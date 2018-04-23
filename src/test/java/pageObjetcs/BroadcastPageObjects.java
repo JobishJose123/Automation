@@ -26,6 +26,8 @@ public class BroadcastPageObjects extends Init{
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	CommonObjects commonObjects = new CommonObjects();
 	
+	@FindBy(xpath="//paper-item[contains(.,' View Broadcasts')]/../input")
+	private WebElement viewBroadcast;
 	@FindBy(xpath="//label[contains(.,'Broadcast Name')]/../input")
 	private WebElement broadcastName;
 	@FindBy(xpath="//label[contains(.,'Purpose')]/../input")
@@ -167,6 +169,10 @@ public class BroadcastPageObjects extends Init{
 	public void selectTrigger2() throws InterruptedException {
 		jswait.loadClick(triggerSelect1);
 	}
+	public void viewBroadcast() throws InterruptedException {
+		jswait.loadClick(viewBroadcast);
+	}
+	
 	public void selectTrackSession() throws InterruptedException {
 		jswait.loadClick(trackSessionSelector);
 		jswait.loadClick(trackSessionAfter);

@@ -36,7 +36,7 @@ import cucumber.api.junit.Cucumber;
 //        features = { "src/test/resources" },
 //		glue = {"classpath:"},
         //@NX-ProductTestSuite,@tagOfferCatalog,@madhan_test_suite_on_OfferCreation,@tagOfferCatalog,@NX-bcCreationSuite
-		tags = { "@NX-800" },
+		tags = { "@NX-7085" },
 		plugin = {
         "html:target/81", "json:target/81/cucumber.json",
         "pretty:target/81/cucumber-pretty.txt",

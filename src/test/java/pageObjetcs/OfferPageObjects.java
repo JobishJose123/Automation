@@ -60,6 +60,14 @@ public class OfferPageObjects extends Init{
 	private WebElement wapCreativeUrl;
 	@FindBy(xpath="//label[contains(.,'Details')]/..//textarea")
 	private WebElement smsCreativeDetails;
+	@FindBy(xpath="//label[contains(.,'Offer Type')]/../..//input")
+	private WebElement offerTypeField;  
+	@FindBy(xpath="//paper-item[contains(.,'Combo Vouchers')]")
+	private WebElement chooseComboVouchers;
+	@FindBy(xpath=".//offer-products//paper-button[contains(.,'Add')]")
+	private WebElement addProductsButton;
+	@FindBy(xpath=".//span[ contains(., 'singleProd2876')]")
+	private WebElement addProductsCheckBox;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -129,9 +137,14 @@ public class OfferPageObjects extends Init{
 			public void clickProceedButton() throws InterruptedException {
 				jswait.loadClick(offerProceedButton);
 			}
+			public void chooseOfferType() throws InterruptedException {
+				jswait.loadClick(offerType);
+			}
 			public void clickOfferAddButton() throws InterruptedException {
 				jswait.loadClick(offerAddProductButton);
 			}
+			@FindBy(xpath="//paper-item[contains(.,'WAP Push')]")
+			private WebElement offerChannelType;
 			public void clickDialogBoxAddButton() throws InterruptedException {
 				jswait.loadClick(dialogBoxAddProductButton);
 			}
@@ -147,6 +160,12 @@ public class OfferPageObjects extends Init{
 				clickOfferCategory();
 				jswait.loadClick("//paper-item[contains(.,'Combo Vouchers')]");
 			}
+			public void clickOfferTypeField() throws InterruptedException {
+				jswait.loadClick(offerTypeField);
+			}
+			public void clickAddProductsButton() throws InterruptedException {
+				jswait.loadClick(addProductsButton);
+			}
 			public void enterDetailsTabFields(String sheet) throws InterruptedException, IOException{
 				eh.setExcelFile("offerInputData",sheet);
 				Random rn = new Random();
@@ -160,6 +179,9 @@ public class OfferPageObjects extends Init{
 				selectOfferChannel(eh.getCell(1, 3).toString());
 				selectOfferCategory();
 			}
+			public void chooseChannelType() throws InterruptedException {
+				jswait.loadClick(offerChannelType);
+			}
 			public void selectCreativeLanguageEnglish() throws InterruptedException, IOException{
 				clickCreativeLanguageField();
 				clickCreativeLanguageEnglishSelect();
@@ -171,6 +193,9 @@ public class OfferPageObjects extends Init{
 			public void enterSmsCreative(String details) throws InterruptedException {
 				jswait.loadSendKeys(smsCreativeDetails, details);;
 			}
+			public void clickComboVouchers() throws InterruptedException {
+				jswait.loadClick(chooseComboVouchers);
+			}
 			public void enterProductTabFields(String productSheet) throws InterruptedException, IOException{
 				ExcelHelper prodcutFile = new ExcelHelper();
 				prodcutFile.setExcelFile("productInputData",productSheet);
@@ -180,4 +205,56 @@ public class OfferPageObjects extends Init{
 				jswait.loadClick("//span[contains(.,'"+productToAdd+"')]");
 				clickDialogBoxAddButton();
 			}
+			
+public void checkAddProductsCheckBox() throws InterruptedException {
+				
+				try{
+		        	if(addProductsCheckBox!=null)
+		        	{
+		        		System.out.println("Product is displayed. Not expected");
+		        		//break;
+		        	}
+		        	
+		        }
+		        catch(Exception e){
+		        	
+		        	System.out.println("Product is not displayed");
+		        	//break;
+		        }
+		        Thread.sleep(1000);
+		        }
+
+			
+			
+public void createNewOffer(String name, String desc) throws InterruptedException {
+				
+				
+				enterOfferName(name);
+				enterOfferDescription(desc);
+				clickOfferTypeField();
+				Thread.sleep(2000);
+				chooseOfferType();
+				Thread.sleep(2000);
+				//driver.findElement(By.xpath("//paper-item[contains(.,'"+eh.getCell(1, 2)+"')]")).click();
+				clickOfferChannel();
+				Thread.sleep(2000);
+				//driver.findElement(By.xpath("//paper-item[contains(.,'"+eh.getCell(1, 3)+"')]")).click();
+				chooseChannelType();
+				clickOfferCategory();
+				Thread.sleep(2000);
+				clickComboVouchers();
+				Thread.sleep(2000);
+				clickProceedButton();
+				Thread.sleep(2000);
+				clickAddProductsButton();
+				Thread.sleep(2000);
+				commonObjects.clickFilterIcon();                            //issue in filter
+				commonObjects.clickFilterResetButton();	
+				
+				
+				
+				//enterCreateProductDescription("Product with attribute");
+			   //clickCreateProductSaveButton();
+			}
+			
 }

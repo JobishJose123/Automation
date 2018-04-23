@@ -50,11 +50,29 @@ public class CommonObjects extends Init{
 	private WebElement targetConditionOptionsEdit;
 	@FindBy(xpath="//paper-icon-item[contains(.,'Delete')]")
 	private WebElement targetConditionOptionsDelete;
+	@FindBy(xpath="//paper-item[contains(.,'Deactivate')]")
+	private WebElement optionsDeactivate;
+	
+	@FindBy(xpath="//paper-button[contains(.,'Activate')]")
+	private WebElement ActivateBCButton;
 
 	@FindBy(xpath="//*[@id='sym2']")
 	private WebElement offers;
 	@FindBy(xpath=".//*[@id='items']/div[1]")
 	private WebElement gridFirstItem;
+	@FindBy(xpath="//paper-item[contains(.,'Attributes')]")
+	private WebElement attributeIcon;
+	@FindBy(xpath="//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
+	private WebElement optionsAttributeIcon;
+	@FindBy(xpath="//paper-item[contains(.,'Delete')]")
+	private WebElement AttributeDelete;
+	@FindBy(xpath=".//*[@id='addProductDialog']/add-product/..//*[ contains(text(), 'Cancel')]")
+	private WebElement CancelButton;
+	@FindBy(xpath="//paper-button[contains(.,'Create')]")
+	private WebElement createBCButton;
+	@FindBy(xpath=".//*[@id='confirmBox']//paper-button[contains(.,'Yes')]")
+	private WebElement YesBCButton;
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -66,6 +84,9 @@ public class CommonObjects extends Init{
 	public void clickEditOption() throws InterruptedException{
 		jswait.loadClick(optionsEdit);
 	}
+	public void clickYesBCButton() throws InterruptedException{
+		jswait.loadClick(YesBCButton);
+	}
 	public void clickPauseOption() throws InterruptedException{
 		jswait.loadClick(optionsPause);
 	}
@@ -75,14 +96,29 @@ public class CommonObjects extends Init{
 	public void clickDeleteOption() throws InterruptedException{
 		jswait.loadClick(optionsDelete);
 	}
+	public void clickActivateBCButton() throws InterruptedException{
+		jswait.loadClick(ActivateBCButton);
+	}
 	public void clickTargetConditionOptionEdit() throws InterruptedException{
 		jswait.loadClick(targetConditionOptionsEdit);
 	}
 	public void clickTargetConditionOptionDelete() throws InterruptedException{
 		jswait.loadClick(targetConditionOptionsDelete);
 	}
+	public void clickAttributeIcon() throws InterruptedException{
+		jswait.loadClick(attributeIcon);
+	}
+	public void clickcreateBCButton() throws InterruptedException{
+		jswait.loadClick(createBCButton);
+	}
 	public void navigateToOffers() throws InterruptedException{
 		jswait.loadClick(offers);
+	}
+	public void clickAttributeDeleteIcon() throws InterruptedException{
+		jswait.loadClick(AttributeDelete);
+	}
+	public void clickAttributeoptionIcon() throws InterruptedException{
+		jswait.loadClick(optionsAttributeIcon);
 	}
 	public void clickOptionsIcon() throws InterruptedException{
 		jswait.loadClick(optionsIcon);
@@ -90,6 +126,10 @@ public class CommonObjects extends Init{
 	public void clickPlusIcon() throws InterruptedException{
 		jswait.loadClick(plusIcon);
 	}
+	public void clickDeactivateProductButton() throws InterruptedException {
+		jswait.loadClick(optionsDeactivate);
+	}
+	
 	public void clickFilterApplyButton() throws InterruptedException {
 		jswait.loadClick(filterFormApply);
 	}
@@ -109,6 +149,13 @@ public class CommonObjects extends Init{
 		clickFilterIcon();
 		enterFilterFormname(name);
 		clickFilterApplyButton();
+	}
+	public void clickCancelButton() throws InterruptedException{
+		jswait.loadClick(CancelButton);
+	}
+	
+	public void clickEditProductButton() throws InterruptedException {
+		jswait.loadClick(optionsEdit);
 	}
 	public String getTextFromFilterForm() throws InterruptedException, UnsupportedFlavorException, IOException {
 		String text = "";
