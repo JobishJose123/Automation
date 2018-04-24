@@ -248,6 +248,60 @@ public class BroadcastSteps extends Init{
 		broadcastPageObjects.clickCreateButton();
 		
     }
+	//---------------------------------------------------------------------
+	
+	@Then("^verify target duplicate function in new broadcast$")
+    public void targetduplicationbc() throws Throwable
+    {  
+		broadcastPageObjects.enterBroadcastBasicDetails("targetduplication");
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectBaseList("latest_list");
+		broadcastPageObjects.clickcreateTargetCondition();
+		commonObjetcs.clickOptionsIcon();
+		broadcastPageObjects.ClickCopyAsAnd();
+		broadcastPageObjects.ClickCopiedAnd();
+		broadcastPageObjects.AddAnd();
+	
+	    }
+	@Then("^verify create BC Notification$")
+	public void createBCNotification() throws InterruptedException {
+		
+		broadcastPageObjects.enterBroadcastBasicDetails("notification");
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectBaseList("latest_list");
+		//broadcastPageObjects.clickcreateTargetCondition();
+	    //broadcastPageObjects.clickProceedButton();
+		//broadcastPageObjects.selectBaseList("Latest_list");
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectFirstOffer();
+		broadcastPageObjects.selectTrackSession();
+		broadcastPageObjects.selectTrackingSource();
+		broadcastPageObjects.selectSenderAndRoute();
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.bcNotifications();
+		broadcastPageObjects.bcNotificationsadd();
+		broadcastPageObjects.bcNotificationsok();
+		broadcastPageObjects.bcNotificationscancel();
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Then("^enter details for new broadcast from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
     public void create_new_broadcast(String sheet, String offer) throws Throwable
     {  
