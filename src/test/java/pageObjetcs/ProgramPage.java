@@ -82,7 +82,11 @@ public class ProgramPage extends Init{
 	private WebElement addTouchpointResponseChannelSelectSMS;
 	@FindBy(xpath="//*[@id='addTouchpointForm']//paper-button[text()='Save']")
 	private WebElement addTouchpointSaveButton;
-//	@FindBy(xpath="")
+	@FindBy(xpath=".//data-table-row[@id='item1']//paper-menu-button button")
+	private WebElement programsfrowbtn;
+	
+	
+	//	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
@@ -210,4 +214,12 @@ public class ProgramPage extends Init{
 		addTouchPointSelectSmsResponseChannel();
 		jswait.loadClick(addTouchpointSaveButton);
 	}
+	
+	
+	public void Programsfirstrowbtn() throws InterruptedException {
+		jswait.loadClick(programsfrowbtn);
+	}
+	
+	
+	
 }
