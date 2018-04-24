@@ -31,7 +31,7 @@ Then click create new product button
 Then clicking on the Add button to add benefits for the product
 
 @NX-1047
-@initBrowser @closeBrowser
+@initBrowser
 Scenario: Create Product: Verify adding multiple benefits for the single product NX-1047
 Given login
 Then navigate to precision marketer
@@ -127,8 +127,9 @@ Then navigate to products
 Then navigate to prepaid telecom
 Then click create new product button
 Then create single product from sheet "singleProductPage"
+Then click create new product button
 Then create single product from sheet "singleProductPage"
-Then check if "productsSamePrice" products with same price under open market
+Then check if "singleProductPage" products with same price under open market
 
 
 @NX-1055

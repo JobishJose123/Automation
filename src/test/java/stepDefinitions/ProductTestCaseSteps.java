@@ -237,6 +237,7 @@ public class ProductTestCaseSteps extends Init{
 		Random rand = new Random();
 		int  n = rand.nextInt(5000) + 1;
 		productPage.enterProductDetails("newProd"+n,"Open Market");
+		productPage.clickAddBenefitButton();
 		productPage.addProductBenefit2();
 		productPage.clickCreateProductSaveButton();
 	}
@@ -337,15 +338,16 @@ public class ProductTestCaseSteps extends Init{
 	@Then("^check if \"([^\"]*)\" products with same price under open market$")
     public void verifyOpenProductPrice(String sheet) throws Exception {
 		Exception samePriceProductInOpenMarket = new Exception("product with same price under open market");
-		eh.setExcelFile("inputData",sheet);
+		eh.setExcelFile("productInputData",sheet);
 		commonObjects.filterName(eh.getCell(1, 0).toString());
-	  try{
-		  jswait.waitUntil("//span[contains(.,'"+eh.getCell(1, 0)+"')]");
+//	  try{
+		  System.out.println((String)eh.getCell(1, 0));
+		  jswait.waitUntil("//span[contains(.,'"+eh.getCell(1, 0).toString()+"')]");
 		  throw samePriceProductInOpenMarket;
-	  }
-	  catch(Exception e1){
+//	  }
+//	  catch(Exception e1){
 		  
-	  }
+//	  }
 	}
 	@Then("^check if products with same price under segmented market$")
     public void verifySegmentedProductPrice() throws Exception {

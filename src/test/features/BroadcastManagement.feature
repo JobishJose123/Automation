@@ -4,17 +4,17 @@
 @NX-BroadcastManagement
 Feature: Test cases related to Broadcast Management
 
-@NX-recurrBC
-@initBrowser @closeBrowser
+@NX-targetCond
+@initBrowser
 Scenario: test recurring BC
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
-Then activate bc
+
 
 @NX-1234
 @initBrowser @closeBrowser
