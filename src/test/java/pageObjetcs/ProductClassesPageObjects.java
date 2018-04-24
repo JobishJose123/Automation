@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -53,7 +54,7 @@ public class ProductClassesPageObjects extends Init{
 	
 	@FindBy(xpath=".//*[@id='addAttrModal']//label[contains(text(),'Type')]/..//input")
 	private WebElement addAttributeType;
-	@FindBy(xpath="//paper-item[contains(.,'NUMBER')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'NUMBER')]")
 	private WebElement typeNumber;
 	@FindBy(xpath="//paper-item[contains(.,'TEXT')]")
 	private WebElement typeText;
@@ -81,6 +82,16 @@ public class ProductClassesPageObjects extends Init{
 	private WebElement addAttributeCancel;
 	@FindBy(xpath="//paper-item[contains(.,'Add Sub-Attribute')]")
 	private WebElement addSubAttributeButton;
+	@FindBy(xpath="//*[@id='form']//label[contains(.,'Name')]/..//input")
+	private WebElement createProductName;
+	@FindBy(xpath="//*[@id='form']//label[text()='Description']/..//input")
+	private WebElement createProductDescription;
+	@FindBy(xpath=".//*[ contains(text(), 'Save')]")
+	private WebElement createProductSaveButton;
+	@FindBy(xpath=".//*[text()='NUM']")
+	private WebElement AttributeField;
+	@FindBy(xpath="//paper-button[contains(.,'Create New Product')]")
+	private WebElement createNewProductButton;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -145,6 +156,9 @@ public class ProductClassesPageObjects extends Init{
 	public void clickShare() throws InterruptedException {
 		jswait.loadClick(optionsShare);
 	}
+	public void clickCreateNewProduct() throws InterruptedException {
+		jswait.loadClick(createNewProductButton);
+	}
 	public void clickAddAttributeSave() throws InterruptedException {
 		jswait.loadClick(addAttributeSave);
 	}
@@ -169,6 +183,17 @@ public class ProductClassesPageObjects extends Init{
 	public void enterAttributeLabel(String label) throws InterruptedException {
 		jswait.loadSendKeys(addAttributeLabel, label);
 	}
+	public void enterCreateProductName(String name) throws InterruptedException {
+		jswait.loadSendKeys(createProductName, name);
+	}
+	public void enterCreateProductDescription(String name) throws InterruptedException {
+		jswait.loadSendKeys(createProductDescription, name);
+	}
+	public void clickCreateProductSaveButton() throws InterruptedException {
+		jswait.loadClick(createProductSaveButton);
+	}
+	
+	
 	public void enterDefaultValue(String def) throws InterruptedException {
 		jswait.loadSendKeys(addAttributeDefaultValue, def);
 	}
@@ -178,6 +203,12 @@ public class ProductClassesPageObjects extends Init{
 	public void clickAllowMultiple() throws InterruptedException {
 		jswait.loadClick(addAttributeAllowMultipleCheckBox);
 	}
+	public void createProductWithAttributes(String name) throws InterruptedException {
+		enterCreateProductName(name);
+		enterCreateProductDescription("Product with attribute");
+		clickCreateProductSaveButton();
+	}
+	
 	public void selectType(String type) throws InterruptedException {
 		jswait.loadClick(addAttributeType);
 		if(type=="NUMBER")
@@ -191,6 +222,19 @@ public class ProductClassesPageObjects extends Init{
 		else if(type=="COMBO")
 			jswait.loadClick(typeCombo);
 	}
+	public void addNumberAttributes() throws InterruptedException {
+		//first attribute
+		clickAddAttribute();
+		enterAttributeName("num");
+		enterAttributeLabel("NUM");
+		selectType("NUMBER");
+		enterDefaultValue("181");
+		clickAddAttributeSave();
+		
+	}	 
+	public void checkAttributeField() throws InterruptedException {
+   	 Assert.assertFalse(jswait.checkVisible(AttributeField),"Num field present after deletion");		 
+}
 	public void createProductClass(String name,String desc) throws InterruptedException {
 		clickCreateProcutClassButton();
 		enterClassName(name);

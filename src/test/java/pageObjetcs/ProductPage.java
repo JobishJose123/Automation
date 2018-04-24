@@ -117,6 +117,12 @@ public class ProductPage extends Init{
 	private WebElement productCellInGrid;
 	@FindBy(xpath="//*[@id='form']//*[@id='icon']")
 	private WebElement allowMultipleAddButton;
+	@FindBy(xpath=".//vaadin-combo-box//paper-input-container")
+    private WebElement partnerDropDown;
+	@FindBy(xpath=".//vaadin-combo-box-item[contains(.,' Test_Fb')]")
+    private WebElement Partner;
+	@FindBy(xpath=".//*[@id='confirmChange']//paper-button[contains(.,'Yes')]")
+    private WebElement YesButton;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -158,6 +164,24 @@ public class ProductPage extends Init{
 		public void clickCreateNewProduct() throws InterruptedException {
 			jswait.loadClick(createNewProductButton);
 		}
+		public void clickPartnerDropDown() throws InterruptedException{
+			jswait.loadClick(partnerDropDown);
+		}
+		public void choosePartner() throws InterruptedException{
+			jswait.loadClick(Partner);
+		}
+		public void clickYesButton() throws InterruptedException{
+			jswait.loadClick(YesButton);
+		}
+		
+       public void changePartner() throws InterruptedException{
+			
+			clickPartnerDropDown();
+			choosePartner();
+			Thread.sleep(3000);
+			clickYesButton();
+			Thread.sleep(3000);
+			}
 		public void clickPrepaidTelecom() throws InterruptedException {
 			jswait.loadClick(prepaidTelecomViewProducts);
 		}

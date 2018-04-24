@@ -265,3 +265,158 @@ Then pass next scenario based on this step
 @NX-7109
 Scenario: Verify the attribute label is displayed when the  product is expanded NX-7109
 Then check previous step and pass this
+
+
+@NX-7015 @initBrowser @closeBrowser
+  Scenario: Verify deletion of attributes from the product class- 7015
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then delete attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then check attribute while editing a product
+    Then check attribute while creating a product
+
+  @NX-7085 
+  @initBrowser
+  Scenario: Verify copying the BC after the product is deactivated- 7085
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then deactivate the product with attributes from sheet "fullDetails"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category "CampaignCategory"
+    Then create new campaign from sheet "campaignBC"
+    Then click on options and view broadcast
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then click on create button
+    Then click on activate button
+    
+    
+    @NX-7068
+    @initBrowser
+    Scenario: Verify whether deactivated product is available for selection while program creation- 7068
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then deactivate the product with attributes from sheet "fullDetails"
+    
+    
+    
+    @NX-6966
+    @initBrowser
+    Scenario: Verify whether products are partner specific- 6966
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then Change partner
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class after changing partner "TestProductClass"
+    
+    @NX-6970
+    @initBrowser
+    Scenario: Verify whether offers with inactive products can be promoted or not- 6970
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then deactivate the product with attributes from sheet "fullDetails"
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer using deactivated product from sheet "rechargeWAP"
+    
+    @NX-6177
+    @initBrowser
+    Scenario: Create offer:Track: Verify creating Informational offers- 6970
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "informationalType" with product "fullDetails"
+    
+    
+    
+    @NX-5577
+    @initBrowser
+    Scenario: Verify whether Status of the dashboard get displayed under Dashboard settings- 5577
+    Given login
+    Then navigate to configuration management
+    Then navigate to partners
+    Then navigate to dashboard page
+    Then edit partner name from sheet "PartnerData"
+    

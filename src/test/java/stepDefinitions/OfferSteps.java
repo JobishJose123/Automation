@@ -15,6 +15,7 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import cucumber.api.java.en.Then;
+import pageObjetcs.CommonObjects;
 import pageObjetcs.CustomerProfilePage;
 import pageObjetcs.LoginPageObjects;
 import pageObjetcs.OfferPageObjects;
@@ -26,6 +27,7 @@ public class OfferSteps extends Init{
 	LoginPageObjects loginPage = new LoginPageObjects();
 	OfferPageObjects offerPageObjects = new OfferPageObjects();
 	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+	CommonObjects commonObjects = new CommonObjects();
 	public OfferSteps() {
 		PageFactory.initElements(driver, this);
 	}
@@ -119,6 +121,37 @@ public class OfferSteps extends Init{
 				Thread.sleep(3000);
 		}
 	}
+	
+	
+	@Then("^create new offer using deactivated product from sheet \"([^\"]*)\"$")
+	public void createOfferWithDeactivatedProduct(String sheet) throws Throwable 
+	  {
+		Thread.sleep(4000);
+		Actions actions = new Actions(driver);
+		Thread.sleep(2000);
+		String st=sheet;
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("inputData","singleProductPage");
+		eh.setExcelFile("offerInputData",sheet);
+		Random rn = new Random();
+		int  n = rn.nextInt(5000) + 1;
+		String name = (String) eh.getCell(1, 0);
+		name =  name.replaceAll("[0-9]", "")+n;
+		eh.setCell(1, 0, name);
+		String desc = (String) eh.getCell(1, 1);
+		offerPageObjects.createNewOffer(name, desc);
+		
+		Thread.sleep(1000);
+		String sheet2= "fullDetails";
+		eh.setExcelFile("productInputData",sheet2);
+		String prod_name = (String) eh.getCell(1, 0);
+		commonObjects.filterName(prod_name);
+		Thread.sleep(3000);
+		offerPageObjects.checkAddProductsCheckBox();
+		
+		 }
+
+	
 	
 	@Then("^Create_offers_with_SMS_channel$")
 	public void Create_offers_with_SMS_channel() throws Throwable
