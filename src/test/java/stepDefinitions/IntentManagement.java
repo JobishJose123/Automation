@@ -10,11 +10,13 @@ import baseClasses.JSWaiter;
 import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.en.Then;
+import pageObjetcs.CommonObjects;
 import pageObjetcs.IntentManagementPageObjects;
 import pageObjetcs.ProgramPage;
 import pageObjetcs.TouchpointPage;
 
 public class IntentManagement extends Init{
+	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	IntentManagementPageObjects intentManagementPage = new IntentManagementPageObjects();
@@ -216,4 +218,27 @@ public class IntentManagement extends Init{
 		programPage.addTouchPointToProgram();
 		programPage.clickPorogramProceedButton();
 	}
+	
+	//-------------------------------------------------------------------//
+	
+	
+	@Then("^click on edit button of programs$")
+	public void Editprograms() throws Throwable {
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//------------------------------------------------------------------//
 }

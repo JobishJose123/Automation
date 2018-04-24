@@ -172,3 +172,11 @@ Given login
 Then navigate to intent management
 Then navigate to programs
 Then verify program touchpoint addition
+
+@NX-3313
+@initBrowser @closeBrowser
+Scenario: Verify Editing the program in Intent management
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then click on edit button of programs

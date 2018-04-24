@@ -100,6 +100,23 @@ public class BroadcastPageObjects extends Init{
 	private WebElement recurringBcEndAtRadio;
 	@FindBy(xpath=".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGrid;
+	
+	@FindBy(xpath=".//div[@id='radioLabel' and contains(text(),'Create')]")
+	private WebElement targetbccreate;
+    @FindBy(xpath=".//*[@id='contentWrapper']/div/paper-menu/div/paper-icon-item[3]")
+	private WebElement bccopyasand;
+	@FindBy(xpath="(//iron-icon[@id='icon'])[23]")
+	private WebElement clickCopiedAnd;
+	@FindBy(xpath="//target-form//condition-form[2]//following::paper-button[contains(text(),'Add AND')]")
+	private WebElement AddAnd ; //change the form number for the conditions in the page
+	@FindBy(xpath=".//*[@id='router']//paper-button[contains(text(),'Notifications')]")
+	private WebElement bcNotifications;
+	@FindBy(xpath=".//*[@id='dialognotification']//paper-button[contains(text(),'Add')]")
+	private WebElement bcNotificationsadd;
+	@FindBy(xpath=".//*[@id='dialognotification']//paper-button[contains(text(),'OK')]")
+	private WebElement bcNotificationsok;
+	@FindBy(xpath=".//*[@id='dialognotification']//paper-button[contains(text(),'Cancel')]")
+	private WebElement bcNotificationscancel;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -182,6 +199,52 @@ public class BroadcastPageObjects extends Init{
 		jswait.loadSendKeys(trackingSourceSelector,"track");
 		jswait.loadClick(trackingSourceTrack);
 	}
+	
+	//--------------------------------------------------------------//
+	public void clickcreateTargetCondition() throws InterruptedException {
+		jswait.loadClick(targetbccreate);
+		}
+	
+	public void ClickCopyAsAnd() throws InterruptedException {
+		jswait.loadClick(bccopyasand);
+			}
+	
+	
+	public void ClickCopiedAnd() throws InterruptedException {
+		jswait.loadClick(clickCopiedAnd);
+			}
+	public void AddAnd() throws InterruptedException {
+		jswait.loadClick(AddAnd);
+			}
+	
+	public void bcNotifications() throws InterruptedException {
+		jswait.loadClick(bcNotifications);
+			}
+	public void bcNotificationsadd() throws InterruptedException {
+		jswait.loadClick(bcNotificationsadd);
+			}
+	
+	public void bcNotificationsok() throws InterruptedException {
+		jswait.loadClick(bcNotificationsok);
+			}
+	
+	public void bcNotificationscancel() throws InterruptedException {
+		jswait.loadClick(bcNotificationscancel);
+			}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//----------------------------------------------------------------//
+	
+		
 	public void selectSenderAndRoute() throws InterruptedException {
 		jswait.loadSendKeys(senderIdBroadcastSelector,"Address-SMPP");
 		jswait.loadClick(senderIdBroadcastAdressSmpp);

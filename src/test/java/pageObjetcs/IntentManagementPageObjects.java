@@ -18,12 +18,44 @@ private WebElement touchpoints;
 @FindBy(xpath="//label[contains(.,'Programs')]/..")
 private WebElement programs;
 
+//--------------------------------------------------------------------
 
 
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------------------
 public void navigateToTouchpoints() throws InterruptedException {
 	jswait.loadClick(touchpoints);
 }
 public void navigateToPrograms() throws InterruptedException {
 	jswait.loadClick(programs);
 }
+
+//-------------------------------//
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------------------------------------//
+
+
+
+
+
 }

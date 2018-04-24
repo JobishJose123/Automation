@@ -189,6 +189,30 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
 Then activate bc
+@NX-2052
+@initBrowser @closeBrowser
+Scenario: Create New Broadcast: verify create BC Notification
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then verify create BC Notification
+@NX-1412
+@initBrowser @closeBrowser
+Scenario: Create New Broadcast:Target AND Duplicate function
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then verify target duplicate function in new broadcast
+
+
+
+
 
 #Then navigate to offer management
 #Then navigate to products
