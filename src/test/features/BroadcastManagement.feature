@@ -394,3 +394,27 @@ Then activate bc
 #Then activate saved "Recurring" bc from sheet "recurringBC"
 #Then navigate to "Recurring" broadcasts
 #Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
+
+@NX-561
+@initBrowser
+Scenario: Create BC- Graphical Target: Verify all the operations using visual editor NX-561
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then create single product from sheet "singleProductPage"
+Then navigate to offer management
+Then navigate to offers
+Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+Then navigate to offer management
+Then Navigate to Offer Catalogue
+Then Create New Offer Catalogue from sheet "defaultCatalog"
+Then Add "rechargeWAP" offer to Offer Catalogue
+Then navigate to life cycle marketing
+Then navigate to "Recharge" category
+Then create new campaign from sheet "campaignBC"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then verify all operations of target using visual editor

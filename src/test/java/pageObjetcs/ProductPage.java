@@ -9,13 +9,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 
 public class ProductPage extends Init{
 	JSWaiter jswait = new JSWaiter();
 	CommonObjects commonObjects =  new CommonObjects();
+	public ExcelHelper eh = new ExcelHelper();	
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	public ProductPage() {
 		PageFactory.initElements(driver, this);
@@ -123,6 +126,20 @@ public class ProductPage extends Init{
     private WebElement Partner;
 	@FindBy(xpath=".//*[@id='confirmChange']//paper-button[contains(.,'Yes')]")
     private WebElement YesButton;
+	@FindBy(xpath="//paper-button[contains(.,'Add')]")
+	private WebElement addBenefitButton;
+	@FindBy(xpath="//paper-item[contains(.,'View Offers')]")
+	private WebElement productViewOffers;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -139,6 +156,12 @@ public class ProductPage extends Init{
 		}
 		public void clickDeleteConfirmYes() throws InterruptedException {
 			jswait.loadClick(deleteConfirmYes);
+		}
+		public void clickProdcutViewOffers() throws InterruptedException {
+			jswait.loadClick(productGridViewOffersButton);
+		}
+		public void clickAddBenefitButton() throws InterruptedException {
+			jswait.loadClick(addBenefitButton);
 		}
 		public void clickProductDeleteButton() throws InterruptedException {
 			jswait.loadClick(productGridDeleteButton);
@@ -281,7 +304,23 @@ public class ProductPage extends Init{
 		}
 		public void enterProductDetails(String name,String scope) throws InterruptedException{
 			enterCreateProductName(name);
-			enterCreateProductDescription("Description for "+name);
+			enterCreateProductDescription("Description of "+name);
+			if(scope.contains("Open Market"))
+				selectCreateProductScopeOpenMarket();
+			else if(scope.contains("Segmented")) 
+				selectCreateProductScopeSegmented();
+			selectCreateProductCategory();
+			enterCreateProductValidity("3");
+			enterCreateProductPrice("100");
+			enterCreateProductProcessingFee("5");
+			enterCreateProductServiceTax("4");
+			enterCreateProductBenefitDescription("benefit desription");
+			addProductBenefit1();
+		}
+		public void enterProductDetails(String name,String scope,String sheet) throws InterruptedException{
+			eh.setExcelFile("productInputData",sheet);
+			enterCreateProductName(name);
+			enterCreateProductDescription((String) eh.getCell(1, 1));
 			if(scope.contains("Open Market"))
 				selectCreateProductScopeOpenMarket();
 			else if(scope.contains("Segmented")) 
@@ -320,6 +359,10 @@ public class ProductPage extends Init{
 			jswait.waitUntil("//label[contains(.,'SS')]/../label[contains(.,'label2')]");
 			jswait.waitUntil("//label[contains(.,'MS')]/../label[contains(.,'label1,label2')]");
 			jswait.waitUntil("//label[contains(.,'NUMCOMBO')]/../label[contains(.,'3')]");
+		}
+		public void createProduct(String name,String scope,String sheet) throws InterruptedException {
+			enterProductDetails(name,scope,sheet);
+			clickCreateProductSaveButton();
 		}
 		public void createProduct(String name,String scope) throws InterruptedException {
 			enterProductDetails(name,scope);
@@ -367,6 +410,13 @@ public class ProductPage extends Init{
 			}
 			else 
 				return false;
+		}
+		public void validatePrepaidProductDetails() throws InterruptedException, UnsupportedFlavorException, IOException {
+			Assert.assertTrue(!commonObjects.getTextFormTextField(createProductValidity).contains("b"),"text in numeric field validity");
+			Assert.assertTrue(!commonObjects.getTextFormTextField(createProductProcessingFee).contains("b"),"text in numeric field processing fee");
+			Assert.assertTrue(!commonObjects.getTextFormTextField(createProductServiceTax).contains("b"),"text in numeric field service tax");
+			Assert.assertTrue(!commonObjects.getTextFormTextField(createProductValue).contains("b"),"text in numeric field value");
+
 		}
 		
 

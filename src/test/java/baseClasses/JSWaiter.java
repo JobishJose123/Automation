@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 				 }
 				 }
 //				 wait.until(ExpectedConditions.elementToBeClickable(element));
-				 Thread.sleep(400);
+				 Thread.sleep(500);
 				 try {
 					 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
 				 }catch(Exception e) {
@@ -48,8 +48,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 				 wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 				 }catch(Exception e) {
 					 System.out.println("messsage5:"+e.getMessage());
-					 Thread.sleep(1000);
+					 Thread.sleep(2000);
+					 try {
 					 wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+					 }catch(Exception secondTry) {
+						 System.out.println("Second Try messsage: "+secondTry.getMessage());
+						 Thread.sleep(2000);
+						 wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+					 }
 				 }
 		}
 			public void loadClick(String element) throws InterruptedException{
@@ -88,8 +94,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).click();
 				 }catch(Exception e) {
 					 System.out.println("messsage5:"+e.getMessage());
-					 Thread.sleep(1000);
+					 Thread.sleep(2000);
+					 try {
 					 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).click();
+					 }catch(Exception secondTry) {
+						 System.out.println("messsage5:"+secondTry.getMessage());
+						 Thread.sleep(2000);
+						 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).click();
+					 }
 				 }
 		}
 
@@ -130,9 +142,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 				 wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(key);
 			 }catch(Exception e) {
 				 System.out.println("messsage5:"+e.getMessage());
-				 Thread.sleep(1000);
+				 Thread.sleep(2000);
+				 try {
 				 wait.until(ExpectedConditions.visibilityOf(element)).clear();
 				 wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(key);
+				 }catch(Exception secondTry) {
+					 System.out.println("messsage5:"+secondTry.getMessage());
+					 Thread.sleep(2000);
+					 wait.until(ExpectedConditions.visibilityOf(element)).clear();
+					 wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(key);
+				 }
 			 }
 		}
 		public void loadSendKeys(String element, String key) throws InterruptedException{
@@ -172,9 +191,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).sendKeys(key);
 			 }catch(Exception e) {
 				 System.out.println("messsage5:"+e.getMessage());
-				 Thread.sleep(1000);
+				 Thread.sleep(2000);
+				 try {
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).clear();
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).sendKeys(key);
+				 }catch(Exception secondTry) {
+					 System.out.println("messsage5:"+secondTry.getMessage());
+					 Thread.sleep(2000);
+					 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).clear();
+					 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).sendKeys(key);
+				 }
 			 }
 		}
 		public void waitUntil(WebElement element) throws InterruptedException{

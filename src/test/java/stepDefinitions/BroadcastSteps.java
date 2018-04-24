@@ -416,9 +416,13 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
 		      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='timeDialog']/div/paper-button[2]");
 			    Thread.sleep(2000);
 			     jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
-		
-			    
-			    
 		}
  }
+	@Then("^verify all operations of target using visual editor$")
+	public void verify_all_operations_of_target_using_visual_editor() throws Throwable {
+	    broadcastPageObjects.enterBroadcastBasicDetails("ForTargetCondition");
+	    broadcastPageObjects.clickProceedButton();
+	    broadcastPageObjects.selectBaseList("list");
+	    
+	}
 }

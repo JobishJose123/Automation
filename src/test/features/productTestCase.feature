@@ -126,8 +126,8 @@ Then navigate to offer management
 Then navigate to products
 Then navigate to prepaid telecom
 Then click create new product button
-Then create single product from sheet "productsSamePrice"
-Then create single product from sheet "productsSamePrice"
+Then create single product from sheet "singleProductPage"
+Then create single product from sheet "singleProductPage"
 Then check if "productsSamePrice" products with same price under open market
 
 
@@ -232,7 +232,7 @@ Then navigate to offers
 Then verify scroll bar for list of offers
 
 @NX-800
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Create offer:Offers Display: Verify by expanding the offer row to know a quick summary details of the offer. NX-800
 Given login
 Then navigate to precision marketer
@@ -245,106 +245,128 @@ Then navigate to offer management
 Then navigate to offers
 Then create new offer from sheet "rechargeWAP" with product "fullDetails"
 Then verify quick summary of product "fullDetails" in offer grid of "rechargeWAP"
-#
-#@NX-805
-#Scenario: Create offer:Offers Display: Verify the offer details in the grid by expanding the offers NX-805
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to products
-#Then create single product from sheet "singleProductPage"
-#Then navigate to offer management
-#Then navigate to offers
-#Then create new "Recharge" offer for product
-#Then verify offer details in grid
-#
-#@NX-808
-#Scenario: Create offer:Offers Display: Verify collapsing the expanded offer summary details. NX-808
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to offers
-#Then verify collapsing and expanding offer summary
-#
-#@NX-809
-#Scenario: Create offer:Offers Display: Verify collapsing the expanded offer summary details. NX-809
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to offers
-#Then verify clicking on options icon in offer grid
-#
-#@NX-810
-#Scenario: Create offer:Offers Display: Verify the edit option of the offers NX-810
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to offers
-#Then create new "Recharge" offer for product
-#Then check edit offer functionality
 
-#@NX-1046
-#Scenario: Create Product: Verify the field validations for the benefit details NX-1046
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to products
-#Then click create new product button
-#Then enter product details from sheet "benefitFieldValidation-NX-1046"
-#Then check field validations under the benefits grid
-#@NX-1012
-#Scenario: Products Grid: Verify scrolling functionality to view the product at the end of the screen NX-1012
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to products
-#Then click create new product button
-#Then enter product details from sheet "fullDetails"
-#Then save product
-#Then scrolling to view "fullDetails" in the entire product list
-#@NX-1036
-#Scenario: Create Product: Verify the field validations for the Basic informations NX-1036
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to products
-#Then click create new product button
-#Then field validations for the Basic Information
+@NX-805
+@initBrowser @closeBrowser
+Scenario: Create offer:Offers Display: Verify the offer details in the grid by expanding the offers NX-805
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then create single product from sheet "singleProductPage"
+Then navigate to offer management
+Then navigate to offers
+Then create new offer from sheet "rechargeWAP" with product "singleProductPage"
+Then verify offer details in grid from sheet "rechargeWAP"
 
-#@NX-1038
-#Scenario: Create Product: Verify saving the products by not adding the mandatory fields NX-1038
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to products
-#Then click create new product button
-#Then saving the products by not adding the mandatory fields
+@NX-808
+@initBrowser @closeBrowser
+Scenario: Create offer:Offers Display: Verify collapsing the expanded offer summary details. NX-808
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to offers
+Then verify collapsing and expanding offer summary
+
+@NX-809
+@initBrowser @closeBrowser
+Scenario: Create offer:Offers Display: Verify collapsing the expanded offer summary details. NX-809
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to offers
+Then verify clicking on options icon in offer grid
+
+@NX-810
+@initBrowser @closeBrowser
+Scenario: Create offer:Offers Display: Verify the edit option of the offers NX-810
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then create single product from sheet "singleProductPage"
+Then navigate to offer management
+Then navigate to offers
+Then create new offer from sheet "rechargeWAP" with product "singleProductPage"
+Then check edit offer functionality
+
+@NX-1046
+@initBrowser @closeBrowser
+Scenario: Create Product: Verify the field validations for the benefit details NX-1046
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then check field validations under the benefits grid
+
+@NX-1012
+@initBrowser @closeBrowser
+Scenario: Products Grid: Verify scrolling functionality to view the product at the end of the screen NX-1012
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then create single product from sheet "singleProductPage"
+Then scrolling to view "singleProductPage" in the entire product list
+@NX-1036
+@initBrowser @closeBrowser
+Scenario: Create Product: Verify the field validations for the Basic informations NX-1036
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then field validations for the Basic Information
+
+@NX-1038
+@initBrowser @closeBrowser
+Scenario: Create Product: Verify saving the products by not adding the mandatory fields NX-1038
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then saving the products by not adding the mandatory fields
 
 
-#@NX-1045
-#no limit in adding benefits
-#Scenario: Create Product: Verify adding more than 3 benefits NX-1045
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to products
-#Then click create new product button
-#Then enter product details from sheet "benefitFieldValidation-NX-1046"
-#Then verify adding more than 3 benefits for product
+@NX-1045
+@initBrowser @closeBrowser
+Scenario: Create Product: Verify adding more than 3 benefits NX-1045  no limit in adding benefits
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then verify adding more than 3 benefits for product
 
-#@NX-1026
-#Scenario: Products Grid: Verify View offers options for the products added NX-1026
-#Given login
-#Then navigate to precision marketer
-#Then navigate to offer management
-#Then navigate to products
-#Then create single product from sheet "singleProductPage"
-#Then navigate to offer management
-#Then navigate to offers
-#Then create new "Recharge" offer for product
-#Then navigate to offer management
-#Then navigate to products
-#Then check if offer is shown in view offers
+@NX-1026
+@initBrowser @closeBrowser
+Scenario: Products Grid: Verify View offers options for the products added NX-1026
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then create single product from sheet "singleProductPage"
+Then navigate to offer management
+Then navigate to offers
+Then create new offer from sheet "rechargeWAP" with product "singleProductPage"
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then check if "rechargeWAP" offer is shown in view offers of "singleProductPage"
 ##invalid##
 #@NX-1051
 #
