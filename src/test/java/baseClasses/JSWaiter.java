@@ -45,11 +45,39 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 				 }
 				 }
 				 try {
+					 Thread.sleep(500);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e) {
+						 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+					 }
+					 while(loadMaskStatus.contains("block")) {
+						 Thread.sleep(1000);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e) {
+						 
+					 }
+					 }
 				 wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 				 }catch(Exception e) {
 					 System.out.println("messsage5:"+e.getMessage());
 					 Thread.sleep(2000);
 					 try {
+						 Thread.sleep(500);
+						 try {
+							 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+						 }catch(Exception e1) {
+							 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+						 }
+						 while(loadMaskStatus.contains("block")) {
+							 Thread.sleep(1000);
+						 try {
+							 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+						 }catch(Exception e1) {
+							 
+						 }
+						 }
 					 wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 					 }catch(Exception secondTry) {
 						 System.out.println("Second Try messsage: "+secondTry.getMessage());
@@ -91,11 +119,39 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 				 }
 				 }
 				 try {
+					 Thread.sleep(500);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e) {
+						 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+					 }
+					 while(loadMaskStatus.contains("block")) {
+						 Thread.sleep(1000);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e) {
+						 
+					 }
+					 }
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).click();
 				 }catch(Exception e) {
 					 System.out.println("messsage5:"+e.getMessage());
 					 Thread.sleep(2000);
 					 try {
+						 Thread.sleep(500);
+						 try {
+							 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+						 }catch(Exception e1) {
+							 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+						 }
+						 while(loadMaskStatus.contains("block")) {
+							 Thread.sleep(1000);
+						 try {
+							 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+						 }catch(Exception e1) {
+							 
+						 }
+						 }
 					 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).click();
 					 }catch(Exception secondTry) {
 						 System.out.println("messsage5:"+secondTry.getMessage());
@@ -138,12 +194,40 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			 }
 			 }
 			 try {
+				 Thread.sleep(500);
+				 try {
+					 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+				 }catch(Exception e) {
+					 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+				 }
+				 while(loadMaskStatus.contains("block")) {
+					 Thread.sleep(1000);
+				 try {
+					 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+				 }catch(Exception e) {
+					 
+				 }
+				 }
 				 wait.until(ExpectedConditions.visibilityOf(element)).clear();
 				 wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(key);
 			 }catch(Exception e) {
 				 System.out.println("messsage5:"+e.getMessage());
 				 Thread.sleep(2000);
 				 try {
+					 Thread.sleep(500);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e1) {
+						 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+					 }
+					 while(loadMaskStatus.contains("block")) {
+						 Thread.sleep(1000);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e1) {
+						 
+					 }
+					 }
 				 wait.until(ExpectedConditions.visibilityOf(element)).clear();
 				 wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(key);
 				 }catch(Exception secondTry) {
@@ -187,12 +271,40 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			 }
 			 }
 			 try {
+				 Thread.sleep(500);
+				 try {
+					 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+				 }catch(Exception e) {
+					 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+				 }
+				 while(loadMaskStatus.contains("block")) {
+					 Thread.sleep(1000);
+				 try {
+					 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+				 }catch(Exception e) {
+					 
+				 }
+				 }
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).clear();
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).sendKeys(key);
 			 }catch(Exception e) {
 				 System.out.println("messsage5:"+e.getMessage());
 				 Thread.sleep(2000);
 				 try {
+					 Thread.sleep(500);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e1) {
+						 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+					 }
+					 while(loadMaskStatus.contains("block")) {
+						 Thread.sleep(1000);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e1) {
+						 
+					 }
+					 }
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).clear();
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element))).sendKeys(key);
 				 }catch(Exception secondTry) {
@@ -264,12 +376,40 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			 }
 			 }
 			 try {
+				 Thread.sleep(500);
+				 try {
+					 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+				 }catch(Exception e) {
+					 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+				 }
+				 while(loadMaskStatus.contains("block")) {
+					 Thread.sleep(1000);
+				 try {
+					 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+				 }catch(Exception e) {
+					 
+				 }
+				 }
 			 wait.until(ExpectedConditions.elementToBeClickable(element));
 			 return true;
 			 }catch(Exception e) {
 				 System.out.println("messsage5:"+e.getMessage());
 				 Thread.sleep(1000);
 				 try {
+					 Thread.sleep(500);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e1) {
+						 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+					 }
+					 while(loadMaskStatus.contains("block")) {
+						 Thread.sleep(1000);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e1) {
+						 
+					 }
+					 }
 					 wait.until(ExpectedConditions.elementToBeClickable(element));
 					 return true;
 				 }catch(Exception e1) {
@@ -311,12 +451,40 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			 }
 			 }
 			 try {
+				 Thread.sleep(500);
+				 try {
+					 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+				 }catch(Exception e) {
+					 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+				 }
+				 while(loadMaskStatus.contains("block")) {
+					 Thread.sleep(1000);
+				 try {
+					 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+				 }catch(Exception e) {
+					 
+				 }
+				 }
 			 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(element)));
 			 return true;
 			 }catch(Exception e) {
 				 System.out.println("messsage5:"+e.getMessage());
 				 Thread.sleep(1000);
 				try {
+					Thread.sleep(500);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e1) {
+						 System.out.println("Couldnt get style of loadMask. Proceeding without checking loadMask");
+					 }
+					 while(loadMaskStatus.contains("block")) {
+						 Thread.sleep(1000);
+					 try {
+						 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+					 }catch(Exception e1) {
+						 
+					 }
+					 }
 					wait.until(ExpectedConditions.elementToBeClickable(By.xpath(element)));
 					return true;
 				}catch(Exception e1) {
