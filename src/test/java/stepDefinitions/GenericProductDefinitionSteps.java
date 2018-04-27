@@ -273,27 +273,28 @@ public class GenericProductDefinitionSteps extends Init{
 	@Then("^navigate to product class after changing partner \"([^\"]*)\"$")
     public void navigateToProductClass(String sheet) throws Exception {
 		eh.setExcelFile("productClassInputData",sheet);
-		Actions clickAction = new Actions(driver);
-        WebElement scrollablePane = driver.findElement(By.xpath("//iron-scroll-threshold"));
-        clickAction.moveToElement(scrollablePane).click().build().perform();
-        Actions scrollAction = new Actions(driver);
-        for(int i=0;i<50;i++){
-        scrollAction.sendKeys(Keys.PAGE_DOWN).perform();
-        try{
-        	if(driver.findElement(By.xpath("//h4[contains(.,'"+eh.getCell(1, 0)+"')]"))!=null)
-        	{
-        		System.out.println("Product class is displayed. Not expected");
-        		break;
-        	}
-        	
-        }
-        catch(Exception e){
-        	
-        	System.out.println("Product class is not displayed");
-        	break;
-        }
-        Thread.sleep(1000);
-        }
+		jswait.scrollAndClick("//iron-scroll-threshold", eh.getCell(1, 0).toString());
+//		Actions clickAction = new Actions(driver);
+//        WebElement scrollablePane = driver.findElement(By.xpath("//iron-scroll-threshold"));
+//        clickAction.moveToElement(scrollablePane).click().build().perform();
+//        Actions scrollAction = new Actions(driver);
+//        for(int i=0;i<50;i++){
+//        scrollAction.sendKeys(Keys.PAGE_DOWN).perform();
+//        try{
+//        	if(driver.findElement(By.xpath("//h4[contains(.,'"+eh.getCell(1, 0)+"')]"))!=null)
+//        	{
+//        		System.out.println("Product class is displayed. Not expected");
+//        		break;
+//        	}
+//        	
+//        }
+//        catch(Exception e){
+//        	
+//        	System.out.println("Product class is not displayed");
+//        	break;
+//        }
+//        Thread.sleep(1000);
+//        }
         
 	}
 	

@@ -21,16 +21,18 @@ public class CatalogPageObjects extends Init{
 	private WebElement catalogName;
 	@FindBy(xpath="//paper-input[2]/paper-input-container/div[2]/div/input")
 	private WebElement catalogDescription;
-	@FindBy(xpath="//div[3]/paper-button[2]")
+	@FindBy(xpath="//create-offer-catalogue//paper-button[contains(text(),'Save')]")
 	private WebElement catalogSaveButton;
+	@FindBy(xpath="//create-offer-catalogue//paper-button[contains(text(),'Cancel')]")
+	private WebElement catalogCancelButton;
 	@FindBy(xpath="//paper-button[contains(text(),'Add Offers')]")
 	private WebElement catalogAddOffer;
 	@FindBy(xpath="//paper-button[text()='Add to Catalog']")
 	private WebElement addToCatalogButton;
 	@FindBy(xpath="//*[@id='sym1' and @icon='app-primary:offer-catalogue']")
 	private WebElement offerCatalogButton;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="//paper-button[text()='Add to Catalog']/../paper-button[text()='Cancel']")
+	private WebElement catalogAddOfferCancelButton;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -66,6 +68,12 @@ public class CatalogPageObjects extends Init{
 	}
 	public void clickSaveCatalogButton() throws InterruptedException {
 		jswait.loadClick(catalogSaveButton);
+	}
+	public void clickCancelCatalogButton() throws InterruptedException {
+		jswait.loadClick(catalogCancelButton);
+	}
+	public void clickCatalogAddOfferCancelButton() throws InterruptedException {
+		jswait.loadClick(catalogAddOfferCancelButton);
 	}
 	public void enterCatalogDetails(String name) throws InterruptedException {
 		enterCatalogName(name);

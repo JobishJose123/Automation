@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,15 +22,19 @@ import pageObjetcs.CampaignObjects;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.LoginPageObjects;
 import pageObjetcs.OfferPageObjects;
+import pageObjetcs.TargetConditionObjects;
 
 public class BroadcastSteps extends Init{
 
 	JSWaiter jswait = new JSWaiter();
+	
 	public ExcelHelper eM = new ExcelHelper();
+	public ExcelHelper eh = new ExcelHelper();
 	CampaignObjects campaignObjects = new CampaignObjects();
 	OfferPageObjects offerPageObjects = new OfferPageObjects();
 	LoginPageObjects loginPage = new LoginPageObjects();
-	CommonObjects commonObjetcs = new CommonObjects();
+	CommonObjects commonObjects = new CommonObjects();
+	TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	@Then("^check if create new bc lands in details tab$")
@@ -61,7 +66,7 @@ public class BroadcastSteps extends Init{
 	@Then("^verify options icon of bc$")
     public void verifyOptionsIconBroadcast() throws Throwable
     {
-	  commonObjetcs.clickOptionsIcon();
+	  commonObjects.clickOptionsIcon();
     }
 	@Then("^verify selected campaign category name$")
     public void verifyViewBroadcastCampaignCategoryName() throws Throwable
@@ -77,7 +82,55 @@ public class BroadcastSteps extends Init{
 		broadcastPageObjects.selectBaseList("list");
 		broadcastPageObjects.clickProceedButton();
 		offerPageObjects.clickCreateNewOfferButton();
-		offerPageObjects.enterOfferName("Offer Page");
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+		
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData","singleProductPage");
+		eh.setExcelFile("offerInputData","rechargeSMS");		
+		
+	//******************Details tab******************:
+		offerPageObjects.enterDetailsTabFields("rechargeSMS");
+		broadcastPageObjects.clickOfferPopUpProceedButton();
+	//******************Products tab*****************:
+		offerPageObjects.clickOfferAddButton();
+		broadcastPageObjects.clickProductFilterButton();
+		broadcastPageObjects.enterFilterProductName(prodcutFile.getCell(1, 0).toString());
+		broadcastPageObjects.clickProductFilterApplyButton();
+		jswait.loadClick("//span[contains(.,'"+prodcutFile.getCell(1, 0).toString()+"')]");
+		offerPageObjects.clickDialogBoxAddButton();
+		broadcastPageObjects.clickOfferPopUpProceedButton();
+		
+	//******************Creative tab*****************:
+		offerPageObjects.selectCreativeLanguageEnglish();
+		if(((String) eh.getCell(1, 3)).contains("WAP")){
+			offerPageObjects.enterWapCreative(eh.getCell(1, 10).toString(),eh.getCell(1, 11).toString());
+		}
+		if(eh.getCell(1, 3).toString().contains("SMS"))
+			offerPageObjects.enterSmsCreative(eh.getCell(1, 10).toString(),eh.getCell(1, 11).toString());
+		if(eh.getCell(1, 3).toString().contains("Voice"))
+			offerPageObjects.enterVoiceCreative(eh.getCell(1, 10).toString(),eh.getCell(1, 11).toString());
+		
+		broadcastPageObjects.clickOfferPopUpProceedButton();
+		Thread.sleep(3000);
+		
+	//******************Track tab*****************:
+		if(!eh.getCell(1, 2).toString().contains("Informational"))
+		{
+			offerPageObjects.clickTrackSourceSelector();
+			offerPageObjects.selectTrackSource("track");
+		}
+		broadcastPageObjects.clickOfferPopUpProceedButton();
+		
+	//******************Rewards tab*****************:
+		if(eh.getCell(1, 2).toString().contains("Seeding")){
+			offerPageObjects.clickRewardTypeInputField();
+			offerPageObjects.clickRewardTypeAny();
+		}
+		offerPageObjects.clickSaveOfferButton();
+		commonObjects.filterName((String) eh.getCell(1, 0));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//data-table-cell[contains(.,'"+(String) eh.getCell(1, 0)+"')]")));
 		
     }
 	@Then("^activate bc$")
@@ -91,15 +144,15 @@ public class BroadcastSteps extends Init{
 	@Then("^verify edit option of bc$")
     public void verifyEditBc() throws Throwable
     {  
-		commonObjetcs.clickOptionsIcon();
-		commonObjetcs.clickEditOption();
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
 		broadcastPageObjects.enterBroadcastName("edit bc");
     }
 	@Then("^verify pause option of bc$")
     public void verifyPauseBc() throws Throwable
     {  
-		commonObjetcs.clickOptionsIcon();
-		commonObjetcs.clickPauseOption();
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickPauseOption();
 		String statusOfBc = broadcastPageObjects.getTopBcStatus();
 		Assert.assertTrue("Invalid status of BC",statusOfBc.contains("Pause"));
     }
@@ -109,9 +162,9 @@ public class BroadcastSteps extends Init{
 		broadcastPageObjects.enterBroadcastBasicDetails("check");
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
-		commonObjetcs.clickOptionsIcon();
-		commonObjetcs.clickTargetConditionOptionEdit();
-		campaignObjects.createTargetCondition();
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickTargetConditionOptionEdit();
+		targetConditionObjects.clickBasicTargetConditionWithAge();
     }
 	@Then("^verify delete option of target condition$")
     public void verifyDeleteOptionOfTargetCondition() throws Throwable
@@ -119,9 +172,9 @@ public class BroadcastSteps extends Init{
 		broadcastPageObjects.enterBroadcastBasicDetails("check");
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
-		commonObjetcs.clickOptionsIcon();
-		commonObjetcs.clickTargetConditionOptionDelete();
-		campaignObjects.createTargetCondition();
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickTargetConditionOptionDelete();
+		targetConditionObjects.clickBasicTargetConditionWithAge();
     }
 	@Then("^verify proceed button without adding target condition$")
     public void verifyProceedWithoutTargetCondition() throws Throwable
@@ -257,7 +310,7 @@ public class BroadcastSteps extends Init{
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("latest_list");
 		broadcastPageObjects.clickcreateTargetCondition();
-		commonObjetcs.clickOptionsIcon();
+		commonObjects.clickOptionsIcon();
 		broadcastPageObjects.ClickCopyAsAnd();
 		broadcastPageObjects.ClickCopiedAnd();
 		broadcastPageObjects.AddAnd();
@@ -479,4 +532,30 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
 	    broadcastPageObjects.selectBaseList("list");
 	    
 	}
+	@Then("^navigate to broadcast target condition$")
+	public void navigate_to_broadcast_target_condition() throws Throwable {
+	    broadcastPageObjects.enterBroadcastBasicDetails("TargetConditionCheck");
+	    broadcastPageObjects.clickProceedButton();
+	    broadcastPageObjects.selectBaseList("l");
+//	    commonObjects.clickTargetConditionViewToggleIcon();
+	    
+	}
+	@Then("^verify adding target condition with and condition$")
+	public void verifyAddingTargetConditionWithAnd() throws Throwable {
+		targetConditionObjects.clickManualAndButton();
+		targetConditionObjects.clickConditionTypeField();
+		
+	}
+	@Then("^verify adding target condition with or condition$")
+	public void verifyAddingTargetConditionWithOr() throws Throwable {
+		targetConditionObjects.clickManualOrButton();
+		targetConditionObjects.clickConditionTypeField();
+		
+	}
+//	@Then("^verify adding target condition with or condition$")
+//	public void verifyEditingTargetCondition() throws Throwable {
+//		targetConditionObjects.clickManualOrButton();
+//		targetConditionObjects.clickConditionTypeField();
+//		
+//	}
 }

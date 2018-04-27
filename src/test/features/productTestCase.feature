@@ -3,7 +3,7 @@
 #Feature: Product Page Features
 
 
-@NX-runProductTestCase
+@NX-ProductTestCase
 
 Feature: Product Page Feature Files
 	Product page test cases

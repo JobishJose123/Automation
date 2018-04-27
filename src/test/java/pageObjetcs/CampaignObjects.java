@@ -20,6 +20,7 @@ public class CampaignObjects extends Init{
 	}
 	JSWaiter jswait = new JSWaiter();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
+	public TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	
 	@FindBy(xpath=".//*[@id='mainContainer']/paper-menu/div/hexagon-icon[3]/label/..")
 	private WebElement lifeCycleMarketing;
@@ -41,24 +42,7 @@ public class CampaignObjects extends Init{
 	private WebElement offerCatalogSelector;
 	@FindBy(xpath="//paper-button[contains(.,'Proceed')]")
 	private WebElement proceedButton;
-	@FindBy(xpath="//target-conditions/div/paper-icon-button")
-	private WebElement targetConditionViewToggle;
-	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
-	private WebElement targetConditionTypeSelector;
-	@FindBy(xpath="//paper-item[contains(.,'Customer Insight')]")
-	private WebElement targetConditionTypeCustomerInsight;
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input")
-	private WebElement CustomerInsightFieldSelector;
-	@FindBy(xpath="//paper-item[contains(.,'Age')]")
-	private WebElement CustomerInsightFieldAge;
-	@FindBy(xpath="//label[text()='Condition']/../..//input")
-	private WebElement conditionSelector;
-	@FindBy(xpath="//paper-item[contains(.,'is greater than')]")
-	private WebElement conditionIsGreaterThan;
-	@FindBy(xpath=".//*[@id='conditionForm']//field-simple/div//paper-input//input")
-	private WebElement isGreaterThanValue;
-	@FindBy(xpath=".//*[@id='conditionCard']/paper-button[2]")
-	private WebElement targetConditionSave;
+
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save Campaign')]")
 	private WebElement saveCampaignButton;
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save')]")
@@ -139,9 +123,7 @@ public class CampaignObjects extends Init{
 	public void clickSaveCampaignButton() throws InterruptedException {
 		jswait.loadClick(saveCampaignButton);
 	}
-	public void clickTargetConditionViewToggle() throws InterruptedException {
-		jswait.loadClick(targetConditionViewToggle);
-	}
+
 	public void clickProceedButton() throws InterruptedException {
 		jswait.loadClick(proceedButton);
 	}
@@ -180,31 +162,22 @@ public class CampaignObjects extends Init{
 		enterCampaignDescription("Campaign to check bc craetion in selenium");
 		selectOfferCatalog(catalog);
 	}
-	public void createTargetCondition() throws InterruptedException {
-		jswait.loadClick(targetConditionTypeSelector);
-		jswait.loadClick(targetConditionTypeCustomerInsight);
-		jswait.loadClick(CustomerInsightFieldSelector);
-		jswait.loadClick(CustomerInsightFieldAge);
-		jswait.loadClick(conditionSelector);
-		jswait.loadClick(conditionIsGreaterThan);
-		jswait.loadSendKeys(isGreaterThanValue,"18");
-		jswait.loadClick(targetConditionSave);
-	}
+
 	public void createCampaignTemplate(String name) throws InterruptedException {
 		clickCampaignTemplateTab();
 		clickCreateCampaignTemplateButton();
 		enterCampaignName(name);
 		enterCampaignDescription("Desc for Template");
 		clickProceedButton();
-		clickTargetConditionViewToggle();
-		createTargetCondition();
+		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickBasicTargetConditionWithAge();
 		clickSaveCampaignTemplate();
 	}
 	public void createCampaign(String name,String catalog) throws InterruptedException {
 		enterCampaignDeails(name,catalog);
 		clickProceedButton();
-		clickTargetConditionViewToggle();
-		createTargetCondition();
+		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickBasicTargetConditionWithAge();
 		clickProceedButton();
 		 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='router']/app-route[9]/campaign-form/wizard-tab/div/iron-pages/campaign-schedule/form/paper-card/paper-date-time-input/div/paper-input[2]/paper-input-container/div[2]"))).click();
     	 Thread.sleep(1000);
