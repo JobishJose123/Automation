@@ -17,6 +17,7 @@ import pageObjetcs.CustomerProfilePage;
 
 public class ConsumerProfileSteps extends Init{
 	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+	CustomerProfilePage customerObjects= new CustomerProfilePage();
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	ExcelHelper list = new ExcelHelper();
@@ -102,4 +103,165 @@ public class ConsumerProfileSteps extends Init{
 		customerProfilePage.enterValueForMsisdn(msisdn);
 		customerProfilePage.clickSearchIcon();
 	}
+	
+	
+	@Then("^enter customer number from sheet \"([^\"]*)\"$")
+	public void enterCustomerNumber(String sheet) throws InterruptedException {
+		
+		ExcelHelper consumerFile = new ExcelHelper();
+		consumerFile.setExcelFile("consumerInputData",sheet);
+		eh.setExcelFile("consumerInputData",sheet);
+		String number = (String) eh.getCell(1, 0);
+		customerObjects.enterCustomerNumber(number);
+	}
+	@Then("^click on search button$")
+	public void clickSearchNumberButton() throws InterruptedException {
+		
+		customerObjects.clickSearchNumberIcon();
+		
+	}
+	
+	@Then("^click on events tab$")
+	public void clickEventsTab() throws Exception {
+		
+		customerObjects.clickEventsTab();
+		
+	}
+	
+	@Then("^click on event type checkbox$")
+	public void clickEventsTypeCheckBox() throws Exception {
+		
+		customerObjects.clickEventTypeCheckbox();
+		
+	}
+	
+	@Then("^click on apply button$")
+	public void clickApplyButton() throws Exception {
+		
+		customerObjects.clickApplyButton();
+		
+	}
+	
+	@Then("^verify toast message$")
+	public void verifyToastMessage() throws Exception {
+		
+		customerObjects.verifyToastMessagege();
+		
+	}
+	
+	
+	@Then("^click subscribed to lists tab$")
+	public void clickSubscribedToListsTab() throws Exception {
+		
+		customerObjects.clickSubscribedToListsTab();
+		
+	}
+	
+	@Then("^click unsubscribe button$")
+	public void clickUnsubscribeButton() throws Exception {
+		
+		customerObjects.clickUnsubscribeButton();
+		
+	}
+	
+	@Then("^verify confirmation message panel$")
+	public void verifyConfirmationMessagePanel() throws Exception {
+		
+		customerObjects.verifyConfirmationMessagePanel();
+		
+	}
+	
+	
+	@Then("^click usage metrics tab$")
+	public void clickUsageMetricsTab() throws Exception {
+		
+		customerObjects.clickUsageMetricsTab();
+		
+	}
+	
+	@Then("^click customer support tab$")
+	public void clickCustomerSupportTab() throws Exception {
+		
+		customerObjects.clickCustomerSupportTab();
+		
+	}
+	
+	@Then("^verify add delete check and uncheck of attributes$")
+	public void addDeleteSaveAttributes() throws Exception {
+		
+		customerObjects.addDeleteSaveAttributes();
+		
+	}
+	
+	@Then("^verify include sub departments option$")
+	public void verifyIncludeSubDepartmentsOption() throws Exception {
+		
+		customerObjects.verifyIncludeSubDepartmentsOption();
+		
+	}
+	
+	@Then("^verify subscribed to lists$")
+	public void verifySubscribedToLists() throws Exception {
+		
+		customerObjects.verifySubscribedToLists();
+	
+	}
+	
+	@Then("^verify events row$")
+    public void verifyEventsRow() throws Exception {
+		
+		customerObjects.verifyEventsRow();
+	
+	}
+	
+	@Then("^verify fulfillment events row$")
+    public void verifyFulfillmentEventsRow() throws Exception {
+		
+		customerObjects.verifyFulfillmentEventsRow();
+	
+	}
+	
+	@Then("^verify conversion events row$")
+    public void verifyConvrsionEventsRow() throws Exception {
+		
+		customerObjects.verifyConversionEventsRow();
+	
+	}
+	
+	
+	@Then("^try to add more than five attributse and check for toast message$")
+	
+	public void addMaxAttributes() throws Exception {
+		
+		customerObjects.addMaxAttributes();
+		
+	}
+	
+   @Then("^verify events row in customer support page$")
+	
+	public void verifyCustomerSupportEventsRow() throws Exception {
+		
+		customerObjects.verifyCustomerSupportEventsRow();
+		
+	}
+	
+   @Then("^choose all events$")
+	
+	public void clickAllEventsCheckbox() throws Exception {
+		
+		customerObjects.clickAllEventsCheckbox();
+		
+	}
+   
+   @Then("^unsubscribe a list$")
+   public void unsubscribeList() throws Exception {
+	   
+	   
+		
+		customerObjects.clickYesButton();
+		
+	}
+	
+	
+	
 }

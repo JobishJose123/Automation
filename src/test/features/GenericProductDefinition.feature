@@ -354,8 +354,8 @@ Feature: generic product class
     Then click on create new ofer button
     Then create new offer using deactivated product from sheet "rechargeWAP"
 
-  @NX-6970 @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating Informational offers- 6970
+  @NX-6177 @initBrowser @closeBrowser
+  Scenario: Create offer:Track: Verify creating Informational offers- 6177
     Given login
     Then navigate to configuration management
     Then naviagte to product classes
@@ -378,10 +378,4 @@ Feature: generic product class
     Then click on create new ofer button
     Then create new offer from sheet "informationalType" with product "fullDetails"
 
-  @NX-5577 @initBrowser @closeBrowser
-  Scenario: Verify whether Status of the dashboard get displayed under Dashboard settings- 5577
-    Given login
-    Then navigate to configuration management
-    Then navigate to partners
-    Then navigate to dashboard page
-    Then edit partner name from sheet "PartnerData"
+  
