@@ -1,10 +1,13 @@
 package stepDefinitions;
 
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.server.handler.FindElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import cucumber.api.PendingException;
@@ -18,6 +21,7 @@ import pageObjetcs.TouchpointPage;
 public class IntentManagement extends Init{
 	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
+	public ExcelHelper eh = new ExcelHelper(); 
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	IntentManagementPageObjects intentManagementPage = new IntentManagementPageObjects();
 	TouchpointPage touchpointPage = new TouchpointPage();
@@ -167,12 +171,9 @@ public class IntentManagement extends Init{
 		programPage.checkFilterCancelButton();
 		programPage.checkAllColumnsInProductList();
 	}
-	@Then("^verify create program page$")
-	public void verify_create_program_page() throws Throwable {
-		programPage.clickCreateProgramButton();
-		programPage.enterProgramDetails("landing page");
-		programPage.checkCreateProgramTopbarButtons();
-	}
+
+		
+	
 	@Then("^verify program proceed button functionality for details tab$")
 	public void verifyProgramProceedButtonDetailsTab() throws Throwable {
 		programPage.clickCreateProgramButton();
@@ -222,23 +223,251 @@ public class IntentManagement extends Init{
 	//-------------------------------------------------------------------//
 	
 	
-	@Then("^click on edit button of programs$")
+	@Then("^click on edit button of programs \"([^\"]*)\"$")
 	public void Editprograms() throws Throwable {
+		
+		Thread.sleep(9000);
+		commonObjects.filterName("autoprogram");
+		Thread.sleep(5000);
 		commonObjects.clickOptionsIcon();
 		commonObjects.clickEditOption();
+		Thread.sleep(5000);
+		String editname=programPage.editProgramDetails("programedit");
+		//programPage.clickCreateProgramAddTouchpointButton();
+		//programPage.addTouchPointToProgramedit();
+		programPage.clickPorogramProceedButton();
+		//programPage.programschstart();
+		//programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		//programPage.prmrefreshat();
+		//programPage.pgmtimeokbtn();
+		programPage.programschserveon(); 
+		programPage.prmshcserveonalldays();
+		programPage.programsavebutton();
+		Thread.sleep(2000);
+		programPage.programconfirmSaveyes();
+		Thread.sleep(5000);
+		commonObjects.filterName(editname);
+		Thread.sleep(5000);
+		programPage.editprogramcheck();
+System.out.println(editname+"program has edited successfully");
+
+		//programPage.programactivatebtn();
+		//programPage.programconfirmactivateyes();
+		
+	}
+	
+	@Then("^verify create program page \"([^\"]*)\"$")
+	public void verify_create_program_page(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		programPage.programschserveon(); 
+		programPage.prmshcserveonalldays();
+		//programPage.createProgramSaveButton();
+		Thread.sleep(2000);
+		programPage.programactivatebtn();
+		programPage.programconfirmactivateyes();
+		System.out.println("program has created successfully");
+		
 	}
 	
 	
 	
+
+	@Then("^Verify duplicate TP entry on touchpoint tab$")
+	public void touchpointsduplicateprograms() throws Throwable {
+		
+		Thread.sleep(9000);
+		commonObjects.filterName("autoprogram");
+		Thread.sleep(5000);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		Thread.sleep(5000);
+		String editname=programPage.editProgramDetails("programedit");
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.Programtouchpointduplicate();
+		
+	}
+	@Then("^Verify Proceed button functionality for Touchpoint tabs \"([^\"]*)\"$")
+	public void touchpointsproceedfuntion(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+	programPage.clickCreateProgramButton();
+	programPage.enterProgramDetails(name);
+	programPage.clickCreateProgramAddTouchpointButton();
+	programPage.addTouchPointToProgram();
+	programPage.clickPorogramProceedButton();
+	programPage.programTouchpointtab();
+	programPage.checkproceedtouchpoints();
 	
 	
 	
+	}
+	
+	@Then("^Verify cancel button functionality for Touchpoint tabs \"([^\"]*)\"$")
+	public void touchpointscancelfuntion(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+	programPage.clickCreateProgramButton();
+	programPage.enterProgramDetails(name);
+	programPage.clickCreateProgramAddTouchpointButton();
+	programPage.cancelTouchPointToProgram();
+	programPage.clickPorogramProceedButton();
+	programPage.checktouchpoints();
+
+	}
+	
+	
+	@Then("^Create Program Schedule Verify Start Now option \"([^\"]*)\"$")
+	public void verify_create_program_page_startnow(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.checkprmshcselectnow(); 
+		
+		
+	
+	}
+	@Then("^check details cancel button in programs \"([^\"]*)\"$")
+	public void verify_create_program_page_cancel(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.cancelProgramDetails(name);
+	
+	}
 	
 	
 	
+	@Then("^check details schedule Refresh At \"([^\"]*)\"$")
+	public void verify_create_program_page_refreshat(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
 	
+	}
 	
+	@Then("^check details schedule Serve on Specific Days \"([^\"]*)\"$")
+	public void verify_create_program_page_serve_on_Specificdays(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		Thread.sleep(2000);
+		programPage.programschserveon(); 
+		programPage.prmshcserveonSpecdays();
+		programPage.programserveoninput();
+		
+	}
 	
-	
-	//------------------------------------------------------------------//
 }

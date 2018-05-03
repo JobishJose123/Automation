@@ -119,7 +119,7 @@ Scenario: Verify Create New Program button behaviour
 Given login
 Then navigate to intent management
 Then navigate to programs
-Then verify create program page
+Then verify create program page "programdetails"
 
 @NX-712
 
@@ -166,7 +166,7 @@ Then click create program button
 Then verify program touchpoint tab
 
 @NX-725
-
+@initBrowser
 Scenario: Verify New touchpoint addition on Touchpoint tab
 Given login
 Then navigate to intent management
@@ -179,4 +179,70 @@ Scenario: Verify Editing the program in Intent management
 Given login
 Then navigate to intent management
 Then navigate to programs
+Then verify create program page "programdetails"
 Then click on edit button of programs
+
+
+@IM-4444
+@initBrowser @closeBrowser
+Scenario: Verify creating a new the program in Intent management
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then click create program button
+Then verify create program page "programdetails"
+
+@NX-752
+@initBrowser @closeBrowser
+Scenario: Verify duplicate TP entry on touchpoint tab
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page "programdetails"
+Then Verify duplicate TP entry on touchpoint tab
+
+@NX-753
+@initBrowser 
+Scenario: Verify Proceed button functionality for Touchpoint tabs
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then Verify Proceed button functionality for Touchpoint tabs "programdetails"
+
+@NX-754
+@initBrowser
+Scenario: Verify cancel button functionality for Touchpoint tabs
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then Verify cancel button functionality for Touchpoint tabs "programdetails"
+
+@NX-1173
+@initBrowser
+Scenario: Create Program Schedule Verify Start Now option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then Create Program Schedule Verify Start Now option "programdetails"
+
+@NX-1201
+@initBrowser
+Scenario: verify Create New Programs Details Cancel button.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then check details cancel button in programs "programdetails"
+@NX-1183
+@initBrowser
+Scenario: verify Create New Programs Schedule Refresh At option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then check details schedule Refresh At "programdetails"
+@NX-1193
+@initBrowser
+Scenario: verify Create New Programs Schedule Refresh At option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then check details schedule Serve on Specific Days "programdetails"
