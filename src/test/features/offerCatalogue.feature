@@ -68,46 +68,26 @@ Given login
   Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
+	Then navigate to offers
+  Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
+  Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Search Offers with Combination of details
+  Then Search Offers with Combination of details from "rechargeSMS"
   
-  
- @initBrowser @closeBrowser @NX-1137
- Scenario: Search Offers Using Service leg
-  Given login
-	When navigate to precision marketer
-	Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Search Offers Using Service leg
-  Then Delete Created Offer Catalogue
-  
-  
-@initBrowser @closeBrowser @NX-1135
-Scenario: Verify Selecting Offers Using Product Name
-Given login
-	When navigate to precision marketer
-	Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Select Offers Using Product Name
-  Then Delete Created Offer Catalogue
-  
-  
-@initBrowser @closeBrowser @NX-1128
+  @initBrowser @closeBrowser @NX-1128
 Scenario:  Verify the newly added offer catalog in the Offer Catalog screen
 Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
-  Then Verify Added Catalogue
-  Then Delete Created Offer Catalogue
+  Then Add "rechargeSMS" offer to Offer Catalogue
+  Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Verify Added Catalogue "defaultCatalog"
   
-
-@initBrowser @closeBrowser @NX-1127
+  @initBrowser @closeBrowser @NX-1127
 Scenario: Verify the field validations for the catalogue name and description
 Given login
 	When navigate to precision marketer
@@ -116,19 +96,18 @@ Given login
   Then Validate Catalogue Name
   
   
-@initBrowser @closeBrowser @NX-5984
+  @initBrowser @closeBrowser @NX-5984
 Scenario: Verify Deleting Offer from catalogue
 Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
-  Then Delete Offer from Catalogue
-  Then Delete Created Offer Catalogue
+  Then Add "rechargeSMS" offer to Offer Catalogue
+  Then Delete Offer "rechargeSMS" from Catalogue
   
   
-@initBrowser @closeBrowser @NX-5985
+  @initBrowser @closeBrowser @NX-5985
 Scenario: Verify displaying offers in Offer catalog when more than 50 offers are added 
 Given login
 	When navigate to precision marketer
@@ -136,37 +115,36 @@ Given login
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
   Then Add fifty more offers to Offer Catalogue
-  Then Delete Created Offer Catalogue
+  Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+	Then verify catalog "defaultCatalog" with 50 offers
   
- 
-@initBrowser @closeBrowser @NX-2185
+  
+  @initBrowser  @closeBrowser @NX-2185
 Scenario: Verify Help Icon in Offer Catalogue Page
 Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
 	Then Verify Help Of Offer Catalogue
-	
-	
-@initBrowser @closeBrowser @NX-2102
+  
+  @initBrowser @closeBrowser @NX-2102
 Scenario: verify sql injection in Offer Catalog
 Given login
 Then navigate to precision marketer
 Then  navigate to offer management 
 Then Navigate to Offer Catalogue
-Then verify sql injection in offer catalogue
-
-	
+Then verify sql injection in offer catalogue 
+  
 @initBrowser @closeBrowser @NX-2074
 Scenario: verify Cross site scripting in Offer Catalog
 Given login
 Then navigate to precision marketer
 Then  navigate to offer management 
 Then Navigate to Offer Catalogue
-Then verify Cross site scripting in offer catalogue
-
-
-
+Then verify Cross site scripting in offer catalogue 
+  
+  
 @initBrowser @closeBrowser @NX-1160
 Scenario: Verify Edit Offer Catalogue 
 Given login
@@ -174,22 +152,20 @@ Given login
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
-  Then Verify Edit Offer Catalog
+  Then Add "rechargeSMS" offer to Offer Catalogue
+  Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Verify Edit Offer Catalog "defaultCatalog"
   
-  
-
-@initBrowser @closeBrowser @NX-1159
+  @initBrowser @closeBrowser @NX-1159
 Scenario: Verify Colapsing Offer in Offer Catalog
 Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
+  Then Add "rechargeSMS" offer to Offer Catalogue
   Then Verify Collapsing Offer in Offer Catalog
-  Then Delete Created Offer Catalogue
-  
 
 @initBrowser @closeBrowser @NX-1142
 Scenario: Verify the label detail for the offer selected
@@ -200,9 +176,8 @@ Scenario: Verify the label detail for the offer selected
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
   Then Verify Label in offer selected
-  Then Delete Created Offer Catalogue
   
- @initBrowser @closeBrowser @NX-1147
+@initBrowser @closeBrowser @NX-1147
 Scenario: Verify the selected offers for the catalog.
 
   Given login
@@ -211,7 +186,7 @@ Scenario: Verify the selected offers for the catalog.
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
   Then Verify searching the offers using invalid information
-  Then Delete Created Offer Catalogue
+
   
   @initBrowser @closeBrowser @NX-1157
   Scenario: Verify expanding the selected offers
@@ -220,11 +195,11 @@ Scenario: Verify the selected offers for the catalog.
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
+  Then Add "rechargeSMS" offer to Offer Catalogue
   Then Verify Expanding Offer
-  Then Delete Created Offer Catalogue
-  
-  @initBrowser @closeBrowser @NX-1149
+
+
+	@initBrowser @closeBrowser @NX-1149
   Scenario: Verify searching the offers using invalid information
 
   Given login
@@ -233,9 +208,9 @@ Scenario: Verify the selected offers for the catalog.
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
   Then Verify searching the offers using invalid information
-  Then Delete Created Offer Catalogue
- 
-  @initBrowser @closeBrowser @NX-1158
+
+
+    @initBrowser @closeBrowser @NX-1158
   Scenario: Verify the details of the expanded offers
 
   Given login
@@ -243,11 +218,11 @@ Scenario: Verify the selected offers for the catalog.
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
-  Then Verify Offer Details
-  Then Delete Created Offer Catalogue
-  
- @initBrowser @closeBrowser @NX-1130
+  Then Add "rechargeSMS" offer to Offer Catalogue
+  Then Verify Offer Details "rechargeSMS"
+
+
+   @initBrowser @closeBrowser @NX-1130
   Scenario: Verify adding offers for the newly created offer catalog
 
   Given login
@@ -255,20 +230,9 @@ Scenario: Verify the selected offers for the catalog.
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
-  Then Delete Created Offer Catalogue
- 
-@initBrowser @closeBrowser @NX-1123
-  Scenario: Verify deleting the offer catalog when the offer is available.
-
-  Given login
-	When navigate to precision marketer
-	Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
-  Then Delete Created Offer Catalogue
+  Then Add "rechargeSMS" offer to Offer Catalogue
   
+
 @initBrowser @closeBrowser @NX-1121
   Scenario: Verify the Delete option from the Options icon.
 
@@ -277,20 +241,12 @@ Scenario: Verify the selected offers for the catalog.
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
-  Then Delete Created Offer Catalogue 
-
-@initBrowser @closeBrowser @NX-1117
-  Scenario:  Verify the Add offers from the Options icon
-
-  Given login
-	When navigate to precision marketer
-	Then navigate to offer management 
+  Then Add "rechargeSMS" offer to Offer Catalogue
+  Then navigate to offer management 
 	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
-  Then Delete Created Offer Catalogue 
+  Then Delete Created Offer Catalogue "defaultCatalog"
   
+
 @initBrowser @closeBrowser @NX-1103
   Scenario:  Verify adding the filters in the offer catalog screen using filter button.
 
@@ -299,8 +255,25 @@ Scenario: Verify the selected offers for the catalog.
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
-  Then Delete Created Offer Catalogue
+Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Delete Created Offer Catalogue "defaultCatalog"
+
+  
+ 
+  
+  
+
+  
+ 
+ 
+
+  
+
+ 
+
+  
+
 
 @initBrowser @closeBrowser @NX-1105
   Scenario:   Verify the actions available by clicking on the Options icon.
@@ -310,7 +283,7 @@ Scenario: Verify the selected offers for the catalog.
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
+  Then Add "rechargeSMS" offer to Offer Catalogue
   Then Verify Expanding Offer
   Then Verify Edit Offer Catalog
   
@@ -343,7 +316,48 @@ Scenario: Verify the selected offers for the catalog.
 	Then Verify Catalog listing
 	
 
+###########    to be removed
+  @initBrowser @closeBrowser @NX-1137
+ Scenario: Search Offers Using Service leg
+  Given login
+	When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then Search Offers Using Service leg
+  Then Delete Created Offer Catalogue
 
   
-
+@initBrowser @closeBrowser @NX-1135
+Scenario: Verify Selecting Offers Using Product Name
+Given login
+	When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then Select Offers Using Product Name
+  Then Delete Created Offer Catalogue
   
+  ## deletes even when there are offers inside
+  @initBrowser  @NX-1123  
+  Scenario: Verify deleting the offer catalog when the offer is available.
+
+  Given login
+	When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then Add "rechargeSMS" offer to Offer Catalogue
+  Then Delete Created Offer Catalogue
+  
+  ##add offers not available in options
+  @initBrowser @closeBrowser @NX-1117
+  Scenario:  Verify the Add offers from the Options icon
+
+  Given login
+	When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then Add "rechargeSMS" offer to Offer Catalogue
+  Then Delete Created Offer Catalogue 
