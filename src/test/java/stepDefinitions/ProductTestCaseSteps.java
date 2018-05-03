@@ -489,7 +489,7 @@ public class ProductTestCaseSteps extends Init{
 	   public void verifyHelpOfProducts() throws Throwable
 	   {   
 		   
-		jswait.loadClick("//flytxt-context-help/paper-icon-button/iron-icon/img");
+		  wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//flytxt-context-help/paper-icon-button/iron-icon/img")))).click();
 		   Thread.sleep(1500);
 		   String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
 		   ((JavascriptExecutor)driver).executeScript("window.open()");
