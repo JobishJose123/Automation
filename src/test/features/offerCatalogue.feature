@@ -8,6 +8,11 @@ Feature: Offer Catalogue test cases
 Scenario: Verify Creating Offer Catalogue
   Given login
 	When navigate to precision marketer
+	Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then create single product from sheet "singleProductPage"
 	Then navigate to offer management 
 	Then navigate to offers
   Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
@@ -16,6 +21,7 @@ Scenario: Verify Creating Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
   Then Add "rechargeSMS" offer to Offer Catalogue
   Then navigate to offer management 
+  Then Navigate to Offer Catalogue
   Then Delete Created Offer Catalogue "defaultCatalog"
   
 	
@@ -260,32 +266,19 @@ Then navigate to offer management
   Then Delete Created Offer Catalogue "defaultCatalog"
 
   
- 
-  
-  
-
-  
- 
- 
-
-  
-
- 
-
-  
-
-
-@initBrowser @closeBrowser @NX-1105
+ @initBrowser @closeBrowser @NX-1105
   Scenario:   Verify the actions available by clicking on the Options icon.
 
   Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeSMS" offer to Offer Catalogue
-  Then Verify Expanding Offer
-  Then Verify Edit Offer Catalog
+  #Then Create New Offer Catalogue from sheet "defaultCatalog"
+  #Then Add "rechargeSMS" offer to Offer Catalogue
+  #Then navigate to offer management 
+  #Then Navigate to Offer Catalogue
+	Then verify options icon
+  
   
 @initBrowser @closeBrowser @NX-1132
   Scenario:   Verify editing the offer catalogue from the Add offers screen
@@ -294,8 +287,21 @@ Then navigate to offer management
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Edit Catalog from Catalog screen
-  Then Delete Created Offer Catalogue
+  Then Edit Catalog "defaultCatalog" from Catalog screen
+
+  
+ 
+ 
+
+  
+
+ 
+
+  
+
+
+
+
   
 @initBrowser @closeBrowser @NX-1112
   Scenario:   Verify scrolling and viewing the last offer catalog in the screen

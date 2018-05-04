@@ -383,6 +383,16 @@ public class OfferCatalogSteps extends Init{
 		   catalogPageObjects.checkOfferExpand();
 			
 	   }
+	   @Then("^verify options icon$")
+	   public void verifyOptionsIcon() throws Throwable
+	   {
+		   commonObjects.clickOptionsIcon();
+		   commonObjects.clickEditOption();
+		   catalogPageObjects.clickCancelCatalogButton();
+		   commonObjects.clickOptionsIcon();
+		   commonObjects.clickDeleteOption();
+			
+	   }
 	   @Then("^Verify Offer Details \"([^\"]*)\"$")
 	   public void verifyOfferDetails(String sheet) throws Throwable
 	   {
@@ -393,38 +403,21 @@ public class OfferCatalogSteps extends Init{
 		   wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//data-table-cell[contains(.,'"+eM.getCell(1, 0).toString()+"')]")));
 		   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(.,'"+eM.getCell(1, 11).toString()+"')]")));
 	   }
-	   @Then("^Edit Catalog from Catalog screen$")
-	   public void editfromCatalogScreen() throws Throwable
+	   @Then("^Edit Catalog \"([^\"]*)\" from Catalog screen$")
+	   public void editfromCatalogScreen(String sheet) throws Throwable
 	   {
 		 Thread.sleep(1000);
-		 wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div/app-router/app-route[18]/catalogue-offer-listing/div[1]/paper-icon-button/iron-icon")))).click();
-		 wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//create-offer-catalogue/form/paper-dialog/div[2]/paper-input[1]/paper-input-container/div[2]/div/input")))).sendKeys("Cancel");
-		 driver.findElement(By.xpath("//paper-input[2]/paper-input-container/div[2]/div/input")).sendKeys("test");
-		 driver.findElement(By.xpath("//div[3]/paper-button[2]")).click();
+		 eM.setExcelFile("offerCatalogInputData", sheet);
+		 catalogPageObjects.clickEditCatalogInViewOffers();
+		 catalogPageObjects.enterCatalogName(eM.getCell(1, 0).toString()+"Edit");
+		 catalogPageObjects.clickSaveCatalogButton();
+		 catalogPageObjects.clickEditCatalogInViewOffers();
 		 
 	   }
 	   @Then("^Verify Scrolling Offer Catalog$")
 	   public void verifyScrolling() throws Throwable
-	   {  Thread.sleep(2000);   
-	  	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='mainContainer']/paper-menu/div/hexagon-icon[4]/label"))).click();
-	  	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sym1' and @icon='app-primary:offer-catalogue']"))).click();
-	  	  Thread.sleep(2000);
-		  wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//offer-catalogue-grid/iron-data-table/div/iron-list/div/div[17]/data-table-row/div[1]/data-table-cell[2]")))).click();
-		  Actions scrollAction = new Actions(driver);
-	      for(int i=0;i<50;i++){
-	      scrollAction.sendKeys(Keys.PAGE_DOWN).perform();
-	      try{
-	      	driver.findElement(By.xpath("//data-table-cell[contains(.,'"+eM.getCell(0, 0)+"')]"));
-	      	break;
-	      }
-	      catch(Exception e){
-	      	 }
-	      Thread.sleep(2000);
-	      }
-	      
-	      driver.findElement(By.xpath("//data-table-cell[contains(.,'"+eM.getCell(0, 0)+"')]"));
-		 
-		  
+	   {  
+		   askkdfjoisdjqlkwjdoiwqwoi;
 	   }
 	   @Then("^Verify Catalog listing$")
 	   public void verifyCatalogListing() throws Throwable

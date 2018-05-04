@@ -61,8 +61,10 @@ public class CatalogPageObjects extends Init{
 	
 	@FindBy(xpath="//h4[contains(.,'Creative')]")
 	private WebElement offerExpandCreativeLabel;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="//paper-item[contains(.,'View Offers')]")
+	private WebElement optionsViewOffers;
+	@FindBy(xpath="//h3[contains(text(),'Offer Catalog')]/following::iron-icon")
+	private WebElement editCatalogInViewOffers;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -114,6 +116,12 @@ public class CatalogPageObjects extends Init{
 	}
 	public void clickCreateCatalogButton() throws InterruptedException {
 		jswait.loadClick(createNewCatalogButton);
+	}
+	public void clickEditCatalogInViewOffers() throws InterruptedException {
+		jswait.loadClick(editCatalogInViewOffers);
+	}
+	public void clickViewOffersOption() throws InterruptedException {
+		jswait.loadClick(optionsViewOffers);
 	}
 	public void clickFilterFormOfferTypeDropdownIcon() throws InterruptedException {
 		jswait.loadClick(filterFormOfferTypeDropdownIcon);
