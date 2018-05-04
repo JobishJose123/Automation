@@ -56,13 +56,13 @@ public class ProductClassesPageObjects extends Init{
 	private WebElement addAttributeType;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'NUMBER')]")
 	private WebElement typeNumber;
-	@FindBy(xpath="//paper-item[contains(.,'TEXT')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'TEXT')]")
 	private WebElement typeText;
-	@FindBy(xpath="//paper-item[contains(.,'SINGLE SELECT')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'SINGLE SELECT')]")
 	private WebElement typeSingleSelect;
-	@FindBy(xpath="//paper-item[contains(.,'MULTI SELECT')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'MULTI SELECT')]")
 	private WebElement typeMultiSelect;
-	@FindBy(xpath="//paper-item[contains(.,'COMBO')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'COMBO')]")
 	private WebElement typeCombo;
 	@FindBy(xpath=".//*[@id='addAttrModal']//label[contains(text(),'Default Value')]/..//input")
 	private WebElement addAttributeDefaultValue;

@@ -414,50 +414,18 @@ public class OfferCatalogSteps extends Init{
 		 catalogPageObjects.clickEditCatalogInViewOffers();
 		 
 	   }
-	   @Then("^Verify Scrolling Offer Catalog$")
-	   public void verifyScrolling() throws Throwable
+	   @Then("^Verify Scrolling Offer Catalog for \"([^\"]*)\"$")
+	   public void verifyScrolling(String sheet) throws Throwable
 	   {  
-		   askkdfjoisdjqlkwjdoiwqwoi;
+		   commonObjects.clickOptionsIcon();
+		   jswait.loadClick("//iron-list//data-table-cell");
+		   eM.setExcelFile("offerCatalogInputData", sheet);
+		   jswait.scrollIntoView("//iron-list", "//data-table-cell[contains(.,'"+eM.getCell(1, 0).toString()+"')]");
+
 	   }
 	   @Then("^Verify Catalog listing$")
 	   public void verifyCatalogListing() throws Throwable
 	   {
-		   Thread.sleep(2000);   
-		  	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='mainContainer']/paper-menu/div/hexagon-icon[4]/label"))).click();
-		  	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sym1' and @icon='app-primary:offer-catalogue']"))).click();
-		  	  Thread.sleep(2000);
-			  wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//offer-catalogue-grid/iron-data-table/div/iron-list/div/div[17]/data-table-row/div[1]/data-table-cell[2]")))).click();
-			  Actions scrollAction = new Actions(driver);
-		      for(int i=0;i<50;i++){
-		      scrollAction.sendKeys(Keys.PAGE_DOWN).perform();
-		      try{
-		      	driver.findElement(By.xpath("//data-table-cell[contains(.,'"+eM.getCell(0, 0)+"')]"));
-		      	break;
-		      }
-		      catch(Exception e){
-		      	 }
-		      Thread.sleep(2000);
-		      }
-		      
-		      driver.findElement(By.xpath("//data-table-cell[contains(.,'"+eM.getCell(0, 0)+"')]"));
-		      
-		      for(int i=1;i<18;i++){
-		    	  
-		    	  try
-		    	  {
-		    		  wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div["+i+"]/data-table-row/div[1]/data-table-cell[4]/paper-menu-button/div/paper-icon-button/iron-icon")))).click();
-		    			wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='contentWrapper']/div/paper-menu/div/paper-item[1]"))));
-		    			wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='contentWrapper']/div/paper-menu/div/paper-item[2]"))));
-		    			wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='contentWrapper']/div/paper-menu/div/paper-item[3]"))));
-		    		  Thread.sleep(1000);
-		    		  wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div["+i+"]/data-table-row/div[1]/data-table-cell[3]")))).click();
-		    		  Thread.sleep(2000);
-		    	  }
-		    	  catch (Exception e) {
-					
-				}
-		    	 
-		    	  
-		    	  }
-		      }
+		  
+	   }
 }

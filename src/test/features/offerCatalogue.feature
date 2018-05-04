@@ -289,20 +289,6 @@ Then navigate to offer management
   Then Create New Offer Catalogue from sheet "defaultCatalog"
   Then Edit Catalog "defaultCatalog" from Catalog screen
 
-  
- 
- 
-
-  
-
- 
-
-  
-
-
-
-
-  
 @initBrowser @closeBrowser @NX-1112
   Scenario:   Verify scrolling and viewing the last offer catalog in the screen
   Given login
@@ -310,60 +296,77 @@ Then navigate to offer management
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
 	Then Create New Offer Catalogue from sheet "defaultCatalog"
-	Then Verify Scrolling Offer Catalog
-	
-@initBrowser @closeBrowser @NX-1098
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+	Then Verify Scrolling Offer Catalog for "defaultCatalog"  
+ 
+ @initBrowser @closeBrowser @NX-1098
   Scenario:   Verify the catalogues listed in the offer Management --> Offer Catalogue screen
   Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
 	Then Create New Offer Catalogue from sheet "defaultCatalog"
-	Then Verify Catalog listing
+	Then Verify Scrolling Offer Catalog for "defaultCatalog" 
+ 
+
+  
+
+ 
+
+  
+
+
+
+
+  
+
 	
-
+ 
+#	
+#
 ###########    to be removed
-  @initBrowser @closeBrowser @NX-1137
- Scenario: Search Offers Using Service leg
-  Given login
-	When navigate to precision marketer
-	Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Search Offers Using Service leg
-  Then Delete Created Offer Catalogue
-
-  
-@initBrowser @closeBrowser @NX-1135
-Scenario: Verify Selecting Offers Using Product Name
-Given login
-	When navigate to precision marketer
-	Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Select Offers Using Product Name
-  Then Delete Created Offer Catalogue
-  
+  #@initBrowser @closeBrowser @NX-1137
+ #Scenario: Search Offers Using Service leg
+  #Given login
+#	When navigate to precision marketer
+#	Then navigate to offer management 
+#	Then Navigate to Offer Catalogue
+  #Then Create New Offer Catalogue from sheet "defaultCatalog"
+  #Then Search Offers Using Service leg
+  #Then Delete Created Offer Catalogue
+#
+  #
+#@initBrowser @closeBrowser @NX-1135
+#Scenario: Verify Selecting Offers Using Product Name
+#Given login
+#	When navigate to precision marketer
+#	Then navigate to offer management 
+#	Then Navigate to Offer Catalogue
+  #Then Create New Offer Catalogue from sheet "defaultCatalog"
+  #Then Select Offers Using Product Name
+  #Then Delete Created Offer Catalogue
+  #
   ## deletes even when there are offers inside
-  @initBrowser  @NX-1123  
-  Scenario: Verify deleting the offer catalog when the offer is available.
-
-  Given login
-	When navigate to precision marketer
-	Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeSMS" offer to Offer Catalogue
-  Then Delete Created Offer Catalogue
-  
+  #@initBrowser  @NX-1123  
+  #Scenario: Verify deleting the offer catalog when the offer is available.
+#
+  #Given login
+#	When navigate to precision marketer
+#	Then navigate to offer management 
+#	Then Navigate to Offer Catalogue
+  #Then Create New Offer Catalogue from sheet "defaultCatalog"
+  #Then Add "rechargeSMS" offer to Offer Catalogue
+  #Then Delete Created Offer Catalogue
+  #
   ##add offers not available in options
-  @initBrowser @closeBrowser @NX-1117
-  Scenario:  Verify the Add offers from the Options icon
-
-  Given login
-	When navigate to precision marketer
-	Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeSMS" offer to Offer Catalogue
-  Then Delete Created Offer Catalogue 
+  #@initBrowser @closeBrowser @NX-1117
+  #Scenario:  Verify the Add offers from the Options icon
+#
+  #Given login
+#	When navigate to precision marketer
+#	Then navigate to offer management 
+#	Then Navigate to Offer Catalogue
+  #Then Create New Offer Catalogue from sheet "defaultCatalog"
+  #Then Add "rechargeSMS" offer to Offer Catalogue
+  #Then Delete Created Offer Catalogue 
