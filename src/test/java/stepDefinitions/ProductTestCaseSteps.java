@@ -125,7 +125,7 @@ public class ProductTestCaseSteps extends Init{
 	}
 	@Then("^delete product from sheet \"([^\"]*)\"$")
     public void deleteProduct(String sheet) throws Exception {
-		eh.setExcelFile("inputData",sheet);
+		eh.setExcelFile("productInputData",sheet);
 		WebDriverWait wait = new WebDriverWait(driver, 15);
 		Exception e = new Exception("product not deleted");
 		commonObjects.filterName(eh.getCell(1, 0).toString());
@@ -133,10 +133,12 @@ public class ProductTestCaseSteps extends Init{
 		productPage.clickProductDeleteButton();
 		productPage.clickDeleteConfirmYes();
 		Thread.sleep(2000);
+		commonObjects.filterName(eh.getCell(1, 0).toString());
 		try{
-			jswait.waitForInvisibility("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../..");
-		}catch(Exception e1){
+			productPage.clickProductGridOptions();
 			Assert.assertTrue(false,"Product not deleted");
+		}catch(Exception e1){
+
 		}
 	}
 	@Then("^enter special characters for name and validate$")
@@ -400,18 +402,18 @@ public class ProductTestCaseSteps extends Init{
 		productPage.clickProdcutViewOffers();
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='offer-view style-scope'][2][contains(.,'"+offer.getCell(1, 0)+"')]")));		
 	}
-	@Then("^check duplicate product of \"([^\"]*)\"$")
+	@Then("^create duplicate product of \"([^\"]*)\"$")
     public void check_duplicate_product_functionality(String sheet) throws AWTException, InterruptedException {
-		eh.setExcelFile("inputData",sheet);
+		eh.setExcelFile("productInputData",sheet);
 		Random rn = new Random();
 		int  n = rn.nextInt(5000) + 1;
 		commonObjects.filterName(eh.getCell(1, 0).toString());
 		productPage.clickProductGridOptions();
 		productPage.clickProductDuplicateButton();
-		productPage.enterCreateProductName("Dupe"+n);
+		productPage.enterCreateProductName("Dupe"+eh.getCell(1, 0).toString());
 		productPage.clickCreateProductSaveButton();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath("//span[contains(.,'Dupe"+n+"')]/../../data-table-cell[3][contains(.,'"+eh.getCell(1, 8)+"')]/../data-table-cell[2][contains(.,'"+eh.getCell(1, 2)+"')]/../data-table-cell[4][contains(.,'"+eh.getCell(1, 11)+"')]/../data-table-cell[5][contains(.,'"+eh.getCell(1, 4)+"')]/../data-table-cell[6][contains(.,'"+eh.getCell(1, 3)+"')]/../data-table-cell[7][contains(.,'"+eh.getCell(1, 7)+"')]"));
+		driver.findElement(By.xpath("//span[contains(.,'Dupe"+eh.getCell(1, 0).toString()+"')]"));
 
 	}
 	@Then("^check edit product functionality$")
@@ -555,12 +557,13 @@ public class ProductTestCaseSteps extends Init{
     public void verify_clicking_options_icon_in_offer_grid() throws Exception {
 		Exception e = new Exception("options not found in options menu");
 		Thread.sleep(1000);
+		Actions action = new Actions(driver);
 		List<WebElement> ele = driver.findElements(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."));
 		List<WebElement> button1 = driver.findElements(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/a[1]"));
 		List<WebElement> button2 = driver.findElements(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item"));
 		List<WebElement> button3 = driver.findElements(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/a[2]"));
 		List<WebElement> button4 = driver.findElements(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/a[3]"));
-		
+			
 		Iterator<WebElement> iter = ele.iterator();
 		Iterator<WebElement> iter1 = button1.iterator();
 		Iterator<WebElement> iter2 = button2.iterator();
@@ -574,53 +577,38 @@ public class ProductTestCaseSteps extends Init{
 		    WebElement we3 = iter3.next();
 		    WebElement we4 = iter4.next();
 		    Thread.sleep(500);
-		    we.click();
-		    Thread.sleep(500);
+		    jswait.loadClick(we);
+		    Thread.sleep(1000);
 		    if( we1.isDisplayed()  && we2.isDisplayed() && we3.isDisplayed() && we4.isDisplayed()){
 		    	
 		    }
 		    else
 		    	 throw e;
 		    
-		    driver.findElement(By.xpath(".//*[@id='router']/app-route[19]/offer-grid/div/div[1]/div")).click();
+		    action.moveToElement(driver.findElement(By.xpath("//div[contains(text(),'Offers')]"))).click().build().perform();
 		  
 		}
 	}
-	@Then("^check edit offer functionality$")
-    public void verifyEditOffer() throws Exception {
-		eh.setExcelFile("productInputData","singleProductPage");
-		commonObjects.filterName((String)eh.getCell(1, 12));
+	@Then("^check edit offer functionality for \"([^\"]*)\"$")
+    public void verifyEditOffer(String sheet) throws Exception {
+		eh.setExcelFile("offerInputData",sheet);
+		commonObjects.filterName((String)eh.getCell(1, 0));
 		commonObjects.clickOptionsIcon();
 		commonObjects.clickEditOption();
-		offerPageObjects.enterOfferName((String)eh.getCell(1, 12)+"_edit");
+		offerPageObjects.enterOfferName((String)eh.getCell(1, 0)+"_edit");
 		offerPageObjects.selectOfferType("STV");
 		offerPageObjects.clickProceedButton();
 		offerPageObjects.clickProceedButton();
 		offerPageObjects.clickProceedButton();
 		offerPageObjects.clickProceedButton();
 		offerPageObjects.clickSaveOfferButton();
-		driver.findElement(By.xpath("//div[1]/data-table-cell[2][contains(.,'"+(String)eh.getCell(1, 12)+"_edit')]/../data-table-cell[3][contains(.,'STV')]")).isDisplayed();
-		
+		commonObjects.filterName((String)eh.getCell(1, 0)+"_edit");
+		jswait.waitUntil("//data-table-cell[contains(.,'"+(String)eh.getCell(1, 0)+"_edit')]");		
 	}
 	@Then("^navigate to product class \"([^\"]*)\"$")
     public void navigateToProductClass(String sheet) throws Exception {
 		eh.setExcelFile("productClassInputData",sheet);
-		Actions clickAction = new Actions(driver);
-        WebElement scrollablePane = driver.findElement(By.xpath("//iron-scroll-threshold"));
-        clickAction.moveToElement(scrollablePane).click().build().perform();
-        Actions scrollAction = new Actions(driver);
-        for(int i=0;i<50;i++){
-        scrollAction.sendKeys(Keys.PAGE_DOWN).perform();
-        try{
-        	driver.findElement(By.xpath("//h4[contains(.,'"+eh.getCell(1, 0)+"')]"));
-        	break;
-        }
-        catch(Exception e){
-        }
-        Thread.sleep(1000);
-        }
-        Thread.sleep(2000);
-    	jswait.loadClick(".//*[@id='prdClsScrollThreshold']/paper-card//h4[contains(.,'"+eh.getCell(1, 0)+"')]/../..//a");
+		jswait.scrollAndClick("//paper-card/div[2]", "//h4[contains(.,'"+eh.getCell(1, 0)+"')]/../..//a");
 	}
 	@Then("^create selClass product from sheet \"([^\"]*)\"$")
     public void createSelClassProduct(String sheet) throws Exception {

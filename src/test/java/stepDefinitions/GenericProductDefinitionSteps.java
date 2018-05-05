@@ -222,33 +222,7 @@ public class GenericProductDefinitionSteps extends Init{
 	public void navigateToCampaignCategories(String sheet) throws Throwable {
 		
 		eh.setExcelFile("campaignCategoryInputData",sheet);
-		Actions clickAction = new Actions(driver);
-		if(driver.findElement(By.xpath("//iron-scroll-threshold")).isDisplayed())
-				{
-			System.out.println("Found");
-			
-			
-				}
-        WebElement scrollablePane = driver.findElement(By.xpath("//iron-scroll-threshold"));
-        clickAction.moveToElement(scrollablePane).click().build().perform();
-        Actions scrollAction = new Actions(driver);
-        for(int i=0;i<50;i++){
-        	
-        scrollAction.sendKeys(Keys.PAGE_DOWN).perform();
-        try{
-        	
-        	//driver.findElement(By.xpath("//div[contains(.,'"+eh.getCell(1, 0)+"')]/../..//a"));
-        	driver.findElement(By.xpath(".//*[contains(text(),'"+eh.getCell(1, 0)+"')]"));
-        	break;
-        }
-        catch(Exception e){
-        }
-        Thread.sleep(1000);
-        }
-        Thread.sleep(5000);
-    	jswait.loadClick(".//*[contains(text(),'"+eh.getCell(1, 0)+"')]");
-   
-		
+		jswait.scrollAndClick("//iron-scroll-threshold", ".//*[contains(text(),'"+eh.getCell(1, 0)+"')]");		
 		}
 	
 	@Then("^click on create button$")

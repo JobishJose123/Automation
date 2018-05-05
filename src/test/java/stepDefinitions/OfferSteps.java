@@ -46,7 +46,7 @@ public class OfferSteps extends Init{
 	{
 		eh.setExcelFile("offerInputData", sheet);
 		commonObjects.filterName(eh.getCell(1, 0).toString());
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(.,'"+eh.getCell(1, 0).toString()+"')]")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(.,'"+eh.getCell(1, 0).toString()+"')]")));
 	}
 	WebDriverWait wait = new WebDriverWait(driver, 15);
 	Actions actions = new Actions(driver);

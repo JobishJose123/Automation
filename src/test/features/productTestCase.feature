@@ -31,7 +31,7 @@ Then click create new product button
 Then clicking on the Add button to add benefits for the product
 
 @NX-1047
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: Create Product: Verify adding multiple benefits for the single product NX-1047
 Given login
 Then navigate to precision marketer
@@ -166,7 +166,8 @@ Then navigate to products
 Then navigate to prepaid telecom
 Then click create new product button
 Then create single product from sheet "singleProductPage"
-Then check duplicate product of "singleProductPage"
+Then create duplicate product of "singleProductPage"
+
 #
 @NX-1014
 @initBrowser @closeBrowser
@@ -271,9 +272,9 @@ Then navigate to offer management
 Then navigate to offers
 Then verify collapsing and expanding offer summary
 
-@NX-809
-@initBrowser @closeBrowser
-Scenario: Create offer:Offers Display: Verify collapsing the expanded offer summary details. NX-809
+@NX-809 @closeBrowser
+@initBrowser 
+Scenario: Create offer:Offers Display: Verify collapsing the expanded offer summary details.Verify the actions available by clicking on the "Options" icon. NX-809
 Given login
 Then navigate to precision marketer
 Then navigate to offer management
@@ -293,7 +294,7 @@ Then create single product from sheet "singleProductPage"
 Then navigate to offer management
 Then navigate to offers
 Then create new offer from sheet "rechargeWAP" with product "singleProductPage"
-Then check edit offer functionality
+Then check edit offer functionality for "rechargeWAP"
 
 @NX-1046
 @initBrowser @closeBrowser

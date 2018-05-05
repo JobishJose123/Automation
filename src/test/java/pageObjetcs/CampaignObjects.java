@@ -36,6 +36,8 @@ public class CampaignObjects extends Init{
 	private WebElement typeInformational;
 	@FindBy(xpath=".//campaign-details//label[contains(.,'Name')]/../input")
 	private WebElement campaignName;
+	@FindBy(xpath="//label[contains(.,'Name')]/../input")
+	private WebElement campaignTemplateName;
 	@FindBy(xpath=".//*[@id='textarea']")
 	private WebElement campaignDescription;
 	@FindBy(xpath=".//campaign-details//label[contains(.,'Offer Catalog')]/../input")
@@ -45,7 +47,7 @@ public class CampaignObjects extends Init{
 
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save Campaign')]")
 	private WebElement saveCampaignButton;
-	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save')]")
+	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save')][3]")
 	private WebElement saveCampaignTemplateButton;
 	@FindBy(xpath="//div[contains(text(),'Campaign Categories')]/../..")
 	private WebElement campaignCategoriesButton;
@@ -146,6 +148,9 @@ public class CampaignObjects extends Init{
 	public void enterCampaignName(String name) throws InterruptedException {
 		jswait.loadSendKeys(campaignName, name);
 	}
+	public void enterCampaignTemplateName(String name) throws InterruptedException {
+		jswait.loadSendKeys(campaignTemplateName, name);
+	}
 	public void enterCampaignDescription(String desc) throws InterruptedException {
 		jswait.loadSendKeys(campaignDescription, desc);
 	}
@@ -162,21 +167,28 @@ public class CampaignObjects extends Init{
 		enterCampaignDescription("Campaign to check bc craetion in selenium");
 		selectOfferCatalog(catalog);
 	}
-
+	public void scrollToCampaignCategory(String name) throws Exception {
+		jswait.scrollAndClick("//campaign-category-chart", "//div[text()='"+name+"']");
+	}
+	public void scrollToViewCampaignCategory(String name) throws Exception {
+		jswait.scrollIntoView("//campaign-category-chart", "//div[text()='"+name+"']");
+	}
 	public void createCampaignTemplate(String name) throws InterruptedException {
 		clickCampaignTemplateTab();
 		clickCreateCampaignTemplateButton();
-		enterCampaignName(name);
+		enterCampaignTemplateName(name);
 		enterCampaignDescription("Desc for Template");
 		clickProceedButton();
-		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickTargetConditionViewToggle();
 		targetConditionObjects.clickBasicTargetConditionWithAge();
 		clickSaveCampaignTemplate();
 	}
 	public void createCampaign(String name,String catalog) throws InterruptedException {
 		enterCampaignDeails(name,catalog);
 		clickProceedButton();
-		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickTargetConditionViewToggle();
 		targetConditionObjects.clickBasicTargetConditionWithAge();
 		clickProceedButton();
 		 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='router']/app-route[9]/campaign-form/wizard-tab/div/iron-pages/campaign-schedule/form/paper-card/paper-date-time-input/div/paper-input[2]/paper-input-container/div[2]"))).click();

@@ -134,7 +134,7 @@ public class RegistrationList extends Init{
     }
 	public void add_profile_field() throws InterruptedException
 	{		
-	jswait.loadClick("//paper-button[contains(.,'Create New Profile Field')]");
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Country_q11");
 	
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
@@ -151,7 +151,7 @@ public class RegistrationList extends Init{
 	jswait.loadSendKeys("//h4[text()='Options']/../div[4]//input",country[3]);
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
-	jswait.loadClick("//paper-button[contains(.,'Create New Profile Field')]");
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Languages_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
@@ -175,7 +175,7 @@ public class RegistrationList extends Init{
 	jswait.loadSendKeys("//h4[text()='Options']/../div[8]//input",Secondlanguages[3]);
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
-	jswait.loadClick("//paper-button[contains(.,'Create New Profile Field')]");
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","First Name_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
@@ -184,7 +184,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick("//create-profile//paper-item[text()='Text']");
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
-	jswait.loadClick("//paper-button[contains(.,'Create New Profile Field')]");
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Last Name_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
@@ -193,7 +193,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick("//create-profile//paper-item[text()='Text']");
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
-	jswait.loadClick("//paper-button[contains(.,'Create New Profile Field')]");
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Email_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
@@ -202,7 +202,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick("//create-profile//paper-item[text()='Text']");
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
-	jswait.loadClick("//paper-button[contains(.,'Create New Profile Field')]");
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Balance_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
@@ -211,7 +211,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick("//create-profile//paper-item[text()='Number']");
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
-	jswait.loadClick("//paper-button[contains(.,'Create New Profile Field')]");
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Boolean_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
@@ -220,7 +220,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick("//create-profile//paper-item[text()='Yes or No']");
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
-	jswait.loadClick("//paper-button[contains(.,'Create New Profile Field')]");
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Age_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
@@ -239,7 +239,7 @@ public class RegistrationList extends Init{
 	
 	@Then("^check and add profile fields$")
     public void addProfileFields() throws IOException, InterruptedException{
-		jswait.loadClick("//a/div//div[contains(.,'Profile Fields')]/../..");
+		jswait.loadClick("//a/div//div[contains(.,'Customer Profile Info')]/../..");
 		jswait.loadClick("//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..");
 		jswait.loadSendKeys("//form/paper-input[1]/paper-input-container/div[2]/div/input","_q11");
 		jswait.loadClick("//paper-button[contains(text(),'Apply')]");

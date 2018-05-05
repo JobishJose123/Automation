@@ -53,7 +53,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>May 3, 2018 12:55:43 PM</span>
+                    <span class='label suite-start-time blue darken-3'>May 5, 2018 11:09:09 PM</span>
 				</a>
 			</li>
 			<li>
@@ -91,10 +91,10 @@
 					<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@NX-OfferCatalog</a></li>
+					<li><a href='#'>@NX-BroadcastManagement</a></li>
+					<li><a href='#'>@NX-1177</a></li>
 					<li><a href='#'>@initBrowser</a></li>
 					<li><a href='#'>@closeBrowser</a></li>
-					<li><a href='#'>@NX-1103</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -172,7 +172,7 @@
 					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>8</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>10</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
 					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
@@ -191,21 +191,21 @@
 				
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>Offer Catalogue test cases</span>
-						<span class='test-time'>May 3, 2018 12:55:43 PM</span>
+						<span class='test-name'>Test cases related to Broadcast Management</span>
+						<span class='test-time'>May 5, 2018 11:09:09 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='scenario node' test-id='2' status='pass'>
 	<div class='category-list'>
+		<span class='category label white-text'>@NX-1177</span>
 		<span class='category label white-text'>@initBrowser</span>
 		<span class='category label white-text'>@closeBrowser</span>
-		<span class='category label white-text'>@NX-1103</span>
 	</div>
-	<span class='duration right label'>0h 1m 24s+374ms</span>
+	<span class='duration right label'>0h 1m 38s+270ms</span>
 	<div class='desc'>
 		<b>Scenario</b>
-		<span class="desc-text">Verify adding the filters in the offer catalog screen using filter button.</span>
+		<span class="desc-text">Category screen : Verify screen navigation by clicking on the category</span>
 	</div>
 	<ul class='steps'>
 		<li test-id='3' class='node given pass' status='pass'>
@@ -216,11 +216,11 @@
 				<div class='pre'>passed</div>
 			
 		</li>
-		<li test-id='4' class='node when pass' status='pass'>
+		<li test-id='4' class='node then pass' status='pass'>
 			
-			<b>When</b>
+			<b>Then</b>
 			
-			<span class="bdd-step-name">When navigate to precision marketer</span>
+			<span class="bdd-step-name">Then navigate to configuration management</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -228,7 +228,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to offer management</span>
+			<span class="bdd-step-name">Then navigate to campaign categories</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -236,7 +236,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then Navigate to Offer Catalogue</span>
+			<span class="bdd-step-name">Then create new campaign category from sheet "campaignCategory"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -244,7 +244,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then Create New Offer Catalogue from sheet "defaultCatalog"</span>
+			<span class="bdd-step-name">Then navigate to landing page</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -252,7 +252,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to offer management</span>
+			<span class="bdd-step-name">Then navigate to precision marketer</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -260,7 +260,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then Navigate to Offer Catalogue</span>
+			<span class="bdd-step-name">Then navigate to life cycle marketing</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -268,7 +268,23 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then Delete Created Offer Catalogue "defaultCatalog"</span>
+			<span class="bdd-step-name">Then navigate to campaign category from sheet "campaignCategory"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='11' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='12' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then naigate to "campaignBC" campaign view broadcasts</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -328,7 +344,7 @@
 				
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NX-OfferCatalog</span>
+						<span class='category-name'>@NX-BroadcastManagement</span>
 						<span class='category-status right'>
 							<span class='label pass'>1</span>
 						</span>
@@ -351,8 +367,42 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 3, 2018 12:55:43 PM</td>
-										<td class='linked' test-id='1'>Offer Catalogue test cases</td>
+										<td>May 5, 2018 11:09:09 PM</td>
+										<td class='linked' test-id='1'>Test cases related to Broadcast Management</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@NX-1177</span>
+						<span class='category-status right'>
+							<span class='label pass'>1</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 1</span>
+							
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>May 5, 2018 11:09:09 PM</td>
+										<td class='linked' test-id='2'>Test cases related to Broadcast Management.Category screen : Verify screen navigation by clicking on the category</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -385,8 +435,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 3, 2018 12:55:43 PM</td>
-										<td class='linked' test-id='2'>Offer Catalogue test cases.Verify adding the filters in the offer catalog screen using filter button.</td>
+										<td>May 5, 2018 11:09:09 PM</td>
+										<td class='linked' test-id='2'>Test cases related to Broadcast Management.Category screen : Verify screen navigation by clicking on the category</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -419,42 +469,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 3, 2018 12:55:43 PM</td>
-										<td class='linked' test-id='2'>Offer Catalogue test cases.Verify adding the filters in the offer catalog screen using filter button.</td>
-										<td><span class='test-status pass'>pass</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</li>
-				<li class='category displayed active'>
-					<div class='category-heading'>
-						<span class='category-name'>@NX-1103</span>
-						<span class='category-status right'>
-							<span class='label pass'>1</span>
-						</span>
-					</div>
-					<div class='category-content hide'>
-						<div class='category-status-counts'>
-							<span class='label green accent-4 white-text'>Passed: 1</span>
-							
-							
-						</div>
-					
-						<div class='category-tests'>
-							<table class='bordered table-results'>
-								<thead>
-									<tr>
-										<th>Timestamp</th>
-										<th>TestName</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>May 3, 2018 12:55:43 PM</td>
-										<td class='linked' test-id='2'>Offer Catalogue test cases.Verify adding the filters in the offer catalog screen using filter button.</td>
+										<td>May 5, 2018 11:09:09 PM</td>
+										<td class='linked' test-id='2'>Test cases related to Broadcast Management.Category screen : Verify screen navigation by clicking on the category</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -495,25 +511,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>8</div>
+					<div class='panel-lead'>10</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>May 3, 2018 12:55:43 PM</div>
+					<div class='panel-lead'>May 5, 2018 11:09:09 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>May 3, 2018 12:57:10 PM</div>
+			 		<div class='panel-lead'>May 5, 2018 11:10:49 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>86,810ms</div>
+					<div class='panel-lead'>100,787ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -548,7 +564,13 @@
 							<th>Others</th>
 						</tr>
 						<tr>
-							<td>@NX-OfferCatalog</td>
+							<td>@NX-BroadcastManagement</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>@NX-1177</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -561,12 +583,6 @@
 						</tr>
 						<tr>
 							<td>@closeBrowser</td>
-							<td>1</td>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<td>@NX-1103</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -610,7 +626,7 @@
 				infoChild: 0,
 				exceptionsChild: 0,
 				
-				passGrandChild: 8,
+				passGrandChild: 10,
 				failGrandChild: 0,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,

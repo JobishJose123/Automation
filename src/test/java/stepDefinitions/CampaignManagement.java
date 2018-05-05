@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -34,12 +35,12 @@ public class CampaignManagement extends Init{
 		PageFactory.initElements(driver, this);
 	}
 
-	 @Then("^create new campaign from sheet \"([^\"]*)\"$")
-	    public void create_new_campaign(String sheet) throws Throwable
+	 @Then("^create new campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+	    public void create_new_campaign(String sheet, String catalogSheet) throws Throwable
 	    {
 	    	Thread.sleep(4000);
 	    	ExcelHelper catalogExcel = new ExcelHelper();
-	    	catalogExcel.setExcelFile("offerCatalogInputData", "defaultCatalog");
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
 	    	Thread.sleep(4000);
 	    	eM.setExcelFile("campaignInputData",sheet);
 	 	    Random rn = new Random();
@@ -95,7 +96,7 @@ public class CampaignManagement extends Init{
 	    @Then("^navigate to \"([^\"]*)\" category$")
 	    public void navigate_to_category(String category) throws Throwable
 	    {
-	    	jswait.scrollAndClick("//iron-scroll-threshold", "//div[text()='"+category+"']");
+	    	jswait.scrollAndClick("//campaign-category-chart", "//div[text()='"+category+"']");
 	    }
 	    @Then("^naigate to \"([^\"]*)\" campaign view broadcasts$")
 	    public void navigateToCampaign(String sheet) throws Throwable
@@ -133,7 +134,7 @@ public class CampaignManagement extends Init{
 	    public void navigate_to_campaign_category_from_sheet(String sheet) throws Throwable {
 	    	eM.setExcelFile("campaignCategoryInputData",sheet);
 	    	String name = (String) eM.getCell(1, 0);
-	    	jswait.scrollAndClick("//iron-scroll-threshold", "//div[text()='"+name+"']");
+	    	campaignObjects.scrollToCampaignCategory(name);
 	    }
 	    @Then("^create new campaign category without adding name$")
 	    public void createCampaignCategoryWithoutName() throws Throwable {
@@ -144,13 +145,13 @@ public class CampaignManagement extends Init{
 	    public void verifyCampaignCount(String sheet) throws Throwable {
 	    	eM.setExcelFile("campaignCategoryInputData",sheet);
 	    	String name = (String) eM.getCell(1, 0);
-	    	jswait.scrollIntoView("//iron-scroll-threshold", "//div[text()='"+name+"']");
+	    	campaignObjects.scrollToViewCampaignCategory(name);
 	    	String campCount = driver.findElement(By.xpath("//div[text()='"+name+"']/../../../..//span[contains(.,'Campaigns')]/../../span")).getText();
 	    	Assert.assertTrue(campCount.contentEquals("0"), "Invalid count displayed(0)");
-	    	jswait.scrollAndClick("//iron-scroll-threshold", "//div[text()='"+name+"']");
-	    	create_new_campaign("campaignBC");
+	    	campaignObjects.scrollToCampaignCategory(name);
+	    	create_new_campaign("campaignBC","defaultCatalog");
 	    	campaignObjects.navigateToLIfeCycleMarketing();
-	    	jswait.scrollIntoView("//iron-scroll-threshold", "//div[text()='"+name+"']");
+	    	campaignObjects.scrollToViewCampaignCategory(name);
 	    	campCount = driver.findElement(By.xpath("//div[text()='"+name+"']/../../../..//span[contains(.,'Campaigns')]/../../span")).getText();
 	    	Assert.assertTrue(campCount.contentEquals("1"), "Invalid count displayed(1)");
 	    }
@@ -158,13 +159,13 @@ public class CampaignManagement extends Init{
 	    public void verifyCampaignTemplateCount(String sheet) throws Throwable {
 	    	eM.setExcelFile("campaignCategoryInputData",sheet);
 	    	String name = (String) eM.getCell(1, 0);
-	    	jswait.scrollIntoView("//iron-scroll-threshold", "//div[text()='"+name+"']");
+	    	campaignObjects.scrollToViewCampaignCategory(name);
 	    	String campCount = driver.findElement(By.xpath("//div[text()='"+name+"']/../../../..//span[contains(.,'Templates')]/../../span")).getText();
 	    	Assert.assertTrue(campCount.contentEquals("0"), "Invalid count displayed(0)");
-	    	jswait.scrollAndClick("//iron-scroll-threshold", "//div[text()='"+name+"']");
+	    	campaignObjects.scrollToCampaignCategory(name);
 	    	campaignObjects.createCampaignTemplate(name+"template");
 	    	campaignObjects.navigateToLIfeCycleMarketing();
-	    	jswait.scrollIntoView("//iron-scroll-threshold", "//div[text()='"+name+"']");
+	    	campaignObjects.scrollToViewCampaignCategory(name);
 	    	campCount = driver.findElement(By.xpath("//div[text()='"+name+"']/../../../..//span[contains(.,'Templates')]/../../span")).getText();
 	    	Assert.assertTrue(campCount.contentEquals("1"), "Invalid count displayed(1)");
 	    }

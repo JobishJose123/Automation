@@ -214,7 +214,7 @@ Feature: generic product class
   Scenario: Verify delete option for the product class NX-7044
     Then delete duplicate of "TestProductClass"
 
-  @NX-7017 @initBrowser @closeBrowser
+  @NX-7017 @initBrowser 
   Scenario: Verify the product listing page NX-7017
     Given login
     Then navigate to precision marketer
@@ -269,7 +269,7 @@ Feature: generic product class
     Then check attribute while editing a product
     Then check attribute while creating a product
 
-  @NX-7085 @initBrowser @closeBrowser
+  @NX-7085 @initBrowser 
   Scenario: Verify copying the BC after the product is deactivated- 7085
     Given login
     Then navigate to configuration management
@@ -292,20 +292,24 @@ Feature: generic product class
     Then navigate to offers
     Then click on create new ofer button
     Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then click on options and view broadcast
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then click on create button
+    Then click on activate button
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
     Then navigate to product class "TestProductClass"
     Then deactivate the product with attributes from sheet "fullDetails"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category "CampaignCategory"
-    Then create new campaign from sheet "campaignBC"
-    Then click on options and view broadcast
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then click on create button
-    Then click on activate button
 
   @NX-7068 @initBrowser @closeBrowser
   Scenario: Verify whether deactivated product is available for selection while program creation- 7068

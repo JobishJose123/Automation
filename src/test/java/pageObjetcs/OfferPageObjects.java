@@ -39,7 +39,7 @@ public class OfferPageObjects extends Init {
 	private WebElement offerChannel;
 	@FindBy(xpath = "//label[contains(.,'Category')]/../..//input")
 	private WebElement offerCategory;
-	@FindBy(xpath = "//paper-button[contains(.,'Proceed')]")
+	@FindBy(xpath = "//*[contains(.,'Create New Offer')]/following::paper-button[contains(.,'Proceed')]")
 	private WebElement offerProceedButton;
 	@FindBy(xpath = ".//*[@id='check']/div/iron-pages/offer-products/form/div/div[2]/paper-button")
 	private WebElement offerAddProductButton;

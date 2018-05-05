@@ -505,7 +505,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			Actions clickAction = new Actions(driver);
 			WebDriverWait wait = new WebDriverWait(driver, 8);
 			 String loadMaskStatus = "";
-			 Thread.sleep(400);
+			 Thread.sleep(2000);
 			 try {
 				 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
 			 }catch(Exception e) {
@@ -554,7 +554,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			Actions clickAction = new Actions(driver);
 			WebDriverWait wait = new WebDriverWait(driver, 8);
 			 String loadMaskStatus = "";
-			 Thread.sleep(400);
+			 Thread.sleep(2000);
 			 try {
 				 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
 			 }catch(Exception e) {

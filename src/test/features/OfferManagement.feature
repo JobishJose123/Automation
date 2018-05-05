@@ -1,5 +1,5 @@
 #Author: madhan.kumar@flytxt.com
-@OfferTestCases
+@NX-OfferTestCases
 Feature: Test suite on Offer creation
   I want to check all test cases related to offer page
 

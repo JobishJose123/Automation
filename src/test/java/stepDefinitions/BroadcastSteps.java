@@ -25,7 +25,8 @@ import pageObjetcs.OfferPageObjects;
 import pageObjetcs.TargetConditionObjects;
 
 public class BroadcastSteps extends Init{
-
+	final String BASE_LIST = "l";
+	
 	JSWaiter jswait = new JSWaiter();
 	
 	public ExcelHelper eM = new ExcelHelper();
@@ -129,6 +130,7 @@ public class BroadcastSteps extends Init{
 			offerPageObjects.clickRewardTypeAny();
 		}
 		offerPageObjects.clickSaveOfferButton();
+		eh.setExcelFile("offerInputData","rechargeSMS");
 		commonObjects.filterName((String) eh.getCell(1, 0));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//data-table-cell[contains(.,'"+(String) eh.getCell(1, 0)+"')]")));
 		
@@ -362,7 +364,7 @@ public class BroadcastSteps extends Init{
     	ExcelHelper list = new ExcelHelper();
     	list.setExcelFile("registrationListInputData", "Sheet1");
     	eM.setExcelFile("bcInputData",sheet);
-    	String baseList = list.getCell(1, 2).toString();
+//    	String baseList = list.getCell(1, 2).toString();
     	ExcelHelper offerExcel = new ExcelHelper(); 
     	offerExcel.setExcelFile("offerInputData", offer);
     	Random rn = new Random();
@@ -397,14 +399,15 @@ public class BroadcastSteps extends Init{
       		 day++;
       	 }
       	 Actions builder = new Actions(driver);
-      	broadcastPageObjects.createBC(name, bc_type,baseList,offerExcel.getCell(1, 0).toString());
+      	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offerExcel.getCell(1, 0).toString());
       	
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
 
 if(bc_type.contentEquals("one-off")){
 	Thread.sleep(1000);
-		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
+		broadcastPageObjects.clickOneOffRadioButton();
+//		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
 		Thread.sleep(1000);
 		 jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
 		Thread.sleep(1000);
@@ -440,7 +443,7 @@ if(bc_type.contentEquals("one-off")){
 	 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='"+date+"']");
 	Thread.sleep(1000);
 	 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2]");
-	Thread.sleep(1000);
+	Thread.sleep(3000);
 	 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[2]//paper-input[2]//input");
   Thread.sleep(2000);
   num = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
@@ -532,11 +535,18 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
 	    broadcastPageObjects.selectBaseList("list");
 	    
 	}
+	@Then("^verify editing target condition$")
+	public void verify_EditingTargetCoindition() throws Throwable {
+		commonObjects.clickOptionsIcon();
+		targetConditionObjects.clickTargetConditionEdit();
+		targetConditionObjects.clickBasicTargetConditionWithAge("20");
+	    
+	}
 	@Then("^navigate to broadcast target condition$")
 	public void navigate_to_broadcast_target_condition() throws Throwable {
 	    broadcastPageObjects.enterBroadcastBasicDetails("TargetConditionCheck");
 	    broadcastPageObjects.clickProceedButton();
-	    broadcastPageObjects.selectBaseList("l");
+	    broadcastPageObjects.selectBaseList(BASE_LIST);
 //	    commonObjects.clickTargetConditionViewToggleIcon();
 	    
 	}

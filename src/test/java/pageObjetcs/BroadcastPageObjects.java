@@ -29,7 +29,7 @@ public class BroadcastPageObjects extends Init {
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	CommonObjects commonObjects = new CommonObjects();
 
-	@FindBy(xpath = "//paper-item[contains(.,' View Broadcasts')]/../input")
+	@FindBy(xpath = "//paper-item[contains(.,'View Broadcasts')]")
 	private WebElement viewBroadcast;
 	@FindBy(xpath = "//label[contains(.,'Broadcast Name')]/../input")
 	private WebElement broadcastName;
@@ -65,11 +65,11 @@ public class BroadcastPageObjects extends Init {
 	private WebElement routeBroadcast;
 	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/../input")
 	private WebElement routeFulfillment;
-	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'SMPP Robi outbond')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
 	private WebElement routeBroadcastSmppRobiOutbount;
 	@FindBy(xpath = ".//label[contains(.,'Sender ID: Fulfillment')]/following::vaadin-combo-box-item[contains(.,'Address-SMPP')]")
 	private WebElement senderIdFulfillmentAdressSmpp;
-	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'SMPP Robi outbond')]")
+	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
 	private WebElement routeFulfillmentSmppRobiOutbount;
 	@FindBy(xpath = ".//label[contains(.,'Track session')]/../input")
 	private WebElement trackSessionSelector;
@@ -123,8 +123,7 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = ".//*[@id='dialognotification']//paper-button[contains(text(),'Cancel')]")
 	private WebElement bcNotificationscancel;
 
-	
-	 @FindBy(xpath=".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]")
+	 @FindBy(xpath="//*[contains(text(),'One-time')]/..")
 	 private WebElement oneOffRadioButton;
 	 @FindBy(xpath=".//label[contains(.,'Send Time')]/../input")
 	 private WebElement oneOffSendTimeField;
@@ -351,14 +350,15 @@ public class BroadcastPageObjects extends Init {
 	public void selectSenderAndRoute() throws InterruptedException {
 		jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
 		jswait.loadClick(senderIdBroadcastAdressSmpp);
-		jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
+		jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
 		jswait.loadClick(routeBroadcastSmppRobiOutbount);
 		jswait.loadSendKeys(senderIdFulfillmentSelector, "Address-SMPP");
 		// jswait.loadClick(senderIdFulfillmentSelector);
 		// Thread.sleep(4000);
 		jswait.loadClick(senderIdFulfillmentAdressSmpp);
 		// wait.until(ExpectedConditions.elementToBeClickable(senderIdFulfillmentAdressSmpp)).click();
-		jswait.loadSendKeys(routeFulfillment, "SMPP Robi outbond");
+		jswait.loadSendKeys(routeFulfillment, "SMPP Robi outbound");
+		Thread.sleep(2000);
 		jswait.loadClick(routeFulfillmentSmppRobiOutbount);
 	}
 
