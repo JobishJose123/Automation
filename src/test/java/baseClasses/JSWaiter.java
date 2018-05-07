@@ -1,4 +1,10 @@
 package baseClasses;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -598,6 +604,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 		        }
 		        Thread.sleep(2000);	
 		}
+		public String getTextFormElement(String xpath) throws InterruptedException, UnsupportedFlavorException, IOException {
+			WebDriverWait wait = new WebDriverWait(driver, 8);
+			String text = "";
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+			text = driver.findElement(By.xpath(xpath)).getText();
+			return text;
+		}
+		
 }
 		
 	

@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -215,6 +216,22 @@ public class BroadcastSteps extends Init{
 		broadcastPageObjects.selectSenderAndRoute();
 		broadcastPageObjects.clickProceedButton();
     }
+	@Then("^verify navigating to delivery tab without selecting channel and sender$")
+    public void verifyNavigatingToDeliveryTab() throws Throwable
+    {  
+		broadcastPageObjects.enterBroadcastBasicDetails("check");
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectBaseList("list");
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectOffer("Offer");
+		broadcastPageObjects.selectTrackSession();
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectTrackingSource();
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectSenderAndRoute();
+		broadcastPageObjects.clickProceedButton();
+    }
 	@Then("^verify mandatory fields in details tab$")
     public void verifyMandatoryFieldsInDetailsTab() throws Throwable
     {  
@@ -301,6 +318,7 @@ public class BroadcastSteps extends Init{
 		broadcastPageObjects.clickCreateButton();
 		broadcastPageObjects.clickBcEndNeverRadioButton();
 		broadcastPageObjects.clickCreateButton();
+		broadcastPageObjects.clickActivateButton();
 		
     }
 	//---------------------------------------------------------------------
@@ -310,7 +328,7 @@ public class BroadcastSteps extends Init{
     {  
 		broadcastPageObjects.enterBroadcastBasicDetails("targetduplication");
 		broadcastPageObjects.clickProceedButton();
-		broadcastPageObjects.selectBaseList("latest_list");
+		broadcastPageObjects.selectBaseList(BASE_LIST);
 		broadcastPageObjects.clickcreateTargetCondition();
 		commonObjects.clickOptionsIcon();
 		broadcastPageObjects.ClickCopyAsAnd();
@@ -323,7 +341,7 @@ public class BroadcastSteps extends Init{
 		
 		broadcastPageObjects.enterBroadcastBasicDetails("notification");
 		broadcastPageObjects.clickProceedButton();
-		broadcastPageObjects.selectBaseList("latest_list");
+		broadcastPageObjects.selectBaseList(BASE_LIST);
 		//broadcastPageObjects.clickcreateTargetCondition();
 	    //broadcastPageObjects.clickProceedButton();
 		//broadcastPageObjects.selectBaseList("Latest_list");
@@ -419,7 +437,7 @@ if(bc_type.contentEquals("one-off")){
 		
      Thread.sleep(2000);
    	 jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
-	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+2)+"]"));
      builder.moveToElement(num).click().build().perform();
      Thread.sleep(2000);
 //      jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
@@ -488,17 +506,24 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
 			 WebElement num = driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
 		     builder.moveToElement(num).click().build().perform();
 		     Thread.sleep(2000);
-		      jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+//		      jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
 			 WebElement num1 = driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
 			 Thread.sleep(1000);
 			 builder.moveToElement(num1).click().build().perform();
 			 Thread.sleep(1000);
+			 if(am_pm==0)
+		    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
+		     else
+		    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
+			 Thread.sleep(1000);
 			 num1 = driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
 			 builder.moveToElement(num1).click().build().perform();
+//			 Thread.sleep(1000);
+//			  jswait.loadClick("//form[@id='deliverDetailForm']//paper-input-container//label[contains(.,'Time Zone')]/..//input");
 			 Thread.sleep(1000);
-			  jswait.loadClick("//form[@id='deliverDetailForm']//paper-input-container//label[contains(.,'Time Zone')]/..//input");
+			 jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
 			 Thread.sleep(1000);
-			  jswait.loadClick(".//paper-item[contains(.,'GMT+05:30')]");
+			  jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
 			 Thread.sleep(1000);
 			  jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
 			 Thread.sleep(1000);
@@ -512,7 +537,7 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
 			 num = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
 		     builder.moveToElement(num).click().build().perform();
 		     Thread.sleep(2000);
-		      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
+//		      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
 			 num1 = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
 			 Thread.sleep(1000);
 			 builder.moveToElement(num1).click().build().perform();
@@ -561,6 +586,38 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
 		targetConditionObjects.clickManualOrButton();
 		targetConditionObjects.clickConditionTypeField();
 		
+	}
+	@Then("^save bc$")
+	public void save_bc() throws Throwable {
+		broadcastPageObjects.clickCreateButton();
+		broadcastPageObjects.clickSaveButton();
+	}
+
+	@Then("^navigate to \"([^\"]*)\" broadcasts$")
+	public void navigate_to_broadcasts(String type) throws Throwable {
+		jswait.loadClick("//paper-tab//div[contains(.,'"+type+"')]");
+	}
+
+	@Then("^activate saved \"([^\"]*)\" bc from sheet \"([^\"]*)\"$")
+	public void activate_saved_bc_from_sheet(String arg1, String sheet) throws Throwable {
+		eh.setExcelFile("bcInputData", sheet);
+		jswait.loadClick("//vaadin-grid-cell-content[contains(.,'"+eh.getCell(1, 0)+"')]/../..//paper-icon-button");
+		jswait.loadClick("//label[text()='Edit']/..");
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.clickProceedButton();
+	    broadcastPageObjects.clickCreateButton();
+	    broadcastPageObjects.clickActivateButton();
+	    broadcastPageObjects.clickActivateConfirmYes();
+	}
+
+	@Then("^check if \"([^\"]*)\" bc status is \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+	public void check_if_bc_status_is_from_sheet(String type, String status, String sheet) throws Throwable {
+		String currStatus = "";
+		if(type.contains("Recurring")) {
+			currStatus = jswait.getTextFormElement("//div[@val='broadcastRecurringViews']//vaadin-grid-table-row/vaadin-grid-table-cell[2]/vaadin-grid-cell-content");
+			Assert.assertEquals("Status of Bc is not chnaged",currStatus, status);
+		}
 	}
 //	@Then("^verify adding target condition with or condition$")
 //	public void verifyEditingTargetCondition() throws Throwable {

@@ -95,6 +95,8 @@ public class BroadcastPageObjects extends Init {
 	private WebElement createButtonBc;
 	@FindBy(xpath = "//paper-button[text()='Activate']")
 	private WebElement activateButtonBc;
+	@FindBy(xpath = "//paper-dialog[@id='broadcastSummary']//paper-button[text()='Save']")
+	private WebElement saveButtonBc;
 	@FindBy(xpath = ".//*[@id='confirmBox']//paper-button[2]")
 	private WebElement activateConfirmYes;
 	@FindBy(xpath = ".//*[@id='checkboxContainer']")
@@ -248,6 +250,9 @@ public class BroadcastPageObjects extends Init {
 
 	public void clickActivateButton() throws InterruptedException {
 		jswait.loadClick(activateButtonBc);
+	}
+	public void clickSaveButton() throws InterruptedException {
+		jswait.loadClick(saveButtonBc);
 	}
 
 	public void enterBroadcastPurpose(String pur) throws InterruptedException {
