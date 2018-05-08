@@ -388,4 +388,12 @@ Given login
   Then edit offer catalog
   Then remove offer for offer catalog from sheet "defaultCatalog" 
   
+  @initBrowser @closeBrowser @NX-2066 
+Scenario: Checking cross site scripting in creation of new catalogue under CLV Max
+Given login
+	When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+	Then verify cross site scripting in new catalog 
+  
   

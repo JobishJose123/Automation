@@ -448,5 +448,19 @@ public class OfferCatalogSteps extends Init{
 			
 		   catalogPageObjects.chooseOfferCatalog(sheet);
 		}
+	   @Then("^verify cross site scripting in new catalog$")
+		public void verifyCrossSiteScrptingInewNewCatalog() throws Throwable {
+			
+		   catalogPageObjects.clickCreateCatalogButton();
+		   catalogPageObjects.enterCatalogDescription("cross site");
+		   String name = "";
+		   char[] specialChar = {'>','<','\'' , ';' ,'"'};
+		   for(char c:specialChar) {
+			   name = "name"+c;
+		   catalogPageObjects.enterCatalogName(name);
+		   catalogPageObjects.clickSaveCatalogButton();
+		   }
+		   catalogPageObjects.clickSaveCatalogButton();
+		}
 
 }
