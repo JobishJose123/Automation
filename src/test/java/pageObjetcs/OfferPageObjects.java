@@ -114,10 +114,10 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = ".//paper-listbox[@id='langDrop']/paper-item")
 	private List <WebElement> creativeLanguagesList;
 	
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 @FindBy(xpath="//span[text()='Offer Details']/..")
+	 private WebElement detailsTab;
+	 @FindBy(xpath="//span[text()='Products']/..")
+	 private WebElement productsTab;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -627,5 +627,15 @@ public class OfferPageObjects extends Init {
 		clickCreateNewOfferButton();
 		enterOfferDetailsFromSheet(sheet, productSheet);
 		clickSaveOfferButton();
+	}
+	public String getDetailsTabColour() {
+		String colour = detailsTab.getCssValue("background-color");
+		System.out.println(colour);
+		return colour;
+	}
+	public String getProductsTabColour() {
+		String colour = productsTab.getCssValue("background-color");
+		System.out.println(colour);
+		return colour;
 	}
 }

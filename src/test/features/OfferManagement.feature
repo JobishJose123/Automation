@@ -191,3 +191,11 @@ Then navigate to precision marketer
 Then  navigate to offer management 
 Then navigate to offers
 Then verify cross site scrpting in new offer
+
+@initBrowser @closeBrowser @NX-1375
+Scenario: Offer Management-->Create new offer-->Details tab
+Given login
+Then navigate to precision marketer
+Then  navigate to offer management 
+Then navigate to offers
+Then verify tab colours

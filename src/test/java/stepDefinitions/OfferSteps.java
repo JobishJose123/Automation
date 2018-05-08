@@ -10,6 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
@@ -219,6 +220,18 @@ public class OfferSteps extends Init{
 	   offerPageObjects.clickProceedButton();
 	   }
 	   offerPageObjects.clickProceedButton();
+	}
+	@Then("^verify tab colours$")
+	public void verifyTabColours() throws Throwable {
+		offerPageObjects.clickCreateNewOfferButton();
+		Assert.assertTrue(offerPageObjects.getDetailsTabColour().contains("rgba(255, 102, 50, 1)"), "current selection colour not orange");
+		offerPageObjects.enterDetailsTabFields("tempRechargeWap");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickAddProductsButton();
+		Assert.assertTrue(offerPageObjects.getDetailsTabColour().contains("rgba(84, 205, 152, 1)"), "current selection colour not green");
+		Assert.assertTrue(offerPageObjects.getProductsTabColour().contains("rgba(255, 102, 50, 1)"), "current selection colour not orange");
+		
+		
 	}
 	
 }
