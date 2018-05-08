@@ -428,4 +428,25 @@ public class OfferCatalogSteps extends Init{
 	   {
 		  
 	   }
+	   @Then("^edit offer catalog$")
+		 public void editOfferCatalog() throws Throwable {
+			 commonObjects.clickOptionsIcon();
+			 catalogPageObjects.clickViewOffersOption();
+		 }
+	   @Then("^remove offer for offer catalog from sheet \"([^\"]*)\"$")
+		public void removeOfferCatalog(String sheet) throws Throwable {
+		 
+		  
+		 catalogPageObjects.removeOfferCatalog(sheet);
+		  
+		  }
+
+
+
+	   @Then("^choose offer catalog from sheet \"([^\"]*)\"$")
+		public void chooseOffer(String sheet) throws Throwable {
+			
+		   catalogPageObjects.chooseOfferCatalog(sheet);
+		}
+
 }

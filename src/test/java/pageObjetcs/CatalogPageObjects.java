@@ -1,5 +1,7 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertFalse;
+
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.List;
@@ -12,10 +14,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 
 public class CatalogPageObjects extends Init{
+	
+	public ExcelHelper eh = new ExcelHelper();
 	public CatalogPageObjects() {
 		PageFactory.initElements(driver, this);
 	}
@@ -65,6 +70,10 @@ public class CatalogPageObjects extends Init{
 	private WebElement optionsViewOffers;
 	@FindBy(xpath="//h3[contains(text(),'Offer Catalog')]/following::iron-icon")
 	private WebElement editCatalogInViewOffers;
+	@FindBy(xpath="//iron-data-table[@id='offer-listing']/div[@id='container']/iron-list[@id='list']/div//data-table-row//paper-icon-button[@role='button']")
+	private WebElement deleteOffer;
+	@FindBy(xpath=".//iron-data-table[@id='offer-listing']//iron-list[@id='list']/div/div/data-table-row")
+	private WebElement offerList;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -178,6 +187,9 @@ public class CatalogPageObjects extends Init{
 		String name = commonObjects.getTextFormTextField(catalogName);
 		Assert.assertEquals(name.length(), 30);
 	}
+	public void clickDeleteOfferOption() throws InterruptedException {
+		jswait.loadClick(deleteOffer);
+	}
 	public void verifyCatalogDescriptionField() throws InterruptedException, UnsupportedFlavorException, IOException {
 		String desc = commonObjects.getTextFormTextField(catalogDescription);
 		Assert.assertEquals(desc.length(), 500);
@@ -189,6 +201,26 @@ public class CatalogPageObjects extends Init{
 		selectFirstOffer();
 	   List<WebElement> offersToAdd = driver.findElements(By.xpath("//*[@id='items']//data-table-checkbox"));
 	   wait.until(ExpectedConditions.elementToBeClickable(offersToAdd.get(1))).click();
+	}
+	public void filterWorkaround(String name) throws InterruptedException {
+		commonObjects.clickFilterIcon();                            //issue in filter
+		commonObjects.clickFilterResetButton();						//issue in filter
+		commonObjects.filterName(name);
+	}
+	
+	public void chooseOfferCatalog(String sheet) throws Throwable {
+
+		eh.setExcelFile("offerCatalogInputData",sheet);
+		String name = (String) eh.getCell(1, 0);
+		filterWorkaround(name);
+		
+	}
+  public void removeOfferCatalog(String sheet) throws Throwable {
+		
+		clickDeleteOfferOption();
+		Thread.sleep(2000);
+		assertFalse("Offer removed successfully", offerList.isDisplayed());
+		
 	}
 
 }

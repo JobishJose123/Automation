@@ -1,6 +1,10 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -51,6 +55,8 @@ public class OfferPageObjects extends Init {
 	private WebElement creativeLanguageEnglishSelect;
 	@FindBy(xpath = "//paper-button[contains(.,'Save Offer')]")
 	private WebElement saveOfferButton;
+	@FindBy(xpath="//paper-item[contains(.,'Edit')]")
+	private WebElement optionsEdit;
 	@FindBy(xpath = "//div[@id='topBar']//paper-button[contains(.,'Cancel')]")
 	private WebElement cancelOfferButton;
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]/..//input")
@@ -81,6 +87,33 @@ public class OfferPageObjects extends Init {
 	private WebElement offersContextHelp;
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Product')]/../input")
 	private WebElement filterProduct;
+	@FindBy(xpath=".//div[@id='items']/div//data-table-row")
+	private WebElement productList;
+	@FindBy(xpath=".//iron-icon[@title='Remove']")
+	private WebElement productRemoveIcon;
+	@FindBy(xpath = "//object[@data='../../context-help/EN/Products.html']")
+	private WebElement productContextHelp;
+	@FindBy(xpath = ".//label[contains(.,'Tracking Source and Rules')]")
+	private List <WebElement> trackingSourceRulesTitle;
+	@FindBy(xpath=".//form[@id='sourceTrackRuleForm']//paper-checkbox[@id='setDefaultTrack']")
+	private WebElement setAsDefault;
+	@FindBy(xpath = ".//div[@class='layout horizontal style-scope offer-track']//paper-button[contains(.,'Add')]")
+	private WebElement addTrackButton;
+	@FindBy(xpath = ".//form[@id='trackForm']/div[@class='style-scope offer-track']/div[@class='closeImg style-scope offer-track']")
+	private WebElement removeTrackRuleButton;
+	@FindBy(xpath = ".//div[@class='buttons style-scope offer-track']//paper-button[contains(.,'Yes')]")
+	private WebElement removeTrackYesButton;
+	@FindBy(xpath = ".//paper-card/form//div/div/div[contains(.,'Define Creative')]")
+	private List <WebElement> defineCreativeTitle;
+	@FindBy(xpath=".//paper-checkbox[@id='setDefault']")
+	private WebElement setAsDefaultCreative;
+	@FindBy(xpath = ".//paper-button[contains(.,'Add Creative')]")
+	private WebElement addCreativeButton;
+	@FindBy(xpath = ".//paper-icon-button[@icon='delete']")
+	private WebElement removeCreativeButton;
+	@FindBy(xpath = ".//paper-listbox[@id='langDrop']/paper-item")
+	private List <WebElement> creativeLanguagesList;
+	
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -100,6 +133,62 @@ public class OfferPageObjects extends Init {
 	public void navigateToOffer() throws InterruptedException {
 		jswait.loadClick(offerButton);
 	}
+	public void clickRemoveTrackYesButton() throws InterruptedException {
+		jswait.loadClick(removeTrackYesButton);
+	}
+	
+	public void selectAllLanguagesCreativeTab() throws Throwable {
+		  
+		  //clickCreativeLanguageField();
+		  
+		  if(creativeLanguagesList.size()>0) {
+			  
+			  for(WebElement language : creativeLanguagesList)  {
+					
+				    jswait.loadClick(language);
+				    clickCreativeLanguageField();
+				   
+			  }
+			  
+			  
+		  }	  
+	  }
+	
+	public void selectAllCreativeLanguages() throws Throwable {
+		clickCreativeLanguageField();
+		selectAllLanguagesCreativeTab();
+	}
+	
+	public void chooseAllLanguagesCeativeTab(String sheet, String productSheet) throws Throwable {
+		 
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+        
+		enterDetailsTabFieldsForTrack(sheet);
+		
+		clickProceedButton();
+		// ******************Products tab*****************:
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+	
+		
+		selectAllCreativeLanguages();
+		
+
+		
+	
+	}
+	
+	public void ChooseAllLanguagesCreativeTab(String sheet, String productSheet) throws Throwable {
+		clickCreateNewOfferButton();
+		chooseAllLanguagesCeativeTab(sheet, productSheet);
+		//clickSaveOfferButton();
+	}
 
 	public void checkOfferContextHelp() throws InterruptedException {
 		commonObjects.clickHelpIcon();
@@ -111,6 +200,139 @@ public class OfferPageObjects extends Init {
 
 	public void enterOfferName(String name) throws InterruptedException {
 		jswait.loadSendKeys(offerName, name);
+	}
+	public void clickRemoveTrackRuleButton() throws InterruptedException {
+		
+		jswait.loadClick(removeTrackRuleButton);
+	}
+	public void clickAddTrackButton() throws InterruptedException {
+		jswait.loadClick(addTrackButton);
+	}
+	
+	public void enterDetailsTabFieldsForTrack(String sheet) throws InterruptedException, IOException {
+		eh.setExcelFile("offerInputData", sheet);
+		
+		String name= "Test Offer Name";
+		
+		enterOfferName(name);
+		enterOfferDescription((String) eh.getCell(1, 1));
+		selectOfferType(eh.getCell(1, 2).toString());
+		selectOfferChannel(eh.getCell(1, 3).toString());
+		selectOfferCategory();
+	}
+	public void enterOfferDetailsCreativeTab(String sheet, String productSheet) throws Throwable {
+		 
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+        
+		enterDetailsTabFieldsForTrack(sheet);
+		
+		clickProceedButton();
+		// ******************Products tab*****************:
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+	
+		
+		selectCreativeLanguageEnglish();
+		if (((String) eh.getCell(1, 3)).contains("WAP")) {
+			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		}
+		if (eh.getCell(1, 3).toString().contains("SMS"))
+			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		if (eh.getCell(1, 3).toString().contains("Voice"))
+			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+
+		
+	
+	}
+	public void clickAddCreativeButton() throws InterruptedException {
+		jswait.loadClick(addCreativeButton);
+	}
+  public void clickRemoveCreativeButton() throws InterruptedException {
+		
+		jswait.loadClick(removeCreativeButton);
+	}
+	
+  public void verifySetAsDefaultCheckboxinCreativeTab() throws Throwable {
+		
+		if(defineCreativeTitle.size()==1)
+			assertFalse("Set as default checkbox is displaying", setAsDefaultCreative.isDisplayed());
+		
+		clickAddCreativeButton();
+		assertTrue("Set as default checkbox is not displaying", setAsDefaultCreative.isDisplayed());
+		//assertTrue("Set as default checkbox is not selected", setAsDefaultCheckbox.isSelected());
+		//Thread.sleep(4000);
+		clickRemoveCreativeButton();
+		Thread.sleep(4000);
+		//clickRemoveTrackYesButton();
+		assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
+	}
+	
+	public void createOfferUptoCreativeTab(String sheet, String productSheet) throws Throwable {
+		clickCreateNewOfferButton();
+		enterOfferDetailsCreativeTab(sheet, productSheet);
+		//clickSaveOfferButton();
+	}
+   public void verifySetAsDefaultCheckbox() throws Throwable {
+		
+		if(trackingSourceRulesTitle.size()==1)
+			assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
+		
+		clickAddTrackButton();
+		assertTrue("Set as default checkbox is not displaying", setAsDefault.isDisplayed());
+		//assertTrue("Set as default checkbox is not selected", setAsDefaultCheckbox.isSelected());
+		clickRemoveTrackRuleButton();
+		clickRemoveTrackYesButton();
+		assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
+	
+	}
+	public void enterOfferDetailsTrackTab(String sheet, String productSheet) throws Throwable {
+		 
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+        
+		enterDetailsTabFieldsForTrack(sheet);
+		
+		clickProceedButton();
+		// ******************Products tab*****************:
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+	
+		
+		selectCreativeLanguageEnglish();
+		if (((String) eh.getCell(1, 3)).contains("WAP")) {
+			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		}
+		if (eh.getCell(1, 3).toString().contains("SMS"))
+			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		if (eh.getCell(1, 3).toString().contains("Voice"))
+			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+
+		clickProceedButton();
+		Thread.sleep(3000);
+
+		// ******************Track tab*****************:
+		if (!eh.getCell(1, 2).toString().contains("Informational")) {
+			clickTrackSourceSelector();
+			selectTrackSource("track");
+		}
+		//clickProceedButton();
+	
+	}
+	public void createOfferUptoTrackTab(String sheet, String productSheet) throws Throwable {
+		clickCreateNewOfferButton();
+		enterOfferDetailsTrackTab(sheet, productSheet);
+		//clickSaveOfferButton();
 	}
 
 	public void filterUsingProduct(String name) throws InterruptedException {
@@ -127,6 +349,13 @@ public class OfferPageObjects extends Init {
 
 	public void clickCancelOfferButton() throws InterruptedException {
 		jswait.loadClick(cancelOfferButton);
+	}
+	public void checkProductContextHelp() throws InterruptedException {
+		commonObjects.clickHelpIcon();
+		driver.switchTo().frame(productContextHelp);
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(text(),'Products')]")));
+		driver.switchTo().parentFrame();
+		commonObjects.clickContextHelpCloseIcon();
 	}
 
 	public void clickTrackSourceSelector() throws InterruptedException {
@@ -159,6 +388,29 @@ public class OfferPageObjects extends Init {
 
 	public void clickCreativeLanguageField() throws InterruptedException {
 		jswait.loadClick(creativeLanguage);
+	}
+	
+	public void clickProductRemoveIcon() throws InterruptedException {
+		jswait.loadClick(productRemoveIcon);
+	}
+	
+	public void removeProduct(String sheet) throws Throwable {
+		clickProceedButton();
+		
+		clickProductRemoveIcon();
+		/*clickProceedButton();
+		clickProceedButton();
+		clickProceedButton();
+		clickSaveOfferButton();
+		eh.setExcelFile("offerInputData",sheet);
+		String name = (String) eh.getCell(1, 0);
+		filterWorkaround(name);
+		commonObjects.clickOptionsIcon();
+		clickEditOffer();
+		clickProceedButton();*/
+		
+		assertFalse("Product removed successfully", productList.isDisplayed());
+			
 	}
 
 	public void clickCreativeLanguageEnglishSelect() throws InterruptedException {
@@ -263,6 +515,22 @@ public class OfferPageObjects extends Init {
 		commonObjects.filterName(productToAdd);
 		jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
 		clickDialogBoxAddButton();
+	}
+	public void clickEditOffer() throws InterruptedException {
+		jswait.loadClick(optionsEdit);
+	}
+	public void filterWorkaround(String name) throws InterruptedException {
+		commonObjects.clickFilterIcon();                            //issue in filter
+		commonObjects.clickFilterResetButton();						//issue in filter
+		commonObjects.filterName(name);
+	}
+	
+	public void chooseOffer(String sheet) throws Throwable {
+
+		eh.setExcelFile("offerInputData",sheet);
+		String name = (String) eh.getCell(1, 0);
+		filterWorkaround(name);
+		
 	}
 
 	public void checkAddProductsCheckBox() throws InterruptedException {

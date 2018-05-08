@@ -129,3 +129,50 @@ Then create single product from sheet "singleProductPage"
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
+    
+     @NX-3036 @initBrowser @closeBrowser
+  Scenario: Verify Clicking on the Remove Icon in the products tab-3036
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "usageBasedWAP" with product "singleProductPage"
+    Then choose offer from sheet "usageBasedWAP"
+    Then edit offer
+    Then remove product for offer from sheet "usageBasedWAP"
+    
+ @NX-2179 @initBrowser @closeBrowser
+  Scenario: Offer Management: Verify for the Products Help icon-2179
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then check product help icon
+    
+ @NX-3041 @initBrowser @closeBrowser
+  Scenario: Verify the Add button displayed in Track tab-3041
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer up to track tab from sheet "usageBasedWAP" with product "singleProductPage"
+    Then verify add button in track tab
+    
+    @NX-3038 @initBrowser @closeBrowser
+  Scenario: Verify for the Set as Default checkbox in Creative tab-3038
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer up to creative tab from sheet "usageBasedWAP" with product "singleProductPage"
+    Then verify add button in creative tab
+    
+    
+     @NX-1386 @initBrowser @closeBrowser
+  Scenario: Offer Management:Multilingual functionality in creative tab-1386
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer up to creative tab and choose all languages from sheet "usageBasedWAP" with product "singleProductPage"
+    

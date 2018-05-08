@@ -369,4 +369,23 @@ Then navigate to offer management
 #	Then Navigate to Offer Catalogue
   #Then Create New Offer Catalogue from sheet "defaultCatalog"
   #Then Add "rechargeSMS" offer to Offer Catalogue
-  #Then Delete Created Offer Catalogue 
+  #Then Delete Created Offer Catalogue
+  
+  
+    @initBrowser @closeBrowser @NX-1156  
+Scenario: Create Offer Catalog: Verify the remove option for the offers selected-1156
+Given login
+	When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then Add offers to Offer Catalogue
+  Then navigate to landing page
+  Then navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then choose offer catalog from sheet "defaultCatalog"
+  Then edit offer catalog
+  Then remove offer for offer catalog from sheet "defaultCatalog" 
+  
+  

@@ -134,5 +134,60 @@ public class OfferSteps extends Init{
 		offerPageObjects.checkAddProductsCheckBox();
 		
 		 }
+	@Then("^check product help icon$")
+	public void Check_Product_help_icon() throws Throwable
+	{
+		offerPageObjects.checkProductContextHelp();
+	}
+	
+	@Then("^choose offer from sheet \"([^\"]*)\"$")
+	public void chooseOffer(String sheet) throws Throwable {
+		
+		offerPageObjects.chooseOffer(sheet);
+	}
+	
+	@Then("^edit offer$")
+	public void editOffer() throws Throwable {
+	 
+	  commonObjects.clickOptionsIcon();
+	  offerPageObjects.clickEditOffer();
+	  }
+	
+	@Then("^remove product for offer from sheet \"([^\"]*)\"$")
+	public void removeProduct(String sheet) throws Throwable {
+	 
+	  
+	  offerPageObjects.removeProduct(sheet);
+	  
+	  }
+	@Then("^create new offer up to track tab from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void create_new_Offer_Upto_Track_Tab(String sheet, String productSheet) throws Throwable 
+	{
+		offerPageObjects.createOfferUptoTrackTab(sheet, productSheet);
+	}
+	@Then("^verify add button in track tab$")
+	public void verifyAddButtonInTrackTab() throws Throwable {
+		
+		 offerPageObjects.verifySetAsDefaultCheckbox();
+		
+	}
+	@Then("^create new offer up to creative tab from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void create_new_Offer_Upto_Creative_Tab(String sheet, String productSheet) throws Throwable 
+	{
+		offerPageObjects.createOfferUptoCreativeTab(sheet, productSheet);
+	}
+	
+	@Then("^verify add button in creative tab$")
+	public void verifyAddButtonInCreativeTab() throws Throwable {
+		
+		 offerPageObjects.verifySetAsDefaultCheckboxinCreativeTab();
+		
+	}
+	@Then("^create new offer up to creative tab and choose all languages from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void create_new_Offer_Upto_Creative_Tab_And_Choose_All_Languages(String sheet, String productSheet) throws Throwable 
+	{
+		offerPageObjects.ChooseAllLanguagesCreativeTab(sheet, productSheet);
+	}
+	
 	
 }
