@@ -55,6 +55,14 @@ public class OfferPageObjects extends Init {
 	private WebElement creativeLanguageEnglishSelect;
 	@FindBy(xpath = "//paper-button[contains(.,'Save Offer')]")
 	private WebElement saveOfferButton;
+	@FindBy(xpath = "//label[contains(.,'Optional1')]/../input")
+	private WebElement voiceCreativeOptional1;
+	@FindBy(xpath = "//label[contains(.,'Optional2')]/../input")
+	private WebElement voiceCreativeOptional2;
+	@FindBy(xpath = "//label[contains(.,'Optional3')]/../input")
+	private WebElement voiceCreativeOptional3;
+	@FindBy(xpath = "//label[contains(.,'Optional4')]/../input")
+	private WebElement voiceCreativeOptional4;
 	@FindBy(xpath="//paper-item[contains(.,'Edit')]")
 	private WebElement optionsEdit;
 	@FindBy(xpath = "//div[@id='topBar']//paper-button[contains(.,'Cancel')]")
@@ -271,6 +279,69 @@ public class OfferPageObjects extends Init {
 		Thread.sleep(4000);
 		//clickRemoveTrackYesButton();
 		assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
+	}
+  public void createOfferAndVerifyOptionalFields(String sheet, String productSheet) throws Throwable {
+		clickCreateNewOfferButton();
+		enterOfferDetailsFromSheetAndVerifyOptionalFields(sheet, productSheet);
+		clickSaveOfferButton();
+	}
+	
+	
+
+	
+	
+	public void enterOfferDetailsFromSheetAndVerifyOptionalFields(String sheet, String productSheet) throws Throwable {
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
+		// ******************Products tab*****************:
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+
+		// ******************Creative tab*****************:
+		selectCreativeLanguageEnglish();
+		if (((String) eh.getCell(1, 3)).contains("WAP")) {
+			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		}
+		if (eh.getCell(1, 3).toString().contains("SMS"))
+			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		if (eh.getCell(1, 3).toString().contains("Voice"))
+			enterVoiceCreativeWithOptionalFields(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString(), eh.getCell(1, 12).toString(), eh.getCell(1, 13).toString(), eh.getCell(1, 14).toString(), eh.getCell(1, 15).toString());
+
+		clickProceedButton();
+		Thread.sleep(3000);
+
+		// ******************Track tab*****************:
+		if (!eh.getCell(1, 2).toString().contains("Informational")) {
+			clickTrackSourceSelector();
+			selectTrackSource("track");
+		}
+		clickProceedButton();
+
+		// ******************Rewards tab*****************:
+		if (eh.getCell(1, 2).toString().contains("Seeding")) {
+			clickRewardTypeInputField();
+			clickRewardTypeAny();
+		}
+
+	}
+	
+	
+	public void enterVoiceCreativeWithOptionalFields(String subject, String reference, String optional1, String optional2, String optional3, String optional4) throws InterruptedException {
+		jswait.loadSendKeys(voiceCreativeSubject, subject);
+		jswait.loadSendKeys(voiceCreativeReference, reference);
+		jswait.loadSendKeys(voiceCreativeOptional1, optional1);
+		jswait.loadSendKeys(voiceCreativeOptional2, optional2);
+		jswait.loadSendKeys(voiceCreativeOptional3, optional3);
+		jswait.loadSendKeys(voiceCreativeOptional4, optional4);
 	}
 	
 	public void createOfferUptoCreativeTab(String sheet, String productSheet) throws Throwable {

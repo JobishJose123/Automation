@@ -199,3 +199,11 @@ Then navigate to precision marketer
 Then  navigate to offer management 
 Then navigate to offers
 Then verify tab colours
+
+@NX-3487 @initBrowser @closeBrowser
+    Scenario: Verify the additional optional fields in offer with voice push as the channel-3487
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer and verify optional fields from sheet "rechargeVoicePush" with product "singleProductPage"

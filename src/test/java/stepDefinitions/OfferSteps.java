@@ -230,8 +230,12 @@ public class OfferSteps extends Init{
 		offerPageObjects.clickAddProductsButton();
 		Assert.assertTrue(offerPageObjects.getDetailsTabColour().contains("rgba(84, 205, 152, 1)"), "current selection colour not green");
 		Assert.assertTrue(offerPageObjects.getProductsTabColour().contains("rgba(255, 102, 50, 1)"), "current selection colour not orange");
-		
-		
+			
+	}
+	@Then("^create new offer and verify optional fields from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void create_new_Offer_And_Verify_Optional_Fields(String sheet, String productSheet) throws Throwable 
+	{
+		offerPageObjects.createOfferAndVerifyOptionalFields(sheet, productSheet);
 	}
 	
 }
