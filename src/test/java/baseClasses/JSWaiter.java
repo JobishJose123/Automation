@@ -611,7 +611,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			text = driver.findElement(By.xpath(xpath)).getText();
 			return text;
 		}
+public void waitForLoadMask() throws InterruptedException{
+	WebDriverWait wait = new WebDriverWait(driver, 8);
+	 String loadMaskStatus = "";
+	 Thread.sleep(2000);
+	 try {
+		 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+	 }catch(Exception e) {
+		 
+	 }
+	 while(loadMaskStatus.contains("block")) {
+		 Thread.sleep(1000);
+	 try {
+		 loadMaskStatus = driver.findElement(By.xpath(".//*[@id='loadMask']")).getAttribute("style");
+	 }catch(Exception e) {
+		 
+	 }
+		}
 		
+}
 }
 		
 	

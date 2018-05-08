@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -32,7 +33,7 @@ public class CustomerProfilePage extends Init{
 	private WebElement customerInfoTab;
 	@FindBy(xpath=".//*[@id='tabsContent']//div[contains(.,'Events')]")
 	private WebElement eventsTab;
-	@FindBy(xpath=".//*[@id='tabsContent']//div[contains(.,'Usage Metrics')]")
+	@FindBy(xpath=".//*[@id='tabsContent']//div[contains(.,'Metrics')]")
 	private WebElement usageMetricsTab;
 	@FindBy(xpath=".//*[@id='tabsContent']//div[contains(.,'Customer Support')]")
 	private WebElement customerSupportTab;
@@ -85,8 +86,8 @@ public class CustomerProfilePage extends Init{
 	@FindBy(xpath="//div[@id='mainContainer']//paper-checkbox[@role='checkbox']/div[@id='checkboxContainer']")
     private WebElement selectedAttributes;
 	
-	@FindBy(xpath="//*[contains(text(),'Include Sub-Departments')]")
-	private WebElement IncludeSubDepartments;
+	@FindBy(xpath="//*[contains(text(),'Include Sub-Partners')]")
+	private WebElement IncludeSubPartners;
 	@FindBy(xpath=".//iron-data-table[@id='consumerSubList']//iron-list[@id='list']/div//data-table-row")
 	private WebElement subscribedToList;
 	@FindBy(xpath="//search-events[@class='style-scope consumer-events x-scope search-events-0']/div[@class='layout horizontal style-scope search-events']/paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab")
@@ -214,6 +215,7 @@ public class CustomerProfilePage extends Init{
 	 
  }
  public void clickAddButton() throws InterruptedException {
+	 	jswait.loadClick(usageMetricsTab);
 		jswait.loadClick(addButton);
 	 
  }
@@ -223,7 +225,7 @@ public class CustomerProfilePage extends Init{
 		
  	try {
  	jswait.loadClick(selectedAttributes);
-		jswait.loadClick(selectedAttributes);
+	jswait.loadClick(selectedAttributes);
 		
  	}
  	catch(Exception e)
@@ -239,7 +241,7 @@ public class CustomerProfilePage extends Init{
  public void addDeleteSaveAttributes() throws Exception {
  	
 	   int defaultList=attributeList.size();
-	   jswait.loadClick(deleteAttributeIcon);
+	  
 	   List <WebElement> afterlist=driver.findElements(By.xpath("//div[@id='mainContainer']//paper-checkbox[@role='checkbox']/div[@id='checkboxContainer']"));
 	   int afterDeletelist=afterlist.size();
 	   Exception DeleteException=new Exception("Deletion not working");
@@ -249,8 +251,9 @@ public class CustomerProfilePage extends Init{
 	   Thread.sleep(2000);
 	   clickAddAttributeDropdown();
 	   clickAttribute();
+	   clickUsageMetricsTab();
 	   clickAddButton();
-	   
+	   jswait.loadClick(deleteAttributeIcon);
 	   List <WebElement> addlist=driver.findElements(By.xpath("//div[@id='mainContainer']//paper-checkbox[@role='checkbox']/div[@id='checkboxContainer']"));
 	   int afteraddlist=addlist.size();
 	   
@@ -262,9 +265,9 @@ public class CustomerProfilePage extends Init{
 	   
  
  }
- public void verifyIncludeSubDepartmentsOption() throws InterruptedException {
+ public void verifyIncludeSubPartnersOption() throws InterruptedException {
 		
- 	assertTrue(IncludeSubDepartments.isDisplayed());
+ 	assertTrue(IncludeSubPartners.isDisplayed());
  	
 	}
  

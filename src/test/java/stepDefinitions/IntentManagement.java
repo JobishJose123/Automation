@@ -69,9 +69,15 @@ public class IntentManagement extends Init{
 		touchpointPage.customerCareClickSave();
 		touchpointPage.customerCareClickCancel();
 	}
-	@Then("^create sms touchpoint$")
-	public void createSmsTouchpoint() throws Throwable{
-		touchpointPage.createSmsTouchpoint("SMSkey");
+	@Then("^create sms touchpoint from sheet \"([^\"]*)\"$")
+	public void createSmsTouchpoint(String sheet) throws Throwable{
+		eh.setExcelFile("touchpointInputData", sheet);
+		Random rn = new Random();
+ 		int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) eh.getCell(1, 0);
+ 		name =  name.replaceAll("[0-9]", "")+n;
+ 		eh.setCell(1, 0, name);
+		touchpointPage.createSmsTouchpoint(name);
 	}
 	@Then("^verify sms touchpoint creation form$")
 	public void verify_sms_tp_creation_form() throws Throwable {
@@ -81,10 +87,14 @@ public class IntentManagement extends Init{
 	    	touchpointPage.smsClickSave();
 	    }
 	}
-	@Then("^check sms touchpoint in grid$")
-	public void checkSmsTouchpoint() throws Throwable{
-		Thread.sleep(7000);
-		jswait.waitUntil("//span[contains(.,'SMSkey')]");
+	@Then("^check sms touchpoint in grid \"([^\"]*)\"$")
+	public void checkSmsTouchpoint(String sheet) throws Throwable{
+		Thread.sleep(6000);
+		String name = (String) eh.getCell(1, 0);
+		jswait.waitForLoadMask();
+		System.out.println("after load mask");
+//		jswait.scrollIntoView(scrollPane, //iron-list//data-table-row);
+		jswait.waitUntil("//span[contains(.,'"+name+"')]");
 	}
 	@Then("^check trigger touchpoint in grid$")
 	public void check_trigger_touchpoint_in_grid() throws Throwable {
@@ -96,45 +106,72 @@ public class IntentManagement extends Init{
 	    touchpointPage.navigateToCustomerCare();
 	}
 
-	@Then("^create customer care touchpoint$")
-	public void create_customer_care_touchpoint() throws Throwable {
-		touchpointPage.createCustomerCareTouchpoint("CustTP");
+	@Then("^create customer care touchpoint from sheet \"([^\"]*)\"$")
+	public void create_customer_care_touchpoint(String sheet) throws Throwable {
+		eh.setExcelFile("touchpointInputData", sheet);
+		Random rn = new Random();
+ 		int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) eh.getCell(1, 0);
+ 		name =  name.replaceAll("[0-9]", "")+n;
+ 		eh.setCell(1, 0, name);
+		touchpointPage.createCustomerCareTouchpoint(name);
 	}
 
-	@Then("^check customer care touchpoint in grid$")
-	public void check_customer_care_touchpoint_in_grid() throws Throwable {
+	@Then("^check customer care touchpoint in grid \"([^\"]*)\"$")
+	public void check_customer_care_touchpoint_in_grid(String sheet) throws Throwable {
+		eh.setExcelFile("touchpointInputData", sheet);
 		Thread.sleep(7000);
-		jswait.waitUntil("//data-table-cell[contains(.,'CustTP')]");
+		String name = (String) eh.getCell(1, 0);
+		jswait.waitForLoadMask();
+		jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");
 	}
 	@Then("^navigate to api$")
 	public void navigate_to_api() throws Throwable {
 		touchpointPage.navigateToApi();
 	}
 
-	@Then("^create api touchpoint$")
-	public void create_api_touchpoint() throws Throwable {
-	  touchpointPage.createApiTouchpoint("ApiTP");
+	@Then("^create api touchpoint from sheet \"([^\"]*)\"$")
+	public void create_api_touchpoint(String sheet) throws Throwable {
+		eh.setExcelFile("touchpointInputData", sheet);
+		Random rn = new Random();
+ 		int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) eh.getCell(1, 0);
+ 		name =  name.replaceAll("[0-9]", "")+n;
+ 		eh.setCell(1, 0, name);
+	  touchpointPage.createApiTouchpoint(name);
 	}
 
-	@Then("^check api touchpoint in grid$")
-	public void check_api_touchpoint_in_grid() throws Throwable {
+	@Then("^check api touchpoint in grid \"([^\"]*)\"$")
+	public void check_api_touchpoint_in_grid(String sheet) throws Throwable {
+		eh.setExcelFile("touchpointInputData", sheet);
 		Thread.sleep(7000);
-		jswait.waitUntil("//data-table-cell[contains(.,'ApiTP')]");
+		String name = (String) eh.getCell(1, 0);
+		jswait.waitForLoadMask();
+		jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");
 	}
 	@Then("^navigate to ussd$")
 	public void navigate_to_ussd() throws Throwable {
 		touchpointPage.navigateToUssd();
 	}
 
-	@Then("^create ussd touchpoint$")
-	public void create_ussd_touchpoint() throws Throwable {
-	  touchpointPage.createUssdTouchpoint("UssdTP1");
+	@Then("^create ussd touchpoint from sheet \"([^\"]*)\"$")
+	public void create_ussd_touchpoint(String sheet) throws Throwable {
+		eh.setExcelFile("touchpointInputData", sheet);
+		Random rn = new Random();
+ 		int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) eh.getCell(1, 0);
+ 		name =  name.replaceAll("[0-9]", "")+n;
+ 		eh.setCell(1, 0, name);
+	  touchpointPage.createUssdTouchpoint(name);
 	}
 
-	@Then("^check ussd touchpoint in grid$")
-	public void check_ussd_touchpoint_in_grid() throws Throwable {
+	@Then("^check ussd touchpoint in grid \"([^\"]*)\"$")
+	public void check_ussd_touchpoint_in_grid(String sheet) throws Throwable {
+		eh.setExcelFile("touchpointInputData", sheet);
 		Thread.sleep(7000);
-		jswait.waitUntil("//data-table-cell[contains(.,'UssdTP1')]");
+		String name = (String) eh.getCell(1, 0);
+		jswait.waitForLoadMask();
+		jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");
 	}
 	@Then("^verify cancel button of sms touchpoint$")
 	public void verifyCancelButtonSmsTouchpoint() throws Throwable {

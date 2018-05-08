@@ -71,7 +71,7 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//h5[contains(.,'Basic Information')]/..//label[contains(.,'Description')]/..//textarea")
 	private WebElement createProgramDescription;
 	
-	@FindBy(xpath="//h5[contains(.,'Basic Information')]/..//label[contains(.,'Choose Offer Catalog')]/..//*[@id='input']")
+	@FindBy(xpath="//h5[contains(.,'Basic Information')]/..//label[contains(.,'Offer Catalog')]/..//*[@id='input']")
 	private WebElement createProgramChooseOfferCatalog;
 	
 	@FindBy(xpath="//form[@id='detailForm']//paper-item[contains(.,'')][2]")

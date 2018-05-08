@@ -1,11 +1,9 @@
 package pageObjetcs;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.server.handler.FindElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import baseClasses.Init;
@@ -108,7 +106,7 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormOrderingRuleSelector;
 	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'FIFO')]")
 	private WebElement smsFormOrderingRuleFIFO;
-	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Short Code')]/../../../../../..//div[contains(@class,'selectable-content')]/paper-item[1]")
+	@FindBy(xpath="//label[contains(.,'Short Code')]/following::vaadin-combo-box-item")
 	private WebElement smsFormShortCode1;
 	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'Rule-based')]")
 	private WebElement smsFormOrderingLogicRuleBased;
@@ -184,7 +182,7 @@ public class TouchpointPage extends Init{
 	private WebElement selectTrigger;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement triggerTouchpointName;
-	@FindBy(xpath=".//*[@id='select']/div/paper-item[1]")
+	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Trigger')]/../../../..//vaadin-combo-box-item")
 	private WebElement triggerFormTriggerSelect;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Ordering Logic')]/../input")
 	private WebElement triggerFormOrderingLogicSelector;
@@ -248,7 +246,11 @@ public class TouchpointPage extends Init{
 		jswait.loadClick(smsFormCancelButton);
 	}
 	public void smsSelectShortCode() throws InterruptedException {
+//		jswait.loadSendKeys(smsFormShortCodeSelector,"1024");
 		jswait.loadClick(smsFormShortCodeSelector);
+//		Thread.sleep(8000);
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(smsFormShortCode1).click().build().perform();
 		jswait.loadClick(smsFormShortCode1);
 	}
 	public void smsEnterKeyword(String name) throws InterruptedException {

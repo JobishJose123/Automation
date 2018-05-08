@@ -47,7 +47,7 @@ public class ConsumerProfileSteps extends Init{
 		customerProfilePage.clickUsageMetricsTab();
 	}
 	@Then("^search msisdn \"([^\"]*)\"$")
-	public void searchMsisdn(String msisdn) throws InterruptedException, IOException {		
+	public void searchMsisdn(String msisdn) throws InterruptedException, IOException {	
 		if(msisdn.length()<=10) {
 			msisdn = getMsisdn();
 		}
@@ -63,6 +63,7 @@ public class ConsumerProfileSteps extends Init{
 	@Then("^verify details in customer info page of \"([^\"]*)\"$")
 	public void verifyDetailsInCustomerProfiile(String msisdn) throws Exception {
 		list.setExcelFile("registrationListInputData", "Sheet1");
+		eh.setExcelFile(list.getCell(1, 0).toString(), list.getCell(1, 2).toString());
 		jswait.waitUntil("//data-table-cell/span[contains(.,'"+msisdn+"')]");
 		if(msisdn.length()<=10) {
 			msisdn = getMsisdn();
@@ -105,14 +106,13 @@ public class ConsumerProfileSteps extends Init{
 	}
 	
 	
-	@Then("^enter customer number from sheet \"([^\"]*)\"$")
-	public void enterCustomerNumber(String sheet) throws InterruptedException {
-		
-		ExcelHelper consumerFile = new ExcelHelper();
-		consumerFile.setExcelFile("consumerInputData",sheet);
-		eh.setExcelFile("consumerInputData",sheet);
-		String number = (String) eh.getCell(1, 0);
-		customerObjects.enterCustomerNumber(number);
+	@Then("^enter customer number \"([^\"]*)\"$")
+	public void enterCustomerNumber(String msisdn) throws InterruptedException, IOException {
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		if(msisdn.length()<=10) {
+			msisdn = getMsisdn();
+		}
+		customerObjects.enterCustomerNumber(msisdn);
 	}
 	@Then("^click on search button$")
 	public void clickSearchNumberButton() throws InterruptedException {
@@ -193,10 +193,10 @@ public class ConsumerProfileSteps extends Init{
 		
 	}
 	
-	@Then("^verify include sub departments option$")
-	public void verifyIncludeSubDepartmentsOption() throws Exception {
+	@Then("^verify include sub partners option$")
+	public void verifyIncludeSubPartnersOption() throws Exception {
 		
-		customerObjects.verifyIncludeSubDepartmentsOption();
+		customerObjects.verifyIncludeSubPartnersOption();
 		
 	}
 	

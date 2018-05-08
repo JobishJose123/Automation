@@ -1,11 +1,12 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary :
 
-@IM-Feature
+@NX-IM_Feature
 
 Feature: positive flow of im program creation
 
 @NX-426
+@initBrowser @closeBrowser
 Scenario: Verify the new touchpoint landing page
 Given login
 Then navigate to intent management
@@ -13,7 +14,7 @@ Then navigate to touchpoints
 Then check touchpoint landing page
 
 @NX-428
-
+@initBrowser @closeBrowser
 Scenario: Verify Create New Touchpoint button behaviour for SMS TP
 Given login
 Then navigate to intent management
@@ -23,55 +24,57 @@ Then click create new touchpoint
 Then verify sms touchpoint creation form
 
 @NX-430
-
+@initBrowser 
 Scenario: Verify new SMS touchpoint creation
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to sms
-Then create sms touchpoint
-Then check sms touchpoint in grid
+Then create sms touchpoint from sheet "smsTouchpoint"
+Then check sms touchpoint in grid "smsTouchpoint"
 
 @NX-431
-
+@initBrowser @closeBrowser
 Scenario: Verify new Trigger touchpoint creation 
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to trigger
-Then create trigger touchpoint
-Then check trigger touchpoint in grid 
+Then create trigger touchpoint from sheet "triggerTouchpoint"
+Then check trigger touchpoint in grid "triggerTouchpoint"
 
 @NX-433
-
+@initBrowser @closeBrowser
 Scenario: Verify new Customer Care touchpoint creation
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to customer care
-Then create customer care touchpoint
-Then check customer care touchpoint in grid
+Then create customer care touchpoint from sheet "triggerTouchpoint"
+Then check customer care touchpoint in grid "triggerTouchpoint"
 
 @NX-434
+@initBrowser @closeBrowser
 Scenario: Verify new API touchpoint creation 
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to api
-Then create api touchpoint
-Then check api touchpoint in grid
+Then create api touchpoint from sheet "triggerTouchpoint"
+Then check api touchpoint in grid "triggerTouchpoint"
 
 @NX-435
-
+@initBrowser @closeBrowser
 Scenario: Verify new USSD touchpoint creation 
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to ussd
-Then create ussd touchpoint
-Then check ussd touchpoint in grid
+Then create ussd touchpoint from sheet "triggerTouchpoint"
+Then check ussd touchpoint in grid "triggerTouchpoint"
 
 @NX-436
+@initBrowser @closeBrowser
 Scenario: Verify Cancel button functionality for SMS TP
 Given login
 Then navigate to intent management
@@ -80,6 +83,7 @@ Then navigate to sms
 Then verify cancel button of sms touchpoint
 
 @NX-437
+@initBrowser @closeBrowser
 Scenario: Verify Cancel button functionality for trigger TP
 Given login
 Then navigate to intent management
@@ -88,7 +92,7 @@ Then navigate to trigger
 Then verify cancel button of trigger touchpoint
 
 @NX-445
-
+@initBrowser @closeBrowser
 Scenario: Verify Trigger touchpoint delete functionality
 Given login
 Then navigate to intent management
@@ -97,7 +101,7 @@ Then navigate to trigger
 Then verify delete trigger touchpoint
 
 @NX-450
-
+@initBrowser @closeBrowser
 Scenario: Field level validation check while creating new Trigger TP
 Given login
 Then navigate to intent management
@@ -106,7 +110,7 @@ Then navigate to trigger
 Then check mandatory fields for trigger touchpoint
 
 @NX-709
-
+@initBrowser @closeBrowser
 Scenario: Verify the new program landing page
 Given login
 Then navigate to intent management
@@ -114,7 +118,7 @@ Then navigate to programs
 Then verify program landing page
 
 @NX-710
-
+@initBrowser @closeBrowser
 Scenario: Verify Create New Program button behaviour
 Given login
 Then navigate to intent management
@@ -122,7 +126,7 @@ Then navigate to programs
 Then verify create program page "programdetails"
 
 @NX-712
-
+@initBrowser @closeBrowser
 Scenario: Verify Proceed button functionality for Details tabs
 Given login
 Then navigate to intent management
@@ -130,7 +134,7 @@ Then navigate to programs
 Then verify program proceed button functionality for details tab
 
 @NX-713
-
+@initBrowser @closeBrowser
 Scenario: Verify cancel button functionality for Details tabs
 Given login
 Then navigate to intent management
@@ -139,7 +143,7 @@ Then click create program button
 Then verify program cancel button functionality for details tab
 
 @NX-714
-
+@initBrowser @closeBrowser
 Scenario: Verify Choose Catalog field values
 Given login
 Then navigate to intent management
@@ -148,7 +152,7 @@ Then click create program button
 Then verify program choose catalog field values
 
 @NX-716
-
+@initBrowser @closeBrowser
 Scenario: Verify field level validation for Details tabs
 Given login
 Then navigate to intent management
@@ -157,7 +161,7 @@ Then click create program button
 Then verify program field validation for details tab
 
 @NX-724
-
+@initBrowser @closeBrowser
 Scenario: Verify touchpoint tab functionality
 Given login
 Then navigate to intent management
@@ -166,7 +170,7 @@ Then click create program button
 Then verify program touchpoint tab
 
 @NX-725
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: Verify New touchpoint addition on Touchpoint tab
 Given login
 Then navigate to intent management
@@ -202,7 +206,7 @@ Then verify create program page "programdetails"
 Then Verify duplicate TP entry on touchpoint tab
 
 @NX-753
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify Proceed button functionality for Touchpoint tabs
 Given login
 Then navigate to intent management
@@ -210,7 +214,7 @@ Then navigate to programs
 Then Verify Proceed button functionality for Touchpoint tabs "programdetails"
 
 @NX-754
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: Verify cancel button functionality for Touchpoint tabs
 Given login
 Then navigate to intent management
@@ -218,7 +222,7 @@ Then navigate to programs
 Then Verify cancel button functionality for Touchpoint tabs "programdetails"
 
 @NX-1173
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: Create Program Schedule Verify Start Now option.
 Given login
 Then navigate to intent management
@@ -226,21 +230,21 @@ Then navigate to programs
 Then Create Program Schedule Verify Start Now option "programdetails"
 
 @NX-1201
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify Create New Programs Details Cancel button.
 Given login
 Then navigate to intent management
 Then navigate to programs
 Then check details cancel button in programs "programdetails"
 @NX-1183
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify Create New Programs Schedule Refresh At option.
 Given login
 Then navigate to intent management
 Then navigate to programs
 Then check details schedule Refresh At "programdetails"
 @NX-1193
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify Create New Programs Schedule Refresh At option.
 Given login
 Then navigate to intent management
