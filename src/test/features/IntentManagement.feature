@@ -24,7 +24,7 @@ Then click create new touchpoint
 Then verify sms touchpoint creation form
 
 @NX-430
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify new SMS touchpoint creation
 Given login
 Then navigate to intent management
@@ -50,8 +50,8 @@ Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to customer care
-Then create customer care touchpoint from sheet "triggerTouchpoint"
-Then check customer care touchpoint in grid "triggerTouchpoint"
+Then create customer care touchpoint from sheet "CCTouchpoint"
+Then check customer care touchpoint in grid "CCTouchpoint"
 
 @NX-434
 @initBrowser @closeBrowser
@@ -60,9 +60,11 @@ Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to api
-Then create api touchpoint from sheet "triggerTouchpoint"
-Then check api touchpoint in grid "triggerTouchpoint"
+Then create api touchpoint from sheet "apiTouchpoint"
+Then check api touchpoint in grid "apiTouchpoint"
 
+
+##need to craete ussd application in legacy first
 @NX-435
 @initBrowser @closeBrowser
 Scenario: Verify new USSD touchpoint creation 
@@ -70,8 +72,8 @@ Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to ussd
-Then create ussd touchpoint from sheet "triggerTouchpoint"
-Then check ussd touchpoint in grid "triggerTouchpoint"
+Then create ussd touchpoint from sheet "ussdTouchpoint"
+Then check ussd touchpoint in grid "ussdTouchpoint"
 
 @NX-436
 @initBrowser @closeBrowser
@@ -100,8 +102,8 @@ Then navigate to touchpoints
 Then navigate to trigger
 Then verify delete trigger touchpoint
 
-@NX-450
-@initBrowser @closeBrowser
+@NX-450 @closeBrowser
+@initBrowser 
 Scenario: Field level validation check while creating new Trigger TP
 Given login
 Then navigate to intent management
@@ -110,7 +112,7 @@ Then navigate to trigger
 Then check mandatory fields for trigger touchpoint
 
 @NX-709
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Verify the new program landing page
 Given login
 Then navigate to intent management

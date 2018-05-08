@@ -48,7 +48,7 @@ public class TouchpointPage extends Init{
 	private WebElement ussdFormHeading;
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'USSD Application')]/../input")
 	private WebElement ussdFormUssdApplicationSelector;
-	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'USSD Application')]/../../../../../..//paper-item")
+	@FindBy(xpath="//label[contains(.,'USSD Application')]/following::vaadin-combo-box-item")
 	private WebElement ussdFormUssdApplication1;
 	
 	
@@ -182,7 +182,7 @@ public class TouchpointPage extends Init{
 	private WebElement selectTrigger;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement triggerTouchpointName;
-	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Trigger')]/../../../..//vaadin-combo-box-item")
+	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Trigger')]/following::vaadin-combo-box-item[contains(text(),'t')]")
 	private WebElement triggerFormTriggerSelect;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Ordering Logic')]/../input")
 	private WebElement triggerFormOrderingLogicSelector;
@@ -521,7 +521,7 @@ public class TouchpointPage extends Init{
 				return smsFormHeading.getText();
 			}
 			public void deleteTriggerTouchpoint(String name) throws InterruptedException{
-				jswait.loadClick("//data-table-cell[contains(.,'"+name+"')]/..//paper-icon-button");
+				jswait.loadClick("//data-table-cell[contains(.,'"+name+"')]/..//paper-icon-button[2]");
 				jswait.loadClick(triggerDeleteYes);
 			}
 			public void checkTriggerMandatoryFields() throws InterruptedException{

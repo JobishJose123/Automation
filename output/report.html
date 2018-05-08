@@ -53,7 +53,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>May 8, 2018 11:29:33 AM</span>
+                    <span class='label suite-start-time blue darken-3'>May 8, 2018 01:56:15 PM</span>
 				</a>
 			</li>
 			<li>
@@ -91,9 +91,11 @@
 					<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@NX-IM_Feature</a></li>
-					<li><a href='#'>@NX-430</a></li>
+					<li><a href='#'>@NX-UserProfile</a></li>
+					<li><a href='#'>@NX-6039</a></li>
 					<li><a href='#'>@initBrowser</a></li>
+					<li><a href='#'>@NX-6040</a></li>
+					<li><a href='#'>@closeBrowser</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -156,7 +158,7 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> scenario(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>2</span> scenario(s) passed</span>
 				</div>
 				<div class='block text-small'>
 					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> scenario(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
@@ -171,7 +173,7 @@
 					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>6</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>14</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
 					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
@@ -190,27 +192,27 @@
 				
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>positive flow of im program creation</span>
-						<span class='test-time'>May 8, 2018 11:29:34 AM</span>
+						<span class='test-name'>Title of your feature</span>
+						<span class='test-time'>May 8, 2018 01:56:16 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='scenario node' test-id='2' status='pass'>
 	<div class='category-list'>
-		<span class='category label white-text'>@NX-430</span>
+		<span class='category label white-text'>@NX-6039</span>
 		<span class='category label white-text'>@initBrowser</span>
 	</div>
-	<span class='duration right label'>0h 1m 14s+847ms</span>
+	<span class='duration right label'>0h 0m 26s+324ms</span>
 	<div class='desc'>
 		<b>Scenario</b>
-		<span class="desc-text">Verify new SMS touchpoint creation</span>
+		<span class="desc-text">Verify  pop-up is displayed on clicking change password option</span>
 	</div>
 	<ul class='steps'>
 		<li test-id='3' class='node given pass' status='pass'>
 			
 			<b>Given</b>
 			
-			<span class="bdd-step-name">Given login</span>
+			<span class="bdd-step-name">Given neon is loaded</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -218,7 +220,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to intent management</span>
+			<span class="bdd-step-name">Then login with "joel.jose@flytxt.com" and "flytxt"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -226,7 +228,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to touchpoints</span>
+			<span class="bdd-step-name">Then navigate to precision marketer</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -234,7 +236,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to sms</span>
+			<span class="bdd-step-name">Then click username on topbar</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -242,7 +244,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then create sms touchpoint from sheet "smsTouchpoint"</span>
+			<span class="bdd-step-name">Then click change password</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -250,7 +252,84 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then check sms touchpoint in grid "smsTouchpoint"</span>
+			<span class="bdd-step-name">Then click cancel in change password</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='9' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@NX-6040</span>
+		<span class='category label white-text'>@closeBrowser</span>
+	</div>
+	<span class='duration right label'>0h 0m 28s+557ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">Verify the functionality of Change password option</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='10' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then click username on topbar</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='11' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then click change password</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='12' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then change password "flytxt1" from "flytxt"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='13' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then logout</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='14' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then login with "joel.jose@flytxt.com" and "flytxt1"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='15' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then click username on topbar</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='16' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then click change password</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='17' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then change password "flytxt" from "flytxt1"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -310,7 +389,7 @@
 				
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NX-IM_Feature</span>
+						<span class='category-name'>@NX-UserProfile</span>
 						<span class='category-status right'>
 							<span class='label pass'>1</span>
 						</span>
@@ -333,8 +412,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 8, 2018 11:29:34 AM</td>
-										<td class='linked' test-id='1'>positive flow of im program creation</td>
+										<td>May 8, 2018 01:56:16 PM</td>
+										<td class='linked' test-id='1'>Title of your feature</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -344,7 +423,7 @@
 				</li>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NX-430</span>
+						<span class='category-name'>@NX-6039</span>
 						<span class='category-status right'>
 							<span class='label pass'>1</span>
 						</span>
@@ -367,8 +446,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 8, 2018 11:29:34 AM</td>
-										<td class='linked' test-id='2'>positive flow of im program creation.Verify new SMS touchpoint creation</td>
+										<td>May 8, 2018 01:56:16 PM</td>
+										<td class='linked' test-id='2'>Title of your feature.Verify  pop-up is displayed on clicking change password option</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -401,8 +480,76 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 8, 2018 11:29:34 AM</td>
-										<td class='linked' test-id='2'>positive flow of im program creation.Verify new SMS touchpoint creation</td>
+										<td>May 8, 2018 01:56:16 PM</td>
+										<td class='linked' test-id='2'>Title of your feature.Verify  pop-up is displayed on clicking change password option</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@NX-6040</span>
+						<span class='category-status right'>
+							<span class='label pass'>1</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 1</span>
+							
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>May 8, 2018 01:56:42 PM</td>
+										<td class='linked' test-id='9'>Title of your feature.Verify the functionality of Change password option</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@closeBrowser</span>
+						<span class='category-status right'>
+							<span class='label pass'>1</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 1</span>
+							
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>May 8, 2018 01:56:42 PM</td>
+										<td class='linked' test-id='9'>Title of your feature.Verify the functionality of Change password option</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -437,31 +584,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Scenarios
-					<div class='panel-lead'>1</div>
+					<div class='panel-lead'>2</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>6</div>
+					<div class='panel-lead'>14</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>May 8, 2018 11:29:33 AM</div>
+					<div class='panel-lead'>May 8, 2018 01:56:15 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>May 8, 2018 11:30:49 AM</div>
+			 		<div class='panel-lead'>May 8, 2018 01:57:11 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>75,245ms</div>
+					<div class='panel-lead'>55,463ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -496,19 +643,31 @@
 							<th>Others</th>
 						</tr>
 						<tr>
-							<td>@NX-IM_Feature</td>
+							<td>@NX-UserProfile</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
 						</tr>
 						<tr>
-							<td>@NX-430</td>
+							<td>@NX-6039</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
 						</tr>
 						<tr>
 							<td>@initBrowser</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>@NX-6040</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>@closeBrowser</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -543,7 +702,7 @@
 				skipParent: 0,
 				exceptionsParent: 0,
 				
-				passChild: 1,
+				passChild: 2,
 				failChild: 0,
 				fatalChild: 0,
 				errorChild: 0,
@@ -552,7 +711,7 @@
 				infoChild: 0,
 				exceptionsChild: 0,
 				
-				passGrandChild: 6,
+				passGrandChild: 14,
 				failGrandChild: 0,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,

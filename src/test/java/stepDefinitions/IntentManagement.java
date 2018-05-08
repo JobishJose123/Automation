@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import java.io.IOException;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -46,9 +47,15 @@ public class IntentManagement extends Init{
 	public void clickCreateNewTouchpoint() throws InterruptedException {
 		touchpointPage.clickCreateNewTouchpoint();
 	}
-	@Then("^create trigger touchpoint")
-	public void createTriggerTouchpoint() throws InterruptedException {
-		touchpointPage.createTriggerTouchpoint("TrigTP");
+	@Then("^create trigger touchpoint from sheet \"([^\"]*)\"$")
+	public void createTriggerTouchpoint(String sheet) throws InterruptedException, IOException {
+		eh.setExcelFile("touchpointInputData", sheet);
+		Random rn = new Random();
+ 		int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) eh.getCell(1, 0);
+ 		name =  name.replaceAll("[0-9]", "")+n;
+ 		eh.setCell(1, 0, name);
+		touchpointPage.createTriggerTouchpoint(name);
 	}
 	@Then("^check touchpoint landing page$")
 	public void checkTouchpointLandingPage() throws Throwable{
@@ -96,10 +103,13 @@ public class IntentManagement extends Init{
 //		jswait.scrollIntoView(scrollPane, //iron-list//data-table-row);
 		jswait.waitUntil("//span[contains(.,'"+name+"')]");
 	}
-	@Then("^check trigger touchpoint in grid$")
-	public void check_trigger_touchpoint_in_grid() throws Throwable {
+	@Then("^check trigger touchpoint in grid \"([^\"]*)\"$")
+	public void check_trigger_touchpoint_in_grid(String sheet) throws Throwable {
+		eh.setExcelFile("touchpointInputData", sheet);
 		Thread.sleep(7000);
-		jswait.waitUntil("//data-table-cell[contains(.,'TrigTP')]");
+		String name = (String) eh.getCell(1, 0);
+		jswait.waitForLoadMask();
+		jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");
 	}
 	@Then("^navigate to customer care$")
 	public void navigate_to_customer_care() throws Throwable {
