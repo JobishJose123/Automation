@@ -261,7 +261,13 @@ public class ConsumerProfileSteps extends Init{
 		customerObjects.clickYesButton();
 		
 	}
-	
+   
+   @Then("^verify events row in customer support tab$")
+   public void verifyEventsRowInCustomerSupportTab() throws Exception {
+	   
+	   customerObjects.verifyEventsRowInCustomerSupportTab();
+	   
+   }
 	
 	
 }

@@ -54,6 +54,14 @@ public class CustomerProfilePage extends Init{
 	@FindBy(xpath=".//iron-data-table[@id='consumerSubList']//iron-list[@id='list']/div//data-table-row")
 	private List <WebElement> subscribedToListElements;
 	
+	@FindBy(xpath=".//h4[contains(.,'Acknowledgement Details')]")
+	private WebElement acknowledgementDetails;
+	@FindBy(xpath=".//h4[contains(.,'Conversion Details')]")
+	private WebElement conversionDetails;
+	@FindBy(xpath=".//h4[contains(.,'Fulfillment Details')]")
+	private WebElement fulfillmentDetails;
+	
+	
 	@FindBy(xpath=".//paper-button[text()='Yes']")
 	private WebElement yesButton;
 	@FindBy(xpath=".//paper-button[text()='No']")
@@ -99,6 +107,9 @@ public class CustomerProfilePage extends Init{
 	private WebElement eventsTable;
 	@FindBy(xpath="//search-events[@class='style-scope consumer-events x-scope search-events-0']/div[@class='layout horizontal style-scope search-events']/paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab/div[contains(.,'Last 90 Days')]")
 	private WebElement SearchEvents90;
+	@FindBy(xpath=".//customer-support//search-events//paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab/div[contains(.,'Last 90 Days')]")
+	private WebElement customerSupportSearchEvents90;
+	
 	@FindBy(xpath="//div[@val='event']//iron-list[@id='list']//data-table-row//span[text()='Conversion']")
 	private WebElement conversionEventsTable;
 	
@@ -140,7 +151,7 @@ public class CustomerProfilePage extends Init{
 		jswait.loadClick(usageMetricsTab);
 	}
 	public void clickCustomerSupportTab() throws InterruptedException {
-		jswait.loadClick(customerInfoTab);
+		jswait.loadClick(customerSupportTab);
 	}
 	public void enterValueForMsisdn(String msisdn) throws InterruptedException {
 		jswait.loadSendKeys(customerNumberInput, msisdn);
@@ -423,5 +434,17 @@ public class CustomerProfilePage extends Init{
 
   }
  
- 
+   public void verifyEventsRowInCustomerSupportTab() throws Exception {
+	   
+	   jswait.loadClick(customerSupportSearchEvents90);
+	   Thread.sleep(4000);
+	   assertTrue(customerSupportEventsTable.isDisplayed());
+	   jswait.loadClick(customerSupportEventsTable);
+	   assertTrue(acknowledgementDetails.isDisplayed());
+	   assertTrue(conversionDetails.isDisplayed());
+	   assertTrue(fulfillmentDetails.isDisplayed());
+	   
+   }
+
+
 }

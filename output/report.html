@@ -53,7 +53,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>May 8, 2018 03:44:45 PM</span>
+                    <span class='label suite-start-time blue darken-3'>May 8, 2018 07:12:59 PM</span>
 				</a>
 			</li>
 			<li>
@@ -91,10 +91,10 @@
 					<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@NX-OfferTestCases</a></li>
+					<li><a href='#'>@NX-consumer_profileTestSuite</a></li>
+					<li><a href='#'>@NX-2821</a></li>
 					<li><a href='#'>@initBrowser</a></li>
 					<li><a href='#'>@closeBrowser</a></li>
-					<li><a href='#'>@NX-1375</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -172,7 +172,7 @@
 					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>5</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>8</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
 					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
@@ -191,21 +191,21 @@
 				
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>Test suite on Offer creation</span>
-						<span class='test-time'>May 8, 2018 03:44:46 PM</span>
+						<span class='test-name'>Title of your feature</span>
+						<span class='test-time'>May 8, 2018 07:13:00 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='scenario node' test-id='2' status='pass'>
 	<div class='category-list'>
+		<span class='category label white-text'>@NX-2821</span>
 		<span class='category label white-text'>@initBrowser</span>
 		<span class='category label white-text'>@closeBrowser</span>
-		<span class='category label white-text'>@NX-1375</span>
 	</div>
-	<span class='duration right label'>0h 0m 51s+91ms</span>
+	<span class='duration right label'>0h 0m 37s+781ms</span>
 	<div class='desc'>
 		<b>Scenario</b>
-		<span class="desc-text">Offer Management-->Create new offer-->Details tab</span>
+		<span class="desc-text">Verify for the details displayed in Customer Support tab-2821</span>
 	</div>
 	<ul class='steps'>
 		<li test-id='3' class='node given pass' status='pass'>
@@ -228,7 +228,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to offer management</span>
+			<span class="bdd-step-name">Then navigate to reports</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -236,7 +236,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to offers</span>
+			<span class="bdd-step-name">Then navigate to customer profile</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -244,7 +244,31 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then verify tab colours</span>
+			<span class="bdd-step-name">Then enter customer number "number"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='8' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then click on search button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='9' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then click customer support tab</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='10' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then verify events row in customer support tab</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -304,7 +328,7 @@
 				
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NX-OfferTestCases</span>
+						<span class='category-name'>@NX-consumer_profileTestSuite</span>
 						<span class='category-status right'>
 							<span class='label pass'>1</span>
 						</span>
@@ -327,8 +351,42 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 8, 2018 03:44:46 PM</td>
-										<td class='linked' test-id='1'>Test suite on Offer creation</td>
+										<td>May 8, 2018 07:13:00 PM</td>
+										<td class='linked' test-id='1'>Title of your feature</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@NX-2821</span>
+						<span class='category-status right'>
+							<span class='label pass'>1</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 1</span>
+							
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>May 8, 2018 07:13:00 PM</td>
+										<td class='linked' test-id='2'>Title of your feature.Verify for the details displayed in Customer Support tab-2821</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -361,8 +419,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 8, 2018 03:44:46 PM</td>
-										<td class='linked' test-id='2'>Test suite on Offer creation.Offer Management-->Create new offer-->Details tab</td>
+										<td>May 8, 2018 07:13:00 PM</td>
+										<td class='linked' test-id='2'>Title of your feature.Verify for the details displayed in Customer Support tab-2821</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -395,42 +453,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 8, 2018 03:44:46 PM</td>
-										<td class='linked' test-id='2'>Test suite on Offer creation.Offer Management-->Create new offer-->Details tab</td>
-										<td><span class='test-status pass'>pass</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</li>
-				<li class='category displayed active'>
-					<div class='category-heading'>
-						<span class='category-name'>@NX-1375</span>
-						<span class='category-status right'>
-							<span class='label pass'>1</span>
-						</span>
-					</div>
-					<div class='category-content hide'>
-						<div class='category-status-counts'>
-							<span class='label green accent-4 white-text'>Passed: 1</span>
-							
-							
-						</div>
-					
-						<div class='category-tests'>
-							<table class='bordered table-results'>
-								<thead>
-									<tr>
-										<th>Timestamp</th>
-										<th>TestName</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>May 8, 2018 03:44:46 PM</td>
-										<td class='linked' test-id='2'>Test suite on Offer creation.Offer Management-->Create new offer-->Details tab</td>
+										<td>May 8, 2018 07:13:00 PM</td>
+										<td class='linked' test-id='2'>Title of your feature.Verify for the details displayed in Customer Support tab-2821</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -471,25 +495,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>5</div>
+					<div class='panel-lead'>8</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>May 8, 2018 03:44:45 PM</div>
+					<div class='panel-lead'>May 8, 2018 07:12:59 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>May 8, 2018 03:45:39 PM</div>
+			 		<div class='panel-lead'>May 8, 2018 07:13:40 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>53,646ms</div>
+					<div class='panel-lead'>40,889ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -503,7 +527,7 @@
 						</tr>
 							<tr>
 								<td>user</td>
-								<td>joel.jose</td>
+								<td>rahul.krishnan</td>
 							</tr>
 							<tr>
 								<td>os</td>
@@ -524,7 +548,13 @@
 							<th>Others</th>
 						</tr>
 						<tr>
-							<td>@NX-OfferTestCases</td>
+							<td>@NX-consumer_profileTestSuite</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>@NX-2821</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -537,12 +567,6 @@
 						</tr>
 						<tr>
 							<td>@closeBrowser</td>
-							<td>1</td>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<td>@NX-1375</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -586,7 +610,7 @@
 				infoChild: 0,
 				exceptionsChild: 0,
 				
-				passGrandChild: 5,
+				passGrandChild: 8,
 				failGrandChild: 0,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,

@@ -233,3 +233,17 @@ Then click on search button
 Then click subscribed to lists tab
 Then click unsubscribe button
 Then unsubscribe a list
+
+@NX-2821
+@initBrowser @closeBrowser
+Scenario: Verify for the details displayed in Customer Support tab-2821
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click customer support tab
+Then verify events row in customer support tab
+
+
