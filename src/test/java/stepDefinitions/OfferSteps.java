@@ -206,5 +206,19 @@ public class OfferSteps extends Init{
 		   }
 		   	
 	   }
+	@Then("^verify cross site scrpting in new offer$")
+	public void verifyCrossSiteScrptingInewNewOffer() throws Throwable {
+		
+	   offerPageObjects.clickCreateNewOfferButton();
+	   offerPageObjects.enterDetailsTabFields("tempRechargeWap");
+	   String name = "";
+	   char[] specialChar = {'>','<','\'' , ';' ,'"'};
+	   for(char c:specialChar) {
+		   name = "name"+c;
+	   offerPageObjects.enterOfferName(name);
+	   offerPageObjects.clickProceedButton();
+	   }
+	   offerPageObjects.clickProceedButton();
+	}
 	
 }
