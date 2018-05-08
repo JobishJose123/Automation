@@ -188,6 +188,23 @@ public class OfferSteps extends Init{
 	{
 		offerPageObjects.ChooseAllLanguagesCreativeTab(sheet, productSheet);
 	}
-	
+	@Then("^verify sql injection in offer$")
+	   public void verifysqlinjectionOffer() throws Throwable
+	   {
+		   commonObjects.filterName("offername'; SELECT * FROM offers;");
+		   int pass=0;
+		   org.openqa.selenium.NoSuchElementException exx = new org.openqa.selenium.NoSuchElementException("no element");
+		   try{
+			   wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//data-table-cell[text()='"+"offername'; SELECT * FROM offers;"+"']"))));  
+		   }
+		   catch (org.openqa.selenium.NoSuchElementException e) {
+			   pass=1;
+			
+		   }
+		   if(pass==0){
+			   throw exx;
+		   }
+		   	
+	   }
 	
 }

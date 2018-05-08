@@ -176,3 +176,10 @@ Then create single product from sheet "singleProductPage"
     Then navigate to offers
     Then create new offer up to creative tab and choose all languages from sheet "usageBasedWAP" with product "singleProductPage"
     
+@initBrowser @closeBrowser @NX-2101
+Scenario: Verify SQL injection in Filtering Offers
+Given login
+Then navigate to precision marketer
+Then  navigate to offer management 
+Then navigate to offers
+Then verify sql injection in offer
