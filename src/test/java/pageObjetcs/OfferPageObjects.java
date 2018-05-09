@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
@@ -715,4 +716,23 @@ public class OfferPageObjects extends Init {
 	public void clickAddProductFirstCheckbox() throws InterruptedException {
 		jswait.loadClick(addProductFirstCheckbox);
 	}
+	public void verifyCheckboxOfCreative() throws InterruptedException {
+		jswait.loadClick(addCreativeButton);
+		jswait.waitForLoadMask();
+		List<WebElement> checkboxes = driver.findElements(By.xpath("//div[contains(@class,'defineCreative')]//paper-checkbox"));
+		checkboxes.get(0).getAttribute("checked");
+		try {
+			checkboxes.get(1).getAttribute("checked");
+		}catch(Exception e) {
+			checkboxes.get(1).click();
+			checkboxes.get(1).getAttribute("checked");
+			try {
+				checkboxes.get(0).getAttribute("checked");
+				Assert.assertTrue(false, "error in checked status");
+			}catch(Exception e1) {
+			}
+		}
+		
+	}
+	
 }

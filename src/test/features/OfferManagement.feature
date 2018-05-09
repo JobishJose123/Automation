@@ -25,6 +25,12 @@ Then create single product from sheet "singleProductPage"
     Then navigate to offers
     Then create new offer from sheet "rechargeVoicePush" with product "singleProductPage"
     Then verify "rechargeVoicePush" offer in grid
+    Then pass next scenario based on this step
+
+  @NX-1344 
+  Scenario: Create offer:Track: Verify clicking on the create offer without adding any response NX-1344
+    Then check previous step and pass this
+    Then pass next scenario based on this step
 
   @NX-1353 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating offers with Wap Push channel NX-1353
@@ -215,3 +221,11 @@ Then navigate to precision marketer
 Then  navigate to offer management 
 Then navigate to offers
 Then verify checkbox of product selection
+
+ @initBrowser @closeBrowser @NX-1330
+Scenario: Create offer:Creative: Verify checking multiple checkbox for defaullt message
+Given login
+Then navigate to precision marketer
+Then  navigate to offer management 
+Then navigate to offers
+Then verify checkbox default creative creative

@@ -253,5 +253,15 @@ public class OfferSteps extends Init{
 		}
 			
 	}
-	
+	@Then("^verify checkbox default creative creative$")
+	public void verifyDefaultCreativeCheckbox() throws Throwable {
+		offerPageObjects.clickCreateNewOfferButton();
+		offerPageObjects.enterDetailsTabFields("tempRechargeWap");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickAddProductsButton();
+		offerPageObjects.clickAddProductFirstCheckbox();
+		offerPageObjects.clickDialogBoxAddButton();
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.verifyCheckboxOfCreative();
+	}
 }
