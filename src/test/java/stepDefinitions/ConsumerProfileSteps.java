@@ -269,5 +269,11 @@ public class ConsumerProfileSteps extends Init{
 	   
    }
 	
+   @Then("^verify tab selected by default$")
+   public void verifyTabSelectedByDefault() throws Exception {
+	   
+	   customerObjects.verifyTabSelectedByDefault();
+   }
+   
 	
 }
