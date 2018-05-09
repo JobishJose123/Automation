@@ -237,5 +237,21 @@ public class OfferSteps extends Init{
 	{
 		offerPageObjects.createOfferAndVerifyOptionalFields(sheet, productSheet);
 	}
+	@Then("^verify checkbox of product selection$")
+	public void verifyProductCheckbox() throws Throwable {
+		offerPageObjects.clickCreateNewOfferButton();
+		offerPageObjects.enterDetailsTabFields("tempRechargeWap");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickAddProductsButton();
+		try {
+			offerPageObjects.getCheckBoxStatus();
+			System.out.println("checked");
+		}
+		catch(Exception e) {
+			offerPageObjects.clickAddProductFirstCheckbox();
+			offerPageObjects.getCheckBoxStatus();
+		}
+			
+	}
 	
 }

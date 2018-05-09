@@ -126,8 +126,8 @@ public class OfferPageObjects extends Init {
 	 private WebElement detailsTab;
 	 @FindBy(xpath="//span[text()='Products']/..")
 	 private WebElement productsTab;
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 @FindBy(xpath="//paper-dialog//iron-list//data-table-checkbox")
+	 private WebElement addProductFirstCheckbox;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -708,5 +708,11 @@ public class OfferPageObjects extends Init {
 		String colour = productsTab.getCssValue("background-color");
 		System.out.println(colour);
 		return colour;
+	}
+	public String getCheckBoxStatus() {
+		return addProductFirstCheckbox.getAttribute("checked");
+	}
+	public void clickAddProductFirstCheckbox() throws InterruptedException {
+		jswait.loadClick(addProductFirstCheckbox);
 	}
 }

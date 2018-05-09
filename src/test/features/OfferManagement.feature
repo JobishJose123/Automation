@@ -207,3 +207,11 @@ Then verify tab colours
     Then navigate to offer management
     Then navigate to offers
     Then create new offer and verify optional fields from sheet "rechargeVoicePush" with product "singleProductPage"
+    
+    @initBrowser @closeBrowser @NX-1373
+Scenario: Offer Management-->Create new offer-->Products tab
+Given login
+Then navigate to precision marketer
+Then  navigate to offer management 
+Then navigate to offers
+Then verify checkbox of product selection
