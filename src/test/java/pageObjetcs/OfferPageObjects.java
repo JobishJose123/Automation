@@ -129,8 +129,8 @@ public class OfferPageObjects extends Init {
 	 private WebElement productsTab;
 	 @FindBy(xpath="//paper-dialog//iron-list//data-table-checkbox")
 	 private WebElement addProductFirstCheckbox;
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 @FindBy(xpath="//paper-card[@id='rewardDetails']//paper-button[contains(text(),'Add')]")
+	 private WebElement rewardAddButton;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -144,6 +144,9 @@ public class OfferPageObjects extends Init {
 	}
 	public void clickRemoveTrackYesButton() throws InterruptedException {
 		jswait.loadClick(removeTrackYesButton);
+	}
+	public void clickRewardAddButton() throws InterruptedException {
+		jswait.loadClick(rewardAddButton);
 	}
 	
 	public void selectAllLanguagesCreativeTab() throws Throwable {
@@ -668,6 +671,28 @@ public class OfferPageObjects extends Init {
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
+		enterCreativeTabDetails(eh);
+		clickProceedButton();
+		Thread.sleep(3000);
+
+		// ******************Track tab*****************:
+		enterTrackTabDetails(eh);
+		clickProceedButton();
+
+		// ******************Rewards tab*****************:
+		if (eh.getCell(1, 2).toString().contains("Seeding")) {
+			clickRewardTypeInputField();
+			clickRewardTypeAny();
+		}
+
+	}
+	public void enterTrackTabDetails(ExcelHelper eh) throws InterruptedException {
+		if (!eh.getCell(1, 2).toString().contains("Informational")) {
+			clickTrackSourceSelector();
+			selectTrackSource("track");
+		}
+	}
+	public void enterCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {
 		selectCreativeLanguageEnglish();
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
 			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
@@ -676,22 +701,6 @@ public class OfferPageObjects extends Init {
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-
-		clickProceedButton();
-		Thread.sleep(3000);
-
-		// ******************Track tab*****************:
-		if (!eh.getCell(1, 2).toString().contains("Informational")) {
-			clickTrackSourceSelector();
-			selectTrackSource("track");
-		}
-		clickProceedButton();
-
-		// ******************Rewards tab*****************:
-		if (eh.getCell(1, 2).toString().contains("Seeding")) {
-			clickRewardTypeInputField();
-			clickRewardTypeAny();
-		}
 
 	}
 

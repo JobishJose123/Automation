@@ -264,4 +264,23 @@ public class OfferSteps extends Init{
 		offerPageObjects.clickProceedButton();
 		offerPageObjects.verifyCheckboxOfCreative();
 	}
+	@Then("^validate success and failure message$")
+	public void validateSuccessAndFailureMessage() throws Throwable {
+		offerPageObjects.clickCreateNewOfferButton();
+		offerPageObjects.enterDetailsTabFields("tempRechargeWap");
+		ExcelHelper eh = new ExcelHelper();
+		eh.setExcelFile("offerInputData", "tempRechargeWap");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickAddProductsButton();
+		offerPageObjects.clickAddProductFirstCheckbox();
+		offerPageObjects.clickDialogBoxAddButton();
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.enterCreativeTabDetails(eh);
+		offerPageObjects.clickProceedButton();
+		Thread.sleep(3000);
+		offerPageObjects.enterTrackTabDetails(eh);
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickRewardAddButton();
+		
+	}
 }
