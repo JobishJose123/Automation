@@ -246,4 +246,14 @@ Then click on search button
 Then click customer support tab
 Then verify events row in customer support tab
 
-
+@NX-2822
+@initBrowser @closeBrowser
+Scenario: Verify whether user can search events in hours and days from Customer Support tab-2822
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click customer support tab
+Then verify events row in customer support page

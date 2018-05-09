@@ -120,6 +120,8 @@ public class CustomerProfilePage extends Init{
 	
 	@FindBy(xpath="//div[@val='support']//iron-list[@id='list']//data-table-row")
 	private WebElement customerSupportEventsTable;
+	@FindBy(xpath="//div[@val='support']//iron-list[@id='list']//data-table-row")
+	private List <WebElement> customerSupportEventsTableList;
 	
 	
 //	@FindBy(xpath="")
@@ -384,11 +386,21 @@ public class CustomerProfilePage extends Init{
 			   Thread.sleep(2000);
 			   jswait.loadClick(event);
 			   Thread.sleep(4000);
-			   
-			 Boolean s= customerSupportEventsTable.isDisplayed();
-			 
-			 System.out.println("Boolean: "+s);
+			  if(customerSupportEventsTableList.size()>0) {
+				 
+				  Boolean s= customerSupportEventsTable.isDisplayed(); 
+				  System.out.println("Table displayed: "+s);
+				  jswait.loadClick(customerSupportEventsTable);
+				  assertTrue(acknowledgementDetails.isDisplayed());
+				  assertTrue(conversionDetails.isDisplayed());
+				  assertTrue(fulfillmentDetails.isDisplayed());
 			  
+			  }
+			  else {
+				  
+				  System.out.println("Tab is empty");
+				  
+			  }
 			   /*try {
 				   assertTrue(customerSupportEventsTable.isDisplayed());
 				   jswait.loadClick(customerSupportEventsTable);
