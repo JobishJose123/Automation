@@ -74,14 +74,16 @@ public class CatalogPageObjects extends Init{
 	private WebElement deleteOffer;
 	@FindBy(xpath=".//iron-data-table[@id='offer-listing']//iron-list[@id='list']/div/div/data-table-row")
 	private WebElement offerList;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="//offer-catalogue-grid//div[contains(text(),'Offer Catalog')]")
+	private WebElement offerCatalogHeader;
+	@FindBy(xpath="//offer-catalogue-grid//data-table-cell[contains(.,'Catalog Name')]")
+	private WebElement gridHeaderCatalogName;
+	@FindBy(xpath="//offer-catalogue-grid//data-table-cell[contains(.,'Description')]")
+	private WebElement gridHeaderDescription;
+	@FindBy(xpath="//offer-catalogue-grid//data-table-cell[contains(text(),'Offers')]")
+	private WebElement gridHeaderOffers;
+	@FindBy(xpath="//paper-dialog//*[contains(text(),'Create New Catalog')]")
+	private WebElement createNewCatalogHeader;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -221,6 +223,14 @@ public class CatalogPageObjects extends Init{
 		Thread.sleep(2000);
 		assertFalse("Offer removed successfully", offerList.isDisplayed());
 		
+	}
+  public void verifyHeaders() throws Throwable {
+	  jswait.checkVisible(offerCatalogHeader);
+	  jswait.checkVisible(gridHeaderCatalogName);
+	  jswait.checkVisible(gridHeaderDescription);
+	  jswait.checkVisible(gridHeaderOffers);
+	  clickCreateCatalogButton();
+	  jswait.checkVisible(createNewCatalogHeader);
 	}
 
 }

@@ -23,6 +23,7 @@ import pageObjetcs.OfferPageObjects;
 
 public class OfferCatalogSteps extends Init{
 	public ExcelHelper eM = new ExcelHelper();
+	public ExcelHelper eh = new ExcelHelper();
 	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
 	CatalogPageObjects catalogPageObjects = new CatalogPageObjects();
@@ -461,6 +462,18 @@ public class OfferCatalogSteps extends Init{
 		   catalogPageObjects.clickSaveCatalogButton();
 		   }
 		   catalogPageObjects.clickSaveCatalogButton();
+		}
+	   @Then("^click view offers of \"([^\"]*)\" in options$")
+		public void navigateToViewOffers(String sheet) throws Throwable {
+		   eh.setExcelFile("offerCatalogInputData",sheet);
+			String name = (String) eh.getCell(1, 0);
+			commonObjects.filterName(name);
+			commonObjects.clickOptionsIcon();
+			catalogPageObjects.clickViewOffersOption();
+		}
+	   @Then("^verify label of offer catalog$")
+		public void verifyLabelsOfOfferCatalog() throws Throwable {
+		   catalogPageObjects.verifyHeaders();
 		}
 
 }

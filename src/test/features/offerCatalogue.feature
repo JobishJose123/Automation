@@ -182,6 +182,11 @@ Scenario: Verify the label detail for the offer selected
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
   Then Verify Label in offer selected
+  Then pass next scenario based on this step
+
+  @NX-1113
+  Scenario: Offer Catalog Grid: Verify the Add option for creating a new offer Catalog. NX-1113
+    Then check previous step and pass this
   
 @initBrowser @closeBrowser @NX-1147
 Scenario: Verify the selected offers for the catalog.
@@ -247,7 +252,6 @@ Scenario: Verify the selected offers for the catalog.
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeSMS" offer to Offer Catalogue
   Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Delete Created Offer Catalogue "defaultCatalog"
@@ -261,7 +265,7 @@ Scenario: Verify the selected offers for the catalog.
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
-Then navigate to offer management 
+  Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Delete Created Offer Catalogue "defaultCatalog"
 
@@ -360,8 +364,7 @@ Then navigate to offer management
   #Then Delete Created Offer Catalogue
   #
   ##add offers not available in options
-  #@initBrowser @closeBrowser @NX-1117
-  #Scenario:  Verify the Add offers from the Options icon
+  
 #
   #Given login
 #	When navigate to precision marketer
@@ -395,5 +398,34 @@ Given login
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
 	Then verify cross site scripting in new catalog 
+	
+  @initBrowser @closeBrowser @NX-1115
+  Scenario:  Offer Catalog Grid: Verify the "View Offers" from the Options icon
+  Given login
+  When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+	Then click view offers of "defaultCatalog" in options
   
-  
+  @initBrowser @closeBrowser @NX-1117
+  Scenario:  Offer Catalog Grid: Verify the "Add offers" from the View Offers
+  Given login
+  When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+	Then click view offers of "defaultCatalog" in options
+	Then Add "rechargeSMS" offer to Offer Catalogue
+	
+	@initBrowser @closeBrowser @NX-1114
+  Scenario:  Offer Catalog Grid: Verify the label and alignment of the Offer Catalog window.
+  Given login
+  When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+	Then verify label of offer catalog
