@@ -230,7 +230,7 @@ Then  navigate to offer management
 Then navigate to offers
 Then verify checkbox default creative creative
 
-@initBrowser @closeBrowser @NX-1340
+@initBrowser  @NX-1340
 Scenario: Create offer:Track: Verify the validations for the success and failure response box
 Given login
 Then navigate to precision marketer

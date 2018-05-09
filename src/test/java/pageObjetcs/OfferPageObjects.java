@@ -3,6 +3,7 @@ package pageObjetcs;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -131,12 +132,37 @@ public class OfferPageObjects extends Init {
 	 private WebElement addProductFirstCheckbox;
 	 @FindBy(xpath="//paper-card[@id='rewardDetails']//paper-button[contains(text(),'Add')]")
 	 private WebElement rewardAddButton;
+	 @FindBy(xpath="//label[contains(text(),'Response on success')]/..//textarea")
+	 private WebElement successMessage;
+	 @FindBy(xpath="//label[contains(text(),'Response on Failure')]/..//textarea")
+	 private WebElement failureMessage;
+	 
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
 	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+	 
+	 
 
 	// offer page functions
 	public void navigateToOffer() throws InterruptedException {
@@ -530,6 +556,12 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick("//paper-item[contains(.,'Combo Vouchers')]");
 	}
 
+	public void enterSuccessMessage(String s) throws InterruptedException {
+		jswait.loadSendKeys(successMessage, s);
+	}
+	public void enterFailureMessage(String f) throws InterruptedException {
+		jswait.loadSendKeys(failureMessage, f);
+	}
 	public void clickOfferTypeField() throws InterruptedException {
 		jswait.loadClick(offerTypeField);
 	}
@@ -742,6 +774,14 @@ public class OfferPageObjects extends Init {
 			}
 		}
 		
+	}
+	public void verifyRewardSucessMessage() throws InterruptedException, UnsupportedFlavorException, IOException {
+		String s = commonObjects.getTextFormTextField(successMessage);
+		Assert.assertTrue(s.length()<=500,"field contains more than 500 chars");
+	}
+	public void verifyRewardFailureMessage() throws InterruptedException, UnsupportedFlavorException, IOException {
+		String s = commonObjects.getTextFormTextField(failureMessage);
+		Assert.assertTrue(s.length()<=500,"field contains more than 500 chars");
 	}
 	
 }
