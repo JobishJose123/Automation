@@ -257,3 +257,17 @@ Then enter customer number "number"
 Then click on search button
 Then click customer support tab
 Then verify events row in customer support page
+
+@NX-2813
+@initBrowser @closeBrowser
+Scenario: Verify whether by default, search events is highlighted in today-2813
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click on events tab
+Then verify tab selected by default
+
+

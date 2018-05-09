@@ -100,6 +100,9 @@ public class CustomerProfilePage extends Init{
 	private WebElement subscribedToList;
 	@FindBy(xpath="//search-events[@class='style-scope consumer-events x-scope search-events-0']/div[@class='layout horizontal style-scope search-events']/paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab")
 	private List <WebElement> SearchEventsList;
+	@FindBy(xpath="//search-events[@class='style-scope consumer-events x-scope search-events-0']/div[@class='layout horizontal style-scope search-events']/paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab[@aria-selected='true']")
+	private WebElement todayTab;
+	
 	@FindBy(xpath=".//div[contains(text(),' No events available. Please try changing your filter settings.')]")
 	private WebElement noEventsMessage;
 	
@@ -331,6 +334,23 @@ public class CustomerProfilePage extends Init{
 	   }
 	  
 	   }
+ 
+     public void verifyTabSelectedByDefault() throws Exception {
+	 
+	 
+    	 String S=todayTab.getText();
+    	 System.out.println("Text on the tab selected by default: "+S);
+    	 try {
+    		 if(S.equals("Today"))
+    			 System.out.println("Today tab is selected by default");
+    		 
+    	 }
+    	catch(Exception e)  {
+    		
+    		e.printStackTrace();
+    	}
+    	 
+      }
  
  public void verifyFulfillmentEventsRow() throws Exception {
 	   
