@@ -32,6 +32,10 @@ Then create single product from sheet "singleProductPage"
     Then check previous step and pass this
     Then pass next scenario based on this step
 
+  @NX-828
+  Scenario: Create offer:Offers Display: Verify the Add option for creating a new offer. NX-828
+    Then check previous step and pass this
+
   @NX-1353 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating offers with Wap Push channel NX-1353
     Given login
