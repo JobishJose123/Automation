@@ -134,6 +134,11 @@ public class ConsumerProfileSteps extends Init{
 		customerObjects.clickEventTypeCheckbox();
 		
 	}
+	@Then("^choose all events$")
+	public void chooseAllEvents() throws Exception {
+		
+		customerObjects.chooseAllEvents();	
+	}
 	
 	@Then("^click on apply button$")
 	public void clickApplyButton() throws Exception {
@@ -245,13 +250,7 @@ public class ConsumerProfileSteps extends Init{
 		
 	}
 	
-   @Then("^choose all events$")
-	
-	public void clickAllEventsCheckbox() throws Exception {
-		
-		customerObjects.clickAllEventsCheckbox();
-		
-	}
+ 
    
    @Then("^unsubscribe a list$")
    public void unsubscribeList() throws Exception {
@@ -275,5 +274,10 @@ public class ConsumerProfileSteps extends Init{
 	   customerObjects.verifyTabSelectedByDefault();
    }
    
-	
+   @Then("^verify filterig event types$")
+   public void verifyFilterigEventTypes() throws Exception {
+	   
+	   customerObjects.verifyFilterigEventTypes();
+   
+   }
 }

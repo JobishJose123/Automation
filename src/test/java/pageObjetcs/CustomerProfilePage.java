@@ -2,6 +2,7 @@ package pageObjetcs;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -126,6 +127,15 @@ public class CustomerProfilePage extends Init{
 	@FindBy(xpath="//div[@val='support']//iron-list[@id='list']//data-table-row")
 	private List <WebElement> customerSupportEventsTableList;
 	
+	@FindBy(xpath="//div[@id='mainContainer']//div[@class='layout horizontal style-scope consumer-events']//paper-checkbox/div[@id='checkboxContainer']")
+	private List <WebElement> eventTypesList;
+	
+	@FindBy(xpath=".//div[@id='mainContainer']//div[@class='layout horizontal style-scope consumer-events']//paper-checkbox/div[@id='checkboxContainer']//div[@class='checked  style-scope paper-checkbox']")
+	private WebElement eventTypesSelected;
+	
+	
+	
+	
 	
 //	@FindBy(xpath="")
 //	private WebElement ;
@@ -187,6 +197,10 @@ public class CustomerProfilePage extends Init{
  public void clickEventTypeCheckbox() throws InterruptedException {
 		jswait.loadClick(checkboxEventTypes);
 		jswait.loadClick(checkboxEventTypes);
+	}
+ public void chooseAllEvents() throws InterruptedException {
+		jswait.loadClick(checkboxEventTypes);
+
 	}
  public void clickApplyButton() throws InterruptedException {
 		jswait.loadClick(applyButton);
@@ -442,10 +456,7 @@ public class CustomerProfilePage extends Init{
 	  
 	   }
  
- public void clickAllEventsCheckbox() throws InterruptedException {
-		jswait.loadClick(checkboxEventTypes);
-		
-	}
+
  
  public void clickYesButton() throws InterruptedException {
  	
@@ -475,6 +486,36 @@ public class CustomerProfilePage extends Init{
 	   assertTrue(acknowledgementDetails.isDisplayed());
 	   assertTrue(conversionDetails.isDisplayed());
 	   assertTrue(fulfillmentDetails.isDisplayed());
+	   
+   }
+   public void chooseFirstEventType() throws Exception {
+			
+		  //int type=eventTypesList.indexOf(type);
+		  
+		    Iterator<WebElement> typeIter = eventTypesList.iterator();
+			WebElement typeElement = typeIter.next();
+			Thread.sleep(2000);
+			typeElement = typeIter.next();
+			jswait.loadClick(typeElement);
+			   
+		 
+	   
+   }
+   
+   public void verifySelectedEventType() throws Exception {
+	   
+	   assertTrue(eventTypesSelected.isDisplayed());
+   }
+   
+   
+   
+   public void verifyFilterigEventTypes() throws Exception {
+	   
+	   chooseFirstEventType();
+	   clickApplyButton();
+	   Thread.sleep(3000);
+	   verifySelectedEventType();
+	   
 	   
    }
 

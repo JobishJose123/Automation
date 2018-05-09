@@ -271,3 +271,19 @@ Then click on events tab
 Then verify tab selected by default
 
 
+@NX-2812
+@initBrowser @closeBrowser
+Scenario: Verify if events can be filtered using apply event icon-2812
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click on events tab
+Then choose all events
+Then click on apply button
+Then choose all events
+Then verify filterig event types
+
+
