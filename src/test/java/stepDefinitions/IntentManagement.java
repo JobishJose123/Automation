@@ -520,4 +520,22 @@ System.out.println(editname+"program has edited successfully");
 		
 	}
 	
+	@Then("^verify delete a program \"([^\"]*)\"$")
+	public void deleteprograms(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+   		String name = (String) programExcel.getCell(1, 0);
+   		Thread.sleep(4000);
+		Thread.sleep(9000);
+		commonObjects.filterName(name);
+		Thread.sleep(5000);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickDeleteOption();
+		System.out.println("deleted");
+	}
+	
+	
+	
+	
 }

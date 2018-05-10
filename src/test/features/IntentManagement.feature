@@ -252,3 +252,11 @@ Given login
 Then navigate to intent management
 Then navigate to programs
 Then check details schedule Serve on Specific Days "programdetails"
+@NX-1243
+@initBrowser @closeBrowser
+Scenario: verify Create New Programs delete option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page "programdetails"
+Then verify delete a program "programdetails"
