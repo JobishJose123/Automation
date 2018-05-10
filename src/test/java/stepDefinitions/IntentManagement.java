@@ -270,7 +270,7 @@ public class IntentManagement extends Init{
 	//-------------------------------------------------------------------//
 	
 	
-	@Then("^click on edit button of programs \"([^\"]*)\"$")
+	@Then("^click on edit button of programs$")
 	public void Editprograms() throws Throwable {
 		
 		Thread.sleep(9000);
@@ -513,7 +513,10 @@ System.out.println(editname+"program has edited successfully");
 		Thread.sleep(2000);
 		programPage.programschserveon(); 
 		programPage.prmshcserveonSpecdays();
-		programPage.programserveoninput();
+		programPage.programserveonevery();
+		programPage.programserveoneverydata();
+		programPage.checkboxdaysmonday();
+		programPage.programdayscheck();
 		
 	}
 	
