@@ -55,6 +55,8 @@ public class OfferPageObjects extends Init {
 	private WebElement creativeLanguage;
 	@FindBy(xpath = "//paper-item[contains(.,'English')]")
 	private WebElement creativeLanguageEnglishSelect;
+	@FindBy(xpath = "//creative-wrapper//define-creative[2]//paper-item[contains(.,'Spanish')]")
+	private WebElement secondCreativeLanguageSpanishSelect;
 	@FindBy(xpath = "//paper-button[contains(.,'Save Offer')]")
 	private WebElement saveOfferButton;
 	@FindBy(xpath = "//label[contains(.,'Optional1')]/../input")
@@ -77,10 +79,16 @@ public class OfferPageObjects extends Init {
 	private WebElement trackSourceSelector;
 	@FindBy(xpath = "//*[@id='form']//label[contains(.,'Title')]/..//input")
 	private WebElement CreativeTitle;
+	@FindBy(xpath = "//creative-wrapper//define-creative[2]//*[@id='form']//label[contains(.,'Title')]/..//input")
+	private WebElement secondCreativeTitle;
 	@FindBy(xpath = "//*[@id='form']//label[contains(.,'URL')]/..//input")
 	private WebElement wapCreativeUrl;
+	@FindBy(xpath = "//creative-wrapper//define-creative[2]//*[@id='form']//label[contains(.,'URL')]/..//input")
+	private WebElement secondWapCreativeUrl;
 	@FindBy(xpath = "//label[contains(.,'Details')]/..//textarea")
 	private WebElement smsCreativeDetails;
+	@FindBy(xpath = "//creative-wrapper//define-creative[2]//label[contains(.,'Details')]/..//textarea")
+	private WebElement secondSmsCreativeDetails;
 	@FindBy(xpath = "//label[contains(.,'Offer Type')]/../..//input")
 	private WebElement offerTypeField;
 	@FindBy(xpath = "//paper-item[contains(.,'Combo Vouchers')]")
@@ -91,8 +99,12 @@ public class OfferPageObjects extends Init {
 	private WebElement addProductsCheckBox;
 	@FindBy(xpath = "//label[contains(.,'Subject')]/../input")
 	private WebElement voiceCreativeSubject;
+	@FindBy(xpath = "//creative-wrapper//define-creative[2]//label[contains(.,'Subject')]/../input")
+	private WebElement secondVoiceCreativeSubject;
 	@FindBy(xpath = "//label[contains(.,'Reference')]/../input")
 	private WebElement voiceCreativeReference;
+	@FindBy(xpath = "//creative-wrapper//define-creative[2]//label[contains(.,'Reference')]/../input")
+	private WebElement secondVoiceCreativeReference;
 	@FindBy(xpath = "//object[@data='../../context-help/EN/Offers.html']")
 	private WebElement offersContextHelp;
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Product')]/../input")
@@ -137,8 +149,8 @@ public class OfferPageObjects extends Init {
 	 @FindBy(xpath="//label[contains(text(),'Response on Failure')]/..//textarea")
 	 private WebElement failureMessage;
 	 
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 @FindBy(xpath="//creative-wrapper//define-creative[2]//label[contains(.,'Language')]/..//input")
+	 private WebElement secondCreativeLanguageSelector;
 	// @FindBy(xpath="")
 	// private WebElement ;
 		// @FindBy(xpath="")
@@ -490,6 +502,9 @@ public class OfferPageObjects extends Init {
 	public void clickCreativeLanguageField() throws InterruptedException {
 		jswait.loadClick(creativeLanguage);
 	}
+	public void clickSecondCreativeLanguageField() throws InterruptedException {
+		jswait.loadClick(secondCreativeLanguageSelector);
+	}
 	
 	public void clickProductRemoveIcon() throws InterruptedException {
 		jswait.loadClick(productRemoveIcon);
@@ -516,6 +531,9 @@ public class OfferPageObjects extends Init {
 
 	public void clickCreativeLanguageEnglishSelect() throws InterruptedException {
 		jswait.loadClick(creativeLanguageEnglishSelect);
+	}
+	public void clickSecondCreativeLanguageSpanishSelect() throws InterruptedException {
+		jswait.loadClick(secondCreativeLanguageSpanishSelect);
 	}
 
 	public void clickOfferCategory() throws InterruptedException {
@@ -592,21 +610,39 @@ public class OfferPageObjects extends Init {
 		clickCreativeLanguageField();
 		clickCreativeLanguageEnglishSelect();
 	}
+	public void selectSecodnCreativeLanguageSpanish() throws InterruptedException, IOException {
+		clickSecondCreativeLanguageField();
+		clickSecondCreativeLanguageSpanishSelect();
+	}
 
 	public void enterWapCreative(String title, String url) throws InterruptedException {
 		jswait.loadSendKeys(CreativeTitle, title);
 		jswait.loadSendKeys(wapCreativeUrl, url);
+	}
+	public void enterSecondWapCreative(String title, String url) throws InterruptedException {
+		jswait.loadSendKeys(secondCreativeTitle, title);
+		jswait.loadSendKeys(secondWapCreativeUrl, url);
 	}
 
 	public void enterVoiceCreative(String subject, String reference) throws InterruptedException {
 		jswait.loadSendKeys(voiceCreativeSubject, subject);
 		jswait.loadSendKeys(voiceCreativeReference, reference);
 	}
+	public void enterSecondVoiceCreative(String subject, String reference) throws InterruptedException {
+		jswait.loadSendKeys(secondVoiceCreativeSubject, subject);
+		jswait.loadSendKeys(secondVoiceCreativeReference, reference);
+	}
 
 	public void enterSmsCreative(String title, String details) throws InterruptedException {
 		jswait.loadSendKeys(CreativeTitle, title);
 		;
 		jswait.loadSendKeys(smsCreativeDetails, details);
+		;
+	}
+	public void enterSecondSmsCreative(String title, String details) throws InterruptedException {
+		jswait.loadSendKeys(secondCreativeTitle, title);
+		;
+		jswait.loadSendKeys(secondSmsCreativeDetails, details);
 		;
 	}
 
@@ -733,6 +769,17 @@ public class OfferPageObjects extends Init {
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+
+	}
+	public void enterSecondCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {
+		selectSecodnCreativeLanguageSpanish();
+		if (((String) eh.getCell(1, 3)).contains("WAP")) {
+			enterSecondWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		}
+		if (eh.getCell(1, 3).toString().contains("SMS"))
+			enterSecondSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		if (eh.getCell(1, 3).toString().contains("Voice"))
+			enterSecondVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 
 	}
 

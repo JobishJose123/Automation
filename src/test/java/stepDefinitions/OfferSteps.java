@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -285,5 +286,28 @@ public class OfferSteps extends Init{
 		offerPageObjects.verifyRewardSucessMessage();
 		offerPageObjects.enterFailureMessage("More the 500 chars Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mi lacus. Maecenas tempus, urna vel efficitur porttitor, nisi mauris rutrum risus, sed sollicitudin ligula urna a turpis. Nullam sit amet elit posuere, semper ligula ut, euismod felis. Duis vel tellus sed magna facilisis eleifend vitae in leo. Aenean odio quam, aliquet egestas massa vel, aliquam scelerisque mi. Donec scelerisque a odio in consectetur. Nulla in nisi quis felis faucibus pellentesque. Vivamus euismod orci ac nullam. after");
 		offerPageObjects.verifyRewardFailureMessage();
+	}
+	@Then("^verify response messages of creatives added$")
+	public void verifyResponseForCreative() throws Throwable {
+		offerPageObjects.clickCreateNewOfferButton();
+		offerPageObjects.enterDetailsTabFields("tempRechargeWap");
+		ExcelHelper eh = new ExcelHelper();
+		eh.setExcelFile("offerInputData", "tempRechargeWap");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickAddProductsButton();
+		offerPageObjects.clickAddProductFirstCheckbox();
+		offerPageObjects.clickDialogBoxAddButton();
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.enterCreativeTabDetails(eh);
+		offerPageObjects.clickAddCreativeButton();
+		offerPageObjects.enterSecondCreativeTabDetails(eh);
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.enterTrackTabDetails(eh);
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickRewardAddButton();
+		String responseXpath = "//response-message";
+		jswait.waitUntil(responseXpath);
+		List <WebElement> responseBox = driver.findElements(By.xpath(responseXpath));
+		Assert.assertTrue(responseBox.size()==2, "response message box should be shown for each creative");
 	}
 }
