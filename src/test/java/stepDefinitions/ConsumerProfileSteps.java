@@ -297,4 +297,12 @@ public class ConsumerProfileSteps extends Init{
 	   
    }
    
+   @Then("^verify selected events displayed in the events tab$")
+   public void verifySelectedEventsDisplayedInTheEventsTab() throws Throwable {
+	   
+	   customerObjects.verifySelectedEventsDisplayedInTheEventsTab();
+	   
+	   
+   }
+   
 }

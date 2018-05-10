@@ -311,5 +311,19 @@ Then navigate to customer profile
 Then enter customer number "number"
 Then click on search button
 Then click usage metrics tab
-#Then verify for saving checked attributes
 Then verify charts in usage metric screen
+
+@NX-2806
+@initBrowser @closeBrowser
+Scenario: Verify only the selected event type is getting displayed in the events tab-2806
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click on events tab
+Then verify selected events displayed in the events tab
+#Then choose all events
+#Then click on apply button
+#Then choose all events

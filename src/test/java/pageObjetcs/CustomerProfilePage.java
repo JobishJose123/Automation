@@ -1,5 +1,6 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
@@ -10,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.gargoylesoftware.htmlunit.javascript.host.fetch.Response;
 
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -58,6 +61,9 @@ public class CustomerProfilePage extends Init{
 	private WebElement unsubscribeButton;
 	@FindBy(xpath=".//iron-data-table[@id='consumerSubList']//iron-list[@id='list']/div//data-table-row")
 	private List <WebElement> subscribedToListElements;
+	@FindBy(xpath=".//paper-card//paper-checkbox/div[@id='checkboxLabel']")
+	private List <WebElement> eventNamesList;
+	
 	
 	@FindBy(xpath=".//h4[contains(.,'Acknowledgement Details')]")
 	private WebElement acknowledgementDetails;
@@ -139,6 +145,9 @@ public class CustomerProfilePage extends Init{
 	
 	@FindBy(xpath=".//div[@id='mainContainer']//div[@class='layout horizontal style-scope consumer-events']//paper-checkbox/div[@id='checkboxContainer']//div[@class='checked  style-scope paper-checkbox']")
 	private WebElement eventTypesSelected;
+	
+	@FindBy(xpath=".//div[@id='mainContainer']//div[@class='layout horizontal style-scope consumer-events']//paper-checkbox/div[@id='checkboxContainer']//div[@class='checked  style-scope paper-checkbox']")
+	private List <WebElement> eventTypesSelectedList;
 	
 	@FindBy(xpath=".//paper-card//div[contains(text(),'Daily Trend')]")
 	private WebElement dailyTrend;
@@ -592,7 +601,63 @@ public class CustomerProfilePage extends Init{
 	   assertTrue(weeklyTrendChart.isDisplayed());
 	   assertTrue(monthlyTrend.isDisplayed());
 	   assertTrue(monthlyTrendChart.isDisplayed());
+	      
+   }
+   
+   public void verifySelectedEventsDisplayedInTheEventsTab() throws Throwable {
 	   
+	   jswait.loadClick(SearchEvents90);
+	   if(eventTypesSelectedList.size()>0) {
+		   
+		   for(WebElement type:eventTypesSelectedList) {
+			   
+			   String S=type.getText();
+			   
+			   assertTrue(driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+S+"')]")).isDisplayed());
+			      
+		   }  
+	   } 
+	   
+	   int size=eventTypesSelectedList.size();
+	   
+	    Iterator<WebElement> typeIter = eventTypesList.iterator();
+		WebElement typeElement = typeIter.next();
+		Thread.sleep(2000);
+		
+		for(int i=0;i<=size;i++) {
+		typeElement = typeIter.next();
+		}
+		jswait.loadClick(typeElement);
+		clickApplyButton();
+		Thread.sleep(3000);
+		
+		if(eventTypesSelectedList.size()>0) {
+			   
+			   for(WebElement type:eventTypesSelectedList) {
+				   
+				   String St=type.getText();
+				   assertTrue(driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]")).isDisplayed());
+				      
+			   }  
+		   }
+		
+		/*size=eventTypesSelectedList.size();
+		Iterator<WebElement> nameIter = eventNamesList.iterator();
+		WebElement nameElement = nameIter.next();
+		Thread.sleep(2000);
+		
+		for(int i=0;i<=size;i++) {
+		nameElement = nameIter.next();
+		}
+		String str=nameElement.getText();
+		System.out.println(str);
+		WebElement el=driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+str+"')]"));
+		assertFalse("Set as default checkbox is displaying", el.isDisplayed());
+		//assertTrue(el.isDisplayed());
+		Thread.sleep(3000);*/
+		
+		
+		
 	   
    }
 
