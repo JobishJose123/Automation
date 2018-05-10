@@ -208,10 +208,11 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath="//*[@id='topBar']/paper-button[contains(.,'Cancel')]")
 	private WebElement programtopcancel;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+		
+	@FindBy(xpath="(//form[@id='scheduleForm']//label[text()='Every']/..//*[@id='input'])[2]")	
+	private WebElement programserveonevery;
+	@FindBy(xpath=".//*[@id='checkboxContainer']//following::div[contains(.,'Monday')]/../div[@id='checkboxContainer']")
+	private WebElement checkboxdaysmonday;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -422,9 +423,11 @@ public class ProgramPage extends Init{
 		jswait.loadClick(programofferclick);
 	}
 	
-
+	public void checkboxdaysmonday() throws InterruptedException {
+		jswait.loadClick(checkboxdaysmonday);
+	}
 	
-
+		
 	public void pgmfirstofferselect() throws InterruptedException {
 		jswait.loadClick(pgmfirstofferselect);
 	}
@@ -534,8 +537,17 @@ public class ProgramPage extends Init{
 		jswait.loadClick(prmshcserveonSpecdays);
 		}
 	
+	public void programserveonevery() throws InterruptedException {
+		jswait.loadClick(programserveonevery);
+		}
+	public void programserveoneverydata() throws InterruptedException {
+		wait.until(ExpectedConditions.visibilityOf(programserveonevery)).sendKeys(Keys.NUMPAD1);
+		}
 	
-	
+	public void programdayscheck() throws InterruptedException {
+	wait.until(ExpectedConditions.elementSelectionStateToBe(checkboxdaysmonday,true));
+		System.out.println("checked");
+	}
 	
 	public void editprogramcheck() throws InterruptedException {
 		jswait.checkVisible(editprogramcheck);
