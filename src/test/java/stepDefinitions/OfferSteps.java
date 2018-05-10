@@ -291,7 +291,7 @@ public class OfferSteps extends Init{
 	public void verifyResponseForCreative() throws Throwable {
 		offerPageObjects.clickCreateNewOfferButton();
 		offerPageObjects.enterDetailsTabFields("tempRechargeWap");
-		ExcelHelper eh = new ExcelHelper();
+//		ExcelHelper eh = new ExcelHelper();
 		eh.setExcelFile("offerInputData", "tempRechargeWap");
 		offerPageObjects.clickProceedButton();
 		offerPageObjects.clickAddProductsButton();
@@ -309,5 +309,47 @@ public class OfferSteps extends Init{
 		jswait.waitUntil(responseXpath);
 		List <WebElement> responseBox = driver.findElements(By.xpath(responseXpath));
 		Assert.assertTrue(responseBox.size()==2, "response message box should be shown for each creative");
+	}
+	@Then("^verify label of offer$")
+	public void verifyLabelsOfOfferCatalog() throws Throwable {
+		offerPageObjects.verifyHeaders();
+	}
+	@Then("^duplicate offer \"([^\"]*)\"$")
+	public void duplicateOffer(String sheet) throws Throwable 
+	{
+		eh.setExcelFile("offerInputData", sheet);
+		commonObjects.filterName(eh.getCell(1, 0).toString());
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickDuplicateOption();
+		offerPageObjects.enterOfferName(eh.getCell(1, 0).toString()+"Dupe");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickSaveOfferButton();
+		
+		commonObjects.filterName(eh.getCell(1, 0).toString()+"Dupe");
+		commonObjects.clickOptionsIcon();
+	}
+	@Then("^verify navigation to product field without mandatory fields$")
+	public void verifyNavigationToProductsWithoutMandatoryFields() throws Throwable {
+		offerPageObjects.clickCreateNewOfferButton();
+		eh.setExcelFile("offerInputData", "tempRechargeWap");
+		offerPageObjects.enterOfferName("checkMandatory");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.enterOfferDescription((String) eh.getCell(1, 1));
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.selectOfferType(eh.getCell(1, 2).toString());
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.selectOfferChannel(eh.getCell(1, 3).toString());
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.selectOfferCategory();
+		offerPageObjects.clickProceedButton();
+	}
+	@Then("^verify length of name and description for offer creation$")
+	public void verifylenthOfNameAndDescriptionInOfferCreation() throws Throwable {
+		offerPageObjects.clickCreateNewOfferButton();
+		offerPageObjects.validateNameField();
+		offerPageObjects.validateDescriptionField();
 	}
 }

@@ -151,10 +151,16 @@ public class OfferPageObjects extends Init {
 	 
 	 @FindBy(xpath="//creative-wrapper//define-creative[2]//label[contains(.,'Language')]/..//input")
 	 private WebElement secondCreativeLanguageSelector;
-	// @FindBy(xpath="")
-	// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
+	 @FindBy(xpath="//div[contains(text(),'Offers')]")
+	 private WebElement offersHeader;
+	 @FindBy(xpath="//offer-grid//data-table-cell[contains(.,'Offer Name')]")
+	 private WebElement gridHeaderOfferName;
+	 @FindBy(xpath="//offer-grid//data-table-cell[contains(.,'Type')]")
+	 private WebElement gridHeaderType;
+	 @FindBy(xpath="//offer-grid//data-table-cell[contains(.,'Channel')]")
+	 private WebElement gridHeaderChannel;
+	 @FindBy(xpath="//offer-grid//data-table-cell[contains(.,'Conversion')]")
+	 private WebElement gridHeaderConversion;
 		// @FindBy(xpath="")
 		// private WebElement ;
 		// @FindBy(xpath="")
@@ -830,5 +836,20 @@ public class OfferPageObjects extends Init {
 		String s = commonObjects.getTextFormTextField(failureMessage);
 		Assert.assertTrue(s.length()<=500,"field contains more than 500 chars");
 	}
-	
+	 public void verifyHeaders() throws Throwable {
+		  jswait.checkVisible(offersHeader);
+		  jswait.checkVisible(gridHeaderChannel);
+		  jswait.checkVisible(gridHeaderConversion);
+		  jswait.checkVisible(gridHeaderOfferName);
+		  jswait.checkVisible(gridHeaderType);
+		  clickCreateNewOfferButton();
+		}
+	 public void validateNameField() throws Throwable {
+		 enterOfferName("iuryt ytey uyei yeuy uys ttsghksio");
+		 Assert.assertTrue(commonObjects.getTextFormTextField(offerName).length()==30, "wrong size of name field");
+		}
+	 public void validateDescriptionField() throws Throwable {
+		 enterOfferDescription("iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey ewifdjhijhiewf");
+		 Assert.assertTrue(commonObjects.getTextFormTextField(offerDescription).length()==500, "wrong size of description field");
+		}
 }
