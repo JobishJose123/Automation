@@ -254,3 +254,36 @@ Then navigate to precision marketer
 Then  navigate to offer management 
 Then navigate to offers
 Then verify response messages of creatives added
+
+@initBrowser @closeBrowser @NX-829
+Scenario: Create offer:Offers Display: Verify the label and alignment of the offers window.
+Given login
+Then navigate to precision marketer
+Then  navigate to offer management 
+Then navigate to offers
+Then verify label of offer
+
+@NX-816 @initBrowser @closeBrowser
+  Scenario: Create offer:Offers Display: Verify the Duplicate options of the offer NX-816
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeVoicePush" with product "singleProductPage"
+    Then duplicate offer "rechargeVoicePush"
+    
+    @NX-831 @initBrowser @closeBrowser
+  Scenario: Create offer:Details: Verify that user is not be able to navigate to product tab withoutadding the mandatory details. NX-831
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify navigation to product field without mandatory fields
+    
+    @NX-830 @initBrowser @closeBrowser
+  Scenario: Create offer:Details: Verify the length of the offer name and description of the create new offer "Details" NX-830
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify length of name and description for offer creation
