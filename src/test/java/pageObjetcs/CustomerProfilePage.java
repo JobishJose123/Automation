@@ -41,6 +41,10 @@ public class CustomerProfilePage extends Init{
 	@FindBy(xpath="//label[contains(text(),'Customer Number')]/../../../../../../..//paper-icon-button[1]")
 	private WebElement searchIcon;
 	
+	@FindBy(xpath=".//div[@id='mainContainer']//app-router[@id='router']/app-route//iron-pages//paper-card//iron-icon[@title='Set current attributes as default']")
+	private WebElement saveAttributeButton;
+	
+	
 	@FindBy(xpath="//paper-button[contains(text(),'Search')]")
 	private WebElement searchNumberIcon;
 	
@@ -92,8 +96,11 @@ public class CustomerProfilePage extends Init{
 	private WebElement Attribute;
 	@FindBy(xpath="//paper-button[contains(text(),'Add')]")
 	private WebElement addButton;
-	@FindBy(xpath="//div[@id='mainContainer']//paper-checkbox[@role='checkbox']/div[@id='checkboxContainer']")
+	@FindBy(xpath=".//paper-card[@class='attributes layout vertical style-scope consumer-metrics x-scope paper-card-0']//paper-checkbox[@role='checkbox']/div[@id='checkboxContainer']")
     private WebElement selectedAttributes;
+	
+	@FindBy(xpath=".//paper-card[@class='attributes layout vertical style-scope consumer-metrics x-scope paper-card-0']//paper-checkbox[@role='checkbox']/div[@id='checkboxContainer']")
+    private List <WebElement> selectedAttributesList;
 	
 	@FindBy(xpath="//*[contains(text(),'Include Sub-Partners')]")
 	private WebElement IncludeSubPartners;
@@ -132,6 +139,24 @@ public class CustomerProfilePage extends Init{
 	
 	@FindBy(xpath=".//div[@id='mainContainer']//div[@class='layout horizontal style-scope consumer-events']//paper-checkbox/div[@id='checkboxContainer']//div[@class='checked  style-scope paper-checkbox']")
 	private WebElement eventTypesSelected;
+	
+	@FindBy(xpath=".//paper-card//div[contains(text(),'Daily Trend')]")
+	private WebElement dailyTrend;
+	@FindBy(xpath=".//paper-card//div[contains(text(),'Weekly Trend')]")
+	private WebElement weeklyTrend;
+	@FindBy(xpath=".//paper-card//div[contains(text(),'Monthly Trend')]")
+	private WebElement monthlyTrend;
+	
+	@FindBy(xpath=".//div[@id='lineChart3']")
+	private WebElement monthlyTrendChart;
+	@FindBy(xpath=".//div[@id='lineChart2']")
+	private WebElement weeklyTrendChart;
+	@FindBy(xpath=".//div[@id='lineChart1']")
+	private WebElement dailyTrendChart;
+	
+	
+	
+	
 	
 	
 	
@@ -249,6 +274,13 @@ public class CustomerProfilePage extends Init{
 		jswait.loadClick(addButton);
 	 
  }
+ 
+ public void clickSaveAttributeButton() throws InterruptedException {
+	 	jswait.loadClick(saveAttributeButton);
+	 
+}
+ 
+ 
  
  
  public void checkUncheckAttributeAddButton() throws InterruptedException {
@@ -518,6 +550,50 @@ public class CustomerProfilePage extends Init{
 	   
 	   
    }
-
+   
+   public void verifyForSavingCheckedAttributes() throws Throwable {
+   
+   if(deleteAttributeIconList.size()>0) {
+		
+		for(WebElement deleteButton : deleteAttributeIconList) 		
+			jswait.loadClick(deleteButton);
+		
+				for(int i=0;i<5;i++) {
+		        
+				clickAddAttributeDropdown();
+				clickAttribute();
+				clickAddButton();
+				
+				}
+				
+	  for(WebElement attribute : selectedAttributesList) 		
+		jswait.loadClick(attribute);
+	  
+	    clickSaveAttributeButton();
+	    
+	    clickEventsTab();
+	    clickUsageMetricsTab();
+	    Thread.sleep(2000);
+	    
+	 for(WebElement attribute : selectedAttributesList)	
+		 assertTrue(attribute.isDisplayed());
+		 
+   
+   }
+   
+   }
+   
+   public void verifyCharts() throws Throwable {
+	   
+	   Thread.sleep(2000);
+	   assertTrue(dailyTrend.isDisplayed());
+	   assertTrue(dailyTrendChart.isDisplayed());
+	   assertTrue(weeklyTrend.isDisplayed());
+	   assertTrue(weeklyTrendChart.isDisplayed());
+	   assertTrue(monthlyTrend.isDisplayed());
+	   assertTrue(monthlyTrendChart.isDisplayed());
+	   
+	   
+   }
 
 }

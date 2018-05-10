@@ -287,3 +287,29 @@ Then choose all events
 Then verify filterig event types
 
 
+@NX-2818   
+@initBrowser @closeBrowser
+Scenario: Verify for saving the checked attributes-2818
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click usage metrics tab
+Then verify for saving checked attributes
+
+
+
+@NX-2809  
+@initBrowser @closeBrowser
+Scenario: Verify whether user is able to view daily,weekly & monthly trend of attributes in Usage Metrics tab-2809
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click usage metrics tab
+#Then verify for saving checked attributes
+Then verify charts in usage metric screen

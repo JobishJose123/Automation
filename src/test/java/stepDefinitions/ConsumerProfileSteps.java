@@ -180,7 +180,9 @@ public class ConsumerProfileSteps extends Init{
 	@Then("^click usage metrics tab$")
 	public void clickUsageMetricsTab() throws Exception {
 		
+		
 		customerObjects.clickUsageMetricsTab();
+		Thread.sleep(2000);
 		
 	}
 	
@@ -280,4 +282,19 @@ public class ConsumerProfileSteps extends Init{
 	   customerObjects.verifyFilterigEventTypes();
    
    }
+   
+   @Then("^verify for saving checked attributes$")
+   public void verifyForSavingCheckedAttributes() throws Throwable {
+	   
+	   customerObjects.verifyForSavingCheckedAttributes();
+   
+   }
+   
+   @Then("^verify charts in usage metric screen$")
+   public void verifyCharts() throws Throwable {
+	   
+	   customerObjects.verifyCharts();
+	   
+   }
+   
 }
