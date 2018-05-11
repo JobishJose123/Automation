@@ -67,7 +67,7 @@ public class OfferPageObjects extends Init {
 	private WebElement voiceCreativeOptional3;
 	@FindBy(xpath = "//label[contains(.,'Optional4')]/../input")
 	private WebElement voiceCreativeOptional4;
-	@FindBy(xpath="//paper-item[contains(.,'Edit')]")
+	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement optionsEdit;
 	@FindBy(xpath = "//div[@id='topBar']//paper-button[contains(.,'Cancel')]")
 	private WebElement cancelOfferButton;
@@ -109,15 +109,15 @@ public class OfferPageObjects extends Init {
 	private WebElement offersContextHelp;
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Product')]/../input")
 	private WebElement filterProduct;
-	@FindBy(xpath=".//div[@id='items']/div//data-table-row")
+	@FindBy(xpath = ".//div[@id='items']/div//data-table-row")
 	private WebElement productList;
-	@FindBy(xpath=".//iron-icon[@title='Remove']")
+	@FindBy(xpath = ".//iron-icon[@title='Remove']")
 	private WebElement productRemoveIcon;
 	@FindBy(xpath = "//object[@data='../../context-help/EN/Products.html']")
 	private WebElement productContextHelp;
 	@FindBy(xpath = ".//label[contains(.,'Tracking Source and Rules')]")
-	private List <WebElement> trackingSourceRulesTitle;
-	@FindBy(xpath=".//form[@id='sourceTrackRuleForm']//paper-checkbox[@id='setDefaultTrack']")
+	private List<WebElement> trackingSourceRulesTitle;
+	@FindBy(xpath = ".//form[@id='sourceTrackRuleForm']//paper-checkbox[@id='setDefaultTrack']")
 	private WebElement setAsDefault;
 	@FindBy(xpath = ".//div[@class='layout horizontal style-scope offer-track']//paper-button[contains(.,'Add')]")
 	private WebElement addTrackButton;
@@ -126,57 +126,57 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = ".//div[@class='buttons style-scope offer-track']//paper-button[contains(.,'Yes')]")
 	private WebElement removeTrackYesButton;
 	@FindBy(xpath = ".//paper-card/form//div/div/div[contains(.,'Define Creative')]")
-	private List <WebElement> defineCreativeTitle;
-	@FindBy(xpath=".//paper-checkbox[@id='setDefault']")
+	private List<WebElement> defineCreativeTitle;
+	@FindBy(xpath = ".//paper-checkbox[@id='setDefault']")
 	private WebElement setAsDefaultCreative;
 	@FindBy(xpath = ".//paper-button[contains(.,'Add Creative')]")
 	private WebElement addCreativeButton;
 	@FindBy(xpath = ".//paper-icon-button[@icon='delete']")
 	private WebElement removeCreativeButton;
 	@FindBy(xpath = ".//paper-listbox[@id='langDrop']/paper-item")
-	private List <WebElement> creativeLanguagesList;
-	
-	 @FindBy(xpath="//span[text()='Offer Details']/..")
-	 private WebElement detailsTab;
-	 @FindBy(xpath="//span[text()='Creative']/..")
-	 private WebElement creativeTab;
-	 @FindBy(xpath="//span[text()='Products']/..")
-	 private WebElement productsTab;
-	 @FindBy(xpath="//paper-dialog//iron-list//data-table-checkbox")
-	 private WebElement addProductFirstCheckbox;
-	 @FindBy(xpath="//paper-card[@id='rewardDetails']//paper-button[contains(text(),'Add')]")
-	 private WebElement rewardAddButton;
-	 @FindBy(xpath="//label[contains(text(),'Response on success')]/..//textarea")
-	 private WebElement successMessage;
-	 @FindBy(xpath="//label[contains(text(),'Response on Failure')]/..//textarea")
-	 private WebElement failureMessage;
-	 
-	 @FindBy(xpath="//creative-wrapper//define-creative[2]//label[contains(.,'Language')]/..//input")
-	 private WebElement secondCreativeLanguageSelector;
-	 @FindBy(xpath="//div[contains(text(),'Offers')]")
-	 private WebElement offersHeader;
-	 @FindBy(xpath="//offer-grid//data-table-cell[contains(.,'Offer Name')]")
-	 private WebElement gridHeaderOfferName;
-	 @FindBy(xpath="//offer-grid//data-table-cell[contains(.,'Type')]")
-	 private WebElement gridHeaderType;
-	 @FindBy(xpath="//offer-grid//data-table-cell[contains(.,'Channel')]")
-	 private WebElement gridHeaderChannel;
-	 @FindBy(xpath="//offer-grid//data-table-cell[contains(.,'Conversion')]")
-	 private WebElement gridHeaderConversion;
-		 @FindBy(xpath="//select-product//iron-list//data-table-row")
-		 private List<WebElement> selectedProducts;
-		 @FindBy(xpath="//paper-dialog//iron-list/div/div[2]//data-table-row//data-table-checkbox")
-		 private WebElement addProductSecondCheckbox;
-		 @FindBy(xpath="//offer-products//form/div[2]//paper-button[text()='Add']")
-		 private WebElement addProductButtonAfterOneProduct;
-		 @FindBy(xpath="//*[@d='M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z']/../../..")
-		 private WebElement mapVariableIcon;
-		 @FindBy(xpath="//iron-data-table[@id='variablesList']//iron-list//data-table-row")
-		 private WebElement mapVariableFirstVariable;
-		 @FindBy(xpath="//paper-button[text()='OK']")
-		 private WebElement mapVariableOkButton;
-	 @FindBy(xpath="//iron-data-table[@id='variablesList']//div[@id='header']//data-table-row[contains(.,'Name') and contains(.,'Field') and contains(.,'Limit') and contains(.,'Default')]")
-	 private WebElement mapVariableDialogHeader;
+	private List<WebElement> creativeLanguagesList;
+
+	@FindBy(xpath = "//span[text()='Offer Details']/..")
+	private WebElement detailsTab;
+	@FindBy(xpath = "//span[text()='Creative']/..")
+	private WebElement creativeTab;
+	@FindBy(xpath = "//span[text()='Products']/..")
+	private WebElement productsTab;
+	@FindBy(xpath = "//paper-dialog//iron-list//data-table-checkbox")
+	private WebElement addProductFirstCheckbox;
+	@FindBy(xpath = "//paper-card[@id='rewardDetails']//paper-button[contains(text(),'Add')]")
+	private WebElement rewardAddButton;
+	@FindBy(xpath = "//label[contains(text(),'Response on success')]/..//textarea")
+	private WebElement successMessage;
+	@FindBy(xpath = "//label[contains(text(),'Response on Failure')]/..//textarea")
+	private WebElement failureMessage;
+
+	@FindBy(xpath = "//creative-wrapper//define-creative[2]//label[contains(.,'Language')]/..//input")
+	private WebElement secondCreativeLanguageSelector;
+	@FindBy(xpath = "//div[contains(text(),'Offers')]")
+	private WebElement offersHeader;
+	@FindBy(xpath = "//offer-grid//data-table-cell[contains(.,'Offer Name')]")
+	private WebElement gridHeaderOfferName;
+	@FindBy(xpath = "//offer-grid//data-table-cell[contains(.,'Type')]")
+	private WebElement gridHeaderType;
+	@FindBy(xpath = "//offer-grid//data-table-cell[contains(.,'Channel')]")
+	private WebElement gridHeaderChannel;
+	@FindBy(xpath = "//offer-grid//data-table-cell[contains(.,'Conversion')]")
+	private WebElement gridHeaderConversion;
+	@FindBy(xpath = "//select-product//iron-list//data-table-row")
+	private List<WebElement> selectedProducts;
+	@FindBy(xpath = "//paper-dialog//iron-list/div/div[2]//data-table-row//data-table-checkbox")
+	private WebElement addProductSecondCheckbox;
+	@FindBy(xpath = "//offer-products//form/div[2]//paper-button[text()='Add']")
+	private WebElement addProductButtonAfterOneProduct;
+	@FindBy(xpath = "//*[@d='M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z']/../../..")
+	private WebElement mapVariableIcon;
+	@FindBy(xpath = "//iron-data-table[@id='variablesList']//iron-list//data-table-row")
+	private WebElement mapVariableFirstVariable;
+	@FindBy(xpath = "//paper-button[text()='OK']")
+	private WebElement mapVariableOkButton;
+	@FindBy(xpath = "//iron-data-table[@id='variablesList']//div[@id='header']//data-table-row[contains(.,'Name') and contains(.,'Field') and contains(.,'Limit') and contains(.,'Default')]")
+	private WebElement mapVariableDialogHeader;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -199,62 +199,67 @@ public class OfferPageObjects extends Init {
 	// private WebElement ;
 	// @FindBy(xpath="")
 	// private WebElement ;
-	 
-	 
 
 	// offer page functions
 	public void navigateToOffer() throws InterruptedException {
 		jswait.loadClick(offerButton);
 	}
+
 	public void clickRemoveTrackYesButton() throws InterruptedException {
 		jswait.loadClick(removeTrackYesButton);
 	}
+
 	public void clickAddProductAfterOneProduct() throws InterruptedException {
 		jswait.loadClick(addProductButtonAfterOneProduct);
 	}
+
 	public void clickMapVariableOkButton() throws InterruptedException {
 		jswait.loadClick(mapVariableOkButton);
 	}
+
 	public void clickRewardAddButton() throws InterruptedException {
 		jswait.loadClick(rewardAddButton);
 	}
+
 	public void clickMapVariableIcon() throws InterruptedException {
 		jswait.loadClick(mapVariableIcon);
 	}
+
 	public int getSelectedProductCount() throws InterruptedException {
 		return selectedProducts.size();
 	}
+
 	public void clickMapVariableFirstVariable() throws InterruptedException {
 		jswait.loadClick(mapVariableFirstVariable);
 	}
+
 	public void clickAddProductSecondCheckbox() throws InterruptedException {
 		jswait.loadClick(addProductSecondCheckbox);
 	}
-	
+
 	public void selectAllLanguagesCreativeTab() throws Throwable {
-		  
-		  //clickCreativeLanguageField();
-		  
-		  if(creativeLanguagesList.size()>0) {
-			  
-			  for(WebElement language : creativeLanguagesList)  {
-					
-				    jswait.loadClick(language);
-				    clickCreativeLanguageField();
-				   
-			  }
-			  
-			  
-		  }	  
-	  }
-	
+
+		// clickCreativeLanguageField();
+
+		if (creativeLanguagesList.size() > 0) {
+
+			for (WebElement language : creativeLanguagesList) {
+
+				jswait.loadClick(language);
+				clickCreativeLanguageField();
+
+			}
+
+		}
+	}
+
 	public void selectAllCreativeLanguages() throws Throwable {
 		clickCreativeLanguageField();
 		selectAllLanguagesCreativeTab();
 	}
-	
+
 	public void chooseAllLanguagesCeativeTab(String sheet, String productSheet) throws Throwable {
-		 
+
 		Thread.sleep(4000);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		Actions actions = new Actions(driver);
@@ -262,26 +267,22 @@ public class OfferPageObjects extends Init {
 		ExcelHelper prodcutFile = new ExcelHelper();
 		prodcutFile.setExcelFile("productInputData", productSheet);
 		eh.setExcelFile("offerInputData", sheet);
-        
+
 		enterDetailsTabFieldsForTrack(sheet);
-		
+
 		clickProceedButton();
 		// ******************Products tab*****************:
 		enterProductTabFields(productSheet);
 		clickProceedButton();
-	
-		
-		selectAllCreativeLanguages();
-		
 
-		
-	
+		selectAllCreativeLanguages();
+
 	}
-	
+
 	public void ChooseAllLanguagesCreativeTab(String sheet, String productSheet) throws Throwable {
 		clickCreateNewOfferButton();
 		chooseAllLanguagesCeativeTab(sheet, productSheet);
-		//clickSaveOfferButton();
+		// clickSaveOfferButton();
 	}
 
 	public void checkOfferContextHelp() throws InterruptedException {
@@ -295,27 +296,30 @@ public class OfferPageObjects extends Init {
 	public void enterOfferName(String name) throws InterruptedException {
 		jswait.loadSendKeys(offerName, name);
 	}
+
 	public void clickRemoveTrackRuleButton() throws InterruptedException {
-		
+
 		jswait.loadClick(removeTrackRuleButton);
 	}
+
 	public void clickAddTrackButton() throws InterruptedException {
 		jswait.loadClick(addTrackButton);
 	}
-	
+
 	public void enterDetailsTabFieldsForTrack(String sheet) throws InterruptedException, IOException {
 		eh.setExcelFile("offerInputData", sheet);
-		
-		String name= "Test Offer Name";
-		
+
+		String name = "Test Offer Name";
+
 		enterOfferName(name);
 		enterOfferDescription((String) eh.getCell(1, 1));
 		selectOfferType(eh.getCell(1, 2).toString());
 		selectOfferChannel(eh.getCell(1, 3).toString());
 		selectOfferCategory();
 	}
+
 	public void enterOfferDetailsCreativeTab(String sheet, String productSheet) throws Throwable {
-		 
+
 		Thread.sleep(4000);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		Actions actions = new Actions(driver);
@@ -323,15 +327,14 @@ public class OfferPageObjects extends Init {
 		ExcelHelper prodcutFile = new ExcelHelper();
 		prodcutFile.setExcelFile("productInputData", productSheet);
 		eh.setExcelFile("offerInputData", sheet);
-        
+
 		enterDetailsTabFieldsForTrack(sheet);
-		
+
 		clickProceedButton();
 		// ******************Products tab*****************:
 		enterProductTabFields(productSheet);
 		clickProceedButton();
-	
-		
+
 		selectCreativeLanguageEnglish();
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
 			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
@@ -341,41 +344,39 @@ public class OfferPageObjects extends Init {
 		if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 
-		
-	
 	}
+
 	public void clickAddCreativeButton() throws InterruptedException {
 		jswait.loadClick(addCreativeButton);
 	}
-  public void clickRemoveCreativeButton() throws InterruptedException {
-		
+
+	public void clickRemoveCreativeButton() throws InterruptedException {
+
 		jswait.loadClick(removeCreativeButton);
 	}
-	
-  public void verifySetAsDefaultCheckboxinCreativeTab() throws Throwable {
-		
-		if(defineCreativeTitle.size()==1)
+
+	public void verifySetAsDefaultCheckboxinCreativeTab() throws Throwable {
+
+		if (defineCreativeTitle.size() == 1)
 			assertFalse("Set as default checkbox is displaying", setAsDefaultCreative.isDisplayed());
-		
+
 		clickAddCreativeButton();
 		assertTrue("Set as default checkbox is not displaying", setAsDefaultCreative.isDisplayed());
-		//assertTrue("Set as default checkbox is not selected", setAsDefaultCheckbox.isSelected());
-		//Thread.sleep(4000);
+		// assertTrue("Set as default checkbox is not selected",
+		// setAsDefaultCheckbox.isSelected());
+		// Thread.sleep(4000);
 		clickRemoveCreativeButton();
 		Thread.sleep(4000);
-		//clickRemoveTrackYesButton();
+		// clickRemoveTrackYesButton();
 		assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
 	}
-  public void createOfferAndVerifyOptionalFields(String sheet, String productSheet) throws Throwable {
+
+	public void createOfferAndVerifyOptionalFields(String sheet, String productSheet) throws Throwable {
 		clickCreateNewOfferButton();
 		enterOfferDetailsFromSheetAndVerifyOptionalFields(sheet, productSheet);
 		clickSaveOfferButton();
 	}
-	
-	
 
-	
-	
 	public void enterOfferDetailsFromSheetAndVerifyOptionalFields(String sheet, String productSheet) throws Throwable {
 		Thread.sleep(4000);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -400,7 +401,9 @@ public class OfferPageObjects extends Init {
 		if (eh.getCell(1, 3).toString().contains("SMS"))
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		if (eh.getCell(1, 3).toString().contains("Voice"))
-			enterVoiceCreativeWithOptionalFields(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString(), eh.getCell(1, 12).toString(), eh.getCell(1, 13).toString(), eh.getCell(1, 14).toString(), eh.getCell(1, 15).toString());
+			enterVoiceCreativeWithOptionalFields(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString(),
+					eh.getCell(1, 12).toString(), eh.getCell(1, 13).toString(), eh.getCell(1, 14).toString(),
+					eh.getCell(1, 15).toString());
 
 		clickProceedButton();
 		Thread.sleep(3000);
@@ -419,9 +422,9 @@ public class OfferPageObjects extends Init {
 		}
 
 	}
-	
-	
-	public void enterVoiceCreativeWithOptionalFields(String subject, String reference, String optional1, String optional2, String optional3, String optional4) throws InterruptedException {
+
+	public void enterVoiceCreativeWithOptionalFields(String subject, String reference, String optional1,
+			String optional2, String optional3, String optional4) throws InterruptedException {
 		jswait.loadSendKeys(voiceCreativeSubject, subject);
 		jswait.loadSendKeys(voiceCreativeReference, reference);
 		jswait.loadSendKeys(voiceCreativeOptional1, optional1);
@@ -429,27 +432,30 @@ public class OfferPageObjects extends Init {
 		jswait.loadSendKeys(voiceCreativeOptional3, optional3);
 		jswait.loadSendKeys(voiceCreativeOptional4, optional4);
 	}
-	
+
 	public void createOfferUptoCreativeTab(String sheet, String productSheet) throws Throwable {
 		clickCreateNewOfferButton();
 		enterOfferDetailsCreativeTab(sheet, productSheet);
-		//clickSaveOfferButton();
+		// clickSaveOfferButton();
 	}
-   public void verifySetAsDefaultCheckbox() throws Throwable {
-		
-		if(trackingSourceRulesTitle.size()==1)
+
+	public void verifySetAsDefaultCheckbox() throws Throwable {
+
+		if (trackingSourceRulesTitle.size() == 1)
 			assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
-		
+
 		clickAddTrackButton();
 		assertTrue("Set as default checkbox is not displaying", setAsDefault.isDisplayed());
-		//assertTrue("Set as default checkbox is not selected", setAsDefaultCheckbox.isSelected());
+		// assertTrue("Set as default checkbox is not selected",
+		// setAsDefaultCheckbox.isSelected());
 		clickRemoveTrackRuleButton();
 		clickRemoveTrackYesButton();
 		assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
-	
+
 	}
+
 	public void enterOfferDetailsTrackTab(String sheet, String productSheet) throws Throwable {
-		 
+
 		Thread.sleep(4000);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		Actions actions = new Actions(driver);
@@ -457,15 +463,14 @@ public class OfferPageObjects extends Init {
 		ExcelHelper prodcutFile = new ExcelHelper();
 		prodcutFile.setExcelFile("productInputData", productSheet);
 		eh.setExcelFile("offerInputData", sheet);
-        
+
 		enterDetailsTabFieldsForTrack(sheet);
-		
+
 		clickProceedButton();
 		// ******************Products tab*****************:
 		enterProductTabFields(productSheet);
 		clickProceedButton();
-	
-		
+
 		selectCreativeLanguageEnglish();
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
 			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
@@ -483,13 +488,14 @@ public class OfferPageObjects extends Init {
 			clickTrackSourceSelector();
 			selectTrackSource("track");
 		}
-		//clickProceedButton();
-	
+		// clickProceedButton();
+
 	}
+
 	public void createOfferUptoTrackTab(String sheet, String productSheet) throws Throwable {
 		clickCreateNewOfferButton();
 		enterOfferDetailsTrackTab(sheet, productSheet);
-		//clickSaveOfferButton();
+		// clickSaveOfferButton();
 	}
 
 	public void filterUsingProduct(String name) throws InterruptedException {
@@ -507,6 +513,7 @@ public class OfferPageObjects extends Init {
 	public void clickCancelOfferButton() throws InterruptedException {
 		jswait.loadClick(cancelOfferButton);
 	}
+
 	public void checkProductContextHelp() throws InterruptedException {
 		commonObjects.clickHelpIcon();
 		driver.switchTo().frame(productContextHelp);
@@ -546,36 +553,34 @@ public class OfferPageObjects extends Init {
 	public void clickCreativeLanguageField() throws InterruptedException {
 		jswait.loadClick(creativeLanguage);
 	}
+
 	public void clickSecondCreativeLanguageField() throws InterruptedException {
 		jswait.loadClick(secondCreativeLanguageSelector);
 	}
-	
+
 	public void clickProductRemoveIcon() throws InterruptedException {
 		jswait.loadClick(productRemoveIcon);
 	}
-	
+
 	public void removeProduct(String sheet) throws Throwable {
 		clickProceedButton();
-		
+
 		clickProductRemoveIcon();
-		/*clickProceedButton();
-		clickProceedButton();
-		clickProceedButton();
-		clickSaveOfferButton();
-		eh.setExcelFile("offerInputData",sheet);
-		String name = (String) eh.getCell(1, 0);
-		filterWorkaround(name);
-		commonObjects.clickOptionsIcon();
-		clickEditOffer();
-		clickProceedButton();*/
-		
+		/*
+		 * clickProceedButton(); clickProceedButton(); clickProceedButton();
+		 * clickSaveOfferButton(); eh.setExcelFile("offerInputData",sheet); String name
+		 * = (String) eh.getCell(1, 0); filterWorkaround(name);
+		 * commonObjects.clickOptionsIcon(); clickEditOffer(); clickProceedButton();
+		 */
+
 		assertFalse("Product removed successfully", productList.isDisplayed());
-			
+
 	}
 
 	public void clickCreativeLanguageEnglishSelect() throws InterruptedException {
 		jswait.loadClick(creativeLanguageEnglishSelect);
 	}
+
 	public void clickSecondCreativeLanguageSpanishSelect() throws InterruptedException {
 		jswait.loadClick(secondCreativeLanguageSpanishSelect);
 	}
@@ -621,9 +626,11 @@ public class OfferPageObjects extends Init {
 	public void enterSuccessMessage(String s) throws InterruptedException {
 		jswait.loadSendKeys(successMessage, s);
 	}
+
 	public void enterFailureMessage(String f) throws InterruptedException {
 		jswait.loadSendKeys(failureMessage, f);
 	}
+
 	public void clickOfferTypeField() throws InterruptedException {
 		jswait.loadClick(offerTypeField);
 	}
@@ -654,6 +661,7 @@ public class OfferPageObjects extends Init {
 		clickCreativeLanguageField();
 		clickCreativeLanguageEnglishSelect();
 	}
+
 	public void selectSecodnCreativeLanguageSpanish() throws InterruptedException, IOException {
 		clickSecondCreativeLanguageField();
 		clickSecondCreativeLanguageSpanishSelect();
@@ -663,6 +671,7 @@ public class OfferPageObjects extends Init {
 		jswait.loadSendKeys(CreativeTitle, title);
 		jswait.loadSendKeys(wapCreativeUrl, url);
 	}
+
 	public void enterSecondWapCreative(String title, String url) throws InterruptedException {
 		jswait.loadSendKeys(secondCreativeTitle, title);
 		jswait.loadSendKeys(secondWapCreativeUrl, url);
@@ -672,6 +681,7 @@ public class OfferPageObjects extends Init {
 		jswait.loadSendKeys(voiceCreativeSubject, subject);
 		jswait.loadSendKeys(voiceCreativeReference, reference);
 	}
+
 	public void enterSecondVoiceCreative(String subject, String reference) throws InterruptedException {
 		jswait.loadSendKeys(secondVoiceCreativeSubject, subject);
 		jswait.loadSendKeys(secondVoiceCreativeReference, reference);
@@ -683,6 +693,7 @@ public class OfferPageObjects extends Init {
 		jswait.loadSendKeys(smsCreativeDetails, details);
 		;
 	}
+
 	public void enterSecondSmsCreative(String title, String details) throws InterruptedException {
 		jswait.loadSendKeys(secondCreativeTitle, title);
 		;
@@ -703,21 +714,23 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
 		clickDialogBoxAddButton();
 	}
+
 	public void clickEditOffer() throws InterruptedException {
 		jswait.loadClick(optionsEdit);
 	}
+
 	public void filterWorkaround(String name) throws InterruptedException {
-		commonObjects.clickFilterIcon();                            //issue in filter
-		commonObjects.clickFilterResetButton();						//issue in filter
+		commonObjects.clickFilterIcon(); // issue in filter
+		commonObjects.clickFilterResetButton(); // issue in filter
 		commonObjects.filterName(name);
 	}
-	
+
 	public void chooseOffer(String sheet) throws Throwable {
 
-		eh.setExcelFile("offerInputData",sheet);
+		eh.setExcelFile("offerInputData", sheet);
 		String name = (String) eh.getCell(1, 0);
 		filterWorkaround(name);
-		
+
 	}
 
 	public void checkAddProductsCheckBox() throws InterruptedException {
@@ -798,12 +811,14 @@ public class OfferPageObjects extends Init {
 		}
 
 	}
+
 	public void enterTrackTabDetails(ExcelHelper eh) throws InterruptedException {
 		if (!eh.getCell(1, 2).toString().contains("Informational")) {
 			clickTrackSourceSelector();
 			selectTrackSource("track");
 		}
 	}
+
 	public void enterCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {
 		selectCreativeLanguageEnglish();
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
@@ -815,6 +830,7 @@ public class OfferPageObjects extends Init {
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 
 	}
+
 	public void enterSecondCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {
 		selectSecodnCreativeLanguageSpanish();
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
@@ -832,89 +848,112 @@ public class OfferPageObjects extends Init {
 		enterOfferDetailsFromSheet(sheet, productSheet);
 		clickSaveOfferButton();
 	}
+
 	public String getDetailsTabColour() {
 		String colour = detailsTab.getCssValue("background-color");
 		System.out.println(colour);
 		return colour;
 	}
+
 	public String getCreativeTabColour() {
 		String colour = creativeTab.getCssValue("background-color");
 		System.out.println(colour);
 		return colour;
 	}
+
 	public String getProductsTabColour() {
 		String colour = productsTab.getCssValue("background-color");
 		System.out.println(colour);
 		return colour;
 	}
+
 	public String getCheckBoxStatus() {
 		return addProductFirstCheckbox.getAttribute("checked");
 	}
+
 	public void clickAddProductFirstCheckbox() throws InterruptedException {
 		jswait.loadClick(addProductFirstCheckbox);
 	}
+
 	public void verifyCheckboxOfCreative() throws InterruptedException {
 		jswait.loadClick(addCreativeButton);
 		jswait.waitForLoadMask();
-		List<WebElement> checkboxes = driver.findElements(By.xpath("//div[contains(@class,'defineCreative')]//paper-checkbox"));
+		List<WebElement> checkboxes = driver
+				.findElements(By.xpath("//div[contains(@class,'defineCreative')]//paper-checkbox"));
 		checkboxes.get(0).getAttribute("checked");
 		try {
 			checkboxes.get(1).getAttribute("checked");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			checkboxes.get(1).click();
 			checkboxes.get(1).getAttribute("checked");
 			try {
 				checkboxes.get(0).getAttribute("checked");
 				Assert.assertTrue(false, "error in checked status");
-			}catch(Exception e1) {
+			} catch (Exception e1) {
 			}
 		}
-		
+
 	}
+
 	public void verifyRewardSucessMessage() throws InterruptedException, UnsupportedFlavorException, IOException {
 		String s = commonObjects.getTextFormTextField(successMessage);
-		Assert.assertTrue(s.length()<=500,"field contains more than 500 chars");
+		Assert.assertTrue(s.length() <= 500, "field contains more than 500 chars");
 	}
+
 	public void verifyRewardFailureMessage() throws InterruptedException, UnsupportedFlavorException, IOException {
 		String s = commonObjects.getTextFormTextField(failureMessage);
-		Assert.assertTrue(s.length()<=500,"field contains more than 500 chars");
+		Assert.assertTrue(s.length() <= 500, "field contains more than 500 chars");
 	}
-	 public void verifyHeaders() throws Throwable {
-		  jswait.checkVisible(offersHeader);
-		  jswait.checkVisible(gridHeaderChannel);
-		  jswait.checkVisible(gridHeaderConversion);
-		  jswait.checkVisible(gridHeaderOfferName);
-		  jswait.checkVisible(gridHeaderType);
-		  clickCreateNewOfferButton();
-		}
-	 public void addFirstProduct() throws Throwable {
-		 clickAddProductsButton();
-		 clickAddProductFirstCheckbox();
-		 clickDialogBoxAddButton();
-		}
-	 public void validateNameField() throws Throwable {
-		 enterOfferName("iuryt ytey uyei yeuy uys ttsghksio");
-		 Assert.assertTrue(commonObjects.getTextFormTextField(offerName).length()==30, "wrong size of name field");
-		}
-	 public void verifyMapVariableHeader() throws Throwable {
-		 jswait.checkVisible(mapVariableDialogHeader);
-		}
-	 public void validateDescriptionField() throws Throwable {
-		 enterOfferDescription("iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey ewifdjhijhiewf");
-		 Assert.assertTrue(commonObjects.getTextFormTextField(offerDescription).length()==500, "wrong size of description field");
-		}
-	 public void verifyLengthOfCreativeTitleAndDetails() throws Throwable {
-		 jswait.loadSendKeys(CreativeTitle, "123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435");
-		 System.out.println("length:"+commonObjects.getTextFormTextField(CreativeTitle).length());
-		 Assert.assertTrue(commonObjects.getTextFormTextField(CreativeTitle).length()==30, "wrong character limit for creative title");
-		 jswait.loadSendKeys(smsCreativeDetails, "123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435");
-		 Assert.assertTrue(commonObjects.getTextFormTextField(smsCreativeDetails).length()==500, "wrong character limit for creative details");
-		}
-	 public void verifySpecialCharacterOfCreativeTitleAndDetails() throws Throwable {
-		 jswait.loadSendKeys(CreativeTitle, "123+_+}{:\\\">?<+_P:\\\"4!@#$%^&*");
-		 System.out.println("length:"+commonObjects.getTextFormTextField(CreativeTitle).length());
-		 Assert.assertTrue(commonObjects.getTextFormTextField(CreativeTitle).length()==29, "wrong character limit for creative title");
-		 jswait.loadSendKeys(smsCreativeDetails, "123+_+}{:\\\">?<+_P:\\\"4!@#$%^&*");
-		 Assert.assertTrue(commonObjects.getTextFormTextField(smsCreativeDetails).length()==29, "wrong character limit for creative details");
-		}
+
+	public void verifyHeaders() throws Throwable {
+		jswait.checkVisible(offersHeader);
+		jswait.checkVisible(gridHeaderChannel);
+		jswait.checkVisible(gridHeaderConversion);
+		jswait.checkVisible(gridHeaderOfferName);
+		jswait.checkVisible(gridHeaderType);
+		clickCreateNewOfferButton();
+	}
+
+	public void addFirstProduct() throws Throwable {
+		clickAddProductsButton();
+		clickAddProductFirstCheckbox();
+		clickDialogBoxAddButton();
+	}
+
+	public void validateNameField() throws Throwable {
+		enterOfferName("iuryt ytey uyei yeuy uys ttsghksio");
+		Assert.assertTrue(commonObjects.getTextFormTextField(offerName).length() == 30, "wrong size of name field");
+	}
+
+	public void verifyMapVariableHeader() throws Throwable {
+		jswait.checkVisible(mapVariableDialogHeader);
+	}
+
+	public void validateDescriptionField() throws Throwable {
+		enterOfferDescription(
+				"iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey ewifdjhijhiewf");
+		Assert.assertTrue(commonObjects.getTextFormTextField(offerDescription).length() == 500,
+				"wrong size of description field");
+	}
+
+	public void verifyLengthOfCreativeTitleAndDetails() throws Throwable {
+		jswait.loadSendKeys(CreativeTitle, "123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435");
+		System.out.println("length:" + commonObjects.getTextFormTextField(CreativeTitle).length());
+		Assert.assertTrue(commonObjects.getTextFormTextField(CreativeTitle).length() == 30,
+				"wrong character limit for creative title");
+		jswait.loadSendKeys(smsCreativeDetails,
+				"123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435");
+		Assert.assertTrue(commonObjects.getTextFormTextField(smsCreativeDetails).length() == 500,
+				"wrong character limit for creative details");
+	}
+
+	public void verifySpecialCharacterOfCreativeTitleAndDetails() throws Throwable {
+		jswait.loadSendKeys(CreativeTitle, "123+_+}{:\\\">?<+_P:\\\"4!@#$%^&*");
+		System.out.println("length:" + commonObjects.getTextFormTextField(CreativeTitle).length());
+		Assert.assertTrue(commonObjects.getTextFormTextField(CreativeTitle).length() == 29,
+				"wrong character limit for creative title");
+		jswait.loadSendKeys(smsCreativeDetails, "123+_+}{:\\\">?<+_P:\\\"4!@#$%^&*");
+		Assert.assertTrue(commonObjects.getTextFormTextField(smsCreativeDetails).length() == 29,
+				"wrong character limit for creative details");
+	}
 }
