@@ -1,6 +1,5 @@
 package pageObjetcs;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
@@ -8,11 +7,8 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import com.gargoylesoftware.htmlunit.javascript.host.fetch.Response;
 
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -683,14 +679,26 @@ public class CustomerProfilePage extends Init{
 		Thread.sleep(3000);
 		System.out.println("St= "+St);
 		Thread.sleep(3000); 
-		WebElement el= driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]"));
-		el.isDisplayed();
 		Exception eventDisplay= new Exception("Event Should not be displayed");
-		if(el.isDisplayed()==true) {
+		
+		try {
+			
+			assertTrue(driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]")).isDisplayed());
+			
+			throw eventDisplay;
+			
+		}
+		catch (Exception e) {
+			
+		}
+		
+		
+		
+		/*if(el.isDisplayed()==true) {
 			throw eventDisplay;
 		}
 		else
-			System.out.println("Event not displayed");
+			System.out.println("Event not displayed");*/
 		//assertFalse("Event Should not be displayed", driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]")).isDisplayed());
 				      
 		
