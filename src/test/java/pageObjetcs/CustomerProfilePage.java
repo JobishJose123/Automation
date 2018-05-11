@@ -667,31 +667,33 @@ public class CustomerProfilePage extends Init{
 		   }  
 	   } 
 	   
-	   /*int size=eventTypesSelectedList.size();
+	   int size=eventTypesSelectedList.size();
+	   System.out.println("Size= "+size);
 	   
-	    Iterator<WebElement> typeIter = eventTypesList.iterator();
+	    Iterator<WebElement> typeIter = eventTypesSelectedList.iterator();
 		WebElement typeElement = typeIter.next();
 		Thread.sleep(2000);
 		
-		for(int i=0;i<=size;i++) {
+		for(int i=0;i<size-1;i++) {
 		typeElement = typeIter.next();
 		}
+		String St=typeElement.getText();
 		jswait.loadClick(typeElement);
 		clickApplyButton();
 		Thread.sleep(3000);
-		
-		if(eventTypesSelectedList.size()>0) {
-			   
-			   for(WebElement type:eventTypesSelectedList) {
-				   
-				   String St=type.getText();
-				   System.out.println("St= "+St);
-				   Thread.sleep(3000); 
-				   assertTrue(driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]")).isDisplayed());
+		System.out.println("St= "+St);
+		Thread.sleep(3000); 
+		WebElement el= driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]"));
+		el.isDisplayed();
+		Exception eventDisplay= new Exception("Event Should not be displayed");
+		if(el.isDisplayed()==true) {
+			throw eventDisplay;
+		}
+		else
+			System.out.println("Event not displayed");
+		//assertFalse("Event Should not be displayed", driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]")).isDisplayed());
 				      
-			   }  
-		   }
-		*/
+		
 		/*size=eventTypesSelectedList.size();
 		Iterator<WebElement> nameIter = eventNamesList.iterator();
 		WebElement nameElement = nameIter.next();
