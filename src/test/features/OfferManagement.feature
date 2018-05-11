@@ -40,6 +40,11 @@ Then create single product from sheet "singleProductPage"
   @NX-833
   Scenario: Create offer:Details: Verify the product search using product name NX-833
     Then check previous step and pass this
+        Then pass next scenario based on this step
+
+  @NX-886
+  Scenario: Create offer: Creative: Verify selecting the language from the Language dropdown. NX-886
+    Then check previous step and pass this
 
   @NX-1353 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating offers with Wap Push channel NX-1353
@@ -214,6 +219,11 @@ Then navigate to precision marketer
 Then  navigate to offer management 
 Then navigate to offers
 Then verify tab colours
+Then pass next scenario based on this step
+
+  @NX-883 
+  Scenario: Create offer:Products: Verify the color of the completed tab after navigating to the new tab NX-883
+    Then check previous step and pass this
 
 @NX-3487 @initBrowser @closeBrowser
     Scenario: Verify the additional optional fields in offer with voice push as the channel-3487
@@ -287,3 +297,75 @@ Then verify label of offer
     Then navigate to offer management
     Then navigate to offers
     Then verify length of name and description for offer creation
+    
+     @NX-846 @initBrowser @closeBrowser
+  Scenario: Create offer: Products :Verify by clicking on the cancel option in the product search result NX-846
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify cancel button in product search of offer
+    
+    @NX-852 @initBrowser @closeBrowser
+  Scenario: Create offer:Products: Verify clicking on the add button in the selected product display screen NX-852
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify adding product after adding one
+    
+    @NX-880 @initBrowser @closeBrowser
+  Scenario: Create offer:Products: Verify the previous selection is not getting deleted after adding the new product NX-880
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify adding product after adding one
+    
+     @NX-882 @initBrowser @closeBrowser
+  Scenario: Create offer:Products: Verify clicking on the proceed button NX-882
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify proceed button after adding product
+    
+    @NX-884 @initBrowser @closeBrowser
+  Scenario: Create offer:Products: Verify clicking on the proceed button NX-884
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify creative  tab colours
+    
+    @NX-889 @initBrowser @closeBrowser
+  Scenario: Create offer: Creative: Verify clicking on the add button in the creative tab.. NX-889
+  Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify adding dynamic variable in creative tab
+    
+    @NX-890 @initBrowser @closeBrowser
+  Scenario: Create offer: Creative: Verify the details displayed for the variables added. NX-890
+  Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify map variable list headers
+    
+     @NX-891 @initBrowser @closeBrowser
+  Scenario: Create offer: Creative: Verify the length of title and details field. NX-891
+  Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify length of creative title and details
+
+  @NX-892 @initBrowser @closeBrowser
+  Scenario: Create offer: Creative: Verify adding special characters in Title and Details field NX-892
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify special characters of creative title and details

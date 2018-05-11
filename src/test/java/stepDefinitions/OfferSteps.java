@@ -352,4 +352,110 @@ public class OfferSteps extends Init{
 		offerPageObjects.validateNameField();
 		offerPageObjects.validateDescriptionField();
 	}
+	@Then("^verify cancel button in product search of offer$")
+	public void verifyCancelInProductSearch() throws Throwable {
+		offerPageObjects.clickCreateNewOfferButton();
+		offerPageObjects.enterDetailsTabFields("tempRechargeWap");
+		ExcelHelper eh = new ExcelHelper();
+		eh.setExcelFile("offerInputData", "tempRechargeWap");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickAddProductsButton();//clickOfferAddButton();
+		commonObjects.clickFilterIcon();
+		commonObjects.enterFilterFormname("noProductWithThis");
+		commonObjects.clickFilterCancelButton();
+		offerPageObjects.clickAddProductFirstCheckbox();
+		offerPageObjects.clickDialogBoxAddButton();
+	}
+	@Then("^verify adding product after adding one$")
+	public void verifyaddingProductAfterAddingOne() throws Throwable {
+		verifyCancelInProductSearch();
+		Assert.assertTrue(offerPageObjects.getSelectedProductCount()==1, "product not selected");
+		offerPageObjects.clickAddProductAfterOneProduct();
+		offerPageObjects.clickAddProductSecondCheckbox();
+		offerPageObjects.clickDialogBoxAddButton();
+		Assert.assertTrue(offerPageObjects.getSelectedProductCount()==2, "product not selected");
+	}
+	@Then("^verify proceed button after adding product$")
+	public void verifyProceedAfteraddingProduct() throws Throwable {
+		offerPageObjects.clickCreateNewOfferButton();
+		offerPageObjects.enterDetailsTabFields("tempRechargeSms");
+		ExcelHelper eh = new ExcelHelper();
+		eh.setExcelFile("offerInputData", "tempRechargeSms");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.addFirstProduct();
+		offerPageObjects.clickProceedButton();
+		try {
+			offerPageObjects.addFirstProduct();
+			Assert.assertTrue(false,"add button displayed after proceed");
+		}catch(Exception e) {
+			
+		}
+	}
+	@Then("^verify creative  tab colours$")
+	public void verifyCreativeTabColours() throws Throwable {
+		ExcelHelper eh = new ExcelHelper();
+		eh.setExcelFile("offerInputData", "tempRechargeSms");
+		offerPageObjects.clickCreateNewOfferButton();
+		offerPageObjects.enterDetailsTabFields("tempRechargeSms");
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.addFirstProduct();
+		offerPageObjects.clickProceedButton();
+		offerPageObjects.enterCreativeTabDetails(eh);
+		Assert.assertTrue(offerPageObjects.getCreativeTabColour().contains("rgba(255, 102, 50, 1)"), "current selection colour not orange");		
+		offerPageObjects.clickProceedButton();
+		Thread.sleep(4000);
+		Assert.assertTrue(offerPageObjects.getCreativeTabColour().contains("rgba(84, 205, 152, 1)"), "current selection colour not green");
+			
+	}
+	@Then("^verify adding dynamic variable in creative tab$")
+	public void verifyDynamicVariableInCreativeTabColours() throws Throwable {
+		proceedToCreativeTab();
+		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.clickMapVariableFirstVariable();
+		offerPageObjects.clickMapVariableOkButton();
+		offerPageObjects.clickProceedButton();
+	}
+	public void proceedToProductTab() throws Throwable {
+		eh.setExcelFile("offerInputData", "tempRechargeSms");
+		offerPageObjects.clickCreateNewOfferButton();
+		offerPageObjects.enterDetailsTabFields("tempRechargeSms");
+		offerPageObjects.clickProceedButton();
+	}
+	public void proceedToCreativeTab() throws Throwable {
+		proceedToProductTab();
+		offerPageObjects.addFirstProduct();
+		offerPageObjects.clickProceedButton();
+	}
+	public void proceedToTrackTab() throws Throwable {
+		eh.setExcelFile("offerInputData", "tempRechargeSms");
+		offerPageObjects.enterCreativeTabDetails(eh);
+		offerPageObjects.clickProceedButton();
+	}
+	@Then("^verify map variable list headers$")
+	public void verifyMapVariableHeaders() throws Throwable {
+		proceedToCreativeTab();
+		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.verifyMapVariableHeader();
+	}
+	@Then("^verify length of creative title and details$")
+	public void verifyLengthOfCreativeTitleAndDetails() throws Throwable {
+		proceedToCreativeTab();
+		eh.setExcelFile("offerInputData", "tempRechargeSms");
+		offerPageObjects.enterCreativeTabDetails(eh);
+		offerPageObjects.verifyLengthOfCreativeTitleAndDetails();
+		offerPageObjects.clickProceedButton();
+		Thread.sleep(3000);
+		offerPageObjects.enterTrackTabDetails(eh);
+	}
+	@Then("^verify special characters of creative title and details$")
+	public void verifySpecialCharactersOfCreativeTitleAndDetails() throws Throwable {
+		proceedToCreativeTab();
+		eh.setExcelFile("offerInputData", "tempRechargeSms");
+		offerPageObjects.enterCreativeTabDetails(eh);
+		offerPageObjects.verifySpecialCharacterOfCreativeTitleAndDetails();
+		offerPageObjects.clickProceedButton();
+		Thread.sleep(3000);
+		offerPageObjects.enterTrackTabDetails(eh);
+	}
 }

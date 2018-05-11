@@ -138,6 +138,8 @@ public class OfferPageObjects extends Init {
 	
 	 @FindBy(xpath="//span[text()='Offer Details']/..")
 	 private WebElement detailsTab;
+	 @FindBy(xpath="//span[text()='Creative']/..")
+	 private WebElement creativeTab;
 	 @FindBy(xpath="//span[text()='Products']/..")
 	 private WebElement productsTab;
 	 @FindBy(xpath="//paper-dialog//iron-list//data-table-checkbox")
@@ -161,24 +163,42 @@ public class OfferPageObjects extends Init {
 	 private WebElement gridHeaderChannel;
 	 @FindBy(xpath="//offer-grid//data-table-cell[contains(.,'Conversion')]")
 	 private WebElement gridHeaderConversion;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
+		 @FindBy(xpath="//select-product//iron-list//data-table-row")
+		 private List<WebElement> selectedProducts;
+		 @FindBy(xpath="//paper-dialog//iron-list/div/div[2]//data-table-row//data-table-checkbox")
+		 private WebElement addProductSecondCheckbox;
+		 @FindBy(xpath="//offer-products//form/div[2]//paper-button[text()='Add']")
+		 private WebElement addProductButtonAfterOneProduct;
+		 @FindBy(xpath="//*[@d='M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z']/../../..")
+		 private WebElement mapVariableIcon;
+		 @FindBy(xpath="//iron-data-table[@id='variablesList']//iron-list//data-table-row")
+		 private WebElement mapVariableFirstVariable;
+		 @FindBy(xpath="//paper-button[text()='OK']")
+		 private WebElement mapVariableOkButton;
+	 @FindBy(xpath="//iron-data-table[@id='variablesList']//div[@id='header']//data-table-row[contains(.,'Name') and contains(.,'Field') and contains(.,'Limit') and contains(.,'Default')]")
+	 private WebElement mapVariableDialogHeader;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
+	// @FindBy(xpath="")
+	// private WebElement ;
 	 
 	 
 
@@ -189,8 +209,26 @@ public class OfferPageObjects extends Init {
 	public void clickRemoveTrackYesButton() throws InterruptedException {
 		jswait.loadClick(removeTrackYesButton);
 	}
+	public void clickAddProductAfterOneProduct() throws InterruptedException {
+		jswait.loadClick(addProductButtonAfterOneProduct);
+	}
+	public void clickMapVariableOkButton() throws InterruptedException {
+		jswait.loadClick(mapVariableOkButton);
+	}
 	public void clickRewardAddButton() throws InterruptedException {
 		jswait.loadClick(rewardAddButton);
+	}
+	public void clickMapVariableIcon() throws InterruptedException {
+		jswait.loadClick(mapVariableIcon);
+	}
+	public int getSelectedProductCount() throws InterruptedException {
+		return selectedProducts.size();
+	}
+	public void clickMapVariableFirstVariable() throws InterruptedException {
+		jswait.loadClick(mapVariableFirstVariable);
+	}
+	public void clickAddProductSecondCheckbox() throws InterruptedException {
+		jswait.loadClick(addProductSecondCheckbox);
 	}
 	
 	public void selectAllLanguagesCreativeTab() throws Throwable {
@@ -799,6 +837,11 @@ public class OfferPageObjects extends Init {
 		System.out.println(colour);
 		return colour;
 	}
+	public String getCreativeTabColour() {
+		String colour = creativeTab.getCssValue("background-color");
+		System.out.println(colour);
+		return colour;
+	}
 	public String getProductsTabColour() {
 		String colour = productsTab.getCssValue("background-color");
 		System.out.println(colour);
@@ -844,12 +887,34 @@ public class OfferPageObjects extends Init {
 		  jswait.checkVisible(gridHeaderType);
 		  clickCreateNewOfferButton();
 		}
+	 public void addFirstProduct() throws Throwable {
+		 clickAddProductsButton();
+		 clickAddProductFirstCheckbox();
+		 clickDialogBoxAddButton();
+		}
 	 public void validateNameField() throws Throwable {
 		 enterOfferName("iuryt ytey uyei yeuy uys ttsghksio");
 		 Assert.assertTrue(commonObjects.getTextFormTextField(offerName).length()==30, "wrong size of name field");
 		}
+	 public void verifyMapVariableHeader() throws Throwable {
+		 jswait.checkVisible(mapVariableDialogHeader);
+		}
 	 public void validateDescriptionField() throws Throwable {
 		 enterOfferDescription("iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey uyei yeuy uys ttsghksio iuryt ytey ewifdjhijhiewf");
 		 Assert.assertTrue(commonObjects.getTextFormTextField(offerDescription).length()==500, "wrong size of description field");
+		}
+	 public void verifyLengthOfCreativeTitleAndDetails() throws Throwable {
+		 jswait.loadSendKeys(CreativeTitle, "123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435");
+		 System.out.println("length:"+commonObjects.getTextFormTextField(CreativeTitle).length());
+		 Assert.assertTrue(commonObjects.getTextFormTextField(CreativeTitle).length()==30, "wrong character limit for creative title");
+		 jswait.loadSendKeys(smsCreativeDetails, "123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435 123+_+}{:\">?<+_P:\"4!@#$%^&*ihui435");
+		 Assert.assertTrue(commonObjects.getTextFormTextField(smsCreativeDetails).length()==500, "wrong character limit for creative details");
+		}
+	 public void verifySpecialCharacterOfCreativeTitleAndDetails() throws Throwable {
+		 jswait.loadSendKeys(CreativeTitle, "123+_+}{:\\\">?<+_P:\\\"4!@#$%^&*");
+		 System.out.println("length:"+commonObjects.getTextFormTextField(CreativeTitle).length());
+		 Assert.assertTrue(commonObjects.getTextFormTextField(CreativeTitle).length()==29, "wrong character limit for creative title");
+		 jswait.loadSendKeys(smsCreativeDetails, "123+_+}{:\\\">?<+_P:\\\"4!@#$%^&*");
+		 Assert.assertTrue(commonObjects.getTextFormTextField(smsCreativeDetails).length()==29, "wrong character limit for creative details");
 		}
 }
