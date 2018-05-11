@@ -324,6 +324,43 @@ Then enter customer number "number"
 Then click on search button
 Then click on events tab
 Then verify selected events displayed in the events tab
-#Then choose all events
-#Then click on apply button
-#Then choose all events
+
+@NX-2800
+@initBrowser @closeBrowser
+Scenario: Verify whether data changes when time parameter is changed-2800
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click on events tab
+Then verify events row
+
+
+
+#@NX-2823   
+#@initBrowser @closeBrowser
+#Scenario: Verify whether Customer Support tab shows the sent time,conversion time,reward time and status of reward-2823
+#Given login
+#Then navigate to precision marketer
+#Then navigate to reports
+#Then navigate to customer profile
+#Then enter customer number "number"
+#Then click on search button
+#Then click customer support tab
+#Then verify events row in customer support events time details
+
+
+
+@NX-2798
+@initBrowser @closeBrowser
+Scenario: Verify by default 3 event types are shown as selected in Events tab-2798
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click on events tab
+Then verify event types selected by default

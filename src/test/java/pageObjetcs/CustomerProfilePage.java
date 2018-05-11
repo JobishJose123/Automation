@@ -1,6 +1,5 @@
 package pageObjetcs;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
@@ -8,11 +7,8 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import com.gargoylesoftware.htmlunit.javascript.host.fetch.Response;
 
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -137,7 +133,7 @@ public class CustomerProfilePage extends Init{
 	
 	@FindBy(xpath="//div[@val='support']//iron-list[@id='list']//data-table-row")
 	private WebElement customerSupportEventsTable;
-	@FindBy(xpath="//div[@val='support']//iron-list[@id='list']//data-table-row")
+	@FindBy(xpath=".//iron-pages//div[@val='support']//iron-list[@id='list']/div/div/data-table-row")
 	private List <WebElement> customerSupportEventsTableList;
 	
 	@FindBy(xpath="//div[@id='mainContainer']//div[@class='layout horizontal style-scope consumer-events']//paper-checkbox/div[@id='checkboxContainer']")
@@ -146,7 +142,8 @@ public class CustomerProfilePage extends Init{
 	@FindBy(xpath=".//div[@id='mainContainer']//div[@class='layout horizontal style-scope consumer-events']//paper-checkbox/div[@id='checkboxContainer']//div[@class='checked  style-scope paper-checkbox']")
 	private WebElement eventTypesSelected;
 	
-	@FindBy(xpath=".//div[@id='mainContainer']//div[@class='layout horizontal style-scope consumer-events']//paper-checkbox/div[@id='checkboxContainer']//div[@class='checked  style-scope paper-checkbox']")
+	//div[@id='mainContainer']//div[@class='layout horizontal style-scope consumer-events']//paper-checkbox/div[@id='checkboxContainer']//div[@class='checked  style-scope paper-checkbox']
+	@FindBy(xpath=".//div[@class='checkboxes layout flex style-scope consumer-events']//paper-checkbox[@aria-checked='true']")
 	private List <WebElement> eventTypesSelectedList;
 	
 	@FindBy(xpath=".//paper-card//div[contains(text(),'Daily Trend')]")
@@ -462,6 +459,8 @@ public class CustomerProfilePage extends Init{
 			   jswait.loadClick(event);
 			   Thread.sleep(4000);
 			  if(customerSupportEventsTableList.size()>0) {
+				  int size= customerSupportEventsTableList.size();
+				  System.out.println(size);
 				 
 				  Boolean s= customerSupportEventsTable.isDisplayed(); 
 				  System.out.println("Table displayed: "+s);
@@ -473,7 +472,7 @@ public class CustomerProfilePage extends Init{
 			  }
 			  else {
 				  
-				  System.out.println("Tab is empty");
+		      		  System.out.println("Tab is empty");
 				  
 			  }
 			   /*try {
@@ -497,7 +496,16 @@ public class CustomerProfilePage extends Init{
 	  
 	   }
  
+ public void verifyCustomerSupportEventsTimeDetails() throws Exception {
+	  
+	        jswait.loadClick(customerSupportSearchEvents90);
+	        
+	  
+	   }
+ 
 
+ 
+ 
  
  public void clickYesButton() throws InterruptedException {
  	
@@ -560,6 +568,39 @@ public class CustomerProfilePage extends Init{
 	   
    }
    
+   public void verifyEventTypesSelectedByDefault() throws Throwable {
+	   
+	   
+	   Exception sizeException=new Exception("No.of events selected by default is not 3");
+	   Exception typeException=new Exception("Some other event is selected by default");
+	   
+	  // verifySelectedEventType();
+	   int size=eventTypesSelectedList.size();
+	   if(size!=3)
+		   throw sizeException;
+	   
+     if(eventTypesSelectedList.size()>0) {
+		   
+		   for(WebElement type:eventTypesSelectedList) {
+			   
+			   String S=type.getText();
+			   
+			   if(S.equals("Acknowledged"))
+				   System.out.println("Event type="+S);
+			   else if(S.equals("Conversion"))
+				   System.out.println("Event type="+S);
+			   else if(S.equals("Fulfillment Success"))
+				   System.out.println("Event type="+S);
+			   else
+				    throw typeException;
+			   
+			   
+			   
+			      
+		   }  
+	   } 
+   }
+   
    public void verifyForSavingCheckedAttributes() throws Throwable {
    
    if(deleteAttributeIconList.size()>0) {
@@ -607,11 +648,15 @@ public class CustomerProfilePage extends Init{
    public void verifySelectedEventsDisplayedInTheEventsTab() throws Throwable {
 	   
 	   jswait.loadClick(SearchEvents90);
+	  int size1= eventTypesSelectedList.size();
+	  System.out.println("Size1= "+size1);
 	   if(eventTypesSelectedList.size()>0) {
 		   
 		   for(WebElement type:eventTypesSelectedList) {
 			   
 			   String S=type.getText();
+			   System.out.println("S= "+S);
+			   Thread.sleep(3000);
 			   
 			   assertTrue(driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+S+"')]")).isDisplayed());
 			      
@@ -619,27 +664,43 @@ public class CustomerProfilePage extends Init{
 	   } 
 	   
 	   int size=eventTypesSelectedList.size();
+	   System.out.println("Size= "+size);
 	   
-	    Iterator<WebElement> typeIter = eventTypesList.iterator();
+	    Iterator<WebElement> typeIter = eventTypesSelectedList.iterator();
 		WebElement typeElement = typeIter.next();
 		Thread.sleep(2000);
 		
-		for(int i=0;i<=size;i++) {
+		for(int i=0;i<size-1;i++) {
 		typeElement = typeIter.next();
 		}
+		String St=typeElement.getText();
 		jswait.loadClick(typeElement);
 		clickApplyButton();
 		Thread.sleep(3000);
+		System.out.println("St= "+St);
+		Thread.sleep(3000); 
+		Exception eventDisplay= new Exception("Event Should not be displayed");
 		
-		if(eventTypesSelectedList.size()>0) {
-			   
-			   for(WebElement type:eventTypesSelectedList) {
-				   
-				   String St=type.getText();
-				   assertTrue(driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]")).isDisplayed());
+		try {
+			
+			assertTrue(driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]")).isDisplayed());
+			
+			throw eventDisplay;
+			
+		}
+		catch (Exception e) {
+			
+		}
+		
+		
+		
+		/*if(el.isDisplayed()==true) {
+			throw eventDisplay;
+		}
+		else
+			System.out.println("Event not displayed");*/
+		//assertFalse("Event Should not be displayed", driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+St+"')]")).isDisplayed());
 				      
-			   }  
-		   }
 		
 		/*size=eventTypesSelectedList.size();
 		Iterator<WebElement> nameIter = eventNamesList.iterator();

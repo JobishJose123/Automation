@@ -251,6 +251,14 @@ public class ConsumerProfileSteps extends Init{
 		customerObjects.verifyCustomerSupportEventsRow();
 		
 	}
+   
+   @Then("^verify events row in customer support events time details$")
+	
+	public void verifyCustomerSupportEventsTimeDetails() throws Exception {
+		
+		customerObjects.verifyCustomerSupportEventsTimeDetails();
+		
+	}
 	
  
    
@@ -280,6 +288,13 @@ public class ConsumerProfileSteps extends Init{
    public void verifyFilterigEventTypes() throws Exception {
 	   
 	   customerObjects.verifyFilterigEventTypes();
+   
+   }
+   
+   @Then("^verify event types selected by default$")
+   public void verifyEventTypesSelectedByDefault() throws Throwable {
+	   
+	   customerObjects.verifyEventTypesSelectedByDefault();
    
    }
    
