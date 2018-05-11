@@ -535,6 +535,170 @@ System.out.println(editname+"program has edited successfully");
 		System.out.println("deleted");
 	}
 	
+	@Then("^Verify delete TP entry on touchpoint tab$")
+	public void deletetouchpointprograms() throws Throwable {
+		
+		Thread.sleep(9000);
+		commonObjects.filterName("autoprogram");
+		Thread.sleep(5000);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		Thread.sleep(5000);
+		String editname=programPage.editProgramDetails("programedit");
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.Programtouchpointduplicate();
+		programPage.cancelTouchPointToProgram();
+		Thread.sleep(5000);
+		programPage.touchpointoptions();
+		programPage.touchpointdelete(); 
+		programPage.touchpointpgmdeletecheck();
+		
+	}
+	
+	@Then("^edit details schedule Serve on Specific Days \"([^\"]*)\"$")
+	public void verify_edit_program_page_serve_on_Specificdays(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+   		String name = (String) programExcel.getCell(1, 0);
+  		
+   		Thread.sleep(9000);
+		commonObjects.filterName(name);
+		Thread.sleep(5000);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		Thread.sleep(5000);
+		String editname=programPage.editProgramDetails("programedit");
+		//programPage.clickCreateProgramAddTouchpointButton();
+		//programPage.addTouchPointToProgramedit();
+		programPage.clickPorogramProceedButton();
+		//programPage.programschstart();
+		//programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		Thread.sleep(2000);
+		programPage.programschserveon(); 
+		programPage.prmshcserveonSpecdays();
+		programPage.programserveonevery();
+		programPage.programserveoneverydata();
+		programPage.checkboxdaysmonday();
+		programPage.programsavebutton();
+		Thread.sleep(2000);
+		programPage.programconfirmSaveyes();
+		Thread.sleep(5000);
+		
+	}
+	
+	@Then("^edit details from specific days to all days \"([^\"]*)\"$")
+	public void verify_edit_program_page_serve_on_alldays(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+   		String name = (String) programExcel.getCell(1, 0);
+  		
+   		Thread.sleep(9000);
+		commonObjects.filterName(name);
+		Thread.sleep(5000);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		Thread.sleep(5000);
+		String editname=programPage.editProgramDetails("programedit");
+		programPage.clickPorogramProceedButton();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		Thread.sleep(2000);
+		programPage.programschserveon(); 
+		programPage.prmshcserveonSpecdays();
+		Thread.sleep(2000);
+		programPage.programserveonevery();
+		programPage.programserveoneverydata();
+		programPage.checkboxdaysmonday();
+		programPage.programsavebutton();
+		programPage.programconfirmSaveyes();
+		Thread.sleep(9000);
+		commonObjects.filterName(editname);
+		Thread.sleep(5000);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		Thread.sleep(5000);
+		programPage.editProgramDetails("programedit");
+		programPage.clickPorogramProceedButton();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		Thread.sleep(2000);
+		programPage.programschserveon(); 
+		programPage.prmshcserveonalldays();
+		programPage.programsavebutton();
+		Thread.sleep(2000);
+		programPage.programconfirmSaveyes();
+		
+	}
+	
+	
+	@Then("^verify create program page with refreshon daily serve on Specific days \"([^\"]*)\"$")
+	public void verify_create_program_pagewith_refreshon_daily_serveon_Specific_days(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		Thread.sleep(2000);
+		programPage.programschserveon(); 
+		programPage.prmshcserveonSpecdays();
+		programPage.programserveonevery();
+		programPage.programserveoneverydata();
+		programPage.checkboxdaysmonday();
+		Thread.sleep(2000);
+		programPage.programsavebutton();
+		programPage.programconfirmSaveyes();
+		System.out.println("program has created successfully");
+		
+	}
 	
 	
 	

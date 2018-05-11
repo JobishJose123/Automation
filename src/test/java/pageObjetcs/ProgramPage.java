@@ -213,12 +213,12 @@ public class ProgramPage extends Init{
 	private WebElement programserveonevery;
 	@FindBy(xpath=".//*[@id='checkboxContainer']//following::div[contains(.,'Monday')]/../div[@id='checkboxContainer']")
 	private WebElement checkboxdaysmonday;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="(.//*[@id='items']//*[@id='icon'])[1]")
+	private WebElement touchpointoptions ;
+	@FindBy(xpath="(.//*[@id='contentWrapper']//paper-item[contains(.,'Delete')])[1]")
+	private WebElement touchpointdelete;
+	@FindBy(xpath=".//*[@id='item92']/div[1]/data-table-cell[contains(.,'SMS')]")
+	private WebElement touchpointpgmdeletecheck ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -404,14 +404,9 @@ public class ProgramPage extends Init{
 		addTouchPointSelectSmsResponseChannel();
 		jswait.loadClick(addTouchpointSaveButton);
 		//boolean check =jswait.checkVisible(warningmessage);
-		try {
 		jswait.checkVisible(warningmessage);
-		    		    
-		  } catch (InterruptedException exception) {
-		    exception.printStackTrace();
-		    throw exception;
-		  }
-		}
+			    
+				}
 	
 	
 	public void Programsfirstrowbtn() throws InterruptedException {
@@ -552,10 +547,20 @@ public class ProgramPage extends Init{
 	public void editprogramcheck() throws InterruptedException {
 		jswait.checkVisible(editprogramcheck);
 		}
+	public void touchpointoptions() throws InterruptedException {
+		jswait.loadClick(touchpointoptions);
+		}
+	
+	
 
 	public void programTouchpointtab() throws InterruptedException {
 		jswait.loadClick(programTouchpointtab);
 		}
+	
+	public void touchpointdelete() throws InterruptedException {
+		jswait.loadClick(touchpointdelete);
+		}
+	
 	
 	public void checktouchpoints() throws Exception{
 		jswait.checkVisible(warningmessageaddtouchpoint);
@@ -575,6 +580,21 @@ public void checkproceedtouchpoints() throws Exception{
 		  
 	   	 }
 	}
+
+
+public void touchpointpgmdeletecheck() throws Exception{
+	
+	try {
+	jswait.checkVisible(touchpointpgmdeletecheck);
+	Assert.assertTrue("touchpoint deleted worked", false);
+	throw Exception;
+  } catch (Exception e){
+	  System.out.println("user Exception");
+	  
+   	 }
+}
+
+
 
 
 	public void cancelTouchPointToProgram() throws InterruptedException {

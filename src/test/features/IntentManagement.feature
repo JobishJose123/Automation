@@ -260,3 +260,36 @@ Then navigate to intent management
 Then navigate to programs
 Then verify create program page "programdetails"
 Then verify delete a program "programdetails"
+@NX-733
+@initBrowser 
+Scenario: Verify duplicate TP entry on touchpoint tab
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page "programdetails"
+Then Verify delete TP entry on touchpoint tab
+
+@NX-4817
+@initBrowser 
+Scenario: Verify editing the option from All Days to Specific Days
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page "programdetails"
+Then edit details schedule Serve on Specific Days "programdetails"
+
+@NX-4818
+@initBrowser 
+Scenario: Verify editing the option from All Days to Specific Days
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page "programdetails"
+Then edit details from specific days to all days "programdetails"
+@NX-4815
+@initBrowser 
+Scenario: verify create program page with refreshon daily serve on Specific days
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page with refreshon daily serve on Specific days "programdetails"
