@@ -228,6 +228,38 @@ public class OfferPageObjects extends Init {
 	 private WebElement deleteRuleConfirmNo;
 	 @FindBy(xpath="//form[@id='trackRuleForm']//paper-input[@label='Rule Name']//input")
 	 private WebElement editTrackRuleName;
+	 @FindBy(xpath="//offer-track/div//paper-button[text()='Add']")
+	 private WebElement addTrackSourceButton;
+	 @FindBy(xpath="//form[@id='trackForm']/div[2]//iron-icon")
+	 private WebElement secondTrackSourceDeleteButton;
+	 @FindBy(xpath="//paper-dialog[@id='confirmation']//paper-button[text()='Yes']")
+	 private WebElement trackSourceDeleteConfirmYes;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -240,6 +272,21 @@ public class OfferPageObjects extends Init {
 //	 private WebElement ;
 	 
 //	Track Tab in Offer Creation	functions
+	 public void clickAddTrackSourceButton() throws InterruptedException {
+			jswait.loadClick(addTrackSourceButton);
+		}
+	 public void clicktrackSourceDeleteConfirmYes() throws InterruptedException {
+			jswait.loadClick(trackSourceDeleteConfirmYes);
+		}
+	 public void clickSecondTrackSourceDeleteButton() throws InterruptedException {
+			jswait.loadClick(secondTrackSourceDeleteButton);
+		}
+	 public int getNumberOfTrackSources() throws InterruptedException {
+		 	Thread.sleep(3000);
+		 	List <WebElement> trackSources = driver.findElements(By.xpath("//label[.='Tracking Source and Rules']"));
+			return trackSources.size();
+		}
+	
 	 public void clickAddRuleButton() throws InterruptedException {
 			jswait.loadClick(addRuleButton);
 		}
@@ -304,6 +351,7 @@ public class OfferPageObjects extends Init {
 		}
 	 public void checkRuleCreation(String ruleName) throws Exception {
 		 jswait.waitUntil("//span[text()='"+ruleName+"']");
+		 jswait.waitUntil("//span[contains(.,'Age is greater than 18, Age is greater than 19')]");
 	 }
 	 public void createTrackRuleCondition() throws InterruptedException {
 		 clickAddTrackingRuleAddConditionButton();
@@ -347,6 +395,7 @@ public class OfferPageObjects extends Init {
 			selectPriority("3");
 			createTrackRuleCondition();
 			clickaddTrackingRuleSaveButton();
+			createSecondTrackRuleCondition();
 			checkRuleCreation("secondRule");
 	 }
 	 

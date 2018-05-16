@@ -391,6 +391,21 @@ Feature: Test suite on Offer creation
   @NX-902
   Scenario: Create offer: Track : Verify adding multiple condition for a rule name NX-902
     Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-899
+  Scenario: Create offer: Track : Verify the PopUp screen for adding rule NX-899
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-905
+  Scenario: Create offer: Track : Verify saving the added tracking rule NX-905
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-908
+  Scenario: Create offer: Track : Verify the Track tab details after saving the Tracking rule NX-908
+    Then check previous step and pass this
 
   @NX-903
   Scenario: Create offer: Track : Verify the validations for Rule name and value textbox in Add Tracking Rule window NX-903
@@ -435,3 +450,17 @@ Feature: Test suite on Offer creation
      @NX-904 @closeBrowser
   Scenario: Create offer: Track : Verify deleting the added tracking rule. NX-904
     Then verify deleting added tracking rule condition
+    
+    @NX-932 @initBrowser
+  Scenario: Create offer: Track : Verify adding multiple Track source. NX-932
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify adding multiple track source
+    Then pass next scenario based on this step
+
+  @NX-931
+  Scenario:Create offer: Track : Verify deleting the added Tracking source. NX-931
+    Then check previous step and pass this
+    

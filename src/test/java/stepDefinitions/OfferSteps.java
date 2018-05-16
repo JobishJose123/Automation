@@ -573,10 +573,22 @@ public class OfferSteps extends Init {
 		}catch(Exception e) {
 			
 		}
+		offerPageObjects.selectAddTrackingRuleConditionParameterAge();
 	}
 	@Then("^verify deleting added tracking rule condition$")
 	public void verifyDeletingTrackingRuleCondition() throws Throwable {
 		offerPageObjects.clickAddTrackingRuleConditionDeleteButton();
-		offerPageObjects.createSecondDefaultTrackingRuleCondition();
+		offerPageObjects.createSecondTrackRuleCondition();
+	}
+	@Then("^verify adding multiple track source$")
+	public void verifyAddingMultipleTrackSource() throws Throwable {
+		proceedToTrackTab();
+		offerPageObjects.enterTrackTabDetails(eh);
+		Assert.assertTrue(offerPageObjects.getNumberOfTrackSources()==1, "issue in current count of track sources");
+		offerPageObjects.clickAddTrackSourceButton();
+		Assert.assertTrue(offerPageObjects.getNumberOfTrackSources()==2, "issue in current count of track sources");
+		offerPageObjects.clickSecondTrackSourceDeleteButton();
+		offerPageObjects.clicktrackSourceDeleteConfirmYes();
+		Assert.assertTrue(offerPageObjects.getNumberOfTrackSources()==1, "issue in current count of track sources");
 	}
 }
