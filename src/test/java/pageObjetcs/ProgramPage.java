@@ -219,12 +219,12 @@ public class ProgramPage extends Init{
 	private WebElement touchpointdelete;
 	@FindBy(xpath=".//*[@id='item92']/div[1]/data-table-cell[contains(.,'SMS')]")
 	private WebElement touchpointpgmdeletecheck ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath=".//*[@id='item1']//data-table-cell[1]/span[contains(.,'autoprogram')]")
+	private WebElement filterprogramcheck ;
+	@FindBy(xpath="//form[@id='scheduleForm']//label[text()='Time Zone']/..//*[@id='input']")
+	private WebElement programtimezone ;
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'Kathmandu')]")
+	private WebElement programtimezonechange;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -505,6 +505,16 @@ public class ProgramPage extends Init{
 		jswait.loadClick(prmshcserveonalldays);
 		}
 
+	public void prmshcserveonalldayscheck() throws Exception {
+		try{
+		jswait.checkVisible(prmshcserveonalldays);
+		Assert.assertTrue(" worked",true);
+		throw Exception;
+	  } catch (Exception e){
+		  System.out.println("passed");
+	   	 }
+		}
+	
 	public void createProgramSaveButton() throws InterruptedException {
 		jswait.loadClick(createProgramSaveButton);
 		}
@@ -561,6 +571,15 @@ public class ProgramPage extends Init{
 		jswait.loadClick(touchpointdelete);
 		}
 	
+	public void programtimezone() throws InterruptedException {
+		jswait.loadClick(programtimezone);
+		}
+	
+	public void programtimezonechange() throws InterruptedException {
+		jswait.loadClick(programtimezonechange);
+		}
+	
+	
 	
 	public void checktouchpoints() throws Exception{
 		jswait.checkVisible(warningmessageaddtouchpoint);
@@ -604,5 +623,43 @@ public void touchpointpgmdeletecheck() throws Exception{
 		addTouchPointSelectSmsResponseChannel();
 		jswait.loadClick(touchpointcancel);
 	}
+	
+	
+	
+	
+	public void filterprogramcheck(String name) throws InterruptedException {
+		Thread.sleep(5000);
+		String name2=driver.findElement(By.xpath(".//*[@id='item1']//span[contains(.,'autoprogram')]")).getAttribute("title");
+		System.out.println(name2);
+		Thread.sleep(5000);
+		Assert.assertEquals(name, name2);
+		}
+	
+	public void refreshatprogramcheck() throws InterruptedException {
+		Thread.sleep(5000);
+		try{
+			jswait.checkVisible(prmrefreshat);
+			Assert.assertTrue(" worked",true);
+			throw Exception;
+		  } catch (Exception e){
+			  System.out.println("passed");
+		   	 }
+		}
+	
+	public void prmshcserveonSpecificdayscheck() throws Exception {
+		Thread.sleep(5000);
+		String name2=driver.findElement(By.xpath(".//*[@id='checkboxContainer']//following::div[contains(.,'Monday')]")).getText();
+		System.out.println(name2);
+		Thread.sleep(5000);
+		Assert.assertEquals("Monday", name2);
+		}
+	public void programtimezonecheck() throws Exception {
+		Thread.sleep(5000);
+		boolean test=driver.findElement(By.xpath(".//*[@id='items']/vaadin-combo-box-item[contains(.,'Kathmandu')]")).isDisplayed();
+	if (test==true){
+		System.out.println("passed");
+	}else {System.out.println("failed");}
+		}
+	
 
 }

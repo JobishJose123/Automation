@@ -701,5 +701,183 @@ System.out.println(editname+"program has edited successfully");
 	}
 	
 	
+	@Then("^verify filter for programs \"([^\"]*)\"$")
+	public void verify_filter_for_programs(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+   		String name = (String) programExcel.getCell(1, 0);
+   		Thread.sleep(9000);
+		commonObjects.filterName(name);
+		Thread.sleep(5000);
+		programPage.filterprogramcheck(name);
+	
+		}
+	
+	
+	
+	@Then("^verify create program page Serve On All days option \"([^\"]*)\"$")
+	public void verify_create_program_page_Serve_On_All_days_option(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		programPage.programschserveon(); 
+		programPage.prmshcserveonalldays();
+		programPage.prmshcserveonalldayscheck();
+		
+	
+		}
+	
+	
+	@Then("^verify create program page Refresh at option \"([^\"]*)\"$")
+	public void verify_create_program_page_Refresh_at_option(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		programPage.refreshatprogramcheck();
+		}
+	
+	
+	@Then("^create program page verify edit option \"([^\"]*)\"$")
+	public void create_program_page_verify_edit_option(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+	
+	 	
+	Thread.sleep(9000);
+	commonObjects.filterName("autoprogram");
+	Thread.sleep(5000);
+	commonObjects.clickOptionsIcon();
+	commonObjects.clickEditOption();
+	Thread.sleep(5000);
+	}
+	
+	@Then("^verify create program page Serve On Specific days option \"([^\"]*)\"$")
+	public void verify_create_program_page_Serve_On_Specific_days_option(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		programPage.programschserveon(); 
+		programPage.prmshcserveonSpecdays();
+		programPage.programserveonevery();
+		programPage.programserveoneverydata();
+		programPage.checkboxdaysmonday();
+		programPage.prmshcserveonSpecificdayscheck();
+		
+	
+		}
+	
+	@Then("^verify create program page timezone option \"([^\"]*)\"$")
+	public void verify_create_program_page_timezone_option(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		programPage.programschserveon(); 
+		programPage.prmshcserveonalldays();
+		programPage.programtimezone();
+		programPage.programtimezonechange();
+		programPage.programtimezonecheck();
+		
+	}
+	
 	
 }

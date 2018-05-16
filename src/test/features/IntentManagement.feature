@@ -292,4 +292,54 @@ Scenario: verify create program page with refreshon daily serve on Specific days
 Given login
 Then navigate to intent management
 Then navigate to programs
+Then verify create program page "programdetails"
 Then verify create program page with refreshon daily serve on Specific days "programdetails"
+@NX-1204
+@initBrowser
+Scenario: verify create program page filters
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page "programdetails"
+Then verify filter for programs "programdetails"
+
+@NX-1186 
+@initBrowser
+Scenario: verify create program page Serve On All days option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page Serve On All days option "programdetails"
+
+@NX-1183
+@initBrowser
+Scenario: verify create program page refresh at option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page Refresh at option "programdetails"
+
+@NX-1233
+@initBrowser
+Scenario: verify create program page Edit options.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page "programdetails"
+Then create program page verify edit option "programdetails"
+
+@NX-1191
+@initBrowser
+Scenario: verify create program page Serve On Specific days option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page Serve On Specific days option "programdetails"
+
+@NX-1200
+@initBrowser
+Scenario: verify create program page timezone option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page timezone option "programdetails"
