@@ -875,9 +875,14 @@ System.out.println(editname+"program has edited successfully");
 		programPage.prmshcserveonalldays();
 		programPage.programtimezone();
 		programPage.programtimezonechange();
-		programPage.programtimezonecheck();
-		
+		Thread.sleep(2000);
+		programPage.programactivatebtn();
+		programPage.programconfirmactivateyes();
+		System.out.println("program has created successfully");
+	
 	}
+	
+	
 	@Then("^verify create program page with deactivated product \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\"$")
 	public void verify_create_program_page_with_deactivated_product(String sheet1, String sheet2) throws Throwable {
 		Thread.sleep(4000);
@@ -894,5 +899,68 @@ System.out.println(editname+"program has edited successfully");
 		
 	}
 	
+	
+	@Then("^verify create program page timezone change option \"([^\"]*)\"$")
+	public void verify_create_program_page_timezone_changeoption(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		programPage.programschserveon(); 
+		programPage.prmshcserveonalldays();
+		programPage.programtimezone();
+		programPage.programtimezonechange();
+		programPage.programtimezonecheck();
+	}
+	
+	
+	
+	
+	@Then("^verify create program page refreshcycle option \"([^\"]*)\"$")
+	public void verify_create_program_refreshoption(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.programrefreshcyclecheck();
+		
+	}
 	
 }

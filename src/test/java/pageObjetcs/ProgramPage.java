@@ -157,6 +157,9 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//paper-item[contains(.,'Days')]")
 	private WebElement prmshcselectdays;
 	
+	@FindBy(xpath="//paper-item[contains(.,'Weeks')]")
+	private WebElement prmshcselectweeks;
+	
 	@FindBy(xpath="//form[@id='scheduleForm']//label[text()='Every']/..//*[@id='input']")
 	private WebElement prmrecycleinput ;
 	
@@ -697,4 +700,27 @@ public void enterProgramDetailsWithDeactivatedProduct(String name, String sheet)
 		}
 	}
 
+	
+	public void programrefreshcyclecheck() throws Exception {
+		Thread.sleep(5000);
+		
+		
+		//jswait.checkVisible(prmshcselectweeks);
+		//jswait.checkVisible(prmshcselectdays);
+		
+		try {
+			assertTrue(driver.findElement(By.xpath("//paper-item[contains(.,'Weeks')]")).isDisplayed());
+			assertTrue(driver.findElement(By.xpath("//paper-item[contains(.,'Days')]")).isDisplayed());
+			
+			}
+			catch(Exception e) {
+				
+				
+			}
+		}
+	
+	
+	
+	
+	
 }

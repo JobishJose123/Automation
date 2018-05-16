@@ -238,13 +238,6 @@ Given login
 Then navigate to intent management
 Then navigate to programs
 Then check details cancel button in programs "programdetails"
-@NX-1183
-@initBrowser @closeBrowser
-Scenario: verify Create New Programs Schedule Refresh At option.
-Given login
-Then navigate to intent management
-Then navigate to programs
-Then check details schedule Refresh At "programdetails"
 @NX-1193
 @initBrowser @closeBrowser
 Scenario: verify Create New Programs Schedule Refresh At option.
@@ -338,8 +331,24 @@ Then verify create program page Serve On Specific days option "programdetails"
 
 @NX-1200
 @initBrowser
+Scenario: verify create program page timezone change option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page timezone change option "programdetails"
+
+@NX-1199
+@initBrowser
 Scenario: verify create program page timezone option.
 Given login
 Then navigate to intent management
 Then navigate to programs
 Then verify create program page timezone option "programdetails"
+
+@NX-1178
+@initBrowser
+Scenario: verify create program page timezone option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify create program page refreshcycle option "programdetails"
