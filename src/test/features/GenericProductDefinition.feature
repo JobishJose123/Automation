@@ -350,6 +350,15 @@ Feature: generic product class
     Then navigate to programs
     Then click create program button
     Then verify create program page with deactivated product "programdetails" and offer catalog sheet "defaultCatalog"
+    
+    @NX-7072 @initBrowser 
+  Scenario: Verify editing the program after the product is deactivated- 7072
+    Given login
+    
+    Then navigate to intent management
+    Then navigate to programs
+    Then choose program from sheet "programdetails"
+    Then verify edit program page with deactivated product "programdetails" and offer catalog sheet "defaultCatalog"
 
   @NX-6966 @initBrowser @closeBrowser
   Scenario: Verify whether products are partner specific- 6966

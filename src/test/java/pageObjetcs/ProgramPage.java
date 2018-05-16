@@ -68,6 +68,8 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Proceed')]")
 	private WebElement createProgramProceedButton;
+	@FindBy(xpath=".//paper-card[contains(.,'Edit')]")
+	private WebElement programEditButton;
 	
 	@FindBy(xpath="//h5[contains(.,'Basic Information')]/..//label[contains(.,'Name')]/..//*[@id='input']")
 	private WebElement createProgramName;
@@ -264,6 +266,10 @@ public class ProgramPage extends Init{
 	public void clickPorogramProceedButton() throws InterruptedException {
 		jswait.loadClick(createProgramProceedButton);
 	}
+	
+	public void clickPorogramEditButton() throws InterruptedException {
+		jswait.loadClick(programEditButton);
+	}
 	public void checkCancelButtonCreateProgram() throws InterruptedException {
 		clickCreateProgramButton();
 		clickCreateProgramCancelButton();
@@ -423,6 +429,9 @@ public class ProgramPage extends Init{
 	
 	public void programofferclick() throws InterruptedException {
 		jswait.loadClick(programofferclick);
+	}
+	public void programofferclear() throws InterruptedException {
+		programofferclick.clear();
 	}
 	
 	public void checkboxdaysmonday() throws InterruptedException {
@@ -669,17 +678,7 @@ public void touchpointpgmdeletecheck() throws Exception{
 		}
 	
 	
-public void enterProgramDetailsWithDeactivatedProduct(String name, String sheet)throws InterruptedException {
-		
-		
-		enterProgramName(name);
-		enterProgramDescription();
-		Thread.sleep(4000);
-		programofferclick();
-		Thread.sleep(4000);
-		selectOfferCatalogfromsheet(sheet);
-		
-	}
+
 	
 	
 	public void selectOfferCatalogfromsheet(String sheet2) throws InterruptedException {
@@ -719,7 +718,48 @@ public void enterProgramDetailsWithDeactivatedProduct(String name, String sheet)
 			}
 		}
 	
+public void enterProgramDetailsWithDeactivatedProduct(String name, String sheet)throws InterruptedException {
+		
+		
+		enterProgramName(name);
+		enterProgramDescription();
+		Thread.sleep(4000);
+		programofferclick();
+		Thread.sleep(4000);
+		selectOfferCatalogfromsheet(sheet);
+		
+	}
+
+public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)throws InterruptedException {
 	
+	
+	
+	programofferclick();
+	programofferclear();
+	Thread.sleep(4000);
+	selectOfferCatalogfromsheet(sheet);
+	
+}
+	
+	
+	
+	
+	
+	
+   public void enterProgramDetailsfromSheet(String name, String sheet)throws InterruptedException {
+		
+		
+		enterProgramName(name);
+		enterProgramDescription();
+		Thread.sleep(4000);
+		programofferclick();
+		Thread.sleep(4000);
+		selectOfferCatalogfromsheet(sheet);
+		Thread.sleep(4000);
+		clickPorogramProceedButton();
+		
+		
+	}
 	
 	
 	

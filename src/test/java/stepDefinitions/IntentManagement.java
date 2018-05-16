@@ -875,14 +875,9 @@ System.out.println(editname+"program has edited successfully");
 		programPage.prmshcserveonalldays();
 		programPage.programtimezone();
 		programPage.programtimezonechange();
-		Thread.sleep(2000);
-		programPage.programactivatebtn();
-		programPage.programconfirmactivateyes();
-		System.out.println("program has created successfully");
-	
+		programPage.programtimezonecheck();
+		
 	}
-	
-	
 	@Then("^verify create program page with deactivated product \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\"$")
 	public void verify_create_program_page_with_deactivated_product(String sheet1, String sheet2) throws Throwable {
 		Thread.sleep(4000);
@@ -897,14 +892,14 @@ System.out.println(editname+"program has edited successfully");
 		programPage.clickCreateProgramButton();
 		programPage.enterProgramDetailsWithDeactivatedProduct(name,sheet2);
 		
+		
 	}
 	
-	
-	@Then("^verify create program page timezone change option \"([^\"]*)\"$")
-	public void verify_create_program_page_timezone_changeoption(String sheet) throws Throwable {
+	@Then("^verify create program page \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\"$")
+	public void verify_create_program_page_from_sheet(String sheet1, String sheet2) throws Throwable {
 		Thread.sleep(4000);
     	ExcelHelper programExcel = new ExcelHelper();
-    	programExcel.setExcelFile("programInputData", sheet);
+    	programExcel.setExcelFile("programInputData", sheet1);
     	Random rn = new Random();
     	int  n = rn.nextInt(5000) + 1;
  		String name = (String) programExcel.getCell(1, 0);
@@ -912,7 +907,7 @@ System.out.println(editname+"program has edited successfully");
  		programExcel.setCell(1, 0, name);
  		Thread.sleep(4000);
 		programPage.clickCreateProgramButton();
-		programPage.enterProgramDetails(name);
+		programPage.enterProgramDetailsfromSheet(name,sheet2);
 		programPage.clickCreateProgramAddTouchpointButton();
 		programPage.addTouchPointToProgram();
 		programPage.clickPorogramProceedButton();
@@ -930,37 +925,49 @@ System.out.println(editname+"program has edited successfully");
 		programPage.pgmtimeokbtn();
 		programPage.programschserveon(); 
 		programPage.prmshcserveonalldays();
-		programPage.programtimezone();
-		programPage.programtimezonechange();
-		programPage.programtimezonecheck();
-	}
-	
-	
-	
-	
-	@Then("^verify create program page refreshcycle option \"([^\"]*)\"$")
-	public void verify_create_program_refreshoption(String sheet) throws Throwable {
-		Thread.sleep(4000);
-    	ExcelHelper programExcel = new ExcelHelper();
-    	programExcel.setExcelFile("programInputData", sheet);
-    	Random rn = new Random();
-    	int  n = rn.nextInt(5000) + 1;
- 		String name = (String) programExcel.getCell(1, 0);
-  		name =  name.replaceAll("[0-9]", "")+n;
- 		programExcel.setCell(1, 0, name);
- 		Thread.sleep(4000);
-		programPage.clickCreateProgramButton();
-		programPage.enterProgramDetails(name);
-		programPage.clickCreateProgramAddTouchpointButton();
-		programPage.addTouchPointToProgram();
-		programPage.clickPorogramProceedButton();
-		programPage.programschstart();
-		programPage.prmshcselectnow();
-		programPage.programschend();
-		programPage.prmshcselectnoend();
-		programPage.programschrefreshcycle();
-		programPage.programrefreshcyclecheck();
+		//programPage.createProgramSaveButton();
+		Thread.sleep(2000);
+		programPage.programactivatebtn();
+		programPage.programconfirmactivateyes();
+		System.out.println("program has created successfully");
 		
+	
 	}
+	
+	public void filterWorkaround(String name) throws InterruptedException {
+		commonObjects.clickFilterIcon();                            //issue in filter
+		commonObjects.clickFilterResetButton();						//issue in filter
+		commonObjects.filterName(name);
+	}
+	
+	 @Then("^choose program from sheet \"([^\"]*)\"$")
+	 public void chooseProgramFromSheet(String sheet) throws InterruptedException {
+		 
+		    eh.setExcelFile("programInputData",sheet);
+			String name = (String) eh.getCell(1, 0);
+		    filterWorkaround(name);
+		    commonObjects.clickOptionsIcon();
+		    programPage.clickPorogramEditButton();
+		 
+		 
+	 }
+	 @Then("^verify edit program page with deactivated product \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\"$")
+		public void verify_edit_program_page_with_deactivated_product(String sheet1, String sheet2) throws Throwable {
+			Thread.sleep(4000);
+	    	ExcelHelper programExcel = new ExcelHelper();
+	    	programExcel.setExcelFile("programInputData", sheet1);
+	    	Random rn = new Random();
+	    	int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) programExcel.getCell(1, 0);
+	  		name =  name.replaceAll("[0-9]", "")+n;
+	 		programExcel.setCell(1, 0, name);
+	 		Thread.sleep(4000);
+			//programPage.clickCreateProgramButton();
+			programPage.editProgramDetailsWithDeactivatedProduct(name,sheet2);
+			
+			
+		}	   
+	
+	
 	
 }
