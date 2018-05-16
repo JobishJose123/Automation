@@ -339,17 +339,17 @@ Then verify events row
 
 
 
-#@NX-2823   
-#@initBrowser @closeBrowser
-#Scenario: Verify whether Customer Support tab shows the sent time,conversion time,reward time and status of reward-2823
-#Given login
-#Then navigate to precision marketer
-#Then navigate to reports
-#Then navigate to customer profile
-#Then enter customer number "number"
-#Then click on search button
-#Then click customer support tab
-#Then verify events row in customer support events time details
+@NX-2823   
+@initBrowser @closeBrowser
+Scenario: Verify whether Customer Support tab shows the sent time,conversion time,reward time and status of reward-2823
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click customer support tab
+Then verify events row in customer support events time details
 
 
 
@@ -364,3 +364,16 @@ Then enter customer number "number"
 Then click on search button
 Then click on events tab
 Then verify event types selected by default
+
+
+@NX-2819  
+@initBrowser 
+Scenario: Verify the checkpoints displayed in the graph-2819
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click usage metrics tab
+Then verify mouse hover in usage metrics tab

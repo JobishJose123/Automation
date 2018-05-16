@@ -114,6 +114,7 @@ public class CampaignManagement extends Init{
 	    public void create_new_broadcast_button() throws Throwable
 	    {
 	    	campaignObjects.clickCreateNewBroadcastButton();
+	    	Thread.sleep(3000);
 	    }
 	    @Then("^navigate to campaign categories$")
 	    public void navigateToCampaignCategory() throws Throwable

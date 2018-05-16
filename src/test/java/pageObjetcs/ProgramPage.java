@@ -1,5 +1,7 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Random;
 
 import org.junit.Assert;
@@ -11,12 +13,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 public class ProgramPage extends Init{
 
 	private static final Exception Exception = null;
 	JSWaiter jswait = new JSWaiter();
+	ExcelHelper eh = new ExcelHelper();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	public ProgramPage() {
 		PageFactory.initElements(driver, this);
@@ -661,5 +665,36 @@ public void touchpointpgmdeletecheck() throws Exception{
 	}else {System.out.println("failed");}
 		}
 	
+	
+public void enterProgramDetailsWithDeactivatedProduct(String name, String sheet)throws InterruptedException {
+		
+		
+		enterProgramName(name);
+		enterProgramDescription();
+		Thread.sleep(4000);
+		programofferclick();
+		Thread.sleep(4000);
+		selectOfferCatalogfromsheet(sheet);
+		
+	}
+	
+	
+	public void selectOfferCatalogfromsheet(String sheet2) throws InterruptedException {
+		
+		eh.setExcelFile("offerCatalogInputData",sheet2);
+		String offer = (String) eh.getCell(1, 0);
+		jswait.loadSendKeys(programofferclick, offer);
+		Thread.sleep(3000);
+		System.out.println("Offer: "+offer);
+		
+		try {
+		assertTrue(driver.findElement(By.xpath(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]")).isDisplayed());
+		driver.findElement(By.xpath(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]")).click();
+		}
+		catch(Exception e) {
+			
+			
+		}
+	}
 
 }

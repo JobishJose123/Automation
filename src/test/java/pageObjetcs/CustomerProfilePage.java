@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -159,6 +160,9 @@ public class CustomerProfilePage extends Init{
 	private WebElement weeklyTrendChart;
 	@FindBy(xpath=".//div[@id='lineChart1']")
 	private WebElement dailyTrendChart;
+	@FindBy(xpath="//div[@class='layout horizontal flex style-scope consumer-metrics']//paper-card[@class='metric layout vertical style-scope consumer-metrics x-scope paper-card-0']//div[@id='lineChart1']//svg//g//g[@class='sub _3']//g[@class='chart-body']//g[@class='dc-tooltip-list']//circle[1]")
+	private List <WebElement> circleList;
+	Actions builder = new Actions(driver);
 	
 	
 	
@@ -500,6 +504,8 @@ public class CustomerProfilePage extends Init{
 	  
 	        jswait.loadClick(customerSupportSearchEvents90);
 	        
+	        
+	        
 	  
 	   }
  
@@ -720,6 +726,20 @@ public class CustomerProfilePage extends Init{
 		
 		
 	   
+   }
+   public void verifyMouseHover() throws Throwable {
+	   
+	int size=circleList.size();
+    System.out.println("Size: "+size);
+	   
+    if(circleList.size()>0) {
+	   
+	for(WebElement circle : circleList) {
+    assertTrue(circle.isDisplayed());
+	builder.moveToElement(circle).build().perform();
+	
+	   }
+   }
    }
 
 }

@@ -320,4 +320,10 @@ public class ConsumerProfileSteps extends Init{
 	   
    }
    
+   @Then("^verify mouse hover in usage metrics tab$")
+     public void verifyMouseHover() throws Throwable {
+	   
+	   customerObjects.verifyMouseHover();
+   }
+   
 }

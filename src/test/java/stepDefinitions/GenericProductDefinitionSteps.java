@@ -225,6 +225,13 @@ public class GenericProductDefinitionSteps extends Init{
 		jswait.scrollAndClick("//iron-scroll-threshold", ".//*[contains(text(),'"+eh.getCell(1, 0)+"')]");		
 		}
 	
+	@Then("^navigate to campaign \"([^\"]*)\"$")
+	public void navigateToCampaign(String sheet) throws Throwable {
+		
+		eh.setExcelFile("campaignInputData",sheet);
+		jswait.scrollAndClick("//iron-scroll-threshold", ".//*[contains(text(),'"+eh.getCell(1, 0)+"')]");		
+		}
+	
 	@Then("^click on create button$")
 	public void clickcreateBCButton() throws Throwable {
 		

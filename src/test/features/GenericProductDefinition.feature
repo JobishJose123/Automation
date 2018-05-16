@@ -293,9 +293,9 @@ Feature: generic product class
     Then click on create new ofer button
     Then create new offer from sheet "rechargeWAP" with product "fullDetails"
     Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
@@ -310,6 +310,11 @@ Feature: generic product class
     Then navigate to products
     Then navigate to product class "TestProductClass"
     Then deactivate the product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then click on options and view broadcast
+    
 
   @NX-7068 @initBrowser @closeBrowser
   Scenario: Verify whether deactivated product is available for selection while program creation- 7068
@@ -322,7 +327,29 @@ Feature: generic product class
     Then navigate to offer management
     Then navigate to products
     Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+     Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
     Then deactivate the product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page with deactivated product "programdetails" and offer catalog sheet "defaultCatalog"
 
   @NX-6966 @initBrowser @closeBrowser
   Scenario: Verify whether products are partner specific- 6966
