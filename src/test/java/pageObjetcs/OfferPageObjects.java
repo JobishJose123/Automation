@@ -31,6 +31,7 @@ public class OfferPageObjects extends Init {
 		PageFactory.initElements(driver, this);
 	}
 
+	final String TRACK_SOURCE = "A_Track_Sel";
 	@FindBy(xpath = ".//*[@id='sym2']")
 	private WebElement offerButton;
 	@FindBy(xpath = "//paper-button[contains(.,'Create New Offer')]")
@@ -177,28 +178,178 @@ public class OfferPageObjects extends Init {
 	private WebElement mapVariableOkButton;
 	@FindBy(xpath = "//iron-data-table[@id='variablesList']//div[@id='header']//data-table-row[contains(.,'Name') and contains(.,'Field') and contains(.,'Limit') and contains(.,'Default')]")
 	private WebElement mapVariableDialogHeader;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
+	
+//Track Tab in Offer Creation	
+	 @FindBy(xpath="//paper-button[text()='Add Rule']")
+	 private WebElement addRuleButton;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Rule Name')]/../input")
+	 private WebElement addTrackingRuleRuleName;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Priority')]/../input")
+	 private WebElement addTrackingRulePrioritySelector;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'2')]")
+	 private WebElement addTrackingRulePrioritySelect2;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[contains(.,'Add')]")
+	 private WebElement addTrackingRuleAddConditionButton;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../input")
+	 private WebElement  addTrackingRuleSecondConditionParameterSelector;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'Age')]")
+	 private WebElement addTrackingRuleSecondConditionParameterSelectAge;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../input")
+	 private WebElement addTrackingRuleSecondConditionConditionSelector;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is greater than')]")
+	 private WebElement addTrackingRuleSecondConditionConditionSelectisGreaterThan;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Value')]/../input")
+	 private WebElement addTrackingRuleSecondConditionConditionValue;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Parameter')]/../input")
+	 private WebElement  addTrackingRuleConditionParameterSelector;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'Age')]")
+	 private WebElement addTrackingRuleConditionParameterSelectAge;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../input")
+	 private WebElement addTrackingRuleConditionConditionSelector;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is greater than')]")
+	 private WebElement addTrackingRuleConditionConditionSelectisGreaterThan;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Value')]/../input")
+	 private WebElement addTrackingRuleConditionConditionValue;
+	 @FindBy(xpath="//form[@id='trackRuleForm']//div[@id='scrollable']/div/iron-icon")
+	 private WebElement addTrackingRuleConditionDeleteButton;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[text()='Save']")
+	 private WebElement addTrackingRuleSaveButton;
+	 @FindBy(xpath="//form[@id='trackRuleForm']//paper-button[text()='Save']")
+	 private WebElement editTrackingRuleSaveButton;
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[text()='Cancel']")
+	 private WebElement addTrackingRuleCancelButton;
+	 @FindBy(xpath="//recharge-rule-grid//iron-list/div/div[2]/data-table-row//data-table-cell[4]//iron-icon")
+	 private WebElement editRule;
+	 @FindBy(xpath="//recharge-rule-grid//iron-list/div/div[2]/data-table-row//data-table-cell[5]//iron-icon")
+	 private WebElement deleteRule;
+	 @FindBy(xpath="//paper-dialog[@id='deleteRule']//paper-button[text()='Yes']")
+	 private WebElement deleteRuleConfirmYes;
+	 @FindBy(xpath="//paper-dialog[@id='deleteRule']//paper-button[text()='No']")
+	 private WebElement deleteRuleConfirmNo;
+	 @FindBy(xpath="//form[@id='trackRuleForm']//paper-input[@label='Rule Name']//input")
+	 private WebElement editTrackRuleName;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+	 
+//	Track Tab in Offer Creation	functions
+	 public void clickAddRuleButton() throws InterruptedException {
+			jswait.loadClick(addRuleButton);
+		}
+	 public void clickEditRuleSaveButton() throws InterruptedException {
+			jswait.loadClick(editTrackingRuleSaveButton);
+		}
+	 public void enterRuleName(String text) throws InterruptedException {
+			jswait.loadSendKeys(addTrackingRuleRuleName,text);
+		}
+	 public void enterEditRuleName(String text) throws InterruptedException {
+			jswait.loadSendKeys(editTrackRuleName,text);
+		}
+	 public void selectPriority(String text) throws InterruptedException {
+			jswait.loadClick(addTrackingRulePrioritySelector);
+			jswait.loadClick("//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'"+text+"')]");
+		}
+	 public void clickAddTrackingRuleAddConditionButton() throws InterruptedException {
+			jswait.loadClick(addTrackingRuleAddConditionButton);
+		}
+	 public void selectAddTrackingRuleConditionParameterAge() throws InterruptedException {
+			jswait.loadClick(addTrackingRuleConditionParameterSelector);
+			jswait.loadClick(addTrackingRuleConditionParameterSelectAge);
+		}
+	 public void selectAddTrackingRuleConditionConditionGreaterThan() throws InterruptedException {
+			jswait.loadClick(addTrackingRuleConditionConditionSelector);
+			jswait.loadClick(addTrackingRuleConditionConditionSelectisGreaterThan);
+		}
+	 public void enterAddTrackingRuleConditionConditionValue(String text) throws InterruptedException {
+			jswait.loadSendKeys(addTrackingRuleConditionConditionValue,text);
+		}
+	 public void selectAddTrackingRuleSecondConditionParameterAge() throws InterruptedException {
+			jswait.loadClick(addTrackingRuleSecondConditionParameterSelector);
+			jswait.loadClick(addTrackingRuleSecondConditionParameterSelectAge);
+		}
+	 public void selectAddTrackingRuleSecondConditionConditionGreaterThan() throws InterruptedException {
+			jswait.loadClick(addTrackingRuleSecondConditionConditionSelector);
+			jswait.loadClick(addTrackingRuleSecondConditionConditionSelectisGreaterThan);
+		}
+	 public void enterAddTrackingRuleSecondConditionConditionValue(String text) throws InterruptedException {
+			jswait.loadSendKeys(addTrackingRuleSecondConditionConditionValue,text);
+		}
+	 public void clickAddTrackingRuleConditionDeleteButton() throws InterruptedException {
+			jswait.loadClick(addTrackingRuleConditionDeleteButton);
+		}
+	 public void clickaddTrackingRuleSaveButton() throws InterruptedException {
+			jswait.loadClick(addTrackingRuleSaveButton);
+		}
+	 public void clickaddTrackingRuleCancelButton() throws InterruptedException {
+			jswait.loadClick(addTrackingRuleCancelButton);
+		}
+	 public void clickEditRule() throws InterruptedException {
+			jswait.loadClick(editRule);
+		}
+	 public void clickDeleteRule() throws InterruptedException {
+			jswait.loadClick(deleteRule);
+		}
+	 public void clickDeleteRuleConfirmYes() throws InterruptedException {
+			jswait.loadClick(deleteRuleConfirmYes);
+		}
+	 public void clickDeleteRuleConfirmNo() throws InterruptedException {
+			jswait.loadClick(deleteRuleConfirmNo);
+		}
+	 public void checkRuleCreation(String ruleName) throws Exception {
+		 jswait.waitUntil("//span[text()='"+ruleName+"']");
+	 }
+	 public void createTrackRuleCondition() throws InterruptedException {
+		 clickAddTrackingRuleAddConditionButton();
+			selectAddTrackingRuleConditionParameterAge();
+			selectAddTrackingRuleConditionConditionGreaterThan();
+			enterAddTrackingRuleConditionConditionValue("18");
+	 }
+	 public void createSecondTrackRuleCondition() throws InterruptedException {
+		 clickAddTrackingRuleAddConditionButton();
+			selectAddTrackingRuleSecondConditionParameterAge();
+			selectAddTrackingRuleSecondConditionConditionGreaterThan();
+			enterAddTrackingRuleSecondConditionConditionValue("19");
+	 }
+	 public void enterDetailsFirstDefaultTrackingRuleCondition(String name) throws InterruptedException {
+		 enterRuleName(name);
+			selectPriority("2");
+			createTrackRuleCondition();
+			createSecondTrackRuleCondition();
+	 }
+	 public void enterDetailsFirstDefaultTrackingRuleCondition() throws InterruptedException {
+		 enterRuleName("defRule");
+			selectPriority("2");
+			createTrackRuleCondition();
+			createSecondTrackRuleCondition();
+	 }
+	 public void createFirstDefaultTrackingRuleCondition() throws Exception {
+		 	clickAddRuleButton();
+		 	enterDetailsFirstDefaultTrackingRuleCondition("firstRule");
+			clickaddTrackingRuleSaveButton();
+			checkRuleCreation("firstRule");
+	 }
+	 public void createFirstDefaultTrackingRuleCondition(String name) throws Exception {
+		 	clickAddRuleButton();
+		 	enterDetailsFirstDefaultTrackingRuleCondition(name);
+			clickaddTrackingRuleSaveButton();
+			checkRuleCreation(name);
+	 }
+	 public void createSecondDefaultTrackingRuleCondition() throws Exception {
+		 	clickAddRuleButton();
+			enterRuleName("secondRule");
+			selectPriority("3");
+			createTrackRuleCondition();
+			clickaddTrackingRuleSaveButton();
+			checkRuleCreation("secondRule");
+	 }
+	 
 
 	// offer page functions
 	public void navigateToOffer() throws InterruptedException {
@@ -411,7 +562,7 @@ public class OfferPageObjects extends Init {
 		// ******************Track tab*****************:
 		if (!eh.getCell(1, 2).toString().contains("Informational")) {
 			clickTrackSourceSelector();
-			selectTrackSource("track");
+			selectTrackSource(TRACK_SOURCE);
 		}
 		clickProceedButton();
 
@@ -815,7 +966,7 @@ public class OfferPageObjects extends Init {
 	public void enterTrackTabDetails(ExcelHelper eh) throws InterruptedException {
 		if (!eh.getCell(1, 2).toString().contains("Informational")) {
 			clickTrackSourceSelector();
-			selectTrackSource("track");
+			selectTrackSource(TRACK_SOURCE);
 		}
 	}
 
@@ -955,5 +1106,9 @@ public class OfferPageObjects extends Init {
 		jswait.loadSendKeys(smsCreativeDetails, "123+_+}{:\\\">?<+_P:\\\"4!@#$%^&*");
 		Assert.assertTrue(commonObjects.getTextFormTextField(smsCreativeDetails).length() == 29,
 				"wrong character limit for creative details");
+	}
+	public void validateRuleNameField() throws InterruptedException, UnsupportedFlavorException, IOException {
+		enterRuleName("ygy56465!@#$%^&*()@#$%^&*(^%$#ggy");
+		Assert.assertTrue(commonObjects.getTextFormTextField(addTrackingRuleRuleName).length()==30, "validation of rule name failed");
 	}
 }

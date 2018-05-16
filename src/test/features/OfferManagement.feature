@@ -59,6 +59,11 @@ Feature: Test suite on Offer creation
     Then navigate to offers
     Then create new offer from sheet "rechargeWAP" with product "singleProductPage"
     Then verify "rechargeWAP" offer in grid
+    Then pass next scenario based on this step
+
+  @NX-896
+  Scenario: Create offer: Track : Verify selecting source for tracking rule. NX-896
+    Then check previous step and pass this
 
   @NX-1346 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating Balance-Deduction offers NX-1346
@@ -373,3 +378,60 @@ Feature: Test suite on Offer creation
     Then navigate to offer management
     Then navigate to offers
     Then verify special characters of creative title and details
+
+  @NX-898 @initBrowser
+  Scenario: Create offer: Track : Verify Adding the Source condition by clicking on Add button NX-898
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify adding rule to tracking source
+    Then pass next scenario based on this step
+
+  @NX-902
+  Scenario: Create offer: Track : Verify adding multiple condition for a rule name NX-902
+    Then check previous step and pass this
+
+  @NX-903
+  Scenario: Create offer: Track : Verify the validations for Rule name and value textbox in Add Tracking Rule window NX-903
+    Then verify validation of rule name
+
+  @NX-930
+  Scenario: Create offer: Track : Verify deleting the added tracking rule. NX-930
+    Then verify deleting added tracking rule
+
+  @NX-906 @initBrowser
+  Scenario: Create offer: Track : Verify cancelling the added tracking rule. NX-906
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify cancelling tracking rule
+
+  @NX-909 @closeBrowser
+  Scenario: Create offer: Track : Verify adding multiple rules for the same track source. NX-909
+    Then verify adding multiple tracking rule
+    
+    @NX-910 @initBrowser
+  Scenario: Create offer: Track : Verify adding multiple rules with same priority NX-910
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify adding multiple rules with same priority
+    
+    @NX-929 @initBrowser
+  Scenario: Create offer: Track : Verify editing the added rule in Track tab NX-929
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify editing added rule in track tab
+
+    @NX-933 
+  Scenario: Create offer: Track : Verify the maximum priority set for the tracking rule NX-933
+    Then verify maximum priority for tracking rule
+    
+     @NX-904 @closeBrowser
+  Scenario: Create offer: Track : Verify deleting the added tracking rule. NX-904
+    Then verify deleting added tracking rule condition

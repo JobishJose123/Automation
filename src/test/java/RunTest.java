@@ -33,9 +33,9 @@ import cucumber.api.junit.Cucumber;
         retryCount = 0)
 @CucumberOptions(
         features = { "src/test/features" },
-//		glue = {"classpath:"},
+		glue = {"classpath:"},
         //@NX-ProductTestSuite,@tagOfferCatalog,@madhan_test_suite_on_OfferCreation,@tagOfferCatalog,@NX-bcCreationSuite
-		tags = { "@NX-1243" },
+		tags = { "@NX-800" },
 		plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:output/report.html",
         "html:target/81", "json:target/81/cucumber.json",

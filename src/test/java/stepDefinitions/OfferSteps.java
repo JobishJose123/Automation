@@ -462,6 +462,7 @@ public class OfferSteps extends Init {
 	}
 
 	public void proceedToTrackTab() throws Throwable {
+		proceedToCreativeTab();
 		eh.setExcelFile("offerInputData", "tempRechargeSms");
 		offerPageObjects.enterCreativeTabDetails(eh);
 		offerPageObjects.clickProceedButton();
@@ -494,5 +495,88 @@ public class OfferSteps extends Init {
 		offerPageObjects.clickProceedButton();
 		Thread.sleep(3000);
 		offerPageObjects.enterTrackTabDetails(eh);
+	}
+	@Then("^verify adding rule to tracking source$")
+	public void verifyAddingRuleToTrackingSource() throws Throwable {
+		proceedToTrackTab();
+		offerPageObjects.enterTrackTabDetails(eh);
+		offerPageObjects.createFirstDefaultTrackingRuleCondition();
+		offerPageObjects.clickEditRule();
+	}
+	@Then("^verify validation of rule name$")
+	public void verifyAddingMultipleCondiionsInRule() throws Throwable {
+//		offerPageObjects.clickAddRuleButton();
+		offerPageObjects.validateRuleNameField();
+		offerPageObjects.clickaddTrackingRuleCancelButton();
+	}
+	@Then("^verify deleting added tracking rule$")
+	public void verifyDeletingTrackingRule() throws Throwable {
+		offerPageObjects.clickDeleteRule();
+		offerPageObjects.clickDeleteRuleConfirmYes();
+		try {
+			offerPageObjects.clickDeleteRule();
+			Assert.assertTrue(false,"rule deletion not successfull");
+		}catch(Exception e) {
+		}
+	}
+	@Then("^verify cancelling tracking rule$")
+	public void verifyCancellingTrackingRule() throws Throwable {
+		proceedToTrackTab();
+		offerPageObjects.enterTrackTabDetails(eh);
+		offerPageObjects.clickAddRuleButton();
+		offerPageObjects.enterDetailsFirstDefaultTrackingRuleCondition();
+		offerPageObjects.clickaddTrackingRuleCancelButton();
+		try {
+			offerPageObjects.clickEditRule();
+			Assert.assertTrue(false, "Rule saved after cliking cancel button");
+		}catch(Exception e){
+			
+		}
+	}
+	@Then("^verify adding multiple tracking rule$")
+	public void verifyAddingMultipleTrackingRule() throws Throwable {
+		offerPageObjects.createFirstDefaultTrackingRuleCondition();
+		offerPageObjects.createSecondDefaultTrackingRuleCondition();
+	}
+	@Then("^verify adding multiple rules with same priority$")
+	public void verifyAddingMultipleTrackingRuleWithSamePriority() throws Throwable {
+		proceedToTrackTab();
+		offerPageObjects.enterTrackTabDetails(eh);
+		offerPageObjects.createFirstDefaultTrackingRuleCondition("priorityCheck1");
+		offerPageObjects.createFirstDefaultTrackingRuleCondition("priorityCheck2");
+		try{
+			offerPageObjects.clickProceedButton();
+			Assert.assertTrue(false, "rules saved with same priority");
+		}catch(Exception e) {
+			
+		}
+	}
+	@Then("^verify editing added rule in track tab$")
+	public void verifyEditingTrackingRule() throws Throwable {
+		proceedToTrackTab();
+		offerPageObjects.enterTrackTabDetails(eh);
+		offerPageObjects.createFirstDefaultTrackingRuleCondition();
+		Thread.sleep(3000);
+		offerPageObjects.clickEditRule();
+		offerPageObjects.enterEditRuleName("EditedRule");
+		offerPageObjects.clickEditRuleSaveButton();
+		offerPageObjects.checkRuleCreation("EditedRule");
+	}
+	@Then("^verify maximum priority for tracking rule$")
+	public void verifyMaximumPriorityTrackingRule() throws Throwable {
+		offerPageObjects.clickAddRuleButton();
+		offerPageObjects.enterDetailsFirstDefaultTrackingRuleCondition("maxPriority");
+		offerPageObjects.selectPriority("15");
+		try{
+			offerPageObjects.selectPriority("16");
+			Assert.assertTrue(false, "priority set to 16");
+		}catch(Exception e) {
+			
+		}
+	}
+	@Then("^verify deleting added tracking rule condition$")
+	public void verifyDeletingTrackingRuleCondition() throws Throwable {
+		offerPageObjects.clickAddTrackingRuleConditionDeleteButton();
+		offerPageObjects.createSecondDefaultTrackingRuleCondition();
 	}
 }

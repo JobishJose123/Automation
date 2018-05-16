@@ -1,4 +1,6 @@
 
+import java.net.MalformedURLException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -73,7 +75,7 @@ public class CommonSteps extends Init {
 		driver.close();
 	}
 	@Then("^open browser")
-	public void openBrowser() throws InterruptedException {
+	public void openBrowser() throws InterruptedException, MalformedURLException {
 		Init.init();
 	}
 	@Then("^navigate to intent management")

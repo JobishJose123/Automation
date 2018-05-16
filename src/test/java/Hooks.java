@@ -1,5 +1,7 @@
 
 
+import java.net.MalformedURLException;
+
 import org.testng.annotations.BeforeSuite;
 
 import baseClasses.Init;
@@ -9,7 +11,7 @@ import cucumber.api.java.Before;
 	public class Hooks extends Init{
 	
 		@Before("@initBrowser")
-		public static void beforeSuite() throws InterruptedException {
+		public static void beforeSuite() throws InterruptedException, MalformedURLException {
 			Init.init();
 		}
 	@After("@closeBrowser")
