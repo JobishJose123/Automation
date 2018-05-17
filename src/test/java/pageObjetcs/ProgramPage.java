@@ -68,8 +68,8 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Proceed')]")
 	private WebElement createProgramProceedButton;
-	@FindBy(xpath=".//paper-card[contains(.,'Edit')]")
-	private WebElement programEditButton;
+	@FindBy(xpath=".//paper-item[contains(.,'View Rules')]")
+	private WebElement programViewRulesButton;
 	
 	@FindBy(xpath="//h5[contains(.,'Basic Information')]/..//label[contains(.,'Name')]/..//*[@id='input']")
 	private WebElement createProgramName;
@@ -138,14 +138,35 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//label[text()[contains(.,'Offer Catalog')]]/../input")
 	private WebElement programofferclick;
 	
+	
+	
+	@FindBy(xpath="//paper-button[contains(.,'Create New Rule')]")
+	private WebElement createNewRuleButton;
+	
+	@FindBy(xpath="//paper-button[contains(.,'Save')]")
+	private WebElement saveRuleButton;
+	
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
 	private WebElement pgmfirstofferselect ;
+	
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
+	private WebElement selectfirstCustomerList ;
 	
 	@FindBy(xpath="//form[@id='scheduleForm']//label[text()='Start Date']/..//*[@id='input']")
 	private WebElement programschstart;
 	
 	@FindBy(xpath="//label[contains(.,'End Date')]/../input")
 	private WebElement programschend;
+	@FindBy(xpath=".//div[@class='input-content label-is-floating style-scope paper-input-container']//label[contains(.,'Rule Name')]/../input")
+	private WebElement enterRuleName;
+	
+	@FindBy(xpath="//label[contains(.,'Customer List')]/../input")
+	private WebElement customerListField;
+	
+	@FindBy(xpath="//label[contains(.,'Product')]/../input")
+	private WebElement productField;
+	
+	
 	
 	@FindBy(xpath="//paper-item[contains(.,'Now')]")
 	private WebElement prmshcselectnow ;
@@ -267,9 +288,35 @@ public class ProgramPage extends Init{
 		jswait.loadClick(createProgramProceedButton);
 	}
 	
-	public void clickPorogramEditButton() throws InterruptedException {
-		jswait.loadClick(programEditButton);
+	public void clickSaveRuleButton() throws InterruptedException {
+		jswait.loadClick(saveRuleButton);
 	}
+	
+	
+	
+	public void clickPorogramViewRulesButton() throws InterruptedException {
+		jswait.loadClick(programViewRulesButton);
+	}
+	
+	public void clickCreateNewRuleButton() throws InterruptedException {
+		jswait.loadClick(createNewRuleButton);
+	}
+	
+	public void clickCustomerListField() throws InterruptedException {
+		jswait.loadClick(customerListField);
+	}
+	
+	public void clickProductField(String name) throws InterruptedException {
+		jswait.loadClick(productField);
+		jswait.loadSendKeys(createProgramName, name);
+		
+	}
+	
+	
+	
+	
+	
+	
 	public void checkCancelButtonCreateProgram() throws InterruptedException {
 		clickCreateProgramButton();
 		clickCreateProgramCancelButton();
@@ -442,6 +489,12 @@ public class ProgramPage extends Init{
 	public void pgmfirstofferselect() throws InterruptedException {
 		jswait.loadClick(pgmfirstofferselect);
 	}
+	
+	public void selectFirstCustomerList() throws InterruptedException {
+		jswait.loadClick(selectfirstCustomerList);
+	}
+	
+	
 	
 	
 	public void createProgramTouchpointGridName() throws InterruptedException {
@@ -698,6 +751,15 @@ public void touchpointpgmdeletecheck() throws Exception{
 			
 		}
 	}
+	
+	public void enterRuleName() throws Exception {
+		
+		jswait.loadClick(enterRuleName);
+		jswait.loadSendKeys(enterRuleName, "Test Rule Name");
+		
+	}
+	
+	
 
 	
 	public void programrefreshcyclecheck() throws Exception {
@@ -730,14 +792,19 @@ public void enterProgramDetailsWithDeactivatedProduct(String name, String sheet)
 		
 	}
 
-public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)throws InterruptedException {
+public void createNewProgramRuleWithDeactivatedProduct(String name)throws Exception {
 	
-	
-	
-	programofferclick();
-	programofferclear();
-	Thread.sleep(4000);
-	selectOfferCatalogfromsheet(sheet);
+	clickCreateNewRuleButton();
+	//enterRuleName();
+	clickSaveRuleButton();
+	Thread.sleep(2000);
+	clickCustomerListField();
+	Thread.sleep(2000);
+	selectFirstCustomerList();
+	Thread.sleep(2000);
+	clickPorogramProceedButton();
+	Thread.sleep(2000);
+	clickProductField(name);
 	
 }
 	

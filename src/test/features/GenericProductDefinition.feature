@@ -358,7 +358,7 @@ Feature: generic product class
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails"
-    Then verify edit program page with deactivated product "programdetails" and offer catalog sheet "defaultCatalog"
+    Then verify create new rule with deactivated product from sheet "fullDetails"
 
   @NX-6966 @initBrowser @closeBrowser
   Scenario: Verify whether products are partner specific- 6966

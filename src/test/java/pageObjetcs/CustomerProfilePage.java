@@ -162,6 +162,8 @@ public class CustomerProfilePage extends Init{
 	private WebElement dailyTrendChart;
 	@FindBy(xpath="//div[@class='layout horizontal flex style-scope consumer-metrics']//paper-card[@class='metric layout vertical style-scope consumer-metrics x-scope paper-card-0']//div[@id='lineChart1']//svg//g//g[@class='sub _3']//g[@class='chart-body']//g[@class='dc-tooltip-list']//circle[1]")
 	private List <WebElement> circleList;
+	@FindBy(xpath="//div[@class='layout horizontal flex style-scope consumer-metrics']//paper-card[@class='metric layout vertical style-scope consumer-metrics x-scope paper-card-0']//div[@id='lineChart1']//svg//g//g[@class='sub _3']//g[@class='chart-body']//g[@class='dc-tooltip-list']//circle[1]")
+	private WebElement circle;
 	Actions builder = new Actions(driver);
 	
 	
@@ -728,18 +730,26 @@ public class CustomerProfilePage extends Init{
 	   
    }
    public void verifyMouseHover() throws Throwable {
+	 
+	Thread.sleep(3000);
+	assertTrue(circle.isDisplayed());
+	builder.moveToElement(circle).build().perform();
+	
+	//int size=circleList.size();
+    //System.out.println("Size: "+size);
+    
 	   
-	int size=circleList.size();
-    System.out.println("Size: "+size);
-	   
-    if(circleList.size()>0) {
+  /*if(circleList.size()>0) {
 	   
 	for(WebElement circle : circleList) {
+	
+    Thread.sleep(3000);
     assertTrue(circle.isDisplayed());
 	builder.moveToElement(circle).build().perform();
 	
 	   }
-   }
+   }*/
+  
    }
 
 }
