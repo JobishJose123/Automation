@@ -1,5 +1,7 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertTrue;
+
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.List;
@@ -124,12 +126,23 @@ public class ProductPage extends Init{
     private WebElement partnerDropDown;
 	@FindBy(xpath=".//vaadin-combo-box-item[contains(.,' Test_Fb')]")
     private WebElement Partner;
-	@FindBy(xpath=".//*[@id='confirmChange']//paper-button[contains(.,'Yes')]")
+	@FindBy(xpath=".//div[@class='buttons style-scope change-partner']//paper-button[contains(.,'Yes')]")
     private WebElement YesButton;
 	@FindBy(xpath="//paper-button[contains(.,'Add')]")
 	private WebElement addBenefitButton;
 	@FindBy(xpath="//paper-item[contains(.,'View Offers')]")
 	private WebElement productViewOffers;
+	@FindBy(xpath="//paper-button[contains(.,'Share')]")
+	private WebElement productClassShareButton;
+	
+	@FindBy(xpath="//div[1]/paper-listbox[@role='listbox']/paper-item[1]")
+	private WebElement partnerList;
+	
+	@FindBy(xpath=".//div[@class='layout horizontal style-scope table-select']//paper-icon-button[2]/iron-icon[@id='icon']")
+	private WebElement selectPartnerButton;
+	
+	
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -190,6 +203,9 @@ public class ProductPage extends Init{
 		public void clickPartnerDropDown() throws InterruptedException{
 			jswait.loadClick(partnerDropDown);
 		}
+		public void clearPartnerDropDown() throws InterruptedException{
+			partnerDropDown.clear();
+		}
 		public void choosePartner() throws InterruptedException{
 			jswait.loadClick(Partner);
 		}
@@ -197,6 +213,31 @@ public class ProductPage extends Init{
 			jswait.loadClick(YesButton);
 		}
 		
+		public void sharePartner() throws Exception{
+		    
+			//Thread.sleep(3000);
+			//String partnerName=partnerList.getText();
+			//System.out.println(partnerName);
+			//jswait.loadClick(partnerList);
+			jswait.loadClick(selectPartnerButton);
+			jswait.loadClick(productClassShareButton);
+			clickPartnerDropDown();
+			//clearPartnerDropDown();
+			//jswait.loadSendKeys(partnerDropDown, partnerName);
+			
+			//jswait.scrollAndClick(".//vaadin-combo-box-overlay[@id='overlay']", ".//vaadin-combo-box-item[contains(.,'"+partnerName+"')]");
+		//	jswait.scrollAndClick(".//vaadin-combo-box-overlay[@id='overlay']", ".//vaadin-combo-box-item[contains(.,'\"+partnerName+\"')]");
+			Thread.sleep(3000);
+//			assertTrue(driver.findElement(By.xpath(".//vaadin-combo-box-item[contains(.,'"+partnerName+"')]")).isDisplayed());
+			driver.findElement(By.xpath(".//vaadin-combo-box-item[25]")).click();
+			Thread.sleep(3000);
+			clickYesButton();
+			Thread.sleep(3000);
+			
+		}
+		
+		
+
        public void changePartner() throws InterruptedException{
 			
 			clickPartnerDropDown();

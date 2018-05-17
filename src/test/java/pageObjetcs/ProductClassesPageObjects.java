@@ -153,6 +153,7 @@ public class ProductClassesPageObjects extends Init{
 	public void clickAttributes() throws InterruptedException {
 		jswait.loadClick(optionsAttributes);
 	}
+	
 	public void clickShare() throws InterruptedException {
 		jswait.loadClick(optionsShare);
 	}
