@@ -12,6 +12,17 @@ Given neon is loaded
 Then login with "flyops@flytxt.com" and "flytxt"
 Then verify login success
 
+
+@NX-446
+@initBrowser @closeBrowser
+Scenario: Verify checking Remember Me check box-446
+Given neon is loaded
+Then login with "flyops@flytxt.com" and "flytxt" and click checkbox
+Then verify login success
+Then Logout from Neon application
+Then verify login credentials "flyops@flytxt.com" and "flytxt"
+
+
 @NX-429
 @initBrowser
 Scenario: Verify Login with correct username and wrong password
