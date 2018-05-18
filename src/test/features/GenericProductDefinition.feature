@@ -356,11 +356,60 @@ Feature: generic product class
     @NX-7072 @initBrowser 
   Scenario: Verify editing the program after the product is deactivated- 7072
     Given login
-    
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then deactivate the product with attributes from sheet "fullDetails"
+    Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails"
     Then verify create new rule with deactivated product from sheet "fullDetails"
+    
+    
+     @NX-7036 @initBrowser 
+  Scenario: Verify whether product class can be shared across partners- 7036
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then choose product class and share from "TestProductClass"
+    Then choose a partner and share
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then verify product class is displayed is available in the sheet "TestProductClass"
+    
+    
 
   @NX-6966 @initBrowser @closeBrowser
   Scenario: Verify whether products are partner specific- 6966

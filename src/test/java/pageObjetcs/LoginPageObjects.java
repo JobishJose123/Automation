@@ -28,6 +28,13 @@ public class LoginPageObjects extends Init{
     private WebElement forgotPasswordConfirmYes;
 	@FindBy(xpath="//paper-button[contains(.,'No')]")
     private WebElement forgotPasswordConfirmNo;
+	@FindBy(xpath=".//div[@id='checkboxContainer']")
+    private WebElement rememberCheckBox;
+	@FindBy(xpath=".//paper-menu-button[@id='usermenudropdown']")
+    private WebElement systemAdmField;
+	@FindBy(xpath="//span[contains(.,'Logout')]")
+    private WebElement logout;
+	
 //	@FindBy(xpath="//*[@id='loginButton']")
 //    private WebElement loginButton;
 //	@FindBy(xpath="//*[@id='loginButton']")
@@ -52,6 +59,16 @@ public void enterPassword(String password) throws InterruptedException {
 public void clickLoginButton() throws InterruptedException {
 	jswait.loadClick(loginButton);
 }
+public void LogoutFromApplication() throws InterruptedException {
+	jswait.loadClick(systemAdmField);
+	jswait.loadClick(logout);
+	Thread.sleep(2000);
+}
+
+
+
+
+
 public boolean checkLogin() throws InterruptedException {
 	try{
 		landingPage.navigateToPrecisionMarketer();
@@ -65,6 +82,38 @@ public void login(String email,String password) throws InterruptedException {
 	enterPassword(password);
 	clickLoginButton();
 }
+public void loginAndClickCheckBox(String email,String password) throws InterruptedException {
+	enterEmail(email);
+	enterPassword(password);
+	clickRememberMeCheckBox();
+	Thread.sleep(2000);
+	clickLoginButton();
+}
+public void verifyLogincredenitals(String email,String password) throws InterruptedException {
+	
+	String email1=emailFiled.getText();
+	
+	try {
+		
+	if(email.equals(email1));
+	  System.out.println("Email id is displaying");
+	
+	}
+	
+	catch(Exception e) {
+		
+		e.printStackTrace();
+	}
+	/*  
+	enterPassword(password);
+	clickRememberMeCheckBox();
+	Thread.sleep(2000);
+	clickLoginButton();*/
+}
+public void clickRememberMeCheckBox() throws InterruptedException {
+	jswait.loadClick(rememberCheckBox);
+}
+
 public void clickForgotPassword() throws InterruptedException {
 	jswait.loadClick(forgotPassword);
 }

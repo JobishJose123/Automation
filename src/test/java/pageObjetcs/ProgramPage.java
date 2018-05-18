@@ -163,10 +163,10 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//label[contains(.,'Customer List')]/../input")
 	private WebElement customerListField;
 	
-	@FindBy(xpath="//label[contains(.,'Product')]/../input")
+	@FindBy(xpath="//label[text()[contains(.,'Product')]]/../input")
 	private WebElement productField;
 	
-	
+	//label[text()[contains(.,'Offer Catalog')]]/../input
 	
 	@FindBy(xpath="//paper-item[contains(.,'Now')]")
 	private WebElement prmshcselectnow ;
@@ -308,10 +308,23 @@ public class ProgramPage extends Init{
 	
 	public void clickProductField(String name) throws InterruptedException {
 		jswait.loadClick(productField);
-		jswait.loadSendKeys(createProgramName, name);
+		jswait.loadSendKeys(productField, name);
 		
 	}
 	
+	
+	public void verifyProduct(String name) throws InterruptedException {
+		try {
+			assertTrue(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+name+"')]")).isDisplayed());
+			
+		}
+		catch(Exception e) {
+			
+			
+		}
+		
+		
+	}
 	
 	
 	
@@ -805,6 +818,9 @@ public void createNewProgramRuleWithDeactivatedProduct(String name)throws Except
 	clickPorogramProceedButton();
 	Thread.sleep(2000);
 	clickProductField(name);
+	verifyProduct(name);
+	
+	
 	
 }
 	

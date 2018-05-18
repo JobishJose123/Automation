@@ -30,6 +30,16 @@ public class LoginPageSteps extends Init{
 	public void loginWith(String email, String password) throws InterruptedException, IOException {		
 		loginPage.login(email, password);
 	}
+	
+	@Then("^login with \"([^\"]*)\" and \"([^\"]*)\" and click checkbox$")
+	public void loginAndClickCheckbox(String email, String password) throws InterruptedException, IOException {		
+		loginPage.loginAndClickCheckBox(email, password);
+	}
+	@Then("^verify login credentials \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void verifyLoginCredentials(String email, String password) throws InterruptedException, IOException {		
+		loginPage.verifyLogincredenitals(email, password);
+	}
+	
 	@Then("^verify login success$")
 	public void verify_login_success() throws Throwable {
 		assertTrue(loginPage.checkLogin(),"Login Unsuccessful");
@@ -56,5 +66,10 @@ public class LoginPageSteps extends Init{
 		loginPage.clickForgotPassword();
 		Assert.assertFalse(loginPage.checkForgotPasswordConfirmMessage(), "Confirmation displyed without username");
 		jswait.waitUntil("//span[contains(.,'Please provide a registered email address.')]");
+	}
+	
+	@Then("^Logout from Neon application$")
+	public void logout() throws Throwable {
+		loginPage.LogoutFromApplication();
 	}
 }

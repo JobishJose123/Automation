@@ -1,15 +1,11 @@
 package stepDefinitions;
 
-import java.util.List;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Random;
 
-import org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
@@ -179,6 +175,45 @@ public class GenericProductDefinitionSteps extends Init{
 		productClassesPageObjects.clickAttributes();
 		productClassesPageObjects.addNumberAttributes();
 	}
+	
+	@Then("^choose product class and share from \"([^\"]*)\"$")
+	public void choose_product_class_and_share_from(String sheet) throws Throwable {
+		eh.setExcelFile("productClassInputData",sheet);
+		
+		String name = (String) eh.getCell(1, 0);
+		filterWorkaround(name);
+		commonObjects.clickOptionsIcon();
+		productClassesPageObjects.clickShare();
+
+	
+	}
+	
+	@Then("^verify product class is displayed is available in the sheet \"([^\"]*)\"$")
+	public void verify_product_class_dispalyed(String sheet) throws Throwable {
+		eh.setExcelFile("productClassInputData",sheet);
+		String name = (String) eh.getCell(1, 0);
+		filterWorkaround(name);
+		try{
+		
+		assertTrue(driver.findElement(By.xpath(".//vaadin-combo-box-item[contains(.,'"+name+"')]")).isDisplayed());
+		
+		}
+		catch(Exception e) {
+			
+			
+		}
+
+	
+	}
+	
+	
+	
+	@Then("^choose a partner and share$") 
+	public void choosePartnerAndShare() throws Throwable {
+		productPageObjects.sharePartner();
+		//productPageObjects.verifySharePartner();
+	}
+	
 	@Then("^check attribute while editing a product$")
 	public void EditProductCheck() throws Throwable {
 		commonObjects.clickOptionsIcon();
