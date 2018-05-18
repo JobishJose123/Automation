@@ -178,6 +178,8 @@ public class OfferPageObjects extends Init {
 	private WebElement mapVariableFirstVariable;
 	@FindBy(xpath = "//paper-button[text()='OK']")
 	private WebElement mapVariableOkButton;
+	@FindBy(xpath = "//div[@class='buttons style-scope variable-dialog']/paper-button[1]")
+	private WebElement mapVariableCancelButton;
 	@FindBy(xpath = "//iron-data-table[@id='variablesList']//div[@id='header']//data-table-row[contains(.,'Name') and contains(.,'Field') and contains(.,'Limit') and contains(.,'Default')]")
 	private WebElement mapVariableDialogHeader;
 	
@@ -236,6 +238,38 @@ public class OfferPageObjects extends Init {
 	 private WebElement secondTrackSourceDeleteButton;
 	 @FindBy(xpath="//paper-dialog[@id='confirmation']//paper-button[text()='Yes']")
 	 private WebElement trackSourceDeleteConfirmYes;
+	 
+// Creative tab in offer creation
+	 @FindBy(xpath="//variable-dialog/paper-dialog//paper-radio-button[2]/div[@id='radioContainer']")
+	 private WebElement addNewVariableButton;
+	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Name')]/..//input")
+	 private WebElement addVariableName;
+	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Source')]/..//input")
+	 private WebElement addVariableSourceSelector;
+	 @FindBy(xpath="//paper-item[@value='ProfileField']")
+	 private WebElement addVariableSourceProfileSelect;
+	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Field')]/..//input")
+	 private WebElement addVariableFieldSelector;
+	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'Age_q11')]")
+	 private WebElement addVariableFieldAgeSelect;
+	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Limit')]/..//input")
+	 private WebElement addVariableLimit;
+	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Format')]/..//input")
+	 private WebElement addVariableFormatSelector;
+	 @FindBy(xpath="//paper-item[@value='NO_FORMAT']")
+	 private WebElement addVariableFormatNoFormatSelect;
+	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Default')]/..//input")
+	 private WebElement addVariableDefault;
+	 @FindBy(xpath="//iron-data-table[@id='variablesList']//data-table-row/div[1]/data-table-cell[5]/paper-icon-button[@role='button']")
+	 private WebElement addVariableEditButton;
+	 @FindBy(xpath="//define-creative[@id='define-creative-0']//paper-button[contains(text(),'Save')]")
+	 private WebElement addVariableSaveButton;
+	 @FindBy(xpath="//define-creative[@id='define-creative-0']//paper-button[contains(text(),'Cancel')]")
+	 private WebElement addVariableCancelButton;
+	 @FindBy(xpath="//variable-dialog/paper-dialog//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
+	 private WebElement mapVariableFilterButton;
+	 @FindBy(xpath="//iron-data-table[@id='variablesList']//data-table-row/div[1]/data-table-cell[6]/paper-icon-button[@role='button']")
+	 private WebElement addVariableDeleteButton;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -272,6 +306,99 @@ public class OfferPageObjects extends Init {
 //	 private WebElement ;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+//	 @FindBy(xpath="")
+//	 private WebElement ;
+	 
+//  Creative Tab in Offer Creation	functions
+	 public void clickAddNewVariableButton() throws InterruptedException {
+			jswait.loadClick(addNewVariableButton);
+		}
+	 public void clickMapVariableCancelButton() throws InterruptedException {
+			jswait.loadClick(mapVariableCancelButton);
+		}
+	 public void clickAddVariableDeleteButton() throws InterruptedException {
+			jswait.loadClick(addVariableDeleteButton);
+		}
+	 public void clickAddNewVariableSaveButton() throws InterruptedException {
+			jswait.loadClick(addVariableSaveButton);
+		}
+	 public void clickAddNewVariableCancelButton() throws InterruptedException {
+			jswait.loadClick(addVariableCancelButton);
+		}
+	 public void MapVariableFilterName(String name) throws InterruptedException {
+			jswait.loadClick(mapVariableFilterButton);
+			jswait.loadSendKeys("//iron-data-table[@id='variablesList']//paper-dialog[@id='filterDialog']//label[contains(text(),'Name')]/..//input",name);
+			jswait.loadClick("//iron-data-table[@id='variablesList']//paper-dialog[@id='filterDialog']//paper-button[contains(text(),'Apply')]");
+		}
+	 public void clickAddNewVariableEditButton() throws InterruptedException {
+			jswait.loadClick(addVariableEditButton);
+		}
+	 public void enterAddVariableName(String text) throws InterruptedException {
+			jswait.loadSendKeys(addVariableName,text);
+		}
+	 public void enterAddVariableLimit(String text) throws InterruptedException {
+			jswait.loadSendKeys(addVariableLimit,text);
+		}
+	 public void enterAddVariableDefault(String text) throws InterruptedException {
+			jswait.loadSendKeys(addVariableDefault,text);
+		}
+	 public void selectAddVariableSourceProfileField() throws InterruptedException {
+			jswait.loadClick(addVariableSourceSelector);
+			jswait.loadClick(addVariableSourceProfileSelect);
+		}
+	 public void selectAddVariableFormatNoFormat() throws InterruptedException {
+			jswait.loadClick(addVariableFormatSelector);
+			jswait.loadClick(addVariableFormatNoFormatSelect);
+		}
+	 public void selectAddVariableFieldAge() throws InterruptedException {
+			jswait.loadSendKeys(addVariableFieldSelector,"Age_q11");
+			jswait.loadClick(addVariableFieldAgeSelect);
+		}
+	 public void enterFirstDynamicVariableDetails(String name) throws InterruptedException {
+		 enterAddVariableName(name);
+			selectAddVariableSourceProfileField();
+			selectAddVariableFieldAge();
+			selectAddVariableFormatNoFormat();
+			enterAddVariableLimit("100");
+			enterAddVariableDefault("10");
+		}
+	 public void createFirstVariable(String name) throws InterruptedException {
+			clickAddNewVariableButton();
+			enterFirstDynamicVariableDetails(name);
+			clickAddNewVariableSaveButton();
+		}
+	 public void createSecondVariable(String name) throws InterruptedException {
+			clickAddNewVariableButton();
+			enterAddVariableName(name);
+			selectAddVariableSourceProfileField();
+			selectAddVariableFieldAge();
+			selectAddVariableFormatNoFormat();
+			enterAddVariableLimit("100");
+			enterAddVariableDefault("10");
+			clickAddNewVariableSaveButton();
+		}
 	 
 //	Track Tab in Offer Creation	functions
 	 public void clickAddTrackSourceButton() throws InterruptedException {

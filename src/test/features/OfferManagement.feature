@@ -460,7 +460,59 @@ Feature: Test suite on Offer creation
     Then verify adding multiple track source
     Then pass next scenario based on this step
 
-  @NX-931
-  Scenario:Create offer: Track : Verify deleting the added Tracking source. NX-931
+  @NX-931 @closeBrowser
+  Scenario: Create offer: Track : Verify deleting the added Tracking source. NX-931
     Then check previous step and pass this
+    
+    @NX-946 @initBrowser
+  Scenario: Create offer: Creative: Verify cancelling the added dynamic variable NX-946
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify cancelling added variable
+    Then pass next scenario based on this step
+
+  @NX-948 
+  Scenario: Create offer: Creative: Verify adding new dynamic tag variable with consumer profile source NX-948
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-951 
+  Scenario: Create offer: Creative: Verify saving the newly added dynamic variable NX-951
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-957
+  Scenario: Create offer: Creative: Verify the newly added dynamic variable in a select variable option. NX-957
+    Then check previous step and pass this
+    
+    @NX-947
+  Scenario: Create offer: Creative: Verify the label message after selecting the variables. NX-947
+    Then verify label message after variable selection
+    
+    @NX-935 
+  Scenario: Create offer: Creative: Verify adding multiple variables for the dynamic tag NX-935
+    Then verify adding multiple dynamic variables
+    
+    @NX-936 
+  Scenario: Create offer: Creative: Verify editing the added dynamic variable from Select a Variable option NX-936
+    Then verify editing added variable
+    
+    @NX-944
+  Scenario: Create offer: Creative: Verify deleting the added dynamic variable from Select a Variable option NX-944
+    Then verify deleting added variable
+    Then pass next scenario based on this step
+
+  @NX-945 @closeBrowser
+  Scenario: Create offer: Creative: Verify save option after selecting the dynamic variable NX-945
+    Then check previous step and pass this
+    
+    @NX-955 @initBrowser
+  Scenario: Create offer: Creative: Verify cancelling the newly added dynamic variable NX-955
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify cancelling newly added variable
     

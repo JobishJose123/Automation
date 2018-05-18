@@ -591,4 +591,80 @@ public class OfferSteps extends Init {
 		offerPageObjects.clicktrackSourceDeleteConfirmYes();
 		Assert.assertTrue(offerPageObjects.getNumberOfTrackSources()==1, "issue in current count of track sources");
 	}
+	@Then("^verify cancelling added variable$")
+	public void verifyCancelDynamicVariables() throws Throwable {
+		proceedToCreativeTab();
+		offerPageObjects.selectCreativeLanguageEnglish();
+		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.createFirstVariable("sel_var1");
+		offerPageObjects.createSecondVariable("sel_var2");
+		offerPageObjects.MapVariableFilterName("sel_var1");
+		offerPageObjects.clickMapVariableFirstVariable();
+		offerPageObjects.clickMapVariableCancelButton();
+		try{
+			jswait.waitUntil("//h3[contains(.,'Variables used:')]/following::label[contains(.,'sel_var1')]");
+			Assert.assertTrue(false, "variable selected after cancel");
+		}catch(Exception e) {
+			
+		}
+	}
+	@Then("^verify label message after variable selection$")
+	public void verifyLabelAfterSelectingDynamicVariables() throws Throwable {
+		offerPageObjects.clickMapVariableIcon();
+		jswait.waitUntil("//label[text()='(0 variable selected)']");
+		offerPageObjects.MapVariableFilterName("sel_var1");
+		offerPageObjects.clickMapVariableFirstVariable();
+		jswait.waitUntil("//label[text()='(1 variable selected)']");
+	}
+	@Then("^verify adding multiple dynamic variables$")
+	public void verifyAddingMultipleDynamicVariables() throws Throwable {
+		offerPageObjects.clickMapVariableOkButton();
+		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.MapVariableFilterName("sel_var2");
+		offerPageObjects.clickMapVariableFirstVariable();
+		offerPageObjects.clickMapVariableOkButton();
+		jswait.waitUntil("//h3[contains(.,'Variables used:')]/following::label[contains(.,'sel_var1')]");
+		jswait.waitUntil("//h3[contains(.,'Variables used:')]/following::label[contains(.,'sel_var2')]");
+	}
+	@Then("^verify editing added variable$")
+	public void verifyEditingDynamicVariables() throws Throwable {
+		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.MapVariableFilterName("sel_var1");
+		offerPageObjects.clickAddNewVariableEditButton();
+		offerPageObjects.enterAddVariableDefault("66545675456456654645");
+		offerPageObjects.clickAddNewVariableSaveButton();
+		offerPageObjects.MapVariableFilterName("sel_var1");
+		jswait.waitUntil("//data-table-cell[contains(.,'66545675456456654645')]");
+	}
+	@Then("^verify deleting added variable$")
+	public void verifyDeletingDynamicVariables() throws Throwable {
+		offerPageObjects.clickAddVariableDeleteButton();
+		offerPageObjects.MapVariableFilterName("sel_var2");
+		offerPageObjects.clickAddVariableDeleteButton();
+		offerPageObjects.MapVariableFilterName("sel_var2");
+		try {
+			offerPageObjects.clickAddVariableDeleteButton();
+			Assert.assertTrue(false, "variable exists after deletion");
+		}catch(Exception e) {
+			
+		}
+		
+	}
+	@Then("^verify cancelling newly added variable$")
+	public void verifyCancellingNeDynamicVariables() throws Throwable {
+		proceedToCreativeTab();
+		offerPageObjects.selectCreativeLanguageEnglish();
+		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.clickAddNewVariableButton();
+		offerPageObjects.enterFirstDynamicVariableDetails("sel_var");
+		offerPageObjects.clickAddNewVariableCancelButton();
+		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.MapVariableFilterName("sel_var");
+		try {
+			offerPageObjects.clickAddVariableDeleteButton();
+			Assert.assertTrue(false, "variable exists after cancel button");
+		}catch(Exception e) {
+			
+		}
+	}
 }
