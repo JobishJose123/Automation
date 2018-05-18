@@ -43,7 +43,6 @@ Then saving product with multiple benefits
 
 
 
-#
 @NX-1011
 @initBrowser @closeBrowser
 Scenario: Products Grid: Verify the product details displayed in the Products screen NX-1011

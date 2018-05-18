@@ -152,7 +152,7 @@ public class OfferSteps extends Init {
 		offerPageObjects.checkProductContextHelp();
 	}
 
-	@Then("^choose offer from sheet \"([^\"]*)\"$")
+	@Then("^filter offer from sheet \"([^\"]*)\"$")
 	public void chooseOffer(String sheet) throws Throwable {
 
 		offerPageObjects.chooseOffer(sheet);
@@ -501,7 +501,7 @@ public class OfferSteps extends Init {
 		proceedToTrackTab();
 		offerPageObjects.enterTrackTabDetails(eh);
 		offerPageObjects.createFirstDefaultTrackingRuleCondition();
-		offerPageObjects.clickEditRule();
+		offerPageObjects.clickAddRuleButton();
 	}
 	@Then("^verify validation of rule name$")
 	public void verifyAddingMultipleCondiionsInRule() throws Throwable {
@@ -543,9 +543,9 @@ public class OfferSteps extends Init {
 		proceedToTrackTab();
 		offerPageObjects.enterTrackTabDetails(eh);
 		offerPageObjects.createFirstDefaultTrackingRuleCondition("priorityCheck1");
-		offerPageObjects.createFirstDefaultTrackingRuleCondition("priorityCheck2");
+		
 		try{
-			offerPageObjects.clickProceedButton();
+			offerPageObjects.createFirstDefaultTrackingRuleCondition("priorityCheck2");
 			Assert.assertTrue(false, "rules saved with same priority");
 		}catch(Exception e) {
 			

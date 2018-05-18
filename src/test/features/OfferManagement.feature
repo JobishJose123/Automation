@@ -167,7 +167,7 @@ Feature: Test suite on Offer creation
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "usageBasedWAP" with product "singleProductPage"
-    Then choose offer from sheet "usageBasedWAP"
+    Then filter offer from sheet "usageBasedWAP"
     Then edit offer
     Then remove product for offer from sheet "usageBasedWAP"
 
@@ -411,7 +411,7 @@ Feature: Test suite on Offer creation
   Scenario: Create offer: Track : Verify the validations for Rule name and value textbox in Add Tracking Rule window NX-903
     Then verify validation of rule name
 
-  @NX-930
+  @NX-930 @closeBrowser
   Scenario: Create offer: Track : Verify deleting the added tracking rule. NX-930
     Then verify deleting added tracking rule
 
@@ -423,11 +423,11 @@ Feature: Test suite on Offer creation
     Then navigate to offers
     Then verify cancelling tracking rule
 
-  @NX-909 @closeBrowser
+  @NX-909 
   Scenario: Create offer: Track : Verify adding multiple rules for the same track source. NX-909
     Then verify adding multiple tracking rule
     
-    @NX-910 @initBrowser
+    @NX-910 @initBrowser @closeBrowser
   Scenario: Create offer: Track : Verify adding multiple rules with same priority NX-910
     Given login
     When navigate to precision marketer

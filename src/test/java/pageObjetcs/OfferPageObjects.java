@@ -31,7 +31,7 @@ public class OfferPageObjects extends Init {
 		PageFactory.initElements(driver, this);
 	}
 
-	final String TRACK_SOURCE = "A_Track_Sel";
+	final String TRACK_SOURCE = "A_track_Sel";
 	@FindBy(xpath = ".//*[@id='sym2']")
 	private WebElement offerButton;
 	@FindBy(xpath = "//paper-button[contains(.,'Create New Offer')]")
@@ -48,6 +48,8 @@ public class OfferPageObjects extends Init {
 	private WebElement offerCategory;
 	@FindBy(xpath = "//*[contains(.,'Create New Offer')]/following::paper-button[contains(.,'Proceed')]")
 	private WebElement offerProceedButton;
+	@FindBy(xpath = "//paper-button[contains(.,'Proceed')]")
+	private WebElement offerEditProceedButton;
 	@FindBy(xpath = ".//*[@id='check']/div/iron-pages/offer-products/form/div/div[2]/paper-button")
 	private WebElement offerAddProductButton;
 	@FindBy(xpath = "//*[@id='productDialog']/div[2]/paper-button[2]")
@@ -118,7 +120,7 @@ public class OfferPageObjects extends Init {
 	private WebElement productContextHelp;
 	@FindBy(xpath = ".//label[contains(.,'Tracking Source and Rules')]")
 	private List<WebElement> trackingSourceRulesTitle;
-	@FindBy(xpath = ".//form[@id='sourceTrackRuleForm']//paper-checkbox[@id='setDefaultTrack']")
+	@FindBy(xpath = ".//form[@id='sourceTrackRuleForm']//paper-checkbox[@id='setDefaultTrack']/..")
 	private WebElement setAsDefault;
 	@FindBy(xpath = ".//div[@class='layout horizontal style-scope offer-track']//paper-button[contains(.,'Add')]")
 	private WebElement addTrackButton;
@@ -395,7 +397,6 @@ public class OfferPageObjects extends Init {
 			selectPriority("3");
 			createTrackRuleCondition();
 			clickaddTrackingRuleSaveButton();
-			createSecondTrackRuleCondition();
 			checkRuleCreation("secondRule");
 	 }
 	 
@@ -407,6 +408,9 @@ public class OfferPageObjects extends Init {
 
 	public void clickRemoveTrackYesButton() throws InterruptedException {
 		jswait.loadClick(removeTrackYesButton);
+	}
+	public void clickOfferEditProceedButton() throws InterruptedException {
+		jswait.loadClick(offerEditProceedButton);
 	}
 
 	public void clickAddProductAfterOneProduct() throws InterruptedException {
@@ -641,16 +645,26 @@ public class OfferPageObjects extends Init {
 
 	public void verifySetAsDefaultCheckbox() throws Throwable {
 
-		if (trackingSourceRulesTitle.size() == 1)
-			assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
+		try {
+			jswait.loadClick(setAsDefault);
+			 assertFalse("Set as default checkbox is displaying with one track source", true);
+		}catch(Exception e){
+			
+		}
 
 		clickAddTrackButton();
-		assertTrue("Set as default checkbox is not displaying", setAsDefault.isDisplayed());
+		jswait.loadClick(setAsDefault);
+
 		// assertTrue("Set as default checkbox is not selected",
 		// setAsDefaultCheckbox.isSelected());
 		clickRemoveTrackRuleButton();
 		clickRemoveTrackYesButton();
-		assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
+		try {
+			jswait.loadClick(setAsDefault);
+			 assertFalse("Set as default checkbox is displaying with one track source", true);
+		}catch(Exception e){
+			
+		}
 
 	}
 
@@ -763,7 +777,7 @@ public class OfferPageObjects extends Init {
 	}
 
 	public void removeProduct(String sheet) throws Throwable {
-		clickProceedButton();
+		clickOfferEditProceedButton();
 
 		clickProductRemoveIcon();
 		/*

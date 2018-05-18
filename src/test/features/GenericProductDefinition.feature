@@ -225,6 +225,8 @@ Feature: generic product class
 
   @NX-7019
   Scenario: Verify whether the product listing page shows the name and description NX-7019
+  Then click create new product button
+    Then create selClass product from sheet "fullDetails"
     Then verify name and description "fullDetails"
 
   @NX-7020
@@ -416,6 +418,6 @@ Feature: generic product class
     Then navigate to offer management
     Then navigate to offers
     Then click on create new ofer button
-    Then create new offer from sheet "informationalType" with product "fullDetails"
+    Then create new offer from sheet "informationalWAP" with product "fullDetails"
 
   
