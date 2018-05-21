@@ -340,7 +340,7 @@ Then verify events row
 
 
 @NX-2823   
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Verify whether Customer Support tab shows the sent time,conversion time,reward time and status of reward-2823
 Given login
 Then navigate to precision marketer

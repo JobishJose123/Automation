@@ -1,5 +1,6 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
@@ -116,6 +117,23 @@ public class CustomerProfilePage extends Init{
 	
 	@FindBy(xpath=".//div[contains(text(),' No events available. Please try changing your filter settings.')]")
 	private WebElement noEventsMessage;
+	@FindBy(xpath=".//div[contains(.,'No fulfillments present.')]")
+	private WebElement noFulfillmentsPresent;
+	@FindBy(xpath=".//div[contains(.,'No conversions present.')]")
+	private WebElement noConversionsPresent;
+	
+	
+	@FindBy(xpath=".//div[contains(text(),'No message sent')]")
+	private WebElement noMessageSent;
+	@FindBy(xpath=".//label[contains(text(),'Conversion Time')]")
+	private WebElement conversionTime;
+	@FindBy(xpath=".//label[contains(text(),'Reward Time')]")
+	private WebElement rewardTime;
+	@FindBy(xpath=".//label[contains(text(),'Reward Status')]")
+	private WebElement rewardStatus;
+	@FindBy(xpath=".//label[contains(text(),'Reward Value')]")
+	private WebElement rewardValue;
+	
 	
 	@FindBy(xpath="//div[@val='event']//iron-list[@id='list']//data-table-row")
 	private WebElement eventsTable;
@@ -505,10 +523,50 @@ public class CustomerProfilePage extends Init{
  public void verifyCustomerSupportEventsTimeDetails() throws Exception {
 	  
 	        jswait.loadClick(customerSupportSearchEvents90);
+	        Thread.sleep(2000);
+	        int size=customerSupportEventsTableList.size();
+	        System.out.println("Size= "+size);
+	        if(customerSupportEventsTableList.size()>0) {
+	        	
+	        for(WebElement event : customerSupportEventsTableList)  {
+	     	   
+	     	   Thread.sleep(2000);
+	     	   jswait.loadClick(event);
+	     	   Thread.sleep(4000);
+	     	  
+	     	   try {
+	     		     Exception SentExc=new Exception("No message sent is dispalyed");
+	     		   if(noFulfillmentsPresent.isDisplayed()) {
+	     		   // assertFalse(noMessageSent.isDisplayed());
+	     		   if(noMessageSent.isDisplayed()==true)
+	     			   throw SentExc;
+	     		   
+	     		   }
+	     		  
+	     		   
+	     	   }
+	     	   
+	     	   catch(Exception e) {
+	     		   
+	     		  if(noConversionsPresent.isDisplayed()==false) {
+		     		    assertTrue(conversionTime.isDisplayed());
+		     		   
+		     		   }
+	     		   else if(noFulfillmentsPresent.isDisplayed()==false) {
+
+	     			  assertTrue(rewardTime.isDisplayed());
+	     			 assertTrue(rewardValue.isDisplayed());
+	     			assertTrue(rewardStatus.isDisplayed());
+	     			  
+	     		   }
+	     		  
+	     		   
+	     		  
+	     	   }   
+	        }
+	       
+	        }
 	        
-	        
-	        
-	  
 	   }
  
 
@@ -751,5 +809,8 @@ public class CustomerProfilePage extends Init{
    }*/
   
    }
+   
+   
+   
 
 }
