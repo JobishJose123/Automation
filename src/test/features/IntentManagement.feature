@@ -189,7 +189,7 @@ Then verify create program page "programdetails"
 Then click on edit button of programs
 
 
-@IM-4444
+@NX-1236
 @initBrowser @closeBrowser
 Scenario: Verify creating a new the program in Intent management
 Given login
@@ -254,7 +254,7 @@ Then navigate to programs
 Then verify create program page "programdetails"
 Then verify delete a program "programdetails"
 @NX-733
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify duplicate TP entry on touchpoint tab
 Given login
 Then navigate to intent management
@@ -263,7 +263,7 @@ Then verify create program page "programdetails"
 Then Verify delete TP entry on touchpoint tab
 
 @NX-4817
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify editing the option from All Days to Specific Days
 Given login
 Then navigate to intent management
@@ -272,7 +272,7 @@ Then verify create program page "programdetails"
 Then edit details schedule Serve on Specific Days "programdetails"
 
 @NX-4818
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify editing the option from All Days to Specific Days
 Given login
 Then navigate to intent management
@@ -280,7 +280,7 @@ Then navigate to programs
 Then verify create program page "programdetails"
 Then edit details from specific days to all days "programdetails"
 @NX-4815
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: verify create program page with refreshon daily serve on Specific days
 Given login
 Then navigate to intent management
@@ -288,7 +288,7 @@ Then navigate to programs
 Then verify create program page "programdetails"
 Then verify create program page with refreshon daily serve on Specific days "programdetails"
 @NX-1204
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify create program page filters
 Given login
 Then navigate to intent management
@@ -297,7 +297,7 @@ Then verify create program page "programdetails"
 Then verify filter for programs "programdetails"
 
 @NX-1186 
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify create program page Serve On All days option.
 Given login
 Then navigate to intent management
@@ -305,7 +305,7 @@ Then navigate to programs
 Then verify create program page Serve On All days option "programdetails"
 
 @NX-1183
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify create program page refresh at option.
 Given login
 Then navigate to intent management
@@ -313,7 +313,7 @@ Then navigate to programs
 Then verify create program page Refresh at option "programdetails"
 
 @NX-1233
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify create program page Edit options.
 Given login
 Then navigate to intent management
@@ -322,7 +322,7 @@ Then verify create program page "programdetails"
 Then create program page verify edit option "programdetails"
 
 @NX-1191
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify create program page Serve On Specific days option.
 Given login
 Then navigate to intent management
@@ -330,7 +330,7 @@ Then navigate to programs
 Then verify create program page Serve On Specific days option "programdetails"
 
 @NX-1200
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify create program page timezone change option.
 Given login
 Then navigate to intent management
@@ -338,7 +338,7 @@ Then navigate to programs
 Then verify create program page timezone change option "programdetails"
 
 @NX-1199
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: verify create program page timezone option.
 Given login
 Then navigate to intent management
@@ -346,9 +346,35 @@ Then navigate to programs
 Then verify create program page timezone option "programdetails"
 
 @NX-1178
-@initBrowser
-Scenario: verify create program page timezone option.
+@initBrowser @closeBrowser
+Scenario: verify create program page Refreshcycle option.
 Given login
 Then navigate to intent management
 Then navigate to programs
 Then verify create program page refreshcycle option "programdetails"
+
+@NX-1230
+@initBrowser
+Scenario: create program Verify More Actions.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then create program Verify More Actions
+
+@NX-1165
+@initBrowser
+Scenario: create program Verify Start At option.
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then verify Start At option "programdetails"
+
+@NX-1580
+@initBrowser 
+Scenario: Verify edit API touchpoint creation 
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to api
+Then create api touchpoint from sheet "apiTouchpoint"
+Then edit api touchpoint from sheet "apiTouchpoint"

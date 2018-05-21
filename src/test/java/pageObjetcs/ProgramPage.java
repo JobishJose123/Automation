@@ -68,8 +68,8 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Proceed')]")
 	private WebElement createProgramProceedButton;
-	@FindBy(xpath=".//paper-item[contains(.,'View Rules')]")
-	private WebElement programViewRulesButton;
+	@FindBy(xpath=".//paper-card[contains(.,'Edit')]")
+	private WebElement programEditButton;
 	
 	@FindBy(xpath="//h5[contains(.,'Basic Information')]/..//label[contains(.,'Name')]/..//*[@id='input']")
 	private WebElement createProgramName;
@@ -111,6 +111,10 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//paper-item[text()='SMS']")
 	private WebElement addTouchpointSelectSMS;
 	
+	
+	@FindBy(xpath=".//data-table-row [@id='item20']//paper-icon-button[1]")
+	private WebElement Apiedittouchpoints;
+	
 	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Keyword Aliases']/..//textarea")
 	private WebElement addTouchpointKeywordAliases;
 	
@@ -138,38 +142,20 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//label[text()[contains(.,'Offer Catalog')]]/../input")
 	private WebElement programofferclick;
 	
-	
-	
-	@FindBy(xpath="//paper-button[contains(.,'Create New Rule')]")
-	private WebElement createNewRuleButton;
-	
-	@FindBy(xpath="//paper-button[contains(.,'Save')]")
-	private WebElement saveRuleButton;
-	
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
 	private WebElement pgmfirstofferselect ;
-	
-	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
-	private WebElement selectfirstCustomerList ;
 	
 	@FindBy(xpath="//form[@id='scheduleForm']//label[text()='Start Date']/..//*[@id='input']")
 	private WebElement programschstart;
 	
 	@FindBy(xpath="//label[contains(.,'End Date')]/../input")
 	private WebElement programschend;
-	@FindBy(xpath=".//div[@class='input-content label-is-floating style-scope paper-input-container']//label[contains(.,'Rule Name')]/../input")
-	private WebElement enterRuleName;
-	
-	@FindBy(xpath="//label[contains(.,'Customer List')]/../input")
-	private WebElement customerListField;
-	
-	@FindBy(xpath="//label[text()[contains(.,'Product')]]/../input")
-	private WebElement productField;
-	
-	//label[text()[contains(.,'Offer Catalog')]]/../input
 	
 	@FindBy(xpath="//paper-item[contains(.,'Now')]")
 	private WebElement prmshcselectnow ;
+	
+	@FindBy(xpath="//paper-item[contains(.,'At')]")
+	private WebElement prmstartAt ;
 	
 	@FindBy(xpath="//paper-item[contains(.,'No End')]")
 	private WebElement prmshcselectnoend ;
@@ -255,8 +241,8 @@ public class ProgramPage extends Init{
 	private WebElement programtimezone ;
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'Kathmandu')]")
 	private WebElement programtimezonechange;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath=".//*[@id='wizard']/li[contains(.,'Schedule')]")
+	private WebElement programScheduletab ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -288,48 +274,9 @@ public class ProgramPage extends Init{
 		jswait.loadClick(createProgramProceedButton);
 	}
 	
-	public void clickSaveRuleButton() throws InterruptedException {
-		jswait.loadClick(saveRuleButton);
+	public void clickPorogramEditButton() throws InterruptedException {
+		jswait.loadClick(programEditButton);
 	}
-	
-	
-	
-	public void clickPorogramViewRulesButton() throws InterruptedException {
-		jswait.loadClick(programViewRulesButton);
-	}
-	
-	public void clickCreateNewRuleButton() throws InterruptedException {
-		jswait.loadClick(createNewRuleButton);
-	}
-	
-	public void clickCustomerListField() throws InterruptedException {
-		jswait.loadClick(customerListField);
-	}
-	
-	public void clickProductField(String name) throws InterruptedException {
-		jswait.loadClick(productField);
-		jswait.loadSendKeys(productField, name);
-		
-	}
-	
-	
-	public void verifyProduct(String name) throws InterruptedException {
-		try {
-			assertTrue(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+name+"')]")).isDisplayed());
-			
-		}
-		catch(Exception e) {
-			
-			
-		}
-		
-		
-	}
-	
-	
-	
-	
-	
 	public void checkCancelButtonCreateProgram() throws InterruptedException {
 		clickCreateProgramButton();
 		clickCreateProgramCancelButton();
@@ -503,12 +450,6 @@ public class ProgramPage extends Init{
 		jswait.loadClick(pgmfirstofferselect);
 	}
 	
-	public void selectFirstCustomerList() throws InterruptedException {
-		jswait.loadClick(selectfirstCustomerList);
-	}
-	
-	
-	
 	
 	public void createProgramTouchpointGridName() throws InterruptedException {
 		jswait.loadClick(createProgramTouchpointGridName);
@@ -537,6 +478,16 @@ public class ProgramPage extends Init{
 			  System.out.println(e+"now ");
 	   	 }}
 		
+	
+	//------------------------------------------------------------------------------//
+	public void Apiedittouchpoints() throws InterruptedException {
+		jswait.loadClick(Apiedittouchpoints);
+	}
+	
+	
+	
+	
+	
 	
 	
 	
@@ -586,6 +537,13 @@ public class ProgramPage extends Init{
 	public void prmshcserveonalldays() throws InterruptedException {
 		jswait.loadClick(prmshcserveonalldays);
 		}
+	
+	public void prmstartAt() throws InterruptedException {
+		jswait.loadClick(prmstartAt);
+		}
+	
+	
+	
 
 	public void prmshcserveonalldayscheck() throws Exception {
 		try{
@@ -764,15 +722,6 @@ public void touchpointpgmdeletecheck() throws Exception{
 			
 		}
 	}
-	
-	public void enterRuleName() throws Exception {
-		
-		jswait.loadClick(enterRuleName);
-		jswait.loadSendKeys(enterRuleName, "Test Rule Name");
-		
-	}
-	
-	
 
 	
 	public void programrefreshcyclecheck() throws Exception {
@@ -805,22 +754,14 @@ public void enterProgramDetailsWithDeactivatedProduct(String name, String sheet)
 		
 	}
 
-public void createNewProgramRuleWithDeactivatedProduct(String name)throws Exception {
-	
-	clickCreateNewRuleButton();
-	//enterRuleName();
-	clickSaveRuleButton();
-	Thread.sleep(2000);
-	clickCustomerListField();
-	Thread.sleep(2000);
-	selectFirstCustomerList();
-	Thread.sleep(2000);
-	clickPorogramProceedButton();
-	Thread.sleep(2000);
-	clickProductField(name);
-	verifyProduct(name);
+public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)throws InterruptedException {
 	
 	
+	
+	programofferclick();
+	programofferclear();
+	Thread.sleep(4000);
+	selectOfferCatalogfromsheet(sheet);
 	
 }
 	
@@ -843,7 +784,65 @@ public void createNewProgramRuleWithDeactivatedProduct(String name)throws Except
 		
 		
 	}
+   
+   
+   
+   public void prmstartAtcheck() throws Exception {
+		Thread.sleep(5000);
+		
+		
+		//jswait.checkVisible(prmshcselectweeks);
+		//jswait.checkVisible(prmshcselectdays);
+		
+		try {
+			jswait.checkVisible(prmstartAt);
+			
+			}
+			catch(Exception e) {
+				
+				
+			}
+		}
+   
+   
+   
+	public void programmoreoptionscheck() throws Exception {
+		Thread.sleep(5000);
+		
+		
+		//jswait.checkVisible(prmshcselectweeks);
+		//jswait.checkVisible(prmshcselectdays);
+		
+		try {
+			assertTrue(driver.findElement(By.xpath("//paper-item[contains(.,'Delete')]")).isDisplayed());
+			assertTrue(driver.findElement(By.xpath("//paper-item[contains(.,'Edit')]")).isDisplayed());
+			
+			}
+			catch(Exception e) {
+				
+				
+			}
+		}
 	
+	public void programschedulecheck() throws Exception {
+		Thread.sleep(5000);
+		
+		
+		//jswait.checkVisible(prmshcselectweeks);
+		//jswait.checkVisible(prmshcselectdays);
+		
+		try {
+			assertTrue(driver.findElement(By.xpath(".//*[@id='wizard']/li[contains(.,'Schedule')]")).isEnabled());
+			jswait.checkVisible(createProgramSaveButton);
+			jswait.checkVisible(createProgramCancelButton);
+						
+			
+			}
+			catch(Exception e) {
+				
+				
+			}
+		}
 	
 	
 }

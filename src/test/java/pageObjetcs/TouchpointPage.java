@@ -62,6 +62,8 @@ public class TouchpointPage extends Init{
 	private WebElement apiFormOrderingRuleSelector;
 	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'FIFO')]")
 	private WebElement apiFormOrderingRuleFIFO;
+	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'LIFO')]")
+	private WebElement apiFormOrderingRuleLIFO;
 	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'Rule-based')]")
 	private WebElement apiFormOrderingLogicRuleBased;
 	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'Hours')]")
@@ -90,6 +92,19 @@ public class TouchpointPage extends Init{
 	private WebElement apiFormApplicationTypeGeneral;
 	@FindBy(xpath="//paper-item[contains(.,'Accepted Event')]")
 	private WebElement apiFormEventForTrackingAcceptedEvent;
+	@FindBy(xpath="((.//data-table-cell[@class='api-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
+	private WebElement Apiedittouchpoints;
+	@FindBy(xpath="(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited apiTouch')]")
+	private WebElement apiedittouchpointcheck ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+	
 	
 	
 	
@@ -128,6 +143,16 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormDialogBox;
 	@FindBy(xpath=".//*[@id='addSmsModal']//h2")
 	private WebElement smsFormHeading;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 	
@@ -417,6 +442,12 @@ public class TouchpointPage extends Init{
 			jswait.loadClick(apiFormOrderingRuleSelector);
 			jswait.loadClick(apiFormOrderingRuleFIFO);
 		}
+		
+		public void apiSelectOrderingRulelifo() throws InterruptedException {
+			jswait.loadClick(apiFormOrderingRuleSelector);
+			jswait.loadClick(apiFormOrderingRuleLIFO);
+		}
+		
 		public void apiEnterRefreshEvery(String name) throws InterruptedException {
 			jswait.loadSendKeys(apiFormRefreshEvery, name);
 		}
@@ -446,11 +477,58 @@ public class TouchpointPage extends Init{
 			apiSelectTimeInterval();
 			apiEnterMaximumOffers("5");
 		}
+		
+		public void editTouchpointDetails(String keyword) throws InterruptedException {
+			apiEnterTouchpointName(keyword);
+			apiSelectApplicationType();
+			apiSelectEventForTracking();
+			apiSelectOrderingLogic();
+			apiSelectOrderingRulelifo();
+			apiEnterRefreshEvery("5");
+			apiSelectTimeInterval();
+			apiEnterMaximumOffers("8");
+			apiClickSave();
+		}
+		
 		public void createApiTouchpoint(String keyword) throws InterruptedException {
 			clickCreateNewTouchpoint();
 			enterApiTouchpointDetails(keyword);
 			apiClickSave();
 		}
+		
+		public void editApiTouchpoint(String keyword) throws InterruptedException {
+			
+			editTouchpointDetails(keyword);
+			apiClickSave();
+		}
+		
+		
+		
+		public void Apiedittouchpointsclick() throws InterruptedException {
+			Thread.sleep(5000);
+			jswait.checkClickable(Apiedittouchpoints);
+			boolean flag=jswait.checkVisible(Apiedittouchpoints);
+			if (flag==true){
+			jswait.loadClick(Apiedittouchpoints);}
+			else{System.out.println("cant find element");}
+			
+			
+		}
+		
+		public void apiedittouchpointcheck(String name) throws Exception {
+			Thread.sleep(5000);
+			boolean flag=jswait.checkVisible(apiedittouchpointcheck);
+			String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited apiTouch')]");
+			System.out.println(newname);
+			if (newname==name){
+			System.out.println("edit success");}
+			else{System.out.println("failed");}
+			
+			
+		}
+		
+		
+		
 		public String getApiFormHeading() throws InterruptedException {
 			Exception wrongForm = new Exception("wrong form displayed");
 			try{

@@ -878,6 +878,44 @@ System.out.println(editname+"program has edited successfully");
 		programPage.programtimezonecheck();
 		
 	}
+	
+	@Then("^verify create program page timezone change option \"([^\"]*)\"$")
+	public void verify_create_program_page_timezone_change_option(String sheet) throws Throwable {
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputData", sheet);
+    	Random rn = new Random();
+    	int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) programExcel.getCell(1, 0);
+  		name =  name.replaceAll("[0-9]", "")+n;
+ 		programExcel.setCell(1, 0, name);
+ 		Thread.sleep(4000);
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetails(name);
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		programPage.programschserveon(); 
+		programPage.prmshcserveonalldays();
+		programPage.programtimezone();
+		programPage.programtimezonechange();
+		programPage.programtimezonecheck();
+		
+	}
+	
+	
 	@Then("^verify create program page with deactivated product \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\"$")
 	public void verify_create_program_page_with_deactivated_product(String sheet1, String sheet2) throws Throwable {
 		Thread.sleep(4000);
@@ -947,24 +985,129 @@ System.out.println(editname+"program has edited successfully");
 			String name = (String) eh.getCell(1, 0);
 		    filterWorkaround(name);
 		    commonObjects.clickOptionsIcon();
-		    programPage.clickPorogramViewRulesButton();
+		    programPage.clickPorogramEditButton();
 		 
 		 
 	 }
-	 @Then("^verify create new rule with deactivated product from sheet \"([^\"]*)\"$")
-		public void verify_edit_program_page_with_deactivated_product(String sheet1) throws Throwable {
+	 @Then("^verify edit program page with deactivated product \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\"$")
+		public void verify_edit_program_page_with_deactivated_product(String sheet1, String sheet2) throws Throwable {
 			Thread.sleep(4000);
 	    	ExcelHelper programExcel = new ExcelHelper();
-	    	programExcel.setExcelFile("productInputData", sheet1);
-	    	
+	    	programExcel.setExcelFile("programInputData", sheet1);
+	    	Random rn = new Random();
+	    	int  n = rn.nextInt(5000) + 1;
 	 		String name = (String) programExcel.getCell(1, 0);
+	  		name =  name.replaceAll("[0-9]", "")+n;
+	 		programExcel.setCell(1, 0, name);
 	 		Thread.sleep(4000);
 			//programPage.clickCreateProgramButton();
-			programPage.createNewProgramRuleWithDeactivatedProduct(name);
+			programPage.editProgramDetailsWithDeactivatedProduct(name,sheet2);
 			
 			
 		}	   
 	
+		@Then("^verify create program page refreshcycle option \"([^\"]*)\"$")
+		public void verify_create_program_page_refreshoption(String sheet) throws Throwable {
+			Thread.sleep(4000);
+	    	ExcelHelper programExcel = new ExcelHelper();
+	    	programExcel.setExcelFile("programInputData", sheet);
+	    	Random rn = new Random();
+	    	int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) programExcel.getCell(1, 0);
+	  		name =  name.replaceAll("[0-9]", "")+n;
+	 		programExcel.setCell(1, 0, name);
+	 		Thread.sleep(4000);
+			programPage.clickCreateProgramButton();
+			programPage.enterProgramDetails(name);
+			programPage.clickCreateProgramAddTouchpointButton();
+			programPage.addTouchPointToProgram();
+			programPage.clickPorogramProceedButton();
+			programPage.programschstart();
+			programPage.prmshcselectnow();
+			programPage.programschend();
+			programPage.prmshcselectnoend();
+			programPage.programschrefreshcycle();
+			programPage.programrefreshcyclecheck();
+		}
+		
+		
+		@Then("^create program Verify More Actions$")
+		public void moreoptionsprograms(String sheet) throws Throwable {
+			
+			Thread.sleep(4000);
+	    	ExcelHelper programExcel = new ExcelHelper();
+	    	programExcel.setExcelFile("programInputData", sheet);
+	    	Random rn = new Random();
+	    	int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) programExcel.getCell(1, 0);
+	  		name =  name.replaceAll("[0-9]", "")+n;
+	 		programExcel.setCell(1, 0, name);
+	 		Thread.sleep(4000);
+			programPage.clickCreateProgramButton();
+			programPage.enterProgramDetails(name);
+			programPage.clickCreateProgramAddTouchpointButton();
+			programPage.addTouchPointToProgram();
+			programPage.clickPorogramProceedButton();
+			programPage.programschedulecheck();
+			
+			}
 	
-	
+		
+		@Then("^verify Schedule tab \"([^\"]*)\"$")
+		public void verify_Schedule_tab() throws Throwable {
+			
+			Thread.sleep(9000);
+			commonObjects.filterName("autoprogram");
+			Thread.sleep(5000);
+			commonObjects.clickOptionsIcon();
+			programPage.programmoreoptionscheck();
+			
+			}
+		
+		
+		@Then("^verify Start At option \"([^\"]*)\"$")
+		public void verify_Start_At_option(String sheet) throws Throwable {
+			Thread.sleep(4000);
+	    	ExcelHelper programExcel = new ExcelHelper();
+	    	programExcel.setExcelFile("programInputData", sheet);
+	    	Random rn = new Random();
+	    	int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) programExcel.getCell(1, 0);
+	  		name =  name.replaceAll("[0-9]", "")+n;
+	 		programExcel.setCell(1, 0, name);
+	 		Thread.sleep(4000);
+			programPage.clickCreateProgramButton();
+			programPage.enterProgramDetails(name);
+			programPage.clickCreateProgramAddTouchpointButton();
+			programPage.addTouchPointToProgram();
+			programPage.clickPorogramProceedButton();
+			programPage.programschstart();
+			programPage.prmstartAt();
+			programPage.prmstartAtcheck();
+		}
+		
+		
+		//-----------------------------------------//
+		
+		@Then("^edit api touchpoint from sheet \"([^\"]*)\"$")
+		public void edit_api_touchpoint(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			
+			touchpointPage.Apiedittouchpointsclick();
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eh.setCell(1, 0, name);
+		  touchpointPage.editTouchpointDetails("edited "+name);
+		  String newname="edited "+name;
+		  System.out.println(newname);
+		  touchpointPage.apiedittouchpointcheck(newname);
+		  
+		}
+		
+		
+		
+		
 }
