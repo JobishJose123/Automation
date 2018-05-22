@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -270,8 +271,13 @@ public class ProgramPage extends Init{
 	@FindBy(xpath=".//paper-item[@aria-selected='true' @value='true' and contains(.,'At')]")
 	private WebElement optionAtAfterSelection;
 	
-	@FindBy(xpath=".//label[contains(.,'Tracking session expires')]")
+	@FindBy(xpath=".//label[contains(.,'Tracking session expires')]/../input")
 	private WebElement trackingSessionField;
+	
+	@FindBy(xpath="//label[contains(.,'Product')]/../../../..//vaadin-combo-box-item[1]")
+	private WebElement product;
+	
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -330,6 +336,9 @@ public class ProgramPage extends Init{
 		jswait.loadSendKeys(productField, name);
 		
 	}
+	public void clickProductFieldOption() throws InterruptedException {
+		jswait.loadClick(productField);
+	}
 	public void checkFilterCancelButton() throws InterruptedException {
 		clickFilterButton();
 		clickFilterCancelButton();
@@ -343,14 +352,16 @@ public class ProgramPage extends Init{
 		jswait.loadClick(trackingSessionField);
 		}
    public void chooseProduct(String name) throws InterruptedException {
-		try {
-			driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+name+"')]")).click();
-		}
-		catch(Exception e) {
-			
-			
-		}
-	
+	   Thread.sleep(7000);
+		Actions act = new Actions(driver);
+		
+				act.moveToElement(driver.findElement(By.xpath("(.//vaadin-combo-box-item[@class='style-scope vaadin-combo-box-overlay'][1])[2]//..//vaadin-combo-box-item[1]"))).click().build().perform();
+		//act.moveToElement(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'singleProd477')]"))).click().build().perform();
+		//act.moveToElement(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+name+"')]"))).click().build().perform();
+//		act.moveToElement(product).click().build().perform();
+		Thread.sleep(3000);
+//	   jswait.loadClick(product);
+		
 	}
 
    public void createNewProgramRuleAndVerifyTrackingSession(String name)throws Exception {
@@ -365,14 +376,18 @@ public class ProgramPage extends Init{
 		Thread.sleep(2000);
 		clickPorogramProceedButton();
 		Thread.sleep(2000);
-		clickProductField(name);
+		clickProductFieldOption();
 		chooseProduct(name);
+		Thread.sleep(2000);
 		clickPorogramProceedButton();
 		clickTrackingSessionField();
+		Thread.sleep(3000);
 		assertTrue(optionAt.isDisplayed());
 		assertTrue(optionAfter.isDisplayed());
 		clickAtOption();
-		assertTrue(optionAtAfterSelection.isDisplayed());
+		clickTrackingSessionField();
+		Thread.sleep(2000);
+		assertTrue(optionAt.isDisplayed());
 		
 	}
 	public void checkAllColumnsInProductList() throws InterruptedException {
