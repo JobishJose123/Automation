@@ -1052,4 +1052,77 @@ System.out.println(editname+"program has edited successfully");
 			}	   
 	
 	
+		
+		@Then("^verify Schedule tab \"([^\"]*)\"$")
+		public void verify_Schedule_tab() throws Throwable {
+			
+			Thread.sleep(9000);
+			commonObjects.filterName("autoprogram");
+			Thread.sleep(5000);
+			commonObjects.clickOptionsIcon();
+			programPage.programmoreoptionscheck();
+			
+			}
+		
+		
+		@Then("^verify Start At option \"([^\"]*)\"$")
+		public void verify_Start_At_option(String sheet) throws Throwable {
+			Thread.sleep(4000);
+	    	ExcelHelper programExcel = new ExcelHelper();
+	    	programExcel.setExcelFile("programInputData", sheet);
+	    	Random rn = new Random();
+	    	int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) programExcel.getCell(1, 0);
+	  		name =  name.replaceAll("[0-9]", "")+n;
+	 		programExcel.setCell(1, 0, name);
+	 		Thread.sleep(4000);
+			programPage.clickCreateProgramButton();
+			programPage.enterProgramDetails(name);
+			programPage.clickCreateProgramAddTouchpointButton();
+			programPage.addTouchPointToProgram();
+			programPage.clickPorogramProceedButton();
+			programPage.programschstart();
+			programPage.prmstartAt();
+			programPage.prmstartAtcheck();
+		}
+		
+		
+		//-----------------------------------------//
+		
+		@Then("^edit api touchpoint from sheet \"([^\"]*)\"$")
+		public void edit_api_touchpoint(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			
+			touchpointPage.Apiedittouchpointsclick();
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eh.setCell(1, 0, name);
+		  touchpointPage.editapiTouchpointDetails("edited "+name);
+		  String newname="edited "+name;
+		  System.out.println(newname);
+		  touchpointPage.apiedittouchpointcheck(newname);
+		  
+		}
+		
+		@Then("^delete api touchpoint from sheet \"([^\"]*)\"$")
+		public void delete_api_touchpoint(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eh.setCell(1, 0, name);
+		  		  System.out.println(name);
+		  touchpointPage.apideletetouchpointcheck(name);
+		  
+		  
+		}
+		
+		
+	
 }

@@ -354,7 +354,7 @@ Then navigate to programs
 Then verify create program page refreshcycle option "programdetails"
 
 @NX-1230
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: create program Verify More Actions.
 Given login
 Then navigate to intent management
@@ -362,15 +362,15 @@ Then navigate to programs
 Then create program Verify More Actions
 
 @NX-1165
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: create program Verify Start At option.
 Given login
 Then navigate to intent management
 Then navigate to programs
 Then verify Start At option "programdetails"
 
-@NX-1580
-@initBrowser 
+@NX-1576
+@initBrowser @closeBrowser
 Scenario: Verify edit API touchpoint creation 
 Given login
 Then navigate to intent management
@@ -378,3 +378,19 @@ Then navigate to touchpoints
 Then navigate to api
 Then create api touchpoint from sheet "apiTouchpoint"
 Then edit api touchpoint from sheet "apiTouchpoint"
+
+@NX-1580
+@initBrowser @closeBrowser
+Scenario: Verify edit API touchpoint creation 
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to api
+Then create api touchpoint from sheet "apiTouchpoint"
+Then delete api touchpoint from sheet "apiTouchpoint"
+@NX-1572
+@initBrowser 
+Scenario: Verify edit API touchpoint creation 
+Given login
+Then navigate to intent management
+Then navigate to touchpoints

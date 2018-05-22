@@ -1,11 +1,10 @@
 package pageObjetcs;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.junit.Assert;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 
@@ -96,12 +95,12 @@ public class TouchpointPage extends Init{
 	private WebElement Apiedittouchpoints;
 	@FindBy(xpath="(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited apiTouch')]")
 	private WebElement apiedittouchpointcheck ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="((.//data-table-cell[@class='api-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
+	private WebElement apideletebutton;
+	@FindBy(xpath=".//*[@id='deleteTP']/div/paper-button[@class='style-scope api-touchpoint-grid x-scope paper-button-0']")
+	private WebElement apideleteyes;
+	@FindBy(xpath="//paper-toast[@id='toast']//span[contains(.,'Touchpoint Deleted')]")
+	private WebElement deletewarningapi;
 //	@FindBy(xpath="")
 //	private WebElement ;
 	
@@ -478,7 +477,7 @@ public class TouchpointPage extends Init{
 			apiEnterMaximumOffers("5");
 		}
 		
-		public void editTouchpointDetails(String keyword) throws InterruptedException {
+		public void editapiTouchpointDetails(String keyword) throws InterruptedException {
 			apiEnterTouchpointName(keyword);
 			apiSelectApplicationType();
 			apiSelectEventForTracking();
@@ -496,11 +495,7 @@ public class TouchpointPage extends Init{
 			apiClickSave();
 		}
 		
-		public void editApiTouchpoint(String keyword) throws InterruptedException {
-			
-			editTouchpointDetails(keyword);
-			apiClickSave();
-		}
+		
 		
 		
 		
@@ -520,13 +515,34 @@ public class TouchpointPage extends Init{
 			boolean flag=jswait.checkVisible(apiedittouchpointcheck);
 			String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited apiTouch')]");
 			System.out.println(newname);
-			if (newname==name){
-			System.out.println("edit success");}
-			else{System.out.println("failed");}
+Assert.assertEquals(name,newname);
+			System.out.println("edit success");
+			
 			
 			
 		}
+		public void apideletetouchpointcheck(String name) throws Exception {
+			Thread.sleep(5000);
+			String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'apiTouch')]");
+			System.out.println(name);
+			jswait.loadClick(apideletebutton);
+			jswait.loadClick(apideleteyes);
+			checktouchpointsdeleteapi();
+		}
 		
+		
+		
+		
+		
+		public void checktouchpointsdeleteapi() throws Exception{
+			jswait.checkVisible(deletewarningapi);
+			try {
+			
+			Assert.assertTrue("checkpoint del worked", true);
+		  } catch (Exception e){
+			  
+		   	 }
+		}
 		
 		
 		public String getApiFormHeading() throws InterruptedException {
