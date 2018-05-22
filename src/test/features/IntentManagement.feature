@@ -381,7 +381,7 @@ Then edit api touchpoint from sheet "apiTouchpoint"
 
 @NX-1580
 @initBrowser @closeBrowser
-Scenario: Verify edit API touchpoint creation 
+Scenario: Verify delete API touchpoint creation 
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
@@ -390,7 +390,7 @@ Then create api touchpoint from sheet "apiTouchpoint"
 Then delete api touchpoint from sheet "apiTouchpoint"
 @NX-1572
 @initBrowser 
-Scenario: Verify edit API touchpoint creation 
+Scenario: Verify edit sms touchpoint creation 
 Given login
 Then navigate to intent management
 Then navigate to touchpoints

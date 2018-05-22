@@ -120,6 +120,8 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormOrderingRuleSelector;
 	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'FIFO')]")
 	private WebElement smsFormOrderingRuleFIFO;
+	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'LIFO')]")
+	private WebElement smsFormOrderingRuleLIFO;
 	@FindBy(xpath="//label[contains(.,'Short Code')]/following::vaadin-combo-box-item")
 	private WebElement smsFormShortCode1;
 	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'Rule-based')]")
@@ -288,6 +290,12 @@ public class TouchpointPage extends Init{
 		jswait.loadClick(smsFormOrderingRuleSelector);
 		jswait.loadClick(smsFormOrderingRuleFIFO);
 	}
+	
+	public void smsSelectOrderingRulelifo() throws InterruptedException {
+		jswait.loadClick(smsFormOrderingRuleSelector);
+		jswait.loadClick(smsFormOrderingRuleLIFO);
+	}
+	
 	public void smsEnterRefreshEvery(String name) throws InterruptedException {
 		jswait.loadSendKeys(smsFormRefreshEvery, name);
 	}
@@ -307,6 +315,19 @@ public class TouchpointPage extends Init{
 		smsSelectTimeInterval();
 		smsEnterMaximumOffers("5");
 	}
+	
+	public void editSmsTouchpointDetails(String keyword) throws InterruptedException {
+		smsEnterKeyword(keyword);
+		smsSelectShortCode();
+		smsSelectOrderingLogic();
+		smsSelectOrderingRulelifo();
+		smsEnterRefreshEvery("8");
+		smsSelectTimeInterval();
+		smsEnterMaximumOffers("10");
+	}
+	
+	
+	
 	public void createSmsTouchpoint(String keyword) throws InterruptedException {
 		clickCreateNewTouchpoint();
 		enterSmsTouchpointDetails(keyword);
