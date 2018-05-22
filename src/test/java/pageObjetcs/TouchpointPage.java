@@ -344,6 +344,34 @@ public class TouchpointPage extends Init{
 		jswait.waitUntil(smsFormHeading);
 		return smsFormHeading.getText();
 	}
+	//--------------------------------//
+	public void smsedittouchpointsclick() throws InterruptedException {
+		Thread.sleep(5000);
+		jswait.checkClickable(Apiedittouchpoints);
+		boolean flag=jswait.checkVisible(Apiedittouchpoints);
+		if (flag==true){
+		jswait.loadClick(Apiedittouchpoints);}
+		else{System.out.println("cant find element");}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//trigger touchpoint functions
 	public void triggerEnterTouchpointName(String name) throws InterruptedException {
