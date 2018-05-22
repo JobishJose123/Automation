@@ -108,6 +108,10 @@ public class CustomerProfilePage extends Init{
 	
 	@FindBy(xpath="//*[contains(text(),'Include Sub-Partners')]")
 	private WebElement IncludeSubPartners;
+	
+	@FindBy(xpath=".//circle-line-icon/div/div")
+	private WebElement circleLine;
+	
 	@FindBy(xpath=".//iron-data-table[@id='consumerSubList']//iron-list[@id='list']/div//data-table-row")
 	private WebElement subscribedToList;
 	@FindBy(xpath="//search-events[@class='style-scope consumer-events x-scope search-events-0']/div[@class='layout horizontal style-scope search-events']/paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab")
@@ -180,8 +184,18 @@ public class CustomerProfilePage extends Init{
 	private WebElement dailyTrendChart;
 	@FindBy(xpath="//div[@class='layout horizontal flex style-scope consumer-metrics']//paper-card[@class='metric layout vertical style-scope consumer-metrics x-scope paper-card-0']//div[@id='lineChart1']//svg//g//g[@class='sub _3']//g[@class='chart-body']//g[@class='dc-tooltip-list']//circle[1]")
 	private List <WebElement> circleList;
-	@FindBy(xpath="//div[@class='layout horizontal flex style-scope consumer-metrics']//paper-card[@class='metric layout vertical style-scope consumer-metrics x-scope paper-card-0']//div[@id='lineChart1']//svg//g//g[@class='sub _3']//g[@class='chart-body']//g[@class='dc-tooltip-list']//circle[1]")
+	@FindBy(xpath=".//div[@id='lineChart1']//g[@class='sub _0']")
 	private WebElement circle;
+	
+	
+	
+	
+	//div[@id='lineChart1']//svg//g//g[@class='sub _0']//g[@class='chart-body']//g[@class='dc-tooltip-list']//circle[1]
+	
+	@FindBy(xpath="//div[@class='layout horizontal flex style-scope consumer-metrics']//paper-card[@class='metric layout vertical style-scope consumer-metrics x-scope paper-card-0']//div[@id='lineChart1']//svg//g/g[@class='sub _0']//g[@class='chart-body']")
+	private WebElement graph;
+	
+	
 	Actions builder = new Actions(driver);
 	
 	
@@ -698,6 +712,41 @@ public class CustomerProfilePage extends Init{
    }
    
    }
+   
+  public void verifyColorOfSelectedAttributeAndGraph() throws Throwable {
+	  
+	  if(deleteAttributeIconList.size()>0) {
+			
+			for(WebElement deleteButton : deleteAttributeIconList) 		
+				jswait.loadClick(deleteButton);
+				clickAddAttributeDropdown();
+				clickAttribute();
+				clickAddButton();	
+		  for(WebElement attribute : selectedAttributesList) 		
+			jswait.loadClick(attribute);
+		  
+		    clickSaveAttributeButton();
+		    
+		    String attrColor=circleLine.getCssValue("color");
+		    System.out.println("color of selected attribute "+attrColor);
+		    
+		    Thread.sleep(8000);
+		    driver.findElement(By.xpath("//div[@id='lineChart1']/svg"));
+		    String graphColor= circle.getCssValue("color");
+		    System.out.println("color of selected attribute "+graphColor);
+		    
+		    Exception diffColor= new Exception("Different color exception");
+		    if(attrColor.equals(graphColor))
+		    	System.out.println("Attribute and graphs are with same color");
+		    else
+		    	throw diffColor;
+		    
+			 
+	   
+	   }
+	  
+	  
+  }
    
    public void verifyCharts() throws Throwable {
 	   

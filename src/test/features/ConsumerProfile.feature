@@ -301,6 +301,19 @@ Then verify for saving checked attributes
 
 
 
+@NX-2820   
+@initBrowser
+Scenario: Verify whether the colour in the graph and attribute matches-2820
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then enter customer number "number"
+Then click on search button
+Then click usage metrics tab
+Then verify Color of selected attribute and graph
+
+
 @NX-2809  
 @initBrowser @closeBrowser
 Scenario: Verify whether user is able to view daily,weekly & monthly trend of attributes in Usage Metrics tab-2809

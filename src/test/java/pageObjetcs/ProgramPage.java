@@ -71,6 +71,9 @@ public class ProgramPage extends Init{
 	@FindBy(xpath=".//paper-card[contains(.,'Edit')]")
 	private WebElement programEditButton;
 	
+	@FindBy(xpath=".//paper-item[contains(.,'View Rules')]")
+	private WebElement programViewRulesButton;
+	
 	@FindBy(xpath="//h5[contains(.,'Basic Information')]/..//label[contains(.,'Name')]/..//*[@id='input']")
 	private WebElement createProgramName;
 	
@@ -144,6 +147,11 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
 	private WebElement pgmfirstofferselect ;
+	@FindBy(xpath="//paper-button[contains(.,'Create New Rule')]")
+	private WebElement createNewRuleButton;
+	
+	@FindBy(xpath="//paper-button[contains(.,'Save')]")
+	private WebElement saveRuleButton;
 	
 	@FindBy(xpath="//form[@id='scheduleForm']//label[text()='Start Date']/..//*[@id='input']")
 	private WebElement programschstart;
@@ -154,8 +162,17 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//paper-item[contains(.,'Now')]")
 	private WebElement prmshcselectnow ;
 	
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
+	private WebElement selectfirstCustomerList ;
+	
 	@FindBy(xpath="//paper-item[contains(.,'At')]")
 	private WebElement prmstartAt ;
+	
+	@FindBy(xpath="//label[contains(.,'Customer List')]/../input")
+	private WebElement customerListField;
+	
+	@FindBy(xpath="//label[text()[contains(.,'Product')]]/../input")
+	private WebElement productField;
 	
 	@FindBy(xpath="//paper-item[contains(.,'No End')]")
 	private WebElement prmshcselectnoend ;
@@ -277,9 +294,29 @@ public class ProgramPage extends Init{
 	public void clickPorogramEditButton() throws InterruptedException {
 		jswait.loadClick(programEditButton);
 	}
+	public void clickCreateNewRuleButton() throws InterruptedException {
+		jswait.loadClick(createNewRuleButton);
+	}
 	public void checkCancelButtonCreateProgram() throws InterruptedException {
 		clickCreateProgramButton();
 		clickCreateProgramCancelButton();
+	}
+	public void clickSaveRuleButton() throws InterruptedException {
+		jswait.loadClick(saveRuleButton);
+	}
+
+	public void clickCustomerListField() throws InterruptedException {
+		jswait.loadClick(customerListField);
+	}
+	
+	public void clickPorogramViewRulesButton() throws InterruptedException {
+		jswait.loadClick(programViewRulesButton);
+	}
+	
+	public void clickProductField(String name) throws InterruptedException {
+		jswait.loadClick(productField);
+		jswait.loadSendKeys(productField, name);
+		
 	}
 	public void checkFilterCancelButton() throws InterruptedException {
 		clickFilterButton();
@@ -293,6 +330,20 @@ public class ProgramPage extends Init{
 		jswait.checkClickable(programListViewsColumn);
 		jswait.checkClickable(programListStatusColumn);
 	}
+	
+	public void verifyProduct(String name) throws InterruptedException {
+		try {
+			assertTrue(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+name+"')]")).isDisplayed());
+			
+		}
+		catch(Exception e) {
+			
+			
+		}
+		
+		
+	}
+	
 	public void enterProgramName(String name)throws InterruptedException {
 		jswait.loadSendKeys(createProgramName, name);
 	}
@@ -459,6 +510,9 @@ public class ProgramPage extends Init{
 		jswait.loadClick(addTouchpointSelectSMS1024);
 	}
 
+	public void selectFirstCustomerList() throws InterruptedException {
+		jswait.loadClick(selectfirstCustomerList);
+	}
 	
 	public void programschstart() throws InterruptedException {
 		jswait.loadClick(programschstart);
@@ -781,6 +835,24 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 		selectOfferCatalogfromsheet(sheet);
 		Thread.sleep(4000);
 		clickPorogramProceedButton();
+		
+		
+	}
+   public void createNewProgramRuleWithDeactivatedProduct(String name)throws Exception {
+		
+		clickCreateNewRuleButton();
+		//enterRuleName();
+		clickSaveRuleButton();
+		Thread.sleep(2000);
+		clickCustomerListField();
+		Thread.sleep(2000);
+		selectFirstCustomerList();
+		Thread.sleep(2000);
+		clickPorogramProceedButton();
+		Thread.sleep(2000);
+		clickProductField(name);
+		verifyProduct(name);
+		
 		
 		
 	}

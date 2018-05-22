@@ -304,6 +304,11 @@ public class ConsumerProfileSteps extends Init{
 	   customerObjects.verifyForSavingCheckedAttributes();
    
    }
+   @Then("^verify Color of selected attribute and graph$")
+   public void verifyColorOfSelectedAttributeAndGraph() throws Throwable {
+	   
+	   customerObjects.verifyColorOfSelectedAttributeAndGraph();
+   }
    
    @Then("^verify charts in usage metric screen$")
    public void verifyCharts() throws Throwable {
