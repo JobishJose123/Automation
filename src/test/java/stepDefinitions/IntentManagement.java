@@ -1049,7 +1049,21 @@ System.out.println(editname+"program has edited successfully");
 				programPage.createNewProgramRuleWithDeactivatedProduct(name);
 				
 				
-			}	   
+			}	
+		 
+		 @Then("^verify tracking field while create new rule from sheet \"([^\"]*)\"$")
+			public void verifyTrackingFieldWhileCreateNewRuleWithFromSheet(String sheet1) throws Throwable {
+				Thread.sleep(4000);
+		    	ExcelHelper programExcel = new ExcelHelper();
+		    	programExcel.setExcelFile("productInputData", sheet1);
+		    	
+		 		String name = (String) programExcel.getCell(1, 0);
+		 		Thread.sleep(4000);
+				//programPage.clickCreateProgramButton();
+				programPage.createNewProgramRuleAndVerifyTrackingSession(name);
+				
+				
+			}	
 	
 	
 		

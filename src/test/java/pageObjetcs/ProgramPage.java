@@ -260,6 +260,18 @@ public class ProgramPage extends Init{
 	private WebElement programtimezonechange;
 	@FindBy(xpath=".//*[@id='wizard']/li[contains(.,'Schedule')]")
 	private WebElement programScheduletab ;
+	
+	
+	@FindBy(xpath=".//paper-item[@value='false' and contains(.,'After')]")
+	private WebElement optionAfter;
+	
+	@FindBy(xpath=".//paper-item[@value='true' and contains(.,'At')]")
+	private WebElement optionAt;
+	@FindBy(xpath=".//paper-item[@aria-selected='true' @value='true' and contains(.,'At')]")
+	private WebElement optionAtAfterSelection;
+	
+	@FindBy(xpath=".//label[contains(.,'Tracking session expires')]")
+	private WebElement trackingSessionField;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -321,6 +333,47 @@ public class ProgramPage extends Init{
 	public void checkFilterCancelButton() throws InterruptedException {
 		clickFilterButton();
 		clickFilterCancelButton();
+	}
+	
+
+   public void clickAtOption() throws InterruptedException {
+		jswait.loadClick(optionAt);
+		}
+   public void clickTrackingSessionField() throws InterruptedException {
+		jswait.loadClick(trackingSessionField);
+		}
+   public void chooseProduct(String name) throws InterruptedException {
+		try {
+			driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+name+"')]")).click();
+		}
+		catch(Exception e) {
+			
+			
+		}
+	
+	}
+
+   public void createNewProgramRuleAndVerifyTrackingSession(String name)throws Exception {
+		
+		clickCreateNewRuleButton();
+		//enterRuleName();
+		clickSaveRuleButton();
+		Thread.sleep(2000);
+		clickCustomerListField();
+		Thread.sleep(2000);
+		selectFirstCustomerList();
+		Thread.sleep(2000);
+		clickPorogramProceedButton();
+		Thread.sleep(2000);
+		clickProductField(name);
+		chooseProduct(name);
+		clickPorogramProceedButton();
+		clickTrackingSessionField();
+		assertTrue(optionAt.isDisplayed());
+		assertTrue(optionAfter.isDisplayed());
+		clickAtOption();
+		assertTrue(optionAtAfterSelection.isDisplayed());
+		
 	}
 	public void checkAllColumnsInProductList() throws InterruptedException {
 		jswait.checkClickable(programListNameColumn);
