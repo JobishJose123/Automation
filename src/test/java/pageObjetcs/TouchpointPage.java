@@ -71,6 +71,10 @@ public class TouchpointPage extends Init{
 	private WebElement apiFormTimeIntervalSelector;
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement apiFormTouchpointName;
+	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Touchpoint Name')]/../input")
+	private WebElement custFormTouchpointName;
+	
+	
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Refresh Every')]/../input")
 	private WebElement apiFormRefreshEvery;
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Maximum offers')]/../input")
@@ -101,6 +105,9 @@ public class TouchpointPage extends Init{
 	private WebElement apideleteyes;
 	@FindBy(xpath="//paper-toast[@id='toast']//span[contains(.,'Touchpoint Deleted')]")
 	private WebElement deletewarningapi;
+	@FindBy(xpath="((.//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
+	private WebElement editTouchpoint;
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 	
@@ -263,6 +270,26 @@ public class TouchpointPage extends Init{
 	public void clickCreateNewTouchpoint() throws InterruptedException {
 		jswait.loadClick(clickCreateNewTouchpoint);
 	}
+	
+	public void clickEditTouchpoint() throws InterruptedException {
+		
+		
+		
+		Thread.sleep(5000);
+		jswait.checkClickable(editTouchpoint);
+		boolean flag=jswait.checkVisible(editTouchpoint);
+		if (flag==true){
+			jswait.loadClick(editTouchpoint);}
+		else{System.out.println("cant find element");}
+	}
+	
+	public void editTouchpointWithAlertValue() throws Throwable {
+		Thread.sleep(3000);
+		custEnterTouchpointName("<script>alert(document.cookies)</script>");
+		apiClickSave();
+		
+	}
+	
 	
 	//sms touchpoint functions
 	public void smsClickSave() throws InterruptedException {
@@ -482,6 +509,12 @@ Assert.assertEquals(name,newname);
 	public void apiEnterTouchpointName(String name) throws InterruptedException {
 		jswait.loadSendKeys(apiFormTouchpointName, name);
 	}
+	
+	public void custEnterTouchpointName(String name) throws InterruptedException {
+		jswait.loadSendKeys(custFormTouchpointName, name);
+	}
+	
+	
 		public void apiClickSave() throws InterruptedException {
 			jswait.loadClick(apiFormSaveButton);
 		}

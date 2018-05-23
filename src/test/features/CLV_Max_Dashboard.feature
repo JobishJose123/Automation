@@ -1,5 +1,5 @@
 #Author: rahul.krishnan@flytxt.com
-@NXCLVMaxDashboard
+@NX-CLVMaxDashboard
 Feature: Dashboard page
 
 @NX-5577 @initBrowser @closeBrowser

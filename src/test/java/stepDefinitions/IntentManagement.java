@@ -30,6 +30,7 @@ public class IntentManagement extends Init{
 	@Then("^navigate to touchpoints")
 	public void navigateToTouchpoints() throws InterruptedException {
 		intentManagementPage.navigateToTouchpoints();
+		Thread.sleep(3000);
 	}
 	@Then("^navigate to programs")
 	public void navigateToPrograms() throws InterruptedException {
@@ -116,6 +117,13 @@ public class IntentManagement extends Init{
 	public void navigate_to_customer_care() throws Throwable {
 	    touchpointPage.navigateToCustomerCare();
 	}
+	
+	@Then("^click edit touchpoint$")
+	public void clickEditTouchpoint() throws Throwable {
+	    touchpointPage.clickEditTouchpoint();
+	}
+	
+	
 
 	@Then("^create customer care touchpoint from sheet \"([^\"]*)\"$")
 	public void create_customer_care_touchpoint(String sheet) throws Throwable {
@@ -1155,6 +1163,14 @@ System.out.println(editname+"program has edited successfully");
 		  System.out.println(newname);
 		  touchpointPage.smsedittouchpointcheck(newname);
 		  
+		}
+		
+		@Then("^edit touchpoint with alert value$")
+		public void editTouchpointWithAlertValue() throws Throwable {
+			
+			touchpointPage.editTouchpointWithAlertValue();
+			
+			
 		}
 		
 	
