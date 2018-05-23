@@ -1,9 +1,13 @@
 package pageObjetcs;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Assert;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -195,6 +199,15 @@ public class TouchpointPage extends Init{
 	private WebElement customerCareFormDialogBox;
 	@FindBy(xpath=".//*[@id='addCustomerForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement customerCareFormTouchpointName;
+	
+	@FindBy(xpath="((.//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
+	private WebElement editTouchpoint1;
+
+@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Touchpoint Name')]/../input")
+	private WebElement custFormTouchpointName1;
+	
+	@FindBy(xpath=".//div[@class='buttons style-scope customercare-touchpoint-grid']//paper-button[contains(.,'Save')]")
+	private WebElement custFormSaveButton;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -276,19 +289,14 @@ public class TouchpointPage extends Init{
 		
 		
 		Thread.sleep(5000);
-		jswait.checkClickable(editTouchpoint);
-		boolean flag=jswait.checkVisible(editTouchpoint);
+		jswait.checkClickable(editTouchpoint1);
+		boolean flag=jswait.checkVisible(editTouchpoint1);
 		if (flag==true){
 			jswait.loadClick(editTouchpoint);}
 		else{System.out.println("cant find element");}
 	}
 	
-	public void editTouchpointWithAlertValue() throws Throwable {
-		Thread.sleep(3000);
-		custEnterTouchpointName("<script>alert(document.cookies)</script>");
-		apiClickSave();
-		
-	}
+	
 	
 	
 	//sms touchpoint functions
@@ -353,7 +361,62 @@ public class TouchpointPage extends Init{
 		smsEnterMaximumOffers("10");
 		smsClickSave();
 	}
+	public void custedittouchpointcheck(String name) throws Exception {
+		
+		//String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited apiTouch')]");
+		Thread.sleep(2000);
+		assertTrue(driver.findElement(By.xpath(".//data-table-cell[@class='customercare-touchpoint-grid style-scope' and contains(.,'"+name+"')]")).isDisplayed());
+//		System.out.println(newname);
+//       Assert.assertEquals(name,newname);
+//		System.out.println("edit success");
+//		
+		
+		
+	}
+
+
+public void custClickSave() throws InterruptedException {
+		jswait.loadClick(custFormSaveButton);
+	}
+
+
+
+
+public void custEnterTouchpointName(String name) throws InterruptedException {
+	jswait.loadSendKeys(custFormTouchpointName1, name);
+}
+
+
+/*public void clickEditTouchpoint() throws InterruptedException {
 	
+	
+	
+	Thread.sleep(5000);
+	jswait.checkClickable(editTouchpoint);
+	boolean flag=jswait.checkVisible(editTouchpoint);
+	if (flag==true){
+		jswait.loadClick(editTouchpoint);}
+	else{System.out.println("cant find element");}
+}*/
+
+
+public void editTouchpointWithAlertValue() throws Throwable {
+	Thread.sleep(3000);
+	custEnterTouchpointName("<script>alert(document.cookies)</script>");
+//	custSelectApplicationType();
+//	apiSelectEventForTracking();
+//	apiSelectOrderingLogic();
+//	apiSelectOrderingRulelifo();
+//	apiEnterRefreshEvery("5");
+//	apiSelectTimeInterval();
+//	apiEnterMaximumOffers("8");
+	custClickSave();
+	
+	String newname="<script>alert(document.cookies)</script>";
+	  System.out.println(newname);
+	  custedittouchpointcheck(newname);
+	
+}
 	
 	
 	public void createSmsTouchpoint(String keyword) throws InterruptedException {
@@ -511,9 +574,9 @@ Assert.assertEquals(name,newname);
 		jswait.loadSendKeys(apiFormTouchpointName, name);
 	}
 	
-	public void custEnterTouchpointName(String name) throws InterruptedException {
-		jswait.loadSendKeys(custFormTouchpointName, name);
-	}
+	
+	
+	
 	
 	
 		public void apiClickSave() throws InterruptedException {
