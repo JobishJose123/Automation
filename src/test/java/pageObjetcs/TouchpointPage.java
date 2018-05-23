@@ -151,8 +151,8 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormDialogBox;
 	@FindBy(xpath=".//*[@id='addSmsModal']//h2")
 	private WebElement smsFormHeading;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="((.//data-table-cell[@class='sms-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
+	private WebElement smstouchpointedit ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -351,6 +351,7 @@ public class TouchpointPage extends Init{
 		smsEnterRefreshEvery("8");
 		smsSelectTimeInterval();
 		smsEnterMaximumOffers("10");
+		smsClickSave();
 	}
 	
 	
@@ -374,10 +375,10 @@ public class TouchpointPage extends Init{
 	//--------------------------------//
 	public void smsedittouchpointsclick() throws InterruptedException {
 		Thread.sleep(5000);
-		jswait.checkClickable(Apiedittouchpoints);
-		boolean flag=jswait.checkVisible(Apiedittouchpoints);
+		jswait.checkClickable(smstouchpointedit);
+		boolean flag=jswait.checkVisible(smstouchpointedit);
 		if (flag==true){
-		jswait.loadClick(Apiedittouchpoints);}
+		jswait.loadClick(smstouchpointedit);}
 		else{System.out.println("cant find element");}
 		
 		
@@ -387,7 +388,7 @@ public class TouchpointPage extends Init{
 	public void smsedittouchpointcheck(String name) throws Exception {
 		Thread.sleep(5000);
 		
-		String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited smsTouch')]");
+		String newname=jswait.getTextFormElement("(.//data-table-cell[@class='sms-touchpoint-grid style-scope'])[1][contains(.,'edited smsTouch')]");
 		System.out.println(newname);
 Assert.assertEquals(name,newname);
 		System.out.println("edit success");

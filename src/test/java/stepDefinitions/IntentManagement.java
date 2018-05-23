@@ -1161,6 +1161,7 @@ System.out.println(editname+"program has edited successfully");
 		  touchpointPage.editSmsTouchpointDetails("edited "+name);
 		  String newname="edited "+name;
 		  System.out.println(newname);
+		  Thread.sleep(6000);
 		  touchpointPage.smsedittouchpointcheck(newname);
 		  
 		}
