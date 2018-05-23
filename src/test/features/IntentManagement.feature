@@ -359,7 +359,7 @@ Scenario: create program Verify More Actions.
 Given login
 Then navigate to intent management
 Then navigate to programs
-Then create program Verify More Actions
+Then create program Verify More Actions "programdetails"
 
 @NX-1165
 @initBrowser @closeBrowser

@@ -78,6 +78,7 @@ public class IntentManagement extends Init{
 	}
 	@Then("^create sms touchpoint from sheet \"([^\"]*)\"$")
 	public void createSmsTouchpoint(String sheet) throws Throwable{
+		navigateToSms(); 
 		eh.setExcelFile("touchpointInputData", sheet);
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
@@ -1016,7 +1017,7 @@ System.out.println(editname+"program has edited successfully");
 		}
 		
 		
-		@Then("^create program Verify More Actions$")
+		@Then("^create program Verify More Actions \"([^\"]*)\"$")
 		public void moreoptionsprograms(String sheet) throws Throwable {
 			
 			Thread.sleep(4000);
@@ -1152,7 +1153,7 @@ System.out.println(editname+"program has edited successfully");
 		  touchpointPage.editSmsTouchpointDetails("edited "+name);
 		  String newname="edited "+name;
 		  System.out.println(newname);
-		  touchpointPage.apiedittouchpointcheck(newname);
+		  touchpointPage.smsedittouchpointcheck(newname);
 		  
 		}
 		

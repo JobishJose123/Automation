@@ -357,8 +357,14 @@ public class TouchpointPage extends Init{
 	}
 	
 	
-	
-	
+	public void smsedittouchpointcheck(String name) throws Exception {
+		Thread.sleep(5000);
+		
+		String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited smsTouch')]");
+		System.out.println(newname);
+Assert.assertEquals(name,newname);
+		System.out.println("edit success");
+	}
 	
 	
 	

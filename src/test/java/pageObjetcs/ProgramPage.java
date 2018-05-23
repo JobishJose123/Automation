@@ -740,18 +740,13 @@ public class ProgramPage extends Init{
 	
 	public void checktouchpoints() throws Exception{
 		jswait.checkVisible(warningmessageaddtouchpoint);
-		try {
 		
-		Assert.assertTrue("checkpoint cancel worked", true);
-	  } catch (Exception e){
-		  
-	   	 }
 	}
 public void checkproceedtouchpoints() throws Exception{
 		
 		
 		jswait.checkVisible(checktouchpoints);
-		Assert.assertTrue("checkpoint proceed worked", true);
+		//Assert.assertTrue("checkpoint proceed worked", true);
 	  
 	}
 
