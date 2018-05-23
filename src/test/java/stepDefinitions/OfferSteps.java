@@ -667,4 +667,14 @@ public class OfferSteps extends Init {
 			
 		}
 	}
+	@Then("^verify cross site scripting for filtering offers$")
+	public void verifyCrossSiteScriptingForOfferFilter() throws Throwable {
+		commonObjects.filterName("<script>alert(document.cookies)</script>");
+		try {
+			commonObjects.clickOptionsIcon();
+			Assert.assertTrue(false, "Error with cross site scripting");
+		}catch(Exception e) {
+			
+		}
+	}
 }

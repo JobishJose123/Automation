@@ -508,11 +508,19 @@ Feature: Test suite on Offer creation
   Scenario: Create offer: Creative: Verify save option after selecting the dynamic variable NX-945
     Then check previous step and pass this
     
-    @NX-955 @initBrowser
+    @NX-955 @initBrowser @closeBrowser
   Scenario: Create offer: Creative: Verify cancelling the newly added dynamic variable NX-955
     Given login
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
     Then verify cancelling newly added variable
+    
+     @NX-2073 @initBrowser @closeBrowser
+  Scenario: Verify cross site scripting for Filtering offers Under CLV Max NX-2073
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify cross site scripting for filtering offers
     

@@ -119,7 +119,8 @@ Then verify login failure
 Scenario: Verify the Branding Area Content of Login page
 Then Verify the Branding Area Content of Login page "Intelligent Customer Engagement" "Engage with customers by learning their behaviour and predicting what they want in real time"
 
-@NX-427
+##tochange
+@NX-4
 @initBrowser @closeBrowser
 Scenario: Verify the Login of NEON
 Given neon is loaded

@@ -34,4 +34,8 @@ import cucumber.api.java.Before;
 
 		}
 	}
+	@After
+	public void afterEveryClass(Scenario scenario) {
+		System.out.println("status"+scenario.getSourceTagNames());
+	}
 }
