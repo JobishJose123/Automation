@@ -1142,14 +1142,14 @@ System.out.println(editname+"program has edited successfully");
 		public void edit_sms_touchpoint(String sheet) throws Throwable {
 			Thread.sleep(4000);
 			
-			touchpointPage.Apiedittouchpointsclick();
+			touchpointPage.smsedittouchpointsclick();
 			eh.setExcelFile("touchpointInputData", sheet);
 			Random rn = new Random();
 	 		int  n = rn.nextInt(5000) + 1;
 	 		String name = (String) eh.getCell(1, 0);
 	 		name =  name.replaceAll("[0-9]", "")+n;
 	 		eh.setCell(1, 0, name);
-		  touchpointPage.editapiTouchpointDetails("edited "+name);
+		  touchpointPage.editSmsTouchpointDetails("edited "+name);
 		  String newname="edited "+name;
 		  System.out.println(newname);
 		  touchpointPage.apiedittouchpointcheck(newname);

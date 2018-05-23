@@ -593,12 +593,7 @@ public class ProgramPage extends Init{
 	public void checkprmshcselectnow() throws InterruptedException {
 		String str= driver.findElement(By.xpath("//paper-item[contains(.,'Now')]")).getText();
 		Assert.assertEquals(str,"Now");
-		try{
-		Assert.assertTrue("passed", false);
-		throw Exception;}
-		catch (Exception e){
-			  System.out.println(e+"now ");
-	   	 }}
+		}
 		
 	
 	//------------------------------------------------------------------------------//
@@ -747,32 +742,24 @@ public class ProgramPage extends Init{
 		jswait.checkVisible(warningmessageaddtouchpoint);
 		try {
 		
-		Assert.assertTrue("checkpoint cancel worked", false);
+		Assert.assertTrue("checkpoint cancel worked", true);
 	  } catch (Exception e){
 		  
 	   	 }
 	}
 public void checkproceedtouchpoints() throws Exception{
 		
-		try {
+		
 		jswait.checkVisible(checktouchpoints);
-		Assert.assertTrue("checkpoint proceed worked", false);
-	  } catch (Exception e){
-		  
-	   	 }
+		Assert.assertTrue("checkpoint proceed worked", true);
+	  
 	}
 
 
 public void touchpointpgmdeletecheck() throws Exception{
 	
-	try {
-	jswait.checkVisible(touchpointpgmdeletecheck);
-	Assert.assertTrue("touchpoint deleted worked", false);
-	throw Exception;
-  } catch (Exception e){
-	  System.out.println("user Exception");
-	  
-   	 }
+		jswait.checkVisible(touchpointpgmdeletecheck);
+	
 }
 
 
@@ -799,14 +786,9 @@ public void touchpointpgmdeletecheck() throws Exception{
 	
 	public void refreshatprogramcheck() throws InterruptedException {
 		Thread.sleep(5000);
-		try{
 			jswait.checkVisible(prmrefreshat);
 			Assert.assertTrue(" worked",true);
-			throw Exception;
-		  } catch (Exception e){
-			  System.out.println("passed");
-		   	 }
-		}
+				}
 	
 	public void prmshcserveonSpecificdayscheck() throws Exception {
 		Thread.sleep(5000);

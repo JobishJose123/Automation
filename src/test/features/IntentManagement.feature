@@ -394,8 +394,8 @@ Scenario: Verify edit sms touchpoint creation
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
-
-
+Then create sms touchpoint from sheet "smsTouchpoint"
+Then edit sms touchpoint from sheet "smsTouchpoint"
 @NX-3315 @initBrowser 
   Scenario: Verify Selecting the 'AT'option in the rules tab- 3315
     Given login
