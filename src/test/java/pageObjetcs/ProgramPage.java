@@ -278,8 +278,8 @@ public class ProgramPage extends Init{
 	private WebElement product;
 	
 	
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath=".//*[@id='item1']//span[contains(.,'autoprogram')]")
+	private WebElement filterpgm ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -778,10 +778,7 @@ public void touchpointpgmdeletecheck() throws Exception{
 	
 	public void filterprogramcheck(String name) throws InterruptedException {
 		Thread.sleep(5000);
-		String name2=driver.findElement(By.xpath(".//*[@id='item1']//span[contains(.,'autoprogram')]")).getAttribute("title");
-		System.out.println(name2);
-		Thread.sleep(5000);
-		Assert.assertEquals(name, name2);
+		jswait.checkVisible(filterpgm);
 		}
 	
 	public void refreshatprogramcheck() throws InterruptedException {
@@ -800,9 +797,7 @@ public void touchpointpgmdeletecheck() throws Exception{
 	public void programtimezonecheck() throws Exception {
 		Thread.sleep(5000);
 		boolean test=driver.findElement(By.xpath(".//*[@id='items']/vaadin-combo-box-item[contains(.,'Kathmandu')]")).isDisplayed();
-	if (test==true){
-		System.out.println("passed");
-	}else {System.out.println("failed");}
+	
 		}
 	
 	
