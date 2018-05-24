@@ -109,16 +109,21 @@ public class TouchpointPage extends Init{
 	private WebElement apideleteyes;
 	@FindBy(xpath="//paper-toast[@id='toast']//span[contains(.,'Touchpoint Deleted')]")
 	private WebElement deletewarningapi;
+	
+	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Maximum offers')]/../input//following::paper-input-error[1]")
+	private WebElement apivalidation ;
+	
+	
+	//-------------------------//
 	@FindBy(xpath="((.//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
 	private WebElement editTouchpoint;
 	
 	@FindBy(xpath=".//div[@class='buttons style-scope customercare-touchpoint-grid']//paper-button[contains(.,'Yes')]")
 	private WebElement custDeleteYes;
+	//-------------------------//
 	
 	
-	
-//	@FindBy(xpath="")
-//	private WebElement ;
+
 	
 	
 	
@@ -730,6 +735,25 @@ public void createNewCustomerCareTouchpointAndDelete() throws Throwable {
 			apiEnterMaximumOffers("8");
 			apiClickSave();
 		}
+		
+		public void editapiTouchpointDetailsvalidation(String keyword) throws InterruptedException {
+			apiEnterTouchpointName(keyword);
+			apiSelectApplicationType();
+			apiSelectEventForTracking();
+			apiSelectOrderingLogic();
+			apiSelectOrderingRulelifo();
+			apiEnterRefreshEvery("5");
+			apiSelectTimeInterval();
+			apiEnterMaximumOffers("");
+			apiClickSave();
+			boolean flag=jswait.checkVisible(apivalidation);
+			System.out.println(flag);
+			if (flag==true){
+				}
+				else{System.out.println("cant find element");}
+		}
+		
+		
 		
 		public void createApiTouchpoint(String keyword) throws InterruptedException {
 			clickCreateNewTouchpoint();

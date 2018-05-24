@@ -463,6 +463,7 @@ Then navigate to touchpoints
 Then create sms touchpoint from sheet "smsTouchpoint"
 Then delete sms touchpoint from sheet "smsTouchpoint"
   
+<<<<<<< HEAD
   
   
   
@@ -496,3 +497,14 @@ Then check ussd touchpoint in grid "ussdTouchpoint"
   Then navigate to customer care
   Then click customer care edit touchpoint
   Then edit customer care touchpoint
+=======
+@NX-1570 
+@initBrowser 
+Scenario: Verify edit API touchpoint creation 
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to api
+Then create api touchpoint from sheet "apiTouchpoint"
+Then edit api touchpoint validation check from sheet "apiTouchpoint"
+>>>>>>> stash
