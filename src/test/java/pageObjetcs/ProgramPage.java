@@ -437,6 +437,19 @@ public class ProgramPage extends Init{
 		Thread.sleep(4000);
 		clickPorogramProceedButton();
 	}
+	
+	public void enterProgramDetailsWithAlertValue()throws InterruptedException {
+		
+		
+		enterProgramName("<script>alert(document.cookies)</script>");
+		enterProgramDescription();
+		Thread.sleep(4000);
+		programofferclick();
+		Thread.sleep(4000);
+		pgmfirstofferselect();
+		Thread.sleep(4000);
+		clickPorogramProceedButton();
+	}
 	public void cancelProgramDetails(String name)throws InterruptedException {
 		Random rn = new Random();
 		int  n = rn.nextInt(5000) + 1;

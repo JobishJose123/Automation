@@ -477,17 +477,6 @@ Then delete sms touchpoint from sheet "smsTouchpoint"
 	Then click create new touchpoint
 	Then create new customer care touchpoint and delete
   
-  @NX-1577
-@initBrowser @closeBrowser
-Scenario: Verify USSD touchpoint edit functionality- 1577
-Given login
-Then navigate to intent management
-Then navigate to touchpoints
-Then navigate to ussd
-Then create ussd touchpoint from sheet "ussdTouchpoint"
-Then check ussd touchpoint in grid "ussdTouchpoint"
-
-
 @NX-1575
   @initBrowser 
   Scenario: Verify Customer Care touchpoint edit functionality-1575
@@ -507,4 +496,14 @@ Then navigate to touchpoints
 Then navigate to api
 Then create api touchpoint from sheet "apiTouchpoint"
 Then edit api touchpoint validation check from sheet "apiTouchpoint"
+
+
+@NX-2080
+@initBrowser @closeBrowser
+Scenario: Verify Cross site scripting for Create program Page under Intenet Management-2080
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then click create program button
+Then verify create program page "programdetails"
 

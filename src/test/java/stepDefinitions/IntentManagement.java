@@ -357,6 +357,37 @@ System.out.println(editname+"program has edited successfully");
 		
 	}
 	
+	@Then("^verify create program page with alert value$")
+	public void verifyCreateProgramPageWithAlertValue() throws Throwable {
+		
+		programPage.clickCreateProgramButton();
+		programPage.enterProgramDetailsWithAlertValue();
+		programPage.clickCreateProgramAddTouchpointButton();
+		programPage.addTouchPointToProgram();
+		programPage.clickPorogramProceedButton();
+		programPage.programschstart();
+		programPage.prmshcselectnow();
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		programPage.programschserveon(); 
+		programPage.prmshcserveonalldays();
+		//programPage.createProgramSaveButton();
+		Thread.sleep(2000);
+		programPage.programactivatebtn();
+		programPage.programconfirmactivateyes();
+		System.out.println("program has created successfully");
+		
+	}
+	
+	
 	
 	
 
@@ -1206,35 +1237,6 @@ System.out.println(editname+"program has edited successfully");
 			
 		}
 	
-		//-----------------------------------------------------------------------------------------//
-		
-		
-		@Then("^edit api touchpoint validation check from sheet \"([^\"]*)\"$")
-		public void edit_api_touchpointvalidation_check(String sheet) throws Throwable {
-			Thread.sleep(4000);
-			
-			touchpointPage.Apiedittouchpointsclick();
-			eh.setExcelFile("touchpointInputData", sheet);
-			Random rn = new Random();
-	 		int  n = rn.nextInt(5000) + 1;
-	 		String name = (String) eh.getCell(1, 0);
-	 		name =  name.replaceAll("[0-9]", "")+n;
-	 		String newname="edited "+name;
-	 		eh.setCell(1, 0, newname);
-		  touchpointPage.editapiTouchpointDetailsvalidation(newname);
-		  
-		  System.out.println(newname);
-		  //touchpointPage.apiedittouchpointcheck(newname);
-		  
-		}
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	
 }

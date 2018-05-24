@@ -53,6 +53,10 @@ public class TouchpointPage extends Init{
 	private WebElement ussdFormUssdApplicationSelector;
 	@FindBy(xpath="//label[contains(.,'USSD Application')]/following::vaadin-combo-box-item")
 	private WebElement ussdFormUssdApplication1;
+	@FindBy(xpath="((.//data-table-cell[@class='ussd-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
+	private WebElement ussdTouchpointEdit;
+	
+
 	
 	
 	
@@ -297,7 +301,13 @@ public class TouchpointPage extends Init{
 //	private WebElement ;
 
 
-
+ public void clickUssdEditTouchpoint() throws InterruptedException {
+		
+		Thread.sleep(2000);
+		jswait.loadClick(ussdTouchpointEdit);
+		Thread.sleep(2000);
+       
+	}
 	public void navigateToSms() throws InterruptedException {
 		jswait.loadClick(smsTouchpoints);
 	}
