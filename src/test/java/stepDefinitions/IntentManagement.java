@@ -118,6 +118,10 @@ public class IntentManagement extends Init{
 	    touchpointPage.navigateToCustomerCare();
 	}
 	
+	@Then("^click edit touchpoint$")
+	public void clickEditTouchpoint() throws Throwable {
+	    touchpointPage.clickEditTouchpoint();
+	}
 	
 
 	@Then("^create customer care touchpoint from sheet \"([^\"]*)\"$")
@@ -1165,16 +1169,12 @@ System.out.println(editname+"program has edited successfully");
 		}
 		
 		
-<<<<<<< HEAD
 		
 		@Then("^click edit touchpoint$")
 		public void clickEditTouchpoint() throws Throwable {
 		    touchpointPage.clickEditTouchpoint();
 		}
 		
-=======
-			
->>>>>>> stash
 		
 		@Then("^edit touchpoint with alert value$")
 			public void editTouchpointWithAlertValue() throws Throwable {
@@ -1192,19 +1192,6 @@ System.out.println(editname+"program has edited successfully");
 			
 		}
 	
-		
-		@Then("^delete sms touchpoint from sheet \"([^\"]*)\"$")
-		public void delete_sms_touchpoint(String sheet) throws Throwable {
-			Thread.sleep(4000);
-			
-			eh.setExcelFile("touchpointInputData", sheet);
-	 		String name = (String) eh.getCell(1, 0);
-	 		System.out.println(name);
-	 		Thread.sleep(4000);
-		  touchpointPage.deletesmsTouchpoint(name);
-		  
-		  
-		}
 		
 	
 }
