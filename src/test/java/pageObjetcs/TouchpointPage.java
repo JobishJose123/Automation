@@ -440,6 +440,19 @@ public void editTouchpointWithAlertValue() throws Throwable {
 	  clickDeleteCustTouchpoint();
 }
 
+public void editCustomerCareTouchpoint() throws Throwable {
+	Thread.sleep(3000);
+	custEnterTouchpointName("Touch point edit007");
+	custClickSave();
+	
+	String newname="Touch point edit007";
+	  System.out.println(newname);
+	  custedittouchpointcheck(newname);
+	  clickDeleteCustTouchpoint();
+}
+
+
+
 
 public void createTouchpointWithAlertValue() throws Throwable {
 	
@@ -457,8 +470,23 @@ public void createTouchpointWithAlertValue() throws Throwable {
 	clickDeleteCustTouchpoint();
 	
 }
+
+public void createNewCustomerCareTouchpointAndDelete() throws Throwable {
 	
+	Thread.sleep(3000);
+	custEnterTouchpointName("Test Touch point007");
+	custTriggerSelectOrderingLogic();
+	custTriggerSelectOrderingRule();
+	custTriggerEnterRefreshEvery("3");
+	custTriggerSelectTimeInterval();
+	custTriggerEnterMaximumOffers("4");
+	custClickSave();
+	String newname="Test Touch point007";
+	System.out.println(newname);
+	custedittouchpointcheck(newname);
+	clickDeleteCustTouchpoint();
 	
+}
 	public void createSmsTouchpoint(String keyword) throws InterruptedException {
 		clickCreateNewTouchpoint();
 		enterSmsTouchpointDetails(keyword);

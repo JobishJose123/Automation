@@ -463,3 +463,36 @@ Then navigate to touchpoints
 Then create sms touchpoint from sheet "smsTouchpoint"
 Then delete sms touchpoint from sheet "smsTouchpoint"
   
+  
+  
+  
+  @NX-1579
+  @initBrowser 
+  Scenario: Verify Customer Care touchpoint delete functionality-1579
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to customer care
+	Then click create new touchpoint
+	Then create new customer care touchpoint and delete
+  
+  @NX-1577
+@initBrowser @closeBrowser
+Scenario: Verify USSD touchpoint edit functionality- 1577
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to ussd
+Then create ussd touchpoint from sheet "ussdTouchpoint"
+Then check ussd touchpoint in grid "ussdTouchpoint"
+
+
+@NX-1575
+  @initBrowser 
+  Scenario: Verify Customer Care touchpoint edit functionality-1575
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to customer care
+  Then click customer care edit touchpoint
+  Then edit customer care touchpoint

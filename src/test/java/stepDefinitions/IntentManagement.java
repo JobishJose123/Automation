@@ -1179,15 +1179,29 @@ System.out.println(editname+"program has edited successfully");
 		@Then("^edit touchpoint with alert value$")
 			public void editTouchpointWithAlertValue() throws Throwable {
 				
-				touchpointPage.editTouchpointWithAlertValue();
-				
-				
+				touchpointPage.editTouchpointWithAlertValue();	
 			}
+		
+		@Then("^edit customer care touchpoint$")
+		public void editCustomerCareTouchpoint() throws Throwable {
+			
+			touchpointPage.editCustomerCareTouchpoint();
+			
+			
+		}
 		
 		@Then("^create new touchpoint with alert value$")
 		public void createTouchpointWithAlertValue() throws Throwable {
 			
 			touchpointPage.createTouchpointWithAlertValue();
+			
+			
+		}
+		
+		@Then("^create new customer care touchpoint and delete$")
+		public void createNewCustomerCareTouchpointAndDelete() throws Throwable {
+			
+			touchpointPage.createNewCustomerCareTouchpointAndDelete();
 			
 			
 		}
