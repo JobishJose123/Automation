@@ -112,6 +112,11 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath="((.//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
 	private WebElement editTouchpoint;
 	
+	@FindBy(xpath=".//div[@class='buttons style-scope customercare-touchpoint-grid']//paper-button[contains(.,'Yes')]")
+	private WebElement custDeleteYes;
+	
+	
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 	
@@ -202,6 +207,9 @@ public class TouchpointPage extends Init{
 	
 	@FindBy(xpath="((.//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
 	private WebElement editTouchpoint1;
+	
+	@FindBy(xpath="((.//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
+	private WebElement custDeleteTouchpoint;
 
 @FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement custFormTouchpointName1;
@@ -232,6 +240,16 @@ public class TouchpointPage extends Init{
 	private WebElement triggerFormTriggerSelect;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Ordering Logic')]/../input")
 	private WebElement triggerFormOrderingLogicSelector;
+	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Ordering Logic')]/../input")
+	private WebElement custTriggerFormOrderingLogicSelector;
+	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'Rule-based')]")
+	private WebElement custTriggerFormOrderingLogicRuleBased;
+	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Ordering Rule')]/../input")
+	private WebElement custTriggerFormOrderingRuleSelector;
+	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'FIFO')]")
+	private WebElement custTriggerFormOrderingRuleFIFO;
+	
+	
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Ordering Rule')]/../input")
 	private WebElement triggerFormOrderingRuleSelector;
 	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'FIFO')]")
@@ -240,12 +258,20 @@ public class TouchpointPage extends Init{
 	private WebElement triggerFormOrderingLogicRuleBased;
 	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'Hours')]")
 	private WebElement triggerFormTimeInterval1;
+	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'Hours')]")
+	private WebElement custTriggerFormTimeInterval;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Time Interval')]/../..//input")
 	private WebElement triggerFormTimeIntervalSelector;
+	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Time Interval')]/../..//input")
+	private WebElement custTriggerFormTimeIntervalSelector;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Refresh Every')]/../input")
 	private WebElement triggerFormRefreshEvery;
+	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Refresh Every')]/../input")
+	private WebElement custTriggerFormRefreshEvery;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Maximum offers')]/../input")
 	private WebElement triggerFormMaximumOffers;
+	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Maximum offers')]/../input")
+	private WebElement custTriggerFormMaximumOffers;
 	@FindBy(xpath=".//*[@id='triggerForm']//paper-button[contains(.,'Save')]")
 	private WebElement triggerFormSaveButton;
 	@FindBy(xpath=".//*[@id='triggerForm']//paper-button[contains(.,'Cancel')]")
@@ -282,6 +308,12 @@ public class TouchpointPage extends Init{
 	}
 	public void clickCreateNewTouchpoint() throws InterruptedException {
 		jswait.loadClick(clickCreateNewTouchpoint);
+	}
+	
+	public void clickDeleteCustTouchpoint() throws InterruptedException {
+		jswait.loadClick(custDeleteTouchpoint);
+		jswait.loadClick(custDeleteYes);
+		
 	}
 	
 	public void clickEditTouchpoint() throws InterruptedException {
@@ -403,18 +435,29 @@ public void custEnterTouchpointName(String name) throws InterruptedException {
 public void editTouchpointWithAlertValue() throws Throwable {
 	Thread.sleep(3000);
 	custEnterTouchpointName("<script>alert(document.cookies)</script>");
-//	custSelectApplicationType();
-//	apiSelectEventForTracking();
-//	apiSelectOrderingLogic();
-//	apiSelectOrderingRulelifo();
-//	apiEnterRefreshEvery("5");
-//	apiSelectTimeInterval();
-//	apiEnterMaximumOffers("8");
 	custClickSave();
 	
 	String newname="<script>alert(document.cookies)</script>";
 	  System.out.println(newname);
 	  custedittouchpointcheck(newname);
+	  clickDeleteCustTouchpoint();
+}
+
+
+public void createTouchpointWithAlertValue() throws Throwable {
+	
+	Thread.sleep(3000);
+	custEnterTouchpointName("<script>alert(document.cookies)</script>");
+	custTriggerSelectOrderingLogic();
+	custTriggerSelectOrderingRule();
+	custTriggerEnterRefreshEvery("3");
+	custTriggerSelectTimeInterval();
+	custTriggerEnterMaximumOffers("4");
+	custClickSave();
+	String newname="<script>alert(document.cookies)</script>";
+	System.out.println(newname);
+	custedittouchpointcheck(newname);
+	clickDeleteCustTouchpoint();
 	
 }
 	
@@ -488,19 +531,38 @@ Assert.assertEquals(name,newname);
 		jswait.loadClick(triggerFormOrderingLogicSelector);
 		jswait.loadClick(triggerFormOrderingLogicRuleBased);
 	}
+	
+	public void custTriggerSelectOrderingLogic() throws InterruptedException {
+		jswait.loadClick(custTriggerFormOrderingLogicSelector);
+		jswait.loadClick(custTriggerFormOrderingLogicRuleBased);
+	}
 	public void triggerSelectOrderingRule() throws InterruptedException {
 		jswait.loadClick(triggerFormOrderingRuleSelector);
 		jswait.loadClick(triggerFormOrderingRuleFIFO);
 	}
+	public void custTriggerSelectOrderingRule() throws InterruptedException {
+		jswait.loadClick(custTriggerFormOrderingRuleSelector);
+		jswait.loadClick(custTriggerFormOrderingRuleFIFO);
+	}
 	public void triggerEnterRefreshEvery(String name) throws InterruptedException {
 		jswait.loadSendKeys(triggerFormRefreshEvery, name);
+	}
+	public void custTriggerEnterRefreshEvery(String name) throws InterruptedException {
+		jswait.loadSendKeys(custTriggerFormRefreshEvery, name);
 	}
 	public void triggerSelectTimeInterval() throws InterruptedException {
 		jswait.loadClick(triggerFormTimeIntervalSelector);
 		jswait.loadClick(triggerFormTimeInterval1);
 	}
+	public void custTriggerSelectTimeInterval() throws InterruptedException {
+		jswait.loadClick(custTriggerFormTimeIntervalSelector);
+		jswait.loadClick(custTriggerFormTimeInterval);
+	}
 	public void triggerEnterMaximumOffers(String name) throws InterruptedException {
 		jswait.loadSendKeys(triggerFormMaximumOffers, name);
+	}
+	public void custTriggerEnterMaximumOffers(String name) throws InterruptedException {
+		jswait.loadSendKeys(custTriggerFormMaximumOffers, name);
 	}
 	public void enterTriggerTouchpointDetails(String name) throws InterruptedException {
 		triggerEnterTouchpointName(name);

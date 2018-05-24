@@ -1177,5 +1177,14 @@ System.out.println(editname+"program has edited successfully");
 				
 			}
 		
+		@Then("^create new touchpoint with alert value$")
+		public void createTouchpointWithAlertValue() throws Throwable {
+			
+			touchpointPage.createTouchpointWithAlertValue();
+			
+			
+		}
+	
+		
 	
 }

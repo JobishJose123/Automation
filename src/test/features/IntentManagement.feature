@@ -430,7 +430,7 @@ Then edit sms touchpoint from sheet "smsTouchpoint"
     Then choose program from sheet "programdetails"
     Then verify tracking field while create new rule from sheet "fullDetails"
     
-      @NX-2083
+  @NX-2083
   @initBrowser 
   Scenario: Verify Cross site scripting in Customer care touch point edit page-2083
   Given login
@@ -439,3 +439,17 @@ Then edit sms touchpoint from sheet "smsTouchpoint"
   Then navigate to customer care
   Then click edit touchpoint
   Then edit touchpoint with alert value
+  
+  
+  
+  @NX-2079
+  @initBrowser 
+  Scenario: Verify Cross site scripting for create new touch point-2079
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to customer care
+	Then click create new touchpoint
+	Then create new touchpoint with alert value
+  
+  
