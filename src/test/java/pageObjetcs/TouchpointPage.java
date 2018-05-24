@@ -162,10 +162,12 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormHeading;
 	@FindBy(xpath="((.//data-table-cell[@class='sms-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
 	private WebElement smstouchpointedit ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath=".//*[@id='item35']/div[1]/data-table-cell[1]/span[@class='ellipsis style-scope data-table-cell']")
+	private WebElement smseditcheck ;
+	@FindBy(xpath=".//*[@id='deleteTP']/div/paper-button[@class='style-scope sms-touchpoint-grid x-scope paper-button-0']")
+	private WebElement smsdeleteyes ;
+	@FindBy(xpath="((.//data-table-cell[@class='sms-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
+	private WebElement smsdeletebutton;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -493,13 +495,16 @@ public void createTouchpointWithAlertValue() throws Throwable {
 	
 	public void smsedittouchpointcheck(String name) throws Exception {
 		Thread.sleep(5000);
-		
-		String newname=jswait.getTextFormElement("(.//data-table-cell[@class='sms-touchpoint-grid style-scope'])[1][contains(.,'edited smsTouch')]");
-		System.out.println(newname);
-Assert.assertEquals(name,newname);
-		System.out.println("edit success");
-	}
+		jswait.checkVisible(smseditcheck);
 	
+	}
+	public void deletesmsTouchpoint(String name) throws InterruptedException{
+		Thread.sleep(10000);
+		
+	 WebElement smsdetele=driver.findElement(By.xpath("//*[@class='x-scope data-table-row-0 style-scope sms-touchpoint-grid']/div[1]/data-table-cell[1]/span[contains(.,'"+name+"')]//following::iron-icon[2]"));
+		jswait.loadClick(smsdetele);
+	jswait.loadClick(smsdeleteyes);
+	}
 	
 	
 	

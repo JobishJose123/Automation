@@ -451,5 +451,12 @@ Then edit sms touchpoint from sheet "smsTouchpoint"
   Then navigate to customer care
 	Then click create new touchpoint
 	Then create new touchpoint with alert value
-  
+@NX-1578
+@initBrowser 
+Scenario: Verify delete sms touchpoint creation 
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then create sms touchpoint from sheet "smsTouchpoint"
+Then delete sms touchpoint from sheet "smsTouchpoint"
   
