@@ -118,10 +118,10 @@ public class IntentManagement extends Init{
 	    touchpointPage.navigateToCustomerCare();
 	}
 	
-	@Then("^click edit touchpoint$")
+	/*@Then("^click edit touchpoint$")
 	public void clickEditTouchpoint() throws Throwable {
 	    touchpointPage.clickEditTouchpoint();
-	}
+	}*/
 	
 
 	@Then("^create customer care touchpoint from sheet \"([^\"]*)\"$")
@@ -1170,9 +1170,9 @@ System.out.println(editname+"program has edited successfully");
 		
 		
 		
-		@Then("^click edit touchpoint$")
-		public void clickEditTouchpoint() throws Throwable {
-		    touchpointPage.clickEditTouchpoint();
+		@Then("^click customer care edit touchpoint$")
+		public void clickCustEditTouchpoint() throws Throwable {
+		    touchpointPage.clickCustEditTouchpoint();
 		}
 		
 		

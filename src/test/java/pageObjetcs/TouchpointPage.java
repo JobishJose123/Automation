@@ -318,16 +318,11 @@ public class TouchpointPage extends Init{
 		
 	}
 	
-	public void clickEditTouchpoint() throws InterruptedException {
+	public void clickCustEditTouchpoint() throws InterruptedException {
 		
+	
+			jswait.loadClick(editTouchpoint1);
 		
-		
-		Thread.sleep(5000);
-		jswait.checkClickable(editTouchpoint1);
-		boolean flag=jswait.checkVisible(editTouchpoint1);
-		if (flag==true){
-			jswait.loadClick(editTouchpoint);}
-		else{System.out.println("cant find element");}
 	}
 	
 	
