@@ -280,6 +280,9 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath=".//*[@id='item1']//span[contains(.,'autoprogram')]")
 	private WebElement filterpgm ;
+	
+	@FindBy(xpath=".//paper-input-error[contains(.,'The value does not match the specified pattern.')]")
+	private WebElement errorProgrammTitle ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -295,6 +298,12 @@ public class ProgramPage extends Init{
 		
 	public void clickCreateProgramButton() throws InterruptedException {
 		jswait.loadClick(createProgramButton);
+	}
+	
+	
+
+   public void checkProgramTitleValidationErrorMessage() throws InterruptedException {
+		assertTrue(errorProgrammTitle.isDisplayed());
 	}
 	public void clickCreateProgramCancelButton() throws InterruptedException {
 		jswait.loadClick(createProgramCancelButton);
@@ -449,6 +458,7 @@ public class ProgramPage extends Init{
 		pgmfirstofferselect();
 		Thread.sleep(4000);
 		clickPorogramProceedButton();
+		checkProgramTitleValidationErrorMessage();
 	}
 	public void cancelProgramDetails(String name)throws InterruptedException {
 		Random rn = new Random();

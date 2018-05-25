@@ -505,8 +505,7 @@ Given login
 Then navigate to intent management
 Then navigate to programs
 Then click create program button
-Then verify create program page "programdetails"
-
+Then verify create program page with alert value
 
 @initBrowser 
 Scenario: Verify edit sms touchpoint creation 

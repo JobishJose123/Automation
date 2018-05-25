@@ -362,34 +362,8 @@ System.out.println(editname+"program has edited successfully");
 		
 		programPage.clickCreateProgramButton();
 		programPage.enterProgramDetailsWithAlertValue();
-		programPage.clickCreateProgramAddTouchpointButton();
-		programPage.addTouchPointToProgram();
-		programPage.clickPorogramProceedButton();
-		programPage.programschstart();
-		programPage.prmshcselectnow();
-		programPage.programschend();
-		programPage.prmshcselectnoend();
-		programPage.programschrefreshcycle();
-		programPage.prmshcselectdays();
-		Thread.sleep(2000);
-		programPage.prmeverylabel();
-		programPage.prmrecycleinputclick();
-		programPage.prmrecycleinput();
-		programPage.prmrefreshat();
-		programPage.pgmtimeokbtn();
-		programPage.programschserveon(); 
-		programPage.prmshcserveonalldays();
-		//programPage.createProgramSaveButton();
-		Thread.sleep(2000);
-		programPage.programactivatebtn();
-		programPage.programconfirmactivateyes();
-		System.out.println("program has created successfully");
 		
 	}
-	
-	
-	
-	
 
 	@Then("^Verify duplicate TP entry on touchpoint tab$")
 	public void touchpointsduplicateprograms() throws Throwable {
