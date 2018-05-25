@@ -489,7 +489,7 @@ Then delete sms touchpoint from sheet "smsTouchpoint"
 
 @NX-1570 
 @initBrowser 
-Scenario: Verify edit API touchpoint creation 
+Scenario: Verify validation API touchpoint  creation 
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
@@ -507,3 +507,11 @@ Then navigate to programs
 Then click create program button
 Then verify create program page "programdetails"
 
+
+@initBrowser 
+Scenario: Verify edit sms touchpoint creation 
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then create sms touchpoint from sheet "smsTouchpoint"
+Then edit sms touchpoint from sheet "smsTouchpoint"
