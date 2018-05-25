@@ -506,6 +506,17 @@ Then navigate to intent management
 Then navigate to programs
 Then click create program button
 Then verify create program page with alert value
+
+ @NX-2077
+  @initBrowser
+  Scenario: Verify Cross site scripting for filtering Catalogues Under Intent Management-2077
+  Given login
+	When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+	Then filter catlog with alert value
+
+
 @NX-1568
 @initBrowser 
 Scenario: Verify edit validation sms touchpoint creation 
