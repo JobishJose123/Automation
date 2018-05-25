@@ -1298,10 +1298,8 @@ System.out.println(editname+"program has edited successfully");
 		 public void filterCatlogWithAlertValue() throws InterruptedException {
 			    String name="<script>alert(document.cookies)</script>";
 			    filterWorkaround(name);
-			    //commonObjects.clickOptionsIcon();
-			   // programPage.clickPorogramViewRulesButton();
-			 
-			 
+			    commonObjects.clickFilterIcon();
+			    intentManagementPage.verifyFilterTitle(); 
 		 }
 	
 }
