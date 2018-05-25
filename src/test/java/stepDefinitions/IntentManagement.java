@@ -1227,6 +1227,17 @@ System.out.println(editname+"program has edited successfully");
 			
 			
 		}
+		
+		@Then("^delete USSD touchpoint$")
+		public void deleteUSSDTouchpoint() throws Throwable {
+			
+			touchpointPage.deleteUSSDTouchpoint();
+			
+			
+		}
+		
+		
+		
 	
 		//-----------------------------------------------------------------------------------------//
 		

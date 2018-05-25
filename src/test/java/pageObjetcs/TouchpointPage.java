@@ -55,6 +55,10 @@ public class TouchpointPage extends Init{
 	private WebElement ussdFormUssdApplication1;
 	@FindBy(xpath="((.//data-table-cell[@class='ussd-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
 	private WebElement ussdTouchpointEdit;
+	@FindBy(xpath="((.//data-table-cell[@class='ussd-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
+	private WebElement ussdDeleteTouchpoint;
+	@FindBy(xpath=".//div[@class='buttons style-scope ussd-touchpoint-grid']//paper-button[contains(.,'Yes')]")
+	private WebElement ussdDeleteYes;
 	
 
 	
@@ -312,6 +316,13 @@ public class TouchpointPage extends Init{
 		Thread.sleep(2000);
        
 	}
+ 
+ 
+ public void clickDeleteUSSDTouchpoint() throws InterruptedException {
+		jswait.loadClick(ussdDeleteTouchpoint);
+		jswait.loadClick(ussdDeleteYes);
+		
+	}
 	public void navigateToSms() throws InterruptedException {
 		jswait.loadClick(smsTouchpoints);
 	}
@@ -506,6 +517,13 @@ public void createNewCustomerCareTouchpointAndDelete() throws Throwable {
 	clickDeleteCustTouchpoint();
 	
 }
+
+public void deleteUSSDTouchpoint() throws Throwable {
+	
+	clickDeleteUSSDTouchpoint();
+	
+}
+
 	public void createSmsTouchpoint(String keyword) throws InterruptedException {
 		clickCreateNewTouchpoint();
 		enterSmsTouchpointDetails(keyword);

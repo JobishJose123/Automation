@@ -477,7 +477,7 @@ Then delete sms touchpoint from sheet "smsTouchpoint"
 	Then click create new touchpoint
 	Then create new customer care touchpoint and delete
   
-@NX-1575
+  @NX-1575
   @initBrowser 
   Scenario: Verify Customer Care touchpoint edit functionality-1575
   Given login
@@ -524,6 +524,15 @@ Then verify create program page with alert value
   Then navigate to offer management
   Then navigate to offers
 	Then filter offer with alert value
+	
+	@NX-1581
+  @initBrowser 
+  Scenario: Verify USSD touchpoint delete functionality-1581
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to ussd
+	Then delete USSD touchpoint
 
 
 @NX-1568
