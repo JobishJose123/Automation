@@ -1177,6 +1177,23 @@ System.out.println(editname+"program has edited successfully");
 		}
 		
 		
+		@Then("^delete sms touchpoint from sheet \"([^\"]*)\"$")
+		public void delete_sms_touchpoint(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eh.setCell(1, 0, name);
+		  		  System.out.println(name);
+		  touchpointPage.deletesmsTouchpoint(name);
+		  
+		  
+		}
+		
+		
 		@Then("^edit sms touchpoint from sheet \"([^\"]*)\"$")
 		public void edit_sms_touchpoint(String sheet) throws Throwable {
 			Thread.sleep(4000);
