@@ -92,6 +92,11 @@ Given login
   Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Verify Added Catalogue "defaultCatalog"
+   Then pass next scenario based on this step
+
+  @NX-1150
+  Scenario: Create Offer Catalog: Verify the selected offers for the catalog. NX-1150
+    Then check previous step and pass this
   
   @initBrowser @closeBrowser @NX-1127
 Scenario: Verify the field validations for the catalogue name and description

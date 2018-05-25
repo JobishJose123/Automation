@@ -4,23 +4,6 @@
 @NX-BroadcastManagement
 Feature: Test cases related to Broadcast Management
 
-@NX-1192
-@initBrowser @closeBrowser
-Scenario: Category screen : Verify the delete option when the category is linked with campaigns
-Given login
-Then navigate to configuration management
-Then navigate to campaign categories
-Then create new campaign category from sheet "campaignCategory"
-Then navigate to landing page
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then navigate to landing page
-Then navigate to configuration management
-Then navigate to campaign categories
-Then check delete campaign category with linked campaigns from sheet "campaignCategory"
-
 @NX-505 
 @initBrowser @closeBrowser
 Scenario: Create BC-Details tab: Verify Create New BC lands in the details tab.
@@ -406,6 +389,22 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 
 
+@NX-1192
+@initBrowser @closeBrowser
+Scenario: Category screen : Verify the delete option when the category is linked with campaigns
+Given login
+Then navigate to configuration management
+Then navigate to campaign categories
+Then create new campaign category from sheet "campaignCategory"
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then navigate to landing page
+Then navigate to configuration management
+Then navigate to campaign categories
+Then check delete campaign category with linked campaigns from sheet "campaignCategory"
 
 
 
