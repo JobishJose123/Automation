@@ -45,25 +45,25 @@ import reportDB.ExtractTags;
 		}
 		
 	}
-	@After
-	public void afterEveryClass(Scenario scenario) throws IOException, SQLException {
-		String str = "\ntags"+scenario.getSourceTagNames()+"status:"+scenario.getStatus();
-		System.out.println(str);
-		int status = 0;
-		if(scenario.getStatus().contains("pass"))
-			status =1;
-		ExtractTags et = new ExtractTags();
-		et.addRowToDb(scenario.getSourceTagNames().toString(), scenario.getName(),status);
-		System.out.println(scenario.getName());
-		BufferedWriter outStream= new BufferedWriter(new FileWriter(".//src//test//resources/runCases.txt", true));
-        // read character wise from string and write
-        // into FileWriter
-        for (int i = 0; i < str.length(); i++)
-        	outStream.write(str.charAt(i));
- 
-        //close the file
-        outStream.close();
-		
-		
-	}
+//	@After
+//	public void afterEveryClass(Scenario scenario) throws IOException, SQLException {
+//		String str = "\ntags"+scenario.getSourceTagNames()+"status:"+scenario.getStatus();
+//		System.out.println(str);
+//		int status = 0;
+//		if(scenario.getStatus().contains("pass"))
+//			status =1;
+//		ExtractTags et = new ExtractTags();
+//		et.addRowToDb(scenario.getSourceTagNames().toString(), scenario.getName(),status);
+//		System.out.println(scenario.getName());
+//		BufferedWriter outStream= new BufferedWriter(new FileWriter(".//src//test//resources/runCases.txt", true));
+//        // read character wise from string and write
+//        // into FileWriter
+//        for (int i = 0; i < str.length(); i++)
+//        	outStream.write(str.charAt(i));
+// 
+//        //close the file
+//        outStream.close();
+//		
+//		
+//	}
 }
