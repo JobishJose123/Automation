@@ -177,7 +177,11 @@ public class TouchpointPage extends Init{
 	private WebElement smsdeleteyes ;
 	@FindBy(xpath="((.//data-table-cell[@class='sms-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
 	private WebElement smsdeletebutton;
-//	@FindBy(xpath="")
+	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Maximum offers')]/../input//following::paper-input-error[1]")
+	private WebElement smsvalidation ;
+	
+	
+	//	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
@@ -402,7 +406,7 @@ public class TouchpointPage extends Init{
 		smsSelectOrderingRulelifo();
 		smsEnterRefreshEvery("8");
 		smsSelectTimeInterval();
-		smsEnterMaximumOffers("10");
+		smsEnterMaximumOffers("5");
 		smsClickSave();
 	}
 	public void custedittouchpointcheck(String name) throws Exception {
@@ -545,7 +549,23 @@ public void createNewCustomerCareTouchpointAndDelete() throws Throwable {
 	}
 	
 	
-	
+	public void editsmsTouchpointDetailsvalidation(String keyword) throws InterruptedException {
+		System.out.println("inside sms validation");
+		smsEnterKeyword(keyword);
+		smsSelectShortCode();
+		smsSelectOrderingLogic();
+		smsSelectOrderingRulelifo();
+		smsEnterRefreshEvery("8");
+		smsSelectTimeInterval();
+		smsEnterMaximumOffers("");
+		smsClickSave();
+		
+		boolean flag=jswait.checkVisible(smsvalidation);
+		System.out.println(flag);
+		if (flag==true){
+			}
+			else{System.out.println("cant find element");}
+	}
 	
 	
 	

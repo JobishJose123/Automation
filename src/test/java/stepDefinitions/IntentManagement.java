@@ -1251,12 +1251,47 @@ System.out.println(editname+"program has edited successfully");
 		}
 		
 		
+		@Then("^edit sms touchpoint validation check from sheet \"([^\"]*)\"$")
+		public void edit_sms_touchpointvalidation_check(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			
+			touchpointPage.smsedittouchpointsclick();
+			System.out.println("inside sms");
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		String newname=name;
+	 		
+		  touchpointPage.editsmsTouchpointDetailsvalidation(newname);
+		  
+		  System.out.println(newname);
+		  //touchpointPage.apiedittouchpointcheck(newname);
+		  
+		}
 		
 		
 		
 		
 		
-		
-		
+		@Then("^create api touchpoint validation check from sheet \"([^\"]*)\"$")
+		public void create_api_touchpointvalidation_check(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			
+			touchpointPage.clickCreateNewTouchpoint();;
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		String newname=name;
+	 		eh.setCell(1, 0, newname);
+		  touchpointPage.editapiTouchpointDetailsvalidation(newname);
+		  
+		  System.out.println(newname);
+		  //touchpointPage.apiedittouchpointcheck(newname);
+		  
+		}
 	
 }

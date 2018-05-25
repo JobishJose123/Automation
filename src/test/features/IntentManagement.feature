@@ -506,11 +506,21 @@ Then navigate to intent management
 Then navigate to programs
 Then click create program button
 Then verify create program page with alert value
-
+@NX-1568
 @initBrowser 
-Scenario: Verify edit sms touchpoint creation 
+Scenario: Verify edit validation sms touchpoint creation 
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then create sms touchpoint from sheet "smsTouchpoint"
-Then edit sms touchpoint from sheet "smsTouchpoint"
+Then edit sms touchpoint validation check from sheet "smsTouchpoint"
+
+
+@NX-1566
+@initBrowser 
+Scenario: Verify validation API touchpoint
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to api
+Then create api touchpoint validation check from sheet "apiTouchpoint"
