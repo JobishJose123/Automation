@@ -515,6 +515,15 @@ Then verify create program page with alert value
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
 	Then filter catlog with alert value
+	
+	@NX-2076
+  @initBrowser
+  Scenario: Verify cross site scripting for Filtering offers Under Intenet Management-2076
+  Given login
+  When navigate to precision marketer
+  Then navigate to offer management
+  Then navigate to offers
+	Then filter offer with alert value
 
 
 @NX-1568

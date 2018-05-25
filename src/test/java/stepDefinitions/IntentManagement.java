@@ -1301,5 +1301,13 @@ System.out.println(editname+"program has edited successfully");
 			    commonObjects.clickFilterIcon();
 			    intentManagementPage.verifyFilterTitle(); 
 		 }
+		
+		@Then("^filter offer with alert value$")
+		 public void filterOfferWithAlertValue() throws InterruptedException {
+			    String name="<script>alert(document.cookies)</script>";
+			    filterWorkaround(name);
+			    commonObjects.clickFilterIcon();
+			    intentManagementPage.verifyFilterTitle(); 
+		 }
 	
 }
