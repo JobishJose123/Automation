@@ -18,7 +18,7 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import gherkin.formatter.model.Feature;
-import reportDB.ExtractTags;
+//import reportDB.ExtractTags;
 	public class Hooks extends Init{
 	
 		@Before("@initBrowser")
