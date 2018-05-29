@@ -533,6 +533,17 @@ Then verify create program page with alert value
   Then navigate to touchpoints
   Then navigate to ussd
 	Then delete USSD touchpoint
+	
+	
+	@NX-1567
+  @initBrowser 
+  Scenario: Field level validation check while creating new USSD TP-1567
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to ussd
+	Then create new touch point without filling mandatory fields
+	Then verify validation error messages
 
 
 @NX-1568

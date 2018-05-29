@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.junit.Assert;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -59,6 +61,11 @@ public class TouchpointPage extends Init{
 	private WebElement ussdDeleteTouchpoint;
 	@FindBy(xpath=".//div[@class='buttons style-scope ussd-touchpoint-grid']//paper-button[contains(.,'Yes')]")
 	private WebElement ussdDeleteYes;
+	@FindBy(xpath=".//paper-input-container[@class='style-scope paper-input x-scope paper-input-container-0']//paper-input-error[contains(.,'This field is required.')]")
+	private List <WebElement> ussdNameValidation;
+	@FindBy(xpath=".//paper-input-container[@class='style-scope vaadin-combo-box x-scope paper-input-container-4']//paper-input-error[contains(.,'This field is required.')]")
+	private WebElement ussdApplicationValidation;
+	
 	
 
 	
@@ -917,6 +924,27 @@ Assert.assertEquals(name,newname);
 				enterUssdTouchpointDetails(keyword);
 				ussdClickSave();
 			}
+			public void createUssdTouchpointWithoutMandatoryFields() throws InterruptedException {
+				clickCreateNewTouchpoint();
+				ussdClickSave();
+			}
+			
+			public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
+				
+				int sizename= ussdNameValidation.size();
+				System.out.println("ussdNameValidation: "+sizename);
+				if(ussdNameValidation.size()>0) {
+					
+					for(WebElement NameValidation: ussdNameValidation ) {
+						
+						assertTrue(NameValidation.isDisplayed());
+					}
+				}
+				assertTrue(ussdApplicationValidation.isDisplayed());
+				assertTrue(ussdFormSaveButton.isDisplayed());
+				
+			}
+			
 			public String getUssdFormHeading() throws InterruptedException {
 				Exception wrongForm = new Exception("wrong form displayed");
 				try{

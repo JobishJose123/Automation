@@ -182,6 +182,21 @@ public class IntentManagement extends Init{
  		eh.setCell(1, 0, name);
 	  touchpointPage.createUssdTouchpoint(name);
 	}
+	
+	@Then("^create new touch point without filling mandatory fields$")
+	public void createUssdTouchpointWithoutMandatoryFields() throws Throwable {
+	  touchpointPage.createUssdTouchpointWithoutMandatoryFields();
+	}
+	
+	@Then("^verify validation error messages$")
+	public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
+		
+		touchpointPage.verifyValidationErrorMessagesInUSSDCreation();
+		
+	}
+	
+	
+	
 
 	@Then("^check ussd touchpoint in grid \"([^\"]*)\"$")
 	public void check_ussd_touchpoint_in_grid(String sheet) throws Throwable {
