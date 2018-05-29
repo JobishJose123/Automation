@@ -234,8 +234,14 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath="((.//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
 	private WebElement editTouchpoint1;
 	
+	@FindBy(xpath=".//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[2]//iron-icon")
+	private List <WebElement> custEditButtonList;
+	
 	@FindBy(xpath="((.//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
 	private WebElement custDeleteTouchpoint;
+	
+	@FindBy(xpath=".//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[1]//iron-icon")
+	private List <WebElement> custDeleteTouchpointList;
 
 @FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement custFormTouchpointName1;
@@ -487,9 +493,6 @@ public void editCustomerCareTouchpoint() throws Throwable {
 	  custedittouchpointcheck(newname);
 	  clickDeleteCustTouchpoint();
 }
-
-
-
 
 public void createTouchpointWithAlertValue() throws Throwable {
 	
@@ -977,4 +980,27 @@ Assert.assertEquals(name,newname);
 				triggerEnterMaximumOffers("5");
 			}
 
+			
+			public void verifyEditAndDeleteButtonTouchpoints() throws InterruptedException {
+				
+				if(custEditButtonList.size()>0) {
+					for(WebElement EditButton: custEditButtonList ) {
+						assertTrue(EditButton.isDisplayed());
+						
+					}
+					
+				}
+				
+				if(custDeleteTouchpointList.size()>0) {
+					for(WebElement DeleteButton: custDeleteTouchpointList ) {
+						assertTrue(DeleteButton.isDisplayed());
+						
+					}
+					
+				}
+				
+				
+				
+			}
+			
 }

@@ -544,6 +544,16 @@ Then verify create program page with alert value
   Then navigate to ussd
 	Then create new touch point without filling mandatory fields
 	Then verify validation error messages
+	
+	
+	@NX-2049
+  @initBrowser 
+  Scenario: Verify for the edit and delete buttons in customer care touch points-2049
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to customer care
+  Then verify edit and delete button touchpoint
 
 
 @NX-1568

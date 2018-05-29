@@ -1335,5 +1335,11 @@ System.out.println(editname+"program has edited successfully");
 			    commonObjects.clickFilterIcon();
 			    intentManagementPage.verifyFilterTitle(); 
 		 }
+		
+		@Then("^verify edit and delete button touchpoint$")
+		public void verifyEditAndDeleteButtonTouchpoints() throws InterruptedException {
+			
+			touchpointPage.verifyEditAndDeleteButtonTouchpoints();
+		}
 	
 }
