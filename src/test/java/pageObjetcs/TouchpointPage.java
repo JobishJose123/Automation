@@ -67,7 +67,15 @@ public class TouchpointPage extends Init{
 	private WebElement ussdApplicationValidation;
 	
 	
-
+	//smart phone  touchpoint objects
+	
+	@FindBy(xpath=".//div[text()='Smartphone App']")
+	private WebElement smartphoneTouchpoints;
+	@FindBy(xpath=".//div[@class='buttons style-scope smartphone-touchpoint-grid']//paper-button[contains(.,'Save')]")
+	private WebElement smartFormSaveButton;
+	@FindBy(xpath=".//form[@id='addSmartphoneFrom']//paper-input-error[@class='style-scope paper-input x-scope paper-input-error-0']")
+	private List <WebElement> smartCreateValidation;
+	
 	
 	
 	
@@ -375,6 +383,9 @@ public class TouchpointPage extends Init{
 	public void navigateToApi() throws InterruptedException {
 		jswait.loadClick(apiTouchpoints);
 	}
+	public void navigateTosmartphone() throws InterruptedException {
+		jswait.loadClick(smartphoneTouchpoints);
+	}
 	public void navigateToCustomerCare() throws InterruptedException {
 		jswait.loadClick(customerCareTouchpoints);
 	}
@@ -477,6 +488,10 @@ public class TouchpointPage extends Init{
 public void custClickSave() throws InterruptedException {
 		jswait.loadClick(custFormSaveButton);
 	}
+
+public void smartClickSave() throws InterruptedException {
+	jswait.loadClick(smartFormSaveButton);
+}
 
 
 
@@ -979,6 +994,13 @@ Assert.assertEquals(name,newname);
 				custClickSave();
 
 			}
+			public void createCustomerSmartPhoneAppWithoutMandatoryFields() throws InterruptedException {
+				clickCreateNewTouchpoint();
+				smartClickSave();
+
+			}
+			
+			
 			
 			public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
 				
@@ -1061,6 +1083,21 @@ Assert.assertEquals(name,newname);
 			
 			
 			assertTrue(custFormSaveButton.isDisplayed());
+		}
+     
+      public void verifyValidationErrorMessagesInSmartPhoneApp() throws Throwable {
+			
+			
+	        int sizename= smartCreateValidation.size();
+			System.out.println("smartCreateValidation: "+sizename);
+			if(smartCreateValidation.size()>0) {
+				
+				for(WebElement NameValidation: smartCreateValidation ) {
+					
+					assertTrue(NameValidation.isDisplayed());
+				}
+			}
+			assertTrue(smartFormSaveButton.isDisplayed());
 		}
      
 			

@@ -598,6 +598,16 @@ Then verify create program page with alert value
 	Then verify validation error messages for customer care touch point
 	
 	
+	@NX-1433
+  @initBrowser @closeBrowser
+  Scenario: Verify the validations for the Smartphone touchpoint screen-1433
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to smart phone app
+	Then create new smart phone app touch point without filling mandatory fields
+	Then verify validation error messages for smart phone app touch point
+	
 	@NX-2049
   @initBrowser @closeBrowser
   Scenario: Verify for the edit and delete buttons in customer care touch points-2049
