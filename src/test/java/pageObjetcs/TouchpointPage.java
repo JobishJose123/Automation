@@ -61,8 +61,8 @@ public class TouchpointPage extends Init{
 	private WebElement ussdDeleteTouchpoint;
 	@FindBy(xpath=".//div[@class='buttons style-scope ussd-touchpoint-grid']//paper-button[contains(.,'Yes')]")
 	private WebElement ussdDeleteYes;
-	@FindBy(xpath=".//paper-input-container[@class='style-scope paper-input x-scope paper-input-container-0']//paper-input-error[contains(.,'This field is required.')]")
-	private List <WebElement> ussdNameValidation;
+	@FindBy(xpath=".//form[@id='ussdForm']//paper-input-error[@class='style-scope paper-input x-scope paper-input-error-0']")
+	private List <WebElement> ussdCreateValidation;
 	@FindBy(xpath=".//paper-input-container[@class='style-scope vaadin-combo-box x-scope paper-input-container-4']//paper-input-error[contains(.,'This field is required.')]")
 	private WebElement ussdApplicationValidation;
 	
@@ -127,6 +127,16 @@ public class TouchpointPage extends Init{
 	
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Maximum offers')]/../input//following::paper-input-error[1]")
 	private WebElement apivalidation ;
+	
+	@FindBy(xpath=".//div[@class='layout vertical style-scope api-touchpoint-grid']//paper-input-error[contains(.,'This field is required.')]")
+	private WebElement apiNameValidation;
+	
+	@FindBy(xpath=".//form[@id='apiForm']//paper-input-error[@class='style-scope paper-input x-scope paper-input-error-0']")
+	private List <WebElement> apiCreateValidation;
+	
+	
+	
+	
 	
 	
 	//-------------------------//
@@ -932,13 +942,23 @@ Assert.assertEquals(name,newname);
 				ussdClickSave();
 			}
 			
+			public void createAPITouchpointWithoutMandatoryFields() throws InterruptedException {
+				clickCreateNewTouchpoint();
+				apiClickSave();
+			}
+			public void createTriggerTouchpointWithoutMandatoryFields() throws InterruptedException {
+				clickCreateNewTouchpoint();
+				triggerClickSave();
+
+			}
+			
 			public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
 				
-				int sizename= ussdNameValidation.size();
+				int sizename= ussdCreateValidation.size();
 				System.out.println("ussdNameValidation: "+sizename);
-				if(ussdNameValidation.size()>0) {
+				if(ussdCreateValidation.size()>0) {
 					
-					for(WebElement NameValidation: ussdNameValidation ) {
+					for(WebElement NameValidation: ussdCreateValidation ) {
 						
 						assertTrue(NameValidation.isDisplayed());
 					}
@@ -946,6 +966,20 @@ Assert.assertEquals(name,newname);
 				assertTrue(ussdApplicationValidation.isDisplayed());
 				assertTrue(ussdFormSaveButton.isDisplayed());
 				
+			}
+			
+     public void verifyValidationErrorMessagesInAPICreation() throws Throwable {
+				
+				assertTrue(apiNameValidation.isDisplayed());
+    	        int sizename= apiCreateValidation.size();
+				System.out.println("apiCreateValidation: "+sizename);
+				if(apiCreateValidation.size()>0) {
+					
+					for(WebElement NameValidation: apiCreateValidation ) {
+						
+						assertTrue(NameValidation.isDisplayed());
+					}
+				}
 			}
 			
 			public String getUssdFormHeading() throws InterruptedException {
@@ -993,14 +1027,10 @@ Assert.assertEquals(name,newname);
 				
 				if(custDeleteTouchpointList.size()>0) {
 					for(WebElement DeleteButton: custDeleteTouchpointList ) {
-						assertTrue(DeleteButton.isDisplayed());
-						
+						assertTrue(DeleteButton.isDisplayed());	
 					}
-					
 				}
-				
-				
-				
-			}
+				}
 			
+
 }

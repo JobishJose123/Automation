@@ -543,7 +543,39 @@ Then verify create program page with alert value
   Then navigate to touchpoints
   Then navigate to ussd
 	Then create new touch point without filling mandatory fields
-	Then verify validation error messages
+	Then verify validation error messages for USSD touch point
+	
+	
+	@NX-1439
+  @initBrowser 
+  Scenario: Verify the validations for the USSD touchpoint screen-1439
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to ussd
+	Then create new touch point without filling mandatory fields
+	Then verify validation error messages for USSD touch point
+	
+	@NX-1438
+  @initBrowser 
+  Scenario: Verify the validations for the API touchpoint screen-1438
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to api
+	Then create new API touch point without filling mandatory fields
+	Then verify validation error messages for API touch point
+	
+	
+	@NX-1437
+  @initBrowser 
+  Scenario: Verify the validations for the Trigger touchpoint screen-1437
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to trigger
+	Then create new trigger touch point without filling mandatory fields
+	Then verify validation error messages for trigger touch point
 	
 	
 	@NX-2049

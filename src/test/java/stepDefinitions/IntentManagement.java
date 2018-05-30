@@ -188,10 +188,27 @@ public class IntentManagement extends Init{
 	  touchpointPage.createUssdTouchpointWithoutMandatoryFields();
 	}
 	
-	@Then("^verify validation error messages$")
+	@Then("^create new API touch point without filling mandatory fields$")
+	public void createAPITouchpointWithoutMandatoryFields() throws Throwable {
+	  touchpointPage.createAPITouchpointWithoutMandatoryFields();
+	}
+	
+	@Then("^create new trigger touch point without filling mandatory fields$")
+	public void createTriggerTouchpointWithoutMandatoryFields() throws Throwable {
+	  touchpointPage.createTriggerTouchpointWithoutMandatoryFields();
+	}
+	
+	@Then("^verify validation error messages for USSD touch point$")
 	public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
 		
 		touchpointPage.verifyValidationErrorMessagesInUSSDCreation();
+		
+	}
+	
+	@Then("^verify validation error messages for API touch point$")
+	public void verifyValidationErrorMessagesInAPICreation() throws Throwable {
+		
+		touchpointPage.verifyValidationErrorMessagesInAPICreation();
 		
 	}
 	
