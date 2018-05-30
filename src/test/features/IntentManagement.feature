@@ -587,6 +587,16 @@ Then verify create program page with alert value
 	Then create new SMS touch point without filling mandatory fields
 	Then verify validation error messages for SMS touch point
 	
+	@NX-1434
+  @initBrowser @closeBrowser
+  Scenario: Verify the validations for the customer care touchpoint screen-1434
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to customer care
+	Then create new customer care touch point without filling mandatory fields
+	Then verify validation error messages for customer care touch point
+	
 	
 	@NX-2049
   @initBrowser @closeBrowser

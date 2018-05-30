@@ -264,6 +264,9 @@ public class TouchpointPage extends Init{
 	
 	@FindBy(xpath=".//div[@class='buttons style-scope customercare-touchpoint-grid']//paper-button[contains(.,'Save')]")
 	private WebElement custFormSaveButton;
+	
+	@FindBy(xpath=".//form[@id='addCustomerForm']//paper-input-error[@class='style-scope paper-input x-scope paper-input-error-0']")
+	private List <WebElement> customercareCreateValidation;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -971,6 +974,11 @@ Assert.assertEquals(name,newname);
 				smsClickSave();
 
 			}
+			public void createCustomerCareTouchpointWithoutMandatoryFields() throws InterruptedException {
+				clickCreateNewTouchpoint();
+				custClickSave();
+
+			}
 			
 			public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
 				
@@ -1036,6 +1044,23 @@ Assert.assertEquals(name,newname);
 			
 			assertTrue(shortCodeValidation.isDisplayed());
 			assertTrue(smsFormSaveButton.isDisplayed());
+		}
+     
+     public void verifyValidationErrorMessagesInCustomercareCreation() throws Throwable {
+			
+			
+	        int sizename= customercareCreateValidation.size();
+			System.out.println("customercareCreateValidation: "+sizename);
+			if(customercareCreateValidation.size()>0) {
+				
+				for(WebElement NameValidation: customercareCreateValidation ) {
+					
+					assertTrue(NameValidation.isDisplayed());
+				}
+			}
+			
+			
+			assertTrue(custFormSaveButton.isDisplayed());
 		}
      
 			
