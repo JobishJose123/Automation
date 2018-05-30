@@ -577,6 +577,16 @@ Then verify create program page with alert value
 	Then create new trigger touch point without filling mandatory fields
 	Then verify validation error messages for trigger touch point
 	
+	@NX-1436
+  @initBrowser 
+  Scenario: Verify the validations for the SMS touchpoint screen-1436
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to trigger
+	Then create new SMS touch point without filling mandatory fields
+	Then verify validation error messages for SMS touch point
+	
 	
 	@NX-2049
   @initBrowser 

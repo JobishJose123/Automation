@@ -212,6 +212,13 @@ public class IntentManagement extends Init{
 		
 	}
 	
+	@Then("^verify validation error messages for trigger touch point$")
+	public void verifyValidationErrorMessagesInTriggerCreation() throws Throwable {
+		
+		touchpointPage.verifyValidationErrorMessagesInTriggerCreation();
+		
+	}
+	
 	
 	
 

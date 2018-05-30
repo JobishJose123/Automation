@@ -326,6 +326,14 @@ public class TouchpointPage extends Init{
 	private WebElement triggerTouchpointDelete;
 	@FindBy(xpath="//div[@val='trigger']//*[@id='deleteTP']//paper-button[contains(.,'Yes')]")
 	private WebElement triggerDeleteYes;
+	
+	@FindBy(xpath=".//form[@id='triggerForm']//paper-input-error[@class='style-scope paper-input x-scope paper-input-error-0']")
+	private List <WebElement> triggerCreateValidation;
+	@FindBy(xpath=".//vaadin-combo-box[@label='Trigger']//paper-input-error")
+	private WebElement triggerFieldValidation;
+	
+	
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -981,6 +989,22 @@ Assert.assertEquals(name,newname);
 					}
 				}
 			}
+     
+     public void verifyValidationErrorMessagesInTriggerCreation() throws Throwable {
+			
+			
+	        int sizename= triggerCreateValidation.size();
+			System.out.println("triggerCreateValidation: "+sizename);
+			if(triggerCreateValidation.size()>0) {
+				
+				for(WebElement NameValidation: triggerCreateValidation ) {
+					
+					assertTrue(NameValidation.isDisplayed());
+				}
+			}
+			
+			assertTrue(triggerFieldValidation.isDisplayed());
+		}
 			
 			public String getUssdFormHeading() throws InterruptedException {
 				Exception wrongForm = new Exception("wrong form displayed");
