@@ -508,7 +508,7 @@ Then click create program button
 Then verify create program page with alert value
 
  @NX-2077
-  @initBrowser
+  @initBrowser @closeBrowser
   Scenario: Verify Cross site scripting for filtering Catalogues Under Intent Management-2077
   Given login
 	When navigate to precision marketer
@@ -517,7 +517,7 @@ Then verify create program page with alert value
 	Then filter catlog with alert value
 	
 	@NX-2076
-  @initBrowser
+  @initBrowser @closeBrowser
   Scenario: Verify cross site scripting for Filtering offers Under Intenet Management-2076
   Given login
   When navigate to precision marketer
@@ -526,7 +526,7 @@ Then verify create program page with alert value
 	Then filter offer with alert value
 	
 	@NX-1581
-  @initBrowser 
+  @initBrowser @closeBrowser
   Scenario: Verify USSD touchpoint delete functionality-1581
   Given login
   Then navigate to intent management
@@ -536,7 +536,7 @@ Then verify create program page with alert value
 	
 	
 	@NX-1567
-  @initBrowser 
+  @initBrowser @closeBrowser
   Scenario: Field level validation check while creating new USSD TP-1567
   Given login
   Then navigate to intent management
@@ -547,7 +547,7 @@ Then verify create program page with alert value
 	
 	
 	@NX-1439
-  @initBrowser 
+  @initBrowser @closeBrowser
   Scenario: Verify the validations for the USSD touchpoint screen-1439
   Given login
   Then navigate to intent management
@@ -557,7 +557,7 @@ Then verify create program page with alert value
 	Then verify validation error messages for USSD touch point
 	
 	@NX-1438
-  @initBrowser 
+  @initBrowser @closeBrowser
   Scenario: Verify the validations for the API touchpoint screen-1438
   Given login
   Then navigate to intent management
@@ -568,7 +568,7 @@ Then verify create program page with alert value
 	
 	
 	@NX-1437
-  @initBrowser 
+  @initBrowser @closeBrowser
   Scenario: Verify the validations for the Trigger touchpoint screen-1437
   Given login
   Then navigate to intent management
@@ -578,18 +578,18 @@ Then verify create program page with alert value
 	Then verify validation error messages for trigger touch point
 	
 	@NX-1436
-  @initBrowser 
+  @initBrowser @closeBrowser
   Scenario: Verify the validations for the SMS touchpoint screen-1436
   Given login
   Then navigate to intent management
   Then navigate to touchpoints
-  Then navigate to trigger
+  Then navigate to sms
 	Then create new SMS touch point without filling mandatory fields
 	Then verify validation error messages for SMS touch point
 	
 	
 	@NX-2049
-  @initBrowser 
+  @initBrowser @closeBrowser
   Scenario: Verify for the edit and delete buttons in customer care touch points-2049
   Given login
   Then navigate to intent management
@@ -599,7 +599,7 @@ Then verify create program page with alert value
 
 
 @NX-1568
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify edit validation sms touchpoint creation 
 Given login
 Then navigate to intent management
@@ -609,7 +609,7 @@ Then edit sms touchpoint validation check from sheet "smsTouchpoint"
 
 
 @NX-1566
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify validation API touchpoint
 Given login
 Then navigate to intent management

@@ -201,6 +201,12 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Maximum offers')]/../input//following::paper-input-error[1]")
 	private WebElement smsvalidation ;
 	
+	@FindBy(xpath=".//form[@id='smsForm']//paper-input-error[@class='style-scope paper-input x-scope paper-input-error-0']")
+	private List <WebElement> smsCreateValidation;
+	
+	@FindBy(xpath=".//vaadin-combo-box[@class='flex style-scope sms-touchpoint-grid x-scope vaadin-combo-box-1']//paper-input-error")
+	private WebElement shortCodeValidation;
+	
 	
 	//	@FindBy(xpath="")
 //	private WebElement ;
@@ -960,6 +966,12 @@ Assert.assertEquals(name,newname);
 
 			}
 			
+			public void createSMSTouchpointWithoutMandatoryFields() throws InterruptedException {
+				clickCreateNewTouchpoint();
+				smsClickSave();
+
+			}
+			
 			public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
 				
 				int sizename= ussdCreateValidation.size();
@@ -988,6 +1000,8 @@ Assert.assertEquals(name,newname);
 						assertTrue(NameValidation.isDisplayed());
 					}
 				}
+				
+				assertTrue(apiFormSaveButton.isDisplayed());
 			}
      
      public void verifyValidationErrorMessagesInTriggerCreation() throws Throwable {
@@ -1004,7 +1018,26 @@ Assert.assertEquals(name,newname);
 			}
 			
 			assertTrue(triggerFieldValidation.isDisplayed());
+			assertTrue(triggerFormSaveButton.isDisplayed());
 		}
+     
+     public void verifyValidationErrorMessagesInSMSCreation() throws Throwable {
+			
+			
+	        int sizename= smsCreateValidation.size();
+			System.out.println("smsCreateValidation: "+sizename);
+			if(smsCreateValidation.size()>0) {
+				
+				for(WebElement NameValidation: smsCreateValidation ) {
+					
+					assertTrue(NameValidation.isDisplayed());
+				}
+			}
+			
+			assertTrue(shortCodeValidation.isDisplayed());
+			assertTrue(smsFormSaveButton.isDisplayed());
+		}
+     
 			
 			public String getUssdFormHeading() throws InterruptedException {
 				Exception wrongForm = new Exception("wrong form displayed");

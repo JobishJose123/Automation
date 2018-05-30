@@ -197,6 +197,10 @@ public class IntentManagement extends Init{
 	public void createTriggerTouchpointWithoutMandatoryFields() throws Throwable {
 	  touchpointPage.createTriggerTouchpointWithoutMandatoryFields();
 	}
+	@Then("^create new SMS touch point without filling mandatory fields$")
+	public void createSMSTouchpointWithoutMandatoryFields() throws Throwable {
+	  touchpointPage.createSMSTouchpointWithoutMandatoryFields();
+	}
 	
 	@Then("^verify validation error messages for USSD touch point$")
 	public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
@@ -216,6 +220,13 @@ public class IntentManagement extends Init{
 	public void verifyValidationErrorMessagesInTriggerCreation() throws Throwable {
 		
 		touchpointPage.verifyValidationErrorMessagesInTriggerCreation();
+		
+	}
+	
+	@Then("^verify validation error messages for SMS touch point$")
+	public void verifyValidationErrorMessagesInSMSCreation() throws Throwable {
+		
+		touchpointPage.verifyValidationErrorMessagesInSMSCreation();
 		
 	}
 	
