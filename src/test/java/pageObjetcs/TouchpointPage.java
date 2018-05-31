@@ -536,6 +536,17 @@ public void editCustomerCareTouchpoint() throws Throwable {
 	  clickDeleteCustTouchpoint();
 }
 
+public void editCustomerCareTouchpointWithSecurityAlert() throws Throwable {
+	Thread.sleep(3000);
+	custEnterTouchpointName("<script>alert(\"Security error\")</script>");
+	custClickSave();
+	
+	String newname="<script>alert(\"Security error\")</script>";
+	  System.out.println(newname);
+	  custedittouchpointcheck(newname);
+	  clickDeleteCustTouchpoint();
+}
+
 public void createTouchpointWithAlertValue() throws Throwable {
 	
 	Thread.sleep(3000);

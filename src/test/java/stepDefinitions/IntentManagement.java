@@ -1287,6 +1287,14 @@ System.out.println(editname+"program has edited successfully");
 			
 		}
 		
+		@Then("^edit customer care touchpoint with security alert$")
+		public void editCustomerCareTouchpointWithSecurityAlert() throws Throwable {
+			
+			touchpointPage.editCustomerCareTouchpointWithSecurityAlert();
+			
+			
+		}
+		
 		@Then("^create new touchpoint with alert value$")
 		public void createTouchpointWithAlertValue() throws Throwable {
 			

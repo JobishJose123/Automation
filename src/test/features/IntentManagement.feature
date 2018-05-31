@@ -486,6 +486,18 @@ Then delete sms touchpoint from sheet "smsTouchpoint"
   Then navigate to customer care
   Then click customer care edit touchpoint
   Then edit customer care touchpoint
+  
+  @NX-2106
+  @initBrowser 
+  Scenario: Verify Cross Site Scripting in Editing Customer Care Touch Point-2106
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to customer care
+  Then click customer care edit touchpoint
+  Then edit customer care touchpoint with security alert
+  
+  
 
 @NX-1570 
 @initBrowser 
@@ -619,7 +631,7 @@ Then verify create program page with alert value
 
 
 @NX-1568
-@initBrowser @closeBrowser
+@initBrowser
 Scenario: Verify edit validation sms touchpoint creation 
 Given login
 Then navigate to intent management
