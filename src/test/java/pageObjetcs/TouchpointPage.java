@@ -654,8 +654,26 @@ public void deleteUSSDTouchpoint() throws Throwable {
 			}
 			else{System.out.println("cant find element");}
 	}
-	
-	
+	public void createsmsTouchpointDetailsvalidation(String keyword) throws InterruptedException {
+		System.out.println("inside sms validation");
+		navigateToSms();
+		clickCreateNewTouchpoint();
+		System.out.println(keyword);
+		smsSelectShortCode();
+		smsEnterKeyword(keyword);
+		smsSelectOrderingLogic();
+		smsSelectOrderingRule();
+		smsEnterRefreshEvery("3");
+		smsSelectTimeInterval();
+		smsEnterMaximumOffers("");
+		smsClickSave();
+		
+		boolean flag=jswait.checkVisible(smsvalidation);
+		System.out.println(flag);
+		if (flag==true){
+			}
+			else{System.out.println("cant find element");}
+	}
 	
 	
 	

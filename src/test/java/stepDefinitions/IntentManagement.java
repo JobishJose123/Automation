@@ -1431,7 +1431,7 @@ System.out.println(editname+"program has edited successfully");
 	 		name =  name.replaceAll("[0-9]", "")+n;
 	 		eh.setCell(1, 0, name);
 	 		
-		  touchpointPage.editsmsTouchpointDetailsvalidation(name);
+		  touchpointPage.createsmsTouchpointDetailsvalidation(name);
 		  
 		  System.out.println(name);
 		  //touchpointPage.apiedittouchpointcheck(newname);

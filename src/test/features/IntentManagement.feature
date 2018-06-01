@@ -666,3 +666,5 @@ Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then create sms touchpoint validation check from sheet "smsTouchpoint"
+
+
