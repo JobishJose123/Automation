@@ -632,11 +632,12 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	
 	public void editsmsTouchpointDetailsvalidation(String keyword) throws InterruptedException {
 		System.out.println("inside sms validation");
+		System.out.println(keyword);
 		smsEnterKeyword(keyword);
 		smsSelectShortCode();
 		smsSelectOrderingLogic();
-		smsSelectOrderingRulelifo();
-		smsEnterRefreshEvery("8");
+		smsSelectOrderingRule();
+		smsEnterRefreshEvery("3");
 		smsSelectTimeInterval();
 		smsEnterMaximumOffers("");
 		smsClickSave();

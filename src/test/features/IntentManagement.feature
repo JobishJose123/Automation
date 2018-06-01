@@ -648,3 +648,11 @@ Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to api
 Then create api touchpoint validation check from sheet "apiTouchpoint"
+
+@NX-1564
+@initBrowser 
+Scenario: Verify create validation sms touchpoint creation 
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then create sms touchpoint validation check from sheet "smsTouchpoint"

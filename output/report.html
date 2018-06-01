@@ -39,6 +39,7 @@
 		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
 			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
 						<li class='waves-effect'><a href='#!' view='category-view' onclick="configureView(1)"><i class='material-icons'>label_outline</i></a></li>
+			<li class='waves-effect'><a href='#!' view='exception-view' onclick="configureView(2)"><i class='material-icons'>bug_report</i></a></li>
 			<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
 			<li class='waves-effect'><a href='#!' onclick="configureView(-1)" view='testrunner-logs-view'><i class='material-icons'>note</i></a></li>
 		</ul>
@@ -53,7 +54,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>May 17, 2018 10:22:06 PM</span>
+                    <span class='label suite-start-time blue darken-3'>May 28, 2018 11:38:28 AM</span>
 				</a>
 			</li>
 			<li>
@@ -79,6 +80,7 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -91,10 +93,9 @@
 					<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@NX-ProductTestCase</a></li>
-					<li><a href='#'>@NX-1011</a></li>
+					<li><a href='#'>@NX-IM_Feature</a></li>
+					<li><a href='#'>@NX-1564</a></li>
 					<li><a href='#'>@initBrowser</a></li>
-					<li><a href='#'>@closeBrowser</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -142,10 +143,10 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> feature(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> feature(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> feature(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='100%'>1</span> feature(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -157,10 +158,10 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> scenario(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> scenario(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> scenario(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='100%'>1</span> scenario(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -172,10 +173,10 @@
 					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>8</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='75%'><span class='strong'>3</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='25%'>1</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -189,23 +190,22 @@
 			<ul id='test-collection' class='test-collection'>
 				
 				
-				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
+				<li class='test displayed active has-leaf fail' status='fail' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>Product Page Feature Files</span>
-						<span class='test-time'>May 17, 2018 10:22:06 PM</span>
-						<span class='test-status right pass'>pass</span>
+						<span class='test-name'>positive flow of im program creation</span>
+						<span class='test-time'>May 28, 2018 11:38:28 AM</span>
+						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
-<div class='scenario node' test-id='2' status='pass'>
+<div class='scenario node' test-id='2' status='fail'>
 	<div class='category-list'>
-		<span class='category label white-text'>@NX-1011</span>
+		<span class='category label white-text'>@NX-1564</span>
 		<span class='category label white-text'>@initBrowser</span>
-		<span class='category label white-text'>@closeBrowser</span>
 	</div>
-	<span class='duration right label'>0h 1m 9s+360ms</span>
+	<span class='duration right label'>0h 0m 36s+933ms</span>
 	<div class='desc'>
 		<b>Scenario</b>
-		<span class="desc-text">Products Grid: Verify the product details displayed in the Products screen NX-1011</span>
+		<span class="desc-text">Verify create validation sms touchpoint creation</span>
 	</div>
 	<ul class='steps'>
 		<li test-id='3' class='node given pass' status='pass'>
@@ -220,7 +220,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to precision marketer</span>
+			<span class="bdd-step-name">Then navigate to intent management</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -228,48 +228,29 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to offer management</span>
+			<span class="bdd-step-name">Then navigate to touchpoints</span>
 				<div class='pre'>passed</div>
 			
 		</li>
-		<li test-id='6' class='node then pass' status='pass'>
+		<li test-id='6' class='node then fail' status='fail'>
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to products</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='7' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then navigate to prepaid telecom</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='8' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then click create new product button</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='9' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then create single product from sheet "singleProductPage"</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='10' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then verify "singleProductPage" product details displayed in the products screen</span>
-				<div class='pre'>passed</div>
+			<span class="bdd-step-name">Then create sms touchpoint validation check from sheet "smsTouchpoint"</span>
+				<div class='pre'><textarea>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of [[ChromeDriver: chrome on XP (25879bc84602f31c102a0782a4f18913)] -> xpath: //form[@id='smsForm']//label[contains(.,'Keyword')]/../input] (tried for 8 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'FLY-DT189', ip: '192.168.14.85', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_65'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\SYAM~1.KRI\AppData...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 66.0.3359.181, webStorageEnabled: true}
+Session ID: 25879bc84602f31c102a0782a4f18913
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:82)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:231)
+	at baseClasses.JSWaiter.loadSendKeys(JSWaiter.java:187)
+	at pageObjetcs.TouchpointPage.smsEnterKeyword(TouchpointPage.java:377)
+	at pageObjetcs.TouchpointPage.editsmsTouchpointDetailsvalidation(TouchpointPage.java:573)
+	at stepDefinitions.IntentManagement.create_sms_touchpointvalidation_check(IntentManagement.java:1338)
+	at ✽.Then create sms touchpoint validation check from sheet "smsTouchpoint"(IntentManagement.feature:563)
+</textarea></div>
 			
 		</li>
 	</ul>
@@ -328,15 +309,15 @@
 				
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NX-ProductTestCase</span>
+						<span class='category-name'>@NX-IM_Feature</span>
 						<span class='category-status right'>
-							<span class='label pass'>1</span>
+							<span class='label fail'>1</span>
 						</span>
 					</div>
 					<div class='category-content hide'>
 						<div class='category-status-counts'>
-							<span class='label green accent-4 white-text'>Passed: 1</span>
 							
+							<span class='label red lighten-1 white-text'>Failed: 1</span>
 							
 						</div>
 					
@@ -351,9 +332,9 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 17, 2018 10:22:06 PM</td>
-										<td class='linked' test-id='1'>Product Page Feature Files</td>
-										<td><span class='test-status pass'>pass</span></td>
+										<td>May 28, 2018 11:38:28 AM</td>
+										<td class='linked' test-id='1'>positive flow of im program creation</td>
+										<td><span class='test-status fail'>fail</span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -362,15 +343,15 @@
 				</li>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NX-1011</span>
+						<span class='category-name'>@NX-1564</span>
 						<span class='category-status right'>
-							<span class='label pass'>1</span>
+							<span class='label fail'>1</span>
 						</span>
 					</div>
 					<div class='category-content hide'>
 						<div class='category-status-counts'>
-							<span class='label green accent-4 white-text'>Passed: 1</span>
 							
+							<span class='label red lighten-1 white-text'>Failed: 1</span>
 							
 						</div>
 					
@@ -385,9 +366,9 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 17, 2018 10:22:06 PM</td>
-										<td class='linked' test-id='2'>Product Page Feature Files.Products Grid: Verify the product details displayed in the Products screen NX-1011</td>
-										<td><span class='test-status pass'>pass</span></td>
+										<td>May 28, 2018 11:38:28 AM</td>
+										<td class='linked' test-id='2'>positive flow of im program creation.Verify create validation sms touchpoint creation</td>
+										<td><span class='test-status fail'>fail</span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -398,13 +379,13 @@
 					<div class='category-heading'>
 						<span class='category-name'>@initBrowser</span>
 						<span class='category-status right'>
-							<span class='label pass'>1</span>
+							<span class='label fail'>1</span>
 						</span>
 					</div>
 					<div class='category-content hide'>
 						<div class='category-status-counts'>
-							<span class='label green accent-4 white-text'>Passed: 1</span>
 							
+							<span class='label red lighten-1 white-text'>Failed: 1</span>
 							
 						</div>
 					
@@ -419,43 +400,9 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>May 17, 2018 10:22:06 PM</td>
-										<td class='linked' test-id='2'>Product Page Feature Files.Products Grid: Verify the product details displayed in the Products screen NX-1011</td>
-										<td><span class='test-status pass'>pass</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</li>
-				<li class='category displayed active'>
-					<div class='category-heading'>
-						<span class='category-name'>@closeBrowser</span>
-						<span class='category-status right'>
-							<span class='label pass'>1</span>
-						</span>
-					</div>
-					<div class='category-content hide'>
-						<div class='category-status-counts'>
-							<span class='label green accent-4 white-text'>Passed: 1</span>
-							
-							
-						</div>
-					
-						<div class='category-tests'>
-							<table class='bordered table-results'>
-								<thead>
-									<tr>
-										<th>Timestamp</th>
-										<th>TestName</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>May 17, 2018 10:22:06 PM</td>
-										<td class='linked' test-id='2'>Product Page Feature Files.Products Grid: Verify the product details displayed in the Products screen NX-1011</td>
-										<td><span class='test-status pass'>pass</span></td>
+										<td>May 28, 2018 11:38:28 AM</td>
+										<td class='linked' test-id='2'>positive flow of im program creation.Verify create validation sms touchpoint creation</td>
+										<td><span class='test-status fail'>fail</span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -474,6 +421,80 @@
 	</div>
 </div>
 <!-- category view -->
+<div id='exception-view' class='view hide'>
+
+    <section id='controls'>
+        <div class='controls grey lighten-4'>
+            <!-- search -->
+            <div class='chip transparent' alt='Search Tests' title='Search Tests'>
+                <a href="#" class='search-div'>
+                    <i class='material-icons'>search</i> Search
+                </a>
+
+                <div class='input-field left hide'>
+                    <input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+                </div>
+
+            </div>
+            <!-- search -->
+        </div>
+    </section>
+
+    <div class='subview-left left'>
+
+        <div class='view-summary'>
+            <h5>Exceptions</h3>
+                <ul id='exception-collection' class='exception-collection'>
+
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>org.openqa.selenium.TimeoutException</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>1</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>May 28, 2018 11:38:52 AM</td>
+                                                        <td class='linked' test-id='6'>positive flow of im program creation.Verify create validation sms touchpoint creation.Then create sms touchpoint validation check from sheet "smsTouchpoint"</td>
+                                                        <td><pre><textarea>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of [[ChromeDriver: chrome on XP (25879bc84602f31c102a0782a4f18913)] -> xpath: //form[@id='smsForm']//label[contains(.,'Keyword')]/../input] (tried for 8 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'FLY-DT189', ip: '192.168.14.85', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_65'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\SYAM~1.KRI\AppData...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 66.0.3359.181, webStorageEnabled: true}
+Session ID: 25879bc84602f31c102a0782a4f18913
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:82)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:231)
+	at baseClasses.JSWaiter.loadSendKeys(JSWaiter.java:187)
+	at pageObjetcs.TouchpointPage.smsEnterKeyword(TouchpointPage.java:377)
+	at pageObjetcs.TouchpointPage.editsmsTouchpointDetailsvalidation(TouchpointPage.java:573)
+	at stepDefinitions.IntentManagement.create_sms_touchpointvalidation_check(IntentManagement.java:1338)
+	at ✽.Then create sms touchpoint validation check from sheet "smsTouchpoint"(IntentManagement.feature:563)
+</textarea></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                </ul>
+        </div>
+    </div>
+
+    <div class='subview-right left'>
+        <div class='view-summary'>
+            <h5 class='exception-name'></h5>
+        </div>
+    </div>
+</div>
 <!-- exception view -->
 <div id='dashboard-view' class='view hide'>
 	<div class='card-panel transparent np-v'>
@@ -495,25 +516,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>8</div>
+					<div class='panel-lead'>4</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>May 17, 2018 10:22:06 PM</div>
+					<div class='panel-lead'>May 28, 2018 11:38:28 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>May 17, 2018 10:23:18 PM</div>
+			 		<div class='panel-lead'>May 28, 2018 11:39:05 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>71,930ms</div>
+					<div class='panel-lead'>37,350ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -527,7 +548,7 @@
 						</tr>
 							<tr>
 								<td>user</td>
-								<td>joel.jose</td>
+								<td>syam.krishna</td>
 							</tr>
 							<tr>
 								<td>os</td>
@@ -548,27 +569,21 @@
 							<th>Others</th>
 						</tr>
 						<tr>
-							<td>@NX-ProductTestCase</td>
-							<td>1</td>
+							<td>@NX-IM_Feature</td>
 							<td>0</td>
+							<td>1</td>
 							<td>0</td>
 						</tr>
 						<tr>
-							<td>@NX-1011</td>
-							<td>1</td>
+							<td>@NX-1564</td>
 							<td>0</td>
+							<td>1</td>
 							<td>0</td>
 						</tr>
 						<tr>
 							<td>@initBrowser</td>
+							<td>0</td>
 							<td>1</td>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<td>@closeBrowser</td>
-							<td>1</td>
-							<td>0</td>
 							<td>0</td>
 						</tr>
 					</table>
@@ -593,31 +608,31 @@
 
 		<script>
 			var statusGroup = {
-				passParent: 1,
-				failParent: 0,
+				passParent: 0,
+				failParent: 1,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 0,
+				exceptionsParent: 1,
 				
-				passChild: 1,
-				failChild: 0,
+				passChild: 0,
+				failChild: 1,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
 				infoChild: 0,
-				exceptionsChild: 0,
+				exceptionsChild: 1,
 				
-				passGrandChild: 8,
-				failGrandChild: 0,
+				passGrandChild: 3,
+				failGrandChild: 1,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,
 				warningGrandChild: 0,
 				skipGrandChild: 0,
 				infoGrandChild: 0,
-				exceptionsGrandChild: 0,
+				exceptionsGrandChild: 1,
 			};
 		</script>
 		

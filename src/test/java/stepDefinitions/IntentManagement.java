@@ -147,10 +147,6 @@ public class IntentManagement extends Init{
 	public void navigate_to_api() throws Throwable {
 		touchpointPage.navigateToApi();
 	}
-	@Then("^navigate to smart phone app$")
-	public void navigate_to_smartphone() throws Throwable {
-		touchpointPage.navigateTosmartphone();
-	}
 
 	@Then("^create api touchpoint from sheet \"([^\"]*)\"$")
 	public void create_api_touchpoint(String sheet) throws Throwable {
@@ -186,77 +182,6 @@ public class IntentManagement extends Init{
  		eh.setCell(1, 0, name);
 	  touchpointPage.createUssdTouchpoint(name);
 	}
-	
-	@Then("^create new touch point without filling mandatory fields$")
-	public void createUssdTouchpointWithoutMandatoryFields() throws Throwable {
-	  touchpointPage.createUssdTouchpointWithoutMandatoryFields();
-	}
-	
-	@Then("^create new API touch point without filling mandatory fields$")
-	public void createAPITouchpointWithoutMandatoryFields() throws Throwable {
-	  touchpointPage.createAPITouchpointWithoutMandatoryFields();
-	}
-	
-	@Then("^create new trigger touch point without filling mandatory fields$")
-	public void createTriggerTouchpointWithoutMandatoryFields() throws Throwable {
-	  touchpointPage.createTriggerTouchpointWithoutMandatoryFields();
-	}
-	@Then("^create new SMS touch point without filling mandatory fields$")
-	public void createSMSTouchpointWithoutMandatoryFields() throws Throwable {
-	  touchpointPage.createSMSTouchpointWithoutMandatoryFields();
-	}
-	
-	@Then("^create new customer care touch point without filling mandatory fields$")
-	public void createCustomerCareTouchpointWithoutMandatoryFields() throws Throwable {
-	  touchpointPage.createCustomerCareTouchpointWithoutMandatoryFields();
-	}
-	@Then("^create new smart phone app touch point without filling mandatory fields$")
-	public void createSmartPhoneAppTouchpointWithoutMandatoryFields() throws Throwable {
-	  touchpointPage.createCustomerSmartPhoneAppWithoutMandatoryFields();
-	}
-	
-	@Then("^verify validation error messages for USSD touch point$")
-	public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
-		
-		touchpointPage.verifyValidationErrorMessagesInUSSDCreation();
-		
-	}
-	
-	@Then("^verify validation error messages for API touch point$")
-	public void verifyValidationErrorMessagesInAPICreation() throws Throwable {
-		
-		touchpointPage.verifyValidationErrorMessagesInAPICreation();
-		
-	}
-	
-	@Then("^verify validation error messages for trigger touch point$")
-	public void verifyValidationErrorMessagesInTriggerCreation() throws Throwable {
-		
-		touchpointPage.verifyValidationErrorMessagesInTriggerCreation();
-		
-	}
-	
-	@Then("^verify validation error messages for SMS touch point$")
-	public void verifyValidationErrorMessagesInSMSCreation() throws Throwable {
-		
-		touchpointPage.verifyValidationErrorMessagesInSMSCreation();
-		
-	}
-	@Then("^verify validation error messages for customer care touch point$")
-	public void verifyValidationErrorMessagesInCustomercareCreation() throws Throwable {
-		
-		touchpointPage.verifyValidationErrorMessagesInCustomercareCreation();
-		
-	}
-	@Then("^verify validation error messages for smart phone app touch point$")
-	public void verifyValidationErrorMessagesInSmartPhoneApp() throws Throwable {
-		
-		touchpointPage.verifyValidationErrorMessagesInSmartPhoneApp();
-		
-	}
-	
-	
-	
 
 	@Then("^check ussd touchpoint in grid \"([^\"]*)\"$")
 	public void check_ussd_touchpoint_in_grid(String sheet) throws Throwable {
@@ -1287,14 +1212,6 @@ System.out.println(editname+"program has edited successfully");
 			
 		}
 		
-		@Then("^edit customer care touchpoint with security alert$")
-		public void editCustomerCareTouchpointWithSecurityAlert() throws Throwable {
-			
-			touchpointPage.editCustomerCareTouchpointWithSecurityAlert();
-			
-			
-		}
-		
 		@Then("^create new touchpoint with alert value$")
 		public void createTouchpointWithAlertValue() throws Throwable {
 			
@@ -1404,10 +1321,31 @@ System.out.println(editname+"program has edited successfully");
 			    intentManagementPage.verifyFilterTitle(); 
 		 }
 		
+
 		@Then("^verify edit and delete button touchpoint$")
 		public void verifyEditAndDeleteButtonTouchpoints() throws InterruptedException {
 			
 			touchpointPage.verifyEditAndDeleteButtonTouchpoints();
+
+		}
+		
+		@Then("^create sms touchpoint validation check from sheet \"([^\"]*)\"$")
+		public void create_sms_touchpointvalidation_check(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eh.setCell(1, 0, name);
+	 		
+		  touchpointPage.editsmsTouchpointDetailsvalidation(name);
+		  
+		  System.out.println(name);
+		  //touchpointPage.apiedittouchpointcheck(newname);
+		  
+
 		}
 	
 }

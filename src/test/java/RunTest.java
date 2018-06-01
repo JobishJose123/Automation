@@ -35,7 +35,7 @@ import cucumber.api.junit.Cucumber;
         features = { "src/test/features" },
 		glue = {"classpath:"},
         //@NX-ProductTestSuite,@tagOfferCatalog,@madhan_test_suite_on_OfferCreation,@tagOfferCatalog,@NX-bcCreationSuite
-		tags = { "@NX-1580" },
+		tags = { "@NX-1564" },
 		plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:output/report.html",
         "html:target/81", "json:target/81/cucumber.json",
