@@ -186,6 +186,12 @@ public class IntentManagement extends Init{
  		eh.setCell(1, 0, name);
 	  touchpointPage.createUssdTouchpoint(name);
 	}
+	
+	@Then("^edit ussd touch point without filling mandatory fileds$")
+	public void editUSSDTouchpointWithoutFillingMandatoryFields() throws Throwable {
+		
+	  touchpointPage.editUSSDTouchpointWithoutFillingMandatoryFields();
+	}
 
 	
 	@Then("^create new touch point without filling mandatory fields$")
@@ -216,10 +222,10 @@ public class IntentManagement extends Init{
 	  touchpointPage.createCustomerSmartPhoneAppWithoutMandatoryFields();
 	}
 	
-	@Then("^verify validation error messages for USSD touch point$")
+	@Then("^verify validation error messages for ussd touch point edit$")
 	public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
 		
-		touchpointPage.verifyValidationErrorMessagesInUSSDCreation();
+		touchpointPage.verifyValidationErrorMessagesInUSSDEdit();
 		
 	}
 	
@@ -253,6 +259,12 @@ public class IntentManagement extends Init{
 	public void verifyValidationErrorMessagesInSmartPhoneApp() throws Throwable {
 		
 		touchpointPage.verifyValidationErrorMessagesInSmartPhoneApp();
+		
+	}
+	@Then("^verify validation error messages for USSD touch point$")
+	public void verifyValidationErrorMessagesInUSSD() throws Throwable {
+		
+		touchpointPage.verifyValidationErrorMessagesInUSSD();
 		
 	}
 	@Then("^check ussd touchpoint in grid \"([^\"]*)\"$")

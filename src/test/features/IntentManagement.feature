@@ -12,7 +12,7 @@ Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then check touchpoint landing page
-
+ 
 @NX-428
 @initBrowser @closeBrowser
 Scenario: Verify Create New Touchpoint button behaviour for SMS TP
@@ -619,6 +619,16 @@ Then verify create program page with alert value
   Then navigate to smart phone app
 	Then create new smart phone app touch point without filling mandatory fields
 	Then verify validation error messages for smart phone app touch point
+	
+	@NX-1571
+  @initBrowser
+  Scenario: Field level validation check for USSD touchpoint during edit-1571
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to ussd
+	Then edit ussd touch point without filling mandatory fileds
+	Then verify validation error messages for ussd touch point edit
 	
 	@NX-2049
   @initBrowser @closeBrowser

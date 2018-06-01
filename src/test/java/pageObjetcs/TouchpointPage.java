@@ -53,6 +53,9 @@ public class TouchpointPage extends Init{
 	private WebElement ussdFormHeading;
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'USSD Application')]/../input")
 	private WebElement ussdFormUssdApplicationSelector;
+	@FindBy(xpath=".//form[@id='ussdForm']//paper-icon-button[@id='clearIcon']")
+	private WebElement ussdFormUssdApplicationClearButton;
+	
 	@FindBy(xpath="//label[contains(.,'USSD Application')]/following::vaadin-combo-box-item")
 	private WebElement ussdFormUssdApplication1;
 	@FindBy(xpath="((.//data-table-cell[@class='ussd-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
@@ -63,6 +66,9 @@ public class TouchpointPage extends Init{
 	private WebElement ussdDeleteYes;
 	@FindBy(xpath=".//form[@id='ussdForm']//paper-input-error[@class='style-scope paper-input x-scope paper-input-error-0']")
 	private List <WebElement> ussdCreateValidation;
+	@FindBy(xpath=".//div[@class='add-on-content is-invalid style-scope paper-input-container']//paper-input-error")
+	private List <WebElement> ussdEditValidation;
+	
 	@FindBy(xpath=".//paper-input-container[@class='style-scope vaadin-combo-box x-scope paper-input-container-4']//paper-input-error[contains(.,'This field is required.')]")
 	private WebElement ussdApplicationValidation;
 	
@@ -938,6 +944,10 @@ Assert.assertEquals(name,newname);
 		public void ussdEnterTouchpointName(String name) throws InterruptedException {
 			jswait.loadSendKeys(ussdFormTouchpointName, name);
 		}
+		public void ussdClearTouchpointName() throws InterruptedException {
+			ussdFormTouchpointName.clear();
+		}
+		
 			public void ussdClickSave() throws InterruptedException {
 				jswait.loadClick(ussdFormSaveButton);
 			}
@@ -955,6 +965,9 @@ Assert.assertEquals(name,newname);
 			public void ussdEnterRefreshEvery(String name) throws InterruptedException {
 				jswait.loadSendKeys(ussdFormRefreshEvery, name);
 			}
+			public void ussdClearRefreshEvery() throws InterruptedException {
+				ussdFormRefreshEvery.clear();
+			}
 			public void ussdSelectTimeInterval() throws InterruptedException {
 				jswait.loadClick(ussdFormTimeIntervalSelector);
 				jswait.loadClick(ussdFormTimeInterval1);
@@ -964,8 +977,17 @@ Assert.assertEquals(name,newname);
 				jswait.loadClick(ussdFormUssdApplication1);
 				
 			}
+			
+			public void ussdClearUssdApplication() throws InterruptedException {
+				jswait.loadClick(ussdFormUssdApplicationClearButton);
+				
+				
+			}
 			public void ussdEnterMaximumOffers(String name) throws InterruptedException {
 				jswait.loadSendKeys(ussdFormMaximumOffers, name);
+			}
+			public void ussdClearMaximumOffers() throws InterruptedException {
+				ussdFormMaximumOffers.clear();
 			}
 			public void enterUssdTouchpointDetails(String keyword) throws InterruptedException {
 				ussdEnterTouchpointName(keyword);
@@ -976,9 +998,25 @@ Assert.assertEquals(name,newname);
 				ussdSelectTimeInterval();
 				ussdEnterMaximumOffers("5");
 			}
+			
+			public void editUssdTouchpointWithoutFillingMandatoryFields() throws InterruptedException {
+				ussdClearTouchpointName();
+				ussdClearUssdApplication();
+				ussdSelectOrderingLogic();
+				ussdSelectOrderingRule();
+				ussdClearRefreshEvery();
+				ussdSelectTimeInterval();
+				ussdClearMaximumOffers();
+			}
 			public void createUssdTouchpoint(String keyword) throws InterruptedException {
 				clickCreateNewTouchpoint();
 				enterUssdTouchpointDetails(keyword);
+				ussdClickSave();
+			}
+			
+			public void editUSSDTouchpointWithoutFillingMandatoryFields() throws InterruptedException {
+				clickUssdEditTouchpoint();
+				editUssdTouchpointWithoutFillingMandatoryFields();
 				ussdClickSave();
 			}
 			public void createUssdTouchpointWithoutMandatoryFields() throws InterruptedException {
@@ -1014,18 +1052,18 @@ Assert.assertEquals(name,newname);
 			
 			
 			
-			public void verifyValidationErrorMessagesInUSSDCreation() throws Throwable {
+			public void verifyValidationErrorMessagesInUSSDEdit() throws Throwable {
 				
-				int sizename= ussdCreateValidation.size();
-				System.out.println("ussdNameValidation: "+sizename);
+				int sizename= ussdEditValidation.size();
+				System.out.println("ussdEditValidation: "+sizename);
 				if(ussdCreateValidation.size()>0) {
 					
-					for(WebElement NameValidation: ussdCreateValidation ) {
+					for(WebElement NameValidation: ussdEditValidation ) {
 						
 						assertTrue(NameValidation.isDisplayed());
 					}
 				}
-				assertTrue(ussdApplicationValidation.isDisplayed());
+				//assertTrue(ussdApplicationValidation.isDisplayed());
 				assertTrue(ussdFormSaveButton.isDisplayed());
 				
 			}
@@ -1110,6 +1148,21 @@ Assert.assertEquals(name,newname);
 				}
 			}
 			assertTrue(smartFormSaveButton.isDisplayed());
+		}
+      
+      public void verifyValidationErrorMessagesInUSSD() throws Throwable {
+			
+			
+	        int sizename= ussdCreateValidation.size();
+			System.out.println("ussdCreateValidation: "+sizename);
+			if(ussdCreateValidation.size()>0) {
+				
+				for(WebElement NameValidation: ussdCreateValidation ) {
+					
+					assertTrue(NameValidation.isDisplayed());
+				}
+			}
+			assertTrue(ussdFormSaveButton.isDisplayed());
 		}
      
 			
