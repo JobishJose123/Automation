@@ -449,7 +449,6 @@ public class OfferSteps extends Init {
 	}
 
 	public void proceedToProductTab() throws Throwable {
-		eh.setExcelFile("offerInputData", "tempRechargeSms");
 		offerPageObjects.clickCreateNewOfferButton();
 		offerPageObjects.enterDetailsTabFields("tempRechargeSms");
 		offerPageObjects.clickProceedButton();
@@ -676,5 +675,47 @@ public class OfferSteps extends Init {
 		}catch(Exception e) {
 			
 		}
+	}
+	@Then("^verify response box for creatives$")
+	public void verify_response_box_for_creatives() throws Throwable {
+		proceedToCreativeTab();
+	offerPageObjects.enterCreativeTabDetails(eh);
+	offerPageObjects.clickAddCreativeButton();
+	offerPageObjects.enterSecondCreativeTabDetails(eh);
+	offerPageObjects.clickProceedButton();
+	offerPageObjects.enterTrackTabDetails(eh);
+	offerPageObjects.clickProceedButton();
+	offerPageObjects.clickRewardAddButton();
+	String responseXpath = "//response-message";
+	jswait.waitUntil(responseXpath);
+	List<WebElement> responseBox = driver.findElements(By.xpath(responseXpath));
+	Assert.assertTrue(responseBox.size() == 2, "response message box should be shown for each creative");
+	driver.findElement(By.xpath("//h4[contains(.,'Add fulfillment response in English')]"));
+	driver.findElement(By.xpath("//h4[contains(.,'Add fulfillment response in Spanish')]"));
+	List<WebElement> responseMessages = driver.findElements(By.xpath("//label[contains(.,'Response on success')]"));
+	Assert.assertTrue(responseMessages.size() == 2, "response message success should be shown for each creative");
+	responseMessages = driver.findElements(By.xpath("//label[contains(.,'Response on Failure')]"));
+	Assert.assertTrue(responseMessages.size() == 2, "response message Failure should be shown for each creative");
+	}
+	@Then("^verify set as default checkbox with multiple track sources$")
+	public void verifySetAsDefaultForTrackSources() throws Throwable {
+		proceedToTrackTab();
+		offerPageObjects.clickAddTrackSourceButton();
+		offerPageObjects.clickAddTrackSourceButton();
+		List<WebElement> setAsDefault = driver.findElements(By.xpath("//paper-item[contains(.,'Set as default')]"));
+		Assert.assertTrue(setAsDefault.size() == 3, "set as default should be shown for each track source");
+	}
+	@Then("^verify selecting set as default check box for multiple track sources$")
+	public void verifySetAsDefaultForMultipleTrackSources() throws Throwable {
+		proceedToTrackTab();
+		offerPageObjects.clickAddTrackSourceButton();
+		offerPageObjects.clickAddTrackSourceButton();
+		List<WebElement> setAsDefault = driver.findElements(By.xpath("//paper-item[contains(.,'Set as default')]"));
+		Assert.assertTrue(setAsDefault.size() == 3, "set as default should be shown for each track source");
+		List<WebElement> deselectedCheck = driver.findElements(By.xpath("//paper-item[contains(.,'Set as default')]/../../div/div/div[contains(@class,'hidden')]"));
+		Assert.assertTrue(deselectedCheck.size() == 2, "more than one track seleced as default");
+		offerPageObjects.clickSetAsDefaultSecondTrack();
+		Assert.assertTrue(deselectedCheck.size() == 2, "more than one track seleced as default");
+		
 	}
 }

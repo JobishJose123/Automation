@@ -524,3 +524,29 @@ Feature: Test suite on Offer creation
     Then navigate to offers
     Then verify cross site scripting for filtering offers
     
+    @NX-1343 @initBrowser @closeBrowser
+  Scenario: Create offer:Track: Verify the default response box for the creatives added in creative tab NX-1343
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify response box for creatives
+    
+    @NX-1336 @initBrowser @closeBrowser
+  Scenario: Create offer:Track: Verify the set as default checkbox by adding multiple rules NX-1336
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify set as default checkbox with multiple track sources
+    
+    @NX-1333 @initBrowser @closeBrowser
+  Scenario: Create offer:Track: Verify setting multiple default rule NX-1333
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify selecting set as default check box for multiple track sources
+    
+    
+    

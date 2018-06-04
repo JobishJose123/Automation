@@ -122,6 +122,8 @@ public class OfferPageObjects extends Init {
 	private List<WebElement> trackingSourceRulesTitle;
 	@FindBy(xpath = ".//form[@id='sourceTrackRuleForm']//paper-checkbox[@id='setDefaultTrack']/..")
 	private WebElement setAsDefault;
+	@FindBy(xpath = ".//*[@id='trackForm']/div[2]//div[@id='checkbox']/..")
+	private WebElement setAsDefaultSecondTrack;
 	@FindBy(xpath = ".//div[@class='layout horizontal style-scope offer-track']//paper-button[contains(.,'Add')]")
 	private WebElement addTrackButton;
 	@FindBy(xpath = ".//form[@id='trackForm']/div[@class='style-scope offer-track']/div[@class='closeImg style-scope offer-track']")
@@ -330,6 +332,10 @@ public class OfferPageObjects extends Init {
 //	 private WebElement ;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
+	 
+	 public void clickSetAsDefaultSecondTrack() throws InterruptedException {
+			jswait.loadClick(setAsDefaultSecondTrack);
+		}
 	 
 //  Creative Tab in Offer Creation	functions
 	 public void clickAddNewVariableButton() throws InterruptedException {
