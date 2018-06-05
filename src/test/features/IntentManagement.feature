@@ -695,4 +695,51 @@ Then check trigger touchpoint in grid "triggerTouchpoint"
   Then navigate to touchpoints
   Then navigate to smart phone app
   Then create new smart phone app touch point from sheet "appTouchpoint"
+  
+  @NX-8504
+@initBrowser
+Scenario: Verify displaying the edited touchpoint name in mapped program-8504
+Given login
+#Then navigate to intent management
+#Then navigate to touchpoints
+#Then navigate to sms
+#Then create sms touchpoint from sheet "smsTouchpoint"
+#Then check sms touchpoint in grid "smsTouchpoint"
+#Then navigate to landing page
+#Then navigate to configuration management
+#Then naviagte to product classes
+#Then create product class and number attribute from "TestProductClass"
+#Then navigate to landing page
+#Then navigate to precision marketer
+#Then navigate to offer management
+#Then navigate to products
+#Then navigate to product class "TestProductClass"
+#Then click create new product button
+#Then create product with attributes from sheet "fullDetails"
+#Then navigate to landing page
+#Then navigate to precision marketer
+#Then navigate to offer management
+#Then navigate to offers
+#Then click on create new ofer button
+#Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#Then navigate to offer management 
+#Then Navigate to Offer Catalogue
+#Then Create New Offer Catalogue from sheet "defaultCatalog"
+#Then Add "rechargeWAP" offer to Offer Catalogue
+#Then navigate to landing page
+#Then navigate to intent management
+#Then navigate to programs
+#Then click create program button
+#Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+#Then navigate to touchpoints
+#Then navigate to sms
+#Then create sms touchpoint from sheet "smsTouchpoint"
+#Then check sms touchpoint in grid "smsTouchpoint"
+#Then navigate to landing page
+Then navigate to landing page
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "programdetails" for edit
+Then verify edit program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+Then verify tracking field while create new rule from sheet "fullDetails"  
 

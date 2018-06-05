@@ -75,6 +75,9 @@ public class ProgramPage extends Init{
 	@FindBy(xpath=".//paper-item[contains(.,'View Rules')]")
 	private WebElement programViewRulesButton;
 	
+	@FindBy(xpath=".//paper-item[contains(.,'Edit')]")
+	private WebElement EditProgramButton;
+	
 	@FindBy(xpath="//h5[contains(.,'Basic Information')]/..//label[contains(.,'Name')]/..//*[@id='input']")
 	private WebElement createProgramName;
 	
@@ -127,6 +130,7 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath="(//*[@id='items']/vaadin-combo-box-item[1])[2]")
 	private WebElement addTouchpointSelectSMS1024;
+	
 	
 	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/..//*[@id='input']")
 	private WebElement addTouchpointResponseChannel;
@@ -339,6 +343,9 @@ public class ProgramPage extends Init{
 	public void clickPorogramViewRulesButton() throws InterruptedException {
 		jswait.loadClick(programViewRulesButton);
 	}
+	public void clickEditProgramButton() throws InterruptedException {
+		jswait.loadClick(EditProgramButton);
+	}
 	
 	public void clickProductField(String name) throws InterruptedException {
 		jswait.loadClick(productField);
@@ -540,6 +547,19 @@ public class ProgramPage extends Init{
 		Thread.sleep(2000);
 		jswait.loadClick(addTouchpointSelectSMS1024);
 	}
+	
+	public void addTouchPointSelectSmsTouchpointFromSheet(String sheet2) throws InterruptedException {
+		jswait.loadClick(addTouchpointTouchpointName);
+		Thread.sleep(2000);
+		eh.setExcelFile("touchpointInputData",sheet2);
+		String tp = (String) eh.getCell(1, 0);
+		jswait.loadSendKeys(addTouchpointTouchpointName, tp);
+		driver.findElement(By.xpath("//*[@id='items']/vaadin-combo-box-item[contains(.,'"+tp+"')]")).click();
+		
+	}
+	
+	
+	
 	public void addTouchPointSelectSmsResponseChannel() throws InterruptedException {
 		jswait.loadClick(addTouchpointResponseChannel);
 		jswait.loadClick(addTouchpointResponseChannelSelectSMS);
@@ -548,6 +568,14 @@ public class ProgramPage extends Init{
 		addTouchPointSelectSmsChannel();
 		addTouchPointEnterKeywordAliase();
 		addTouchPointSelectSmsTouchpoint();
+		addTouchPointSelectSmsResponseChannel();
+		jswait.loadClick(addTouchpointSaveButton);
+	}
+	public void addTouchPointToProgramFromSheet(String sheet) throws InterruptedException {
+		addTouchPointSelectSmsChannel();
+		addTouchPointEnterKeywordAliase();
+		Thread.sleep(2000);
+		addTouchPointSelectSmsTouchpointFromSheet(sheet);
 		addTouchPointSelectSmsResponseChannel();
 		jswait.loadClick(addTouchpointSaveButton);
 	}

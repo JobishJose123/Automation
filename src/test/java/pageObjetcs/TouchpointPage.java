@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Assert;
 import baseClasses.Init;
@@ -557,12 +558,17 @@ public void editTouchpointWithAlertValue() throws Throwable {
 	  clickDeleteCustTouchpoint();
 }
 
+
+
 public void editCustomerCareTouchpoint() throws Throwable {
 	Thread.sleep(3000);
-	custEnterTouchpointName("Touch point edit007");
-	custClickSave();
 	
-	String newname="Touch point edit007";
+	    Random rn = new Random();
+		int  n = rn.nextInt(5000) + 1;
+		String newname = "Touch point edit";
+		newname =  newname.replaceAll("[0-9]", "")+n;
+	   custEnterTouchpointName(newname);
+	  custClickSave();
 	  System.out.println(newname);
 	  custedittouchpointcheck(newname);
 	  clickDeleteCustTouchpoint();
