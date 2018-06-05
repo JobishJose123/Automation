@@ -139,9 +139,13 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath="//paper-item[text()='SMS']")
 	private WebElement addTouchpointChannelSelectSMS;
+	@FindBy(xpath="//paper-item[text()='Customer Care']")
+	private WebElement addTouchpointChannelSelectCC;
 	
 	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/../../../../../../..//paper-item[text()='SMS']")
 	private WebElement addTouchpointResponseChannelSelectSMS;
+	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/../../../../../../..//paper-item[text()='CustomerCare']")
+	private WebElement addTouchpointResponseChannelSelectCC;
 	
 	@FindBy(xpath="//*[@id='addTouchpointForm']//paper-button[text()='Save']")
 	private WebElement addTouchpointSaveButton;
@@ -537,6 +541,10 @@ public class ProgramPage extends Init{
 		jswait.loadClick(addTouchpointChannel);
 		jswait.loadClick(addTouchpointChannelSelectSMS);
 	}
+	public void addTouchPointSelectCCChannel() throws InterruptedException {
+		jswait.loadClick(addTouchpointChannel);
+		jswait.loadClick(addTouchpointChannelSelectCC);
+	}
 	public void addTouchPointEnterKeywordAliase() throws InterruptedException {
 		jswait.loadSendKeys(addTouchpointKeywordAliases, "SampleKey");
 	}
@@ -568,6 +576,10 @@ public class ProgramPage extends Init{
 		jswait.loadClick(addTouchpointResponseChannel);
 		jswait.loadClick(addTouchpointResponseChannelSelectSMS);
 	}
+	public void addTouchPointSelectCCResponseChannel() throws InterruptedException {
+		jswait.loadClick(addTouchpointResponseChannel);
+		jswait.loadClick(addTouchpointResponseChannelSelectCC);
+	}
 	public void addTouchPointToProgram() throws InterruptedException {
 		addTouchPointSelectSmsChannel();
 		addTouchPointEnterKeywordAliase();
@@ -581,6 +593,14 @@ public class ProgramPage extends Init{
 		Thread.sleep(2000);
 		addTouchPointSelectSmsTouchpointFromSheet(sheet);
 		addTouchPointSelectSmsResponseChannel();
+		jswait.loadClick(addTouchpointSaveButton);
+	}
+	public void addTouchPointToProgramFromSheetForCC(String sheet) throws InterruptedException {
+		addTouchPointSelectCCChannel();
+		//addTouchPointEnterKeywordAliase();
+		Thread.sleep(2000);
+		addTouchPointSelectSmsTouchpointFromSheet(sheet);
+		addTouchPointSelectCCResponseChannel();
 		jswait.loadClick(addTouchpointSaveButton);
 	}
 	public void addTouchPointToProgramedit() throws InterruptedException {

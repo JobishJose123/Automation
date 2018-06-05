@@ -767,4 +767,18 @@ Then navigate to ussd
 Then verify edit button for USSD touchpoint
 
 
+@NX-4064
+@initBrowser
+Scenario: Verify Program creation with CC touchpoint-4064
+Given login
+#Then navigate to intent management
+#Then navigate to touchpoints
+#Then navigate to customer care
+#Then create customer care touchpoint from sheet "CCTouchpoint"
+#Then check customer care touchpoint in grid "CCTouchpoint"
+#Then navigate to landing page
+Then navigate to intent management
+Then navigate to programs
+Then click create program button
+Then verify create program page with customer care touchpoint "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
 
