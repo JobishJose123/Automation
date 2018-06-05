@@ -14,9 +14,9 @@ public class RegistrationListPage extends Init{
 	}
 	JSWaiter jswait = new JSWaiter();
 	
-	@FindBy(xpath="//div[contains(text(),'Registration Lists')]/../..")
+	@FindBy(xpath="//div[contains(text(),'Customer Lists')]/../..")
 	private WebElement registrationListButton;
-	@FindBy(xpath="//paper-button[text()='Create New Registration List']")
+	@FindBy(xpath="//paper-button[text()='Create']")
 	private WebElement createNewRegistrationListButton;
 	@FindBy(xpath=".//*[@id='createNew']//label[text()='Name']/../input")
 	private WebElement registrationListName;

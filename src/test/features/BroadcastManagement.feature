@@ -179,6 +179,7 @@ Then navigate to broadcast target condition
 Then verify editing target condition
 
 @NX-571
+@RegressionYes
 @initBrowser @closeBrowser
 Scenario: Create BC- Manual Target: Verify adding the filter conditions with OR condition
 Given login
