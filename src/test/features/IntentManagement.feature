@@ -736,10 +736,14 @@ Given login
 #Then create sms touchpoint from sheet "smsTouchpoint"
 #Then check sms touchpoint in grid "smsTouchpoint"
 #Then navigate to landing page
-Then navigate to landing page
+#Then navigate to landing page
 Then navigate to intent management
 Then navigate to programs
 Then choose program from sheet "programdetails" for edit
 Then verify edit program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-Then verify tracking field while create new rule from sheet "fullDetails"  
+Then navigate to landing page
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "programdetails" for edit
+Then verify edited program for touchpoint from sheet "smsTouchpoint"
 

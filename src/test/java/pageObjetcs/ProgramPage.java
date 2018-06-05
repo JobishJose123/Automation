@@ -66,6 +66,8 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save')]")
 	private WebElement createProgramSaveButton;
+	@FindBy(xpath=".//div[@id='topBar']/paper-button[2]")
+	private WebElement editProgramSaveButton;
 	
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Proceed')]")
 	private WebElement createProgramProceedButton;
@@ -215,6 +217,8 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath="//paper-dialog[@id='confirmActivate']//paper-button[text()='Yes']")
 	private WebElement programconfirmactivateyes;
+	@FindBy(xpath="//paper-dialog[@id='confirmSave']//paper-button[text()='Yes']")
+	private WebElement confirmProgramEditSave;
 	
 	@FindBy(xpath="//paper-dialog[@id='confirmSave']//paper-button[text()='Yes']")
 	private WebElement programconfirmSaveyes;
@@ -727,10 +731,23 @@ public class ProgramPage extends Init{
 		jswait.loadClick(createProgramSaveButton);
 		}
 	
+	public void clickEditProgramSaveButton() throws InterruptedException {
+		jswait.checkClickable(editProgramSaveButton);
+		jswait.loadClick(editProgramSaveButton);
+		}
+	
 	
 	public void programconfirmactivateyes() throws InterruptedException {
 		jswait.loadClick(programconfirmactivateyes);
 		}
+	public void confirmProgramEditSave() throws InterruptedException {
+		jswait.loadClick(confirmProgramEditSave);
+		}
+	
+	public void verifyEDitedTouchpoint(String tp) throws InterruptedException {
+		
+		assertTrue(driver.findElement(By.xpath(".//data-table-cell[contains(.,'"+tp+"')]")).isDisplayed());
+	}
 	
 	public void programactivatebtn() throws InterruptedException {
 		jswait.loadClick(programactivatebtn);

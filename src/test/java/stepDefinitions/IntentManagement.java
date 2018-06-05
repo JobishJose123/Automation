@@ -1151,26 +1151,38 @@ System.out.println(editname+"program has edited successfully");
 		programPage.clickCreateProgramAddTouchpointButton();
 		programPage.addTouchPointToProgramFromSheet(sheet3);
 		programPage.clickPorogramProceedButton();
-		programPage.programschstart();
-		programPage.prmshcselectnow();
-		programPage.programschend();
-		programPage.prmshcselectnoend();
-		programPage.programschrefreshcycle();
-		programPage.prmshcselectdays();
+//		programPage.programschstart();
+//		programPage.prmshcselectnow();
+//		programPage.programschend();
+//		programPage.prmshcselectnoend();
+//		programPage.programschrefreshcycle();
+//		programPage.prmshcselectdays();
+//		Thread.sleep(2000);
+//		programPage.prmeverylabel();
+//		programPage.prmrecycleinputclick();
+//		programPage.prmrecycleinput();
+//		programPage.prmrefreshat();
+//		programPage.pgmtimeokbtn();
+//		programPage.programschserveon(); 
+//		programPage.prmshcserveonalldays();
+		//programPage.clickEditProgramSaveButton();
 		Thread.sleep(2000);
-		programPage.prmeverylabel();
-		programPage.prmrecycleinputclick();
-		programPage.prmrecycleinput();
-		programPage.prmrefreshat();
-		programPage.pgmtimeokbtn();
-		programPage.programschserveon(); 
-		programPage.prmshcserveonalldays();
-		//programPage.createProgramSaveButton();
-		Thread.sleep(2000);
-		programPage.programactivatebtn();
-		programPage.programconfirmactivateyes();
-		System.out.println("program has created successfully");
+		//programPage.programactivatebtn();
+		programPage.confirmProgramEditSave();
+		System.out.println("program has edited successfully");
 	}
+	   
+	@Then("^verify edited program for touchpoint from sheet \"([^\\\"]*)\"$")
+	public void verifyAddedTouchpointsFromSheet(String sheet) throws Throwable {
+		programPage.clickPorogramProceedButton();
+		
+		ExcelHelper programExcel = new ExcelHelper();
+ 	    programExcel.setExcelFile("touchpointInputData", sheet);
+ 	    String tp = (String) programExcel.getCell(1, 0);
+ 	    programPage.verifyEDitedTouchpoint(tp);
+		
+	}
+	
 	
 	public void filterWorkaround(String name) throws InterruptedException {
 		commonObjects.clickFilterIcon();                            //issue in filter
