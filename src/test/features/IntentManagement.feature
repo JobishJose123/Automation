@@ -696,7 +696,7 @@ Then check trigger touchpoint in grid "triggerTouchpoint"
   Then navigate to smart phone app
   Then create new smart phone app touch point from sheet "appTouchpoint"
   
-  @NX-8504
+ @NX-8504
 @initBrowser
 Scenario: Verify displaying the edited touchpoint name in mapped program-8504
 Given login
