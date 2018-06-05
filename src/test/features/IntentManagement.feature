@@ -388,7 +388,7 @@ Then navigate to touchpoints
 Then navigate to api
 Then create api touchpoint from sheet "apiTouchpoint"
 Then delete api touchpoint from sheet "apiTouchpoint"
-@NX-1572
+@NX-1572 
 @initBrowser 
 Scenario: Verify edit sms touchpoint creation 
 Given login
@@ -667,4 +667,32 @@ Then navigate to intent management
 Then navigate to touchpoints
 Then create sms touchpoint validation check from sheet "smsTouchpoint"
 
+@NX-8415
+@initBrowser 
+Scenario: Verify edit sms touchpoint creation_8415
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then create sms touchpoint from sheet "smsTouchpoint"
+Then edit sms touchpoint from sheet "smsTouchpoint"
+
+@NX-8422
+@initBrowser 
+Scenario: Verify new Trigger touchpoint creation 
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to trigger
+Then edit trigger touchpoint from sheet "triggerTouchpoint"
+Then check trigger touchpoint in grid "triggerTouchpoint"
+
+
+@NX-8392
+  @initBrowser @closeBrowser
+  Scenario: Verify the validations for the Smartphone touchpoint screen-1433
+  Given login
+  Then navigate to intent management
+  Then navigate to touchpoints
+  Then navigate to smart phone app
+  Then create new smart phone app touch point from sheet "appTouchpoint"
 

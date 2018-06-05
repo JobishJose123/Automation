@@ -82,6 +82,29 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath=".//form[@id='addSmartphoneFrom']//paper-input-error[@class='style-scope paper-input x-scope paper-input-error-0']")
 	private List <WebElement> smartCreateValidation;
 	
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//label[contains(.,'Touchpoint Name')]/../input")
+	private WebElement smartphoneTouchpointsname;
+	
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//label[contains(.,'Ordering Logic')]/../input")
+	private WebElement appFormOrderingLogicSelector;
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//label[contains(.,'Ordering Rule')]/../input")
+	private WebElement appFormOrderingRuleSelector;
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//paper-item[contains(.,'FIFO')]")
+	private WebElement appFormOrderingRuleFIFO;
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//paper-item[contains(.,'LIFO')]")
+	private WebElement appFormOrderingRuleLIFO;
+	
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//paper-item[contains(.,'Rule-based')]")
+	private WebElement appFormOrderingLogicRuleBased;
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//paper-item[contains(.,'Hours')]")
+	private WebElement appFormTimeInterval1;
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//label[contains(.,'Time Interval')]/../..//input")
+	private WebElement appFormTimeIntervalSelector;
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//label[contains(.,'Refresh Every')]/../input")
+	private WebElement appFormRefreshEvery;
+	@FindBy(xpath="//form[@id='addSmartphoneFrom']//label[contains(.,'Maximum offers')]/../input")
+	private WebElement appFormMaximumOffers;
+	
 	
 	
 	
@@ -319,6 +342,8 @@ public class TouchpointPage extends Init{
 	private WebElement triggerFormOrderingRuleSelector;
 	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'FIFO')]")
 	private WebElement triggerFormOrderingRuleFIFO;
+	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'LIFO')]")
+	private WebElement triggerFormOrderingRuleLIFO;
 	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'Rule-based')]")
 	private WebElement triggerFormOrderingLogicRuleBased;
 	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'Hours')]")
@@ -355,10 +380,11 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath=".//vaadin-combo-box[@label='Trigger']//paper-input-error")
 	private WebElement triggerFieldValidation;
 	
+	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Maximum offers')]/../input//following::paper-input-error[1]")
+	private WebElement triggervalidation ;
 	
-	
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="((.//data-table-cell[@class='trigger-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
+	private WebElement triggereditclick ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 
@@ -709,6 +735,12 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		jswait.loadClick(triggerFormOrderingRuleSelector);
 		jswait.loadClick(triggerFormOrderingRuleFIFO);
 	}
+	public void triggerFormOrderingRuleLIFO() throws InterruptedException {
+		jswait.loadClick(triggerFormOrderingRuleSelector);
+		jswait.loadClick(triggerFormOrderingRuleLIFO);
+	}
+	
+	
 	public void custTriggerSelectOrderingRule() throws InterruptedException {
 		jswait.loadClick(custTriggerFormOrderingRuleSelector);
 		jswait.loadClick(custTriggerFormOrderingRuleFIFO);
@@ -742,10 +774,26 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		triggerSelectTimeInterval();
 		triggerEnterMaximumOffers("5");
 	}
+	public void editTriggerTouchpointDetails(String name) throws InterruptedException {
+		triggerEnterTouchpointName(name);
+		selectTrigger();
+		triggerSelectOrderingLogic();
+		triggerFormOrderingRuleLIFO();
+		triggerEnterRefreshEvery("2");
+		triggerSelectTimeInterval();
+		triggerEnterMaximumOffers("2");
+		triggerClickSave();
+	}
 	public void createTriggerTouchpoint(String keyword) throws InterruptedException {
 		clickCreateNewTouchpoint();
 		enterTriggerTouchpointDetails(keyword);
-		triggerClickSave();
+		
+	}
+	public void editTriggerTouchpoint(String keyword) throws InterruptedException {
+		triggereditclick();
+		editTriggerTouchpointDetails(keyword);
+		
+		jswait.checkVisible(triggerFieldValidation);
 	}
 	//customer care functions
 	public void customerCareSelectOrderingLogic() throws InterruptedException {
@@ -1001,6 +1049,8 @@ Assert.assertEquals(name,newname);
 				
 				
 			}
+			
+			
 			public void ussdEnterMaximumOffers(String name) throws InterruptedException {
 				jswait.loadSendKeys(ussdFormMaximumOffers, name);
 			}
@@ -1052,11 +1102,33 @@ Assert.assertEquals(name,newname);
 
 			}
 			
-			public void createSMSTouchpointWithoutMandatoryFields() throws InterruptedException {
+			//----------------*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--------------------------------------***///
+			public void createSMSTouchpointWithoutMandatoryFields(String name) throws InterruptedException {
 				clickCreateNewTouchpoint();
+				smartappEnterKeyword(name);
+				appSelectOrderingLogic();
+				appSelectOrderingRule();
+				appEnterRefreshEvery("3");
+				appSelectTimeInterval();
+				appEnterMaximumOffers("5");
+				
+				
 				smsClickSave();
 
 			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+			//-------------------------------------------//
 			public void createCustomerCareTouchpointWithoutMandatoryFields() throws InterruptedException {
 				clickCreateNewTouchpoint();
 				custClickSave();
@@ -1068,6 +1140,15 @@ Assert.assertEquals(name,newname);
 
 			}
 			
+			
+			
+			
+			public void createCustomerSmartPhone() throws InterruptedException {
+				clickCreateNewTouchpoint();
+				
+				smartClickSave();
+
+			}
 			
 			
 			public void verifyValidationErrorMessagesInUSSDEdit() throws Throwable {
@@ -1216,6 +1297,15 @@ Assert.assertEquals(name,newname);
 				triggerEnterMaximumOffers("5");
 			}
 
+			public void triggereditclick() throws InterruptedException {
+				jswait.loadClick(triggereditclick);
+				
+				
+			}
+			
+			
+			
+			
 			
 			public void verifyEditAndDeleteButtonTouchpoints() throws InterruptedException {
 				
@@ -1233,6 +1323,54 @@ Assert.assertEquals(name,newname);
 					}
 				}
 				}
+			
+			
+			
+			
+			
+			//-------------------------------smartphoneapp--------------------------------------------//
+			
+			public void smartappEnterKeyword(String name) throws InterruptedException {
+				jswait.loadSendKeys(smartphoneTouchpointsname, name);
+			}
+			
+			public void appSelectOrderingLogic() throws InterruptedException {
+				jswait.loadClick(appFormOrderingLogicSelector);
+				jswait.loadClick(appFormOrderingLogicRuleBased);
+			}
+			public void appSelectOrderingRule() throws InterruptedException {
+				jswait.loadClick(appFormOrderingRuleSelector);
+				jswait.loadClick(appFormOrderingRuleFIFO);
+			}
+			
+			public void appSelectOrderingRulelifo() throws InterruptedException {
+				jswait.loadClick(appFormOrderingRuleSelector);
+				jswait.loadClick(appFormOrderingRuleLIFO);
+			}
+			
+			public void appEnterRefreshEvery(String name) throws InterruptedException {
+				jswait.loadSendKeys(appFormRefreshEvery, name);
+			}
+			public void appSelectTimeInterval() throws InterruptedException {
+				jswait.loadClick(appFormTimeIntervalSelector);
+				jswait.loadClick(appFormTimeInterval1);
+			}
+			public void appEnterMaximumOffers(String name) throws InterruptedException {
+				jswait.loadSendKeys(appFormMaximumOffers, name);
+			}
+			
+			public void createCustomerSmartPhone(String name) throws InterruptedException {
+				clickCreateNewTouchpoint();
+				smartappEnterKeyword(name);
+				appSelectOrderingLogic();
+				appSelectOrderingRule();
+				appSelectOrderingRulelifo();
+				appEnterRefreshEvery(name);
+				appSelectTimeInterval();
+				appEnterMaximumOffers(name);
+				smartClickSave();
+
+			}
 			
 
 }

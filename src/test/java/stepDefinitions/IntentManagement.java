@@ -208,18 +208,32 @@ public class IntentManagement extends Init{
 	public void createTriggerTouchpointWithoutMandatoryFields() throws Throwable {
 	  touchpointPage.createTriggerTouchpointWithoutMandatoryFields();
 	}
+	
+	//-------------------------------------------------------------------------------------------//
 	@Then("^create new SMS touch point without filling mandatory fields$")
-	public void createSMSTouchpointWithoutMandatoryFields() throws Throwable {
-	  touchpointPage.createSMSTouchpointWithoutMandatoryFields();
+	public void createSMSTouchpointWithoutMandatoryFields(String name) throws Throwable {
+	  touchpointPage.createSMSTouchpointWithoutMandatoryFields(name);
+	
 	}
+	
+	
+	
+	///-------------------------------------------------------------------------------//
 	
 	@Then("^create new customer care touch point without filling mandatory fields$")
 	public void createCustomerCareTouchpointWithoutMandatoryFields() throws Throwable {
 	  touchpointPage.createCustomerCareTouchpointWithoutMandatoryFields();
 	}
-	@Then("^create new smart phone app touch point without filling mandatory fields$")
-	public void createSmartPhoneAppTouchpointWithoutMandatoryFields() throws Throwable {
-	  touchpointPage.createCustomerSmartPhoneAppWithoutMandatoryFields();
+	@Then("^create new smart phone app touch point from sheet \"([^\"]*)\"$")
+	public void createSmartPhoneAppTouchpointWithoutMandatoryFields(String sheet) throws Throwable {
+		eh.setExcelFile("touchpointInputData", sheet);
+		Random rn = new Random();
+ 		int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) eh.getCell(1, 0);
+ 		name =  name.replaceAll("[0-9]", "")+n;
+ 		eh.setCell(1, 0, name);
+		
+	  touchpointPage.createCustomerSmartPhone(name);
 	}
 	
 	@Then("^verify validation error messages for ussd touch point edit$")
@@ -1437,6 +1451,18 @@ System.out.println(editname+"program has edited successfully");
 		  //touchpointPage.apiedittouchpointcheck(newname);
 		  
 
+		}
+		
+		
+		@Then("^edit trigger touchpoint from sheet \"([^\"]*)\"$")
+		public void editTriggerTouchpoint(String sheet) throws InterruptedException, IOException {
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eh.setCell(1, 0, name);
+			touchpointPage.editTriggerTouchpoint(name);
 		}
 		
 	
