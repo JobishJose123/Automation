@@ -747,3 +747,24 @@ Then navigate to programs
 Then choose program from sheet "programdetails" for edit
 Then verify edited program for touchpoint from sheet "smsTouchpoint"
 
+
+@NX-8390
+@initBrowser
+Scenario: Verify whether edit icon is available for all the touchpoints-8390 
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then verify edit button for smartphone touchpoint
+Then navigate to customer care
+Then verify edit button for customer care touchpoint
+Then navigate to sms
+Then verify edit button for sms touchpoint
+Then navigate to trigger
+Then verify edit button for trigger touchpoint
+Then navigate to api
+Then verify edit button for API touchpoint
+Then navigate to ussd
+Then verify edit button for USSD touchpoint
+
+
+

@@ -1488,9 +1488,49 @@ System.out.println(editname+"program has edited successfully");
 		  
 		}
 		
+		@Then("^verify edit button for smartphone touchpoint$")
+		public void verifyEditButtonForSmartphoneTouchpoint() throws Throwable {
+			
+		touchpointPage.verifyEditButtonForSmartphoneTouchpoint();
+			
+		}
+		
+		@Then("^verify edit button for customer care touchpoint$")
+		public void verifyEditButtonForCustomercareTouchpoint() throws Throwable {
+			
+		touchpointPage.verifyEditButtonForCustomercareTouchpoint();
+			
+		}
+		
+
+		@Then("^verify edit button for API touchpoint$")
+		public void verifyEditButtonForAPITouchpoint() throws Throwable {
+			
+		touchpointPage.verifyEditButtonForAPITouchpoint();
+			
+		}
+		@Then("^verify edit button for USSD touchpoint$")
+		public void verifyEditButtonForUSSDTouchpoint() throws Throwable {
+			
+		touchpointPage.verifyEditButtonForUSSDTouchpoint();
+			
+		}
+		
+		@Then("^verify edit button for trigger touchpoint$")
+		public void verifyEditButtonForTriggerTouchpoint() throws Throwable {
+			
+		touchpointPage.verifyEditButtonForTriggerTouchpoint();
+			
+		}
 		
 		
 		
+		@Then("^verify edit button for sms touchpoint$")
+		public void verifyEditButtonForSMSTouchpoint() throws Throwable {
+			
+		touchpointPage.verifyEditButtonForSMSTouchpoint();
+			
+		}
 		
 		@Then("^create api touchpoint validation check from sheet \"([^\"]*)\"$")
 		public void create_api_touchpointvalidation_check(String sheet) throws Throwable {

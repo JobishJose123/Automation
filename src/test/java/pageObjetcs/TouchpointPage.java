@@ -106,6 +106,11 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath="//form[@id='addSmartphoneFrom']//label[contains(.,'Maximum offers')]/../input")
 	private WebElement appFormMaximumOffers;
 	
+	@FindBy(xpath=".//data-table-cell[@class='smartphone-touchpoint-grid style-scope']//paper-icon-button[2]")
+	private WebElement editSmartphoneTouchpoint;
+	
+	
+	
 	
 	
 	
@@ -338,6 +343,9 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'FIFO')]")
 	private WebElement custTriggerFormOrderingRuleFIFO;
 	
+	@FindBy(xpath=".//data-table-cell[@class='trigger-touchpoint-grid style-scope']//paper-icon-button[1]")
+	private WebElement editTriggerTouchpoint;
+	
 	
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Ordering Rule')]/../input")
 	private WebElement triggerFormOrderingRuleSelector;
@@ -426,6 +434,13 @@ public class TouchpointPage extends Init{
 		jswait.loadClick(clickCreateNewTouchpoint);
 	}
 	
+	public void verifyEditButtonForSmartphoneTouchpoint() throws InterruptedException {
+		Thread.sleep(2000);
+		assertTrue(editSmartphoneTouchpoint.isDisplayed());
+	}
+	
+	
+	
 	public void clickDeleteCustTouchpoint() throws InterruptedException {
 		jswait.loadClick(custDeleteTouchpoint);
 		jswait.loadClick(custDeleteYes);
@@ -439,7 +454,39 @@ public class TouchpointPage extends Init{
 		
 	}
 	
+	public void verifyEditButtonForCustomercareTouchpoint() throws InterruptedException {
+		
+		Thread.sleep(2000);
+		assertTrue(editTouchpoint1.isDisplayed());
 	
+}
+	
+public void verifyEditButtonForAPITouchpoint() throws InterruptedException {
+		
+	Thread.sleep(2000);
+		assertTrue(Apiedittouchpoints.isDisplayed());
+	
+}
+public void verifyEditButtonForUSSDTouchpoint() throws InterruptedException {
+	
+	Thread.sleep(2000);
+		assertTrue(ussdTouchpointEdit.isDisplayed());
+	
+}
+public void verifyEditButtonForSMSTouchpoint() throws InterruptedException {
+		
+	Thread.sleep(10000);
+		assertTrue(smstouchpointedit.isDisplayed());
+	
+}
+
+public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
+	
+	Thread.sleep(2000);
+	assertTrue(editTriggerTouchpoint.isDisplayed());
+
+}
+
 	
 	
 	//sms touchpoint functions
