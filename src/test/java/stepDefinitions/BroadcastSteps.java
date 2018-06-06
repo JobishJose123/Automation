@@ -422,7 +422,7 @@ public class BroadcastSteps extends Init{
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
 
-if(bc_type.contentEquals("one-off")){
+if(bc_type.contains("one-off")){
 	Thread.sleep(1000);
 		broadcastPageObjects.clickOneOffRadioButton();
 //		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
@@ -491,7 +491,7 @@ if(bc_type.contentEquals("one-off")){
   builder.moveToElement(num1).click().build().perform();
   Thread.sleep(1000);	
     }
-else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurring")||bc_type.contentEquals("seedingTriggerable")){
+else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")){
 	Thread.sleep(2000);
 	if(bc_type.contentEquals("recurring")){
 			 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");

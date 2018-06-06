@@ -547,6 +547,23 @@ Feature: Test suite on Offer creation
     Then navigate to offer management
     Then navigate to offers
     Then verify selecting set as default check box for multiple track sources
-    
+
+    @NX-2993 @initBrowser @closeBrowser
+  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-2993
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "informationalWAP" with product "singleProductPage"
+     Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then Add "informationalWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast from sheet "informationalBC" with "informationalWAP"
     
     

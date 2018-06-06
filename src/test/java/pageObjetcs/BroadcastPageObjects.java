@@ -453,9 +453,18 @@ public class BroadcastPageObjects extends Init {
 		selectBaseList(baseList);
 		clickProceedButton();
 		selectOffer(offer);
-		selectTrackSession();
-		selectTrackingSource();
-		selectSenderAndRoute();
+		if(!bc_type.contains("informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
+			jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+		}
 		clickProceedButton();
 	}
 
