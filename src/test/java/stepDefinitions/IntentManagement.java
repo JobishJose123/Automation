@@ -215,6 +215,10 @@ public class IntentManagement extends Init{
 	  touchpointPage.createSMSTouchpointWithoutMandatoryFields(name);
 	
 	}
+	@Then("^create new smart phone app touch point without filling mandatory fields$")
+	public void createSmartPhoneAppTouchpointWithoutMandatoryFields() throws Throwable {
+	  touchpointPage.createCustomerSmartPhoneAppWithoutMandatoryFields();
+	}
 	
 	
 	
@@ -1120,6 +1124,8 @@ System.out.println(editname+"program has edited successfully");
 		programPage.programconfirmactivateyes();
 		System.out.println("program has created successfully");
 	}
+	
+	
 	
 	
 	@Then("^verify create program page with customer care touchpoint \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
