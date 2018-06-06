@@ -40,6 +40,8 @@ private WebElement filtersTitle;
 public void navigateToTouchpoints() throws InterruptedException {
 	jswait.loadClick(touchpoints);
 }
+
+
 public void navigateToPrograms() throws InterruptedException {
 	jswait.loadClick(programs);
 }

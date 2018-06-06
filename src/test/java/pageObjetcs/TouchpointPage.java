@@ -469,7 +469,7 @@ public void verifyEditButtonForAPITouchpoint() throws InterruptedException {
 }
 public void verifyEditButtonForUSSDTouchpoint() throws InterruptedException {
 	
-	Thread.sleep(2000);
+	    Thread.sleep(2000);
 		assertTrue(ussdTouchpointEdit.isDisplayed());
 	
 }
