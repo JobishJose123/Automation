@@ -43,7 +43,7 @@ Then navigate to trigger
 Then create trigger touchpoint from sheet "triggerTouchpoint"
 Then check trigger touchpoint in grid "triggerTouchpoint"
 
-@NX-433
+@NX-433 @NX-4063
 @initBrowser @closeBrowser
 Scenario: Verify new Customer Care touchpoint creation
 Given login
@@ -477,7 +477,7 @@ Then delete sms touchpoint from sheet "smsTouchpoint"
 	Then click create new touchpoint
 	Then create new customer care touchpoint and delete
   
-  @NX-1575
+  @NX-1575 @NX-8393
   @initBrowser 
   Scenario: Verify Customer Care touchpoint edit functionality-1575
   Given login
@@ -767,4 +767,36 @@ Then navigate to ussd
 Then verify edit button for USSD touchpoint
 
 
+@NX-8459
+@initBrowser
+Scenario: Check whether Cluster page/tab is available for Segment  analysis if model is not activated-8459 
+Given login
+Then navigate to intent management
+Then navigate to analytics
+Then navigate to explore segments
+Then click on options icon
+Then verify cluster option
+Then choose a segment analysis
+Then verify cluster tab
 
+
+@NX-8453
+@initBrowser
+Scenario: Check by creating Cluster by configuring KPIs for a  single view--View1/View2-8453 
+Given login
+Then navigate to intent management
+Then navigate to analytics
+Then navigate to explore segments
+Then choose a segment analysis with clusters
+Then click on create new cluster button
+Then enter view values for cluster
+Then select radio button for view1
+Then click save cluster button
+Then toast messagewhile saving cluster with only view1 values
+#Then add KPI for segment analysis
+#Then click on options icon
+#Then verify cluster option
+#Then choose a segment analysis
+#Then verify cluster tab
+#Then click on options icon
+#Then click on cluster option
