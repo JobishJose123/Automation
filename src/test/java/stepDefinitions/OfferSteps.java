@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
+import org.mozilla.javascript.JavaScriptException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -16,11 +17,13 @@ import org.testng.Assert;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.JavaScriptExecutor;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.CustomerProfilePage;
 import pageObjetcs.LoginPageObjects;
 import pageObjetcs.OfferPageObjects;
+import pageObjetcs.Admin.RewardTypePage;
 
 public class OfferSteps extends Init {
 	public ExcelHelper eh = new ExcelHelper();
@@ -30,6 +33,7 @@ public class OfferSteps extends Init {
 	OfferPageObjects offerPageObjects = new OfferPageObjects();
 	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 	CommonObjects commonObjects = new CommonObjects();
+	RewardTypePage rewardTypePage = new RewardTypePage();
 
 	public OfferSteps() {
 		PageFactory.initElements(driver, this);
@@ -717,5 +721,21 @@ public class OfferSteps extends Init {
 		offerPageObjects.clickSetAsDefaultSecondTrack();
 		Assert.assertTrue(deselectedCheck.size() == 2, "more than one track seleced as default");
 		
+	}
+	@Then("^create new reward type$")
+	public void createNewRewardType() throws Throwable {
+//		rewardTypePage.clickCreateNewRewardTypeButton();
+//		rewardTypePage.enterCreateRewardName("Selenium_reward");
+//		rewardTypePage.enterCreateRewardDescription("desc_for reward created using sekenium");
+//		rewardTypePage.selectFirstCreateRewardFlowClass();
+//		rewardTypePage.clickCreateRewardSaveButton();
+		commonObjects.filterName("Selenium_reward");
+		rewardTypePage.expandReward("Selenium_reward");
+		rewardTypePage.createRewardParameters("Text", "text", "TEXT");
+		Thread.sleep(2000);
+	}
+	@Then("^create alert$")
+	public void createAlert() throws Throwable {
+		JavaScriptExecutor je = new JavaScriptExecutor();
 	}
 }

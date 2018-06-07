@@ -1149,6 +1149,7 @@ public class OfferPageObjects extends Init {
 
 		// ******************Track tab*****************:
 		enterTrackTabDetails(eh);
+		createFirstDefaultTrackingRuleCondition();
 		clickProceedButton();
 
 		// ******************Rewards tab*****************:

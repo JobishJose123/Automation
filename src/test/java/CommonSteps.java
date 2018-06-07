@@ -90,6 +90,10 @@ public class CommonSteps extends Init {
 	public void navigateToRegistrationList() throws InterruptedException {
 		registrationListPage.navigateToRegistrationList();
 	}
+	@Then("^navigate to rewards")
+	public void navigateToRewards() throws InterruptedException {
+		jswait.loadClick("//a/div[contains(.,'Rewards')]/..");
+	}
 	@Then("^navigate to configuration management")
 	public void navigateToConfiurationManagement() throws InterruptedException {
 		landingPage.navigateToConfigurationManagement();
