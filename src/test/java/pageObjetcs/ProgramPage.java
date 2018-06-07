@@ -569,7 +569,16 @@ public class ProgramPage extends Init{
 		driver.findElement(By.xpath("//*[@id='items']/vaadin-combo-box-item[contains(.,'"+tp+"')]")).click();
 		
 	}
-	
+	public void addTouchPointSelectSmsTouchpointFromSheetnewshortcode(String sheet2) throws InterruptedException {
+		jswait.loadClick(addTouchpointTouchpointName);
+		Thread.sleep(2000);
+		eh.setExcelFile("touchpointInputData",sheet2);
+		String tp = (String) eh.getCell(1, 0);
+		jswait.loadSendKeys(addTouchpointTouchpointName, tp);
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id='items']/vaadin-combo-box-item[contains(.,'2255-"+tp+"')]")).click();
+		
+	}
 	
 	
 	public void addTouchPointSelectSmsResponseChannel() throws InterruptedException {
@@ -592,6 +601,14 @@ public class ProgramPage extends Init{
 		addTouchPointEnterKeywordAliase();
 		Thread.sleep(2000);
 		addTouchPointSelectSmsTouchpointFromSheet(sheet);
+		addTouchPointSelectSmsResponseChannel();
+		jswait.loadClick(addTouchpointSaveButton);
+	}
+	public void addTouchPointToProgramFromSheetnewshortcode(String sheet) throws InterruptedException {
+		addTouchPointSelectSmsChannel();
+		addTouchPointEnterKeywordAliase();
+		Thread.sleep(2000);
+		addTouchPointSelectSmsTouchpointFromSheetnewshortcode(sheet);
 		addTouchPointSelectSmsResponseChannel();
 		jswait.loadClick(addTouchpointSaveButton);
 	}

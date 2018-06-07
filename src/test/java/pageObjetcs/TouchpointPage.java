@@ -213,6 +213,9 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormOrderingRuleLIFO;
 	@FindBy(xpath="//label[contains(.,'Short Code')]/following::vaadin-combo-box-item")
 	private WebElement smsFormShortCode1;
+	
+	@FindBy(xpath="//label[contains(.,'Short Code')]/following::vaadin-combo-box-item[2]")
+	private WebElement smsFormShortCode2;
 	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'Rule-based')]")
 	private WebElement smsFormOrderingLogicRuleBased;
 	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'Hours')]")
@@ -504,6 +507,24 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 //		actions.moveToElement(smsFormShortCode1).click().build().perform();
 		jswait.loadClick(smsFormShortCode1);
 	}
+	
+	//--------------------------------------------------------///
+	
+	public void smsSelectnewShortCode() throws InterruptedException {
+//		jswait.loadSendKeys(smsFormShortCodeSelector,"1024");
+		jswait.loadClick(smsFormShortCodeSelector);
+//		Thread.sleep(8000);
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(smsFormShortCode1).click().build().perform();
+		jswait.loadClick(smsFormShortCode2);
+	}
+	
+	
+	
+	
+	
+	
+	
 	public void smsEnterKeyword(String name) throws InterruptedException {
 		jswait.loadSendKeys(smsFormKeywordInput, name);
 	}
@@ -544,6 +565,18 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	public void editSmsTouchpointDetails(String keyword) throws InterruptedException {
 		smsEnterKeyword(keyword);
 		smsSelectShortCode();
+		smsSelectOrderingLogic();
+		smsSelectOrderingRulelifo();
+		smsEnterRefreshEvery("8");
+		smsSelectTimeInterval();
+		smsEnterMaximumOffers("5");
+		smsClickSave();
+	}
+	
+	
+	public void editSmsTouchpointDetailsshortcode(String keyword) throws InterruptedException {
+		smsEnterKeyword(keyword);
+		smsSelectnewShortCode();
 		smsSelectOrderingLogic();
 		smsSelectOrderingRulelifo();
 		smsEnterRefreshEvery("8");

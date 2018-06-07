@@ -800,3 +800,44 @@ Then toast messagewhile saving cluster with only view1 values
 #Then verify cluster tab
 #Then click on options icon
 #Then click on cluster option
+
+
+
+
+@NX-8495
+@initBrowser
+Scenario: Verify by editing the existing short code and check by sending keyword to new short code for the customer
+Given login
+#Then navigate to intent management
+#Then navigate to touchpoints
+#Then navigate to sms
+#Then create sms touchpoint from sheet "smsTouchpoint"
+#Then edit sms touchpoint from sheet with new shortcode "smsTouchpoint"
+#Then navigate to landing page
+#Then navigate to configuration management
+#Then naviagte to product classes
+#Then create product class and number attribute from "TestProductClass"
+#Then navigate to landing page
+#Then navigate to precision marketer
+#Then navigate to offer management
+#Then navigate to products
+#Then navigate to product class "TestProductClass"
+#Then click create new product button
+#Then create product with attributes from sheet "fullDetails"
+#Then navigate to landing page
+#Then navigate to precision marketer
+#Then navigate to offer management
+#Then navigate to offers
+#Then click on create new ofer button
+#Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#Then navigate to offer management 
+#Then Navigate to Offer Catalogue
+#Then Create New Offer Catalogue from sheet "defaultCatalog"
+#Then Add "rechargeWAP" offer to Offer Catalogue
+Then navigate to landing page
+Then navigate to intent management
+Then navigate to programs
+Then click create program button
+Then verify create programpagenewcode "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+Then choose program from sheet "programdetails"
+Then verify tracking field while create new rule from sheet "fullDetails"

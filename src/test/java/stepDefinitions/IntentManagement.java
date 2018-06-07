@@ -34,6 +34,7 @@ public class IntentManagement extends Init{
 	}
 	@Then("^navigate to programs")
 	public void navigateToPrograms() throws InterruptedException {
+		Thread.sleep(5000);
 		intentManagementPage.navigateToPrograms();
 	}
 	@Then("^navigate to sms")
@@ -1216,6 +1217,53 @@ System.out.println(editname+"program has edited successfully");
 		System.out.println("program has edited successfully");
 	}
 	   
+	   
+	   
+	   //----------------------------------------------------------------------------------//
+	   
+		
+	   
+	   @Then("^verify create programpagenewcode \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+		public void verify_edit_program_page_newcodefrom_sheet(String sheet1, String sheet2, String sheet3) throws Throwable {
+			Thread.sleep(4000);
+	    	ExcelHelper programExcel = new ExcelHelper();
+	    	programExcel.setExcelFile("programInputData", sheet1);
+	    	Random rn = new Random();
+	    	int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) programExcel.getCell(1, 0);
+	  		name =  name.replaceAll("[0-9]", "")+n;
+	 		programExcel.setCell(1, 0, name);
+	 		Thread.sleep(4000);
+			programPage.clickCreateProgramButton();
+			programPage.enterProgramDetailsfromSheet(name,sheet2);
+			programPage.clickPorogramProceedButton();
+			programPage.clickCreateProgramAddTouchpointButton();
+			programPage.addTouchPointToProgramFromSheetnewshortcode(sheet3);
+			programPage.clickPorogramProceedButton();
+			programPage.programschstart();
+			programPage.prmshcselectnow();
+			programPage.programschend();
+			programPage.prmshcselectnoend();
+			programPage.programschrefreshcycle();
+			programPage.prmshcselectdays();
+			Thread.sleep(2000);
+			programPage.prmeverylabel();
+			programPage.prmrecycleinputclick();
+			programPage.prmrecycleinput();
+			programPage.prmrefreshat();
+			programPage.pgmtimeokbtn();
+			programPage.programschserveon(); 
+			programPage.prmshcserveonalldays();
+			//programPage.clickEditProgramSaveButton();
+			Thread.sleep(2000);
+			programPage.programactivatebtn();
+			programPage.programconfirmactivateyes();
+			System.out.println("program has edited successfully");
+		}
+	   
+	   //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-//
+	   
+	   
 	@Then("^verify edited program for touchpoint from sheet \"([^\\\"]*)\"$")
 	public void verifyAddedTouchpointsFromSheet(String sheet) throws Throwable {
 		programPage.clickPorogramProceedButton();
@@ -1432,6 +1480,28 @@ System.out.println(editname+"program has edited successfully");
 		  touchpointPage.smsedittouchpointcheck(newname);
 		  
 		}
+		
+		
+		@Then("^edit sms touchpoint from sheet with new shortcode \"([^\"]*)\"$")
+		public void edit_sms_touchpointnewshortcode(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			
+			touchpointPage.smsedittouchpointsclick();
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		String newname="edited "+name;
+	 		eh.setCell(1, 0, newname);
+	 		Thread.sleep(3000);
+		  touchpointPage.editSmsTouchpointDetailsshortcode(newname);
+		  
+		  
+		  
+		}
+		
+		
 		
 		
 		
