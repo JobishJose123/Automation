@@ -737,5 +737,6 @@ public class OfferSteps extends Init {
 	@Then("^create alert$")
 	public void createAlert() throws Throwable {
 		JavaScriptExecutor je = new JavaScriptExecutor();
+		je.createAlert();
 	}
 }
