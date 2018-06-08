@@ -9,10 +9,10 @@ Scenario: Verify Creating Offer Catalogue
   Given login
 	When navigate to precision marketer
 	Then navigate to offer management
-Then navigate to products
-Then navigate to prepaid telecom
-Then click create new product button
-Then create single product from sheet "singleProductPage"
+  Then navigate to products
+  Then navigate to prepaid telecom
+  Then click create new product button
+  Then create single product from sheet "singleProductPage"
 	Then navigate to offer management 
 	Then navigate to offers
   Then create new offer from sheet "rechargeSMS" with product "singleProductPage"

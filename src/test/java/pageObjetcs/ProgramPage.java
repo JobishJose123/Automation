@@ -566,6 +566,7 @@ public class ProgramPage extends Init{
 		eh.setExcelFile("touchpointInputData",sheet2);
 		String tp = (String) eh.getCell(1, 0);
 		jswait.loadSendKeys(addTouchpointTouchpointName, tp);
+		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id='items']/vaadin-combo-box-item[contains(.,'"+tp+"')]")).click();
 		
 	}
@@ -914,6 +915,7 @@ public void touchpointpgmdeletecheck() throws Exception{
 		
 		try {
 		assertTrue(driver.findElement(By.xpath(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]")).isDisplayed());
+		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]")).click();
 		}
 		catch(Exception e) {

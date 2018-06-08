@@ -230,6 +230,7 @@ public class ProductClassesPageObjects extends Init{
 		enterAttributeLabel("NUM");
 		selectType("NUMBER");
 		enterDefaultValue("181");
+		Thread.sleep(2000);
 		clickAddAttributeSave();
 		
 	}	 

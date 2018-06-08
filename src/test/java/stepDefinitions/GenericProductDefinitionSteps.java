@@ -170,6 +170,7 @@ public class GenericProductDefinitionSteps extends Init{
 		name =  name.replaceAll("[0-9]", "")+n;
 		eh.setCell(1, 0, name);
 		productClassesPageObjects.createProductClass(name, (String) eh.getCell(1, 1));
+		Thread.sleep(2000);
 		filterWorkaround(name);
 		commonObjects.clickOptionsIcon();
 		productClassesPageObjects.clickAttributes();

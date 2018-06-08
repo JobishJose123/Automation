@@ -17,7 +17,7 @@ import org.testng.Assert;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
-import baseClasses.JavaScriptExecutor;
+//import baseClasses.JavaScriptExecutor;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.CustomerProfilePage;
@@ -734,9 +734,9 @@ public class OfferSteps extends Init {
 		rewardTypePage.createRewardParameters("Text", "text", "TEXT");
 		Thread.sleep(2000);
 	}
-	@Then("^create alert$")
-	public void createAlert() throws Throwable {
-		JavaScriptExecutor je = new JavaScriptExecutor();
-		je.createAlert();
-	}
+//	@Then("^create alert$")
+//	public void createAlert() throws Throwable {
+//		JavaScriptExecutor je = new JavaScriptExecutor();
+//		je.createAlert();
+//	}
 }
