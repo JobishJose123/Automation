@@ -1368,6 +1368,19 @@ System.out.println(editname+"program has edited successfully");
 				
 				
 			}	
+		 @Then("^create new rule from sheet \"([^\"]*)\" and list \"([^\"]*)\"$")
+			public void CreateNewRuleWithFromSheet(String sheet1,String list) throws Throwable {
+				Thread.sleep(4000);
+		    	ExcelHelper programExcel = new ExcelHelper();
+		    	programExcel.setExcelFile("productInputData", sheet1);
+		    	
+		 		String name = (String) programExcel.getCell(1, 0);
+		 		Thread.sleep(4000);
+				//programPage.clickCreateProgramButton();
+				programPage.createNewProgramRule(name,list);
+				
+				
+			}
 	
 	
 		
@@ -1719,6 +1732,9 @@ System.out.println(editname+"program has edited successfully");
 	 		eh.setCell(1, 0, name);
 			touchpointPage.editTriggerTouchpoint(name);
 		}
+		
+		
+		
 		
 	
 }

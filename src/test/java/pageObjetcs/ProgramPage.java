@@ -278,6 +278,9 @@ public class ProgramPage extends Init{
 	@FindBy(xpath=".//paper-item[@value='false' and contains(.,'After')]")
 	private WebElement optionAfter;
 	
+	@FindBy(xpath="//div[@id='contentWrapper']//paper-listbox[@role='listbox']/paper-item[contains(.,'After')]")
+	private WebElement optionAfterselect;
+	
 	@FindBy(xpath=".//paper-item[@value='true' and contains(.,'At')]")
 	private WebElement optionAt;
 	@FindBy(xpath=".//paper-item[@aria-selected='true' @value='true' and contains(.,'At')]")
@@ -295,6 +298,44 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath=".//paper-input-error[contains(.,'The value does not match the specified pattern.')]")
 	private WebElement errorProgrammTitle ;
+
+	
+	//rules
+	
+	
+	
+@FindBy(xpath="//paper-dialog[@id='view']//label[contains(.,'Rule Name')]//..//input")
+private WebElement programrulename ;
+	
+
+	
+@FindBy(xpath="//div[@id='contentWrapper']//paper-listbox[@role='listbox']/paper-item[contains(.,'After')]//following::input[1]")
+private WebElement ruleaftervalue ;
+@FindBy(xpath="//div[@id='contentWrapper']//paper-listbox[@role='listbox']/paper-item[contains(.,'After')]//following::input[2]")
+private WebElement ruleafterinput2 ;
+@FindBy(xpath="//form[@id='deliverySegment']//div[@id='contentWrapper']//paper-listbox[@role='listbox']/paper-item[contains(.,'Days')]")
+private WebElement ruledays;
+@FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::input[1]")
+private WebElement rulessenderid ;
+@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'Address-SMPP')]")
+private WebElement addresssprule;
+@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'Address-SMPP')])[2]")
+private WebElement addresssprule2;
+
+@FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which this broadcast can be sent')]//following::input[1]")
+private WebElement rulerouteid;
+@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'SMPP Robi outbond')]")
+private WebElement ruleroute;
+@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'SMPP Robi outbond')])[2]")
+private WebElement ruleroute2;
+@FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::input[1]")
+private WebElement rulerouteid2;
+
+	
+@FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::input[1]")
+private WebElement rulessenderid2 ;
+	
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -372,6 +413,10 @@ public class ProgramPage extends Init{
    public void clickAtOption() throws InterruptedException {
 		jswait.loadClick(optionAt);
 		}
+   public void optionAfterselect() throws InterruptedException {
+		jswait.loadClick(optionAfterselect);
+		}
+   
    public void clickTrackingSessionField() throws InterruptedException {
 		jswait.loadClick(trackingSessionField);
 		}
@@ -396,7 +441,7 @@ public class ProgramPage extends Init{
 		Thread.sleep(2000);
 		clickCustomerListField();
 		Thread.sleep(2000);
-		selectFirstCustomerList();
+		selectCustomerList("listname");
 		Thread.sleep(2000);
 		clickPorogramProceedButton();
 		Thread.sleep(2000);
@@ -414,6 +459,170 @@ public class ProgramPage extends Init{
 		assertTrue(optionAt.isDisplayed());
 		
 	}
+   
+   //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-///
+   public void createNewProgramRule(String name,String listname)throws Exception {
+		
+		clickCreateNewRuleButton();
+		enterruleName("autorule");
+		clickSaveRuleButton();
+		Thread.sleep(2000);
+		clickCustomerListField();
+		Thread.sleep(2000);
+		selectCustomerList(listname);
+		Thread.sleep(2000);
+		clickPorogramProceedButton();
+		Thread.sleep(2000);
+		clickProductFieldOption();
+		chooseProduct(name);
+		Thread.sleep(2000);
+		clickPorogramProceedButton();
+		//System.out.println("test");
+		clickTrackingSessionField();
+		Thread.sleep(3000);
+		optionAfterselect();
+		Thread.sleep(3000);
+		ruledelivryafterinput();
+		Thread.sleep(3000);
+		ruleafterinput2(); 
+		ruledays();
+		Thread.sleep(2000);
+		rulessenderid();
+		addresssprule();
+		Thread.sleep(3000);
+		rulerouteid();
+		ruleroute();
+		Thread.sleep(2000);
+		rulessenderid2();
+		addresssprule2();
+		Thread.sleep(2000);
+		rulerouteid2(); 
+		ruleroute2();
+		clickPorogramProceedButton();
+		// same path for both program and rule thats why used this fns here//
+		Thread.sleep(2000);
+		programschstart(); 
+		prmshcselectnow();
+		Thread.sleep(2000);
+		programactivatebtn();
+		programconfirmactivateyes();
+		System.out.println("test");
+	
+		
+	}
+   
+   
+   
+   
+   public void enterruleName(String name)throws InterruptedException {
+		Random rn = new Random();
+		int  n = rn.nextInt(5000) + 1;
+	
+		name =  name.replaceAll("[0-9]", "")+n;
+		jswait.loadSendKeys(programrulename, name);
+	} 
+   
+   
+   
+   public void selectCustomerList(String listname) throws InterruptedException {
+			
+		Thread.sleep(3000);
+		eh.setExcelFile("listname",listname);
+		String list = (String) eh.getCell(1, 0);
+		jswait.loadSendKeys(customerListField, list);
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+list+"')]")).click();
+		
+	}
+   
+   public void ruledelivryafterinput() throws InterruptedException {
+		wait.until(ExpectedConditions.visibilityOf(ruleaftervalue)).sendKeys(Keys.ARROW_UP);
+		}
+   public void ruleafterinput2() throws InterruptedException {
+		jswait.loadClick(ruleafterinput2);
+	}
+   
+   
+   public void ruledays() throws InterruptedException {
+		jswait.loadClick(ruledays);
+	}
+   
+   public void rulessenderid() throws InterruptedException {
+	   Thread.sleep(2000);
+		jswait.loadClick(rulessenderid);
+	}
+   
+   public void addresssprule() throws InterruptedException {
+	   Thread.sleep(2000);
+		jswait.loadClick(addresssprule);
+	
+	}
+   public void addresssprule2() throws InterruptedException {
+	   Thread.sleep(2000);
+		jswait.loadClick(addresssprule2);
+//		 Thread.sleep(2000);
+//			jswait.loadClick(addresssprule2);
+	
+	}
+   
+   public void rulerouteid() throws InterruptedException {
+	   Thread.sleep(2000);
+		jswait.loadClick(rulerouteid);
+		
+		
+	}
+   
+   public void ruleroute() throws InterruptedException {
+	   Thread.sleep(2000);
+	   String name="SMPP Robi outbond";
+		jswait.loadClick(ruleroute);
+		Thread.sleep(1000);
+		jswait.loadClick(ruleroute);
+		
+	}
+   public void ruleroute2() throws InterruptedException {
+	   Thread.sleep(2000);
+	 jswait.loadClick(ruleroute2);
+		
+		
+	}
+   public void rulessenderid2() throws InterruptedException {
+	   Thread.sleep(2000);
+		jswait.loadClick(rulessenderid2);
+//		Thread.sleep(2000);
+//		jswait.loadClick(rulessenderid2);
+	}
+   
+   public void rulerouteid2() throws InterruptedException {
+	   Thread.sleep(2000);
+		jswait.loadClick(rulerouteid2);
+//		 Thread.sleep(2000);
+//			jswait.loadClick(rulerouteid2);
+	}
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
 	public void checkAllColumnsInProductList() throws InterruptedException {
 		jswait.checkClickable(programListNameColumn);
 		jswait.checkClickable(programListChannelsColumn);
@@ -492,6 +701,11 @@ public class ProgramPage extends Init{
 		 jswait.checkVisible(createProgramButton);
 		clickCreateProgramButton();
 	}
+	
+	
+	
+	
+	
 	
 	
 	public String editProgramDetails(String name)throws InterruptedException {
@@ -671,9 +885,7 @@ public class ProgramPage extends Init{
 		jswait.loadClick(addTouchpointSelectSMS1024);
 	}
 
-	public void selectFirstCustomerList() throws InterruptedException {
-		jswait.loadClick(selectfirstCustomerList);
-	}
+	
 	
 	public void programschstart() throws InterruptedException {
 		jswait.loadClick(programschstart);
@@ -993,7 +1205,7 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 		Thread.sleep(2000);
 		clickCustomerListField();
 		Thread.sleep(2000);
-		selectFirstCustomerList();
+		selectCustomerList("listname");
 		Thread.sleep(2000);
 		clickPorogramProceedButton();
 		Thread.sleep(2000);
