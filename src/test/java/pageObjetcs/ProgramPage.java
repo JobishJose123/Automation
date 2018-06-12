@@ -332,7 +332,8 @@ private WebElement ruleroute2;
 private WebElement rulerouteid2;
 
 	
-@FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::input[1]")
+@FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]/../input")
+//form[@id='deliverySegment']//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::input[1]")
 private WebElement rulessenderid2 ;
 	
 	
@@ -499,6 +500,8 @@ private WebElement rulessenderid2 ;
 		rulerouteid2(); 
 		ruleroute2();
 		clickPorogramProceedButton();
+		
+		
 		// same path for both program and rule thats why used this fns here//
 		Thread.sleep(2000);
 		programschstart(); 
@@ -574,20 +577,27 @@ private WebElement rulessenderid2 ;
    
    public void ruleroute() throws InterruptedException {
 	   Thread.sleep(2000);
-	   String name="SMPP Robi outbond";
+	
+	   while(ruleroute.isDisplayed()==false) {
+	   
+		   rulerouteid.sendKeys(Keys.DOWN);
+		   
+	   }
+	    wait.until(ExpectedConditions.visibilityOf(ruleroute));
 		jswait.loadClick(ruleroute);
-		Thread.sleep(1000);
-		jswait.loadClick(ruleroute);
+//		Thread.sleep(1000);
+//		jswait.loadClick(ruleroute);
 		
 	}
    public void ruleroute2() throws InterruptedException {
-	   Thread.sleep(2000);
+	   Thread.sleep(3000);
 	 jswait.loadClick(ruleroute2);
 		
 		
 	}
    public void rulessenderid2() throws InterruptedException {
-	   Thread.sleep(2000);
+	   Thread.sleep(4000);
+	   //wait.until(ExpectedConditions.visibilityOf(rulessenderid2)).click();
 		jswait.loadClick(rulessenderid2);
 //		Thread.sleep(2000);
 //		jswait.loadClick(rulessenderid2);
@@ -781,7 +791,8 @@ private WebElement rulessenderid2 ;
 		String tp = (String) eh.getCell(1, 0);
 		jswait.loadSendKeys(addTouchpointTouchpointName, tp);
 		Thread.sleep(3000);
-		driver.findElement(By.xpath("//*[@id='items']/vaadin-combo-box-item[contains(.,'"+tp+"')]")).click();
+		
+		driver.findElement(By.xpath("//*[@id='items']/vaadin-combo-box-item[contains(.,'2255-"+tp+"')]")).click();
 		
 	}
 	public void addTouchPointSelectSmsTouchpointFromSheetnewshortcode(String sheet2) throws InterruptedException {

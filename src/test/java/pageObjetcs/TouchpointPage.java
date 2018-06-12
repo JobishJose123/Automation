@@ -8,15 +8,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
 import org.junit.Assert;
+
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 
 public class TouchpointPage extends Init{
 	JSWaiter jswait = new JSWaiter();
+	public ExcelHelper eh = new ExcelHelper(); 
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	public TouchpointPage() {
 		PageFactory.initElements(driver, this);
@@ -252,6 +256,10 @@ public class TouchpointPage extends Init{
 	
 	@FindBy(xpath=".//vaadin-combo-box[@class='flex style-scope sms-touchpoint-grid x-scope vaadin-combo-box-1']//paper-input-error")
 	private WebElement shortCodeValidation;
+	@FindBy(xpath=".//paper-input[@class='style-scope sms-touchpoint-grid x-scope paper-input-0']//label[contains(.,'Touchpoint Name')]/../input")
+	private WebElement smsTouchpointName;
+	
+	
 	
 	
 	//	@FindBy(xpath="")
@@ -552,9 +560,12 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	public void smsEnterMaximumOffers(String name) throws InterruptedException {
 		jswait.loadSendKeys(smsFormMaximumOffers, name);
 	}
-	public void enterSmsTouchpointDetails(String keyword) throws InterruptedException {
+	public void enterSmsTouchpointDetails(String keyword) throws InterruptedException, IOException {
 		smsEnterKeyword(keyword);
 		smsSelectShortCode();
+		eh.setExcelFile("touchpointInputData", "smsTouchpoint");
+ 		String name = smsTouchpointName.getText();
+ 		eh.setCell(1, 0, name);
 		smsSelectOrderingLogic();
 		smsSelectOrderingRule();
 		smsEnterRefreshEvery("3");
@@ -705,7 +716,7 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	
 }
 
-	public void createSmsTouchpoint(String keyword) throws InterruptedException {
+	public void createSmsTouchpoint(String keyword) throws InterruptedException, IOException {
 		clickCreateNewTouchpoint();
 		enterSmsTouchpointDetails(keyword);
 		smsClickSave();
