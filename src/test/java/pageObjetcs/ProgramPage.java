@@ -2,6 +2,7 @@ package pageObjetcs;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -393,6 +394,13 @@ private WebElement rulessenderid2 ;
 	public void clickPorogramViewRulesButton() throws InterruptedException {
 		jswait.loadClick(programViewRulesButton);
 	}
+	
+	public void verifyRuleCreatedFromSheet(String name) throws InterruptedException {
+		Thread.sleep(3000);
+		assertTrue(driver.findElement(By.xpath("//data-table-cell[contains(.,'"+name+"')]")).isDisplayed());
+	}
+	
+	
 	public void clickEditProgramButton() throws InterruptedException {
 		jswait.loadClick(EditProgramButton);
 	}
@@ -465,7 +473,7 @@ private WebElement rulessenderid2 ;
    public void createNewProgramRule(String name,String listname)throws Exception {
 		
 		clickCreateNewRuleButton();
-		enterruleName("autorule");
+		enterruleName();
 		clickSaveRuleButton();
 		Thread.sleep(2000);
 		clickCustomerListField();
@@ -517,11 +525,16 @@ private WebElement rulessenderid2 ;
    
    
    
-   public void enterruleName(String name)throws InterruptedException {
-		Random rn = new Random();
+   public void enterruleName()throws InterruptedException, IOException {
+	   ExcelHelper programExcel = new ExcelHelper();
+   	   eh.setExcelFile("ruleInputData", "rule");
+	   Random rn = new Random();
 		int  n = rn.nextInt(5000) + 1;
-	
+		String name = (String) eh.getCell(1, 0);
 		name =  name.replaceAll("[0-9]", "")+n;
+		
+    	eh.setCell(1, 0, name);
+		
 		jswait.loadSendKeys(programrulename, name);
 	} 
    

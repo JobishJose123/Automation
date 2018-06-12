@@ -850,33 +850,33 @@ Scenario: Verify by editing the existing short code and check by sending keyword
 @NX-7221 @initBrowser 
   Scenario: Verify adding a new rule to an active program without changing the basic configuration program- 7221
     Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management 
-    #Then navigate to offers
-    #Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management 
-    #Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeSMS" offer to Offer Catalogue
-    #Then navigate to landing page
-    #Then navigate to intent management
-    #Then navigate to touchpoints
-    #Then navigate to sms
-    #Then create sms touchpoint from sheet "smsTouchpoint"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management 
+    Then navigate to offers
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management 
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to sms
+    Then create sms touchpoint from sheet "smsTouchpoint"
+    Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
     Then click create program button
@@ -886,5 +886,9 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     Then navigate to programs
     Then choose program from sheet "programdetails"
     Then create new rule from sheet "fullDetails" and list "listname"
-    Then 
+    Then verify rule created from sheet "rule"
+    Then navigate to programs
+    Then choose program from sheet "programdetails"
+    Then create new rule from sheet "fullDetails" and list "listname"
+    Then verify rule created from sheet "rule"
 

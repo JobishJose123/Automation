@@ -1177,7 +1177,8 @@ System.out.println(editname+"program has edited successfully");
 		 
 		 
 	 }
-	   
+	 
+	  
 	   
 	   @Then("^verify edit program page \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
 	public void verify_edit_program_page_from_sheet(String sheet1, String sheet2, String sheet3) throws Throwable {
@@ -1290,6 +1291,16 @@ System.out.println(editname+"program has edited successfully");
 		    filterWorkaround(name);
 		    commonObjects.clickOptionsIcon();
 		    programPage.clickPorogramViewRulesButton();
+		 
+		 
+	 }
+	 
+	 @Then("^verify rule created from sheet \"([^\"]*)\"$")
+	 public void verifyRuleCreatedFromSheet(String sheet) throws InterruptedException {
+		 Thread.sleep(2000);
+		    eh.setExcelFile("ruleInputData",sheet);
+			String name = (String) eh.getCell(1, 0);
+		    programPage.verifyRuleCreatedFromSheet(name);
 		 
 		 
 	 }
