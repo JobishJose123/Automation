@@ -5,7 +5,7 @@
 Feature: Test cases related to Broadcast Management
 
 @NX-505 
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Create BC-Details tab: Verify Create New BC lands in the details tab.
 Given login
 Then navigate to configuration management
@@ -29,15 +29,15 @@ Then navigate to configuration management
     Then click on create new ofer button
     Then create new offer from sheet "rechargeWAP" with product "fullDetails"
     Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "rechargeWAP" offer to Offer Catalogue
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then check if create new bc lands in details tab
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then check if create new bc lands in details tab
 
 @NX-517 
 @initBrowser @closeBrowser
@@ -204,18 +204,56 @@ Then click create new broadcast button
 Then navigate to broadcast target condition
 Then verify adding target condition with and condition
 
-@NX-2050 @closeBrowser
+@NX-2050 
 @initBrowser
 Scenario: Create New Broadcast: Verify the Creation and Activation of One Off Broadcast
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
-#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
 Then activate bc
+
+
+@NX-7612 
+@initBrowser 
+Scenario: To Verify the selected Broadcast can be viewed-7612
+Given login
+Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then activate bc
+    Then verify bc created from sheet "one-offBC"
 
 @NX-2052
 @initBrowser @closeBrowser

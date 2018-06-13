@@ -144,6 +144,16 @@ public class BroadcastSteps extends Init{
 		broadcastPageObjects.clickActivateConfirmYes();
 		Thread.sleep(10000);
     }
+	@Then("^verify bc created from sheet \"([^\"]*)\"$")
+	public void verifyBCFromSheet(String sheet) throws InterruptedException {
+		
+		Thread.sleep(2000);
+	    eh.setExcelFile("bcInputData",sheet);
+		String name = (String) eh.getCell(1, 0);
+		broadcastPageObjects.verifyBCFromSheet(name);
+		
+	}
+	
 	@Then("^verify edit option of bc$")
     public void verifyEditBc() throws Throwable
     {  

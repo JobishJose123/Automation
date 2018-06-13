@@ -1,5 +1,7 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertTrue;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -247,6 +249,13 @@ public class BroadcastPageObjects extends Init {
 	public void clickActivateConfirmYes() throws InterruptedException {
 		jswait.loadClick(activateConfirmYes);
 	}
+	
+	public void verifyBCFromSheet(String name) throws InterruptedException {
+		Thread.sleep(3000);
+		assertTrue(driver.findElement(By.xpath("//data-table-cell[contains(.,'"+name+"')]")).isDisplayed());
+	}
+	
+	
 
 	public void clickActivateButton() throws InterruptedException {
 		jswait.loadClick(activateButtonBc);
