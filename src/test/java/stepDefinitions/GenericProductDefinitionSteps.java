@@ -189,6 +189,16 @@ public class GenericProductDefinitionSteps extends Init{
 		productClassesPageObjects.verifyDefaultValField();
 	}
 	
+	 @Then("^verify attribute created from sheet \"([^\"]*)\"$")
+	 public void verifyAttributeCreatedFromSheet(String sheet) throws InterruptedException {
+		 Thread.sleep(2000);
+		    eh.setExcelFile("attrInputData",sheet);
+			String name = (String) eh.getCell(1, 0);
+			productClassesPageObjects.verifyAttributeCreatedFromSheet(name);
+		 
+		 
+	 }
+	
 	@Then("^choose product class and share from \"([^\"]*)\"$")
 	public void choose_product_class_and_share_from(String sheet) throws Throwable {
 		eh.setExcelFile("productClassInputData",sheet);

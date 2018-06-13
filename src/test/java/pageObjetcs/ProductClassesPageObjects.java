@@ -2,17 +2,23 @@ package pageObjetcs;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.util.Random;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 
 public class ProductClassesPageObjects extends Init{
 	JSWaiter jswait = new JSWaiter();
+	ExcelHelper eh = new ExcelHelper();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	public ProductClassesPageObjects() {
 		PageFactory.initElements(driver, this);
@@ -183,7 +189,28 @@ public class ProductClassesPageObjects extends Init{
 	public void enterAttributeName(String name) throws InterruptedException {
 		jswait.loadSendKeys(addAttributeName, name);
 	}
+	
+	public void enterNumAttributeName() throws InterruptedException, IOException {
+		
+		    eh.setExcelFile("attrInputData", "num");
+		    Random rn = new Random();
+			int  n = rn.nextInt(5000) + 1;
+			String name = (String) eh.getCell(1, 0);
+			name =  name.replaceAll("[0-9]", "")+n;
+	    	eh.setCell(1, 0, name);
+		    jswait.loadSendKeys(addAttributeName, name);
+		    
+	}
 	public void enterAttributeLabel(String label) throws InterruptedException {
+		
+		jswait.loadSendKeys(addAttributeLabel, label);
+	}
+	
+	public void enterNumAttributeLabel() throws InterruptedException {
+		Random rn = new Random();
+		int  n = rn.nextInt(5000) + 1;
+		String label = "label_";
+		label =  label.replaceAll("[0-9]", "")+n;
 		jswait.loadSendKeys(addAttributeLabel, label);
 	}
 	public void enterCreateProductName(String name) throws InterruptedException {
@@ -227,10 +254,10 @@ public class ProductClassesPageObjects extends Init{
 		else if(type=="COMBO")
 			jswait.loadClick(typeCombo);
 	}
-	public void addNumberAttributes() throws InterruptedException {
+	public void addNumberAttributes() throws InterruptedException, IOException {
 		//first attribute
 		clickAddAttribute();
-		enterAttributeName("num");
+		enterNumAttributeName();
 		enterAttributeLabel("NUM");
 		selectType("NUMBER");
 		enterDefaultValue("181");
@@ -238,11 +265,11 @@ public class ProductClassesPageObjects extends Init{
 		clickAddAttributeSave();
 		
 	}
-	public void verifyDefaultValField() throws InterruptedException {
+	public void verifyDefaultValField() throws InterruptedException, IOException {
 		//first attribute
 		clickAddAttribute();
-		enterAttributeName("num");
-		enterAttributeLabel("NUM");
+		enterNumAttributeName();
+		enterNumAttributeLabel();
 		selectType("NUMBER");
 		verifyDefaultValueField();
 		enterDefaultValue("181");
@@ -250,6 +277,11 @@ public class ProductClassesPageObjects extends Init{
 		
 		clickAddAttributeSave();
 		
+	}
+	
+	public void verifyAttributeCreatedFromSheet(String name) throws InterruptedException {
+		Thread.sleep(5000);
+		assertTrue(driver.findElement(By.xpath("//data-table-cell[contains(.,'"+name+"')]")).isDisplayed());
 	}
 	
 	public void checkAttributeField() throws InterruptedException {

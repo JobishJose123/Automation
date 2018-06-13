@@ -221,8 +221,8 @@ Then activate bc
 @NX-7612 
 @initBrowser 
 Scenario: To Verify the selected Broadcast can be viewed-7612
-Given login
-Then navigate to configuration management
+    Given login
+    Then navigate to configuration management
     Then naviagte to product classes
     Then create product class and number attribute from "TestProductClass"
     Then navigate to landing page

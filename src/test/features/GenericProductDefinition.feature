@@ -278,6 +278,7 @@ Feature: generic product class
     Then navigate to configuration management
     Then naviagte to product classes
     Then create product class and number attribute from "TestProductClass"
+    Then verify attribute created from sheet "num"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -289,13 +290,8 @@ Feature: generic product class
     Then navigate to configuration management
     Then naviagte to product classes
     Then create number attribute from "TestProductClass"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then check attribute while editing a product
-    #Then check attribute while creating a product
+    Then verify attribute created from sheet "num"
+    
 
   @NX-7085 @initBrowser 
   Scenario: Verify copying the BC after the product is deactivated- 7085
