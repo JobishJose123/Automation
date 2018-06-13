@@ -147,7 +147,7 @@ public class BroadcastSteps extends Init{
 	@Then("^verify bc created from sheet \"([^\"]*)\"$")
 	public void verifyBCFromSheet(String sheet) throws InterruptedException {
 		
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 	    eh.setExcelFile("bcInputData",sheet);
 		String name = (String) eh.getCell(1, 0);
 		broadcastPageObjects.verifyBCFromSheet(name);

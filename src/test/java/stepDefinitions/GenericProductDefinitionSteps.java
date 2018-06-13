@@ -177,6 +177,18 @@ public class GenericProductDefinitionSteps extends Init{
 		productClassesPageObjects.addNumberAttributes();
 	}
 	
+	@Then("^create number attribute from \"([^\"]*)\"$")
+	public void create_number_attribute_from(String sheet) throws Throwable {
+		eh.setExcelFile("productClassInputData",sheet);
+		String name = (String) eh.getCell(1, 0);
+		Thread.sleep(2000);
+		filterWorkaround(name);
+		commonObjects.clickOptionsIcon();
+		productClassesPageObjects.clickAttributes();
+		//productClassesPageObjects.addNumberAttributes();
+		productClassesPageObjects.verifyDefaultValField();
+	}
+	
 	@Then("^choose product class and share from \"([^\"]*)\"$")
 	public void choose_product_class_and_share_from(String sheet) throws Throwable {
 		eh.setExcelFile("productClassInputData",sheet);

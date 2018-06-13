@@ -252,7 +252,7 @@ public class BroadcastPageObjects extends Init {
 	
 	public void verifyBCFromSheet(String name) throws InterruptedException {
 		Thread.sleep(3000);
-		assertTrue(driver.findElement(By.xpath("//data-table-cell[contains(.,'"+name+"')]")).isDisplayed());
+		assertTrue(driver.findElement(By.xpath("//vaadin-grid-cell-content[contains(.,'"+name+"')]")).isDisplayed());
 	}
 	
 	

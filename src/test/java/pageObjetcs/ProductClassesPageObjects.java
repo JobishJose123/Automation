@@ -1,5 +1,7 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertTrue;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -193,7 +195,9 @@ public class ProductClassesPageObjects extends Init{
 	public void clickCreateProductSaveButton() throws InterruptedException {
 		jswait.loadClick(createProductSaveButton);
 	}
-	
+	public void verifyDefaultValueField() throws InterruptedException {
+		assertTrue(addAttributeDefaultValue.isDisplayed());
+	}
 	
 	public void enterDefaultValue(String def) throws InterruptedException {
 		jswait.loadSendKeys(addAttributeDefaultValue, def);
@@ -233,7 +237,21 @@ public class ProductClassesPageObjects extends Init{
 		Thread.sleep(2000);
 		clickAddAttributeSave();
 		
-	}	 
+	}
+	public void verifyDefaultValField() throws InterruptedException {
+		//first attribute
+		clickAddAttribute();
+		enterAttributeName("num");
+		enterAttributeLabel("NUM");
+		selectType("NUMBER");
+		verifyDefaultValueField();
+		enterDefaultValue("181");
+		Thread.sleep(2000);
+		
+		clickAddAttributeSave();
+		
+	}
+	
 	public void checkAttributeField() throws InterruptedException {
    	 Assert.assertFalse(jswait.checkVisible(AttributeField),"Num field present after deletion");		 
 }

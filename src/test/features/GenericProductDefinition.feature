@@ -246,8 +246,8 @@ Feature: generic product class
   Scenario: Verify the attribute label is displayed when the  product is expanded NX-7109
     Then check previous step and pass this
 
-  @NX-7015 @initBrowser @closeBrowser
-  Scenario: Verify deletion of attributes from the product class- 7015
+  @NX-7015 @NX-7014 @initBrowser @closeBrowser
+  Scenario: Verify deletion of attributes from the product class
     Given login
     Then navigate to configuration management
     Then naviagte to product classes
@@ -270,6 +270,32 @@ Feature: generic product class
     Then navigate to product class "TestProductClass"
     Then check attribute while editing a product
     Then check attribute while creating a product
+    
+    
+    @NX-7016 @initBrowser 
+    Scenario: Verify whether default value is asked when new attributes are added after some products are already created
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create number attribute from "TestProductClass"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to products
+    #Then navigate to product class "TestProductClass"
+    #Then check attribute while editing a product
+    #Then check attribute while creating a product
 
   @NX-7085 @initBrowser 
   Scenario: Verify copying the BC after the product is deactivated- 7085
