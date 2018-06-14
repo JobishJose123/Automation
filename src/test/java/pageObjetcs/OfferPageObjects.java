@@ -76,6 +76,9 @@ public class OfferPageObjects extends Init {
 	private WebElement cancelOfferButton;
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]/..//input")
 	private WebElement rewardTypeInputField;
+//	@FindBy(xpath = ".//rewards-container//paper-button[contains(.,'Add')]")
+//	private WebElement rewardAddButton;
+	
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item")
 	private WebElement rewardTypeAnySelector;
 	@FindBy(xpath = "//label[contains(@class,'style-scope paper-input') and contains(text(),'Source')]/..//input")
@@ -140,6 +143,9 @@ public class OfferPageObjects extends Init {
 	private WebElement removeCreativeButton;
 	@FindBy(xpath = ".//paper-listbox[@id='langDrop']/paper-item")
 	private List<WebElement> creativeLanguagesList;
+	
+	@FindBy(xpath="//div[contains(text(),'Rewards')]")
+	private WebElement rewards;
 
 	@FindBy(xpath = "//span[text()='Offer Details']/..")
 	private WebElement detailsTab;
@@ -880,6 +886,13 @@ public class OfferPageObjects extends Init {
 	public void clickRewardTypeInputField() throws InterruptedException {
 		jswait.loadClick(rewardTypeInputField);
 	}
+//	public void clickRewardAddButton() throws InterruptedException {
+//		jswait.loadClick(rewardAddButton);
+//	}
+//	
+	public void enterReward() throws InterruptedException {
+		jswait.loadSendKeys(rewardTypeInputField, "Selenium_reward");
+	}
 
 	public void clickRewardTypeAny() throws InterruptedException {
 		jswait.loadClick(rewardTypeAnySelector);
@@ -1159,6 +1172,49 @@ public class OfferPageObjects extends Init {
 		}
 
 	}
+	
+	public void enterOfferDetailsFromSheetAndCheckRewardsDropDown(String sheet, String productSheet) throws Throwable {
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
+		// ******************Products tab*****************:
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+
+		// ******************Creative tab*****************:
+		enterCreativeTabDetails(eh);
+		clickProceedButton();
+		Thread.sleep(3000);
+
+		// ******************Track tab*****************:
+		enterTrackTabDetails(eh);
+		createFirstDefaultTrackingRuleCondition();
+		clickProceedButton();
+
+		// ******************Rewards tab*****************:
+		    clickRewardAddButton();
+			clickRewardTypeInputField();
+			enterReward();
+			
+		
+
+	}
+	public void verifyRewardTypeField() throws InterruptedException {
+		Thread.sleep(2000);
+		assertTrue(driver.findElement(By.xpath(".//vaadin-combo-box-item[contains(.,'Selenium_reward')]")).isDisplayed());
+	}
+	
+	
+	
+	
 
 	public void enterTrackTabDetails(ExcelHelper eh) throws InterruptedException {
 		if (!eh.getCell(1, 2).toString().contains("Informational")) {
@@ -1195,6 +1251,17 @@ public class OfferPageObjects extends Init {
 		clickCreateNewOfferButton();
 		enterOfferDetailsFromSheet(sheet, productSheet);
 		clickSaveOfferButton();
+	}
+	
+	public void createOfferAndCheckRewardsDropDown(String sheet, String productSheet) throws Throwable {
+		clickCreateNewOfferButton();
+		enterOfferDetailsFromSheetAndCheckRewardsDropDown(sheet, productSheet);
+		verifyRewardTypeField();
+		
+	}
+	
+	public void navigateToRewards() throws InterruptedException {
+		jswait.loadClick(rewards);
 	}
 
 	public String getDetailsTabColour() {

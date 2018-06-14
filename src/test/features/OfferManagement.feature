@@ -566,15 +566,35 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then enter details for new broadcast from sheet "informationalBC" with "informationalWAP"
     
-     #@NX-4513 @initBrowser 
-  #Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
-    #Given login
-    #Then navigate to configuration management
-    #Then navigate to rewards
-    #Then create new reward type
-    
-    @NX-4513 @initBrowser 
-  Scenario: create alertff
+     @NX-4513 @initBrowser 
+    Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
     Given login
-    Then create alert
+    Then navigate to configuration management
+    Then navigate to rewards
+    Then create new reward type
+    
+    
+    #@NX-4513 @initBrowser 
+    #Scenario: create alertff
+    #Given login
+    #Then create alert
+    
+    
+    @NX-7307 @initBrowser 
+    Scenario: Verify whether Reward attributes have searchable drop downs
+    Given login
+    Then navigate to configuration management
+    Then navigate to rewards
+    Then create new reward type
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to prepaid telecom
+    Then click create new product button
+    Then create single product from sheet "singleProductPage"
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeSMS" with product "singleProductPage" and verify rewards dropdown field
+    
     

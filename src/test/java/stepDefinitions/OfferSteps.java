@@ -47,6 +47,16 @@ public class OfferSteps extends Init {
 	public void create_new_Offer(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.createOffer(sheet, productSheet);
 	}
+	
+	@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\" and verify rewards dropdown field$")
+	public void create_new_OfferAndCheckRewardsDropDown(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.createOfferAndCheckRewardsDropDown(sheet, productSheet);
+	}
+	
+//	@Then("^naviagte to rewards")
+//	public void navigateToProductClasses() throws InterruptedException {
+//		offerPageObjects.navigateToRewards();
+//	}
 
 	@Then("^verify \"([^\"]*)\" offer in grid$")
 	public void verifyOfferInGrid(String sheet) throws Throwable {
@@ -724,15 +734,15 @@ public class OfferSteps extends Init {
 	}
 	@Then("^create new reward type$")
 	public void createNewRewardType() throws Throwable {
-//		rewardTypePage.clickCreateNewRewardTypeButton();
-//		rewardTypePage.enterCreateRewardName("Selenium_reward");
-//		rewardTypePage.enterCreateRewardDescription("desc_for reward created using sekenium");
-//		rewardTypePage.selectFirstCreateRewardFlowClass();
-//		rewardTypePage.clickCreateRewardSaveButton();
-		commonObjects.filterName("Selenium_reward");
-		rewardTypePage.expandReward("Selenium_reward");
-		rewardTypePage.createRewardParameters("Text", "text", "TEXT");
-		Thread.sleep(2000);
+		rewardTypePage.clickCreateNewRewardTypeButton();
+		rewardTypePage.enterCreateRewardName("Selenium_reward");
+		rewardTypePage.enterCreateRewardDescription("desc_for reward created using sekenium");
+		rewardTypePage.selectFirstCreateRewardFlowClass();
+		rewardTypePage.clickCreateRewardSaveButton();
+//		commonObjects.filterName("Selenium_reward");
+//		rewardTypePage.expandReward("Selenium_reward");
+//		rewardTypePage.createRewardParameters("Text", "text", "TEXT");
+//		Thread.sleep(2000);
 	}
 //	@Then("^create alert$")
 //	public void createAlert() throws Throwable {
