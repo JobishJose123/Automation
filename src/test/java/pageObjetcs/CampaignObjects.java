@@ -1,5 +1,7 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Calendar;
 
 import org.openqa.selenium.By;
@@ -61,6 +63,9 @@ public class CampaignObjects extends Init{
 	private WebElement campaignTemplatesTab;
 	@FindBy(xpath="//paper-button[contains(.,'Create Campaign template')]")
 	private WebElement createCampaignTemplateButton;
+	@FindBy(xpath=".//span[contains(.,'Oops! This name already exists. Try another name for the new Campaign.')]")
+	private WebElement DuplicateCampaignNameToast;
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -125,7 +130,11 @@ public class CampaignObjects extends Init{
 	public void clickSaveCampaignButton() throws InterruptedException {
 		jswait.loadClick(saveCampaignButton);
 	}
-
+	
+	public void verifyDuplicateCampaignNameToast() throws InterruptedException {
+		assertTrue(DuplicateCampaignNameToast.isDisplayed());
+	}
+	
 	public void clickProceedButton() throws InterruptedException {
 		jswait.loadClick(proceedButton);
 	}

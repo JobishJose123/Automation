@@ -4,7 +4,7 @@
 Feature: campaign management
 
   #########################recurring bc
-  @NX-CampaignCreation @initBrowser
+  @NX-1777 @initBrowser
   Scenario: create a campaign
     Given login
     Then navigate to configuration management
@@ -15,3 +15,16 @@ Feature: campaign management
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    
+    @NX-1560 @initBrowser
+  Scenario: Create Campaign: Verify adding the campaign with duplicate name- 1560
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then create duplicate campaign from sheet "campaignBC" with catalog "defaultCatalog"

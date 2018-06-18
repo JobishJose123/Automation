@@ -88,6 +88,29 @@ public class CampaignManagement extends Init{
 	 		dt.gteDateTime();
 	    	 Thread.sleep(2000);
 	    }
+	 
+	 @Then("^create duplicate campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+	    public void create_duplicate_campaign(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 	    //Random rn = new Random();
+	 		//int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		//name =  name.replaceAll("[0-9]", "")+n;
+	 		eM.setCell(1, 0, name);
+	 		campaignObjects.clickCreateNewCampaignButton();
+	 		campaignObjects.createCampaign(name, catalog);
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	 Thread.sleep(2000);
+	    	 campaignObjects.verifyDuplicateCampaignNameToast();
+	    
+	    }
 	 @Then("^navigate to life cycle marketing$")
 		public void naviagte_to_life_cycle_marketing() throws Exception
 		{
