@@ -720,6 +720,7 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		clickCreateNewTouchpoint();
 		enterSmsTouchpointDetails(keyword);
 		smsClickSave();
+		Thread.sleep(3000);
 	}
 	public String getSmsFormHeading() throws InterruptedException {
 		Exception wrongForm = new Exception("wrong form displayed");
