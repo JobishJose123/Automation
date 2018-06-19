@@ -566,13 +566,6 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then enter details for new broadcast from sheet "informationalBC" with "informationalWAP"
     
-     @NX-4513 @initBrowser 
-    Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
-    Given login
-    Then navigate to configuration management
-    Then navigate to rewards
-    Then create new reward type
-    
     
     #@NX-4513 @initBrowser 
     #Scenario: create alertff
@@ -596,5 +589,26 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "rechargeSMS" with product "singleProductPage" and verify rewards dropdown field
+    
+    @checkRewardType
+     @NX-4513 @initBrowser 
+  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+    Given login
+    Then navigate to configuration management
+    Then navigate to rewards
+    Then create new reward type
+    Then verify created reward type
+    @NX-4513
+  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+    Then edit reward parameter
+    @NX-4513
+  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+    Then delete reward parameter
+    @NX-4513
+  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+    Then edit created reward type
+    @NX-4513 @closeBrowser
+  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+    Then delete created reward type
     
     

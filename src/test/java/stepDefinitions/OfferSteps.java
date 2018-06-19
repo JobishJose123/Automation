@@ -739,11 +739,60 @@ public class OfferSteps extends Init {
 		rewardTypePage.enterCreateRewardDescription("desc_for reward created using sekenium");
 		rewardTypePage.selectFirstCreateRewardFlowClass();
 		rewardTypePage.clickCreateRewardSaveButton();
+		commonObjects.filterName("Selenium_reward");
+		rewardTypePage.expandReward("Selenium_reward");
+		rewardTypePage.createRewardParameters("Text", "text", "TEXT","1");
+		rewardTypePage.createRewardParameters("Number", "number", "NUMBER","2");
+		rewardTypePage.createRewardParameters("Single Select", "singleSelect", "SINGLE_SELECT","3");
+		Thread.sleep(2000);
+	}
+	@Then("^verify created reward type$")
+	public void verifyCreatedRewardParameters() throws Throwable {
+		jswait.waitUntil(".//*[@id='rewardParamGrid']//data-table-cell[contains(.,'Text')]/../..//data-table-cell[3][contains(.,'Text')]/../..//data-table-cell[4][contains(.,'Yes')]/../..//data-table-cell[5][contains(.,'Yes')]/../..//data-table-cell[6][contains(.,'No')]/../..//data-table-cell[7][contains(.,'Yes')]/../..//data-table-cell[8][contains(.,'1')]/../..//data-table-cell[9][contains(.,'defaultValue')]");
+		jswait.waitUntil(".//*[@id='rewardParamGrid']//data-table-cell[contains(.,'Number')]/../..//data-table-cell[3][contains(.,'Number')]/../..//data-table-cell[4][contains(.,'Yes')]/../..//data-table-cell[5][contains(.,'Yes')]/../..//data-table-cell[6][contains(.,'No')]/../..//data-table-cell[7][contains(.,'No')]/../..//data-table-cell[8][contains(.,'2')]/../..//data-table-cell[9][contains(.,'defaultValue')]");
+		jswait.waitUntil(".//*[@id='rewardParamGrid']//data-table-cell[contains(.,'Single Select')]/../..//data-table-cell[3][contains(.,'Single Select')]/../..//data-table-cell[4][contains(.,'No')]/../..//data-table-cell[5][contains(.,'Yes')]/../..//data-table-cell[6][contains(.,'No')]/../..//data-table-cell[7][contains(.,'No')]/../..//data-table-cell[8][contains(.,'3')]/../..//data-table-cell[9][contains(.,'defaultValue')]");
+	}
+	@Then("^edit created reward type$")
+	public void editCreatedReward() throws Throwable {
+		rewardTypePage.editReward("Selenium_reward","Edited191817");
+		commonObjects.filterName("Edited191817");
+	}
+	@Then("^delete created reward type$")
+	public void deleteCreatedReward() throws Throwable {
+		rewardTypePage.deleteReward("Edited191817");
+		try {
+			Exception e = new Exception("Reward not deleted successfully");
+			commonObjects.filterName("Edited191817");
+			rewardTypePage.expandReward("Edited191817");
+			throw e;
+		}catch(Exception e) {
+			
+		}
+	}
+	@Then("^edit reward parameter$")
+	public void editRewardParameters() throws Throwable {
+		rewardTypePage.editFirstParameter();
+		jswait.waitUntil(".//*[@id='rewardParamGrid']//data-table-cell[contains(.,'Edited616263')]/../..//data-table-cell[3][contains(.,'Text')]/../..//data-table-cell[4][contains(.,'Yes')]/../..//data-table-cell[5][contains(.,'Yes')]/../..//data-table-cell[6][contains(.,'No')]/../..//data-table-cell[7][contains(.,'Yes')]/../..//data-table-cell[8][contains(.,'1')]/../..//data-table-cell[9][contains(.,'defaultValue')]");
+	}
+	@Then("^delete reward parameter$")
+	public void deleteRewardParameters() throws Throwable {
+		rewardTypePage.deleteFirstParameter();
+		rewardTypePage.deleteFirstParameter();
+		rewardTypePage.deleteFirstParameter();
+	}
+
+//	@Then("^create new reward type$")
+//	public void createNewRewardType() throws Throwable {
+//		rewardTypePage.clickCreateNewRewardTypeButton();
+//		rewardTypePage.enterCreateRewardName("Selenium_reward");
+//		rewardTypePage.enterCreateRewardDescription("desc_for reward created using sekenium");
+//		rewardTypePage.selectFirstCreateRewardFlowClass();
+//		rewardTypePage.clickCreateRewardSaveButton();
 //		commonObjects.filterName("Selenium_reward");
 //		rewardTypePage.expandReward("Selenium_reward");
 //		rewardTypePage.createRewardParameters("Text", "text", "TEXT");
 //		Thread.sleep(2000);
-	}
+//	}
 //	@Then("^create alert$")
 //	public void createAlert() throws Throwable {
 //		JavaScriptExecutor je = new JavaScriptExecutor();

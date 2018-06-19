@@ -54,12 +54,14 @@ public class RewardTypePage extends Init{
 	private WebElement rewardParameterHiddenCheckbox;
 	@FindBy(xpath=".//*[@id='newParamDialog']//paper-button[contains(.,'Save')]")
 	private WebElement rewartdParameterSaveButton;
-//	@FindBy(xpath="")
-//	private WebElement partnerOption;
-//	@FindBy(xpath="")
-//	private WebElement partnerOption;
-//	@FindBy(xpath="")
-//	private WebElement partnerOption;
+	@FindBy(xpath=".//*[@id='rewardParamGrid']//paper-icon-button[@icon='delete']")
+	private WebElement rewardParameterDelete;
+	@FindBy(xpath="//*[@id='rewardParamGrid']//paper-icon-button[@icon='create']")
+	private WebElement rewardParameterEdit;
+	@FindBy(xpath=".//*[@id='deleteRewardParam']//paper-button[2]")
+	private WebElement rewardParameterDeleteConfirmYes;
+	@FindBy(xpath=".//*[@id='deleteReward']//paper-button[2]")
+	private WebElement rewardDeleteConfirmYes;
 //	@FindBy(xpath="")
 //	private WebElement partnerOption;
 //	@FindBy(xpath="")
@@ -106,6 +108,11 @@ public class RewardTypePage extends Init{
 	public void expandReward(String reward) throws InterruptedException{
 		jswait.loadClick("//span[contains(.,'"+reward+"')]/..");
 	}
+	public void deleteReward(String reward) throws InterruptedException{
+		jswait.loadClick("//span[contains(.,'"+reward+"')]/../..//paper-icon-button[1]");
+		jswait.loadClick(rewardDeleteConfirmYes);
+	}
+	
 	public void clickCreateRewardSaveButton() throws InterruptedException{
 		jswait.loadClick(createRewardSaveButton);
 	}
@@ -120,21 +127,39 @@ public class RewardTypePage extends Init{
 		jswait.loadClick(createRewardFlowClassDropDown);
 		jswait.loadClick(createRewardFlowClassSelectFirst);
 	}
-	public void createRewardParameters(String displayName,String parameterName,String type) throws InterruptedException{
+	public void createRewardParameters(String displayName,String parameterName,String type,String order) throws InterruptedException{
 		jswait.loadClick(createNewRewardParameterButton);
 		jswait.loadSendKeys(rewardParameterDisplayName, displayName);
 		jswait.loadSendKeys(rewardParameterName, parameterName);
 		jswait.loadClick(rewardParameterTypeDropDown);
 		if(type.contains("SINGLE_SELECT"))
 			jswait.loadClick(rewardParameterTypeSingleSelect);
-		else if(type.contains("NUMBER"))
+		else if(type.contains("NUMBER")) {
 			jswait.loadClick(rewardParameterTypeNumber);
-		else if(type.contains("TEXT"))
+			jswait.loadClick(rewardParameterMandatoryCheckbox);
+		}
+		else if(type.contains("TEXT")) {
 			jswait.loadClick(rewardParameterTypeText);
-		jswait.loadSendKeys(rewardParameterUIOrder, "1");
+			jswait.loadClick(rewardParameterMandatoryCheckbox);
+			jswait.loadClick(rewardParameterHiddenCheckbox);
+		}
+		jswait.loadSendKeys(rewardParameterUIOrder, order);
 		jswait.loadSendKeys(rewardParameterDefaultValue, "defaultValue");
 		jswait.loadClick(rewartdParameterSaveButton);
 	}
-	
+	public void deleteFirstParameter() throws InterruptedException{
+		jswait.loadClick(rewardParameterDelete);
+		jswait.loadClick(rewardParameterDeleteConfirmYes);
+	}
+	public void editFirstParameter() throws InterruptedException{
+		jswait.loadClick(rewardParameterEdit);
+		jswait.loadSendKeys(rewardParameterDisplayName, "Edited616263");
+		jswait.loadClick(rewartdParameterSaveButton);
+	}
+	public void editReward(String reward,String newName) throws InterruptedException{
+		jswait.loadClick("//span[contains(.,'"+reward+"')]/../..//paper-icon-button[2]");
+		jswait.loadSendKeys(createRewardName, newName);
+		jswait.loadClick(createRewardSaveButton);
+	}
 
 }
