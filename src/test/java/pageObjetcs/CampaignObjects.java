@@ -32,6 +32,8 @@ public class CampaignObjects extends Init{
 	private WebElement createNewBroadcastButton;
 	@FindBy(xpath="//paper-button[contains(.,'Create New Campaign')]")
 	private WebElement createNewCampaignButton;
+	@FindBy(xpath="//paper-button[contains(.,'Create Campaign template')]")
+	private WebElement createNewTemplateButton;
 	@FindBy(xpath="//label[contains(.,'Type')]/../input")
 	private WebElement typeSelector;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Informational')]")
@@ -106,6 +108,7 @@ public class CampaignObjects extends Init{
 	}
 	public void clickCampaignTemplateTab() throws InterruptedException {
 		jswait.loadClick(campaignTemplatesTab);
+		
 	}
 	public void clickCreateCampaignTemplateButton() throws InterruptedException {
 		jswait.loadClick(createCampaignTemplateButton);
@@ -144,6 +147,9 @@ public class CampaignObjects extends Init{
 	public void clickCreateNewCampaignButton() throws InterruptedException {
 		jswait.loadClick(createNewCampaignButton);
 	}
+	public void clickCreateNewTemplateButton() throws InterruptedException {
+		jswait.loadClick(createNewTemplateButton);
+	}
 	public void clickTypeSelector() throws InterruptedException {
 		jswait.loadClick(typeSelector);
 	}
@@ -176,15 +182,24 @@ public class CampaignObjects extends Init{
 		enterCampaignDescription("Campaign to check bc craetion in selenium");
 		selectOfferCatalog(catalog);
 	}
+	
+	public void enterTemplateDeails(String name) throws InterruptedException {
+		selectTypeInformational();
+		enterCampaignName(name);
+		enterCampaignDescription("Campaign to check bc craetion in selenium");
+		
+	}
 	public void scrollToCampaignCategory(String name) throws Exception {
 		jswait.scrollAndClick("//campaign-category-chart", "//div[text()='"+name+"']");
 	}
+	
+	
+	
+	
 	public void scrollToViewCampaignCategory(String name) throws Exception {
 		jswait.scrollIntoView("//campaign-category-chart", "//div[text()='"+name+"']");
 	}
 	public void createCampaignTemplate(String name) throws InterruptedException {
-		clickCampaignTemplateTab();
-		clickCreateCampaignTemplateButton();
 		enterCampaignTemplateName(name);
 		enterCampaignDescription("Desc for Template");
 		clickProceedButton();
@@ -193,6 +208,13 @@ public class CampaignObjects extends Init{
 		targetConditionObjects.clickBasicTargetConditionWithAge();
 		clickSaveCampaignTemplate();
 	}
+	
+	public void VerifyTemplateCreated(String name) throws InterruptedException {
+		assertTrue(driver.findElement(By.xpath(".//data-table-cell[contains(.,'"+name+"')]")).isDisplayed());
+	
+	}
+	
+	
 	public void createCampaign(String name,String catalog) throws InterruptedException {
 		enterCampaignDeails(name,catalog);
 		clickProceedButton();
@@ -230,6 +252,45 @@ public class CampaignObjects extends Init{
          wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
          clickSaveCampaignButton();
 	}
+/*	
+	public void createCampaignTemplate(String name,String catalog) throws InterruptedException {
+		enterTempalteDeails(name,catalog);
+		clickProceedButton();
+		targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickBasicTargetConditionWithAge();
+		clickProceedButton();
+		 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='router']/app-route[9]/campaign-form/wizard-tab/div/iron-pages/campaign-schedule/form/paper-card/paper-date-time-input/div/paper-input[2]/paper-input-container/div[2]"))).click();
+    	 Thread.sleep(1000);
+    	 Calendar rightNow =Calendar.getInstance();
+    	 int hours = rightNow.get(Calendar.HOUR);
+    	 int min = rightNow.get(Calendar.MINUTE);
+    	 int am_pm = rightNow.get(Calendar.AM_PM);
+    	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+    	 int year = rightNow.get(Calendar.YEAR);
+    	 int month = rightNow.get(Calendar.MONTH)+1;
+    	 min+=2;
+    	 int rem = min%5;
+    	 rem = 5-rem;
+    	 min+=rem;
+    	 if(min>59){
+    		 min-=60;
+    		 hours++;
+    	 }
+    	 Actions builder = new Actions(driver);
+    	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+         builder.moveToElement(num).click().build().perform();
+         Thread.sleep(2000);
+    	 WebElement num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+         builder.moveToElement(num1).click().build().perform();
+         if(am_pm==0)
+        	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[1]"))).click();
+         else
+        	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[2]"))).click();
+         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
+         clickSaveCampaignButton();
+	}  */
+	
 //	public void navigateToPrograms() throws InterruptedException {
 //				eh.setExcelFile("productClassInputData",sheet);
 //	Actions clickAction = new Actions(driver);

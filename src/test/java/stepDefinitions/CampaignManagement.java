@@ -89,6 +89,39 @@ public class CampaignManagement extends Init{
 	    	 Thread.sleep(2000);
 	    }
 	 
+	 
+	 @Then("^create new template from sheet \"([^\"]*)\"$")
+	    public void create_new_template(String sheet) throws Throwable
+	    {
+	    	
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignTemplateInputData",sheet);
+	 	    Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eM.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eM.setCell(1, 0, name);
+	 		campaignObjects.clickCreateNewTemplateButton();
+	 		campaignObjects.createCampaignTemplate(name);
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	 Thread.sleep(2000);
+	    }
+	 
+	 @Then("^verify template created from sheet \"([^\"]*)\"$")
+	    public void VerifyTemplateCreated(String sheet) throws Throwable
+	    {
+	    	
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignTemplateInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		campaignObjects.VerifyTemplateCreated(name);
+	    	 Thread.sleep(2000);
+	    }
+	 
+	 
+	 
+	 
 	 @Then("^create duplicate campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
 	    public void create_duplicate_campaign(String sheet, String catalogSheet) throws Throwable
 	    {
@@ -160,6 +193,15 @@ public class CampaignManagement extends Init{
 	    	String name = (String) eM.getCell(1, 0);
 	    	campaignObjects.scrollToCampaignCategory(name);
 	    }
+	    
+	    @Then("^navigate to templates tab$")
+	    public void navigate_to_templates_tab() throws Throwable {
+	    	
+	    	campaignObjects.clickCampaignTemplateTab();
+	    	Thread.sleep(2000);
+	    }
+	    
+	    
 	    @Then("^create new campaign category without adding name$")
 	    public void createCampaignCategoryWithoutName() throws Throwable {
 	    	campaignObjects.createNewCampaignCategory("");
