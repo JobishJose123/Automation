@@ -590,7 +590,6 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     Then navigate to offers
     Then create new offer from sheet "rechargeSMS" with product "singleProductPage" and verify rewards dropdown field
     
-    @checkRewardType
      @NX-4513 @initBrowser 
   Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
     Given login
