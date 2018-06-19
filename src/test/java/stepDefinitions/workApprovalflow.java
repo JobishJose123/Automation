@@ -66,8 +66,12 @@ public class workApprovalflow extends Init{
     	
     	approvalPageObjects.createNewApprovalRule(sheet);
 	}
-	
-	
+    
+    @Then("^editApprovalRuleDetailsFromSheet \"([^\"]*)\"$")
+	public void editApprovalRuleDetailsFromSheet(String sheet) throws Throwable {
+    	
+    	approvalPageObjects.editApprovalRuleDetailsFromSheet(sheet);
+	}
 	
 	
 	

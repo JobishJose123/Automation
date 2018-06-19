@@ -22,6 +22,7 @@ import baseClasses.JSWaiter;
 public class WorkApprovalObjects extends Init{
 
 	private static final Exception Exception = null;
+	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -48,11 +49,14 @@ public class WorkApprovalObjects extends Init{
 	private WebElement addUserButton;
 	@FindBy(xpath = ".//div[@class='heading layout horizontal justified style-scope create-approval-rule']//h4[contains(.,'Untitled Rule')]//paper-icon-button")
 	private WebElement editRuleNameButton;
+	@FindBy(xpath = ".//div[@class='layout horizontal center end-justified style-scope create-approval-rule']//paper-icon-button[@title='Save']")
+	private WebElement saveRuleName;
+	
 	@FindBy(xpath = ".//div[@class='heading layout horizontal justified style-scope create-approval-rule']//input/../input")
 	private WebElement addApprovalRuleName;
 	@FindBy(xpath = "//label[contains(.,'Select required')]/../input")
 	private WebElement addUserField;
-	@FindBy(xpath = "//paper-item[contains(.,'ashitha.george@flytxt.com')]")
+	@FindBy(xpath = "//paper-item[contains(.,'syam.krishna@flytxt.com')]")
 	private WebElement ruleUserName;
 	@FindBy(xpath = "//paper-item[contains(.,'Recharge')]")
 	private WebElement ruleCategory;
@@ -66,13 +70,16 @@ public class WorkApprovalObjects extends Init{
 	private List <WebElement> checkboxes;
 	@FindBy(xpath = "//paper-button[contains(.,'Add Category')]")
 	private WebElement addCategoryButton;
-	@FindBy(xpath = ".//div[@class='input-content label-is-floating style-scope paper-input-container']//iron-icon")
+//	@FindBy(xpath = ".//div[@class='input-content label-is-floating style-scope paper-input-container']//iron-icon")
+//	private WebElement addCategoryDropdown;
+	@FindBy(xpath = ".//label[contains(.,'Select required campaign categories')]//following::iron-icon[1]")
 	private WebElement addCategoryDropdown;
 	@FindBy(xpath = ".//span[contains(.,'Add Category')]")
 	private WebElement paperDialogBox;
 	
 	
-
+	@FindBy(xpath = ".//label[contains(.,'Select required campaign categories')]//following::input[1]")
+	private WebElement cataloginput;
 	
 	
 	
@@ -98,14 +105,53 @@ public class WorkApprovalObjects extends Init{
 		
 		clickEditRuleNameButton();
 		enterRuleName(sheet);
+		saveRuleName();
 		clickAddUserButton();
 		enterLevel1User();
 		chooseLevel1User();
 		clickAddUserNameSave();
 		clickCheckboxes();
 		clickAddCategoryButton();
+		cataloginput();
+		Thread.sleep(2000);
 		enterCategory();
+		Thread.sleep(2000);
 		chooseCategory();
+		Thread.sleep(2000);
+		clickAddCategorySave();
+		clickApprovalRuleSave();
+		
+	}
+	
+	
+	
+public void editApprovalRuleDetailsFromSheet(String sheet) throws Throwable {
+	eh.setExcelFile("appRuleInputData", sheet);
+  	String name = (String) eh.getCell(1, 0);
+	Thread.sleep(9000);
+	filterWorkaround(name);
+	Thread.sleep(9000);
+	commonObjects.clickOptionsIcon();
+	commonObjects.clickEditOption();
+	Thread.sleep(5000);
+	driver.findElement(By.xpath("//div[@class='heading layout horizontal justified style-scope create-approval-rule']//h4[contains(.,'"+name+"')]//paper-icon-button")).click();
+	
+	Thread.sleep(2000);
+		//clickEditRuleNameButton();
+		editRuleName(name);
+		saveRuleName();
+		clickAddUserButton();
+		enterLevel1User();
+		chooseLevel1User();
+		clickAddUserNameSave();
+		clickCheckboxes();
+		clickAddCategoryButton();
+		cataloginput();
+		Thread.sleep(2000);
+		enterCategory();
+		Thread.sleep(2000);
+		chooseCategory();
+		Thread.sleep(2000);
 		clickAddCategorySave();
 		clickApprovalRuleSave();
 		
@@ -114,6 +160,36 @@ public class WorkApprovalObjects extends Init{
 	public void clickAddUserButton() throws InterruptedException {
 		jswait.loadClick(addUserButton);
 	}
+	
+	public void filterWorkaround(String name) throws InterruptedException {
+		  commonObjects.clickFilterIcon();                            //issue in filter
+		  commonObjects.clickFilterResetButton();      //issue in filter
+		  commonObjects.filterName(name);
+		 }
+	
+	
+	public void cataloginput() throws InterruptedException {
+				
+		String sheet="campaignCategory";
+		eh.setExcelFile("campaignCategoryInputData", sheet);
+	    
+		String name = (String) eh.getCell(1, 0);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(cataloginput, name);
+	}
+	
+	
+	public void chooseCategory() throws InterruptedException {
+		String sheet="campaignCategory";
+		eh.setExcelFile("campaignCategoryInputData", sheet);
+	    
+		String name = (String) eh.getCell(1, 0);
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item[contains(.,'"+name+"')]")).click();
+		Thread.sleep(2000);
+	}
+	
 	
 	public void clickAddCategoryButton() throws InterruptedException {
 		jswait.loadClick(addCategoryButton);
@@ -126,6 +202,19 @@ public class WorkApprovalObjects extends Init{
 	public void clickEditRuleNameButton() throws InterruptedException {
 		jswait.loadClick(editRuleNameButton);
 	}
+	public void saveRuleName() throws InterruptedException {
+		jswait.loadClick(saveRuleName);
+	}
+	
+	public void editRuleName(String name) throws InterruptedException, IOException {
+		
+	
+		name=("edit"+name);
+ 	    eh.setCell(1, 0, name);
+ 	    addApprovalRuleName.clear();
+	    jswait.loadSendKeys(addApprovalRuleName, name);
+	}
+	
 	
 	public void enterRuleName(String sheet) throws InterruptedException, IOException {
 		
@@ -139,11 +228,14 @@ public class WorkApprovalObjects extends Init{
 	    jswait.loadSendKeys(addApprovalRuleName, name);
 	}
 	public void enterLevel1User() throws InterruptedException {
-		jswait.loadSendKeys(addUserField, "ash");
+		jswait.loadSendKeys(addUserField, "syam.krishna@flytxt.com");
 		Thread.sleep(2000);
 	}
 	public void enterCategory() throws InterruptedException {
+		Thread.sleep(2000);
 		jswait.loadClick(addCategoryDropdown);
+//		Thread.sleep(2000);
+//		jswait.loadClick(addCategoryDropdown);
 		
 	}
 	
@@ -156,11 +248,7 @@ public class WorkApprovalObjects extends Init{
 		jswait.loadClick(ruleUserName);
 		Thread.sleep(2000);
 	}
-	public void chooseCategory() throws InterruptedException {
-		jswait.loadClick(ruleCategory);
-		jswait.loadClick(paperDialogBox);
-		Thread.sleep(2000);
-	}
+	
 	public void clickAddUserNameSave() throws InterruptedException {
 		jswait.loadClick(addUserSave);
 		Thread.sleep(2000);
@@ -180,6 +268,7 @@ public class WorkApprovalObjects extends Init{
 			}
 		}
 	}
+	
 	
 
 	
