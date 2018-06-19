@@ -67,6 +67,11 @@ public class CampaignObjects extends Init{
 	private WebElement createCampaignTemplateButton;
 	@FindBy(xpath=".//span[contains(.,'Oops! This name already exists. Try another name for the new Campaign.')]")
 	private WebElement DuplicateCampaignNameToast;
+	@FindBy(xpath = ".//div[@id='trigger']//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
+	private WebElement optionsIcon;
+	
+	@FindBy(xpath = "//paper-item[@class='campaign-list style-scope x-scope paper-item-1' and contains(.,'Edit')]")
+	private WebElement optionsEdit;
 	
 //	@FindBy(xpath="")
 //	private WebElement ;
@@ -173,6 +178,9 @@ public class CampaignObjects extends Init{
 		clickTypeSelector();
 		clickTypeInformational();
 	}
+	public void clickEditOption() throws InterruptedException {
+		jswait.loadClick(optionsEdit);
+	}
 	public void navigateToLIfeCycleMarketing() throws InterruptedException {
 		jswait.loadClick(lifeCycleMarketing);
 	}
@@ -193,6 +201,10 @@ public class CampaignObjects extends Init{
 		jswait.scrollAndClick("//campaign-category-chart", "//div[text()='"+name+"']");
 	}
 	
+	public void clickOptionsIcon() throws InterruptedException {
+		jswait.loadClick(optionsIcon);
+	}
+	
 	
 	
 	
@@ -211,6 +223,7 @@ public class CampaignObjects extends Init{
 	
 	public void VerifyTemplateCreated(String name) throws InterruptedException {
 		assertTrue(driver.findElement(By.xpath(".//data-table-cell[contains(.,'"+name+"')]")).isDisplayed());
+		Thread.sleep(2000);
 	
 	}
 	

@@ -283,4 +283,21 @@ public class CampaignManagement extends Init{
 	 			Assert.assertTrue(false, "Campaign Category with linked campaigns deleted");
 	 		}
 	    }
+	    
+	    @Then("^edit campaign template from sheet \"([^\"]*)\"$")
+	    public void editCampaignTemplateFromSheet(String sheet) throws Throwable {
+	    	eM.setExcelFile("campaignTemplateInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		campaignObjects.clickOptionsIcon();
+//	 		Thread.sleep(3000);
+	 		campaignObjects.clickEditOption();
+	 		campaignObjects.clickOptionsIcon();
+	 		campaignObjects.clickEditOption();
+	 		Thread.sleep(5000);
+//	 		campaignObjects.enterCategoryName(name+"edit");
+//	 		campaignObjects.clickCreateCategorySaveButton();
+//	 		commonObjects.filterName(name+"edit");
+//	 		commonObjects.clickOptionsIcon();
+	    }
+	    
 }
