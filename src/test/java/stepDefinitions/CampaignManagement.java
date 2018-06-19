@@ -119,6 +119,17 @@ public class CampaignManagement extends Init{
 	    	 Thread.sleep(2000);
 	    }
 	 
+	 @Then("^verify template edited from sheet \"([^\"]*)\"$")
+	    public void VerifyTemplateEdited(String sheet) throws Throwable
+	    {
+	    	
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignTemplateInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		campaignObjects.VerifyTemplateCreated(name);
+	    	 Thread.sleep(2000);
+	    }
+	 
 	 
 	 
 	 
@@ -291,13 +302,14 @@ public class CampaignManagement extends Init{
 	 		campaignObjects.clickOptionsIcon();
 //	 		Thread.sleep(3000);
 	 		campaignObjects.clickEditOption();
-	 		campaignObjects.clickOptionsIcon();
-	 		campaignObjects.clickEditOption();
-	 		Thread.sleep(5000);
-//	 		campaignObjects.enterCategoryName(name+"edit");
-//	 		campaignObjects.clickCreateCategorySaveButton();
-//	 		commonObjects.filterName(name+"edit");
-//	 		commonObjects.clickOptionsIcon();
+	 		Thread.sleep(2000);
+	 		campaignObjects.editCaampaignTemplateDetails(name+"edit");
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    	String nameEdited=name+"edit";
+	    	eM.setCell(1, 0, nameEdited);
+	 		
 	    }
 	    
 }

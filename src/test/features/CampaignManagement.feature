@@ -47,15 +47,16 @@ Feature: campaign management
     @NX-1510 @initBrowser
     Scenario: Campaign Template: Verify editing the created campaign templates- 1510
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
     #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
-    #Then create new template from sheet "template"
-    #Then verify template created from sheet "template"
+    Then create new template from sheet "template"
+    Then verify template created from sheet "template"
     Then edit campaign template from sheet "template"
+    Then verify template edited from sheet "template"

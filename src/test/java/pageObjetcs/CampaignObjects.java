@@ -70,8 +70,10 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath = ".//div[@id='trigger']//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
 	private WebElement optionsIcon;
 	
-	@FindBy(xpath = "//paper-item[@class='campaign-list style-scope x-scope paper-item-1' and contains(.,'Edit')]")
+	@FindBy(xpath = ".//paper-icon-button[@icon='create']")
 	private WebElement optionsEdit;
+	@FindBy(xpath = ".//label[contains(.,'Name')]/../input")
+	private WebElement campaignTemplateNameInput;
 	
 //	@FindBy(xpath="")
 //	private WebElement ;
@@ -123,6 +125,13 @@ public class CampaignObjects extends Init{
 	}
 	public void enterCategoryName(String name) throws InterruptedException {
 		jswait.loadSendKeys(categoryNameInput, name);
+	}
+	
+	public void editCaampaignTemplateDetails(String name) throws InterruptedException {
+		jswait.loadSendKeys(campaignTemplateNameInput, name);
+		enterCampaignDescription("Desc for Template edited");
+		clickProceedButton();
+		clickSaveCampaignTemplate();
 	}
 	public void createNewCampaignCategory(String name) throws InterruptedException {
 		clickCreateNewCampaignCategoryButton();
