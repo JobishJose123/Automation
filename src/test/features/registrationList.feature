@@ -17,8 +17,8 @@ Given login
 #Then enter details of registration list
 #Then save registration list
 #Then navigate to landing page
-#Then navigate to data foundation
-#Then check and add profile fields
+Then navigate to data foundation
+Then check and add profile fields
 Then upload list
 Given login
 Then navigate to precision marketer

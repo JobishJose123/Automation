@@ -135,7 +135,7 @@ public class RegistrationList extends Init{
 	public void add_profile_field() throws InterruptedException
 	{		
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Country_q11");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Country_q22");
 	
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
@@ -152,7 +152,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Languages_q11");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Languages_q22");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
 	jswait.loadClick("//paper-item[contains(.,'Normal')]");
@@ -176,7 +176,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","First Name_q11");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","First Name_q22");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
 	jswait.loadClick("//paper-item[contains(.,'Normal')]");
@@ -185,7 +185,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Last Name_q11");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Last Name_q22");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
 	jswait.loadClick("//paper-item[contains(.,'Normal')]");
@@ -194,7 +194,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Email_q11");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Email_q22");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
 	jswait.loadClick("//paper-item[contains(.,'Normal')]");
@@ -203,7 +203,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Balance_q11");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Balance_q22");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
 	jswait.loadClick("//paper-item[contains(.,'Normal')]");
@@ -212,7 +212,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Boolean_q11");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Boolean_q22");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
 	jswait.loadClick("//paper-item[contains(.,'Normal')]");
@@ -221,7 +221,7 @@ public class RegistrationList extends Init{
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Age_q11");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Age_q22");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
 	jswait.loadClick("//paper-item[contains(.,'Normal')]");
@@ -241,11 +241,11 @@ public class RegistrationList extends Init{
     public void addProfileFields() throws IOException, InterruptedException{
 		jswait.loadClick("//a/div//div[contains(.,'Customer Profile Info')]/../..");
 		jswait.loadClick("//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..");
-		jswait.loadSendKeys("//form/paper-input[1]/paper-input-container/div[2]/div/input","_q11");
+		jswait.loadSendKeys("//form/paper-input[1]/paper-input-container/div[2]/div/input","_q22");
 		jswait.loadClick("//paper-button[contains(text(),'Apply')]");
 		Thread.sleep(3000);
 		try{
-		 if(driver. findElement(By.xpath("//*[@id='item1']//span[contains(.,'_q11')]")).isDisplayed()){
+		 if(driver. findElement(By.xpath("//*[@id='item1']//span[contains(.,'_q22')]")).isDisplayed()){
 			 System.out.println("fields already present");
 		 }
 		}catch(Exception e){
@@ -346,7 +346,7 @@ public class RegistrationList extends Init{
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_0']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_0']/option[contains(.,'Name_q11')]")).click();
+		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_0']/option[contains(.,'Name_q22')]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//div/*[@id='addProfileUpdateBtn_0']")).click();
 		Thread.sleep(3000);
@@ -356,7 +356,7 @@ public class RegistrationList extends Init{
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_1']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_1']/option[contains(.,'Country_q11')]")).click();
+		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_1']/option[contains(.,'Country_q22')]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='profileAdvancedOptions.autoUploadChk.0_1']")).click();
 		Thread.sleep(3000);
@@ -368,7 +368,7 @@ public class RegistrationList extends Init{
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_2']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_2']/option[contains(.,'Email_q11')]")).click();
+		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_2']/option[contains(.,'Email_q22')]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//div/*[@id='addProfileUpdateBtn_0']")).click();
 		Thread.sleep(3000);
@@ -378,7 +378,7 @@ public class RegistrationList extends Init{
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_3']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_3']/option[contains(.,'Languages_q11')]")).click();
+		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_3']/option[contains(.,'Languages_q22')]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='profileAdvancedOptions.autoUploadChk.0_3']")).click();
 		Thread.sleep(3000);
@@ -390,7 +390,7 @@ public class RegistrationList extends Init{
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_4']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_4']/option[contains(.,'Languages_q11')]")).click();
+		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_4']/option[contains(.,'Languages_q22')]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='profileAdvancedOptions.autoUploadChk.0_4']")).click();
 		Thread.sleep(3000);
@@ -402,7 +402,7 @@ public class RegistrationList extends Init{
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_5']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_5']/option[contains(.,'Balance_q11')]")).click();
+		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_5']/option[contains(.,'Balance_q22')]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//div/*[@id='addProfileUpdateBtn_0']")).click();
 		Thread.sleep(3000);
@@ -412,7 +412,7 @@ public class RegistrationList extends Init{
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_6']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_6']/option[contains(.,'Boolean_q11')]")).click();
+		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_6']/option[contains(.,'Boolean_q22')]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='profileAdvancedOptions.autoUploadChk.0_6']")).click();
 		Thread.sleep(3000);
@@ -424,7 +424,7 @@ public class RegistrationList extends Init{
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_7']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_7']/option[contains(.,'Age_q11')]")).click();
+		driver.findElement(By.xpath(".//*[@id='partnerProfileField0_7']/option[contains(.,'Age_q22')]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(".//*[@id='addSubsUpdateBtn_0']")).click();
 		Thread.sleep(3000);
@@ -502,14 +502,14 @@ public class RegistrationList extends Init{
 		jswait.loadClick("//paper-button[contains(text(),'Search')]");
 		try{
 			driver.findElement(By.xpath("//h3[contains(@class,'consumer-profile') and contains(text(),'"+rowData[0]+"')]"));
-			driver.findElement(By.xpath("//span[contains(.,'Age_q11')]/../../data-table-cell[2]//span[contains(.,'Number')]/../../data-table-cell[3]//span[contains(.,'"+rowData[9]+"')]"));
-			driver.findElement(By.xpath("//span[contains(.,'Balance_q11')]/../../data-table-cell[2]//span[contains(.,'Number')]/../../data-table-cell[3]//span[contains(.,'"+rowData[7]+"')]"));
-			driver.findElement(By.xpath("//span[contains(.,'Boolean_q11')]/../../data-table-cell[2]//span[contains(.,'Yes or No')]/../../data-table-cell[3]//span[contains(.,'"+rowData[8]+"')]"));
-			driver.findElement(By.xpath("//span[contains(.,'Country_q11')]/../../data-table-cell[2]//span[contains(.,'Single Select')]/../../data-table-cell[3]//span[contains(.,'"+rowData[3]+"')]"));
-			driver.findElement(By.xpath("//span[contains(.,'Email_q11')]/../../data-table-cell[2]//span[contains(.,'Text')]/../../data-table-cell[3]//span[contains(.,'"+rowData[4]+"')]"));
-			driver.findElement(By.xpath("//span[contains(.,'First Name_q11')]/../../data-table-cell[2]//span[contains(.,'Text')]/../../data-table-cell[3]//span[contains(.,'"+rowData[1]+"')]"));
-			driver.findElement(By.xpath("//span[contains(.,'Languages_q11')]/../../data-table-cell[2]//span[contains(.,'Multi Select')]/../../data-table-cell[3]//span[contains(.,'"+rowData[5]+"/"+rowData[6]+"')]"));
-			driver.findElement(By.xpath("//span[contains(@title,'_q11')]"));
+			driver.findElement(By.xpath("//span[contains(.,'Age_q22')]/../../data-table-cell[2]//span[contains(.,'Number')]/../../data-table-cell[3]//span[contains(.,'"+rowData[9]+"')]"));
+			driver.findElement(By.xpath("//span[contains(.,'Balance_q22')]/../../data-table-cell[2]//span[contains(.,'Number')]/../../data-table-cell[3]//span[contains(.,'"+rowData[7]+"')]"));
+			driver.findElement(By.xpath("//span[contains(.,'Boolean_q22')]/../../data-table-cell[2]//span[contains(.,'Yes or No')]/../../data-table-cell[3]//span[contains(.,'"+rowData[8]+"')]"));
+			driver.findElement(By.xpath("//span[contains(.,'Country_q22')]/../../data-table-cell[2]//span[contains(.,'Single Select')]/../../data-table-cell[3]//span[contains(.,'"+rowData[3]+"')]"));
+			driver.findElement(By.xpath("//span[contains(.,'Email_q22')]/../../data-table-cell[2]//span[contains(.,'Text')]/../../data-table-cell[3]//span[contains(.,'"+rowData[4]+"')]"));
+			driver.findElement(By.xpath("//span[contains(.,'First Name_q22')]/../../data-table-cell[2]//span[contains(.,'Text')]/../../data-table-cell[3]//span[contains(.,'"+rowData[1]+"')]"));
+			driver.findElement(By.xpath("//span[contains(.,'Languages_q22')]/../../data-table-cell[2]//span[contains(.,'Multi Select')]/../../data-table-cell[3]//span[contains(.,'"+rowData[5]+"/"+rowData[6]+"')]"));
+			driver.findElement(By.xpath("//span[contains(@title,'_q22')]"));
 
 		}catch(Exception e1){
 			

@@ -6,7 +6,7 @@ Feature: Test suite on Offer creation
   @NX-1349 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating offers with SMS channel NX-1349
     Given login
-    When navigate to precision marketer
+    Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
     Then navigate to prepaid telecom
@@ -20,7 +20,7 @@ Feature: Test suite on Offer creation
   @NX-1351 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-1351
     Given login
-    When navigate to precision marketer
+    Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "rechargeVoicePush" with product "singleProductPage"
@@ -610,4 +610,12 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
   Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
     Then delete created reward type
     
+     @NX-2328 @initBrowser @closeBrowser
+    Scenario: Email Channel --> Verify the Creative Tab in Create Offers while creating Email Based Offers. NX-2328
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeEmail" with product "rechargeEmail"
+    Then verify "rechargeEmail" offer in grid
     
