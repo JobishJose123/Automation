@@ -30,14 +30,20 @@ public class TargetConditionObjects extends Init {
 	private WebElement CustomerInsightFieldSelector;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'Age')]")
 	private WebElement CustomerInsightFieldAge;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'Balance')]")
+	private WebElement CustomerInsightFieldBalance;
 	@FindBy(xpath="//label[text()='Condition']/../..//input")
 	private WebElement conditionSelector;
 	@FindBy(xpath="//paper-item[contains(.,'is greater than')]")
 	private WebElement conditionIsGreaterThan;
+	@FindBy(xpath="//paper-item[contains(.,'is less than')]")
+	private WebElement conditionIsLessThan;
 	@FindBy(xpath=".//*[@id='conditionForm']//field-simple/div//paper-input//input")
 	private WebElement isGreaterThanValue;
 	@FindBy(xpath=".//*[@id='conditionCard']/paper-button[2]")
 	private WebElement targetConditionSave;
+	@FindBy(xpath="//condition-form[2]//paper-button[contains(.,'Save')]")
+	private WebElement targetConditionSave2;
 	@FindBy(xpath = "//*[@data-moduletext='Customer Insight']")
 	private WebElement targetGraphicalCustomerInsight;
 	@FindBy(xpath = "//*[@data-moduletext='Event']")
@@ -125,6 +131,18 @@ public class TargetConditionObjects extends Init {
 			jswait.loadSendKeys(isGreaterThanValue,"18");
 			jswait.loadClick(targetConditionSave);
 	 }
+	 
+	 public void clickBasicTargetConditionWithAge2() throws InterruptedException {
+//		 	jswait.loadClick(createConditionButton);
+		    jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(CustomerInsightFieldAge);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsLessThan);
+			jswait.loadSendKeys(isGreaterThanValue,"25");
+			jswait.loadClick(targetConditionSave2);
+	 }
 	 public void clickBasicTargetConditionWithAge(String age) throws InterruptedException {
 //		 	jswait.loadClick(createConditionButton);
 		    jswait.loadClick(targetConditionTypeSelector);
@@ -134,6 +152,18 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,age);
+			jswait.loadClick(targetConditionSave);
+	 }
+	 
+	 public void clickBasicTargetConditionWithBalance() throws InterruptedException {
+//		 	jswait.loadClick(createConditionButton);
+		    jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(CustomerInsightFieldBalance);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"20");
 			jswait.loadClick(targetConditionSave);
 	 }
 	public void graphicalTargetMoveCustomerInsightToCanvas() throws InterruptedException, AWTException {

@@ -77,6 +77,11 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath = ".//paper-button[contains(.,'Use Template')]")
 	private WebElement useTemplateButton;
 	
+	@FindBy(xpath = ".//paper-button[contains(.,'Add AND')]")
+	private WebElement addAndButton;
+	
+	
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -148,6 +153,13 @@ public class CampaignObjects extends Init{
 	}
 	public void clickSaveCampaignButton() throws InterruptedException {
 		jswait.loadClick(saveCampaignButton);
+	}
+	
+	public void clickAddAndButton() throws InterruptedException {
+		jswait.loadClick(addAndButton);
+	}
+	public void verifyAddAndButton() throws InterruptedException {
+		assertTrue(addAndButton.isDisplayed());
 	}
 	
 	public void verifyDuplicateCampaignNameToast() throws InterruptedException {
@@ -233,6 +245,22 @@ public class CampaignObjects extends Init{
 		targetConditionObjects.clickCreateTargetConditionButton();
 //		targetConditionObjects.clickTargetConditionViewToggle();
 		targetConditionObjects.clickBasicTargetConditionWithAge();
+		clickSaveCampaignTemplate();
+	}
+	
+	
+	public void createCampaignTemplateWithAddAnd(String name) throws InterruptedException {
+		enterCampaignTemplateName(name);
+		enterCampaignDescription("Desc for Template");
+		clickProceedButton();
+		targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickBasicTargetConditionWithAge();
+		verifyAddAndButton();
+		clickAddAndButton();
+		//targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickBasicTargetConditionWithAge2();
 		clickSaveCampaignTemplate();
 	}
 	

@@ -40,7 +40,7 @@ Feature: campaign management
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
     Then create new template from sheet "template"
     Then verify template created from sheet "template"
@@ -64,20 +64,18 @@ Feature: campaign management
     
     
     
-    @NX-1503 @initBrowser
-    Scenario: Create new campaign template :- Verify the count of the templates- 1503
+    @NX-1505 @initBrowser
+    Scenario: Campaign Template: Verify the Add AND option for the condition added- 1505
     Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
-    Then create new template from sheet "template"
+    Then create new template from sheet with add AND option "template"
     Then verify template created from sheet "template"
-    Then click on use template button
-    Then create new campaign use template from sheet "campaignBC" with catalog "defaultCatalog"
-    Then verify campaign created from sheet "campaignBC"
     

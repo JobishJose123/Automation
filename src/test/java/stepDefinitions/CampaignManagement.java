@@ -130,6 +130,26 @@ public class CampaignManagement extends Init{
 	    	 Thread.sleep(2000);
 	    }
 	 
+	 @Then("^create new template from sheet with add AND option \"([^\"]*)\"$")
+	    public void create_new_template_with_add_and_option(String sheet) throws Throwable
+	    {
+	    	
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignTemplateInputData",sheet);
+	 	    Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eM.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eM.setCell(1, 0, name);
+	 		campaignObjects.clickCreateNewTemplateButton();
+	 		campaignObjects.createCampaignTemplateWithAddAnd(name);
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    
+	    }
+	 
+	 
 	 @Then("^verify template created from sheet \"([^\"]*)\"$")
 	    public void VerifyTemplateCreated(String sheet) throws Throwable
 	    {
