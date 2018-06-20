@@ -1,5 +1,6 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
@@ -48,6 +49,11 @@ public class CampaignObjects extends Init{
 	private WebElement offerCatalogSelector;
 	@FindBy(xpath="//paper-button[contains(.,'Proceed')]")
 	private WebElement proceedButton;
+	
+	@FindBy(xpath=".//paper-card[@id='conditionCard']")
+	private WebElement conditionCard;
+	
+	
 
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save Campaign')]")
 	private WebElement saveCampaignButton;
@@ -72,6 +78,8 @@ public class CampaignObjects extends Init{
 	
 	@FindBy(xpath = ".//paper-icon-button[@icon='create']")
 	private WebElement optionsEdit;
+	@FindBy(xpath = ".//paper-icon-item[contains(.,'Delete')]")
+	private WebElement optionsDelete;
 	@FindBy(xpath = ".//label[contains(.,'Name')]/../input")
 	private WebElement campaignTemplateNameInput;
 	@FindBy(xpath = ".//paper-button[contains(.,'Use Template')]")
@@ -79,6 +87,8 @@ public class CampaignObjects extends Init{
 	
 	@FindBy(xpath = ".//paper-button[contains(.,'Add AND')]")
 	private WebElement addAndButton;
+	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
+	private WebElement targetConditionTypeSelector;
 	
 	
 	
@@ -140,6 +150,20 @@ public class CampaignObjects extends Init{
 		clickProceedButton();
 		clickSaveCampaignTemplate();
 	}
+	
+	public void deleteTargetTemplateFromSheet() throws InterruptedException {
+		clickProceedButton();
+		verifyTargetConditionCard();
+		clickOptionsIcon();
+		Thread.sleep(3000);
+		clickDeleteOption();
+		Thread.sleep(3000);
+		verifyTargetConditionCardAfterDeleteion();
+		clickSaveCampaignTemplate();
+	}
+	
+	
+	
 	public void createNewCampaignCategory(String name) throws InterruptedException {
 		clickCreateNewCampaignCategoryButton();
 		enterCategoryName(name);
@@ -169,6 +193,14 @@ public class CampaignObjects extends Init{
 	public void clickProceedButton() throws InterruptedException {
 		jswait.loadClick(proceedButton);
 	}
+	public void verifyTargetConditionCard() throws InterruptedException {
+		assertTrue(conditionCard.isDisplayed());
+	}
+	public void verifyTargetConditionCardAfterDeleteion() throws InterruptedException {
+		assertTrue(targetConditionTypeSelector.isDisplayed());
+	}
+	
+	
 	public void clickCreateNewBroadcastButton() throws InterruptedException {
 		jswait.loadClick(createNewBroadcastButton);
 	}
@@ -203,6 +235,9 @@ public class CampaignObjects extends Init{
 	}
 	public void clickEditOption() throws InterruptedException {
 		jswait.loadClick(optionsEdit);
+	}
+	public void clickDeleteOption() throws InterruptedException {
+		jswait.loadClick(optionsDelete);
 	}
 	public void navigateToLIfeCycleMarketing() throws InterruptedException {
 		jswait.loadClick(lifeCycleMarketing);

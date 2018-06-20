@@ -373,4 +373,18 @@ public class CampaignManagement extends Init{
 	 		
 	    }
 	    
+	    @Then("^delete target conditions for template$")
+	    public void deletTargetTemplateFromSheet() throws Throwable {
+	 		campaignObjects.clickOptionsIcon();
+//	 		Thread.sleep(3000);
+	 		campaignObjects.clickEditOption();
+	 		Thread.sleep(2000);
+	 		campaignObjects.deleteTargetTemplateFromSheet();
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    	
+	 		
+	    }
+	    
 }
