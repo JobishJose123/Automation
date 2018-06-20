@@ -74,6 +74,8 @@ public class CampaignObjects extends Init{
 	private WebElement optionsEdit;
 	@FindBy(xpath = ".//label[contains(.,'Name')]/../input")
 	private WebElement campaignTemplateNameInput;
+	@FindBy(xpath = ".//paper-button[contains(.,'Use Template')]")
+	private WebElement useTemplateButton;
 	
 //	@FindBy(xpath="")
 //	private WebElement ;
@@ -193,6 +195,10 @@ public class CampaignObjects extends Init{
 	public void navigateToLIfeCycleMarketing() throws InterruptedException {
 		jswait.loadClick(lifeCycleMarketing);
 	}
+	
+	public void clickOnUseTemplateButton() throws InterruptedException {
+		jswait.loadClick(useTemplateButton);
+	}
 	public void enterCampaignDeails(String name,String catalog) throws InterruptedException {
 		selectTypeInformational();
 		enterCampaignName(name);
@@ -236,6 +242,12 @@ public class CampaignObjects extends Init{
 	
 	}
 	
+	public void VerifyCampaignCreated(String name) throws InterruptedException {
+		assertTrue(driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'"+name+"')]")).isDisplayed());
+		Thread.sleep(2000);
+	
+	}
+	
 	
 	public void createCampaign(String name,String catalog) throws InterruptedException {
 		enterCampaignDeails(name,catalog);
@@ -274,6 +286,44 @@ public class CampaignObjects extends Init{
          wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
          clickSaveCampaignButton();
 	}
+	
+	
+	public void createCampaignUseTemplate(String name,String catalog) throws InterruptedException {
+		enterCampaignDeails(name,catalog);
+		clickProceedButton();
+		clickProceedButton();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//paper-card/paper-date-time-input/div/paper-input[2]/paper-input-container/div[2]"))).click();
+   	 Thread.sleep(1000);
+   	 Calendar rightNow =Calendar.getInstance();
+   	 int hours = rightNow.get(Calendar.HOUR);
+   	 int min = rightNow.get(Calendar.MINUTE);
+   	 int am_pm = rightNow.get(Calendar.AM_PM);
+   	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+   	 int year = rightNow.get(Calendar.YEAR);
+   	 int month = rightNow.get(Calendar.MONTH)+1;
+   	 min+=2;
+   	 int rem = min%5;
+   	 rem = 5-rem;
+   	 min+=rem;
+   	 if(min>59){
+   		 min-=60;
+   		 hours++;
+   	 }
+   	 Actions builder = new Actions(driver);
+   	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+        builder.moveToElement(num).click().build().perform();
+        Thread.sleep(2000);
+   	 WebElement num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+        builder.moveToElement(num1).click().build().perform();
+        if(am_pm==0)
+       	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[1]"))).click();
+        else
+       	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[2]"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
+        clickSaveCampaignButton();
+	}
+	
+	
 /*	
 	public void createCampaignTemplate(String name,String catalog) throws InterruptedException {
 		enterTempalteDeails(name,catalog);

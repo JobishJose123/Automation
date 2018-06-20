@@ -15,6 +15,7 @@ Feature: campaign management
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
     
     @NX-1560 @initBrowser
   Scenario: Create Campaign: Verify adding the campaign with duplicate name- 1560
@@ -30,7 +31,7 @@ Feature: campaign management
     Then create duplicate campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
     @NX-1506 @initBrowser
-  Scenario: CLV Max: Create new campaign template :- Verify the name and created by of the Campaign template- 1510
+  Scenario: Create new campaign template :- Verify the name and created by of the Campaign template- 1510
     Given login
     Then navigate to configuration management
     Then navigate to campaign categories
@@ -60,3 +61,23 @@ Feature: campaign management
     Then verify template created from sheet "template"
     Then edit campaign template from sheet "template"
     Then verify template edited from sheet "template"
+    
+    
+    
+    @NX-1503 @initBrowser
+    Scenario: Create new campaign template :- Verify the count of the templates- 1503
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then navigate to templates tab
+    Then create new template from sheet "template"
+    Then verify template created from sheet "template"
+    Then click on use template button
+    Then create new campaign use template from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    

@@ -86,7 +86,29 @@ public class CampaignManagement extends Init{
 //	    	 driver.findElement(By.xpath(xpath)).click(); 
 	 		TimePicker dt = new TimePicker();
 	 		dt.gteDateTime();
-	    	 Thread.sleep(2000);
+	    	Thread.sleep(2000);
+	    }
+	 
+	 
+	 @Then("^create new campaign use template from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+	    public void createNewCampaignUseTemplate(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 	    Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eM.setCell(1, 0, name);
+	 		//campaignObjects.clickCreateNewCampaignButton();
+	 		campaignObjects.createCampaignUseTemplate(name, catalog);
+//	 		TimePicker dt = new TimePicker();
+//	 		dt.gteDateTime();
+//	    	 Thread.sleep(2000);
 	    }
 	 
 	 
@@ -116,6 +138,17 @@ public class CampaignManagement extends Init{
 	    	eM.setExcelFile("campaignTemplateInputData",sheet);
 	 		String name = (String) eM.getCell(1, 0);
 	 		campaignObjects.VerifyTemplateCreated(name);
+	    	 Thread.sleep(2000);
+	    }
+	 
+	 @Then("^verify campaign created from sheet \"([^\"]*)\"$")
+	    public void VerifyCampaignCreated(String sheet) throws Throwable
+	    {
+	    	
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		campaignObjects.VerifyCampaignCreated(name);
 	    	 Thread.sleep(2000);
 	    }
 	 
@@ -160,6 +193,14 @@ public class CampaignManagement extends Init{
 		{
 		 	campaignObjects.navigateToLIfeCycleMarketing();
 		}
+	 
+	 @Then("^click on use template button$")
+		public void clickOnUseTemplateButton() throws Exception
+		{
+		 	campaignObjects.clickOnUseTemplateButton();
+		}
+	 
+	 
 	    @Then("^navigate to \"([^\"]*)\" category$")
 	    public void navigate_to_category(String category) throws Throwable
 	    {
