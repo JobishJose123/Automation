@@ -132,6 +132,18 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionSave);
 	 }
 	 
+	 public void clickBasicTargetConditionWithAgeEdit() throws InterruptedException {
+//		 	jswait.loadClick(createConditionButton);
+		    jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(CustomerInsightFieldAge);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"25");
+			jswait.loadClick(targetConditionSave);
+	 }
+	 
 	 public void clickBasicTargetConditionWithAge2() throws InterruptedException {
 //		 	jswait.loadClick(createConditionButton);
 		    jswait.loadClick(targetConditionTypeSelector);

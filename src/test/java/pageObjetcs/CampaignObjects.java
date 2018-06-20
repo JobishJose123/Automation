@@ -80,6 +80,8 @@ public class CampaignObjects extends Init{
 	private WebElement optionsEdit;
 	@FindBy(xpath = ".//paper-icon-item[contains(.,'Delete')]")
 	private WebElement optionsDelete;
+	@FindBy(xpath = ".//paper-icon-item[contains(.,'Edit')]")
+	private WebElement optionsEditTargetCondtion;
 	@FindBy(xpath = ".//label[contains(.,'Name')]/../input")
 	private WebElement campaignTemplateNameInput;
 	@FindBy(xpath = ".//paper-button[contains(.,'Use Template')]")
@@ -148,6 +150,17 @@ public class CampaignObjects extends Init{
 		jswait.loadSendKeys(campaignTemplateNameInput, name);
 		enterCampaignDescription("Desc for Template edited");
 		clickProceedButton();
+		clickSaveCampaignTemplate();
+	}
+	
+	public void editTargetConditionForATemplate() throws InterruptedException {
+		clickProceedButton();
+		verifyTargetConditionCard();
+		clickOptionsIcon();
+		Thread.sleep(3000);
+		clickEditTargetCondtion();
+		targetConditionObjects.clickBasicTargetConditionWithAgeEdit();
+		Thread.sleep(3000);
 		clickSaveCampaignTemplate();
 	}
 	
@@ -235,6 +248,9 @@ public class CampaignObjects extends Init{
 	}
 	public void clickEditOption() throws InterruptedException {
 		jswait.loadClick(optionsEdit);
+	}
+	public void clickEditTargetCondtion() throws InterruptedException {
+		jswait.loadClick(optionsEditTargetCondtion);
 	}
 	public void clickDeleteOption() throws InterruptedException {
 		jswait.loadClick(optionsDelete);
