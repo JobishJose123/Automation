@@ -738,6 +738,8 @@ public class OfferPageObjects extends Init {
 			assertFalse("Set as default checkbox is displaying", setAsDefaultCreative.isDisplayed());
 
 		clickAddCreativeButton();
+		clickSecondCreativeLanguageField();
+		clickSecondCreativeLanguageSpanishSelect();
 		assertTrue("Set as default checkbox is not displaying", setAsDefaultCreative.isDisplayed());
 		// assertTrue("Set as default checkbox is not selected",
 		// setAsDefaultCheckbox.isSelected());
@@ -1078,6 +1080,8 @@ public class OfferPageObjects extends Init {
 	
    public void enterEmailCreative(String profile,String subject ) throws InterruptedException, UnsupportedFlavorException, IOException {
 	   jswait.loadClick(emailProfileField);
+	   jswait.loadClick("//preview-email//paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]");
+	   jswait.loadClick(emailProfileField);
 	   jswait.loadClick("//preview-email//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
 	   jswait.loadSendKeys(emailCreativeSubject, "Subject of Email Offer &$^%#@!+*(&)");
 	   String enteredText = commonObjects.getTextFormTextField(emailCreativeSubject);
@@ -1088,7 +1092,9 @@ public class OfferPageObjects extends Init {
 	   jswait.loadClick(previewEmailButton);
 	   Thread.sleep(3000);
 	   driver.switchTo().frame("my_iframe");
-	   driver.findElement(By.xpath("//*[contains(.,'THIS IS THE BODY OF EMAIL')]"));
+	   driver.findElement(By.xpath("//h1[contains(.,'THIS IS THE BODY OF EMAIL')]"));
+	   driver.findElement(By.xpath("//h1[contains(.,'$$EMAIL$$')]"));
+	   driver.findElement(By.xpath("//img[@src='logo.png']"));
 	   driver.switchTo().parentFrame();
 	   jswait.loadClick(previewEmailConfirmButton);
 	   clickMapVariableIcon();
@@ -1101,6 +1107,7 @@ public class OfferPageObjects extends Init {
 		   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
 	   }
 	   clickMapVariableOkButton();
+	   
 	}
 
 	public void enterSecondVoiceCreative(String subject, String reference) throws InterruptedException {
@@ -1284,7 +1291,7 @@ public class OfferPageObjects extends Init {
 		}
 	}
 	
-	public void enterCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException, UnsupportedFlavorException {
+	public void enterCreativeTabDetails(ExcelHelper eh) throws Throwable {
 		selectCreativeLanguageEnglish();
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
 			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
@@ -1293,8 +1300,13 @@ public class OfferPageObjects extends Init {
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		else if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-		else if (eh.getCell(1, 3).toString().contains("Email"))
-			enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		else if (eh.getCell(1, 3).toString().contains("Email")) {
+			 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			 verifySetAsDefaultCheckboxinCreativeTab();			   
+			   selectCreativeLanguageEnglish();
+			   enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		}
+			
 	}
 
 	public void enterSecondCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {

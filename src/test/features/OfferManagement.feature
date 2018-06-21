@@ -617,7 +617,10 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
-    Then verify "rechargeEmail" offer in grid
+    Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then click view offers of "defaultCatalog" in options
+  Then Add "rechargeEmail" offer to Offer Catalogue
     Then pass next scenario based on this step
 
   @NX-2329
