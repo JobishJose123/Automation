@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +33,13 @@ public class OfferPageObjects extends Init {
 	}
 
 	final String TRACK_SOURCE = "A_track_Sel";
+	final String EMAIL_PROFILE_FIELD = "Email";
+	final String AGE_PROFILE_FIELD = "Age";
+	final String AGE_DYNAMIC_VARIABLE = "Age_Q990";
+	final String NAME_PROFILE_FIELD = "Name";
+	
+	@FindBy(xpath = "//span[contains(.,'Select')]/../input")
+	private WebElement emailSelectResourceButton;
 	@FindBy(xpath = ".//*[@id='sym2']")
 	private WebElement offerButton;
 	@FindBy(xpath = "//paper-button[contains(.,'Create New Offer')]")
@@ -105,6 +113,10 @@ public class OfferPageObjects extends Init {
 	private WebElement addProductsCheckBox;
 	@FindBy(xpath = "//label[contains(.,'Subject')]/../input")
 	private WebElement voiceCreativeSubject;
+	@FindBy(xpath = "//label[contains(.,'Subject')]/../input")
+	private WebElement emailCreativeSubject;
+	@FindBy(xpath = "//label[contains(.,'Email Profile Field')]/../input")
+	private WebElement emailProfileField;
 	@FindBy(xpath = "//creative-wrapper//define-creative[2]//label[contains(.,'Subject')]/../input")
 	private WebElement secondVoiceCreativeSubject;
 	@FindBy(xpath = "//label[contains(.,'Reference')]/../input")
@@ -161,6 +173,8 @@ public class OfferPageObjects extends Init {
 	private WebElement successMessage;
 	@FindBy(xpath = "//label[contains(text(),'Response on Failure')]/..//textarea")
 	private WebElement failureMessage;
+	@FindBy(xpath = "//span[contains(.,'Preview Email')]")
+	private WebElement previewEmailButton;
 
 	@FindBy(xpath = "//creative-wrapper//define-creative[2]//label[contains(.,'Language')]/..//input")
 	private WebElement secondCreativeLanguageSelector;
@@ -190,6 +204,9 @@ public class OfferPageObjects extends Init {
 	private WebElement mapVariableCancelButton;
 	@FindBy(xpath = "//iron-data-table[@id='variablesList']//div[@id='header']//data-table-row[contains(.,'Name') and contains(.,'Field') and contains(.,'Limit') and contains(.,'Default')]")
 	private WebElement mapVariableDialogHeader;
+	@FindBy(xpath = "//preview-email/div//*[@d='M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z']/../../..")
+	private WebElement emailMapVariable;
+	
 	
 //Track Tab in Offer Creation	
 	 @FindBy(xpath="//paper-button[text()='Add Rule']")
@@ -258,8 +275,10 @@ public class OfferPageObjects extends Init {
 	 private WebElement addVariableSourceProfileSelect;
 	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Field')]/..//input")
 	 private WebElement addVariableFieldSelector;
-	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'Age_q11')]")
+	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
 	 private WebElement addVariableFieldAgeSelect;
+	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+NAME_PROFILE_FIELD+"')]")
+	 private WebElement addVariableFieldNameSelect;
 	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Limit')]/..//input")
 	 private WebElement addVariableLimit;
 	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Format')]/..//input")
@@ -278,8 +297,8 @@ public class OfferPageObjects extends Init {
 	 private WebElement mapVariableFilterButton;
 	 @FindBy(xpath="//iron-data-table[@id='variablesList']//data-table-row/div[1]/data-table-cell[6]/paper-icon-button[@role='button']")
 	 private WebElement addVariableDeleteButton;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
+	 @FindBy(xpath=".//*[@id='previewForm']//paper-button[2]")
+	 private WebElement previewEmailConfirmButton;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -388,6 +407,10 @@ public class OfferPageObjects extends Init {
 			jswait.loadSendKeys(addVariableFieldSelector,"Age_q11");
 			jswait.loadClick(addVariableFieldAgeSelect);
 		}
+	 public void selectAddVariableFieldName() throws InterruptedException {
+			jswait.loadSendKeys(addVariableFieldSelector,NAME_PROFILE_FIELD);
+			jswait.loadClick(addVariableFieldNameSelect);
+		}
 	 public void enterFirstDynamicVariableDetails(String name) throws InterruptedException {
 		 enterAddVariableName(name);
 			selectAddVariableSourceProfileField();
@@ -401,11 +424,22 @@ public class OfferPageObjects extends Init {
 			enterFirstDynamicVariableDetails(name);
 			clickAddNewVariableSaveButton();
 		}
+	 
 	 public void createSecondVariable(String name) throws InterruptedException {
 			clickAddNewVariableButton();
 			enterAddVariableName(name);
 			selectAddVariableSourceProfileField();
 			selectAddVariableFieldAge();
+			selectAddVariableFormatNoFormat();
+			enterAddVariableLimit("100");
+			enterAddVariableDefault("10");
+			clickAddNewVariableSaveButton();
+		}
+	 public void createNameDynamicVariable(String name) throws InterruptedException {
+			clickAddNewVariableButton();
+			enterAddVariableName(name);
+			selectAddVariableSourceProfileField();
+			selectAddVariableFieldName();
 			selectAddVariableFormatNoFormat();
 			enterAddVariableLimit("100");
 			enterAddVariableDefault("10");
@@ -1041,6 +1075,33 @@ public class OfferPageObjects extends Init {
 		jswait.loadSendKeys(voiceCreativeSubject, subject);
 		jswait.loadSendKeys(voiceCreativeReference, reference);
 	}
+	
+   public void enterEmailCreative(String profile,String subject ) throws InterruptedException, UnsupportedFlavorException, IOException {
+	   jswait.loadClick(emailProfileField);
+	   jswait.loadClick("//preview-email//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
+	   jswait.loadSendKeys(emailCreativeSubject, "Subject of Email Offer &$^%#@!+*(&)");
+	   String enteredText = commonObjects.getTextFormTextField(emailCreativeSubject);
+	   Assert.assertTrue(enteredText.length()==35, "error in subject field accepting alpha nueric and special characters");
+	   Thread.sleep(2000);
+	   File indexZip = new File("EmailZipFile\\index.zip");
+	   emailSelectResourceButton.sendKeys(indexZip.getAbsolutePath());
+	   jswait.loadClick(previewEmailButton);
+	   Thread.sleep(3000);
+	   driver.switchTo().frame("my_iframe");
+	   driver.findElement(By.xpath("//*[contains(.,'THIS IS THE BODY OF EMAIL')]"));
+	   driver.switchTo().parentFrame();
+	   jswait.loadClick(previewEmailConfirmButton);
+	   clickMapVariableIcon();
+	   clickMapVariableCancelButton();
+	   jswait.loadClick(emailMapVariable);
+	   MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
+	   try{
+		   clickMapVariableFirstVariable();
+	   }catch(Exception e) {
+		   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
+	   }
+	   clickMapVariableOkButton();
+	}
 
 	public void enterSecondVoiceCreative(String subject, String reference) throws InterruptedException {
 		jswait.loadSendKeys(secondVoiceCreativeSubject, subject);
@@ -1222,17 +1283,18 @@ public class OfferPageObjects extends Init {
 			selectTrackSource(TRACK_SOURCE);
 		}
 	}
-
-	public void enterCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {
+	
+	public void enterCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException, UnsupportedFlavorException {
 		selectCreativeLanguageEnglish();
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
 			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		}
-		if (eh.getCell(1, 3).toString().contains("SMS"))
+		else if (eh.getCell(1, 3).toString().contains("SMS"))
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-		if (eh.getCell(1, 3).toString().contains("Voice"))
+		else if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-
+		else if (eh.getCell(1, 3).toString().contains("Email"))
+			enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 	}
 
 	public void enterSecondCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {

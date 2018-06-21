@@ -610,12 +610,27 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
   Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
     Then delete created reward type
     
-     @NX-2328 @initBrowser @closeBrowser
+     @NX-2328 @initBrowser
     Scenario: Email Channel --> Verify the Creative Tab in Create Offers while creating Email Based Offers. NX-2328
     Given login
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then create new offer from sheet "rechargeEmail" with product "rechargeEmail"
+    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
     Then verify "rechargeEmail" offer in grid
+    Then pass next scenario based on this step
+
+  @NX-2329
+  Scenario: Verify for the Add Variable icon in the Creative tab NX-2329
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-2330
+  Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
+    Then check previous step and pass this
     
+
+    
+    @NX-testExcel
+    Scenario:  the Creative Tab in Create Offers while creating Email Based Offers. NX-2328
+    Then testExcel
