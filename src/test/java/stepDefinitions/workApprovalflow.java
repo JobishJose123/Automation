@@ -73,10 +73,18 @@ public class workApprovalflow extends Init{
     	approvalPageObjects.editApprovalRuleDetailsFromSheet(sheet);
 	}
 	
+    @Then("^deleteApprovalRuleDetailsFromSheet \"([^\"]*)\"$")
+	public void deleteApprovalRuleDetailsFromSheet(String sheet) throws Throwable {
+    	
+    	approvalPageObjects.deleteApprovalRuleDetailsFromSheet(sheet);
+	}
 	
 	
-	
-	
+    @Then("^default ApprovalRule edit and delete$")
+   	public void deleteApprovalRuleDefault() throws Throwable {
+       	
+       	approvalPageObjects.deleteApprovalRuleDefault();
+   	}
 	
 	
 	

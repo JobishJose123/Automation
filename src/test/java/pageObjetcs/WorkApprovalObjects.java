@@ -76,12 +76,38 @@ public class WorkApprovalObjects extends Init{
 	private WebElement addCategoryDropdown;
 	@FindBy(xpath = ".//span[contains(.,'Add Category')]")
 	private WebElement paperDialogBox;
+	@FindBy(xpath = ".//*[@id='checkboxContainer']//following::div[contains(.,'Campaign Activation')]//following::div[@id='checkboxContainer']")
+	private WebElement broadcastpaperDialogBox;
 	
 	
 	@FindBy(xpath = ".//label[contains(.,'Select required campaign categories')]//following::input[1]")
 	private WebElement cataloginput;
 	
 	
+	@FindBy(xpath=".//*[@id='deleteApprovalRule']/div/paper-button[contains(.,'Yes')]")
+	private WebElement ruledeleteyes ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
 	
 	
 	
@@ -134,31 +160,95 @@ public void editApprovalRuleDetailsFromSheet(String sheet) throws Throwable {
 	commonObjects.clickOptionsIcon();
 	commonObjects.clickEditOption();
 	Thread.sleep(5000);
-	driver.findElement(By.xpath("//div[@class='heading layout horizontal justified style-scope create-approval-rule']//h4[contains(.,'"+name+"')]//paper-icon-button")).click();
-	
+	//WebElement nameclick=driver.findElement(By.xpath("//div[@class='heading layout horizontal justified style-scope create-approval-rule']//h4[contains(.,'"+name+"')]//paper-icon-button"));
+	wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='heading layout horizontal justified style-scope create-approval-rule']//h4[contains(.,'"+name+"')]//paper-icon-button"))).click();
 	Thread.sleep(2000);
 		//clickEditRuleNameButton();
+	addApprovalRuleName.clear();
 		editRuleName(name);
 		saveRuleName();
-		clickAddUserButton();
-		enterLevel1User();
-		chooseLevel1User();
-		clickAddUserNameSave();
-		clickCheckboxes();
-		clickAddCategoryButton();
-		cataloginput();
+//		clickAddUserButton();
+//		enterLevel1User();
+//		chooseLevel1User();
+//		clickAddUserNameSave();
+		broadcastpaperDialogBox();
+//		clickAddCategoryButton();
+//		cataloginput();
+//		Thread.sleep(2000);
+//		enterCategory();
+//		Thread.sleep(2000);
+//		chooseCategory();
 		Thread.sleep(2000);
-		enterCategory();
-		Thread.sleep(2000);
-		chooseCategory();
-		Thread.sleep(2000);
-		clickAddCategorySave();
+		//clickAddCategorySave();
 		clickApprovalRuleSave();
 		
 	}
+
+
+
+
+
+
+public void deleteApprovalRuleDetailsFromSheet(String sheet) throws Exception {
+	eh.setExcelFile("appRuleInputData", sheet);
+  	String name = (String) eh.getCell(1, 0);
+	Thread.sleep(9000);
+	filterWorkaround(name);
+	Thread.sleep(9000);
+	commonObjects.clickOptionsIcon();
+	commonObjects.clickDeleteOption();
+	ruledeleteyes(); 
+	try {
+		filterWorkaround(name);
+		
+		Boolean n=driver.findElement(By.xpath(".//*[@id='item26']/div[1]/data-table-cell[1]/span[contains(.,'"+name+"')]")).isDisplayed();
+		if(n=false) {
+		throw Exception;}
+	}
+	catch (Exception e){
+		
+		
+	}
+	Thread.sleep(5000);
+
+
+}
+
+public void deleteApprovalRuleDefault() throws Exception {
 	
+	Thread.sleep(9000);
+	filterWorkaround("Campaigns and Broadcasts");
+	commonObjects.clickOptionsIcon();
+	Thread.sleep(9000);
+	 
+	try {
+		
+		assertTrue(driver.findElement(By.xpath("//paper-item[contains(.,'Edit')]")).isDisplayed());
+		Boolean n=driver.findElement(By.xpath("//paper-item[contains(.,'Delete')]")).isDisplayed();
+		if(n=true) {
+		throw Exception;}
+	}
+	catch (Exception e){
+		
+		
+	}
+	commonObjects.clickEditOption();
+	clickApprovalRuleSave();
+	Thread.sleep(5000);
+	
+}
+
+
+
+public void ruledeleteyes() throws InterruptedException {
+	jswait.loadClick(ruledeleteyes);
+}
 	public void clickAddUserButton() throws InterruptedException {
 		jswait.loadClick(addUserButton);
+	}
+	
+	public void broadcastpaperDialogBox() throws InterruptedException {
+		jswait.loadClick(broadcastpaperDialogBox);
 	}
 	
 	public void filterWorkaround(String name) throws InterruptedException {
@@ -210,7 +300,7 @@ public void editApprovalRuleDetailsFromSheet(String sheet) throws Throwable {
 		
 	
 		name=("edit"+name);
- 	    eh.setCell(1, 0, name);
+ 	    
  	    addApprovalRuleName.clear();
 	    jswait.loadSendKeys(addApprovalRuleName, name);
 	}
