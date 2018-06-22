@@ -428,6 +428,18 @@ public class CampaignManagement extends Init{
 	    }
 	    
 	    
+	    @Then("^verify filter for campaign from sheet \"([^\"]*)\"$")
+	    public void verifyFilterForCampaignFromSheet(String sheet) throws InterruptedException {
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	    	commonObjects.clickFilterIcon();                            //issue in filter
+			commonObjects.clickFilterResetButton();						//issue in filter
+			commonObjects.filterName(name);
+	    }
+
+	    
+	    
 	    @Then("^delete target conditions for template$")
 	    public void deletTargetTemplateFromSheet() throws Throwable {
 	 		campaignObjects.clickOptionsIcon();

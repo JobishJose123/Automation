@@ -132,7 +132,7 @@ Feature: campaign management
     
     
     @NX-1205 @initBrowser
-    Scenario: Campaign grid: Verify edit option of the campaign
+    Scenario: Campaign grid: Verify edit option of the campaign-1205
     Given login
     #Then navigate to configuration management
     #Then navigate to campaign categories
@@ -145,4 +145,21 @@ Feature: campaign management
     #Then verify campaign created from sheet "campaignBC"
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
+    
+    @NX-1198 @initBrowser
+    Scenario: Campaign grid: Verify the filter option for the campaign-1198
+    Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then verify campaign created from sheet "campaignBC"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then verify campaign created from sheet "campaignBC"
+    Then verify filter for campaign from sheet "campaignBC"
+    Then verify campaign created from sheet "campaignBC"
     
