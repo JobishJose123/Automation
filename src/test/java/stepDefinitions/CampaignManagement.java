@@ -90,6 +90,27 @@ public class CampaignManagement extends Init{
 	    }
 	 
 	 
+	 @Then("^edit campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+	    public void editCampaign(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		commonObjects.clickOptionsIcon();
+	 		campaignObjects.clickEditCampaignOption();
+	 		campaignObjects.editCampaign(name+" Edited", catalog);
+	 		eM.setCell(1, 0, name+" Edited");
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    }
+	 
+	 
+	 
 	 @Then("^create new campaign use template from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
 	    public void createNewCampaignUseTemplate(String sheet, String catalogSheet) throws Throwable
 	    {
@@ -125,6 +146,24 @@ public class CampaignManagement extends Init{
 	 		eM.setCell(1, 0, name);
 	 		campaignObjects.clickCreateNewTemplateButton();
 	 		campaignObjects.createCampaignTemplate(name);
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	 Thread.sleep(2000);
+	    }
+	 
+	 @Then("^create new template customer insight condition type from sheet \"([^\"]*)\"$")
+	    public void create_new_template_with_customer_insight(String sheet) throws Throwable
+	    {
+	    	
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignTemplateInputData",sheet);
+	 	    Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eM.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eM.setCell(1, 0, name);
+	 		campaignObjects.clickCreateNewTemplateButton();
+	 		campaignObjects.createCampaignTemplateWithCustomerInsight(name);
 	 		TimePicker dt = new TimePicker();
 	 		dt.gteDateTime();
 	    	 Thread.sleep(2000);
