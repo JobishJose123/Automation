@@ -632,8 +632,3 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
   Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
     Then check previous step and pass this
     
-
-    
-    @NX-testExcel
-    Scenario:  the Creative Tab in Create Offers while creating Email Based Offers. NX-2328
-    Then testExcel
