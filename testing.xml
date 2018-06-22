@@ -4,7 +4,7 @@
 <suite name = "Converted JUnit suite" >
    <test name = "JUnitTests" junit="true">
       <classes>
-         <class name = "TestRunner" />
+         <class name = "RunTestJoel" />
       </classes>
    </test>
 </suite>

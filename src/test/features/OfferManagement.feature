@@ -631,4 +631,11 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
   @NX-2330
   Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
     Then check previous step and pass this
-    
+    @NX-2403 @initBrowser @closeBrowser
+    Scenario: Offer Management-->Check for the Edit Functionality NX-2403
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
+	  Then edit offer from sheet "rechargeEmail"
