@@ -2,7 +2,7 @@ package baseClasses;
 
 import java.util.Random;
 
-public class RandonNumberGenerator {
+public class RandomNumberGenerator {
 	
 	public static int getRandomNumber() {
 		Random rn = new Random();
