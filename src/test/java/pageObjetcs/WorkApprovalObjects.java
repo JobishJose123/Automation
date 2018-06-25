@@ -85,13 +85,13 @@ public class WorkApprovalObjects extends Init{
 	
 	
 	@FindBy(xpath=".//*[@id='deleteApprovalRule']/div/paper-button[contains(.,'Yes')]")
-	private WebElement ruledeleteyes ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	private WebElement ruledeleteyes;
+	@FindBy(xpath=".//*[@id='deleteApprovalRule']/span[contains(.,'Are you sure you want to delete this rule?')]")
+	private WebElement deletewaringboxcheck;
+	@FindBy(xpath=".//div[@id='levelCheckBox1']//following::iron-icon[1]")
+	private WebElement userlevelclosebutton;
+	@FindBy(xpath=".//*[@id='toast']//span[contains(.,'Please choose at least one check-box.')]")
+	private WebElement warningmessage ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -127,6 +127,12 @@ public class WorkApprovalObjects extends Init{
 		//clickSaveOfferButton();
 	}
 	
+	public void userlevelclosebutton() throws InterruptedException {
+		jswait.loadClick(userlevelclosebutton);
+	}
+	
+	
+	
 	public void enterApprovalRuleDetailsFromSheet(String sheet) throws Throwable {
 		
 		clickEditRuleNameButton();
@@ -148,6 +154,38 @@ public class WorkApprovalObjects extends Init{
 		clickApprovalRuleSave();
 		
 	}
+	
+	public void createNewApprovalRulecheckboxverify(String sheet) throws Throwable {
+		clickCreateNewApprovalRuleButton();
+		clickEditRuleNameButton();
+		enterRuleName(sheet);
+		saveRuleName();
+		userlevelclosebutton();
+		clickCheckboxesverify();
+		clickAddCategoryButton();
+		cataloginput();
+		Thread.sleep(2000);
+		enterCategory();
+		Thread.sleep(2000);
+		chooseCategory();
+		Thread.sleep(2000);
+		clickAddCategorySave();
+		clickApprovalRuleSave();
+		Thread.sleep(1000);
+		clickCheckboxesverifywarning();
+		clickAddUserButton();
+		Thread.sleep(2000);
+		enterLevel1User();
+		Thread.sleep(2000);
+		chooseLevel1User();
+		clickAddUserNameSave();
+		clickCheckboxes();
+		clickApprovalRuleSave();
+								
+	}
+	
+	
+		
 	
 	
 	
@@ -202,6 +240,32 @@ public void deleteApprovalRuleDetailsFromSheet(String sheet) throws Exception {
 		filterWorkaround(name);
 		
 		Boolean n=driver.findElement(By.xpath(".//*[@id='item26']/div[1]/data-table-cell[1]/span[contains(.,'"+name+"')]")).isDisplayed();
+		if(n=false) {
+		throw Exception;}
+	}
+	catch (Exception e){
+		
+		
+	}
+	Thread.sleep(5000);
+
+
+}
+
+
+
+public void verifydeletecheckbox(String sheet) throws Exception {
+	eh.setExcelFile("appRuleInputData", sheet);
+  	String name = (String) eh.getCell(1, 0);
+	Thread.sleep(9000);
+	filterWorkaround(name);
+	Thread.sleep(9000);
+	
+	commonObjects.clickOptionsIcon();
+	commonObjects.clickDeleteOption();
+	Boolean n=deletewaringboxcheck.isDisplayed();
+	try {
+		
 		if(n=false) {
 		throw Exception;}
 	}
@@ -360,6 +424,37 @@ public void ruledeleteyes() throws InterruptedException {
 	}
 	
 	
+	public void clickCheckboxesverify() throws Exception {
+		try {
+		if(checkboxes.size()>0) {
+			for(WebElement checkbox: checkboxes) {
+				jswait.loadClick(checkbox);
+				throw Exception;
+			}}
+		
+		}catch(Exception e) {
+			System.out.println("checkbox not enabled");
+		}
+		
+		
+		
+	}
+	public void clickCheckboxesverifywarning() throws Exception {
+		
+		
+		boolean n=warningmessage.isDisplayed();
+		
+		try {
+			if(n=false) {
+				throw Exception;
+			}
+			
+		}
+		catch(Exception e) {
+			System.out.println("warning message  not displayed");
+		}
+		
+	}
 
 	
 	

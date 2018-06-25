@@ -7,14 +7,14 @@ Feature: generic product class
 @initBrowser
 Scenario: Verify by creating new Approval Rule
 Given login
-  	Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+  #	Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to landing page
 		Then navigate to precision marketer
 		Then navigate to configuration
@@ -68,3 +68,40 @@ Then navigate to landing page
 		Then navigate to configuration
 		Then click approval rules option
 		Then default ApprovalRule edit and delete
+		
+		@NX-6322
+		@initBrowser
+		Scenario: Verify whether warning message get displayed before deletion of rule
+		Given login
+		Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+		Then navigate to landing page
+		Then navigate to precision marketer
+		Then navigate to configuration
+		Then click approval rules option
+		Then deleteApprovalRulecheckFromSheet "approvalRule"
+		
+		@NX-6333
+		@initBrowser
+		Scenario: Verify selecting the Approval Required for Campaign and BC activation checkbox
+		Given login
+#		Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+		Then navigate to landing page
+		Then navigate to precision marketer
+		Then navigate to configuration
+		Then click approval rules option
+		Then check the Approval campaign and BC activation checkbox "approvalRule"
+		
