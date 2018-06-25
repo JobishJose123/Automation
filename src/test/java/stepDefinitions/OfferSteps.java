@@ -178,6 +178,23 @@ public class OfferSteps extends Init {
 		commonObjects.clickOptionsIcon();
 		offerPageObjects.clickEditOffer();
 	}
+	
+	@Then("^edit offer from sheet \"([^\"]*)\"$")
+	public void editOffer(String sheet) throws Throwable {
+		eh.setExcelFile("offerInputData", sheet);
+		String offerName = (String) eh.getCell(1, 0);
+		commonObjects.filterName(offerName);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		offerPageObjects.enterOfferName(offerName+"Edited");
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickSaveOfferButton();
+		commonObjects.filterName(offerName+"Edited");
+		commonObjects.clickOptionsIcon();
+	}
 
 	@Then("^remove product for offer from sheet \"([^\"]*)\"$")
 	public void removeProduct(String sheet) throws Throwable {
