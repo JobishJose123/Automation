@@ -93,6 +93,18 @@ public class CampaignObjects extends Init{
 	private WebElement addAndButton;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
 	private WebElement targetConditionTypeSelector;
+	@FindBy(xpath="//label[contains(.,'Conversion Rate')]")
+	private WebElement conversionRate;
+	@FindBy(xpath="//label[contains(.,'Targeted Customers')]")
+	private WebElement targetedCustomers;
+	@FindBy(xpath="//label[contains(.,'CG')]")
+	private WebElement CG;
+	@FindBy(xpath=".//div[@class='layout vertical flex rowDetail style-scope campaign-list']")
+	private WebElement campaignRowDetails;
+	@FindBy(xpath=".//span[contains(.,'Save target conditions before proceeding.')]")
+	private WebElement SaveTCforCampaign;
+	
+	
 	
 	
 	
@@ -180,6 +192,31 @@ public class CampaignObjects extends Init{
 		clickSaveCampaignTemplate();
 	}
 	
+	public void deleteTargetConditionForCampaign() throws InterruptedException {
+		clickProceedButton();
+		verifyTargetConditionCard();
+		clickOptionsIcon();
+		Thread.sleep(3000);
+		clickDeleteOption();
+		Thread.sleep(3000);
+		verifyTargetConditionCardAfterDeleteion();
+		clickProceedButton();
+		verifySaveTCforCampaign();
+	}
+	
+	
+	public void click_on_campaign_and_verify_row(String name) throws InterruptedException {
+		
+		assertTrue(driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'campaignBC Edited1693')]")).isDisplayed());
+		driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'"+name+"')]")).click();
+		assertTrue(campaignRowDetails.isDisplayed());
+		assertTrue(conversionRate.isDisplayed());
+		assertTrue(targetedCustomers.isDisplayed());
+		assertTrue(CG.isDisplayed());
+
+		
+	}
+	
 	
 	
 	public void createNewCampaignCategory(String name) throws InterruptedException {
@@ -206,6 +243,10 @@ public class CampaignObjects extends Init{
 	
 	public void verifyDuplicateCampaignNameToast() throws InterruptedException {
 		assertTrue(DuplicateCampaignNameToast.isDisplayed());
+	}
+	
+	public void verifySaveTCforCampaign() throws InterruptedException {
+		assertTrue(SaveTCforCampaign.isDisplayed());
 	}
 	
 	public void clickProceedButton() throws InterruptedException {
