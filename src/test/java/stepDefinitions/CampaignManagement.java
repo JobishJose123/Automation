@@ -450,8 +450,6 @@ public class CampaignManagement extends Init{
 	 		TimePicker dt = new TimePicker();
 	 		dt.gteDateTime();
 	    	Thread.sleep(2000);
-	    	
-	 		
 	    }
 	    
 	    @Then("^click on campaign  to verify expanding the campaign row from sheet \"([^\"]*)\"$")
@@ -460,9 +458,20 @@ public class CampaignManagement extends Init{
 	    	eM.setExcelFile("campaignInputData",sheet);
 	 		String name = (String) eM.getCell(1, 0);
 	 		campaignObjects.click_on_campaign_and_verify_row(name);
-	    	
-	    	
-	    
 	    }
+	    
+	    @Then("^delete target conditions for campaign$")
+	    public void deleteTargetConditionForCampaign() throws Throwable
+	    {
+	    	commonObjects.clickOptionsIcon();
+//	 		Thread.sleep(3000);
+	 		campaignObjects.clickEditCampaignOption();
+	 		Thread.sleep(2000);
+	 		campaignObjects.deleteTargetConditionForCampaign();
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    }
+	    
 	    
 }

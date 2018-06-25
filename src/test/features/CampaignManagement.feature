@@ -177,3 +177,18 @@ Feature: campaign management
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then click on campaign  to verify expanding the campaign row from sheet "campaignBC"
     
+    
+    @NX-686 @initBrowser
+    Scenario: Campaign Creation: Graphical  :Verify the delete option for the added virtual conditions-686
+    Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then verify campaign created from sheet "campaignBC"
+    Then delete target conditions for campaign
+    

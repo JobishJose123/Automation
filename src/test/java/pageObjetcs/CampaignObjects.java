@@ -101,6 +101,8 @@ public class CampaignObjects extends Init{
 	private WebElement CG;
 	@FindBy(xpath=".//div[@class='layout vertical flex rowDetail style-scope campaign-list']")
 	private WebElement campaignRowDetails;
+	@FindBy(xpath=".//span[contains(.,'Save target conditions before proceeding.')]")
+	private WebElement SaveTCforCampaign;
 	
 	
 	
@@ -190,6 +192,19 @@ public class CampaignObjects extends Init{
 		clickSaveCampaignTemplate();
 	}
 	
+	public void deleteTargetConditionForCampaign() throws InterruptedException {
+		clickProceedButton();
+		verifyTargetConditionCard();
+		clickOptionsIcon();
+		Thread.sleep(3000);
+		clickDeleteOption();
+		Thread.sleep(3000);
+		verifyTargetConditionCardAfterDeleteion();
+		clickProceedButton();
+		verifySaveTCforCampaign();
+	}
+	
+	
 	public void click_on_campaign_and_verify_row(String name) throws InterruptedException {
 		
 		assertTrue(driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'campaignBC Edited1693')]")).isDisplayed());
@@ -228,6 +243,10 @@ public class CampaignObjects extends Init{
 	
 	public void verifyDuplicateCampaignNameToast() throws InterruptedException {
 		assertTrue(DuplicateCampaignNameToast.isDisplayed());
+	}
+	
+	public void verifySaveTCforCampaign() throws InterruptedException {
+		assertTrue(SaveTCforCampaign.isDisplayed());
 	}
 	
 	public void clickProceedButton() throws InterruptedException {
