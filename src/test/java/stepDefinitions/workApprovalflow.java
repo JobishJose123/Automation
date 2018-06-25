@@ -87,7 +87,17 @@ public class workApprovalflow extends Init{
    	}
 	
 	
-	
+    @Then("^deleteApprovalRulecheckFromSheet \"([^\"]*)\"$")
+   	public void deleteApprovalRulecheck(String sheet) throws Throwable {
+       	
+       	approvalPageObjects.verifydeletecheckbox(sheet);
+   	}
+    
+    @Then("^check the Approval campaign and BC activation checkbox \"([^\"]*)\"$")
+   	public void createNewApprovalRulecheckboxverify(String sheet) throws Throwable {
+       	
+       	approvalPageObjects.createNewApprovalRulecheckboxverify(sheet);
+   	}
 	
 	
 	
