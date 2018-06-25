@@ -207,3 +207,19 @@ Feature: campaign management
     Then verify campaign created from sheet "campaignBC"
     
     
+    @NX-685 @initBrowser
+    Scenario: Campaign Creation: Graphical  :Verify the edit option of the added virtual conditions-685
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    Then edit target conditions for campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    
+    
+    

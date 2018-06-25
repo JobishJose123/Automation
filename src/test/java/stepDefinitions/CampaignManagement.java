@@ -133,6 +133,25 @@ public class CampaignManagement extends Init{
 	    	Thread.sleep(2000);
 	    }
 	 
+	 @Then("^edit target conditions for campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+	    public void editTargetConditionsForCampaign(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		commonObjects.clickOptionsIcon();
+	 		campaignObjects.clickEditCampaignOption();
+	 		campaignObjects.editTargetConditionsForCampaign(name+" Edited", catalog);
+	 		eM.setCell(1, 0, name+" Edited");
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    }
+	 
 	 
 	 
 	 @Then("^create new campaign use template from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")

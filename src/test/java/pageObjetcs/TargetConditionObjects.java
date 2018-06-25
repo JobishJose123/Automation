@@ -1,5 +1,7 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertTrue;
+
 import java.awt.AWTException;
 
 import org.openqa.selenium.Point;
@@ -24,6 +26,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionViewToggle;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
 	private WebElement targetConditionTypeSelector;
+	@FindBy(xpath=".//field-simple//span[contains(.,'25')]")
+	private WebElement editedTC;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Profile Info')]")
 	private WebElement targetConditionTypeCustomerProfileInfo;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Location Insights')]")
@@ -153,7 +157,7 @@ public class TargetConditionObjects extends Init {
 	 
 	 public void clickBasicTargetConditionWithAgeEdit() throws InterruptedException {
 //	    jswait.loadClick(createConditionButton);
-	      jswait.loadClick(targetConditionTypeSelector);
+	   jswait.loadClick(targetConditionTypeSelector);
 	   jswait.loadClick(targetConditionTypeCustomerProfileInfo);
 	   jswait.loadClick(CustomerInsightFieldSelector);
 	   jswait.loadClick(CustomerInsightFieldAge);
@@ -162,6 +166,11 @@ public class TargetConditionObjects extends Init {
 	   jswait.loadSendKeys(isGreaterThanValue,"25");
 	   jswait.loadClick(targetConditionSave);
 	  }
+	 
+	 public void verifyAddedTargetCondition() throws InterruptedException {
+		 Thread.sleep(3000);
+		assertTrue(editedTC.isDisplayed());  
+	 }
 	 
 	 public void clickBasicTargetConditionWithAge2() throws InterruptedException {
 //		 	jswait.loadClick(createConditionButton);
