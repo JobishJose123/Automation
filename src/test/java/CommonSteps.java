@@ -18,6 +18,7 @@ import com.github.mkolisnyk.cucumber.runner.BeforeSuite;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.PropHandler;
+import baseClasses.RandomNumberGenerator;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
