@@ -149,17 +149,31 @@ Feature: campaign management
     @NX-1198 @initBrowser
     Scenario: Campaign grid: Verify the filter option for the campaign-1198
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then verify campaign created from sheet "campaignBC"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then verify campaign created from sheet "campaignBC"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
     Then verify filter for campaign from sheet "campaignBC"
     Then verify campaign created from sheet "campaignBC"
+    
+    
+    @NX-1194 @initBrowser
+    Scenario: Campaign grid: Verify expanding the campaign row-1194
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then click on campaign  to verify expanding the campaign row from sheet "campaignBC"
     

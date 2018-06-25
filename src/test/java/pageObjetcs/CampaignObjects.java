@@ -93,6 +93,16 @@ public class CampaignObjects extends Init{
 	private WebElement addAndButton;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
 	private WebElement targetConditionTypeSelector;
+	@FindBy(xpath="//label[contains(.,'Conversion Rate')]")
+	private WebElement conversionRate;
+	@FindBy(xpath="//label[contains(.,'Targeted Customers')]")
+	private WebElement targetedCustomers;
+	@FindBy(xpath="//label[contains(.,'CG')]")
+	private WebElement CG;
+	@FindBy(xpath=".//div[@class='layout vertical flex rowDetail style-scope campaign-list']")
+	private WebElement campaignRowDetails;
+	
+	
 	
 	
 	
@@ -178,6 +188,18 @@ public class CampaignObjects extends Init{
 		Thread.sleep(3000);
 		verifyTargetConditionCardAfterDeleteion();
 		clickSaveCampaignTemplate();
+	}
+	
+	public void click_on_campaign_and_verify_row(String name) throws InterruptedException {
+		
+		assertTrue(driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'campaignBC Edited1693')]")).isDisplayed());
+		driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'"+name+"')]")).click();
+		assertTrue(campaignRowDetails.isDisplayed());
+		assertTrue(conversionRate.isDisplayed());
+		assertTrue(targetedCustomers.isDisplayed());
+		assertTrue(CG.isDisplayed());
+
+		
 	}
 	
 	

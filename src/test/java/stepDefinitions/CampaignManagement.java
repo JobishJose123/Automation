@@ -454,4 +454,15 @@ public class CampaignManagement extends Init{
 	 		
 	    }
 	    
+	    @Then("^click on campaign  to verify expanding the campaign row from sheet \"([^\"]*)\"$")
+	    public void click_on_campaign(String sheet) throws Throwable
+	    {
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		campaignObjects.click_on_campaign_and_verify_row(name);
+	    	
+	    	
+	    
+	    }
+	    
 }
