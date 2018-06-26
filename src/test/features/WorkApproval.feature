@@ -7,14 +7,14 @@ Feature: generic product class
 @initBrowser
 Scenario: Verify by creating new Approval Rule
 Given login
-  #	Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to life cycle marketing
-#		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+  	Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to landing page
 		Then navigate to precision marketer
 		Then navigate to configuration
@@ -91,7 +91,26 @@ Then navigate to landing page
 		@initBrowser
 		Scenario: Verify selecting the Approval Required for Campaign and BC activation checkbox
 		Given login
-#		Then navigate to configuration management
+		Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+		Then navigate to landing page
+		Then navigate to precision marketer
+		Then navigate to configuration
+		Then click approval rules option
+		Then check the Approval campaign and BC activation checkbox "approvalRule"
+		
+		
+		@NX-6353
+		@initBrowser
+		Scenario: Verify adding Campaign category to multiple rule
+		Given login
+  #	Then navigate to configuration management
     #Then navigate to campaign categories
     #Then create new campaign category from sheet "CampaignCategory"
     #Then navigate to landing page
@@ -99,9 +118,10 @@ Then navigate to landing page
     #Then navigate to life cycle marketing
 #		Then navigate to campaign category from sheet "CampaignCategory"
     #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-		Then navigate to landing page
+    Then navigate to landing page
 		Then navigate to precision marketer
 		Then navigate to configuration
 		Then click approval rules option
-		Then check the Approval campaign and BC activation checkbox "approvalRule"
+		Then create new approval rule from sheet "approvalRule"
+		Then create new approval multiple rule from sheet "approvalRule"
 		

@@ -99,7 +99,11 @@ public class workApprovalflow extends Init{
        	approvalPageObjects.createNewApprovalRulecheckboxverify(sheet);
    	}
 	
-	
+    @Then("^create new approval multiple rule from sheet \"([^\"]*)\"$")
+   	public void createNewApprovalmultipleRuleverify(String sheet) throws Throwable {
+       	
+       	approvalPageObjects.createNewApprovalRule_multiplerule_verify(sheet);
+   	}
 	
 	
 }

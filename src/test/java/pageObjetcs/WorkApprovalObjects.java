@@ -19,10 +19,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.RandomNumberGenerator;
 public class WorkApprovalObjects extends Init{
 
 	private static final Exception Exception = null;
 	CommonObjects commonObjects = new CommonObjects();
+	 RandomNumberGenerator random=new RandomNumberGenerator();
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -173,17 +175,47 @@ public class WorkApprovalObjects extends Init{
 		clickApprovalRuleSave();
 		Thread.sleep(1000);
 		clickCheckboxesverifywarning();
-		clickAddUserButton();
 		Thread.sleep(2000);
+		driver.findElement(By.xpath(".//*[@id='addLevelButton']")).click();
+		clickAddUserButton();
 		enterLevel1User();
 		Thread.sleep(2000);
 		chooseLevel1User();
 		clickAddUserNameSave();
 		clickCheckboxes();
 		clickApprovalRuleSave();
+		
 								
 	}
 	
+	
+	
+	public void createNewApprovalRule_multiplerule_verify(String sheet) throws Throwable {
+		clickCreateNewApprovalRuleButton();
+		clickEditRuleNameButton();
+		enterRuleName(sheet);
+		saveRuleName();
+		clickAddUserButton();
+		enterLevel1User();
+		chooseLevel1User();
+		clickAddUserNameSave();
+		clickAddCategoryButton();
+		cataloginput();
+		Thread.sleep(2000);
+		chooseCategorycheck();
+//		Thread.sleep(2000);
+//		enterCategory();
+//		Thread.sleep(2000);
+//		chooseCategory();
+//		Thread.sleep(2000);
+//		clickAddCategorySave();
+//		clickApprovalRuleSave();
+//		Thread.sleep(1000);
+//			clickCheckboxes();
+//		clickApprovalRuleSave();
+		
+								
+	}
 	
 		
 	
@@ -345,6 +377,29 @@ public void ruledeleteyes() throws InterruptedException {
 	}
 	
 	
+	
+	public void chooseCategorycheck() throws Exception {
+		String sheet="campaignCategory";
+		eh.setExcelFile("campaignCategoryInputData", sheet);
+	    
+		String name = (String) eh.getCell(1, 0);
+		Thread.sleep(2000);
+try {
+		Boolean n=driver.findElement(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item[contains(.,'"+name+"')]")).isSelected();
+		Thread.sleep(2000);
+		if(n=true) {
+			throw Exception;
+		}
+		}
+catch(Exception e) {
+	System.out.println("error:catagory is present");
+	
+}
+
+
+
+	}
+	
 	public void clickAddCategoryButton() throws InterruptedException {
 		jswait.loadClick(addCategoryButton);
 	}
@@ -373,15 +428,16 @@ public void ruledeleteyes() throws InterruptedException {
 	public void enterRuleName(String sheet) throws InterruptedException, IOException {
 		
 		eh.setExcelFile("appRuleInputData", sheet);
-	    Random rn = new Random();
-		int  n = rn.nextInt(5000) + 1;
+//	    Random rn = new Random();
+//		int  n = rn.nextInt(5000) + 1;
 		String name = (String) eh.getCell(1, 0);
-		name =  name.replaceAll("[0-9]", "")+n;
+		name =  RandomNumberGenerator.changeRandomNumber(name);
  	    eh.setCell(1, 0, name);
  	    addApprovalRuleName.clear();
 	    jswait.loadSendKeys(addApprovalRuleName, name);
 	}
 	public void enterLevel1User() throws InterruptedException {
+		
 		jswait.loadSendKeys(addUserField, "syam.krishna@flytxt.com");
 		Thread.sleep(2000);
 	}
