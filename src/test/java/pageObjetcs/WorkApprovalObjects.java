@@ -19,12 +19,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
-import baseClasses.RandomNumberGenerator;
+import baseClasses.RandomNameGenerator;
+
 public class WorkApprovalObjects extends Init{
 
 	private static final Exception Exception = null;
 	CommonObjects commonObjects = new CommonObjects();
-	 RandomNumberGenerator random=new RandomNumberGenerator();
+	 
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -431,7 +432,7 @@ catch(Exception e) {
 //	    Random rn = new Random();
 //		int  n = rn.nextInt(5000) + 1;
 		String name = (String) eh.getCell(1, 0);
-		name =  RandomNumberGenerator.changeRandomNumber(name);
+		name =  RandomNameGenerator.getRandomName(name);
  	    eh.setCell(1, 0, name);
  	    addApprovalRuleName.clear();
 	    jswait.loadSendKeys(addApprovalRuleName, name);

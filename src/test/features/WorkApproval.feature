@@ -122,6 +122,6 @@ Then navigate to landing page
 		Then navigate to precision marketer
 		Then navigate to configuration
 		Then click approval rules option
-		Then create new approval rule from sheet "approvalRule"
+#		Then create new approval rule from sheet "approvalRule"
 		Then create new approval multiple rule from sheet "approvalRule"
 		
