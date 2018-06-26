@@ -223,3 +223,32 @@ Feature: campaign management
     
     
     
+    @NX-674 @initBrowser
+    Scenario: Campaign Creation: Details: Verify the offers by clicking on the hyperlink near choose catalo-674
+    Given login
+    When navigate to precision marketer
+	  Then navigate to offer management
+    Then navigate to products
+    Then navigate to prepaid telecom
+    Then click create new product button
+    Then create single product from sheet "singleProductPage"
+	  Then navigate to offer management 
+	  Then navigate to offers
+    Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then verify number of offers while create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    
+    
+    
+    
