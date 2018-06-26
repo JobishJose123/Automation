@@ -299,8 +299,8 @@ public class OfferPageObjects extends Init {
 	 private WebElement addVariableDeleteButton;
 	 @FindBy(xpath=".//*[@id='previewForm']//paper-button[2]")
 	 private WebElement previewEmailConfirmButton;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
+	 @FindBy(xpath="//paper-dialog[@id='deleteOffer']//paper-button[contains(.,'Yes')]")
+	 private WebElement offerDeleteConfirmYes;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -365,6 +365,9 @@ public class OfferPageObjects extends Init {
 //  Creative Tab in Offer Creation	functions
 	 public void clickAddNewVariableButton() throws InterruptedException {
 			jswait.loadClick(addNewVariableButton);
+		}
+	 public void clickOfferDeleteConfirmYesButton() throws InterruptedException {
+			jswait.loadClick(offerDeleteConfirmYes);
 		}
 	 public void clickMapVariableCancelButton() throws InterruptedException {
 			jswait.loadClick(mapVariableCancelButton);

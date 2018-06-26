@@ -631,11 +631,24 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
   @NX-2330
   Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
     Then check previous step and pass this
-    @NX-2403 @initBrowser @closeBrowser
-    Scenario: Offer Management-->Check for the Edit Functionality NX-2403
+    
+    @NX-2419 @initBrowser
+  Scenario: Email Channel -->Verify the Create offer using Email as a channel. NX-2419 
     Given login
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
+    Then pass next scenario based on this step
+
+ @NX-2403 
+    Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
 	  Then edit offer from sheet "rechargeEmail"
+	  
+    @NX-2421
+  Scenario: Email Channel -->Verify the Duplicate options of the offers using Email as a channel. NX-2421
+    Then duplicate offer from sheet "rechargeEmail"
+  
+	  @NX-2422
+  Scenario: Email Channel -->Verify the Verify the "Delete" option from the Options icon using Email as a channel. NX-2422
+	   Then delete offer from sheet "rechargeEmail"

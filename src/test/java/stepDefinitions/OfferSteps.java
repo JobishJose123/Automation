@@ -178,7 +178,22 @@ public class OfferSteps extends Init {
 		commonObjects.clickOptionsIcon();
 		offerPageObjects.clickEditOffer();
 	}
-	
+	@Then("^duplicate offer from sheet \"([^\"]*)\"$")
+	public void duplicateOfferFromSheet(String sheet) throws Throwable {
+		eh.setExcelFile("offerInputData", sheet);
+		String offerName = (String) eh.getCell(1, 0);
+		commonObjects.filterName(offerName);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickDuplicateOption();
+		offerPageObjects.enterOfferName(offerName+"Duplicate");
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickSaveOfferButton();
+		commonObjects.filterName(offerName+"Duplicate");
+		commonObjects.clickOptionsIcon();
+	}
 	@Then("^edit offer from sheet \"([^\"]*)\"$")
 	public void editOffer(String sheet) throws Throwable {
 		eh.setExcelFile("offerInputData", sheet);
@@ -187,6 +202,7 @@ public class OfferSteps extends Init {
 		commonObjects.clickOptionsIcon();
 		commonObjects.clickEditOption();
 		offerPageObjects.enterOfferName(offerName+"Edited");
+		eh.setCell(1, 0,offerName+"Edited");
 		offerPageObjects.clickOfferEditProceedButton();
 		offerPageObjects.clickOfferEditProceedButton();
 		offerPageObjects.clickOfferEditProceedButton();
@@ -194,6 +210,21 @@ public class OfferSteps extends Init {
 		offerPageObjects.clickSaveOfferButton();
 		commonObjects.filterName(offerName+"Edited");
 		commonObjects.clickOptionsIcon();
+	}
+	@Then("^delete offer from sheet \"([^\"]*)\"$")
+	public void deleteOffer(String sheet) throws Throwable {
+		eh.setExcelFile("offerInputData", sheet);
+		String offerName = (String) eh.getCell(1, 0);
+		commonObjects.filterName(offerName);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickDeleteOption();
+		offerPageObjects.clickOfferDeleteConfirmYesButton();
+		commonObjects.filterName(offerName);
+		try {
+			commonObjects.clickOptionsIcon();
+		}catch(Exception e) {
+			
+		}
 	}
 
 	@Then("^remove product for offer from sheet \"([^\"]*)\"$")
