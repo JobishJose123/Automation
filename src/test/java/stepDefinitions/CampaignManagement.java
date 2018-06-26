@@ -516,4 +516,23 @@ public class CampaignManagement extends Init{
 	    }
 	    
 	    
+	    @Then("^verify number of offers while create new campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+	    public void verifyNumberOfOffersWhileCreateCampaign(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 	    Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		campaignObjects.clickCreateNewCampaignButton();
+	 		campaignObjects.verifyNumberOfOffersWhileCreateCampaign(name, catalog);
+ 
+	    }
+	    
+	    
 }

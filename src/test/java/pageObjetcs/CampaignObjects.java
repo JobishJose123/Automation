@@ -52,6 +52,8 @@ public class CampaignObjects extends Init{
 	
 	@FindBy(xpath=".//paper-card[@id='conditionCard']")
 	private WebElement conditionCard;
+	@FindBy(xpath=".//div[@class='offers flex style-scope campaign-details' and contains(.,'1 Number of offers')]")
+	private WebElement offerNumber;
 	
 	
 
@@ -315,6 +317,15 @@ public class CampaignObjects extends Init{
 		selectOfferCatalog(catalog);
 	}
 	
+	
+	public void verifyNumberOfOffersWhileCreateCampaign() throws InterruptedException {
+		assertTrue(offerNumber.isDisplayed());
+		String offNumber=offerNumber.getText();
+		System.out.println(offNumber);
+		offNumber.equals("1 Number of offers");
+		
+	}
+	
 	public void enterTemplateDeails(String name) throws InterruptedException {
 		selectTypeInformational();
 		enterCampaignName(name);
@@ -421,6 +432,16 @@ public class CampaignObjects extends Init{
          wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
          clickSaveCampaignButton();
 	}
+	
+	
+	
+	public void verifyNumberOfOffersWhileCreateCampaign(String name,String catalog) throws InterruptedException {
+		enterCampaignDeails(name,catalog);
+		verifyNumberOfOffersWhileCreateCampaign();
+	
+	}
+	
+	
 	
 	
 	public void createCampaignWithAddAndOption(String name,String catalog) throws InterruptedException {
