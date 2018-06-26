@@ -534,4 +534,15 @@ public class CampaignManagement extends Init{
 	    }
 	    
 	    
+	    @Then("^verify pause and resume option for campaign$")
+	    public void verifyPauseAndResumeForCampaign(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	commonObjects.clickOptionsIcon();
+	 		campaignObjects.clickPauseCampaignOption();
+	 		campaignObjects.clickConfirmPauseYes();
+	 		Thread.sleep(4000);
+	 		
+	    }
+	    
+	    
 }

@@ -193,7 +193,7 @@ Feature: campaign management
     Then delete target conditions for campaign
     
     
-    @NX-687 @initBrowser
+    @NX-687 @NX-691 @initBrowser
     Scenario: Campaign Creation: Graphical  :Verify adding multiple AND/OR condition in visual editor-687
     Given login
     Then navigate to configuration management
@@ -207,7 +207,7 @@ Feature: campaign management
     Then verify campaign created from sheet "campaignBC"
     
     
-    @NX-685 @initBrowser
+    @NX-685 @NX-693 @initBrowser
     Scenario: Campaign Creation: Graphical  :Verify the edit option of the added virtual conditions-685
     Given login
     Then navigate to configuration management
@@ -248,6 +248,23 @@ Feature: campaign management
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
     Then verify number of offers while create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    
+    
+    
+    @NX-1212 @initBrowser
+    Scenario: Campaign grid: Verify the resume option for the campaign-1212
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    Then verify pause and resume option for campaign
+    
     
     
     

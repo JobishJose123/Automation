@@ -67,6 +67,8 @@ public class CampaignObjects extends Init{
 	private WebElement createNewCampaignCategoryButton;
 	@FindBy(xpath=".//*[@id='createNew']//label[contains(.,'Name')]/../input")
 	private WebElement categoryNameInput;
+	@FindBy(xpath=".//paper-dialog[@id='confirmBoxPause']//paper-button[contains(.,'Yes')]")
+	private WebElement confirmPauseYes;
 	@FindBy(xpath=".//*[@id='createNew']//paper-button[contains(.,'Save')]")
 	private WebElement campaignCategorySave;
 	@FindBy(xpath="//paper-tab/div[contains(.,'Campaign Templates')]/..")
@@ -86,6 +88,8 @@ public class CampaignObjects extends Init{
 	private WebElement optionsEditTargetCondtion;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement editCampaign;
+	@FindBy(xpath = "//paper-item[contains(.,'Pause')]")
+	private WebElement pauseCampaign;
 	@FindBy(xpath = ".//label[contains(.,'Name')]/../input")
 	private WebElement campaignTemplateNameInput;
 	@FindBy(xpath = ".//paper-button[contains(.,'Use Template')]")
@@ -160,6 +164,13 @@ public class CampaignObjects extends Init{
 	}
 	public void clickEditCampaignOption() throws InterruptedException {
 		jswait.loadClick(editCampaign);
+	}
+	
+	public void clickPauseCampaignOption() throws InterruptedException {
+		jswait.loadClick(pauseCampaign);
+	}
+	public void clickConfirmPauseYes() throws InterruptedException {
+		jswait.loadClick(confirmPauseYes);
 	}
 	public void enterCategoryName(String name) throws InterruptedException {
 		jswait.loadSendKeys(categoryNameInput, name);
