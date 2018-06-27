@@ -22,6 +22,7 @@ public class CampaignObjects extends Init{
 		PageFactory.initElements(driver, this);
 	}
 	JSWaiter jswait = new JSWaiter();
+	CommonObjects commonObjects = new CommonObjects();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	public TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	
@@ -69,6 +70,8 @@ public class CampaignObjects extends Init{
 	private WebElement categoryNameInput;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxPause']//paper-button[contains(.,'Yes')]")
 	private WebElement confirmPauseYes;
+	@FindBy(xpath=".//paper-dialog[@id='confirmBoxResume']//paper-button[contains(.,'Yes')]")
+	private WebElement confirmResumeYes;
 	@FindBy(xpath=".//*[@id='createNew']//paper-button[contains(.,'Save')]")
 	private WebElement campaignCategorySave;
 	@FindBy(xpath="//paper-tab/div[contains(.,'Campaign Templates')]/..")
@@ -88,8 +91,10 @@ public class CampaignObjects extends Init{
 	private WebElement optionsEditTargetCondtion;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement editCampaign;
-	@FindBy(xpath = "//paper-item[contains(.,'Pause')]")
+	@FindBy(xpath = "//iron-icon[@icon='av:pause-circle-filled']")
 	private WebElement pauseCampaign;
+	@FindBy(xpath = "//iron-icon[@icon='av:playlist-play']")
+	private WebElement resumeCampaign;
 	@FindBy(xpath = ".//label[contains(.,'Name')]/../input")
 	private WebElement campaignTemplateNameInput;
 	@FindBy(xpath = ".//paper-button[contains(.,'Use Template')]")
@@ -169,8 +174,36 @@ public class CampaignObjects extends Init{
 	public void clickPauseCampaignOption() throws InterruptedException {
 		jswait.loadClick(pauseCampaign);
 	}
+	public void clickResumeCampaignOption() throws InterruptedException {
+		jswait.loadClick(resumeCampaign);
+	}
+	public void verifyResumeCampaignOption() throws InterruptedException {
+		assertTrue(resumeCampaign.isDisplayed());
+	}
 	public void clickConfirmPauseYes() throws InterruptedException {
 		jswait.loadClick(confirmPauseYes);
+	}
+	public void clickConfirmResumeYes() throws InterruptedException {
+		jswait.loadClick(confirmResumeYes);
+	}
+	public void verifyStatusOfCampaign() throws InterruptedException {
+		
+		commonObjects.clickOptionsIcon();
+ 		clickPauseCampaignOption();
+ 		clickConfirmPauseYes();
+ 		//WebDriverWait wait = new WebDriverWait(driver, 25);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//vaadin-grid-table-row//vaadin-grid-table-cell//span[@class='statusHexWrap style-scope campaign-list' and contains(.,'P')]")));
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//vaadin-grid-table-row//vaadin-grid-table-cell//span[@class='statusHexWrap style-scope campaign-list' and contains(.,'P')]")));
+ 		Thread.sleep(5000);
+ 		driver.navigate().refresh();
+ 		Thread.sleep(5000);
+		commonObjects.clickOptionsIcon();
+		//WebDriverWait wait = new WebDriverWait(driver, 25);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iron-icon[@icon='av:playlist-play']")));
+		verifyResumeCampaignOption();
+		clickResumeCampaignOption();
+ 		clickConfirmPauseYes();
+		
 	}
 	public void enterCategoryName(String name) throws InterruptedException {
 		jswait.loadSendKeys(categoryNameInput, name);
