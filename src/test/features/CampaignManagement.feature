@@ -40,7 +40,6 @@ Feature: campaign management
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
     Then create new template from sheet "template"
     Then verify template created from sheet "template"
@@ -56,7 +55,6 @@ Feature: campaign management
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
     Then create new template from sheet "template"
     Then verify template created from sheet "template"
@@ -73,7 +71,6 @@ Feature: campaign management
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
     Then create new template from sheet "template"
     Then verify template created from sheet "template"
@@ -85,14 +82,13 @@ Feature: campaign management
     @NX-1505 @initBrowser
     Scenario: Campaign Template: Verify the Add AND option for the condition added- 1505
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
     Then create new template from sheet with add AND option "template"
     Then verify template created from sheet "template"
@@ -101,14 +97,13 @@ Feature: campaign management
     @NX-1500 @initBrowser
     Scenario: Campaign Template: Verify delete option for the conditions added- 1500
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
     Then create new template from sheet "template"
     Then verify template created from sheet "template"
@@ -118,14 +113,13 @@ Feature: campaign management
     @NX-1496 @initBrowser
     Scenario: Campaign Template:Verify the edit option for the conditions added- 1496
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
     Then create new template from sheet "template"
     Then verify template created from sheet "template"
@@ -136,14 +130,13 @@ Feature: campaign management
     @NX-1492 @NX-1491 @initBrowser
     Scenario: Campaign Template: Verify adding the Field value in target condition tab- 1492
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then navigate to templates tab
     Then create new template customer insight condition type from sheet "template"
     Then verify template created from sheet "template"
@@ -152,15 +145,15 @@ Feature: campaign management
     @NX-1205 @initBrowser
     Scenario: Campaign grid: Verify edit option of the campaign-1205
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then verify campaign created from sheet "campaignBC"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
     
@@ -199,15 +192,15 @@ Feature: campaign management
     @NX-686 @initBrowser
     Scenario: Campaign Creation: Graphical  :Verify the delete option for the added virtual conditions-686
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then verify campaign created from sheet "campaignBC"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
     Then delete target conditions for campaign
     
     
@@ -272,6 +265,22 @@ Feature: campaign management
     @NX-1212 @initBrowser
     Scenario: Campaign grid: Verify the resume option for the campaign-1212
     Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    Then verify pause and resume option for campaign
+    
+    
+    
+    @NX-698 @initBrowser
+    Scenario: Campaign Creation: Graphical Target:Verify the Duplicate option for the added virtual condition-698
+    Given login
     #Then navigate to configuration management
     #Then navigate to campaign categories
     #Then create new campaign category from sheet "CampaignCategory"
@@ -279,9 +288,7 @@ Feature: campaign management
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then verify campaign created from sheet "campaignBC"
-    Then verify pause and resume option for campaign
+    Then verify the duplicate option for the added virtual condition while creating new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
     
     

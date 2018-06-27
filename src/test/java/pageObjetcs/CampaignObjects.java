@@ -481,6 +481,21 @@ public class CampaignObjects extends Init{
 	}
 	
 	
+	public void VerifyDuplicateOptionForAdedVirtualConditions(String name,String catalog) throws InterruptedException {
+		enterCampaignDeails(name,catalog);
+		clickProceedButton();
+		targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickBasicTargetConditionWithAge();
+		targetConditionObjects.clickGraphicalTargetConditionButton();
+		commonObjects.clickOptionsIcon();
+		targetConditionObjects.clickDuplicateTargetConditionButton();
+		targetConditionObjects.verifyDuplicatedTargetConditionCard();
+		
+	}
+	
+	
+	
 	
 	public void verifyNumberOfOffersWhileCreateCampaign(String name,String catalog) throws InterruptedException {
 		enterCampaignDeails(name,catalog);

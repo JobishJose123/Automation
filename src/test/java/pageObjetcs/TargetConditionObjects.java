@@ -3,6 +3,7 @@ package pageObjetcs;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.AWTException;
+import java.util.List;
 
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -74,8 +75,16 @@ public class TargetConditionObjects extends Init {
 		 private WebElement manualConditionTypeField;
 		 @FindBy(xpath="//paper-button[contains(text(),'Create Condition')]")
 		 private WebElement createConditionButton;
+		 @FindBy(xpath=".//div[@class='container flex-end-justified style-scope target-conditions']//paper-icon-button[@class='style-scope target-conditions x-scope paper-icon-button-0']//iron-icon")
+		 private WebElement graphicalConditionButton;
 		 @FindBy(xpath=".//*[@id='conditionCard']//paper-icon-item[contains(.,'Edit')]")
 		 private WebElement targetConditionEdit;
+		 @FindBy(xpath=".//paper-item[contains(.,'Duplicate')]")
+		 private WebElement optionDuplicate;
+		 @FindBy(xpath="//div[@class='window graph-item style-scope target-conditions-graph jsplumb-endpoint-anchor jsplumb-draggable']")
+		 private List <WebElement> duplicatedTargetConditionCard;
+		 
+		 
 		// @FindBy(xpath="")
 		// private WebElement ;
 		// @FindBy(xpath="")
@@ -129,6 +138,24 @@ public class TargetConditionObjects extends Init {
 		}
 		public void clickCreateTargetConditionButton() throws InterruptedException {
 			jswait.loadClick(createConditionButton);
+		}
+		public void clickGraphicalTargetConditionButton() throws InterruptedException {
+			jswait.loadClick(graphicalConditionButton);
+		}
+		public void clickDuplicateTargetConditionButton() throws InterruptedException {
+			jswait.loadClick(optionDuplicate);
+			Thread.sleep(2000);
+		}
+		public void verifyDuplicatedTargetConditionCard() throws InterruptedException {
+			
+			Thread.sleep(2000);
+			if(duplicatedTargetConditionCard.size()>0) {
+				for(WebElement card: duplicatedTargetConditionCard) {
+					
+					assertTrue(card.isDisplayed());
+				}
+				
+			}
 		}
 	 public void clickBasicTargetConditionWithAge() throws InterruptedException {
 //		 	jswait.loadClick(createConditionButton);

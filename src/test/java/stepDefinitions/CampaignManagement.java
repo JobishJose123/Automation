@@ -542,4 +542,21 @@ public class CampaignManagement extends Init{
 	    }
 	    
 	    
+	    @Then("^verify the duplicate option for the added virtual condition while creating new campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+	    public void VerifyDuplicateOptionForAdedVirtualConditions(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		name =  RandomNameGenerator.getRandomName(name);
+	 		campaignObjects.clickCreateNewCampaignButton();
+	 		campaignObjects.VerifyDuplicateOptionForAdedVirtualConditions(name, catalog);
+	 		
+	    }
+	    
+	    
 }
