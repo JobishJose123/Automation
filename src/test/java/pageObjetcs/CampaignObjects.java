@@ -196,13 +196,16 @@ public class CampaignObjects extends Init{
 		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//vaadin-grid-table-row//vaadin-grid-table-cell//span[@class='statusHexWrap style-scope campaign-list' and contains(.,'P')]")));
  		Thread.sleep(5000);
  		driver.navigate().refresh();
+ 		Thread.sleep(3000);
+ 		driver.navigate().refresh();
  		Thread.sleep(5000);
 		commonObjects.clickOptionsIcon();
 		//WebDriverWait wait = new WebDriverWait(driver, 25);
 		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iron-icon[@icon='av:playlist-play']")));
+		Thread.sleep(3000);
 		verifyResumeCampaignOption();
 		clickResumeCampaignOption();
- 		clickConfirmPauseYes();
+ 		clickConfirmResumeYes();
 		
 	}
 	public void enterCategoryName(String name) throws InterruptedException {
