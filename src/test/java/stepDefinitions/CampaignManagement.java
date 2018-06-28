@@ -541,6 +541,13 @@ public class CampaignManagement extends Init{
 	 		
 	    }
 	    
+	    @Then("^verify pause for campaign$")
+	    public void verifyPauseOptionForCampaign() throws Throwable
+	    {
+	    	campaignObjects.verifyPauseOptionForCampaign();
+	 		
+	    }
+	    
 	    
 	    @Then("^verify the duplicate option for the added virtual condition while creating new campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
 	    public void VerifyDuplicateOptionForAdedVirtualConditions(String sheet, String catalogSheet) throws Throwable
@@ -563,7 +570,6 @@ public class CampaignManagement extends Init{
 		 @Then("^verify abort option for campaign$")
 		    public void abortCampaign() throws Throwable
 		    {
-		 		
 		 		campaignObjects.abortCampaign();
 		
 		    }

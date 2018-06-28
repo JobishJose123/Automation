@@ -70,8 +70,17 @@ public class CampaignObjects extends Init{
 	private WebElement categoryNameInput;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxPause']//paper-button[contains(.,'Yes')]")
 	private WebElement confirmPauseYes;
+	@FindBy(xpath=".//paper-dialog[@id='confirmBoxPause']")
+	private WebElement confirmPauseDialogue;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxAbort']//paper-button[contains(.,'Yes')]")
 	private WebElement confirmAbortYes;
+	@FindBy(xpath=".//vaadin-grid-table-row//vaadin-grid-table-cell//span[@class='statusHexWrap style-scope campaign-list' and contains(.,'A')]")
+	private WebElement statusBeforePause;
+	@FindBy(xpath=".//vaadin-grid-table-row//vaadin-grid-table-cell//span[@class='statusHexWrap style-scope campaign-list' and contains(.,'P')]")
+	private WebElement statusAfterPause;
+	@FindBy(xpath=".//vaadin-grid-table-row//vaadin-grid-table-cell//span[@class='statusHexWrap style-scope campaign-list' and contains(.,'A')]")
+	private WebElement statusAfterResume;
+	
 	@FindBy(xpath=".//div[@class='hex style-scope hexagon-content']")
 	private WebElement statusIcon;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxResume']//paper-button[contains(.,'Yes')]")
@@ -194,6 +203,7 @@ public class CampaignObjects extends Init{
 		assertTrue(resumeCampaign.isDisplayed());
 	}
 	public void clickConfirmPauseYes() throws InterruptedException {
+		assertTrue(confirmPauseDialogue.isDisplayed());
 		jswait.loadClick(confirmPauseYes);
 	}
 	public void clickConfirmResumeYes() throws InterruptedException {
@@ -203,8 +213,23 @@ public class CampaignObjects extends Init{
 	public void clickConfirmAbortYes() throws InterruptedException {
 		jswait.loadClick(confirmAbortYes);
 	}
+	
+	public void verifyStatusBeforePause() throws InterruptedException {
+		jswait.loadClick(statusBeforePause);
+	}
+	
+	public void verifyStatusAfterPause() throws InterruptedException {
+		jswait.loadClick(statusAfterPause);
+	}
+	
+	public void verifyStatusAfterResume() throws InterruptedException {
+		jswait.loadClick(statusAfterResume);
+	}
+	
 	public void verifyStatusOfCampaign() throws InterruptedException {
 		
+		Thread.sleep(3000);
+		verifyStatusBeforePause();
 		commonObjects.clickOptionsIcon();
  		clickPauseCampaignOption();
  		clickConfirmPauseYes();
@@ -216,6 +241,7 @@ public class CampaignObjects extends Init{
  		Thread.sleep(3000);
  		driver.navigate().refresh();
  		Thread.sleep(5000);
+ 		verifyStatusAfterPause();
 		commonObjects.clickOptionsIcon();
 		//WebDriverWait wait = new WebDriverWait(driver, 25);
 		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iron-icon[@icon='av:playlist-play']")));
@@ -223,6 +249,27 @@ public class CampaignObjects extends Init{
 		verifyResumeCampaignOption();
 		clickResumeCampaignOption();
  		clickConfirmResumeYes();
+ 		Thread.sleep(3000);
+ 		verifyStatusAfterResume();
+		
+	}
+	
+   public void verifyPauseOptionForCampaign() throws InterruptedException {
+		
+		Thread.sleep(3000);
+		verifyStatusBeforePause();
+		commonObjects.clickOptionsIcon();
+ 		clickPauseCampaignOption();
+ 		clickConfirmPauseYes();
+ 		//WebDriverWait wait = new WebDriverWait(driver, 25);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//vaadin-grid-table-row//vaadin-grid-table-cell//span[@class='statusHexWrap style-scope campaign-list' and contains(.,'P')]")));
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//vaadin-grid-table-row//vaadin-grid-table-cell//span[@class='statusHexWrap style-scope campaign-list' and contains(.,'P')]")));
+ 		Thread.sleep(5000);
+ 		driver.navigate().refresh();
+ 		Thread.sleep(3000);
+ 		driver.navigate().refresh();
+ 		Thread.sleep(5000);
+ 		verifyStatusAfterPause();
 		
 	}
 	public void enterCategoryName(String name) throws InterruptedException {

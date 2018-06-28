@@ -262,6 +262,20 @@ Feature: campaign management
     
     
     
+    @NX-1211 @initBrowser
+    Scenario: Campaign grid: Verify the pause option for the campaign-1211
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    Then verify pause for campaign
+    
     @NX-1212 @initBrowser
     Scenario: Campaign grid: Verify the resume option for the campaign-1212
     Given login
@@ -295,10 +309,10 @@ Feature: campaign management
     @NX-1210 @initBrowser
     Scenario: Campaign grid: Verify the Abort option for the campaign-1210
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
