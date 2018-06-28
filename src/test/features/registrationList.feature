@@ -9,7 +9,7 @@ Feature: positive flow of list upload and verification in cuctomer info
 @NX-registrationList
 @initBrowser
 Scenario: generate randrom registration list and upload
-#Given random registration list is generated
+Given random registration list is generated
 Given login
 #Then navigate to data foundation
 #Then navigate to registration list

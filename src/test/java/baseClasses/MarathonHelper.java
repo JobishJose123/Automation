@@ -11,76 +11,39 @@ import org.apache.commons.codec.binary.Base64;
 
 public class MarathonHelper {
 	
-	public static void main(String[] args) throws IOException {
-		getContainerStatus("192.168.150.27","neon/apps/platform/conveyor-belt");
+	/*
+	 *  env = 192.168.150.45
+	 *	container = neon/apps/platform/dfe
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 
-	}
 	//////////////////////SCALE CONTAINER///////////////////////////////////////
-	public static void scaleContainer(String env,String container,String instance) throws IOException{
-	//env = 192.168.150.45
-	//container = neon/apps/platform/dfe
-	Random random = new Random();
-  URL url = new URL("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness");
-  HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-  String userpassword = "flyuser" + ":" + "flypassWORD";
-      String encodedAuthorization = new Base64().encodeToString(userpassword.getBytes() );
-      connection.setRequestProperty("Authorization", "Basic "+
-            encodedAuthorization);
-  connection.setRequestMethod("PUT");
-  connection.setDoOutput(true);
-  connection.setRequestProperty("Content-Type", "application/json");
-  connection.setRequestProperty("Accept", "application/json");
-  OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
-  osw.write(String.format("{\"instances\":"+instance+"}", random.nextInt(30), random.nextInt(20)));
-  osw.flush();
-  osw.close();
-  System.err.println(connection.getResponseCode());
+	public static void scaleContainer(String env,String container,String instance) throws IOException {
+		Request r = new Request();
+		String data = "{\"instances\":"+instance+"}";
+		r.putRequest("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA==", data);
 	}
+	
 	////////////////////////GET MARATHON CONTAINER STATUS///////////////////////////////////////
-	public static int getContainerStatus(String env,String container) throws IOException{
-		//env = 192.168.150.45
-		//container = neon/apps/platform/dfe
-		String USER_AGENT = "Mozilla/5.0";
-		String url = "http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness";
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		//authentication for marathon
-		//result = new Base64().encodeToString(rawHmac);
-	      String userpassword = "flyuser" + ":" + "flypassWORD";
-	      String encodedAuthorization = new Base64().encodeToString( userpassword.getBytes() );
-	      con.setRequestProperty("Authorization", "Basic "+
-	            encodedAuthorization);
-
-		// optional default is GET
-		con.setRequestMethod("GET");
-
-		//add request header
-		con.setRequestProperty("User-Agent", USER_AGENT);
-
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
-
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
-		String JSONStr = response.toString();
+	public static int getContainerStatus(String env,String container) throws IOException {
+		Request r = new Request();
+		r.getRequest("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA==");
+		String JSONStr = r.responseString;
 		int runIndexbeg = JSONStr.indexOf("tasksRunning");
 		int runIndexend = JSONStr.indexOf(",\"tasksHealthy");
 		String instances = JSONStr.substring(runIndexbeg, runIndexend);
 		String[] num = instances.split(":");
 		int n = Integer.parseInt(num[1]);
-		System.out.println(n);
-		
-		//return result
 		return n;
 	}
 	
-	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		scaleContainer("192.168.150.27","neon/apps/platform/dfe","1");
+		System.out.println(getContainerStatus("192.168.150.27","neon/apps/platform/dfe"));
+		
+	}
 }

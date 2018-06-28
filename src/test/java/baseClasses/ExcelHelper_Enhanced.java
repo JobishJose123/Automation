@@ -42,6 +42,16 @@ String file = "";
         workbook.write(outFile);   //printing the data in the new file
         outFile.close();           //closing the new file
     }
+    public void setCell(int r,String colName,String val) throws IOException{
+    	Row row = sh.getRow(r);
+    	int c = getColumnNumber(colName);
+        Cell cell = row.getCell(c);       
+        cell.setCellType(Cell.CELL_TYPE_STRING);
+        cell.setCellValue(val);
+        FileOutputStream outFile =new FileOutputStream(new File(file));  //Creating new file
+        workbook.write(outFile);   //printing the data in the new file
+        outFile.close();           //closing the new file
+    }
 	public CharSequence getCell(int row,int col){
 		CharSequence CellGetContent = "";
 	if(sh.getRow(row).getCell(col).getCellType()==Cell.CELL_TYPE_STRING)
@@ -92,10 +102,23 @@ String file = "";
     	}
 		return colNum;
     }
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		ExcelHelper_Enhanced eh = new ExcelHelper_Enhanced();
-		eh.setExcelFile("login", "Sheet1");
-		System.out.println(eh.getCellByColumnName("env"));
+		eh.setExcelFile("test", "sh");
+		String oldN = "";
+		String newN = "";
+		for(int i=1;i<93;i++) {
+			newN = eh.getCellByColumnName(i,"new");
+			System.out.println(newN);
+			for(int j=1;j<51;j++) {
+				oldN = eh.getCellByColumnName(j,"old");
+				System.out.println(oldN);
+				if(newN==oldN) {
+					eh.setCell(j, "new", "OLD");
+					break;
+				}
+			}
+		}
 	}
 
 }
