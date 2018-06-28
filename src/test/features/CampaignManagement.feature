@@ -321,4 +321,21 @@ Feature: campaign management
     Then verify abort option for campaign
     
     
+    @NX-9211 @initBrowser
+    Scenario: Campaign grid: Verify Delete option of the campaign-9211
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    Then verify abort option for campaign
+    Then verify delete option for campaign
+    Then verify deleted campaign from sheet "campaignBC"
+    
+    
     

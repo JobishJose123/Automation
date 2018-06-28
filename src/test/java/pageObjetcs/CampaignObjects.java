@@ -72,6 +72,10 @@ public class CampaignObjects extends Init{
 	private WebElement confirmPauseYes;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxPause']")
 	private WebElement confirmPauseDialogue;
+	@FindBy(xpath=".//paper-dialog[@id='deleteCampaign']//paper-button[contains(.,'Yes')]")
+	private WebElement confirmDeleteCampaignYes;
+	@FindBy(xpath=".//paper-dialog[@id='deleteCampaign']")
+	private WebElement confirmDeleteCampaignDialogue;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxAbort']//paper-button[contains(.,'Yes')]")
 	private WebElement confirmAbortYes;
 	@FindBy(xpath=".//vaadin-grid-table-row//vaadin-grid-table-cell//span[@class='statusHexWrap style-scope campaign-list' and contains(.,'A')]")
@@ -106,6 +110,8 @@ public class CampaignObjects extends Init{
 	private WebElement editCampaign;
 	@FindBy(xpath = "//iron-icon[@icon='icons:block']")
 	private WebElement abortCampaign;
+	@FindBy(xpath = ".//paper-item[contains(.,'Delete')]")
+	private WebElement deleteCampaign;
 	@FindBy(xpath = "//iron-icon[@icon='av:pause-circle-filled']")
 	private WebElement pauseCampaign;
 	@FindBy(xpath = "//iron-icon[@icon='av:playlist-play']")
@@ -192,6 +198,10 @@ public class CampaignObjects extends Init{
 		jswait.loadClick(abortCampaign);
 	}
 	
+	public void clickDeleteCampaignOption() throws InterruptedException {
+		jswait.loadClick(deleteCampaign);
+	}
+	
 	
 	public void clickPauseCampaignOption() throws InterruptedException {
 		jswait.loadClick(pauseCampaign);
@@ -272,6 +282,30 @@ public class CampaignObjects extends Init{
  		verifyStatusAfterPause();
 		
 	}
+   
+   public void verifyDeletedCampaign(String name) throws Exception {
+	   
+	 
+	   
+	   Exception deleteException=new Exception("Status not deleted");
+	   
+	  try { 
+		  if(driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'"+name+"')]")).isDisplayed()==true) {
+		  
+			  throw deleteException;
+		  }
+	  }
+		  
+		  catch(Exception e) {
+			  
+			  System.out.println("Status deleted");
+			  
+			  
+			  
+		  }
+	  
+	}
+   
 	public void enterCategoryName(String name) throws InterruptedException {
 		jswait.loadSendKeys(categoryNameInput, name);
 	}
@@ -364,9 +398,34 @@ public class CampaignObjects extends Init{
 		commonObjects.clickOptionsIcon();
  		clickAbortCampaignOption();
  		clickConfirmAbortYes();
+ 		driver.navigate().refresh();
 		Thread.sleep(4000);
 		verifyStatusIconAfterAbort();
 		compareColorOfStatusIcons();
+	}
+	
+	public void verifyConfirmDeleteCampaignDialogue() throws Exception {
+		
+		assertTrue(confirmDeleteCampaignDialogue.isDisplayed());
+ 		
+	}
+	
+   public void clickCampaignDeleteYesButton() throws Exception {
+		
+		assertTrue(confirmDeleteCampaignYes.isDisplayed());
+		jswait.loadClick(confirmDeleteCampaignYes);
+ 		
+	}
+	
+	
+    public void deleteCampaign() throws Exception {
+		Thread.sleep(2000);
+		commonObjects.clickOptionsIcon();
+ 		clickDeleteCampaignOption();
+ 		verifyConfirmDeleteCampaignDialogue();
+ 		clickCampaignDeleteYesButton();
+ 		Thread.sleep(3000);
+ 		
 	}
 	
 	

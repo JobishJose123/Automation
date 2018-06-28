@@ -573,6 +573,26 @@ public class CampaignManagement extends Init{
 		 		campaignObjects.abortCampaign();
 		
 		    }
+		 
+		 @Then("^verify delete option for campaign$")
+		    public void deleteCampaign() throws Throwable
+		    {
+		 		campaignObjects.deleteCampaign();
+		
+		    }
+		 
+		 @Then("^verify deleted campaign from sheet \"([^\"]*)\"$")
+		    public void verifyDeletedCampaign(String sheet) throws Throwable
+		    {
+			    
+		    	Thread.sleep(4000);
+		    	eM.setExcelFile("campaignInputData",sheet);
+		 		String name = (String) eM.getCell(1, 0);
+		 		campaignObjects. verifyDeletedCampaign(name);
+		    }
+		 
+		 
+		 
 	    
 	    
 }
