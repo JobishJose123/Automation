@@ -70,6 +70,10 @@ public class CampaignObjects extends Init{
 	private WebElement categoryNameInput;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxPause']//paper-button[contains(.,'Yes')]")
 	private WebElement confirmPauseYes;
+	@FindBy(xpath=".//paper-dialog[@id='confirmBoxAbort']//paper-button[contains(.,'Yes')]")
+	private WebElement confirmAbortYes;
+	@FindBy(xpath=".//div[@class='hex style-scope hexagon-content']")
+	private WebElement statusIcon;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxResume']//paper-button[contains(.,'Yes')]")
 	private WebElement confirmResumeYes;
 	@FindBy(xpath=".//*[@id='createNew']//paper-button[contains(.,'Save')]")
@@ -91,6 +95,8 @@ public class CampaignObjects extends Init{
 	private WebElement optionsEditTargetCondtion;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement editCampaign;
+	@FindBy(xpath = "//iron-icon[@icon='icons:block']")
+	private WebElement abortCampaign;
 	@FindBy(xpath = "//iron-icon[@icon='av:pause-circle-filled']")
 	private WebElement pauseCampaign;
 	@FindBy(xpath = "//iron-icon[@icon='av:playlist-play']")
@@ -114,6 +120,8 @@ public class CampaignObjects extends Init{
 	private WebElement campaignRowDetails;
 	@FindBy(xpath=".//span[contains(.,'Save target conditions before proceeding.')]")
 	private WebElement SaveTCforCampaign;
+	String colorBeforeAbort;
+	String colorAfterAbort;
 	
 	
 	
@@ -171,6 +179,11 @@ public class CampaignObjects extends Init{
 		jswait.loadClick(editCampaign);
 	}
 	
+	public void clickAbortCampaignOption() throws InterruptedException {
+		jswait.loadClick(abortCampaign);
+	}
+	
+	
 	public void clickPauseCampaignOption() throws InterruptedException {
 		jswait.loadClick(pauseCampaign);
 	}
@@ -185,6 +198,10 @@ public class CampaignObjects extends Init{
 	}
 	public void clickConfirmResumeYes() throws InterruptedException {
 		jswait.loadClick(confirmResumeYes);
+	}
+	
+	public void clickConfirmAbortYes() throws InterruptedException {
+		jswait.loadClick(confirmAbortYes);
 	}
 	public void verifyStatusOfCampaign() throws InterruptedException {
 		
@@ -264,6 +281,45 @@ public class CampaignObjects extends Init{
 		assertTrue(CG.isDisplayed());
 
 		
+	}
+	
+      public void verifyStatusIconBeforeAbort() throws InterruptedException {
+		
+    	 colorBeforeAbort= statusIcon.getCssValue("background-color");
+    	 System.out.println("Color Before Abort: "+colorBeforeAbort);
+    	 
+		
+	    }
+      
+      public void verifyStatusIconAfterAbort() throws InterruptedException {
+    	   
+    	  driver.navigate().refresh();
+  		Thread.sleep(5000);
+    	  colorAfterAbort= statusIcon.getCssValue("background-color");
+     	 System.out.println("Color After Abort: "+colorAfterAbort);
+ 		
+ 	    }
+      
+      public void compareColorOfStatusIcons() throws Exception {
+  		
+    	  Exception colorException=new Exception("Status Not Changed");
+    	  
+    	if(colorBeforeAbort.equals(colorAfterAbort)) {
+    		
+    		throw colorException;
+    	}
+  	  }
+	
+	
+	public void abortCampaign() throws Exception {
+		
+		verifyStatusIconBeforeAbort();
+		commonObjects.clickOptionsIcon();
+ 		clickAbortCampaignOption();
+ 		clickConfirmAbortYes();
+		Thread.sleep(4000);
+		verifyStatusIconAfterAbort();
+		compareColorOfStatusIcons();
 	}
 	
 	

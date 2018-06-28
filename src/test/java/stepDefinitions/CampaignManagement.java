@@ -249,7 +249,7 @@ public class CampaignManagement extends Init{
 	    	eM.setExcelFile("campaignInputData",sheet);
 	 		String name = (String) eM.getCell(1, 0);
 	 		campaignObjects.VerifyCampaignCreated(name);
-	    	 Thread.sleep(2000);
+	    	 Thread.sleep(4000);
 	    }
 	 
 	 @Then("^verify template edited from sheet \"([^\"]*)\"$")
@@ -557,6 +557,16 @@ public class CampaignManagement extends Init{
 	 		campaignObjects.VerifyDuplicateOptionForAdedVirtualConditions(name, catalog);
 	 		
 	    }
+	    
+	    
+
+		 @Then("^verify abort option for campaign$")
+		    public void abortCampaign() throws Throwable
+		    {
+		 		
+		 		campaignObjects.abortCampaign();
+		
+		    }
 	    
 	    
 }
