@@ -14,7 +14,10 @@ public class MarathonHelper {
 	/*
 	 *  env = 192.168.150.45
 	 *	container = neon/apps/platform/dfe
-	 * 
+	 *___________________________________________________
+	 *  EXAMPLE
+	 *  scaleContainer("192.168.150.27","neon/apps/platform/dfe","1");
+	 *  System.out.println(getContainerStatus("192.168.150.27","neon/apps/platform/dfe"));
 	 * 
 	 * 
 	 * 
@@ -28,7 +31,7 @@ public class MarathonHelper {
 	}
 	
 	////////////////////////GET MARATHON CONTAINER STATUS///////////////////////////////////////
-	public static int getContainerStatus(String env,String container) throws IOException {
+	public int getContainerStatus(String env,String container) throws IOException {
 		Request r = new Request();
 		r.getRequest("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA==");
 		String JSONStr = r.responseString;
@@ -38,12 +41,5 @@ public class MarathonHelper {
 		String[] num = instances.split(":");
 		int n = Integer.parseInt(num[1]);
 		return n;
-	}
-	
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		scaleContainer("192.168.150.27","neon/apps/platform/dfe","1");
-		System.out.println(getContainerStatus("192.168.150.27","neon/apps/platform/dfe"));
-		
 	}
 }
