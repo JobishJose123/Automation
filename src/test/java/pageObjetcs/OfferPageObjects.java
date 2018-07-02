@@ -80,6 +80,9 @@ public class OfferPageObjects extends Init {
 	private WebElement voiceCreativeOptional4;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement optionsEdit;
+	@FindBy(xpath = ".//*[@id='contentWrapper']//paper-item[contains(.,'Delete')]")
+	private WebElement optionsDelete;
+	
 	@FindBy(xpath = "//div[@id='topBar']//paper-button[contains(.,'Cancel')]")
 	private WebElement cancelOfferButton;
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]/..//input")
@@ -361,6 +364,13 @@ public class OfferPageObjects extends Init {
 	 public void clickSetAsDefaultSecondTrack() throws InterruptedException {
 			jswait.loadClick(setAsDefaultSecondTrack);
 		}
+	 
+	 
+	 public void optionsDelete() throws InterruptedException {
+			jswait.loadClick(optionsDelete);
+		}
+	 
+	 
 	 
 //  Creative Tab in Offer Creation	functions
 	 public void clickAddNewVariableButton() throws InterruptedException {

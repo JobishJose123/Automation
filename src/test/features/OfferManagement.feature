@@ -624,11 +624,13 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     Then pass next scenario based on this step
 
   @NX-2329
+  @initBrowser
   Scenario: Verify for the Add Variable icon in the Creative tab NX-2329
     Then check previous step and pass this
     Then pass next scenario based on this step
 
   @NX-2330
+ 
   Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
     Then check previous step and pass this
     
@@ -652,3 +654,28 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
 	  @NX-2422
   Scenario: Email Channel -->Verify the Verify the "Delete" option from the Options icon using Email as a channel. NX-2422
 	   Then delete offer from sheet "rechargeEmail"
+	   
+	   
+	   
+	   
+	  @NX-2411 @initBrowser
+  Scenario: Email Channel -->Verify the Duplicate options of the offers  NX-2411
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
+    Then duplicate offer from sheet "rechargeEmail"
+	   
+	   
+	   
+	   @NX-2406
+	   @initBrowser
+	     Scenario: Email Channel -->Verify the Verify the Delete option 
+	     Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
+    Then delete offer from sheet "rechargeEmail"
+  

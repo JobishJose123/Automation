@@ -67,7 +67,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement routeBroadcast;
 	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/../input")
 	private WebElement routeFulfillment;
-	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'SMPP Robi outbond')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
 	private WebElement routeBroadcastSmppRobiOutbond;
 	@FindBy(xpath = ".//label[contains(.,'Sender ID: Fulfillment')]/following::vaadin-combo-box-item[contains(.,'Address-SMPP')]")
 	private WebElement senderIdFulfillmentAdressSmpp;
@@ -364,8 +364,13 @@ public class BroadcastPageObjects extends Init {
 	public void selectSenderAndRoute() throws InterruptedException {
 		jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
 		jswait.loadClick(senderIdBroadcastAdressSmpp);
-		jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
+		Thread.sleep(2000);
+//		jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
+		Thread.sleep(2000);
 		jswait.loadClick(routeBroadcastSmppRobiOutbond);
+		Thread.sleep(2000);
+		jswait.loadClick(routeBroadcastSmppRobiOutbond);
+		Thread.sleep(2000);
 		jswait.loadSendKeys(senderIdFulfillmentSelector, "Address-SMPP");
 		// jswait.loadClick(senderIdFulfillmentSelector);
 		// Thread.sleep(4000);
@@ -469,10 +474,17 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
+			System.out.println("inside else");
 			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
-			jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+			Thread.sleep(3000);
+			System.out.println("before route");
+			jswait.loadClick(routeBroadcast);
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			
+			Thread.sleep(3000);
+			jswait.loadClick(routeBroadcastSmppRobiOutbond);
+			
 		}
 		clickProceedButton();
 	}
