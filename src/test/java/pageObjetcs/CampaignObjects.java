@@ -137,6 +137,8 @@ public class CampaignObjects extends Init{
 	private WebElement SaveTCforCampaign;
 	String colorBeforeAbort;
 	String colorAfterAbort;
+	@FindBy(xpath=".//paper-item//label[contains(.,'Targeted Customers')]")
+	private WebElement targetedCustomersLabel;
 	
 	
 	
@@ -365,6 +367,22 @@ public class CampaignObjects extends Init{
 		assertTrue(CG.isDisplayed());
 
 		
+	}
+	
+public void verifyTargetdCustomersLabelAndCount() throws Exception {
+		
+		assertTrue(targetedCustomersLabel.isDisplayed());
+//		String count1=targetedCustomersCount.getText();
+//		String count2=targetedCustomersExpandCount.getText();
+//		System.out.println("Count1 "+count1);
+//		System.out.println("Count2 "+count2);
+//		Exception mismatchCount=new Exception("Count mismatch");
+//		
+//		if(count1.equals(count2)) {
+//			System.out.println("Count is matching");
+//		}
+//		else
+//			throw mismatchCount;
 	}
 	
       public void verifyStatusIconBeforeAbort() throws InterruptedException {

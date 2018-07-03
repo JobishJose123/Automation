@@ -496,9 +496,17 @@ public class CampaignManagement extends Init{
 	    @Then("^click on campaign  to verify expanding the campaign row from sheet \"([^\"]*)\"$")
 	    public void click_on_campaign(String sheet) throws Throwable
 	    {
+	    	Thread.sleep(3000);
 	    	eM.setExcelFile("campaignInputData",sheet);
 	 		String name = (String) eM.getCell(1, 0);
 	 		campaignObjects.click_on_campaign_and_verify_row(name);
+	    }
+	    
+	    @Then("^verify targetd customers label and count$")
+	    public void verifyTargetdCustomersLabelAndCount() throws Throwable
+	    {
+	
+	 		campaignObjects.verifyTargetdCustomersLabelAndCount();
 	    }
 	    
 	    @Then("^delete target conditions for campaign$")
