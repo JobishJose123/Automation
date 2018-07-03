@@ -908,4 +908,9 @@ public void verifyTargetdCustomersLabelAndCount() throws Exception {
 //	jswait.loadClick(".//*[@id='prdClsScrollThreshold']/paper-card//h4[contains(.,'"+eh.getCell(1, 0)+"')]/../..//a");
 //	}
 
+   public void clickOnUseTemplateButton(String templateName) throws InterruptedException {
+		
+		jswait.loadClick(driver.findElement(By.xpath("//data-table-cell[contains(.,'"+templateName+"')]/..//paper-button[contains(.,\"Use Template\")]")));
+	}
+
 }

@@ -599,7 +599,14 @@ public class CampaignManagement extends Init{
 		 		campaignObjects. verifyDeletedCampaign(name);
 		    }
 		 
-		 
+		 @Then("^click on use template button from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+			public void clickOnUseTemplateButton(String sheet, String fileName) throws Exception
+			{
+		 		ExcelHelper excelHelper = new ExcelHelper();
+		 		excelHelper.setExcelFile(fileName, sheet);
+			 	campaignObjects.clickOnUseTemplateButton((String)excelHelper.getCell(1, 0));
+			}
+
 		 
 	    
 	    
