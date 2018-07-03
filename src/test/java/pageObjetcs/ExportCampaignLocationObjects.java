@@ -83,9 +83,10 @@ public class ExportCampaignLocationObjects extends Init{
 			jswait.loadClick(systemAdministration);
 		}
 		
-		public void verifyExportLocation(String action, String locationName) throws InterruptedException{
+		public void verifyExportLocation(String action, String locationName) throws Exception{
 			Thread.sleep(4000);
-			WebElement locationNameElement = driver.findElement(By.xpath("//data-table-cell[contains(.,'"+locationName+"')]"));
+			
+			WebElement locationNameElement = driver.findElement(By.xpath("//data-table-cell[contains(.,"+locationName+")]"));
 			if (action == "edit" || action == "added") 
 			{
 				Assert.assertTrue(locationNameElement.isDisplayed());
@@ -137,5 +138,4 @@ public class ExportCampaignLocationObjects extends Init{
 			jswait.loadSendKeys(campaignToBeSelectedForExporting,campaignToBeSelected);
 			jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+campaignToBeSelectedForExporting+"')]");
 		}
-		
 }

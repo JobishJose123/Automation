@@ -49,3 +49,13 @@ Feature: Test cases related to export campaign location
     Then create new campaign use template from sheet "campaignBC" with catalog "defaultCatalog"
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then verify campaign created from sheet "campaignBC"
+    
+    @NX-7957 @initBrowser @closeBrowser
+  	Scenario: Verify whether user can save location details with invalid details
+  	Given login
+  	Then navigate to configuration management
+    Then navigate to system administration
+    Then navigate to export location
+    Then add new export location
+    Then enter export location from sheet "invalidlocationdetails" of file "ExportCampaignLocation"
+    Then verify export location "added" from sheet "invalidlocationdetails" of file "ExportCampaignLocation"
