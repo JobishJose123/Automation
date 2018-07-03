@@ -58,7 +58,7 @@ Then resume bc from sheet "recurringTriggerable"
 
 @NX-8716
 @initBrowser 
-Scenario: Verify whether Pause/Resume option is available for Recurring triggerable BC NX-8715
+Scenario: Verify whether Pause/Resume option is available for Recurring triggerable BC NX-8716
 Given login
 Then navigate to precision marketer
  Then navigate to offer management
