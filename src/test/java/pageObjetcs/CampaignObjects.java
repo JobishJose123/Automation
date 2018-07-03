@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.util.Assert;
 
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -146,8 +147,9 @@ public class CampaignObjects extends Init{
 	
 	@FindBy(xpath=".//*[@id='campaignsListMenu']//paper-item[contains(.,'Pause')]")
 	private WebElement campaignPauseButton;
-//	@FindBy(xpath="")
-//	private WebElement ;
+
+	@FindBy(xpath="//label[@id = 'label']/../input")
+	private WebElement selectLocationToExport;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -912,5 +914,18 @@ public void verifyTargetdCustomersLabelAndCount() throws Exception {
 		
 		jswait.loadClick(driver.findElement(By.xpath("//data-table-cell[contains(.,'"+templateName+"')]/..//paper-button[contains(.,\"Use Template\")]")));
 	}
+
+   public void clickOnTemplatesExportToLocationOption(String name) throws InterruptedException {
+		WebElement edit = driver.findElement(By.xpath("//data-table-cell[contains(.,'"+name+"')]/..//data-table-cell//paper-menu-button"));
+		jswait.loadClick(edit);
+		Thread.sleep(4000);
+		WebElement exportCampaignOption = driver.findElement(By.xpath("//data-table-cell[contains(.,'"+name+"')]/..//paper-item[2]"));
+		jswait.loadClick(exportCampaignOption);
+	}
+   
+   public void verifyLocationNameInDropDown(String locationName) throws InterruptedException {
+	   jswait.loadSendKeys(selectLocationToExport, locationName);
+	   assertTrue(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+locationName+"')]")).isDisplayed());
+   }
 
 }

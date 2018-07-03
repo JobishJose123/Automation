@@ -1,16 +1,9 @@
 package stepDefinitions;
 
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -19,7 +12,6 @@ import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
 import baseClasses.TimePicker;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CampaignObjects;
 import pageObjetcs.CommonObjects;
@@ -599,7 +591,7 @@ public class CampaignManagement extends Init{
 		 		campaignObjects. verifyDeletedCampaign(name);
 		    }
 		 
-		 @Then("^click on use template button from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		   @Then("^click on use template button from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
 			public void clickOnUseTemplateButton(String sheet, String fileName) throws Exception
 			{
 		 		ExcelHelper excelHelper = new ExcelHelper();
@@ -607,7 +599,51 @@ public class CampaignManagement extends Init{
 			 	campaignObjects.clickOnUseTemplateButton((String)excelHelper.getCell(1, 0));
 			}
 
-		 
-	    
-	    
+		   @Then("^create new template from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		    public void create_new_template(String sheet, String fileName) throws Throwable
+		    {
+		    	
+		    	Thread.sleep(4000);
+		    	eM.setExcelFile(fileName,sheet);
+		 		String name = RandomNameGenerator.getRandomName((String) eM.getCell(1, 0));
+		 		eM.setCell(1, 0, name);
+		 		campaignObjects.clickCreateNewTemplateButton();
+		 		campaignObjects.createCampaignTemplate(name);
+		 		TimePicker dt = new TimePicker();
+		 		dt.gteDateTime();
+		    	Thread.sleep(2000);
+		    }
+
+		    @Then("^create new campaign category from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		    public void create_new_campaign_category_from_sheet_of_file(String sheet, String fileName) throws Throwable {
+		    	eM.setExcelFile(fileName,sheet);
+		 		String name = RandomNameGenerator.getRandomName((String) eM.getCell(1, 0));
+		 		eM.setCell(1, 0, name);
+		 		campaignObjects.createNewCampaignCategory(name);
+		    }
+		    
+		    @Then("^navigate to campaign category from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		    public void navigate_to_campaign_category_from_sheet_of_file(String sheet, String fileName) throws Throwable {
+		    	eM.setExcelFile(fileName,sheet);
+		    	String name = (String) eM.getCell(1, 0);
+		    	campaignObjects.scrollToCampaignCategory(name);
+		    }
+
+		    @Then("^click on export location option of template from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		    public void clickExportLocationOnCampaignTemplate(String sheet, String fileName) throws Throwable
+		    {
+		    	Thread.sleep(4000);
+		    	eM.setExcelFile(fileName,sheet);
+		 		String name = (String) eM.getCell(1, 0);
+		    	campaignObjects.clickOnTemplatesExportToLocationOption(name);	 		
+		    }
+		    
+		    @Then("^verify the location name from sheet \"([^\"]*)\" of file \"([^\"]*)\" can be selected from the drop down$")
+		    public void verifyLocationNameInDropDown(String sheet, String fileName) throws Throwable
+		    {
+		    	Thread.sleep(4000);
+		    	eM.setExcelFile(fileName,sheet);
+		 		String locationName = (String) eM.getCell(1, 0);
+		    	campaignObjects.verifyLocationNameInDropDown(locationName);	 		
+		    }
 }
