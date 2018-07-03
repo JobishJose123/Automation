@@ -325,9 +325,9 @@ private WebElement addresssprule2;
 
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which this broadcast can be sent')]//following::input[1]")
 private WebElement rulerouteid;
-@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'SMPP Robi outbond')]")
+@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
 private WebElement ruleroute;
-@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'SMPP Robi outbond')])[2]")
+@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')])[2]")
 private WebElement ruleroute2;
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::input[1]")
 private WebElement rulerouteid2;

@@ -13,6 +13,7 @@ import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
 import baseClasses.TimePicker;
 import cucumber.api.java.en.Then;
+import pageObjetcs.BroadcastPageObjects;
 import pageObjetcs.CampaignObjects;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.LoginPageObjects;
@@ -591,7 +592,37 @@ public class CampaignManagement extends Init{
 		 		campaignObjects. verifyDeletedCampaign(name);
 		    }
 		 
-		   @Then("^click on use template button from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		 @Then("^pause campaign from sheet \"([^\"]*)\"$")
+		    public void pauseCampaign(String sheet) throws Throwable
+		    {
+		    	Thread.sleep(2000);
+		    	eM.setExcelFile("campaignInputData",sheet);
+		 		String name = (String) eM.getCell(1, 0);
+		 		commonObjects.filterName(name);
+		 		campaignObjects.verifyStatusBeforePause();
+				commonObjects.clickOptionsIcon();
+				campaignObjects.clickPauseCampaignOption();
+				campaignObjects.clickConfirmPauseYes();
+		    }
+		 @Then("^verify activating bc in paused campaign$")
+		    public void verifyActivatingBcInPausedCampaign() throws Throwable
+		    {
+			 	Exception ex = new Exception("Activate button available even after campaign pause");
+			   BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
+			   try{
+				   broadcastPageObjects.clickCreateButton();
+					broadcastPageObjects.clickActivateButton();
+					broadcastPageObjects.clickActivateConfirmYes();
+					Thread.sleep(10000);
+				   throw ex;
+			   }catch(Exception e) {
+				   
+			   }
+		    }
+	    
+		 
+		 
+		 @Then("^click on use template button from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
 			public void clickOnUseTemplateButton(String sheet, String fileName) throws Exception
 			{
 		 		ExcelHelper excelHelper = new ExcelHelper();
@@ -599,7 +630,7 @@ public class CampaignManagement extends Init{
 			 	campaignObjects.clickOnUseTemplateButton((String)excelHelper.getCell(1, 0));
 			}
 
-		   @Then("^create new template from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		 @Then("^create new template from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
 		    public void create_new_template(String sheet, String fileName) throws Throwable
 		    {
 		    	
@@ -646,4 +677,5 @@ public class CampaignManagement extends Init{
 		 		String locationName = (String) eM.getCell(1, 0);
 		    	campaignObjects.verifyLocationNameInDropDown(locationName);	 		
 		    }
+
 }

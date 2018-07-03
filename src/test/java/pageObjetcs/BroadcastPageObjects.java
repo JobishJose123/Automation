@@ -67,12 +67,12 @@ public class BroadcastPageObjects extends Init {
 	private WebElement routeBroadcast;
 	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/../input")
 	private WebElement routeFulfillment;
-	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'SMPP Robi outbond')]")
-	private WebElement routeBroadcastSmppRobiOutbond;
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
+	private WebElement routeBroadcastSmppRobioutbound;
 	@FindBy(xpath = ".//label[contains(.,'Sender ID: Fulfillment')]/following::vaadin-combo-box-item[contains(.,'Address-SMPP')]")
 	private WebElement senderIdFulfillmentAdressSmpp;
-	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'SMPP Robi outbond')]")
-	private WebElement routeFulfillmentSmppRobiOutbond;
+	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
+	private WebElement routeFulfillmentSmppRobioutbound;
 	@FindBy(xpath = ".//label[contains(.,'Track session')]/../input")
 	private WebElement trackSessionSelector;
 	@FindBy(xpath = ".//*[@id='contentWrapper']/div/paper-listbox/paper-item[contains(.,'After')]")
@@ -386,16 +386,16 @@ public class BroadcastPageObjects extends Init {
 	public void selectSenderAndRoute() throws InterruptedException {
 		jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
 		jswait.loadClick(senderIdBroadcastAdressSmpp);
-		jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
-		jswait.loadClick(routeBroadcastSmppRobiOutbond);
+		jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+		jswait.loadClick(routeBroadcastSmppRobioutbound);
 		jswait.loadSendKeys(senderIdFulfillmentSelector, "Address-SMPP");
 		// jswait.loadClick(senderIdFulfillmentSelector);
 		// Thread.sleep(4000);
 		jswait.loadClick(senderIdFulfillmentAdressSmpp);
 		// wait.until(ExpectedConditions.elementToBeClickable(senderIdFulfillmentAdressSmpp)).click();
-		jswait.loadSendKeys(routeFulfillment, "SMPP Robi outbond");
+		jswait.loadSendKeys(routeFulfillment, "SMPP Robi outbound");
 		Thread.sleep(2000);
-		jswait.loadClick(routeFulfillmentSmppRobiOutbond);
+		jswait.loadClick(routeFulfillmentSmppRobioutbound);
 	}
 
 	public void enterBroadcastBasicDetails(String name) throws InterruptedException {
@@ -493,8 +493,8 @@ public class BroadcastPageObjects extends Init {
 		else {
 			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
-			jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 		}
 		clickProceedButton();
 	}
