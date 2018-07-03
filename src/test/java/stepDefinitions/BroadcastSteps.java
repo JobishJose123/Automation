@@ -53,6 +53,34 @@ public class BroadcastSteps extends Init{
 		Assert.assertTrue("Wrong breadcrumb", jswait.checkClickable("//flytxt-breadcrumbs//flytxt-breadcrumb[3]//paper-button[contains(text(),'Life-Cycle Marketing')]"));
 		
     }
+	public void pauseBC(String sheet) throws Throwable {
+		eh.setExcelFile("bcInputData", sheet);
+		if(eh.getCellByColumnName("Type").contains("recurring")){
+			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Pause')]");
+			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
+		}
+		
+		verifyPauseBc();
+	}
+	public void resumeBC(String sheet) throws InterruptedException {
+		eh.setExcelFile("bcInputData", sheet);
+		if(eh.getCellByColumnName("Type").contains("recurring")){
+			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Resume')]");
+			jswait.loadClick(".//*[@id='confirmBoxResume']//paper-button[contains(text(),'Yes')]");
+		}
+	}
+	@Then("^pause bc from sheet \"([^\"]*)\"$")
+	public void verifyPauseAndResume(String sheet) throws Throwable {
+		pauseBC(sheet);
+		Thread.sleep(3000);
+	}
+	
+	@Then("^resume bc from sheet \"([^\"]*)\"$")
+	public void ResumeBC(String sheet) throws InterruptedException {
+		resumeBC(sheet);
+	}
 	@Then("^verify selected campaign name$")
     public void verifyViewBroadcastCampaignName() throws Throwable
     {
