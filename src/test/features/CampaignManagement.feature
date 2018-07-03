@@ -342,30 +342,30 @@ Feature: campaign management
     @NX-1219 @initBrowser
     Scenario: Campaign grid: Verify the label of targeted subscribers-1219
     Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+    #Then navigate to configuration management
+    #Then naviagte to product classes
+    #Then create product class and number attribute from "TestProductClass"
+    #Then navigate to landing page
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
     Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
+    #Then navigate to offer management
+    #Then navigate to products
+    #Then navigate to product class "TestProductClass"
+    #Then click create new product button
+    #Then create product with attributes from sheet "fullDetails"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
@@ -381,5 +381,19 @@ Feature: campaign management
     Then click on campaign  to verify expanding the campaign row from sheet "campaignBC"
     Then verify targetd customers label and count
     
+    
+    
+    
+    @NX-8151 @initBrowser
+    Scenario: Campaign creation: Verify whether Graphical conditions in target conditions are working properly-8151
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then verify whether Graphical conditions in target conditions are working properly from sheet "campaignBC" with catalog "defaultCatalog"
     
     

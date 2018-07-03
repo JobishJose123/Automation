@@ -5,8 +5,10 @@ import static org.junit.Assert.assertTrue;
 import java.awt.AWTException;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -81,6 +83,10 @@ public class TargetConditionObjects extends Init {
 		 private WebElement targetConditionEdit;
 		 @FindBy(xpath=".//paper-item[contains(.,'Duplicate')]")
 		 private WebElement optionDuplicate;
+//		 @FindBy(xpath=".//div[@class='jtk-demo-canvas canvas-wide flowchart style-scope target-conditions-graph']")
+//		 private WebElement dropLocation;
+//		 @FindBy(xpath=".//div[@draggable='true'][1]")
+//		 private WebElement graphicTC;
 		 @FindBy(xpath="//div[@class='window graph-item style-scope target-conditions-graph jsplumb-endpoint-anchor jsplumb-draggable']")
 		 private List <WebElement> duplicatedTargetConditionCard;
 		 
@@ -144,6 +150,19 @@ public class TargetConditionObjects extends Init {
 		}
 		public void clickDuplicateTargetConditionButton() throws InterruptedException {
 			jswait.loadClick(optionDuplicate);
+			Thread.sleep(2000);
+		}
+		public void dragTargetCondition() throws InterruptedException {
+			
+			//Actions act=new Actions(driver);
+//			Actions builder = new Actions(driver);
+//			 
+//			Action dragAndDrop = builder.clickAndHold(graphicTC).moveToElement(dropLocation).release(dropLocation).build();
+//			 
+//			dragAndDrop.perform();
+			WebElement graphicTC=driver.findElement(By.xpath(".//div[@draggable='true' and @class='widgets AI Powered Analytical Scores style-scope target-conditions-widgets'][1]"));
+			WebElement dropLocation=driver.findElement(By.xpath(".//div[@class='jtk-demo-canvas canvas-wide flowchart style-scope target-conditions-graph']"));
+			(new Actions(driver)).dragAndDrop(graphicTC, dropLocation).build().perform();
 			Thread.sleep(2000);
 		}
 		public void verifyDuplicatedTargetConditionCard() throws InterruptedException {

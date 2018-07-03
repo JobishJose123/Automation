@@ -677,5 +677,21 @@ public class CampaignManagement extends Init{
 		 		String locationName = (String) eM.getCell(1, 0);
 		    	campaignObjects.verifyLocationNameInDropDown(locationName);	 		
 		    }
+		    
+		    @Then("^verify whether Graphical conditions in target conditions are working properly from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+		    public void VerifyGraphicalConditionsInTargetConditionsAreWorkingProperly(String sheet, String catalogSheet) throws Throwable
+		    {
+		    	Thread.sleep(4000);
+		    	ExcelHelper catalogExcel = new ExcelHelper();
+		    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+		    	Thread.sleep(4000);
+		    	eM.setExcelFile("campaignInputData",sheet);
+		 		String name = (String) eM.getCell(1, 0);
+		 		String catalog = (String) catalogExcel.getCell(1, 0);
+		 		name =  RandomNameGenerator.getRandomName(name);
+		 		campaignObjects.clickCreateNewCampaignButton();
+		 		campaignObjects.VerifyGraphicalConditionsInTargetConditionsAreWorkingProperly(name, catalog);
+		 		
+		    }
 
 }

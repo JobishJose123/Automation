@@ -680,6 +680,19 @@ public void verifyTargetdCustomersLabelAndCount() throws Exception {
 	}
 	
 	
+	public void VerifyGraphicalConditionsInTargetConditionsAreWorkingProperly(String name,String catalog) throws InterruptedException {
+		enterCampaignDeails(name,catalog);
+		clickProceedButton();
+		targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickBasicTargetConditionWithAge();
+		targetConditionObjects.clickGraphicalTargetConditionButton();
+		targetConditionObjects.dragTargetCondition();
+		
+	}
+	
+	
+	
 	
 	
 	public void verifyNumberOfOffersWhileCreateCampaign(String name,String catalog) throws InterruptedException {
