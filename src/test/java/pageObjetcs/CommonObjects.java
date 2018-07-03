@@ -28,7 +28,7 @@ public class CommonObjects extends Init {
 
 	@FindBy(xpath = "//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
 	private WebElement filterIcon;
-	@FindBy(xpath = "//*[@id='filterForm']//input")
+	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Name')]/..//input")
 	private WebElement filterFormName;
 	@FindBy(xpath = "//*[@id='filterDialog']/div/paper-button[3]")
 	private WebElement filterFormApply;

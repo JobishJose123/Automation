@@ -31,8 +31,10 @@ String file = "";
     }
     public void setCell(int r,int c,String val) throws IOException{
     	Row row = sh.getRow(r);
-        Cell cell = row.getCell(c);       
-        cell.setCellType(Cell.CELL_TYPE_STRING);
+    	Cell cell = null;
+        	cell = row.getCell(c);  
+        	cell.setCellType(Cell.CELL_TYPE_STRING);
+        
         cell.setCellValue(val);
         FileOutputStream outFile =new FileOutputStream(new File(file));  //Creating new file
         workbook.write(outFile);   //printing the data in the new file

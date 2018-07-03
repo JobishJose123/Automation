@@ -3,31 +3,61 @@ package baseClasses;
 import java.io.IOException;
 
 public class ExcelStatus {
-
-	public static void main(String[] args) throws IOException {
-		ExcelHelper oldFile = new ExcelHelper();
-		ExcelHelper newFile = new ExcelHelper();
-		newFile.setExcelFile("Automation Status", "Test Cases");
-		oldFile.setExcelFile("Automation Status", "Sheet1");
-		int i = 0;
-		int j = 0;
-		int countOld = 0;
-		String oldCase = "";
-		System.out.println("Initial\n");
-		String newCase = "";
-		for(i=0;i<=75;i++) {
-				countOld++;
-			oldCase = oldFile.getCell(i, 1).toString();
-			System.out.println(oldCase);
-			for(j=1;j<=4353;j++) {
-				
-				if(oldCase.contentEquals(newFile.getCell(j, 0).toString())) {
-					System.out.println(newFile.getCell(j, 0).toString());
-					newFile.setCell(j, 10, "Yes");
+	static Runnable r1 = new Runnable() {
+		  public void run() {
+			  ExcelHelper oldFile = new ExcelHelper();
+				ExcelHelper newFile = new ExcelHelper();
+				newFile.setExcelFile("old", "q");
+				oldFile.setExcelFile("old", "q");
+				int i = 0;
+				int j = 0;
+				int countOld = 0;
+				String oldCase = "";
+				System.out.println("Initial\n");
+				String newCase = "";
+				for(i=0;i<=500;i++) {
+					try {
+						oldFile.setCell(i, 0,"check1");
+						System.out.println("check1");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}
-			
-		}
-		System.out.println(countOld);
+				System.out.println(countOld);
+		  }
+		};
+		static Runnable r2 = new Runnable() {
+		  public void run() {
+			  ExcelHelper oldFile = new ExcelHelper();
+				ExcelHelper newFile = new ExcelHelper();
+				newFile.setExcelFile("old", "q");
+				oldFile.setExcelFile("old", "q");
+				int i = 0;
+				int j = 0;
+				int countOld = 0;
+				String oldCase = "";
+				System.out.println("Initial\n");
+				String newCase = "";
+				for(i=0;i<=200;i++) {
+					try {
+						oldFile.setCell(i, 0,"check2");
+						System.out.println("check2");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				System.out.println(countOld);
+		  }
+		};
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		Thread thr1 = new Thread(r1);
+		Thread thr2 = new Thread(r2);
+		
+		thr2.start();
+		thr1.start();
+		
 	}
 }

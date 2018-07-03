@@ -23,6 +23,14 @@ public static PropHandler p = new PropHandler();
 	driver.manage().window().maximize();
 	p.setPropertyFile("config.properties");
 	}
+	
+	//CONFIGURATIONS
+	
+	public final String BASE_LIST = "selenium_list";
+	public final String AGE_PROFILE_FIELD = "Age_q11";
+	public final String SITE_ID_PROFILE_FIELD = "SiteID";
+	public final String BALANCE_PROFILE_FIELD = "Balance";
+	
 }
 //public class Init {
 //public static WebDriver driver;

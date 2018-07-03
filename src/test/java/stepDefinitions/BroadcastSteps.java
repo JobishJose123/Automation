@@ -26,7 +26,6 @@ import pageObjetcs.OfferPageObjects;
 import pageObjetcs.TargetConditionObjects;
 
 public class BroadcastSteps extends Init{
-	final String BASE_LIST = "l";
 	
 	JSWaiter jswait = new JSWaiter();
 	
@@ -447,7 +446,7 @@ if(bc_type.contains("one-off")){
 		
      Thread.sleep(2000);
    	 jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
-	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+2)+"]"));
+	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
      builder.moveToElement(num).click().build().perform();
      Thread.sleep(2000);
 //      jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
@@ -629,6 +628,27 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 			Assert.assertEquals("Status of Bc is not chnaged",currStatus, status);
 		}
 	}
+	@Then("^wait until broadcast from sheet \"([^\"]*)\" change status to \"([^\"]*)\"$")
+	public void waitUntilStatusOfBroadcast(String sheet, String status ) throws Throwable {
+		eh.setExcelFile("bcInputData", sheet);
+		String type = (String) eh.getCell(1, 7);
+		String bcName = (String) eh.getCell(1, 0);
+		String currStatus = "";
+		currStatus = broadcastPageObjects.getBcStatus(bcName);
+		while(!status.contentEquals(currStatus)) {
+			Thread.sleep(2000);
+			currStatus = broadcastPageObjects.getBcStatus(bcName);
+		}
+		
+	}
+	@Then("^check targeted count of \"([^\"]*)\"$")
+	public void checkTargtedCountOfBroadcast(String sheet) throws Throwable {
+		Thread.sleep(5000);
+		eh.setExcelFile("bcInputData", sheet);
+		String bcName = (String) eh.getCell(1, 0);
+		RegistrationList rl = new RegistrationList();
+	}
+	
 //	@Then("^verify adding target condition with or condition$")
 //	public void verifyEditingTargetCondition() throws Throwable {
 //		targetConditionObjects.clickManualOrButton();

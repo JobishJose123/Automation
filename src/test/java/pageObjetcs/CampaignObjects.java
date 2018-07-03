@@ -142,8 +142,8 @@ public class CampaignObjects extends Init{
 	
 	
 	
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath=".//*[@id='campaignsListMenu']//paper-item[contains(.,'Pause')]")
+	private WebElement campaignPauseButton;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -186,6 +186,9 @@ public class CampaignObjects extends Init{
 	}
 	public void clickCreateCampaignTemplateButton() throws InterruptedException {
 		jswait.loadClick(createCampaignTemplateButton);
+	}
+	public void clickCampaignPauseButton() throws InterruptedException {
+		jswait.loadClick(campaignPauseButton);
 	}
 	public void clickCreateCategorySaveButton() throws InterruptedException {
 		jswait.loadClick(campaignCategorySave);

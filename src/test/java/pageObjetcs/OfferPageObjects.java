@@ -21,12 +21,14 @@ import org.testng.Assert;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import pageObjetcs.Admin.OfferAttributesPage;
 
 public class OfferPageObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	CommonObjects commonObjects = new CommonObjects();
 	public ExcelHelper eh = new ExcelHelper();
+	OfferAttributesPage offerAttributesPage = new OfferAttributesPage();
 
 	public OfferPageObjects() {
 		PageFactory.initElements(driver, this);
@@ -80,9 +82,6 @@ public class OfferPageObjects extends Init {
 	private WebElement voiceCreativeOptional4;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement optionsEdit;
-	@FindBy(xpath = ".//*[@id='contentWrapper']//paper-item[contains(.,'Delete')]")
-	private WebElement optionsDelete;
-	
 	@FindBy(xpath = "//div[@id='topBar']//paper-button[contains(.,'Cancel')]")
 	private WebElement cancelOfferButton;
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]/..//input")
@@ -304,6 +303,14 @@ public class OfferPageObjects extends Init {
 	 private WebElement previewEmailConfirmButton;
 	 @FindBy(xpath="//paper-dialog[@id='deleteOffer']//paper-button[contains(.,'Yes')]")
 	 private WebElement offerDeleteConfirmYes;
+	 @FindBy(xpath="//paper-button[contains(.,'Add')]")
+	 private WebElement addOfferAttributeButton;
+	 @FindBy(xpath="//label[contains(text(),'Attribute')]/..//input")
+	 private WebElement offerAttributeSelector;
+	 @FindBy(xpath="//paper-item[contains(.,'a_sel_offer_attribute')]")
+	 private WebElement offerAttributeSelect;
+	 @FindBy(xpath="//label[contains(text(),'Value')]/..//input")
+	 private WebElement offerAttributeValueSelector;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -352,25 +359,48 @@ public class OfferPageObjects extends Init {
 //	 private WebElement ;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
+	 public void checkOfefrAttributesValidation() throws InterruptedException, UnsupportedFlavorException, IOException {
+		 String textField = commonObjects.getTextFormTextField("//offer-attribute[3]//label[contains(text(),'Value')]/..//input");
+		 Assert.assertTrue(textField.length()==10, "Error in text field of offer attriibute");
+		 textField = commonObjects.getTextFormTextField("//offer-attribute[4]//label[contains(text(),'Value')]/..//input");
+		 Assert.assertTrue(textField.length()==4, "Error in text field of offer attriibute");
+		 
+	 }
+	 public void selectOfferAttribute() throws InterruptedException, UnsupportedFlavorException, IOException {
+			jswait.loadClick("//offer-attribute[1]//label[contains(text(),'Attribute')]/..//input");
+			jswait.loadClick("//offer-attribute[1]//paper-item[contains(.,'a_sel_offer_attributeMultiname')]");
+			jswait.loadClick("//offer-attribute[1]//label[contains(text(),'Value')]/../../iron-icon");
+			jswait.loadClick("//offer-attribute[1]//paper-item[contains(.,'LABEL')]");
+			jswait.loadClick("//offer-attribute[1]//paper-item[contains(.,'LABEL1')]");
+			
+			clickAddOfferAttributeButton();
+			
+			jswait.loadClick("//offer-attribute[2]//label[contains(text(),'Attribute')]/..//input");
+			jswait.loadClick("//offer-attribute[2]//paper-item[contains(.,'a_sel_offer_attributeSinglename')]");
+			jswait.loadClick("//offer-attribute[2]//label[contains(text(),'Value')]/..//input");
+			jswait.loadClick("//offer-attribute[2]//paper-item[contains(.,'LABEL')]");
+			
+			clickAddOfferAttributeButton();
+			
+			jswait.loadClick("//offer-attribute[3]//label[contains(text(),'Attribute')]/..//input");
+			jswait.loadClick("//offer-attribute[3]//paper-item[contains(.,'a_sel_offer_attributeTextname')]");
+			jswait.loadSendKeys("//offer-attribute[3]//label[contains(text(),'Value')]/..//input","text454Val");
+			
+			clickAddOfferAttributeButton();
+			
+			jswait.loadClick("//offer-attribute[4]//label[contains(text(),'Attribute')]/..//input");
+			jswait.loadClick("//offer-attribute[4]//paper-item[contains(.,'a_sel_offer_attributeNumbername')]");
+			jswait.loadSendKeys("//offer-attribute[4]//label[contains(text(),'Value')]/..//input","98nb33");
+			
+			checkOfefrAttributesValidation();
+		}
 	 
 	 public void clickSetAsDefaultSecondTrack() throws InterruptedException {
 			jswait.loadClick(setAsDefaultSecondTrack);
 		}
-	 
-	 
-	 public void optionsDelete() throws InterruptedException {
-			jswait.loadClick(optionsDelete);
+	 public void clickAddOfferAttributeButton() throws InterruptedException {
+			jswait.loadClick(addOfferAttributeButton);
 		}
-	 
-	 
 	 
 //  Creative Tab in Offer Creation	functions
 	 public void clickAddNewVariableButton() throws InterruptedException {

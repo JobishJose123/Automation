@@ -67,7 +67,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement routeBroadcast;
 	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/../input")
 	private WebElement routeFulfillment;
-	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'SMPP Robi outbond')]")
 	private WebElement routeBroadcastSmppRobiOutbond;
 	@FindBy(xpath = ".//label[contains(.,'Sender ID: Fulfillment')]/following::vaadin-combo-box-item[contains(.,'Address-SMPP')]")
 	private WebElement senderIdFulfillmentAdressSmpp;
@@ -233,6 +233,28 @@ public class BroadcastPageObjects extends Init {
 		String status = topBcStatusGrid.getText();
 		return status;
 	}
+	public String getBcStatus(String bcName) throws Exception {
+		jswait.waitUntil(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[2]/vaadin-grid-cell-content");
+		String status = driver.findElement(By.xpath(".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[2]/vaadin-grid-cell-content")).getText();
+		return status;
+	}
+	
+	public String getBcTargtedCount(String bcName) throws Exception {
+		jswait.waitUntil(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[5]/vaadin-grid-cell-content");
+		String status = driver.findElement(By.xpath(".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[5]/vaadin-grid-cell-content")).getText();
+		return status;
+	}
+	
+	public String getBcSentCount(String bcName) throws Exception {
+		jswait.waitUntil(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[6]/vaadin-grid-cell-content");
+		String status = driver.findElement(By.xpath(".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[6]/vaadin-grid-cell-content")).getText();
+		return status;
+	}
+	public String getBcAcknowledgedCount(String bcName) throws Exception {
+		jswait.waitUntil(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[7]/vaadin-grid-cell-content");
+		String status = driver.findElement(By.xpath(".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[7]/vaadin-grid-cell-content")).getText();
+		return status;
+	}
 
 	public void clickCreateButton() throws InterruptedException {
 		jswait.loadClick(createButtonBc);
@@ -364,13 +386,8 @@ public class BroadcastPageObjects extends Init {
 	public void selectSenderAndRoute() throws InterruptedException {
 		jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
 		jswait.loadClick(senderIdBroadcastAdressSmpp);
-		Thread.sleep(2000);
-//		jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
-		Thread.sleep(2000);
+		jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
 		jswait.loadClick(routeBroadcastSmppRobiOutbond);
-		Thread.sleep(2000);
-		jswait.loadClick(routeBroadcastSmppRobiOutbond);
-		Thread.sleep(2000);
 		jswait.loadSendKeys(senderIdFulfillmentSelector, "Address-SMPP");
 		// jswait.loadClick(senderIdFulfillmentSelector);
 		// Thread.sleep(4000);
@@ -474,17 +491,10 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
-			System.out.println("inside else");
 			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			Thread.sleep(3000);
-			System.out.println("before route");
-			jswait.loadClick(routeBroadcast);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
-			
-			Thread.sleep(3000);
-			jswait.loadClick(routeBroadcastSmppRobiOutbond);
-			
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbond");
+			jswait.loadClick(routeBroadcastSmppRobiOutbond);	
 		}
 		clickProceedButton();
 	}

@@ -35,11 +35,11 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionTypeCustomerLocationInsights;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input")
 	private WebElement CustomerInsightFieldSelector;
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'Age')]")
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldAge;
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'SiteID')]")
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+SITE_ID_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldSite;
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'Balance')]")
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+BALANCE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldBalance;
 	@FindBy(xpath="//label[text()='Condition']/../..//input")
 	private WebElement conditionSelector;

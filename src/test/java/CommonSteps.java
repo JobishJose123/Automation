@@ -95,13 +95,10 @@ public class CommonSteps extends Init {
 	public void navigateToRewards() throws InterruptedException {
 		jswait.loadClick("//a/div[contains(.,'Rewards')]/..");
 	}
-	
-	@Then("^navigate to Users")
-	public void navigateToUsers() throws InterruptedException {
-		jswait.loadClick("//a/div[contains(.,'Users')]/..");
+	@Then("^navigate to offer attributes")
+	public void navigateToOfferAttributes() throws InterruptedException {
+		jswait.loadClick("//a/div[contains(.,'Offer Attributes')]/..");
 	}
-	
-	
 	@Then("^navigate to configuration management")
 	public void navigateToConfiurationManagement() throws InterruptedException {
 		landingPage.navigateToConfigurationManagement();
