@@ -55,6 +55,9 @@ public class ExportCampaignLocationObjects extends Init{
 		@FindBy(xpath="//form[@id='importCampaignForm']//vaadin-combo-box[@id='categoryDropdown']//input]")
 		private WebElement campaignToBeSelectedForExporting;
 		
+		@FindBy(xpath="//paper-dialog[@id = 'createNew']")
+		private WebElement exportCampaignPanel;
+		
 		public void clickAddExportLocationButton() throws InterruptedException{
 			jswait.loadClick(addExportLocationButton);
 		}
@@ -137,5 +140,9 @@ public class ExportCampaignLocationObjects extends Init{
 		public void selectCampaignToWhereExported(String campaignToBeSelected)  throws InterruptedException {
 			jswait.loadSendKeys(campaignToBeSelectedForExporting,campaignToBeSelected);
 			jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+campaignToBeSelectedForExporting+"')]");
+		}
+		
+		public void isExportCampaignTemplatePanelDisplayed() {
+			Assert.assertTrue(exportCampaignPanel.isDisplayed());
 		}
 }

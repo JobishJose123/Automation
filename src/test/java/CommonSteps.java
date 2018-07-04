@@ -1,25 +1,13 @@
 
 import java.net.MalformedURLException;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-
-import com.github.mkolisnyk.cucumber.runner.BeforeSuite;
-
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
-import baseClasses.PropHandler;
-import baseClasses.RandomNameGenerator;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CommonObjects;
@@ -35,6 +23,7 @@ public class CommonSteps extends Init {
 	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 	CommonObjects commonObjetcs = new CommonObjects();
 	RegistrationListPage registrationListPage = new RegistrationListPage();
+	ExcelHelper excelHelper = new ExcelHelper();
 	
 	public CommonSteps() {
 		PageFactory.initElements(driver, this);
@@ -132,4 +121,17 @@ public class CommonSteps extends Init {
 	{
 		commonObjetcs.navigateToOffers();
 	}
+	
+	@Then("^wait for (\\d+) minutes$")
+	public void waitForTimeInMinutes(int minutes) throws InterruptedException {
+		int milliSeconds = minutes * 60 * 1000;
+		Thread.sleep(milliSeconds);
+	}
+	
+	@Given("^login with the user from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+    public void loginuser(String sheet, String fileName) throws Exception {
+		excelHelper.setExcelFile(fileName,sheet);
+		 driver.get("http://"+p.getValue("env"));
+		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(2, 0));
+    }
 }

@@ -104,4 +104,9 @@ public class AddExportLocationSteps extends Init {
     {
     	exportCampignLocationObject.clickViewAllNotifications();
     }
+    
+    @Then("^verify export option panel displayed$")
+    public void isExportCampaignTemplatePanelDisplayed() {
+    	exportCampignLocationObject.isExportCampaignTemplatePanelDisplayed();
+    }
 }

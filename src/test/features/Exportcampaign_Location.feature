@@ -80,3 +80,46 @@ Feature: Test cases related to export campaign location
     Then click on export location option of template from sheet "template" of file "ExportCampaignLocation"
 		Then verify the location name from sheet "locationdetails" of file "ExportCampaignLocation" can be selected from the drop down
     
+    
+    @NX-8184 @initBrowser @closeBrowser
+ 		Scenario: Verify imported campaign template can be used for new campaign creation
+ 		Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then create new campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
+    Then navigate to system administration
+    Then navigate to export location
+    Then add new export location
+    Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then navigate to templates tab
+    Then create new template from sheet "template" of file "ExportCampaignLocation"
+    Then click on export location option of template from sheet "template" of file "ExportCampaignLocation"
+    Then select export location from sheet "locationdetails" of file "ExportCampaignLocation" and click export
+    Then wait for 6 minutes
+    Then click on notification bell
+    Then click on view all notifications
+   	Then click proceed on notification from the sheet "template" of file "ExportCampaignLocation"
+    Then select a campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
+    Then click on import
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
+    Then navigate to templates tab
+    Then click on use template button from sheet "template" of file "ExportCampaignLocation"
+    Then create new campaign use template from sheet "campaignBC" with catalog "defaultCatalog"
+    Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    
+   @NX-8193 @initBrowser @closeBrowser
+   Scenario: Verify whether share option is available for imported campaign template
+ 		Given login
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
+		Then navigate to templates tab
+		Then click on export location option of template from sheet "template" of file "ExportCampaignLocation"
+		Then verify export option panel displayed
