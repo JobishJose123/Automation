@@ -376,22 +376,29 @@ public class BroadcastSteps extends Init{
 	@Then("^verify create BC Notification$")
 	public void createBCNotification() throws InterruptedException {
 		
-		broadcastPageObjects.enterBroadcastBasicDetails("notification");
-		broadcastPageObjects.clickProceedButton();
-		broadcastPageObjects.selectBaseList(BASE_LIST);
-		//broadcastPageObjects.clickcreateTargetCondition();
-	    //broadcastPageObjects.clickProceedButton();
-		//broadcastPageObjects.selectBaseList("Latest_list");
-		broadcastPageObjects.clickProceedButton();
-		broadcastPageObjects.selectFirstOffer();
-		broadcastPageObjects.selectTrackSession();
-		broadcastPageObjects.selectTrackingSource();
-		broadcastPageObjects.selectSenderAndRoute();
-		broadcastPageObjects.clickProceedButton();
+//		broadcastPageObjects.enterBroadcastBasicDetails("notification");
+//		broadcastPageObjects.clickProceedButton();
+//		broadcastPageObjects.selectBaseList(BASE_LIST);
+//		broadcastPageObjects.clickcreateTargetCondition();
+//	    broadcastPageObjects.clickProceedButton();
+//		broadcastPageObjects.selectBaseList("Latest_list");
+//		broadcastPageObjects.clickProceedButton();
+//		broadcastPageObjects.selectFirstOffer();
+//		broadcastPageObjects.selectTrackSession();
+//		broadcastPageObjects.selectTrackingSource();
+//		broadcastPageObjects.selectSenderAndRoute();
+//		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.bcNotifications();
 		broadcastPageObjects.bcNotificationsadd();
-		broadcastPageObjects.bcNotificationsok();
-		broadcastPageObjects.bcNotificationscancel();
+		broadcastPageObjects.bcnotificationrecipient();
+		broadcastPageObjects.bcnotificationrecipientclick(); 
+		broadcastPageObjects.bcnotificationbeforesendingtime();
+		broadcastPageObjects.bcnotificationbeforesendingtime1min();
+		broadcastPageObjects.bcnotificationbeforeRendertime();
+		broadcastPageObjects.bcnotificationbeforerendertime1min();
+		broadcastPageObjects.bcremovebutton();
+		//broadcastPageObjects.bcNotificationsok();
+	
 		
 	}
 	
@@ -658,6 +665,8 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 	}
 	@Then("^wait until broadcast from sheet \"([^\"]*)\" change status to \"([^\"]*)\"$")
 	public void waitUntilStatusOfBroadcast(String sheet, String status ) throws Throwable {
+		
+		Thread.sleep(3000);
 		eh.setExcelFile("bcInputData", sheet);
 		String type = (String) eh.getCell(1, 7);
 		String bcName = (String) eh.getCell(1, 0);

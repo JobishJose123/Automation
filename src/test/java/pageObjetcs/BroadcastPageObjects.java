@@ -1,5 +1,6 @@
 package pageObjetcs;
 
+
 import static org.junit.Assert.assertTrue;
 
 import java.awt.AWTException;
@@ -11,6 +12,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+
+
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -139,20 +143,20 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement filterProductNameField;
 	 @FindBy(xpath="//iron-data-table[@id='productTable']//paper-dialog[@id='filterDialog']/div/paper-button[3]")
 	 private WebElement productFilterApplyButton;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Recipient')]//..//input")
+	 private WebElement bcnotificationrecipient ;
+	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Sending')]//following::iron-icon[1]")
+	 private WebElement bcnotificationbeforesendingtime ;
+	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Sending')]//following::paper-listbox//paper-item[2]")
+	 private WebElement bcnotificationbeforesendingtime1min;
+	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::iron-icon[1]")
+	 private WebElement bcnotificationbeforeRendertime ;
+	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::paper-listbox//paper-item[2]")
+	 private WebElement bcnotificationbeforerendertime1min ;
+	 @FindBy(xpath="//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'syamkrishna cs')]")
+	 private WebElement bcnotificationrecipientclick;
+	 @FindBy(xpath="//bc-notifications-list//paper-button[contains(.,'Remove')]")
+	 private WebElement bcremovebutton ;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -199,6 +203,49 @@ public class BroadcastPageObjects extends Init {
 	public void clickOneOffSendTimeField() throws InterruptedException {
 		jswait.loadClick(oneOffSendTimeField);
 	}
+	
+	//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
+	public void bcnotificationrecipient() throws InterruptedException {
+		jswait.loadSendKeys(bcnotificationrecipient, "syamkrishna cs");
+		
+		wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE);
+		Thread.sleep(2000);
+	}
+	
+	public void bcnotificationbeforesendingtime() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick(bcnotificationbeforesendingtime);
+	}
+	public void bcnotificationbeforesendingtime1min() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick(bcnotificationbeforesendingtime1min);
+	}
+	public void bcnotificationbeforeRendertime() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick(bcnotificationbeforeRendertime);
+	}
+	
+	public void bcnotificationbeforerendertime1min() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick(bcnotificationbeforerendertime1min);
+	}
+	
+	public void bcnotificationrecipientclick() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick(bcnotificationrecipientclick);
+	}
+	public void bcremovebutton() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick(bcremovebutton);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public void selectOneOffDateAndTimeNow() throws InterruptedException {
 		Calendar rightNow =Calendar.getInstance();
     	String mn = "";
@@ -494,7 +541,11 @@ public class BroadcastPageObjects extends Init {
 			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
 			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
 		}
 		clickProceedButton();
 	}
