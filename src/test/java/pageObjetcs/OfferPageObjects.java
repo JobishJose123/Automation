@@ -311,8 +311,8 @@ public class OfferPageObjects extends Init {
 	 private WebElement offerAttributeSelect;
 	 @FindBy(xpath="//label[contains(text(),'Value')]/..//input")
 	 private WebElement offerAttributeValueSelector;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
+	 @FindBy(xpath="//*[@id='offerGrid']//data-table-cell[contains(.,'Recharge')])")
+	 private WebElement rechargeverify ;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -656,6 +656,10 @@ public class OfferPageObjects extends Init {
 	public void clickAddProductSecondCheckbox() throws InterruptedException {
 		jswait.loadClick(addProductSecondCheckbox);
 	}
+	
+	
+	
+	
 
 	public void selectAllLanguagesCreativeTab() throws Throwable {
 

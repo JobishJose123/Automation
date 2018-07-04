@@ -846,4 +846,62 @@ public class OfferSteps extends Init {
 //		JavaScriptExecutor je = new JavaScriptExecutor();
 //		je.createAlert();
 //	}
-}
+
+
+
+	@Then("^verify delete added variable$")
+	public void verifydeleteDynamicVariables() throws Throwable {
+		proceedToCreativeTab();
+		offerPageObjects.selectCreativeLanguageEnglish();
+		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.createFirstVariable("sel_test");
+		Thread.sleep(3000);
+		offerPageObjects.MapVariableFilterName("sel_test");
+		Thread.sleep(3000);
+		
+		offerPageObjects.clickAddVariableDeleteButton();
+		Thread.sleep(3000);
+		offerPageObjects.MapVariableFilterName("sel_test");
+//		offerPageObjects.clickMapVariableFirstVariable();
+//		offerPageObjects.clickMapVariableCancelButton();
+		try{
+			jswait.waitUntil("//h3[contains(.,'Variables used:')]/following::label[contains(.,'sel_test')]");
+			Assert.assertTrue(false, "variable selected after cancel");
+		}catch(Exception e) {
+			
+		}
+		}
+
+
+
+	@Then("^verify recharge offer from sheet \"([^\"]*)\"$")
+	public void verifyrechargeOffer(String sheet) throws Throwable {
+		eh.setExcelFile("offerInputData", sheet);
+		String offerName = (String) eh.getCell(1, 0);
+		commonObjects.filterName(offerName);
+		
+		String name=driver.findElement(By.xpath(".//*[@id='offerGrid']//data-table-cell[contains(.,'Recharge')]")).getText();
+//		commonObjects.clickOptionsIcon();
+//		commonObjects.clickDeleteOption();
+//		offerPageObjects.clickOfferDeleteConfirmYesButton();
+//		commonObjects.filterName(offerName);
+		try {
+			Assert.assertEquals("Recharge", name, "passed");
+		}catch(Exception e) {
+			
+		}
+	}
+
+
+
+
+
+
+
+
+
+	}
+
+
+
+

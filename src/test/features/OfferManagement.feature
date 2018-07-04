@@ -92,15 +92,7 @@ Feature: Test suite on Offer creation
     Then create new offer from sheet "informationalWAP" with product "singleProductPage"
     Then verify "informationalWAP" offer in grid
 
-  @NX-1348 @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating Recharge offers NX-1348
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
-    Then verify "rechargeSMS" offer in grid
-
+   
   @NX-1345 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating Seeding offers NX-1345
     Given login
@@ -110,14 +102,7 @@ Feature: Test suite on Offer creation
     Then create new offer from sheet "seedingWAPoffer" with product "singleProductPage"
     Then verify "seedingWAPoffer" offer in grid
 
-  @NX-6176 @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating STV offers NX-6176
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "STVWAP" with product "singleProductPage"
-    Then verify "STVWAP" offer in grid
+
 
   @NX-1347 @initBrowser
   Scenario: Create offer:Track: Verify creating Usage Based offers NX-1347
@@ -678,4 +663,34 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     Then navigate to offers
     Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
     Then delete offer from sheet "rechargeEmail"
-  
+    
+    
+    
+     @NX-2425
+ @initBrowser
+  Scenario: Create offer: Creative: Verify cancelling the added dynamic variable NX-946
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify delete added variable
+    
+    
+      @NX-1348 @initBrowser
+  Scenario: Create offer:Track: Verify creating Recharge offers 
+         Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then verify recharge offer from sheet "rechargeWAP"
+   
+
+    @NX-6176 @initBrowser
+  Scenario: Create offer:Track: Verify creating STV offers NX-6176
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "STVWAP" with product "fullDetails"
+    Then verify "STVWAP" offer in grid
