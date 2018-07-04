@@ -350,7 +350,7 @@ Feature: campaign management
     #Then navigate to campaign categories
     #Then create new campaign category from sheet "CampaignCategory"
     #Then navigate to landing page
-    Then navigate to precision marketer
+    #Then navigate to precision marketer
     #Then navigate to offer management
     #Then navigate to products
     #Then navigate to product class "TestProductClass"
@@ -366,15 +366,15 @@ Feature: campaign management
 #	  Then Navigate to Offer Catalogue
     #Then Create New Offer Catalogue from sheet "defaultCatalog"
     #Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
-    Then navigate to landing page
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then naigate to "campaignBC" campaign view broadcasts
+    #Then click create new broadcast button
+    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    #Then activate bc
+    #Then verify bc created from sheet "one-offBC"
+    #Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"

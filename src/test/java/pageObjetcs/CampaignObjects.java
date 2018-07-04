@@ -140,6 +140,13 @@ public class CampaignObjects extends Init{
 	String colorAfterAbort;
 	@FindBy(xpath=".//paper-item//label[contains(.,'Targeted Customers')]")
 	private WebElement targetedCustomersLabel;
+	@FindBy(xpath=".//div[@class='summary layout horizontal center style-scope campaign-list']//paper-item[2]")
+	private WebElement targetedCustomersCount;
+	
+	@FindBy(xpath=".//div[@class='layout vertical flex rowDetail style-scope campaign-list']//label[1][2]")
+	private WebElement targetedCustomersExpandCount;
+	
+	
 	
 	
 	
@@ -361,7 +368,7 @@ public class CampaignObjects extends Init{
 	
 	public void click_on_campaign_and_verify_row(String name) throws InterruptedException {
 		
-		assertTrue(driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'campaignBC Edited1693')]")).isDisplayed());
+		assertTrue(driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'"+name+"')]")).isDisplayed());
 		driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'"+name+"')]")).click();
 		assertTrue(campaignRowDetails.isDisplayed());
 		assertTrue(conversionRate.isDisplayed());
@@ -371,20 +378,25 @@ public class CampaignObjects extends Init{
 		
 	}
 	
-public void verifyTargetdCustomersLabelAndCount() throws Exception {
+  
+	
+	public void verifyTargetdCustomersLabelAndCount() throws Exception {
 		
+	
+	    Thread.sleep(300000);
+	    driver.navigate().refresh();
 		assertTrue(targetedCustomersLabel.isDisplayed());
-//		String count1=targetedCustomersCount.getText();
-//		String count2=targetedCustomersExpandCount.getText();
-//		System.out.println("Count1 "+count1);
-//		System.out.println("Count2 "+count2);
-//		Exception mismatchCount=new Exception("Count mismatch");
-//		
-//		if(count1.equals(count2)) {
-//			System.out.println("Count is matching");
-//		}
-//		else
-//			throw mismatchCount;
+		String count1=targetedCustomersCount.getText();
+		String count2=targetedCustomersExpandCount.getText();
+		System.out.println("Count1 "+count1);
+		System.out.println("Count2 "+count2);
+		Exception mismatchCount=new Exception("Count mismatch");
+		
+		if(count1.equals(count2)) {
+			System.out.println("Count is matching");
+		}
+		else
+			throw mismatchCount;
 	}
 	
       public void verifyStatusIconBeforeAbort() throws InterruptedException {
