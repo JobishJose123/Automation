@@ -350,7 +350,7 @@ Feature: campaign management
     #Then navigate to campaign categories
     #Then create new campaign category from sheet "CampaignCategory"
     #Then navigate to landing page
-    #Then navigate to precision marketer
+    Then navigate to precision marketer
     #Then navigate to offer management
     #Then navigate to products
     #Then navigate to product class "TestProductClass"
@@ -374,10 +374,13 @@ Feature: campaign management
     #Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     #Then activate bc
     #Then verify bc created from sheet "one-offBC"
+    #Then verify target status of bc
     #Then navigate to landing page
-    Then navigate to precision marketer
+    #Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
+		Then naigate to "campaignBC" campaign view broadcasts
+		Then verify target status of bc
     Then click on campaign  to verify expanding the campaign row from sheet "campaignBC"
     Then verify targetd customers label and count
     
@@ -395,5 +398,9 @@ Feature: campaign management
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
     Then verify whether Graphical conditions in target conditions are working properly from sheet "campaignBC" with catalog "defaultCatalog"
+    
+    
+    
+    
     
     

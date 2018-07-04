@@ -703,7 +703,12 @@ public class CampaignObjects extends Init{
 		
 	}
 	
+	public void verifyTargetStatusOfBC() throws InterruptedException {
+		
+		WebDriverWait wait = new WebDriverWait(driver,300);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//vaadin-grid-cell-content[contains(.,'Targeting')]")));
 	
+	}
 	
 	
 	

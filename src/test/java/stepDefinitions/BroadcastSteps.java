@@ -693,6 +693,15 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		RegistrationList rl = new RegistrationList();
 	}
 	
+	@Then("^validate bc$")
+    public void validateBc() throws Throwable
+    {  
+		broadcastPageObjects.clickCreateButton();
+		broadcastPageObjects.clickValidateButton();
+	//	broadcastPageObjects.clickActivateConfirmYes();
+		Thread.sleep(10000);
+    }
+	
 //	@Then("^verify adding target condition with or condition$")
 //	public void verifyEditingTargetCondition() throws Throwable {
 //		targetConditionObjects.clickManualOrButton();

@@ -693,5 +693,13 @@ public class CampaignManagement extends Init{
 		 		campaignObjects.VerifyGraphicalConditionsInTargetConditionsAreWorkingProperly(name, catalog);
 		 		
 		    }
+		    
+		    @Then("^verify target status of bc$")
+		    public void verifyTargetStatusOfBC() throws Throwable
+		    {
+		    	
+		    	campaignObjects.verifyTargetStatusOfBC();	 		
+		    }
+		    
 
 }
