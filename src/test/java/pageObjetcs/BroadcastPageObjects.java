@@ -519,7 +519,7 @@ public class BroadcastPageObjects extends Init {
 
 	public void createBC(String name, String bc_type, String baseList, String offer) throws InterruptedException {
 		enterBroadcastBasicDetails(name);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")) {
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(1000);

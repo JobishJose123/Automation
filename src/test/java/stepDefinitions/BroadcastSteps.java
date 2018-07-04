@@ -55,20 +55,36 @@ public class BroadcastSteps extends Init{
     }
 	public void pauseBC(String sheet) throws Throwable {
 		eh.setExcelFile("bcInputData", sheet);
-		if(eh.getCellByColumnName("Type").contains("recurring")){
+		if(eh.getCellByColumnName("Type").contentEquals("recurring")){
 			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Pause')]");
 			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
+			Thread.sleep(5000);
+			jswait.waitUntil(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//vaadin-grid-cell-content[contains(text(),'Paused')]");
 		}
-		
-		verifyPauseBc();
+		if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")){
+			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastSeedGridMenu']//paper-item[contains(.,'Pause')]");
+			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
+			Thread.sleep(5000);
+			jswait.waitUntil(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//vaadin-grid-cell-content[contains(text(),'Paused')]");
+		}
 	}
-	public void resumeBC(String sheet) throws InterruptedException {
+	public void resumeBC(String sheet) throws Exception {
 		eh.setExcelFile("bcInputData", sheet);
-		if(eh.getCellByColumnName("Type").contains("recurring")){
+		if(eh.getCellByColumnName("Type").contentEquals("recurring")){
 			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Resume')]");
 			jswait.loadClick(".//*[@id='confirmBoxResume']//paper-button[contains(text(),'Yes')]");
+			Thread.sleep(5000);
+			jswait.waitUntil(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//vaadin-grid-cell-content[contains(text(),'Active')]");
+		}
+		if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")){
+			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastSeedGridMenu']//paper-item[contains(.,'Resume')]");
+			jswait.loadClick(".//*[@id='confirmBoxResume']//paper-button[contains(text(),'Yes')]");
+			Thread.sleep(5000);
+			jswait.waitUntil(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//vaadin-grid-cell-content[contains(text(),'Active')]");
 		}
 	}
 	@Then("^pause bc from sheet \"([^\"]*)\"$")
@@ -78,7 +94,7 @@ public class BroadcastSteps extends Init{
 	}
 	
 	@Then("^resume bc from sheet \"([^\"]*)\"$")
-	public void ResumeBC(String sheet) throws InterruptedException {
+	public void ResumeBC(String sheet) throws Exception {
 		resumeBC(sheet);
 	}
 	@Then("^verify selected campaign name$")
@@ -376,29 +392,22 @@ public class BroadcastSteps extends Init{
 	@Then("^verify create BC Notification$")
 	public void createBCNotification() throws InterruptedException {
 		
-//		broadcastPageObjects.enterBroadcastBasicDetails("notification");
-//		broadcastPageObjects.clickProceedButton();
-//		broadcastPageObjects.selectBaseList(BASE_LIST);
-//		broadcastPageObjects.clickcreateTargetCondition();
-//	    broadcastPageObjects.clickProceedButton();
-//		broadcastPageObjects.selectBaseList("Latest_list");
-//		broadcastPageObjects.clickProceedButton();
-//		broadcastPageObjects.selectFirstOffer();
-//		broadcastPageObjects.selectTrackSession();
-//		broadcastPageObjects.selectTrackingSource();
-//		broadcastPageObjects.selectSenderAndRoute();
-//		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.enterBroadcastBasicDetails("notification");
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectBaseList(BASE_LIST);
+		//broadcastPageObjects.clickcreateTargetCondition();
+	    //broadcastPageObjects.clickProceedButton();
+		//broadcastPageObjects.selectBaseList("Latest_list");
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectFirstOffer();
+		broadcastPageObjects.selectTrackSession();
+		broadcastPageObjects.selectTrackingSource();
+		broadcastPageObjects.selectSenderAndRoute();
+		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.bcNotifications();
 		broadcastPageObjects.bcNotificationsadd();
-		broadcastPageObjects.bcnotificationrecipient();
-		broadcastPageObjects.bcnotificationrecipientclick(); 
-		broadcastPageObjects.bcnotificationbeforesendingtime();
-		broadcastPageObjects.bcnotificationbeforesendingtime1min();
-		broadcastPageObjects.bcnotificationbeforeRendertime();
-		broadcastPageObjects.bcnotificationbeforerendertime1min();
-		broadcastPageObjects.bcremovebutton();
-		//broadcastPageObjects.bcNotificationsok();
-	
+		broadcastPageObjects.bcNotificationsok();
+		broadcastPageObjects.bcNotificationscancel();
 		
 	}
 	
@@ -535,7 +544,7 @@ if(bc_type.contains("one-off")){
   builder.moveToElement(num1).click().build().perform();
   Thread.sleep(1000);	
     }
-else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")){
+else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")||bc_type.contains("seedingTriggerableRecurringBC")){
 	Thread.sleep(2000);
 	if(bc_type.contentEquals("recurring")){
 			 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
@@ -665,8 +674,6 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 	}
 	@Then("^wait until broadcast from sheet \"([^\"]*)\" change status to \"([^\"]*)\"$")
 	public void waitUntilStatusOfBroadcast(String sheet, String status ) throws Throwable {
-		
-		Thread.sleep(3000);
 		eh.setExcelFile("bcInputData", sheet);
 		String type = (String) eh.getCell(1, 7);
 		String bcName = (String) eh.getCell(1, 0);

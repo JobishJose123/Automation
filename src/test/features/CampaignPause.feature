@@ -77,7 +77,53 @@ Then click create new broadcast button
 Then enter details for new broadcast from sheet "seedingRecurringBC" with "seedingWAPoffer"
 Then activate bc
 Then navigate to "Seeding" broadcasts
-Then check if "Seeding" bc status is "Active" from sheet "seedingRecurringBC"
 Then pause bc from sheet "seedingRecurringBC"
 Then resume bc from sheet "seedingRecurringBC"
-		
+
+@NX-8717
+@initBrowser 
+Scenario: Verify whether Pause/Resume option is available for Recurring triggerable BC NX-8717
+Given login
+Then navigate to precision marketer
+ Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "seedingWAPoffer" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast from sheet "seedingTriggerableRecurringBC" with "seedingWAPoffer"
+Then activate bc
+Then navigate to "Seeding" broadcasts
+Then pause bc from sheet "seedingTriggerableRecurringBC"
+Then resume bc from sheet "seedingTriggerableRecurringBC"		
+
+@NX-8718
+@initBrowser 
+Scenario: Verify whether Pause/Resume option is available for Recurring triggerable BC NX-8718
+Given login
+Then navigate to precision marketer
+#Then navigate to offer management
+#Then navigate to offers
+#Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#Then navigate to offer management
+#Then Navigate to Offer Catalogue
+#Then Create New Offer Catalogue from sheet "defaultCatalog"
+#Then Add "rechargeWAP" offer to Offer Catalogue
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
+#Then activate bc
+Then navigate to "Recurring" broadcasts
+Then pause bc from sheet "recurringBC"
+Then resume bc from sheet "recurringBC"		
+

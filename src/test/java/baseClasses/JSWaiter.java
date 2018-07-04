@@ -327,7 +327,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 		}
 		public void waitUntil(String xpath) throws Exception{
 			WebDriverWait wait = new WebDriverWait(driver, 8);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+			try {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+			}catch(Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+			}
+			
 		}
 		public void waitForInvisibility(String xpath) throws Exception{
 			WebDriverWait wait = new WebDriverWait(driver, 8);
