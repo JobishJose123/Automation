@@ -593,7 +593,13 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
  }
 	
 	
-	
+	@Then("^verify active option for bc$")
+    public void verifyActiveOptionForBC() throws Throwable
+    { 
+		
+		broadcastPageObjects.verifyActiveOptionForBC();
+    
+    }
 	
 	
 	
@@ -876,7 +882,6 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
     {  
 		broadcastPageObjects.clickCreateButton();
 		broadcastPageObjects.clickValidateButton();
-	//	broadcastPageObjects.clickActivateConfirmYes();
 		Thread.sleep(10000);
     }
 	

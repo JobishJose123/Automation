@@ -72,6 +72,8 @@ public class BroadcastPageObjects extends Init {
 	private WebElement defineLimitSave;
 	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//paper-button[contains(.,'Save')]")
 	private WebElement defineCGLimitSave;
+	@FindBy(xpath = ".//paper-button[contains(.,'Calculate')]")
+	private WebElement calculateLimit;
 	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]")
 	private WebElement defineCGSize;
 	@FindBy(xpath = ".//*[@id='offerDetailForm']//paper-input-wrapper//input")
@@ -373,7 +375,15 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(defineLimitSave);
 		jswait.loadClick(CGConfigure);
 		jswait.loadClick(defineCGSize);
-		jswait.loadClick(defineCGLimitSave);	
+		jswait.loadClick(defineCGLimitSave);
+		jswait.loadClick(calculateLimit);
+		
+	}
+	
+	
+	public void verifyActiveOptionForBC() throws InterruptedException {
+		
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."))).click();
 	}
 
 	public void selectLabelCrossell() throws InterruptedException {
