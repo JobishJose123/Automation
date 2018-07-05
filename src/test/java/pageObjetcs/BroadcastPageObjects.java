@@ -60,6 +60,20 @@ public class BroadcastPageObjects extends Init {
 	private WebElement offerPopUpProceedButton;
 	@FindBy(xpath = ".//label[contains(.,'Base Lists')]/../input")
 	private WebElement baseListSelector;
+	@FindBy(xpath = ".//paper-button[contains(.,'Target Group')]")
+	private WebElement TGConfigure;
+	@FindBy(xpath = ".//paper-button[contains(.,'Control Group')]")
+	private WebElement CGConfigure;
+	@FindBy(xpath = ".//paper-dialog[@id='changeLRSettings']//div[contains(.,'Define Limit')]")
+	private WebElement defineLimit;
+	@FindBy(xpath = ".//div/label[contains(.,'Limit Recipients')]/../input")
+	private WebElement enterLimitField;
+	@FindBy(xpath = ".//paper-dialog[@id='changeLRSettings']//paper-button[contains(.,'Save')]")
+	private WebElement defineLimitSave;
+	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//paper-button[contains(.,'Save')]")
+	private WebElement defineCGLimitSave;
+	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]")
+	private WebElement defineCGSize;
 	@FindBy(xpath = ".//*[@id='offerDetailForm']//paper-input-wrapper//input")
 	private WebElement trackSession2Days;
 	@FindBy(xpath = ".//label[contains(.,'Sender ID: Broadcast')]/../input")
@@ -349,6 +363,18 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(
 				"//form[@id='baseListsForm']//following::vaadin-combo-box-item[contains(.,'" + baseList + "')]");
 	}
+	
+	public void verifyTG_And_CG_Configure_Options() throws InterruptedException {
+		assertTrue(TGConfigure.isDisplayed());
+		assertTrue(CGConfigure.isDisplayed());
+		jswait.loadClick(TGConfigure);
+		jswait.loadClick(defineLimit);
+		jswait.loadSendKeys(enterLimitField, "10");
+		jswait.loadClick(defineLimitSave);
+		jswait.loadClick(CGConfigure);
+		jswait.loadClick(defineCGSize);
+		jswait.loadClick(defineCGLimitSave);	
+	}
 
 	public void selectLabelCrossell() throws InterruptedException {
 		jswait.loadClick(labelSelector);
@@ -552,6 +578,44 @@ public class BroadcastPageObjects extends Init {
 		}
 		clickProceedButton();
 	}
+	
+	
+	public void createBCAndConfigurCG_TG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+		enterBroadcastBasicDetails(name);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		verifyTG_And_CG_Configure_Options();
+		
+		clickProceedButton();
+		selectOffer(offer);
+		if(!bc_type.contains("informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+		}
+		clickProceedButton();
+	}
+
 
 	public void validateNameField() throws InterruptedException, UnsupportedFlavorException, IOException {
 		enterBroadcastName("efwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaqwqw");
