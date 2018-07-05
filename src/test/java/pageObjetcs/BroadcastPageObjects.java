@@ -158,6 +158,8 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement bcnotificationrecipientclick;
 	 @FindBy(xpath="//bc-notifications-list//paper-button[contains(.,'Remove')]")
 	 private WebElement bcremovebutton ;
+	 @FindBy(xpath = "//paper-button[text()='Validate']")
+     private WebElement validateButtonBc;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -579,6 +581,10 @@ public class BroadcastPageObjects extends Init {
 		selectTrigger2();
 		List<WebElement> tags = driver.findElements(By.xpath("//paper-tag/div"));
 		Assert.assertTrue(tags.size() == 2, "error in multi select field");
+	}
+	
+	public void clickValidateButton() throws InterruptedException {
+		jswait.loadClick(validateButtonBc);
 	}
 
 
