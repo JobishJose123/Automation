@@ -894,13 +894,30 @@ public class OfferSteps extends Init {
 
 
 
+	
 
 
 
-
-
+	@Then("^Verify the Map Variable and used variables icons$")
+	public void verifymapvariableandusedvariableicon() throws Throwable {
+		proceedToCreativeTab();
+		offerPageObjects.selectCreativeLanguageEnglish();
+		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.selectVariableButton();
+		offerPageObjects.clickMapVariableFirstVariable();
+		
+		
 
 	}
+	
+
+
+
+
+
+
+
+}
 
 
 

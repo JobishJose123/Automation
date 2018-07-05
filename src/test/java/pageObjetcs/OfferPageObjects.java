@@ -269,6 +269,9 @@ public class OfferPageObjects extends Init {
 // Creative tab in offer creation
 	 @FindBy(xpath="//variable-dialog/paper-dialog//paper-radio-button[2]/div[@id='radioContainer']")
 	 private WebElement addNewVariableButton;
+	 @FindBy(xpath="//variable-dialog/paper-dialog//paper-radio-button[1]/div[@id='radioContainer']")
+	 private WebElement selectVariableButton;
+	
 	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Name')]/..//input")
 	 private WebElement addVariableName;
 	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Source')]/..//input")
@@ -640,7 +643,11 @@ public class OfferPageObjects extends Init {
 	public void clickRewardAddButton() throws InterruptedException {
 		jswait.loadClick(rewardAddButton);
 	}
-
+	public void selectVariableButton() throws InterruptedException {
+		jswait.loadClick(selectVariableButton);
+	}
+	
+	
 	public void clickMapVariableIcon() throws InterruptedException {
 		jswait.loadClick(mapVariableIcon);
 	}
