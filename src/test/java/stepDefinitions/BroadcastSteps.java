@@ -855,6 +855,14 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 			currStatus = jswait.getTextFormElement("//div[@val='broadcastRecurringViews']//vaadin-grid-table-row/vaadin-grid-table-cell[2]/vaadin-grid-cell-content");
 			Assert.assertEquals("Status of Bc is not chnaged",currStatus, status);
 		}
+		else if(type.contains("One-time")) {
+			currStatus = jswait.getTextFormElement("//vaadin-grid-table-row/vaadin-grid-table-cell[2]/vaadin-grid-cell-content");
+			Assert.assertEquals("Status of Bc is not chnaged",currStatus, status);
+		}
+		else {
+			currStatus = jswait.getTextFormElement("//vaadin-grid-ta");
+			Assert.assertEquals("Status of Bc is not chnaged",currStatus, status);
+		}
 	}
 	@Then("^wait until broadcast from sheet \"([^\"]*)\" change status to \"([^\"]*)\"$")
 	public void waitUntilStatusOfBroadcast(String sheet, String status ) throws Throwable {

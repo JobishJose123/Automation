@@ -125,5 +125,11 @@ Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
 Then activate bc
 Then navigate to "Recurring" broadcasts
 Then pause bc from sheet "recurringBC"
-Then resume bc from sheet "recurringBC"		
+Then resume bc from sheet "recurringBC"	
+Then pass next scenario based on this step	
+
+@NX-1273
+@initBrowser 
+Scenario: Broadcast grid: Verify the Pause option of the BC BC NX-1273
+ Then check previous step and pass this
 
