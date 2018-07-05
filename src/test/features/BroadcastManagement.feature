@@ -500,7 +500,7 @@ Then click create new broadcast button
 Then enter details for new broadcast from sheet "seedingRecurringBC" with "seedingWAPoffer"
 Then activate bc
 Then navigate to "Seeding" broadcasts
-Then check if "Seedgin" bc status is "Active" from sheet "seedingRecurringBC"
+Then check if "Seeding" bc status is "Active" from sheet "seedingRecurringBC"
 
 @NX-7598
 @initBrowser 
@@ -523,8 +523,31 @@ Then click create new broadcast button
 Then enter details for new broadcast from sheet "seedingTriggerableBC" with "seedingWAPoffer"
 Then activate bc
 Then navigate to "Seeding" broadcasts
-Then check if "Seedgin" bc status is "Active" from sheet "seedingTriggerableBC"
+Then check if "Seeding" bc status is "Active" from sheet "seedingTriggerableBC"
 
+
+
+@NX-1273
+@initBrowser 
+Scenario: Broadcast grid: Verify the Pause option of the BC BC NX-1273
+Given login
+Then navigate to precision marketer
+ Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "seedingWAPoffer" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast from sheet "seedingTriggerableBC" with "seedingWAPoffer"
+Then activate bc
+Then check if "One-time" bc status is "Active" from sheet "seedingTriggerableBC"
 ##----------------------------------------------------------------------------------------------------------------------------------------##
 
 
