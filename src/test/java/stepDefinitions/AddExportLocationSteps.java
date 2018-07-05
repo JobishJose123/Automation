@@ -102,11 +102,18 @@ public class AddExportLocationSteps extends Init {
     @Then("^click on import$")
     public void clickOnImport() throws Throwable
     {
-    	exportCampignLocationObject.clickViewAllNotifications();
+    	exportCampignLocationObject.clickOnImport();
     }
     
     @Then("^verify export option panel displayed$")
     public void isExportCampaignTemplatePanelDisplayed() {
     	exportCampignLocationObject.isExportCampaignTemplatePanelDisplayed();
+    }
+    @Then("^change campaign name from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+    public void  changeCampaignName(String sheet, String fileName) throws Throwable{
+    	excelHelper.setExcelFile(fileName, sheet);
+		String location = RandomNameGenerator.getRandomName((String)excelHelper.getCell(1, 0));
+		excelHelper.setCell(1, 0, location);
+    	exportCampignLocationObject.changeCampaignName(location);
     }
 }

@@ -52,11 +52,17 @@ public class ExportCampaignLocationObjects extends Init{
 		@FindBy(xpath="//div[@id='contentWrapper']//div[contains(@class, 'messageStyle')]//div[contains(., 'View All')]")
 		private WebElement viewAllNotifications;
 		
-		@FindBy(xpath="//form[@id='importCampaignForm']//vaadin-combo-box[@id='categoryDropdown']//input]")
+		@FindBy(xpath="//form[@id='importCampaignForm']//vaadin-combo-box[@id='categoryDropdown']//input")
 		private WebElement campaignToBeSelectedForExporting;
 		
 		@FindBy(xpath="//paper-dialog[@id = 'createNew']")
 		private WebElement exportCampaignPanel;
+		
+		@FindBy(id ="importBtn")
+		private WebElement importButton;
+		
+		@FindBy(xpath="//paper-input[@id = 'locationName']//input")
+		private WebElement campaignNameChange;
 		
 		public void clickAddExportLocationButton() throws InterruptedException{
 			jswait.loadClick(addExportLocationButton);
@@ -139,10 +145,18 @@ public class ExportCampaignLocationObjects extends Init{
 		
 		public void selectCampaignToWhereExported(String campaignToBeSelected)  throws InterruptedException {
 			jswait.loadSendKeys(campaignToBeSelectedForExporting,campaignToBeSelected);
-			jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+campaignToBeSelectedForExporting+"')]");
+			jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+campaignToBeSelected+"')]");
 		}
 		
 		public void isExportCampaignTemplatePanelDisplayed() {
 			Assert.assertTrue(exportCampaignPanel.isDisplayed());
+		}
+		
+		public void clickOnImport()  throws InterruptedException {
+			jswait.loadClick(importButton);
+		}
+		
+		public void changeCampaignName(String location)  throws InterruptedException {
+			jswait.loadSendKeys(campaignNameChange, location);
 		}
 }

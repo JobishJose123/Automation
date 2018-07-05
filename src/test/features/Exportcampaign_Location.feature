@@ -105,6 +105,7 @@ Feature: Test cases related to export campaign location
     Then click on view all notifications
    	Then click proceed on notification from the sheet "template" of file "ExportCampaignLocation"
     Then select a campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
+    Then change campaign name from sheet "template" of file "ExportCampaignLocation"
     Then click on import
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
