@@ -59,7 +59,7 @@ public class WorkApprovalObjects extends Init{
 	private WebElement addApprovalRuleName;
 	@FindBy(xpath = "//label[contains(.,'Select required')]/../input")
 	private WebElement addUserField;
-	@FindBy(xpath = "//paper-item[contains(.,'joel.jose@flytxt.com')]")
+	@FindBy(xpath = "//paper-item[contains(.,'selenium.flytxt@gmail.com')]")
 	private WebElement ruleUserName;
 	@FindBy(xpath = "//paper-item[contains(.,'Recharge')]")
 	private WebElement ruleCategory;
@@ -439,7 +439,7 @@ catch(Exception e) {
 	}
 	public void enterLevel1User() throws InterruptedException {
 		
-		jswait.loadSendKeys(addUserField, "joel.jose@flytxt.com");
+		jswait.loadSendKeys(addUserField, "selenium.flytxt@gmail.com");
 		Thread.sleep(2000);
 	}
 	public void enterCategory() throws InterruptedException {
