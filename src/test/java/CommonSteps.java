@@ -15,6 +15,7 @@ import pageObjetcs.CustomerProfilePage;
 import pageObjetcs.LandingPageObjects;
 import pageObjetcs.LoginPageObjects;
 import pageObjetcs.RegistrationListPage;
+import stepDefinitions.LoginPageSteps;
 
 public class CommonSteps extends Init {
 	JSWaiter jswait = new JSWaiter();
@@ -24,7 +25,7 @@ public class CommonSteps extends Init {
 	CommonObjects commonObjetcs = new CommonObjects();
 	RegistrationListPage registrationListPage = new RegistrationListPage();
 	ExcelHelper excelHelper = new ExcelHelper();
-	
+	LoginPageObjects loginpageobjects=new LoginPageObjects();
 	public CommonSteps() {
 		PageFactory.initElements(driver, this);
 	}
@@ -35,6 +36,9 @@ public class CommonSteps extends Init {
 	private WebElement reports;
 	@FindBy(xpath="//*[@id='sym1']")
 	private WebElement products;
+	
+	@FindBy(xpath="//*[@id='loginButton']")
+    private WebElement loginButton;
 	@Given("^login$")
     public void loginuser() throws Exception {
 		 driver.get("http://"+p.getValue("env"));
@@ -134,4 +138,15 @@ public class CommonSteps extends Init {
 		 driver.get("http://"+p.getValue("env"));
 		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(2, 0));
     }
+
+	@Then("^login with seleniumuser from sheet \"([^\"]*)\"$")
+    public void seleniumloginuser(String sheet) throws Exception {
+		excelHelper.setExcelFile("seluserlogin",sheet);
+		 //driver.get("http://"+p.getValue("env"));
+		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(2, 0));
+		 jswait.loadClick(loginButton);
+			
+		 
+    }
+
 }

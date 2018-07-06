@@ -125,3 +125,24 @@ Then navigate to landing page
 		Then create new approval rule from sheet "approvalRule"
 		Then create new approval multiple rule from sheet "approvalRule"
 		
+		@NX-6480
+		@initBrowser
+Scenario: Verify approving campaign/BC by navigating through BC page 
+Given login
+  	Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then navigate to landing page
+#		Then navigate to precision marketer
+#		Then navigate to configuration
+#		Then click approval rules option
+#		Then create new approval rule from sheet "approvalRule"
+		Then Logout from Neon application
+		Then login with seleniumuser from sheet "seleniumuser"
+		
+		

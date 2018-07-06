@@ -24,7 +24,7 @@ public class LoginPageSteps extends Init{
 	
 	@Given("^neon is loaded$")
 	public void neon_is_loaded() throws Throwable {
-		 driver.get("http://192.168.150.27");
+		 driver.get("http://"+p.getValue("env"));
 	}
 	@Then("^login with \"([^\"]*)\" and \"([^\"]*)\"$")
 	public void loginWith(String email, String password) throws InterruptedException, IOException {		
@@ -66,6 +66,15 @@ public class LoginPageSteps extends Init{
 		loginPage.clickForgotPassword();
 		Assert.assertFalse(loginPage.checkForgotPasswordConfirmMessage(), "Confirmation displyed without username");
 		jswait.waitUntil("//span[contains(.,'Please provide a registered email address.')]");
+	}
+	@Then("^verify forgot password by adding username with \"([^\"]*)\"$")
+	public void verify_forgot_password_by_adding_username(String email) throws Throwable {
+		loginPage.Typeuser(email);
+		loginPage.clickForgotPassword();
+		Assert.assertTrue(loginPage.checkForgotPasswordConfirmMessage(), "Confirmation displyed with username");
+		loginPage.clickForgotPasswordYes();
+		jswait.waitUntil("//span[contains(.,'Your password has been reset.')]");
+		
 	}
 	
 	@Then("^Logout from Neon application$")
