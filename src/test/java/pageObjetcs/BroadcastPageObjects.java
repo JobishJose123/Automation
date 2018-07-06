@@ -74,6 +74,9 @@ public class BroadcastPageObjects extends Init {
 	private WebElement defineCGLimitSave;
 	@FindBy(xpath = ".//paper-button[contains(.,'Calculate')]")
 	private WebElement calculateLimit;
+	
+	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Submitted for CG Validation')]")
+	private WebElement statusValidation;
 	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]")
 	private WebElement defineCGSize;
 	@FindBy(xpath = ".//*[@id='offerDetailForm']//paper-input-wrapper//input")
@@ -384,6 +387,11 @@ public class BroadcastPageObjects extends Init {
 	public void verifyActiveOptionForBC() throws InterruptedException {
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."))).click();
+	}
+	
+	public void verifyValidateOptionForBC() throws Throwable {
+		
+		assertTrue(statusValidation.isDisplayed());
 	}
 
 	public void selectLabelCrossell() throws InterruptedException {

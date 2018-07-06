@@ -893,6 +893,15 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		Thread.sleep(10000);
     }
 	
+	
+	@Then("^verify validate option for bc$")
+    public void verifyValidateOptionForBC() throws Throwable
+    { 
+		
+		broadcastPageObjects.verifyValidateOptionForBC();
+    
+    }
+	
 //	@Then("^verify adding target condition with or condition$")
 //	public void verifyEditingTargetCondition() throws Throwable {
 //		targetConditionObjects.clickManualOrButton();
