@@ -610,7 +610,165 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 	
 	
 	
-	
+	public void enterDeliveryTabDetails(String bc_type,String sheet) throws InterruptedException {
+		eM.setExcelFile("bcInputData",sheet);
+		Calendar rightNow =Calendar.getInstance();
+    	String mn = "";
+    	if(rightNow.get(Calendar.MONTH)+1<9) {
+    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+    	}
+    	else 
+    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+    	int hours = rightNow.get(Calendar.HOUR);
+      	 int min = rightNow.get(Calendar.MINUTE);
+      	 int am_pm = rightNow.get(Calendar.AM_PM);
+      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+      	 int year = rightNow.get(Calendar.YEAR);
+      	 int month = rightNow.get(Calendar.MONTH)+1;
+      	 min+=2;
+      	 int rem = min%5;
+      	 rem = 5-rem;
+      	 min+=rem;
+      	 if(min>59){
+      		 min-=60;
+      		 hours++;
+      	 }
+      	 if((String)eM.getCell(1, 6)=="later"){
+      		 day++;
+      	 }
+      	 Actions builder = new Actions(driver);
+      	if(bc_type.contains("one-off")){
+      		Thread.sleep(1000);
+      			broadcastPageObjects.clickOneOffRadioButton();
+//      			 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
+      			Thread.sleep(1000);
+      			 jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
+      			Thread.sleep(1000);
+      			 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='"+date+"']");
+      			Thread.sleep(1000);
+      			 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+      			Thread.sleep(1000);
+      			 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
+      			
+      	     Thread.sleep(2000);
+      	   	 jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
+      		 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+      	     builder.moveToElement(num).click().build().perform();
+      	     Thread.sleep(2000);
+//      	      jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
+      		 WebElement num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+      		 Thread.sleep(1000);
+      		 builder.moveToElement(num1).click().build().perform();
+//      		  jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
+//      		    num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][41]"));
+//      		    builder.moveToElement(num1).click().build().perform();
+//      		    Thread.sleep(2000);     
+      	     if(am_pm==0)
+      	    	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+      	     else
+      	    	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+      	        
+      	      jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
+      		    Thread.sleep(2000);
+      					
+      		 jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
+      		Thread.sleep(1000);
+      		 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='"+date+"']");
+      		Thread.sleep(1000);
+      		 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2]");
+      		Thread.sleep(3000);
+      		 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[2]//paper-input[2]//input");
+      	  Thread.sleep(2000);
+      	  num = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+      	  builder.moveToElement(num).click().build().perform();
+      	  Thread.sleep(1000);
+      	//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
+      	  WebElement num2 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+      	  builder.moveToElement(num2).click().build().perform();
+      	  Thread.sleep(1000);
+      	//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
+      	//  num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][21]"));
+      	//  builder.moveToElement(num1).click().build().perform();
+      	//  Thread.sleep(1000);
+      	  if(am_pm==0)
+      	  {
+      	  	num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
+      	  	builder.moveToElement(num1).click().build().perform();
+      	     
+      	  }
+      	  else
+      	  {
+      	  	num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[2]"));
+      	  	builder.moveToElement(num1).click().build().perform();
+      	  }
+      	  
+      	  num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='timeDialog']/div/paper-button[2]"));
+      	  builder.moveToElement(num1).click().build().perform();
+      	  Thread.sleep(1000);	
+      	    }
+      	else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")||bc_type.contains("seedingTriggerableRecurringBC")){
+      		Thread.sleep(2000);
+      		if(bc_type.contentEquals("recurring")){
+      				 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
+//      				 jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+//      				 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='"+date+"']");
+//      				 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+//      				 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
+      		}	
+      		     Thread.sleep(2000);
+      				 jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
+      				 jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
+      				 WebElement num = driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+      			     builder.moveToElement(num).click().build().perform();
+      			     Thread.sleep(2000);
+//      			      jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+      				 WebElement num1 = driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+      				 Thread.sleep(1000);
+      				 builder.moveToElement(num1).click().build().perform();
+      				 Thread.sleep(1000);
+      				 if(am_pm==0)
+      			    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
+      			     else
+      			    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
+      				 Thread.sleep(1000);
+      				 num1 = driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
+      				 builder.moveToElement(num1).click().build().perform();
+//      				 Thread.sleep(1000);
+//      				  jswait.loadClick("//form[@id='deliverDetailForm']//paper-input-container//label[contains(.,'Time Zone')]/..//input");
+      				 Thread.sleep(1000);
+      				 jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
+      				 Thread.sleep(1000);
+      				  jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
+      				 Thread.sleep(1000);
+      				  jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
+      				 Thread.sleep(1000);
+      				  jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Days')]");
+      				 Thread.sleep(1000);
+      				  jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input","1");
+      				 Thread.sleep(1000);
+      				  jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+      				 Thread.sleep(2000);
+      			   	 jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
+      				 num = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+      			     builder.moveToElement(num).click().build().perform();
+      			     Thread.sleep(2000);
+//      			      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
+      				 num1 = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+      				 Thread.sleep(1000);
+      				 builder.moveToElement(num1).click().build().perform();
+      				
+      				    Thread.sleep(1000);     
+      			     if(am_pm==0)
+      			    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[1]");
+      			     else
+      			    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[2]");
+      			     Thread.sleep(2000);
+      			      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='timeDialog']/div/paper-button[2]");
+      				    Thread.sleep(2000);
+      				     jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
+      			}
+	}
 	
 	@Then("^enter details for new broadcast from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
     public void create_new_broadcast(String sheet, String offer) throws Throwable
@@ -659,136 +817,11 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
 
-if(bc_type.contains("one-off")){
-	Thread.sleep(1000);
-		broadcastPageObjects.clickOneOffRadioButton();
-//		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
-		Thread.sleep(1000);
-		 jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
-		Thread.sleep(1000);
-		 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='"+date+"']");
-		Thread.sleep(1000);
-		 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
-		Thread.sleep(1000);
-		 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
-		
-     Thread.sleep(2000);
-   	 jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
-	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
-     builder.moveToElement(num).click().build().perform();
-     Thread.sleep(2000);
-//      jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
-	 WebElement num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
-	 Thread.sleep(1000);
-	 builder.moveToElement(num1).click().build().perform();
-//	  jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
-//	    num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][41]"));
-//	    builder.moveToElement(num1).click().build().perform();
-//	    Thread.sleep(2000);     
-     if(am_pm==0)
-    	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
-     else
-    	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
-        
-      jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
-	    Thread.sleep(2000);
-				
-	 jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
-	Thread.sleep(1000);
-	 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='"+date+"']");
-	Thread.sleep(1000);
-	 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2]");
-	Thread.sleep(3000);
-	 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[2]//paper-input[2]//input");
-  Thread.sleep(2000);
-  num = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
-  builder.moveToElement(num).click().build().perform();
-  Thread.sleep(1000);
-//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
-  WebElement num2 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
-  builder.moveToElement(num2).click().build().perform();
-  Thread.sleep(1000);
-//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
-//  num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][21]"));
-//  builder.moveToElement(num1).click().build().perform();
-//  Thread.sleep(1000);
-  if(am_pm==0)
-  {
-  	num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
-  	builder.moveToElement(num1).click().build().perform();
-     
-  }
-  else
-  {
-  	num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[2]"));
-  	builder.moveToElement(num1).click().build().perform();
-  }
-  
-  num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='timeDialog']/div/paper-button[2]"));
-  builder.moveToElement(num1).click().build().perform();
-  Thread.sleep(1000);	
-    }
-else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")||bc_type.contains("seedingTriggerableRecurringBC")){
-	Thread.sleep(2000);
-	if(bc_type.contentEquals("recurring")){
-			 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
-//			 jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
-//			 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='"+date+"']");
-//			 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
-//			 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
-	}	
-	     Thread.sleep(2000);
-			 jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
-			 jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
-			 WebElement num = driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
-		     builder.moveToElement(num).click().build().perform();
-		     Thread.sleep(2000);
-//		      jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
-			 WebElement num1 = driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
-			 Thread.sleep(1000);
-			 builder.moveToElement(num1).click().build().perform();
-			 Thread.sleep(1000);
-			 if(am_pm==0)
-		    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
-		     else
-		    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
-			 Thread.sleep(1000);
-			 num1 = driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
-			 builder.moveToElement(num1).click().build().perform();
-//			 Thread.sleep(1000);
-//			  jswait.loadClick("//form[@id='deliverDetailForm']//paper-input-container//label[contains(.,'Time Zone')]/..//input");
-			 Thread.sleep(1000);
-			 jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
-			 Thread.sleep(1000);
-			  jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
-			 Thread.sleep(1000);
-			  jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
-			 Thread.sleep(1000);
-			  jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Days')]");
-			 Thread.sleep(1000);
-			  jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input","1");
-			 Thread.sleep(1000);
-			  jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
-			 Thread.sleep(2000);
-		   	 jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
-			 num = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
-		     builder.moveToElement(num).click().build().perform();
-		     Thread.sleep(2000);
-//		      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
-			 num1 = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
-			 Thread.sleep(1000);
-			 builder.moveToElement(num1).click().build().perform();
-			
-			    Thread.sleep(1000);     
-		     if(am_pm==0)
-		    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[1]");
-		     else
-		    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[2]");
-		     Thread.sleep(2000);
-		      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='timeDialog']/div/paper-button[2]");
-			    Thread.sleep(2000);
-			     jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
-		}
+      	enterDeliveryTabDetails(bc_type,sheet);
+      	
+      	
+      	
+      	
  }
 	@Then("^verify all operations of target using visual editor$")
 	public void verify_all_operations_of_target_using_visual_editor() throws Throwable {
@@ -851,6 +884,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 	@Then("^check if \"([^\"]*)\" bc status is \"([^\"]*)\" from sheet \"([^\"]*)\"$")
 	public void check_if_bc_status_is_from_sheet(String type, String status, String sheet) throws Throwable {
 		String currStatus = "";
+		Thread.sleep(3000);
 		if(type.contains("Recurring")) {
 			currStatus = jswait.getTextFormElement("//div[@val='broadcastRecurringViews']//vaadin-grid-table-row/vaadin-grid-table-cell[2]/vaadin-grid-cell-content");
 			Assert.assertEquals("Status of Bc is not chnaged",currStatus, status);
@@ -877,6 +911,31 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		}
 		
 	}
+	@Then("^verify copy bc from sheet \"([^\"]*)\"$")
+	public void verifyCopyBC(String sheet) throws Throwable {
+		eh.setExcelFile("bcInputData", sheet);
+		String type = (String) eh.getCellByColumnName("Type");
+		String bcName = (String) eh.getCellByColumnName("BC Name");
+		Exception ex = new Exception("type mentionedif");
+		if(type.contentEquals("one-off")) {
+			commonObjects.clickOptionsIcon();
+			commonObjects.clickCopyOption();
+			broadcastPageObjects.enterBroadcastName(bcName+"Copy");
+			broadcastPageObjects.clickProceedButton();
+			broadcastPageObjects.clickProceedButton();
+			broadcastPageObjects.clickProceedButton();
+			enterDeliveryTabDetails(type,sheet);
+			broadcastPageObjects.clickCreateButton();
+			broadcastPageObjects.clickActivateButton();
+			broadcastPageObjects.clickActivateConfirmYes();
+			Thread.sleep(10000);
+			commonObjects.filterName(bcName+"Copy");
+			commonObjects.clickOptionsIcon();
+			
+		}else {
+			throw ex;
+		}
+	}
 	@Then("^check targeted count of \"([^\"]*)\"$")
 	public void checkTargtedCountOfBroadcast(String sheet) throws Throwable {
 		Thread.sleep(5000);
@@ -891,15 +950,6 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		broadcastPageObjects.clickCreateButton();
 		broadcastPageObjects.clickValidateButton();
 		Thread.sleep(10000);
-    }
-	
-	
-	@Then("^verify validate option for bc$")
-    public void verifyValidateOptionForBC() throws Throwable
-    { 
-		
-		broadcastPageObjects.verifyValidateOptionForBC();
-    
     }
 	
 //	@Then("^verify adding target condition with or condition$")
