@@ -116,4 +116,11 @@ public class AddExportLocationSteps extends Init {
 		excelHelper.setCell(1, 0, location);
     	exportCampignLocationObject.changeCampaignName(location);
     }
+    
+    @Then("^verify template contains exported template from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+    public void verifyTemplateTabContainsExportedTemplate(String sheet, String fileName) throws Throwable{
+    	excelHelper.setExcelFile(fileName, sheet);
+		String templateName = (String)excelHelper.getCell(1, 0);
+		exportCampignLocationObject.verifyTemplateTabContainsExportedTemplate(templateName);
+    }
 }

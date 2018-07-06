@@ -1,5 +1,7 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -158,5 +160,9 @@ public class ExportCampaignLocationObjects extends Init{
 		
 		public void changeCampaignName(String location)  throws InterruptedException {
 			jswait.loadSendKeys(campaignNameChange, location);
+		}
+		
+		public void verifyTemplateTabContainsExportedTemplate(String templateName) throws InterruptedException {
+			Assert.assertTrue(driver.findElement(By.xpath("//data-table-cell[contains(.,'"+templateName+"')]")).isDisplayed());
 		}
 }

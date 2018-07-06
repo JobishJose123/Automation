@@ -100,7 +100,7 @@ Feature: Test cases related to export campaign location
     Then create new template from sheet "template" of file "ExportCampaignLocation"
     Then click on export location option of template from sheet "template" of file "ExportCampaignLocation"
     Then select export location from sheet "locationdetails" of file "ExportCampaignLocation" and click export
-    Then wait for 6 minutes
+    Then wait for 8 minutes
     Then click on notification bell
     Then click on view all notifications
    	Then click proceed on notification from the sheet "template" of file "ExportCampaignLocation"
@@ -115,12 +115,44 @@ Feature: Test cases related to export campaign location
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then verify campaign created from sheet "campaignBC"
     
-   @NX-8193 @initBrowser @closeBrowser
+    @NX-8193 @initBrowser @closeBrowser
    Scenario: Verify whether share option is available for imported campaign template
  		Given login
+ 		Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
 		Then navigate to templates tab
 		Then click on export location option of template from sheet "template" of file "ExportCampaignLocation"
+		Then verify export option panel displayed
+		Then select export location from sheet "locationdetails" of file "ExportCampaignLocation" and click export
+    Then wait for 6 minutes
+    Then click on notification bell
+    Then click on view all notifications
+   	Then click proceed on notification from the sheet "template" of file "ExportCampaignLocation"
+    Then select a campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then change campaign name from sheet "template" of file "ExportCampaignLocation"
+    Then click on import
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then navigate to templates tab
+    Then verify template contains exported template from sheet "template" of file "ExportCampaignLocation"
+    Then pass next scenario based on this step
+
+  @NX-8257
+  Scenario: delete export location
+    Then check previous step and pass this
+    
+  @NX-8198 @initBrowser @closeBrowser
+  Scenario: Verify whether user can share without valid location details
+ 		Given login
+ 		Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
+		Then navigate to templates tab
+		Then click on export location option of template from sheet "template" of file "ExportCampaignLocation"
+		Then select export location from sheet "invalidlocationdetails" of file "ExportCampaignLocation" and click export
 		Then verify export option panel displayed
