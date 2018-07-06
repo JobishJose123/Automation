@@ -67,6 +67,15 @@ public class LoginPageSteps extends Init{
 		Assert.assertFalse(loginPage.checkForgotPasswordConfirmMessage(), "Confirmation displyed without username");
 		jswait.waitUntil("//span[contains(.,'Please provide a registered email address.')]");
 	}
+	@Then("^verify forgot password by adding username with \"([^\"]*)\"$")
+	public void verify_forgot_password_by_adding_username(String email) throws Throwable {
+		loginPage.Typeuser(email);
+		loginPage.clickForgotPassword();
+		Assert.assertTrue(loginPage.checkForgotPasswordConfirmMessage(), "Confirmation displyed with username");
+		loginPage.clickForgotPasswordYes();
+		jswait.waitUntil("//span[contains(.,'Your password has been reset.')]");
+		
+	}
 	
 	@Then("^Logout from Neon application$")
 	public void logout() throws Throwable {

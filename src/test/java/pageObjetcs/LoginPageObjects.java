@@ -134,6 +134,9 @@ public boolean checkLoginButtonClickable() throws InterruptedException{
 		else 
 		return false;	
 }
+public void Typeuser(String email) throws InterruptedException {
+	enterEmail(email);
+}
 
 
 
