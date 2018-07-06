@@ -86,7 +86,7 @@ public class RegistrationList extends Init{
     	
     	 String alphabet = "abcdefghijklmnopqrstuvwxyz";
  	    final int N = 6;
-    	for(int i=1; i<=50; i++){
+    	for(int i=1; i<=500; i++){
     	///////random name generation
     	    StringBuilder sb1 = new StringBuilder();
     	    for (int j = 0; j < N; j++) {

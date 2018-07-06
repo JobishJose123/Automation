@@ -668,7 +668,7 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     
      @NX-2425
  @initBrowser
-  Scenario: Create offer: Creative: Verify cancelling the added dynamic variable NX-946
+  Scenario: Create offer: Creative: Verify deleting the added dynamic variable NX-946
     Given login
     When navigate to precision marketer
     Then navigate to offer management
@@ -687,10 +687,21 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
    
 
     @NX-6176 @initBrowser
-  Scenario: Create offer:Track: Verify creating STV offers NX-6176
+  Scenario: Create offer:Track: Verify creating STV offers 
     Given login
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "STVWAP" with product "fullDetails"
     Then verify "STVWAP" offer in grid
+    
+    
+    @NX-2409
+     @initBrowser
+  Scenario: Email Channel -->Verify the Map Variable and used variables icons
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then Verify the Map Variable and used variables icons
+    Then verify label message after variable selection
