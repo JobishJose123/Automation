@@ -24,7 +24,7 @@ public class LoginPageSteps extends Init{
 	
 	@Given("^neon is loaded$")
 	public void neon_is_loaded() throws Throwable {
-		 driver.get("http://192.168.150.27");
+		 driver.get("http://"+p.getValue("env"));
 	}
 	@Then("^login with \"([^\"]*)\" and \"([^\"]*)\"$")
 	public void loginWith(String email, String password) throws InterruptedException, IOException {		
