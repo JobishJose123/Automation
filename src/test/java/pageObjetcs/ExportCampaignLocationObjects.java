@@ -66,6 +66,9 @@ public class ExportCampaignLocationObjects extends Init{
 		@FindBy(xpath="//paper-input[@id = 'locationName']//input")
 		private WebElement campaignNameChange;
 		
+		@FindBy(xpath="//div[@data-log = 'conditions']")
+		private WebElement conditions;
+		
 		public void clickAddExportLocationButton() throws InterruptedException{
 			jswait.loadClick(addExportLocationButton);
 		}
@@ -164,5 +167,12 @@ public class ExportCampaignLocationObjects extends Init{
 		
 		public void verifyTemplateTabContainsExportedTemplate(String templateName) throws InterruptedException {
 			Assert.assertTrue(driver.findElement(By.xpath("//data-table-cell[contains(.,'"+templateName+"')]")).isDisplayed());
+		}
+		
+		
+		public void isConditionsDisplayedInImportedCampaign() throws InterruptedException {
+			Thread.sleep(1000);
+			Assert.assertTrue(conditions.isDisplayed());			
+			Assert.assertTrue(conditions.getText().contains("Customer Profile Info"));
 		}
 }

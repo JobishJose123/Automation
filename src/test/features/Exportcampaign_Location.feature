@@ -104,6 +104,8 @@ Feature: Test cases related to export campaign location
     Then click on notification bell
     Then click on view all notifications
    	Then click proceed on notification from the sheet "template" of file "ExportCampaignLocation"
+   	Then verify whether condition displayed
+   	Then pass next scenario based on this step
     Then select a campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
     Then change campaign name from sheet "template" of file "ExportCampaignLocation"
     Then click on import
@@ -114,6 +116,10 @@ Feature: Test cases related to export campaign location
     Then create new campaign use template from sheet "campaignBC" with catalog "defaultCatalog"
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then verify campaign created from sheet "campaignBC"
+
+  @NX-8019
+  Scenario: Verify the exported campaign contains all the target conditions
+    Then check previous step and pass this
     
     @NX-8193 @initBrowser @closeBrowser
    Scenario: Verify whether share option is available for imported campaign template

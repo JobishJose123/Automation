@@ -123,4 +123,9 @@ public class AddExportLocationSteps extends Init {
 		String templateName = (String)excelHelper.getCell(1, 0);
 		exportCampignLocationObject.verifyTemplateTabContainsExportedTemplate(templateName);
     }
+    
+    @Then("^verify whether condition displayed$")
+    public void isConditionsDisplayedInImportedCampaign() throws InterruptedException {
+    	exportCampignLocationObject.isConditionsDisplayedInImportedCampaign();
+    }
 }
