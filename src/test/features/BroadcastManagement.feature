@@ -922,7 +922,29 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     Then verify validating CG status for bc
     Then verify bc created from sheet "one-offBC"
     
-    
+    @NX-6529
+@initBrowser 
+Scenario: Verify specifying the recurrence value as 10,20,30 etc NX-6529
+Given login
+Then navigate to precision marketer
+ #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
+#Then activate bc
+Then navigate to "Recurring" broadcasts
+Then view broadcast from sheet "recurringMonthBC"
+Then verify delivery details from "recurringMonthBC"
     
     @NX-3399 @initBrowser
     Scenario: Calculate Target - Creating One-Off BC with DNC exclusion-3399
@@ -996,4 +1018,5 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then activate bc
     Then export bc
+   
     

@@ -143,7 +143,7 @@ public class CommonSteps extends Init {
     public void seleniumloginuser(String sheet) throws Exception {
 		excelHelper.setExcelFile("seluserlogin",sheet);
 		 //driver.get("http://"+p.getValue("env"));
-		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(2, 0));
+		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(1, 1));
 		 jswait.loadClick(loginButton);
 			
 		 

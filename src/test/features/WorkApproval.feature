@@ -129,7 +129,7 @@ Then navigate to landing page
 		@initBrowser
 Scenario: Verify approving campaign/BC by navigating through BC page 
 Given login
-  	Then navigate to configuration management
+  #	Then navigate to configuration management
     #Then navigate to campaign categories
     #Then create new campaign category from sheet "CampaignCategory"
     #Then navigate to landing page

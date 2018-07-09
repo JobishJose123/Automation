@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 
@@ -35,6 +36,7 @@ public class BroadcastPageObjects extends Init {
 
 	JSWaiter jswait = new JSWaiter();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
+	public ExcelHelper eh = new ExcelHelper();
 	CommonObjects commonObjects = new CommonObjects();
 
 	@FindBy(xpath = "//paper-item[contains(.,'View Broadcasts')]")
@@ -287,7 +289,80 @@ public class BroadcastPageObjects extends Init {
 	
 	
 	
-	
+	public void selectRecurrancePattern(String type,String sheet) throws InterruptedException {
+		eh.setExcelFile("bcInputData",sheet);
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		Actions builder = new Actions(driver);
+		Thread.sleep(1000);
+
+		Thread.sleep(1000);
+		
+		if(type.contentEquals("days")){
+			  jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
+			 Thread.sleep(1000);
+			  jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Days')]");
+			 Thread.sleep(1000);
+			  jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input","1");
+			 Thread.sleep(1000);
+		
+	}
+		else if(type.contentEquals("months")) {
+			jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
+			 Thread.sleep(1000);
+			  jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Months')]");
+			  Thread.sleep(1000);
+			  jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input",eh.getCellByColumnName("Recur every months"));
+			 Thread.sleep(1000);
+			 jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Select days')]/..//input");
+			 String daysStr = eh.getCellByColumnName("Recur on");
+			 String[] days = daysStr.split(",");
+			 for(int i =0; i<days.length;i++)
+			   jswait.loadClick(".//*[@id='days']//div[text()='"+days[i]+"']/../..");
+			 jswait.loadClick(".//*[@id='dayDialog']//paper-button[text()='Done']");
+		}
+		jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+		 Thread.sleep(2000);
+	   	 jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
+	   	WebElement num = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+	     builder.moveToElement(num).click().build().perform();
+	     Thread.sleep(2000);
+//	      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
+	     WebElement num1 = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+		 Thread.sleep(1000);
+		 builder.moveToElement(num1).click().build().perform();
+		
+		    Thread.sleep(1000);     
+	     if(am_pm==0)
+	    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[1]");
+	     else
+	    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[2]");
+	     Thread.sleep(2000);
+	      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='timeDialog']/div/paper-button[2]");
+		    Thread.sleep(2000);
+		jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
+
+	}
 	
 	public void selectOneOffDateAndTimeNow() throws InterruptedException {
 		Calendar rightNow =Calendar.getInstance();
