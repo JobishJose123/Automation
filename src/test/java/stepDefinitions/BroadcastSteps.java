@@ -952,6 +952,14 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		Thread.sleep(10000);
     }
 	
+	@Then("^export bc$")
+    public void exportBc() throws Throwable
+    {  
+		broadcastPageObjects.exportBroadcast();
+		
+    }
+	
+	
 //	@Then("^verify adding target condition with or condition$")
 //	public void verifyEditingTargetCondition() throws Throwable {
 //		targetConditionObjects.clickManualOrButton();

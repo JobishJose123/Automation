@@ -10,6 +10,7 @@ import java.awt.event.InputEvent;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -38,6 +39,8 @@ public class BroadcastPageObjects extends Init {
 
 	@FindBy(xpath = "//paper-item[contains(.,'View Broadcasts')]")
 	private WebElement viewBroadcast;
+	@FindBy(xpath = "//paper-item[contains(.,'Export As PDF')]")
+	private WebElement exportBroadcast;
 	@FindBy(xpath = "//label[contains(.,'Broadcast Name')]/../input")
 	private WebElement broadcastName;
 	@FindBy(xpath = "//label[contains(.,'Purpose')]/../input")
@@ -62,6 +65,22 @@ public class BroadcastPageObjects extends Init {
 	private WebElement baseListSelector;
 	@FindBy(xpath = ".//paper-button[contains(.,'Target Group')]")
 	private WebElement TGConfigure;
+	
+	@FindBy(xpath = ".//div[@id='contentWrapper']//paper-listbox//paper-item[@class='style-scope dnc-exclusion x-scope paper-item-1'][1]")
+	private WebElement DNCList;
+	@FindBy(xpath = ".//paper-button[contains(.,'DNC Exclusions')]")
+	private WebElement DNCExclusionOption;
+	@FindBy(xpath = ".//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']")
+	private WebElement DNCExclusionList;
+	@FindBy(xpath = ".//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']//data-table-cell//iron-icon")
+	private WebElement DNCListRemoveButton;
+	
+	@FindBy(xpath = ".//div[@class='layout horizontal center style-scope dnc-exclusion']//paper-button[contains(.,'Add')]")
+	private WebElement DNCListAddButton;
+	@FindBy(xpath = ".//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']//paper-icon-button[@id='clear']//iron-icon")
+	private WebElement DNCListCloseButton;
+	@FindBy(xpath = ".//label[contains(.,'Removed DNC Lists')]/../input")
+	private WebElement DNCListTextbox;
 	@FindBy(xpath = ".//paper-button[contains(.,'Control Group')]")
 	private WebElement CGConfigure;
 	@FindBy(xpath = ".//paper-dialog[@id='changeLRSettings']//div[contains(.,'Define Limit')]")
@@ -77,6 +96,8 @@ public class BroadcastPageObjects extends Init {
 	
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Submitted for CG Validation')]")
 	private WebElement statusValidation;
+	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Validating CG')]")
+	private WebElement statusValidatingCG;
 	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]")
 	private WebElement defineCGSize;
 	@FindBy(xpath = ".//*[@id='offerDetailForm']//paper-input-wrapper//input")
@@ -329,6 +350,22 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(createButtonBc);
 	}
 
+	
+	public void exportBroadcast() throws InterruptedException {
+		
+		commonObjects.clickOptionsIcon();
+		clickExportBroadcastOption();
+		Thread.sleep(4000);
+		verifyExportBroadcast();
+	}
+	
+  public void verifyExportBroadcast() throws InterruptedException {
+		
+	  
+	  driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"j");
+	  
+	}
+	
 	public void clickBcEndNeverRadioButton() throws InterruptedException {
 		jswait.loadClick(recurringBcEndNeverRadio);
 	}
@@ -383,6 +420,33 @@ public class BroadcastPageObjects extends Init {
 		
 	}
 	
+	public void selectDNCList() throws InterruptedException {
+		
+		
+		jswait.loadClick(DNCExclusionOption);
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(DNCExclusionList).click().perform();
+//		actions.moveToElement(DNCListRemoveButton).click().perform();
+//		actions.moveToElement(DNCListRemoveButton).click().perform();
+//		actions.moveToElement(DNCListRemoveButton).click().perform();
+//		actions.moveToElement(DNCListRemoveButton).click().perform();
+		
+		//Set <String> handle=driver.getWindowHandles();
+		for (String handle : driver.getWindowHandles()) {
+		    driver.switchTo().window(handle);
+		    
+		}
+		jswait.loadClick(DNCListRemoveButton);
+		jswait.loadClick(DNCListRemoveButton);
+		jswait.loadClick(DNCListRemoveButton);
+		jswait.loadClick(DNCListRemoveButton);
+		jswait.loadClick(DNCListTextbox);
+		jswait.loadClick(DNCList);
+		jswait.loadClick(DNCListAddButton);
+		jswait.loadClick(DNCListCloseButton);
+	
+	}
+	
 	
 	public void verifyActiveOptionForBC() throws InterruptedException {
 		
@@ -393,6 +457,15 @@ public class BroadcastPageObjects extends Init {
 		
 		assertTrue(statusValidation.isDisplayed());
 	}
+	
+  public void verifyValidatingCGStatusForBC() throws Throwable {
+		
+	  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//vaadin-grid-cell-content[contains(.,'Validating CG')]")));
+      assertTrue(statusValidatingCG.isDisplayed());
+	
+  }
+	
+	
 
 	public void selectLabelCrossell() throws InterruptedException {
 		jswait.loadClick(labelSelector);
@@ -429,6 +502,10 @@ public class BroadcastPageObjects extends Init {
 
 	public void viewBroadcast() throws InterruptedException {
 		jswait.loadClick(viewBroadcast);
+	}
+	
+	public void clickExportBroadcastOption() throws InterruptedException {
+		jswait.loadClick(exportBroadcast);
 	}
 
 	public void selectTrackSession() throws InterruptedException {
@@ -612,6 +689,43 @@ public class BroadcastPageObjects extends Init {
 		clickProceedButton();
 		selectBaseList(baseList);
 		verifyTG_And_CG_Configure_Options();
+		
+		clickProceedButton();
+		selectOffer(offer);
+		if(!bc_type.contains("informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+		}
+		clickProceedButton();
+	}
+	
+	
+	public void createBCAndSelectDNCList(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+		enterBroadcastBasicDetails(name);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		selectDNCList();
 		
 		clickProceedButton();
 		selectOffer(offer);
