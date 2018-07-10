@@ -1025,6 +1025,58 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
     }
 	
 	
+	
+	@Then("^enter details for new broadcast and verify starts broadcast at option from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
+    public void create_new_broadcastand_verify_starts_broadcast_at_option(String sheet, String offer) throws Throwable
+    {  
+    	Thread.sleep(3000);
+    	ExcelHelper list = new ExcelHelper();
+    	list.setExcelFile("registrationListInputData", "Sheet1");
+    	eM.setExcelFile("bcInputData",sheet);
+//    	String baseList = list.getCell(1, 2).toString();
+    	ExcelHelper offerExcel = new ExcelHelper(); 
+    	offerExcel.setExcelFile("offerInputData", offer);
+    	Random rn = new Random();
+ 		int  n = rn.nextInt(5000) + 1;
+ 		String name = (String) eM.getCell(1, 0);
+ 		name =  name.replaceAll("[0-9]", "")+n;
+ 		eM.setCell(1, 0, name);
+ 	  	String bc_type =(String) eM.getCell(1, 7);
+    	Calendar rightNow =Calendar.getInstance();
+    	String mn = "";
+    	if(rightNow.get(Calendar.MONTH)+1<9) {
+    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+    	}
+    	else 
+    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+    	int hours = rightNow.get(Calendar.HOUR);
+      	 int min = rightNow.get(Calendar.MINUTE);
+      	 int am_pm = rightNow.get(Calendar.AM_PM);
+      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+      	 int year = rightNow.get(Calendar.YEAR);
+      	 int month = rightNow.get(Calendar.MONTH)+1;
+      	 min+=2;
+      	 int rem = min%5;
+      	 rem = 5-rem;
+      	 min+=rem;
+      	 if(min>59){
+      		 min-=60;
+      		 hours++;
+      	 }
+      	 if((String)eM.getCell(1, 6)=="later"){
+      		 day++;
+      	 }
+      	 Actions builder = new Actions(driver);
+      	broadcastPageObjects.createBCAndVerifyStartBroadcastAtOption(name, bc_type,BASE_LIST,offerExcel.getCell(1, 0).toString());
+      	
+//		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
+//		Thread.sleep(1500);
+
+      	enterDeliveryTabDetails(bc_type,sheet);
+ }
+	
+	
 //	@Then("^verify adding target condition with or condition$")
 //	public void verifyEditingTargetCondition() throws Throwable {
 //		targetConditionObjects.clickManualOrButton();

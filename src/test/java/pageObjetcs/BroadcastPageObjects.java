@@ -156,6 +156,8 @@ public class BroadcastPageObjects extends Init {
 	private WebElement recurringBcEndAtRadio;
 	@FindBy(xpath = ".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGrid;
+	@FindBy(xpath = ".//label[contains(.,'Start Date/Time')]")
+	private WebElement StartBroadcastDateTimeField;
 
 	@FindBy(xpath = ".//div[@id='radioLabel' and contains(text(),'Create')]")
 	private WebElement targetbccreate;
@@ -835,6 +837,10 @@ public class BroadcastPageObjects extends Init {
 		String color = detailsTabHeader.getCssValue("background-color");
 		Assert.assertEquals(color, "rgba(84, 205, 152, 1)", "wrong header color after pproceed");
 	}
+	
+	public void verifyStartBroadcastDateTimeField() throws InterruptedException {
+		assertTrue(StartBroadcastDateTimeField.isDisplayed());
+	}
 
 	public void validatePurposeField() throws InterruptedException, UnsupportedFlavorException, IOException {
 		enterBroadcastName(
@@ -856,6 +862,45 @@ public class BroadcastPageObjects extends Init {
 	
 	public void clickValidateButton() throws InterruptedException {
 		jswait.loadClick(validateButtonBc);
+	}
+	
+	
+	
+	public void createBCAndVerifyStartBroadcastAtOption(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+		enterBroadcastBasicDetails(name);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		clickProceedButton();
+		selectOffer(offer);
+		if(!bc_type.contains("informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+		}
+		clickProceedButton();
+		
+		verifyStartBroadcastDateTimeField();
+		
 	}
 
 
