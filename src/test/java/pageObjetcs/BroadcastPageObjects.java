@@ -43,6 +43,14 @@ public class BroadcastPageObjects extends Init {
 	private WebElement viewBroadcast;
 	@FindBy(xpath = "//paper-item[contains(.,'Export As PDF')]")
 	private WebElement exportBroadcast;
+	@FindBy(xpath = "//paper-item[contains(.,'View')]")
+	private WebElement broadcastView;
+	@FindBy(xpath = ".//paper-icon-button[@icon='block']")
+	private WebElement broadcastAbort;
+	@FindBy(xpath = ".//paper-dialog[@id='confirmBoxAbort']//paper-button[contains(.,'Yes')]")
+	private WebElement broadcastAbortYes;
+	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Aborted')]")
+	private WebElement statusOfBCAfterAbortion;
 	@FindBy(xpath = "//label[contains(.,'Broadcast Name')]/../input")
 	private WebElement broadcastName;
 	@FindBy(xpath = "//label[contains(.,'Purpose')]/../input")
@@ -204,6 +212,15 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement bcremovebutton ;
 	 @FindBy(xpath = "//paper-button[text()='Validate']")
      private WebElement validateButtonBc;
+	 @FindBy(xpath = "//paper-card[contains(.,'Basic Details')]")
+     private WebElement basicDetailsBC;
+	 @FindBy(xpath = "//paper-card[contains(.,'Target Details')]")
+     private WebElement targetDetailsBC;
+	 @FindBy(xpath = "//paper-card[contains(.,'Offer details')]")
+     private WebElement offerDetailsBC;
+	 @FindBy(xpath = "//div//h4[contains(.,'Delivery Details')]")
+     private WebElement deliveryDetailsBC;
+	 
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -436,6 +453,42 @@ public class BroadcastPageObjects extends Init {
 		verifyExportBroadcast();
 	}
 	
+  public void broadcastView(String name) throws InterruptedException {
+		
+		commonObjects.clickOptionsIcon();
+		clickBroadcastViewOption();
+		Thread.sleep(2000);
+		verifyBroadcastView(name);
+	}
+  
+  
+  public void abortBC() throws InterruptedException {
+		
+		commonObjects.clickOptionsIcon();
+		clickAbortBroadcastOption();
+		clickAbortYesButton();
+		Thread.sleep(3000);
+		commonObjects.clickOptionsIcon();
+		clickAbortBroadcastOption();
+		clickAbortYesButton();
+		verifyStatusOfBCAfterAbortion();
+		
+	}
+  
+  public void verifyBroadcastView(String name) throws InterruptedException {
+		
+	 assertTrue(driver.findElement(By.xpath("//h3[contains(.,'"+name+"')]")).isDisplayed());
+	 assertTrue(basicDetailsBC.isDisplayed());
+	 assertTrue(targetDetailsBC.isDisplayed());
+	 assertTrue(offerDetailsBC.isDisplayed());
+	 assertTrue(deliveryDetailsBC.isDisplayed());
+	 jswait.loadClick(basicDetailsBC);
+	 assertTrue(driver.findElement(By.xpath(".//p[contains(.,'"+name+"')]")).isDisplayed());
+	 
+	  
+	}
+	
+	
   public void verifyExportBroadcast() throws InterruptedException {
 		
 	  
@@ -584,6 +637,29 @@ public class BroadcastPageObjects extends Init {
 	public void clickExportBroadcastOption() throws InterruptedException {
 		jswait.loadClick(exportBroadcast);
 	}
+	public void clickBroadcastViewOption() throws InterruptedException {
+		jswait.loadClick(broadcastView);
+	}
+	
+	public void clickAbortBroadcastOption() throws InterruptedException {
+		jswait.loadClick(broadcastAbort);
+	}
+	
+	public void clickAbortYesButton() throws InterruptedException {
+		jswait.loadClick(broadcastAbortYes);
+	}
+
+   public void verifyStatusOfBCAfterAbortion() throws InterruptedException {
+	   
+	   
+	   driver.navigate().refresh();
+	   Thread.sleep(5000);
+	   driver.navigate().refresh();
+	   Thread.sleep(3000);
+	   assertTrue(statusOfBCAfterAbortion.isDisplayed());
+	
+    }
+
 
 	public void selectTrackSession() throws InterruptedException {
 		jswait.loadClick(trackSessionSelector);

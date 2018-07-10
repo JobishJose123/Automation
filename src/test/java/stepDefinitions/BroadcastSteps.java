@@ -1077,6 +1077,27 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
  }
 	
 	
+	@Then("^view bc from sheet \"([^\"]*)\"$")
+    public void viewBc(String sheet) throws Throwable
+    {  
+		
+		eh.setExcelFile("bcInputData", sheet);
+		String name = (String) eh.getCell(1, 0);
+		broadcastPageObjects.broadcastView(name);
+		
+    }
+	
+	
+	@Then("^abort bc$")
+    public void abortBc() throws Throwable
+    {  
+		
+		
+		broadcastPageObjects.abortBC();
+		
+    }
+	
+	
 //	@Then("^verify adding target condition with or condition$")
 //	public void verifyEditingTargetCondition() throws Throwable {
 //		targetConditionObjects.clickManualOrButton();
