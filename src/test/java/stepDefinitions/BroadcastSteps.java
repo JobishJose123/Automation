@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.RandomNameGenerator;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -120,10 +121,14 @@ public class BroadcastSteps extends Init{
 			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'View')]");
 			}
-		if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")|| eh.getCellByColumnName("Type").contentEquals("seedingTriggerableRecurringBC")){
+		else if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")|| eh.getCellByColumnName("Type").contentEquals("seedingTriggerableRecurringBC")){
 			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastSeedGridMenu']//paper-item[contains(.,'View')]");
 			}
+		else if(eh.getCellByColumnName("Type").contentEquals("one-off")) {
+			commonObjects.filterName(eh.getCellByColumnName("BC Name"));
+			commonObjects.clickOptionsIcon();
+		}
 	}
 	@Then("^verify delivery details from \"([^\"]*)\"$")
 	public void verify_view_broadcasts_delivery(String sheet) throws Throwable {
@@ -244,10 +249,9 @@ public class BroadcastSteps extends Init{
       		Thread.sleep(2000);
       		if(bc_type.contentEquals("recurring")){
       				 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
-//      				 jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
-//      				 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='"+date+"']");
-//      				 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
-//      				 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
+      				 jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+      				 jswait.loadClick(".//*[@id='months']//div[@date='"+date+"']");
+      				 jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
       		}	
       		     Thread.sleep(2000);
       				 jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
@@ -274,31 +278,50 @@ public class BroadcastSteps extends Init{
       				 Thread.sleep(1000);
       				  jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
       				 Thread.sleep(1000);
-      				  jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
+      				 if(eM.getCellByColumnName("Recurrance Pattern").contentEquals("days")) {
+      				
+      					 jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
       				 Thread.sleep(1000);
       				  jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Days')]");
       				 Thread.sleep(1000);
       				  jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input","1");
       				 Thread.sleep(1000);
-      				  jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
-      				 Thread.sleep(2000);
-      			   	 jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
-      				 num = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
-      			     builder.moveToElement(num).click().build().perform();
-      			     Thread.sleep(2000);
-//      			      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
-      				 num1 = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
-      				 Thread.sleep(1000);
-      				 builder.moveToElement(num1).click().build().perform();
-      				
-      				    Thread.sleep(1000);     
-      			     if(am_pm==0)
-      			    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[1]");
-      			     else
-      			    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[2]");
-      			     Thread.sleep(2000);
-      			      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='timeDialog']/div/paper-button[2]");
-      				    Thread.sleep(2000);
+      				  
+      				 }
+      				 else if(eM.getCellByColumnName("Recurrance Pattern").contentEquals("months") && !eM.getCellByColumnName("BC Name").contains("Copy")){
+      					jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
+         				 Thread.sleep(1000);
+         				  jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Months')]");
+         				 Thread.sleep(1000);
+         				jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input",eM.getCellByColumnName("Recur every months"));
+         				 Thread.sleep(1000);
+         				jswait.loadClick("//label[contains(.,'Select days')]/..//input");
+         				String daysStr = eM.getCellByColumnName("Recur on");
+         				 String[] days = daysStr.split(",");
+         				 for(int i =0; i<days.length;i++)
+         					jswait.loadClick("//*[@id='dayDialog']//div[text()='"+days[i]+"']/../..");
+         				jswait.loadClick(".//*[@id='dayDialog']//paper-button[text()='Done']");
+         				
+      				 }
+      				jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+     				 Thread.sleep(2000);
+     			   	 jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
+     				 num = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+     			     builder.moveToElement(num).click().build().perform();
+     			     Thread.sleep(2000);
+//     			      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
+     				 num1 = driver.findElement(By.xpath("//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+     				 Thread.sleep(1000);
+     				 builder.moveToElement(num1).click().build().perform();
+     				
+     				    Thread.sleep(1000);     
+     			     if(am_pm==0)
+     			    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[1]");
+     			     else
+     			    	  jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[2]");
+     			     Thread.sleep(2000);
+     			      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='timeDialog']/div/paper-button[2]");
+     				    Thread.sleep(2000);
       				     jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
       			}
 	}
@@ -811,10 +834,8 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 //    	String baseList = list.getCell(1, 2).toString();
     	ExcelHelper offerExcel = new ExcelHelper(); 
     	offerExcel.setExcelFile("offerInputData", offer);
-    	Random rn = new Random();
- 		int  n = rn.nextInt(5000) + 1;
  		String name = (String) eM.getCell(1, 0);
- 		name =  name.replaceAll("[0-9]", "")+n;
+ 		name =  RandomNameGenerator.getRandomName(name);
  		eM.setCell(1, 0, name);
  	  	String bc_type =(String) eM.getCell(1, 7);
     	Calendar rightNow =Calendar.getInstance();
@@ -947,8 +968,10 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		eh.setExcelFile("bcInputData", sheet);
 		String type = (String) eh.getCellByColumnName("Type");
 		String bcName = (String) eh.getCellByColumnName("BC Name");
+		eh.setCell(1, "BC Name", bcName+"Copy");
 		Exception ex = new Exception("type mentionedif");
 		if(type.contentEquals("one-off")) {
+			commonObjects.filterName(bcName);
 			commonObjects.clickOptionsIcon();
 			commonObjects.clickCopyOption();
 			broadcastPageObjects.enterBroadcastName(bcName+"Copy");
@@ -960,9 +983,20 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 			broadcastPageObjects.clickActivateButton();
 			broadcastPageObjects.clickActivateConfirmYes();
 			Thread.sleep(10000);
-			commonObjects.filterName(bcName+"Copy");
-			commonObjects.clickOptionsIcon();
 			
+		}
+		else if(eh.getCellByColumnName("Type").contentEquals("recurring")){
+			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+bcName+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Copy')]");
+			broadcastPageObjects.enterBroadcastName(bcName+"Copy");
+			broadcastPageObjects.clickProceedButton();
+			broadcastPageObjects.clickProceedButton();
+			broadcastPageObjects.clickProceedButton();
+			enterDeliveryTabDetails(type,sheet);
+			broadcastPageObjects.clickCreateButton();
+			broadcastPageObjects.clickActivateButton();
+			broadcastPageObjects.clickActivateConfirmYes();
+			Thread.sleep(10000);
 		}else {
 			throw ex;
 		}

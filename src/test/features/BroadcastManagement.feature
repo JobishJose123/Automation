@@ -546,11 +546,12 @@ Then naigate to "campaignBC" campaign view broadcasts
 #Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
 #Then activate bc
 Then verify copy bc from sheet "one-offBC"
+Then view broadcast from sheet "one-offBC"
 
 ##----------------------------------------------------------------------------------------------------------------------------------------##
 
- #pending email check
-@NX-7364 @NX-7350 
+
+@NX-7364 @NX-7350
 @initBrowser 
 Scenario: Create New Broadcast: verify create BC Notification
     Given login
@@ -588,9 +589,7 @@ Scenario: Create New Broadcast: verify create BC Notification
 		#Then activate bc
     #Then verify bc created from sheet "one-offBC"
     #Then wait until broadcast from sheet "one-offBC" change status to "Completed"
-    
-    
-    
+
 
 
 
@@ -944,6 +943,32 @@ Then naigate to "campaignBC" campaign view broadcasts
 #Then click create new broadcast button
 #Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
 #Then activate bc
+Then navigate to "Recurring" broadcasts
+Then view broadcast from sheet "recurringMonthBC"
+Then verify delivery details from "recurringMonthBC"
+
+    @NX-6291
+@initBrowser 
+Scenario: Verify copy of the activated BC which has monthly recurrence NX-6291
+Given login
+Then navigate to precision marketer
+ Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
+Then activate bc
+Then navigate to "Recurring" broadcasts
+Then verify copy bc from sheet "recurringMonthBC"
 Then navigate to "Recurring" broadcasts
 Then view broadcast from sheet "recurringMonthBC"
 Then verify delivery details from "recurringMonthBC"
