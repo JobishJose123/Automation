@@ -25,7 +25,7 @@ public class WorkApprovalObjects extends Init{
 
 	private static final Exception Exception = null;
 	CommonObjects commonObjects = new CommonObjects();
-	 
+	CampaignObjects CampaignObjects=new CampaignObjects();
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -95,20 +95,20 @@ public class WorkApprovalObjects extends Init{
 	private WebElement userlevelclosebutton;
 	@FindBy(xpath=".//*[@id='toast']//span[contains(.,'Please choose at least one check-box.')]")
 	private WebElement warningmessage ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath=".//paper-menu-button[@id='notedropdown']")
+	private WebElement seleniumusernotificationclick;
+	@FindBy(xpath=".//*[@id='contentWrapper']//paper-button[contains(.,'Review')]")
+	private WebElement Notificationreviewbtn;
+	@FindBy(xpath=".//*[@id='router']//paper-button[contains(.,'Approve & Activate')]")
+	private WebElement ApproveActivatebtn;
+	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Create')]")
+	private WebElement Bccreatebtn ;
+	@FindBy(xpath=".//*[@id='broadcastSummary']//paper-button[contains(.,'Request Approval')]")
+	private WebElement bcRequestApproval;
+	@FindBy(xpath=".//paper-dialog[@id='confirmBox']")
+	private WebElement confirmbox ;
+	@FindBy(xpath=".//paper-dialog[@id='confirmBox']//paper-button[contains(.,'Yes')]")
+	private WebElement confirmboxyes;
 //	@FindBy(xpath="")
 //	private WebElement ;
 	
@@ -132,6 +132,13 @@ public class WorkApprovalObjects extends Init{
 	
 	public void userlevelclosebutton() throws InterruptedException {
 		jswait.loadClick(userlevelclosebutton);
+	}
+	
+	public void Notificationreviewbtn() throws InterruptedException {
+		jswait.loadClick(Notificationreviewbtn);
+	}
+	public void ApproveActivatebtn() throws InterruptedException {
+		jswait.loadClick(ApproveActivatebtn);
 	}
 	
 	
@@ -372,8 +379,8 @@ public void ruledeleteyes() throws InterruptedException {
 	    
 		String name = (String) eh.getCell(1, 0);
 		Thread.sleep(2000);
-
-		driver.findElement(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item[contains(.,'"+name+"')]")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item[contains(.,'"+name+"')]"))).click();
+		//driver.findElement(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item[contains(.,'"+name+"')]")).click();
 		Thread.sleep(2000);
 	}
 	
@@ -515,6 +522,47 @@ catch(Exception e) {
 
 	
 	
+	
+	
+	
+	
+	public void requestBCaproveseleniumuser() throws InterruptedException {
+		Thread.sleep(2000);
+		Bccreatebtn.click();
+		bcRequestApproval.click();
+		   Thread.sleep(3000);
+		   CampaignObjects.firstleveluserselect();
+		   CampaignObjects.approvalboxOKbtn();
+	}
+	
+	public void campaignaproveseleniumuser() throws Exception {
+		Thread.sleep(2000);
+		seleniumusernotificationclick.click();
+		Notificationreviewbtn();
+		ApproveActivatebtn();
+		Thread.sleep(2000);
+		try {
+		boolean n=confirmbox.isDisplayed();
+		
+		if(n=true) {
+			confirmboxyes.click();
+			
+		}
+		}
+		catch(Exception e) {
+			
+		
+		}
+		Thread.sleep(3000);
+		
+	}
+	public void BCAprovalbyseleniumuser() throws InterruptedException {
+		Thread.sleep(2000);
+		seleniumusernotificationclick.click();
+		Notificationreviewbtn();
+		ApproveActivatebtn();
+		
+	}
 	
 	
 }

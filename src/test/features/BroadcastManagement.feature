@@ -549,8 +549,8 @@ Then verify copy bc from sheet "one-offBC"
 
 ##----------------------------------------------------------------------------------------------------------------------------------------##
 
-
-@NX-7364 @NX-7350
+ #pending email check
+@NX-7364 @NX-7350 
 @initBrowser 
 Scenario: Create New Broadcast: verify create BC Notification
     Given login
@@ -588,7 +588,9 @@ Scenario: Create New Broadcast: verify create BC Notification
 		#Then activate bc
     #Then verify bc created from sheet "one-offBC"
     #Then wait until broadcast from sheet "one-offBC" change status to "Completed"
-
+    
+    
+    
 
 
 

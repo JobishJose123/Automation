@@ -105,5 +105,28 @@ public class workApprovalflow extends Init{
        	approvalPageObjects.createNewApprovalRule_multiplerule_verify(sheet);
    	}
 	
+    @Then("^approve campaign by selenium user$")
+   	public void approvecampaignbyseleniumuser() throws Throwable {
+       	
+       	approvalPageObjects.campaignaproveseleniumuser();
+   	}
+    
+    @Then("^Request for bc approval$")
+   	public void Requestforapprovebc() throws Throwable {
+    	approvalPageObjects.requestBCaproveseleniumuser();
+    	
+    	
+       	
+   	}
+    
+    
+    @Then("^approve Broadcast by selenium user$")
+   	public void approvebroadcastbyseleniumuser() throws Throwable {
+       	
+       	approvalPageObjects.BCAprovalbyseleniumuser();
+   	}
+
+    
+    
 	
 }
