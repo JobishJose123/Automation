@@ -715,6 +715,15 @@ public class CampaignManagement extends Init{
 		    	campaignObjects.clickOnTemplatesExportToLocationOption(name);	 		
 		    }
 		    
+		    @Then("^click on export location option of campaign from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		    public void clickExportLocationOnCampaign(String sheet, String fileName) throws Throwable
+		    {
+		    	Thread.sleep(4000);
+		    	eM.setExcelFile(fileName,sheet);
+		 		String name = (String) eM.getCell(1, 0);
+		    	campaignObjects.clickOnCampaignExportToLocationOption(name);	 		
+		    }
+		    
 		    @Then("^verify the location name from sheet \"([^\"]*)\" of file \"([^\"]*)\" can be selected from the drop down$")
 		    public void verifyLocationNameInDropDown(String sheet, String fileName) throws Throwable
 		    {
@@ -747,5 +756,22 @@ public class CampaignManagement extends Init{
 		    	campaignObjects.verifyTargetStatusOfBC();	 		
 		    }
 		    
+		    @Then("^create new campaign from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		    public void create_new_campaign_from_file(String sheet, String fileName) throws Throwable
+		    {
+		    	Thread.sleep(4000);
+		    	eM.setExcelFile(fileName, sheet);
+		    	Thread.sleep(4000);
+		 		String name = RandomNameGenerator.getRandomName((String) eM.getCell(1, 0));
+		 		String catalog = (String) eM.getCell(2, 0);
+		 		eM.setCell(1, 0, name);
+		 		campaignObjects.clickCreateNewCampaignButton();
+		 		campaignObjects.createCampaign(name, catalog);
 
+		    }
+		    @Then("^verify whether validation messasge for invalid usag metric shown$")
+		    public void verifyValidationErrorOfUsageMetrics() throws Throwable
+		    {
+		    	
+		    }
 }

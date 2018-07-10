@@ -1018,6 +1018,13 @@ public class CampaignObjects extends Init{
 		jswait.loadClick(exportCampaignOption);
 	}
    
+   public void clickOnCampaignExportToLocationOption(String name) throws InterruptedException {
+		WebElement edit = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(.,'"+name+"')]/../vaadin-grid-table-cell[7]"));
+		jswait.loadClick(edit);
+		Thread.sleep(4000);
+		WebElement exportCampaignOption = driver.findElement(By.xpath("//paper-menu-button[@id='campaignsListMenu']//iron-dropdown[@id='dropdown']//paper-item[2]"));
+		jswait.loadClick(exportCampaignOption);
+	}
    public void verifyLocationNameInDropDown(String locationName) throws InterruptedException {
 	   jswait.loadSendKeys(selectLocationToExport, locationName);
 	   assertTrue(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+locationName+"')]")).isDisplayed());

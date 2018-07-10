@@ -148,5 +148,11 @@ public class CommonSteps extends Init {
 			
 		 
     }
+	
+	@Then("^login to next environment$")
+    public void loginuserToNextEnv() throws Exception {
+		 driver.get("http://"+p.getValue("env2"));
+		 loginPage.login(p.getValue("username"), p.getValue("password"));
+    }
 
 }
