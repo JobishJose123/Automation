@@ -18,7 +18,7 @@ import baseClasses.RandomNameGenerator;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-
+import pageObjetcs.AdminPageObjects;
 import pageObjetcs.BroadcastPageObjects;
 import pageObjetcs.CampaignObjects;
 import pageObjetcs.CommonObjects;
@@ -33,6 +33,7 @@ public class BroadcastSteps extends Init{
 	public ExcelHelper eM = new ExcelHelper();
 	public ExcelHelper eh = new ExcelHelper();
 	CampaignObjects campaignObjects = new CampaignObjects();
+	AdminPageObjects adminPageObjects = new AdminPageObjects();
 	OfferPageObjects offerPageObjects = new OfferPageObjects();
 	LoginPageObjects loginPage = new LoginPageObjects();
 	CommonObjects commonObjects = new CommonObjects();
@@ -1096,7 +1097,19 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		broadcastPageObjects.abortBC();
 		
     }
-	
+	@Then("^navigate to partners Edit page$")
+	public void navigate_to_partners_Edit_page() throws Throwable {
+	    // 
+	    //throw new PendingException();
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		adminPageObjects.clickBCSettings();
+		//adminPageObjects.selectUsers();
+		adminPageObjects.checkBCConfiguration();
+		//AdminPageObjects.clickEditOption();
+		
+	}
+
 	
 //	@Then("^verify adding target condition with or condition$")
 //	public void verifyEditingTargetCondition() throws Throwable {
