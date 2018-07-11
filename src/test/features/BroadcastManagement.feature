@@ -1188,4 +1188,12 @@ Then verify copy bc from sheet "recurringMonthBC"
 Then navigate to "Recurring" broadcasts
 Then view broadcast from sheet "recurringMonthBC"
 Then verify delivery details from "recurringMonthBC"
+
+@NX-7449
+   @initBrowser
+   Scenario: Check whether configuration is available to set permision to edit BCs
+   Given login
+   Then navigate to configuration management
+   Then navigate to partners
+   Then navigate to partners Edit page
     
