@@ -40,37 +40,41 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 					clickElement(element);
 					return 1;
 				}catch(Exception e) {
-					System.out.println("Exception on try Click");
+					System.out.println("Exception on try Click:"+element.toString());
+					log.debug("Exception on try Click:"+element.toString());
 					return 0;
 				}
 			}
 			public int tryClick(String element) {
-				log.debug("inside tryClick method");
+				log.debug("inside tryClick method to click:"+element.toString());
 				try{
 					clickElement(element);
 					return 1;
 				}catch(Exception e) {
-					System.out.println("Exception on try Click");
+					System.out.println("Exception on try Click:"+element.toString());
+					log.debug("Exception on try Click:"+element.toString());
 					return 0;
 				}
 			}
 			public void loadClick(WebElement element) throws InterruptedException{
-				log.debug("inside loadClick method");
+				log.debug("inside loadClick method to click"+element.toString());
 				int initialWait = 0;
 				while(initialWait<=waitValue) {
 					Thread.sleep(400);
-					log.debug("initial wait of 400ms");
+					log.debug("initial wait of 400ms for:"+element.toString());
 					loadMask.waitForLoadMask();
-					log.debug("no presence of loadMask");
+					log.debug("no presence of loadMask for"+element.toString());
 					Thread.sleep(400);
 					if(tryClick(element)==1)
 						return;
+					Thread.sleep(1000);
+					loadMask.waitForLoadMask();
 					initialWait++;
 				}
 				clickElement(element);
 			}
 			public void loadClick(String element) throws InterruptedException{
-				log.debug("inside loadClick method");
+				log.debug("inside loadClick method for:"+element.toString());
 				int initialWait = 0;
 				while(initialWait<=waitValue) {
 					Thread.sleep(400);
@@ -80,6 +84,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 					Thread.sleep(400);
 					if(tryClick(element)==1)
 						return;
+					Thread.sleep(1000);
+					loadMask.waitForLoadMask();
 					initialWait++;
 				}
 				clickElement(element);

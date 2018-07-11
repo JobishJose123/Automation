@@ -986,7 +986,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 			
 		}
 		else if(eh.getCellByColumnName("Type").contentEquals("recurring")){
-			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+bcName+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Copy')]");
 			broadcastPageObjects.enterBroadcastName(bcName+"Copy");
 			broadcastPageObjects.clickProceedButton();
