@@ -1161,5 +1161,31 @@ Then verify delivery details from "recurringMonthBC"
     Then click create new broadcast button
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then activate bc
-    Then abort bc 
+    Then abort bc
+     
+    @NX-6290
+@initBrowser 
+Scenario: Verify copy of the planned broadcast which has monthly recurrence NX-6290
+Given login
+Then navigate to precision marketer
+ Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
+Then save bc
+Then navigate to "Recurring" broadcasts
+Then verify copy bc from sheet "recurringMonthBC"
+Then navigate to "Recurring" broadcasts
+Then view broadcast from sheet "recurringMonthBC"
+Then verify delivery details from "recurringMonthBC"
     

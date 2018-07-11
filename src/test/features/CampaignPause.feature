@@ -133,3 +133,24 @@ Then pass next scenario based on this step
 Scenario: Broadcast grid: Verify the Pause option of the BC BC NX-1273
  Then check previous step and pass this
 
+@NX-8789 @initBrowser
+  Scenario: Verify whether pause option is available for active  campaigns NX-8789
+    Given login
+    Then navigate to precision marketer
+Then navigate to offer management
+#Then navigate to offers
+#Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#Then navigate to offer management
+Then Navigate to Offer Catalogue
+Then Create New Offer Catalogue from sheet "defaultCatalog"
+Then Add "rechargeWAP" offer to Offer Catalogue
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then pause campaign from sheet "campaignBC"
+    Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
+Then save bc
+Then navigate to "Recurring" broadcasts
+Then activate saved "Recurring" bc from sheet "recurringBC"
