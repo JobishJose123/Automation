@@ -43,6 +43,14 @@ public class BroadcastPageObjects extends Init {
 	private WebElement viewBroadcast;
 	@FindBy(xpath = "//paper-item[contains(.,'Export As PDF')]")
 	private WebElement exportBroadcast;
+	@FindBy(xpath = "//paper-item[contains(.,'View')]")
+	private WebElement broadcastView;
+	@FindBy(xpath = ".//paper-icon-button[@icon='block']")
+	private WebElement broadcastAbort;
+	@FindBy(xpath = ".//paper-dialog[@id='confirmBoxAbort']//paper-button[contains(.,'Yes')]")
+	private WebElement broadcastAbortYes;
+	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Aborted')]")
+	private WebElement statusOfBCAfterAbortion;
 	@FindBy(xpath = "//label[contains(.,'Broadcast Name')]/../input")
 	private WebElement broadcastName;
 	@FindBy(xpath = "//label[contains(.,'Purpose')]/../input")
@@ -156,6 +164,8 @@ public class BroadcastPageObjects extends Init {
 	private WebElement recurringBcEndAtRadio;
 	@FindBy(xpath = ".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGrid;
+	@FindBy(xpath = ".//label[contains(.,'Start Date/Time')]")
+	private WebElement StartBroadcastDateTimeField;
 
 	@FindBy(xpath = ".//div[@id='radioLabel' and contains(text(),'Create')]")
 	private WebElement targetbccreate;
@@ -202,6 +212,15 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement bcremovebutton ;
 	 @FindBy(xpath = "//paper-button[text()='Validate']")
      private WebElement validateButtonBc;
+	 @FindBy(xpath = "//paper-card[contains(.,'Basic Details')]")
+     private WebElement basicDetailsBC;
+	 @FindBy(xpath = "//paper-card[contains(.,'Target Details')]")
+     private WebElement targetDetailsBC;
+	 @FindBy(xpath = "//paper-card[contains(.,'Offer details')]")
+     private WebElement offerDetailsBC;
+	 @FindBy(xpath = "//div//h4[contains(.,'Delivery Details')]")
+     private WebElement deliveryDetailsBC;
+	 
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -434,6 +453,42 @@ public class BroadcastPageObjects extends Init {
 		verifyExportBroadcast();
 	}
 	
+  public void broadcastView(String name) throws InterruptedException {
+		
+		commonObjects.clickOptionsIcon();
+		clickBroadcastViewOption();
+		Thread.sleep(2000);
+		verifyBroadcastView(name);
+	}
+  
+  
+  public void abortBC() throws InterruptedException {
+		
+		commonObjects.clickOptionsIcon();
+		clickAbortBroadcastOption();
+		clickAbortYesButton();
+		Thread.sleep(3000);
+		commonObjects.clickOptionsIcon();
+		clickAbortBroadcastOption();
+		clickAbortYesButton();
+		verifyStatusOfBCAfterAbortion();
+		
+	}
+  
+  public void verifyBroadcastView(String name) throws InterruptedException {
+		
+	 assertTrue(driver.findElement(By.xpath("//h3[contains(.,'"+name+"')]")).isDisplayed());
+	 assertTrue(basicDetailsBC.isDisplayed());
+	 assertTrue(targetDetailsBC.isDisplayed());
+	 assertTrue(offerDetailsBC.isDisplayed());
+	 assertTrue(deliveryDetailsBC.isDisplayed());
+	 jswait.loadClick(basicDetailsBC);
+	 assertTrue(driver.findElement(By.xpath(".//p[contains(.,'"+name+"')]")).isDisplayed());
+	 
+	  
+	}
+	
+	
   public void verifyExportBroadcast() throws InterruptedException {
 		
 	  
@@ -582,6 +637,29 @@ public class BroadcastPageObjects extends Init {
 	public void clickExportBroadcastOption() throws InterruptedException {
 		jswait.loadClick(exportBroadcast);
 	}
+	public void clickBroadcastViewOption() throws InterruptedException {
+		jswait.loadClick(broadcastView);
+	}
+	
+	public void clickAbortBroadcastOption() throws InterruptedException {
+		jswait.loadClick(broadcastAbort);
+	}
+	
+	public void clickAbortYesButton() throws InterruptedException {
+		jswait.loadClick(broadcastAbortYes);
+	}
+
+   public void verifyStatusOfBCAfterAbortion() throws InterruptedException {
+	   
+	   
+	   driver.navigate().refresh();
+	   Thread.sleep(5000);
+	   driver.navigate().refresh();
+	   Thread.sleep(3000);
+	   assertTrue(statusOfBCAfterAbortion.isDisplayed());
+	
+    }
+
 
 	public void selectTrackSession() throws InterruptedException {
 		jswait.loadClick(trackSessionSelector);
@@ -835,6 +913,10 @@ public class BroadcastPageObjects extends Init {
 		String color = detailsTabHeader.getCssValue("background-color");
 		Assert.assertEquals(color, "rgba(84, 205, 152, 1)", "wrong header color after pproceed");
 	}
+	
+	public void verifyStartBroadcastDateTimeField() throws InterruptedException {
+		assertTrue(StartBroadcastDateTimeField.isDisplayed());
+	}
 
 	public void validatePurposeField() throws InterruptedException, UnsupportedFlavorException, IOException {
 		enterBroadcastName(
@@ -856,6 +938,45 @@ public class BroadcastPageObjects extends Init {
 	
 	public void clickValidateButton() throws InterruptedException {
 		jswait.loadClick(validateButtonBc);
+	}
+	
+	
+	
+	public void createBCAndVerifyStartBroadcastAtOption(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+		enterBroadcastBasicDetails(name);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		clickProceedButton();
+		selectOffer(offer);
+		if(!bc_type.contains("informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+		}
+		clickProceedButton();
+		
+		verifyStartBroadcastDateTimeField();
+		
 	}
 
 
