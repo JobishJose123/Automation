@@ -1,0 +1,19 @@
+2018-07-11 12:52:01 INFO  JSWaiter:34 - info message
+2018-07-11 12:52:01 DEBUG JSWaiter:35 - This is debug
+2018-07-11 12:52:01 DEBUG JSWaiter:36 - opening webiste
+2018-07-11 12:59:32 INFO  JSWaiter:35 - info message
+2018-07-11 12:59:32 DEBUG JSWaiter:36 - This is debug
+2018-07-11 12:59:32 DEBUG JSWaiter:37 - opening webiste
+2018-07-11 13:01:23 INFO  JSWaiter:36 - info message
+2018-07-11 13:01:23 DEBUG JSWaiter:37 - This is debug
+2018-07-11 13:01:23 DEBUG JSWaiter:38 - opening webiste
+2018-07-11 14:58:48 DEBUG automatioLog:58 - inside loadClick method
+2018-07-11 14:58:48 DEBUG automatioLog:62 - initial wait of 400ms
+2018-07-11 14:58:48 DEBUG automatioLog:64 - no presence of loadMask
+2018-07-11 14:58:49 DEBUG automatioLog:58 - inside loadClick method
+2018-07-11 14:58:49 DEBUG automatioLog:62 - initial wait of 400ms
+2018-07-11 14:58:54 DEBUG automatioLog:64 - no presence of loadMask
+2018-07-11 14:58:55 DEBUG automatioLog:58 - inside loadClick method
+2018-07-11 14:58:55 DEBUG automatioLog:62 - initial wait of 400ms
+2018-07-11 14:58:56 DEBUG automatioLog:64 - no presence of loadMask
+2018-07-11 14:58:57 DEBUG automatioLog:62 - initial wait of 400ms

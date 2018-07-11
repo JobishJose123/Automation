@@ -1169,12 +1169,12 @@ Scenario: Verify copy of the planned broadcast which has monthly recurrence NX-6
 Given login
 Then navigate to precision marketer
  Then navigate to offer management
-    #Then navigate to offers
+    Then navigate to offers
     #Then click on create new ofer button
     #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    #Then navigate to offer management 
+    Then navigate to offer management 
 	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
     Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"

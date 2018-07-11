@@ -1,9 +1,13 @@
 package baseClasses;
 import java.awt.Toolkit;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -13,12 +17,75 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 		public class JSWaiter extends Init{
+			///////////////////////////////////////////////////////////////////////
+			private static int waitValue = 2;
+			private LoadMask loadMask = new LoadMask();
+
+			public void clickElement(WebElement element) {
+				WebDriverWait wait = new WebDriverWait(driver, 8);
+				wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+			}
+			public void clickElement(String element) {
+				WebDriverWait wait = new WebDriverWait(driver, 8);
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath(element))).click();
+			}
+			public int tryClick(WebElement element) {
+				try{
+					clickElement(element);
+					return 1;
+				}catch(Exception e) {
+					System.out.println("Exception on try Click");
+					return 0;
+				}
+			}
+			public int tryClick(String element) {
+				log.debug("inside tryClick method");
+				try{
+					clickElement(element);
+					return 1;
+				}catch(Exception e) {
+					System.out.println("Exception on try Click");
+					return 0;
+				}
+			}
 			public void loadClick(WebElement element) throws InterruptedException{
+				log.debug("inside loadClick method");
+				int initialWait = 0;
+				while(initialWait<=waitValue) {
+					Thread.sleep(400);
+					log.debug("initial wait of 400ms");
+					loadMask.waitForLoadMask();
+					log.debug("no presence of loadMask");
+					Thread.sleep(400);
+					if(tryClick(element)==1)
+						return;
+					initialWait++;
+				}
+				clickElement(element);
+			}
+			public void loadClick(String element) throws InterruptedException{
+				log.debug("inside loadClick method");
+				int initialWait = 0;
+				while(initialWait<=waitValue) {
+					Thread.sleep(400);
+					log.debug("initial wait of 400ms");
+					loadMask.waitForLoadMask();
+					log.debug("no presence of loadMask");
+					Thread.sleep(400);
+					if(tryClick(element)==1)
+						return;
+					initialWait++;
+				}
+				clickElement(element);
+			}
+			//////////////////////////////////////////////////////////////////
+			public void loadClickTry(WebElement element) throws InterruptedException{
 				 WebDriverWait wait = new WebDriverWait(driver, 8);
 				 String loadMaskStatus = "";
 				 Thread.sleep(400);
@@ -92,7 +159,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 					 }
 				 }
 		}
-			public void loadClick(String element) throws InterruptedException{
+			public void loadClickTry(String element) throws InterruptedException{
 				 WebDriverWait wait = new WebDriverWait(driver, 8);
 				 String loadMaskStatus = "";
 				 Thread.sleep(400);

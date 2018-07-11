@@ -1,8 +1,11 @@
 package baseClasses;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -16,12 +19,23 @@ public class Init {
 public static WebDriver driver;
 public static int passScenario = 0;
 public static PropHandler p = new PropHandler();
+public static Logger log;
+
 	public static void init() throws InterruptedException{
 	System.out.println("Initializing Browser.....");
 	System.setProperty("webdriver.chrome.driver", "browser_files\\chromedriver2.37.exe");
 	driver =  new ChromeDriver();
 	driver.manage().window().maximize();
 	p.setPropertyFile("config.properties");
+	
+	try {
+		String path = new File( "." ).getCanonicalPath();
+		System.setProperty("my.log", path+"\\Logs\\logging.log");
+		System.out.println(System.getProperty("my.log"));
+		log = Logger.getLogger("automatioLog");
+	}catch(Exception e) {
+		System.out.println("Could not create log file");
+	}
 	}
 	
 	//CONFIGURATIONS
