@@ -21,6 +21,16 @@ public class AdminPageObjects extends Init{
 	public AdminPageObjects() {
 		PageFactory.initElements(driver, this);
 	}
+
+	//For Partner setting page
+	@FindBy(xpath=".//*[@id='mainContainer']/paper-menu/div/paper-item[contains(.,'Broadcast Settings')]")
+	private WebElement BCSettings;
+	
+	@FindBy(xpath="//div[contains(text(),'Creator and selected users')]/..")
+	private WebElement selectedusers;
+	
+	@FindBy(xpath="//div[contains(text(),'All users')]/..")
+	private WebElement Allusers;
 	@FindBy(xpath="//div[contains(text(),'Partners')]")
 	private WebElement partnerOption;
 	@FindBy(xpath="//paper-item[contains(.,'Edit')]")
@@ -300,5 +310,18 @@ public class AdminPageObjects extends Init{
 	        throw ElementExcep;
 		
 	   }
+		//to click BCsettings page in Partners page
+		public void clickBCSettings() throws InterruptedException{
+				jswait.loadClick(BCSettings);
+			}
+		//To select user
+		public void selectUsers() throws InterruptedException{
+			jswait.loadClick(selectedusers);
+		}
+		//To check BCSettings element is displayed
+		public void checkBCConfiguration() throws InterruptedException{
+			assertTrue(selectedusers.isDisplayed());
+			assertTrue(Allusers.isDisplayed());
+		}
 
 }

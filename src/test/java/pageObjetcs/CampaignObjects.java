@@ -56,7 +56,8 @@ public class CampaignObjects extends Init{
 	private WebElement conditionCard;
 	@FindBy(xpath=".//div[@class='offers flex style-scope campaign-details' and contains(.,'1 Number of offers')]")
 	private WebElement offerNumber;
-	
+	@FindBy(xpath="//paper-item[contains(.,'Show History')]")
+	private WebElement optionsshowhistory;
 	
 
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save Campaign')]")
@@ -188,6 +189,14 @@ public class CampaignObjects extends Init{
 	public void clickOptionsViewBroadcasts() throws InterruptedException {
 		jswait.loadClick(optionsViewBroadcasts);
 	}
+	public void optionsshowhistory() throws InterruptedException {
+		jswait.loadClick(optionsshowhistory);
+	}
+	
+	
+	
+	
+	
 	public void clickSaveCampaignTemplate() throws InterruptedException {
 		jswait.loadClick(saveCampaignTemplateButton);
 	}

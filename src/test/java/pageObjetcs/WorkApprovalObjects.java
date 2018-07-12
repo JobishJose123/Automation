@@ -20,12 +20,14 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
+import cucumber.api.java.en.Then;
 
 public class WorkApprovalObjects extends Init{
 
 	private static final Exception Exception = null;
 	CommonObjects commonObjects = new CommonObjects();
 	CampaignObjects CampaignObjects=new CampaignObjects();
+	
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -109,8 +111,40 @@ public class WorkApprovalObjects extends Init{
 	private WebElement confirmbox ;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBox']//paper-button[contains(.,'Yes')]")
 	private WebElement confirmboxyes;
+	@FindBy(xpath="//paper-button[contains(.,'Edit')]")
+	private WebElement approvalusereditbtn;
+	@FindBy(xpath=".//iron-list[@id='list']/div[1]//span[contains(.,'Submitted for Approval')]")
+	private WebElement historystatuscheck;
+	
+	@FindBy(xpath=".//iron-list[@id='list']/div[1]//span[contains(.,'Approved')]")
+	private WebElement historystatuscheckapprove;
+	@FindBy(xpath=".//*[@id='chooseHistoryDialog']//paper-button[contains(.,'OK')]")
+	private WebElement historyboxokbtn;
+	@FindBy(xpath="(.//div[@class='layout vertical left-justified style-scope create-approval-rule']//following::paper-checkbox)[1]")
+	private WebElement campaignactivationcheckbox ;
+	@FindBy(xpath="(.//div[@class='layout vertical left-justified style-scope create-approval-rule']//following::paper-checkbox)[2]")
+	private WebElement broadcastactivationcheckbox ;
 //	@FindBy(xpath="")
 //	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+	
 	
 	
 	
@@ -123,6 +157,14 @@ public class WorkApprovalObjects extends Init{
 	public void clickApprovalRulesOption() throws InterruptedException {
 		jswait.loadClick(approvalRules);
 	}
+	public void campaignactivationcheckbox() throws InterruptedException {
+		jswait.loadClick(campaignactivationcheckbox);
+	}
+	public void broadcastactivationcheckbox() throws InterruptedException {
+		jswait.loadClick(broadcastactivationcheckbox);
+	}
+	
+	
 	
 	public void createNewApprovalRule(String sheet) throws Throwable {
 		clickCreateNewApprovalRuleButton();
@@ -165,6 +207,28 @@ public class WorkApprovalObjects extends Init{
 		
 	}
 	
+	public void createNewApprovalRulecampaignonly(String sheet) throws Throwable {
+		clickCreateNewApprovalRuleButton();
+		clickEditRuleNameButton();
+		enterRuleName(sheet);
+		saveRuleName();
+		clickAddUserButton();
+		enterLevel1User();
+		chooseLevel1User();
+		clickAddUserNameSave();
+		campaignactivationcheckbox();
+		clickAddCategoryButton();
+		cataloginput();
+		Thread.sleep(2000);
+		enterCategory();
+		Thread.sleep(2000);
+		chooseCategory();
+		Thread.sleep(2000);
+		clickAddCategorySave();
+		clickApprovalRuleSave();
+		
+								
+	}
 	public void createNewApprovalRulecheckboxverify(String sheet) throws Throwable {
 		clickCreateNewApprovalRuleButton();
 		clickEditRuleNameButton();
@@ -195,6 +259,9 @@ public class WorkApprovalObjects extends Init{
 		
 								
 	}
+	
+	
+	
 	
 	
 	
@@ -488,6 +555,68 @@ catch(Exception e) {
 	}
 	
 	
+	
+	
+    public void verify_campaign_show_history(String sheet) throws Exception
+    {
+    	eh.setExcelFile("campaignInputData", sheet);
+    	String name = eh.getCell(1, 0).toString();
+    	commonObjects.filterName(name);
+    	
+    	Thread.sleep(5000);
+    	
+    	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+    	CampaignObjects.optionsshowhistory();
+    	jswait.loadClick(historyboxokbtn);
+    	Thread.sleep(5000);
+    	CampaignObjects.optionsshowhistory();
+    	Thread.sleep(2000);
+   	try {
+    		historystatuscheck.isDisplayed();
+    	}catch(Exception e) {
+    		Assert.assertTrue(false);
+    	}
+    	Thread.sleep(2000);
+    	jswait.loadClick(historyboxokbtn);
+    	
+    }
+	
+    
+    
+    public void verify_campaign_show_historyapprove(String sheet) throws Exception
+    {
+    	eh.setExcelFile("campaignInputData", sheet);
+    	String name = eh.getCell(1, 0).toString();
+    	commonObjects.filterName(name);
+    	
+    	Thread.sleep(5000);
+    	
+    	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+    	CampaignObjects.optionsshowhistory();
+    	jswait.loadClick(historyboxokbtn);
+    	Thread.sleep(5000);
+    	CampaignObjects.optionsshowhistory();
+    	Thread.sleep(2000);
+    	try {
+    		boolean n=historystatuscheckapprove.isDisplayed();
+    		System.out.println(n);
+    		
+    	}catch(Exception e) {
+    		Assert.assertTrue(false);
+    	}
+    	Thread.sleep(2000);
+    	jswait.loadClick(historyboxokbtn);
+    	
+    }
+    
+    
+    
+    
+    
+    
+	
+	
+	
 	public void clickCheckboxesverify() throws Exception {
 		try {
 		if(checkboxes.size()>0) {
@@ -561,6 +690,16 @@ catch(Exception e) {
 		seleniumusernotificationclick.click();
 		Notificationreviewbtn();
 		ApproveActivatebtn();
+		
+	}
+	
+	public void BCeditbyseleniumuser() throws InterruptedException {
+		Thread.sleep(2000);
+		seleniumusernotificationclick.click();
+		Notificationreviewbtn();
+		Thread.sleep(3000);
+		approvalusereditbtn.click();
+		
 		
 	}
 	

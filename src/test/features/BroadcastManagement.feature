@@ -889,30 +889,30 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     @NX-2548 @initBrowser
     Scenario: CVM UI- Verify whether BC status is changed to 'Validating CG' when validation is started-2548
     Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+    #Then navigate to configuration management
+    #Then naviagte to product classes
+    #Then create product class and number attribute from "TestProductClass"
+    #Then navigate to landing page
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
     Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
+    #Then navigate to offer management
+    #Then navigate to products
+    #Then navigate to product class "TestProductClass"
+    #Then click create new product button
+    #Then create product with attributes from sheet "fullDetails"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
@@ -920,6 +920,9 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     Then click create new broadcast button
     Then enter details for new broadcast and configure TG and CG from sheet "one-offBC" with "rechargeWAP"
     Then validate bc
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
     Then verify validating CG status for bc
     Then verify bc created from sheet "one-offBC"
     
@@ -1051,7 +1054,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     @NX-652 @initBrowser
-    Scenario: Broadcast grid: Verify export option of the BC-1275
+    Scenario: Create BC: Deliver tab: Verify "Starts broadcast at" option-652
     Given login
     Then navigate to configuration management
     Then naviagte to product classes
@@ -1161,7 +1164,7 @@ Then verify delivery details from "recurringMonthBC"
     Then click create new broadcast button
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then activate bc
-    Then abort bc
+    Then abort bc 
      
     @NX-6290
 @initBrowser 
@@ -1188,4 +1191,12 @@ Then verify copy bc from sheet "recurringMonthBC"
 Then navigate to "Recurring" broadcasts
 Then view broadcast from sheet "recurringMonthBC"
 Then verify delivery details from "recurringMonthBC"
+
+@NX-7449
+   @initBrowser
+   Scenario: Check whether configuration is available to set permision to edit BCs
+   Given login
+   Then navigate to configuration management
+   Then navigate to partners
+   Then navigate to partners Edit page
     

@@ -29,9 +29,7 @@ public static Logger log;
 	p.setPropertyFile("config.properties");
 	
 	try {
-		String path = new File( "." ).getCanonicalPath();
-		System.setProperty("my.log", path+"\\Logs\\logging.log");
-		System.out.println(System.getProperty("my.log"));
+		System.out.println(System.getProperty("log"));
 		log = Logger.getLogger("automatioLog");
 	}catch(Exception e) {
 		System.out.println("Could not create log file");
