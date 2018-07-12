@@ -23,15 +23,24 @@ Feature: Test cases related to export campaign in multiple environment
 		Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory1" of file "MultipleEnvironmentExport"
-    Then create new campaign from sheet "campaign" of file "MultipleEnvironmentExport"
-    Then click on export location option of campaign from sheet "campaign" of file "MultipleEnvironmentExport"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then click on export location option of campaign from sheet "campaignBC" of file "campaignInputData"
     Then select export location from sheet "locationdetails" of file "MultipleEnvironmentExport" and click export
+    Then click username on topbar
 		Then logout
 		Then login to next environment
 		Then wait for 7 minutes
 		Then click on notification bell
     Then click on view all notifications
-   	Then click proceed on notification from the sheet "campaign" of file "MultipleEnvironmentExport"
+   	Then click proceed on notification from the sheet "campaignBC" of file "campaignInputData"
    	Then verify whether validation messasge for invalid usag metric shown
+   	#Then map to the native condition
+   	#Then check whether the native condition displayed
+   	Then pass next scenario based on this step
+
+  @NX-8150
+  Scenario: delete export location
+    Then check previous step and pass this
+
    	
 		

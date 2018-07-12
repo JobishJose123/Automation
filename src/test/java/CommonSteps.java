@@ -156,4 +156,14 @@ public class CommonSteps extends Init {
 		 loginPage.login(p.getValue("username"), p.getValue("password"));
     }
 
+	@Given("^navigate to environment$")
+	 public void loginuserToEnv() throws Exception {
+		 driver.get("http://"+p.getValue("env"));
+	}
+	
+	@Then("^login with the username \"([^\"]*)\" and password \"([^\"]*)\"$")
+	public void loginWithUser(String userName, String passWord) throws Exception {
+		 loginPage.login(userName, passWord);
+	}
+
 }

@@ -69,6 +69,64 @@ public class ExportCampaignLocationObjects extends Init{
 		@FindBy(xpath="//div[@data-log = 'conditions']")
 		private WebElement conditions;
 		
+		@FindBy(xpath="//paper-card[contains(@class, 'systemAdmin-sections') and contains(., 'Security')]")
+		private WebElement securityGroupButton;
+		
+		@FindBy(xpath="//paper-dialog[@id='createNew']//paper-button[text()='Save']")
+		private WebElement saveButtonInSecurityGroup;
+		
+		@FindBy(xpath="//paper-dialog[@id = 'listNotifications']//paper-button[contains(., 'OK')]")
+		private WebElement notificationPanelOKButton;
+		
+		public void clickOnSecurityGroup()  throws InterruptedException {
+			jswait.loadClick(securityGroupButton);
+		}
+		
+		public void editSecurityGroup(String groupName)  throws InterruptedException {
+			Thread.sleep(1500);
+			jswait.loadClick(driver.findElement(By.xpath("//data-table-row//span[text() ='"+groupName+"']/../../..//data-table-cell[9]//paper-icon-button")));
+			Thread.sleep(500);
+			jswait.loadClick(driver.findElement(By.xpath("//div[@id = 'contentWrapper']//paper-item[1]")));
+			Thread.sleep(1000);
+		}
+		
+		public void expandOption(String optionName)  throws Throwable {
+			Thread.sleep(4000);
+			jswait.loadClick(driver.findElement(By.xpath("//paper-dialog[@id = 'createNew']//paper-dialog-scrollable//label[contains(., '"+optionName+"')]")));
+		}
+		
+		public void selectOrDeselectOption(String optionName)  throws Throwable {
+			String scrollPanel ="//paper-dialog-scrollable[contains(@class, 'create-security-group')]//div[@id = 'scrollable']";
+			jswait.scrollIntoView(scrollPanel, optionName);
+			jswait.loadClick(driver.findElement(By.xpath("//div[@id = 'checkboxLabel' and contains(.,'"+optionName+"')]/../div[@id = 'checkboxContainer']")));
+		}
+		
+		public void clickSaveInSecurityGroup()  throws InterruptedException {
+			jswait.loadClick(saveButtonInSecurityGroup);
+			Thread.sleep(1000);
+		}
+		
+		public void verifyCampaignNotification(String isDisplayed, String campaignName) throws Exception {
+			String scrollPanel = "//iron-list[@id='list']";
+			boolean elementNotFound = false;
+			try {
+				jswait.scrollIntoView(scrollPanel, campaignName);
+				WebElement element = driver.findElement(By.xpath("//p[contains(@class, 'notification-listing') and contains(.,'"+campaignName+"')]"));
+				if (isDisplayed == "true") {
+					Assert.assertTrue(element.isDisplayed());
+				}
+			} 
+			catch (Exception e){
+				
+					elementNotFound = true;
+			}
+			if(isDisplayed == "false") {
+				Assert.assertTrue(elementNotFound);	
+			}
+			jswait.loadClick(notificationPanelOKButton);
+		}
+
+		
 		public void clickAddExportLocationButton() throws InterruptedException{
 			jswait.loadClick(addExportLocationButton);
 		}

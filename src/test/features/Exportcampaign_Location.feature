@@ -162,3 +162,44 @@ Feature: Test cases related to export campaign location
 		Then click on export location option of template from sheet "template" of file "ExportCampaignLocation"
 		Then select export location from sheet "invalidlocationdetails" of file "ExportCampaignLocation" and click export
 		Then verify export option panel displayed
+		
+	#For this test we need a user who has only one security group access
+	#Currently using shinu.rajan@flytxt.com as user and CCE as security group	
+	@NX-8023 @initBrowser @closeBrowser
+  Scenario: Verify whether user will get notifications without campaign template administration
+ 		Given navigate to environment
+ 		Then login with the username "shinu.rajan@flytxt.com" and password "flytxt"
+ 		Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then create new campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
+    Then navigate to system administration
+    Then navigate to export location
+    Then add new export location
+    Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then navigate to templates tab
+    Then create new template from sheet "template" of file "ExportCampaignLocation"
+    Then click on export location option of template from sheet "template" of file "ExportCampaignLocation"
+    Then select export location from sheet "locationdetails" of file "ExportCampaignLocation" and click export
+    Then wait for 7 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then verify whether campaign notification displayed "true" from sheet "template" of file "ExportCampaignLocation"
+ 		Then navigate to configuration management
+ 		Then navigate to system administration
+ 		Then click on security group
+ 		Then edit security group "CCE"
+ 		Then expand "Applications" in edit security group
+ 		Then deselect option "Campaign Template Administration"
+ 		Then click save on edit security group
+ 		Then click username on topbar
+ 		Then logout
+ 		Then login with the username "shinu.rajan@flytxt.com" and password "flytxt"
+ 		Then click on notification bell
+    Then click on view all notifications
+    Then verify whether campaign notification displayed "false" from sheet "template" of file "ExportCampaignLocation"
+	

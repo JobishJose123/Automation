@@ -128,4 +128,37 @@ public class AddExportLocationSteps extends Init {
     public void isConditionsDisplayedInImportedCampaign() throws InterruptedException {
     	exportCampignLocationObject.isConditionsDisplayedInImportedCampaign();
     }
+    
+    @Then("^click on security group$")
+    public void clickOnSecurityGroup() throws InterruptedException {
+    	exportCampignLocationObject.clickOnSecurityGroup();
+    }
+    
+    @Then("^edit security group \"([^\"]*)\"$")
+    public void editSecurityGroup(String groupName) throws InterruptedException {
+    	exportCampignLocationObject.editSecurityGroup(groupName);
+    }
+    
+    @Then("^expand \"([^\"]*)\" in edit security group$")
+    public void expandOption(String option) throws Throwable {
+    	exportCampignLocationObject.expandOption(option);
+    }
+    
+    @Then("^(?:deselect|select) option \"([^\"]*)\"$")
+    public void selectOrDeselectOption(String option) throws Throwable {
+    	exportCampignLocationObject.selectOrDeselectOption(option);
+    }
+    
+    @Then("^click save on edit security group$")
+    public void clickSave() throws InterruptedException {
+    	exportCampignLocationObject.clickSaveInSecurityGroup();
+    }
+    
+    @Then("^verify whether campaign notification displayed \"([^\"]*)\" from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+    public void verifyCampaignNotification(String isDisplayed, String sheet, String fileName) throws Throwable {
+    	excelHelper.setExcelFile(fileName, sheet);
+    	String campaignName = (String)excelHelper.getCell(1, 0);
+    	exportCampignLocationObject.verifyCampaignNotification(isDisplayed, campaignName);    	
+    }
+
 }
