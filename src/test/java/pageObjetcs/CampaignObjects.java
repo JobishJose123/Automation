@@ -402,7 +402,7 @@ public class CampaignObjects extends Init{
 	
   
 	
-	public void verifyTargetdCustomersLabelAndCount() throws Exception {
+	public void verifyTargetedCustomersLabelAndCount() throws Exception {
 		
 	
 	    Thread.sleep(300000);
@@ -757,20 +757,29 @@ public class CampaignObjects extends Init{
 	}
 	
 	
-	public void VerifyGraphicalConditionsInTargetConditionsAreWorkingProperly(String name,String catalog) throws InterruptedException {
+	public void VerifyGraphicalConditionsInTargetConditionsAreWorkingProperly(String name,String catalog) throws Exception {
 		enterCampaignDeails(name,catalog);
 		clickProceedButton();
 		targetConditionObjects.clickCreateTargetConditionButton();
 //		targetConditionObjects.clickTargetConditionViewToggle();
 		targetConditionObjects.clickBasicTargetConditionWithAge();
+		clickAddAndButton();
+		targetConditionObjects.clickBasicTargetConditionWithAge2();
 		targetConditionObjects.clickGraphicalTargetConditionButton();
-		targetConditionObjects.dragTargetCondition();
+		targetConditionObjects.verifyGraphicalTargetConditionVisibility();
+		targetConditionObjects.clickCampaignDetailsTab();
+		clickProceedButton();
+		Thread.sleep(2000);
+		targetConditionObjects.verifyGraphicalTargetConditionVisibility();
+		
+	    //targetConditionObjects.dragTargetCondition();
 		
 	}
 	
 	public void verifyTargetStatusOfBC() throws InterruptedException {
 		
 		WebDriverWait wait = new WebDriverWait(driver,300);
+		driver.navigate().refresh();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//vaadin-grid-cell-content[contains(.,'Targeting')]")));
 	
 	}

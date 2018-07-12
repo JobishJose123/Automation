@@ -1161,7 +1161,7 @@ Then verify delivery details from "recurringMonthBC"
     Then click create new broadcast button
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then activate bc
-    Then abort bc
+    Then abort bc 
      
     @NX-6290
 @initBrowser 

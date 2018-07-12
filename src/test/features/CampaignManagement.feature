@@ -363,26 +363,30 @@ Feature: campaign management
     #Then click on create new ofer button
     #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
     #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
+    #Then Navigate to Offer Catalogue
     #Then Create New Offer Catalogue from sheet "defaultCatalog"
     #Then Add "rechargeWAP" offer to Offer Catalogue
-    #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
     #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then naigate to "campaignBC" campaign view broadcasts
-    #Then click create new broadcast button
-    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    #Then activate bc
-    #Then verify bc created from sheet "one-offBC"
-    #Then verify target status of bc
-    #Then navigate to landing page
-    #Then navigate to precision marketer
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then activate bc
+    Then verify bc created from sheet "one-offBC"
+    Then verify target status of bc
+    Then navigate to landing page
+    Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
 		Then naigate to "campaignBC" campaign view broadcasts
 		Then verify target status of bc
+		Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
     Then click on campaign  to verify expanding the campaign row from sheet "campaignBC"
-    Then verify targetd customers label and count
+    Then verify targeted customers label and count
     
     
     

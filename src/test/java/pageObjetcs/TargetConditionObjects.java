@@ -55,7 +55,7 @@ public class TargetConditionObjects extends Init {
 	private WebElement isGreaterThanValue;
 	@FindBy(xpath=".//*[@id='conditionCard']/paper-button[2]")
 	private WebElement targetConditionSave;
-	@FindBy(xpath="//condition-form[2]//paper-button[contains(.,'Save')]")
+	@FindBy(xpath=".//div[@id='single'][2]//paper-button[contains(.,'Save')]")
 	private WebElement targetConditionSave2;
 	@FindBy(xpath = "//*[@data-moduletext='Customer Insight']")
 	private WebElement targetGraphicalCustomerInsight;
@@ -79,10 +79,17 @@ public class TargetConditionObjects extends Init {
 		 private WebElement createConditionButton;
 		 @FindBy(xpath=".//div[@class='container flex-end-justified style-scope target-conditions']//paper-icon-button[@class='style-scope target-conditions x-scope paper-icon-button-0']//iron-icon")
 		 private WebElement graphicalConditionButton;
+		 @FindBy(xpath=".//target-conditions-context-menu")
+		 private List <WebElement> graphicalConditionContextMenu;
+		 @FindBy(xpath=".//div[@class='inner-content style-scope target-conditions-graph']//profile-field[contains(.,'Customer Profile Info')]")
+		 private List <WebElement> graphicalConditionText;
 		 @FindBy(xpath=".//*[@id='conditionCard']//paper-icon-item[contains(.,'Edit')]")
 		 private WebElement targetConditionEdit;
 		 @FindBy(xpath=".//paper-item[contains(.,'Duplicate')]")
 		 private WebElement optionDuplicate;
+		 @FindBy(xpath=".//li[contains(.,'Campaign Details')]")
+		 private WebElement campaignDetails;
+		 
 //		 @FindBy(xpath=".//div[@class='jtk-demo-canvas canvas-wide flowchart style-scope target-conditions-graph']")
 //		 private WebElement dropLocation;
 //		 @FindBy(xpath=".//div[@draggable='true'][1]")
@@ -136,7 +143,7 @@ public class TargetConditionObjects extends Init {
 	 public void clickManualOrButton() throws InterruptedException {
 			jswait.loadClick(manualOrCondition);
 		}
-	 public void clickConditionTypeField() throws InterruptedException {
+	    public void clickConditionTypeField() throws InterruptedException {
 			jswait.loadClick(manualConditionTypeField);
 		}
 		public void clickTargetConditionViewToggle() throws InterruptedException {
@@ -148,6 +155,31 @@ public class TargetConditionObjects extends Init {
 		public void clickGraphicalTargetConditionButton() throws InterruptedException {
 			jswait.loadClick(graphicalConditionButton);
 		}
+		
+		public void verifyGraphicalTargetConditionVisibility() throws Exception {
+			
+			
+			Exception sizeException=new Exception("Target Condions changed");
+			int size1=graphicalConditionContextMenu.size();
+			if(size1!=3) {
+				
+				throw sizeException;	
+			}
+			
+			int size2=graphicalConditionText.size();
+			
+            if(size2!=2) {
+				
+				throw sizeException;	
+			}
+			
+		
+		}	
+		public void clickCampaignDetailsTab() throws InterruptedException {
+			jswait.loadClick(campaignDetails);
+			Thread.sleep(2000);
+		}
+		
 		public void clickDuplicateTargetConditionButton() throws InterruptedException {
 			jswait.loadClick(optionDuplicate);
 			Thread.sleep(2000);
@@ -160,10 +192,23 @@ public class TargetConditionObjects extends Init {
 //			Action dragAndDrop = builder.clickAndHold(graphicTC).moveToElement(dropLocation).release(dropLocation).build();
 //			 
 //			dragAndDrop.perform();
+			
+			
+			
 			WebElement graphicTC=driver.findElement(By.xpath(".//div[@draggable='true' and @class='widgets AI Powered Analytical Scores style-scope target-conditions-widgets'][1]"));
 			WebElement dropLocation=driver.findElement(By.xpath(".//div[@class='jtk-demo-canvas canvas-wide flowchart style-scope target-conditions-graph']"));
-			(new Actions(driver)).dragAndDrop(graphicTC, dropLocation).build().perform();
-			Thread.sleep(2000);
+//			(new Actions(driver)).dragAndDrop(graphicTC, dropLocation).build().perform();
+//			Thread.sleep(2000);
+			if(graphicTC.isDisplayed()) { 
+				
+				System.out.println("Card displayed");
+			}
+		
+			Actions builder = new Actions(driver);
+	 	    Action dragAndDrop = builder.clickAndHold(graphicTC).moveToElement(dropLocation).release(dropLocation).build();
+	        dragAndDrop.perform();
+		
+		
 		}
 		public void verifyDuplicatedTargetConditionCard() throws InterruptedException {
 			
@@ -227,6 +272,12 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsLessThan);
 			jswait.loadSendKeys(isGreaterThanValue,"25");
+			Thread.sleep(3000);
+//			Actions action = new Actions(driver);
+//			action.moveToElement(targetConditionSave2).click().build().perform();
+////			action.click(targetConditionSave2);
+////			Action action2  = action.build();
+////			action2.perform();
 			jswait.loadClick(targetConditionSave2);
 	 }
 	 public void clickBasicTargetConditionWithAge(String age) throws InterruptedException {
