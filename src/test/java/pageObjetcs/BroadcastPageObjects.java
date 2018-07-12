@@ -591,7 +591,17 @@ public class BroadcastPageObjects extends Init {
 	}
 	
   public void verifyValidatingCGStatusForBC() throws Throwable {
-		
+	 
+	  Thread.sleep(200000);
+	  driver.navigate().refresh();
+	  Thread.sleep(200000);
+	  driver.navigate().refresh();
+	  Thread.sleep(100000);
+	  driver.navigate().refresh();
+	  Thread.sleep(100000);
+	  driver.navigate().refresh();
+	  WebDriverWait wait = new WebDriverWait(driver,100);
+	  driver.navigate().refresh();
 	  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//vaadin-grid-cell-content[contains(.,'Validating CG')]")));
       assertTrue(statusValidatingCG.isDisplayed());
 	
