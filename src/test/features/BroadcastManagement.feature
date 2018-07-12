@@ -1051,7 +1051,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     @NX-652 @initBrowser
-    Scenario: Broadcast grid: Verify export option of the BC-1275
+    Scenario: Create BC: Deliver tab: Verify "Starts broadcast at" option-652
     Given login
     Then navigate to configuration management
     Then naviagte to product classes
