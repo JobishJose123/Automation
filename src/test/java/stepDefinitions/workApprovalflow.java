@@ -67,6 +67,13 @@ public class workApprovalflow extends Init{
     	approvalPageObjects.createNewApprovalRule(sheet);
 	}
     
+    @Then("^create new approval rule from sheet campaignonly \"([^\"]*)\"$")
+   	public void createNewApprovalRulecampaignonly(String sheet) throws Throwable {
+       	
+       	approvalPageObjects.createNewApprovalRulecampaignonly(sheet);
+   	}
+    
+    
     @Then("^editApprovalRuleDetailsFromSheet \"([^\"]*)\"$")
 	public void editApprovalRuleDetailsFromSheet(String sheet) throws Throwable {
     	
@@ -127,6 +134,22 @@ public class workApprovalflow extends Init{
    	}
 
     
+    @Then("^edit campaign by selenium user$")
+   	public void editcampaignbyseleniumuser() throws Throwable {
+       	
+       	approvalPageObjects.BCeditbyseleniumuser();
+   	}
     
+    @Then("^naigate to \"([^\"]*)\" campaign show history$")
+   	public void verify_campaign_show_history(String sheet) throws Throwable {
+    	       	
+       	approvalPageObjects.verify_campaign_show_history(sheet);
+   	}
+    
+    @Then("^naigate to \"([^\"]*)\" campaign show historyapprove$")
+   	public void verify_campaign_show_historyapprove(String sheet) throws Throwable {
+    	       	
+       	approvalPageObjects.verify_campaign_show_historyapprove(sheet);
+   	}
 	
 }
