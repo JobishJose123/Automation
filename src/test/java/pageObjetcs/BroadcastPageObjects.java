@@ -82,10 +82,11 @@ public class BroadcastPageObjects extends Init {
 	private WebElement DNCExclusionOption;
 	@FindBy(xpath = ".//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']")
 	private WebElement DNCExclusionList;
-	@FindBy(xpath = ".//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']//data-table-cell//iron-icon")
+	@FindBy(css = "[icon=\"icons\\:remove-circle\"]")
 	private WebElement DNCListRemoveButton;
+	//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']//data-table-cell//iron-icon
 	
-	@FindBy(xpath = ".//div[@class='layout horizontal center style-scope dnc-exclusion']//paper-button[contains(.,'Add')]")
+	@FindBy(css = "[class=\"addDNCBtn style-scope dnc-exclusion x-scope paper-button-0\"]")
 	private WebElement DNCListAddButton;
 	@FindBy(xpath = ".//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']//paper-icon-button[@id='clear']//iron-icon")
 	private WebElement DNCListCloseButton;
@@ -562,14 +563,15 @@ public class BroadcastPageObjects extends Init {
 //		actions.moveToElement(DNCListRemoveButton).click().perform();
 		
 		//Set <String> handle=driver.getWindowHandles();
-		for (String handle : driver.getWindowHandles()) {
-		    driver.switchTo().window(handle);
-		    
-		}
+		
+		
+		//driver.switchTo().frame(DNCExclusionList);
+		
+		
 		jswait.loadClick(DNCListRemoveButton);
-		jswait.loadClick(DNCListRemoveButton);
-		jswait.loadClick(DNCListRemoveButton);
-		jswait.loadClick(DNCListRemoveButton);
+//		jswait.loadClick(DNCListRemoveButton);
+//		jswait.loadClick(DNCListRemoveButton);
+//		jswait.loadClick(DNCListRemoveButton);
 		jswait.loadClick(DNCListTextbox);
 		jswait.loadClick(DNCList);
 		jswait.loadClick(DNCListAddButton);
