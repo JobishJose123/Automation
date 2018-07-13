@@ -67,6 +67,12 @@ public class workApprovalflow extends Init{
     	approvalPageObjects.createNewApprovalRule(sheet);
 	}
     
+    @Then("^create new approval rule from sheet \"([^\"]*)\" with two approvers$")
+   	public void createNewApprovalRuleWithTwoApprovers(String sheet) throws Throwable {
+       	
+       	approvalPageObjects.createApprovalRuleDetailsFromSheetWithTwoApprovers(sheet);
+   	}
+    
     @Then("^create new approval rule from sheet campaignonly \"([^\"]*)\"$")
    	public void createNewApprovalRulecampaignonly(String sheet) throws Throwable {
        	

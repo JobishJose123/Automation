@@ -359,7 +359,7 @@ Feature: generic product class
     Then approve Broadcast by selenium user
 =======
   @NX-6363 @initBrowser @closeBrowser
-  Scenario: Verify by creating new Approval Rule
+  Scenario: Verify whether status of BC get changed to Waiting for Approval once it is sent for approval
     Given login
     Then navigate to configuration management
     Then navigate to campaign categories
@@ -374,4 +374,35 @@ Feature: generic product class
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then verify campaign status from sheet "campaignBC" of file "campaignInputData"
     
+<<<<<<< HEAD
 >>>>>>> branch 'October-release' of git@bitbucket.org:flytxt/neon-dx-qa-automation.git
+=======
+   #For this test we used selenium user and shinu.rajan as approvers. Going forward need to change implementation to read users from excel
+  @NX-6335 @initBrowser @closeBrowser
+  Scenario: Verify Campaign creation with approval rule flow
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet "approvalRule"
+    Then create new approval rule from sheet "approvalRule" with two approvers
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    Then Logout from Neon application
+    Then login with the username "selenium.flytxt@gmail.com" and password "Flytxt.4"
+    Then click notification bell
+    Then click view all notifications
+    Then click review on the campaign from sheet "" of file ""
+    Then verify the presence of approval button
+    Then Logout from Neon application
+    Then login with the username "shinu.rajan@flytxt.com" and password "flytxt"
+    Then click notification bell
+    Then click view all notifications
+    Then click review on the campaign from sheet "" of file ""
+    Then verify the presence of approval and activate button
+>>>>>>> stash

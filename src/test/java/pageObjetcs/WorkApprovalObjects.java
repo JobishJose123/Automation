@@ -75,8 +75,8 @@ public class WorkApprovalObjects extends Init{
 	private List <WebElement> checkboxes;
 	@FindBy(xpath = "//paper-button[contains(.,'Add Category')]")
 	private WebElement addCategoryButton;
-//	@FindBy(xpath = ".//div[@class='input-content label-is-floating style-scope paper-input-container']//iron-icon")
-//	private WebElement addCategoryDropdown;
+	@FindBy(xpath = "//paper-button[@id = 'addLevelButton']")
+	private WebElement addLevel;
 	@FindBy(xpath = ".//label[contains(.,'Select required campaign categories')]//following::iron-icon[1]")
 	private WebElement addCategoryDropdown;
 	@FindBy(xpath = ".//span[contains(.,'Add Category')]")
@@ -192,6 +192,32 @@ public class WorkApprovalObjects extends Init{
 		saveRuleName();
 		clickAddUserButton();
 		enterLevel1User();
+		chooseLevel1User();
+		clickAddUserNameSave();
+		clickCheckboxes();
+		clickAddCategoryButton();
+		cataloginput();
+		Thread.sleep(2000);
+		enterCategory();
+		Thread.sleep(2000);
+		chooseCategory();
+		Thread.sleep(2000);
+		clickAddCategorySave();
+		clickApprovalRuleSave();
+		
+	}
+	
+public void createApprovalRuleDetailsFromSheetWithTwoApprovers(String sheet) throws Throwable {
+		clickCreateNewApprovalRuleButton();
+		clickEditRuleNameButton();
+		enterRuleName(sheet);
+		saveRuleName();
+		clickAddUserButton();
+		enterLevel1User();
+		chooseLevel1User();
+		clickAddUserNameSave();
+		clickAddUserButton();
+		enterLevel2User();
 		chooseLevel1User();
 		clickAddUserNameSave();
 		clickCheckboxes();
@@ -539,6 +565,12 @@ catch(Exception e) {
 		jswait.loadSendKeys(addUserField, "selenium.flytxt@gmail.com");
 		Thread.sleep(2000);
 	}
+	
+	public void enterLevel2User() throws InterruptedException {
+		
+		jswait.loadSendKeys(addUserField, "shinu.rajan@gmail.com");
+		Thread.sleep(2000);
+	}
 	public void enterCategory() throws InterruptedException {
 		Thread.sleep(2000);
 		jswait.loadClick(addCategoryDropdown);
@@ -738,6 +770,10 @@ catch(Exception e) {
 	{
 		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'W')]"));
 		Assert.assertTrue(approvalStatus.isDisplayed());
+	}
+	
+	public void addLevel2Approver() throws InterruptedException {
+		jswait.loadClick(addLevel);
 	}
 	
 }
