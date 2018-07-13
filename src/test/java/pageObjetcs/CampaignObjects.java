@@ -588,7 +588,7 @@ public class CampaignObjects extends Init{
 	public void enterCampaignDeails(String name,String catalog) throws InterruptedException {
 		selectTypeInformational();
 		enterCampaignName(name);
-		enterCampaignDescription("Campaign to check bc craetion in selenium");
+		enterCampaignDescription("Campaign to check bc creation in selenium");
 		selectOfferCatalog(catalog);
 	}
 	
