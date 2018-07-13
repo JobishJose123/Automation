@@ -151,5 +151,10 @@ public class workApprovalflow extends Init{
     	       	
        	approvalPageObjects.verify_campaign_show_historyapprove(sheet);
    	}
-	
+    
+    @Then("^verify campaign status from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+    public void isWaitingForApprovalStatusDisplayed(String sheet, String fileName) throws Throwable {
+    	eM.setExcelFile(fileName,sheet);
+    	approvalPageObjects.isWaitingForApprovalStatusDisplayed((String)eM.getCell(1, 0));
+    }
 }

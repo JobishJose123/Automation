@@ -145,7 +145,7 @@ public class CommonSteps extends Init {
 		excelHelper.setExcelFile("seluserlogin",sheet);
 		 //driver.get("http://"+p.getValue("env"));
 		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(1, 1));
-		 jswait.loadClick(loginButton);
+		 //jswait.loadClick(loginButton);
 			
 		 
     }
