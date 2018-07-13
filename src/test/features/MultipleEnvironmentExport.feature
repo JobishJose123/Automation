@@ -18,8 +18,22 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to system administration
     Then navigate to export location
     Then add new export location
-    Then enter export location from sheet "locationdetails" of file "MultipleEnvironmentExport"
+    Then enter export location from sheet "locationdetails23" of file "MultipleEnvironmentExport"
     Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+	  Then navigate to products
+	  Then navigate to prepaid telecom
+	  Then click create new product button
+	  Then create single product from sheet "singleProductPage"
+		Then navigate to offer management 
+		Then navigate to offers
+	  Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
+	  Then navigate to offer management 
+		Then Navigate to Offer Catalogue
+	  Then Create New Offer Catalogue from sheet "defaultCatalog"
+	  Then Add "rechargeSMS" offer to Offer Catalogue
+	  Then navigate to offer management 
 		Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory1" of file "MultipleEnvironmentExport"
