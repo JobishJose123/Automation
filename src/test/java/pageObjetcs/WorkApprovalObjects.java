@@ -124,7 +124,7 @@ public class WorkApprovalObjects extends Init{
 	private WebElement campaignactivationcheckbox ;
 	@FindBy(xpath="(.//div[@class='layout vertical left-justified style-scope create-approval-rule']//following::paper-checkbox)[2]")
 	private WebElement broadcastactivationcheckbox ;
-//	@FindBy(xpath="")
+//	@FindBy(xpath="//vaadin-grid-table-cell[contains(., 'campaignBC3671')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'W')]")
 //	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
@@ -734,5 +734,10 @@ catch(Exception e) {
 		
 	}
 	
+	public void isWaitingForApprovalStatusDisplayed(String campaignName) throws InterruptedException
+	{
+		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'W')]"));
+		Assert.assertTrue(approvalStatus.isDisplayed());
+	}
 	
 }

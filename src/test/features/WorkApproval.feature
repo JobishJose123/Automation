@@ -219,6 +219,7 @@ Feature: generic product class
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then activate bc
     
+<<<<<<< HEAD
     
     
     
@@ -356,3 +357,21 @@ Feature: generic product class
     Then Logout from Neon application
     Then login with seleniumuser from sheet "seleniumuser"
     Then approve Broadcast by selenium user
+=======
+  @NX-6363 @initBrowser @closeBrowser
+  Scenario: Verify by creating new Approval Rule
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet "approvalRule"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign status from sheet "campaignBC" of file "campaignInputData"
+    
+>>>>>>> branch 'October-release' of git@bitbucket.org:flytxt/neon-dx-qa-automation.git
