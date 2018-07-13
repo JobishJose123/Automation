@@ -167,7 +167,7 @@ Feature: generic product class
     Then edit campaign by selenium user
     Then edit campaign from sheet by approve user "campaignBC" with catalog "defaultCatalog"
 
-  @NX-6467 @initBrowser
+  @NX-6356 @initBrowser
   Scenario: Verify creation of BC without approval flow but for campaign
     Given login
     Then navigate to configuration management
@@ -205,7 +205,7 @@ Feature: generic product class
     Then login with seleniumuser from sheet "seleniumuser"
     Then approve campaign by selenium user
     Then naigate to "campaignBC" campaign show historyapprove
-  @NX-6356 @initBrowser
+  @NX-6467 @initBrowser
   Scenario: Verify the details displaying while clicked on Show history
     #Given login
     #Then navigate to configuration management
