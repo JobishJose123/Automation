@@ -73,6 +73,12 @@ public class workApprovalflow extends Init{
        	approvalPageObjects.createNewApprovalRulecampaignonly(sheet);
    	}
     
+    @Then("^create new approval rule from sheet broadcastonly \"([^\"]*)\"$")
+   	public void createNewApprovalRulebroadcastonly(String sheet) throws Throwable {
+       	
+       	approvalPageObjects.createNewApprovalRulecampaignonly(sheet);
+   	}
+    
     
     @Then("^editApprovalRuleDetailsFromSheet \"([^\"]*)\"$")
 	public void editApprovalRuleDetailsFromSheet(String sheet) throws Throwable {
@@ -132,6 +138,14 @@ public class workApprovalflow extends Init{
        	
        	approvalPageObjects.BCAprovalbyseleniumuser();
    	}
+    
+    @Then("^approve Broadcast by selenium user without notification navigation$")
+   	public void  BCAprovalbyseleniumuserwithoutnotificationclick() throws Throwable {
+       	
+       	approvalPageObjects. BCAprovalbyseleniumuserwithoutnotificationclick();
+   	}
+    
+   
 
     
     @Then("^edit campaign by selenium user$")

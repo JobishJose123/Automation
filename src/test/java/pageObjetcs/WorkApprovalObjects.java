@@ -229,6 +229,29 @@ public class WorkApprovalObjects extends Init{
 		
 								
 	}
+	
+	public void createNewApprovalRulebroadcastonly(String sheet) throws Throwable {
+		clickCreateNewApprovalRuleButton();
+		clickEditRuleNameButton();
+		enterRuleName(sheet);
+		saveRuleName();
+		clickAddUserButton();
+		enterLevel1User();
+		chooseLevel1User();
+		clickAddUserNameSave();
+		broadcastactivationcheckbox();
+		clickAddCategoryButton();
+		cataloginput();
+		Thread.sleep(2000);
+		enterCategory();
+		Thread.sleep(2000);
+		chooseCategory();
+		Thread.sleep(2000);
+		clickAddCategorySave();
+		clickApprovalRuleSave();
+		
+								
+	}
 	public void createNewApprovalRulecheckboxverify(String sheet) throws Throwable {
 		clickCreateNewApprovalRuleButton();
 		clickEditRuleNameButton();
@@ -692,6 +715,14 @@ catch(Exception e) {
 		ApproveActivatebtn();
 		
 	}
+	
+	public void BCAprovalbyseleniumuserwithoutnotificationclick() throws InterruptedException {
+		Thread.sleep(2000);
+		
+		ApproveActivatebtn();
+		
+	}
+	
 	
 	public void BCeditbyseleniumuser() throws InterruptedException {
 		Thread.sleep(2000);
