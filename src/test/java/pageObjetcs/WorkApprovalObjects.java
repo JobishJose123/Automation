@@ -52,6 +52,10 @@ public class WorkApprovalObjects extends Init{
 	private WebElement createNewApprovalRuleButton;
 	@FindBy(xpath = "//paper-button[contains(.,'Add User')]")
 	private WebElement addUserButton;
+	
+	
+	@FindBy(xpath = "(//paper-button[contains(.,'Add User')])[2]")
+	private WebElement addUserButton2;
 	@FindBy(xpath = ".//div[@class='heading layout horizontal justified style-scope create-approval-rule']//h4[contains(.,'Untitled Rule')]//paper-icon-button")
 	private WebElement editRuleNameButton;
 	@FindBy(xpath = ".//div[@class='layout horizontal center end-justified style-scope create-approval-rule']//paper-icon-button[@title='Save']")
@@ -63,6 +67,9 @@ public class WorkApprovalObjects extends Init{
 	private WebElement addUserField;
 	@FindBy(xpath = "//paper-item[contains(.,'selenium.flytxt@gmail.com')]")
 	private WebElement ruleUserName;
+	@FindBy(xpath = "//paper-item[contains(.,'shinu.rajan@flytxt.com')]")
+	private WebElement ruleUserName2;
+	
 	@FindBy(xpath = "//paper-item[contains(.,'Recharge')]")
 	private WebElement ruleCategory;
 	@FindBy(xpath = ".//div[@class='buttons style-scope approver-level-details']//paper-button[contains(.,'Save')]")
@@ -103,6 +110,8 @@ public class WorkApprovalObjects extends Init{
 	private WebElement Notificationreviewbtn;
 	@FindBy(xpath=".//*[@id='router']//paper-button[contains(.,'Approve & Activate')]")
 	private WebElement ApproveActivatebtn;
+	@FindBy(xpath=".//*[@id='router']//paper-button[contains(.,'Approve')]")
+	private WebElement Approvebtn;
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Create')]")
 	private WebElement Bccreatebtn ;
 	@FindBy(xpath=".//*[@id='broadcastSummary']//paper-button[contains(.,'Request Approval')]")
@@ -216,9 +225,10 @@ public void createApprovalRuleDetailsFromSheetWithTwoApprovers(String sheet) thr
 		enterLevel1User();
 		chooseLevel1User();
 		clickAddUserNameSave();
-		clickAddUserButton();
+		addLevel2Approver();
+		clickAddUserButton2();
 		enterLevel2User();
-		chooseLevel1User();
+		chooseLevel2User();
 		clickAddUserNameSave();
 		clickCheckboxes();
 		clickAddCategoryButton();
@@ -568,7 +578,7 @@ catch(Exception e) {
 	
 	public void enterLevel2User() throws InterruptedException {
 		
-		jswait.loadSendKeys(addUserField, "shinu.rajan@gmail.com");
+		jswait.loadSendKeys(addUserField, "shinu.rajan@flytxt.com");
 		Thread.sleep(2000);
 	}
 	public void enterCategory() throws InterruptedException {
@@ -589,7 +599,12 @@ catch(Exception e) {
 		Thread.sleep(2000);
 	}
 	
+	public void chooseLevel2User() throws InterruptedException {
+		jswait.loadClick(ruleUserName2);
+		Thread.sleep(2000);
+	} 
 	public void clickAddUserNameSave() throws InterruptedException {
+		Thread.sleep(2000);
 		jswait.loadClick(addUserSave);
 		Thread.sleep(2000);
 	}
@@ -766,6 +781,13 @@ catch(Exception e) {
 		
 	}
 	
+	public void clickOnCampaignReviewButton() throws InterruptedException {
+		Thread.sleep(2000);
+		seleniumusernotificationclick.click();
+		Notificationreviewbtn();
+		Thread.sleep(2000);
+	}
+	
 	public void isWaitingForApprovalStatusDisplayed(String campaignName) throws InterruptedException
 	{
 		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'W')]"));
@@ -774,6 +796,18 @@ catch(Exception e) {
 	
 	public void addLevel2Approver() throws InterruptedException {
 		jswait.loadClick(addLevel);
+	}
+	
+	public void isApprovedAndActivateButtonDisplayed() {
+		Assert.assertTrue(ApproveActivatebtn.isDisplayed());
+	}
+	
+	public void isApprovedButtonDisplayed() {
+		Assert.assertTrue(Approvebtn.isDisplayed());
+	}
+	
+	public void clickAddUserButton2() throws InterruptedException {
+		jswait.loadClick(addUserButton2);
 	}
 	
 }

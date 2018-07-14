@@ -78,6 +78,13 @@ public class ExportCampaignLocationObjects extends Init{
 		@FindBy(xpath="//paper-dialog[@id = 'listNotifications']//paper-button[contains(., 'OK')]")
 		private WebElement notificationPanelOKButton;
 		
+		@FindBy(xpath="//span[contains(., 'Target Conditions')]")
+		private WebElement targetTab;
+		
+		
+		public void isTargetHasCampaignName(String campaignName)  throws InterruptedException {
+			Assert.assertTrue(targetTab.getAttribute("title").contains(campaignName));
+		}
 		public void clickOnSecurityGroup()  throws InterruptedException {
 			jswait.loadClick(securityGroupButton);
 		}

@@ -202,4 +202,15 @@ Feature: Test cases related to export campaign location
  		Then click on notification bell
     Then click on view all notifications
     Then verify whether campaign notification displayed "false" from sheet "template" of file "ExportCampaignLocation"
-	
+    
+    
+    @NX-8848 @initBrowser @closeBrowser
+  	Scenario: Verify category names are displaying on mouse hovering in target tab of campaign creation page
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"

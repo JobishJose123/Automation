@@ -4,11 +4,14 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.RandomNameGenerator;
 import cucumber.api.java.en.Then;
+import pageObjetcs.CampaignObjects;
 import pageObjetcs.ExportCampaignLocationObjects;
 
 public class AddExportLocationSteps extends Init {
 	ExportCampaignLocationObjects  exportCampignLocationObject = new ExportCampaignLocationObjects();
 	public ExcelHelper excelHelper = new ExcelHelper(); 
+	
+	CampaignObjects campaignObjects = new CampaignObjects();
 	
 	@Then("^add new export location$")
     public void addNewExportLocation() throws Throwable
@@ -159,6 +162,6 @@ public class AddExportLocationSteps extends Init {
     	excelHelper.setExcelFile(fileName, sheet);
     	String campaignName = (String)excelHelper.getCell(1, 0);
     	exportCampignLocationObject.verifyCampaignNotification(isDisplayed, campaignName);    	
-    }
+    }   
 
 }
