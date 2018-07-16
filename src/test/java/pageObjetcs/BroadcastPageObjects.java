@@ -550,6 +550,9 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(defineCGSize);
 		jswait.loadClick(defineCGLimitSave);
 		jswait.loadClick(calculateLimit);
+		Thread.sleep(4000);;
+		assertTrue(calculateText.isDisplayed());
+		Thread.sleep(2000);
 		
 	}
 	
@@ -945,6 +948,7 @@ public class BroadcastPageObjects extends Init {
 		clickProceedButton();
 		selectBaseList(baseList);
 		selectDNCList();
+		calculate_CG_TG();
 		
 		clickProceedButton();
 		selectOffer(offer);
@@ -966,6 +970,48 @@ public class BroadcastPageObjects extends Init {
 		}
 		clickProceedButton();
 	}
+	
+	
+	
+	
+	public void createBCAndSelectDNCListForSeedingBC(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+		enterBroadcastBasicDetails(name);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		selectDNCList();
+		verifyTG_And_CG_Configure_Options();
+		//calculate_CG_TG();
+		
+		clickProceedButton();
+		selectOffer(offer);
+		if(!bc_type.contains("informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+		}
+		clickProceedButton();
+	}
+	
 
 
 	public void validateNameField() throws InterruptedException, UnsupportedFlavorException, IOException {
