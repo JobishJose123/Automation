@@ -104,6 +104,8 @@ public class BroadcastPageObjects extends Init {
 	private WebElement defineCGLimitSave;
 	@FindBy(xpath = ".//paper-button[contains(.,'Calculate')]")
 	private WebElement calculateLimit;
+	@FindBy(xpath = ".//label[text()='Calculating']")
+	private WebElement calculateText;
 	
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Submitted for CG Validation')]")
 	private WebElement statusValidation;
@@ -551,6 +553,15 @@ public class BroadcastPageObjects extends Init {
 		
 	}
 	
+	public void calculate_CG_TG() throws InterruptedException {
+		
+		jswait.loadClick(calculateLimit);
+		Thread.sleep(2000);;
+		assertTrue(calculateText.isDisplayed());
+		Thread.sleep(2000);
+		
+	}
+	
 	public void selectDNCList() throws InterruptedException {
 		
 		
@@ -600,7 +611,9 @@ public class BroadcastPageObjects extends Init {
 	  driver.navigate().refresh();
 	  Thread.sleep(100000);
 	  driver.navigate().refresh();
-	  WebDriverWait wait = new WebDriverWait(driver,100);
+	  Thread.sleep(100000);
+	  driver.navigate().refresh();
+	  WebDriverWait wait = new WebDriverWait(driver,50);
 	  driver.navigate().refresh();
 	  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//vaadin-grid-cell-content[contains(.,'Validating CG')]")));
       assertTrue(statusValidatingCG.isDisplayed());
@@ -623,6 +636,8 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadSendKeys(inventorySelector, "Unlimited");
 		jswait.loadClick(inventoryUnlimited);
 	}
+	
+	
 
 	public void selectInventory1() throws InterruptedException {
 		jswait.loadClick(inventoryClearButton);
@@ -875,6 +890,45 @@ public class BroadcastPageObjects extends Init {
 		}
 		clickProceedButton();
 	}
+	
+	
+	
+	public void createBCAndCalculateCG_TG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+		enterBroadcastBasicDetails(name);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		calculate_CG_TG();
+		
+		clickProceedButton();
+		selectOffer(offer);
+		if(!bc_type.contains("informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+		}
+		clickProceedButton();
+	}
+	
 	
 	
 	public void createBCAndSelectDNCList(String name, String bc_type, String baseList, String offer) throws InterruptedException {
