@@ -813,6 +813,18 @@ public class CampaignManagement extends Init{
 		 		campaignObjects.createCampaign(name, catalog);
 
 		    }
+			 @Then("^resume campaign from sheet \"([^\"]*)\"$")
+			    public void resumeCampaign(String sheet) throws Throwable
+			    {
+			    	Thread.sleep(2000);
+			    	eM.setExcelFile("campaignInputData",sheet);
+			 		String name = (String) eM.getCell(1, 0);
+			 		commonObjects.filterName(name);
+			 		campaignObjects.verifyStatusAfterPause();
+					commonObjects.clickOptionsIcon();
+					campaignObjects.clickResumeCampaignOption();
+					campaignObjects.clickConfirmResumeYes();
+			    }
 		    @Then("^verify whether validation messasge for invalid usag metric shown$")
 		    public void verifyValidationErrorOfUsageMetrics() throws Throwable
 		    {
