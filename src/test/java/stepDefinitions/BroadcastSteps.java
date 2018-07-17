@@ -1604,6 +1604,70 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		    //productClassesPageObjects.clickAttributes();
 		//productClassesPageObjects.addDefaultAttributes();
 	}
+	
+	
+	
+	@Then("^enter details for new broadcast without target condition from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
+    public void create_new_broadcast_without_target_condition(String sheet, String offer) throws Throwable
+    {  
+    	Thread.sleep(3000);
+    	ExcelHelper list = new ExcelHelper();
+    	list.setExcelFile("registrationListInputData", "Sheet1");
+    	eM.setExcelFile("bcInputData",sheet);
+//    	String baseList = list.getCell(1, 2).toString();
+    	ExcelHelper offerExcel = new ExcelHelper(); 
+    	offerExcel.setExcelFile("offerInputData", offer);
+ 		String name = (String) eM.getCell(1, 0);
+ 		name =  RandomNameGenerator.getRandomName(name);
+ 		eM.setCell(1, 0, name);
+ 	  	String bc_type =(String) eM.getCell(1, 7);
+    	Calendar rightNow =Calendar.getInstance();
+    	String mn = "";
+    	if(rightNow.get(Calendar.MONTH)+1<9) {
+    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+    	}
+    	else 
+    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+    	int hours = rightNow.get(Calendar.HOUR);
+      	 int min = rightNow.get(Calendar.MINUTE);
+      	 int am_pm = rightNow.get(Calendar.AM_PM);
+      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+      	 int year = rightNow.get(Calendar.YEAR);
+      	 int month = rightNow.get(Calendar.MONTH)+1;
+      	 min+=2;
+      	 int rem = min%5;
+      	 rem = 5-rem;
+      	 min+=rem;
+      	 if(min>59){
+      		 min-=60;
+      		 hours++;
+      	 }
+      	 if((String)eM.getCell(1, 6)=="later"){
+      		 day++;
+      	 }
+      	 Actions builder = new Actions(driver);
+      	broadcastPageObjects.createBCWithoutTargetCondition(name, bc_type,BASE_LIST2,offerExcel.getCell(1, 0).toString());
+      	
+//		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
+//		Thread.sleep(1500);
+
+      	enterDeliveryTabDetails(bc_type,sheet);
+      		
+      	
+    }
+	
+	
+	@Then("^pause bc$")
+    public void pauseBc() throws Throwable
+    {  
+		broadcastPageObjects.pauseBC();
+		
+    }
+	
+	
+	
+	
 @Then("^navigate to BC page$")
 	public void navigate_to_bc_page() throws Throwable {
 		driver.get("http://192.168.150.27/#/precision-marketer/life-cycle-marketing/campaignId/24/broadcasts");
