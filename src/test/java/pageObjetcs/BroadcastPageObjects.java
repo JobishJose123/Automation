@@ -51,6 +51,15 @@ public class BroadcastPageObjects extends Init {
 	private WebElement broadcastCopy;
 	@FindBy(xpath = ".//paper-icon-button[@icon='av:pause-circle-filled']")
 	private WebElement broadcastPause;
+	@FindBy(xpath = ".//paper-item[contains(.,'Send Trial')]")
+	private WebElement broadcastSendTrial;
+	@FindBy(xpath = "//paper-button[contains(.,'Send')]")
+	private WebElement sendTrialMailButton;
+	@FindBy(xpath = ".//paper-dialog[@id='savedialog']")
+	private WebElement sendingMessageDialogueForSendTrialBC;
+	
+	@FindBy(xpath = "//label[contains(.,'Please enter the email addresses/MSISDNs of recipients')]//following::input[1]")
+	private WebElement sendTrialMailIdField;
 	
 	@FindBy(xpath = ".//paper-dialog[@id='confirmBoxAbort']//paper-button[contains(.,'Yes')]")
 	private WebElement broadcastAbortYes;
@@ -543,6 +552,19 @@ public class BroadcastPageObjects extends Init {
 	}
   
   
+  public void verifySendTrialOptionForBc() throws InterruptedException {
+	  
+	  commonObjects.clickOptionsIcon();
+	  clickSendTrialBroadcastOption();
+	  enterSendTrialMailId();
+	  clickSendTrialMailButton();
+	  verifySendingMessageDialogueForSendTrialBC();
+	 
+	  
+  }
+  
+  
+  
   
   
   
@@ -753,6 +775,26 @@ public class BroadcastPageObjects extends Init {
 	
 	public void clickPauseBroadcastOption() throws InterruptedException {
 		jswait.loadClick(broadcastPause);
+	}
+	
+	public void clickSendTrialBroadcastOption() throws InterruptedException {
+		jswait.loadClick(broadcastSendTrial);
+	}
+	
+	public void enterSendTrialMailId() throws InterruptedException {
+		jswait.loadClick(sendTrialMailIdField);
+		jswait.loadSendKeys(sendTrialMailIdField, "selenium.flytxt@gmail.com");
+		
+	}
+	
+	public void clickSendTrialMailButton() throws InterruptedException {
+		jswait.loadClick(sendTrialMailButton);
+		
+	}
+	
+	public void verifySendingMessageDialogueForSendTrialBC() throws InterruptedException {
+		assertTrue(sendingMessageDialogueForSendTrialBC.isDisplayed());
+		
 	}
 	
 	public void clickAbortYesButton() throws InterruptedException {

@@ -1665,6 +1665,13 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		
     }
 	
+	@Then("^verify send trial option for bc$")
+    public void verifySendTrialOptionForBc() throws Throwable
+    {  
+		broadcastPageObjects.verifySendTrialOptionForBc();
+		
+    }
+	
 	
 	
 	
