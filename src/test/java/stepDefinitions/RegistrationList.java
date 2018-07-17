@@ -25,6 +25,7 @@ import baseClasses.Init;
 import baseClasses.JSWaiter;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import pageObjetcs.CommonObjects;
 import pageObjetcs.LandingPageObjects;
 import pageObjetcs.RegistrationListPage;
 
@@ -245,9 +246,9 @@ public class RegistrationList extends Init{
 		jswait.loadClick("//paper-button[contains(text(),'Apply')]");
 		Thread.sleep(3000);
 		try{
-		 if(driver. findElement(By.xpath("//*[@id='item1']//span[contains(.,'_q11')]")).isDisplayed()){
+			 CommonObjects commonObjects = new CommonObjects(); 
+			 commonObjects.clickOptionsIcon();
 			 System.out.println("fields already present");
-		 }
 		}catch(Exception e){
 			System.out.println("profile fields not present");
 			add_profile_field();
@@ -265,8 +266,9 @@ public class RegistrationList extends Init{
 	}
 	@Then("^enter details of registration list$")
     public void createRegistrationList() throws Exception{
-		list.setExcelFile("registrationListInputData", "Sheet1");
-		String listname = (String) list.getCell(1, 2);
+//		list.setExcelFile("registrationListInputData", "Sheet1");
+//		String listname = (String) list.getCell(1, 2);
+		String listname = "selenium_list";
 		System.out.println(listname);
 		registrationListPage.enterRegistratonListDetails(listname, "Description");	
 	}

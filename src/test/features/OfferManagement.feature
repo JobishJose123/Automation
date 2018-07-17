@@ -705,3 +705,11 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     Then navigate to offers
     Then Verify the Map Variable and used variables icons
     Then verify label message after variable selection
+    
+    @NX-5173 @initBrowser @closeBrowser
+  Scenario: STC-->Verify functionality of Cancel button  present in send trial pop-up NX-5173
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify cancel button in send trial pop up from sheet "STVWAP" with product "fullDetails"

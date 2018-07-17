@@ -170,6 +170,15 @@ public class CampaignManagement extends Init{
 	 		dt.gteDateTime();
 	    	Thread.sleep(2000);
 	    }
+	 @Then("^verify edited campaign from sheet \"([^\"]*)\"$")
+	    public void verifyEditedCampaign(String sheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		commonObjects.filterName(name);
+	 		commonObjects.clickOptionsIcon();
+	    }
 	 
 	 
 	 

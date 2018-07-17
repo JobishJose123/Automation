@@ -316,10 +316,12 @@ public class OfferPageObjects extends Init {
 	 private WebElement offerAttributeValueSelector;
 	 @FindBy(xpath="//*[@id='offerGrid']//data-table-cell[contains(.,'Recharge')])")
 	 private WebElement rechargeverify ;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
+	 @FindBy(xpath="//span[text()='Send Trial']")
+	 private WebElement sendTrialButton;
+	 @FindBy(xpath=".//*[@id='sendTrialDialogEmail']//paper-button[text()='Cancel']")
+	 private WebElement sendTrialEmailCancelButton;
+	 @FindBy(xpath=".//*[@id='sendTrialDialogNumber']//paper-button[text()='Cancel']")
+	 private WebElement sendTrialNumberCancelButton;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -400,6 +402,9 @@ public class OfferPageObjects extends Init {
 	 
 	 public void clickSetAsDefaultSecondTrack() throws InterruptedException {
 			jswait.loadClick(setAsDefaultSecondTrack);
+		}
+	 public void clickSendTrialButton() throws InterruptedException {
+			jswait.loadClick(sendTrialButton);
 		}
 	 public void clickAddOfferAttributeButton() throws InterruptedException {
 			jswait.loadClick(addOfferAttributeButton);
@@ -1294,6 +1299,38 @@ public class OfferPageObjects extends Init {
 		}
 
 	}
+	public void verifyCancelInSendTrial(String sheet, String productSheet) throws Throwable {
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
+		// ******************Products tab*****************:
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+
+		// ******************Creative tab*****************:
+		enterCreativeTabDetails(eh);
+		
+		//verify cancel button of send trial 
+		clickSendTrialButton();
+		if(eh.getCellByColumnName("Channel").contains("Email")) {
+			jswait.loadClick(sendTrialEmailCancelButton);
+		}
+		else {
+			jswait.loadClick(sendTrialNumberCancelButton);
+		}
+		
+		clickProceedButton();
+		Thread.sleep(3000);
+
+	}
 	
 	public void enterOfferDetailsFromSheetAndCheckRewardsDropDown(String sheet, String productSheet) throws Throwable {
 		Thread.sleep(4000);
@@ -1379,6 +1416,10 @@ public class OfferPageObjects extends Init {
 		clickCreateNewOfferButton();
 		enterOfferDetailsFromSheet(sheet, productSheet);
 		clickSaveOfferButton();
+	}
+	public void verifyCancelButtonInSendTrial(String sheet, String productSheet) throws Throwable {
+		clickCreateNewOfferButton();
+		verifyCancelInSendTrial(sheet, productSheet);
 	}
 	
 	public void createOfferAndCheckRewardsDropDown(String sheet, String productSheet) throws Throwable {

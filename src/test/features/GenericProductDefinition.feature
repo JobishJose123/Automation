@@ -490,5 +490,29 @@ Feature: generic product class
     Then navigate to offers
     Then click on create new ofer button
     Then create new offer from sheet "informationalWAP" with product "fullDetails"
+    
+     @NX-7068 @initBrowser @closeBrowser
+  Scenario: Verify whether deactivated product is available for selection while program creation - 7068
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "informationalWAP" with product "fullDetails"
 
   

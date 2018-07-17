@@ -152,8 +152,8 @@ Feature: campaign management
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then verify campaign created from sheet "campaignBC"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
     
@@ -405,6 +405,19 @@ Feature: campaign management
     
     
     
-    
+     @NX-6904 @initBrowser
+    Scenario: verify whether for the newly created campaign created using create campaign template option has edit option -new -6904
+    Given login
+		Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then navigate to templates tab
+    Then create new template from sheet "template"
+    Then verify template created from sheet "template"
+    Then click on use template button
+    Then create new campaign use template from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify edited campaign from sheet "campaignBC"
     
     
