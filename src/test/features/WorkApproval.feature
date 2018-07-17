@@ -400,7 +400,7 @@ Feature: generic product class
     Then verify approve and activate button displayed
     Then Logout from Neon application
     
-  @NX-6462 @initBrowser
+  @NX-6462 @initBrowser @closeBrowser
   Scenario: Verify the behaviour by rejecting an approval request by level 2 approver
     Given login
     Then navigate to configuration management
@@ -415,7 +415,7 @@ Feature: generic product class
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog" with two approvers
     Then Logout from Neon application
-    Then login with the username "selenium.flytxt@gmail.com" and password "Flytxt.4"
+    Then login with user from sheet "user1" of file "workApproval" 
     Then wait for 1 minutes
     Then click on notification bell
     Then click on view all notifications
@@ -423,7 +423,7 @@ Feature: generic product class
     Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then click on approve campaign
     Then Logout from Neon application
-    Then login with the username "shinu.rajan@flytxt.com" and password "flytxt"
+    Then login with user from sheet "user2" of file "workApproval" 
     Then wait for 1 minutes
     Then click on notification bell
     Then click on view all notifications
@@ -432,7 +432,7 @@ Feature: generic product class
     Then verify Reject message panel displayed
     Then enter reject message "Rejected"
     Then Logout from Neon application
-    Then login with the username "flyops@flytxt.com" and password "flytxt"
+    Then login with user from sheet "defaultUser" of file "workApproval" 
     Then wait for 1 minutes
     Then click on notification bell
     Then click on view all notifications

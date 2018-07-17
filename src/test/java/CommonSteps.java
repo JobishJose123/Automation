@@ -166,7 +166,7 @@ public class CommonSteps extends Init {
 		 loginPage.login(userName, passWord);
 	}
 	
-	@Then("^login with seleniumuser from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+	@Then("^login with user from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
     public void loginUserFromExcel(String sheet, String fileName) throws Exception {
 		 excelHelper.setExcelFile(fileName,sheet);
 		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(2, 1));
