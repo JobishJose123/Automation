@@ -101,6 +101,12 @@ public class AdminPageObjects extends Init{
 	
 	@FindBy(xpath=".//manage-partner-settings//paper-button[text()='Cancel']")
 	private WebElement editCancelButton;
+	//BCSeetings Save button in Partner page
+	@FindBy(xpath=".//*[@id='form']/div/div/paper-button[text()='Save']")
+	private WebElement BCSaveButton;
+	
+	@FindBy(css="#clear > #icon")
+	private WebElement SettingsClose;
 	
 	
 	public void clickPartnerOption() throws InterruptedException{
@@ -318,10 +324,20 @@ public class AdminPageObjects extends Init{
 		public void selectUsers() throws InterruptedException{
 			jswait.loadClick(selectedusers);
 		}
+		
 		//To check BCSettings element is displayed
 		public void checkBCConfiguration() throws InterruptedException{
 			assertTrue(selectedusers.isDisplayed());
 			assertTrue(Allusers.isDisplayed());
+		}
+		public void BCSaveSettings() throws InterruptedException{
+			jswait.loadClick(BCSaveButton);
+		}
+		
+		public void BCSettingsclose() throws InterruptedException{
+			//driver.findElement(By.cssSelector("#clear > #icon")).click();
+			jswait.loadClick(SettingsClose);
+			Thread.sleep(5000);
 		}
 
 }

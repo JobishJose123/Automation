@@ -47,6 +47,10 @@ public class OfferSteps extends Init {
 	public void create_new_Offer(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.createOffer(sheet, productSheet);
 	}
+	@Then("^verify cancel button in send trial pop up from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void verifyCancelButtonInSendTrial(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.verifyCancelButtonInSendTrial(sheet, productSheet);
+	}
 	
 	@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\" and verify rewards dropdown field$")
 	public void create_new_OfferAndCheckRewardsDropDown(String sheet, String productSheet) throws Throwable {
