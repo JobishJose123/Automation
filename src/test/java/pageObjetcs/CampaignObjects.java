@@ -258,7 +258,6 @@ public class CampaignObjects extends Init{
 		assertTrue(resumeCampaign.isDisplayed());
 	}
 	public void clickConfirmPauseYes() throws InterruptedException {
-		assertTrue(confirmPauseDialogue.isDisplayed());
 		jswait.loadClick(confirmPauseYes);
 	}
 	public void clickConfirmResumeYes() throws InterruptedException {
