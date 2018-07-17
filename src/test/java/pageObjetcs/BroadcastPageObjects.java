@@ -47,6 +47,9 @@ public class BroadcastPageObjects extends Init {
 	private WebElement broadcastView;
 	@FindBy(xpath = ".//paper-icon-button[@icon='block']")
 	private WebElement broadcastAbort;
+	@FindBy(xpath = ".//paper-item[contains(.,'Copy')]")
+	private WebElement broadcastCopy;
+	
 	@FindBy(xpath = ".//paper-dialog[@id='confirmBoxAbort']//paper-button[contains(.,'Yes')]")
 	private WebElement broadcastAbortYes;
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Aborted')]")
@@ -478,6 +481,34 @@ public class BroadcastPageObjects extends Init {
 		
 	}
   
+  
+  public void copyBC() throws InterruptedException {
+		
+//	  Thread.sleep(200000);
+//	  driver.navigate().refresh();
+//	  Thread.sleep(200000);
+//	  driver.navigate().refresh();
+//	  Thread.sleep(100000);
+//	  driver.navigate().refresh();
+//	  Thread.sleep(100000);
+//	  driver.navigate().refresh();
+//	  Thread.sleep(100000);
+//	  driver.navigate().refresh();
+//	  WebDriverWait wait = new WebDriverWait(driver,50);
+//	  driver.navigate().refresh();
+//	  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//vaadin-grid-cell-content[contains(.,'Delivery Scheduled')]")));
+	   commonObjects.clickOptionsIcon();
+	    clickCopyBroadcastOption();
+//		clickAbortYesButton();
+//		Thread.sleep(3000);
+//		commonObjects.clickOptionsIcon();
+//		clickAbortBroadcastOption();
+//		clickAbortYesButton();
+//		verifyStatusOfBCAfterAbortion();
+		
+	}
+  
+  
   public void verifyBroadcastView(String name) throws InterruptedException {
 		
 	 assertTrue(driver.findElement(By.xpath("//h3[contains(.,'"+name+"')]")).isDisplayed());
@@ -675,6 +706,10 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(broadcastAbort);
 	}
 	
+	public void clickCopyBroadcastOption() throws InterruptedException {
+		jswait.loadClick(broadcastCopy);
+	}
+	
 	public void clickAbortYesButton() throws InterruptedException {
 		jswait.loadClick(broadcastAbortYes);
 	}
@@ -854,6 +889,14 @@ public class BroadcastPageObjects extends Init {
 			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
 
 		}
+		clickProceedButton();
+	}
+	
+	
+	public void createBCWithCopyOption() throws InterruptedException {
+		
+		clickProceedButton();
+		clickProceedButton();
 		clickProceedButton();
 	}
 	

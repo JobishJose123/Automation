@@ -1295,6 +1295,15 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		broadcastPageObjects.abortBC();
 		
     }
+	
+	
+	@Then("^copy bc$")
+    public void copyBc() throws Throwable
+    {  
+		broadcastPageObjects.copyBC();
+		
+    }
+	
 	@Then("^navigate to partners Edit page$")
 	public void navigate_to_partners_Edit_page() throws Throwable {
 	    // 
@@ -1464,6 +1473,56 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 
       	enterDeliveryTabDetails(bc_type,sheet);
       		
+      	
+ }
+	
+	
+	@Then("^copy and create new broadcast from sheet \"([^\"]*)\"$")
+    public void copy_new_broadcast(String sheet) throws Throwable
+    {  
+    	Thread.sleep(3000);
+    	ExcelHelper list = new ExcelHelper();
+    	
+    	eM.setExcelFile("bcInputData",sheet);
+//    	
+ 		String name = (String) eM.getCell(1, 0);
+ 		eM.setCell(1, 0, name+"_Copy");
+ 	  	String bc_type =(String) eM.getCell(1, 7);
+    	Calendar rightNow =Calendar.getInstance();
+    	String mn = "";
+    	if(rightNow.get(Calendar.MONTH)+1<9) {
+    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+    	}
+    	else 
+    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+    	int hours = rightNow.get(Calendar.HOUR);
+      	 int min = rightNow.get(Calendar.MINUTE);
+      	 int am_pm = rightNow.get(Calendar.AM_PM);
+      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+      	 int year = rightNow.get(Calendar.YEAR);
+      	 int month = rightNow.get(Calendar.MONTH)+1;
+      	 min+=2;
+      	 int rem = min%5;
+      	 rem = 5-rem;
+      	 min+=rem;
+      	 if(min>59){
+      		 min-=60;
+      		 hours++;
+      	 }
+      	 if((String)eM.getCell(1, 6)=="later"){
+      		 day++;
+      	 }
+      	 Actions builder = new Actions(driver);
+      	broadcastPageObjects.createBCWithCopyOption();
+      	
+//		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
+//		Thread.sleep(1500);
+
+      	enterDeliveryTabDetails(bc_type,sheet);
+      	
+      	
+      	
       	
  }
 	
