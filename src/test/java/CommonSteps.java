@@ -165,5 +165,14 @@ public class CommonSteps extends Init {
 	public void loginWithUser(String userName, String passWord) throws Exception {
 		 loginPage.login(userName, passWord);
 	}
+	
+	@Then("^login with seleniumuser from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+    public void loginUserFromExcel(String sheet, String fileName) throws Exception {
+		 excelHelper.setExcelFile(fileName,sheet);
+		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(2, 1));
+		 jswait.loadClick(loginButton);
+			
+		 
+    }
 
 }

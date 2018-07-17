@@ -95,6 +95,20 @@ public class AddExportLocationSteps extends Init {
     	exportCampignLocationObject.clickOnProceedOnNotification(notificationText);
     }
     
+    @Then("^click Review on notification from the sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+    public void clickOnReviewOnNotification(String sheet, String fileName) throws Throwable {
+    	excelHelper.setExcelFile(fileName,sheet);
+    	String notificationText = (String) excelHelper.getCell(1, 0);
+    	exportCampignLocationObject.clickOnReviewOnNotification(notificationText);
+    }
+    
+    @Then("^verify Review on notification from the sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+    public void verifyReviewOnNotification(String sheet, String fileName) throws Throwable {
+    	excelHelper.setExcelFile(fileName,sheet);
+    	String notificationText = (String) excelHelper.getCell(1, 0);
+    	exportCampignLocationObject.clickOnReviewOnNotification(notificationText);
+    }
+    
     @Then("^select a campaign category from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
     public void selectCampaignToWhereExported(String sheet, String fileName) throws Throwable {
     	excelHelper.setExcelFile(fileName,sheet);

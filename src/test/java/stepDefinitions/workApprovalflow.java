@@ -182,4 +182,32 @@ public class workApprovalflow extends Init {
 	public void clickOnCampaignReviewButton() throws Throwable {
 		approvalPageObjects.clickOnCampaignReviewButton();
 	}
+	
+	@Then("^click on approve campaign$")
+	public void clickOnCampaignApproveButton() throws Throwable {
+		approvalPageObjects.approveCampaign();
+	}
+	
+	@Then("^click on reject button$")
+	public void clickOnRejectButton() throws Throwable {
+		approvalPageObjects.clickOnRejectButton();
+	}
+	
+	@Then("^verify Reject message panel displayed$")
+	public void verifyRejectMessagePanelDisplayed() throws Throwable {
+		approvalPageObjects.verifyRejectMessagePanelDisplayed();
+	}
+	
+	@Then("^enter reject message \"([^\"]*)\"$")
+	public void enterRejectMessage(String message) throws Throwable {
+		approvalPageObjects.enterRejectMessage(message);
+	}
+	
+	@Then("verify rejected message of campaign from the sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+	public void verifyRejectMessage(String sheet, String fileName) throws Throwable {
+		
+		eM.setExcelFile(fileName, sheet);
+		String campaignName = (String) eM.getCell(1, 0);
+		approvalPageObjects.verifyRejectMessage(campaignName);
+	}
 }

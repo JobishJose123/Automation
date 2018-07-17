@@ -135,14 +135,15 @@ public class WorkApprovalObjects extends Init{
 	private WebElement broadcastactivationcheckbox ;
 //	@FindBy(xpath="//vaadin-grid-table-cell[contains(., 'campaignBC3671')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'W')]")
 //	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	
+	@FindBy(xpath="//paper-button[contains(., 'Reject')]")
+	private WebElement rejectButton;
+	@FindBy(xpath="//paper-dialog[@id ='approveReject']")
+	private WebElement rejectMessagePanel;
+	@FindBy(xpath="//paper-dialog[@id ='approveReject' ]//textarea[@id = 'textarea']")
+	private WebElement rejectMessage;
+	@FindBy(xpath="//paper-dialog[@id ='approveReject' ]//paper-button[contains(., 'Send')]")
+	private WebElement sendRejectMessageButton;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -810,4 +811,47 @@ catch(Exception e) {
 		jswait.loadClick(addUserButton2);
 	}
 	
+	
+	public void approveCampaign() throws Exception {
+		Thread.sleep(2000);
+		jswait.loadClick(Approvebtn);
+		Thread.sleep(2000);
+		try {
+			boolean isElementDisplayed=confirmbox.isDisplayed();
+			
+			if(isElementDisplayed) {
+				confirmboxyes.click();			
+			}
+		}
+		catch(Exception e) {
+			// Do nothing		
+		}
+		Thread.sleep(3000);		
+	}
+	
+	public void clickOnRejectButton() throws Exception {
+		Thread.sleep(2000);
+		jswait.loadClick(rejectButton);
+		Thread.sleep(2000);
+	}
+	
+	public void verifyRejectMessagePanelDisplayed() throws Exception {
+		Thread.sleep(2000);
+		Assert.assertTrue(rejectMessagePanel.isDisplayed());
+		Thread.sleep(2000);
+	}
+	
+	public void enterRejectMessage(String message)throws Exception {
+		Thread.sleep(2000);
+		jswait.loadSendKeys(rejectMessage, message);
+		Thread.sleep(2000);
+		jswait.loadClick(sendRejectMessageButton);
+	}
+	public void verifyRejectMessage(String campaignName) throws Exception {
+		String scrollPanel = "//iron-list[@id='list']";
+		jswait.scrollIntoView(scrollPanel, campaignName); 
+		WebElement element = driver.findElement(By.xpath("//span[contains(@class, 'notification-listing') and contains(.,'"+campaignName+"') and contains(., 'rejected')]"));
+		Assert.assertTrue(element.isDisplayed());
+		Thread.sleep(2000);
+	}
 }

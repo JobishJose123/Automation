@@ -102,6 +102,25 @@ public class CampaignManagement extends Init{
 	    	Thread.sleep(2000);
 	    }
 	 
+	 @Then("^create new campaign from sheet for approval \"([^\"]*)\" with catalog \"([^\"]*)\" with two approvers$")
+	    public void create_new_campaign_approval_with_two_approvers(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		name =  RandomNameGenerator.getRandomName(name);
+	 		eM.setCell(1, 0, name);
+	 		campaignObjects.clickCreateNewCampaignButton();
+	 		campaignObjects.createCampaignfroapprovalWithTwoLvelUsers(name, catalog);
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    }
+	 
 	 
 	 
 	 

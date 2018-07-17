@@ -293,7 +293,7 @@ Feature: generic product class
     Then approve Broadcast by selenium user
     
     
-      @NX-6356 @initBrowser
+  @NX-6356 @initBrowser
   Scenario: Verify creation of BC without approval flow but for campaign
     Given login
     Then navigate to configuration management
@@ -375,14 +375,14 @@ Feature: generic product class
     Then verify campaign status from sheet "campaignBC" of file "campaignInputData"
     
 
-   #For this test we used selenium user and shinu.rajan as approvers. Going forward need to change implementation to read users from excel
-  @NX-6335 @initBrowser
+  #For the following tests, we used selenium user and shinu.rajan as approvers. Going forward need to change implementation to read users from excel
+  @NX-6335 @initBrowser @closeBrowser
   Scenario: Verify Campaign creation with approval rule flow
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to configuration
     Then click approval rules option
@@ -399,5 +399,48 @@ Feature: generic product class
     Then click on review button
     Then verify approve and activate button displayed
     Then Logout from Neon application
-    Then 
+    
+  @NX-6462 @initBrowser
+  Scenario: Verify the behaviour by rejecting an approval request by level 2 approver
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet "approvalRule" with two approvers
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog" with two approvers
+    Then Logout from Neon application
+    Then login with the username "selenium.flytxt@gmail.com" and password "Flytxt.4"
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then verify Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    Then click on approve campaign
+    Then Logout from Neon application
+    Then login with the username "shinu.rajan@flytxt.com" and password "flytxt"
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    Then click on reject button
+    Then verify Reject message panel displayed
+    Then enter reject message "Rejected"
+    Then Logout from Neon application
+    Then login with the username "flyops@flytxt.com" and password "flytxt"
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then verify rejected message of campaign from the sheet "campaignBC" of file "campaignInputData"
+   	Then pass next scenario based on this step
+    
+   @NX-6368
+   Scenario: Verify whether all the selected Level 1 approvers receives notification of the approval requests
+    Then check previous step and pass this
+    
 

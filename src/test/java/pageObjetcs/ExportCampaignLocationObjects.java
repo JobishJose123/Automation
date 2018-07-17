@@ -213,6 +213,19 @@ public class ExportCampaignLocationObjects extends Init{
 			jswait.loadClick(element);
 		}
 		
+		public void clickOnReviewOnNotification(String notificationContent)  throws Exception {
+			String scrollPanel = "//iron-list[@id='list']";
+			jswait.scrollIntoView(scrollPanel, notificationContent); 
+			WebElement element = driver.findElement(By.xpath("//span[contains(@class, 'notification-listing') and contains(.,'"+notificationContent+"')]/../../data-table-cell//paper-button[contains(@class, 'reviewBtn')][1]"));
+			jswait.loadClick(element);
+		}
+		public void verifyReviewOnNotification(String notificationContent)  throws Exception {
+			String scrollPanel = "//iron-list[@id='list']";
+			jswait.scrollIntoView(scrollPanel, notificationContent); 
+			WebElement element = driver.findElement(By.xpath("//span[contains(@class, 'notification-listing') and contains(.,'"+notificationContent+"')]/../../data-table-cell//paper-button[contains(@class, 'reviewBtn')][1]"));
+			Assert.assertTrue(element.isDisplayed());
+		}
+		
 		public void selectCampaignToWhereExported(String campaignToBeSelected)  throws InterruptedException {
 			jswait.loadSendKeys(campaignToBeSelectedForExporting,campaignToBeSelected);
 			jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+campaignToBeSelected+"')]");
