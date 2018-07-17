@@ -21,6 +21,7 @@ import cucumber.api.java.en.Then;
 import pageObjetcs.AdminPageObjects;
 import pageObjetcs.BroadcastPageObjects;
 import pageObjetcs.CampaignObjects;
+import pageObjetcs.CatalogPageObjects;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.LoginPageObjects;
 import pageObjetcs.OfferPageObjects;
@@ -34,6 +35,7 @@ public class BroadcastSteps extends Init{
 	public ExcelHelper eh = new ExcelHelper();
 	CampaignObjects campaignObjects = new CampaignObjects();
 	AdminPageObjects adminPageObjects = new AdminPageObjects();
+	CatalogPageObjects catalogPageObjects = new CatalogPageObjects();
 	OfferPageObjects offerPageObjects = new OfferPageObjects();
 	LoginPageObjects loginPage = new LoginPageObjects();
 	CommonObjects commonObjects = new CommonObjects();
@@ -1535,4 +1537,75 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 //		targetConditionObjects.clickConditionTypeField();
 //		
 //	}
+	@Then("^Save BC Settings as selected users$")
+	public void BCSettings_Selectedusers() throws Throwable {
+	    // 
+	    //throw new PendingException();
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		adminPageObjects.clickBCSettings();
+		adminPageObjects.selectUsers();
+		adminPageObjects.BCSaveSettings();
+		adminPageObjects.BCSettingsclose();
+		//driver.get("http://192.168.150.27/#/precision-marketer/life-cycle-marketing/campaignId/4/broadcasts");
+		
+		//adminPageObjects.checkBCConfiguration();
+		//AdminPageObjects.clickEditOption();
+		
+	}
+	//To Find a BC and Edit
+	@Then("^Search BC and Edit from \"([^\"]*)\"$")
+	public void Search_BC_and_Edit_from(String sheet) throws Throwable {
+		eh.setExcelFile("bcInputData",sheet);
+		String name = (String) eh.getCell(1, 0);
+		catalogPageObjects.filterWorkaround(name);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.clickProceedButton();
+	}
+	
+	@Then("^Then Search BC and give permission from \"([^\"]*)\" for user \"([^\"]*)\"$")
+	public void then_Search_BC_and_give_permission_from_for_user(String sheet, String user) throws Throwable {
+		eh.setExcelFile("bcInputData",sheet);
+		//Random rn = new Random();
+		//int  n = rn.nextInt(5000) + 1;
+		String name = (String) eh.getCell(1, 0);
+		//name =  name.replaceAll("[0-9]", "")+n;
+		//eh.setCell(1, 0, name);
+		//productClassesPageObjects.createProductClass(name, (String) eh.getCell(1, 1));
+		catalogPageObjects.filterWorkaround(name);
+		commonObjects.clickOptionsIcon();
+		jswait.loadClick("//div[@id='contentWrapper']/div/paper-menu/div//label[contains(.,'Permissions')]");
+		//jswait.loadClick(".//label[contains(.,'Select users who can edit this broadcast')]/../input");
+		jswait.loadClick("//paper-dialog[@id='addUserDialog']//paper-input-container//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']");
+		//jswait.loadClick("//paper-tags-dropdown[@id='tagDropDown']/paper-menu-button[@id='menuButton']//paper-tags-input[@id='tagInput']/paper-input[@id='tagInput']//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']/../div");
+		jswait.loadClick("//paper-item[contains(.,'rahul.chandran@flytxt.com')]");
+		jswait.loadClick("//paper-dialog[@id='addUserDialog']//span[.='Broadcast Edit Permissions']");
+		jswait.loadClick("//paper-dialog[@id='addUserDialog']//paper-button[2][contains(.,Save)]");
+		//jswait.loadSendKeys(".//label[contains(.,'Select users who can edit this broadcast')]/../input", "ash");
+		//jswait.loadClick("");
+	    //System.out.printf("username is",user);
+	    //jswait.loadClick("//paper-item[contains(.,'ashitha.george@flytxt.com')]");
+	    //driver.findElement(By.xpath(".//label[contains(.,'Select users who can edit this broadcast')]/../input")).clear();
+		//jswait.loadSendKeys(".//label[contains(.,'Select users who can edit this broadcast')]/../input", "yiyiyi@flytxt.com");
+	    
+		//jswait.loadClick("(//input[@id='input'])[115]"));
+		//driver.findElement(By.xpath("//div[@id='contentWrapper']/div/paper-menu/div/paper-item[8]/label")).click();
+		//driver.findElement(By.xpath("//div[@id='labelAndInputContainer']/input[@id='input' and @class='style-scope paper-input' and 1]")).clear();
+		//driver.findElement(By.xpath("//div[@id='labelAndInputContainer']/input[@id='input' and @class='style-scope paper-input' and 1]")).sendKeys(user);
+		//driver.findElement(By.xpath("(//paper-input[@id='tagInput']/paper-input-container/[contains(.,'Permissions')]")).click();
+		//driver.findElement(By.xpath("(//div[@id='contentWrapper']/div/paper-menu/div/paper-item)[213]")).click();
+		//commonObjects.clickEditOption();
+		//broadcastPageObjects.clickProceedButton();
+		//broadcastPageObjects.clickProceedButton();
+		//broadcastPageObjects.clickProceedButton();
+		    //productClassesPageObjects.clickAttributes();
+		//productClassesPageObjects.addDefaultAttributes();
+	}
+@Then("^navigate to BC page$")
+	public void navigate_to_bc_page() throws Throwable {
+		driver.get("http://192.168.150.27/#/precision-marketer/life-cycle-marketing/campaignId/24/broadcasts");
+	}
 }
