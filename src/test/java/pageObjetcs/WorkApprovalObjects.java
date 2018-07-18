@@ -794,6 +794,11 @@ catch(Exception e) {
 		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'W')]"));
 		Assert.assertTrue(approvalStatus.isDisplayed());
 	}
+	public void isRejectedStatusDisplayed(String campaignName) throws InterruptedException
+	{
+		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'R')]"));
+		Assert.assertTrue(approvalStatus.isDisplayed());
+	}
 	
 	public void addLevel2Approver() throws InterruptedException {
 		jswait.loadClick(addLevel);
@@ -850,7 +855,7 @@ catch(Exception e) {
 	public void verifyRejectMessage(String campaignName) throws Exception {
 		String scrollPanel = "//iron-list[@id='list']";
 		jswait.scrollIntoView(scrollPanel, campaignName); 
-		WebElement element = driver.findElement(By.xpath("//span[contains(@class, 'notification-listing') and contains(.,'"+campaignName+"') and contains(., 'rejected')]"));
+		WebElement element = driver.findElement(By.xpath("//span[contains(@class, 'notification-listing') and contains(.,'"+campaignName+"') and contains(.,'has been rejected by')]"));
 		Assert.assertTrue(element.isDisplayed());
 		Thread.sleep(2000);
 	}

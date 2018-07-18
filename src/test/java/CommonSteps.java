@@ -145,7 +145,7 @@ public class CommonSteps extends Init {
 		excelHelper.setExcelFile("seluserlogin",sheet);
 		 //driver.get("http://"+p.getValue("env"));
 		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(1, 1));
-		 jswait.loadClick(loginButton);
+		 //jswait.loadClick(loginButton);
 			
 		 
     }
@@ -169,9 +169,7 @@ public class CommonSteps extends Init {
 	@Then("^login with user from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
     public void loginUserFromExcel(String sheet, String fileName) throws Exception {
 		 excelHelper.setExcelFile(fileName,sheet);
-		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(2, 1));
-		 jswait.loadClick(loginButton);
-			
+		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(2, 0));		
 		 
     }
 

@@ -106,7 +106,7 @@ public class AddExportLocationSteps extends Init {
     public void verifyReviewOnNotification(String sheet, String fileName) throws Throwable {
     	excelHelper.setExcelFile(fileName,sheet);
     	String notificationText = (String) excelHelper.getCell(1, 0);
-    	exportCampignLocationObject.clickOnReviewOnNotification(notificationText);
+    	exportCampignLocationObject.verifyReviewOnNotification(notificationText);
     }
     
     @Then("^select a campaign category from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")

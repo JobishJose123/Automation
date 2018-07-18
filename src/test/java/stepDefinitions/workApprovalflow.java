@@ -162,10 +162,16 @@ public class workApprovalflow extends Init {
 		approvalPageObjects.verify_campaign_show_historyapprove(sheet);
 	}
 
-	@Then("^verify campaign status from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+	@Then("^verify campaign status waiting for approval from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
 	public void isWaitingForApprovalStatusDisplayed(String sheet, String fileName) throws Throwable {
-		eM.setExcelFile(fileName, sheet);
+		eM.setExcelFile(fileName, sheet);		
 		approvalPageObjects.isWaitingForApprovalStatusDisplayed((String) eM.getCell(1, 0));
+	}
+	
+	@Then("^verify campaign status rejected from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+	public void isRejectedStatusDisplayed(String sheet, String fileName) throws Throwable {
+		eM.setExcelFile(fileName, sheet);
+		approvalPageObjects.isRejectedStatusDisplayed((String) eM.getCell(1, 0));
 	}
 
 	@Then("^verify approve button displayed$")
