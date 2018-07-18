@@ -331,4 +331,12 @@ public class ConsumerProfileSteps extends Init{
 	   customerObjects.verifyMouseHover();
    }
    
+   
+   @Then("^enter customer number for send trial verification \"([^\"]*)\"$")
+	public void enterCustomerNumberForSendTrialVerification(String msisdn) throws InterruptedException, IOException {
+		
+		
+		customerObjects.enterCustomerNumber(msisdn);
+	}
+   
 }
