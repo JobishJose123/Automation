@@ -94,7 +94,7 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = ".//paper-button[contains(.,'Target Group')]")
 	private WebElement TGConfigure;
 	
-	@FindBy(xpath = ".//div[@id='contentWrapper']//paper-listbox//paper-item[@class='style-scope dnc-exclusion x-scope paper-item-1'][1]")
+	@FindBy(xpath = "//paper-item[contains(.,'selenium_list_DND')]")
 	private WebElement DNCList;
 	@FindBy(xpath = ".//paper-button[contains(.,'DNC Exclusions')]")
 	private WebElement DNCExclusionOption;
@@ -783,7 +783,7 @@ public class BroadcastPageObjects extends Init {
 	
 	public void enterSendTrialMailId() throws InterruptedException {
 		jswait.loadClick(sendTrialMailIdField);
-		jswait.loadSendKeys(sendTrialMailIdField, "selenium.flytxt@gmail.com");
+		jswait.loadSendKeys(sendTrialMailIdField, "919717802035");
 		
 	}
 	
@@ -964,7 +964,7 @@ public class BroadcastPageObjects extends Init {
 		selectBaseList(baseList);
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("informational"))
+		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
@@ -1009,7 +1009,7 @@ public class BroadcastPageObjects extends Init {
 		
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("informational"))
+		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
@@ -1047,7 +1047,7 @@ public class BroadcastPageObjects extends Init {
 		
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("informational"))
+		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
@@ -1086,7 +1086,7 @@ public class BroadcastPageObjects extends Init {
 		
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("informational"))
+		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
@@ -1127,7 +1127,7 @@ public class BroadcastPageObjects extends Init {
 		
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("informational"))
+		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
@@ -1166,7 +1166,7 @@ public class BroadcastPageObjects extends Init {
 		
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("informational"))
+		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
@@ -1242,7 +1242,7 @@ public class BroadcastPageObjects extends Init {
 		selectBaseList(baseList);
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("informational"))
+		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
@@ -1284,7 +1284,7 @@ public class BroadcastPageObjects extends Init {
 		clickTargetConditionNoneOption();
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("informational"))
+		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();

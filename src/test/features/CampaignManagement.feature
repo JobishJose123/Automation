@@ -192,10 +192,10 @@ Feature: campaign management
     @NX-686 @initBrowser
     Scenario: Campaign Creation: Graphical  :Verify the delete option for the added virtual conditions-686
     Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+     #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
@@ -203,14 +203,24 @@ Feature: campaign management
     Then verify campaign created from sheet "campaignBC"
     Then delete target conditions for campaign
     
+     @NX-694 @initBrowser
+    Scenario: Campaign Creation: Manual Target:Verify deleting the textual conditions-694
+    Given login
+     #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    Then delete textual target conditions for campaign
+    
     
     @NX-691 @initBrowser
     Scenario: Campaign Creation: Graphical  :Verify adding multiple AND/OR condition in visual editor-687
     Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"

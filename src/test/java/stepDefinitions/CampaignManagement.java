@@ -613,6 +613,18 @@ public class CampaignManagement extends Init{
 	 		dt.gteDateTime();
 	    	Thread.sleep(2000);
 	    }
+	    @Then("^delete textual target conditions for campaign$")
+	    public void deleteTextualTargetConditionForCampaign() throws Throwable
+	    {
+	    	commonObjects.clickOptionsIcon();
+//	 		Thread.sleep(3000);
+	 		campaignObjects.clickEditCampaignOption();
+	 		Thread.sleep(2000);
+	 		campaignObjects.deleteTextualTargetConditionForCampaign();
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    }
 	    
 	    
 	    @Then("^verify number of offers while create new campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")

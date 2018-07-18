@@ -26,6 +26,8 @@ public class RegistrationListPage extends Init{
 	private WebElement registrationListTypeSelector;
 	@FindBy(xpath=".//*[@id='createNew']//paper-item[text()='Standard']")
 	private WebElement registrationListTypeStandard;
+	@FindBy(xpath=".//*[@id='createNew']//paper-item[text()='Do-not-Contact List']")
+	private WebElement registrationListTypeDND;
 	@FindBy(xpath=".//*[@id='createNew']//paper-button[text()='Save']")
 	private WebElement registrationListSaveButton;
 	@FindBy(xpath=".//table-select//paper-icon-button[2]")
@@ -60,6 +62,10 @@ public class RegistrationListPage extends Init{
 		jswait.loadClick(registrationListTypeSelector);
 		jswait.loadClick(registrationListTypeStandard);
 	}
+	public void selectRegistrationListTypeDND() throws InterruptedException {
+		jswait.loadClick(registrationListTypeSelector);
+		jswait.loadClick(registrationListTypeDND);
+	}
 	public void clickSaveButton() throws InterruptedException {
 		jswait.loadClick(registrationListSaveButton);
 	}
@@ -70,6 +76,12 @@ public class RegistrationListPage extends Init{
 		enterRegistrationListName(name);
 		enterRegistrationListDescription(desc);
 		selectRegistrationListTypeStandard();
+		SelectAllPartners();
+	}
+	public void enterDNDRegistratonListDetails(String name,String desc) throws InterruptedException {
+		enterRegistrationListName(name);
+		enterRegistrationListDescription(desc);
+		selectRegistrationListTypeDND();
 		SelectAllPartners();
 	}
 	public void clickCreateNewRegistrationListButton() throws InterruptedException {

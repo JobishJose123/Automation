@@ -1669,6 +1669,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
     public void verifySendTrialOptionForBc() throws Throwable
     {  
 		broadcastPageObjects.verifySendTrialOptionForBc();
+		Thread.sleep(15000);
 		
     }
 	
