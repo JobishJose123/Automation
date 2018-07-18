@@ -106,6 +106,8 @@ public class CampaignObjects extends Init{
 	private WebElement optionsEdit;
 	@FindBy(xpath = ".//paper-icon-item[contains(.,'Delete')]")
 	private WebElement optionsDelete;
+	@FindBy(xpath = ".//paper-item[contains(.,'Delete')]")
+	private WebElement optionsGraphicalDelete;
 	@FindBy(xpath = ".//paper-icon-item[contains(.,'Edit')]")
 	private WebElement optionsEditTargetCondtion;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
@@ -390,7 +392,18 @@ public class CampaignObjects extends Init{
 	
 	public void deleteTargetConditionForCampaign() throws InterruptedException {
 		clickProceedButton();
-		verifyTargetConditionCard();
+		targetConditionObjects.clickTargetConditionViewToggle();
+		clickOptionsIcon();
+		Thread.sleep(3000);
+		clickDeleteOptionGraphical();
+		Thread.sleep(3000);
+		targetConditionObjects.clickTargetConditionViewToggle();
+		verifyTargetConditionCardAfterDeleteion();
+		clickProceedButton();
+		verifySaveTCforCampaign();
+	}
+	public void deleteTextualTargetConditionForCampaign() throws InterruptedException {
+		clickProceedButton();
 		clickOptionsIcon();
 		Thread.sleep(3000);
 		clickDeleteOption();
@@ -582,6 +595,9 @@ public class CampaignObjects extends Init{
 	public void clickDeleteOption() throws InterruptedException {
 		jswait.loadClick(optionsDelete);
 	}
+	public void clickDeleteOptionGraphical() throws InterruptedException {
+		jswait.loadClick(optionsGraphicalDelete);
+	}
 	public void navigateToLIfeCycleMarketing() throws InterruptedException {
 		jswait.loadClick(lifeCycleMarketing);
 	}
@@ -667,10 +683,10 @@ public class CampaignObjects extends Init{
 	
 	}
 	
-	public void VerifyCampaignCreated(String name) throws InterruptedException {
-		assertTrue(driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'"+name+"')]")).isDisplayed());
-		Thread.sleep(2000);
-	
+	public void VerifyCampaignCreated(String name) throws Exception {
+		commonObjects.filterName(name);
+		jswait.waitUntil(".//vaadin-grid-cell-content[contains(.,'"+name+"')]");
+		assertTrue(driver.findElement(By.xpath(".//vaadin-grid-cell-content[contains(.,'"+name+"')]")).isDisplayed());	
 	}
 	
 	

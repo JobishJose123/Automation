@@ -52,3 +52,4 @@ Then navigate to landing page
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     Then enter details for new broadcast and select any DNC exclusion list from sheet "one-offBC" with "rechargeWAP"
+    Then save bc

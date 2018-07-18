@@ -25,7 +25,7 @@ public class TargetConditionObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	CommonObjects commonObjects = new CommonObjects();
-	@FindBy(xpath="//target-conditions/div/paper-icon-button")
+	@FindBy(xpath="//img[contains(@src,'http://192.168.150.27/images/Flip')]/../..")
 	private WebElement targetConditionViewToggle;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
 	private WebElement targetConditionTypeSelector;
