@@ -1288,8 +1288,10 @@ public class OfferPageObjects extends Init {
 		Thread.sleep(3000);
 
 		// ******************Track tab*****************:
-		enterTrackTabDetails(eh);
-		createFirstDefaultTrackingRuleCondition();
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+			enterTrackTabDetails(eh);
+			createFirstDefaultTrackingRuleCondition();
+		}
 		clickProceedButton();
 
 		// ******************Rewards tab*****************:

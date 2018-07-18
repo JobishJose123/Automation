@@ -272,6 +272,14 @@ public class RegistrationList extends Init{
 		System.out.println(listname);
 		registrationListPage.enterRegistratonListDetails(listname, "Description");	
 	}
+	@Then("^enter details of DND list$")
+    public void createDNDList() throws Exception{
+//		list.setExcelFile("registrationListInputData", "Sheet1");
+//		String listname = (String) list.getCell(1, 2);
+		String listname = "selenium_list_DND";
+		System.out.println(listname);
+		registrationListPage.enterDNDRegistratonListDetails(listname, "Description");	
+	}
 	@Then("^upload list$")
     public void uploadList() throws Exception{
 		driver.close();

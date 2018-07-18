@@ -363,6 +363,7 @@ Then click create new product button
 Then create single product from sheet "singleProductPage"
 Then navigate to offer management
 Then navigate to offers
+Then click on create new ofer button
 Then create new offer from sheet "rechargeWAP" with product "singleProductPage"
 Then navigate to offer management
 Then navigate to products
