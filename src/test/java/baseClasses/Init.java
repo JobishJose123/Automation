@@ -39,9 +39,10 @@ public static Logger log;
 	//CONFIGURATIONS
 	
 	public final String BASE_LIST = "selenium_list";
-	public final String AGE_PROFILE_FIELD = "Age_q11";
+	public final String AGE_PROFILE_FIELD = "Age";
 	public final String SITE_ID_PROFILE_FIELD = "SiteID";
 	public final String BALANCE_PROFILE_FIELD = "Balance";
+	public final String BASE_LIST2 = "List_for_copy_paste";
 	
 }
 //public class Init {
