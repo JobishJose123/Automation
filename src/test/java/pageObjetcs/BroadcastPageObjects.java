@@ -39,6 +39,8 @@ public class BroadcastPageObjects extends Init {
 	public ExcelHelper eh = new ExcelHelper();
 	CommonObjects commonObjects = new CommonObjects();
 
+	@FindBy(xpath="//paper-button[contains(.,'Create New Broadcast')]")
+	private WebElement createNewBroadcastButton;
 	@FindBy(xpath = "//paper-item[contains(.,'View Broadcasts')]")
 	private WebElement viewBroadcast;
 	@FindBy(xpath = "//paper-item[contains(.,'Export As PDF')]")
@@ -472,7 +474,9 @@ public class BroadcastPageObjects extends Init {
 	public void clickCreateButton() throws InterruptedException {
 		jswait.loadClick(createButtonBc);
 	}
-
+	public void clickCreateNewBroadcastButton() throws InterruptedException {
+		jswait.loadClick(createNewBroadcastButton);
+	}
 	
 	public void exportBroadcast() throws InterruptedException {
 		
