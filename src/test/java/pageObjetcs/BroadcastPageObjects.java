@@ -247,6 +247,14 @@ public class BroadcastPageObjects extends Init {
      private List <WebElement> compltedeStatusBC;
 	 @FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'Render Scheduled')]")
      private List <WebElement> renderScheduledStatusBC;
+	 @FindBy(xpath="//div[@id='contentWrapper']/div/paper-menu/div//label[contains(.,'Permissions')")
+	 private WebElement Permissions;
+	 @FindBy(xpath=".//label[contains(.,'Select users who can edit this broadcast')]/../../../div")
+	 private WebElement clickusers;
+	 @FindBy(xpath="//paper-dialog[@id='addUserDialog']//span[.='Broadcast Edit Permissions']")
+	 private WebElement PermissionTitle;
+	 @FindBy(xpath="//paper-dialog[@id='addUserDialog']//paper-button[2][contains(.,Save)]")
+	 private WebElement PermissionSave;
 	 
 	
 	 
@@ -1303,7 +1311,19 @@ public class BroadcastPageObjects extends Init {
 		clickProceedButton();
 	}
 	
+	public void ClickPermissions() throws InterruptedException {
+		jswait.loadClick(Permissions);
+	}
+	public void Clickclickusers() throws InterruptedException {
+		jswait.loadClick(clickusers);
+	}
+	public void ClickPermissionTitle() throws InterruptedException {
+		jswait.loadClick(PermissionTitle);
+	}
 	
+	public void ClickPermissionSave() throws InterruptedException {
+		jswait.loadClick(PermissionSave);
+	}
 
 
 }

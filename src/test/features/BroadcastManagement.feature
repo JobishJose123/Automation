@@ -1440,26 +1440,8 @@ Then verify delivery details from "recurringMonthBC"
     Then save bc
     Then Search BC and Edit from "one-offBC"
     Then save bc
-       
-    @NX-7460_test
-   @initBrowser  
-   Scenario: Check whether approvers and creator can edit the BC
-   Given login
-   Then navigate to configuration management
-   Then navigate to partners
-   Then Save BC Settings as selected users
-    Then navigate to BC page
-    Then Search BC and Edit from "one-offBC"
-    Then save bc
-    Then Then Search BC and give permission from "one-offBC" for user "rahul.chandran@flytxt.com"
-    Then Logout from Neon application
-    Given login with "rahul.chandran@flytxt.com" and "cT4AAbPzk3"
-    Then navigate to precision marketer
-    Then navigate to BC page
-    Then Search BC and Edit from "one-offBC"
-    Then save bc
     
-    @NX-7460_Withpermissions
+    @NX-7464
    @initBrowser  
    Scenario: Check whether approvers and creator can edit the BC
    Given login
@@ -1492,10 +1474,6 @@ Then verify delivery details from "recurringMonthBC"
     Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
     Then Add "rechargeWAP" offer to Offer Catalogue
-   
-   ##Extra step
-   #Then navigate to precision marketer
-   #End of extra
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
@@ -1511,10 +1489,14 @@ Then verify delivery details from "recurringMonthBC"
     Given login with "rahul.chandran@flytxt.com" and "cT4AAbPzk3"
     #Then login with seleniumuser from sheet "seleniumuser"
     Then navigate to precision marketer
-    Then navigate to BC page
-    ##Then Search BC and Edit from "one-offBC"
-    ##Then save bc
-    
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    #Then navigate to BC page
+    Then Search BC and Edit from "one-offBC"
+    Then save bc
+       
+     
     
     
     @NX-7589 @initBrowser
