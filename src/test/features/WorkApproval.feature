@@ -451,21 +451,28 @@ Feature: generic product class
     
    @NX-6381 @initBrowser
   Scenario: Verify the status of BC when rejected
-   Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+  Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
     Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
     Then login with seleniumuser from sheet "seleniumuser"
-    Then approve campaign by selenium user
+    #Given navigate to environment 
+    # Remove it after use
+    Then login with user from sheet "user1" of file "workApproval"
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "CampaignCategory" of file "campaignCategoryInputData"
+    Then click on approve campaign
     Then Logout from Neon application
     Then login
     Then navigate to precision marketer
@@ -476,14 +483,14 @@ Feature: generic product class
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then Request for bc approval
     Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
+    Then login with user from sheet "user1" of file "workApproval"
     Then wait for 1 minutes
     Then click on notification bell
     Then click on view all notifications
     Then click Review on notification from the sheet "one-offBC" of file "bcInputData"
     Then click on reject button
     Then verify Reject message panel displayed
-    Then enter reject message " BC Rejected"
+    Then enter reject message "BC Rejected"
     Then wait for 1 minutes
     Then verify campaign status rejected from sheet "one-offBC" of file "bcInputData"
 

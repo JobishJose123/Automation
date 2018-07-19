@@ -881,12 +881,19 @@ public class BroadcastPageObjects extends Init {
 	public void enterBroadcastBasicDetails(String name) throws InterruptedException {
 		enterBroadcastName(name);
 		enterBroadcastPurpose("Purpose of BC is NOTHING");
-		selectLabelCrossell();
+		selectLabelCrossell();		
 		selectInventoryUnlimited();
+		selectROI();
+	}
+	
+	public void selectROI() throws InterruptedException {
+		jswait.loadClick("//label[contains(.,'Expected ROI')]/../../iron-icon");
+		jswait.loadClick("//paper-item[contains(.,'10%')]");
+		
 	}
 
 	public void selectOffer(String offerName) throws InterruptedException {
-		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
+		jswait.loadClick(".//data-table-cell[contains(.,'"+offerName+"')]/..//*[@id='checkboxContainer']");
 	}
 
 	public void selectFirstOffer() throws InterruptedException {
