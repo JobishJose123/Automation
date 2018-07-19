@@ -499,25 +499,25 @@ Feature: generic product class
     #Then create product class and number attribute from "TestProductClass"
     #Then navigate to landing page
     Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
- #		Then navigate to offer management
-#		Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "informationalWAP" with product "fullDetails"
-#		Then navigate to offer management 
-    #Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "informationalWAP" offer to Offer Catalogue
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+ 		Then navigate to offer management
+		Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "informationalWAP" with product "fullDetails"
+		Then navigate to offer management 
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "informationalWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "informationalWAP"
+    Then enter details for new broadcast from sheet "InformationalOne-offBC" with "informationalWAP"
     Then save bc
     Then navigate to offer management
     Then navigate to products
@@ -526,4 +526,5 @@ Feature: generic product class
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "campaignCategory"
 		Then naigate to "campaignBC" campaign view broadcasts
-    Then activate saved "One-Time" bc from sheet "one-offBC"
+    Then activate saved "One-Time" bc from sheet "InformationalOne-offBC"
+    Then verify failure in activating bc

@@ -1111,9 +1111,24 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.clickProceedButton();
+		//to update the time
+		eM.setExcelFile("bcInputData",sheet);
+ 	  	String bc_type =(String) eM.getCell(1, 7);
+		enterDeliveryTabDetails(bc_type,sheet);
+		
 	    broadcastPageObjects.clickCreateButton();
 	    broadcastPageObjects.clickActivateButton();
 	    broadcastPageObjects.clickActivateConfirmYes();
+	}
+	
+	@Then("^verify failure in activating bc$")
+	public void verifyFailureInActivatingBc() throws Throwable {
+		Exception failure = new Exception("broadcast created(expected to fail)");
+		try {
+			broadcastPageObjects.clickCreateNewBroadcastButton();
+			throw failure;
+		} catch (Exception e) {
+		}
 	}
 
 	@Then("^check if \"([^\"]*)\" bc status is \"([^\"]*)\" from sheet \"([^\"]*)\"$")
