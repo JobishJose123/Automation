@@ -35,10 +35,10 @@ public class OfferPageObjects extends Init {
 	}
 
 	final String TRACK_SOURCE = "A_track_Sel";
-	final String EMAIL_PROFILE_FIELD = "Email";
-	final String AGE_PROFILE_FIELD = "Age";
+	final String EMAIL_PROFILE_FIELD = "Email_q11";
+	final String AGE_PROFILE_FIELD = "Age_q11";
 	final String AGE_DYNAMIC_VARIABLE = "Age_Q990";
-	final String NAME_PROFILE_FIELD = "Name";
+	final String NAME_PROFILE_FIELD = "FirstName_q11";
 	
 	@FindBy(xpath = "//span[contains(.,'Select')]/../input")
 	private WebElement emailSelectResourceButton;
