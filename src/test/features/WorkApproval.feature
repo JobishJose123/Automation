@@ -400,7 +400,7 @@ Feature: generic product class
     Then verify approve and activate button displayed
     Then Logout from Neon application
     
-  @NX-6462 @initBrowser 
+  @NX-6462 @initBrowser @closeBrowser
   Scenario: Verify the behaviour by rejecting an approval request by level 2 approver
     Given login
     Then navigate to configuration management
@@ -452,19 +452,18 @@ Feature: generic product class
    @NX-6381 @initBrowser
   Scenario: Verify the status of BC when rejected
   Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
-    #Then navigate to configuration
-    #Then click approval rules option
-    #Then create new approval rule from sheet "approvalRule"
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet "approvalRule"
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
     #Given navigate to environment 
     # Remove it after use
     Then login with user from sheet "user1" of file "workApproval"
@@ -493,4 +492,9 @@ Feature: generic product class
     Then enter reject message "BC Rejected"
     Then wait for 1 minutes
     Then verify campaign status rejected from sheet "one-offBC" of file "bcInputData"
+    Then pass next scenario based on this step
+    
+   @NX-6384
+   Scenario: Verify whether campaign/BC get rejected if any one of the approver rejects it
+    Then check previous step and pass this
 
