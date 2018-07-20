@@ -216,4 +216,12 @@ public class workApprovalflow extends Init {
 		String campaignName = (String) eM.getCell(1, 0);
 		approvalPageObjects.verifyRejectMessage(campaignName);
 	}
+	
+	@Then("verify approved message of campaign from the sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+	public void verifyApprovedMessage(String sheet, String fileName) throws Throwable {
+		
+		eM.setExcelFile(fileName, sheet);
+		String campaignName = (String) eM.getCell(1, 0);
+		approvalPageObjects.verifyApprovedMessage(campaignName);
+	}
 }

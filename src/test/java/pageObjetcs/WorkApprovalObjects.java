@@ -859,4 +859,12 @@ catch(Exception e) {
 		Assert.assertTrue(element.isDisplayed());
 		Thread.sleep(2000);
 	}
+	
+	public void verifyApprovedMessage(String campaignName) throws Exception {
+		String scrollPanel = "//iron-list[@id='list']";
+		jswait.scrollIntoView(scrollPanel, campaignName); 
+		WebElement element = driver.findElement(By.xpath("//span[contains(@class, 'notification-listing') and contains(.,'"+campaignName+"') and contains(.,'has been approved by')]"));
+		Assert.assertTrue(element.isDisplayed());
+		Thread.sleep(2000);
+	}
 }

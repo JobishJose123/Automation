@@ -449,7 +449,7 @@ Feature: generic product class
    Scenario: Verify whether approver is able to specify the reject message in the reject popup
     Then check previous step and pass this
     
-   @NX-6381 @initBrowser
+   @NX-6381 @initBrowser @closeBrowser
   Scenario: Verify the status of BC when rejected
   Given login
     Then navigate to configuration management
@@ -497,4 +497,33 @@ Feature: generic product class
    @NX-6384
    Scenario: Verify whether campaign/BC get rejected if any one of the approver rejects it
     Then check previous step and pass this
-
+    
+  @NX-6386 @initBrowser @closeBrowser
+  Scenario: Verify whether notification is send to the creator user when BC/campaign is approved
+   Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet "approvalRule"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    Then Logout from Neon application
+    #Given navigate to environment
+    Then login with user from sheet "user1" of file "workApproval"
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "CampaignCategory" of file "campaignCategoryInputData"
+  	Then click on approve campaign
+  	Then Logout from Neon application
+  	Then login with user from sheet "defaultUser" of file "workApproval"
+  	Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then verify approved message of campaign from the sheet "campaignBC" of file "campaignInputData"
+		
