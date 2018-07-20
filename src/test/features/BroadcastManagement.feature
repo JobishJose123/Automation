@@ -1582,3 +1582,12 @@ Then verify delivery details from "recurringMonthBC"
     Then choose all events
     Then click on apply button
     
+    @NX-7450
+   @initBrowser
+   Scenario: Check edit BC screen
+   Given login
+   Then navigate to configuration management
+   Then navigate to partners
+   #Then navigate to partners Edit page
+   Then BC Settings page validation
+    

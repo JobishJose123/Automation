@@ -104,6 +104,10 @@ public class AdminPageObjects extends Init{
 	//BCSeetings Save button in Partner page
 	@FindBy(xpath=".//*[@id='form']/div/div/paper-button[text()='Save']")
 	private WebElement BCSaveButton;
+	@FindBy(xpath=".//*[@id='form']/div/div/paper-button[text()='Cancel']")
+	private WebElement BCCancel;
+	@FindBy(xpath="//*/broadcast-settings/form[@id='form']/div/..//label[.='Broadcasts can be edited by:']")
+	private WebElement BCEditText;
 	
 	@FindBy(css="#clear > #icon")
 	private WebElement SettingsClose;
@@ -338,6 +342,19 @@ public class AdminPageObjects extends Init{
 			//driver.findElement(By.cssSelector("#clear > #icon")).click();
 			jswait.loadClick(SettingsClose);
 			Thread.sleep(5000);
+		}
+		//To check all elements in BCSettings element is displayed
+		public void checkAllBCConfiguration() throws InterruptedException{
+			assertTrue(selectedusers.isDisplayed());
+			assertTrue(Allusers.isDisplayed());
+			assertTrue(BCSaveButton.isDisplayed());
+			assertTrue(BCCancel.isDisplayed());
+			assertTrue(BCEditText.isDisplayed());
+			jswait.loadClick(Allusers);
+			jswait.loadClick(selectedusers);
+			jswait.loadClick(BCSaveButton);
+			jswait.loadClick(BCCancel);
+			System.out.println("Success");
 		}
 
 }
