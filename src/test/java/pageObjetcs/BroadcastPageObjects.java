@@ -59,6 +59,11 @@ public class BroadcastPageObjects extends Init {
 	private WebElement sendTrialMailButton;
 	@FindBy(xpath = ".//paper-dialog[@id='savedialog']")
 	private WebElement sendingMessageDialogueForSendTrialBC;
+	@FindBy(xpath = "//iron-icon[@icon='close']")
+	private WebElement sendTrialCloseButton;
+	
+	@FindBy(xpath = "//span[contains(.,'Trial Message Event')]")
+	private WebElement trialMessageEventField;
 	
 	@FindBy(xpath = "//label[contains(.,'Please enter the email addresses/MSISDNs of recipients')]//following::input[1]")
 	private WebElement sendTrialMailIdField;
@@ -130,7 +135,7 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Submitted for CG Validation')]")
 	private WebElement statusValidation;
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Validating CG')]")
-	private WebElement statusValidatingCG;
+	private List <WebElement> statusValidatingCG;
 	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]")
 	private WebElement defineCGSize;
 	@FindBy(xpath = ".//*[@id='offerDetailForm']//paper-input-wrapper//input")
@@ -249,6 +254,14 @@ public class BroadcastPageObjects extends Init {
      private List <WebElement> compltedeStatusBC;
 	 @FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'Render Scheduled')]")
      private List <WebElement> renderScheduledStatusBC;
+	 @FindBy(xpath="//div[@id='contentWrapper']/div/paper-menu/div//label[contains(.,'Permissions')")
+	 private WebElement Permissions;
+	 @FindBy(xpath=".//label[contains(.,'Select users who can edit this broadcast')]/../../../div")
+	 private WebElement clickusers;
+	 @FindBy(xpath="//paper-dialog[@id='addUserDialog']//span[.='Broadcast Edit Permissions']")
+	 private WebElement PermissionTitle;
+	 @FindBy(xpath="//paper-dialog[@id='addUserDialog']//paper-button[2][contains(.,Save)]")
+	 private WebElement PermissionSave;
 	 
 	
 	 
@@ -555,6 +568,12 @@ public class BroadcastPageObjects extends Init {
 		
 	}
   
+  public void clickCloseSendTrialWindow() throws InterruptedException {
+		
+	  jswait.loadClick(sendTrialCloseButton);	
+		 
+}
+  
   
   public void verifySendTrialOptionForBc() throws InterruptedException {
 	  
@@ -563,15 +582,31 @@ public class BroadcastPageObjects extends Init {
 	  enterSendTrialMailId();
 	  clickSendTrialMailButton();
 	  verifySendingMessageDialogueForSendTrialBC();
+	  clickCloseSendTrialWindow();
 	 
 	  
   }
   
+  public void verifyTrialMessageEvent() throws Exception {
+	  
+	  Thread.sleep(5000);
+	  
+	  assertTrue(trialMessageEventField.isDisplayed());
+	  
+	  
+	  /*  Thread.sleep(5000);	
+	  String Text=trialMessageEventField.getText();
+	  System.out.println("Text: "+Text);
+	  Exception sendTrialExcep=new Exception("Send Trial Exception");
+	  if(Text.equals("Trial Message Event"))
+		  System.out.println("Trial message send successfully");
+	  else
+		  throw sendTrialExcep; */
+	  
   
+  }
   
-  
-  
-  
+ 
   public void verifyBroadcastView(String name) throws InterruptedException {
 		
 	 assertTrue(driver.findElement(By.xpath("//h3[contains(.,'"+name+"')]")).isDisplayed());
@@ -702,25 +737,51 @@ public class BroadcastPageObjects extends Init {
 		assertTrue(statusValidation.isDisplayed());
 	}
 	
-  public void verifyValidatingCGStatusForBC() throws Throwable {
-	 
-	  Thread.sleep(200000);
-	  driver.navigate().refresh();
-	  Thread.sleep(200000);
-	  driver.navigate().refresh();
-	  Thread.sleep(100000);
-	  driver.navigate().refresh();
-	  Thread.sleep(100000);
-	  driver.navigate().refresh();
-	  Thread.sleep(100000);
-	  driver.navigate().refresh();
-	  WebDriverWait wait = new WebDriverWait(driver,50);
-	  driver.navigate().refresh();
-	  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//vaadin-grid-cell-content[contains(.,'Validating CG')]")));
-      assertTrue(statusValidatingCG.isDisplayed());
-	
-  }
-	
+	 public void verifyValidatingCGStatusForBC() throws Throwable {
+		  
+		  
+		  
+		 
+		  int size=statusValidatingCG.size();
+		  System.out.println("Size before loop: "+size);
+		 
+		  while(size==0) {
+			  
+		  Thread.sleep(20000);
+		  driver.navigate().refresh();
+		  Thread.sleep(3000);
+		  size=statusValidatingCG.size();
+		  System.out.println(size);
+		
+		  
+		  }
+		 
+//		  Thread.sleep(200000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(200000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(100000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(100000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(100000);
+//		  driver.navigate().refresh();
+//		  WebDriverWait wait = new WebDriverWait(driver,50);
+//		  driver.navigate().refresh();
+//		  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//vaadin-grid-cell-content[contains(.,'Validating CG')]")));
+		 
+		  int size2=statusValidatingCG.size();
+		  if(size2>0) {
+			  for(WebElement ValidatingCG : statusValidatingCG) {
+				 
+				  assertTrue(ValidatingCG.isDisplayed());
+				  
+			  }
+			  
+		  }
+		 
+		
+	  }
 	
 
 	public void selectLabelCrossell() throws InterruptedException {
@@ -787,7 +848,7 @@ public class BroadcastPageObjects extends Init {
 	
 	public void enterSendTrialMailId() throws InterruptedException {
 		jswait.loadClick(sendTrialMailIdField);
-		jswait.loadSendKeys(sendTrialMailIdField, "919717802035");
+		jswait.loadSendKeys(sendTrialMailIdField, "919717802050");
 		
 	}
 	
@@ -1314,7 +1375,19 @@ public class BroadcastPageObjects extends Init {
 		clickProceedButton();
 	}
 	
+	public void ClickPermissions() throws InterruptedException {
+		jswait.loadClick(Permissions);
+	}
+	public void Clickclickusers() throws InterruptedException {
+		jswait.loadClick(clickusers);
+	}
+	public void ClickPermissionTitle() throws InterruptedException {
+		jswait.loadClick(PermissionTitle);
+	}
 	
+	public void ClickPermissionSave() throws InterruptedException {
+		jswait.loadClick(PermissionSave);
+	}
 
 
 }

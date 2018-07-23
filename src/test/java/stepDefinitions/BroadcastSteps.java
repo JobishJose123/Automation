@@ -1592,33 +1592,23 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		//productClassesPageObjects.createProductClass(name, (String) eh.getCell(1, 1));
 		catalogPageObjects.filterWorkaround(name);
 		commonObjects.clickOptionsIcon();
-		jswait.loadClick("//div[@id='contentWrapper']/div/paper-menu/div//label[contains(.,'Permissions')]");
-		//jswait.loadClick(".//label[contains(.,'Select users who can edit this broadcast')]/../input");
-		jswait.loadClick("//paper-dialog[@id='addUserDialog']//paper-input-container//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']");
+		broadcastPageObjects.ClickPermissions();
+		broadcastPageObjects.Clickclickusers();
+		broadcastPageObjects.Clickclickusers();
+		//jswait.loadClick("//div[@id='contentWrapper']/div/paper-menu/div//label[contains(.,'Permissions')]");
+//		jswait.loadClick(".//label[contains(.,'Select users who can edit this broadcast')]");
+		//jswait.loadClick(".//label[contains(.,'Select users who can edit this broadcast')]/../../../div");
+		//jswait.loadClick(".//label[contains(.,'Select users who can edit this broadcast')]/../../../div");
+		//jswait.loadClick("//paper-dialog[@id='addUserDialog']//paper-input-container//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']");
 		//jswait.loadClick("//paper-tags-dropdown[@id='tagDropDown']/paper-menu-button[@id='menuButton']//paper-tags-input[@id='tagInput']/paper-input[@id='tagInput']//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']/../div");
 		jswait.loadClick("//paper-item[contains(.,'rahul.chandran@flytxt.com')]");
-		jswait.loadClick("//paper-dialog[@id='addUserDialog']//span[.='Broadcast Edit Permissions']");
-		jswait.loadClick("//paper-dialog[@id='addUserDialog']//paper-button[2][contains(.,Save)]");
-		//jswait.loadSendKeys(".//label[contains(.,'Select users who can edit this broadcast')]/../input", "ash");
-		//jswait.loadClick("");
-	    //System.out.printf("username is",user);
-	    //jswait.loadClick("//paper-item[contains(.,'ashitha.george@flytxt.com')]");
-	    //driver.findElement(By.xpath(".//label[contains(.,'Select users who can edit this broadcast')]/../input")).clear();
-		//jswait.loadSendKeys(".//label[contains(.,'Select users who can edit this broadcast')]/../input", "yiyiyi@flytxt.com");
-	    
-		//jswait.loadClick("(//input[@id='input'])[115]"));
-		//driver.findElement(By.xpath("//div[@id='contentWrapper']/div/paper-menu/div/paper-item[8]/label")).click();
-		//driver.findElement(By.xpath("//div[@id='labelAndInputContainer']/input[@id='input' and @class='style-scope paper-input' and 1]")).clear();
-		//driver.findElement(By.xpath("//div[@id='labelAndInputContainer']/input[@id='input' and @class='style-scope paper-input' and 1]")).sendKeys(user);
-		//driver.findElement(By.xpath("(//paper-input[@id='tagInput']/paper-input-container/[contains(.,'Permissions')]")).click();
-		//driver.findElement(By.xpath("(//div[@id='contentWrapper']/div/paper-menu/div/paper-item)[213]")).click();
-		//commonObjects.clickEditOption();
-		//broadcastPageObjects.clickProceedButton();
-		//broadcastPageObjects.clickProceedButton();
-		//broadcastPageObjects.clickProceedButton();
-		    //productClassesPageObjects.clickAttributes();
-		//productClassesPageObjects.addDefaultAttributes();
+		broadcastPageObjects.ClickPermissionTitle();
+		//jswait.loadClick("//paper-dialog[@id='addUserDialog']//span[.='Broadcast Edit Permissions']");
+		broadcastPageObjects.ClickPermissionSave();
+		//jswait.loadClick("//paper-dialog[@id='addUserDialog']//paper-button[2][contains(.,Save)]");
+
 	}
+
 	
 	
 	
@@ -1687,6 +1677,15 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		Thread.sleep(15000);
 		
     }
+	
+	
+	@Then("^verify trial message event$") 
+	public void verifyTrialMessageEvent() throws Exception {
+		
+	
+	broadcastPageObjects.verifyTrialMessageEvent();
+		
+	}
 	
 	
 	
