@@ -43,6 +43,7 @@ public static Logger log;
 	public final String SITE_ID_PROFILE_FIELD = "SiteID";
 	public final String BALANCE_PROFILE_FIELD = "Balance_q11";
 	public final String BASE_LIST2 = "Copy_paste_List";
+	public final String BASE_LIST3 = "1M_List";
 	
 }
 //public class Init {
