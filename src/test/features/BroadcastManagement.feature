@@ -1575,11 +1575,12 @@ Then verify delivery details from "recurringMonthBC"
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919717802035"
+    Then enter customer number for send trial verification "919717802050"
     Then click on search button
     Then click on events tab
     Then choose all events
     Then click on apply button
+    Then verify trial message event
     
     @NX-7450
    @initBrowser

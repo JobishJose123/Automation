@@ -42,7 +42,7 @@ public static Logger log;
 	public final String AGE_PROFILE_FIELD = "Age_q11";
 	public final String SITE_ID_PROFILE_FIELD = "SiteID";
 	public final String BALANCE_PROFILE_FIELD = "Balance_q11";
-	public final String BASE_LIST2 = "List_for_copy_paste";
+	public final String BASE_LIST2 = "Copy_paste_List";
 	
 }
 //public class Init {

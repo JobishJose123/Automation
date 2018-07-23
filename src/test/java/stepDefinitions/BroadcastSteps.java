@@ -1679,6 +1679,15 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
     }
 	
 	
+	@Then("^verify trial message event$") 
+	public void verifyTrialMessageEvent() throws Exception {
+		
+	
+	broadcastPageObjects.verifyTrialMessageEvent();
+		
+	}
+	
+	
 	
 	
 @Then("^navigate to BC page$")

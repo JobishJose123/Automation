@@ -59,6 +59,11 @@ public class BroadcastPageObjects extends Init {
 	private WebElement sendTrialMailButton;
 	@FindBy(xpath = ".//paper-dialog[@id='savedialog']")
 	private WebElement sendingMessageDialogueForSendTrialBC;
+	@FindBy(xpath = "//iron-icon[@icon='close']")
+	private WebElement sendTrialCloseButton;
+	
+	@FindBy(xpath = "//span[contains(.,'Trial Message Event')]")
+	private WebElement trialMessageEventField;
 	
 	@FindBy(xpath = "//label[contains(.,'Please enter the email addresses/MSISDNs of recipients')]//following::input[1]")
 	private WebElement sendTrialMailIdField;
@@ -563,6 +568,12 @@ public class BroadcastPageObjects extends Init {
 		
 	}
   
+  public void clickCloseSendTrialWindow() throws InterruptedException {
+		
+	  jswait.loadClick(sendTrialCloseButton);	
+		 
+}
+  
   
   public void verifySendTrialOptionForBc() throws InterruptedException {
 	  
@@ -571,15 +582,31 @@ public class BroadcastPageObjects extends Init {
 	  enterSendTrialMailId();
 	  clickSendTrialMailButton();
 	  verifySendingMessageDialogueForSendTrialBC();
+	  clickCloseSendTrialWindow();
 	 
 	  
   }
   
+  public void verifyTrialMessageEvent() throws Exception {
+	  
+	  Thread.sleep(5000);
+	  
+	  assertTrue(trialMessageEventField.isDisplayed());
+	  
+	  
+	  /*  Thread.sleep(5000);	
+	  String Text=trialMessageEventField.getText();
+	  System.out.println("Text: "+Text);
+	  Exception sendTrialExcep=new Exception("Send Trial Exception");
+	  if(Text.equals("Trial Message Event"))
+		  System.out.println("Trial message send successfully");
+	  else
+		  throw sendTrialExcep; */
+	  
   
+  }
   
-  
-  
-  
+ 
   public void verifyBroadcastView(String name) throws InterruptedException {
 		
 	 assertTrue(driver.findElement(By.xpath("//h3[contains(.,'"+name+"')]")).isDisplayed());
@@ -821,7 +848,7 @@ public class BroadcastPageObjects extends Init {
 	
 	public void enterSendTrialMailId() throws InterruptedException {
 		jswait.loadClick(sendTrialMailIdField);
-		jswait.loadSendKeys(sendTrialMailIdField, "919717802035");
+		jswait.loadSendKeys(sendTrialMailIdField, "919717802050");
 		
 	}
 	
