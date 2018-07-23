@@ -130,7 +130,7 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Submitted for CG Validation')]")
 	private WebElement statusValidation;
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Validating CG')]")
-	private WebElement statusValidatingCG;
+	private List <WebElement> statusValidatingCG;
 	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]")
 	private WebElement defineCGSize;
 	@FindBy(xpath = ".//*[@id='offerDetailForm']//paper-input-wrapper//input")
@@ -710,25 +710,51 @@ public class BroadcastPageObjects extends Init {
 		assertTrue(statusValidation.isDisplayed());
 	}
 	
-  public void verifyValidatingCGStatusForBC() throws Throwable {
-	 
-	  Thread.sleep(200000);
-	  driver.navigate().refresh();
-	  Thread.sleep(200000);
-	  driver.navigate().refresh();
-	  Thread.sleep(100000);
-	  driver.navigate().refresh();
-	  Thread.sleep(100000);
-	  driver.navigate().refresh();
-	  Thread.sleep(100000);
-	  driver.navigate().refresh();
-	  WebDriverWait wait = new WebDriverWait(driver,50);
-	  driver.navigate().refresh();
-	  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//vaadin-grid-cell-content[contains(.,'Validating CG')]")));
-      assertTrue(statusValidatingCG.isDisplayed());
-	
-  }
-	
+	 public void verifyValidatingCGStatusForBC() throws Throwable {
+		  
+		  
+		  
+		 
+		  int size=statusValidatingCG.size();
+		  System.out.println("Size before loop: "+size);
+		 
+		  while(size==0) {
+			  
+		  Thread.sleep(20000);
+		  driver.navigate().refresh();
+		  Thread.sleep(3000);
+		  size=statusValidatingCG.size();
+		  System.out.println(size);
+		
+		  
+		  }
+		 
+//		  Thread.sleep(200000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(200000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(100000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(100000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(100000);
+//		  driver.navigate().refresh();
+//		  WebDriverWait wait = new WebDriverWait(driver,50);
+//		  driver.navigate().refresh();
+//		  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//vaadin-grid-cell-content[contains(.,'Validating CG')]")));
+		 
+		  int size2=statusValidatingCG.size();
+		  if(size2>0) {
+			  for(WebElement ValidatingCG : statusValidatingCG) {
+				 
+				  assertTrue(ValidatingCG.isDisplayed());
+				  
+			  }
+			  
+		  }
+		 
+		
+	  }
 	
 
 	public void selectLabelCrossell() throws InterruptedException {

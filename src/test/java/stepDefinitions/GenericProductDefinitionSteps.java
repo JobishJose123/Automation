@@ -257,6 +257,7 @@ public class GenericProductDefinitionSteps extends Init{
     public void clickCreateNewOfferButton() throws Throwable {
 		
 		offerPageObjects.clickCreateNewOfferButton();
+		Thread.sleep(5000);
 		
 	}
 	
