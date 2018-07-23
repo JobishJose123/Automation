@@ -800,6 +800,11 @@ catch(Exception e) {
 		Assert.assertTrue(approvalStatus.isDisplayed());
 	}
 	
+	public void isApprovedStatusDisplayed(String campaignName) throws InterruptedException
+	{
+		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'A')]"));
+		Assert.assertTrue(approvalStatus.isDisplayed());
+	}
 	public void addLevel2Approver() throws InterruptedException {
 		jswait.loadClick(addLevel);
 	}

@@ -173,6 +173,12 @@ public class workApprovalflow extends Init {
 		eM.setExcelFile(fileName, sheet);
 		approvalPageObjects.isRejectedStatusDisplayed((String) eM.getCell(1, 0));
 	}
+	
+	@Then("^verify campaign status approved from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+	public void isApprovedStatusDisplayed(String sheet, String fileName) throws Throwable {
+		eM.setExcelFile(fileName, sheet);
+		approvalPageObjects.isApprovedStatusDisplayed((String) eM.getCell(1, 0));
+	}
 
 	@Then("^verify approve button displayed$")
 	public void isApproveButtonDisplayed() throws Throwable {

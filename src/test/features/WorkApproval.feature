@@ -427,6 +427,7 @@ Feature: generic product class
     Then wait for 1 minutes
     Then click on notification bell
     Then click on view all notifications
+    Then verify Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then click on reject button
     Then verify Reject message panel displayed
@@ -448,6 +449,11 @@ Feature: generic product class
    @NX-6382
    Scenario: Verify whether approver is able to specify the reject message in the reject popup
     Then check previous step and pass this
+    
+   @NX-6364
+   Scenario: Verify whether BC notification is send to level 2 approver after atleast 1 approver from level 1 approves it
+    Then check previous step and pass this
+    Then pass next scenario based on this step
     
    @NX-6381 @initBrowser @closeBrowser
   Scenario: Verify the status of BC when rejected
@@ -526,4 +532,3 @@ Feature: generic product class
     Then click on notification bell
     Then click on view all notifications
     Then verify approved message of campaign from the sheet "campaignBC" of file "campaignInputData"
-		
