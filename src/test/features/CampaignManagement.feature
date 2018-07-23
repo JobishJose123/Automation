@@ -430,4 +430,11 @@ Feature: campaign management
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then verify edited campaign from sheet "campaignBC"
     
-    
+     @NX-8938 @initBrowser
+     Scenario: Verify description is getting displayed properly on mouse hovering for graphical view NX-8938
+     Given login
+		Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+		Then verify descrption of graphical condition on mouse hover

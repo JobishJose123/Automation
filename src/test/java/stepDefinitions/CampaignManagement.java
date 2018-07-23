@@ -3,6 +3,8 @@ package stepDefinitions;
 import java.util.Random;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -17,6 +19,7 @@ import pageObjetcs.BroadcastPageObjects;
 import pageObjetcs.CampaignObjects;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.LoginPageObjects;
+import pageObjetcs.TargetConditionObjects;
 
 public class CampaignManagement extends Init{
 	JSWaiter jswait = new JSWaiter();
@@ -850,5 +853,25 @@ public class CampaignManagement extends Init{
 		    public void verifyValidationErrorOfUsageMetrics() throws Throwable
 		    {
 		    	
+		    }
+		    @Then("^verify descrption of graphical condition on mouse hover$")
+		    public void verifyThisCase() throws Throwable
+		    {
+		    	commonObjects.clickOptionsIcon();
+		    	commonObjects.clickEditOption();
+		    	campaignObjects.clickProceedButton();
+		    	TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+		    	targetConditionObjects.clickTargetConditionViewToggle();
+		    	Thread.sleep(3000);
+		    	 WebElement element = driver.findElement(By.xpath("//div[@id='graph-holder']/div/div"));
+		    	 
+		         Actions action = new Actions(driver);
+		  
+		         action.moveToElement(element).build().perform();
+		         
+		       jswait.waitUntil("//div[@id='tooltip']/*[contains(.,'Customer Profile Info')]");
+		       jswait.waitUntil("//div[@id='tooltip']/*[contains(.,'Age_q11')]");
+		       jswait.waitUntil("//div[@id='tooltip']/*[contains(.,'is greater than')]");
+		       jswait.waitUntil("//div[@id='tooltip']/*[contains(.,'18')]");
 		    }
 }
