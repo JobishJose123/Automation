@@ -258,7 +258,7 @@ public class BroadcastPageObjects extends Init {
      private List <WebElement> compltedeStatusBC;
 	 @FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'Render Scheduled')]")
      private List <WebElement> renderScheduledStatusBC;
-	 @FindBy(xpath="//div[@id='contentWrapper']/div/paper-menu/div//label[contains(.,'Permissions')")
+	 @FindBy(xpath="//div[@id='contentWrapper']/div/paper-menu/div//label[contains(.,'Permissions')]")
 	 private WebElement Permissions;
 	 @FindBy(xpath=".//label[contains(.,'Select users who can edit this broadcast')]/../../../div")
 	 private WebElement clickusers;
@@ -952,7 +952,7 @@ public class BroadcastPageObjects extends Init {
 		enterBroadcastPurpose("Purpose of BC is NOTHING");
 		selectLabelCrossell();		
 		selectInventoryUnlimited();
-		selectROI();
+		//selectROI();
 	}
 	
 	public void selectROI() throws InterruptedException {
@@ -1494,6 +1494,9 @@ public class BroadcastPageObjects extends Init {
 		  }
 		 
 		
+	  }
+	   public void verifyPermissions() throws Exception {
+		   jswait.failIfVisible(Permissions); 
 	  }
 	
 

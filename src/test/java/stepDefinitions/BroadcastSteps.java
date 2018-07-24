@@ -1613,7 +1613,8 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		//jswait.loadClick(".//label[contains(.,'Select users who can edit this broadcast')]/../../../div");
 		//jswait.loadClick("//paper-dialog[@id='addUserDialog']//paper-input-container//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']");
 		//jswait.loadClick("//paper-tags-dropdown[@id='tagDropDown']/paper-menu-button[@id='menuButton']//paper-tags-input[@id='tagInput']/paper-input[@id='tagInput']//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']/../div");
-		jswait.loadClick("//paper-item[contains(.,'rahul.chandran@flytxt.com')]");
+		//jswait.loadClick("//paper-item[contains(.,'rahul.chandran@flytxt.com')]");
+		jswait.loadClick("//paper-item[contains(.,'"+user+"')]");
 		broadcastPageObjects.ClickPermissionTitle();
 		//jswait.loadClick("//paper-dialog[@id='addUserDialog']//span[.='Broadcast Edit Permissions']");
 		broadcastPageObjects.ClickPermissionSave();
@@ -1888,4 +1889,13 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 	public void navigate_to_bc_page() throws Throwable {
 		driver.get("http://192.168.150.27/#/precision-marketer/life-cycle-marketing/campaignId/24/broadcasts");
 	}
+@Then("^Search BC and check for permissions from \"([^\"]*)\"$")
+public void Search_BC_and_check_for_permissions_from(String sheet) throws Throwable {
+	eh.setExcelFile("bcInputData",sheet);
+	String name = (String) eh.getCell(1, 0);
+	catalogPageObjects.filterWorkaround(name);
+	commonObjects.clickOptionsIcon();
+	broadcastPageObjects.verifyPermissions();
+
+}
 }
