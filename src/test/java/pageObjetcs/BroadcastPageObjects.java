@@ -198,6 +198,9 @@ public class BroadcastPageObjects extends Init {
 	
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Targeting')]")
 	private List <WebElement> statusTargetingCG;
+	
+	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Delivering')]")
+	private List <WebElement> statusDelivering;
 
 	@FindBy(xpath = ".//div[@id='radioLabel' and contains(text(),'Create')]")
 	private WebElement targetbccreate;
@@ -1407,6 +1410,7 @@ public class BroadcastPageObjects extends Init {
 		}
 		clickProceedButton();
 		selectBaseList(baseList);
+		clickTargetConditionNoneOption();
 		verifyCG_Configure_Options();
 		
 		clickProceedButton();
@@ -1430,7 +1434,6 @@ public class BroadcastPageObjects extends Init {
 		clickProceedButton();
 	}
 	
-	
 	public void verifyCG_Configure_Options() throws InterruptedException {
 		assertTrue(TGConfigure.isDisplayed());
 		assertTrue(CGConfigure.isDisplayed());
@@ -1441,12 +1444,51 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(CGConfigure);
 		jswait.loadClick(defineCGSize);
 		jswait.loadClick(defineCGLimitSave);
-		jswait.loadClick(calculateLimit);
-		Thread.sleep(4000);;
-		assertTrue(calculateText.isDisplayed());
+//		jswait.loadClick(calculateLimit);
+//		Thread.sleep(4000);;
+//		assertTrue(calculateText.isDisplayed());
 		Thread.sleep(2000);
 		
 	}
+	
+	
+	
+	
+	public void verifyDeliveringStatusForBC() throws Throwable {
+		  
+		  
+		  
+		 
+		  int size=statusDelivering.size();
+		  System.out.println("Size before loop: "+size);
+		 
+		  while(size==0) {
+			  
+		  Thread.sleep(20000);
+		  driver.navigate().refresh();
+		  Thread.sleep(3000);
+		  size=statusDelivering.size();
+		  System.out.println(size);
+		
+		  
+		  }
+		 
+
+		 
+		  int size2=statusDelivering.size();
+		  if(size2>0) {
+			  for(WebElement Delivering : statusDelivering) {
+				 
+				  assertTrue(Delivering.isDisplayed());
+				  
+			  }
+			  
+		  }
+		 
+		
+	  }
+	
+	
 	
 	
 	
