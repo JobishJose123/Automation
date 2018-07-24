@@ -35,6 +35,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 				WebDriverWait wait = new WebDriverWait(driver, 8);
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath(element))).click();
 			}
+			
+			public boolean checkVisibility(WebElement element) {
+				WebDriverWait wait = new WebDriverWait(driver, 8);
+				wait.until(ExpectedConditions.visibilityOf(element));
+				return element.isDisplayed();
+			}
+			public boolean checkVisibility(String element) {
+				WebDriverWait wait = new WebDriverWait(driver, 8);
+				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy((By.xpath(element))));
+				return driver.findElement(By.xpath(element)).isDisplayed();
+			}
+			
 			public int tryClick(WebElement element) {
 				try{
 					clickElement(element);
@@ -89,6 +101,48 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 					initialWait++;
 				}
 				clickElement(element);
+			}
+			
+			public void failIfVisible(String element) throws Exception {
+				Exception failIfVisibleException = new Exception("failIfVisibleException::element is visible, hence scenario failed");
+				log.debug("inside failIfVisible method for:"+element.toString());
+				boolean status = false;
+				int initialWait = 0;
+				while(initialWait<=waitValue) {
+					Thread.sleep(400);
+					log.debug("initial wait of 400ms");
+					loadMask.waitForLoadMask();
+					log.debug("no presence of loadMask");
+					Thread.sleep(400);
+					if(checkVisibility(element)==true)
+						return;
+					Thread.sleep(1000);
+					loadMask.waitForLoadMask();
+					initialWait++;
+				}
+				if(checkVisibility(element)==true)
+					throw failIfVisibleException;
+			}
+			
+			public void failIfVisible(WebElement element) throws Exception {
+				Exception failIfVisibleException = new Exception("failIfVisibleException::element is visible, hence scenario failed");
+				log.debug("inside failIfVisible method for:"+element.toString());
+				boolean status = false;
+				int initialWait = 0;
+				while(initialWait<=waitValue) {
+					Thread.sleep(400);
+					log.debug("initial wait of 400ms");
+					loadMask.waitForLoadMask();
+					log.debug("no presence of loadMask");
+					Thread.sleep(400);
+					if(checkVisibility(element)==true)
+						return;
+					Thread.sleep(1000);
+					loadMask.waitForLoadMask();
+					initialWait++;
+				}
+				if(checkVisibility(element)==true)
+					throw failIfVisibleException;
 			}
 			//////////////////////////////////////////////////////////////////
 			public void loadClickTry(WebElement element) throws InterruptedException{

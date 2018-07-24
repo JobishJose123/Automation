@@ -756,8 +756,8 @@ public class OfferSteps extends Init {
 	jswait.waitUntil(responseXpath);
 	List<WebElement> responseBox = driver.findElements(By.xpath(responseXpath));
 	Assert.assertTrue(responseBox.size() == 2, "response message box should be shown for each creative");
-	driver.findElement(By.xpath("//h4[contains(.,'Add fulfillment response in English')]"));
-	driver.findElement(By.xpath("//h4[contains(.,'Add fulfillment response in Spanish')]"));
+	driver.findElement(By.xpath("//h4[contains(.,'Add fulfillment response in "+LANGUAGE1+"')]"));
+	driver.findElement(By.xpath("//h4[contains(.,'Add fulfillment response in "+LANGUAGE2+"')]"));
 	List<WebElement> responseMessages = driver.findElements(By.xpath("//label[contains(.,'Response on success')]"));
 	Assert.assertTrue(responseMessages.size() == 2, "response message success should be shown for each creative");
 	responseMessages = driver.findElements(By.xpath("//label[contains(.,'Response on Failure')]"));

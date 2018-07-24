@@ -87,7 +87,7 @@ public class RegistrationList extends Init{
     	
     	 String alphabet = "abcdefghijklmnopqrstuvwxyz";
  	    final int N = 6;
-    	for(int i=1; i<=500; i++){
+    	for(int i=1; i<=498; i++){
     	///////random name generation
     	    StringBuilder sb1 = new StringBuilder();
     	    for (int j = 0; j < N; j++) {
@@ -129,6 +129,52 @@ public class RegistrationList extends Init{
             pw.write(sb.toString());
             sb.setLength(0);
     	}
+    	sb.append('\n');
+	    sb.append("919446506807");
+        sb.append(',');
+        sb.append("joel");
+        sb.append(',');
+        sb.append("jose");
+        sb.append(',');
+        sb.append("India");
+        sb.append(',');
+        sb.append("joel.jose@flytxt.com");
+        sb.append(',');
+        sb.append("Malayalam");
+        sb.append(',');
+        sb.append("English");
+        sb.append(',');
+        sb.append("200");
+        sb.append(',');
+        sb.append("Yes");
+        sb.append(',');
+        sb.append("25");
+        pw.write(sb.toString());
+        sb.setLength(0);
+        
+        sb.append('\n');
+	    sb.append("919446506808");
+        sb.append(',');
+        sb.append("joel1");
+        sb.append(',');
+        sb.append("jose1");
+        sb.append(',');
+        sb.append("India");
+        sb.append(',');
+        sb.append("joel.kallely95@gmail.com");
+        sb.append(',');
+        sb.append("Malayalam");
+        sb.append(',');
+        sb.append("English");
+        sb.append(',');
+        sb.append("201");
+        sb.append(',');
+        sb.append("No");
+        sb.append(',');
+        sb.append("26");
+        pw.write(sb.toString());
+        sb.setLength(0);
+        
         pw.close();
         System.out.println("reg list creation done!");
 		
