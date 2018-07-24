@@ -194,6 +194,10 @@ public class BroadcastPageObjects extends Init {
 	private WebElement topBcStatusGrid;
 	@FindBy(xpath = ".//label[contains(.,'Start Date/Time')]")
 	private WebElement StartBroadcastDateTimeField;
+	
+	
+	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Targeting')]")
+	private List <WebElement> statusTargetingCG;
 
 	@FindBy(xpath = ".//div[@id='radioLabel' and contains(text(),'Create')]")
 	private WebElement targetbccreate;
@@ -1388,6 +1392,110 @@ public class BroadcastPageObjects extends Init {
 	public void ClickPermissionSave() throws InterruptedException {
 		jswait.loadClick(PermissionSave);
 	}
+	
+	
+	public void createBCWith1MSubscribersAndConfigurCG_TG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+		enterBroadcastBasicDetails(name);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		verifyCG_Configure_Options();
+		
+		clickProceedButton();
+		selectOffer(offer);
+		if(!bc_type.contains("Informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+		}
+		clickProceedButton();
+	}
+	
+	
+	public void verifyCG_Configure_Options() throws InterruptedException {
+		assertTrue(TGConfigure.isDisplayed());
+		assertTrue(CGConfigure.isDisplayed());
+//		jswait.loadClick(TGConfigure);
+//		jswait.loadClick(defineLimit);
+//		jswait.loadSendKeys(enterLimitField, "10");
+//		jswait.loadClick(defineLimitSave);
+		jswait.loadClick(CGConfigure);
+		jswait.loadClick(defineCGSize);
+		jswait.loadClick(defineCGLimitSave);
+		jswait.loadClick(calculateLimit);
+		Thread.sleep(4000);;
+		assertTrue(calculateText.isDisplayed());
+		Thread.sleep(2000);
+		
+	}
+	
+	
+	
+	 public void verifyTargetingStatusForBC() throws Throwable {
+		  
+		  
+		  
+		 
+		  int size=statusTargetingCG.size();
+		  System.out.println("Size before loop: "+size);
+		 
+		  while(size==0) {
+			  
+		  Thread.sleep(20000);
+		  driver.navigate().refresh();
+		  Thread.sleep(3000);
+		  size=statusTargetingCG.size();
+		  System.out.println(size);
+		
+		  
+		  }
+		 
+//		  Thread.sleep(200000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(200000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(100000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(100000);
+//		  driver.navigate().refresh();
+//		  Thread.sleep(100000);
+//		  driver.navigate().refresh();
+//		  WebDriverWait wait = new WebDriverWait(driver,50);
+//		  driver.navigate().refresh();
+//		  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//vaadin-grid-cell-content[contains(.,'Validating CG')]")));
+		 
+		  int size2=statusTargetingCG.size();
+		  if(size2>0) {
+			  for(WebElement Targeting : statusTargetingCG) {
+				 
+				  assertTrue(Targeting.isDisplayed());
+				  
+			  }
+			  
+		  }
+		 
+		
+	  }
+	
 
 
 }
