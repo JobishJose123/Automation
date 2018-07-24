@@ -144,18 +144,26 @@ public class BroadcastPageObjects extends Init {
 	private WebElement senderIdBroadcastSelector;
 	@FindBy(xpath = ".//label[contains(.,'Sender ID: Fulfillment')]/../input")
 	private WebElement senderIdFulfillmentSelector;
-	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'Address-SMPP')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	private WebElement senderIdBroadcastAdressSmpp;
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'"+SENDER_EMAIL+"')]")
+	private WebElement senderIdBroadcastEmail;
 	@FindBy(xpath = ".//label[contains(.,'Route over which this broadcast')]/../input")
 	private WebElement routeBroadcast;
 	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/../input")
 	private WebElement routeFulfillment;
-	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
 	private WebElement routeBroadcastSmppRobioutbound;
-	@FindBy(xpath = ".//label[contains(.,'Sender ID: Fulfillment')]/following::vaadin-combo-box-item[contains(.,'Address-SMPP')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'"+ROUTE_EMAIL+"')]")
+	private WebElement routeBroadcastEmail;
+	@FindBy(xpath = ".//label[contains(.,'Sender ID: Fulfillment')]/following::vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	private WebElement senderIdFulfillmentAdressSmpp;
-	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
+	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
 	private WebElement routeFulfillmentSmppRobioutbound;
+	@FindBy(xpath = ".//label[contains(.,'Sender ID: Fulfillment')]/following::vaadin-combo-box-item[contains(.,'"+SENDER_EMAIL+"')]")
+	private WebElement senderIdFulfillmentEmail;
+	@FindBy(xpath = ".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'"+ROUTE_EMAIL+"')]")
+	private WebElement routeFulfillmentEmail;
 	@FindBy(xpath = ".//label[contains(.,'Track session')]/../input")
 	private WebElement trackSessionSelector;
 	@FindBy(xpath = ".//*[@id='contentWrapper']/div/paper-listbox/paper-item[contains(.,'After')]")
@@ -269,8 +277,8 @@ public class BroadcastPageObjects extends Init {
 	 
 	
 	 
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 @FindBy(xpath="//paper-radio-button[contains(.,'No Control Group')]")
+	 private WebElement noControlGroupRadioButton;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -465,6 +473,8 @@ public class BroadcastPageObjects extends Init {
 		String status = topBcStatusGrid.getText();
 		return status;
 	}
+	
+	
 	public String getBcStatus(String bcName) throws Exception {
 		jswait.waitUntil(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[2]/vaadin-grid-cell-content");
 		String status = driver.findElement(By.xpath(".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/../vaadin-grid-table-cell[2]/vaadin-grid-cell-content")).getText();
@@ -933,18 +943,32 @@ public class BroadcastPageObjects extends Init {
 	// ----------------------------------------------------------------//
 
 	public void selectSenderAndRoute() throws InterruptedException {
-		jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+		jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 		jswait.loadClick(senderIdBroadcastAdressSmpp);
-		jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+		jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 		jswait.loadClick(routeBroadcastSmppRobioutbound);
-		jswait.loadSendKeys(senderIdFulfillmentSelector, "Address-SMPP");
+		jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_SMPP);
 		// jswait.loadClick(senderIdFulfillmentSelector);
 		// Thread.sleep(4000);
 		jswait.loadClick(senderIdFulfillmentAdressSmpp);
 		// wait.until(ExpectedConditions.elementToBeClickable(senderIdFulfillmentAdressSmpp)).click();
-		jswait.loadSendKeys(routeFulfillment, "SMPP Robi outbound");
+		jswait.loadSendKeys(routeFulfillment, ROUTE_SMPP);
 		Thread.sleep(2000);
 		jswait.loadClick(routeFulfillmentSmppRobioutbound);
+	}
+	public void selectSenderAndRouteEmail() throws InterruptedException {
+		jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_EMAIL);
+		jswait.loadClick(senderIdBroadcastEmail);
+		jswait.loadSendKeys(routeBroadcast, ROUTE_EMAIL);
+		jswait.loadClick(routeBroadcastEmail);
+		jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_EMAIL);
+		// jswait.loadClick(senderIdFulfillmentSelector);
+		// Thread.sleep(4000);
+		jswait.loadClick(senderIdFulfillmentEmail);
+		// wait.until(ExpectedConditions.elementToBeClickable(senderIdFulfillmentAdressSmpp)).click();
+		jswait.loadSendKeys(routeFulfillment, ROUTE_EMAIL);
+		Thread.sleep(2000);
+		jswait.loadClick(routeFulfillmentEmail);
 	}
 
 	public void enterBroadcastBasicDetails(String name) throws InterruptedException {
@@ -1026,6 +1050,8 @@ public class BroadcastPageObjects extends Init {
 	}
 
 	public void createBC(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+		ExcelHelper offerExcel = new ExcelHelper(); 
+    	offerExcel.setExcelFile("offerInputData", offer);
 		enterBroadcastBasicDetails(name);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
@@ -1038,18 +1064,26 @@ public class BroadcastPageObjects extends Init {
 		}
 		clickProceedButton();
 		selectBaseList(baseList);
+		jswait.loadClick(CGConfigure);
+		jswait.loadClick(noControlGroupRadioButton);
+		jswait.loadClick(defineCGLimitSave);
 		clickProceedButton();
-		selectOffer(offer);
+		selectOffer(offerExcel.getCellByColumnName("Offer Name"));
 		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
-			selectSenderAndRoute();
+			if(offerExcel.getCellByColumnName("Channel").contains("Email"))
+			{
+				selectSenderAndRouteEmail();
+			}
+			else
+				selectSenderAndRoute();
 		}
 		else {
-			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 
@@ -1092,9 +1126,9 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
-			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 
@@ -1130,9 +1164,9 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
-			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 
@@ -1169,9 +1203,9 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
-			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 
@@ -1210,9 +1244,9 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
-			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 
@@ -1249,9 +1283,9 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
-			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 
@@ -1325,9 +1359,9 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
-			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 
@@ -1367,9 +1401,9 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
-			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 
@@ -1418,9 +1452,9 @@ public class BroadcastPageObjects extends Init {
 			selectSenderAndRoute();
 		}
 		else {
-			jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
-			jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
 
 			jswait.loadClick(routeBroadcastSmppRobioutbound);	
 

@@ -318,16 +318,16 @@ private WebElement ruleafterinput2 ;
 private WebElement ruledays;
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::input[1]")
 private WebElement rulessenderid ;
-@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'Address-SMPP')]")
+@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 private WebElement addresssprule;
-@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'Address-SMPP')])[2]")
+@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')])[2]")
 private WebElement addresssprule2;
 
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which this broadcast can be sent')]//following::input[1]")
 private WebElement rulerouteid;
-@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
+@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
 private WebElement ruleroute;
-@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')])[2]")
+@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])[2]")
 private WebElement ruleroute2;
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::input[1]")
 private WebElement rulerouteid2;

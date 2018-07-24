@@ -87,7 +87,7 @@ public class RegistrationList extends Init{
     	
     	 String alphabet = "abcdefghijklmnopqrstuvwxyz";
  	    final int N = 6;
-    	for(int i=1; i<=498; i++){
+    	for(int i=1; i<=197; i++){
     	///////random name generation
     	    StringBuilder sb1 = new StringBuilder();
     	    for (int j = 0; j < N; j++) {
@@ -172,6 +172,29 @@ public class RegistrationList extends Init{
         sb.append("No");
         sb.append(',');
         sb.append("26");
+        pw.write(sb.toString());
+        sb.setLength(0);
+        
+        sb.append('\n');
+	    sb.append("919446506809");
+        sb.append(',');
+        sb.append("selenium");
+        sb.append(',');
+        sb.append("flytxt");
+        sb.append(',');
+        sb.append("India");
+        sb.append(',');
+        sb.append("selenium.flytxt@gmail.com");
+        sb.append(',');
+        sb.append("Malayalam");
+        sb.append(',');
+        sb.append("English");
+        sb.append(',');
+        sb.append("150");
+        sb.append(',');
+        sb.append("No");
+        sb.append(',');
+        sb.append("28");
         pw.write(sb.toString());
         sb.setLength(0);
         
@@ -309,12 +332,15 @@ public class RegistrationList extends Init{
 	@Then("^save registration list$")
     public void saveRegistrationListButton() throws Exception{
 		registrationListPage.clickSaveButton();
+		CommonObjects commonObjects = new CommonObjects();
+		commonObjects.filterName(SELENIUM_LIST);
+		commonObjects.clickOptionsIcon();
 	}
 	@Then("^enter details of registration list$")
     public void createRegistrationList() throws Exception{
 //		list.setExcelFile("registrationListInputData", "Sheet1");
 //		String listname = (String) list.getCell(1, 2);
-		String listname = "selenium_list";
+		String listname = SELENIUM_LIST;
 		System.out.println(listname);
 		registrationListPage.enterRegistratonListDetails(listname, "Description");	
 	}
@@ -322,7 +348,7 @@ public class RegistrationList extends Init{
     public void createDNDList() throws Exception{
 //		list.setExcelFile("registrationListInputData", "Sheet1");
 //		String listname = (String) list.getCell(1, 2);
-		String listname = "selenium_list_DND";
+		String listname = SELENIUM_DND_LIST;
 		System.out.println(listname);
 		registrationListPage.enterDNDRegistratonListDetails(listname, "Description");	
 	}

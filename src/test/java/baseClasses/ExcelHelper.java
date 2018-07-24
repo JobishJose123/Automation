@@ -44,6 +44,10 @@ String file = "";
     	int c = getColumnNumber(colName);
     	setCell(r, c, val);
     }
+    public void setCell(String colName,String val) throws IOException{
+    	int c = getColumnNumber(colName);
+    	setCell(1, c, val);
+    }
 	public CharSequence getCell(int row,int col){
 		CharSequence CellGetContent = "";
 	if(sh.getRow(row).getCell(col).getCellType()==Cell.CELL_TYPE_STRING)

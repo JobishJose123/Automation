@@ -1047,7 +1047,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
       		 day++;
       	 }
       	 Actions builder = new Actions(driver);
-      	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offerExcel.getCell(1, 0).toString());
+      	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer);
       	
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
@@ -1888,4 +1888,33 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 	public void navigate_to_bc_page() throws Throwable {
 		driver.get("http://192.168.150.27/#/precision-marketer/life-cycle-marketing/campaignId/24/broadcasts");
 	}
+
+@Then("^wait until status of \"([^\"]*)\" is \"([^\"]*)\"$")
+public void waitUntilBCStatus(String bcSheet, String statusExpected) throws Throwable
+{  
+	eh.setExcelFile("bcInputData", bcSheet);
+	commonObjects.filterName(eh.getCellByColumnName("BC Name"));
+	commonObjects.toggleAutoRefresh();
+	String statusOfBc = broadcastPageObjects.getTopBcStatus();
+	while(!statusOfBc.contains(statusExpected)) {
+		statusOfBc = broadcastPageObjects.getTopBcStatus();
+		System.out.println(statusOfBc);
+		Thread.sleep(3000);
+	}
+	Assert.assertTrue("Invalid status of BC",statusOfBc.contains(statusExpected));
+}
+@Then("^verify targeted and sent count of \"([^\"]*)\"$")
+public void verifyBCTargetedCount(String sheet) throws Throwable {
+	eh.setExcelFile("bcInputData", sheet);
+	String targetStr = broadcastPageObjects.getBcTargtedCount(eh.getCellByColumnName("BC Name"));
+	String sentStr = broadcastPageObjects.getBcSentCount(eh.getCellByColumnName("BC Name"));
+	int targeted = Integer.parseInt(targetStr);
+	int sent = Integer.parseInt(sentStr);
+	ExcelHelper list = new ExcelHelper();
+	list.setExcelFile("registrationListInputData", "Sheet1");
+	targetStr = list.getCellByColumnName("age>18");
+	int expected = Integer.parseInt(targetStr);
+	Assert.assertEquals("expected count not equal to actual count",expected, targeted);
+	Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+}
 }

@@ -46,6 +46,12 @@ public static Logger log;
 	public final String BASE_LIST3 = "1M_List";
 	public final String LANGUAGE1 = "English";
 	public final String LANGUAGE2 = "Portuguese";
+	public final String SENDER_SMPP = "Address-SMPP";
+	public final String ROUTE_SMPP = "SMPP Robi outbound";
+	public final String SENDER_EMAIL = "Address-SMPP";
+	public final String ROUTE_EMAIL = "Email_Chan_New";
+	public final String SELENIUM_LIST = "selenium_list";
+	public final String SELENIUM_DND_LIST = "selenium_list_DND";
 	
 }
 //public class Init {
