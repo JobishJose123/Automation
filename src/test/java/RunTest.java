@@ -35,7 +35,7 @@ import cucumber.api.junit.Cucumber;
         features = { "src/test/features" },
 		glue = {"classpath:"},
         //@NX-ProductTestSuite,@tagOfferCatalog,@madhan_test_suite_on_OfferCreation,@tagOfferCatalog,@NX-bcCreationSuite
-		tags = { "@NX-685" },
+		tags = { "@NX-8938" },
 		plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:output/report.html",
         "html:target/81", "json:target/81/cucumber.json",
@@ -49,7 +49,12 @@ public class RunTest extends Init
 	@BeforeClass
 	public static void beforeClass() {
 		System.out.println("Starting test"); 
-
+		try{
+			String path = new File( "." ).getCanonicalPath();
+			System.setProperty("log", path+"\\Logs");
+		}catch(Exception e) {
+			
+		}
 	}
 	@AfterClass
 	public static void writeExtentReport() {

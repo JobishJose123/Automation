@@ -38,7 +38,7 @@ public class OfferPageObjects extends Init {
 	final String EMAIL_PROFILE_FIELD = "Email_q11";
 	final String AGE_PROFILE_FIELD = "Age_q11";
 	final String AGE_DYNAMIC_VARIABLE = "Age_Q990";
-	final String NAME_PROFILE_FIELD = "FirstName_q11";
+	final String NAME_PROFILE_FIELD = "First Name_q11";
 	
 	@FindBy(xpath = "//span[contains(.,'Select')]/../input")
 	private WebElement emailSelectResourceButton;
@@ -66,9 +66,9 @@ public class OfferPageObjects extends Init {
 	private WebElement dialogBoxAddProductButton;
 	@FindBy(xpath = "//label[contains(.,'Language')]/..//input")
 	private WebElement creativeLanguage;
-	@FindBy(xpath = "//paper-item[contains(.,'English')]")
+	@FindBy(xpath = "//paper-item[contains(.,'"+LANGUAGE1+"')]")
 	private WebElement creativeLanguageEnglishSelect;
-	@FindBy(xpath = "//creative-wrapper//define-creative[2]//paper-item[contains(.,'Spanish')]")
+	@FindBy(xpath = "//creative-wrapper//define-creative[2]//paper-item[contains(.,'"+LANGUAGE2+"')]")
 	private WebElement secondCreativeLanguageSpanishSelect;
 	@FindBy(xpath = "//paper-button[contains(.,'Save Offer')]")
 	private WebElement saveOfferButton;

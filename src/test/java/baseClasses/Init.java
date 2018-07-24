@@ -44,6 +44,8 @@ public static Logger log;
 	public final String BALANCE_PROFILE_FIELD = "Balance_q11";
 	public final String BASE_LIST2 = "Copy_paste_List";
 	public final String BASE_LIST3 = "1M_List";
+	public final String LANGUAGE1 = "English";
+	public final String LANGUAGE2 = "Portuguese";
 	
 }
 //public class Init {

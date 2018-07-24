@@ -84,7 +84,7 @@ public class Offer_creation_steps extends Init
 	{
 		actions.moveToElement(driver.findElement(By.xpath("//label[contains(.,'Language')]"))).click().build().perform();
 		Thread.sleep(1000);
-		actions.moveToElement(driver.findElement(By.xpath("//paper-item[contains(.,'English (UK)')]"))).click().build().perform();
+		actions.moveToElement(driver.findElement(By.xpath("//paper-item[contains(.,'"+LANGUAGE1+"')]"))).click().build().perform();
 		Thread.sleep(1000);
 		actions.moveToElement(driver.findElement(By.xpath("//label[contains(.,'Character Set')]"))).click().build().perform();
 		Thread.sleep(1000);
