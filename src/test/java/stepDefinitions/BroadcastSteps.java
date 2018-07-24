@@ -1259,6 +1259,15 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 	
 	
 	
+
+	@Then("^verify targeted count$")
+    public void verifyTargetedCount() throws Throwable
+    { 
+		
+		broadcastPageObjects.verifyTargetedCount();
+    
+    }
+	
 	
 	
 	

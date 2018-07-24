@@ -196,6 +196,10 @@ public class BroadcastPageObjects extends Init {
 	private WebElement StartBroadcastDateTimeField;
 	
 	
+	@FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'9,00,000')]")
+	private WebElement targetCount;
+	
+	
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Targeting')]")
 	private List <WebElement> statusTargetingCG;
 	
@@ -1487,6 +1491,25 @@ public class BroadcastPageObjects extends Init {
 		 
 		
 	  }
+	
+	
+	
+	
+	
+   public void verifyTargetedCount() throws Throwable {
+		
+		String count=targetCount.getText();
+		System.out.println("Count: "+count);
+		Exception targetCountExcep=new Exception("Target count is not correct");
+		if(count.equals("9,00,000"))
+			System.out.println("Target count is correct");
+		else
+			throw targetCountExcep;
+			
+		
+		
+	}
+	
 	
 	
 	
