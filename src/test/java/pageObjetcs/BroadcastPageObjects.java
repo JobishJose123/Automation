@@ -204,8 +204,15 @@ public class BroadcastPageObjects extends Init {
 	private WebElement StartBroadcastDateTimeField;
 	
 	
+	@FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'9,00,000')]")
+	private WebElement targetCount;
+	
+	
 	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Targeting')]")
 	private List <WebElement> statusTargetingCG;
+	
+	@FindBy(xpath = ".//vaadin-grid-cell-content[contains(.,'Delivering')]")
+	private List <WebElement> statusDelivering;
 
 	@FindBy(xpath = ".//div[@id='radioLabel' and contains(text(),'Create')]")
 	private WebElement targetbccreate;
@@ -266,7 +273,7 @@ public class BroadcastPageObjects extends Init {
      private List <WebElement> compltedeStatusBC;
 	 @FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'Render Scheduled')]")
      private List <WebElement> renderScheduledStatusBC;
-	 @FindBy(xpath="//div[@id='contentWrapper']/div/paper-menu/div//label[contains(.,'Permissions')")
+	 @FindBy(xpath="//div[@id='contentWrapper']/div/paper-menu/div//label[contains(.,'Permissions')]")
 	 private WebElement Permissions;
 	 @FindBy(xpath=".//label[contains(.,'Select users who can edit this broadcast')]/../../../div")
 	 private WebElement clickusers;
@@ -976,7 +983,7 @@ public class BroadcastPageObjects extends Init {
 		enterBroadcastPurpose("Purpose of BC is NOTHING");
 		selectLabelCrossell();		
 		selectInventoryUnlimited();
-		selectROI();
+		//selectROI();
 	}
 	
 	public void selectROI() throws InterruptedException {
@@ -1441,6 +1448,7 @@ public class BroadcastPageObjects extends Init {
 		}
 		clickProceedButton();
 		selectBaseList(baseList);
+		clickTargetConditionNoneOption();
 		verifyCG_Configure_Options();
 		
 		clickProceedButton();
@@ -1464,7 +1472,6 @@ public class BroadcastPageObjects extends Init {
 		clickProceedButton();
 	}
 	
-	
 	public void verifyCG_Configure_Options() throws InterruptedException {
 		assertTrue(TGConfigure.isDisplayed());
 		assertTrue(CGConfigure.isDisplayed());
@@ -1475,12 +1482,70 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(CGConfigure);
 		jswait.loadClick(defineCGSize);
 		jswait.loadClick(defineCGLimitSave);
-		jswait.loadClick(calculateLimit);
-		Thread.sleep(4000);;
-		assertTrue(calculateText.isDisplayed());
+//		jswait.loadClick(calculateLimit);
+//		Thread.sleep(4000);;
+//		assertTrue(calculateText.isDisplayed());
 		Thread.sleep(2000);
 		
 	}
+	
+	
+	
+	
+	public void verifyDeliveringStatusForBC() throws Throwable {
+		  
+		  
+		  
+		 
+		  int size=statusDelivering.size();
+		  System.out.println("Size before loop: "+size);
+		 
+		  while(size==0) {
+			  
+		  Thread.sleep(20000);
+		  driver.navigate().refresh();
+		  Thread.sleep(3000);
+		  size=statusDelivering.size();
+		  System.out.println(size);
+		
+		  
+		  }
+		 
+
+		 
+		  int size2=statusDelivering.size();
+		  if(size2>0) {
+			  for(WebElement Delivering : statusDelivering) {
+				 
+				  assertTrue(Delivering.isDisplayed());
+				  
+			  }
+			  
+		  }
+		 
+		
+	  }
+	
+	
+	
+	
+	
+   public void verifyTargetedCount() throws Throwable {
+		
+		String count=targetCount.getText();
+		System.out.println("Count: "+count);
+		Exception targetCountExcep=new Exception("Target count is not correct");
+		if(count.equals("9,00,000"))
+			System.out.println("Target count is correct");
+		else
+			throw targetCountExcep;
+			
+		
+		
+	}
+	
+	
+	
 	
 	
 	
@@ -1528,6 +1593,9 @@ public class BroadcastPageObjects extends Init {
 		  }
 		 
 		
+	  }
+	   public void verifyPermissions() throws Exception {
+		   jswait.failIfVisible(Permissions); 
 	  }
 	
 

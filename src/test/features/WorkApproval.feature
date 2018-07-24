@@ -533,7 +533,7 @@ Feature: generic product class
     Then click on view all notifications
     Then verify approved message of campaign from the sheet "campaignBC" of file "campaignInputData"
     
-  @NX-6387 @initBrowser
+  @NX-6387 @initBrowser @closeBrowser
   Scenario: Verify whether BC get activate only after atleast  1 approver from all configured levels approves the BC
   Given login
     Then navigate to configuration management

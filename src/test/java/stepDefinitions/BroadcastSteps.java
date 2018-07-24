@@ -1249,6 +1249,24 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
     }
 	
 	
+	@Then("^verify delivering status for bc$")
+    public void verifyDeliveringCGStatusForBC() throws Throwable
+    { 
+		
+		broadcastPageObjects.verifyDeliveringStatusForBC();
+    
+    }
+	
+	
+	
+
+	@Then("^verify targeted count$")
+    public void verifyTargetedCount() throws Throwable
+    { 
+		
+		broadcastPageObjects.verifyTargetedCount();
+    
+    }
 	
 	
 	
@@ -1613,7 +1631,8 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		//jswait.loadClick(".//label[contains(.,'Select users who can edit this broadcast')]/../../../div");
 		//jswait.loadClick("//paper-dialog[@id='addUserDialog']//paper-input-container//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']");
 		//jswait.loadClick("//paper-tags-dropdown[@id='tagDropDown']/paper-menu-button[@id='menuButton']//paper-tags-input[@id='tagInput']/paper-input[@id='tagInput']//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']/../div");
-		jswait.loadClick("//paper-item[contains(.,'rahul.chandran@flytxt.com')]");
+		//jswait.loadClick("//paper-item[contains(.,'rahul.chandran@flytxt.com')]");
+		jswait.loadClick("//paper-item[contains(.,'"+user+"')]");
 		broadcastPageObjects.ClickPermissionTitle();
 		//jswait.loadClick("//paper-dialog[@id='addUserDialog']//span[.='Broadcast Edit Permissions']");
 		broadcastPageObjects.ClickPermissionSave();
@@ -1916,5 +1935,14 @@ public void verifyBCTargetedCount(String sheet) throws Throwable {
 	int expected = Integer.parseInt(targetStr);
 	Assert.assertEquals("expected count not equal to actual count",expected, targeted);
 	Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+}
+@Then("^Search BC and check for permissions from \"([^\"]*)\"$")
+public void Search_BC_and_check_for_permissions_from(String sheet) throws Throwable {
+	eh.setExcelFile("bcInputData",sheet);
+	String name = (String) eh.getCell(1, 0);
+	catalogPageObjects.filterWorkaround(name);
+	commonObjects.clickOptionsIcon();
+	broadcastPageObjects.verifyPermissions();
+
 }
 }
