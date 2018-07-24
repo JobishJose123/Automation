@@ -230,4 +230,9 @@ public class workApprovalflow extends Init {
 		String campaignName = (String) eM.getCell(1, 0);
 		approvalPageObjects.verifyApprovedMessage(campaignName);
 	}
+	
+	@Then("verify review page$")
+	public void verifyCampaignReviewPage() throws Throwable {
+		approvalPageObjects.verifyCampaignReviewPage();
+	}
 }

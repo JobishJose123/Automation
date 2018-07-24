@@ -144,17 +144,18 @@ public class WorkApprovalObjects extends Init{
 	private WebElement rejectMessage;
 	@FindBy(xpath="//paper-dialog[@id ='approveReject' ]//paper-button[contains(., 'Send')]")
 	private WebElement sendRejectMessageButton;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-	
+	@FindBy(css=".flex.broadcast-view")
+	private WebElement heading;
+	@FindBy(xpath="//paper-button[contains(., 'Edit')]")
+	private WebElement editButton;
+	@FindBy(xpath="//h4[@id='headingdet']")
+	private WebElement basicDetailsHeading;
+	@FindBy(xpath="//h4[@id='heading']")
+	private WebElement targetDetailsHeading;
+	@FindBy(xpath="//h4[@id='headingoffer']")
+	private WebElement offerDetailsHeading;
+	@FindBy(xpath="//h4[@id='headingdel']")
+	private WebElement deliverDetailsHeading;
 	
 	
 	
@@ -871,5 +872,16 @@ catch(Exception e) {
 		WebElement element = driver.findElement(By.xpath("//span[contains(@class, 'notification-listing') and contains(.,'"+campaignName+"') and contains(.,'has been approved by')]"));
 		Assert.assertTrue(element.isDisplayed());
 		Thread.sleep(2000);
+	}
+	
+	public void verifyCampaignReviewPage() throws Exception {
+		Assert.assertTrue(heading.isDisplayed());
+		Assert.assertTrue(Approvebtn.isDisplayed());
+		Assert.assertTrue(rejectButton.isDisplayed());
+		Assert.assertTrue(editButton.isDisplayed());
+		Assert.assertTrue(basicDetailsHeading.isDisplayed());
+		Assert.assertTrue(targetDetailsHeading.isDisplayed());
+		Assert.assertTrue(offerDetailsHeading.isDisplayed());
+		Assert.assertTrue(deliverDetailsHeading.isDisplayed());
 	}
 }

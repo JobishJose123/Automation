@@ -532,3 +532,42 @@ Feature: generic product class
     Then click on notification bell
     Then click on view all notifications
     Then verify approved message of campaign from the sheet "campaignBC" of file "campaignInputData"
+    
+  @NX-6387 @initBrowser
+  Scenario: Verify whether BC get activate only after atleast  1 approver from all configured levels approves the BC
+  Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet "approvalRule" with two approvers
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog" with two approvers
+    Then Logout from Neon application
+    #Given navigate to environment
+    Then login with user from sheet "user1" of file "workApproval" 
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    Then verify review page
+    Then click on approve campaign
+    Then Logout from Neon application
+    Then login with user from sheet "user2" of file "workApproval" 
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    Then click on approve campaign
+    Then wait for 1 minutes
+    Then verify campaign status approved from sheet "campaignBC" of file "campaignInputData"
+    Then pass next scenario based on this step
+    
+   @NX-6365
+   Scenario: Verify the details displaying in Review page of Campaign 
+    Then check previous step and pass this
+    
