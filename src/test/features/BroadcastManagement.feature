@@ -1779,3 +1779,33 @@ Then verify delivery details from "recurringMonthBC"
     #Then navigate to BC page
     Then Search BC and check for permissions from "one-offBC"   
     
+    @NX-8862 @initBrowser
+    Scenario:Verify BC targeting with Customer Profile Info category-8862
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeEmail" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
+    Then activate bc
+    Then wait until status of "one-offBC" is "Complete"
+    Then verify targeted and sent count of "one-offBC"
+    
+    
