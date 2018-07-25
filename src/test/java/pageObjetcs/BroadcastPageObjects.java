@@ -101,7 +101,7 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = ".//paper-button[contains(.,'Target Group')]")
 	private WebElement TGConfigure;
 	
-	@FindBy(xpath = "//paper-item[contains(.,'selenium_list_DND')]")
+	@FindBy(xpath = "//paper-item[contains(.,'"+SELENIUM_DND_LIST+"')]")
 	private WebElement DNCList;
 	@FindBy(xpath = ".//paper-button[contains(.,'DNC Exclusions')]")
 	private WebElement DNCExclusionOption;

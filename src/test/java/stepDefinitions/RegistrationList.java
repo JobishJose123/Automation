@@ -46,7 +46,43 @@ public class RegistrationList extends Init{
 	String[] Secondlanguages = {"Tamil","Spanish","Mandarin","Urdu"};
 	String[] bool = {"Yes","No"};
 	
-	
+	public static int getAgeTargetCount() throws IOException {
+    	ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		String filename = (String) list.getCell(1, 0);
+//		CSVFile csvFile = new CSVFile("ExcelFiles\\"+filename);
+		
+		File csvfile = new File("ExcelFiles\\"+filename);
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 0;
+		 
+
+		 int age[] = new int[550];
+		 String val = "";
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 temp = br.readLine();
+		 while ((temp = br.readLine()) != null) {
+			 String[] a = temp.split(",");
+			 System.out.println(a[9]);
+			 val = a[9];
+			 age[initial] = Integer.parseInt(val);
+//			 age[0]=Integer.parseInt(a[9].toString());
+			 initial++;
+         }
+		 br.close();
+		 int ageGT18 = 0;
+		 for(int j=0;j<age.length;j++)
+			 if(age[j]>18){
+				 System.out.println(age[j]);
+				 ageGT18++;
+			 }
+		 System.out.println(ageGT18);
+		 System.out.println("age>18");
+		 list.setCell(1, "age>18",String.valueOf(ageGT18) );
+		 return ageGT18;
+    	
+    }
 	
 	@Given("^random registration list is generated$")
     public void loginuser() throws IOException{
@@ -200,6 +236,8 @@ public class RegistrationList extends Init{
         
         pw.close();
         System.out.println("reg list creation done!");
+        getAgeTargetCount();
+        System.out.println("age target conditoin count updated");
 		
     }
 	public void add_profile_field() throws InterruptedException
