@@ -235,4 +235,14 @@ public class workApprovalflow extends Init {
 	public void verifyCampaignReviewPage() throws Throwable {
 		approvalPageObjects.verifyCampaignReviewPage();
 	}
+	
+	@Then("delete the campaign of sheet \"([^\"]*)\" from approval rule of sheet \"([^\"]*)\"$")
+	public void deleteCampaignFromAprovalRule(String sheetForcampaign, String sheetForApprovalRule) throws Throwable {
+		eM.setExcelFile("campaignCategoryInputData", sheetForcampaign);
+		String campaignName = (String) eM.getCell(1, 0);
+		ExcelHelper excelHelper = new ExcelHelper();
+		excelHelper.setExcelFile("appRuleInputData", sheetForApprovalRule);
+		String appRule = (String) excelHelper.getCell(1, 0);
+		approvalPageObjects.deleteCampaignFromAprovalRule(campaignName, appRule);
+	}
 }

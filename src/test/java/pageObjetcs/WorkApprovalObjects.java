@@ -500,6 +500,27 @@ public void ruledeleteyes() throws InterruptedException {
 		jswait.loadSendKeys(cataloginput, name);
 	}
 	
+	public void cataloginputFromExcel() throws InterruptedException {
+		
+		String sheet="CampaignCategory2";
+		eh.setExcelFile("ExportCampaignLocation", sheet);
+	    
+		String name = (String) eh.getCell(1, 0);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(cataloginput, name);
+	}
+	
+	public void chooseCategoryFromExcel() throws InterruptedException {
+		String sheet="CampaignCategory2";
+		eh.setExcelFile("ExportCampaignLocation", sheet);
+	    
+		String name = (String) eh.getCell(1, 0);
+		Thread.sleep(2000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item[contains(.,'"+name+"')]"))).click();
+		//driver.findElement(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item[contains(.,'"+name+"')]")).click();
+		Thread.sleep(2000);
+	}
+	
 	
 	public void chooseCategory() throws InterruptedException {
 		String sheet="campaignCategory";
@@ -884,5 +905,28 @@ catch(Exception e) {
 		Assert.assertTrue(targetDetailsHeading.isDisplayed());
 		// Assert.assertTrue(offerDetailsHeading.isDisplayed());
 		Assert.assertTrue(deliverDetailsHeading.isDisplayed());
+	}
+	public void deleteCampaignFromAprovalRule(String campaignName, String appRuleName) throws Exception {
+		Thread.sleep(2000);
+		filterWorkaround(appRuleName);
+		Thread.sleep(9000);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		Thread.sleep(5000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='heading layout horizontal justified style-scope create-approval-rule']//h4[contains(.,'"+appRuleName+"')]//paper-icon-button"))).click();
+		Thread.sleep(2000);
+		deleteCampaignNameInAppRule(campaignName);
+		clickAddCategoryButton();
+		cataloginputFromExcel();
+		enterCategory();
+		Thread.sleep(2000);
+		chooseCategoryFromExcel();
+		clickAddCategorySave();
+		clickApprovalRuleSave();
+	}
+	
+	public void deleteCampaignNameInAppRule(String campaignName) throws InterruptedException {
+		WebElement closeButton = driver.findElement(By.xpath("//span[contains(., '"+campaignName+"')]/../paper-icon-button[1]"));
+		jswait.loadClick(closeButton);
 	}
 }

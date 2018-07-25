@@ -571,3 +571,39 @@ Feature: generic product class
    Scenario: Verify the details displaying in Review page of Campaign 
     Then check previous step and pass this
     
+  @NX-6354 @initBrowser @closeBrowser
+	Scenario: Verify adding campaign category to one rule & then deleting after sending an approval request for campaign/BC
+		Given login
+		Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet "approvalRule"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory2" of file "ExportCampaignLocation"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then delete the campaign of sheet "CampaignCategory" from approval rule of sheet "approvalRule"
+    Then Logout from Neon application
+    #Given navigate to environment 
+    # Remove it after use
+    Then login with user from sheet "user1" of file "workApproval"
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then verify Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    Then click on approve campaign
+    Then wait for 1 minutes
+    Then verify campaign status approved from sheet "campaignBC" of file "campaignInputData"
+    
