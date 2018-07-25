@@ -17,6 +17,7 @@ import baseClasses.JSWaiter;
 
 public class AdminPageObjects extends Init{
 	JSWaiter jswait = new JSWaiter();
+	CommonObjects commonObjects = new CommonObjects();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	public AdminPageObjects() {
 		PageFactory.initElements(driver, this);
@@ -53,6 +54,8 @@ public class AdminPageObjects extends Init{
 	
 	@FindBy(xpath="//paper-dialog[@id='managePartner']//data-table-row")
 	private List <WebElement> dashboardRow;
+	@FindBy(xpath = "//*[@id='filterDialog']/div/paper-button[3]")
+	private WebElement filterFormApply;
 	
 	@FindBy(xpath="//paper-dialog[@id='managePartner']//data-table-row//data-table-cell/span[text()='Active']")
 	private List <WebElement> statusActiveList;
@@ -63,10 +66,17 @@ public class AdminPageObjects extends Init{
 	@FindBy(xpath=".//paper-toolbar//flytxt-context-help//paper-icon-button//iron-icon[@id='icon']//img")
 	private WebElement iconHelp;
 	
+	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Partner')]/..//input")
+	private WebElement filterFormName;
+	
+	
+	
 	
 	
 	@FindBy(xpath="//paper-item[contains(.,'Dashboard Settings')]")
 	private WebElement dashboardSettings;
+	@FindBy(xpath="//paper-item[contains(.,'Control Group Settings')]")
+	private WebElement controlGroupSettings;
 	@FindBy(xpath="//data-table-cell[contains(.,'Status')]")
 	private WebElement statusTitle;
 	@FindBy(xpath="//data-table-cell[1]")
@@ -75,6 +85,9 @@ public class AdminPageObjects extends Init{
 	private WebElement optionsIcon;
 	@FindBy(xpath="//paper-dialog[@id='managePartner']//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
 	private WebElement configuireOptionsIcon;
+	
+	@FindBy(xpath = "//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
+	private WebElement filterIcon;
 	
 	
 	@FindBy(xpath="//paper-dialog[@id='managePartner']//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
@@ -85,6 +98,10 @@ public class AdminPageObjects extends Init{
 	
 	@FindBy(xpath="//div[text()='Campaign Performance Monitor']")
 	private WebElement CampaignPerformanceMonitor;
+	@FindBy(xpath = ".//label[contains(.,'Base List')]/../input")
+	private WebElement baseListSelector;
+	@FindBy(xpath = "//paper-dialog[@id='managePartner']//paper-drawer-panel/iron-selector/div[@id='main']//control-group-settings/form[@id='form']//paper-card//paper-input-wrapper[@label='']//paper-input[@required='']/paper-input-container//div[@id='labelAndInputContainer']/input[@id='input']")
+	private WebElement cgPercentage;
 	
 	
 	//iron-data-table[#'dashboardGrid']/?/?/iron-list[@id='list']/div/div[1]/data-table-row[@safeclass~'\bdashboard-table\b.*\bdata-table-row-0\b.*\bstyle-scope\b.*\bx-scope\b']//paper-menu-button[@role='group']/?/?/paper-icon-button[@alt='menu']/iron-icon[@id='icon']
@@ -111,6 +128,12 @@ public class AdminPageObjects extends Init{
 	
 	@FindBy(css="#clear > #icon")
 	private WebElement SettingsClose;
+	@FindBy(xpath="//form[@class='layout vertical style-scope control-group-settings']//paper-button[contains(.,'Save')]")
+	private WebElement CGsave;
+	@FindBy(xpath="//paper-icon-button[@id='clear']")
+	private WebElement CGclose;
+	
+	
 	
 	
 	public void clickPartnerOption() throws InterruptedException{
@@ -125,6 +148,11 @@ public class AdminPageObjects extends Init{
 	}
 	public void clickDashboardSettingsOption() throws InterruptedException{
 		jswait.loadClick(dashboardSettings);
+		Thread.sleep(2000);
+	}
+	
+	public void clickCGSettingsOption() throws InterruptedException{
+		jswait.loadClick(controlGroupSettings);
 		Thread.sleep(2000);
 	}
 	
@@ -320,6 +348,70 @@ public class AdminPageObjects extends Init{
 	        throw ElementExcep;
 		
 	   }
+	 
+	 public void clickFilterIcon() throws InterruptedException {
+			jswait.loadClick(filterIcon);
+		}
+	 public void enterFilterFormname(String name) throws InterruptedException {
+			jswait.loadSendKeys(filterFormName, name);
+		}
+	 
+	 public void clickFilterApplyButton() throws InterruptedException {
+			jswait.loadClick(filterFormApply);
+		}
+
+	 
+	 
+	 public void filterName(String name) throws InterruptedException {
+			clickFilterIcon();
+			enterFilterFormname(name);
+			clickFilterApplyButton();
+		}
+	 
+	 
+	 
+	 public void editPartner() throws Exception {
+		   
+		 filterName("System Global");
+		 commonObjects.clickOptionsIcon();
+		 clickEditOption();
+		
+	   }
+	 
+	 public void changeCGPercentage() throws Exception {
+		   
+		 jswait.loadSendKeys(cgPercentage, "20");
+		
+	   }
+	 
+	 public void changePartnerControlGroupSettings() throws Exception {
+		   
+		 selectBaseList("CG20_1M_List");
+		 changeCGPercentage();
+		
+	   }
+	 
+	 public void selectBaseList(String baseList) throws InterruptedException {
+			
+		   // jswait.loadSendKeys(baseListSelector, baseList);
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("//form[@id='form']//vaadin-combo-box[@label='Base List']/paper-input-container[@id='inputContainer']//div[@id='labelAndInputContainer']/paper-icon-button[@id='clearIcon']/iron-icon[@id='icon']")).click();
+			
+			 jswait.loadSendKeys(baseListSelector, baseList);
+				Thread.sleep(5000);
+				System.out.println(baseList);
+			driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+baseList+"')]")).click();
+			Thread.sleep(3000);
+			
+		
+		}
+	 public void CGSave() throws InterruptedException{
+		 jswait.loadClick(CGsave);
+		 jswait.loadClick(CGclose);
+		
+		}
+	 
+	 
 		//to click BCsettings page in Partners page
 		public void clickBCSettings() throws InterruptedException{
 				jswait.loadClick(BCSettings);

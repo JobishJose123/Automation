@@ -203,6 +203,9 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = ".//label[contains(.,'Start Date/Time')]")
 	private WebElement StartBroadcastDateTimeField;
 	
+	@FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'8,00,000')]")
+	private WebElement targetCountPartnerLevelCG;
+	
 	
 	@FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'9,00,000')]")
 	private WebElement targetCount;
@@ -1597,6 +1600,62 @@ public class BroadcastPageObjects extends Init {
 	   public void verifyPermissions() throws Exception {
 		   jswait.failIfVisible(Permissions); 
 	  }
+	   
+	   
+	   
+	   public void createBCWith1MSubscribersAndConfigurPartnerLevelCG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+			enterBroadcastBasicDetails(name);
+			if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+				System.out.println("inside triggerable");
+				jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+				Thread.sleep(1000);
+				jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+				Thread.sleep(2000);
+				jswait.loadClick("//paper-item[contains(.,'trigger')]");
+				Thread.sleep(1500);
+			}
+			clickProceedButton();
+			selectBaseList(baseList);
+			clickTargetConditionNoneOption();
+			//verifyCG_Configure_Options();
+			
+			clickProceedButton();
+			selectOffer(offer);
+			if(!bc_type.contains("Informational"))
+			{
+				selectTrackSession();
+				selectTrackingSource();
+				selectSenderAndRoute();
+			}
+			else {
+				jswait.loadSendKeys(senderIdBroadcastSelector, "Address-SMPP");
+				jswait.loadClick(senderIdBroadcastAdressSmpp);
+				jswait.loadSendKeys(routeBroadcast, "SMPP Robi outbound");
+
+				jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+				//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+			}
+			clickProceedButton();
+		}
+		
+	
+	   
+	   public void verifyTargetedCountForPartnerLevelCG() throws Throwable {
+			
+			String count=targetCountPartnerLevelCG.getText();
+			System.out.println("Count: "+count);
+			Exception targetCountExcep=new Exception("Target count is not correct");
+			if(count.equals("8,00,000"))
+				System.out.println("Target count is correct");
+			else
+				throw targetCountExcep;
+				
+			
+			
+		}
+	   
 	
 
 

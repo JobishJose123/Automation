@@ -1676,9 +1676,15 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-4868 @initBrowser
+     @NX-4868 @initBrowser
     Scenario: Verify BC with Partner level CG targeting 10 Million subscribers  -4868
     Given login
+    Then navigate to configuration management
+    Then navigate to partners
+    Then edit a partner
+    Then navigate to control group settings page
+    Then change partner control group settings
+    Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
     Then create product class and number attribute from "TestProductClass"
@@ -1708,10 +1714,11 @@ Then verify delivery details from "recurringMonthBC"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with 1M subscribers and configure TG and CG from sheet "one-offBC" with "rechargeWAP"
-    Then validate bc
+    Then enter details for new broadcast with 1M subscribers and configure partner level CG from sheet "one-offBC" with "rechargeWAP"
+    Then activate bc
     Then verify bc created from sheet "one-offBC"
-    Then verify validating CG status for bc
+    Then verify delivering status for bc
+    Then verify targeted count for partner level CG
     
     
     

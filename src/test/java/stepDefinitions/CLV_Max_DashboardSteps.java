@@ -1,4 +1,5 @@
 package stepDefinitions;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -72,6 +73,14 @@ public class CLV_Max_DashboardSteps extends Init {
 		adminPageObjects.clickDashboardSettingsOption();
 		
 	}
+	
+	@Then("^navigate to control group settings page$")
+	public void clickCGSettings() throws Exception {
+		
+		Thread.sleep(3000);
+		adminPageObjects.clickCGSettingsOption();
+		
+	}
 	@Then("^navigate to configuration page$")
 	public void navigateToConfigurationPage() throws Exception {
 		  
@@ -116,5 +125,63 @@ public class CLV_Max_DashboardSteps extends Init {
 		Thread.sleep(2000);
 		adminPageObjects.verifyHelpPanel();	
 	}
+	
+	
+	@Then("^edit a partner$")
+    public void verifyTargetedCount() throws Throwable
+    { 
+		
+		adminPageObjects.editPartner();
+    
+    }
+	
+	
+	@Then("^change partner control group settings$")
+    public void changePartnerControlGroupSettings() throws Throwable
+    { 
+		
+		
+		Calendar rightNow =Calendar.getInstance();
+    	String mn = "";
+    	if(rightNow.get(Calendar.MONTH)+1<9) {
+    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+    	}
+    	else 
+    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)+1);
+//    	int hours = rightNow.get(Calendar.HOUR);
+//      	 int min = rightNow.get(Calendar.MINUTE);
+//      	 int am_pm = rightNow.get(Calendar.AM_PM);
+//      	 //int day = rightNow.get(Calendar.DAY_OF_MONTH);
+//      	 int year = rightNow.get(Calendar.YEAR);
+//      	 int month = rightNow.get(Calendar.MONTH)+1;
+//      	 min+=2;
+//      	 int rem = min%5;
+//      	 rem = 5-rem;
+//      	 min+=rem;
+//      	 if(min>59){
+//      		 min-=60;
+//      		 hours++;
+//      		 
+//      	 }
+      	
+      		 
+      	 
+		
+		adminPageObjects.changePartnerControlGroupSettings();
+		
+		Thread.sleep(1000);
+		 jswait.loadClick("//label[@class='leftstylectrl start-time style-scope control-group-settings']//following::input[1]");
+		Thread.sleep(1000);
+//		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+//		day++;
+		 jswait.loadClick("(//div[@date='"+date+"'])[3]");
+		 
+		Thread.sleep(1000);
+		 jswait.loadClick("(.//paper-button[contains(.,'OK')])[5]");
+		Thread.sleep(1000);
+//		 jswait.loadClick(".//paper-date-time-input[1]//paper-input[2]//input");
+		adminPageObjects.CGSave();
+    }
 	
 }
