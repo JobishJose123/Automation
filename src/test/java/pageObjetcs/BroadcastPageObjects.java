@@ -713,6 +713,47 @@ public class BroadcastPageObjects extends Init {
 		
 	}
 	
+	
+	public void createBCAndSelectDNCListForPartnerLevelCG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
+		enterBroadcastBasicDetails(name);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		selectDNCList();
+		calculate_CG_TG();
+		
+		clickProceedButton();
+		selectOffer(offer);
+		if(!bc_type.contains("Informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+		}
+		clickProceedButton();
+	}
+	
+	
+	
+	
 	public void calculate_CG_TG() throws InterruptedException {
 		
 		jswait.loadClick(calculateLimit);
