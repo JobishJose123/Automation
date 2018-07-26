@@ -81,7 +81,7 @@ public class workApprovalflow extends Init {
 	@Then("^create new approval rule from sheet broadcastonly \"([^\"]*)\"$")
 	public void createNewApprovalRulebroadcastonly(String sheet) throws Throwable {
 
-		approvalPageObjects.createNewApprovalRulecampaignonly(sheet);
+		approvalPageObjects.createNewApprovalRulebroadcastonly(sheet);
 	}
 
 	@Then("^editApprovalRuleDetailsFromSheet \"([^\"]*)\"$")
@@ -244,5 +244,11 @@ public class workApprovalflow extends Init {
 		excelHelper.setExcelFile("appRuleInputData", sheetForApprovalRule);
 		String appRule = (String) excelHelper.getCell(1, 0);
 		approvalPageObjects.deleteCampaignFromAprovalRule(campaignName, appRule);
+	}
+	
+	@Then("^verify broadcast status render scheduled from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+	public void isRenderScheduledStatusDisplayed(String sheet, String fileName) throws Throwable {
+		eM.setExcelFile(fileName, sheet);
+		approvalPageObjects.isRenderScheduledStatusDisplayed((String) eM.getCell(1, 0));
 	}
 }

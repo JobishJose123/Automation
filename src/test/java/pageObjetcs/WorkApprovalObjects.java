@@ -929,4 +929,10 @@ catch(Exception e) {
 		WebElement closeButton = driver.findElement(By.xpath("//span[contains(., '"+campaignName+"')]/../paper-icon-button[1]"));
 		jswait.loadClick(closeButton);
 	}
+	
+	public void isRenderScheduledStatusDisplayed(String campaignName) throws InterruptedException
+	{
+		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'R')]"));
+		Assert.assertTrue(approvalStatus.isDisplayed());
+	}
 }

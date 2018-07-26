@@ -607,3 +607,33 @@ Feature: generic product class
     Then wait for 1 minutes
     Then verify campaign status approved from sheet "campaignBC" of file "campaignInputData"
     
+    
+  @NX-6388 @initBrowser
+  Scenario: Verify upon approval BC gets moved to Render scheduled
+  Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet broadcastonly "approvalRule"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then Request for bc approval
+    Then Logout from Neon application
+    #Given navigate to environment 
+    Then login with user from sheet "user1" of file "workApproval"
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "one-offBC" of file "bcInputData"
+    Then click on approve campaign
+    Then wait for 1 minutes
+    Then verify broadcast status render scheduled from sheet "one-offBC" of file "bcInputData"
+    
