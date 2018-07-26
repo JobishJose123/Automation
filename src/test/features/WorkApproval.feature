@@ -326,37 +326,6 @@ Feature: generic product class
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then approve Broadcast by selenium user
-    
-#*************************************************************************************
-  @NX-6388 @initBrowser
-  Scenario: Verify upon approval BC gets moved to Render scheduled
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
-    Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then approve campaign by selenium user
-    Then Logout from Neon application
-    Then login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then Request for bc approval
-    Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then approve Broadcast by selenium user
 
   @NX-6363 @initBrowser @closeBrowser
   Scenario: Verify whether status of BC get changed to Waiting for Approval once it is sent for approval
