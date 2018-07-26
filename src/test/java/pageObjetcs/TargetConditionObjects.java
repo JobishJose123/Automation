@@ -33,10 +33,14 @@ public class TargetConditionObjects extends Init {
 	private WebElement editedTC;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Profile Info')]")
 	private WebElement targetConditionTypeCustomerProfileInfo;
+	@FindBy(xpath="//paper-item[contains(.,'System Events')]")
+	private WebElement targetConditionTypeSystemEvents;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Location Insights')]")
 	private WebElement targetConditionTypeCustomerLocationInsights;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input")
 	private WebElement CustomerInsightFieldSelector;
+	@FindBy(xpath="//label[contains(.,'Events')]/../..//input")
+	private WebElement EventFieldSelector;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldAge;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+SITE_ID_PROFILE_FIELD+"')]")
@@ -45,8 +49,18 @@ public class TargetConditionObjects extends Init {
 	private WebElement CustomerInsightFieldBalance;
 	@FindBy(xpath="//label[text()='Condition']/../..//input")
 	private WebElement conditionSelector;
+	@FindBy(xpath="//label[text()='Event Date and Time']/../..//input")
+	private WebElement eventDateAndTimeSelector;
+	@FindBy(xpath="//paper-item[contains(.,'All events before')]")
+	private WebElement allEventsBefore;
+	@FindBy(xpath="//label[text()='Select']/../..//input")
+	private WebElement selectFieldSelector;
+	@FindBy(xpath="//paper-item[contains(.,'now (target time)')]")
+	private WebElement nowSelect;
 	@FindBy(xpath="//paper-item[contains(.,'is greater than')]")
 	private WebElement conditionIsGreaterThan;
+	@FindBy(xpath="//paper-item[contains(.,'Offer accepted')]")
+	private WebElement eventOfferAccepted;
 	@FindBy(xpath="//paper-item[contains(.,'is not')]")
 	private WebElement conditionIsNot;
 	@FindBy(xpath="//paper-item[contains(.,'is less than')]")
@@ -85,6 +99,8 @@ public class TargetConditionObjects extends Init {
 		 private List <WebElement> graphicalConditionText;
 		 @FindBy(xpath=".//*[@id='conditionCard']//paper-icon-item[contains(.,'Edit')]")
 		 private WebElement targetConditionEdit;
+		 @FindBy(xpath=".//*[@id='conditionCard']//paper-icon-item[contains(.,'Delete')]")
+		 private WebElement targetConditionDelete;
 		 @FindBy(xpath=".//paper-item[contains(.,'Duplicate')]")
 		 private WebElement optionDuplicate;
 		 @FindBy(xpath=".//li[contains(.,'Campaign Details')]")
@@ -139,6 +155,9 @@ public class TargetConditionObjects extends Init {
 		}
 	 public void clickTargetConditionEdit() throws InterruptedException {
 			jswait.loadClick(targetConditionEdit);
+		}
+	 public void clickTargetConditionDeletet() throws InterruptedException {
+			jswait.loadClick(targetConditionDelete);
 		}
 	 public void clickManualOrButton() throws InterruptedException {
 			jswait.loadClick(manualOrCondition);
@@ -230,6 +249,19 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"18");
+			jswait.loadClick(targetConditionSave);
+	 }
+	 
+	 public void clickBasicTargetConditionWithIMEvents() throws InterruptedException {
+//		 	jswait.loadClick(createConditionButton);
+		    jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeSystemEvents);
+			jswait.loadClick(EventFieldSelector);
+			jswait.loadClick(eventOfferAccepted);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
 			jswait.loadClick(targetConditionSave);
 	 }
 	 

@@ -16,15 +16,15 @@ public class LandingPageObjects extends Init{
 	}
 	JSWaiter jswait = new JSWaiter();
 
-	@FindBy(xpath="//*[@id='outLogo']")
+	@FindBy(xpath="//div[text()='Precision Marketer']/../..")
 	private WebElement precisionMarketer;
 	@FindBy(xpath=".//div[text()='Intent Management']/../..")
 	private WebElement intentManagement;
-	@FindBy(xpath="//div[contains(text(),'Insights Workbench')]")
+	@FindBy(xpath="//div[contains(text(),'Insight Workbench')]/../..")
 	private WebElement insightsWorkbench;
-	@FindBy(xpath="//div[contains(text(),'Configuration Management')]/..")
+	@FindBy(xpath="//div[contains(text(),'Configuration Management')]/../../a")
 	private WebElement configurationManagement;
-	@FindBy(xpath="//div[contains(text(),'Data Foundation')]/..")
+	@FindBy(xpath="//div[contains(text(),'Data Foundation')]/../../a")
 	private WebElement dataFoundation;
 	@FindBy(xpath=".//*[@id='topBar']//img")
 	private WebElement flytxtLogo;

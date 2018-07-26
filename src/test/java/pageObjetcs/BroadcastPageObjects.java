@@ -1027,7 +1027,7 @@ public class BroadcastPageObjects extends Init {
 		enterBroadcastPurpose("Purpose of BC is NOTHING");
 		selectLabelCrossell();		
 		selectInventoryUnlimited();
-		//selectROI();
+		selectROI();
 	}
 	
 	public void selectROI() throws InterruptedException {
@@ -1144,6 +1144,56 @@ public class BroadcastPageObjects extends Init {
 		clickProceedButton();
 	}
 	
+	public void createBC(String name, String bc_type, String baseList, String offer,String condition) throws InterruptedException {
+		ExcelHelper offerExcel = new ExcelHelper(); 
+    	offerExcel.setExcelFile("offerInputData", offer);
+		enterBroadcastBasicDetails(name);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		jswait.loadClick(CGConfigure);
+		jswait.loadClick(noControlGroupRadioButton);
+		jswait.loadClick(defineCGLimitSave);
+		
+		if(condition.contains("IMEvents")) {
+			TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+			commonObjects.clickOptionsIcon();
+			targetConditionObjects.clickTargetConditionDeletet();
+			targetConditionObjects.clickBasicTargetConditionWithIMEvents();
+		}
+		clickProceedButton();
+		selectOffer(offerExcel.getCellByColumnName("Offer Name"));
+		if(!bc_type.contains("Informational"))
+		{
+			selectTrackSession();
+			selectTrackingSource();
+			if(offerExcel.getCellByColumnName("Channel").contains("Email"))
+			{
+				selectSenderAndRouteEmail();
+			}
+			else
+				selectSenderAndRoute();
+		}
+		else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+			//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+		}
+		clickProceedButton();
+	}
 	
 	public void createBCWithCopyOption() throws InterruptedException {
 		

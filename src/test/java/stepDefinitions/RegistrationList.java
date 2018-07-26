@@ -85,7 +85,7 @@ public class RegistrationList extends Init{
     }
 	
 	@Given("^random registration list is generated$")
-    public void loginuser() throws IOException{
+    public void generateRandomRegistrationList() throws IOException{
 		System.out.println("in rand");
 		 Random r = new Random();
     	 msisdn = "9199"+ String.valueOf(r.nextInt(9000)+1000);
@@ -240,6 +240,35 @@ public class RegistrationList extends Init{
         System.out.println("age target conditoin count updated");
 		
     }
+	@Given("^random dnd list is generated$")
+    public void generateRandomDndList() throws IOException{
+		File DNDcsvfile = new File("ExcelFiles\\"+"selenium_list_DND.csv");
+		PrintWriter pw = new PrintWriter(DNDcsvfile);
+		ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		String filename = (String) list.getCell(1, 0);
+//		CSVFile csvFile = new CSVFile("ExcelFiles\\"+filename);
+		
+		File csvfile = new File("ExcelFiles\\"+filename);
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 0;
+		 
+
+		 int age[] = new int[550];
+		 String val = "";
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 temp = br.readLine();
+		 pw.write("msisdn,first name,last name,country,email,language 1,language 2,balance,boolean,age");
+		 pw.write("\n");
+		 while ((temp = br.readLine()) != null && initial<50) {
+			 pw.write(temp);
+			 pw.write("\n");
+			 initial++;
+         }
+		 pw.close();
+	}
+	
 	public void add_profile_field() throws InterruptedException
 	{		
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
