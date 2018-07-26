@@ -70,6 +70,29 @@ public class ShellExecuter extends Init{
 		    }
     }
     
+    public static void uploadDNDListForDkJob() throws IOException {
+    	String csvFileData = "";
+		File csvfile = new File("ExcelFiles\\selenium_list_DND.csv");
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 1;
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 while ((temp = br.readLine()) != null) {
+			 if(initial==0) {
+				 csvFileData+="\n";
+			 }
+			 initial=0;
+			 csvFileData+=temp;
+         }
+		 System.out.println(csvFileData);
+		 System.out.println("test");
+		 br.close();
+		
+		
+		ShellExecuter se = new ShellExecuter();
+		se.executeScript("cd /usr/local/flytxt/selenium/dnd; echo '"+csvFileData+"' >dndUpload.csv");
+//		se.executeScript("ls");
+    }
     public static void uploadListForDkJob() throws IOException {
     	String csvFileData = "";
 		ExcelHelper list = new ExcelHelper();
@@ -140,7 +163,12 @@ public class ShellExecuter extends Init{
 //		
 //		String csvFileData = "";
 		
-		getAgeTargetCount();
+//		getAgeTargetCount();
+		
+//		uploadDNDListForDkJob();
+		
+		ShellExecuter se = new ShellExecuter();
+		se.executeScript("cd /usr/local/flytxt/selenium/dnd; ls");
 	}
 
 }

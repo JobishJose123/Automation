@@ -148,7 +148,7 @@ public class CLV_Max_DashboardSteps extends Init {
     	}
     	else 
     		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
-		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)+1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
 //    	int hours = rightNow.get(Calendar.HOUR);
 //      	 int min = rightNow.get(Calendar.MINUTE);
 //      	 int am_pm = rightNow.get(Calendar.AM_PM);

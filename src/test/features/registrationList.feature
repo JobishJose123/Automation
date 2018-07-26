@@ -39,12 +39,6 @@ Then navigate to landing page
 @initBrowser @closeBrowser
 Scenario: Calculate Targets - Creating DNC Exclusion list. 3482
 Given login
-Then navigate to data foundation
-Then navigate to registration list
-Then click create new registration list button
-Then enter details of DND list
-Then save registration list
-Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"

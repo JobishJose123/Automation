@@ -166,6 +166,11 @@ public class CommonSteps extends Init {
 		 loginPage.login(userName, passWord);
 	}
 	
+	@Then("^go to temp url \"([^\"]*)\"$")
+	public void go_to_url(String url) throws Exception {
+		 driver.get(url);
+	}
+	
 	@Then("^login with user from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
     public void loginUserFromExcel(String sheet, String fileName) throws Exception {
 		 excelHelper.setExcelFile(fileName,sheet);
