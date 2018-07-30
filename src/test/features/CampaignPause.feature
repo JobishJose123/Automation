@@ -158,3 +158,29 @@ Then resume campaign from sheet "campaignBC"
 Then naigate to "campaignBC" campaign view broadcasts
 Then navigate to "Recurring" broadcasts
 Then activate saved "Recurring" bc from sheet "recurringBC"
+
+@NX-8737 @initBrowser
+Scenario: Verify activating the saved BC after the campaign is resumed NX-8789
+    Given login
+    Then navigate to precision marketer
+#		Then navigate to offer management
+#		Then navigate to offers
+#		Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#		Then navigate to offer management
+#		Then Navigate to Offer Catalogue
+#		Then Create New Offer Catalogue from sheet "defaultCatalog"
+#		Then Add "rechargeWAP" offer to Offer Catalogue
+		Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "campaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then activate bc
+    Then verify bc created from sheet "one-offBC"
+    Then wait until status of "one-offBC" is "Delivering"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then pause campaign from sheet "campaignBC"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then wait until status of "one-offBC" is "Paused"

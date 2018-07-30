@@ -131,6 +131,7 @@ public class BroadcastSteps extends Init{
 		else if(eh.getCellByColumnName("Type").contentEquals("one-off")) {
 			commonObjects.filterName(eh.getCellByColumnName("BC Name"));
 			commonObjects.clickOptionsIcon();
+			broadcastPageObjects.clickBroadcastViewOption();
 		}
 	}
 	@Then("^verify delivery details from \"([^\"]*)\"$")
@@ -2240,5 +2241,26 @@ public void verifyTargetedCountForPartnerLevelCG() throws Throwable
 
 }
 
+@Then("^check target condition \"([^\"]*)\"$")
+public void verifyImEventTargetCondition(String event) throws Throwable
+{  
+	broadcastPageObjects.clickTargetDetailsInBcView();
+	if(event.contentEquals("IMEventsOfferAccepted")){
+		jswait.waitUntil("//target-event[contains(.,'This event occured')]");
+		jswait.waitUntil("//b[contains(.,'Offer accepted')]");
+	}
+	else if(event.contentEquals("IMEventsOfferDeclined")){
+		jswait.waitUntil("//target-event[contains(.,'This event occured')]");
+		jswait.waitUntil("//b[contains(.,'Offer declined')]");
+	}
+	else if(event.contentEquals("IMEventsOfferRecommended")){
+		jswait.waitUntil("//target-event[contains(.,'This event occured')]");
+		jswait.waitUntil("//b[contains(.,'Offer Recommended')]");
+	}
+	else if(event.contentEquals("IMEventsCustomerCareUsage")){
+		jswait.waitUntil("//target-event[contains(.,'This event occured')]");
+		jswait.waitUntil("//b[contains(.,'Customer Care Usage')]");
+	}
+}
 
 }

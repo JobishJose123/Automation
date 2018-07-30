@@ -289,6 +289,8 @@ public class BroadcastPageObjects extends Init {
 	 
 	 @FindBy(xpath="//paper-radio-button[contains(.,'No Control Group')]")
 	 private WebElement noControlGroupRadioButton;
+	 @FindBy(xpath=".//h4[contains(.,'Target Details')]")
+	 private WebElement viewTargetDetails;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -304,7 +306,21 @@ public class BroadcastPageObjects extends Init {
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
-	// private WebElement ;
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
+		// @FindBy(xpath="")
+		// private WebElement ;
 
 	public void enterBroadcastName(String name) throws InterruptedException {
 		jswait.loadSendKeys(broadcastName, name);
@@ -314,6 +330,9 @@ public class BroadcastPageObjects extends Init {
 	}
 	public void selectOneOffSendTimeDate(String date) throws InterruptedException {
 		jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='"+date+"']");
+	}
+	public void clickTargetDetailsInBcView() throws InterruptedException {
+		jswait.loadClick(viewTargetDetails);
 	}
 	public void clickOneOffRadioButton() throws InterruptedException {
 		jswait.loadClick(oneOffRadioButton);
@@ -1163,12 +1182,12 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(noControlGroupRadioButton);
 		jswait.loadClick(defineCGLimitSave);
 		
-		if(condition.contains("IMEvents")) {
 			TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 			commonObjects.clickOptionsIcon();
 			targetConditionObjects.clickTargetConditionDeletet();
-			targetConditionObjects.clickBasicTargetConditionWithIMEvents();
-		}
+			targetConditionObjects.clickBasicTargetCondition(condition);
+			Thread.sleep(3000);
+		
 		clickProceedButton();
 		selectOffer(offerExcel.getCellByColumnName("Offer Name"));
 		if(!bc_type.contains("Informational"))

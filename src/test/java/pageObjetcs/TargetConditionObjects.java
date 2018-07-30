@@ -39,7 +39,7 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionTypeCustomerLocationInsights;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input")
 	private WebElement CustomerInsightFieldSelector;
-	@FindBy(xpath="//label[contains(.,'Events')]/../..//input")
+	@FindBy(xpath="//input[@placeholder='Event']")
 	private WebElement EventFieldSelector;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldAge;
@@ -59,8 +59,14 @@ public class TargetConditionObjects extends Init {
 	private WebElement nowSelect;
 	@FindBy(xpath="//paper-item[contains(.,'is greater than')]")
 	private WebElement conditionIsGreaterThan;
-	@FindBy(xpath="//paper-item[contains(.,'Offer accepted')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer accepted')]")
 	private WebElement eventOfferAccepted;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer declined')]")
+	private WebElement eventOfferDeclined;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer Recommended')]")
+	private WebElement eventOfferRecommended;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer Care Usage')]")
+	private WebElement eventOfferCustomerCareUsage;
 	@FindBy(xpath="//paper-item[contains(.,'is not')]")
 	private WebElement conditionIsNot;
 	@FindBy(xpath="//paper-item[contains(.,'is less than')]")
@@ -252,17 +258,86 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionSave);
 	 }
 	 
-	 public void clickBasicTargetConditionWithIMEvents() throws InterruptedException {
-//		 	jswait.loadClick(createConditionButton);
-		    jswait.loadClick(targetConditionTypeSelector);
+	 public void clickBasicTargetCondition(String event) throws InterruptedException {
+		if(event.contentEquals("IMEventsOfferAccepted")){
+			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadClick(EventFieldSelector);
+			jswait.loadSendKeys(EventFieldSelector,"Offer accepted");
 			jswait.loadClick(eventOfferAccepted);
 			jswait.loadClick(eventDateAndTimeSelector);
 			jswait.loadClick(allEventsBefore);
 			jswait.loadClick(selectFieldSelector);
 			jswait.loadClick(nowSelect);
 			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("IMEventsOfferDeclined")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeSystemEvents);
+			jswait.loadSendKeys(EventFieldSelector,"Offer declined");
+			jswait.loadClick(eventOfferDeclined);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("IMEventsOfferRecommended")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeSystemEvents);
+			jswait.loadSendKeys(EventFieldSelector,"Offer Recommended");
+			jswait.loadClick(eventOfferRecommended);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("IMEventsCustomerCareUsage")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeSystemEvents);
+			jswait.loadSendKeys(EventFieldSelector,"Customer Care Usage");
+			jswait.loadClick(eventOfferCustomerCareUsage);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+		//to change
+		else if(event.contentEquals("IMEventsOfferDeclined")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeSystemEvents);
+			jswait.loadSendKeys(EventFieldSelector,"Offer declined");
+			jswait.loadClick(eventOfferDeclined);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("IMEventsOfferRecommended")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeSystemEvents);
+			jswait.loadSendKeys(EventFieldSelector,"Offer Recommended");
+			jswait.loadClick(eventOfferRecommended);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("IMEventsCustomerCareUsage")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeSystemEvents);
+			jswait.loadSendKeys(EventFieldSelector,"Customer Care Usage");
+			jswait.loadClick(eventOfferCustomerCareUsage);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+			
 	 }
 	 
 	 
