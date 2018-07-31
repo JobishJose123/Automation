@@ -2009,7 +2009,9 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 	
 @Then("^navigate to BC page$")
 	public void navigate_to_bc_page() throws Throwable {
-		driver.get("http://192.168.150.27/#/precision-marketer/life-cycle-marketing/campaignId/24/broadcasts");
+	      Thread.sleep(2000);
+	      driver.get("http://192.168.150.27/#/precision-marketer/life-cycle-marketing/campaignId/60/broadcasts");
+	      Thread.sleep(2000);
 	}
 
 @Then("^wait until status of \"([^\"]*)\" is \"([^\"]*)\"$")
@@ -2263,4 +2265,18 @@ public void verifyImEventTargetCondition(String event) throws Throwable
 	}
 }
 
+@Then("^Search BC and Click on Sendtrial from \"([^\"]*)\"$")
+public void Search_BC_and_click_on_sendtrial_from(String sheet) throws Throwable {
+	eh.setExcelFile("bcInputData",sheet);
+	String name = (String) eh.getCell(1, 0);
+	catalogPageObjects.filterWorkaround(name);
+	commonObjects.clickOptionsIcon();
+	broadcastPageObjects.clickSendTrialBroadcastOption();
+	broadcastPageObjects.VerifySendTrialPage();
+	broadcastPageObjects.clickCloseSendTrialWindow();
+	//commonObjects.clickEditOption();
+	//broadcastPageObjects.clickProceedButton();
+	//broadcastPageObjects.clickProceedButton();
+	//broadcastPageObjects.clickProceedButton();
+}
 }

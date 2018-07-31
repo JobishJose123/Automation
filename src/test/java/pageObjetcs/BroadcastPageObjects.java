@@ -59,6 +59,8 @@ public class BroadcastPageObjects extends Init {
 	private WebElement sendTrialMailButton;
 	@FindBy(xpath = ".//paper-dialog[@id='savedialog']")
 	private WebElement sendingMessageDialogueForSendTrialBC;
+	@FindBy(xpath = ".//*[@id='sendTrialDialogNumberBC']/div/paper-button[contains(.,'Cancel')]")
+	private WebElement sendTrialCancel;
 	@FindBy(xpath = "//iron-icon[@icon='close']")
 	private WebElement sendTrialCloseButton;
 	
@@ -1766,7 +1768,15 @@ public class BroadcastPageObjects extends Init {
 			
 		}
 	   
-	
+	   public void VerifySendTrialPage() throws InterruptedException {
+			
+		   assertTrue(sendTrialMailIdField.isDisplayed());
+		   assertTrue(sendTrialMailButton.isDisplayed());
+		   assertTrue(sendTrialCloseButton.isDisplayed());
+		   assertTrue(sendTrialMailIdField.isDisplayed());
+		   assertTrue(sendTrialCancel.isDisplayed());
+		   	   			  
+			}
 
 
 }
