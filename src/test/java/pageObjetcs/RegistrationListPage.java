@@ -32,8 +32,8 @@ public class RegistrationListPage extends Init{
 	private WebElement registrationListSaveButton;
 	@FindBy(xpath=".//table-select//paper-icon-button[2]")
 	private WebElement registrationListSelectAllPartners;
-//	@FindBy(xpath="")
-//	private WebElement registrationListButton;
+	@FindBy(xpath="//div[@id='radioLabel'][contains(.,'Mandatory')]/..")
+	private WebElement dndListMandatorySelect;
 //	@FindBy(xpath="")
 //	private WebElement registrationListButton;
 //	@FindBy(xpath="")
@@ -66,6 +66,11 @@ public class RegistrationListPage extends Init{
 		jswait.loadClick(registrationListTypeSelector);
 		jswait.loadClick(registrationListTypeDND);
 	}
+	public void selectRegistrationListTypeDNDMandatory() throws InterruptedException {
+		jswait.loadClick(registrationListTypeSelector);
+		jswait.loadClick(registrationListTypeDND);
+		jswait.loadClick(dndListMandatorySelect);
+	}
 	public void clickSaveButton() throws InterruptedException {
 		jswait.loadClick(registrationListSaveButton);
 	}
@@ -82,6 +87,11 @@ public class RegistrationListPage extends Init{
 		enterRegistrationListName(name);
 		enterRegistrationListDescription(desc);
 		selectRegistrationListTypeDND();
+		SelectAllPartners();
+	}public void enterMandatoryDNDRegistratonListDetails(String name,String desc) throws InterruptedException {
+		enterRegistrationListName(name);
+		enterRegistrationListDescription(desc);
+		selectRegistrationListTypeDNDMandatory();
 		SelectAllPartners();
 	}
 	public void clickCreateNewRegistrationListButton() throws InterruptedException {

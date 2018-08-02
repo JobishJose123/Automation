@@ -403,6 +403,20 @@ public class RegistrationList extends Init{
 		commonObjects.filterName(SELENIUM_LIST);
 		commonObjects.clickOptionsIcon();
 	}
+	@Then("^save DND list$")
+    public void saveDNDListButton() throws Exception{
+		registrationListPage.clickSaveButton();
+		CommonObjects commonObjects = new CommonObjects();
+		commonObjects.filterName(SELENIUM_DND_LIST);
+		commonObjects.clickOptionsIcon();
+	}
+	@Then("^save mandatory DND list$")
+    public void saveMandatoryDNDListButton() throws Exception{
+		registrationListPage.clickSaveButton();
+		CommonObjects commonObjects = new CommonObjects();
+		commonObjects.filterName(SELENIUM_MANDATORY_DND_LIST);
+		commonObjects.clickOptionsIcon();
+	}
 	@Then("^enter details of registration list$")
     public void createRegistrationList() throws Exception{
 //		list.setExcelFile("registrationListInputData", "Sheet1");
@@ -418,6 +432,14 @@ public class RegistrationList extends Init{
 		String listname = SELENIUM_DND_LIST;
 		System.out.println(listname);
 		registrationListPage.enterDNDRegistratonListDetails(listname, "Description");	
+	}
+	@Then("^enter details of mandatoy DND list$")
+    public void createMandatoryDNDList() throws Exception{
+//		list.setExcelFile("registrationListInputData", "Sheet1");
+//		String listname = (String) list.getCell(1, 2);
+		String listname = SELENIUM_MANDATORY_DND_LIST;
+		System.out.println(listname);
+		registrationListPage.enterMandatoryDNDRegistratonListDetails(listname, "Description");	
 	}
 	@Then("^upload list$")
     public void uploadList() throws Exception{

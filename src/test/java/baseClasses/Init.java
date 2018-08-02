@@ -54,6 +54,7 @@ public static Logger log;
 	public final String ROUTE_EMAIL = "Email_Chan_New";
 	public final String SELENIUM_LIST = "selenium_list";
 	public final String SELENIUM_DND_LIST = "selenium_list_DND";
+	public final String SELENIUM_MANDATORY_DND_LIST = "selenium_list_DND_mandatory";
 	
 }
 //public class Init {

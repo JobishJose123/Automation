@@ -105,6 +105,10 @@ public class CommonSteps extends Init {
 	public void waitForSomeTime() throws InterruptedException {
 		Thread.sleep(5000);
 	}
+	@Then("^wait for (\\d+) sec")
+	public void waitForSec(int sec) throws InterruptedException {
+		Thread.sleep(sec+1000);
+	}
 	@Then("^navigate to products$")
 	public void naviagte_to_products() throws Exception
 	{

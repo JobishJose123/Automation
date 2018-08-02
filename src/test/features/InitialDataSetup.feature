@@ -22,7 +22,18 @@ Then navigate to data foundation
 Then navigate to registration list
 Then click create new registration list button
 Then enter details of DND list
-Then save registration list
+Then save DND list
+Then navigate to landing page
+
+@NX-3483
+@initBrowser @closeBrowser
+Scenario: Calculate Targets - Mandatory Exclusion list 3483
+Given login
+Then navigate to data foundation
+Then navigate to registration list
+Then click create new registration list button
+Then enter details of mandatoy DND list
+Then save mandatory DND list
 Then navigate to landing page
 
 @NX-createDKJob

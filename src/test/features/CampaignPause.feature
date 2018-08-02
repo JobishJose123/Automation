@@ -199,16 +199,24 @@ Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-8739
     Then navigate to precision marketer
 		Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "campaignCategory"
-#		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
-    #Then click create new broadcast button
-    #Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
-    #Then activate bc
-    #Then wait for 2 minutes
-    #Then wait until status of child bc of "recurringBC" is "Delivering"
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
+    Then activate bc
+    Then wait for 2 minutes
+    Then wait until status of child bc of "recurringBC" is "Delivering"
     Then navigate to "Recurring" broadcasts
-    #Then pause bc from sheet "recurringBC"
-    #Then wait for 2 minutes
+    Then pause bc from sheet "recurringBC"
+    Then wait for 2 minutes
     Then navigate to "One-time" broadcasts
     Then wait until status of child bc of "recurringBC" is "Paused"
+    
+    @NX-8740
+Scenario: Verify the BCs in Delivering state when the parent bc  is resumed NX-8740
+    Then navigate to "Recurring" broadcasts
+    Then resume bc from sheet "recurringBC"
+    Then wait for 2 minutes
+    Then navigate to "One-time" broadcasts
+    Then wait until status of child bc of "recurringBC" is "Delivering"
     
