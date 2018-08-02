@@ -160,18 +160,18 @@ Then navigate to "Recurring" broadcasts
 Then activate saved "Recurring" bc from sheet "recurringBC"
 
 @NX-8737 @initBrowser
-Scenario: Verify activating the saved BC after the campaign is resumed NX-8789
+Scenario: Verify the BCs in Delivering state when the campaign is paused NX-8737
     Given login
     Then navigate to precision marketer
-#		Then navigate to offer management
-#		Then navigate to offers
-#		Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-#		Then navigate to offer management
-#		Then Navigate to Offer Catalogue
-#		Then Create New Offer Catalogue from sheet "defaultCatalog"
-#		Then Add "rechargeWAP" offer to Offer Catalogue
+		Then navigate to offer management
+		Then navigate to offers
+		Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+		Then navigate to offer management
+		Then Navigate to Offer Catalogue
+		Then Create New Offer Catalogue from sheet "defaultCatalog"
+		Then Add "rechargeWAP" offer to Offer Catalogue
 		Then navigate to life cycle marketing
-#		Then navigate to campaign category from sheet "campaignCategory"
+		Then navigate to campaign category from sheet "campaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
@@ -184,3 +184,31 @@ Scenario: Verify activating the saved BC after the campaign is resumed NX-8789
     Then pause campaign from sheet "campaignBC"
     Then naigate to "campaignBC" campaign view broadcasts
     Then wait until status of "one-offBC" is "Paused"
+    
+    @NX-8738 @closeBrowser
+    Scenario: Verify the BCs in Delivering state when the campaign is resumed NX-8738
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then resume campaign from sheet "campaignBC"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then wait until status of "one-offBC" is "Delivering"
+    
+    @NX-8739 @initBrowser
+Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-8739
+    Given login
+    Then navigate to precision marketer
+		Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "campaignCategory"
+#		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    #Then click create new broadcast button
+    #Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
+    #Then activate bc
+    #Then wait for 2 minutes
+    #Then wait until status of child bc of "recurringBC" is "Delivering"
+    Then navigate to "Recurring" broadcasts
+    #Then pause bc from sheet "recurringBC"
+    #Then wait for 2 minutes
+    Then navigate to "One-time" broadcasts
+    Then wait until status of child bc of "recurringBC" is "Paused"
+    

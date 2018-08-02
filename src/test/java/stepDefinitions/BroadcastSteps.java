@@ -60,7 +60,7 @@ public class BroadcastSteps extends Init{
 	public void pauseBC(String sheet) throws Throwable {
 		eh.setExcelFile("bcInputData", sheet);
 		if(eh.getCellByColumnName("Type").contentEquals("recurring")){
-			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Pause')]");
 			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
 			Thread.sleep(5000);
@@ -2019,6 +2019,21 @@ public void waitUntilBCStatus(String bcSheet, String statusExpected) throws Thro
 {  
 	eh.setExcelFile("bcInputData", bcSheet);
 	commonObjects.filterName(eh.getCellByColumnName("BC Name"));
+	commonObjects.toggleAutoRefresh();
+	String statusOfBc = broadcastPageObjects.getTopBcStatus();
+	while(!statusOfBc.contains(statusExpected)) {
+		statusOfBc = broadcastPageObjects.getTopBcStatus();
+		System.out.println(statusOfBc);
+		Thread.sleep(3000);
+	}
+	Assert.assertTrue("Invalid status of BC",statusOfBc.contains(statusExpected));
+}
+@Then("^wait until status of child bc of \"([^\"]*)\" is \"([^\"]*)\"$")
+public void waitUntilChildBCStatus(String bcSheet, String statusExpected) throws Throwable
+{  
+	eh.setExcelFile("bcInputData", bcSheet);
+	Calendar rightNow =Calendar.getInstance();
+	commonObjects.filterName(eh.getCellByColumnName("BC Name")+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)));
 	commonObjects.toggleAutoRefresh();
 	String statusOfBc = broadcastPageObjects.getTopBcStatus();
 	while(!statusOfBc.contains(statusExpected)) {

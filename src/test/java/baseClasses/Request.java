@@ -19,8 +19,14 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -90,10 +96,31 @@ public class Request {
 		return responseCode;	
 	}
 
+	public void postRequest(String urlStr, String jobPayload) throws ClientProtocolException, IOException {
+		StringEntity entity = new StringEntity(jobPayload,
+                ContentType.APPLICATION_JSON);
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost request = new HttpPost(urlStr);
+        request.setHeader("Content-type", "application/json");
+        request.setEntity(entity);
+        HttpResponse response = httpClient.execute(request);
+        System.out.println(response.getStatusLine().getStatusCode());
+        System.out.println(response.toString());
+	}
 	public void putRequest(String urlStr,String authKey,String data) throws IOException{
 		Random random = new Random();
 		setUrl(urlStr);
 		setEncodedAuthorisation(authKey);
+		setPutProperties();
+		OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
+		osw.write(String.format(data, random.nextInt(30), random.nextInt(20)));
+		osw.flush();
+		osw.close();
+		System.err.println(con.getResponseCode());
+	}
+	public void putRequest(String urlStr,String data) throws IOException{
+		Random random = new Random();
+		setUrl(urlStr);
 		setPutProperties();
 		OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
 		osw.write(String.format(data, random.nextInt(30), random.nextInt(20)));
@@ -128,28 +155,44 @@ public class Request {
 //		r.putRequest("http://192.168.150.27/neon-ws/broadcastApps","Zmx5b3BzQGZseXR4dC5jb206Zmx5dHh0", "{\"createdDate\":\"2018-07-05T05:28:11.000+0000\",\"updateDate\":\"2018-07-05T05:28:11.000+0000\",\"createdUser\":\"System Administrator\",\"updatedUser\":\"System Administrator\",\"name\":\"seedTrSeedFromCopy\",\"description\":\"Purpose of BC is NOTHING\",\"status\":\"planned\",\"applicationInstanceType\":\"SEEDING_RECURRING_BROADCAST\",\"partnerId\":1,\"activatedDate\":\"2018-07-04T12:35:43.000+0000\",\"deleted\":false,\"hidden\":false,\"message\":null,\"bcLevelCgCount\":null,\"targetCountMap\":null,\"broadcastParameters\":{\"deliverDetails\":{\"timezoneId\":null,\"recurring\":true,\"recurringConfiguration\":{\"recurringRange\":{\"startDate\":\"2018-07-05T12:35:41.680Z\",\"cycleEndDate\":null,\"type\":\"NEVER\",\"endType\":1,\"recurrenceCount\":null,\"timezoneId\":49,\"timezone\":\"Asia/Calcutta\",\"startCycleOnEndOfMonth\":false,\"endCycleOnEndOfMonth\":false},\"recurringPattern\":{\"type\":\"DAILY\",\"recurringInterval\":1,\"startTimeString\":\"18:05\"},\"renderSchedule\":{\"sendImmediately\":true,\"renderTargetAlways\":false,\"type\":null,\"renderScheduleType\":null,\"renderTimeAt\":null,\"renderTimeBefore\":null},\"thisRecurrencePosition\":null},\"broadcastExpirySettings\":{},\"broadcastNotificationList\":[],\"recurringStr\":\"true\",\"startTimeStr\":\"6:05 PM\",\"timezoneObj\":{\"sortOrder\":49,\"description\":\"(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi\",\"gmtOffset\":\"+05:30\",\"javaTimeZoneId\":\"Asia/Calcutta\",\"offset\":19800000}},\"targetDetails\":{\"limitRecipients\":null,\"controlGroupPercentage\":null,\"bcValidationDetails\":{\"cgSelectionMode\":1,\"fixedPercentage\":10,\"confidenceLevel\":null,\"marginOfError\":null},\"dndListIdsToExclude\":[]},\"offerDetails\":{\"trackingDetails\":{\"expirySettings\":{\"trackingEnabled\":true,\"absolute\":false,\"absoluteDate\":null,\"relativeTime\":\"ad5\",\"timeZoneId\":49},\"trackSourceId\":237,\"convertAll\":\"false\",\"rewardAllConversions\":\"false\",\"trackSourceName\":\"A_track_Sel\"},\"routingDetails\":{\"messagingChannel\":\"WAP\",\"broadcastMessageMobileAddressId\":1,\"responseMessageMobileAddressId\":1,\"broadcastMessageRouteId\":1,\"responseMessageRouteId\":1,\"broadcastMessageMobileAddressName\":\"Address-SMPP\",\"responseMessageMobileAddressName\":\"Address-SMPP\"},\"temporalOffers\":[],\"preferredLanguageId\":1},\"timezoneId\":null,\"abortBroadcastsForPreviousRevision\":false},\"operation\":\"ACTIVATE\",\"triggerable\":false,\"sustainabilityPeriod\":null,\"cgValidationEnabled\":false,\"broadcastTriggerList\":null,\"fbAdBudget\":null,\"minDailyFbBudget\":null,\"statusId\":21,\"recurringParentId\":null,\"previousRevisionBroadcastId\":null,\"approvers\":null,\"approverList\":null,\"targetValue\":\"create\",\"labelObj\":{\"createdDate\":\"2014-05-29T13:56:09.000+0000\",\"updateDate\":null,\"createdUser\":\"System Administrator\",\"updatedUser\":null,\"centerName\":\"Crossell\",\"description\":null,\"address1\":null,\"address2\":null,\"address3\":null,\"city\":null,\"county\":null,\"countryId\":null,\"phoneNumber\":null,\"faxNumber\":null,\"emailAddress\":null,\"partnerId\":1},\"inventoryObj\":{\"channelType\":-1,\"inventoryLimit\":-1,\"inventoryName\":\"Unlimited\",\"inventoryPriority\":1,\"isDefault\":false,\"sendingPriority\":2,\"status\":\"active\",\"createdPartnerId\":1,\"sharedPartnerList\":null,\"partnerName\":\"System Global\",\"blackoutRuleName\":\"Black-CG\",\"freqRuleName\":\"Rule-1\"},\"offer\":\"/offers/1681\",\"selectedLanguage\":\"English (UK)\",\"campaignName\":\"campaignBC711\",\"target\":\"http://192.168.150.27/neon-ws/targets/5942\",\"campaign\":\"/campaigns/1060\",\"label\":\"http://192.168.150.27/neon-ws/labels/1001\",\"inventoryDefinition\":\"http://192.168.150.27/neon-ws/partnerInventoryDefinitions/21\",\"registrationList\":\"http://192.168.150.27/neon-ws/registrationLists/845\",\"broadcastTrigger\":null}");
 //		r.getRequest("http://192.168.150.27/neon-ws/getNotifications?webUserId=1&partnerId=1", "Zmx5b3BzQGZseXR4dC5jb206Zmx5dHh0");
 //		String[] testCases = {"NX-4858","NX-2533","NX-7592","NX-643","NX-640","NX-633","NX-1219","NX-7593","NX-9260","NX-8248","NX-8244","NX-8243","NX-8223","NX-8150","NX-7595","NX-7594","NX-7585","NX-7584","NX-7337","NX-7141","NX-7140","NX-6911","NX-6903","NX-6902","NX-6901","NX-6900","NX-6893","NX-6892","NX-6887","NX-6886","NX-6885","NX-6884","NX-6883","NX-6882","NX-6881","NX-6880","NX-6879","NX-6878","NX-6871","NX-6867","NX-6864","NX-2516","NX-1503","NX-1220","NX-743","NX-738","NX-693","NX-687","NX-685","NX-683","NX-639"};
-		String[] testCases = {};
-		for(int i =0;i<testCases.length;i++)
-			{
-			r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
-			
-				"   \"fields\": {\r\n" + 
-				"       \"customfield_11172\":{\"value\":\"NO\"}\r\n" + 
-				"   }\r\n" + 
-				"}");
-			System.out.println(testCases[i]+": changed automated status to:");
-			System.err.print("YES");
-		r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
-				"   \"fields\": {\r\n" + 
-				"       \"customfield_11175\":{\"value\":\"6.1 GA\"}\r\n" +
-				"   }\r\n" + 
-				"}");
-		r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
-				"   \"fields\": {\r\n" + 
-				"       \"customfield_11174\":{\"name\":\"rahul.krishnan\"}\r\n"+
-				"   }\r\n" + 
-				"}");
-			}
+		
+		
+//		String[] testCases = {};
+//		for(int i =0;i<testCases.length;i++)
+//			{
+//			r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
+//			
+//				"   \"fields\": {\r\n" + 
+//				"       \"customfield_11172\":{\"value\":\"NO\"}\r\n" + 
+//				"   }\r\n" + 
+//				"}");
+//			System.out.println(testCases[i]+": changed automated status to:");
+//			System.err.print("YES");
+//		r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
+//				"   \"fields\": {\r\n" + 
+//				"       \"customfield_11175\":{\"value\":\"6.1 GA\"}\r\n" +
+//				"   }\r\n" + 
+//				"}");
+//		r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
+//				"   \"fields\": {\r\n" + 
+//				"       \"customfield_11174\":{\"name\":\"rahul.krishnan\"}\r\n"+
+//				"   }\r\n" + 
+//				"}");
+//			}
+		
+		r.getRequest("http://192.168.150.253/dk-new/jobs?projection=jobView&page=0&size=50&name=selenium_list", "dcdcdc");
+		System.out.println(r.responseString);
+		JsonParser jsonParser = new JsonFactory().createParser(r.responseString);
+		while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
+			   //get the current token
+			   String fieldname = jsonParser.getCurrentName();
+			   if ("name".equals(fieldname)) {
+			      //move to next token
+			      jsonParser.nextToken();
+			      System.out.println(jsonParser.getText());        	 
+			   }
+		
+		}
 	}
 
 }

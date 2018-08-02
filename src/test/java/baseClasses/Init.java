@@ -26,8 +26,7 @@ public static Logger log;
 	System.setProperty("webdriver.chrome.driver", "browser_files\\chromedriver2.37.exe");
 	driver =  new ChromeDriver();
 	driver.manage().window().maximize();
-	p.setPropertyFile("config.properties");
-	
+	initPropFile();
 	try {
 		System.out.println(System.getProperty("log"));
 		log = Logger.getLogger("automatioLog");
@@ -35,7 +34,9 @@ public static Logger log;
 		System.out.println("Could not create log file");
 	}
 	}
-	
+	public static void initPropFile() {
+		p.setPropertyFile("config.properties");	
+	}
 	//CONFIGURATIONS
 	
 	public final String BASE_LIST = "selenium_list";
