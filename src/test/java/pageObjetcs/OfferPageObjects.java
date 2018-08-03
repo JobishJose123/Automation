@@ -322,6 +322,21 @@ public class OfferPageObjects extends Init {
 	 private WebElement sendTrialEmailCancelButton;
 	 @FindBy(xpath=".//*[@id='sendTrialDialogNumber']//paper-button[text()='Cancel']")
 	 private WebElement sendTrialNumberCancelButton;
+	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']")
+	 private WebElement sendTrialfield;
+	 @FindBy(xpath="//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
+	 private WebElement sendTrialSMSSender;
+	 @FindBy(xpath="//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
+	 private WebElement sendTrialSMSRoute;
+	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
+	 private WebElement SelectTrialSMSID;
+	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
+	 private WebElement SelectTrialSMSRoute;
+	 @FindBy(xpath=".//*[@id='sendTrialDialogNumber']//paper-button[text()='Send']")
+	 private WebElement sendTrialNumberSendButton;
+	 @FindBy(xpath="//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
+	 private WebElement sendTrialPageClose;
+	 
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -1107,7 +1122,7 @@ public class OfferPageObjects extends Init {
 		selectOfferChannel(eh.getCell(1, 3).toString());
 		selectOfferCategory();
 	}
-
+	
 	public void chooseChannelType() throws InterruptedException {
 		jswait.loadClick(offerChannelType);
 	}
@@ -1545,5 +1560,46 @@ public class OfferPageObjects extends Init {
 	public void validateRuleNameField() throws InterruptedException, UnsupportedFlavorException, IOException {
 		enterRuleName("ygy56465!@#$%^&*()@#$%^&*(^%$#ggy");
 		Assert.assertTrue(commonObjects.getTextFormTextField(addTrackingRuleRuleName).length()==30, "validation of rule name failed");
+	}
+	
+	public void SendTrialSMS(String sheet, String productSheet) throws Throwable {
+		Thread.sleep(1000);
+		clickCreateNewOfferButton();
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
+		// ******************Products tab*****************:
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+
+		// ******************Creative tab*****************:
+		enterCreativeTabDetails(eh);
+		
+		//verify cancel button of send trial 
+		clickSendTrialButton();
+		if(eh.getCellByColumnName("Channel").contains("Email")) {
+                           //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
+                           //jswait.loadSendKeys("1234567890");
+		}
+		else {
+                           jswait.loadClick(sendTrialfield);
+                           jswait.loadSendKeys(sendTrialfield, "919446506809");
+		}
+		jswait.loadClick(sendTrialSMSSender);
+		jswait.loadClick(SelectTrialSMSID);
+		jswait.loadClick(sendTrialSMSRoute);
+		jswait.loadClick(SelectTrialSMSRoute);
+		jswait.loadClick(sendTrialNumberSendButton);
+		Thread.sleep(3000);
+		jswait.loadClick(sendTrialPageClose);
+		
 	}
 }

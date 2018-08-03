@@ -913,6 +913,10 @@ public class OfferSteps extends Init {
 		
 
 	}
+	@Then("^verify send trail to number from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void VerifySendTrialSMS(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.SendTrialSMS(sheet, productSheet);
+	}
 	
 
 

@@ -1777,6 +1777,7 @@ public class BroadcastPageObjects extends Init {
 		   assertTrue(sendTrialCancel.isDisplayed());
 		   	   			  
 			}
+	   
 
 
 }
