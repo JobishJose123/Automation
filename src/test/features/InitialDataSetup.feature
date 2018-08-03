@@ -14,6 +14,7 @@ Then enter details of registration list
 Then save registration list
 Then navigate to landing page
 
+@NX-3482
 @NX-createDndList
 @initBrowser @closeBrowser
 Scenario: Calculate Targets - Creating DNC Exclusion list. 3482
@@ -36,6 +37,15 @@ Then enter details of mandatoy DND list
 Then save mandatory DND list
 Then navigate to landing page
 
+@NX-8842
+@NX-createProfileField
+@initBrowser
+Scenario: generate randrom registration list and upload
+Given login
+Then navigate to data foundation
+Then check and add profile fields
+#Then check the upoaded list in ui
+
 @NX-createDKJob
 @initBrowser @closeBrowser
 Scenario: create DK job for registration list upload and DNC list upload
@@ -44,3 +54,4 @@ Given login
 #Then random dnd list is generated
 Then create dk jobs for list upload
 #Then move list to dk input for upload
+

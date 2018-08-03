@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import baseClasses.CalenderUtility;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -57,16 +58,24 @@ public class BroadcastSteps extends Init{
 		Assert.assertTrue("Wrong breadcrumb", jswait.checkClickable("//flytxt-breadcrumbs//flytxt-breadcrumb[3]//paper-button[contains(text(),'Life-Cycle Marketing')]"));
 		
     }
+	public void pauseChildBC(String sheet) throws Throwable {
+		eh.setExcelFile("bcInputData", sheet);
+			jswait.loadClick("//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastGridMenu']//paper-item[contains(.,'Pause')]");
+			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
+			Thread.sleep(5000);
+			jswait.waitUntil("//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//vaadin-grid-cell-content[contains(.,'Paused')]");
+	}
 	public void pauseBC(String sheet) throws Throwable {
 		eh.setExcelFile("bcInputData", sheet);
 		if(eh.getCellByColumnName("Type").contentEquals("recurring")){
-			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
+			jswait.loadClick("//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Pause')]");
 			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
 			Thread.sleep(5000);
-			jswait.waitUntil(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//vaadin-grid-cell-content[contains(text(),'Paused')]");
+			jswait.waitUntil("//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//vaadin-grid-cell-content[contains(.,'Paused')]");
 		}
-		if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")|| eh.getCellByColumnName("Type").contentEquals("seedingTriggerableRecurringBC")){
+		else if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")|| eh.getCellByColumnName("Type").contentEquals("seedingTriggerableRecurringBC")){
 			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastSeedGridMenu']//paper-item[contains(.,'Pause')]");
 			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
@@ -94,6 +103,11 @@ public class BroadcastSteps extends Init{
 	@Then("^pause bc from sheet \"([^\"]*)\"$")
 	public void verifyPauseAndResume(String sheet) throws Throwable {
 		pauseBC(sheet);
+		Thread.sleep(3000);
+	}
+	@Then("^pause child bc from sheet \"([^\"]*)\"$")
+	public void verifyPauseAndResumeChild(String sheet) throws Throwable {
+		pauseChildBC(sheet);
 		Thread.sleep(3000);
 	}
 	
@@ -297,14 +311,27 @@ public class BroadcastSteps extends Init{
          				 Thread.sleep(1000);
          				  jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Months')]");
          				 Thread.sleep(1000);
+         				 
+         				 
          				jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input",eM.getCellByColumnName("Recur every months"));
          				 Thread.sleep(1000);
+         				 
+         				 if(eM.getCellByColumnName("Recur on").contentEquals("5th weekend day")) {
+         					jswait.loadClick("//div[@id='radioLabel'][contains(.,'Select special day')]/..");
+         					jswait.loadClick("//label[contains(.,'Order of the Day')]/..//input");
+         					jswait.loadClick("//paper-item[contains(.,'5th')]");
+         					jswait.loadClick("//label[contains(.,'Type of Day')]/..//input");
+         					jswait.loadClick("//paper-item[contains(.,'Weekend Day')]");
+         				 }
+         				 else {
          				jswait.loadClick("//label[contains(.,'Select days')]/..//input");
          				String daysStr = eM.getCellByColumnName("Recur on");
          				 String[] days = daysStr.split(",");
+         				jswait.loadClick("//*[@id='dayDialog']//div[text()='"+rightNow.get(Calendar.DAY_OF_MONTH)+"']/../..");
          				 for(int i =0; i<days.length;i++)
          					jswait.loadClick("//*[@id='dayDialog']//div[text()='"+days[i]+"']/../..");
          				jswait.loadClick(".//*[@id='dayDialog']//paper-button[text()='Done']");
+         				 }
          				
       				 }
       				jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
@@ -1413,6 +1440,17 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		//AdminPageObjects.clickEditOption();
 		
 	}
+	@Then("^verify weekdays and weekend settings$")
+	public void selectWeekendAndWeekdays() throws Throwable {
+	    // 
+	    //throw new PendingException();
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		adminPageObjects.clickWeekSettings();
+		
+		adminPageObjects.selectWeekdaysAndWeekend();
+		
+	}
 	
 	
 	@Then("^enter details for new broadcast and select any DNC exclusion list from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
@@ -2032,9 +2070,18 @@ public void waitUntilBCStatus(String bcSheet, String statusExpected) throws Thro
 public void waitUntilChildBCStatus(String bcSheet, String statusExpected) throws Throwable
 {  
 	eh.setExcelFile("bcInputData", bcSheet);
+	String bc_type = eh.getCellByColumnName("Type");
+	if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")) {
 	Calendar rightNow =Calendar.getInstance();
-	commonObjects.filterName(eh.getCellByColumnName("BC Name")+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)));
+	CalenderUtility cal = new CalenderUtility();
+	if(eh.getCellByColumnName("Recur on").contentEquals("5th weekend day")) {
+		commonObjects.filterName(eh.getCellByColumnName("BC Name")+"-"+cal.calculateMonthlyReccuranceWeekend(5));
+	}
+	else if(eh.getCellByColumnName("Recur on").contains(",")){
+		commonObjects.filterName(eh.getCellByColumnName("BC Name")+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)));
+	}
 	commonObjects.toggleAutoRefresh();
+	}
 	String statusOfBc = broadcastPageObjects.getTopBcStatus();
 	while(!statusOfBc.contains(statusExpected)) {
 		statusOfBc = broadcastPageObjects.getTopBcStatus();

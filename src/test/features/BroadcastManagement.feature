@@ -1897,4 +1897,29 @@ Then verify delivery details from "recurringMonthBC"
     #Then navigate to BC page
     Then Search BC and Click on Sendtrial from "one-offBC"    
     
+    @NX-6244
+   @initBrowser
+   Scenario: CVerify Configuration management have the provision to set week days and weekend days NX-6244
+   Given login
+   Then navigate to configuration management
+   Then navigate to partners
+   Then verify weekdays and weekend settings
+   Then pass next scenario based on this step
+
+  @NX-6340
+  Scenario: Verify whether week settings option is displayed under partner settings NX-6340
+    Then check previous step and pass this
+    
+    @NX-6326 @initBrowser
+Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-6326
+    Given login
+    Then navigate to precision marketer
+		Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "recurringMonthSpecialBC" with "rechargeWAP"
+    Then activate bc
+    Then wait for 1 minutes
+    Then wait until status of child bc of "recurringMonthSpecialBC" is "Render Scheduled"
     

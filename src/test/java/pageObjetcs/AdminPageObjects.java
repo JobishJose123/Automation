@@ -26,6 +26,24 @@ public class AdminPageObjects extends Init{
 	//For Partner setting page
 	@FindBy(xpath=".//*[@id='mainContainer']/paper-menu/div/paper-item[contains(.,'Broadcast Settings')]")
 	private WebElement BCSettings;
+	@FindBy(xpath=".//*[@id='mainContainer']/paper-menu/div/paper-item[contains(.,'Week Settings')]")
+	private WebElement weekSettings;
+	@FindBy(xpath="//label[contains(.,'Sunday')]/..//paper-radio-button[2]")
+	private WebElement sundayWeekend;
+	@FindBy(xpath="//label[contains(.,'Monday')]/..//paper-radio-button[1]")
+	private WebElement mondayWeekday;
+	@FindBy(xpath="//label[contains(.,'Tuesday')]/..//paper-radio-button[1]")
+	private WebElement tuesdayWeekday;
+	@FindBy(xpath="//label[contains(.,'Wednesday')]/..//paper-radio-button[1]")
+	private WebElement wednesdayWeekday;
+	@FindBy(xpath="//label[contains(.,'Thursday')]/..//paper-radio-button[1]")
+	private WebElement thursdayWeekday;
+	@FindBy(xpath="//label[contains(.,'Friday')]/..//paper-radio-button[1]")
+	private WebElement fridayWeekday;
+	@FindBy(xpath="//label[contains(.,'Saturday')]/..//paper-radio-button[2]")
+	private WebElement saturdayWeekend;
+	@FindBy(xpath="//week-settings//paper-button[text()='Save']")
+	private WebElement weekSettingsSaveButton;
 	
 	@FindBy(xpath="//div[contains(text(),'Creator and selected users')]/..")
 	private WebElement selectedusers;
@@ -416,6 +434,20 @@ public class AdminPageObjects extends Init{
 		public void clickBCSettings() throws InterruptedException{
 				jswait.loadClick(BCSettings);
 			}
+		//to click  week settings page in Partners page
+				public void clickWeekSettings() throws InterruptedException{
+						jswait.loadClick(weekSettings);
+					}
+				public void selectWeekdaysAndWeekend() throws InterruptedException{
+					jswait.loadClick(sundayWeekend);
+					jswait.loadClick(mondayWeekday);
+					jswait.loadClick(tuesdayWeekday);
+					jswait.loadClick(wednesdayWeekday);
+					jswait.loadClick(thursdayWeekday);
+					jswait.loadClick(fridayWeekday);
+					jswait.loadClick(saturdayWeekend);
+					jswait.loadClick(weekSettingsSaveButton);
+				}
 		//To select user
 		public void selectUsers() throws InterruptedException{
 			jswait.loadClick(selectedusers);
