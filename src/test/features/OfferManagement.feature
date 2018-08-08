@@ -732,3 +732,36 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     Then click on apply button
     Then verify trial message event
     
+    @NX-5284 @initBrowser 
+     Scenario: STC--> Verify send trial creative for both valid and invalid msisdn
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify send trail to invalidnumber from sheet "STVWAP" with product "fullDetails"
+    Then navigate to landing page
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify send trail to number from sheet "STVWAP" with product "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then enter customer number for send trial verification "919446506809"
+    Then click on search button
+    Then click on events tab
+    Then choose all events
+    Then click on apply button
+    Then verify trial message event
+    #verification for second number
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then enter customer number for send trial verification "919446506807"
+    Then click on search button
+    Then click on events tab
+    Then choose all events
+    Then click on apply button
+    Then verify trial message event

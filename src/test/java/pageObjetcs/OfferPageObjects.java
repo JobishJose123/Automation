@@ -324,6 +324,8 @@ public class OfferPageObjects extends Init {
 	 private WebElement sendTrialNumberCancelButton;
 	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']")
 	 private WebElement sendTrialfield;
+	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-input[2]//div[@id='labelAndInputContainer']/input[@id='input']")
+	 private WebElement sendTrialsecondfield;
 	 @FindBy(xpath="//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
 	 private WebElement sendTrialSMSSender;
 	 @FindBy(xpath="//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
@@ -336,6 +338,10 @@ public class OfferPageObjects extends Init {
 	 private WebElement sendTrialNumberSendButton;
 	 @FindBy(xpath="//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
 	 private WebElement sendTrialPageClose;
+	 @FindBy(xpath="/html//paper-toast[@id='toast']/span[contains(.,'Unable to process your request. Please try again')]")
+	 private WebElement sendTrialInavlidNumPopup;
+	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-button[contains(.,'Add')]")
+	 private WebElement sendTrialAddButton;
 	 
 //	 @FindBy(xpath="")
 //	 private WebElement ;
@@ -1583,7 +1589,7 @@ public class OfferPageObjects extends Init {
 		// ******************Creative tab*****************:
 		enterCreativeTabDetails(eh);
 		
-		//verify cancel button of send trial 
+	
 		clickSendTrialButton();
 		if(eh.getCellByColumnName("Channel").contains("Email")) {
                            //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
@@ -1592,6 +1598,10 @@ public class OfferPageObjects extends Init {
 		else {
                            jswait.loadClick(sendTrialfield);
                            jswait.loadSendKeys(sendTrialfield, "919446506809");
+                           jswait.loadClick(sendTrialAddButton);
+                           jswait.loadClick(sendTrialsecondfield);
+                           jswait.loadSendKeys(sendTrialsecondfield, "919446506807");                       
+                           
 		}
 		jswait.loadClick(sendTrialSMSSender);
 		jswait.loadClick(SelectTrialSMSID);
@@ -1602,4 +1612,54 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(sendTrialPageClose);
 		
 	}
+
+
+public void SendTrialInvalidNumber(String sheet, String productSheet) throws Throwable {
+	Thread.sleep(1000);
+	clickCreateNewOfferButton();
+	Thread.sleep(4000);
+	WebDriverWait wait = new WebDriverWait(driver, 10);
+	Actions actions = new Actions(driver);
+
+	ExcelHelper prodcutFile = new ExcelHelper();
+	prodcutFile.setExcelFile("productInputData", productSheet);
+	eh.setExcelFile("offerInputData", sheet);
+
+	// ******************Details tab******************:
+	enterDetailsTabFields(sheet);
+	clickProceedButton();
+	// ******************Products tab*****************:
+	enterProductTabFields(productSheet);
+	clickProceedButton();
+
+	// ******************Creative tab*****************:
+	enterCreativeTabDetails(eh);
+	
+	 
+	clickSendTrialButton();
+	if(eh.getCellByColumnName("Channel").contains("Email")) {
+                       //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
+                       //jswait.loadSendKeys("1234567890");
+	}
+	else {
+                       jswait.loadClick(sendTrialfield);
+                       jswait.loadSendKeys(sendTrialfield, "9123");
+                       jswait.loadClick(sendTrialAddButton);
+                       jswait.loadClick(sendTrialsecondfield);
+                       jswait.loadSendKeys(sendTrialsecondfield, "923");
+	}
+	jswait.loadClick(sendTrialSMSSender);
+	jswait.loadClick(SelectTrialSMSID);
+	jswait.loadClick(sendTrialSMSRoute);
+	jswait.loadClick(SelectTrialSMSRoute);
+	jswait.loadClick(sendTrialNumberSendButton);
+	Thread.sleep(3000);
+	String gettext;
+	gettext = sendTrialInavlidNumPopup.getText();
+    Assert.assertTrue(gettext.contentEquals("Unable to process your request. Please try again"), "Invalid popup message");
+    //System.out.println("message is , " +gettext);
+    Thread.sleep(3000);
+	jswait.loadClick(sendTrialPageClose);
+	
+}
 }

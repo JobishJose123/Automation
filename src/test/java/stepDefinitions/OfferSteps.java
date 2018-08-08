@@ -918,7 +918,10 @@ public class OfferSteps extends Init {
 		offerPageObjects.SendTrialSMS(sheet, productSheet);
 	}
 	
-
+	@Then("^verify send trail to invalidnumber from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void VerifySendTrialInvalidnumber(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.SendTrialInvalidNumber(sheet, productSheet);
+	}
 
 
 
