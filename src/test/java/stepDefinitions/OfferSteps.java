@@ -922,7 +922,10 @@ public class OfferSteps extends Init {
 	public void VerifySendTrialInvalidnumber(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.SendTrialInvalidNumber(sheet, productSheet);
 	}
-
+	@Then("^verify send trail to number with multiple creative from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void VerifySendTrialSMSMultipleCreative(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.SendTrialSMSMultipleCreative(sheet, productSheet);
+	}
 
 
 
