@@ -34,11 +34,7 @@ public class OfferPageObjects extends Init {
 		PageFactory.initElements(driver, this);
 	}
 
-	final String TRACK_SOURCE = "A_track_Sel";
-	final String EMAIL_PROFILE_FIELD = "Email_q11";
-	final String AGE_PROFILE_FIELD = "Age_q11";
-	final String AGE_DYNAMIC_VARIABLE = "Age_Q990";
-	final String NAME_PROFILE_FIELD = "First Name_q11";
+	
 	
 	@FindBy(xpath = "//span[contains(.,'Select')]/../input")
 	private WebElement emailSelectResourceButton;
@@ -324,47 +320,18 @@ public class OfferPageObjects extends Init {
 	 private WebElement sendTrialNumberCancelButton;
 	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']")
 	 private WebElement sendTrialfield;
-	 @FindBy(xpath="//define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']/paper-input[@required='']//div[@id='labelAndInputContainer']/input[@id='input']")
-	 private WebElement secondsendTrialfield;
-	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-input[2]//div[@id='labelAndInputContainer']/input[@id='input']")
-	 private WebElement sendTrialsecondfield;
 	 @FindBy(xpath="//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
-	 //define-creative[2]//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']
 	 private WebElement sendTrialSMSSender;
-	 @FindBy(xpath="//define-creative[2]//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
-	 private WebElement SecondsendTrialSMSSender;
 	 @FindBy(xpath="//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
 	 private WebElement sendTrialSMSRoute;
-	 @FindBy(xpath="//define-creative[2]//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
-	 private WebElement SecondsendTrialSMSRoute;
 	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	 private WebElement SelectTrialSMSID;
-	 //@FindBy(xpath="//wizard-tab[@id='check']//creative-wrapper/define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']//vaadin-combo-box[@label='Sender ID: Trial message would appear from this ID']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
-	 @FindBy(xpath="//define-creative[2]//*[@id='sendTrialDialogNumber']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
-	 private WebElement SecondSelectTrialSMSID;
 	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
 	 private WebElement SelectTrialSMSRoute;
-	 @FindBy(xpath="//creative-wrapper/define-creative[2]//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
-	 private WebElement SecondSelectTrialSMSRoute;
 	 @FindBy(xpath=".//*[@id='sendTrialDialogNumber']//paper-button[text()='Send']")
 	 private WebElement sendTrialNumberSendButton;
-	 @FindBy(xpath=".//define-creative[2]//*[@id='sendTrialDialogNumber']//paper-button[text()='Send']")
-	 private WebElement SecondsendTrialNumberSendButton;
 	 @FindBy(xpath="//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
 	 private WebElement sendTrialPageClose;
-	 @FindBy(xpath="//define-creative[2]//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
-	 private WebElement SecondsendTrialPageClose;
-	 @FindBy(xpath="/html//paper-toast[@id='toast']/span[contains(.,'Unable to process your request. Please try again')]")
-	 private WebElement sendTrialInavlidNumPopup;
-	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-button[contains(.,'Add')]")
-	 private WebElement sendTrialAddButton;
-	 @FindBy(xpath="//div/paper-button[contains(.,'Add Creative')]")
-	 private WebElement sendTrialCreativeAddButton;
-	 @FindBy(xpath="//creative-wrapper/define-creative[2]/paper-card/form[@id='form']//span[.='Send Trial']")
-	 private WebElement SecondsendTrialButton;
-	//define-creative[2]/paper-card/form[@id='form']/div/div[3]/div/div/div[1]/paper-icon-button[@role='button']/iron-icon[@id='icon']
-	 @FindBy(xpath="//define-creative[2]/paper-card/form[@id='form']/div/div[3]/div/div/div[1]/paper-icon-button[@role='button']/iron-icon[@id='icon']")
-	 private WebElement CreativeDeleteButton;
 	 
 //	 @FindBy(xpath="")
 //	 private WebElement ;
@@ -795,7 +762,16 @@ public class OfferPageObjects extends Init {
 		enterOfferDescription((String) eh.getCell(1, 1));
 		selectOfferType(eh.getCell(1, 2).toString());
 		selectOfferChannel(eh.getCell(1, 3).toString());
-		selectOfferCategory();
+		selectOfferCategory(eh.getCellByColumnName("Category"));
+	}
+	
+	public void verifyOfferDetails(String sheet,String product) throws Exception {
+		eh.setExcelFile("offerInputData", sheet);
+		jswait.waitUntil("//*[contains(text(),'"+eh.getCellByColumnName("Channel")+"')]");
+		jswait.waitUntil("//span[contains(.,'"+eh.getCellByColumnName("Offer Type")+"')]");
+		jswait.waitUntil("//*[contains(text(),'"+eh.getCellByColumnName("Category")+"')]");
+		eh.setExcelFile("productInputData", product);
+		jswait.waitUntil("//*[contains(text(),'"+eh.getCellByColumnName("Product Name")+"')]");
 	}
 
 	public void enterOfferDetailsCreativeTab(String sheet, String productSheet) throws Throwable {
@@ -1117,9 +1093,9 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick("//paper-card//paper-item[contains(.,'" + offerChannel + "')]");
 	}
 
-	public void selectOfferCategory() throws InterruptedException {
+	public void selectOfferCategory(String offerCategory) throws InterruptedException {
 		clickOfferCategory();
-		jswait.loadClick("//paper-item[contains(.,'Combo Vouchers')]");
+		jswait.loadClick("//paper-item[contains(.,'"+offerCategory+"')]");
 	}
 
 	public void enterSuccessMessage(String s) throws InterruptedException {
@@ -1149,7 +1125,7 @@ public class OfferPageObjects extends Init {
 		enterOfferDescription((String) eh.getCell(1, 1));
 		selectOfferType(eh.getCell(1, 2).toString());
 		selectOfferChannel(eh.getCell(1, 3).toString());
-		selectOfferCategory();
+		selectOfferCategory(eh.getCellByColumnName("Category"));
 	}
 	
 	public void chooseChannelType() throws InterruptedException {
@@ -1612,7 +1588,13 @@ public class OfferPageObjects extends Init {
 		// ******************Creative tab*****************:
 		enterCreativeTabDetails(eh);
 		
-	
+		//verify cancel button of send trial 
+		sendTrialSMSToNumber("919446506807");
+		sendTrialSMSToNumber("919446506808");
+		sendTrialSMSToNumber("919446506809");
+		
+	}
+	public void sendTrialSMSToNumber(String number) throws InterruptedException {
 		clickSendTrialButton();
 		if(eh.getCellByColumnName("Channel").contains("Email")) {
                            //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
@@ -1620,11 +1602,7 @@ public class OfferPageObjects extends Init {
 		}
 		else {
                            jswait.loadClick(sendTrialfield);
-                           jswait.loadSendKeys(sendTrialfield, "919446506809");
-                           jswait.loadClick(sendTrialAddButton);
-                           jswait.loadClick(sendTrialsecondfield);
-                           jswait.loadSendKeys(sendTrialsecondfield, "919446506807");                       
-                           
+                           jswait.loadSendKeys(sendTrialfield, number);
 		}
 		jswait.loadClick(sendTrialSMSSender);
 		jswait.loadClick(SelectTrialSMSID);
@@ -1633,132 +1611,6 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(sendTrialNumberSendButton);
 		Thread.sleep(3000);
 		jswait.loadClick(sendTrialPageClose);
-		
 	}
-
-
-public void SendTrialInvalidNumber(String sheet, String productSheet) throws Throwable {
-	Thread.sleep(1000);
-	clickCreateNewOfferButton();
-	Thread.sleep(4000);
-	WebDriverWait wait = new WebDriverWait(driver, 10);
-	Actions actions = new Actions(driver);
-
-	ExcelHelper prodcutFile = new ExcelHelper();
-	prodcutFile.setExcelFile("productInputData", productSheet);
-	eh.setExcelFile("offerInputData", sheet);
-
-	// ******************Details tab******************:
-	enterDetailsTabFields(sheet);
-	clickProceedButton();
-	// ******************Products tab*****************:
-	enterProductTabFields(productSheet);
-	clickProceedButton();
-
-	// ******************Creative tab*****************:
-	enterCreativeTabDetails(eh);
 	
-	 
-	clickSendTrialButton();
-	if(eh.getCellByColumnName("Channel").contains("Email")) {
-                       //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
-                       //jswait.loadSendKeys("1234567890");
-	}
-	else {
-                       jswait.loadClick(sendTrialfield);
-                       jswait.loadSendKeys(sendTrialfield, "9123");
-                       jswait.loadClick(sendTrialAddButton);
-                       jswait.loadClick(sendTrialsecondfield);
-                       jswait.loadSendKeys(sendTrialsecondfield, "923");
-	}
-	jswait.loadClick(sendTrialSMSSender);
-	jswait.loadClick(SelectTrialSMSID);
-	jswait.loadClick(sendTrialSMSRoute);
-	jswait.loadClick(SelectTrialSMSRoute);
-	jswait.loadClick(sendTrialNumberSendButton);
-	Thread.sleep(3000);
-	String gettext;
-	gettext = sendTrialInavlidNumPopup.getText();
-    Assert.assertTrue(gettext.contentEquals("Unable to process your request. Please try again"), "Invalid popup message");
-    //System.out.println("message is , " +gettext);
-    Thread.sleep(3000);
-	jswait.loadClick(sendTrialPageClose);
-	
-}
-public void SendTrialSMSMultipleCreative(String sheet, String productSheet) throws Throwable {
-	Thread.sleep(1000);
-	clickCreateNewOfferButton();
-	Thread.sleep(4000);
-	WebDriverWait wait = new WebDriverWait(driver, 10);
-	Actions actions = new Actions(driver);
-
-	ExcelHelper prodcutFile = new ExcelHelper();
-	prodcutFile.setExcelFile("productInputData", productSheet);
-	eh.setExcelFile("offerInputData", sheet);
-
-	// ******************Details tab******************:
-	enterDetailsTabFields(sheet);
-	clickProceedButton();
-	// ******************Products tab*****************:
-	enterProductTabFields(productSheet);
-	clickProceedButton();
-
-	// ******************Creative tab*****************:
-//	enterCreativeTabDetails(eh);
-//	
-//
-//	clickSendTrialButton();
-	if(eh.getCellByColumnName("Channel").contains("Email")) {
-                       //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
-                       //jswait.loadSendKeys("1234567890");
-	}
-	else {
-//		jswait.loadClick(sendTrialCreativeAddButton);
-//                       jswait.loadClick(sendTrialfield);
-//                       jswait.loadSendKeys(sendTrialfield, "919446506809");
-                       //jswait.loadClick(sendTrialAddButton);
-                       //jswait.loadClick(sendTrialsecondfield);
-                       //jswait.loadSendKeys(sendTrialsecondfield, "919446506807");                       
-                       
-	}
-//	sendTrialPageFill();
-	jswait.loadClick(sendTrialCreativeAddButton);
-	//Thread.sleep(3000);
-//	enterSecondCreativeTabDetails(eh);
-	//SecondsendTrialButton
-	jswait.loadClick(SecondsendTrialButton);
-	//jswait.loadClick(sendTrialPageClose);
-	jswait.loadClick(secondsendTrialfield);
-    jswait.loadSendKeys(secondsendTrialfield, "919446506807");
-    //sendTrialPageFill();
-    jswait.loadClick(SecondsendTrialSMSSender);
-//    Actions action = new Actions(driver);
-//    Thread.sleep(5000);
-//    action.moveToElement(SecondSelectTrialSMSID).click().build().perform();
-//    jswait.loadSendKeys(SecondsendTrialSMSSender,SENDER_SMPP);
-	jswait.loadClick(SelectTrialSMSID);
-	jswait.loadClick(SecondsendTrialSMSRoute);
-	jswait.loadClick(SelectTrialSMSRoute);
-	jswait.loadClick(SecondsendTrialNumberSendButton);
-	jswait.loadClick(SecondsendTrialPageClose);
-	jswait.loadClick(CreativeDeleteButton);
-	clickSendTrialButton();
-	jswait.loadClick(sendTrialfield);
-  jswait.loadSendKeys(sendTrialfield, "919446506809");
-  sendTrialPageFill();
-	
-    Thread.sleep(3000);
-    
-}
-public void sendTrialPageFill() throws InterruptedException {
-	jswait.loadClick(sendTrialSMSSender);
-	jswait.loadClick(SelectTrialSMSID);
-	jswait.loadClick(sendTrialSMSRoute);
-	jswait.loadClick(SelectTrialSMSRoute);
-	jswait.loadClick(sendTrialNumberSendButton);
-	jswait.loadClick(sendTrialPageClose);
-	
-}
-
-
 }

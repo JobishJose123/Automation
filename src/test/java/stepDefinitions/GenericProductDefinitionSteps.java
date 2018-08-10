@@ -391,4 +391,27 @@ public class GenericProductDefinitionSteps extends Init{
 		bcObjects.viewBroadcast();
 		
 	}
+	@Then("^verify offer details in create broadcast using offer \"([^\"]*)\" and product \"([^\"]*)\"$")
+	public void verify_offer_details_in_create_broadcast_using_offer_and_product_and_bc(String offer, String product) throws Throwable {
+		eh.setExcelFile("offerInputData",offer);
+	    BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
+	    broadcastPageObjects.enterBroadcastBasicDetails("tempBC");
+	    broadcastPageObjects.clickProceedButton();
+	    broadcastPageObjects.selectBaseList(BASE_LIST);
+	    broadcastPageObjects.clickProceedButton();
+	    broadcastPageObjects.expandOfferInChooseOffers(eh.getCellByColumnName("Offer Name"));
+	    offerPageObjects.verifyOfferDetails(offer,product);
+	}
+	@Then("^test$")
+	public void test() throws InterruptedException {
+		jswait.loadClick("//paper-button[contains(.,'Create')]");
+		jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","First Name_q11");
+		jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+		jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+		jswait.loadClick("//paper-item[contains(.,'Normal')]");
+		jswait.loadClick("//create-profile//label[text()='Type']/../input");
+		jswait.loadClick("//create-profile//paper-item[text()='Text']");
+		jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+		
+	}
 }

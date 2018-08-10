@@ -45,6 +45,7 @@ public class RegistrationList extends Init{
 	String[] languages = {"Malayalam","English","Korean","Hindi"};
 	String[] Secondlanguages = {"Tamil","Spanish","Mandarin","Urdu"};
 	String[] bool = {"Yes","No"};
+	String[] device_id = {"4444","5555"};
 	
 	public static int getAgeTargetCount() throws IOException {
     	ExcelHelper list = new ExcelHelper();
@@ -83,6 +84,43 @@ public class RegistrationList extends Init{
 		 return ageGT18;
     	
     }
+	public static int getdevice_idnot6666Count() throws IOException {
+    	ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		String filename = (String) list.getCell(1, 0);
+//		CSVFile csvFile = new CSVFile("ExcelFiles\\"+filename);
+		
+		File csvfile = new File("ExcelFiles\\"+filename);
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 0;
+		 
+
+		 int device_id[] = new int[550];
+		 String val = "";
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 temp = br.readLine();
+		 while ((temp = br.readLine()) != null) {
+			 String[] a = temp.split(",");
+			 System.out.println(a[9]);
+			 val = a[9];
+			 device_id[initial] = Integer.parseInt(val);
+//			 age[0]=Integer.parseInt(a[9].toString());
+			 initial++;
+         }
+		 br.close();
+		 int device_idnot6666 = 0;
+		 for(int j=0;j<device_id.length;j++)
+			 if(device_id[j]>18){
+				 System.out.println(device_id[j]);
+				 device_idnot6666++;
+			 }
+		 System.out.println(device_idnot6666);
+		 System.out.println("device_idnot6666");
+		 list.setCell(1, "device_idnot6666",String.valueOf(device_idnot6666) );
+		 return device_idnot6666;
+    	
+    }
 	
 	@Given("^random registration list is generated$")
     public void generateRandomRegistrationList() throws IOException{
@@ -117,6 +155,8 @@ public class RegistrationList extends Init{
         sb.append("boolean");
         sb.append(',');
         sb.append("age");
+        sb.append(',');
+        sb.append("device id");
         pw.write(sb.toString());
         sb.setLength(0);
         
@@ -162,6 +202,8 @@ public class RegistrationList extends Init{
             sb.append(bool[boolSelect]);
             sb.append(',');
             sb.append(String.valueOf(r.nextInt(60)+15));
+            sb.append(',');
+            sb.append(device_id[boolSelect]);
             pw.write(sb.toString());
             sb.setLength(0);
     	}
@@ -185,6 +227,8 @@ public class RegistrationList extends Init{
         sb.append("Yes");
         sb.append(',');
         sb.append("25");
+        sb.append(',');
+        sb.append("6666");
         pw.write(sb.toString());
         sb.setLength(0);
         
@@ -208,6 +252,8 @@ public class RegistrationList extends Init{
         sb.append("No");
         sb.append(',');
         sb.append("26");
+        sb.append(',');
+        sb.append("6666");
         pw.write(sb.toString());
         sb.setLength(0);
         
@@ -231,6 +277,8 @@ public class RegistrationList extends Init{
         sb.append("No");
         sb.append(',');
         sb.append("28");
+        sb.append(',');
+        sb.append("6666");
         pw.write(sb.toString());
         sb.setLength(0);
         
@@ -271,22 +319,7 @@ public class RegistrationList extends Init{
 	
 	public void add_profile_field() throws InterruptedException
 	{		
-	jswait.loadClick("//paper-button[contains(.,'Create')]");
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Country_q11");
 	
-	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
-	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
-	jswait.loadClick("//paper-item[contains(.,'Normal')]");
-	jswait.loadClick("//create-profile//label[text()='Type']/../input");
-	jswait.loadClick("//create-profile//paper-item[text()='Single Select']");
-	jswait.loadSendKeys("//h4[text()='Options']/../div[1]//input",country[0]);
-	jswait.loadClick("//h4[text()='Options']/../..//paper-icon-button[@icon='icons:add']");
-	jswait.loadSendKeys("//h4[text()='Options']/../div[2]//input",country[1]);
-	jswait.loadClick("//h4[text()='Options']/../..//paper-icon-button[@icon='icons:add']");
-	jswait.loadSendKeys("//h4[text()='Options']/../div[3]//input",country[2]);
-	jswait.loadClick("//h4[text()='Options']/../..//paper-icon-button[@icon='icons:add']");
-	jswait.loadSendKeys("//h4[text()='Options']/../div[4]//input",country[3]);
-	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Languages_q11");
@@ -365,6 +398,58 @@ public class RegistrationList extends Init{
 	jswait.loadClick("//create-profile//label[text()='Type']/../input");
 	jswait.loadClick("//create-profile//paper-item[text()='Number']");
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");	
+	
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Country_q11");
+	
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+	jswait.loadClick("//paper-item[contains(.,'Normal')]");
+	jswait.loadClick("//create-profile//label[text()='Type']/../input");
+	jswait.loadClick("//create-profile//paper-item[text()='Single Select']");
+	jswait.loadSendKeys("//h4[text()='Options']/../div[1]//input",country[0]);
+	jswait.loadClick("//h4[text()='Options']/../..//paper-icon-button[@icon='icons:add']");
+	jswait.loadSendKeys("//h4[text()='Options']/../div[2]//input",country[1]);
+	jswait.loadClick("//h4[text()='Options']/../..//paper-icon-button[@icon='icons:add']");
+	jswait.loadSendKeys("//h4[text()='Options']/../div[3]//input",country[2]);
+	jswait.loadClick("//h4[text()='Options']/../..//paper-icon-button[@icon='icons:add']");
+	jswait.loadSendKeys("//h4[text()='Options']/../div[4]//input",country[3]);
+	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+	
+	///next field country in location insights////
+	
+	LandingPageObjects landingPage = new LandingPageObjects();
+	landingPage.navigateToLandingPage();
+	landingPage.navigateToDataFoundation();
+	registrationListPage.navigateToCustomerLocationInsights();
+	
+	/////
+	
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Location_q11");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+	jswait.loadClick("//paper-item[contains(.,'Normal')]");
+	jswait.loadClick("//create-profile//label[text()='Type']/../input");
+	jswait.loadClick("//create-profile//paper-item[text()='Number']");
+	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+	
+	///next field country in customer device info////
+	
+		landingPage.navigateToLandingPage();
+		landingPage.navigateToDataFoundation();
+		registrationListPage.navigateToCustomerDeviceInfo();
+		
+		/////
+		jswait.loadClick("//paper-button[contains(.,'Create')]");
+		jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Device ID_q11");
+		jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+		jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+		jswait.loadClick("//paper-item[contains(.,'Normal')]");
+		jswait.loadClick("//create-profile//label[text()='Type']/../input");
+		jswait.loadClick("//create-profile//paper-item[text()='Number']");
+		jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+		
 	}
 	public void delete_profile_field() throws InterruptedException
 	{

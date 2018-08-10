@@ -135,11 +135,11 @@ public class BroadcastSteps extends Init{
 	public void view_broadcasts(String sheet) throws Throwable {
 		eh.setExcelFile("bcInputData", sheet);
 		if(eh.getCellByColumnName("Type").contentEquals("recurring")){
-			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'View')]");
 			}
 		else if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")|| eh.getCellByColumnName("Type").contentEquals("seedingTriggerableRecurringBC")){
-			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastSeedGridMenu']//paper-item[contains(.,'View')]");
 			}
 		else if(eh.getCellByColumnName("Type").contentEquals("one-off")) {
@@ -1753,6 +1753,51 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		broadcastPageObjects.clickProceedButton();
 	}
 	
+	@Then("^enter edit recurrance pattern of \"([^\"]*)\" with \"([^\"]*)\"$")
+	public void enterEditRecurranceDetails(String oldSheet,String sheet) throws Throwable {
+		eh.setExcelFile("bcInputData",sheet);
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.clickProceedButton();
+		enterDeliveryTabDetails(eh.getCellByColumnName("Type"),sheet);
+	}
+	
+	@Then("^click edit option for bc from sheet \"([^\"]*)\"$")
+	public void clickEditOptionOfBcFromSheet(String sheet) throws Throwable {
+		eh.setExcelFile("bcInputData", sheet);
+		if(eh.getCellByColumnName("Type").contentEquals("recurring")){
+			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Edit')]");
+			}
+		else if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")|| eh.getCellByColumnName("Type").contentEquals("seedingTriggerableRecurringBC")){
+			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastSeedGridMenu']//paper-item[contains(.,'Edit')]");
+			}
+		else if(eh.getCellByColumnName("Type").contentEquals("one-off")) {
+			commonObjects.filterName(eh.getCellByColumnName("BC Name"));
+			commonObjects.clickOptionsIcon();
+			commonObjects.clickEditOption();
+		}
+	}
+	
+	@Then("^click copy option for bc from sheet \"([^\"]*)\"$")
+	public void clickCopyOptionOfBcFromSheet(String sheet) throws Throwable {
+		eh.setExcelFile("bcInputData", sheet);
+		if(eh.getCellByColumnName("Type").contentEquals("recurring")){
+			jswait.loadClick(".//*[@id='broadcastRecurList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Copy')]");
+			}
+		else if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")|| eh.getCellByColumnName("Type").contentEquals("seedingTriggerableRecurringBC")){
+			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastSeedGridMenu']//paper-item[contains(.,'Copy')]");
+			}
+		else if(eh.getCellByColumnName("Type").contentEquals("one-off")) {
+			commonObjects.filterName(eh.getCellByColumnName("BC Name"));
+			commonObjects.clickOptionsIcon();
+			commonObjects.clickCopyOption();
+		}
+	}
+	
 	@Then("^Then Search BC and give permission from \"([^\"]*)\" for user \"([^\"]*)\"$")
 	public void then_Search_BC_and_give_permission_from_for_user(String sheet, String user) throws Throwable {
 		eh.setExcelFile("bcInputData",sheet);
@@ -2090,8 +2135,8 @@ public void waitUntilChildBCStatus(String bcSheet, String statusExpected) throws
 	}
 	Assert.assertTrue("Invalid status of BC",statusOfBc.contains(statusExpected));
 }
-@Then("^verify targeted and sent count of \"([^\"]*)\"$")
-public void verifyBCTargetedCount(String sheet) throws Throwable {
+@Then("^verify targeted and sent count of \"([^\"]*)\" with condition \"([^\"]*)\"$")
+public void verifyBCTargetedCount(String sheet,String condition) throws Throwable {
 	eh.setExcelFile("bcInputData", sheet);
 	String targetStr = broadcastPageObjects.getBcTargtedCount(eh.getCellByColumnName("BC Name"));
 	String sentStr = broadcastPageObjects.getBcSentCount(eh.getCellByColumnName("BC Name"));
@@ -2099,10 +2144,23 @@ public void verifyBCTargetedCount(String sheet) throws Throwable {
 	int sent = Integer.parseInt(sentStr);
 	ExcelHelper list = new ExcelHelper();
 	list.setExcelFile("registrationListInputData", "Sheet1");
-	targetStr = list.getCellByColumnName("age>18");
-	int expected = Integer.parseInt(targetStr);
-	Assert.assertEquals("expected count not equal to actual count",expected, targeted);
-	Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+	if(condition.contentEquals("customerDeviceInfo")){
+		targetStr = list.getCellByColumnName("device_idnot6666");
+		int expected = Integer.parseInt(targetStr);
+		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+	}
+	else if(condition.contentEquals("customerWasSentTheTrialMessage")) {
+		int SEND_TRIAL_COUNT = 3;
+		int expected = SEND_TRIAL_COUNT;
+		Assert.assertEquals("expected count not equal to actual count, SEND_TRIAL_COUNT harcoded to 3",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count , SEND_TRIAL_COUNT harcoded to 3",sent, targeted);
+	}
+	else {
+		Exception notDefined = new Exception("Condition not defined");
+		throw notDefined;
+	}
+	
 }
 @Then("^Search BC and check for permissions from \"([^\"]*)\"$")
 public void Search_BC_and_check_for_permissions_from(String sheet) throws Throwable {

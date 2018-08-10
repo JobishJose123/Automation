@@ -16,6 +16,10 @@ public class RegistrationListPage extends Init{
 	
 	@FindBy(xpath="//div[contains(text(),'Customer Lists')]/../..")
 	private WebElement registrationListButton;
+	@FindBy(xpath="//div[contains(text(),'Customer Location Insights')]/../..")
+	private WebElement customerLocationInsightsButton;
+	@FindBy(xpath="//div[contains(text(),'Customer Device Info')]/../..")
+	private WebElement customerDeviceInfoButton;
 	@FindBy(xpath="//paper-button[text()='Create']")
 	private WebElement createNewRegistrationListButton;
 	@FindBy(xpath=".//*[@id='createNew']//label[text()='Name']/../input")
@@ -51,6 +55,12 @@ public class RegistrationListPage extends Init{
 	
 	public void navigateToRegistrationList() throws InterruptedException {
 		jswait.loadClick(registrationListButton);
+	}
+	public void navigateToCustomerLocationInsights() throws InterruptedException {
+		jswait.loadClick(customerLocationInsightsButton);
+	}
+	public void navigateToCustomerDeviceInfo() throws InterruptedException {
+		jswait.loadClick(customerDeviceInfoButton);
 	}
 	public void enterRegistrationListName(String name) throws InterruptedException {
 		jswait.loadSendKeys(registrationListName, name);

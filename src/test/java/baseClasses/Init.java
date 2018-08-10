@@ -40,8 +40,9 @@ public static Logger log;
 	//CONFIGURATIONS
 	
 	public final String BASE_LIST = "selenium_list";
-	public final String AGE_PROFILE_FIELD = "Age_q11";
 	public final String SITE_ID_PROFILE_FIELD = "SiteID";
+	public final String LOCATION_PROFILE_FIELD = "Location_q11";
+	public final String DEVICE_INFO_FIELD = "Device ID_q11";
 	public final String BALANCE_PROFILE_FIELD = "Balance_q11";
 	public final String BASE_LIST2 = "Copy_paste_List";
 	public final String BASE_LIST3 = "1M_List";
@@ -55,6 +56,11 @@ public static Logger log;
 	public final String SELENIUM_LIST = "selenium_list";
 	public final String SELENIUM_DND_LIST = "selenium_list_DND";
 	public final String SELENIUM_MANDATORY_DND_LIST = "selenium_list_DND_mandatory";
+	public final String TRACK_SOURCE = "A_track_Sel";
+	public final String EMAIL_PROFILE_FIELD = "Email_q11";
+	public final String AGE_PROFILE_FIELD = "Age_q11";
+	public final String AGE_DYNAMIC_VARIABLE = "Age_Q990";
+	public final String NAME_PROFILE_FIELD = "First Name_q11";
 	
 }
 //public class Init {

@@ -85,6 +85,10 @@ public class CommonSteps extends Init {
 	public void navigateToRegistrationList() throws InterruptedException {
 		registrationListPage.navigateToRegistrationList();
 	}
+	@Then("^navigate to customer location insights")
+	public void navigateToCustomerLocationInsights() throws InterruptedException {
+		registrationListPage.navigateToCustomerLocationInsights();
+	}
 	@Then("^navigate to rewards")
 	public void navigateToRewards() throws InterruptedException {
 		jswait.loadClick("//a/div[contains(.,'Rewards')]/..");

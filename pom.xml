@@ -5,7 +5,7 @@
   <groupId>fly</groupId>
   <artifactId>dx_automation_selenium</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <name>dx_automation_selenium</name>
   <url>http://maven.apache.org</url>
@@ -236,6 +236,21 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <configuration>
+        <archive>
+            <manifest>
+                <addClasspath>true</addClasspath>
+                <classpathPrefix>libs/</classpathPrefix>
+                <mainClass>
+                    RunClass
+                </mainClass>
+            </manifest>
+        </archive>
+    </configuration>
+</plugin>
 </plugins> 
   	</build>
 </project>

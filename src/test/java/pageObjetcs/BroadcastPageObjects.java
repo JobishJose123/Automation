@@ -710,6 +710,10 @@ public class BroadcastPageObjects extends Init {
 	public void clickTargetConditionNoneOption() throws InterruptedException {
 		jswait.loadClick(targetConditionNoneOption);
 	}
+	
+	public void expandOfferInChooseOffers(String offerName) throws InterruptedException {
+		jswait.loadClick(".//data-table-cell[contains(.,'"+offerName+"')]");
+	}
 
 	public void selectBaseList(String baseList) throws InterruptedException {
 		jswait.loadSendKeys(baseListSelector, baseList);

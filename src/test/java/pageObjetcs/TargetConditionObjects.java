@@ -37,6 +37,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionTypeSystemEvents;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Location Insights')]")
 	private WebElement targetConditionTypeCustomerLocationInsights;
+	@FindBy(xpath="//paper-item[contains(.,'Customer Device Info')]")
+	private WebElement targetConditionTypeCustomerDeviceInfo;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input")
 	private WebElement CustomerInsightFieldSelector;
 	@FindBy(xpath="//input[@placeholder='Event']")
@@ -45,6 +47,10 @@ public class TargetConditionObjects extends Init {
 	private WebElement CustomerInsightFieldAge;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+SITE_ID_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldSite;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+LOCATION_PROFILE_FIELD+"')]")
+	private WebElement CustomerInsightLocation;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DEVICE_INFO_FIELD+"')]")
+	private WebElement CustomerDeviceInfo;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+BALANCE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldBalance;
 	@FindBy(xpath="//label[text()='Condition']/../..//input")
@@ -63,6 +69,10 @@ public class TargetConditionObjects extends Init {
 	private WebElement eventOfferAccepted;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer declined')]")
 	private WebElement eventOfferDeclined;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer was sent the message')]")
+	private WebElement eventCustomerWasSentTheMessage;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer was sent the trial message')]")
+	private WebElement eventCustomerWasSentTheTrialMessage;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer Recommended')]")
 	private WebElement eventOfferRecommended;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer Care Usage')]")
@@ -264,6 +274,48 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionTypeSystemEvents);
 			jswait.loadSendKeys(EventFieldSelector,"Offer accepted");
 			jswait.loadClick(eventOfferAccepted);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("customerLocationInsights")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerLocationInsights);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(CustomerInsightLocation);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsLessThan);
+			jswait.loadSendKeys(isGreaterThanValue,"25");
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("customerDeviceInfo")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerDeviceInfo);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(CustomerDeviceInfo);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsNot);
+			jswait.loadSendKeys(isGreaterThanValue,"6666");
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("customerWasSentTheMessage")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeSystemEvents);
+			jswait.loadSendKeys(EventFieldSelector,"Customer was sent the message");
+			jswait.loadClick(eventCustomerWasSentTheMessage);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("customerWasSentTheTrialMessage")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeSystemEvents);
+			jswait.loadSendKeys(EventFieldSelector,"Customer was sent the trial message");
+			jswait.loadClick(eventCustomerWasSentTheTrialMessage);
 			jswait.loadClick(eventDateAndTimeSelector);
 			jswait.loadClick(allEventsBefore);
 			jswait.loadClick(selectFieldSelector);
