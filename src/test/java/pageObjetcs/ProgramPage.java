@@ -542,11 +542,11 @@ private WebElement rulessenderid2 ;
    
    public void selectCustomerList(String listname) throws InterruptedException {
 			
-		Thread.sleep(3000);
-		eh.setExcelFile("listname",listname);
-		String list = (String) eh.getCell(1, 0);
+		Thread.sleep(1000);
+//		eh.setExcelFile("listname",listname);
+		String list = listname; //(String) eh.getCell(1, 0);
 		jswait.loadSendKeys(customerListField, list);
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath("//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+list+"')]")).click();
 		
 	}

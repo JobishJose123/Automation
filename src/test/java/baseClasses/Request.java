@@ -1,6 +1,7 @@
 package baseClasses;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -95,6 +96,14 @@ public class Request {
 		getResponseString();
 		return responseCode;	
 	}
+	public int getRequestWithCookie(String urlStr,String cookie) throws IOException{	
+		setUrl(urlStr);
+		setGetProperties();
+		con.setRequestProperty("Cookie", cookie);
+		int responseCode = con.getResponseCode();
+		getResponseString();
+		return responseCode;	
+	}
 
 	public void postRequest(String urlStr, String jobPayload) throws ClientProtocolException, IOException {
 		StringEntity entity = new StringEntity(jobPayload,
@@ -106,6 +115,45 @@ public class Request {
         HttpResponse response = httpClient.execute(request);
         System.out.println(response.getStatusLine().getStatusCode());
         System.out.println(response.toString());
+	}
+	public void postRequestWithCookie(String urlStr, String jobPayload,String cookie) throws ClientProtocolException, IOException {
+		StringEntity entity = new StringEntity(jobPayload,
+                ContentType.APPLICATION_JSON);
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost request = new HttpPost(urlStr);
+        request.setHeader("Content-type", "application/json");
+        request.setHeader("Cookie", cookie);
+        request.setEntity(entity);
+        HttpResponse response = httpClient.execute(request);
+        System.out.println(response.getStatusLine().getStatusCode());
+        System.out.println(response.toString());
+	}
+	public void postRequest_payload(String urlStr, String jobPayload) throws ClientProtocolException, IOException {
+		final String USER_AGENT = "Mozilla/5.0";
+//		String url = "http://192.168.150.27/neon-ws/login";
+		URL obj = new URL(urlStr);
+//		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+		con = (HttpURLConnection) obj.openConnection();
+		//add reuqest header
+		con.setRequestMethod("POST");
+		con.setRequestProperty("User-Agent", USER_AGENT);
+		con.setRequestProperty("accept", "application/json");
+//		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+		String urlParameters = jobPayload ;//"username=flyops%40flytxt.com&password=flytxt&remember-me=false";
+		
+		// Send post request
+		con.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(urlParameters);
+		wr.flush();
+		wr.close();
+
+		int responseCode = con.getResponseCode();
+//		System.out.println("\nSending 'POST' request to URL : " + url);
+//		System.out.println("Post parameters : " + urlParameters);
+		System.out.println("Response Code : " + responseCode);
+		getResponseString();
 	}
 	public void putRequest(String urlStr,String authKey,String data) throws IOException{
 		Random random = new Random();
@@ -146,6 +194,10 @@ public class Request {
 		System.out.println(response.header("Set-Cookie"));
 		
 
+	}
+	public List<String> getCookies(){
+		List<String> cookies = con.getHeaderFields().get("Set-Cookie");
+		return cookies;
 	}
 	public static void main(String[] args) throws IOException {
 		Request r = new Request();

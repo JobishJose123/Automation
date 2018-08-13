@@ -2104,7 +2104,8 @@ public void waitUntilBCStatus(String bcSheet, String statusExpected) throws Thro
 	commonObjects.filterName(eh.getCellByColumnName("BC Name"));
 	commonObjects.toggleAutoRefresh();
 	String statusOfBc = broadcastPageObjects.getTopBcStatus();
-	while(!statusOfBc.contains(statusExpected)) {
+	long startTime = System.currentTimeMillis();
+	while(!statusOfBc.contains(statusExpected)||(System.currentTimeMillis()-startTime)<1080000) {
 		statusOfBc = broadcastPageObjects.getTopBcStatus();
 		System.out.println(statusOfBc);
 		Thread.sleep(3000);
@@ -2170,6 +2171,11 @@ public void Search_BC_and_check_for_permissions_from(String sheet) throws Throwa
 	commonObjects.clickOptionsIcon();
 	broadcastPageObjects.verifyPermissions();
 
+}
+
+@Then("^verify preferred language field in broadcast settings$")
+public void verifyPreferredLanguageInBroadcastSettings() throws Throwable {
+	adminPageObjects.checkPreferredLanguageDropdown();
 }
 
 

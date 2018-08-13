@@ -2007,3 +2007,12 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then activate bc
     Then wait until status of "one-offBC" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition "customerWasSentTheTrialMessage"
+    
+     @NX-4936 @initBrowser
+    Scenario: LGS- Verify Preferred Language dropdown values  -4936
+    Given login
+    Then navigate to configuration management
+    Then navigate to partners
+    Then edit a partner
+    Then navigate to broadcast settings page
+    Then verify preferred language field in broadcast settings

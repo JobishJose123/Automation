@@ -1745,7 +1745,20 @@ System.out.println(editname+"program has edited successfully");
 		}
 		
 		
-		
+		@Then("^create (\\d+) rule from sheet \"([^\"]*)\" and list \"([^\"]*)\"$")
+		public void create_rule_from_sheet_and_list(int arg1, String sheet1, String list) throws Throwable {
+			for(int i=0;i<arg1;i++) {
+				Thread.sleep(2000);
+				ExcelHelper programExcel = new ExcelHelper();
+		    	programExcel.setExcelFile("productInputData", sheet1);
+		    	
+		 		String name = "myy_rule_";
+		 		Thread.sleep(2000);
+				//programPage.clickCreateProgramButton();
+				programPage.createNewProgramRule(name+i,list);
+			}
+	    	
+		}
 		
 	
 }

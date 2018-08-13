@@ -346,6 +346,19 @@ public class RegistrationList extends Init{
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input",PREFERRED_LANGUAGE_PROFILE_FIELD);
+	
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+	jswait.loadClick("//paper-item[contains(.,'Normal')]");
+	jswait.loadClick("//create-profile//label[text()='Type']/../input");
+	jswait.loadClick("//create-profile//paper-item[text()='Single Select']");
+	jswait.loadSendKeys("//h4[text()='Options']/../div[1]//input",LANGUAGE1);
+	jswait.loadClick("//h4[text()='Options']/../..//paper-icon-button[@icon='icons:add']");
+	jswait.loadSendKeys("//h4[text()='Options']/../div[2]//input",LANGUAGE2);
+	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+	
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","First Name_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");

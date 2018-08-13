@@ -40,6 +40,7 @@ public static Logger log;
 	//CONFIGURATIONS
 	
 	public final String BASE_LIST = "selenium_list";
+	public final String PREFERRED_LANGUAGE_PROFILE_FIELD = "Preferred Language_q11";
 	public final String SITE_ID_PROFILE_FIELD = "SiteID";
 	public final String LOCATION_PROFILE_FIELD = "Location_q11";
 	public final String DEVICE_INFO_FIELD = "Device ID_q11";

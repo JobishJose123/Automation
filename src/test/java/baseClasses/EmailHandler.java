@@ -15,7 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class SendMailTLS {
+public class EmailHandler {
 
 	
 	private static String getTextFromMessage(Message message) throws MessagingException, IOException {

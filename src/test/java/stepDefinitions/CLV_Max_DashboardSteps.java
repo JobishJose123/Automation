@@ -81,6 +81,16 @@ public class CLV_Max_DashboardSteps extends Init {
 		adminPageObjects.clickCGSettingsOption();
 		
 	}
+	
+	@Then("^navigate to broadcast settings page$")
+	public void clickBroadcastSettingsOption() throws Exception {
+		
+		Thread.sleep(3000);
+		adminPageObjects.clickBroadcastSettingsOption();
+		
+	}
+	
+	
 	@Then("^navigate to configuration page$")
 	public void navigateToConfigurationPage() throws Exception {
 		  

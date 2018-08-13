@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -24,6 +25,10 @@ public class AdminPageObjects extends Init{
 	}
 
 	//For Partner setting page
+	@FindBy(xpath="//input[@placeholder='Select a Profile Field']")
+	private WebElement LanguageSettingSelectProfileFieldSelector;
+	@FindBy(xpath="//paper-item[contains(.,'"+PREFERRED_LANGUAGE_PROFILE_FIELD+"')]")
+	private WebElement LanguageSettingSelectProfileFieldItem;
 	@FindBy(xpath=".//*[@id='mainContainer']/paper-menu/div/paper-item[contains(.,'Broadcast Settings')]")
 	private WebElement BCSettings;
 	@FindBy(xpath=".//*[@id='mainContainer']/paper-menu/div/paper-item[contains(.,'Week Settings')]")
@@ -171,6 +176,10 @@ public class AdminPageObjects extends Init{
 	
 	public void clickCGSettingsOption() throws InterruptedException{
 		jswait.loadClick(controlGroupSettings);
+		Thread.sleep(2000);
+	}
+	public void clickBroadcastSettingsOption() throws InterruptedException{
+		jswait.loadClick(BCSettings);
 		Thread.sleep(2000);
 	}
 	
@@ -480,5 +489,8 @@ public class AdminPageObjects extends Init{
 			jswait.loadClick(BCCancel);
 			System.out.println("Success");
 		}
-
+		public void checkPreferredLanguageDropdown() throws InterruptedException{
+			jswait.loadClick(LanguageSettingSelectProfileFieldSelector);
+			Assert.assertTrue(jswait.checkClickable(LanguageSettingSelectProfileFieldItem),"Language preference profile field not found in dropdown");
+		}
 }

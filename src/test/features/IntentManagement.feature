@@ -891,4 +891,3 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     Then choose program from sheet "programdetails"
     Then create new rule from sheet "fullDetails" and list "listname"
     Then verify rule created from sheet "rule"
-
