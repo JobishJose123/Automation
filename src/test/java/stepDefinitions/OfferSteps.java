@@ -918,9 +918,9 @@ public class OfferSteps extends Init {
 		offerPageObjects.SendTrialSMS(sheet, productSheet);
 	}
 	
-	@Then("^verify send trail to ONE number from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
-	public void VerifySendTrialSMSOneNum(String sheet, String productSheet) throws Throwable {
-		offerPageObjects.SendTrialSMSOneNum(sheet, productSheet);
+	@Then("^verify send trail to ONE number from sheet \"([^\"]*)\" with product \"([^\"]*)\" and number \"([^\"]*)\"$")
+	public void VerifySendTrialSMSOneNum(String sheet, String productSheet, String number) throws Throwable {
+		offerPageObjects.SendTrialSMSOneNum(sheet, productSheet, number);
 	}
 	@Then("^verify send trail to invalidnumber from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
 	public void VerifySendTrialInvalidnumber(String sheet, String productSheet) throws Throwable {

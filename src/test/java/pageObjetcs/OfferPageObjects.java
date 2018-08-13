@@ -1641,7 +1641,7 @@ public class OfferPageObjects extends Init {
 		Thread.sleep(3000);
 		jswait.loadClick(sendTrialPageClose);
 	}
-	public void SendTrialSMSOneNum(String sheet, String productSheet) throws Throwable {
+	public void SendTrialSMSOneNum(String sheet, String productSheet, String number) throws Throwable {
 		Thread.sleep(1000);
 		clickCreateNewOfferButton();
 		Thread.sleep(4000);
@@ -1670,7 +1670,7 @@ public class OfferPageObjects extends Init {
 		}
 		else {
                            jswait.loadClick(sendTrialfield);
-                           jswait.loadSendKeys(sendTrialfield, "919446506809");                                                 
+                           jswait.loadSendKeys(sendTrialfield, number);                                                 
                            
 		}
 		jswait.loadClick(sendTrialSMSSender);
