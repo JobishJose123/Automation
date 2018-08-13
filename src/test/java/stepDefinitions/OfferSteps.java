@@ -918,7 +918,18 @@ public class OfferSteps extends Init {
 		offerPageObjects.SendTrialSMS(sheet, productSheet);
 	}
 	
-
+	@Then("^verify send trail to ONE number from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void VerifySendTrialSMSOneNum(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.SendTrialSMSOneNum(sheet, productSheet);
+	}
+	@Then("^verify send trail to invalidnumber from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void VerifySendTrialInvalidnumber(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.SendTrialInvalidNumber(sheet, productSheet);
+	}
+	@Then("^verify send trail to number with multiple creative from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void VerifySendTrialSMSMultipleCreative(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.SendTrialSMSMultipleCreative(sheet, productSheet);
+	}
 
 
 

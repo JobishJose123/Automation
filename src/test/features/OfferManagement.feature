@@ -766,7 +766,7 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     Then click on apply button
     Then verify trial message event
     
-    @NX-5169_test @initBrowser 
+    @NX-5169 @initBrowser 
      Scenario: STC--> verify whether send trial option is available against each creative
     Given login
     When navigate to precision marketer
@@ -774,23 +774,44 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     Then navigate to offers
     #Then verify send trail to number from sheet "rechargeSMS" with product "fullDetails"
     Then verify send trail to number with multiple creative from sheet "rechargeSMS" with product "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to reports
-    #Then navigate to customer profile
-    #Then enter customer number for send trial verification "919446506809"
-    #Then click on search button
-    #Then click on events tab
-    #Then choose all events
-    #Then click on apply button
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then enter customer number for send trial verification "919446506809"
+    Then click on search button
+    Then click on events tab
+    Then choose all events
+    Then click on apply button
+    Then verify trial message event
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then enter customer number for send trial verification "919446506807"
+    Then click on search button
+    Then click on events tab
+    Then choose all events
+    Then click on apply button
+    Then verify trial message event
+    
+    @NX-5176 @initBrowser 
+     Scenario: STC--> verify whether send trial option is available against each creative
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify send trail to ONE number from sheet "rechargeSMS" with product "fullDetails"
+    #Then verify send trail to number with multiple creative from sheet "rechargeSMS" with product "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then enter customer number for send trial verification "919446506807"
+    Then click on search button
+    Then click on events tab
+    Then choose all events
+    Then click on apply button
     #Then verify trial message event
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to reports
-    #Then navigate to customer profile
-    #Then enter customer number for send trial verification "919446506807"
-    #Then click on search button
-    #Then click on events tab
-    #Then choose all events
-    #Then click on apply button
-    #Then verify trial message event
+    Then verify trial message event details from sheet "rechargeSMS"
+    

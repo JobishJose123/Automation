@@ -338,5 +338,12 @@ public class ConsumerProfileSteps extends Init{
 		
 		customerObjects.enterCustomerNumber(msisdn);
 	}
+	@Then("^verify trial message event details from sheet \"([^\"]*)\"$") 
+	public void verifyTrialMessageEventDetails(String sheet) throws Exception {
+		
+		Thread.sleep(5000);
+		customerObjects.verifyTrialMessageEventDetails(sheet);
+		
+	}
    
 }

@@ -1,11 +1,13 @@
 package pageObjetcs;
 
 import static org.junit.Assert.assertFalse;
+import baseClasses.ExcelHelper;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,12 +16,14 @@ import org.openqa.selenium.support.PageFactory;
 
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import cucumber.api.java.en.Then;
 
 public class CustomerProfilePage extends Init{
 	public CustomerProfilePage() {
 		PageFactory.initElements(driver, this);
 	}
 	JSWaiter jswait = new JSWaiter();
+	ExcelHelper list = new ExcelHelper();
 
 	@FindBy(xpath="//div[contains(text(),'Customer Profile')]/..")
 	private WebElement customerProfile;
@@ -198,7 +202,17 @@ public class CustomerProfilePage extends Init{
 	
 	Actions builder = new Actions(driver);
 	
+	@FindBy(xpath = "//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row//span[contains(.,'Trial Message Event')]")
+	private WebElement trialMessageEvent;
 	
+	@FindBy(xpath = "//div[@id='items']/div[1]/data-table-row//data-table-row-detail//label[.='AC1 title 2018']")
+	private WebElement Creativetext;
+	
+	@FindBy(xpath = "//div[@id='items']/div[1]/data-table-row//data-table-row-detail//label[.='Text']")
+	private WebElement Messagetypetext;
+	
+	@FindBy(xpath = "//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[2]")
+	private WebElement Eventdate;
 	
 	
 	
@@ -858,8 +872,31 @@ public class CustomerProfilePage extends Init{
    }*/
   
    }
+public void verifyTrialMessageEventDetails(String sheet) throws Exception {
+	Thread.sleep(10000);
+	jswait.loadClick(trialMessageEvent);
+	list.setExcelFile("offerInputData", sheet);
+	 //String gettext;
+	 jswait.waitUntil("//div[@id='items']/div[1]/data-table-row//data-table-row-detail//label[.='"+list.getCell(1, 11).toString()+"']");
+	 //jswait.waitUntil("//div[@id='items']/div[1]/data-table-row//data-table-row-detail//label[.='"+list.getCell(1, 11).toString()+"']");
+	 //jswait.waitUntil(trialMessageEvent);
+	// gettext = Creativetext.getText();
+	 //Assert.assertTrue("Creative text ",gettext.contentEquals("AC1 title 2018"));
+	 String gettextType = Messagetypetext.getText();
+	 Assert.assertTrue("Message Type ",gettextType.contentEquals("Text"));
+	 String Eventname = trialMessageEvent.getText();
+	 Assert.assertTrue("Event name ",Eventname.contentEquals("Trial Message Event"));
+	 String sEventdate = Eventdate.getText();
+	 Assert.assertTrue("Event date ",(sEventdate.contains("PM") || sEventdate.contains("AM")) );
+	 int timelength= sEventdate.length();
+	 System.out.println("Date length is" +timelength);
+	 Assert.assertTrue("Event date ",(timelength == 20)) ;
+	 //list.setExcelFile("offerInputData", "rechargeSMS"); 
+	 //Assert.assertTrue("Creative text ",gettext.contentEquals(""+list.getCell(1, 11).toString()+""));
+}
+
    
-   
-   
+    
+
 
 }
