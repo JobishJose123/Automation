@@ -194,6 +194,9 @@ public class OfferPageObjects extends Init {
 	private WebElement addProductButtonAfterOneProduct;
 	@FindBy(xpath = "//*[@d='M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z']/../../..")
 	private WebElement mapVariableIcon;
+	@FindBy(xpath = "//label[contains(.,'Details')]/following::*[@d='M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z']//../../../..")
+	private WebElement mapVariablecreativeIcon;
+	
 	@FindBy(xpath = "//iron-data-table[@id='variablesList']//iron-list//data-table-row")
 	private WebElement mapVariableFirstVariable;
 	@FindBy(xpath = "//paper-button[text()='OK']")
@@ -1804,4 +1807,59 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(sendTrialPageClose);
 		
 	}
+	public void SendTrialSMSOneNumDynamictag(String sheet, String productSheet, String number) throws Throwable {
+		Thread.sleep(1000);
+		clickCreateNewOfferButton();
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
+		// ******************Products tab*****************:
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+
+		// ******************Creative tab*****************:
+		enterCreativeTabDetails(eh);
+		//clickMapVariableIcon();
+		jswait.loadClick(mapVariablecreativeIcon);
+		//clickMapVariableCancelButton();
+		//jswait.loadClick(emailMapVariable);
+		   MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
+		   try{
+			   clickMapVariableFirstVariable();
+		   }catch(Exception e) {
+			   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
+		   }
+		   clickMapVariableOkButton();
+		   
+		
+	
+		clickSendTrialButton();
+		if(eh.getCellByColumnName("Channel").contains("Email")) {
+                           //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
+                           //jswait.loadSendKeys("1234567890");
+		}
+		else {
+                           jswait.loadClick(sendTrialfield);
+                           jswait.loadSendKeys(sendTrialfield, number);                                                 
+                           
+		}
+		jswait.loadClick(sendTrialSMSSender);
+		jswait.loadClick(SelectTrialSMSID);
+		jswait.loadClick(sendTrialSMSRoute);
+		jswait.loadClick(SelectTrialSMSRoute);
+		jswait.loadClick(sendTrialNumberSendButton);
+		Thread.sleep(3000);
+		jswait.loadClick(sendTrialPageClose);
+		
+	}
+
+	
 }

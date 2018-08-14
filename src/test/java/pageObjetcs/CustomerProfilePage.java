@@ -895,7 +895,32 @@ public void verifyTrialMessageEventDetails(String sheet) throws Exception {
 	 //Assert.assertTrue("Creative text ",gettext.contentEquals(""+list.getCell(1, 11).toString()+""));
 }
 
-   
+public void verifyTrialMessageEventDetailsDynamic(String sheet) throws Exception {
+	Thread.sleep(10000);
+	jswait.loadClick(trialMessageEvent);
+	list.setExcelFile("offerInputData", sheet);
+	 String gettext;
+	 gettext = Creativetext.getText()+"jose";
+	 //jswait.waitUntil("//div[@id='items']/div[1]/data-table-row//data-table-row-detail//label[contains(.,'"+list.getCell(1, 11).toString()+"']");
+	 jswait.waitUntil("//div[@id='items']/div[1]/data-table-row//data-table-row-detail//label[.='"+gettext+"']");
+	    																					///data-table-cell[contains(.,'City')]
+	 //jswait.waitUntil("//div[@id='items']/div[1]/data-table-row//data-table-row-detail//label[.='"+list.getCell(1, 11).toString()+"']");
+	 //jswait.waitUntil(trialMessageEvent);
+	//gettext = Creativetext.getText()+"jose";
+	Assert.assertTrue("Creative text ",gettext.contentEquals(gettext));
+	 System.out.println("creative detail is : " +gettext);
+	 String gettextType = Messagetypetext.getText();
+	 Assert.assertTrue("Message Type ",gettextType.contentEquals("Text"));
+	 String Eventname = trialMessageEvent.getText();
+	 Assert.assertTrue("Event name ",Eventname.contentEquals("Trial Message Event"));
+	 String sEventdate = Eventdate.getText();
+	 Assert.assertTrue("Event date ",(sEventdate.contains("PM") || sEventdate.contains("AM")) );
+	 int timelength= sEventdate.length();
+	 System.out.println("Date length is" +timelength);
+	 Assert.assertTrue("Event date ",(timelength == 20)) ;
+	 //list.setExcelFile("offerInputData", "rechargeSMS"); 
+	 //Assert.assertTrue("Creative text ",gettext.contentEquals(""+list.getCell(1, 11).toString()+""));
+}  
     
 
 

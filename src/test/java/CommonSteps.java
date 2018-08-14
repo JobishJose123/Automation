@@ -55,6 +55,7 @@ public class CommonSteps extends Init {
 	}
 	@Then("^navigate to landing page")
 	public void navigateToLandingPage() throws InterruptedException {
+		Thread.sleep(3000);
 		landingPage.navigateToLandingPage();
 	}
 	@Then("^navigate to reports")

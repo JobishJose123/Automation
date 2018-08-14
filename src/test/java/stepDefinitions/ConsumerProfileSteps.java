@@ -345,5 +345,12 @@ public class ConsumerProfileSteps extends Init{
 		customerObjects.verifyTrialMessageEventDetails(sheet);
 		
 	}
+	@Then("^verify trial message event details with dynamic from sheet \"([^\"]*)\"$") 
+	public void verifyTrialMessageEventDetailsDynamic(String sheet) throws Exception {
+		
+		Thread.sleep(5000);
+		customerObjects.verifyTrialMessageEventDetailsDynamic(sheet);
+		
+	}
    
 }

@@ -835,3 +835,25 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     #Then verify trial message event
     Then verify trial message event details from sheet "rechargeSMS"
     
+    @NX-5177_test @initBrowser
+    Scenario: STC--> Verify whether dynamic tags are working properly
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify send trail to ONE number with dynamic tag from sheet "rechargeSMS" with product "fullDetails" and number "919446506807"
+    #Then verify send trail to number with multiple creative from sheet "rechargeSMS" with product "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then enter customer number for send trial verification "919446506807"
+    Then click on search button
+    Then click on events tab
+    Then choose all events
+    Then click on apply button
+    #Then verify trial message event
+    Then verify trial message event details with dynamic from sheet "rechargeSMS"
+    
+    
+    

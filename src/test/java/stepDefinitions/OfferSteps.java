@@ -931,7 +931,10 @@ public class OfferSteps extends Init {
 		offerPageObjects.SendTrialSMSMultipleCreative(sheet, productSheet);
 	}
 
-
+	@Then("^verify send trail to ONE number with dynamic tag from sheet \"([^\"]*)\" with product \"([^\"]*)\" and number \"([^\"]*)\"$")
+	public void VerifySendTrialSMSOneNumDynamictag(String sheet, String productSheet, String number) throws Throwable {
+		offerPageObjects.SendTrialSMSOneNumDynamictag(sheet, productSheet, number);
+	}
 
 
 
