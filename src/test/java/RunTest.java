@@ -1,5 +1,13 @@
 
 import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.JUnitCore;
@@ -15,7 +23,6 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
-import cucumber.api.junit.Cucumber;
 @RunWith(ExtendedCucumber.class)
 //@RunWith(JoelCucumber.class)
 //@RunWith(Cucumber.class)
@@ -46,9 +53,30 @@ import cucumber.api.junit.Cucumber;
 
 public class RunTest extends Init 
 {
+	private static boolean runCheckTimeWait = true;
+	private static class MyTimeTask extends TimerTask
+	{
+	    public void run()
+	    {
+	    	runCheckTimeWait = false;
+	    }
+	}
 	@BeforeClass
-	public static void beforeClass() {
+	public static void beforeClass() throws ParseException, IOException, InterruptedException {
+		initPropFile();
 		System.out.println("Starting test"); 
+		
+		
+		//for starting test at specific time using startExecutionTime property as 2012-07-06 13:05:45[yyyy-MM-dd HH:mm:ss]
+		String startTimeStr = p.getValue("startExecutionTime");
+		System.out.println("Start time::::"+startTimeStr);
+		 DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    Date date = dateFormatter .parse(startTimeStr);
+		    Timer timer = new Timer();
+		    timer.schedule(new MyTimeTask(), date);
+		    while(runCheckTimeWait) {
+		    	Thread.sleep(3000);
+		    }
 		try{
 			String path = new File( "." ).getCanonicalPath();
 			System.setProperty("log", path+"\\Logs");

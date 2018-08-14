@@ -16,6 +16,7 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
+import baseClasses.TimeoutImpl;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -2104,8 +2105,9 @@ public void waitUntilBCStatus(String bcSheet, String statusExpected) throws Thro
 	commonObjects.filterName(eh.getCellByColumnName("BC Name"));
 	commonObjects.toggleAutoRefresh();
 	String statusOfBc = broadcastPageObjects.getTopBcStatus();
-	long startTime = System.currentTimeMillis();
-	while(!statusOfBc.contains(statusExpected)||(System.currentTimeMillis()-startTime)<1080000) {
+	TimeoutImpl t = new TimeoutImpl();
+	t.startTimer();
+	while(!statusOfBc.contains(statusExpected)|| t.checkTimerMin(15)) {
 		statusOfBc = broadcastPageObjects.getTopBcStatus();
 		System.out.println(statusOfBc);
 		Thread.sleep(3000);
@@ -2129,7 +2131,9 @@ public void waitUntilChildBCStatus(String bcSheet, String statusExpected) throws
 	commonObjects.toggleAutoRefresh();
 	}
 	String statusOfBc = broadcastPageObjects.getTopBcStatus();
-	while(!statusOfBc.contains(statusExpected)) {
+	TimeoutImpl t = new TimeoutImpl();
+	t.startTimer();
+	while(!statusOfBc.contains(statusExpected)|| t.checkTimerMin(15)) {
 		statusOfBc = broadcastPageObjects.getTopBcStatus();
 		System.out.println(statusOfBc);
 		Thread.sleep(3000);
