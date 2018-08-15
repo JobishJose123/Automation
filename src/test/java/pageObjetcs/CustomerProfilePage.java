@@ -900,7 +900,8 @@ public void verifyTrialMessageEventDetailsDynamic(String sheet) throws Exception
 	jswait.loadClick(trialMessageEvent);
 	list.setExcelFile("offerInputData", sheet);
 	 String gettext;
-	 gettext = Creativetext.getText()+"jose";
+	 gettext = list.getCell(1, 11).toString() +"jose";
+	 System.out.println("Date length is" +gettext);
 	 //jswait.waitUntil("//div[@id='items']/div[1]/data-table-row//data-table-row-detail//label[contains(.,'"+list.getCell(1, 11).toString()+"']");
 	 jswait.waitUntil("//div[@id='items']/div[1]/data-table-row//data-table-row-detail//label[.='"+gettext+"']");
 	    																					///data-table-cell[contains(.,'City')]
