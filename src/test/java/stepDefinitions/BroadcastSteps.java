@@ -1233,7 +1233,9 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		String bcName = (String) eh.getCell(1, 0);
 		String currStatus = "";
 		currStatus = broadcastPageObjects.getBcStatus(bcName);
-		while(!status.contentEquals(currStatus)) {
+		TimeoutImpl t = new TimeoutImpl();
+		t.startTimer();
+		while(!status.contentEquals(currStatus)|| t.checkTimerMin(15)) {
 			Thread.sleep(2000);
 			currStatus = broadcastPageObjects.getBcStatus(bcName);
 		}

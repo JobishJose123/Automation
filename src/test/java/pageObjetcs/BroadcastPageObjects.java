@@ -585,8 +585,9 @@ public class BroadcastPageObjects extends Init {
 	  System.out.println("Size RS: "+size_RS);
 	  int size=deliveringStatusBC.size();
 	  System.out.println("Size before loop: "+size);
-	 
-	  while(size==0) {
+	  TimeoutImpl t = new TimeoutImpl();
+		t.startTimer();
+	  while(size==0|| t.checkTimerMin(15)) {
 		  
 	  Thread.sleep(20000);
 	  driver.navigate().refresh();
@@ -835,8 +836,9 @@ public class BroadcastPageObjects extends Init {
 		 
 		  int size=statusValidatingCG.size();
 		  System.out.println("Size before loop: "+size);
-		 
-		  while(size==0) {
+		  TimeoutImpl t = new TimeoutImpl();
+			t.startTimer();
+		  while(size==0|| t.checkTimerMin(15)) {
 			  
 		  Thread.sleep(20000);
 		  driver.navigate().refresh();
@@ -1677,8 +1679,9 @@ public class BroadcastPageObjects extends Init {
 		 
 		  int size=statusTargetingCG.size();
 		  System.out.println("Size before loop: "+size);
-		 
-		  while(size==0) {
+		  TimeoutImpl t = new TimeoutImpl();
+			t.startTimer();
+		  while(size==0|| t.checkTimerMin(15)) {
 			  
 		  Thread.sleep(20000);
 		  driver.navigate().refresh();
