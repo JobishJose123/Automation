@@ -457,7 +457,7 @@ Then check delete campaign category with linked campaigns from sheet "campaignCa
 
 
 @NX-7596
-@initBrowser 
+@initBrowser  @closeBrowser
 Scenario: Verify creation of triggerable BC - Regression NX-7596
 Given login
 Then navigate to precision marketer
@@ -480,18 +480,18 @@ Then navigate to "Triggerable" broadcasts
 Then check if "Triggerable" bc status is "Active" from sheet "triggerableBC"
 
 @NX-7597
-@initBrowser 
+@initBrowser  @closeBrowser
 Scenario: Verify creation of seeding recurring BC NX-7597
 Given login
 Then navigate to precision marketer
- #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-    #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "seedingWAPoffer" offer to Offer Catalogue
+ Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "seedingWAPoffer" offer to Offer Catalogue
     Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
@@ -680,7 +680,7 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
 
 
 
-@NX-2529 @initBrowser
+@NX-2529 @initBrowser @closeBrowser
     Scenario: CVM UI- Verify whether user is able to validate CG before activating BC-2529
     Given login
     Then navigate to configuration management
@@ -717,7 +717,7 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     Then verify bc created from sheet "one-offBC"
     
     
-    @NX-2525 @initBrowser
+    @NX-2525 @initBrowser @closeBrowser
     Scenario: CVM UI- Verify whether there is an option to configure Target group and Control group parameters in Target tab-2525
     Given login
     Then navigate to configuration management
@@ -757,7 +757,7 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     
     
      
-    @NX-2533 @initBrowser
+    @NX-2533 @initBrowser @closeBrowser
     Scenario: CVM UI- Verify that BC can be activated only after 'CG Validation Passed' once BC enters validation process-2533
     Given login
     Then navigate to configuration management
@@ -796,7 +796,7 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     
     
     
-     @NX-2540 @initBrowser
+     @NX-2540 @initBrowser @closeBrowser
     Scenario: CVM UI- Check whether BC goes to 'Submitted For CG Validation' status when BC is clicked to Validate-2540
     Given login
     Then navigate to configuration management
@@ -836,7 +836,7 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     
     
     
-     @NX-2548 @initBrowser
+     @NX-2548 @initBrowser @closeBrowser
     Scenario: CVM UI- Verify whether BC status is changed to 'Validating CG' when validation is started-2548
     Given login
     Then navigate to configuration management
@@ -876,31 +876,31 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     Then verify validating CG status for bc
     Then verify bc created from sheet "one-offBC"
     @NX-6529
-@initBrowser 
+@initBrowser  @closeBrowser
 Scenario: Verify specifying the recurrence value as 10,20,30 etc NX-6529
 Given login
 Then navigate to precision marketer
- #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeWAP" offer to Offer Catalogue
+ Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
-#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 Then naigate to "campaignBC" campaign view broadcasts
-#Then click create new broadcast button
-#Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
-#Then activate bc
+Then click create new broadcast button
+Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
+Then activate bc
 Then navigate to "Recurring" broadcasts
 Then view broadcast from sheet "recurringMonthBC"
 Then verify delivery details from "recurringMonthBC"
 
     @NX-6291
-@initBrowser 
+@initBrowser  @closeBrowser
 Scenario: Verify copy of the activated BC which has monthly recurrence NX-6291
 Given login
 Then navigate to precision marketer
@@ -925,7 +925,7 @@ Then navigate to "Recurring" broadcasts
 Then view broadcast from sheet "recurringMonthBC"
 Then verify delivery details from "recurringMonthBC"
     
-    @NX-3399 @initBrowser
+    @NX-3399 @initBrowser @closeBrowser
     Scenario: Calculate Target - Creating One-Off BC with DNC exclusion-3399
     Given login
     Then navigate to configuration management
@@ -962,7 +962,7 @@ Then verify delivery details from "recurringMonthBC"
     Then verify bc created from sheet "one-offBC"
     
     
-    @NX-1275 @initBrowser
+    @NX-1275 @initBrowser @closeBrowser
     Scenario: Broadcast grid: Verify export option of the BC-1275
     Given login
     Then navigate to configuration management
@@ -1002,7 +1002,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-652 @initBrowser
+    @NX-652 @initBrowser @closeBrowser
     Scenario: Create BC: Deliver tab: Verify "Starts broadcast at" option-652
     Given login
     Then navigate to configuration management
@@ -1041,7 +1041,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-7586 @initBrowser
+    @NX-7586 @initBrowser @closeBrowser
     Scenario: Verify broadcast view for all type of one off BCs-7586
     Given login
     Then navigate to configuration management
@@ -1079,7 +1079,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-7587 @initBrowser
+    @NX-7587 @initBrowser @closeBrowser
     Scenario: Verify Abort option for all type of one off BCs-7587
     Given login
     Then navigate to configuration management
@@ -1116,7 +1116,7 @@ Then verify delivery details from "recurringMonthBC"
     Then abort bc 
      
     @NX-6290
-@initBrowser 
+@initBrowser  @closeBrowser
 Scenario: Verify copy of the planned broadcast which has monthly recurrence NX-6290
 Given login
 Then navigate to precision marketer
@@ -1142,7 +1142,7 @@ Then view broadcast from sheet "recurringMonthBC"
 Then verify delivery details from "recurringMonthBC"
 
 @NX-7449
-   @initBrowser
+   @initBrowser @closeBrowser
    Scenario: Check whether configuration is available to set permision to edit BCs
    Given login
    Then navigate to configuration management
@@ -1151,7 +1151,7 @@ Then verify delivery details from "recurringMonthBC"
    
    
    
-   @NX-3679 @initBrowser
+   @NX-3679 @initBrowser @closeBrowser
     Scenario: Calculate Targets - Clicking calculate and Activating the BC simultaneously-3679
     Given login
     Then navigate to configuration management
@@ -1190,7 +1190,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-3416 @initBrowser
+    @NX-3416 @initBrowser @closeBrowser
     Scenario: Calculate Targets - Creating seeding BC with DNC exclusion, Target Group and Control Group-3416
     Given login
     Then navigate to configuration management
@@ -1229,7 +1229,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-3556 @initBrowser
+    @NX-3556 @initBrowser @closeBrowser
     Scenario: Calculate Targets - Calculate Drill down-3556
     Given login
     Then navigate to configuration management
@@ -1268,7 +1268,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-3412 @initBrowser
+    @NX-3412 @initBrowser @closeBrowser
     Scenario: Calculate Targets - Creating One-Off BC with DNC exclusion, Target Group and Control Group-3412
     Given login
     Then navigate to configuration management
@@ -1308,7 +1308,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-     @NX-7590 @initBrowser
+     @NX-7590 @initBrowser @closeBrowser
     Scenario: Verify Copy option for all type of one off BCs-7590
     Given login
     Then navigate to configuration management
@@ -1348,7 +1348,7 @@ Then verify delivery details from "recurringMonthBC"
     Then verify bc created from sheet "one-offBC"
     
     @NX-7460
-   @initBrowser  
+   @initBrowser   @closeBrowser
    Scenario: Check whether creator can edit the BC
    Given login
    Then navigate to configuration management
@@ -1391,7 +1391,7 @@ Then verify delivery details from "recurringMonthBC"
     Then save bc
     
     @NX-7464
-   @initBrowser  
+   @initBrowser   @closeBrowser
    Scenario: Check whether approvers and creator can edit the BC
    Given login
    Then navigate to configuration management
@@ -1448,7 +1448,7 @@ Then verify delivery details from "recurringMonthBC"
      
     
     
-    @NX-7589 @initBrowser
+    @NX-7589 @initBrowser @closeBrowser
     Scenario: Verify Pause option for all type of  one off BCs-7589
     Given login
     Then navigate to configuration management
@@ -1486,7 +1486,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-7591 @initBrowser
+    @NX-7591 @initBrowser @closeBrowser
     Scenario: d Trial option for all type of one off BCs-7591
     Given login
     Then navigate to configuration management
@@ -1533,7 +1533,7 @@ Then verify delivery details from "recurringMonthBC"
     Then verify trial message event
     
     @NX-7450
-   @initBrowser
+   @initBrowser @closeBrowser
    Scenario: Check edit BC screen
    Given login
    Then navigate to configuration management
@@ -1543,7 +1543,7 @@ Then verify delivery details from "recurringMonthBC"
    
    
    
-   @NX-4866 @initBrowser
+   @NX-4866 @initBrowser @closeBrowser
     Scenario: Verify BC level CG by targeting 10 Million subscribers -4866
     Given login
     Then navigate to configuration management
@@ -1585,7 +1585,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-4871 @initBrowser
+    @NX-4871 @initBrowser @closeBrowser
     Scenario: Verify validating BC with 10 Million subscribers  -4871
     Given login
     Then navigate to configuration management
@@ -1626,7 +1626,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-     @NX-4868 @initBrowser
+     @NX-4868 @initBrowser @closeBrowser
     Scenario: Verify BC with Partner level CG targeting 10 Million subscribers  -4868
     Given login
     Then navigate to configuration management
@@ -1676,7 +1676,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     @NX-7467
-   @initBrowser  
+   @initBrowser   @closeBrowser
    Scenario: Check whether users given with edit permission have authority to give permission for other users
    Given login
    Then navigate to configuration management
@@ -1729,7 +1729,7 @@ Then verify delivery details from "recurringMonthBC"
     #Then navigate to BC page
     Then Search BC and check for permissions from "one-offBC"   
     
-    @NX-8862 @initBrowser
+    @NX-8862 @initBrowser @closeBrowser
     Scenario:Verify BC targeting with Customer Profile Info category-8862
     Given login
     Then navigate to precision marketer
@@ -1762,7 +1762,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-     @NX-3568 @initBrowser
+     @NX-3568 @initBrowser @closeBrowser
     Scenario: Calculate Targets - Verifying partner level control group count  -3568
     Given login
     Then navigate to configuration management
@@ -1806,7 +1806,7 @@ Then verify delivery details from "recurringMonthBC"
     Then wait until status of "one-offBC" is "Delivering"
     Then verify targeted count for partner level CG 
    
-        @NX-9088 @initBrowser
+        @NX-9088 @initBrowser @closeBrowser
         @NX-7833
     Scenario: Verify IM events for all type of BC's  -9088
     Given login
@@ -1820,7 +1820,7 @@ Then verify delivery details from "recurringMonthBC"
     Then view broadcast from sheet "one-offBC"
     Then check target condition "IMEventsOfferAccepted"
     
-    @NX-7833 @initBrowser
+    @NX-7833 @initBrowser @closeBrowser
     Scenario: Verify IM events for all type of BC's  -7833
     Given login
     Then navigate to precision marketer
@@ -1833,7 +1833,7 @@ Then verify delivery details from "recurringMonthBC"
     Then view broadcast from sheet "one-offBC"
     Then check target condition "IMEventsOfferDeclined"
     
-    @NX-7831 @initBrowser
+    @NX-7831 @initBrowser @closeBrowser
     Scenario: Verify IM events for all type of BC's  -7831
     Given login
     Then navigate to precision marketer
@@ -1847,7 +1847,7 @@ Then verify delivery details from "recurringMonthBC"
     Then check target condition "IMEventsOfferRecommended"
     
     
-    @NX-7830 @initBrowser
+    @NX-7830 @initBrowser @closeBrowser
     Scenario: Verify IM events for all type of BC's  -7830
     Given login
     Then navigate to precision marketer
@@ -1861,6 +1861,7 @@ Then verify delivery details from "recurringMonthBC"
     Then check target condition "IMEventsCustomerCareUsage"
     
     @NX-5170 
+     @initBrowser @closeBrowser
     Scenario: Verify whether send trial box is displayed after clicking on send trial button
     Given login
     Then navigate to configuration management
@@ -1898,7 +1899,7 @@ Then verify delivery details from "recurringMonthBC"
     Then Search BC and Click on Sendtrial from "one-offBC"    
     
     @NX-6244
-   @initBrowser
+   @initBrowser @closeBrowser
    Scenario: CVerify Configuration management have the provision to set week days and weekend days NX-6244
    Given login
    Then navigate to configuration management
@@ -1906,11 +1907,11 @@ Then verify delivery details from "recurringMonthBC"
    Then verify weekdays and weekend settings
    Then pass next scenario based on this step
 
-  @NX-6340
+  @NX-6340 
   Scenario: Verify whether week settings option is displayed under partner settings NX-6340
     Then check previous step and pass this
     
-    @NX-6326 @initBrowser
+    @NX-6326 @initBrowser @closeBrowser
 Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-6326
     Given login
     Then navigate to precision marketer
@@ -1923,7 +1924,7 @@ Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-6326
     Then wait for 1 minutes
     Then wait until status of child bc of "recurringMonthSpecialBC" is "Render Scheduled"
     
-     @NX-6206 @initBrowser
+     @NX-6206 @initBrowser @closeBrowser
 Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Given login
     Then navigate to precision marketer
@@ -1942,7 +1943,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
 		Then view broadcast from sheet "recurringMonthBC"
 		Then verify delivery details from "recurringMonthSpecialBC"
 		
-		@NX-6350 @initBrowser
+		@NX-6350 @initBrowser @closeBrowser
 		Scenario: Verify whether it is possible to edit Type of day's field for activated BCs NX-6350
     Given login
     Then navigate to precision marketer
@@ -1960,7 +1961,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
 		Then view broadcast from sheet "recurringMonthBC"
 		Then verify delivery details from "recurringMonthSpecialBC"
 		
-		 @NX-8840 @initBrowser
+		 @NX-8840 @initBrowser @closeBrowser
     Scenario: Verify IM events for all type of BC's  -8840
     Given login
     Then navigate to precision marketer
@@ -1973,7 +1974,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then view broadcast from sheet "one-offBC"
     Then check target condition "customerLocationInsights"
     
-     @NX-8870 @initBrowser
+     @NX-8870 @initBrowser @closeBrowser
     Scenario: Verify BC targeting with Customer Device  Info category -8870
     Given login
     Then navigate to precision marketer
@@ -1986,7 +1987,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then wait until status of "one-offBC" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition "customerDeviceInfo"
     
-    @NX-8868 @initBrowser
+    @NX-8868 @initBrowser @closeBrowser
     Scenario: Verify BC targeting with System Events categor -8868
     Given login
     Then navigate to precision marketer
@@ -2008,7 +2009,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then wait until status of "one-offBC" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition "customerWasSentTheTrialMessage"
     
-     @NX-4936 @initBrowser
+     @NX-4936 @initBrowser @closeBrowser
     Scenario: LGS- Verify Preferred Language dropdown values  -4936
     Given login
     Then navigate to configuration management

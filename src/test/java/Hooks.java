@@ -37,9 +37,9 @@ import cucumber.api.java.Before;
 		    Process p = Runtime.getRuntime().exec("taskkill /im chromedriver2.37.exe /f");
 		    p.waitFor();
 		    System.out.println(p.getInputStream());
-//		    p = Runtime.getRuntime().exec("taskkill /im chrome.exe /f");
-//		    p.waitFor();
-//		    System.out.println(p.getInputStream());
+		    p = Runtime.getRuntime().exec("taskkill /im chrome.exe /f");
+		    p.waitFor();
+		    System.out.println(p.getInputStream());
 
 		}catch( IOException ex ){
 		    //Validate the case the file can't be accesed (not enought permissions)
