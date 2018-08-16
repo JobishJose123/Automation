@@ -554,7 +554,7 @@ Then view broadcast from sheet "one-offBC"
 @NX-7364 @NX-7350
 @initBrowser 
 Scenario: Create New Broadcast: verify create BC Notification
-    Given login
+ Given login
     #Then navigate to configuration management
     #Then naviagte to product classes
     #Then create product class and number attribute from "TestProductClass"
@@ -586,9 +586,10 @@ Scenario: Create New Broadcast: verify create BC Notification
     Then click create new broadcast button
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
 		Then verify create BC Notification
-		#Then activate bc
-    #Then verify bc created from sheet "one-offBC"
-    #Then wait until broadcast from sheet "one-offBC" change status to "Completed"
+		Then activate bc
+    Then verify bc created from sheet "one-offBC"
+    Then wait until status of "one-offBC" is "Complete"
+    Then verify email notifications from sheet "one-offBC"
 
 
 

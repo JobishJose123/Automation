@@ -1,6 +1,7 @@
 package pageObjetcs;
 
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.AWTException;
@@ -25,6 +26,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+
+import baseClasses.EmailHandler;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -259,7 +262,7 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement bcnotificationbeforeRendertime ;
 	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::paper-listbox//paper-item[2]")
 	 private WebElement bcnotificationbeforerendertime1min ;
-	 @FindBy(xpath="//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'syamkrishna cs')]")
+	 @FindBy(xpath="//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'Selenium user')]")
 	 private WebElement bcnotificationrecipientclick;
 	 @FindBy(xpath="//bc-notifications-list//paper-button[contains(.,'Remove')]")
 	 private WebElement bcremovebutton ;
@@ -294,8 +297,12 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement noControlGroupRadioButton;
 	 @FindBy(xpath=".//h4[contains(.,'Target Details')]")
 	 private WebElement viewTargetDetails;
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 
+	 
+	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::div[@id='checkmark'][1]")
+	 private WebElement bcnotificationatcompletion ;
+	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::div[@id='checkmark'][2]")
+	 private WebElement bcnotificationatreceivebroadcastmsg ;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -358,7 +365,7 @@ public class BroadcastPageObjects extends Init {
 	
 	//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
 	public void bcnotificationrecipient() throws InterruptedException {
-		jswait.loadSendKeys(bcnotificationrecipient, "syamkrishna cs");
+		jswait.loadSendKeys(bcnotificationrecipient, "Selenium user");
 		
 		wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE);
 		Thread.sleep(2000);
@@ -391,9 +398,15 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(bcremovebutton);
 	}
 	
+	public void bcnotificationatcompletion() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick(bcnotificationatcompletion);
+	}
 	
-	
-	
+	public void bcnotificationatreceivebroadcastmsg() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick(bcnotificationatreceivebroadcastmsg);
+	}
 	
 	
 	public void selectRecurrancePattern(String type,String sheet) throws InterruptedException {
@@ -1787,6 +1800,33 @@ public class BroadcastPageObjects extends Init {
 		   	   			  
 			}
 	   
+public void addNotificationuser() throws Exception{
+	
+	bcnotificationrecipient();
+	Thread.sleep(2000);
+	bcnotificationrecipientclick();
+	bcnotificationbeforesendingtime();
+	bcnotificationbeforesendingtime1min();
+	bcnotificationbeforeRendertime();
+	bcnotificationbeforerendertime1min();
+	bcnotificationatcompletion();
+	bcnotificationatreceivebroadcastmsg();
+	
+}
 
+public void Verifyemail(String sheet) throws Exception {
+	eh.setExcelFile("bcInputData",sheet);
+	String name = (String) eh.getCell(1, 0);
+	
+	String emaildata[]=EmailHandler.check();
+	System.out.println("inside the verify email" );
+	System.out.println(emaildata[0]);
+	String Subject=emaildata[0];
+	String fromid=emaildata[1];
+	Assert.assertEquals(Subject,"Broadcast Finished - "+name);
+	Assert.assertEquals(fromid,"'flyops@flytxt.com <flyops@flytxt.com>''");
+//	assertTrue(Subject.contains("Broadcast Finished - oneOffBC"));
+//	assertTrue(fromid.contains(""flyops@flytxt.com" <flyops@flytxt.com>"));
+		}
 
 }

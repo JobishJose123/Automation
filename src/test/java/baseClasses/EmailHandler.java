@@ -1,5 +1,6 @@
 package baseClasses;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.BodyPart;
@@ -14,6 +15,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+import org.apache.commons.collections.list.LazyList;
 
 public class EmailHandler {
 
@@ -47,9 +50,13 @@ public class EmailHandler {
 	    }
 	    return result;
 	}
-	public static void check(String host, String storeType, String user,
-		      String password) 
+	public static String[] check() 
 		   {
+		String[] emaildata=new String[4];
+		String host = "pop.gmail.com";// change accordingly
+	      String mailStoreType = "pop3";
+	      String user = "selenium.flytxt@gmail.com";// change accordingly
+	      String password = "Flytxt.4";// change accordingly
 		      try {
 
 		      //create properties field
@@ -73,7 +80,7 @@ public class EmailHandler {
 		      Message[] messages = emailFolder.getMessages();
 		      System.out.println("messages.length---" + messages.length);
 
-//		      for (int i = 0, n = messages.length; i < n; i++) {
+//	      for (int i = 0, n = messages.length; i < n; i++) {
 		         Message message = messages[(messages.length-1)];
 		         System.out.println("---------------------------------");
 		         System.out.println("Email Number " + ( (messages.length-1) + 1));
@@ -81,6 +88,13 @@ public class EmailHandler {
 		         System.out.println("From: " + message.getFrom()[0]);
 		         System.out.println("Text: " + message.getContent().toString());
 		         System.out.println("Body: " + getTextFromMessage(message));
+		         System.out.println(message.getContentType());
+
+emaildata[0]=message.getSubject().toString();
+emaildata[1]=(message.getFrom()[0].toString());
+emaildata[2]=(message.getContent().toString());
+emaildata[3]=(message.getContentType());
+
 
 //		      }
 
@@ -95,16 +109,21 @@ public class EmailHandler {
 		      } catch (Exception e) {
 		         e.printStackTrace();
 		      }
-		   }
+		  
+		  return emaildata;
+		 }
 
 		   public static void main(String[] args) {
+			   
 
-		      String host = "pop.gmail.com";// change accordingly
-		      String mailStoreType = "pop3";
-		      String username = "selenium.flytxt@gmail.com";// change accordingly
-		      String password = "Flytxt.4";// change accordingly
-
-		      check(host, mailStoreType, username, password);
+		      String emaildata[]=check();
+		      System.out.println("test");
+		      System.out.println(emaildata[0]);
+		      System.out.println(emaildata[1]);
+		      System.out.println(emaildata[2]);
+		      System.out.println(emaildata[3]);
 
 		   }
+		   
+		 
 }

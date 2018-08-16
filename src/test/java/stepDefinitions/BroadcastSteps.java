@@ -635,24 +635,25 @@ public class BroadcastSteps extends Init{
 	
 	    }
 	@Then("^verify create BC Notification$")
-	public void createBCNotification() throws InterruptedException {
+	public void createBCNotification() throws Exception {
 		
-		broadcastPageObjects.enterBroadcastBasicDetails("notification");
-		broadcastPageObjects.clickProceedButton();
-		broadcastPageObjects.selectBaseList(BASE_LIST);
-		//broadcastPageObjects.clickcreateTargetCondition();
-	    //broadcastPageObjects.clickProceedButton();
-		//broadcastPageObjects.selectBaseList("Latest_list");
-		broadcastPageObjects.clickProceedButton();
-		broadcastPageObjects.selectFirstOffer();
-		broadcastPageObjects.selectTrackSession();
-		broadcastPageObjects.selectTrackingSource();
-		broadcastPageObjects.selectSenderAndRoute();
-		broadcastPageObjects.clickProceedButton();
+//		broadcastPageObjects.enterBroadcastBasicDetails("notification");
+//		broadcastPageObjects.clickProceedButton();
+//		broadcastPageObjects.selectBaseList(BASE_LIST);
+//		//broadcastPageObjects.clickcreateTargetCondition();
+//	    //broadcastPageObjects.clickProceedButton();
+//		//broadcastPageObjects.selectBaseList("Latest_list");
+//		broadcastPageObjects.clickProceedButton();
+//		broadcastPageObjects.selectFirstOffer();
+//		broadcastPageObjects.selectTrackSession();
+//		broadcastPageObjects.selectTrackingSource();
+//		broadcastPageObjects.selectSenderAndRoute();
+//		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.bcNotifications();
 		broadcastPageObjects.bcNotificationsadd();
+		broadcastPageObjects.addNotificationuser();
 		broadcastPageObjects.bcNotificationsok();
-		broadcastPageObjects.bcNotificationscancel();
+		//broadcastPageObjects.bcNotificationscancel();
 		
 	}
 	
@@ -2411,4 +2412,13 @@ public void Search_BC_and_click_on_sendtrial_from(String sheet) throws Throwable
 	//broadcastPageObjects.clickProceedButton();
 	//broadcastPageObjects.clickProceedButton();
 }
+
+@Then("^verify email notifications from sheet \"([^\"]*)\"$")
+public void verify_email_notification(String sheet) throws Throwable {
+	
+	broadcastPageObjects.Verifyemail(sheet);
+	
+	
+}
+
 }
