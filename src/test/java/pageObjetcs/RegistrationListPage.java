@@ -18,8 +18,18 @@ public class RegistrationListPage extends Init{
 	private WebElement registrationListButton;
 	@FindBy(xpath="//div[contains(text(),'Customer Location Insights')]/../..")
 	private WebElement customerLocationInsightsButton;
+	@FindBy(xpath="//div[contains(text(),'Customer Demographics')]/../..")
+	private WebElement customerDemographicsCategoryButton;
+	@FindBy(xpath="//div[contains(text(),'Customer Digital Persona')]/../..")
+	private WebElement customerDigitalPersonaButton;
+	@FindBy(xpath="//div[contains(text(),'Learned Behaviors')]/../..")
+	private WebElement learnedBehaviourButton;
+	@FindBy(xpath="//div[contains(text(),'AI powered Analytical Scores')]/../..")
+	private WebElement AIPoweredAnalyticalScoresButton;
 	@FindBy(xpath="//div[contains(text(),'Customer Device Info')]/../..")
 	private WebElement customerDeviceInfoButton;
+	@FindBy(xpath="//div[contains(text(),'Digital Engagement Preferences')]/../..")
+	private WebElement digitalEngagementPreferencesCategoryButton;
 	@FindBy(xpath="//paper-button[text()='Create']")
 	private WebElement createNewRegistrationListButton;
 	@FindBy(xpath=".//*[@id='createNew']//label[text()='Name']/../input")
@@ -62,6 +72,22 @@ public class RegistrationListPage extends Init{
 	public void navigateToCustomerDeviceInfo() throws InterruptedException {
 		jswait.loadClick(customerDeviceInfoButton);
 	}
+	public void navigateToCustomerDemographicsCategory() throws InterruptedException {
+		jswait.loadClick(customerDemographicsCategoryButton);
+	}
+	public void navigateToCustomerDigitalPersona() throws InterruptedException {
+		jswait.loadClick(customerDigitalPersonaButton);
+	}
+	public void navigateToLearnedBehaviour() throws InterruptedException {
+		jswait.loadClick(learnedBehaviourButton);
+	}
+	public void navigateToAIPoweredAnalyticalScores() throws InterruptedException {
+		jswait.loadClick(AIPoweredAnalyticalScoresButton);
+	}
+	public void navigateToDigitalEngagementPreferencesCategory() throws InterruptedException {
+		jswait.loadClick(digitalEngagementPreferencesCategoryButton);
+	}
+	
 	public void enterRegistrationListName(String name) throws InterruptedException {
 		jswait.loadSendKeys(registrationListName, name);
 	}

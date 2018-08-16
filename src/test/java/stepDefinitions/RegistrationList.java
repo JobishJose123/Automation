@@ -320,7 +320,7 @@ public class RegistrationList extends Init{
 	public void add_profile_field() throws InterruptedException
 	{		
 	
-	
+		LandingPageObjects landingPage = new LandingPageObjects();
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Languages_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
@@ -431,7 +431,7 @@ public class RegistrationList extends Init{
 	
 	///next field country in location insights////
 	
-	LandingPageObjects landingPage = new LandingPageObjects();
+
 	landingPage.navigateToLandingPage();
 	landingPage.navigateToDataFoundation();
 	registrationListPage.navigateToCustomerLocationInsights();
@@ -462,6 +462,84 @@ public class RegistrationList extends Init{
 		jswait.loadClick("//create-profile//label[text()='Type']/../input");
 		jswait.loadClick("//create-profile//paper-item[text()='Number']");
 		jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+		
+		///next field country in Customer Demographics Category////
+			landingPage.navigateToLandingPage();
+			landingPage.navigateToDataFoundation();
+			registrationListPage.navigateToCustomerDemographicsCategory();
+			
+			/////
+			jswait.loadClick("//paper-button[contains(.,'Create')]");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Demographics_q11");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+			jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+			jswait.loadClick("//paper-item[contains(.,'Normal')]");
+			jswait.loadClick("//create-profile//label[text()='Type']/../input");
+			jswait.loadClick("//create-profile//paper-item[text()='Number']");
+			jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+			
+			///next field country in Customer Digital Persona category////
+			landingPage.navigateToLandingPage();
+			landingPage.navigateToDataFoundation();
+			registrationListPage.navigateToCustomerDigitalPersona();
+			
+			/////
+			jswait.loadClick("//paper-button[contains(.,'Create')]");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Digital Persona_q11");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+			jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+			jswait.loadClick("//paper-item[contains(.,'Normal')]");
+			jswait.loadClick("//create-profile//label[text()='Type']/../input");
+			jswait.loadClick("//create-profile//paper-item[text()='Number']");
+			jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+			
+			
+			///next field country in  Learned Behaviors category////
+			landingPage.navigateToLandingPage();
+			landingPage.navigateToDataFoundation();
+			registrationListPage.navigateToLearnedBehaviour();
+			
+			/////
+			jswait.loadClick("//paper-button[contains(.,'Create')]");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Learned Behaviour_q11");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+			jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+			jswait.loadClick("//paper-item[contains(.,'Normal')]");
+			jswait.loadClick("//create-profile//label[text()='Type']/../input");
+			jswait.loadClick("//create-profile//paper-item[text()='Number']");
+			jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+			
+			
+			///next field country in AI powered Analytical Scores category////
+			landingPage.navigateToLandingPage();
+			landingPage.navigateToDataFoundation();
+			registrationListPage.navigateToAIPoweredAnalyticalScores();
+			
+			/////
+			jswait.loadClick("//paper-button[contains(.,'Create')]");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Analytical Scores_q11");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+			jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+			jswait.loadClick("//paper-item[contains(.,'Normal')]");
+			jswait.loadClick("//create-profile//label[text()='Type']/../input");
+			jswait.loadClick("//create-profile//paper-item[text()='Number']");
+			jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+			
+			
+			///next field country in digital engagement Preferences category////
+			landingPage.navigateToLandingPage();
+			landingPage.navigateToDataFoundation();
+			registrationListPage.navigateToDigitalEngagementPreferencesCategory();
+			
+			/////
+			jswait.loadClick("//paper-button[contains(.,'Create')]");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Digital Engagement_q11");
+			jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+			jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+			jswait.loadClick("//paper-item[contains(.,'Normal')]");
+			jswait.loadClick("//create-profile//label[text()='Type']/../input");
+			jswait.loadClick("//create-profile//paper-item[text()='Number']");
+			jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 		
 	}
 	public void delete_profile_field() throws InterruptedException

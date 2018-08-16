@@ -44,6 +44,10 @@ public class CommonSteps extends Init {
     public void loginuser() throws Exception {
 		 driver.get("http://"+p.getValue("env"));
 		 loginPage.login(p.getValue("username"), p.getValue("password"));
+		 
+		 //handle robox
+		 jswait.waitUntil("//iron-overlay-backdrop");
+		 jswait.loadClick("//iron-overlay-backdrop");
     }
 	@Then("^logout")
 	public void logout() throws InterruptedException {

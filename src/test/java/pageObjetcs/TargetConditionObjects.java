@@ -39,6 +39,16 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionTypeCustomerLocationInsights;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Device Info')]")
 	private WebElement targetConditionTypeCustomerDeviceInfo;
+	@FindBy(xpath="//paper-item[contains(.,'Customer Demographics')]")
+	private WebElement targetConditionTypeCustomerDemographics;
+	@FindBy(xpath="//paper-item[contains(.,'Customer Digital Persona')]")
+	private WebElement targetConditionTypeCustomerDigitalPersona;
+	@FindBy(xpath="//paper-item[contains(.,'Learned Behaviors')]")
+	private WebElement targetConditionTypeLearnedBehaviors;
+	@FindBy(xpath="//paper-item[contains(.,'AI powered Analytical Scores')]")
+	private WebElement targetConditionTypeAIPoweredAnalyticalScores;
+	@FindBy(xpath="//paper-item[contains(.,'Digital Engagement Preferences')]")
+	private WebElement targetConditionTypeDigitalEngagementPreferences;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input")
 	private WebElement CustomerInsightFieldSelector;
 	@FindBy(xpath="//input[@placeholder='Event']")
@@ -53,6 +63,17 @@ public class TargetConditionObjects extends Init {
 	private WebElement CustomerDeviceInfo;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+BALANCE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldBalance;
+	
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DEMOGRAPHICS_FIELD+"')]")
+	private WebElement demographicsField;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_PERSONA_FIELD+"')]")
+	private WebElement digitalPersonaField;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+LEARNED_BEHAVIOR_FIELD+"')]")
+	private WebElement learnedBehaviorField;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]")
+	private WebElement analyticalScoresField;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_ENGAGEMENT_FIELD+"')]")
+	private WebElement digitalEngagementField;
 	@FindBy(xpath="//label[text()='Condition']/../..//input")
 	private WebElement conditionSelector;
 	@FindBy(xpath="//label[text()='Event Date and Time']/../..//input")
@@ -278,6 +299,26 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(allEventsBefore);
 			jswait.loadClick(selectFieldSelector);
 			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("digitalPersonaGT25")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerDemographics);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(demographicsField);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"15");
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("customerDemographicsGT15")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerDemographics);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(demographicsField);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"15");
 			jswait.loadClick(targetConditionSave);
 		}
 		else if(event.contentEquals("customerLocationInsights")){
