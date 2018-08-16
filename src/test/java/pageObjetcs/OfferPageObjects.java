@@ -1599,7 +1599,7 @@ public class OfferPageObjects extends Init {
 		Assert.assertTrue(commonObjects.getTextFormTextField(addTrackingRuleRuleName).length()==30, "validation of rule name failed");
 	}
 	
-	public void SendTrialSMS(String sheet, String productSheet) throws Throwable {
+	public void SendTrialSMS(String number1, String number2, String number3, String sheet, String productSheet) throws Throwable {
 		Thread.sleep(1000);
 		clickCreateNewOfferButton();
 		Thread.sleep(4000);
@@ -1621,9 +1621,9 @@ public class OfferPageObjects extends Init {
 		enterCreativeTabDetails(eh);
 		
 		//verify cancel button of send trial 
-		sendTrialSMSToNumber("919446506807");
-		sendTrialSMSToNumber("919446506808");
-		sendTrialSMSToNumber("919446506809");
+		sendTrialSMSToNumber(number1);
+		sendTrialSMSToNumber(number2);
+		sendTrialSMSToNumber(number3);
 		
 	}
 	public void sendTrialSMSToNumber(String number) throws InterruptedException {
@@ -1667,15 +1667,15 @@ public class OfferPageObjects extends Init {
 		
 	
 		clickSendTrialButton();
-		if(eh.getCellByColumnName("Channel").contains("Email")) {
+		//if(eh.getCellByColumnName("Channel").contains("Email")) {
                            //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
                            //jswait.loadSendKeys("1234567890");
-		}
-		else {
-                           jswait.loadClick(sendTrialfield);
-                           jswait.loadSendKeys(sendTrialfield, number);                                                 
+		//}
+		//else {
+          //                 jswait.loadClick(sendTrialfield);
+          //                 jswait.loadSendKeys(sendTrialfield, number);                                                 
                            
-		}
+		//}
 		jswait.loadClick(sendTrialSMSSender);
 		jswait.loadClick(SelectTrialSMSID);
 		jswait.loadClick(sendTrialSMSRoute);
@@ -1860,6 +1860,51 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(sendTrialPageClose);
 		
 	}
+	public void EmailSendTrialSMSOneNum(String sheet, String productSheet, String number) throws Throwable {
+		Thread.sleep(1000);
+		clickCreateNewOfferButton();
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
 
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
+		// ******************Products tab*****************:
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+
+		// ******************Creative tab*****************:
+		enterCreativeTabDetails(eh);
+		
 	
+		//clickSendTrialButton();
+		if(eh.getCellByColumnName("Channel").contains("Email")) {
+			enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			 verifySetAsDefaultCheckboxinCreativeTab();			   
+			   selectCreativeLanguageEnglish();
+			   //enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			   clickSendTrialButton();
+			   jswait.loadClick(sendTrialfield);
+               jswait.loadSendKeys(sendTrialfield, number);                                                 
+		}
+		else {
+                           jswait.loadClick(sendTrialfield);
+                           jswait.loadSendKeys(sendTrialfield, number);                                                 
+                           
+		}
+		jswait.loadClick(sendTrialSMSSender);
+		jswait.loadClick(SelectTrialSMSID);
+		jswait.loadClick(sendTrialSMSRoute);
+		jswait.loadClick(SelectTrialSMSRoute);
+		jswait.loadClick(sendTrialNumberSendButton);
+		Thread.sleep(3000);
+		jswait.loadClick(sendTrialPageClose);
+		
+	}
+
 }

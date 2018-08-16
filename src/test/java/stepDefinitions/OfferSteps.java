@@ -913,9 +913,9 @@ public class OfferSteps extends Init {
 		
 
 	}
-	@Then("^verify send trail to number from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
-	public void VerifySendTrialSMS(String sheet, String productSheet) throws Throwable {
-		offerPageObjects.SendTrialSMS(sheet, productSheet);
+	@Then("^verify send trail to numbers \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void VerifySendTrialSMS(String number1, String number2, String number3, String sheet, String productSheet) throws Throwable {
+		offerPageObjects.SendTrialSMS(number1, number2, number3, sheet, productSheet);
 	}
 	
 	@Then("^verify send trail to ONE number from sheet \"([^\"]*)\" with product \"([^\"]*)\" and number \"([^\"]*)\"$")
@@ -935,7 +935,10 @@ public class OfferSteps extends Init {
 	public void VerifySendTrialSMSOneNumDynamictag(String sheet, String productSheet, String number) throws Throwable {
 		offerPageObjects.SendTrialSMSOneNumDynamictag(sheet, productSheet, number);
 	}
-
+	@Then("^verify send trail for Emailtype to ONE number from sheet \"([^\"]*)\" with product \"([^\"]*)\" and number \"([^\"]*)\"$")
+	public void VerifyEmailSendTrialSMSOneNum(String sheet, String productSheet, String number) throws Throwable {
+		offerPageObjects.EmailSendTrialSMSOneNum(sheet, productSheet, number);
+	}
 
 
 
