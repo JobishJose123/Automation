@@ -64,16 +64,16 @@ public class TargetConditionObjects extends Init {
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+BALANCE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldBalance;
 	
-//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DEMOGRAPHICS_FIELD+"')]")
-//	private WebElement demographicsField;
-//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_PERSONA_FIELD+"')]")
-//	private WebElement digitalPersonaField;
-//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+LEARNED_BEHAVIOR_FIELD+"')]")
-//	private WebElement learnedBehaviorField;
-//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]")
-//	private WebElement analyticalScoresField;
-//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_ENGAGEMENT_FIELD+"')]")
-//	private WebElement digitalEngagementField;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DEMOGRAPHICS_FIELD+"')]")
+	private WebElement demographicsField;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_PERSONA_FIELD+"')]")
+	private WebElement digitalPersonaField;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+LEARNED_BEHAVIOR_FIELD+"')]")
+	private WebElement learnedBehaviorField;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]")
+	private WebElement analyticalScoresField;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_ENGAGEMENT_FIELD+"')]")
+	private WebElement digitalEngagementField;
 	@FindBy(xpath="//label[text()='Condition']/../..//input")
 	private WebElement conditionSelector;
 	@FindBy(xpath="//label[text()='Event Date and Time']/../..//input")
@@ -303,22 +303,52 @@ public class TargetConditionObjects extends Init {
 		}
 		else if(event.contentEquals("digitalPersonaGT25")){
 			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeCustomerDemographics);
+			jswait.loadClick(targetConditionTypeCustomerDigitalPersona);
 			jswait.loadClick(CustomerInsightFieldSelector);
-//			jswait.loadClick(demographicsField);
+			jswait.loadClick(digitalPersonaField);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsGreaterThan);
-			jswait.loadSendKeys(isGreaterThanValue,"15");
+			jswait.loadSendKeys(isGreaterThanValue,"25");
 			jswait.loadClick(targetConditionSave);
 		}
 		else if(event.contentEquals("customerDemographicsGT15")){
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerDemographics);
 			jswait.loadClick(CustomerInsightFieldSelector);
-//			jswait.loadClick(demographicsField);
+			jswait.loadClick(demographicsField);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"15");
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("learnedBehaviourGT35")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeLearnedBehaviors);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(learnedBehaviorField);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"35");
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("analyticalScoresGT45")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeAIPoweredAnalyticalScores);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(analyticalScoresField);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"45");
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("digitalEngagementGT235")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeDigitalEngagementPreferences);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(digitalEngagementField);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"235");
 			jswait.loadClick(targetConditionSave);
 		}
 		else if(event.contentEquals("customerLocationInsights")){
