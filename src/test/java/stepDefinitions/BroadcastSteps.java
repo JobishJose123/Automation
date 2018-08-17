@@ -1236,7 +1236,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 		currStatus = broadcastPageObjects.getBcStatus(bcName);
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
-		while(!status.contentEquals(currStatus)|| t.checkTimerMin(15)) {
+		while(!status.contentEquals(currStatus)&& t.checkTimerMin(15)) {
 			Thread.sleep(2000);
 			currStatus = broadcastPageObjects.getBcStatus(bcName);
 		}
@@ -2110,7 +2110,7 @@ public void waitUntilBCStatus(String bcSheet, String statusExpected) throws Thro
 	String statusOfBc = broadcastPageObjects.getTopBcStatus();
 	TimeoutImpl t = new TimeoutImpl();
 	t.startTimer();
-	while(!statusOfBc.contains(statusExpected)|| t.checkTimerMin(15)) {
+	while(!statusOfBc.contains(statusExpected)&& t.checkTimerMin(15)) {
 		statusOfBc = broadcastPageObjects.getTopBcStatus();
 		System.out.println(statusOfBc);
 		Thread.sleep(3000);
@@ -2136,7 +2136,7 @@ public void waitUntilChildBCStatus(String bcSheet, String statusExpected) throws
 	String statusOfBc = broadcastPageObjects.getTopBcStatus();
 	TimeoutImpl t = new TimeoutImpl();
 	t.startTimer();
-	while(!statusOfBc.contains(statusExpected)|| t.checkTimerMin(15)) {
+	while(!statusOfBc.contains(statusExpected)&& t.checkTimerMin(15)) {
 		statusOfBc = broadcastPageObjects.getTopBcStatus();
 		System.out.println(statusOfBc);
 		Thread.sleep(3000);

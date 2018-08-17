@@ -30,6 +30,35 @@ import cucumber.api.java.Before;
 		public static void beforeSuite() throws InterruptedException, MalformedURLException {
 			Init.init();
 		}
+		//After to take screenshot
+		@After
+		public void getscreenshot(Scenario scenario) throws Exception 
+	    {
+			if(scenario.getStatus().contentEquals("failed")) {
+			String path = new File( "." ).getCanonicalPath();
+			String tagStr = scenario.getSourceTagNames().toString();
+			tagStr = tagStr.replaceAll("\\[", " ");
+			tagStr = tagStr.replaceAll("\\]", " ");
+			tagStr = tagStr.trim();
+			String[] tags = tagStr.split(",");
+			String NXtag = "";
+			int i = 0 ;
+			while(i<tags.length) {
+				tags[i] = tags[i].trim();
+				if(tags[i].matches("@NX-[0-9]+"))
+				{
+					NXtag = tags[i];
+				    break;
+				}
+				i++;
+			}
+			String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+			System.out.println(scenario.getStatus());
+	            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	            System.out.println(FileUtils.sizeOfDirectory(new File(path+"\\Screenshots")));
+	            FileUtils.copyFile(scrFile, new File(path+"\\Screenshots\\"+NXtag+"_"+timeStamp+".png"));
+			}
+	    }
 	@After("@closeBrowser")
 	public void afterClass(Scenario scenario){
 		driver.quit();
@@ -50,35 +79,7 @@ import cucumber.api.java.Before;
 		}
 		
 	}
-	//After to take screenshot
-	@After
-	public void getscreenshot(Scenario scenario) throws Exception 
-    {
-		if(scenario.getStatus().contentEquals("failed")) {
-		String path = new File( "." ).getCanonicalPath();
-		String tagStr = scenario.getSourceTagNames().toString();
-		tagStr = tagStr.replaceAll("\\[", " ");
-		tagStr = tagStr.replaceAll("\\]", " ");
-		tagStr = tagStr.trim();
-		String[] tags = tagStr.split(",");
-		String NXtag = "";
-		int i = 0 ;
-		while(i<tags.length) {
-			tags[i] = tags[i].trim();
-			if(tags[i].matches("@NX-[0-9]+"))
-			{
-				NXtag = tags[i];
-			    break;
-			}
-			i++;
-		}
-		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		System.out.println(scenario.getStatus());
-            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            System.out.println(FileUtils.sizeOfDirectory(new File(path+"\\Screenshots")));
-            FileUtils.copyFile(scrFile, new File(path+"\\Screenshots\\"+NXtag+"_"+timeStamp+".png"));
-		}
-    }
+	
 	
 //	@After
 //	public void afterEveryClass(Scenario scenario) throws IOException, SQLException {

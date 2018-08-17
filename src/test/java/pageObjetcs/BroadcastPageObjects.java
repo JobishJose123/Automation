@@ -601,7 +601,7 @@ private WebElement recipientclick;
 	  System.out.println("Size before loop: "+size);
 	  TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
-	  while(size==0|| t.checkTimerMin(15)) {
+	  while(size==0&& t.checkTimerMin(15)) {
 		  
 	  Thread.sleep(20000);
 	  driver.navigate().refresh();
@@ -852,7 +852,7 @@ private WebElement recipientclick;
 		  System.out.println("Size before loop: "+size);
 		  TimeoutImpl t = new TimeoutImpl();
 			t.startTimer();
-		  while(size==0|| t.checkTimerMin(15)) {
+		  while(size==0&& t.checkTimerMin(15)) {
 			  
 		  Thread.sleep(20000);
 		  driver.navigate().refresh();
@@ -1637,7 +1637,7 @@ private WebElement recipientclick;
 		  System.out.println("Size before loop: "+size);
 		  TimeoutImpl t = new TimeoutImpl();
 			t.startTimer();
-		  while(size==0|| t.checkTimerMin(15)) {
+		  while(size==0&& t.checkTimerMin(15)) {
 			  
 		  Thread.sleep(20000);
 		  driver.navigate().refresh();
@@ -1695,7 +1695,7 @@ private WebElement recipientclick;
 		  System.out.println("Size before loop: "+size);
 		  TimeoutImpl t = new TimeoutImpl();
 			t.startTimer();
-		  while(size==0|| t.checkTimerMin(15)) {
+		  while(size==0&& t.checkTimerMin(15)) {
 			  
 		  Thread.sleep(20000);
 		  driver.navigate().refresh();

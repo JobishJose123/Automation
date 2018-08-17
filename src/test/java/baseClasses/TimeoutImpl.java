@@ -18,8 +18,9 @@ public class TimeoutImpl {
 	public static void main(String[] args) throws InterruptedException {
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
-		while(t.checkTimerMin(0.1)){
-			
+		while(true&&t.checkTimerMin(0.1)){
+			System.out.println(t.checkTimerMin(0.1));
+			Thread.sleep(1000);
 		}
 	}
 
