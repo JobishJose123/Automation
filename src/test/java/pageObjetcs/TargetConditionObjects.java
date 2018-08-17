@@ -64,16 +64,16 @@ public class TargetConditionObjects extends Init {
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+BALANCE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldBalance;
 	
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DEMOGRAPHICS_FIELD+"')]")
-	private WebElement demographicsField;
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_PERSONA_FIELD+"')]")
-	private WebElement digitalPersonaField;
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+LEARNED_BEHAVIOR_FIELD+"')]")
-	private WebElement learnedBehaviorField;
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]")
-	private WebElement analyticalScoresField;
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_ENGAGEMENT_FIELD+"')]")
-	private WebElement digitalEngagementField;
+//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DEMOGRAPHICS_FIELD+"')]")
+//	private WebElement demographicsField;
+//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_PERSONA_FIELD+"')]")
+//	private WebElement digitalPersonaField;
+//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+LEARNED_BEHAVIOR_FIELD+"')]")
+//	private WebElement learnedBehaviorField;
+//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]")
+//	private WebElement analyticalScoresField;
+//	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_ENGAGEMENT_FIELD+"')]")
+//	private WebElement digitalEngagementField;
 	@FindBy(xpath="//label[text()='Condition']/../..//input")
 	private WebElement conditionSelector;
 	@FindBy(xpath="//label[text()='Event Date and Time']/../..//input")
@@ -305,7 +305,7 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerDemographics);
 			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(demographicsField);
+//			jswait.loadClick(demographicsField);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"15");
@@ -315,7 +315,7 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerDemographics);
 			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(demographicsField);
+//			jswait.loadClick(demographicsField);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"15");

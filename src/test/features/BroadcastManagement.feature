@@ -583,8 +583,8 @@ Scenario: Create New Broadcast: verify create BC Notification
     Then navigate to campaign category from sheet "CampaignCategory"
     #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    #Then click create new broadcast button
+    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
 		Then verify create BC Notification
 		Then activate bc
     Then verify bc created from sheet "one-offBC"

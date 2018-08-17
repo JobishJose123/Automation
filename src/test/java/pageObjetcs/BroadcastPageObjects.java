@@ -299,12 +299,12 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement viewTargetDetails;
 	 
 	 
-	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::div[@id='checkmark'][1]")
+	 @FindBy(xpath="(//form[@id='bcNotificationForm']//..//paper-checkbox[1])[1]")
 	 private WebElement bcnotificationatcompletion ;
-	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::div[@id='checkmark'][2]")
+	 @FindBy(xpath="(//form[@id='bcNotificationForm']//..//paper-checkbox[1])[2]")
 	 private WebElement bcnotificationatreceivebroadcastmsg ;
-	// @FindBy(xpath="")
-	// private WebElement ;
+ @FindBy(xpath="//label[contains(.,'Recipient')]//following::paper-icon-button[2]")
+private WebElement recipientclick;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -367,8 +367,9 @@ public class BroadcastPageObjects extends Init {
 	public void bcnotificationrecipient() throws InterruptedException {
 		jswait.loadSendKeys(bcnotificationrecipient, "Selenium user");
 		
-		wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE);
+		//wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE);
 		Thread.sleep(2000);
+		//jswait.loadClick(recipientclick);
 	}
 	
 	public void bcnotificationbeforesendingtime() throws InterruptedException {
@@ -1804,13 +1805,15 @@ public void addNotificationuser() throws Exception{
 	
 	bcnotificationrecipient();
 	Thread.sleep(2000);
+	
 	bcnotificationrecipientclick();
 	bcnotificationbeforesendingtime();
 	bcnotificationbeforesendingtime1min();
 	bcnotificationbeforeRendertime();
 	bcnotificationbeforerendertime1min();
-	bcnotificationatcompletion();
+	
 	bcnotificationatreceivebroadcastmsg();
+	bcnotificationatcompletion();
 	
 }
 
