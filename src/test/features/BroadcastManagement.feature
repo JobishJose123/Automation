@@ -1988,9 +1988,14 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then wait until status of "one-offBC" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition "customerDeviceInfo"
     
-    @NX-8868 @initBrowser @closeBrowser
-    Scenario: Verify BC targeting with System Events categor -8868
+    @NX-8868 @NX-5195 @initBrowser @closeBrowser
+    Scenario: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8868 
     Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify send trail to numbers "9446506807" "9446506808" "9446506809" from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
@@ -2009,7 +2014,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then activate bc
     Then wait until status of "one-offBC" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition "customerWasSentTheTrialMessage"
-    
+
      @NX-4936 @initBrowser @closeBrowser
     Scenario: LGS- Verify Preferred Language dropdown values  -4936
     Given login
