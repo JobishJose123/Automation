@@ -28,6 +28,7 @@ import org.testng.Assert;
 
 
 import baseClasses.EmailHandler;
+import baseClasses.EmailHandlergmail;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -1817,17 +1818,41 @@ public void addNotificationuser() throws Exception{
 	
 }
 
-public void Verifyemail(String sheet) throws Exception {
+public void Verifyemailnotification(String sheet) throws Exception {
+	System.out.println("inside the verify email" );
 	eh.setExcelFile("bcInputData",sheet);
 	String name = (String) eh.getCell(1, 0);
-	
-	String emaildata[]=EmailHandler.check();
+
+	List<String> emaildata=EmailHandlergmail.fetch();
+	System.out.println("after verify email" );
+	System.out.println(emaildata.get(1));
+	System.out.println(emaildata.get(2));
+	System.out.println(emaildata.get(3));
+	System.out.println(emaildata.get(4));
+	String html=emaildata.get(1);
+	String Subject=emaildata.get(2);
+	String fromid=emaildata.get(3);
+	assertTrue(Subject.contains("Broadcast Finished - oneOffBC"));
+	assertTrue(fromid.contains("flyops@flytxt.com <flyops@flytxt.com>"));
+		}
+
+
+
+public void Verifyemail(String sheet) throws Exception {
 	System.out.println("inside the verify email" );
-	System.out.println(emaildata[0]);
-	String Subject=emaildata[0];
-	String fromid=emaildata[1];
-	Assert.assertEquals(Subject,"Broadcast Finished - "+name);
-	Assert.assertEquals(fromid,"'flyops@flytxt.com <flyops@flytxt.com>''");
+	eh.setExcelFile("bcInputData",sheet);
+	String name = (String) eh.getCell(1, 0);
+
+	List<String> emaildata=EmailHandlergmail.fetch();
+	System.out.println("after verify email" );
+	System.out.println(emaildata.get(1));
+	System.out.println(emaildata.get(2));
+	System.out.println(emaildata.get(3));
+	System.out.println(emaildata.get(4));
+	String html=emaildata.get(1);
+	
+	Assert.assertTrue(html.contains("<form method=\"POST\" target=\"_blank\"><input type=\"RADIO\" value=\"A\" name=\"cc\">Another name for Java<br><input type=\"RADIO\" value=\"B\" name=\"cc\">When you use Java without compiling<br><input type=\"RADIO\" value=\"C\" name=\"cc\">A scripting language mostly for the web<br><input type=\"SUBMIT\" value=\"Submit Answer\"></form>"));
+	//Assert.assertEquals(fromid,"'flyops@flytxt.com <flyops@flytxt.com>''");
 //	assertTrue(Subject.contains("Broadcast Finished - oneOffBC"));
 //	assertTrue(fromid.contains(""flyops@flytxt.com" <flyops@flytxt.com>"));
 		}

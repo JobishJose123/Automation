@@ -46,8 +46,8 @@ public class CommonSteps extends Init {
 		 loginPage.login(p.getValue("username"), p.getValue("password"));
 		 
 		 //handle robox
-		 jswait.waitUntil("//iron-overlay-backdrop");
-		 jswait.loadClick("//iron-overlay-backdrop");
+		 //jswait.waitUntil("//iron-overlay-backdrop");
+		 //jswait.loadClick("//iron-overlay-backdrop");
     }
 	@Then("^logout")
 	public void logout() throws InterruptedException {
