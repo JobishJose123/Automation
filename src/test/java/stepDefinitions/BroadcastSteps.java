@@ -2413,12 +2413,20 @@ public void Search_BC_and_click_on_sendtrial_from(String sheet) throws Throwable
 	//broadcastPageObjects.clickProceedButton();
 }
 
-@Then("^verify email notifications from sheet \"([^\"]*)\"$")
+@Then("^verify email from sheet \"([^\"]*)\"$")
 public void verify_email_notification(String sheet) throws Throwable {
 	
 	broadcastPageObjects.Verifyemail(sheet);
 	
 	
 }
+@Then("^verify email notifications from sheet \"([^\"]*)\"$")
+public void verify_email_(String sheet) throws Throwable {
+	
+	broadcastPageObjects.Verifyemailnotification(sheet);
+	
+	
+}
+
 
 }
