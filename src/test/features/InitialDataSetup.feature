@@ -1,8 +1,18 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary : feature file to setup initial data
-#@InitialDataSetup
-#Feature: data setup
-#
+@InitialDataSetup
+Feature: data setup
+
+
+@NX-createDKJob
+@initBrowser @closeBrowser
+Scenario: create DK job for registration list upload and DNC list upload
+#Given login
+#Then random registration list is generated
+#Then random dnd list is generated
+Then create dk jobs for list upload
+#Then move list to dk input for upload
+
 #@NX-createRegList
 #@initBrowser @closeBrowser
 #Scenario: create registration list in dx ui
@@ -13,7 +23,7 @@
 #Then enter details of registration list
 #Then save registration list
 #Then navigate to landing page
-#
+
 #@NX-3482
 #@NX-createDndList
 #@initBrowser @closeBrowser
@@ -45,13 +55,3 @@
 #Then navigate to data foundation
 #Then check and add profile fields
 #Then check the upoaded list in ui
-
-#@NX-createDKJob
-#@initBrowser @closeBrowser
-#Scenario: create DK job for registration list upload and DNC list upload
-#Given login
-#Then random registration list is generated
-#Then random dnd list is generated
-#Then create dk jobs for list upload
-#Then move list to dk input for upload
-

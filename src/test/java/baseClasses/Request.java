@@ -199,8 +199,22 @@ public class Request {
 		List<String> cookies = con.getHeaderFields().get("Set-Cookie");
 		return cookies;
 	}
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		Request r = new Request();
+		//putJson to NEon
+
+				Request req = new Request();
+//				req.postRequest(urlStr, jobPayload);
+				req.postRequest_payload("http://192.168.150.27/neon-ws/login", "username=flyops%40flytxt.com&password=flytxt&remember-me=false");
+//				System.out.println(req.responseString);
+				List<String> cookies = req.getCookies();
+				System.out.println(cookies.get(0));
+				for(int i=3;i<=30;i++) {
+					req.postRequestWithCookie("http://192.168.150.27/neon-ws/saveSegmentRule","{\"name\":\"newRule"+i+"\",\"programId\":11,\"targetDetails\":{\"baseListType\":\"none\",\"targetType\":null,\"targetConfiguration\":null,\"registrationListObj\":{\"createdDate\":\"2018-08-21T06:37:07.000+0000\",\"updateDate\":\"2018-08-21T06:37:07.000+0000\",\"createdUser\":null,\"updatedUser\":null,\"description\":\"Description\",\"dncType\":0,\"lastFullCount\":null,\"memberCount\":0,\"name\":\"selenium_list\",\"partnerId\":1,\"type\":{\"name\":\"Standard\"},\"listType\":\"standard\",\"sharedPartnerList\":null,\"status\":\"active\",\"partnerName\":\"System Global\",\"ostrichEntityId\":0,\"targets\":0},\"regListId\":478},\"offerDetails\":{\"productId\":1,\"offers\":[{\"touchpointId\":\"4\",\"offerId\":1}],\"productObj\":{\"createdDate\":\"2018-07-12T12:24:47.000+0000\",\"updateDate\":\"2018-08-21T08:00:13.000+0000\",\"createdUser\":\"System Administrator\",\"updatedUser\":\"System Administrator\",\"productId\":1,\"description\":\"Product with attribute\",\"name\":\"singleProd379\",\"partnerId\":1,\"categoryName\":null,\"configuration\":\"{\\\"SelAttr_1017\\\":[\\\"181\\\"],\\\"PriceValue\\\":[\\\"100\\\"],\\\"price\\\":[\\\"10\\\"]}\",\"activated\":true,\"productJson\":null}},\"scheduleDetails\":{\"startDate\":\"2018-08-23T05:37:38.199Z\",\"endDate\":null,\"timeZone\":49,\"refreshCycle\":\"Daily\",\"refreshFrequency\":1,\"refreshTime\":\"00:00\",\"weekDays\":{\"weekDay\":[]},\"servesOn\":{\"weekDays\":{\"weekDay\":null},\"refreshFrequency\":null},\"setEndDate\":null,\"setStartDate\":\"2018-08-22T05:37:38.199Z\",\"timezoneObj\":{\"sortOrder\":49,\"description\":\"(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi\",\"gmtOffset\":\"+05:30\",\"javaTimeZoneId\":\"Asia/Calcutta\",\"offset\":19800000},\"timezoneId\":49},\"trackingDetails\":{\"timezoneObj\":{\"sortOrder\":49,\"description\":\"(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi\",\"gmtOffset\":\"+05:30\",\"javaTimeZoneId\":\"Asia/Calcutta\",\"offset\":19800000},\"timeZoneId\":49},\"routingDetails\":{\"broadcastMessageMobileAddressId\":1,\"broadcastMessageRouteId\":1,\"responseMessageMobileAddressId\":1,\"responseMessageRouteId\":1},\"operation\":\"ACTIVATE\"}",cookies.get(0));
+					Thread.sleep(2000);
+				}
+				
+				System.out.println(req.responseString);
 //		postRequest();
 //		r.getRequest("https://flytxt.atlassian.net/rest/api/2/issue/NX-7116?fields=customfield_11160", "am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==");
 //		System.out.println(r.responseString);
@@ -232,19 +246,19 @@ public class Request {
 //				"}");
 //			}
 		
-		r.getRequest("http://192.168.150.253/dk-new/jobs?projection=jobView&page=0&size=50&name=selenium_list", "dcdcdc");
-		System.out.println(r.responseString);
-		JsonParser jsonParser = new JsonFactory().createParser(r.responseString);
-		while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
-			   //get the current token
-			   String fieldname = jsonParser.getCurrentName();
-			   if ("name".equals(fieldname)) {
-			      //move to next token
-			      jsonParser.nextToken();
-			      System.out.println(jsonParser.getText());        	 
-			   }
-		
-		}
+//		r.getRequest("http://192.168.150.253/dk-new/jobs?projection=jobView&page=0&size=50&name=selenium_list", "dcdcdc");
+//		System.out.println(r.responseString);
+//		JsonParser jsonParser = new JsonFactory().createParser(r.responseString);
+//		while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
+//			   //get the current token
+//			   String fieldname = jsonParser.getCurrentName();
+//			   if ("name".equals(fieldname)) {
+//			      //move to next token
+//			      jsonParser.nextToken();
+//			      System.out.println(jsonParser.getText());        	 
+//			   }
+//		
+//		}
 	}
 
 }

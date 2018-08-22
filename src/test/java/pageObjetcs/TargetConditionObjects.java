@@ -351,14 +351,14 @@ public class TargetConditionObjects extends Init {
 			jswait.loadSendKeys(isGreaterThanValue,"235");
 			jswait.loadClick(targetConditionSave);
 		}
-		else if(event.contentEquals("customerLocationInsights")){
+		else if(event.contentEquals("customerLocationInsightsGT5")){
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerLocationInsights);
 			jswait.loadClick(CustomerInsightFieldSelector);
 			jswait.loadClick(CustomerInsightLocation);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsLessThan);
-			jswait.loadSendKeys(isGreaterThanValue,"25");
+			jswait.loadSendKeys(isGreaterThanValue,"5");
 			jswait.loadClick(targetConditionSave);
 		}
 		else if(event.contentEquals("customerDeviceInfo")){

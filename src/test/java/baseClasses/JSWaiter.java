@@ -449,6 +449,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			 }
 		}
 		public void waitUntil(WebElement element) throws InterruptedException{
+			Thread.sleep(2000);
 			WebDriverWait wait = new WebDriverWait(driver, 8);
 			wait.until(ExpectedConditions.visibilityOf(element));
 		}

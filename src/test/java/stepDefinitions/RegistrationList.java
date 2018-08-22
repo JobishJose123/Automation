@@ -46,6 +46,12 @@ public class RegistrationList extends Init{
 	String[] Secondlanguages = {"Tamil","Spanish","Mandarin","Urdu"};
 	String[] bool = {"Yes","No"};
 	String[] device_id = {"4444","5555"};
+	String[] location_insight = {"5","4","7","8"};
+	String[] digital_persona = {"15","17","18","14"};
+	String[]  demographics= {"25","24","27","28"};
+	String[] learned_behaviour = {"35","37","34","38"};
+	String[] analytical = {"47","48","45","44"};
+	String[] digital_engagement = {"238","237","235","234"};
 	
 	public static int getAgeTargetCount() throws IOException {
     	ExcelHelper list = new ExcelHelper();
@@ -73,11 +79,12 @@ public class RegistrationList extends Init{
          }
 		 br.close();
 		 int ageGT18 = 0;
-		 for(int j=0;j<age.length;j++)
+		 for(int j=0;j<age.length;j++) {
 			 if(age[j]>18){
 				 System.out.println(age[j]);
 				 ageGT18++;
 			 }
+		 }
 		 System.out.println(ageGT18);
 		 System.out.println("age>18");
 		 list.setCell(1, "age>18",String.valueOf(ageGT18) );
@@ -102,8 +109,8 @@ public class RegistrationList extends Init{
 		 temp = br.readLine();
 		 while ((temp = br.readLine()) != null) {
 			 String[] a = temp.split(",");
-			 System.out.println(a[9]);
-			 val = a[9];
+			 System.out.println(a[10]);
+			 val = a[10];
 			 device_id[initial] = Integer.parseInt(val);
 //			 age[0]=Integer.parseInt(a[9].toString());
 			 initial++;
@@ -111,13 +118,239 @@ public class RegistrationList extends Init{
 		 br.close();
 		 int device_idnot6666 = 0;
 		 for(int j=0;j<device_id.length;j++)
-			 if(device_id[j]>18){
+			 if(device_id[j]==4444 || device_id[j]==5555){
 				 System.out.println(device_id[j]);
 				 device_idnot6666++;
 			 }
 		 System.out.println(device_idnot6666);
 		 System.out.println("device_idnot6666");
 		 list.setCell(1, "device_idnot6666",String.valueOf(device_idnot6666) );
+		 return device_idnot6666;
+    	
+    }
+	
+	public static int getdigitalPersonaGT25Count() throws IOException {
+    	ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		String filename = (String) list.getCell(1, 0);
+//		CSVFile csvFile = new CSVFile("ExcelFiles\\"+filename);
+		
+		File csvfile = new File("ExcelFiles\\"+filename);
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 0;
+		 
+
+		 int device_id[] = new int[550];
+		 String val = "";
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 temp = br.readLine();
+		 while ((temp = br.readLine()) != null) {
+			 String[] a = temp.split(",");
+			 System.out.println(a[12]);
+			 val = a[12];
+			 device_id[initial] = Integer.parseInt(val);
+//			 age[0]=Integer.parseInt(a[9].toString());
+			 initial++;
+         }
+		 br.close();
+		 int device_idnot6666 = 0;
+		 for(int j=0;j<device_id.length;j++)
+			 if(device_id[j]>15){
+				 System.out.println(device_id[j]);
+				 device_idnot6666++;
+			 }
+		 System.out.println(device_idnot6666);
+		 System.out.println("digitalPersonaGT25");
+		 list.setCell(1, "digitalPersonaGT25",String.valueOf(device_idnot6666) );
+		 return device_idnot6666;
+    	
+    }
+	
+	public static int getcustomerDemographicsGT15Count() throws IOException {
+    	ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		String filename = (String) list.getCell(1, 0);
+//		CSVFile csvFile = new CSVFile("ExcelFiles\\"+filename);
+		
+		File csvfile = new File("ExcelFiles\\"+filename);
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 0;
+		 
+
+		 int device_id[] = new int[550];
+		 String val = "";
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 temp = br.readLine();
+		 while ((temp = br.readLine()) != null) {
+			 String[] a = temp.split(",");
+			 System.out.println(a[13]);
+			 val = a[13];
+			 device_id[initial] = Integer.parseInt(val);
+//			 age[0]=Integer.parseInt(a[9].toString());
+			 initial++;
+         }
+		 br.close();
+		 int device_idnot6666 = 0;
+		 for(int j=0;j<device_id.length;j++)
+			 if(device_id[j]>25){
+				 System.out.println(device_id[j]);
+				 device_idnot6666++;
+			 }
+		 System.out.println(device_idnot6666);
+		 System.out.println("customerDemographicsGT15");
+		 list.setCell(1, "customerDemographicsGT15",String.valueOf(device_idnot6666) );
+		 return device_idnot6666;
+    	
+    }
+	public static int getlearnedBehaviourGT35Count() throws IOException {
+    	ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		String filename = (String) list.getCell(1, 0);
+//		CSVFile csvFile = new CSVFile("ExcelFiles\\"+filename);
+		
+		File csvfile = new File("ExcelFiles\\"+filename);
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 0;
+		 
+
+		 int device_id[] = new int[550];
+		 String val = "";
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 temp = br.readLine();
+		 while ((temp = br.readLine()) != null) {
+			 String[] a = temp.split(",");
+			 System.out.println(a[14]);
+			 val = a[14];
+			 device_id[initial] = Integer.parseInt(val);
+//			 age[0]=Integer.parseInt(a[9].toString());
+			 initial++;
+         }
+		 br.close();
+		 int device_idnot6666 = 0;
+		 for(int j=0;j<device_id.length;j++)
+			 if(device_id[j]>35){
+				 System.out.println(device_id[j]);
+				 device_idnot6666++;
+			 }
+		 System.out.println(device_idnot6666);
+		 System.out.println("learnedBehaviourGT35");
+		 list.setCell(1, "learnedBehaviourGT35",String.valueOf(device_idnot6666) );
+		 return device_idnot6666;
+    	
+    }
+	public static int getanalyticalScoresGT45Count() throws IOException {
+    	ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		String filename = (String) list.getCell(1, 0);
+//		CSVFile csvFile = new CSVFile("ExcelFiles\\"+filename);
+		
+		File csvfile = new File("ExcelFiles\\"+filename);
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 0;
+		 
+
+		 int device_id[] = new int[550];
+		 String val = "";
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 temp = br.readLine();
+		 while ((temp = br.readLine()) != null) {
+			 String[] a = temp.split(",");
+			 System.out.println(a[15]);
+			 val = a[15];
+			 device_id[initial] = Integer.parseInt(val);
+//			 age[0]=Integer.parseInt(a[9].toString());
+			 initial++;
+         }
+		 br.close();
+		 int device_idnot6666 = 0;
+		 for(int j=0;j<device_id.length;j++)
+			 if(device_id[j]>45){
+				 System.out.println(device_id[j]);
+				 device_idnot6666++;
+			 }
+		 System.out.println(device_idnot6666);
+		 System.out.println("analyticalScoresGT45");
+		 list.setCell(1, "analyticalScoresGT45",String.valueOf(device_idnot6666) );
+		 return device_idnot6666;
+    	
+    }
+	public static int getdigitalEngagementGT235Count() throws IOException {
+    	ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		String filename = (String) list.getCell(1, 0);
+//		CSVFile csvFile = new CSVFile("ExcelFiles\\"+filename);
+		
+		File csvfile = new File("ExcelFiles\\"+filename);
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 0;
+		 
+
+		 int device_id[] = new int[550];
+		 String val = "";
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 temp = br.readLine();
+		 while ((temp = br.readLine()) != null) {
+			 String[] a = temp.split(",");
+			 System.out.println(a[16]);
+			 val = a[16];
+			 device_id[initial] = Integer.parseInt(val);
+//			 age[0]=Integer.parseInt(a[9].toString());
+			 initial++;
+         }
+		 br.close();
+		 int device_idnot6666 = 0;
+		 for(int j=0;j<device_id.length;j++)
+			 if(device_id[j]>235){
+				 System.out.println(device_id[j]);
+				 device_idnot6666++;
+			 }
+		 System.out.println(device_idnot6666);
+		 System.out.println("digitalEngagementGT235");
+		 list.setCell(1, "digitalEngagementGT235",String.valueOf(device_idnot6666) );
+		 return device_idnot6666;
+    	
+    }
+	
+	public static int getcustomerLocationInsightsGT5Count() throws IOException {
+    	ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		String filename = (String) list.getCell(1, 0);
+//		CSVFile csvFile = new CSVFile("ExcelFiles\\"+filename);
+		
+		File csvfile = new File("ExcelFiles\\"+filename);
+		 BufferedReader br = null;
+		 String temp = "";
+		 int initial = 0;
+		 
+
+		 int device_id[] = new int[550];
+		 String val = "";
+		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
+		 temp = br.readLine();
+		 while ((temp = br.readLine()) != null) {
+			 String[] a = temp.split(",");
+			 System.out.println(a[11]);
+			 val = a[11];
+			 device_id[initial] = Integer.parseInt(val);
+//			 age[0]=Integer.parseInt(a[9].toString());
+			 initial++;
+         }
+		 br.close();
+		 int device_idnot6666 = 0;
+		 System.out.println("array length:"+device_id.length);
+		 for(int j=0;j<device_id.length;j++)
+			 if(device_id[j]>5){
+				 System.out.println(device_id[j]);
+				 device_idnot6666++;
+			 }
+		 System.out.println(device_idnot6666);
+		 System.out.println("customerLocationInsightsGT5");
+		 list.setCell(1, "customerLocationInsightsGT5",String.valueOf(device_idnot6666) );
 		 return device_idnot6666;
     	
     }
@@ -157,7 +390,20 @@ public class RegistrationList extends Init{
         sb.append("age");
         sb.append(',');
         sb.append("device id");
+        sb.append(',');
+        sb.append("location insight");
+        sb.append(',');
+        sb.append("digital persona");
+        sb.append(',');
+        sb.append("demographic");
+        sb.append(',');
+        sb.append("larned behaviour");
+        sb.append(',');
+        sb.append("analytical scores");
+        sb.append(',');
+        sb.append("digital engagement");
         pw.write(sb.toString());
+        pw.flush();
         sb.setLength(0);
         
     	
@@ -204,7 +450,20 @@ public class RegistrationList extends Init{
             sb.append(String.valueOf(r.nextInt(60)+15));
             sb.append(',');
             sb.append(device_id[boolSelect]);
+            sb.append(',');
+            sb.append(location_insight[languageSelect]);
+            sb.append(',');
+            sb.append(digital_persona[countrySelect]);
+            sb.append(',');
+            sb.append(demographics[languageSelect]);
+            sb.append(',');
+            sb.append(learned_behaviour[countrySelect]);
+            sb.append(',');
+            sb.append(analytical[languageSelect]);
+            sb.append(',');
+            sb.append(digital_engagement[secondlanguageSelect]);
             pw.write(sb.toString());
+            pw.flush();
             sb.setLength(0);
     	}
     	sb.append('\n');
@@ -229,6 +488,18 @@ public class RegistrationList extends Init{
         sb.append("25");
         sb.append(',');
         sb.append("6666");
+        sb.append(',');
+        sb.append("5");
+        sb.append(',');
+        sb.append("15");
+        sb.append(',');
+        sb.append("25");
+        sb.append(',');
+        sb.append("35");
+        sb.append(',');
+        sb.append("45");
+        sb.append(',');
+        sb.append("235");
         pw.write(sb.toString());
         sb.setLength(0);
         
@@ -254,6 +525,18 @@ public class RegistrationList extends Init{
         sb.append("26");
         sb.append(',');
         sb.append("6666");
+        sb.append(',');
+        sb.append("5");
+        sb.append(',');
+        sb.append("15");
+        sb.append(',');
+        sb.append("25");
+        sb.append(',');
+        sb.append("35");
+        sb.append(',');
+        sb.append("45");
+        sb.append(',');
+        sb.append("235");
         pw.write(sb.toString());
         sb.setLength(0);
         
@@ -279,15 +562,38 @@ public class RegistrationList extends Init{
         sb.append("28");
         sb.append(',');
         sb.append("6666");
+        sb.append(',');
+        sb.append("5");
+        sb.append(',');
+        sb.append("15");
+        sb.append(',');
+        sb.append("25");
+        sb.append(',');
+        sb.append("35");
+        sb.append(',');
+        sb.append("45");
+        sb.append(',');
+        sb.append("235");
         pw.write(sb.toString());
         sb.setLength(0);
-        
+        pw.flush();
         pw.close();
         System.out.println("reg list creation done!");
-        getAgeTargetCount();
+        getTargetCounts();
         System.out.println("age target conditoin count updated");
 		
     }
+	private void getTargetCounts() throws IOException {
+		getcustomerLocationInsightsGT5Count();
+		getAgeTargetCount();
+		getanalyticalScoresGT45Count();
+		getcustomerDemographicsGT15Count();
+		getdevice_idnot6666Count();
+		getlearnedBehaviourGT35Count();
+		getdigitalPersonaGT25Count();
+		getdigitalEngagementGT235Count();
+		
+	}
 	@Given("^random dnd list is generated$")
     public void generateRandomDndList() throws IOException{
 		File DNDcsvfile = new File("ExcelFiles\\"+"selenium_list_DND.csv");
@@ -307,7 +613,7 @@ public class RegistrationList extends Init{
 		 String val = "";
 		 br = new BufferedReader(new FileReader(csvfile.getCanonicalPath()));
 		 temp = br.readLine();
-		 pw.write("msisdn,first name,last name,country,email,language 1,language 2,balance,boolean,age");
+		 pw.write("msisdn,first name,last name,country,email,language 1,language 2,balance,boolean,age,device id,Location_q11,Demographics_q11,Digital Persona_q11,Learned Behaviour_q11,Analytical Scores_q11,Digital Engagement_q11");
 		 pw.write("\n");
 		 while ((temp = br.readLine()) != null && initial<50) {
 			 pw.write(temp);

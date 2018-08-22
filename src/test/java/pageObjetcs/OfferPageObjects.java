@@ -1331,6 +1331,7 @@ public class OfferPageObjects extends Init {
 		enterDetailsTabFields(sheet);
 		clickProceedButton();
 		// ******************Products tab*****************:
+		Thread.sleep(3000);
 		enterProductTabFields(productSheet);
 		clickProceedButton();
 
