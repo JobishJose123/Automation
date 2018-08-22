@@ -72,7 +72,7 @@ public class AdminPageObjects extends Init{
 	private List <WebElement> optionsConfigureList; 
 	@FindBy(xpath="//paper-item[contains(.,'Activate')]")
 	private List <WebElement> optionsActivateList;
-	@FindBy(xpath="//paper-item[contains(.,'Deactivate')]")
+	@FindBy(xpath="//paper-item[text()='Deactivate']")
 	private List <WebElement> optionsDeactivateList;
 	
 	@FindBy(xpath="//paper-dialog[@id='managePartner']//data-table-row")
@@ -241,60 +241,73 @@ public class AdminPageObjects extends Init{
 	Iterator<WebElement> configIter = optionsConfigureList.iterator();
 	Iterator<WebElement> actIter = optionsActivateList.iterator();
 	Iterator<WebElement> deactIter = optionsDeactivateList.iterator();
-	
+	WebElement actElement = null;
 	WebElement configElement = configIter.next();
-	WebElement actElement = actIter.next();
-	WebElement deactElement = deactIter.next();
+	try{
+		actElement = actIter.next();
+	}catch(Exception e) {
+		System.out.println("no activate buttons");
+	}
+	WebElement deactElement = null;
+	try{
+		deactElement = deactIter.next();
+	}catch(Exception e) {
+		System.out.println("no activate buttons");
+	}
+	
 	System.out.println("con"+optionsConfigureList.size());
 	System.out.println("act"+optionsActivateList.size());
 	System.out.println("dea"+optionsDeactivateList.size());
 	Exception actElementExcep = new Exception("activate element not found");
 	Exception deactElementExcep = new Exception("deactivate element not found");
-	if(dashboardlist.size()>0) {
+	if(!(optionsConfigureList.size()==6)||!(6==(optionsActivateList.size()+optionsDeactivateList.size())))
+		throw deactElementExcep;
 		
-		for(WebElement dashboard : dashboardlist)  {
-			
-	    jswait.loadClick(dashboard);
-	    Thread.sleep(2000);
-	    System.out.println("assert conf");
-		assertTrue(configElement.isDisplayed());
-		System.out.println("conf element");
-		if(configIter.hasNext())
-		configElement = configIter.next();
-		
-		
-		try {
-			if(!actElement.isDisplayed())
-				throw actElementExcep;
-			System.out.println("act element");
-			if(actIter.hasNext())
-			actElement = actIter.next();
-			
-		}
-		
-		catch(Exception e) {
-			if(!deactElement.isDisplayed())
-				throw deactElementExcep;
-			System.out.println("deact element");
-			if(deactIter.hasNext())
-			deactElement = deactIter.next();
-			
-		}
+//	if(dashboardlist.size()>0) {
+//		
+//		for(WebElement dashboard : dashboardlist)  {
+//			
+//	    jswait.loadClick(dashboard);
+//	    Thread.sleep(2000);
+//	    System.out.println("assert conf");
+//		assertTrue(configElement.isDisplayed());
+//		System.out.println("conf element");
+//		if(configIter.hasNext())
+//		configElement = configIter.next();
+//		
+//		
+//		try {
+//			if(!actElement.isDisplayed())
+//				throw actElementExcep;
+//			System.out.println("act element");
+//			if(actIter.hasNext())
+//			actElement = actIter.next();
+//			
+//		}
+//		
+//		catch(Exception e) {
+//			if(!deactElement.isDisplayed())
+//				throw deactElementExcep;
+//			System.out.println("deact element");
+//			if(deactIter.hasNext())
+//			deactElement = deactIter.next();
+//			
+//		}
 		
 		//actElement = actIter.next();
 		//deactElement = deactIter.next();
-		jswait.loadClick(dashboardSettings);
-		 System.out.println("dashboard Settings click");
+//		jswait.loadClick(dashboardSettings);
+//		 System.out.println("dashboard Settings click");
 		/*//System.out.println(optionsDeactivate.isDisplayed());
 		System.out.println(optionsActivate.isDisplayed());
 		
 		assertTrue(optionsActivate.isDisplayed()||optionsDeactivate.isDisplayed());
 		jswait.loadClick(DashboardName);*/
 		
-		}
+//		}
 		
 	
-	}
+//	}
 	
 	
 	}

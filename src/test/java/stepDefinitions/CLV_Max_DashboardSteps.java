@@ -47,7 +47,7 @@ public class CLV_Max_DashboardSteps extends Init {
 		adminPageObjects.editPartnerName(name);
 		commonObjects.clickFilterIcon();
 		commonObjects.clickFilterResetButton();	
-		commonObjects.filterName(name);
+		commonObjects.filterPartner(name);
 		Thread.sleep(3000);
 		
 		try

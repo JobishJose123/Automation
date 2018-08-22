@@ -12,7 +12,7 @@ Feature: Dashboard page
     
     
      @NX-5573
-    @initBrowser
+    @initBrowser @closeBrowser
     Scenario: Verify clicking on the cancel button- 5573
     Given login
     Then navigate to configuration management
@@ -21,7 +21,7 @@ Feature: Dashboard page
     Then edit partner name from sheet "PartnerData" and click cancel button
     
     @NX-5571
-    @initBrowser
+    @initBrowser @closeBrowser
     Scenario: Verify whether save and cancel button is displayed- 5571
     Given login
     Then navigate to configuration management
@@ -33,7 +33,7 @@ Feature: Dashboard page
     
     
     @NX-5576
-    @initBrowser
+    @initBrowser @closeBrowser
     Scenario: Verify whether Configure,Activate,Deactivate options are available in grid icon of each dashboard- 5576
     Given login
     Then navigate to configuration management
@@ -44,7 +44,7 @@ Feature: Dashboard page
     
     
     @NX-5616
-    @initBrowser
+    @initBrowser @closeBrowser
     Scenario: Verify whether help text is available for the dashboard- 5616
     Given login
     Then navigate to precision marketer

@@ -30,6 +30,8 @@ public class CommonObjects extends Init {
 	private WebElement filterIcon;
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Name')]/..//input")
 	private WebElement filterFormName;
+	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Partner')]/..//input")
+	private WebElement filterFormPartner;
 	@FindBy(xpath = "//*[@id='filterDialog']/div/paper-button[3]")
 	private WebElement filterFormApply;
 	@FindBy(xpath = "//*[@id='filterDialog']/div/paper-button[1]")
@@ -201,6 +203,10 @@ public class CommonObjects extends Init {
 	public void enterFilterFormname(String name) throws InterruptedException {
 		jswait.loadSendKeys(filterFormName, name);
 	}
+	
+	public void enterFilterFormPartner(String name) throws InterruptedException {
+		jswait.loadSendKeys(filterFormPartner, name);
+	}
 
 	public void clickFilterCancelButton() throws InterruptedException {
 		jswait.loadClick(filterFormCancel);
@@ -217,6 +223,11 @@ public class CommonObjects extends Init {
 	public void filterName(String name) throws InterruptedException {
 		clickFilterIcon();
 		enterFilterFormname(name);
+		clickFilterApplyButton();
+	}
+	public void filterPartner(String name) throws InterruptedException {
+		clickFilterIcon();
+		enterFilterFormPartner(name);
 		clickFilterApplyButton();
 	}
 
