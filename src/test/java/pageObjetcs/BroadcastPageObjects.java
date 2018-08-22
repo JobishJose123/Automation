@@ -28,7 +28,7 @@ import org.testng.Assert;
 
 
 import baseClasses.EmailHandler;
-import baseClasses.EmailHandlergmail;
+//import baseClasses.EmailHandlergmail;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -205,7 +205,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement recurringBcEndNeverRadio;
 	@FindBy(xpath = ".//div[@id='radioLabel' and contains(.,'At')]/../div[1]")
 	private WebElement recurringBcEndAtRadio;
-	@FindBy(xpath = ".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
+	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[1]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGrid;
 	@FindBy(xpath = ".//label[contains(.,'Start Date/Time')]")
 	private WebElement StartBroadcastDateTimeField;
@@ -1818,43 +1818,43 @@ public void addNotificationuser() throws Exception{
 	
 }
 
-public void Verifyemailnotification(String sheet) throws Exception {
-	System.out.println("inside the verify email" );
-	eh.setExcelFile("bcInputData",sheet);
-	String name = (String) eh.getCell(1, 0);
-
-	List<String> emaildata=EmailHandlergmail.fetch();
-	System.out.println("after verify email" );
-	System.out.println(emaildata.get(1));
-	System.out.println(emaildata.get(2));
-	System.out.println(emaildata.get(3));
-	System.out.println(emaildata.get(4));
-	String html=emaildata.get(1);
-	String Subject=emaildata.get(2);
-	String fromid=emaildata.get(3);
-	assertTrue(Subject.contains("Broadcast Finished - oneOffBC"));
-	assertTrue(fromid.contains("flyops@flytxt.com <flyops@flytxt.com>"));
-		}
-
-
-
-public void Verifyemail(String sheet) throws Exception {
-	System.out.println("inside the verify email" );
-	eh.setExcelFile("bcInputData",sheet);
-	String name = (String) eh.getCell(1, 0);
-
-	List<String> emaildata=EmailHandlergmail.fetch();
-	System.out.println("after verify email" );
-	System.out.println(emaildata.get(1));
-	System.out.println(emaildata.get(2));
-	System.out.println(emaildata.get(3));
-	System.out.println(emaildata.get(4));
-	String html=emaildata.get(1);
-	
-	Assert.assertTrue(html.contains("<form method=\"POST\" target=\"_blank\"><input type=\"RADIO\" value=\"A\" name=\"cc\">Another name for Java<br><input type=\"RADIO\" value=\"B\" name=\"cc\">When you use Java without compiling<br><input type=\"RADIO\" value=\"C\" name=\"cc\">A scripting language mostly for the web<br><input type=\"SUBMIT\" value=\"Submit Answer\"></form>"));
+//public void Verifyemailnotification(String sheet) throws Exception {
+//	System.out.println("inside the verify email" );
+//	eh.setExcelFile("bcInputData",sheet);
+//	String name = (String) eh.getCell(1, 0);
+//
+//	List<String> emaildata=EmailHandlergmail.fetch();
+//	System.out.println("after verify email" );
+//	System.out.println(emaildata.get(1));
+//	System.out.println(emaildata.get(2));
+//	System.out.println(emaildata.get(3));
+//	System.out.println(emaildata.get(4));
+//	String html=emaildata.get(1);
+//	String Subject=emaildata.get(2);
+//	String fromid=emaildata.get(3);
+//	assertTrue(Subject.contains("Broadcast Finished - oneOffBC"));
+//	assertTrue(fromid.contains("flyops@flytxt.com <flyops@flytxt.com>"));
+//		}
+//
+//
+//
+//public void Verifyemail(String sheet) throws Exception {
+//	System.out.println("inside the verify email" );
+//	eh.setExcelFile("bcInputData",sheet);
+//	String name = (String) eh.getCell(1, 0);
+//
+//	List<String> emaildata=EmailHandlergmail.fetch();
+//	System.out.println("after verify email" );
+//	System.out.println(emaildata.get(1));
+//	System.out.println(emaildata.get(2));
+//	System.out.println(emaildata.get(3));
+//	System.out.println(emaildata.get(4));
+//	String html=emaildata.get(1);
+//	
+//	Assert.assertTrue(html.contains("<form method=\"POST\" target=\"_blank\"><input type=\"RADIO\" value=\"A\" name=\"cc\">Another name for Java<br><input type=\"RADIO\" value=\"B\" name=\"cc\">When you use Java without compiling<br><input type=\"RADIO\" value=\"C\" name=\"cc\">A scripting language mostly for the web<br><input type=\"SUBMIT\" value=\"Submit Answer\"></form>"));
 	//Assert.assertEquals(fromid,"'flyops@flytxt.com <flyops@flytxt.com>''");
 //	assertTrue(Subject.contains("Broadcast Finished - oneOffBC"));
 //	assertTrue(fromid.contains(""flyops@flytxt.com" <flyops@flytxt.com>"));
-		}
+//		}
 
 }

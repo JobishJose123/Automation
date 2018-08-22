@@ -2164,6 +2164,42 @@ public void verifyBCTargetedCount(String sheet,String condition) throws Throwabl
 		Assert.assertEquals("expected count not equal to actual count, SEND_TRIAL_COUNT harcoded to 3",expected, targeted);
 		Assert.assertEquals("sent count not equal to targeted count , SEND_TRIAL_COUNT harcoded to 3",sent, targeted);
 	}
+	else if(condition.contentEquals("customerLocationInsightsGT5")) {
+		targetStr = list.getCellByColumnName("customerLocationInsightsGT5");
+		int expected = Integer.parseInt(targetStr);
+		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+	}
+	else if(condition.contentEquals("digitalEngagementGT235")) {
+		targetStr = list.getCellByColumnName("digitalEngagementGT235");
+		int expected = Integer.parseInt(targetStr);
+		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+	}
+	else if(condition.contentEquals("analyticalScoresGT45")) {
+		targetStr = list.getCellByColumnName("analyticalScoresGT45");
+		int expected = Integer.parseInt(targetStr);
+		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+	}
+	else if(condition.contentEquals("learnedBehaviourGT35")) {
+		targetStr = list.getCellByColumnName("learnedBehaviourGT35");
+		int expected = Integer.parseInt(targetStr);
+		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+	}
+	else if(condition.contentEquals("customerDemographicsGT15")) {
+		targetStr = list.getCellByColumnName("customerDemographicsGT15");
+		int expected = Integer.parseInt(targetStr);
+		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+	}
+	else if(condition.contentEquals("digitalPersonaGT25")) {
+		targetStr = list.getCellByColumnName("digitalPersonaGT25");
+		int expected = Integer.parseInt(targetStr);
+		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+	}
 	else {
 		Exception notDefined = new Exception("Condition not defined");
 		throw notDefined;
@@ -2413,20 +2449,20 @@ public void Search_BC_and_click_on_sendtrial_from(String sheet) throws Throwable
 	//broadcastPageObjects.clickProceedButton();
 }
 
-@Then("^verify email from sheet \"([^\"]*)\"$")
-public void verify_email_notification(String sheet) throws Throwable {
-	
-	broadcastPageObjects.Verifyemail(sheet);
-	
-	
-}
-@Then("^verify email notifications from sheet \"([^\"]*)\"$")
-public void verify_email_(String sheet) throws Throwable {
-	
-	broadcastPageObjects.Verifyemailnotification(sheet);
-	
-	
-}
+//@Then("^verify email from sheet \"([^\"]*)\"$")
+//public void verify_email_notification(String sheet) throws Throwable {
+//	
+//	broadcastPageObjects.Verifyemail(sheet);
+//	
+//	
+//}
+//@Then("^verify email notifications from sheet \"([^\"]*)\"$")
+//public void verify_email_(String sheet) throws Throwable {
+//	
+//	broadcastPageObjects.Verifyemailnotification(sheet);
+//	
+//	
+//}
 
 
 }
