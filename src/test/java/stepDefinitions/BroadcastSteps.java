@@ -73,13 +73,15 @@ public class BroadcastSteps extends Init{
 			jswait.loadClick("//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastRecurGridMenu']//paper-item[contains(.,'Pause')]");
 			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
+			commonObjects.toggleAutoRefresh();
 			Thread.sleep(5000);
 			jswait.waitUntil("//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//vaadin-grid-cell-content[contains(.,'Paused')]");
 		}
 		else if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")|| eh.getCellByColumnName("Type").contentEquals("seedingTriggerableRecurringBC")){
-			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//iron-icon");
+			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastSeedGridMenu']//paper-item[contains(.,'Pause')]");
 			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
+			commonObjects.toggleAutoRefresh();
 			Thread.sleep(5000);
 			jswait.waitUntil(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[text()='"+eh.getCellByColumnName("BC Name")+"']/../..//vaadin-grid-cell-content[contains(text(),'Paused')]");
 		}
@@ -2125,11 +2127,13 @@ public void waitUntilChildBCStatus(String bcSheet, String statusExpected) throws
 	if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")) {
 	Calendar rightNow =Calendar.getInstance();
 	CalenderUtility cal = new CalenderUtility();
+	if(eh.getCellByColumnName("Recurrance Pattern").contentEquals("months")) {
 	if(eh.getCellByColumnName("Recur on").contentEquals("5th weekend day")) {
 		commonObjects.filterName(eh.getCellByColumnName("BC Name")+"-"+cal.calculateMonthlyReccuranceWeekend(5));
 	}
 	else if(eh.getCellByColumnName("Recur on").contains(",")){
 		commonObjects.filterName(eh.getCellByColumnName("BC Name")+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)));
+	}
 	}
 	commonObjects.toggleAutoRefresh();
 	}

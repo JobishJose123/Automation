@@ -1099,6 +1099,7 @@ public class OfferPageObjects extends Init {
 	public void clickProceedButton() throws InterruptedException {
 		jswait.loadClick(offerProceedButton);
 	}
+	
 
 	public void chooseOfferType() throws InterruptedException {
 		jswait.loadClick(offerType);
@@ -1190,6 +1191,27 @@ public class OfferPageObjects extends Init {
 	}
 	
    public void enterEmailCreative(String profile,String subject ) throws InterruptedException, UnsupportedFlavorException, IOException {
+	  
+	   jswait.loadClick(emailProfileField);
+	   jswait.loadClick("//preview-email//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
+	   jswait.loadSendKeys(emailCreativeSubject, "Subject of Email Offer &$^%#@!+*(&)");
+	   
+	   File indexZip = new File("EmailZipFile\\index.zip");
+	   emailSelectResourceButton.sendKeys(indexZip.getAbsolutePath());
+	   
+
+	   jswait.loadClick(emailMapVariable);
+	   MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
+	   try{
+		   clickMapVariableFirstVariable();
+	   }catch(Exception e) {
+		   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
+	   }
+	   clickMapVariableOkButton();
+	   
+	}
+   
+   public void verifyEmailCreative(String profile,String subject ) throws InterruptedException, UnsupportedFlavorException, IOException {
 	   jswait.loadClick(emailProfileField);
 	   jswait.loadClick("//preview-email//paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]");
 	   jswait.loadClick(emailProfileField);
@@ -1318,7 +1340,7 @@ public class OfferPageObjects extends Init {
 		// clickCreateProductSaveButton();
 	}
 
-	public void enterOfferDetailsFromSheet(String sheet, String productSheet) throws Throwable {
+	public void enterOfferDetailsFromSheet(String sheet, String productSheet, String testMode) throws Throwable {
 		Thread.sleep(4000);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		Actions actions = new Actions(driver);
@@ -1336,7 +1358,7 @@ public class OfferPageObjects extends Init {
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
-		enterCreativeTabDetails(eh);
+		enterCreativeTabDetails(eh,testMode);
 		clickProceedButton();
 		Thread.sleep(3000);
 
@@ -1454,6 +1476,27 @@ public class OfferPageObjects extends Init {
 		}
 			
 	}
+	public void enterCreativeTabDetails(ExcelHelper eh,String testMode) throws Throwable {
+		selectCreativeLanguageEnglish();
+		if (((String) eh.getCell(1, 3)).contains("WAP")) {
+			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		}
+		else if (eh.getCell(1, 3).toString().contains("SMS"))
+			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		else if (eh.getCell(1, 3).toString().contains("Voice"))
+			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		else if (eh.getCell(1, 3).toString().contains("Email")) {
+			 
+			 if(testMode!="NULL") {verifySetAsDefaultCheckboxinCreativeTab();	
+			 verifyEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			   selectCreativeLanguageEnglish();
+			   enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			 }
+			 else
+				 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		}
+			
+	}
 
 	public void enterSecondCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {
 		selectSecodnCreativeLanguageSpanish();
@@ -1467,9 +1510,9 @@ public class OfferPageObjects extends Init {
 
 	}
 
-	public void createOffer(String sheet, String productSheet) throws Throwable {
+	public void createOffer(String sheet, String productSheet,String testMode) throws Throwable {
 		clickCreateNewOfferButton();
-		enterOfferDetailsFromSheet(sheet, productSheet);
+		enterOfferDetailsFromSheet(sheet, productSheet, testMode);
 		clickSaveOfferButton();
 	}
 	public void verifyCancelButtonInSendTrial(String sheet, String productSheet) throws Throwable {

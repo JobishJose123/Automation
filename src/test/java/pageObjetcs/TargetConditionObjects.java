@@ -469,7 +469,7 @@ public class TargetConditionObjects extends Init {
 		    jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerLocationInsights);
 			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(CustomerInsightFieldSite);
+			jswait.loadClick(CustomerInsightLocation);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsNot);
 			jswait.loadSendKeys(isGreaterThanValue,"30");

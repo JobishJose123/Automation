@@ -364,7 +364,7 @@ public class ProductTestCaseSteps extends Init{
 	}
 	@Then("^verify \"([^\"]*)\" product details displayed in the products screen$")
     public void verifyProductsGrid(String sheet) throws Exception {
-		eh.setExcelFile("inputData",sheet);
+		eh.setExcelFile("productInputData",sheet);
 		commonObjects.filterName(eh.getCell(1, 0).toString());
 		jswait.waitUntil("//span[contains(.,'"+eh.getCell(1, 0)+"')]/../../data-table-cell[3][contains(.,'Description')]");
 	}
@@ -597,10 +597,10 @@ public class ProductTestCaseSteps extends Init{
 		commonObjects.clickEditOption();
 		offerPageObjects.enterOfferName((String)eh.getCell(1, 0)+"_edit");
 		offerPageObjects.selectOfferType("STV");
-		offerPageObjects.clickProceedButton();
-		offerPageObjects.clickProceedButton();
-		offerPageObjects.clickProceedButton();
-		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
 		offerPageObjects.clickSaveOfferButton();
 		commonObjects.filterName((String)eh.getCell(1, 0)+"_edit");
 		jswait.waitUntil("//data-table-cell[contains(.,'"+(String)eh.getCell(1, 0)+"_edit')]");		

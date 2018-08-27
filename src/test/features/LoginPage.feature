@@ -117,7 +117,7 @@ Then verify login failure
 @NX-463 
 @closeBrowser
 Scenario: Verify the Branding Area Content of Login page
-Then Verify the Branding Area Content of Login page "Intelligent Customer Engagement" "Engage with customers by learning their behaviour and predicting what they want in real time"
+Then Verify the Branding Area Content of Login page "Intelligent Customer Management" "Engage with customers by learning their behaviour and predicting what they want in real time"
 
 ##tochange
 @NX-4

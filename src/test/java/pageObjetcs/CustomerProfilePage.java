@@ -243,6 +243,7 @@ public class CustomerProfilePage extends Init{
 		jswait.loadClick(subscribedToListsTab);
 	}
 	public void clickEventsTab() throws InterruptedException {
+		Thread.sleep(2000);
 		jswait.loadClick(eventsTab);
 	}
 	public void clickUsageMetricsTab() throws InterruptedException {

@@ -90,7 +90,7 @@ Feature: Test suite on Offer creation
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "informationalWAP" with product "singleProductPage"
-    Then verify "informationalWAP" offer in grid
+    Then verify "InformationalOne-offBC" offer in grid
 
    
   @NX-1345 @initBrowser @closeBrowser
@@ -509,14 +509,6 @@ Feature: Test suite on Offer creation
     Then navigate to offers
     Then verify cross site scripting for filtering offers
     
-    @NX-1343 @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify the default response box for the creatives added in creative tab NX-1343
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then verify response box for creatives
-    
     @NX-1336 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify the set as default checkbox by adding multiple rules NX-1336
     Given login
@@ -549,7 +541,7 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then enter details for new broadcast from sheet "informationalBC" with "informationalWAP"
+Then enter details for new broadcast from sheet "InformationalOne-offBC" with "InformationalOne-offBC"
     
     
     #@NX-4513 @initBrowser 
@@ -557,23 +549,6 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     #Given login
     #Then create alert
     
-    
-    @NX-7307 @initBrowser 
-    Scenario: Verify whether Reward attributes have searchable drop downs
-    Given login
-    Then navigate to configuration management
-    Then navigate to rewards
-    Then create new reward type
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to prepaid telecom
-    Then click create new product button
-    Then create single product from sheet "singleProductPage"
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeSMS" with product "singleProductPage" and verify rewards dropdown field
     
      @NX-4513 @initBrowser 
   Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
@@ -594,6 +569,31 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
     @NX-4513 @closeBrowser
   Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
     Then delete created reward type
+    
+    @NX-7307 @initBrowser  @closeBrowser
+    Scenario: Verify whether Reward attributes have searchable drop downs NX-7307
+    Given login
+    Then navigate to configuration management
+    Then navigate to rewards
+    Then create new reward type
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to prepaid telecom
+    Then click create new product button
+    Then create single product from sheet "singleProductPage"
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeSMS" with product "singleProductPage" and verify rewards dropdown field
+    
+    @NX-1343 @initBrowser @closeBrowser
+  Scenario: Create offer:Track: Verify the default response box for the creatives added in creative tab NX-1343
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify response box for creatives
     
      @NX-2328 @initBrowser
     Scenario: Email Channel --> Verify the Creative Tab in Create Offers while creating Email Based Offers. NX-2328
@@ -656,7 +656,7 @@ Then enter details for new broadcast from sheet "informationalBC" with "informat
 	   
 	   @NX-2406
 	   @initBrowser
-	     Scenario: Email Channel -->Verify the Verify the Delete option 
+	     Scenario: Email Channel -->Verify the Verify the Delete option NX-2406
 	     Given login
     Then navigate to precision marketer
     Then navigate to offer management

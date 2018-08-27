@@ -597,7 +597,7 @@ public class CampaignManagement extends Init{
 	 		campaignObjects.click_on_campaign_and_verify_row(name);
 	    }
 	    
-	    @Then("^verify targetd customers label and count$")
+	    @Then("^verify targeted customers label and count$")
 	    public void verifyTargetdCustomersLabelAndCount() throws Throwable
 	    {
 	

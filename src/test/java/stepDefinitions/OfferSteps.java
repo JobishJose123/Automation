@@ -45,8 +45,12 @@ public class OfferSteps extends Init {
 
 	@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
 	public void create_new_Offer(String sheet, String productSheet) throws Throwable {
-		offerPageObjects.createOffer(sheet, productSheet);
+		offerPageObjects.createOffer(sheet, productSheet,"NULL");
+	}@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\" for test$")
+	public void create_new_Offer_test(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.createOffer(sheet, productSheet,"test");
 	}
+	
 	@Then("^verify cancel button in send trial pop up from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
 	public void verifyCancelButtonInSendTrial(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.verifyCancelButtonInSendTrial(sheet, productSheet);
@@ -745,6 +749,7 @@ public class OfferSteps extends Init {
 	@Then("^verify response box for creatives$")
 	public void verify_response_box_for_creatives() throws Throwable {
 		proceedToCreativeTab();
+		eh.setExcelFile("offerInputData", "tempRechargeSms");
 	offerPageObjects.enterCreativeTabDetails(eh);
 	offerPageObjects.clickAddCreativeButton();
 	offerPageObjects.enterSecondCreativeTabDetails(eh);

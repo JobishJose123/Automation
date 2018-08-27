@@ -5,7 +5,7 @@
 Feature: Offer Catalogue test cases
 
 @initBrowser @closeBrowser @NX-1125
-Scenario: Verify Creating Offer Catalogue
+Scenario: Verify Creating Offer Catalogue NX-1125
   Given login
 	When navigate to precision marketer
 	Then navigate to offer management
@@ -316,6 +316,8 @@ Scenario: Verify the selected offers for the catalog.
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
 	Then Create New Offer Catalogue from sheet "defaultCatalog"
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
 	Then Verify Scrolling Offer Catalog for "defaultCatalog" 
  
 

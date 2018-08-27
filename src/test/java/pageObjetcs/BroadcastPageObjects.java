@@ -1070,7 +1070,7 @@ private WebElement recipientclick;
 		enterBroadcastPurpose("Purpose of BC is NOTHING");
 		selectLabelCrossell();		
 		selectInventoryUnlimited();
-		selectROI();
+//		selectROI();
 	}
 	
 	public void selectROI() throws InterruptedException {
