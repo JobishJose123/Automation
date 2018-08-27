@@ -52,6 +52,10 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath="//paper-button[contains(.,'Proceed')]")
 	private WebElement proceedButton;
 	
+	@FindBy(xpath="//span[contains(.,'1')]")
+	private WebElement templateCount;
+	
+	
 	@FindBy(xpath=".//paper-card[@id='conditionCard']")
 	private WebElement conditionCard;
 	@FindBy(xpath=".//div[@class='offers flex style-scope campaign-details' and contains(.,'1 Number of offers')]")
@@ -630,6 +634,13 @@ public class CampaignObjects extends Init{
 	public void scrollToCampaignCategory(String name) throws Exception {
 		jswait.scrollAndClick("//campaign-category-chart", "//div[text()='"+name+"']");
 	}
+	
+	
+	public void scrollToCampaignCategoryAndCheckCount(String name) throws Exception {
+		jswait.scrollIntoView("//campaign-category-chart", "//div[text()='"+name+"']");
+		assertTrue(templateCount.isDisplayed());
+	}
+	
 	
 	public void clickOptionsIcon() throws InterruptedException {
 		jswait.loadClick(optionsIcon);

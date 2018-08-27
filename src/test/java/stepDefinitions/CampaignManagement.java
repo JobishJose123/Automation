@@ -874,4 +874,13 @@ public class CampaignManagement extends Init{
 		       jswait.waitUntil("//div[@id='tooltip']/*[contains(.,'is greater than')]");
 		       jswait.waitUntil("//div[@id='tooltip']/*[contains(.,'18')]");
 		    }
+		    
+		    @Then("^navigate to campaign category and check template count from sheet \"([^\"]*)\"$")
+		    public void navigate_to_campaign_category_from_sheet_and_check_count(String sheet) throws Throwable {
+		    	eM.setExcelFile("campaignCategoryInputData",sheet);
+		    	String name = (String) eM.getCell(1, 0);
+		    	campaignObjects.scrollToCampaignCategoryAndCheckCount(name);
+		    }
+		    
+		   
 }

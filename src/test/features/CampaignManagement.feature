@@ -482,3 +482,26 @@ Feature: campaign management
 		Then navigate to campaign category from sheet "CampaignCategory"
 		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 		Then verify descrption of graphical condition on mouse hover
+
+		
+		
+		
+		
+		@NX-1503 @initBrowser
+    Scenario: CLV Max: Create new campaign template :- Verify the count of the templates- 1503
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then navigate to templates tab
+    Then create new template from sheet "template"
+    Then verify template created from sheet "template"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category and check template count from sheet "CampaignCategory"
+		
