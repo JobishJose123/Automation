@@ -34,6 +34,18 @@ public class OfferAttributesSteps {
 		offerPageObjects.clickAddOfferAttributeButton();
 		offerPageObjects.selectOfferAttribute();
     }
+	@Then("^check offer attributes while creating offer after changing partner$")
+    public void verifyDefaultSeleniumAttributesAfterChangingPartner() throws Throwable
+    {
+		Exception offerAttributePresetnAfterChangingPartner = new Exception("offer Attribute Presetn After Changing Partner");
+		offerPageObjects.clickAddOfferAttributeButton();
+		try{
+			offerPageObjects.selectOfferAttribute();
+			throw offerAttributePresetnAfterChangingPartner;
+		}catch(Exception e) {
+			
+		}
+    }
 	
 	@Then("^create offer attribute with 50 characters$")
     public void createOfferAttributeWith50Characters() throws Throwable

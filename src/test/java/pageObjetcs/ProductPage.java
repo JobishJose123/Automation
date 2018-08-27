@@ -124,7 +124,7 @@ public class ProductPage extends Init{
 	private WebElement allowMultipleAddButton;
 	@FindBy(xpath=".//vaadin-combo-box//paper-input-container")
     private WebElement partnerDropDown;
-	@FindBy(xpath=".//vaadin-combo-box-item[contains(.,' Test_Fb')]")
+	@FindBy(xpath=".//vaadin-combo-box-item[contains(.,'"+SELENIUM_PARTNER+"')]")
     private WebElement Partner;
 	@FindBy(xpath=".//div[@class='buttons style-scope change-partner']//paper-button[contains(.,'Yes')]")
     private WebElement YesButton;

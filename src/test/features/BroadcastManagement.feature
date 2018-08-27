@@ -2024,7 +2024,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then navigate to broadcast settings page
     Then verify preferred language field in broadcast settings
     
-     @NX-8856 @initBrowser @closeBrowser
+     @NX-8856 @initBrowser
     Scenario: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8868 
     Given login
     Then navigate to precision marketer

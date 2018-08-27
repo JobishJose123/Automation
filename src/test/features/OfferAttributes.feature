@@ -25,3 +25,13 @@ Feature: Test suite on Offer Attributes
     Then navigate to configuration management  
     Then navigate to offer attributes
     Then create offer attribute with 50 characters
+    
+     @NX-5321 @initBrowser @closeBrowse
+    Scenario:  Attaching Offer Attributes created by another partner while creating offers
+    Given login
+    Then Change partner
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then check offer attributes while creating offer after changing partner

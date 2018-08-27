@@ -66,6 +66,8 @@ public static Logger log;
 	public final String AGE_PROFILE_FIELD = "Age_q11";
 	public final String AGE_DYNAMIC_VARIABLE = "Age_Q990";
 	public final String NAME_PROFILE_FIELD = "First Name_q11";
+	public final String SELENIUM_PARTNER = "selenium_partner";
+
 	
 }
 //public class Init {
