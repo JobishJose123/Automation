@@ -272,7 +272,7 @@ Feature: campaign management
     Then verify campaign created from sheet "campaignBC"
     
     
-    @NX-693 @initBrowser
+    @NX-685 @initBrowser
     Scenario: Campaign Creation: Graphical  :Verify the edit option of the added virtual conditions-685
     Given login
     Then navigate to configuration management
@@ -504,4 +504,54 @@ Feature: campaign management
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category and check template count from sheet "CampaignCategory"
+		
+		
+		
+		@NX-1220 @initBrowser
+    Scenario: Campaign grid: Verify the label of Converted subscribers- 1220
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then activate bc
+    Then verify bc created from sheet "one-offBC"
+		Then wait until status of "one-offBC" is "Targeting"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+		Then naigate to "campaignBC" campaign view broadcasts
+		Then wait until status of "one-offBC" is "Targeting"
+		Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then verify converted customers label and count
 		

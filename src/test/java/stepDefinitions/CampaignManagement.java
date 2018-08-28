@@ -882,5 +882,14 @@ public class CampaignManagement extends Init{
 		    	campaignObjects.scrollToCampaignCategoryAndCheckCount(name);
 		    }
 		    
+		    
+		    
+		    @Then("^verify converted customers label and count$")
+		    public void verifyConvertedCustomersLabelAndCount() throws Throwable
+		    {
+		
+		 		campaignObjects.verifyConvertedCustomersLabelAndCount();
+		    }
+		    
 		   
 }

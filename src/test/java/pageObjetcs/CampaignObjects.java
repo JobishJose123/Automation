@@ -147,8 +147,13 @@ public class CampaignObjects extends Init{
 	String colorAfterAbort;
 	@FindBy(xpath=".//paper-item//label[contains(.,'Targeted Customers')]")
 	private WebElement targetedCustomersLabel;
+	@FindBy(xpath=".//paper-item//label[contains(.,'Converted Customers')]")
+	private WebElement convertedCustomersLabel;
 	@FindBy(xpath=".//div[@class='summary layout horizontal center style-scope campaign-list']//paper-item[2]")
 	private WebElement targetedCustomersCount;
+	
+	@FindBy(xpath=".//div[@class='summary layout horizontal center style-scope campaign-list']//paper-item[3]")
+	private WebElement convertedCustomersCount;
 	
 	@FindBy(xpath=".//div[@class='layout vertical flex rowDetail style-scope campaign-list']//label[1][2]")
 	private WebElement targetedCustomersExpandCount;
@@ -1112,5 +1117,21 @@ public class CampaignObjects extends Init{
 	   jswait.loadSendKeys(selectLocationToExport, locationName);
 	   assertTrue(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+locationName+"')]")).isDisplayed());
    }
+   
+   
+   
+   
+  public void verifyConvertedCustomersLabelAndCount() throws Exception {
+		
+		
+	    
+	    
+		assertTrue(convertedCustomersLabel.isDisplayed());
+		assertTrue(convertedCustomersCount.isDisplayed());
+		
+	}
+   
+   
+   
 
 }
