@@ -173,6 +173,29 @@ public class CampaignManagement extends Init{
 	 
 	 
 	 
+	 @Then("^create new campaign from sheet with add multiple AND option \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+	    public void create_new_campaign_with_add_Multiple_And_Option(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 	    Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		eM.setCell(1, 0, name);
+	 		campaignObjects.clickCreateNewCampaignButton();
+	 		campaignObjects.createCampaignWithAddMultipleAndOption(name, catalog);
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    }
+	 
+	 
+	 
 	 
 	 @Then("^edit campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
 	    public void editCampaign(String sheet, String catalogSheet) throws Throwable

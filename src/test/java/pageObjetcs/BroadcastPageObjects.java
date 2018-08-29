@@ -57,6 +57,8 @@ public class BroadcastPageObjects extends Init {
 	private WebElement broadcastAbort;
 	@FindBy(xpath = ".//paper-item[contains(.,'Copy')]")
 	private WebElement broadcastCopy;
+	@FindBy(xpath = ".//paper-item[contains(.,'View Details')]")
+	private WebElement broadcastViewDetails;
 	@FindBy(xpath = ".//paper-icon-button[@icon='av:pause-circle-filled']")
 	private WebElement broadcastPause;
 	@FindBy(xpath = ".//paper-item[contains(.,'Send Trial')]")
@@ -196,6 +198,9 @@ public class BroadcastPageObjects extends Init {
 	private WebElement createButtonBc;
 	@FindBy(xpath = "//paper-button[text()='Activate']")
 	private WebElement activateButtonBc;
+	@FindBy(xpath = "//paper-dialog[@id='validationDetails']//paper-button[contains(.,'Activate')]")
+	private WebElement activateViewDetailsButtonBc;
+	
 	@FindBy(xpath = "//paper-dialog[@id='broadcastSummary']//paper-button[text()='Save']")
 	private WebElement saveButtonBc;
 	@FindBy(xpath = ".//*[@id='confirmBox']//paper-button[2]")
@@ -837,7 +842,19 @@ private WebElement recipientclick;
 	
 	public void verifyActiveOptionForBC() throws InterruptedException {
 		
+//		List <WebElement> OptionIcon=driver.findElements(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."));
+//		int sizeOption=OptionIcon.size();
+//		while(sizeOption==0) {
+//			
+//			Thread.sleep(30000);
+//		}
+		
+		Thread.sleep(100000);
+		driver.navigate().refresh();
+		
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."))).click();
+		clickViewDetailsBroadcastOption();
+		assertTrue(activateViewDetailsButtonBc.isDisplayed());
 	}
 	
 	public void verifyValidateOptionForBC() throws Throwable {
@@ -945,6 +962,10 @@ private WebElement recipientclick;
 	
 	public void clickCopyBroadcastOption() throws InterruptedException {
 		jswait.loadClick(broadcastCopy);
+	}
+	
+	public void clickViewDetailsBroadcastOption() throws InterruptedException {
+		jswait.loadClick(broadcastViewDetails);
 	}
 	
 	public void clickPauseBroadcastOption() throws InterruptedException {

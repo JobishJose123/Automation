@@ -263,7 +263,7 @@ Feature: campaign management
     
     
     @NX-691 @initBrowser
-    Scenario: Campaign Creation: Graphical  :Verify adding multiple AND/OR condition in visual editor-687
+    Scenario: Campaign Creation: Manual Target:Verify adding the filter conditions with AND condition-691
     Given login
     Then navigate to precision marketer
     Then navigate to life cycle marketing
@@ -271,6 +271,21 @@ Feature: campaign management
     Then create new campaign from sheet with add AND option "campaignBC" with catalog "defaultCatalog"
     Then verify campaign created from sheet "campaignBC"
     
+    
+    
+    @NX-693 @initBrowser
+    Scenario: Campaign Creation: Manual Target:Verify editing the added textual conditions-693
+    Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+		Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
+    Then edit target conditions for campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
     @NX-685 @initBrowser
     Scenario: Campaign Creation: Graphical  :Verify the edit option of the added virtual conditions-685
@@ -434,6 +449,7 @@ Feature: campaign management
     #Then navigate to life cycle marketing
 #		Then navigate to campaign category from sheet "CampaignCategory"
 #		Then naigate to "campaignBC" campaign view broadcasts
+		Then verify targeting status for bc
 #		Then wait until status of "one-offBC" is "Targeting"
 		Then navigate to landing page
     Then navigate to precision marketer
@@ -554,4 +570,24 @@ Feature: campaign management
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
     Then verify converted customers label and count
+    
+    
+    
+    @NX-687 @initBrowser
+    Scenario: Campaign Creation: Graphical  :Verify adding multiple AND/OR condition in visual editor-687
+    Given login
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet with add multiple AND option "campaignBC" with catalog "defaultCatalog"
+    Then verify campaign created from sheet "campaignBC"
 		
+		
+		
+		
+		
+		@NX-738 @initBrowser
+    Scenario: Campaign Creation: Schedule: Verify broadcast expiry option with "at" time "on" day option-738
+    Given login
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing

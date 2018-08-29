@@ -758,7 +758,7 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     
     
      
-    @NX-2533 @initBrowser @closeBrowser
+    @NX-2533 @initBrowser 
     Scenario: CVM UI- Verify that BC can be activated only after 'CG Validation Passed' once BC enters validation process-2533
     Given login
     Then navigate to configuration management
