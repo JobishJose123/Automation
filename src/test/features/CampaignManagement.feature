@@ -443,14 +443,7 @@ Feature: campaign management
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then activate bc
     Then verify bc created from sheet "one-offBC"
-#		Then wait until status of "one-offBC" is "Targeting"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to life cycle marketing
-#		Then navigate to campaign category from sheet "CampaignCategory"
-#		Then naigate to "campaignBC" campaign view broadcasts
 		Then verify targeting status for bc
-#		Then wait until status of "one-offBC" is "Targeting"
 		Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
