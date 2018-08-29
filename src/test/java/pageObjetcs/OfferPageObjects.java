@@ -119,7 +119,7 @@ public class OfferPageObjects extends Init {
 	private WebElement secondVoiceCreativeSubject;
 	@FindBy(xpath = "//label[contains(.,'Reference')]/../input")
 	private WebElement voiceCreativeReference;
-	@FindBy(xpath = "//creative-wrapper//define-creative[2]//label[contains(.,'Reference')]/../input")
+	@FindBy(xpath = "//createnterEmailCreativeive-wrapper//define-creative[2]//label[contains(.,'Reference')]/../input")
 	private WebElement secondVoiceCreativeReference;
 	@FindBy(xpath = "//object[@data='../../context-help/EN/Offers.html']")
 	private WebElement offersContextHelp;
@@ -323,6 +323,8 @@ public class OfferPageObjects extends Init {
 	 private WebElement sendTrialNumberCancelButton;
 	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']")
 	 private WebElement sendTrialfield;
+	 @FindBy(xpath="//form[@id='trialEmailForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']")
+	 private WebElement sendTrialEmailfield;
 	 @FindBy(xpath="//define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']/paper-input[@required='']//div[@id='labelAndInputContainer']/input[@id='input']")
 	 private WebElement secondsendTrialfield;
 	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-input[2]//div[@id='labelAndInputContainer']/input[@id='input']")
@@ -330,27 +332,43 @@ public class OfferPageObjects extends Init {
 	 @FindBy(xpath="//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
 	 //define-creative[2]//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']
 	 private WebElement sendTrialSMSSender;
+	 @FindBy(xpath="//form[@id='trialEmailForm']//*//label[contains(.,'Sender ID: ')]/..//input[@id='input']")
+	 private WebElement sendTrialEmailSender;
 	 @FindBy(xpath="//define-creative[2]//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
 	 private WebElement SecondsendTrialSMSSender;
 	 @FindBy(xpath="//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
 	 private WebElement sendTrialSMSRoute;
+	 @FindBy(xpath="//form[@id='trialEmailForm']//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
+	 private WebElement sendTrialEmailRoute;
 	 @FindBy(xpath="//define-creative[2]//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
 	 private WebElement SecondsendTrialSMSRoute;
 	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	 private WebElement SelectTrialSMSID;
+	 @FindBy(xpath=".//*[@id='trialEmailForm']/vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
+	 private WebElement SelectTrialEmailID;
 	 //@FindBy(xpath="//wizard-tab[@id='check']//creative-wrapper/define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']//vaadin-combo-box[@label='Sender ID: Trial message would appear from this ID']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	 @FindBy(xpath="//define-creative[2]//*[@id='sendTrialDialogNumber']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	 private WebElement SecondSelectTrialSMSID;
 	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
 	 private WebElement SelectTrialSMSRoute;
+	 //@FindBy(xpath=".//*[@id='trialEmailForm']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
+	 @FindBy(xpath=".//*[@id='trialEmailForm']//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
+	 //@FindBy(xpath="//form[@id='trialEmailForm']//vaadin-combo-box[@label='Route over which this broadcast can be sent']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']/div/vaadin-combo-box-item[2]")
+	 private WebElement SelectTrialEmailRoute;
 	 @FindBy(xpath="//creative-wrapper/define-creative[2]//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
 	 private WebElement SecondSelectTrialSMSRoute;
 	 @FindBy(xpath=".//*[@id='sendTrialDialogNumber']//paper-button[text()='Send']")
 	 private WebElement sendTrialNumberSendButton;
+	 @FindBy(xpath=".//*[@id='sendTrialDialogEmail']//paper-button[text()='Send']")
+	 private WebElement sendTrialEmailSendButton;
+	 @FindBy(xpath="//form[@id='trialEmailForm']//vaadin-combo-box[@label='Route over which this broadcast can be sent']/paper-input-container[@id='inputContainer']//paper-icon-button[@id='toggleIcon']/iron-icon[@id='icon']")
+	 private WebElement sendTrialwindow;
 	 @FindBy(xpath=".//define-creative[2]//*[@id='sendTrialDialogNumber']//paper-button[text()='Send']")
 	 private WebElement SecondsendTrialNumberSendButton;
 	 @FindBy(xpath="//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
 	 private WebElement sendTrialPageClose;
+	 @FindBy(xpath="//paper-dialog[@id='sendTrialDialogEmail']/iron-icon[@icon='close']")
+	 private WebElement sendTrialEmailPageClose;
 	 @FindBy(xpath="//define-creative[2]//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
 	 private WebElement SecondsendTrialPageClose;
 	 @FindBy(xpath="/html//paper-toast[@id='toast']/span[contains(.,'Unable to process your request. Please try again')]")
@@ -1205,7 +1223,7 @@ public class OfferPageObjects extends Init {
 	   try{
 		   clickMapVariableFirstVariable();
 	   }catch(Exception e) {
-		   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
+		  createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
 	   }
 	   clickMapVariableOkButton();
 	   
@@ -1471,8 +1489,15 @@ public class OfferPageObjects extends Init {
 		else if (eh.getCell(1, 3).toString().contains("Email")) {
 			 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 			 verifySetAsDefaultCheckboxinCreativeTab();			   
-			   selectCreativeLanguageEnglish();
-			   enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			 selectCreativeLanguageEnglish();
+			 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		}
+			
+	}
+	public void enterEmailCreativeTabDetails(ExcelHelper eh) throws Throwable {
+		selectCreativeLanguageEnglish();
+		if (eh.getCell(1, 3).toString().contains("Email")) {
+		enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		}
 			
 	}
@@ -1923,31 +1948,19 @@ public class OfferPageObjects extends Init {
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
-		enterCreativeTabDetails(eh);
-		
-	
-		//clickSendTrialButton();
-		if(eh.getCellByColumnName("Channel").contains("Email")) {
-			enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-			 verifySetAsDefaultCheckboxinCreativeTab();			   
-			   selectCreativeLanguageEnglish();
-			   //enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-			   clickSendTrialButton();
-			   jswait.loadClick(sendTrialfield);
-               jswait.loadSendKeys(sendTrialfield, number);                                                 
-		}
-		else {
-                           jswait.loadClick(sendTrialfield);
-                           jswait.loadSendKeys(sendTrialfield, number);                                                 
-                           
-		}
-		jswait.loadClick(sendTrialSMSSender);
+		enterEmailCreativeTabDetails(eh);
+		clickSendTrialButton();
+		jswait.loadClick(sendTrialEmailfield);
+        jswait.loadSendKeys(sendTrialEmailfield, number);                                                 
+		jswait.loadClick(sendTrialEmailSender);
 		jswait.loadClick(SelectTrialSMSID);
-		jswait.loadClick(sendTrialSMSRoute);
-		jswait.loadClick(SelectTrialSMSRoute);
-		jswait.loadClick(sendTrialNumberSendButton);
+		jswait.loadClick(sendTrialEmailRoute);
+		jswait.loadSendKeys(sendTrialEmailRoute, "SMPP Robi outbound");
+		//jswait.loadClick(SelectTrialEmailRoute);
+		jswait.loadClick(sendTrialwindow);
+		jswait.loadClick(sendTrialEmailSendButton);
 		Thread.sleep(3000);
-		jswait.loadClick(sendTrialPageClose);
+		jswait.loadClick(sendTrialEmailPageClose);
 		
 	}
 
