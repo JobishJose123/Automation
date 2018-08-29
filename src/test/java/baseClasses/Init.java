@@ -57,7 +57,7 @@ public static Logger log;
 	public final String SENDER_SMPP = "Address-SMPP";
 	public final String ROUTE_SMPP = "SMPP Robi outbound";
 	public final String SENDER_EMAIL = "Address-SMPP";
-	public final String ROUTE_EMAIL = "Email_Chan_New";
+	public final String ROUTE_EMAIL = "Email Route new";
 	public final String SELENIUM_LIST = "selenium_list";
 	public final String SELENIUM_DND_LIST = "selenium_list_DND";
 	public final String SELENIUM_MANDATORY_DND_LIST = "selenium_list_DND_mandatory";

@@ -679,10 +679,13 @@ public class OfferSteps extends Init {
 	}
 	@Then("^verify label message after variable selection$")
 	public void verifyLabelAfterSelectingDynamicVariables() throws Throwable {
-		offerPageObjects.clickMapVariableIcon();
-		jswait.waitUntil("//label[text()='(0 variable selected)']");
-		offerPageObjects.MapVariableFilterName("sel_var1");
+		Thread.sleep(2000);
+
+//		offerPageObjects.clickMapVariableIcon();
+		//jswait.waitUntil("//label[text()='(0 variable selected)']");
+		offerPageObjects.MapVariableFilterName("city");
 		offerPageObjects.clickMapVariableFirstVariable();
+		Thread.sleep(2000);
 		jswait.waitUntil("//label[text()='(1 variable selected)']");
 	}
 	@Then("^verify adding multiple dynamic variables$")
