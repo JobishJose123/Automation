@@ -301,24 +301,24 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(nowSelect);
 			jswait.loadClick(targetConditionSave);
 		}
-		else if(event.contentEquals("digitalPersonaGT25")){
+		else if(event.contentEquals("digitalPersonaGT15")){
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerDigitalPersona);
 			jswait.loadClick(CustomerInsightFieldSelector);
 			jswait.loadClick(digitalPersonaField);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsGreaterThan);
-			jswait.loadSendKeys(isGreaterThanValue,"25");
+			jswait.loadSendKeys(isGreaterThanValue,"15");
 			jswait.loadClick(targetConditionSave);
 		}
-		else if(event.contentEquals("customerDemographicsGT15")){
+		else if(event.contentEquals("customerDemographicsGT25")){
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerDemographics);
 			jswait.loadClick(CustomerInsightFieldSelector);
 			jswait.loadClick(demographicsField);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsGreaterThan);
-			jswait.loadSendKeys(isGreaterThanValue,"15");
+			jswait.loadSendKeys(isGreaterThanValue,"25");
 			jswait.loadClick(targetConditionSave);
 		}
 		else if(event.contentEquals("learnedBehaviourGT35")){

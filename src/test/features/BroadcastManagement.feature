@@ -338,16 +338,17 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
 Then activate bc
+Then wait until status of "one-offBC" is "Delivering"
 Then verify options icon of bc
 
-#@NX-1273
-#Scenario: Broadcast grid: Verify the Pause option of the BC
-#Given verify pause option of bc
+@NX-1273
+Scenario: Broadcast grid: Verify the Pause option of the BC
+Given verify pause option of bc
 
-#@NX-1271
-#@closeBrowser
-#Scenario: Broadcast grid: Verify the edit option for the BC
-#Given verify edit option of bc
+@NX-1271
+@closeBrowser
+Scenario: Broadcast grid: Verify the edit option for the BC
+Given verify edit option of bc
 
 @NX-1185
 @initBrowser @closeBrowser
@@ -2024,27 +2025,30 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then navigate to broadcast settings page
     Then verify preferred language field in broadcast settings
     
-     @NX-8856 @initBrowser @closeBrowser
+     @NX-8856 @initBrowser
     Scenario: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8868 
     Given login
     Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition "digitalPersonaGT25" from sheet "one-offBC" with "rechargeWap"
+    Then enter details for new broadcast with condition from sheet "one-offBC" with "rechargeWap"
+    |Condition|
+    |digitalPersonaGT15|
+    |customerDemographicsGT25|
     Then activate bc
     Then wait until status of "one-offBC" is "Complete"
-    Then verify targeted and sent count of "one-offBC" with condition "digitalPersonaGT25"
+    Then verify targeted and sent count of "one-offBC" with condition "digitalPersonaGT15"
     
       
     @NX-2350 @NX-2347 @NX-2349 @NX-2348

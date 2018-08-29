@@ -24,7 +24,7 @@ public class ShellExecuter extends Init{
 //    	user=p.getValue("rootUser");
     	user = "root";
 //    	password=p.getValue("rootPassword");
-    	password = "bullet";
+    	password = "qaenv23";
     }
     public void executeScript(String command1) {
 //    	 String command1="cp /root/dk_testing_selenium/location1/source.txt /root/dk_testing_selenium/location2/";

@@ -1,6 +1,8 @@
 package stepDefinitions;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -17,6 +19,7 @@ import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
 import baseClasses.TimeoutImpl;
+import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -1091,9 +1094,11 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
       	
  }
 	
-	@Then("^enter details for new broadcast with condition \"([^\"]*)\" from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
-    public void create_new_broadcast_with_target_condition(String condition, String sheet, String offer) throws Throwable
+	@Then("^enter details for new broadcast with condition from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
+    public void create_new_broadcast_with_target_condition(String sheet, String offer,DataTable conditionTable) throws Throwable
     {  
+		List<Map<String,String>> data = conditionTable.asMaps(String.class,String.class);
+		String condition = data.get(0).get("Condition");
     	Thread.sleep(3000);
     	ExcelHelper list = new ExcelHelper();
     	list.setExcelFile("registrationListInputData", "Sheet1");

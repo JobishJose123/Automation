@@ -1,6 +1,6 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary : generic product class test cases
-@NX-ProductClass
+@NX-WorkApprovalFlow
 Feature: generic product class
 
   @NX-6319 @initBrowser
