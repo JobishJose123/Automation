@@ -732,7 +732,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then click on apply button
     Then verify trial message event
     
-    @NX-5284 @initBrowser 
+    @NX-5284 @initBrowser @closeBrowser
      Scenario: STC--> Verify send trial creative for both valid and invalid msisdn
     Given login
     When navigate to precision marketer
@@ -766,7 +766,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then click on apply button
     Then verify trial message event
     
-    @NX-5169 @initBrowser 
+    @NX-5169 @initBrowser @closeBrowser
      Scenario: STC--> verify whether send trial option is available against each creative
     Given login
     When navigate to precision marketer
@@ -795,7 +795,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then click on apply button
     Then verify trial message event
     
-    @NX-5176 @initBrowser 
+    @NX-5176 @initBrowser @closeBrowser
      Scenario: STC--> Verify whether new system event displayed for the trial message
     Given login
     When navigate to precision marketer
@@ -815,7 +815,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     #Then verify trial message event
     Then verify trial message event details from sheet "rechargeSMS"
     
-    @NX-5161 @initBrowser
+    @NX-5161 @initBrowser @closeBrowser
     Scenario: STC--> Verify the functionality of send trial for Short Text type offers
     Given login
     When navigate to precision marketer
@@ -835,7 +835,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     #Then verify trial message event
     Then verify trial message event details from sheet "rechargeSMS"
     
-    @NX-5177_test @initBrowser
+    @NX-5177 @initBrowser @closeBrowser
     Scenario: STC--> Verify whether dynamic tags are working properly
     Given login
     When navigate to precision marketer
