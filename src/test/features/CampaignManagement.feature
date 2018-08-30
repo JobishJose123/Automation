@@ -364,10 +364,10 @@ Feature: campaign management
     @NX-698 @initBrowser
     Scenario: Campaign Creation: Graphical Target:Verify the Duplicate option for the added virtual condition-698
     Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
@@ -553,12 +553,6 @@ Feature: campaign management
     Then verify bc created from sheet "one-offBC"
 		Then wait until status of "one-offBC" is "Targeting"
     Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-		Then naigate to "campaignBC" campaign view broadcasts
-		Then wait until status of "one-offBC" is "Targeting"
-		Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"

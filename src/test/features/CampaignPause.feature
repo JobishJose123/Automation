@@ -13,17 +13,17 @@ Then navigate to precision marketer
  Then navigate to offer management
     Then navigate to offers
     Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
     Then navigate to offer management 
 	  Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then Add "rechargeEmail" offer to Offer Catalogue
     Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then enter details for new broadcast from sheet "recurringTriggerable" with "rechargeWAP"
+Then enter details for new broadcast from sheet "recurringTriggerable" with "rechargeEmail"
 Then activate bc
 Then navigate to "Recurring" broadcasts
 Then pause bc from sheet "recurringTriggerable"
@@ -35,7 +35,7 @@ Then resume bc from sheet "recurringTriggerable"
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    Then enter details for new broadcast from sheet "recurringTriggerable" with "rechargeWAP"
+    Then enter details for new broadcast from sheet "recurringTriggerable" with "rechargeEmail"
     Then verify pause and resume option for campaign
     Then pause campaign from sheet "campaignBC"
     
@@ -113,17 +113,17 @@ Given login
 Then navigate to precision marketer
 Then navigate to offer management
 Then navigate to offers
-Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+Then create new offer from sheet "rechargeEmail" with product "fullDetails"
 Then navigate to offer management
 Then Navigate to Offer Catalogue
 Then Create New Offer Catalogue from sheet "defaultCatalog"
-Then Add "rechargeWAP" offer to Offer Catalogue
+Then Add "rechargeEmail" offer to Offer Catalogue
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
+Then enter details for new broadcast from sheet "recurringBC" with "rechargeEmail"
 Then activate bc
 Then navigate to "Recurring" broadcasts
 Then pause bc from sheet "recurringBC"
@@ -141,18 +141,18 @@ Scenario: Broadcast grid: Verify the Pause option of the BC BC NX-1273
     Then navigate to precision marketer
 Then navigate to offer management
 Then navigate to offers
-Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+Then create new offer from sheet "rechargeEmail" with product "fullDetails"
 Then navigate to offer management
 Then Navigate to Offer Catalogue
 Then Create New Offer Catalogue from sheet "defaultCatalog"
-Then Add "rechargeWAP" offer to Offer Catalogue
+Then Add "rechargeEmail" offer to Offer Catalogue
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then pause campaign from sheet "campaignBC"
     Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
+Then enter details for new broadcast from sheet "recurringBC" with "rechargeEmail"
 Then save bc
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
@@ -167,17 +167,17 @@ Scenario: Verify the BCs in Delivering state when the campaign is paused NX-8737
     Then navigate to precision marketer
 		Then navigate to offer management
 		Then navigate to offers
-		Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+		Then create new offer from sheet "rechargeEmail" with product "fullDetails"
 		Then navigate to offer management
 		Then Navigate to Offer Catalogue
 		Then Create New Offer Catalogue from sheet "defaultCatalog"
-		Then Add "rechargeWAP" offer to Offer Catalogue
+		Then Add "rechargeEmail" offer to Offer Catalogue
 		Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "campaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
     Then activate bc
     Then verify bc created from sheet "one-offBC"
     Then wait until status of "one-offBC" is "Delivering"
@@ -204,7 +204,7 @@ Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-8739
 		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
+    Then enter details for new broadcast from sheet "recurringBC" with "rechargeEmail"
     Then activate bc
     Then wait for 1 minutes
     Then wait until status of child bc of "recurringBC" is "Delivering"
@@ -232,7 +232,7 @@ Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-6288
 		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
+    Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeEmail"
     Then activate bc
     Then wait for 1 minutes
     Then wait until status of child bc of "recurringMonthBC" is "Delivering"

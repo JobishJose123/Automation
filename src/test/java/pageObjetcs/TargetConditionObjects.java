@@ -128,7 +128,8 @@ public class TargetConditionObjects extends Init {
 		 private WebElement manualConditionTypeField;
 		 @FindBy(xpath="//paper-button[contains(text(),'Create Condition')]")
 		 private WebElement createConditionButton;
-		 @FindBy(xpath=".//div[@class='container flex-end-justified style-scope target-conditions']//paper-icon-button[@class='style-scope target-conditions x-scope paper-icon-button-0']//iron-icon")
+
+         @FindBy(xpath="(.//div[@class='container flex-end-justified style-scope target-conditions']//iron-icon[1])[4]")
 		 private WebElement graphicalConditionButton;
 		 @FindBy(xpath=".//target-conditions-context-menu")
 		 private List <WebElement> graphicalConditionContextMenu;
