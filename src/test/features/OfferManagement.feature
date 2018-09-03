@@ -895,6 +895,27 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then verify trial message event
     #Then verify trial message event details from sheet "rechargeSMS"
     
+    @NX-5162 @initBrowser @closeBrowser
+    Scenario: Verify the functionality of sending trial for email type offers
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify send trail for Emailtype to ONE number from sheet "rechargeEmail" with product "fullDetails" and number "selenium.flytxt@gmail.com"
+    #Then verify send trail to number with multiple creative from sheet "rechargeSMS" with product "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    #Below number(Env 23) should be unique for each environment,and that needs to be checked in Transporter logs
+    Then enter customer number for send trial verification "'emailconenctorid'"
+    Then click on search button
+    Then click on events tab
+    Then choose all events
+    Then click on apply button
+    Then verify trial message event
+    #Then verify trial message event details from sheet "rechargeSMS"
+    
     
     
     

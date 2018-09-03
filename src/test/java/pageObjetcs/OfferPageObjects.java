@@ -1955,7 +1955,8 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(sendTrialEmailSender);
 		jswait.loadClick(SelectTrialSMSID);
 		jswait.loadClick(sendTrialEmailRoute);
-		jswait.loadSendKeys(sendTrialEmailRoute, "SMPP Robi outbound");
+		//jswait.loadSendKeys(sendTrialEmailRoute, "SMPP Robi outbound");
+		jswait.loadSendKeys(sendTrialEmailRoute, "Email Route new");
 		//jswait.loadClick(SelectTrialEmailRoute);
 		jswait.loadClick(sendTrialwindow);
 		jswait.loadClick(sendTrialEmailSendButton);

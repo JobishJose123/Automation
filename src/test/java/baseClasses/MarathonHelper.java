@@ -42,4 +42,12 @@ public class MarathonHelper {
 		int n = Integer.parseInt(num[1]);
 		return n;
 	}
+	
+	public static void main(String args[]) throws IOException {
+		  
+		  MarathonHelper m = new MarathonHelper();
+		  System.out.println(m.getContainerStatus("192.168.150.27", "neon/apps/dk/tp-ws"));
+		  m.scaleContainer("192.168.150.27", "neon/apps/dk/tp-ws","0");
+		  System.out.println(m.getContainerStatus("192.168.150.27", "neon/apps/dk/tp-ws"));
+		 }
 }
