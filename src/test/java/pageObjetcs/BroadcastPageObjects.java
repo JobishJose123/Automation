@@ -283,6 +283,10 @@ public class BroadcastPageObjects extends Init {
      private WebElement offerDetailsBC;
 	 @FindBy(xpath = "//div//h4[contains(.,'Delivery Details')]")
      private WebElement deliveryDetailsBC;
+	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
+     private WebElement sendTimeData;
+	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
+     private WebElement sendTimeText;
 	 @FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'Delivering')]")
      private List <WebElement> deliveringStatusBC;
 	 @FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'Completed')]")
@@ -868,9 +872,15 @@ private WebElement recipientclick;
 //		}
 		
 		
-		
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."))).click();
 		clickBroadcastViewOption();
+		
+		clickBroadcastDeliveryDetails();
+		Thread.sleep(3000);
+		assertTrue(sendTimeData.isDisplayed());
+		assertTrue(sendTimeText.isDisplayed());
+		
 		
 	}
 	
@@ -972,6 +982,10 @@ private WebElement recipientclick;
 	}
 	public void clickBroadcastViewOption() throws InterruptedException {
 		jswait.loadClick(broadcastView);
+	}
+	
+	public void clickBroadcastDeliveryDetails() throws InterruptedException {
+		jswait.loadClick(deliveryDetailsBC);
 	}
 	
 	public void clickAbortBroadcastOption() throws InterruptedException {
