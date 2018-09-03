@@ -198,9 +198,6 @@ public class BroadcastPageObjects extends Init {
 	private WebElement createButtonBc;
 	@FindBy(xpath = "//paper-button[text()='Activate']")
 	private WebElement activateButtonBc;
-	@FindBy(xpath = "//paper-dialog[@id='validationDetails']//paper-button[contains(.,'Activate')]")
-	private WebElement activateViewDetailsButtonBc;
-	
 	@FindBy(xpath = "//paper-dialog[@id='broadcastSummary']//paper-button[text()='Save']")
 	private WebElement saveButtonBc;
 	@FindBy(xpath = ".//*[@id='confirmBox']//paper-button[2]")
@@ -271,6 +268,8 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement bcnotificationbeforerendertime1min ;
 	 @FindBy(xpath="//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'Selenium user')]")
 	 private WebElement bcnotificationrecipientclick;
+	 @FindBy(xpath="//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'System Administrator')]")
+	 private WebElement bcnotificationrecipientclick2;
 	 @FindBy(xpath="//bc-notifications-list//paper-button[contains(.,'Remove')]")
 	 private WebElement bcremovebutton ;
 	 @FindBy(xpath = "//paper-button[text()='Validate']")
@@ -283,10 +282,6 @@ public class BroadcastPageObjects extends Init {
      private WebElement offerDetailsBC;
 	 @FindBy(xpath = "//div//h4[contains(.,'Delivery Details')]")
      private WebElement deliveryDetailsBC;
-	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
-     private WebElement sendTimeData;
-	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
-     private WebElement sendTimeText;
 	 @FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'Delivering')]")
      private List <WebElement> deliveringStatusBC;
 	 @FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'Completed')]")
@@ -376,11 +371,11 @@ private WebElement recipientclick;
 	
 	//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
 	public void bcnotificationrecipient() throws InterruptedException {
-		jswait.loadSendKeys(bcnotificationrecipient, "Selenium user");
+//		jswait.loadSendKeys(bcnotificationrecipient, "Selenium user");
 		
-		//wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE);
+		wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE);
 		Thread.sleep(2000);
-		//jswait.loadClick(recipientclick);
+		jswait.loadClick(recipientclick);
 	}
 	
 	public void bcnotificationbeforesendingtime() throws InterruptedException {
@@ -405,6 +400,11 @@ private WebElement recipientclick;
 		Thread.sleep(2000);
 		jswait.loadClick(bcnotificationrecipientclick);
 	}
+	public void bcnotificationrecipientclick2() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick(bcnotificationrecipientclick2);
+	}
+	
 	public void bcremovebutton() throws InterruptedException {
 		Thread.sleep(2000);
 		jswait.loadClick(bcremovebutton);
@@ -846,44 +846,8 @@ private WebElement recipientclick;
 	
 	public void verifyActiveOptionForBC() throws InterruptedException {
 		
-//		List <WebElement> OptionIcon=driver.findElements(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."));
-//		int sizeOption=OptionIcon.size();
-//		while(sizeOption==0) {
-//			
-//			Thread.sleep(30000);
-//		}
-		
-		Thread.sleep(100000);
-		driver.navigate().refresh();
-		
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."))).click();
-		clickViewDetailsBroadcastOption();
-		assertTrue(activateViewDetailsButtonBc.isDisplayed());
 	}
-	
-	
-   public void verifyViewOptionForBC() throws InterruptedException {
-		
-//		List <WebElement> OptionIcon=driver.findElements(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."));
-//		int sizeOption=OptionIcon.size();
-//		while(sizeOption==0) {
-//			
-//			Thread.sleep(30000);
-//		}
-		
-		
-		Thread.sleep(3000);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."))).click();
-		clickBroadcastViewOption();
-		
-		clickBroadcastDeliveryDetails();
-		Thread.sleep(3000);
-		assertTrue(sendTimeData.isDisplayed());
-		assertTrue(sendTimeText.isDisplayed());
-		
-		
-	}
-	
 	
 	public void verifyValidateOptionForBC() throws Throwable {
 		
@@ -984,10 +948,6 @@ private WebElement recipientclick;
 		jswait.loadClick(broadcastView);
 	}
 	
-	public void clickBroadcastDeliveryDetails() throws InterruptedException {
-		jswait.loadClick(deliveryDetailsBC);
-	}
-	
 	public void clickAbortBroadcastOption() throws InterruptedException {
 		jswait.loadClick(broadcastAbort);
 	}
@@ -995,11 +955,6 @@ private WebElement recipientclick;
 	public void clickCopyBroadcastOption() throws InterruptedException {
 		jswait.loadClick(broadcastCopy);
 	}
-	
-	public void clickViewDetailsBroadcastOption() throws InterruptedException {
-		jswait.loadClick(broadcastViewDetails);
-	}
-	
 	
 	public void clickPauseBroadcastOption() throws InterruptedException {
 		jswait.loadClick(broadcastPause);
@@ -1872,6 +1827,34 @@ public void addNotificationuser() throws Exception{
 	bcnotificationatcompletion();
 	
 }
+
+
+public void addNotification2users() throws Exception{
+	
+	bcnotificationrecipient();
+	Thread.sleep(2000);
+	
+	bcnotificationrecipientclick();
+	bcnotificationbeforesendingtime();
+	bcnotificationbeforesendingtime1min();
+	bcnotificationbeforeRendertime();
+	Thread.sleep(2000);
+	bcnotificationbeforerendertime1min();
+	bcnotificationatreceivebroadcastmsg();
+	bcnotificationatcompletion();
+	Thread.sleep(2000);
+	bcNotificationsadd();
+	bcnotificationrecipientclick2();
+	bcnotificationbeforesendingtime();
+	bcnotificationbeforesendingtime1min();
+	Thread.sleep(2000);
+	bcnotificationbeforeRendertime();
+	bcnotificationbeforerendertime1min();
+	bcnotificationatreceivebroadcastmsg();
+	bcnotificationatcompletion();
+	
+}
+
 
 public void Verifyemailnotification(String sheet) throws Exception {
 	System.out.println("inside the verify email" );

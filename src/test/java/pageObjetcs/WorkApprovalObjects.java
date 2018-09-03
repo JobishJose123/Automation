@@ -788,6 +788,13 @@ catch(Exception e) {
 	
 	public void BCAprovalbyseleniumuserwithoutnotificationclick() throws InterruptedException {
 		Thread.sleep(2000);
+		eh.setExcelFile("bcInputData", "one-offBC");
+    	String name = eh.getCell(1, 0).toString();
+    	commonObjects.filterName(name);
+    	
+    	Thread.sleep(5000);
+    	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+		
 		
 		ApproveActivatebtn();
 		

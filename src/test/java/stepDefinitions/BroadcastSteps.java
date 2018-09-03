@@ -1,8 +1,6 @@
 package stepDefinitions;
 
 import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -19,7 +17,6 @@ import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
 import baseClasses.TimeoutImpl;
-import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -31,6 +28,7 @@ import pageObjetcs.CommonObjects;
 import pageObjetcs.LoginPageObjects;
 import pageObjetcs.OfferPageObjects;
 import pageObjetcs.TargetConditionObjects;
+import pageObjetcs.dkpageobjects;
 
 public class BroadcastSteps extends Init{
 	
@@ -44,6 +42,7 @@ public class BroadcastSteps extends Init{
 	OfferPageObjects offerPageObjects = new OfferPageObjects();
 	LoginPageObjects loginPage = new LoginPageObjects();
 	CommonObjects commonObjects = new CommonObjects();
+	dkpageobjects dkpageobjects=new dkpageobjects();
 	TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
@@ -225,8 +224,7 @@ public class BroadcastSteps extends Init{
 //      		  jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
 //      		    num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][41]"));
 //      		    builder.moveToElement(num1).click().build().perform();
-//      		    Thread.sleep(2000);   
-      		 
+//      		    Thread.sleep(2000);     
       	     if(am_pm==0)
       	    	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
       	     else
@@ -248,9 +246,6 @@ public class BroadcastSteps extends Init{
       	  Thread.sleep(1000);
       	//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
       	  WebElement num2 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
-      	 
-        	SEND_TIME=driver.findElement(By.xpath(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input")).getText();
-        	System.out.println("Send Time:"+SEND_TIME);
       	  builder.moveToElement(num2).click().build().perform();
       	  Thread.sleep(1000);
       	//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
@@ -365,8 +360,6 @@ public class BroadcastSteps extends Init{
      				    Thread.sleep(2000);
       				     jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
       			}
-      	
-    
 	}
 	
 	@Then("^verify selected campaign category name$")
@@ -1100,11 +1093,9 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
       	
  }
 	
-	@Then("^enter details for new broadcast with condition from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
-    public void create_new_broadcast_with_target_condition(String sheet, String offer,DataTable conditionTable) throws Throwable
+	@Then("^enter details for new broadcast with condition \"([^\"]*)\" from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
+    public void create_new_broadcast_with_target_condition(String condition, String sheet, String offer) throws Throwable
     {  
-		List<Map<String,String>> data = conditionTable.asMaps(String.class,String.class);
-		String condition = data.get(0).get("Condition");
     	Thread.sleep(3000);
     	ExcelHelper list = new ExcelHelper();
     	list.setExcelFile("registrationListInputData", "Sheet1");
@@ -2479,14 +2470,25 @@ public void verify_email_(String sheet) throws Throwable {
 	
 }
 
-
-
-@Then("^verify view option for bc$")
-public void verify_view_option_for_bc() throws Throwable {
+@Then("^navigate to dk to trigger bc$")
+public void naviagate_to_dk_to_trigger_bc() throws Throwable {
 	
-	broadcastPageObjects.verifyViewOptionForBC();
-
+	dkpageobjects.navigateTostreamingattribute();
+	dkpageobjects.createstreamingAttributes();
+	dkpageobjects.createstreamingAttributesname();
+	dkpageobjects.StreamingattributesDES();
+	dkpageobjects.Streamingattributessource();
+	Thread.sleep(3000);
+	dkpageobjects.selectDataFusionEngine();
+	dkpageobjects.labelvalue1();
+	dkpageobjects.labelvalue2();
+	dkpageobjects.streamingAttributeSavebtn();
+	
 }
+
+
+
+
 
 
 }
