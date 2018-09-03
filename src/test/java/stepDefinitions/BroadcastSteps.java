@@ -2470,6 +2470,16 @@ public void verify_email_(String sheet) throws Throwable {
 	
 }
 
+
+
+@Then("^verify view option for bc$")
+public void verify_view_option_for_bc() throws Throwable {
+	
+	broadcastPageObjects.verifyViewOptionForBC();
+
+}
+
+
 @Then("^navigate to dk to trigger bc$")
 public void naviagate_to_dk_to_trigger_bc() throws Throwable {
 	

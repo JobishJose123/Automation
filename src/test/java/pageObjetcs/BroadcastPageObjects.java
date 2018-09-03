@@ -297,6 +297,12 @@ public class BroadcastPageObjects extends Init {
 	 @FindBy(xpath="//paper-dialog[@id='addUserDialog']//paper-button[2][contains(.,Save)]")
 	 private WebElement PermissionSave;
 	 
+	 
+	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
+     private WebElement sendTimeData;
+	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
+     private WebElement sendTimeText;
+	 
 	
 	 
 	 @FindBy(xpath="//paper-radio-button[contains(.,'No Control Group')]")
@@ -854,6 +860,31 @@ private WebElement recipientclick;
 		assertTrue(statusValidation.isDisplayed());
 	}
 	
+	
+	
+	
+public void verifyViewOptionForBC() throws InterruptedException {
+		
+//		List <WebElement> OptionIcon=driver.findElements(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."));
+//		int sizeOption=OptionIcon.size();
+//		while(sizeOption==0) {
+//			
+//			Thread.sleep(30000);
+//		}
+		
+		
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."))).click();
+		clickBroadcastViewOption();
+		
+		clickBroadcastDeliveryDetails();
+		Thread.sleep(3000);
+		assertTrue(sendTimeData.isDisplayed());
+		assertTrue(sendTimeText.isDisplayed());
+		
+		
+	}
+	
 	 public void verifyValidatingCGStatusForBC() throws Throwable {
 		  
 		  
@@ -950,6 +981,10 @@ private WebElement recipientclick;
 	
 	public void clickAbortBroadcastOption() throws InterruptedException {
 		jswait.loadClick(broadcastAbort);
+	}
+	
+	public void clickBroadcastDeliveryDetails() throws InterruptedException {
+		jswait.loadClick(deliveryDetailsBC);
 	}
 	
 	public void clickCopyBroadcastOption() throws InterruptedException {

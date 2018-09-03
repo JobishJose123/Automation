@@ -618,3 +618,7 @@ Feature: campaign management
     Then activate bc
     Then verify view option for bc
     
+    
+    
+    
+    
