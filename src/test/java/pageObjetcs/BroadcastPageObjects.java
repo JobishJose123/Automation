@@ -857,6 +857,24 @@ private WebElement recipientclick;
 		assertTrue(activateViewDetailsButtonBc.isDisplayed());
 	}
 	
+	
+   public void verifyViewOptionForBC() throws InterruptedException {
+		
+//		List <WebElement> OptionIcon=driver.findElements(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."));
+//		int sizeOption=OptionIcon.size();
+//		while(sizeOption==0) {
+//			
+//			Thread.sleep(30000);
+//		}
+		
+		
+		
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."))).click();
+		clickBroadcastViewOption();
+		
+	}
+	
+	
 	public void verifyValidateOptionForBC() throws Throwable {
 		
 		assertTrue(statusValidation.isDisplayed());
@@ -967,6 +985,7 @@ private WebElement recipientclick;
 	public void clickViewDetailsBroadcastOption() throws InterruptedException {
 		jswait.loadClick(broadcastViewDetails);
 	}
+	
 	
 	public void clickPauseBroadcastOption() throws InterruptedException {
 		jswait.loadClick(broadcastPause);

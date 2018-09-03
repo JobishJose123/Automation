@@ -225,7 +225,8 @@ public class BroadcastSteps extends Init{
 //      		  jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
 //      		    num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][41]"));
 //      		    builder.moveToElement(num1).click().build().perform();
-//      		    Thread.sleep(2000);     
+//      		    Thread.sleep(2000);   
+      		 
       	     if(am_pm==0)
       	    	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
       	     else
@@ -247,6 +248,9 @@ public class BroadcastSteps extends Init{
       	  Thread.sleep(1000);
       	//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
       	  WebElement num2 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+      	 
+        	SEND_TIME=driver.findElement(By.xpath(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input")).getText();
+        	System.out.println("Send Time:"+SEND_TIME);
       	  builder.moveToElement(num2).click().build().perform();
       	  Thread.sleep(1000);
       	//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
@@ -361,6 +365,8 @@ public class BroadcastSteps extends Init{
      				    Thread.sleep(2000);
       				     jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
       			}
+      	
+    
 	}
 	
 	@Then("^verify selected campaign category name$")
@@ -2471,6 +2477,15 @@ public void verify_email_(String sheet) throws Throwable {
 	broadcastPageObjects.Verifyemailnotification(sheet);
 	
 	
+}
+
+
+
+@Then("^verify view option for bc$")
+public void verify_view_option_for_bc() throws Throwable {
+	
+	broadcastPageObjects.verifyViewOptionForBC();
+
 }
 
 
