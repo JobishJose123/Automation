@@ -1,6 +1,7 @@
 package pageObjetcs;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +27,7 @@ public class DataFusionEngine extends Init {
 	private static final Exception Exception = null;
 	CommonObjects commonObjects = new CommonObjects();
 	CampaignObjects CampaignObjects=new CampaignObjects();
+	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
 	
 	
 	JSWaiter jswait = new JSWaiter();
@@ -127,5 +129,16 @@ public class DataFusionEngine extends Init {
 		jswait.loadSendKeys(FileRegex, regex);
 	}
 	
+	public void copy(String jobname) throws InterruptedException, Exception, IOException{
+		//commonObjects.filterName(eh.getCellByColumnName("BC Name"));
+		commonObjects.filterName(jobname);
+		commonObjects.clickOptionsIcon();
+		broadcastPageObjects.clickCopyBroadcastOption();
+		String copiedjobname = jswait.getTextFormElement(".//label[contains(.,'Job Name')]/../input");
+		System.out.println("name" +copiedjobname );
+		jswait.loadClick(JobSave);
+		commonObjects.filterName(copiedjobname);
+		}
+		
 
 }

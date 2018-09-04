@@ -1,5 +1,7 @@
 package stepDefinitions;
 
+import java.io.IOException;
+
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -60,5 +62,16 @@ public class DataFusionEngineSteps extends Init {
 		DataFusionEngineObjects.FileOutput(fileoutput);
 		DataFusionEngineObjects.FileRegex(regex);
 		DataFusionEngineObjects.JobSave(output);
+	}
+	@Then("^copy the job from sheet \"([^\"]*)\"$")
+	public void ClickCopy(String sheet) throws IOException, Exception {
+		eh.setExcelFile("DKInput", sheet);
+		String JobName = (String) eh.getCell(1, 0);
+		DataFusionEngineObjects.copy(JobName);
+		Thread.sleep(3000);
+		//String partnerName= DataFusionEngineObjects.Hostname().getText();
+		
+		
+		
 	}
 }

@@ -20,4 +20,13 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
 
+@NX-4465
+@initBrowser
+Scenario: DK--->Verify the functionality of Copy option
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
+Then copy the job from sheet "Jobinput"
+
   
