@@ -2203,3 +2203,113 @@ Then wait until status of "Recurring" is "Complete"
     Then click on apply button
     Then verify trial message event
 
+ @NX-8868 @NX-5195 @initBrowser @closeBrowser
+    Scenario Outline: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8868 
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify send trail to numbers "9446506807" "9446506808" "9446506809" from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition from sheet "one-offBC" with "rechargeWap"
+    Then activate bc
+    Then wait until status of "one-offBC" is "Complete"
+    Then verify targeted and sent count of "one-offBC" with condition "customerWasSentTheTrialMessage"
+    Examples:
+    |Condition|
+    |customerWasSentTheTrialMessage|
+    
+
+     @NX-4936 @initBrowser @closeBrowser
+    Scenario: LGS- Verify Preferred Language dropdown values  -4936
+    Given login
+    Then navigate to configuration management
+    Then navigate to partners
+    Then edit a partner
+    Then navigate to broadcast settings page
+    Then verify preferred language field in broadcast settings
+    
+    
+    @NX-targetingCampaignCreation @initBrowser @closeBrowser
+    Scenario: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8856 
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    
+    
+     @NX-8856 @initBrowser
+    Scenario Outline: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8856 
+    Given login
+    Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition <Condition> from sheet "one-offBC" with "rechargeWap"
+      Then activate bc
+    Then wait until status of "one-offBC" is "Complete"
+    Then verify targeted and sent count of "one-offBC" with condition <Condition>
+          Examples:
+    |Condition|
+    |digitalPersonaGT15|
+    |customerDemographicsGT25|
+    |learnedBehaviourGT35|
+    |analyticalScoresGT45|
+    |digitalEngagementGT235|
+    |customerLocationInsightsGT5|
+
+    
+    @NX-4525 @initBrowser
+    Scenario Outline: Verify creating new reward type -4525 
+    Given login
+    Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
+      Then activate bc
+    Then wait until status of "one-offBC" is "Complete"
+    Then provide file for conversion

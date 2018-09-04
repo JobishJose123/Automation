@@ -1093,9 +1093,10 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
       	
  }
 	
-	@Then("^enter details for new broadcast with condition \"([^\"]*)\" from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
-    public void create_new_broadcast_with_target_condition(String condition, String sheet, String offer) throws Throwable
+	@Then("^enter details for new broadcast with condition (.*) from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
+    public void create_new_broadcast_with_target_condition(String condition,String sheet, String offer) throws Throwable
     {  
+		System.out.println(condition);
     	Thread.sleep(3000);
     	ExcelHelper list = new ExcelHelper();
     	list.setExcelFile("registrationListInputData", "Sheet1");
@@ -2149,7 +2150,7 @@ public void waitUntilChildBCStatus(String bcSheet, String statusExpected) throws
 	}
 	Assert.assertTrue("Invalid status of BC",statusOfBc.contains(statusExpected));
 }
-@Then("^verify targeted and sent count of \"([^\"]*)\" with condition \"([^\"]*)\"$")
+@Then("^verify targeted and sent count of \"([^\"]*)\" with condition (.*)$")
 public void verifyBCTargetedCount(String sheet,String condition) throws Throwable {
 	eh.setExcelFile("bcInputData", sheet);
 	String targetStr = broadcastPageObjects.getBcTargtedCount(eh.getCellByColumnName("BC Name"));
@@ -2194,14 +2195,14 @@ public void verifyBCTargetedCount(String sheet,String condition) throws Throwabl
 		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
 		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
 	}
-	else if(condition.contentEquals("customerDemographicsGT15")) {
-		targetStr = list.getCellByColumnName("customerDemographicsGT15");
+	else if(condition.contentEquals("customerDemographicsGT25")) {
+		targetStr = list.getCellByColumnName("customerDemographicsGT25");
 		int expected = Integer.parseInt(targetStr);
 		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
 		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
 	}
-	else if(condition.contentEquals("digitalPersonaGT25")) {
-		targetStr = list.getCellByColumnName("digitalPersonaGT25");
+	else if(condition.contentEquals("digitalPersonaGT15")) {
+		targetStr = list.getCellByColumnName("digitalPersonaGT15");
 		int expected = Integer.parseInt(targetStr);
 		Assert.assertEquals("expected count not equal to actual count",expected, targeted);
 		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);

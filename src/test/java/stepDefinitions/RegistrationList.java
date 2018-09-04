@@ -129,7 +129,7 @@ public class RegistrationList extends Init{
     	
     }
 	
-	public static int getdigitalPersonaGT25Count() throws IOException {
+	public static int getdigitalPersonaGT15Count() throws IOException {
     	ExcelHelper list = new ExcelHelper();
 		list.setExcelFile("registrationListInputData", "Sheet1");
 		String filename = (String) list.getCell(1, 0);
@@ -161,13 +161,13 @@ public class RegistrationList extends Init{
 				 device_idnot6666++;
 			 }
 		 System.out.println(device_idnot6666);
-		 System.out.println("digitalPersonaGT25");
-		 list.setCell(1, "digitalPersonaGT25",String.valueOf(device_idnot6666) );
+		 System.out.println("digitalPersonaGT15");
+		 list.setCell(1, "digitalPersonaGT15",String.valueOf(device_idnot6666) );
 		 return device_idnot6666;
     	
     }
 	
-	public static int getcustomerDemographicsGT15Count() throws IOException {
+	public static int getcustomerDemographicsGT25Count() throws IOException {
     	ExcelHelper list = new ExcelHelper();
 		list.setExcelFile("registrationListInputData", "Sheet1");
 		String filename = (String) list.getCell(1, 0);
@@ -199,8 +199,8 @@ public class RegistrationList extends Init{
 				 device_idnot6666++;
 			 }
 		 System.out.println(device_idnot6666);
-		 System.out.println("customerDemographicsGT15");
-		 list.setCell(1, "customerDemographicsGT15",String.valueOf(device_idnot6666) );
+		 System.out.println("customerDemographicsGT25");
+		 list.setCell(1, "customerDemographicsGT25",String.valueOf(device_idnot6666) );
 		 return device_idnot6666;
     	
     }
@@ -587,10 +587,10 @@ public class RegistrationList extends Init{
 		getcustomerLocationInsightsGT5Count();
 		getAgeTargetCount();
 		getanalyticalScoresGT45Count();
-		getcustomerDemographicsGT15Count();
+		getcustomerDemographicsGT25Count();
 		getdevice_idnot6666Count();
 		getlearnedBehaviourGT35Count();
-		getdigitalPersonaGT25Count();
+		getdigitalPersonaGT15Count();
 		getdigitalEngagementGT235Count();
 		
 	}

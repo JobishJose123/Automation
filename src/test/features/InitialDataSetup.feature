@@ -37,6 +37,7 @@ Then save DND list
 Then navigate to landing page
 
 @NX-3483
+@NX-createMandatoryExclusionList
 @initBrowser @closeBrowser
 Scenario: Calculate Targets - Mandatory Exclusion list 3483
 Given login

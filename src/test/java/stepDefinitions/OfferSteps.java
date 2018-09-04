@@ -792,19 +792,26 @@ public class OfferSteps extends Init {
 		Assert.assertTrue(deselectedCheck.size() == 2, "more than one track seleced as default");
 		
 	}
-	@Then("^create new reward type$")
-	public void createNewRewardType() throws Throwable {
+	public void createReward(String rewardName) throws InterruptedException {
 		rewardTypePage.clickCreateNewRewardTypeButton();
-		rewardTypePage.enterCreateRewardName("Selenium_reward");
+		rewardTypePage.enterCreateRewardName(rewardName);
 		rewardTypePage.enterCreateRewardDescription("desc_for reward created using sekenium");
 		rewardTypePage.selectFirstCreateRewardFlowClass();
 		rewardTypePage.clickCreateRewardSaveButton();
-		commonObjects.filterName("Selenium_reward");
-		rewardTypePage.expandReward("Selenium_reward");
+		commonObjects.filterName(rewardName);
+		rewardTypePage.expandReward(rewardName);
 		rewardTypePage.createRewardParameters("Text", "text", "TEXT","1");
 		rewardTypePage.createRewardParameters("Number", "number", "NUMBER","2");
 		rewardTypePage.createRewardParameters("Single Select", "singleSelect", "SINGLE_SELECT","3");
 		Thread.sleep(2000);
+	}
+	@Then("^create new reward type$")
+	public void createNewRewardType() throws Throwable {
+		createReward("Selenium_reward");
+	}
+	@Then("^create new reward type for test$")
+	public void createNewRewardTypeTest() throws Throwable {
+		createReward("Selenium_reward_test");
 	}
 	@Then("^verify created reward type$")
 	public void verifyCreatedRewardParameters() throws Throwable {
