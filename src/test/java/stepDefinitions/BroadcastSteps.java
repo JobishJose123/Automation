@@ -1,5 +1,8 @@
 package stepDefinitions;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -16,6 +19,7 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
+import baseClasses.ShellExecuter;
 import baseClasses.TimeoutImpl;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
@@ -179,7 +183,7 @@ public class BroadcastSteps extends Init{
     		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
     	}
     	else 
-    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+    		mn = String.format("%02d",rightNow.get(Calendar.MONTH)+1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
     	int hours = rightNow.get(Calendar.HOUR);
       	 int min = rightNow.get(Calendar.MINUTE);
@@ -2495,6 +2499,28 @@ public void naviagate_to_dk_to_trigger_bc() throws Throwable {
 	dkpageobjects.labelvalue2();
 	dkpageobjects.streamingAttributeSavebtn();
 	
+}
+
+@Then("^provide file for conversion$")
+public void provideFileForConversion() throws Throwable {
+	String csvFileData = "";
+	File conversionCSV = new File("ExcelFiles\\"+"conversion.csv");
+	BufferedReader br = null;
+	 String temp = "";
+	 int initial = 1;
+	 br = new BufferedReader(new FileReader(conversionCSV.getCanonicalPath()));
+	 while ((temp = br.readLine()) != null) {
+		 if(initial==0) {
+			 csvFileData+="\n";
+		 }
+		 initial=0;
+		 csvFileData+=temp;
+    }
+	 System.out.println(csvFileData);
+	 System.out.println("test");
+	 br.close();
+	ShellExecuter se = new ShellExecuter();
+	se.executeScript("cd /usr/local/flytxt/selenium/conversion; echo '"+csvFileData+"' >conversionJob.csv");
 }
 
 

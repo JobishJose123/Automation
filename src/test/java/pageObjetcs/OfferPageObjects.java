@@ -222,7 +222,7 @@ public class OfferPageObjects extends Init {
 	 private WebElement addTrackingRuleAddConditionButton;
 	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../input")
 	 private WebElement  addTrackingRuleSecondConditionParameterSelector;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'Age')]")
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'amount')]")
 	 private WebElement addTrackingRuleSecondConditionParameterSelectAge;
 	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../input")
 	 private WebElement addTrackingRuleSecondConditionConditionSelector;
@@ -232,7 +232,7 @@ public class OfferPageObjects extends Init {
 	 private WebElement addTrackingRuleSecondConditionConditionValue;
 	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Parameter')]/../input")
 	 private WebElement  addTrackingRuleConditionParameterSelector;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'Age')]")
+	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'amount')]")
 	 private WebElement addTrackingRuleConditionParameterSelectAge;
 	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../input")
 	 private WebElement addTrackingRuleConditionConditionSelector;
@@ -638,7 +638,7 @@ public class OfferPageObjects extends Init {
 		}
 	 public void checkRuleCreation(String ruleName) throws Exception {
 		 jswait.waitUntil("//span[text()='"+ruleName+"']");
-		 jswait.waitUntil("//span[contains(.,'Age is greater than 18, Age is greater than 19')]");
+		 jswait.waitUntil("//span[contains(.,'amount is greater than 18, amount is greater than 19')]");
 	 }
 	 public void createTrackRuleCondition() throws InterruptedException {
 		 clickAddTrackingRuleAddConditionButton();

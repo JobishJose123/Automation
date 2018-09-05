@@ -2293,7 +2293,7 @@ Then wait until status of "Recurring" is "Complete"
 
     
     @NX-4525 @initBrowser
-    Scenario Outline: Verify creating new reward type -4525 
+    Scenario: Verify creating new reward type -4525 
     Given login
     Then navigate to precision marketer
     #Then navigate to offer management

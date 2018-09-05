@@ -4,14 +4,14 @@
 Feature: data setup
 
 
-#@NX-createDKJob
-#@initBrowser @closeBrowser
-#Scenario: create DK job for registration list upload and DNC list upload
-#Given login
+@NX-createDKJob
+@initBrowser @closeBrowser
+Scenario: create DK job for registration list upload and DNC list upload
+Given login
 #Then random registration list is generated
 #Then random dnd list is generated
-#Then create dk jobs for list upload
-#Then move list to dk input for upload
+Then create dk jobs for list upload
+Then move list to dk input for upload
 
 #@NX-createRegList
 #@initBrowser @closeBrowser
@@ -55,4 +55,3 @@ Scenario: generate randrom registration list and upload
 Given login
 Then navigate to data foundation
 Then check and add profile fields
-Then check the upoaded list in ui
