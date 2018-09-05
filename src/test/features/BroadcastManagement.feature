@@ -2047,45 +2047,81 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then verify targeted and sent count of "one-offBC" with condition "digitalPersonaGT25"
     
       
-    @NX-2350 @NX-2347 @NX-2349 @NX-2348
+    @NX-2350   
     @initBrowser 
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Call to Action Buttons.
  Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeEmail" with product "fullDetails"
-    #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeEmail" offer to Offer Catalogue
-    #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then naigate to "campaignBC" campaign view broadcasts
-    #Then click create new broadcast button
-    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"	
-    #Then verify create BC Notification
-#		Then activate bc
-    #Then verify bc created from sheet "one-offBC"
-    #Then wait until status of "one-offBC" is "Complete"
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeEmail" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"	
+   	Then activate bc
+    Then verify bc created from sheet "one-offBC"
+    Then wait until status of "one-offBC" is "Complete"
     Then verify email from sheet "one-offBC"
+    Then pass next scenario based on this step
+    
+    @NX-2349
+      @initBrowser 
+Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Forms.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    @NX-2347
+        @initBrowser 
+Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Links.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+       @NX-2348
+        @initBrowser 
+Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Surveys.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    @NX-2397
+          @initBrowser 
+Scenario: Email Channel -->Verify the URL's inside the email content is getting tracked on click
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+        @NX-2382
+          @initBrowser 
+Scenario: Email Channel -->Verify the event Unsubscribed to emails is handled and differentiated or not.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+    @NX-2395
+             @initBrowser 
+Scenario: Verify attached images of different format in Email
+    Then check previous step and pass this
+    Then pass next scenario based on this step 
+    
+    
+    
     
     
     @NX-2416
