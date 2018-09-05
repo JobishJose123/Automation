@@ -160,13 +160,14 @@ public class EmailHandlergmail {
 //	            output.write(buffer, 0, bytesRead);
 //	         }
 //	      } 
-   else {
-	         Object o = p.getContent();
-	         if (o instanceof String) {
-	            System.out.println("This is a string");
-	            System.out.println("---------------------------");
-	            System.out.println((String) o);
+	      else {
+		         Object o = p.getContent();
+		         if (o instanceof String) {
+		            System.out.println("This is a string");
+		            System.out.println("---------------------------");
+		            System.out.println((String) o);
 	            emaildata.add(o.toString());
+	            
 	          
 	         } 
 //	         else if (o instanceof InputStream) {
