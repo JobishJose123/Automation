@@ -3,6 +3,7 @@ package pageObjetcs;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.Calendar;
 
 import org.openqa.selenium.By;
@@ -15,8 +16,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.util.Assert;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.RandomNameGenerator;
 
 public class CampaignObjects extends Init{
 	public CampaignObjects() {
@@ -24,11 +27,14 @@ public class CampaignObjects extends Init{
 	}
 	JSWaiter jswait = new JSWaiter();
 	CommonObjects commonObjects = new CommonObjects();
+	public ExcelHelper eM = new ExcelHelper(); 
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	public TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	
 	@FindBy(xpath=".//*[@id='mainContainer']/paper-menu/div/hexagon-icon[3]/label/..")
 	private WebElement lifeCycleMarketing;
+	@FindBy(xpath="//paper-item[contains(.,'Export to Location')]")
+	private WebElement optionsExportToLocation;
 	@FindBy(xpath="//paper-item[contains(.,'View Broadcasts')]")
 	private WebElement optionsViewBroadcasts;
 	@FindBy(xpath="//paper-button[contains(.,'Create New Broadcast')]")
@@ -56,6 +62,12 @@ public class CampaignObjects extends Init{
 	private WebElement templateCount;
 	
 	
+	@FindBy(xpath="//label[contains(.,'Please select a Campaign Category')]/../input")
+	private WebElement selectCategory;
+	@FindBy(xpath="//vaadin-combo-box-item[1]")
+	private WebElement firstCategory;
+	
+	
 	@FindBy(xpath=".//paper-card[@id='conditionCard']")
 	private WebElement conditionCard;
 	@FindBy(xpath=".//div[@class='offers flex style-scope campaign-details' and contains(.,'1 Number of offers')]")
@@ -72,6 +84,11 @@ public class CampaignObjects extends Init{
 	private WebElement campaignCategoriesButton;
 	@FindBy(xpath="//paper-button[contains(text(),'Create New Campaign Category')]")
 	private WebElement createNewCampaignCategoryButton;
+	@FindBy(xpath="//label[contains(.,'Please select a location')]/../input")
+	private WebElement SelectLocationField;
+	
+	
+	
 	@FindBy(xpath=".//*[@id='createNew']//label[contains(.,'Name')]/../input")
 	private WebElement categoryNameInput;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxPause']//paper-button[contains(.,'Yes')]")
@@ -97,8 +114,12 @@ public class CampaignObjects extends Init{
 	private WebElement confirmResumeYes;
 	@FindBy(xpath=".//*[@id='createNew']//paper-button[contains(.,'Save')]")
 	private WebElement campaignCategorySave;
+	@FindBy(xpath="//paper-button[contains(.,'Export')]")
+	private WebElement exportLocationButton;
 	@FindBy(xpath="//paper-tab/div[contains(.,'Campaign Templates')]/..")
 	private WebElement campaignTemplatesTab;
+	@FindBy(xpath="//paper-button[contains(.,'Import')]")
+	private WebElement importOption;
 	@FindBy(xpath="//paper-button[contains(.,'Create Campaign template')]")
 	private WebElement createCampaignTemplateButton;
 	@FindBy(xpath=".//span[contains(.,'Oops! This name already exists. Try another name for the new Campaign.')]")
@@ -128,6 +149,9 @@ public class CampaignObjects extends Init{
 	private WebElement campaignTemplateNameInput;
 	@FindBy(xpath = ".//paper-button[contains(.,'Use Template')]")
 	private WebElement useTemplateButton;
+	
+	@FindBy(xpath = "//label[contains(.,'Category')]/../input")
+	private WebElement categoryName;
 	
 	@FindBy(xpath = ".//paper-button[contains(.,'Add AND')]")
 	private WebElement addAndButton;
@@ -203,6 +227,9 @@ public class CampaignObjects extends Init{
 	public void clickOptionsViewBroadcasts() throws InterruptedException {
 		jswait.loadClick(optionsViewBroadcasts);
 	}
+	public void clickOptionsExportToLocation() throws InterruptedException {
+		jswait.loadClick(optionsExportToLocation);
+	}
 	public void optionsshowhistory() throws InterruptedException {
 		jswait.loadClick(optionsshowhistory);
 	}
@@ -214,6 +241,25 @@ public class CampaignObjects extends Init{
 	public void clickSaveCampaignTemplate() throws InterruptedException {
 		jswait.loadClick(saveCampaignTemplateButton);
 	}
+	
+	public void chooseCategory() throws InterruptedException, IOException {
+		
+	    jswait.loadClick(selectCategory);
+		String Category=firstCategory.getText();
+		System.out.println("Category: "+Category);
+		eM.setExcelFile("CategoryEnv2", "category");
+    	Thread.sleep(4000);
+    	System.out.println("151511: "+eM.getCell(1, 0));
+ 		eM.setCell(1, 0, Category);
+		jswait.loadClick(firstCategory);
+	
+	}
+	
+	public void clickImportOption() throws InterruptedException {
+		jswait.loadClick(importOption);
+		
+	}
+	
 	public void clickCampaignTemplateTab() throws InterruptedException {
 		jswait.loadClick(campaignTemplatesTab);
 		
@@ -221,11 +267,16 @@ public class CampaignObjects extends Init{
 	public void clickCreateCampaignTemplateButton() throws InterruptedException {
 		jswait.loadClick(createCampaignTemplateButton);
 	}
+	
+	
 	public void clickCampaignPauseButton() throws InterruptedException {
 		jswait.loadClick(campaignPauseButton);
 	}
 	public void clickCreateCategorySaveButton() throws InterruptedException {
 		jswait.loadClick(campaignCategorySave);
+	}
+	public void clickExportButton() throws InterruptedException {
+		jswait.loadClick(exportLocationButton);
 	}
 	public void clickEditCampaignOption() throws InterruptedException {
 		jswait.loadClick(editCampaign);
@@ -368,6 +419,12 @@ public class CampaignObjects extends Init{
    
 	public void enterCategoryName(String name) throws InterruptedException {
 		jswait.loadSendKeys(categoryNameInput, name);
+	}
+	
+	public void enterExportLocation(String name) throws InterruptedException {
+		jswait.loadSendKeys(SelectLocationField, name);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+name+"')]");
+	
 	}
 	
 	public void editCaampaignTemplateDetails(String name) throws InterruptedException {
@@ -527,8 +584,20 @@ public class CampaignObjects extends Init{
 		enterCategoryName(name);
 		clickCreateCategorySaveButton();
 	}
+	
+	public void chooseExportLocationForCampaign(String name) throws InterruptedException {
+		clickSelectLocationField();
+		enterExportLocation(name);
+		clickExportButton();
+	}
+	
+	
+	
 	public void clickCreateNewCampaignCategoryButton() throws InterruptedException {
 		jswait.loadClick(createNewCampaignCategoryButton);
+	}
+	public void clickSelectLocationField() throws InterruptedException {
+		jswait.loadClick(SelectLocationField);
 	}
 	public void navigateToCampaignCategories() throws InterruptedException {
 		jswait.loadClick(campaignCategoriesButton);
@@ -614,6 +683,21 @@ public class CampaignObjects extends Init{
 	public void clickOnUseTemplateButton() throws InterruptedException {
 		jswait.loadClick(useTemplateButton);
 	}
+	public void checkCategoryName(String name) throws Exception {
+		
+		String st=commonObjects.getTextFormTextField(categoryName);
+
+		//String st=categoryName.getText();
+		System.out.println("Cat: "+st);
+		Exception excep=new Exception("Match not Found");
+		if(st.equals(name))
+		{
+			System.out.println("Match Found");
+		}
+		else
+			throw excep;
+	
+	}
 	public void enterCampaignDeails(String name,String catalog) throws InterruptedException {
 		selectTypeInformational();
 		enterCampaignName(name);
@@ -638,6 +722,12 @@ public class CampaignObjects extends Init{
 	}
 	public void scrollToCampaignCategory(String name) throws Exception {
 		jswait.scrollAndClick("//campaign-category-chart", "//div[text()='"+name+"']");
+	}
+	
+	public void selectCategoryAndImport() throws Exception {
+		
+		chooseCategory();
+		clickImportOption();
 	}
 	
 	

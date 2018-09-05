@@ -434,6 +434,47 @@ public class CampaignManagement extends Init{
 	    	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
 			campaignObjects.clickOptionsViewBroadcasts();
 	    }
+	    
+	    
+	    
+	    @Then("^find template from sheet \"([^\"]*)\"$")
+	    public void findTemplateFromSheet(String sheet) throws Throwable
+	    {
+	    	eM.setExcelFile("campaignInputData", sheet);
+	    	String name = eM.getCell(1, 0).toString();
+	    	Thread.sleep(3000);
+	    	commonObjects.filterNameEnv(name);
+	    	
+//	    	Thread.sleep(30000);//NX-8537 bug wait
+	    	
+	    }
+	    
+	    
+	    @Then("^check category while click on use template$")
+	    public void checkCategoryWhileClickOnUseTemplate() throws Throwable {
+	    	
+	    	campaignObjects.clickOnUseTemplateButton();
+	    	eM.setExcelFile("CategoryEnv2", "category");
+	    	String name = eM.getCell(1, 0).toString();
+	    	campaignObjects.checkCategoryName(name);
+	    	
+	    	
+	    }
+	    
+	    
+	    
+	    @Then("^choose export to location option from sheet \"([^\"]*)\"$")
+	    public void chooseExportToLocationOption(String sheet) throws Throwable
+	    {
+	    	eM.setExcelFile("campaignInputData", sheet);
+	    	String name = eM.getCell(1, 0).toString();
+	    	commonObjects.filterName(name);
+	    	
+//	    	Thread.sleep(30000);//NX-8537 bug wait
+	    	
+	    	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+			campaignObjects.clickOptionsExportToLocation();
+	    }
 	    @Then("^click create new broadcast button$")
 	    public void create_new_broadcast_button() throws Throwable
 	    {
@@ -461,6 +502,9 @@ public class CampaignManagement extends Init{
 	    	String name = (String) eM.getCell(1, 0);
 	    	campaignObjects.scrollToCampaignCategory(name);
 	    }
+	    
+	    
+	    
 	    
 	    @Then("^navigate to templates tab$")
 	    public void navigate_to_templates_tab() throws Throwable {
@@ -790,12 +834,28 @@ public class CampaignManagement extends Init{
 		 		campaignObjects.createNewCampaignCategory(name);
 		    }
 		    
+		    
+		    @Then("^choose export location for campaign from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		    public void chooseExportLocationForCampaign(String sheet, String fileName) throws Throwable {
+		    	eM.setExcelFile(fileName,sheet);
+		    	String name = (String) eM.getCell(1, 0);
+		 		campaignObjects.chooseExportLocationForCampaign(name);
+		    }
+		    
 		    @Then("^navigate to campaign category from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
 		    public void navigate_to_campaign_category_from_sheet_of_file(String sheet, String fileName) throws Throwable {
 		    	eM.setExcelFile(fileName,sheet);
 		    	String name = (String) eM.getCell(1, 0);
 		    	campaignObjects.scrollToCampaignCategory(name);
 		    }
+		    
+		    
+		    @Then("^select a category and import$")
+		    public void selectCategoryAndImport() throws Throwable {
+		    	
+		    	campaignObjects.selectCategoryAndImport();
+		    }
+
 
 		    @Then("^click on export location option of template from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
 		    public void clickExportLocationOnCampaignTemplate(String sheet, String fileName) throws Throwable

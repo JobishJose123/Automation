@@ -28,12 +28,18 @@ public class CommonObjects extends Init {
 
 	@FindBy(xpath = "//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
 	private WebElement filterIcon;
+	@FindBy(xpath = "(//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..)[2]")
+	private WebElement filterIcon2;
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Name')]/..//input")
 	private WebElement filterFormName;
+	@FindBy(xpath = "(//*[@id='filterForm']//label[contains(.,'Name')]/..//input)[2]")
+	private WebElement filterFormName2;
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Partner')]/..//input")
 	private WebElement filterFormPartner;
 	@FindBy(xpath = "//*[@id='filterDialog']/div/paper-button[3]")
 	private WebElement filterFormApply;
+	@FindBy(xpath = "(//paper-button[contains(.,'Apply')])[2]")
+	private WebElement filterFormApply2;
 	@FindBy(xpath = "//*[@id='filterDialog']/div/paper-button[1]")
 	private WebElement filterFormCancel;
 	@FindBy(xpath = "//*[@id='filterDialog']/div/paper-button[2]")
@@ -111,6 +117,11 @@ public class CommonObjects extends Init {
 	public void clickFilterIcon() throws InterruptedException {
 		jswait.loadClick(filterIcon);
 	}
+	
+	public void clickFilterIcon2() throws InterruptedException {
+		jswait.loadClick(filterIcon2);
+	}
+
 
 	public void clickHelpIcon() throws InterruptedException {
 		jswait.loadClick(helpIcon);
@@ -199,9 +210,16 @@ public class CommonObjects extends Init {
 	public void clickFilterApplyButton() throws InterruptedException {
 		jswait.loadClick(filterFormApply);
 	}
+	
+	public void clickFilterApplyButton2() throws InterruptedException {
+		jswait.loadClick(filterFormApply2);
+	}
 
 	public void enterFilterFormname(String name) throws InterruptedException {
 		jswait.loadSendKeys(filterFormName, name);
+	}
+	public void enterFilterFormname2(String name) throws InterruptedException {
+		jswait.loadSendKeys(filterFormName2, name);
 	}
 	
 	public void enterFilterFormPartner(String name) throws InterruptedException {
@@ -224,6 +242,12 @@ public class CommonObjects extends Init {
 		clickFilterIcon();
 		enterFilterFormname(name);
 		clickFilterApplyButton();
+	}
+	
+	public void filterNameEnv(String name) throws InterruptedException {
+		clickFilterIcon2();
+		enterFilterFormname2(name);
+		clickFilterApplyButton2();
 	}
 	public void filterPartner(String name) throws InterruptedException {
 		clickFilterIcon();
