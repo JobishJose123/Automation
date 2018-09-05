@@ -763,6 +763,35 @@ public void waitForLoadMask() throws InterruptedException{
 		}
 		
 }
+public String getTextFormTextField(String xpath)
+		throws InterruptedException, UnsupportedFlavorException, IOException {
+	String text = "";
+	Toolkit toolkit = Toolkit.getDefaultToolkit();
+	Clipboard clipboard = toolkit.getSystemClipboard();
+	StringSelection stringSelection = new StringSelection("checkText");
+	clipboard.setContents(stringSelection, null);
+	driver.findElement(By.xpath(xpath)).sendKeys(Keys.CONTROL, "a");
+	Thread.sleep(1000);
+	driver.findElement(By.xpath(xpath)).sendKeys(Keys.CONTROL, "c");
+	String result = (String) clipboard.getData(DataFlavor.stringFlavor);
+	text = result;
+	return text;
+}
+
+public String getTextFormTextField(WebElement element)
+		throws InterruptedException, UnsupportedFlavorException, IOException {
+	String text = "";
+	Toolkit toolkit = Toolkit.getDefaultToolkit();
+	Clipboard clipboard = toolkit.getSystemClipboard();
+	StringSelection stringSelection = new StringSelection("checkText");
+	clipboard.setContents(stringSelection, null);
+	element.sendKeys(Keys.CONTROL, "a");
+	Thread.sleep(1000);
+	element.sendKeys(Keys.CONTROL, "c");
+	String result = (String) clipboard.getData(DataFlavor.stringFlavor);
+	text = result;
+	return text;
+}
 }
 		
 	

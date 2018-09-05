@@ -2328,7 +2328,7 @@ Then wait until status of "Recurring" is "Complete"
     |customerLocationInsightsGT5|
 
     
-    @NX-4525 @initBrowser
+       @NX-4525 @initBrowser
     Scenario: Verify creating new reward type -4525 
     Given login
     Then navigate to precision marketer
@@ -2340,12 +2340,17 @@ Then wait until status of "Recurring" is "Complete"
 #	  Then Navigate to Offer Catalogue
     #Then Create New Offer Catalogue from sheet "defaultCatalog"
     #Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
     #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
-      Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
-    Then provide file for conversion
+    #Then naigate to "campaignBC" campaign view broadcasts
+    #Then click create new broadcast button
+    #Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
+      #Then activate bc
+    #Then wait until status of "one-offBC" is "Complete"
+    #Then provide file for conversion
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "912255225505"
+    Then click on events tab
+    Then wait for comversion event

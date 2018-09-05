@@ -2522,8 +2522,47 @@ public void provideFileForConversion() throws Throwable {
 	ShellExecuter se = new ShellExecuter();
 	se.executeScript("cd /usr/local/flytxt/selenium/conversion; echo '"+csvFileData+"' >conversionJob.csv");
 }
-
-
+public String getLastConversionTime() {
+	try {
+		jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[2]");
+		String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[2]")).getText();
+		return latestTime;
+	}catch (Exception e) {
+		return "noConversionFound";
+	}
+}
+@Then("^wait for comversion event$")
+//consumer-events//iron-list//data-table-row  
+public void wait_for_comversion_event() throws Throwable {
+	
+	jswait.loadClick("//div[text()='Select Event Types']/..");
+	Thread.sleep(1000);
+	jswait.loadClick("//div[text()='Select Event Types']/..");
+	Thread.sleep(1000);
+	jswait.loadClick("//div[text()='Conversion']/..");
+	Thread.sleep(1000);
+	jswait.loadClick("//iron-icon[@title='Apply']");
+	Thread.sleep(2000);
+	TimeoutImpl t = new TimeoutImpl();
+	t.startTimer();
+	
+	while(getLastConversionTime().contains("noConversionFound")&& t.checkTimerMin(15)) {
+		System.out.println(getLastConversionTime());
+		Thread.sleep(3000);
+	}
+	
+//	commonObjects.filterName(eh.getCellByColumnName("BC Name"));
+//	commonObjects.toggleAutoRefresh();
+//	String statusOfBc = broadcastPageObjects.getTopBcStatus();
+//	TimeoutImpl t = new TimeoutImpl();
+//	t.startTimer();
+//	while(!statusOfBc.contains(statusExpected)&& t.checkTimerMin(15)) {
+//		statusOfBc = broadcastPageObjects.getTopBcStatus();
+//		System.out.println(statusOfBc);
+//		Thread.sleep(3000);
+//	}
+//	Assert.assertTrue("Invalid status of BC",statusOfBc.contains(statusExpected));
+}
 
 
 
