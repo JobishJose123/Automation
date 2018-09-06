@@ -13,7 +13,7 @@ Feature: DK
 ## (Comments)
 #Sample Feature Definition Template
 @NX-4468
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: DK--->Verify the functionality of Delete option
 Given login
 Then navigate to data foundation
@@ -21,12 +21,21 @@ Then click Data Fusion Engine
 Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
 
 @NX-4465
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: DK--->Verify the functionality of Copy option
 Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
 Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
 Then copy the job from sheet "Jobinput"
+
+@NX-4466
+@initBrowser @closeBrowser
+Scenario: DK--->Verify the functionality of Copy option
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
+Then delete the job from sheet "Jobinput"
 
   
