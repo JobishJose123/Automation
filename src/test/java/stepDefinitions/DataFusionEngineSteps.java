@@ -19,8 +19,7 @@ import pageObjetcs.TargetConditionObjects;
 import pageObjetcs.WorkApprovalObjects;
 
 public class DataFusionEngineSteps extends Init {
-	final String BASE_LIST = "l";
-
+	
 	JSWaiter jswait = new JSWaiter();
 
 	public ExcelHelper eM = new ExcelHelper();

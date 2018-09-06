@@ -130,14 +130,17 @@ public class DataFusionEngine extends Init {
 	}
 	
 	public void copy(String jobname) throws InterruptedException, Exception, IOException{
-		//commonObjects.filterName(eh.getCellByColumnName("BC Name"));
 		commonObjects.filterName(jobname);
 		commonObjects.clickOptionsIcon();
 		broadcastPageObjects.clickCopyBroadcastOption();
-		String copiedjobname = jswait.getTextFormElement(".//label[contains(.,'Job Name')]/../input");
+		Thread.sleep(2000);
+		String copiedjobname = commonObjects.getTextFormTextField(".//label[contains(.,'Job Name')]/../input");
 		System.out.println("name" +copiedjobname );
 		jswait.loadClick(JobSave);
 		commonObjects.filterName(copiedjobname);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+copiedjobname+"')]"));
+		Assert.assertTrue("Copied job not found", element.isDisplayed());
 		}
 		
 
