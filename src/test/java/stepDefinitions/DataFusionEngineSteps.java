@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import java.io.IOException;
+import java.util.Random;
 
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -49,6 +50,11 @@ public class DataFusionEngineSteps extends Init {
 		Thread.sleep(3000);
 		//DataFusionEngineObjects.ClickAddJobbutton();
 		eh.setExcelFile("DKInput", sheet);
+		Random rn = new Random();
+		int n = rn.nextInt(5000) + 1;
+		String name = (String) eh.getCell(1, 0);
+		name = name.replaceAll("[0-9]", "") + n;
+		eh.setCell(1, 0, name);
 		String JobName = (String) eh.getCell(1, 0);
 		String fileinput = (String) eh.getCell(1, 3);
 		String fileoutput = (String) eh.getCell(1, 4);
