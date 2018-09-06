@@ -210,6 +210,8 @@ public class BroadcastPageObjects extends Init {
 	private WebElement recurringBcEndAtRadio;
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[1]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGrid;
+	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[1]/vaadin-grid-table-cell[5]/vaadin-grid-cell-content")
+	private WebElement topBcTargetedGrid;
 	@FindBy(xpath = ".//label[contains(.,'Start Date/Time')]")
 	private WebElement StartBroadcastDateTimeField;
 	
@@ -534,6 +536,11 @@ private WebElement recipientclick;
 	public String getTopBcStatus() throws InterruptedException {
 		jswait.waitUntil(topBcStatusGrid);
 		String status = topBcStatusGrid.getText();
+		return status;
+	}
+	public String getTopBcTargeted() throws InterruptedException {
+		jswait.waitUntil(topBcTargetedGrid);
+		String status = topBcTargetedGrid.getText();
 		return status;
 	}
 	

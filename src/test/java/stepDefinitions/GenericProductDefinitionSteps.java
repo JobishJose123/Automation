@@ -395,7 +395,7 @@ public class GenericProductDefinitionSteps extends Init{
 	public void verify_offer_details_in_create_broadcast_using_offer_and_product_and_bc(String offer, String product) throws Throwable {
 		eh.setExcelFile("offerInputData",offer);
 	    BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
-	    broadcastPageObjects.enterBroadcastBasicDetails("tempBC");
+	    broadcastPageObjects.enterBroadcastBasicDetails("tempBC",INVENTORY_UNLIMITED);
 	    broadcastPageObjects.clickProceedButton();
 	    broadcastPageObjects.selectBaseList(BASE_LIST);
 	    broadcastPageObjects.clickProceedButton();

@@ -2240,7 +2240,7 @@ Then wait until status of "Recurring" is "Complete"
     Then verify trial message event
 
  @NX-8868 @NX-5195 @initBrowser @closeBrowser
-    Scenario Outline: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8868 
+    Scenario: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8868 
     Given login
     When navigate to precision marketer
     Then navigate to offer management
@@ -2261,13 +2261,10 @@ Then wait until status of "Recurring" is "Complete"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition from sheet "one-offBC" with "rechargeWap"
+    Then enter details for new broadcast with condition customerWasSentTheTrialMessage from sheet "one-offBC" with "rechargeWap"
     Then activate bc
     Then wait until status of "one-offBC" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition "customerWasSentTheTrialMessage"
-    Examples:
-    |Condition|
-    |customerWasSentTheTrialMessage|
     
 
      @NX-4936 @initBrowser @closeBrowser
@@ -2354,6 +2351,8 @@ Then wait until status of "Recurring" is "Complete"
     Then search msisdn "912255225505"
     Then click on events tab
     Then wait for comversion event
+    Then remove file for conversion
+    Then wait for reward in consumer profile
     
       @NX-2355 @initBrowser
   Scenario: Email Channel -->Verify whether the Email is being sent to all the targeted consumers.
@@ -2419,3 +2418,28 @@ Then wait until status of "Recurring" is "Complete"
     Then verify bc created from sheet "one-offBC"
     #Then wait until status of "one-offBC" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition Nacklist
+    
+    @NX-3569 @initBrowser
+    Scenario: Calculate Targets - Verifying frequency exclusion count -3569 
+    Given login
+    Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap" to check frequency exclusion
+      Then activate bc
+    Then wait until status of "one-offBC" is "Complete"
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap" to check frequency exclusion
+      Then activate bc
+    Then wait until status of "one-offBC" is "Complete"
+    Then verify frequency exclusion
