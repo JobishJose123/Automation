@@ -920,6 +920,20 @@ public class CampaignManagement extends Init{
 		 		campaignObjects.createCampaign(name, catalog);
 
 		    }
+		    
+		    @Then("^create new campaign with unique KPI from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+		    public void create_new_campaign_with_unique_KPI_from_file(String sheet, String fileName) throws Throwable
+		    {
+		    	Thread.sleep(4000);
+		    	eM.setExcelFile(fileName, sheet);
+		    	Thread.sleep(4000);
+		 		String name = RandomNameGenerator.getRandomName((String) eM.getCell(1, 0));
+		 		String catalog = (String) eM.getCell(2, 0);
+		 		eM.setCell(1, 0, name);
+		 		campaignObjects.clickCreateNewCampaignButton();
+		 		campaignObjects.createCampaignWithUniqueKPI(name, catalog);
+
+		    }
 			 @Then("^resume campaign from sheet \"([^\"]*)\"$")
 			    public void resumeCampaign(String sheet) throws Throwable
 			    {

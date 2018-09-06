@@ -55,6 +55,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement EventFieldSelector;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldAge;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD_UNIQUE+"')]")
+	private WebElement CustomerInsightFieldAgeUnique;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+SITE_ID_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldSite;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+LOCATION_PROFILE_FIELD+"')]")
@@ -284,6 +286,18 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionTypeCustomerProfileInfo);
 			jswait.loadClick(CustomerInsightFieldSelector);
 			jswait.loadClick(CustomerInsightFieldAge);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"18");
+			jswait.loadClick(targetConditionSave);
+	 }
+	 
+	 public void clickBasicTargetConditionWithUniqueKPI() throws InterruptedException {
+//		 	jswait.loadClick(createConditionButton);
+		    jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(CustomerInsightFieldAgeUnique);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"18");
