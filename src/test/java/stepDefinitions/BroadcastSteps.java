@@ -377,8 +377,8 @@ public class BroadcastSteps extends Init{
 	}
 	  @Then("^check create new offer in bc creation$")
     public void checkCreateNewOfferOfCreateNewBc() throws Throwable
-    {
-		broadcastPageObjects.enterBroadcastBasicDetails("new Offer");
+    {	
+		broadcastPageObjects.enterBroadcastBasicDetails("new Offer",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
 		broadcastPageObjects.clickProceedButton();
@@ -471,7 +471,7 @@ public class BroadcastSteps extends Init{
 	@Then("^verify textual editor for target condition$")
     public void verifyTextualEditorOfTargetCondition() throws Throwable
     {  
-		broadcastPageObjects.enterBroadcastBasicDetails("check");
+		broadcastPageObjects.enterBroadcastBasicDetails("check",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
 		commonObjects.clickOptionsIcon();
@@ -481,7 +481,7 @@ public class BroadcastSteps extends Init{
 	@Then("^verify delete option of target condition$")
     public void verifyDeleteOptionOfTargetCondition() throws Throwable
     {  
-		broadcastPageObjects.enterBroadcastBasicDetails("check");
+		broadcastPageObjects.enterBroadcastBasicDetails("check",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
 		commonObjects.clickOptionsIcon();
@@ -491,7 +491,7 @@ public class BroadcastSteps extends Init{
 	@Then("^verify proceed button without adding target condition$")
     public void verifyProceedWithoutTargetCondition() throws Throwable
     {  
-		broadcastPageObjects.enterBroadcastBasicDetails("check");
+		broadcastPageObjects.enterBroadcastBasicDetails("check",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
 		broadcastPageObjects.clickProceedButton();
@@ -500,7 +500,7 @@ public class BroadcastSteps extends Init{
 	@Then("^verify choose offer window after selecting offer$")
     public void verifyChooseOfferWindowAfterSelectingOffer() throws Throwable
     {  
-		broadcastPageObjects.enterBroadcastBasicDetails("check");
+		broadcastPageObjects.enterBroadcastBasicDetails("check",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
 		broadcastPageObjects.clickProceedButton();
@@ -513,7 +513,7 @@ public class BroadcastSteps extends Init{
 	@Then("^verify selecting channel and sender$")
     public void verifySelectingChannelAndSender() throws Throwable
     {  
-		broadcastPageObjects.enterBroadcastBasicDetails("check");
+		broadcastPageObjects.enterBroadcastBasicDetails("check",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
 		broadcastPageObjects.clickProceedButton();
@@ -528,7 +528,7 @@ public class BroadcastSteps extends Init{
 	@Then("^verify navigating to delivery tab without selecting channel and sender$")
     public void verifyNavigatingToDeliveryTab() throws Throwable
     {  
-		broadcastPageObjects.enterBroadcastBasicDetails("check");
+		broadcastPageObjects.enterBroadcastBasicDetails("check",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
 		broadcastPageObjects.clickProceedButton();
@@ -549,20 +549,20 @@ public class BroadcastSteps extends Init{
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.enterBroadcastPurpose("purpose");
 		broadcastPageObjects.clickProceedButton();
-		broadcastPageObjects.selectInventoryUnlimited();
+		broadcastPageObjects.selectInventory(INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
     }
 	@Then("^verify proceeding to target tab$")
     public void verifyProceedingToTab() throws Throwable
     {  
-		broadcastPageObjects.enterBroadcastBasicDetails("ProceedCheck");
+		broadcastPageObjects.enterBroadcastBasicDetails("ProceedCheck",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
     }
 	@Then("^verify headers after proceeding to next target tab$")
     public void verifyHeaderAfterProceedingToNextTab() throws Throwable
     {  
-		broadcastPageObjects.enterBroadcastBasicDetails("ProceedCheck");
+		broadcastPageObjects.enterBroadcastBasicDetails("ProceedCheck",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.checkDetailsTabHeaderColor();
     }
@@ -601,7 +601,7 @@ public class BroadcastSteps extends Init{
       	 //schedule for later
       		 day++;
       	 
-		broadcastPageObjects.enterBroadcastBasicDetails("schedle");
+		broadcastPageObjects.enterBroadcastBasicDetails("schedle",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList("list");
 		broadcastPageObjects.clickProceedButton();
@@ -635,7 +635,7 @@ public class BroadcastSteps extends Init{
 	@Then("^verify target duplicate function in new broadcast$")
     public void targetduplicationbc() throws Throwable
     {  
-		broadcastPageObjects.enterBroadcastBasicDetails("targetduplication");
+		broadcastPageObjects.enterBroadcastBasicDetails("targetduplication",INVENTORY_UNLIMITED);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.selectBaseList(BASE_LIST);
 		broadcastPageObjects.clickcreateTargetCondition();
@@ -1141,7 +1141,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
       		 day++;
       	 }
       	 Actions builder = new Actions(driver);
-      	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer,condition);
+      	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer,condition, INVENTORY_UNLIMITED);
       	
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
@@ -1151,7 +1151,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
  }
 	@Then("^verify all operations of target using visual editor$")
 	public void verify_all_operations_of_target_using_visual_editor() throws Throwable {
-	    broadcastPageObjects.enterBroadcastBasicDetails("ForTargetCondition");
+	    broadcastPageObjects.enterBroadcastBasicDetails("ForTargetCondition",INVENTORY_UNLIMITED);
 	    broadcastPageObjects.clickProceedButton();
 	    broadcastPageObjects.selectBaseList("list");
 	    
@@ -1165,7 +1165,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 	}
 	@Then("^navigate to broadcast target condition$")
 	public void navigate_to_broadcast_target_condition() throws Throwable {
-	    broadcastPageObjects.enterBroadcastBasicDetails("TargetConditionCheck");
+	    broadcastPageObjects.enterBroadcastBasicDetails("TargetConditionCheck",INVENTORY_UNLIMITED);
 	    broadcastPageObjects.clickProceedButton();
 	    broadcastPageObjects.selectBaseList(BASE_LIST);
 //	    commonObjects.clickTargetConditionViewToggleIcon();

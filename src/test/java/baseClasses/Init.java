@@ -39,6 +39,7 @@ public static Logger log;
 	}
 	//CONFIGURATIONS
 	public Date dateForCompare = new Date();
+	public final String INVENTORY_ONE_PER_DAY = "sel_one_per_day";
 	public final String BASE_LIST = "selenium_list";
 	public final String PREFERRED_LANGUAGE_PROFILE_FIELD = "Preferred Language_q11";
 	public final String SITE_ID_PROFILE_FIELD = "Device ID_q11";
@@ -69,7 +70,7 @@ public static Logger log;
 	public final String AGE_DYNAMIC_VARIABLE = "Age_Q990";
 	public final String NAME_PROFILE_FIELD = "First Name_q11";
 	public final String SELENIUM_PARTNER = "selenium_partner";
-//	public final String SELENIUM_USER = "selenium_partner";
+	public final String INVENTORY_UNLIMITED = "Unlimited";
 
 	
 }

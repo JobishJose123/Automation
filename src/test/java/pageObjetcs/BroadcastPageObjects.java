@@ -773,7 +773,7 @@ private WebElement recipientclick;
 	
 	
 	public void createBCAndSelectDNCListForPartnerLevelCG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -943,9 +943,9 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		jswait.loadClick(labelInformation);
 	}
 
-	public void selectInventoryUnlimited() throws InterruptedException {
-		jswait.loadSendKeys(inventorySelector, "Unlimited");
-		jswait.loadClick(inventoryUnlimited);
+	public void selectInventory(String inventory) throws InterruptedException {
+		jswait.loadSendKeys(inventorySelector, inventory);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+inventory+"')]");
 	}
 	
 	
@@ -1110,11 +1110,11 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		jswait.loadClick(routeFulfillmentEmail);
 	}
 
-	public void enterBroadcastBasicDetails(String name) throws InterruptedException {
+	public void enterBroadcastBasicDetails(String name,String inventory) throws InterruptedException {
 		enterBroadcastName(name);
 		enterBroadcastPurpose("Purpose of BC is NOTHING");
 		selectLabelCrossell();		
-		selectInventoryUnlimited();
+		selectInventory(inventory);
 //		selectROI();
 	}
 	
@@ -1191,7 +1191,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	public void createBC(String name, String bc_type, String baseList, String offer) throws InterruptedException {
 		ExcelHelper offerExcel = new ExcelHelper(); 
     	offerExcel.setExcelFile("offerInputData", offer);
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1232,10 +1232,10 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		clickProceedButton();
 	}
 	
-	public void createBC(String name, String bc_type, String baseList, String offer,String condition) throws InterruptedException {
+	public void createBC(String name, String bc_type, String baseList, String offer,String condition,String inventory) throws InterruptedException {
 		ExcelHelper offerExcel = new ExcelHelper(); 
     	offerExcel.setExcelFile("offerInputData", offer);
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,inventory);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1292,7 +1292,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 	
 	public void createBCAndConfigurCG_TG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1330,7 +1330,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 	
 	public void createBCAndCalculateCG_TG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1368,7 +1368,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 	
 	public void createBCAndSelectDNCList(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1408,7 +1408,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 	
 	public void createBCAndSelectDNCListForSeedingBC(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1447,7 +1447,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 	
 	public void createBCAndSelectDNCList_AndConfigureCG_TG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1512,7 +1512,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	public void verifySelectionFields() throws InterruptedException, UnsupportedFlavorException, IOException {
 		selectLabelCrossell();
 		selectLabelInformation();
-		selectInventoryUnlimited();
+		selectInventory(INVENTORY_UNLIMITED);
 		selectInventory1();
 		selectTrigger1();
 		selectTrigger2();
@@ -1527,7 +1527,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 	
 	public void createBCAndVerifyStartBroadcastAtOption(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1568,7 +1568,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 	
 	public void createBCWithoutTargetCondition(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1618,7 +1618,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 	
 	public void createBCWith1MSubscribersAndConfigurCG_TG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-		enterBroadcastBasicDetails(name);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1785,7 +1785,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	   
 	   
 	   public void createBCWith1MSubscribersAndConfigurPartnerLevelCG(String name, String bc_type, String baseList, String offer) throws InterruptedException {
-			enterBroadcastBasicDetails(name);
+			enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
 			if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 				System.out.println("inside triggerable");
 				jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");

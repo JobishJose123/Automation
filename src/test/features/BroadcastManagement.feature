@@ -2340,19 +2340,40 @@ Then wait until status of "Recurring" is "Complete"
 #	  Then Navigate to Offer Catalogue
     #Then Create New Offer Catalogue from sheet "defaultCatalog"
     #Then Add "rechargeWAP" offer to Offer Catalogue
-    #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
     #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then naigate to "campaignBC" campaign view broadcasts
-    #Then click create new broadcast button
-    #Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
-      #Then activate bc
-    #Then wait until status of "one-offBC" is "Complete"
-    #Then provide file for conversion
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
+      Then activate bc
+    Then wait until status of "one-offBC" is "Complete"
+    Then provide file for conversion
     Then navigate to reports
     Then navigate to customer profile
     Then search msisdn "913366552200"
     Then click on events tab
-    #Then wait for comversion event
-    #Then remove file for conversion
+    Then wait for comversion event
+    Then remove file for conversion
     Then wait for reward in consumer profile
+    
+     @NX-3569 @initBrowser
+    Scenario: Calculate Targets - Verifying frequency exclusion count -4525 
+    Given login
+    Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
+      Then activate bc
+    Then wait until status of "one-offBC" is "Complete"
