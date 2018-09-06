@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -37,7 +38,7 @@ public static Logger log;
 		p.setPropertyFile("config.properties");	
 	}
 	//CONFIGURATIONS
-	
+	public Date dateForCompare = new Date();
 	public final String BASE_LIST = "selenium_list";
 	public final String PREFERRED_LANGUAGE_PROFILE_FIELD = "Preferred Language_q11";
 	public final String SITE_ID_PROFILE_FIELD = "Device ID_q11";

@@ -2351,6 +2351,8 @@ Then wait until status of "Recurring" is "Complete"
     #Then provide file for conversion
     Then navigate to reports
     Then navigate to customer profile
-    Then search msisdn "912255225505"
+    Then search msisdn "913366552200"
     Then click on events tab
-    Then wait for comversion event
+    #Then wait for comversion event
+    #Then remove file for conversion
+    Then wait for reward in consumer profile

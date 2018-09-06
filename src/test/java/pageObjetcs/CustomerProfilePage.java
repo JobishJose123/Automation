@@ -220,6 +220,14 @@ public class CustomerProfilePage extends Init{
 	
 	
 	
+	@FindBy(xpath="//div[text()='Select Event Types']/..")
+	private WebElement selectEventTypesCheckbox;
+	@FindBy(xpath="//div[text()='Conversion']/..")
+	private WebElement conversionEventCheckBox;
+	@FindBy(xpath="//div[text()='Fulfillment Success']/..")
+	private WebElement fulfillmentEventCheckBox;
+	@FindBy(xpath="//iron-icon[@title='Apply']")
+	private WebElement selectEventApplyButton;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -230,6 +238,32 @@ public class CustomerProfilePage extends Init{
 //	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+	public void clickEventTypesCheckBox() throws InterruptedException {
+		jswait.loadClick(selectEventTypesCheckbox);
+	}
+	public void clickConversionEventCheckBox() throws InterruptedException {
+		jswait.loadClick(conversionEventCheckBox);
+	}
+	public void clickFulfillmentEventCheckBox() throws InterruptedException {
+		jswait.loadClick(fulfillmentEventCheckBox);
+	}
+	public void clickSelectEventApplyButton() throws InterruptedException {
+		jswait.loadClick(selectEventApplyButton);
+	}
 	public void clickSearchButton() throws InterruptedException {
 		jswait.loadClick(customerProfileSearchButton);
 	}

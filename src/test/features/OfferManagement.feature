@@ -573,10 +573,6 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     @NX-7307 @initBrowser  @closeBrowser
     Scenario: Verify whether Reward attributes have searchable drop downs NX-7307
     Given login
-    Then navigate to configuration management
-    Then navigate to rewards
-    Then create new reward type
-    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products

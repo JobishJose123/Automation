@@ -55,3 +55,11 @@ Scenario: generate randrom registration list and upload
 Given login
 Then navigate to data foundation
 Then check and add profile fields
+
+ @NX-createDefaultReward @initBrowser  @closeBrowser
+    Scenario: Verify whether Reward attributes have searchable drop downs NX-7307
+    Given login
+    Then navigate to configuration management
+    Then navigate to rewards
+    Then create new reward type
+    Then navigate to landing page

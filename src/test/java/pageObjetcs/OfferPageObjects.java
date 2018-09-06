@@ -85,7 +85,7 @@ public class OfferPageObjects extends Init {
 //	@FindBy(xpath = ".//rewards-container//paper-button[contains(.,'Add')]")
 //	private WebElement rewardAddButton;
 	
-	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item")
+	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'Selenium_reward')]")
 	private WebElement rewardTypeAnySelector;
 	@FindBy(xpath = "//label[contains(@class,'style-scope paper-input') and contains(text(),'Source')]/..//input")
 	private WebElement trackSourceSelector;
@@ -383,8 +383,8 @@ public class OfferPageObjects extends Init {
 	 @FindBy(xpath="//define-creative[2]/paper-card/form[@id='form']/div/div[3]/div/div/div[1]/paper-icon-button[@role='button']/iron-icon[@id='icon']")
 	 private WebElement CreativeDeleteButton;
 	 
-//	 @FindBy(xpath="")
-//	 private WebElement ;
+	 @FindBy(xpath="//rewards-container[2]//paper-button")
+	 private WebElement rewardFirstRuleAdButton;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -463,6 +463,9 @@ public class OfferPageObjects extends Init {
 	 
 	 public void clickSetAsDefaultSecondTrack() throws InterruptedException {
 			jswait.loadClick(setAsDefaultSecondTrack);
+		}
+	 public void clickRewardFirstRuleAdButton() throws InterruptedException {
+			jswait.loadClick(rewardFirstRuleAdButton);
 		}
 	 public void clickSendTrialButton() throws InterruptedException {
 			jswait.loadClick(sendTrialButton);
@@ -1391,6 +1394,13 @@ public class OfferPageObjects extends Init {
 		if (eh.getCell(1, 2).toString().contains("Seeding")) {
 			clickRewardTypeInputField();
 			clickRewardTypeAny();
+		}
+		else {
+			clickRewardFirstRuleAdButton();
+			clickRewardTypeInputField();
+			clickRewardTypeAny();
+			enterSuccessMessage("Success from Selenium");
+			enterFailureMessage("Failure from Selenium");
 		}
 
 	}

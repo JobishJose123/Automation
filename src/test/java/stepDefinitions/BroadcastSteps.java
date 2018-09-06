@@ -3,7 +3,9 @@ package stepDefinitions;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -29,6 +31,7 @@ import pageObjetcs.BroadcastPageObjects;
 import pageObjetcs.CampaignObjects;
 import pageObjetcs.CatalogPageObjects;
 import pageObjetcs.CommonObjects;
+import pageObjetcs.CustomerProfilePage;
 import pageObjetcs.LoginPageObjects;
 import pageObjetcs.OfferPageObjects;
 import pageObjetcs.TargetConditionObjects;
@@ -2522,6 +2525,11 @@ public void provideFileForConversion() throws Throwable {
 	ShellExecuter se = new ShellExecuter();
 	se.executeScript("cd /usr/local/flytxt/selenium/conversion; echo '"+csvFileData+"' >conversionJob.csv");
 }
+@Then("^remove file for conversion$")
+public void deleteFileForConversion() throws Throwable {
+	ShellExecuter se = new ShellExecuter();
+	se.executeScript("cd /usr/local/flytxt/selenium/conversion; rm conversionJob.csv -f");
+}
 public String getLastConversionTime() {
 	try {
 		jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[2]");
@@ -2531,37 +2539,119 @@ public String getLastConversionTime() {
 		return "noConversionFound";
 	}
 }
+public boolean checkConversionTime(Date startTime, Date conversionTime) {
+	if(conversionTime.after(startTime))
+	return true;
+	else 
+		return false;
+	
+}
 @Then("^wait for comversion event$")
 //consumer-events//iron-list//data-table-row  
 public void wait_for_comversion_event() throws Throwable {
-	
-	jswait.loadClick("//div[text()='Select Event Types']/..");
-	Thread.sleep(1000);
-	jswait.loadClick("//div[text()='Select Event Types']/..");
-	Thread.sleep(1000);
-	jswait.loadClick("//div[text()='Conversion']/..");
-	Thread.sleep(1000);
-	jswait.loadClick("//iron-icon[@title='Apply']");
+	Date startTime = new Date();
+	System.out.println(startTime);
+	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+	customerProfilePage.clickEventTypesCheckBox();
+	customerProfilePage.clickEventTypesCheckBox();
+	customerProfilePage.clickConversionEventCheckBox();
+	customerProfilePage.clickSelectEventApplyButton();
 	Thread.sleep(2000);
 	TimeoutImpl t = new TimeoutImpl();
 	t.startTimer();
-	
-	while(getLastConversionTime().contains("noConversionFound")&& t.checkTimerMin(15)) {
+	String date = getLastConversionTime();
+	if(date.equals("noConversionFound"))
+		date = "05 Sep 2000 04:18 PM";
+	Date timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+	System.out.println(timeStamp);
+	System.out.println(checkConversionTime(startTime,timeStamp));
+	while(t.checkTimerMin(15) && !checkConversionTime(startTime,timeStamp)) {
+		System.out.println("insie while");
+		Thread.sleep(5000);
+//		customerProfilePage.clickEventsTab();
+		customerProfilePage.clickEventTypesCheckBox();
+		customerProfilePage.clickSelectEventApplyButton();
+		Thread.sleep(2000);
+		customerProfilePage.clickEventTypesCheckBox();
+		customerProfilePage.clickConversionEventCheckBox();
+		customerProfilePage.clickSelectEventApplyButton();
+		Thread.sleep(2000);
+		
+		date = getLastConversionTime();
+		if(date.equals("noConversionFound"))
+			date = "05 Sep 2000 04:18 PM";
+		timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+		System.out.println(timeStamp);
 		System.out.println(getLastConversionTime());
-		Thread.sleep(3000);
+		
 	}
+	date = getLastConversionTime();
+	if(date.equals("noConversionFound"))
+		date = "05 Sep 2000 04:18 PM";
+	timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+	Assert.assertTrue("convertion event not found", checkConversionTime(startTime,timeStamp));
+}
+
+public String getLastFullfillmentTime() {
+	try {
+		jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[2]");
+		String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[2]")).getText();
+		return latestTime;
+	}catch (Exception e) {
+		return "noFulfillmentFound";
+	}
+}
+public boolean checkFullfillmentTime(Date startTime, Date conversionTime) {
+	if(conversionTime.after(startTime))
+	return true;
+	else 
+		return false;
 	
-//	commonObjects.filterName(eh.getCellByColumnName("BC Name"));
-//	commonObjects.toggleAutoRefresh();
-//	String statusOfBc = broadcastPageObjects.getTopBcStatus();
-//	TimeoutImpl t = new TimeoutImpl();
-//	t.startTimer();
-//	while(!statusOfBc.contains(statusExpected)&& t.checkTimerMin(15)) {
-//		statusOfBc = broadcastPageObjects.getTopBcStatus();
-//		System.out.println(statusOfBc);
-//		Thread.sleep(3000);
-//	}
-//	Assert.assertTrue("Invalid status of BC",statusOfBc.contains(statusExpected));
+}
+@Then("^wait for reward in consumer profile$")
+//consumer-events//iron-list//data-table-row  
+public void wait_for_Fullfillment_event() throws Throwable {
+	Date startTime = new Date();
+	System.out.println(startTime);
+	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+	customerProfilePage.clickEventTypesCheckBox();
+	customerProfilePage.clickEventTypesCheckBox();
+	customerProfilePage.clickFulfillmentEventCheckBox();
+	customerProfilePage.clickSelectEventApplyButton();
+	Thread.sleep(2000);
+	TimeoutImpl t = new TimeoutImpl();
+	t.startTimer();
+	String date = getLastFullfillmentTime();
+	if(date.equals("noFulfillmentFound"))
+		date = "05 Sep 2000 04:18 PM";
+	Date timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+	System.out.println(timeStamp);
+	System.out.println(checkFullfillmentTime(startTime,timeStamp));
+	while(t.checkTimerMin(15) && !checkFullfillmentTime(startTime,timeStamp)) {
+		System.out.println("insie while");
+		Thread.sleep(5000);
+//		customerProfilePage.clickEventsTab();
+		customerProfilePage.clickEventTypesCheckBox();
+		customerProfilePage.clickSelectEventApplyButton();
+		Thread.sleep(2000);
+		customerProfilePage.clickEventTypesCheckBox();
+		customerProfilePage.clickFulfillmentEventCheckBox();
+		customerProfilePage.clickSelectEventApplyButton();
+		Thread.sleep(2000);
+		
+		date = getLastFullfillmentTime();
+		if(date.equals("noFulfillmentFound"))
+			date = "05 Sep 2000 04:18 PM";
+		timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+		System.out.println(timeStamp);
+		System.out.println(getLastFullfillmentTime());
+		
+	}
+	date = getLastFullfillmentTime();
+	if(date.equals("noFulfillmentFound"))
+		date = "05 Sep 2000 04:18 PM";
+	timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+	Assert.assertTrue("fulfillment event not found", checkFullfillmentTime(startTime,timeStamp));
 }
 
 
