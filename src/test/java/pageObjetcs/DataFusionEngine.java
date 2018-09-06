@@ -44,6 +44,13 @@ public class DataFusionEngine extends Init {
 	private WebElement DataFusionEnginebutton;
 	@FindBy(xpath="/html//div[@id='mainContainer']//*/div/paper-button[contains(.,'Add Job')]")
 	private WebElement AddJobbutton;
+	
+	@FindBy(xpath = ".//paper-item[contains(.,'Delete')]")
+	private WebElement jobdelete;
+	
+	@FindBy(xpath = "//div/paper-button[contains(.,'Delete')]")
+	private WebElement Deleteok;
+	
 	@FindBy(xpath=".//label[contains(.,'Job Name')]/../input")
 	private WebElement Jobname;
 	@FindBy(xpath=".//label[contains(.,'Select connector')]/../input")
@@ -61,6 +68,8 @@ public class DataFusionEngine extends Init {
 	
 	@FindBy(xpath=".//label[contains(.,'Regex')]/../input")
 	private WebElement FileRegex;
+	
+	
 	
 	@FindBy(xpath = "//*[@id='fileToLoad']")
 	private WebElement emailSelectResourceButton;
@@ -129,6 +138,10 @@ public class DataFusionEngine extends Init {
 		jswait.loadSendKeys(FileRegex, regex);
 	}
 	
+	public void clickDeleteOption() throws InterruptedException{
+		jswait.loadClick(jobdelete);
+		}
+	
 	public void copy(String jobname) throws InterruptedException, Exception, IOException{
 		commonObjects.filterName(jobname);
 		commonObjects.clickOptionsIcon();
@@ -141,6 +154,21 @@ public class DataFusionEngine extends Init {
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+copiedjobname+"')]"));
 		Assert.assertTrue("Copied job not found", element.isDisplayed());
+		}
+	
+	public void delete(String jobname) throws InterruptedException, Exception, IOException{
+		commonObjects.filterName(jobname);
+		commonObjects.clickOptionsIcon();
+		clickDeleteOption();
+		jswait.loadClick(Deleteok);
+		Thread.sleep(2000);
+		//String copiedjobname = commonObjects.getTextFormTextField(".//label[contains(.,'Job Name')]/../input");
+		//System.out.println("name" +copiedjobname );
+		//jswait.loadClick(JobSave);
+		commonObjects.filterName(jobname);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+jobname+"')]"));
+		Assert.assertFalse("Job Not deleted", element.isDisplayed());
 		}
 		
 
