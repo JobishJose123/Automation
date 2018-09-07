@@ -150,7 +150,12 @@ Feature: generic product class
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then approve Broadcast by selenium user without notification navigation
-
+    Then pass next scenario based on this step
+    
+    @NX-7592 @initBrowser 
+Scenario: Verify Approval Work Flow for all type of One Off BCs
+    Then check previous step and pass this
+    
   @NX-6389 @initBrowser 
   Scenario: Verify whether approver can edit campaign/BC on clicking edit option from Review page
     Given login
