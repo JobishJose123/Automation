@@ -551,7 +551,7 @@ Then view broadcast from sheet "one-offBC"
 ##----------------------------------------------------------------------------------------------------------------------------------------##
 
 
-@NX-7364 @NX-7350
+@NX-7364 
 @initBrowser 
 Scenario: Create New Broadcast: verify create BC Notification
  Given login
@@ -590,7 +590,17 @@ Scenario: Create New Broadcast: verify create BC Notification
     Then verify bc created from sheet "one-offBC"
     Then wait until status of "one-offBC" is "Complete"
     Then verify email notifications from sheet "one-offBC"
-
+    Then pass next scenario based on this step
+    @NX-7593
+      @initBrowser 
+Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Forms.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    @NX-7350
+        @initBrowser 
+Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Links.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
 
 
 
