@@ -151,6 +151,8 @@ public class CampaignObjects extends Init{
 	private WebElement campaignTemplateNameInput;
 	@FindBy(xpath = ".//paper-button[contains(.,'Use Template')]")
 	private WebElement useTemplateButton;
+	@FindBy(xpath = "//div[@data-nodepos='responseData.conditions']")
+	private WebElement KPIConditionBox;
 	
 	@FindBy(xpath = "//label[contains(.,'Category')]/../input")
 	private WebElement categoryName;
@@ -888,7 +890,7 @@ public class CampaignObjects extends Init{
 		clickProceedButton();
 		targetConditionObjects.clickCreateTargetConditionButton();
 //		targetConditionObjects.clickTargetConditionViewToggle();
-		targetConditionObjects.clickBasicTargetConditionWithUniqueKPI();
+		targetConditionObjects.clickBasicTargetConditionWithUsageMetric();
 		clickProceedButton();
 		 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='router']/app-route[9]/campaign-form/wizard-tab/div/iron-pages/campaign-schedule/form/paper-card/paper-date-time-input/div/paper-input[2]/paper-input-container/div[2]"))).click();
     	 Thread.sleep(1000);
@@ -919,6 +921,22 @@ public class CampaignObjects extends Init{
         	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[2]"))).click();
          wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
          clickSaveCampaignButton();
+	}
+	
+	public void verifyColorOfKPIConditionText() throws Throwable {
+		
+		String color=KPIConditionBox.getCssValue("color");
+		System.out.println(color);
+		Exception colorExec= new Exception("Color Not Matching");
+		if(color.equals("rgba(255, 0, 0, 1)")) {
+			
+			System.out.println("Validation is showing");
+			
+		}
+		else
+			throw colorExec;
+			
+		
 	}
 	
 	

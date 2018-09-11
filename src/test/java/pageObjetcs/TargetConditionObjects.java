@@ -37,6 +37,10 @@ public class TargetConditionObjects extends Init {
 	private WebElement usageMetricUnique;
 	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]")
 	private WebElement metricDaySelector;
+	@FindBy(xpath="//paper-item[contains(.,'today')]")
+	private WebElement metricDay;
+	@FindBy(xpath="(//label[contains(.,'Condition')])[3]//following::iron-icon[1]")
+	private WebElement metricConditionField;
 	@FindBy(xpath=".//field-simple//span[contains(.,'25')]")
 	private WebElement editedTC;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Profile Info')]")
@@ -544,6 +548,8 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(usageMetricField);
 			jswait.loadClick(usageMetricUnique);
 			jswait.loadClick(metricDaySelector);
+			jswait.loadClick(metricDay);
+			jswait.loadClick(metricConditionField);
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"18");
 			jswait.loadClick(targetConditionSave);
