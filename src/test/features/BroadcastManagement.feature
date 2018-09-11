@@ -2333,6 +2333,7 @@ Then wait until status of "Recurring" is "Complete"
     |analyticalScoresGT45|
     |digitalEngagementGT235|
     |customerLocationInsightsGT5|
+    |customerList|
 
     
        @NX-4525 @initBrowser
@@ -2344,7 +2345,7 @@ Then wait until status of "Recurring" is "Complete"
     #Then click on create new ofer button
     #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
     #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
+    #Then Navigate to Offer Catalogue
     #Then Create New Offer Catalogue from sheet "defaultCatalog"
     #Then Add "rechargeWAP" offer to Offer Catalogue
     #Then navigate to life cycle marketing

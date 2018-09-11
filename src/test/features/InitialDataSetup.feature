@@ -24,6 +24,19 @@ Then move list to dk input for upload
 #Then save registration list
 #Then navigate to landing page
 
+
+@NX-createDiscoveredClustersList
+@initBrowser @closeBrowser
+Scenario: Calculate Targets - Creating DNC Exclusion list. 3482
+Given login
+Then navigate to data foundation
+Then navigate to registration list
+Then click create new registration list button
+Then enter details of discovered clusters list
+Then save discovered clusters list
+Then navigate to landing page
+
+
 @NX-3482
 @NX-createDndList
 @initBrowser @closeBrowser

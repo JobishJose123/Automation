@@ -892,6 +892,13 @@ public class RegistrationList extends Init{
 		commonObjects.filterName(SELENIUM_DND_LIST);
 		commonObjects.clickOptionsIcon();
 	}
+	@Then("^save discovered clusters list$")
+    public void saveDiscoveredClustersListButton() throws Exception{
+		registrationListPage.clickSaveButton();
+		CommonObjects commonObjects = new CommonObjects();
+		commonObjects.filterName(SELENIUM_DND_LIST);
+		commonObjects.clickOptionsIcon();
+	}
 	@Then("^save mandatory DND list$")
     public void saveMandatoryDNDListButton() throws Exception{
 		registrationListPage.clickSaveButton();
@@ -915,6 +922,17 @@ public class RegistrationList extends Init{
 		System.out.println(listname);
 		registrationListPage.enterDNDRegistratonListDetails(listname, "Description");	
 	}
+	
+	@Then("^enter details of discovered clusters list$")
+    public void createDiscoveredClustersList() throws Exception{
+//		list.setExcelFile("registrationListInputData", "Sheet1");
+//		String listname = (String) list.getCell(1, 2);
+		String listname = SELENIUM_DISCOVERED_CLUSTERS_LIST;
+		System.out.println(listname);
+		registrationListPage.enterDNDRegistratonListDetails(listname, "Description");	
+	}
+	
+	
 	@Then("^enter details of mandatoy DND list$")
     public void createMandatoryDNDList() throws Exception{
 //		list.setExcelFile("registrationListInputData", "Sheet1");

@@ -43,6 +43,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionTypeCustomerDemographics;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Digital Persona')]")
 	private WebElement targetConditionTypeCustomerDigitalPersona;
+	@FindBy(xpath="//paper-item[contains(.,'Customer Lists')]")
+	private WebElement targetConditionTypeCustomerList;
 	@FindBy(xpath="//paper-item[contains(.,'Learned Behaviors')]")
 	private WebElement targetConditionTypeLearnedBehaviors;
 	@FindBy(xpath="//paper-item[contains(.,'AI powered Analytical Scores')]")
@@ -55,6 +57,10 @@ public class TargetConditionObjects extends Init {
 	private WebElement EventFieldSelector;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldAge;
+	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::label[contains(.,'List')]/../..//input")
+	private WebElement CustomerListFieldSelector;
+	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+BASE_LIST+"')]")
+	private WebElement CustomerListSelection;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD_UNIQUE+"')]")
 	private WebElement CustomerInsightFieldAgeUnique;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+SITE_ID_PROFILE_FIELD+"')]")
@@ -88,6 +94,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement nowSelect;
 	@FindBy(xpath="//paper-item[contains(.,'is greater than')]")
 	private WebElement conditionIsGreaterThan;
+	@FindBy(xpath="//paper-item[contains(.,'is subscribed')]")
+	private WebElement conditionIsSubscribed;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer accepted')]")
 	private WebElement eventOfferAccepted;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer declined')]")
@@ -325,6 +333,14 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"15");
 			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("customerList")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerList);
+			jswait.loadSendKeys(CustomerListFieldSelector,BASE_LIST);
+			jswait.loadClick(CustomerListSelection);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsSubscribed);
 		}
 		else if(event.contentEquals("customerDemographicsGT25")){
 			jswait.loadClick(targetConditionTypeSelector);
