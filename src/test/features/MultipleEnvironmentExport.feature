@@ -110,8 +110,8 @@ Feature: Test cases related to export campaign in multiple environment
    	
    	@NX-8243 @initBrowser 
   Scenario: Verify whether mapping can be done when location insights condition is selected in foreign KPI conditions - 8243
+    
     Given login
-   Given login
     Then navigate to configuration management
     Then naviagte to product classes
     Then create product class and number attribute from "TestProductClass"
@@ -156,8 +156,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then click proceed on notification from the sheet "campaignBC" of file "campaignInputData"
    	Then verify whether validation messasge for invalid usag metric shown
    	Then map to the native condition
-   	Then check whether the native condition displayed
-   	Then pass next scenario based on this step
+   	Then verify color of KPI condition box after successful mapping
 
   @NX-8150
   Scenario: delete export location

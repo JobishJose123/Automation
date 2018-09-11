@@ -154,6 +154,13 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath = "//div[@data-nodepos='responseData.conditions']")
 	private WebElement KPIConditionBox;
 	
+	@FindBy(xpath = "//label[contains(.,'Native KPI')]//following::iron-icon")
+	private WebElement nativeKPIField;
+	@FindBy(xpath = "//paper-listbox[@id='listBoxDropdown']//paper-item[1]")
+	private WebElement nativeKPIListFirstElement;
+	@FindBy(xpath = "//paper-button[@id='saveCondition']")
+	private WebElement conditionMapSave;
+	
 	@FindBy(xpath = "//label[contains(.,'Category')]/../input")
 	private WebElement categoryName;
 	
@@ -926,7 +933,7 @@ public class CampaignObjects extends Init{
 	public void verifyColorOfKPIConditionText() throws Throwable {
 		
 		String color=KPIConditionBox.getCssValue("color");
-		System.out.println(color);
+		System.out.println("Color Before Mapping:"+color);
 		Exception colorExec= new Exception("Color Not Matching");
 		if(color.equals("rgba(255, 0, 0, 1)")) {
 			
@@ -936,6 +943,45 @@ public class CampaignObjects extends Init{
 		else
 			throw colorExec;
 			
+		
+	}
+	
+	
+	
+	
+	
+public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
+		
+		String color=KPIConditionBox.getCssValue("color");
+		System.out.println("Color After Mapping:"+color);
+		Exception colorExec= new Exception("Color Not Matching");
+		if(color.equals("rgba(23, 26, 40, 1)")) {
+			
+			System.out.println("Mapping Successful");
+			
+		}
+		else
+			throw colorExec;
+			
+		
+	}
+	
+	
+	
+	
+	
+	public void map_to_the_native_condition() throws Throwable {
+		
+		Actions action = new Actions(driver);
+		action.moveToElement(KPIConditionBox).doubleClick().build().perform();
+		jswait.loadClick(nativeKPIField);
+		Thread.sleep(2000);
+		jswait.loadClick(nativeKPIField);
+		Thread.sleep(2000);
+		jswait.loadClick(nativeKPIField);
+		Thread.sleep(3000);
+		jswait.loadClick(nativeKPIListFirstElement);
+		jswait.loadClick(conditionMapSave);
 		
 	}
 	

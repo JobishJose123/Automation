@@ -965,6 +965,20 @@ public class CampaignManagement extends Init{
 		    	
 		    	
 		    }
+		    
+		    
+		    
+		    
+		   @Then("^map to the native condition$")
+		   public void map_to_the_native_condition() throws Throwable {
+			   
+			   campaignObjects.map_to_the_native_condition();
+			   
+			   
+		   }
+		    
+		    
+		    
 			 @Then("^resume campaign from sheet \"([^\"]*)\"$")
 			    public void resumeCampaign(String sheet) throws Throwable
 			    {
@@ -983,6 +997,17 @@ public class CampaignManagement extends Init{
 		    	
 		    	Thread.sleep(4000);
 		    	campaignObjects.verifyColorOfKPIConditionText();
+		    	
+		    	
+		    }
+		    
+		    
+		    @Then("^verify color of KPI condition box after successful mapping$")
+		    public void verifyColorOfKPIConditionBoxAfterSuccessfulMapping() throws Throwable
+		    {
+		    	
+		    	Thread.sleep(4000);
+		    	campaignObjects.verifyColorOfKPIConditionTextAfterMapping();
 		    	
 		    	
 		    }
