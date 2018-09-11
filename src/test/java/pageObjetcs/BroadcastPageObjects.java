@@ -317,7 +317,7 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement bcnotificationatcompletion ;
 	 @FindBy(xpath="(//form[@id='bcNotificationForm']//..//paper-checkbox[1])[2]")
 	 private WebElement bcnotificationatreceivebroadcastmsg ;
- @FindBy(xpath="//label[contains(.,'Recipient')]//following::paper-icon-button[2]")
+ @FindBy(xpath="(//label[contains(.,'Recipient')]//following::paper-icon-button[2])[2]")
 private WebElement recipientclick;
 	// @FindBy(xpath="")
 	// private WebElement ;
@@ -1912,9 +1912,22 @@ public void Verifyemailnotification(String sheet) throws Exception {
 	String html=emaildata.get(1);
 	String Subject=emaildata.get(2);
 	String fromid=emaildata.get(3);
+	if(Subject=="Broadcast Rendering Notification -"+name) {
 	assertTrue(Subject.contains("Broadcast Finished - oneOffBC"));
+	assertTrue(fromid.contains("flyops@flytxt.com <flyops@flytxt.com>"));}
+	else if(Subject=="Broadcast Delivery Notification -"+name)
+	{
+		assertTrue(Subject.contains("Broadcast Delivery Notification -"+name));
+		assertTrue(fromid.contains("flyops@flytxt.com <flyops@flytxt.com>"));}
+	else if(Subject=="Broadcast Finished -"+name) 
+	
+	assertTrue(Subject.contains("Broadcast Finished -"+name));
 	assertTrue(fromid.contains("flyops@flytxt.com <flyops@flytxt.com>"));
-		}
+}
+
+	
+	
+		
 
 
 
