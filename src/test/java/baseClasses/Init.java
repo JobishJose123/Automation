@@ -74,6 +74,7 @@ public static Logger log;
 	public final String NAME_PROFILE_FIELD = "First Name_q11";
 	public final String SELENIUM_PARTNER = "selenium_partner";
 	public final String INVENTORY_UNLIMITED = "Unlimited";
+	public final String USAGE_METRIC_UNIQUE = "Unique_Metric";
 
 	
 }

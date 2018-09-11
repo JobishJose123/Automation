@@ -29,6 +29,14 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionViewToggle;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
 	private WebElement targetConditionTypeSelector;
+	@FindBy(xpath="//paper-item[contains(.,'Usage Metrics')]")
+	private WebElement targetConditionTypeUsageMetrics;
+	@FindBy(xpath="//label[contains(.,'Metric')]/../..//input")
+	private WebElement usageMetricField;
+	@FindBy(xpath="//paper-item[contains(.,'"+USAGE_METRIC_UNIQUE+"')]")
+	private WebElement usageMetricUnique;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]")
+	private WebElement metricDaySelector;
 	@FindBy(xpath=".//field-simple//span[contains(.,'25')]")
 	private WebElement editedTC;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Profile Info')]")
@@ -526,6 +534,20 @@ public class TargetConditionObjects extends Init {
 	   jswait.loadSendKeys(isGreaterThanValue,"25");
 	   jswait.loadClick(targetConditionSave);
 	  }
+	 
+	 
+
+	 public void clickBasicTargetConditionWithUsageMetric() throws InterruptedException {
+//		 	jswait.loadClick(createConditionButton);
+		    jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeUsageMetrics);
+			jswait.loadClick(usageMetricField);
+			jswait.loadClick(usageMetricUnique);
+			jswait.loadClick(metricDaySelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"18");
+			jswait.loadClick(targetConditionSave);
+	 }
 	 
 	 public void verifyAddedTargetCondition() throws InterruptedException {
 		 Thread.sleep(3000);
