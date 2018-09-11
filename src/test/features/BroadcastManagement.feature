@@ -2334,6 +2334,7 @@ Then wait until status of "Recurring" is "Complete"
     |digitalEngagementGT235|
     |customerLocationInsightsGT5|
     |customerList|
+    |discoveredClusters200|
 
     
        @NX-4525 @initBrowser

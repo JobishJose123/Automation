@@ -896,7 +896,7 @@ public class RegistrationList extends Init{
     public void saveDiscoveredClustersListButton() throws Exception{
 		registrationListPage.clickSaveButton();
 		CommonObjects commonObjects = new CommonObjects();
-		commonObjects.filterName(SELENIUM_DND_LIST);
+		commonObjects.filterName(SELENIUM_DISCOVERED_CLUSTERS_LIST);
 		commonObjects.clickOptionsIcon();
 	}
 	@Then("^save mandatory DND list$")
@@ -929,7 +929,7 @@ public class RegistrationList extends Init{
 //		String listname = (String) list.getCell(1, 2);
 		String listname = SELENIUM_DISCOVERED_CLUSTERS_LIST;
 		System.out.println(listname);
-		registrationListPage.enterDNDRegistratonListDetails(listname, "Description");	
+		registrationListPage.enterRegistratonListDetails(listname, "Description");	
 	}
 	
 	

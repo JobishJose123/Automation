@@ -342,6 +342,14 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsSubscribed);
 		}
+		else if(event.contentEquals("discoveredClusters200")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerList);
+			jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_DISCOVERED_CLUSTERS_LIST);
+			jswait.loadClick(CustomerListSelection);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsSubscribed);
+		}
 		else if(event.contentEquals("customerDemographicsGT25")){
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerDemographics);

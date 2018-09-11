@@ -3,7 +3,6 @@
 @InitialDataSetup
 Feature: data setup
 
-
 @NX-createDKJob
 @initBrowser @closeBrowser
 Scenario: create DK job for registration list upload and DNC list upload
@@ -30,7 +29,7 @@ Then move list to dk input for upload
 Scenario: Calculate Targets - Creating DNC Exclusion list. 3482
 Given login
 Then navigate to data foundation
-Then navigate to registration list
+Then navigate to discovered clusters
 Then click create new registration list button
 Then enter details of discovered clusters list
 Then save discovered clusters list

@@ -26,6 +26,8 @@ public class LandingPageObjects extends Init{
 	private WebElement configurationManagement;
 	@FindBy(xpath="//div[contains(text(),'Data Foundation')]/../../a")
 	private WebElement dataFoundation;
+	@FindBy(xpath="//div[contains(text(),'Discovered Clusters')]/../../..")
+	private WebElement discoveredClusters;
 	@FindBy(xpath=".//*[@id='topBar']//img")
 	private WebElement flytxtLogo;
 	@FindBy(xpath="//div[contains(@class,'profile-name')]/..")
@@ -67,6 +69,9 @@ public class LandingPageObjects extends Init{
 	}
 	public void navigateToDataFoundation() throws InterruptedException {
 		jswait.loadClick(dataFoundation);
+	}
+	public void navigateToDiscoveredClusters() throws InterruptedException {
+		jswait.loadClick(discoveredClusters);
 	}
 	public void navigateToLandingPage() throws InterruptedException {
 		jswait.loadClick(flytxtLogo);

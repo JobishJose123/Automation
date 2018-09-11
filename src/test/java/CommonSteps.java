@@ -86,6 +86,10 @@ public class CommonSteps extends Init {
 	public void navigateToDataFoundation() throws InterruptedException {
 		landingPage.navigateToDataFoundation();
 	}
+	@Then("^navigate to discovered clusters")
+	public void navigateToDiscoveredClusters() throws InterruptedException {
+		landingPage.navigateToDiscoveredClusters();
+	}
 	@Then("^navigate to registration list")
 	public void navigateToRegistrationList() throws InterruptedException {
 		registrationListPage.navigateToRegistrationList();
