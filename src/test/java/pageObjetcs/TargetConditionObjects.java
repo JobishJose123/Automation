@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 
@@ -25,6 +26,7 @@ public class TargetConditionObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	CommonObjects commonObjects = new CommonObjects();
+	public ExcelHelper eM = new ExcelHelper(); 
 	@FindBy(xpath="//img[contains(@src,'http://192.168.150.27/images/Flip')]/../..")
 	private WebElement targetConditionViewToggle;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
@@ -37,10 +39,24 @@ public class TargetConditionObjects extends Init {
 	private WebElement usageMetricUnique;
 	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]")
 	private WebElement metricDaySelector;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[1]")
+	private WebElement metricWeekSelector;
+	@FindBy(xpath="//label[contains(.,'Date Part')]/../input")
+	private WebElement customerLocationInsightDatePart;
+	@FindBy(xpath="//paper-item[contains(.,'DATE')]")
+	private WebElement customerLocationInsightDate;
 	@FindBy(xpath="//paper-item[contains(.,'today')]")
-	private WebElement metricDay;
+	private WebElement customerLocationInsightSelectToday;
+	@FindBy(xpath="//paper-item[contains(.,'this week')]")
+	private WebElement metricWeek;
+	@FindBy(xpath="//paper-item[contains(.,'By Week')]")
+	private WebElement metricWeekOption;
 	@FindBy(xpath="(//label[contains(.,'Condition')])[3]//following::iron-icon[1]")
 	private WebElement metricConditionField;
+	@FindBy(xpath="//label[contains(.,'elect')]//following::iron-icon[1]")
+	private WebElement customerLocationInsightSelectField;
+	@FindBy(xpath="(//label[contains(.,'Condition')])[3]//following::iron-icon[1]")
+	private WebElement customerLocationInsightConditionField;
 	@FindBy(xpath=".//field-simple//span[contains(.,'25')]")
 	private WebElement editedTC;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Profile Info')]")
@@ -106,6 +122,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement nowSelect;
 	@FindBy(xpath="//paper-item[contains(.,'is greater than')]")
 	private WebElement conditionIsGreaterThan;
+	@FindBy(xpath="//paper-item[contains(.,'is on')]")
+	private WebElement customerLocationInsightCondition;
 	@FindBy(xpath="//paper-item[contains(.,'is subscribed')]")
 	private WebElement conditionIsSubscribed;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer accepted')]")
@@ -547,13 +565,43 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionTypeUsageMetrics);
 			jswait.loadClick(usageMetricField);
 			jswait.loadClick(usageMetricUnique);
+			jswait.loadClick(metricWeekSelector);
+			jswait.loadClick(metricWeekOption);
 			jswait.loadClick(metricDaySelector);
-			jswait.loadClick(metricDay);
+			jswait.loadClick(metricWeek);
 			jswait.loadClick(metricConditionField);
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"18");
 			jswait.loadClick(targetConditionSave);
 	 }
+	 
+	 
+	 
+	 
+	 public void clickBasicTargetConditionWithCustomerLocationInsight() throws InterruptedException {
+//		 	jswait.loadClick(createConditionButton);
+		    jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerLocationInsights);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			
+			eM.setExcelFile("customerLocationInsightInputData","name");
+	    	String name = (String) eM.getCell(1, 0);
+	    	Thread.sleep(2000);
+	    	//driver.findElement(By.xpath("//paper-item[contains(.,'"+name+"')]")).click();
+			
+	    	jswait.loadClick("//paper-item[contains(.,'"+name+"')]");
+			jswait.loadClick(customerLocationInsightDatePart);
+			jswait.loadClick(customerLocationInsightDate);
+			jswait.loadClick(customerLocationInsightConditionField);
+			jswait.loadClick(customerLocationInsightCondition);
+			jswait.loadClick(customerLocationInsightSelectField);
+			jswait.loadClick(customerLocationInsightSelectToday);
+			jswait.loadClick(targetConditionSave);
+	
+	 
+	 }
+	 
+	 
 	 
 	 public void verifyAddedTargetCondition() throws InterruptedException {
 		 Thread.sleep(3000);

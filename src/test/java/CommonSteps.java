@@ -10,6 +10,7 @@ import org.testng.Assert;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.RandomNameGenerator;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CommonObjects;
@@ -27,6 +28,7 @@ public class CommonSteps extends Init {
 	CommonObjects commonObjetcs = new CommonObjects();
 	RegistrationListPage registrationListPage = new RegistrationListPage();
 	ExcelHelper excelHelper = new ExcelHelper();
+	public ExcelHelper eM = new ExcelHelper(); 
 	LoginPageObjects loginpageobjects=new LoginPageObjects();
 	public CommonSteps() {
 		PageFactory.initElements(driver, this);
@@ -205,5 +207,34 @@ public class CommonSteps extends Init {
 		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(2, 0));		
 		 
     }
+	
+	
+	@Then("^click create new customer location insight$")
+    public void clickCreateNewRegistrationListButton() throws Throwable{
+		commonObjetcs.clickCreateNewCustomerLocationInsight();
+	}
+	
+	@Then("^enter new customer location insight details from sheet \"([^\"]*)\"$")
+    public void enterNewCustomerLocationInsightDetails(String sheet) throws Throwable{
+		
+    	Thread.sleep(4000);
+    	eM.setExcelFile("customerLocationInsightInputData",sheet);
+ 		String name = (String) eM.getCell(1, 0);
+ 		name =  RandomNameGenerator.getRandomName(name);
+ 		eM.setCell(1, 0, name);
+		commonObjetcs.enterNewCustomerLocationInsightDetails(name, "Test Description");
+	
+	
+	}
+	@Then("^create same  customer location insight details from sheet \"([^\"]*)\"$")
+    public void enterSameCustomerLocationInsightDetails(String sheet) throws Throwable{
+		
+    	Thread.sleep(4000);
+    	eM.setExcelFile("customerLocationInsightInputData",sheet);
+ 		String name = (String) eM.getCell(1, 0);
+		commonObjetcs.enterNewCustomerLocationInsightDetails(name, "Test Description");
+	
+	
+	}
 
 }

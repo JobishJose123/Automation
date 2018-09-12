@@ -967,6 +967,26 @@ public class CampaignManagement extends Init{
 		    }
 		    
 		    
+		    @Then("^create new campaign with customer location insight from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+		    public void create_new_campaign_with_customer_location_insight_from_sheet_with_catalog(String sheet, String catalogSheet) throws Throwable {
+		      
+		    	
+		    	Thread.sleep(4000);
+		    	ExcelHelper catalogExcel = new ExcelHelper();
+		    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+		    	Thread.sleep(4000);
+		    	eM.setExcelFile("campaignInputData",sheet);
+		 		String name = (String) eM.getCell(1, 0);
+		 		String catalog = (String) catalogExcel.getCell(1, 0);
+		 		name =  RandomNameGenerator.getRandomName(name);
+		 		eM.setCell(1, 0, name);
+		 		campaignObjects.clickCreateNewCampaignButton();
+		 		campaignObjects.createCampaignWithCustomerLocationInsight(name, catalog);
+		    	
+		    	
+		    }
+		    
+		    
 		    
 		    
 		   @Then("^map to the native condition$")

@@ -70,6 +70,8 @@ public class CommonObjects extends Init {
 	private WebElement targetConditionViewToggle;
 	@FindBy(xpath = "//paper-button[contains(.,'Activate')]")
 	private WebElement ActivateBCButton;
+	@FindBy(xpath="//paper-button[text()='Create']")
+	private WebElement createNewCustomerLocationInsightButton;
 
 	@FindBy(xpath = "//*[@id='sym2']")
 	private WebElement offers;
@@ -95,24 +97,73 @@ public class CommonObjects extends Init {
 	private WebElement contextHelpCloseIcon;
 	 @FindBy(xpath="//paper-toggle-button")
 	 private WebElement autoRefreshButton;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 @FindBy(xpath=".//*[@id='createNew']//label[text()='Name']/../input")
+		private WebElement customerLocationInsightNameField;
+	 @FindBy(xpath=".//*[@id='createNew']//label[text()='Description']/..//textarea")
+		private WebElement registrationListDescription;
+	 
+	 @FindBy(xpath=".//*[@id='createNew']//label[text()='Context Type']/..//input")
+		private WebElement customerLocationInsightContextTypeSelector;
+	 @FindBy(xpath=".//*[@id='createNew']//paper-item[text()='Normal']")
+		private WebElement customerLocationInsightContextType;
+	 
+	 
+	 @FindBy(xpath=".//*[@id='createNew']//label[text()='Type']/..//input")
+		private WebElement customerLocationInsightTypeSelector;
+	 @FindBy(xpath=".//*[@id='createNew']//paper-item[text()='Date']")
+		private WebElement customerLocationInsightType;
+	 
+	 @FindBy(xpath=".//paper-button[contains(.,'Save')]")
+		private WebElement customerLocationInsighSaveButton;
+	
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 public void clickCreateNewCustomerLocationInsight() throws Throwable {
+		 
+		 jswait.loadClick(createNewCustomerLocationInsightButton);
+	 }
+	 
+	 
+ public void enterNewCustomerLocationInsightDetails(String name,String desc) throws Throwable {
+		 
+	    enterCustomerLocationInsightName(name);
+	    enterCustomerLocationInsightDescription(desc);
+	    selectCustomerLocationInsightContextType();
+	    selectCustomerLocationInsightType();
+	    clickSaveCustomerLocationInsighButton();
+		
+	 }
+ 
+ 
+ public void enterCustomerLocationInsightName(String name) throws InterruptedException {
+		jswait.loadSendKeys(customerLocationInsightNameField, name);
+	}
+ 
+ public void enterCustomerLocationInsightDescription(String desc) throws InterruptedException {
+		jswait.loadSendKeys(registrationListDescription, desc);
+	}
+ 
+ public void selectCustomerLocationInsightContextType() throws InterruptedException {
+		jswait.loadClick(customerLocationInsightContextTypeSelector);
+		jswait.loadClick(customerLocationInsightContextType);
+	}
+ 
+ public void selectCustomerLocationInsightType() throws InterruptedException {
+		jswait.loadClick(customerLocationInsightTypeSelector);
+		jswait.loadClick(customerLocationInsightType);
+	}
+ 
+ public void clickSaveCustomerLocationInsighButton() throws InterruptedException {
+		jswait.loadClick(customerLocationInsighSaveButton);
+	}
 
 	public void clickFilterIcon() throws InterruptedException {
 		jswait.loadClick(filterIcon);
