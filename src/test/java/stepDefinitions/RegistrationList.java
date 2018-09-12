@@ -899,6 +899,20 @@ public class RegistrationList extends Init{
 		commonObjects.filterName(SELENIUM_DISCOVERED_CLUSTERS_LIST);
 		commonObjects.clickOptionsIcon();
 	}
+	@Then("^save customer driven event$")
+    public void saveCustomerDrivenEvent() throws Exception{
+		registrationListPage.clickSaveButton();
+		CommonObjects commonObjects = new CommonObjects();
+		commonObjects.filterName(SELENIUM_CUSTOMER_DRIVEN_EVENT);
+		commonObjects.clickOptionsIcon();
+	}
+	@Then("^save usage metric$")
+    public void saveUsageMetric() throws Exception{
+		registrationListPage.clickSaveButton();
+		CommonObjects commonObjects = new CommonObjects();
+		commonObjects.filterName(SELENIUM_USAGE_METRIC);
+		commonObjects.clickOptionsIcon();
+	}
 	@Then("^save mandatory DND list$")
     public void saveMandatoryDNDListButton() throws Exception{
 		registrationListPage.clickSaveButton();
@@ -930,6 +944,16 @@ public class RegistrationList extends Init{
 		String listname = SELENIUM_DISCOVERED_CLUSTERS_LIST;
 		System.out.println(listname);
 		registrationListPage.enterRegistratonListDetails(listname, "Description");	
+	}
+	@Then("^enter details of customer driven event$")
+    public void createCustomerDrivenEvent() throws Exception{
+		String field = SELENIUM_CUSTOMER_DRIVEN_EVENT;
+		registrationListPage.enterCustomerDrivenEventDetails(field, "Description");	
+	}
+	@Then("^enter details of usage metric$")
+    public void createUsageMetric() throws Exception{
+		String field = SELENIUM_USAGE_METRIC;
+		registrationListPage.enterUsageMetricDetails(field, "Description");	
 	}
 	
 	

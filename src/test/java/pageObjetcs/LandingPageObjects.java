@@ -28,6 +28,10 @@ public class LandingPageObjects extends Init{
 	private WebElement dataFoundation;
 	@FindBy(xpath="//div[contains(text(),'Discovered Clusters')]/../../..")
 	private WebElement discoveredClusters;
+	@FindBy(xpath="//div[contains(text(),'Customer Driven Events')]/../../..")
+	private WebElement customerDrivenEvents;
+	@FindBy(xpath="//div[contains(text(),'Usage Metric')]/../../..")
+	private WebElement usageMetric;
 	@FindBy(xpath=".//*[@id='topBar']//img")
 	private WebElement flytxtLogo;
 	@FindBy(xpath="//div[contains(@class,'profile-name')]/..")
@@ -73,6 +77,13 @@ public class LandingPageObjects extends Init{
 	public void navigateToDiscoveredClusters() throws InterruptedException {
 		jswait.loadClick(discoveredClusters);
 	}
+	public void navigateToCustomerDrivenEvents() throws InterruptedException {
+		jswait.loadClick(customerDrivenEvents);
+	}
+	public void navigateToUsageMetric() throws InterruptedException {
+		jswait.loadClick(usageMetric);
+	}
+	
 	public void navigateToLandingPage() throws InterruptedException {
 		jswait.loadClick(flytxtLogo);
 	}

@@ -2,6 +2,7 @@
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -42,6 +43,7 @@ public class CommonSteps extends Init {
     private WebElement loginButton;
 	@Given("^login$")
     public void loginuser() throws Exception {
+
 		 driver.get("http://"+p.getValue("env"));
 		 loginPage.login(p.getValue("username"), p.getValue("password"));
 		 
@@ -90,6 +92,15 @@ public class CommonSteps extends Init {
 	public void navigateToDiscoveredClusters() throws InterruptedException {
 		landingPage.navigateToDiscoveredClusters();
 	}
+	@Then("^navigate to customer driven events")
+	public void navigateToCustomerDrivenEvents() throws InterruptedException {
+		landingPage.navigateToCustomerDrivenEvents();
+	}
+	@Then("^navigate to usage metric")
+	public void navigateToUsageMetric() throws InterruptedException {
+		landingPage.navigateToUsageMetric();
+	}
+	
 	@Then("^navigate to registration list")
 	public void navigateToRegistrationList() throws InterruptedException {
 		registrationListPage.navigateToRegistrationList();

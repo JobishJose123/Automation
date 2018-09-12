@@ -48,8 +48,8 @@ public class RegistrationListPage extends Init{
 	private WebElement registrationListSelectAllPartners;
 	@FindBy(xpath="//div[@id='radioLabel'][contains(.,'Mandatory')]/..")
 	private WebElement dndListMandatorySelect;
-//	@FindBy(xpath="")
-//	private WebElement registrationListButton;
+	@FindBy(xpath="//div[contains(text(),'Enable Tracking')]")
+	private WebElement enableTrackingCheckbox;
 //	@FindBy(xpath="")
 //	private WebElement registrationListButton;
 //	@FindBy(xpath="")
@@ -110,6 +110,9 @@ public class RegistrationListPage extends Init{
 	public void clickSaveButton() throws InterruptedException {
 		jswait.loadClick(registrationListSaveButton);
 	}
+	public void enableTracking() throws InterruptedException {
+		jswait.loadClick(enableTrackingCheckbox);
+	}
 	public void SelectAllPartners() throws InterruptedException {
 		jswait.loadClick(registrationListSelectAllPartners);
 	}
@@ -119,6 +122,17 @@ public class RegistrationListPage extends Init{
 		selectRegistrationListTypeStandard();
 		SelectAllPartners();
 	}
+	public void enterCustomerDrivenEventDetails(String name,String desc) throws InterruptedException {
+		enterRegistrationListName(name);
+		enterRegistrationListDescription(desc);
+	}
+	public void enterUsageMetricDetails(String name,String desc) throws InterruptedException {
+		enterRegistrationListName(name);
+		enterRegistrationListDescription(desc);
+		enableTracking();
+		SelectAllPartners();
+	}
+	
 	public void enterDNDRegistratonListDetails(String name,String desc) throws InterruptedException {
 		enterRegistrationListName(name);
 		enterRegistrationListDescription(desc);

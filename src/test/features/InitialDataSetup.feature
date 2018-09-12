@@ -35,6 +35,28 @@ Then enter details of discovered clusters list
 Then save discovered clusters list
 Then navigate to landing page
 
+@NX-createCustomerDrivenEvents
+@initBrowser @closeBrowser
+Scenario: Create Customer Driven Event for upload
+Given login
+Then navigate to data foundation
+Then navigate to customer driven events
+Then click create new registration list button
+Then enter details of customer driven event
+Then save customer driven event
+Then navigate to landing page
+
+@NX-createUsageMetricField
+@initBrowser @closeBrowser
+Scenario: Create Customer Driven Event for upload
+Given login
+Then navigate to data foundation
+Then navigate to usage metric
+Then click create new registration list button
+Then enter details of usage metric
+Then save usage metric
+Then navigate to landing page
+
 
 @NX-3482
 @NX-createDndList
