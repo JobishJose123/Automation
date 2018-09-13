@@ -79,6 +79,8 @@ public static Logger log;
 	public final String SELENIUM_PARTNER = "selenium_partner";
 	public final String INVENTORY_UNLIMITED = "Unlimited";
 	public final String USAGE_METRIC_UNIQUE = "Unique_Metric";
+	public String KPI_TEXT1 ="";
+	public String KPI_TEXT2 ="";
 
 	
 }

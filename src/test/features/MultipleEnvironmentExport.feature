@@ -325,5 +325,6 @@ Feature: Test cases related to export campaign in multiple environment
    	Then verify whether validation messasge for invalid usag metric shown
    	Then map to the native condition
    	Then verify color of KPI condition box after successful mapping
+   	Then verify texts of KPI  conditions before and after mapping
    	
 		

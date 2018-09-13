@@ -996,6 +996,14 @@ public class CampaignManagement extends Init{
 			   
 			   
 		   }
+		   
+		   @Then("^verify texts of KPI  conditions before and after mapping$")
+		   public void verifyTextsOfKPIConditionsBeforeAndAfterMapping() throws Throwable {
+			   
+			   campaignObjects.verifyTextsOfKPIConditionsBeforeAndAfterMapping();
+			   
+			   
+		   }
 		    
 		    
 		    

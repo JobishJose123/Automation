@@ -977,6 +977,8 @@ public class CampaignObjects extends Init{
 		
 		String color=KPIConditionBox.getCssValue("color");
 		System.out.println("Color Before Mapping:"+color);
+		KPI_TEXT1=jswait.getTextFormElement("//div[@data-nodepos='responseData.conditions']");
+		
 		Exception colorExec= new Exception("Color Not Matching");
 		if(color.equals("rgba(255, 0, 0, 1)")) {
 			
@@ -997,6 +999,8 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 		
 		String color=KPIConditionBox.getCssValue("color");
 		System.out.println("Color After Mapping:"+color);
+		KPI_TEXT2=jswait.getTextFormElement("//div[@data-nodepos='responseData.conditions']");
+		
 		Exception colorExec= new Exception("Color Not Matching");
 		if(color.equals("rgba(23, 26, 40, 1)")) {
 			
@@ -1022,6 +1026,22 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 		jswait.loadClick(nativeKPIListFirstElement);
 		jswait.loadClick(conditionMapSave);
 		
+	}
+	
+   public void verifyTextsOfKPIConditionsBeforeAndAfterMapping() throws Throwable {
+		
+	   
+	   
+	    System.out.println("Text Before Mapping:"+KPI_TEXT1);
+	    System.out.println("Text After Mapping:"+KPI_TEXT2);
+		Exception KPITextExcep=new Exception("Text are same after mapping");
+		if(KPI_TEXT1.equals(KPI_TEXT2)) {
+			throw KPITextExcep;
+			
+		}
+		
+		else
+			System.out.println("Text are different after mapping");
 	}
 	
 	
