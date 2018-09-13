@@ -87,4 +87,13 @@ public class DataFusionEngineSteps extends Init {
 		//String partnerName= DataFusionEngineObjects.Hostname().getText();
 			
 	}
+	@Then("^edit the job from sheet \"([^\"]*)\"$")
+	public void ClickEdit(String sheet) throws IOException, Exception {
+		eh.setExcelFile("DKInput", sheet);
+		String JobName = (String) eh.getCell(1, 0);
+		DataFusionEngineObjects.edit(JobName);
+		Thread.sleep(3000);
+		//String partnerName= DataFusionEngineObjects.Hostname().getText();
+			
+	}
 }

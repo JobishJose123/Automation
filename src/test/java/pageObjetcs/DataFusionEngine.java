@@ -48,6 +48,9 @@ public class DataFusionEngine extends Init {
 	@FindBy(xpath = ".//paper-item[contains(.,'Delete')]")
 	private WebElement jobdelete;
 	
+	@FindBy(xpath = ".//paper-item[contains(.,'Edit')]")
+	private WebElement jobedit;
+	
 	@FindBy(xpath = "//div/paper-button[contains(.,'Delete')]")
 	private WebElement Deleteok;
 	
@@ -141,6 +144,9 @@ public class DataFusionEngine extends Init {
 	public void clickDeleteOption() throws InterruptedException{
 		jswait.loadClick(jobdelete);
 		}
+	public void clickEditOption() throws InterruptedException{
+		jswait.loadClick(jobedit);
+		}
 	
 	public void copy(String jobname) throws InterruptedException, Exception, IOException{
 		commonObjects.filterName(jobname);
@@ -170,6 +176,26 @@ public class DataFusionEngine extends Init {
 		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+jobname+"')]"));
 		Assert.assertFalse("Job Not deleted", element.isDisplayed());
 		}
+	public void edit(String jobname) throws InterruptedException, Exception, IOException{
+		commonObjects.filterName(jobname);
+		commonObjects.clickOptionsIcon();
+		clickEditOption();
+		Thread.sleep(2000);
+		//driver.SendKeys(Jobname, "edited");
+		driver.findElement(By.xpath(".//label[contains(.,'Job Name')]/../input")).sendKeys("edited");
+		jswait.loadClick(JobSave);
+		//jswait.loadClick(Deleteok);
+		//Thread.sleep(2000);
+		//String copiedjobname = commonObjects.getTextFormTextField(".//label[contains(.,'Job Name')]/../input");
+		//System.out.println("name" +copiedjobname );
+		//jswait.loadClick(JobSave);
+		jobname = jobname + "edited";
+		commonObjects.filterName(jobname);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+jobname+"')]"));
+		Assert.assertTrue("Job Not Edited", element.isDisplayed());
+		}
+
 		
 
 }

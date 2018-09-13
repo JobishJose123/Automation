@@ -29,7 +29,7 @@ Then click Data Fusion Engine
 Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
 Then copy the job from sheet "Jobinput"
 
-@NX-4466
+@NX-4466 @closeBrowser
 @initBrowser @closeBrowser
 Scenario: DK--->Verify the functionality of Copy option
 Given login
@@ -37,5 +37,15 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
 Then delete the job from sheet "Jobinput"
+
+
+@NX-4464 @closeBrowser
+@initBrowser @closeBrowser
+Scenario: DK--->Verify the functionality of Edit option
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
+Then edit the job from sheet "Jobinput"
 
   
