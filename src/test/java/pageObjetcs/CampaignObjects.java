@@ -154,9 +154,9 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath = "//div[@data-nodepos='responseData.conditions']")
 	private WebElement KPIConditionBox;
 	
-	@FindBy(xpath = "//label[contains(.,'Native KPI')]//following::iron-icon")
+	@FindBy(xpath = "//label[contains(.,'Native KPI')]//following::iron-icon[2]")
 	private WebElement nativeKPIField;
-	@FindBy(xpath = "//paper-listbox[@id='listBoxDropdown']//paper-item[1]")
+	@FindBy(xpath = "//vaadin-combo-box-item[1]")
 	private WebElement nativeKPIListFirstElement;
 	@FindBy(xpath = "//paper-button[@id='saveCondition']")
 	private WebElement conditionMapSave;
@@ -1019,10 +1019,6 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 		action.moveToElement(KPIConditionBox).doubleClick().build().perform();
 		jswait.loadClick(nativeKPIField);
 		Thread.sleep(2000);
-		jswait.loadClick(nativeKPIField);
-		Thread.sleep(2000);
-		jswait.loadClick(nativeKPIField);
-		Thread.sleep(3000);
 		jswait.loadClick(nativeKPIListFirstElement);
 		jswait.loadClick(conditionMapSave);
 		
