@@ -102,6 +102,14 @@ public class CommonSteps extends Init {
 	public void navigateToUsageMetric() throws InterruptedException {
 		landingPage.navigateToUsageMetric();
 	}
+	@Then("^navigate to revenue metric")
+	public void navigateToRevenueMetric() throws InterruptedException {
+		landingPage.navigateToRevenueMetric();
+	}
+	@Then("^navigate to event counts")
+	public void navigateToEventCounts() throws InterruptedException {
+		landingPage.navigateToEventCounts();
+	}
 	
 	@Then("^navigate to registration list")
 	public void navigateToRegistrationList() throws InterruptedException {

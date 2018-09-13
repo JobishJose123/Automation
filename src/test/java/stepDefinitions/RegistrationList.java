@@ -913,6 +913,20 @@ public class RegistrationList extends Init{
 		commonObjects.filterName(SELENIUM_USAGE_METRIC);
 		commonObjects.clickOptionsIcon();
 	}
+	@Then("^save revenue metric$")
+    public void saveRevenueMetric() throws Exception{
+		registrationListPage.clickSaveButton();
+		CommonObjects commonObjects = new CommonObjects();
+		commonObjects.filterName(SELENIUM_REVENUE_METRIC);
+		commonObjects.clickOptionsIcon();
+	}
+	@Then("^save event counts$")
+    public void saveEventCounts() throws Exception{
+		registrationListPage.clickSaveButton();
+		CommonObjects commonObjects = new CommonObjects();
+		commonObjects.filterName(SELENIUM_EVENT_COUNTS);
+		commonObjects.clickOptionsIcon();
+	}
 	@Then("^save mandatory DND list$")
     public void saveMandatoryDNDListButton() throws Exception{
 		registrationListPage.clickSaveButton();
@@ -954,6 +968,17 @@ public class RegistrationList extends Init{
     public void createUsageMetric() throws Exception{
 		String field = SELENIUM_USAGE_METRIC;
 		registrationListPage.enterUsageMetricDetails(field, "Description");	
+		
+	}
+	@Then("^enter details of revenue metric$")
+    public void createRevenueMetric() throws Exception{
+		String field = SELENIUM_REVENUE_METRIC;
+		registrationListPage.enterRevenueMetricDetails(field, "Description");	
+	}
+	@Then("^enter details of event counts$")
+    public void createEventCounts() throws Exception{
+		String field = SELENIUM_EVENT_COUNTS;
+		registrationListPage.enterEventCountDetails(field, "Description");	
 	}
 	
 	

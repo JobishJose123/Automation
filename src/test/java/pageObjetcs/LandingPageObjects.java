@@ -32,6 +32,10 @@ public class LandingPageObjects extends Init{
 	private WebElement customerDrivenEvents;
 	@FindBy(xpath="//div[contains(text(),'Usage Metric')]/../../..")
 	private WebElement usageMetric;
+	@FindBy(xpath="//div[contains(text(),'Event Counts')]/../../..")
+	private WebElement eventCounts;
+	@FindBy(xpath="//div[contains(text(),'Revenue Metrics')]/../../..")
+	private WebElement revenueMetric;
 	@FindBy(xpath=".//*[@id='topBar']//img")
 	private WebElement flytxtLogo;
 	@FindBy(xpath="//div[contains(@class,'profile-name')]/..")
@@ -82,6 +86,14 @@ public class LandingPageObjects extends Init{
 	}
 	public void navigateToUsageMetric() throws InterruptedException {
 		jswait.loadClick(usageMetric);
+	}
+	public void navigateToEventCounts() throws InterruptedException {
+		jswait.loadClick(eventCounts);
+	}
+	
+	
+	public void navigateToRevenueMetric() throws InterruptedException {
+		jswait.loadClick(revenueMetric);
 	}
 	
 	public void navigateToLandingPage() throws InterruptedException {

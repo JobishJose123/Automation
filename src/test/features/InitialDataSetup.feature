@@ -57,6 +57,28 @@ Then enter details of usage metric
 Then save usage metric
 Then navigate to landing page
 
+@NX-createRevenueMetricField
+@initBrowser @closeBrowser
+Scenario: Create Customer Driven Event for upload
+Given login
+Then navigate to data foundation
+Then navigate to revenue metric
+Then click create new registration list button
+Then enter details of revenue metric
+Then save revenue metric
+Then navigate to landing page
+
+@NX-createEventCountField
+@initBrowser @closeBrowser
+Scenario: Create Customer Driven Event for upload
+Given login
+Then navigate to data foundation
+Then navigate to event counts
+Then click create new registration list button
+Then enter details of event counts
+Then save event counts
+Then navigate to landing page
+
 
 @NX-3482
 @NX-createDndList

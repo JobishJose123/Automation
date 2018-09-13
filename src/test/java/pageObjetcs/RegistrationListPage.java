@@ -132,6 +132,18 @@ public class RegistrationListPage extends Init{
 		enableTracking();
 		SelectAllPartners();
 	}
+	public void enterRevenueMetricDetails(String name,String desc) throws InterruptedException {
+		enterRegistrationListName(name);
+		enterRegistrationListDescription(desc);
+		enableTracking();
+		SelectAllPartners();
+	}
+	public void enterEventCountDetails(String name,String desc) throws InterruptedException {
+		enterRegistrationListName(name);
+		enterRegistrationListDescription(desc);
+		enableTracking();
+		SelectAllPartners();
+	}
 	
 	public void enterDNDRegistratonListDetails(String name,String desc) throws InterruptedException {
 		enterRegistrationListName(name);

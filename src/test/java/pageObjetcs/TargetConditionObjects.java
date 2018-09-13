@@ -63,6 +63,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionTypeCustomerProfileInfo;
 	@FindBy(xpath="//paper-item[contains(.,'System Events')]")
 	private WebElement targetConditionTypeSystemEvents;
+	@FindBy(xpath="//paper-item[contains(.,'Customer Driven Events')]")
+	private WebElement targetConditionTypeCustomerDrivenEvents;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Location Insights')]")
 	private WebElement targetConditionTypeCustomerLocationInsights;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Device Info')]")
@@ -128,6 +130,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement conditionIsSubscribed;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer accepted')]")
 	private WebElement eventOfferAccepted;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]")
+	private WebElement eventCustomerDrivenEvent;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer declined')]")
 	private WebElement eventOfferDeclined;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer was sent the message')]")
@@ -348,6 +352,17 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionTypeSystemEvents);
 			jswait.loadSendKeys(EventFieldSelector,"Offer accepted");
 			jswait.loadClick(eventOfferAccepted);
+			jswait.loadClick(eventDateAndTimeSelector);
+			jswait.loadClick(allEventsBefore);
+			jswait.loadClick(selectFieldSelector);
+			jswait.loadClick(nowSelect);
+			jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("customerDrivenEvent")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerDrivenEvents);
+			jswait.loadSendKeys(EventFieldSelector,SELENIUM_CUSTOMER_DRIVEN_EVENT);
+			jswait.loadClick(eventCustomerDrivenEvent);
 			jswait.loadClick(eventDateAndTimeSelector);
 			jswait.loadClick(allEventsBefore);
 			jswait.loadClick(selectFieldSelector);
