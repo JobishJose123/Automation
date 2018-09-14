@@ -579,7 +579,13 @@ public class TargetConditionObjects extends Init {
 		    jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeUsageMetrics);
 			jswait.loadClick(usageMetricField);
-			jswait.loadClick(usageMetricUnique);
+			
+			eM.setExcelFile("usageMetricInputData","usageMetric");
+	    	String name = (String) eM.getCell(1, 0);
+	    	Thread.sleep(2000);
+			
+			jswait.loadClick("//paper-item[contains(.,'"+name+"')]");
+			//jswait.loadClick(usageMetricUnique);
 			jswait.loadClick(metricWeekSelector);
 			jswait.loadClick(metricWeekOption);
 			jswait.loadClick(metricDaySelector);
@@ -588,6 +594,7 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"18");
 			jswait.loadClick(targetConditionSave);
+	
 	 }
 	 
 	 

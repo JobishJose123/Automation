@@ -222,6 +222,26 @@ public class CommonSteps extends Init {
 		commonObjetcs.clickCreateNewCustomerLocationInsight();
 	}
 	
+	
+	@Then("^click create new usage metric$")
+    public void clickCreateNewUsageMetricButton() throws Throwable{
+		commonObjetcs.clickCreateNewUsageMetric();
+	}
+	
+	
+	@Then("^enter new usage metric details from sheet \"([^\"]*)\"$")
+    public void enterNewUsageMetricDetails(String sheet) throws Throwable{
+		
+    	Thread.sleep(4000);
+    	eM.setExcelFile("usageMetricInputData",sheet);
+ 		String name = (String) eM.getCell(1, 0);
+ 		name =  RandomNameGenerator.getRandomName(name);
+ 		eM.setCell(1, 0, name);
+		commonObjetcs.enterNewUsageMetricDetails(name, "Test Description");
+	
+	
+	}
+	
 	@Then("^enter new customer location insight details from sheet \"([^\"]*)\"$")
     public void enterNewCustomerLocationInsightDetails(String sheet) throws Throwable{
 		
@@ -241,6 +261,18 @@ public class CommonSteps extends Init {
     	eM.setExcelFile("customerLocationInsightInputData",sheet);
  		String name = (String) eM.getCell(1, 0);
 		commonObjetcs.enterNewCustomerLocationInsightDetails(name, "Test Description");
+	
+	
+	}
+	
+	
+	@Then("^create same usage metric details from sheet \"([^\"]*)\"$")
+    public void enterSameUsageMetricDetails(String sheet) throws Throwable{
+		
+    	Thread.sleep(4000);
+    	eM.setExcelFile("usageMetricInputData",sheet);
+ 		String name = (String) eM.getCell(1, 0);
+		commonObjetcs.enterNewUsageMetricDetails(name, "Test Description");
 	
 	
 	}

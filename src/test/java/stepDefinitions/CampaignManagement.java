@@ -461,6 +461,16 @@ public class CampaignManagement extends Init{
 	    	
 	    }
 	    
+	    @Then("^check usage metric KPI showing while click on use template option$")
+	    public void checkUsageMetricKPIShowingWhileClickOnUseTemplateOption() throws Throwable {
+	    	
+	    	campaignObjects.clickOnUseTemplateButton();
+	    	
+	    	campaignObjects.enterCampaignDeailsForExportCampaign();
+	    	
+	    	
+	    }
+	    
 	    
 	    
 	    @Then("^choose export to location option from sheet \"([^\"]*)\"$")
@@ -993,6 +1003,17 @@ public class CampaignManagement extends Init{
 		   public void map_to_the_native_condition() throws Throwable {
 			   
 			   campaignObjects.map_to_the_native_condition();
+			   
+			   
+		   }
+		   
+		   @Then("^map to the native condition from sheet \"([^\"]*)\"$")
+		   public void map_to_the_native_condition_from_sheet(String sheet) throws Throwable {
+			    Thread.sleep(4000);
+		    	eM.setExcelFile("usageMetricInputData",sheet);
+		 		String name = (String) eM.getCell(1, 0);
+		 		eM.setCell(1, 0, name);
+			   campaignObjects.map_to_the_native_condition_from_sheet(name);
 			   
 			   
 		   }

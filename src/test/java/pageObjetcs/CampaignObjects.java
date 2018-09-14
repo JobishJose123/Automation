@@ -3,6 +3,7 @@ package pageObjetcs;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -253,7 +254,7 @@ public class CampaignObjects extends Init{
 		jswait.loadClick(saveCampaignTemplateButton);
 	}
 	
-	public void chooseCategory() throws InterruptedException, IOException {
+	public void chooseCategory() throws InterruptedException, IOException, UnsupportedFlavorException {
 		
 	    jswait.loadClick(selectCategory);
 		String Category=firstCategory.getText();
@@ -263,6 +264,8 @@ public class CampaignObjects extends Init{
     	System.out.println("151511: "+eM.getCell(1, 0));
  		eM.setCell(1, 0, Category);
 		jswait.loadClick(firstCategory);
+		
+		KPI_TEXT1=jswait.getTextFormElement("//div[@data-nodepos='responseData.conditions']");
 	
 	}
 	
@@ -662,6 +665,16 @@ public class CampaignObjects extends Init{
 		jswait.loadSendKeys(offerCatalogSelector,catalog);
 		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+catalog+"')]");
 	}
+	
+	public void selectOfferCatalogForExportCapaign() throws InterruptedException, UnsupportedFlavorException, IOException {
+		jswait.loadClick(offerCatalogSelector);
+		//jswait.loadClick("//vaadin-combo-box-item[1]");
+		Thread.sleep(4000);
+		String cat=jswait.getTextFormElement(".//*[@id='messageStyle']//following::vaadin-combo-box-item[1]");
+		System.out.println("Catalog: "+cat);
+		jswait.loadSendKeys(offerCatalogSelector,cat);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+cat+"')]");
+	}
 	public void enterCampaignName(String name) throws InterruptedException {
 		jswait.loadSendKeys(campaignName, name);
 	}
@@ -717,6 +730,35 @@ public class CampaignObjects extends Init{
 		enterCampaignName(name);
 		enterCampaignDescription("Campaign to check bc creation in selenium");
 		selectOfferCatalog(catalog);
+	}
+	
+	
+	public void enterCampaignDeailsForExportCampaign() throws Throwable {
+		
+		selectTypeInformational();
+		String name="Test_Camp";
+		enterCampaignName(name);
+		enterCampaignDescription("Campaign to check bc creation in selenium");
+		selectOfferCatalogForExportCapaign();
+		clickProceedButton();
+		compareTextOfUsageMetricKPI();
+	}
+	
+	public void compareTextOfUsageMetricKPI() throws Throwable {
+		
+		  KPI_TEXT2=jswait.getTextFormElement("//usage-metric[@class='style-scope target-usage-metric']");
+		
+		 System.out.println("Text Before Import:"+KPI_TEXT1);
+		    System.out.println("Text After Import:"+KPI_TEXT2);
+			Exception KPITextExcep=new Exception("Text are different after import");
+			if(KPI_TEXT1.equals(KPI_TEXT2)) {
+				
+				System.out.println("Text are same after import");
+					
+			}
+			else
+				throw KPITextExcep;
+		
 	}
 	
 	
@@ -1027,6 +1069,21 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 		jswait.loadClick(conditionMapSave);
 		
 	}
+	
+	
+	
+   public void map_to_the_native_condition_from_sheet(String name) throws Throwable {
+		
+		Actions action = new Actions(driver);
+		action.moveToElement(KPIConditionBox).doubleClick().build().perform();
+		jswait.loadClick(nativeKPIField);
+		Thread.sleep(2000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+name+"')]");
+		jswait.loadClick(conditionMapSave);
+		
+	}
+	
+	
 	
    public void verifyTextsOfKPIConditionsBeforeAndAfterMapping() throws Throwable {
 		

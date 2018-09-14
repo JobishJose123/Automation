@@ -72,6 +72,8 @@ public class CommonObjects extends Init {
 	private WebElement ActivateBCButton;
 	@FindBy(xpath="//paper-button[text()='Create']")
 	private WebElement createNewCustomerLocationInsightButton;
+	@FindBy(xpath="//paper-button[text()='Create']")
+	private WebElement createNewUsageMetricButton;
 
 	@FindBy(xpath = "//*[@id='sym2']")
 	private WebElement offers;
@@ -102,6 +104,12 @@ public class CommonObjects extends Init {
 	 @FindBy(xpath=".//*[@id='createNew']//label[text()='Description']/..//textarea")
 		private WebElement registrationListDescription;
 	 
+	 @FindBy(xpath="//label[contains(.,'Default Targeting Option')]/../input")
+		private WebElement defaultTargetingOption;
+	 
+	 @FindBy(xpath="//paper-item[contains(.,'By Week')]")
+		private WebElement byWeekOption;
+	 
 	 @FindBy(xpath=".//*[@id='createNew']//label[text()='Context Type']/..//input")
 		private WebElement customerLocationInsightContextTypeSelector;
 	 @FindBy(xpath=".//*[@id='createNew']//paper-item[text()='Normal']")
@@ -131,6 +139,11 @@ public class CommonObjects extends Init {
 		 jswait.loadClick(createNewCustomerLocationInsightButton);
 	 }
 	 
+ public void clickCreateNewUsageMetric() throws Throwable {
+		 
+		 jswait.loadClick(createNewUsageMetricButton);
+	 }
+	 
 	 
  public void enterNewCustomerLocationInsightDetails(String name,String desc) throws Throwable {
 		 
@@ -138,6 +151,17 @@ public class CommonObjects extends Init {
 	    enterCustomerLocationInsightDescription(desc);
 	    selectCustomerLocationInsightContextType();
 	    selectCustomerLocationInsightType();
+	    clickSaveCustomerLocationInsighButton();
+		
+	 }
+ 
+ 
+ public void enterNewUsageMetricDetails(String name,String desc) throws Throwable {
+	 
+	    enterCustomerLocationInsightName(name);
+	    enterCustomerLocationInsightDescription(desc);
+	    jswait.loadClick(defaultTargetingOption);
+	    jswait.loadClick(byWeekOption);
 	    clickSaveCustomerLocationInsighButton();
 		
 	 }
