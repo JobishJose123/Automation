@@ -146,7 +146,7 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = ".//paper-card/form//div/div/div[contains(.,'Define Creative')]")
 	private List<WebElement> defineCreativeTitle;
 	@FindBy(xpath = ".//paper-checkbox[@id='setDefault']")
-	private WebElement setAsDefaultCreative;
+	private List<WebElement> setAsDefaultCreative;
 	@FindBy(xpath = ".//paper-button[contains(.,'Add Creative')]")
 	private WebElement addCreativeButton;
 	@FindBy(xpath = ".//paper-icon-button[@icon='delete']")
@@ -866,13 +866,27 @@ public class OfferPageObjects extends Init {
 
 	public void verifySetAsDefaultCheckboxinCreativeTab() throws Throwable {
 
-		if (defineCreativeTitle.size() == 1)
-			assertFalse("Set as default checkbox is displaying", setAsDefaultCreative.isDisplayed());
-
+		if (defineCreativeTitle.size() == 1)  {
+			Exception ceckboxExcep=new Exception("Set as default checkbox is displaying");
+					
+			if (setAsDefaultCreative.size() == 2) {
+				throw ceckboxExcep;
+			}
+			}
+			
 		clickAddCreativeButton();
 		clickSecondCreativeLanguageField();
 		clickSecondCreativeLanguageSpanishSelect();
-		assertTrue("Set as default checkbox is not displaying", setAsDefaultCreative.isDisplayed());
+		
+		
+		if (defineCreativeTitle.size() == 2)  {
+			Exception ceckboxExcep2=new Exception("Set as default checkbox is not displaying");
+					
+			if (setAsDefaultCreative.size() == 1) {
+				throw ceckboxExcep2;
+			}
+			}
+		
 		// assertTrue("Set as default checkbox is not selected",
 		// setAsDefaultCheckbox.isSelected());
 		// Thread.sleep(4000);
@@ -881,7 +895,11 @@ public class OfferPageObjects extends Init {
 		// clickRemoveTrackYesButton();
 		assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
 	}
-
+	
+	
+	
+	
+	
 	public void createOfferAndVerifyOptionalFields(String sheet, String productSheet) throws Throwable {
 		clickCreateNewOfferButton();
 		enterOfferDetailsFromSheetAndVerifyOptionalFields(sheet, productSheet);
