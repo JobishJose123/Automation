@@ -366,7 +366,7 @@ public class ProductTestCaseSteps extends Init{
     public void verifyProductsGrid(String sheet) throws Exception {
 		eh.setExcelFile("productInputData",sheet);
 		commonObjects.filterName(eh.getCell(1, 0).toString());
-		jswait.waitUntil("//span[contains(.,'"+eh.getCell(1, 0)+"')]/../../data-table-cell[3][contains(.,'Description')]");
+		jswait.waitUntil("//span[contains(.,'"+eh.getCell(1, 0)+"')]/../../data-table-cell[3][contains(.,'Product with attribute')]");
 	}
 	
 	@Then("^check if  the filter option is saving data after cancel$")

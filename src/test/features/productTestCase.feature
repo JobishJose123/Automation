@@ -44,16 +44,20 @@ Then saving product with multiple benefits
 
 
 @NX-1011
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Products Grid: Verify the product details displayed in the Products screen NX-1011
 Given login
+Then navigate to configuration management
+Then naviagte to product classes
+Then create product class and number attribute from "TestProductClass"
+Then navigate to landing page
 Then navigate to precision marketer
 Then navigate to offer management
 Then navigate to products
-Then navigate to prepaid telecom
+Then navigate to product class "TestProductClass"
 Then click create new product button
-Then create single product from sheet "singleProductPage"
-Then verify "singleProductPage" product details displayed in the products screen
+Then create product with attributes from sheet "fullDetails"
+Then verify "fullDetails" product details displayed in the products screen
 #
 @NX-1061
 @initBrowser @closeBrowser

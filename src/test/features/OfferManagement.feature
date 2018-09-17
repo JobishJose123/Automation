@@ -191,14 +191,14 @@ Feature: Test suite on Offer creation
     Then create new offer up to creative tab and choose all languages from sheet "usageBasedWAP" with product "singleProductPage"
 
   @initBrowser @closeBrowser @NX-2101
-  Scenario: Verify SQL injection in Filtering Offers
+  Scenario: Verify SQL injection in Filtering Offers-2101
     Given login
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
     Then verify sql injection in offer
 
-  @initBrowser @closeBrowser @NX-2065
+  @initBrowser  @NX-2065
   Scenario: Checking cross site scripting in creation of new offer under CLV Max
     Given login
     Then navigate to precision marketer
