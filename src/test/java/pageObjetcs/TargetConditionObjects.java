@@ -569,6 +569,33 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(nowSelect);
 			jswait.loadClick(targetConditionSave);
 		}
+		else if(event.contentEquals("usageMetric")){
+			jswait.loadClick(targetConditionTypeSelector);
+		jswait.loadClick(targetConditionTypeUsageMetrics);
+		jswait.loadClick(usageMetricField);
+		jswait.loadSendKeys(usageMetricField,SELENIUM_USAGE_METRIC);
+		jswait.loadClick(usageMetricUnique);
+		jswait.loadClick(metricWeekSelector);
+		jswait.loadClick(metricByMonthOption);
+		jswait.loadClick(metricDaySelector);
+		jswait.loadClick(metricMaxOf);
+		jswait.loadClick(metricMaxOfMonthsSelect);
+		jswait.loadClick(metricMaxOfMonthThisMonth);
+		jswait.loadClick(metricMaxOfMonthLastMonth);
+		jswait.loadClick(metricMaxOfMonthLast2Month);
+		jswait.loadClick(metricMaxOfMonthLast3Month);
+		jswait.loadClick(metricMaxOfMonthLast4Month);
+		jswait.loadClick(metricMaxOfMonthLast5Month);
+		jswait.loadClick(metricMaxOfMonthLast6Month);
+		jswait.loadClick(metricMaxOfMonthLast7Month);
+		jswait.loadClick(metricMaxOfMonthLast8Month);
+		jswait.loadClick(metricMaxOfMonthLast9Month);
+		
+		jswait.loadClick(metricConditionField);
+		jswait.loadClick(conditionIsGreaterThan);
+		jswait.loadSendKeys(isGreaterThanValue,"0");
+		jswait.loadClick(targetConditionSave);
+		}
 			
 	 }
 	 
