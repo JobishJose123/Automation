@@ -604,6 +604,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
   Then Add "rechargeEmail" offer to Offer Catalogue
     Then pass next scenario based on this step
 
+
   @NX-2329
   @initBrowser
   Scenario: Verify for the Add Variable icon in the Creative tab NX-2329
@@ -614,6 +615,11 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
  
   Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
     Then check previous step and pass this
+    
+    @NX-2414
+     Scenario: Email Channel -->Verify the change button as per the design document
+    Then check previous step and pass this
+    Then pass next scenario based on this step
     
     @NX-2419 @initBrowser
   Scenario: Email Channel -->Verify the Create offer using Email as a channel. NX-2419 
