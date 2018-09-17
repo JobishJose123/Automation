@@ -121,7 +121,7 @@ Then create new segmented product from sheet "productsSamePrice"
 Then verify "productsSamePrice" product details displayed in the products screen
 #
 @NX-1057
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Create Product: Verify adding products with same price under open market NX-1057
 Given login
 Then navigate to precision marketer
@@ -288,15 +288,19 @@ Then verify clicking on options icon in offer grid
 @initBrowser @closeBrowser
 Scenario: Create offer:Offers Display: Verify the edit option of the offers NX-810
 Given login
+Then navigate to configuration management
+Then naviagte to product classes
+Then create product class and number attribute from "TestProductClass"
+Then navigate to landing page
 Then navigate to precision marketer
 Then navigate to offer management
 Then navigate to products
-Then navigate to prepaid telecom
+Then navigate to product class "TestProductClass"
 Then click create new product button
-Then create single product from sheet "singleProductPage"
+Then create product with attributes from sheet "fullDetails"
 Then navigate to offer management
 Then navigate to offers
-Then create new offer from sheet "rechargeWAP" with product "singleProductPage"
+Then create new offer from sheet "rechargeWAP" with product "fullDetails"
 Then check edit offer functionality for "rechargeWAP"
 
 @NX-1046
