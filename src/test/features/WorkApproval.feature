@@ -132,8 +132,10 @@ Feature: generic product class
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then approve campaign by selenium user
+     Then login with seleniumuser from sheet "seleniumuser"
+       Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then Logout from Neon application
     Then login
     Then navigate to precision marketer
@@ -177,7 +179,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
 
 
 
-  @NX-6467 @initBrowser @closeBrowser
+  @NX-6467 @initBrowser 
   Scenario: Verify the details displaying while clicked on Show history
     Given login
     Then navigate to configuration management
@@ -193,8 +195,10 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign show history
     Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then approve campaign by selenium user
+     Then login with seleniumuser from sheet "seleniumuser"
+       Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then naigate to "campaignBC" campaign show historyapprove
 
   @NX-6356 @initBrowser @closeBrowser
@@ -212,8 +216,10 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then approve campaign by selenium user
+  Then login with seleniumuser from sheet "seleniumuser"
+       Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then Logout from Neon application
     Then login
     Then navigate to precision marketer
@@ -224,6 +230,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
     Then activate bc
     
+
 
     
     
@@ -248,6 +255,9 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
     Then login with seleniumuser from sheet "seleniumuser"
+       Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then approve campaign by selenium user
     Then Logout from Neon application
     Then login
@@ -278,7 +288,10 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
+  Then login with seleniumuser from sheet "seleniumuser"
+       Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then approve campaign by selenium user
     Then Logout from Neon application
     Then login
@@ -299,7 +312,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     
      
   @NX-6357 @initBrowser 
-  Scenario: Verify creation of BC without approval flow butnot for campaign
+  Scenario: Verify creation of BC without approval flow but not for campaign
     Given login
     Then navigate to configuration management
     Then navigate to campaign categories
@@ -313,8 +326,10 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then approve campaign by selenium user
+     Then login with seleniumuser from sheet "seleniumuser"
+       Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then Logout from Neon application
     Then login
     Then navigate to precision marketer
@@ -582,7 +597,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then verify campaign status approved from sheet "campaignBC" of file "campaignInputData"
     
     
-  @NX-6388 @initBrowser @closeBrowser
+  @NX-6388 @initBrowser 
   Scenario: Verify upon approval BC gets moved to Render scheduled
   Given login
     Then navigate to configuration management
@@ -598,7 +613,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
     Then Request for bc approval
     Then Logout from Neon application
     #Given navigate to environment 
@@ -611,3 +626,27 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then wait for 1 minutes
     Then verify broadcast status render scheduled from sheet "one-offBC" of file "bcInputData"
     
+    
+    @NX-6466
+    @initBrowser 
+    Scenario: Verify whether Show history & Review option is available in context menu
+    Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    #Then naigate to "campaignBC" campaign show history
+    Then Logout from Neon application
+     Then login with seleniumuser from sheet "seleniumuser"
+     Then navigate to precision marketer
+     Then navigate to life cycle marketing
+   Then navigate to campaign category from sheet "CampaignCategory"
+   Then verify show history and review options from sheet "campaignBC"
+   

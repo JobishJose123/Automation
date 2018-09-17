@@ -77,6 +77,8 @@ public class CampaignObjects extends Init{
 	private WebElement offerNumber;
 	@FindBy(xpath="//paper-item[contains(.,'Show History')]")
 	private WebElement optionsshowhistory;
+	@FindBy(xpath="//paper-item[contains(.,'Review')]")
+	private WebElement optionsReview;
 	
 
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save Campaign')]")
@@ -214,6 +216,8 @@ public class CampaignObjects extends Init{
 	
 	@FindBy(xpath=".//div[@class='levelCheckBox style-scope choose-approvers']//following::paper-checkbox[2]")
 	private WebElement secondLevelUserSelect ;
+	@FindBy(xpath=".//label[contains(.,'attr_2')]/..//input")
+	private WebElement campaignattribute;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -730,7 +734,7 @@ public class CampaignObjects extends Init{
 		enterCampaignName(name);
 		enterCampaignDescription("Campaign to check bc creation in selenium");
 		selectOfferCatalog(catalog);
-	}
+jswait.loadSendKeys(campaignattribute, "11");	}
 	
 	
 	public void enterCampaignDeailsForExportCampaign() throws Throwable {

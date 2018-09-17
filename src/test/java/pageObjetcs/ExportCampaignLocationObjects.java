@@ -214,8 +214,10 @@ public class ExportCampaignLocationObjects extends Init{
 		}
 		
 		public void clickOnReviewOnNotification(String notificationContent)  throws Exception {
+			Thread.sleep(1000);
 			String scrollPanel = "//iron-list[@id='list']";
 			jswait.scrollIntoView(scrollPanel, notificationContent); 
+			Thread.sleep(1000);
 			WebElement element = driver.findElement(By.xpath("//span[contains(@class, 'notification-listing') and contains(.,'"+notificationContent+"')]/../../data-table-cell//paper-button[contains(@class, 'reviewBtn')][1]"));
 			jswait.loadClick(element);
 		}

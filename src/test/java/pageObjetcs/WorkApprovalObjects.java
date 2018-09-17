@@ -4,13 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,13 +17,14 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
-import cucumber.api.java.en.Then;
+import stepDefinitions.AddExportLocationSteps;
 
 public class WorkApprovalObjects extends Init{
 
 	private static final Exception Exception = null;
 	CommonObjects commonObjects = new CommonObjects();
 	CampaignObjects CampaignObjects=new CampaignObjects();
+	AddExportLocationSteps AddExportLocationSteps=new AddExportLocationSteps();
 	
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
@@ -158,6 +156,10 @@ public class WorkApprovalObjects extends Init{
 	private WebElement deliverDetailsHeading;
 	
 	
+	@FindBy(xpath="//paper-item[contains(.,'Show History')]")
+	private WebElement optionsshowhistory;
+	@FindBy(xpath="//paper-item[contains(.,'Review')]")
+	private WebElement optionsReview;
 	
 	
 	
@@ -188,6 +190,8 @@ public class WorkApprovalObjects extends Init{
 	}
 	
 	public void Notificationreviewbtn() throws InterruptedException {
+		
+	
 		jswait.loadClick(Notificationreviewbtn);
 	}
 	public void ApproveActivatebtn() throws InterruptedException {
@@ -685,11 +689,11 @@ catch(Exception e) {
     	Thread.sleep(5000);
     	
     	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+    	Thread.sleep(3000);
     	CampaignObjects.optionsshowhistory();
     	jswait.loadClick(historyboxokbtn);
     	Thread.sleep(5000);
-    	CampaignObjects.optionsshowhistory();
-    	Thread.sleep(2000);
+    	
     	try {
     		boolean n=historystatuscheckapprove.isDisplayed();
     		System.out.println(n);
@@ -758,9 +762,11 @@ catch(Exception e) {
 	}
 	
 	public void campaignaproveseleniumuser() throws Exception {
+//		
+		
 		Thread.sleep(2000);
-		seleniumusernotificationclick.click();
-		Notificationreviewbtn();
+//		
+//		Notificationreviewbtn();
 		ApproveActivatebtn();
 		Thread.sleep(2000);
 		try {
@@ -942,4 +948,27 @@ catch(Exception e) {
 		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'R')]"));
 		Assert.assertTrue(approvalStatus.isDisplayed());
 	}
+	public void verifyHistoryandReview(String sheet) throws InterruptedException
+	{
+		eh.setExcelFile("campaignInputData", sheet);
+    	String name = eh.getCell(1, 0).toString();
+    	commonObjects.filterName(name);
+    	
+    	Thread.sleep(5000);
+    	
+    	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+    	Thread.sleep(3000);
+    	
+    	try {
+    		boolean n=optionsshowhistory.isDisplayed();
+    		boolean m=optionsReview.isDisplayed();
+    		
+    		
+    	}catch(Exception e) {
+    		Assert.assertTrue(false);
+    	}
+    	Thread.sleep(2000);
+    	
+	}
+	
 }

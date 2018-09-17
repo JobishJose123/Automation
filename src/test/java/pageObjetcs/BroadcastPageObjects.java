@@ -319,14 +319,16 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement bcnotificationatreceivebroadcastmsg ;
  @FindBy(xpath="(//label[contains(.,'Recipient')]//following::paper-icon-button[2])[2]")
 private WebElement recipientclick;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
+ 
+ 
+	 @FindBy(xpath=".//form[@id='bcExpiryForm']//paper-checkbox//div[contains(.,'Broadcast Expiry')]")
+	 private WebElement bcExpiryclick ;
+	 @FindBy(xpath=" .//form[@id='bcExpiryForm']//label[contains(.,'Expires')]//following::iron-icon[1]")
+	 private WebElement expirestime ;
+	 @FindBy(xpath="//form[@id='bcExpiryForm']//paper-item[contains(.,'At')]")
+	 private WebElement expiresAtoption;
+	 @FindBy(xpath=".//form[@id='bcExpiryForm']//label[contains(.,'Expires')]//following::iron-icon[5]")
+	 private WebElement expirestimezone ;
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -1950,5 +1952,44 @@ public void Verifyemail(String sheet) throws Exception {
 //	assertTrue(Subject.contains("Broadcast Finished - oneOffBC"));
 //	assertTrue(fromid.contains(""flyops@flytxt.com" <flyops@flytxt.com>"));
 		}
+
+public void Broadcast_Expiry() throws Exception{
+	Thread.sleep(2000);
+	jswait.loadClick(bcExpiryclick);
+	Thread.sleep(4000);
+	jswait.loadClick(expirestime);
+	Thread.sleep(2000);
+	jswait.loadClick(expiresAtoption);
+	
+	Calendar rightNow = Calendar.getInstance();
+	String mn = "";
+	if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+		mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+	} else
+		mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+	String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+	int hours = rightNow.get(Calendar.HOUR);
+	int min = rightNow.get(Calendar.MINUTE);
+	int am_pm = rightNow.get(Calendar.AM_PM);
+	int day = rightNow.get(Calendar.DAY_OF_MONTH);
+	int year = rightNow.get(Calendar.YEAR);
+	int month = rightNow.get(Calendar.MONTH) + 1;
+	min += 2;
+	int rem = min % 5;
+	rem = 5 - rem;
+	min += rem;
+	if (min > 59) {
+		min -= 60;
+		hours++;
+	}
+	
+	jswait.loadClick(expirestimezone);
+	
+
+	
+	
+}
+
 
 }

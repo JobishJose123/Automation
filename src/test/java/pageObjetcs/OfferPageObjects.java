@@ -385,8 +385,8 @@ public class OfferPageObjects extends Init {
 	 
 	 @FindBy(xpath="//rewards-container[2]//paper-button")
 	 private WebElement rewardFirstRuleAdButton;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
+	 @FindBy(xpath="//span[contains(.,'Change')]/../input")
+	 private WebElement emailcreativechangebtn ;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -1230,6 +1230,10 @@ public class OfferPageObjects extends Init {
 	   }
 	   clickMapVariableOkButton();
 	   
+	   //jswait.loadClick(emailcreativechangebtn);
+	   Thread.sleep(2000);
+	 
+	   emailcreativechangebtn.sendKeys(indexZip.getAbsolutePath());
 	}
    
    public void verifyEmailCreative(String profile,String subject ) throws InterruptedException, UnsupportedFlavorException, IOException {
@@ -1243,6 +1247,7 @@ public class OfferPageObjects extends Init {
 	   Thread.sleep(2000);
 	   File indexZip = new File("EmailZipFile\\index.zip");
 	   emailSelectResourceButton.sendKeys(indexZip.getAbsolutePath());
+	   
 	   jswait.loadClick(previewEmailButton);
 	   Thread.sleep(3000);
 	   driver.switchTo().frame("my_iframe");
@@ -1261,6 +1266,13 @@ public class OfferPageObjects extends Init {
 		   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
 	   }
 	   clickMapVariableOkButton();
+	   
+	   //jswait.loadClick(emailcreativechangebtn);
+	   Thread.sleep(2000);
+	 
+	   emailcreativechangebtn.sendKeys(indexZip.getAbsolutePath());
+	   
+	   
 	   
 	}
 
