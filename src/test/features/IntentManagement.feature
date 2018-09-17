@@ -7,15 +7,15 @@ Feature: positive flow of im program creation
 
 @NX-426
 @initBrowser @closeBrowser
-Scenario: Verify the new touchpoint landing page
+Scenario: Verify the new touchpoint landing page NX-426
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then check touchpoint landing page
  
 @NX-428
-@initBrowser @closeBrowser
-Scenario: Verify Create New Touchpoint button behaviour for SMS TP
+@initBrowser 
+Scenario: Verify Create New Touchpoint button behaviour for SMS TP NX-428
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
@@ -25,7 +25,7 @@ Then verify sms touchpoint creation form
 
 @NX-430
 @initBrowser @closeBrowser
-Scenario: Verify new SMS touchpoint creation
+Scenario: Verify new SMS touchpoint creation 430
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
@@ -35,7 +35,7 @@ Then check sms touchpoint in grid "smsTouchpoint"
 
 @NX-431
 @initBrowser @closeBrowser
-Scenario: Verify new Trigger touchpoint creation 
+Scenario: Verify new Trigger touchpoint creation  NX-431
 Given login
 Then navigate to intent management
 Then navigate to touchpoints

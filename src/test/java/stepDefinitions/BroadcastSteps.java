@@ -2231,6 +2231,16 @@ public void verifyBCTargetedCount(String sheet,String condition) throws Throwabl
 				Assert.assertEquals("expected count not equal to actual count",0, targeted);
 		Assert.assertEquals("sent count not equal to targeted count",sent, 0);
 	}
+	else if(condition.contentEquals("customerDrivenEvent")) {
+		int expected = 200; //Integer.parseInt(targetStr);
+		Assert.assertEquals("expected count not equal to actual count; count hardcoded to 200",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+}
+	else if(condition.contentEquals("usageMetric")) {
+		int expected = 200; //Integer.parseInt(targetStr);
+		Assert.assertEquals("expected count not equal to actual count; count hardcoded to 200",expected, targeted);
+		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
+}
 	else {
 		Exception notDefined = new Exception("Condition not defined");
 		throw notDefined;

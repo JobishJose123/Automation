@@ -2,6 +2,7 @@ package pageObjetcs;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -207,9 +208,9 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormShortCodeSelector;
 	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Keyword')]/../input")
 	private WebElement smsFormKeywordInput;
-	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Ordering Logic')]/../input")
-	private WebElement smsFormOrderingLogicSelector;
-	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Ordering Rule')]/../input")
+	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Prioritization Logic')]/../input")
+	private WebElement smsFormPrioritizationLogicSelector;
+	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Prioritization Rule')]/../input")
 	private WebElement smsFormOrderingRuleSelector;
 	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'FIFO')]")
 	private WebElement smsFormOrderingRuleFIFO;
@@ -220,8 +221,8 @@ public class TouchpointPage extends Init{
 	
 	@FindBy(xpath="//label[contains(.,'Short Code')]/following::vaadin-combo-box-item[2]")
 	private WebElement smsFormShortCode2;
-	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'Rule-based')]")
-	private WebElement smsFormOrderingLogicRuleBased;
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
+	private WebElement smsFormPrioritizationLogicFIFO;
 	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'Hours')]")
 	private WebElement smsFormTimeInterval1;
 	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Time Interval')]/../..//input")
@@ -343,8 +344,8 @@ public class TouchpointPage extends Init{
 	private WebElement triggerTouchpointName;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Trigger')]/following::vaadin-combo-box-item[contains(text(),'t')]")
 	private WebElement triggerFormTriggerSelect;
-	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Ordering Logic')]/../input")
-	private WebElement triggerFormOrderingLogicSelector;
+	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Prioritization Logic')]/../input")
+	private WebElement triggerFormProritizationLogicSelector;
 	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Ordering Logic')]/../input")
 	private WebElement custTriggerFormOrderingLogicSelector;
 	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'Rule-based')]")
@@ -364,8 +365,8 @@ public class TouchpointPage extends Init{
 	private WebElement triggerFormOrderingRuleFIFO;
 	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'LIFO')]")
 	private WebElement triggerFormOrderingRuleLIFO;
-	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'Rule-based')]")
-	private WebElement triggerFormOrderingLogicRuleBased;
+	@FindBy(xpath="//form[@id='triggerForm']//vaadin-combo-box-item[contains(.,'FIFO')]")
+	private WebElement triggerFormProritizationLogicFIFO;
 	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'Hours')]")
 	private WebElement triggerFormTimeInterval1;
 	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'Hours')]")
@@ -536,9 +537,10 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	public void smsEnterKeyword(String name) throws InterruptedException {
 		jswait.loadSendKeys(smsFormKeywordInput, name);
 	}
-	public void smsSelectOrderingLogic() throws InterruptedException {
-		jswait.loadClick(smsFormOrderingLogicSelector);
-		jswait.loadClick(smsFormOrderingLogicRuleBased);
+	public void smsSelectPrioritizationLogic() throws InterruptedException {
+		jswait.loadClick(smsFormPrioritizationLogicSelector);
+		Thread.sleep(2000);
+		jswait.loadClick(smsFormPrioritizationLogicFIFO);
 	}
 	public void smsSelectOrderingRule() throws InterruptedException {
 		jswait.loadClick(smsFormOrderingRuleSelector);
@@ -566,8 +568,8 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 		eh.setExcelFile("touchpointInputData", "smsTouchpoint");
  		String name = smsTouchpointName.getText();
  		eh.setCell(1, 0, name);
-		smsSelectOrderingLogic();
-		smsSelectOrderingRule();
+		smsSelectPrioritizationLogic();
+//		smsSelectOrderingRule();
 		smsEnterRefreshEvery("3");
 		smsSelectTimeInterval();
 		smsEnterMaximumOffers("5");
@@ -576,7 +578,7 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	public void editSmsTouchpointDetails(String keyword) throws InterruptedException {
 		smsEnterKeyword(keyword);
 		smsSelectShortCode();
-		smsSelectOrderingLogic();
+		smsSelectPrioritizationLogic();
 		smsSelectOrderingRulelifo();
 		smsEnterRefreshEvery("8");
 		smsSelectTimeInterval();
@@ -588,7 +590,7 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	public void editSmsTouchpointDetailsshortcode(String keyword) throws InterruptedException {
 		smsEnterKeyword(keyword);
 		smsSelectnewShortCode();
-		smsSelectOrderingLogic();
+		smsSelectPrioritizationLogic();
 		smsSelectOrderingRulelifo();
 		smsEnterRefreshEvery("8");
 		smsSelectTimeInterval();
@@ -765,8 +767,8 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		System.out.println(keyword);
 		smsEnterKeyword(keyword);
 		smsSelectShortCode();
-		smsSelectOrderingLogic();
-		smsSelectOrderingRule();
+		smsSelectPrioritizationLogic();
+//		smsSelectOrderingRule();
 		smsEnterRefreshEvery("3");
 		smsSelectTimeInterval();
 		smsEnterMaximumOffers("");
@@ -785,8 +787,8 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		System.out.println(keyword);
 		smsSelectShortCode();
 		smsEnterKeyword(keyword);
-		smsSelectOrderingLogic();
-		smsSelectOrderingRule();
+		smsSelectPrioritizationLogic();
+//		smsSelectOrderingRule();
 		smsEnterRefreshEvery("3");
 		smsSelectTimeInterval();
 		smsEnterMaximumOffers("");
@@ -820,9 +822,12 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	public void triggerClickCancel() throws InterruptedException {
 		jswait.loadClick(triggerFormCancelButton);
 	}
-	public void triggerSelectOrderingLogic() throws InterruptedException {
-		jswait.loadClick(triggerFormOrderingLogicSelector);
-		jswait.loadClick(triggerFormOrderingLogicRuleBased);
+	public void triggerSelectPrioritizationLogic() throws InterruptedException {
+		jswait.loadClick(triggerFormProritizationLogicSelector);
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//form[@id='triggerForm']//vaadin-combo-box-item[contains(.,'FIFO')]")).click();
+//		triggerFormProritizationLogicFIFO.click();
+//		jswait.loadClick(triggerFormProritizationLogicFIFO);
 	}
 	
 	public void custTriggerSelectOrderingLogic() throws InterruptedException {
@@ -866,7 +871,7 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	public void enterTriggerTouchpointDetails(String name) throws InterruptedException {
 		triggerEnterTouchpointName(name);
 		selectTrigger();
-		triggerSelectOrderingLogic();
+		triggerSelectPrioritizationLogic();
 		triggerSelectOrderingRule();
 		triggerEnterRefreshEvery("3");
 		triggerSelectTimeInterval();
@@ -875,7 +880,7 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	public void editTriggerTouchpointDetails(String name) throws InterruptedException {
 		triggerEnterTouchpointName(name);
 		selectTrigger();
-		triggerSelectOrderingLogic();
+		triggerSelectPrioritizationLogic();
 		triggerFormOrderingRuleLIFO();
 		triggerEnterRefreshEvery("2");
 		triggerSelectTimeInterval();
@@ -1384,7 +1389,7 @@ Assert.assertEquals(name,newname);
 				triggerClickSave();
 				selectTrigger();
 				triggerClickSave();
-				triggerSelectOrderingLogic();
+				triggerSelectPrioritizationLogic();
 				triggerClickSave();
 				triggerSelectOrderingRule();
 				triggerClickSave();

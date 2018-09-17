@@ -2304,7 +2304,7 @@ Then wait until status of "Recurring" is "Complete"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
     
-     @NX-8856 @initBrowser
+    @NX-targetingTestCases @initBrowser
     Scenario Outline: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8856 
     Given login
     Then navigate to precision marketer
@@ -2327,14 +2327,16 @@ Then wait until status of "Recurring" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition <Condition>
           Examples:
     |Condition|
-    |digitalPersonaGT15|
-    |customerDemographicsGT25|
-    |learnedBehaviourGT35|
-    |analyticalScoresGT45|
-    |digitalEngagementGT235|
-    |customerLocationInsightsGT5|
-    |customerList|
-    |discoveredClusters200|
+    #|digitalPersonaGT15|
+    #|customerDemographicsGT25|
+    #|learnedBehaviourGT35|
+    #|analyticalScoresGT45|
+    #|digitalEngagementGT235|
+    #|customerLocationInsightsGT5|
+    #|customerList|
+    #|discoveredClusters200|
+    #|customerDrivenEvent|
+    |usageMetric|
 
     
        @NX-4525 @initBrowser

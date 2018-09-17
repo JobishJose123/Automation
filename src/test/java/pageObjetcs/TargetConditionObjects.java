@@ -29,10 +29,39 @@ public class TargetConditionObjects extends Init {
 	public ExcelHelper eM = new ExcelHelper(); 
 	@FindBy(xpath="//img[contains(@src,'http://192.168.150.27/images/Flip')]/../..")
 	private WebElement targetConditionViewToggle;
-	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
-	private WebElement targetConditionTypeSelector;
 	@FindBy(xpath="//paper-item[contains(.,'Usage Metrics')]")
 	private WebElement targetConditionTypeUsageMetrics;
+		@FindBy(xpath="(//label[contains(.,'Condition')])[3]//following::input")
+	private WebElement customerLocationInsightConditionField;
+	@FindBy(xpath="//paper-item[contains(.,'By Month')]")
+	private WebElement metricByMonthOption;
+	@FindBy(xpath="(//label[contains(.,'Condition')])[3]//following::input")
+	private WebElement metricConditionField;
+		@FindBy(xpath="//paper-item[contains(.,'max of')]")
+	private WebElement metricMaxOf;	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::input//following::iron-icon")
+	private WebElement metricMaxOfMonthsSelect;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'this month')][2]")
+	private WebElement metricMaxOfMonthThisMonth;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'last month')][2]")
+	private WebElement metricMaxOfMonthLastMonth;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'2 months ago')][2]")
+	private WebElement metricMaxOfMonthLast2Month;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'3 months ago')][2]")
+	private WebElement metricMaxOfMonthLast3Month;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'4 months ago')][2]")
+	private WebElement metricMaxOfMonthLast4Month;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'5 months ago')][2]")
+	private WebElement metricMaxOfMonthLast5Month;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'6 months ago')][2]")
+	private WebElement metricMaxOfMonthLast6Month;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'7 months ago')][2]")
+	private WebElement metricMaxOfMonthLast7Month;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'8 months ago')][2]")
+	private WebElement metricMaxOfMonthLast8Month;
+	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]//following::paper-item[contains(.,'9 months ago')][2]")
+	private WebElement metricMaxOfMonthLast9Month;	
+	@FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
+	private WebElement targetConditionTypeSelector;
 	@FindBy(xpath="//label[contains(.,'Metric')]/../..//input")
 	private WebElement usageMetricField;
 	@FindBy(xpath="//paper-item[contains(.,'"+USAGE_METRIC_UNIQUE+"')]")
@@ -51,12 +80,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement metricWeek;
 	@FindBy(xpath="//paper-item[contains(.,'By Week')]")
 	private WebElement metricWeekOption;
-	@FindBy(xpath="(//label[contains(.,'Condition')])[3]//following::iron-icon[1]")
-	private WebElement metricConditionField;
 	@FindBy(xpath="//label[contains(.,'elect')]//following::iron-icon[1]")
 	private WebElement customerLocationInsightSelectField;
-	@FindBy(xpath="(//label[contains(.,'Condition')])[3]//following::iron-icon[1]")
-	private WebElement customerLocationInsightConditionField;
 	@FindBy(xpath=".//field-simple//span[contains(.,'25')]")
 	private WebElement editedTC;
 	@FindBy(xpath="//paper-item[contains(.,'Customer Profile Info')]")
