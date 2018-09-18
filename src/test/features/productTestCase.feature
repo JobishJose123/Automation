@@ -325,8 +325,10 @@ Then navigate to prepaid telecom
 Then click create new product button
 Then create single product from sheet "singleProductPage"
 Then scrolling to view "singleProductPage" in the entire product list
+
+
 @NX-1036
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Create Product: Verify the field validations for the Basic informations NX-1036
 Given login
 Then navigate to precision marketer
@@ -349,7 +351,7 @@ Then saving the products by not adding the mandatory fields
 
 
 @NX-1045
-@initBrowser @closeBrowser
+@initBrowser
 Scenario: Create Product: Verify adding more than 3 benefits NX-1045  no limit in adding benefits
 Given login
 Then navigate to precision marketer

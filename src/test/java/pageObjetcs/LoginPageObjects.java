@@ -70,6 +70,7 @@ public void LogoutFromApplication() throws InterruptedException {
 
 
 public boolean checkLogin() throws InterruptedException {
+	Thread.sleep(3000);
 	try{
 		landingPage.navigateToPrecisionMarketer();
 		return true;
