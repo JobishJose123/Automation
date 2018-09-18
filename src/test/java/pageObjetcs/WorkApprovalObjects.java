@@ -65,7 +65,7 @@ public class WorkApprovalObjects extends Init{
 	private WebElement addUserField;
 	@FindBy(xpath = "//paper-item[contains(.,'selenium.flytxt@gmail.com')]")
 	private WebElement ruleUserName;
-	@FindBy(xpath = "//paper-item[contains(.,'shinu.rajan@flytxt.com')]")
+	@FindBy(xpath = "//paper-item[contains(.,'joel.jose@flytxt.com')]")
 	private WebElement ruleUserName2;
 	
 	@FindBy(xpath = "//paper-item[contains(.,'Recharge')]")
@@ -177,7 +177,9 @@ public class WorkApprovalObjects extends Init{
 		jswait.loadClick(broadcastactivationcheckbox);
 	}
 	
-	
+	public void clickreviewOption() throws InterruptedException {
+		jswait.loadClick(optionsReview);
+	}
 	
 	public void createNewApprovalRule(String sheet) throws Throwable {
 		clickCreateNewApprovalRuleButton();
@@ -605,7 +607,7 @@ catch(Exception e) {
 	
 	public void enterLevel2User() throws InterruptedException {
 		
-		jswait.loadSendKeys(addUserField, "shinu.rajan@flytxt.com");
+		jswait.loadSendKeys(addUserField, "joel.jose@flytxt.com");
 		Thread.sleep(2000);
 	}
 	public void enterCategory() throws InterruptedException {
@@ -666,8 +668,12 @@ catch(Exception e) {
     	CampaignObjects.optionsshowhistory();
     	jswait.loadClick(historyboxokbtn);
     	Thread.sleep(5000);
-    	CampaignObjects.optionsshowhistory();
-    	Thread.sleep(2000);
+
+   	Thread.sleep(3000);
+   	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+	CampaignObjects.optionsshowhistory();
+	Thread.sleep(5000);
+
    	try {
     		historystatuscheck.isDisplayed();
     	}catch(Exception e) {
@@ -686,13 +692,17 @@ catch(Exception e) {
     	String name = eh.getCell(1, 0).toString();
     	commonObjects.filterName(name);
     	
-    	Thread.sleep(5000);
+Thread.sleep(5000);
     	
     	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
-    	Thread.sleep(3000);
     	CampaignObjects.optionsshowhistory();
     	jswait.loadClick(historyboxokbtn);
     	Thread.sleep(5000);
+
+   	Thread.sleep(3000);
+   	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+	CampaignObjects.optionsshowhistory();
+	Thread.sleep(5000);
     	
     	try {
     		boolean n=historystatuscheckapprove.isDisplayed();
@@ -800,8 +810,8 @@ catch(Exception e) {
     	
     	Thread.sleep(5000);
     	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
-		
-		
+		Thread.sleep(2000);
+    	jswait.loadClick(optionsReview);
 		ApproveActivatebtn();
 		
 	}

@@ -954,6 +954,10 @@ public class OfferSteps extends Init {
 	public void VerifyEmailSendTrialSMSOneNum(String sheet, String productSheet, String number) throws Throwable {
 		offerPageObjects.EmailSendTrialSMSOneNum(sheet, productSheet, number);
 	}
+	
+	
+	
+	
 
 
 

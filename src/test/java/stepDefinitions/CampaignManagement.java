@@ -20,6 +20,7 @@ import pageObjetcs.CampaignObjects;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.LoginPageObjects;
 import pageObjetcs.TargetConditionObjects;
+import pageObjetcs.WorkApprovalObjects;
 
 public class CampaignManagement extends Init{
 	JSWaiter jswait = new JSWaiter();
@@ -28,6 +29,7 @@ public class CampaignManagement extends Init{
 	CommonObjects commonObjects = new CommonObjects();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	LoginPageObjects loginPage = new LoginPageObjects();
+	WorkApprovalObjects WorkApprovalObjects=new WorkApprovalObjects();
 	public CampaignManagement() {
 		PageFactory.initElements(driver, this);
 	}
@@ -238,9 +240,10 @@ public class CampaignManagement extends Init{
 	    	eM.setExcelFile("campaignInputData",sheet);
 	 		String name = (String) eM.getCell(1, 0);
 	 		String catalog = (String) catalogExcel.getCell(1, 0);
-//	 		commonObjects.clickOptionsIcon();
-//	 		campaignObjects.clickEditCampaignOption();
-	 		campaignObjects.editCampaign(name+"Editedbyseluser", catalog);
+ 		commonObjects.clickOptionsIcon();
+ 		WorkApprovalObjects.clickreviewOption();
+	 		campaignObjects.clickEditCampaignOption();
+	 		campaignObjects.editCampaignselsuer(name+"Editedbyseluser", catalog);
 	 		eM.setCell(1, 0, name+" Editedbyseluser");
 	 		TimePicker dt = new TimePicker();
 	 		dt.gteDateTime();
