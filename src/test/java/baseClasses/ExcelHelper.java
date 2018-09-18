@@ -29,6 +29,19 @@ String file = "";
 		sh = workbook.getSheet(sheet);
 		
     }
+    public void setCsvFile(String filename, String sheet)
+    {
+		try {
+			workbook = new HSSFWorkbook(new FileInputStream(new File("ExcelFiles\\"+filename+".xls")));
+			file = "ExcelFiles\\"+filename+".csv";
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		sh = workbook.getSheet(sheet);
+		
+    }
     public void setCell(int r,int c,String val) throws IOException{
     	Row row = sh.getRow(r);
     	Cell cell = null;

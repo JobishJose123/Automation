@@ -27,7 +27,7 @@ public class ConsumerProfileSteps extends Init{
 	public String getMsisdn() throws IOException {
 		String line = "";
 		list.setExcelFile("registrationListInputData", "Sheet1");
-		BufferedReader br = new BufferedReader(new FileReader(list.getCell(1, 1).toString()));
+		BufferedReader br = new BufferedReader(new FileReader("ExcelFiles\\"+list.getCell(1, 0).toString()));
 		line = br.readLine();
 		line = br.readLine();
 		System.out.println(line);
@@ -63,7 +63,7 @@ public class ConsumerProfileSteps extends Init{
 	@Then("^verify details in customer info page of \"([^\"]*)\"$")
 	public void verifyDetailsInCustomerProfiile(String msisdn) throws Exception {
 		list.setExcelFile("registrationListInputData", "Sheet1");
-		eh.setExcelFile(list.getCell(1, 0).toString(), list.getCell(1, 2).toString());
+		eh.setExcelFile(list.getCell(1, 2).toString(), list.getCell(1, 2).toString());
 		jswait.waitUntil("//data-table-cell/span[contains(.,'"+msisdn+"')]");
 		if(msisdn.length()<=10) {
 			msisdn = getMsisdn();
