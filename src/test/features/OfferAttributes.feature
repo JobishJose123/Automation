@@ -9,8 +9,7 @@ Feature: Test suite on Offer Attributes
     Then navigate to configuration management  
     Then navigate to offer attributes
     Then check and create default selenium attributes
-    
-    @NX-4784 @initBrowser @closeBrowse
+    @NX-4784 @initBrowser 
     Scenario:  Adding Offer Attributes of type text while creating offers.
     Given login
     Then navigate to precision marketer

@@ -46,7 +46,7 @@ public class LoginPageSteps extends Init{
 	}
 	@Then("^verify login failure$")
 	public void verify_login_failure() throws Throwable {
-		assertTrue(loginPage.checkLogin(),"Login Successful");
+		assertFalse(loginPage.checkLogin(),"Login Successful");
 	}
 	@Then("^change url to landing$")
 	public void changeUrlToLanding() throws Throwable {

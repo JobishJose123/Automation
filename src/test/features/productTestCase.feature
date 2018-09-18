@@ -217,7 +217,7 @@ Then navigate to prepaid telecom
 Then check script in product name field "productname'; SELECT * FROM products;"
 #
 
-@initBrowser  @closeBrowser
+@initBrowser  
 @NX-2299
 Scenario: Offer Management: Verify for the details present in the Help page NX-2299
 Given login

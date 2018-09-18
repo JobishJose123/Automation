@@ -44,7 +44,7 @@ Feature: Dashboard page
     
     
     @NX-5616
-    @initBrowser @closeBrowser
+    @initBrowser 
     Scenario: Verify whether help text is available for the dashboard- 5616
     Given login
     Then navigate to precision marketer

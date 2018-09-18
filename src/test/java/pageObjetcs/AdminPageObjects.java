@@ -2,11 +2,13 @@ package pageObjetcs;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -66,7 +68,7 @@ public class AdminPageObjects extends Init{
 	@FindBy(xpath="//paper-item[contains(.,'Deactivate')]")
 	private WebElement optionsDeactivate;
 	@FindBy(xpath=".//paper-dialog[@id='helpDialog']")
-	private WebElement HelpPanel;
+	private List <WebElement> HelpPanel;
 	
 	@FindBy(xpath="//paper-item[contains(.,'Configure')]")
 	private List <WebElement> optionsConfigureList; 
@@ -381,11 +383,33 @@ public class AdminPageObjects extends Init{
 	  
 	 public void verifyHelpPanel() throws Exception {
 		   
-		   Exception ElementExcep = new Exception("Help panel not found");
-		   
-		    Thread.sleep(2000);
-	        if(!HelpPanel.isDisplayed());
-	        throw ElementExcep;
+		 Thread.sleep(3000);
+	        
+		 String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
+		   ((JavascriptExecutor)driver).executeScript("window.open()");
+		   ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+		    driver.switchTo().window(tabs2.get(1));
+		    driver.get(secondUrl);
+		    Thread.sleep(3000);
+		    driver.switchTo().frame(1);
+		    try{
+		    driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Campaign Performance Monitor')]"));
+		    driver.close();
+		    driver.switchTo().window(tabs2.get(0));
+		    }
+		    catch (Exception e) {
+		    	driver.close();
+			    driver.switchTo().window(tabs2.get(0));
+			    throw e;
+			}
+		    
+	    
+
+	        
+	        
+	        
+	        
+	        
 		
 	   }
 	 

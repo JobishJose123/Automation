@@ -490,7 +490,7 @@ public class ProductTestCaseSteps extends Init{
 	@Then("^veirfy help icon of products$")
 	   public void verifyHelpOfProducts() throws Throwable
 	   {   
-		   
+		  Thread.sleep(3000);
 		  wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//flytxt-context-help/paper-icon-button/iron-icon/img")))).click();
 		   Thread.sleep(1500);
 		   String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
