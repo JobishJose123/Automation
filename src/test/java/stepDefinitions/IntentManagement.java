@@ -632,6 +632,7 @@ System.out.println(editname+"program has edited successfully");
 		programPage.programserveonevery();
 		programPage.programserveoneverydata();
 		programPage.checkboxdaysmonday();
+		Thread.sleep(2000);
 		programPage.programdayscheck();
 		
 	}

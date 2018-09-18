@@ -90,7 +90,7 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//h5[contains(.,'Basic Information')]/..//label[contains(.,'Offer Catalog')]/..//*[@id='input']")
 	private WebElement createProgramChooseOfferCatalog;
 	
-	@FindBy(xpath="//form[@id='detailForm']//paper-item[contains(.,'')][2]")
+	@FindBy(xpath="//form[@id='detailForm']//*[@id='items']/vaadin-combo-box-item")
 	private WebElement createProgramCatalogSelect;
 	
 	@FindBy(xpath=".//*[@id='crumbs']/flytxt-breadcrumb[4]//paper-button[contains(.,'Create Program')]")
@@ -258,7 +258,7 @@ public class ProgramPage extends Init{
 		
 	@FindBy(xpath="(//form[@id='scheduleForm']//label[text()='Every']/..//*[@id='input'])[2]")	
 	private WebElement programserveonevery;
-	@FindBy(xpath=".//*[@id='checkboxContainer']//following::div[contains(.,'Monday')]/../div[@id='checkboxContainer']")
+	@FindBy(xpath=".//*[@id='checkboxContainer']//following::div[contains(.,'Monday')]/../div[@id='checkboxContainer']/..")
 	private WebElement checkboxdaysmonday;
 	@FindBy(xpath="(.//*[@id='items']//*[@id='icon'])[1]")
 	private WebElement touchpointoptions ;
@@ -758,14 +758,17 @@ private WebElement rulessenderid2 ;
 	public void createProgramCheckOfferCatalogField() throws Exception {
 		Exception e = new Exception("offer catalog displayed exceeds limit");
 		jswait.loadClick(createProgramChooseOfferCatalog);
-		jswait.waitUntil("//form[@id='detailForm']//paper-item");
-		int offerCatalogesCount = driver.findElements(By.xpath("//form[@id='detailForm']//paper-item")).size();
+//		jswait.waitUntil("//form[@id='detailForm']//*[@id='items']/vaadin-combo-box-item");
+		Thread.sleep(2000);
+		
+		int offerCatalogesCount = driver.findElements(By.xpath("//*[@id='items']/vaadin-combo-box-item")).size();
+		System.out.println("count of catalogs:"+offerCatalogesCount);
 		if(offerCatalogesCount>20) {
 			throw e;
 		}
 		jswait.loadSendKeys(createProgramChooseOfferCatalog, "at");
 		Thread.sleep(3000);
-		jswait.loadClick(createProgramCatalogSelect);
+		jswait.loadClick("//*[@id='items']/vaadin-combo-box-item");
 	}
 	public void checkCreateProgramTouchpointGrid() throws InterruptedException {
 		jswait.checkVisible(createProgramTouchpointGridChannel);
@@ -1049,8 +1052,8 @@ private WebElement rulessenderid2 ;
 		}
 	
 	public void programdayscheck() throws InterruptedException {
-	wait.until(ExpectedConditions.elementSelectionStateToBe(checkboxdaysmonday,true));
-		System.out.println("checked");
+//	wait.until(ExpectedConditions.elementSelectionStateToBe(checkboxdaysmonday,true));
+		Assert.assertEquals("Monday is not checked",checkboxdaysmonday.getAttribute("checked"), "true");
 	}
 	
 	public void editprogramcheck() throws InterruptedException {

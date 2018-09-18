@@ -122,16 +122,16 @@ public class TouchpointPage extends Init{
 	//api touchpoint objects
 	@FindBy(xpath=".//*[text()='API']")
 	private WebElement apiTouchpoints;
-	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Ordering Logic')]/../input")
-	private WebElement apiFormOrderingLogicSelector;
+	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Prioritization Logic')]/../input")
+	private WebElement apiFormPrioritizationLogicSelector;
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Ordering Rule')]/../input")
 	private WebElement apiFormOrderingRuleSelector;
 	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'FIFO')]")
 	private WebElement apiFormOrderingRuleFIFO;
 	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'LIFO')]")
 	private WebElement apiFormOrderingRuleLIFO;
-	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'Rule-based')]")
-	private WebElement apiFormOrderingLogicRuleBased;
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
+	private WebElement apiFormPrioritizationLogicFIFO;
 	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'Hours')]")
 	private WebElement apiFormTimeInterval1;
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Time Interval')]/../..//input")
@@ -283,14 +283,14 @@ public class TouchpointPage extends Init{
 	private WebElement customerCareFormHeading;
 	@FindBy(xpath=".//*[@id='addCustomerCare']")
 	private WebElement customerCareForm;
-	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Ordering Logic')]/../input")
-	private WebElement customerCareFormOrderingLogicSelector;
+	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Prioritization Logic')]/../input")
+	private WebElement customerCareFormPrioritizationLogicSelector;
 	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Ordering Rule')]/../input")
 	private WebElement customerCareFormOrderingRuleSelector;
 	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'FIFO')]")
 	private WebElement customerCareFormOrderingRuleFIFO;
-	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'Rule-based')]")
-	private WebElement customerCareFormOrderingLogicRuleBased;
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
+	private WebElement customerCareFormPrioritizationLogicFIFO;
 	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'Hours')]")
 	private WebElement customerCareFormTimeInterval1;
 	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Time Interval')]/../..//input")
@@ -824,10 +824,8 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	}
 	public void triggerSelectPrioritizationLogic() throws InterruptedException {
 		jswait.loadClick(triggerFormProritizationLogicSelector);
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//form[@id='triggerForm']//vaadin-combo-box-item[contains(.,'FIFO')]")).click();
-//		triggerFormProritizationLogicFIFO.click();
-//		jswait.loadClick(triggerFormProritizationLogicFIFO);
+		Thread.sleep(2000);
+		jswait.loadClick(smsFormPrioritizationLogicFIFO);
 	}
 	
 	public void custTriggerSelectOrderingLogic() throws InterruptedException {
@@ -870,9 +868,10 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	}
 	public void enterTriggerTouchpointDetails(String name) throws InterruptedException {
 		triggerEnterTouchpointName(name);
-		selectTrigger();
+		
 		triggerSelectPrioritizationLogic();
-		triggerSelectOrderingRule();
+		selectTrigger();
+//		triggerSelectOrderingRule();
 		triggerEnterRefreshEvery("3");
 		triggerSelectTimeInterval();
 		triggerEnterMaximumOffers("5");
@@ -890,7 +889,7 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	public void createTriggerTouchpoint(String keyword) throws InterruptedException {
 		clickCreateNewTouchpoint();
 		enterTriggerTouchpointDetails(keyword);
-		
+		triggerClickSave();
 	}
 	public void editTriggerTouchpoint(String keyword) throws InterruptedException {
 		triggereditclick();
@@ -899,9 +898,9 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		jswait.checkVisible(triggerFieldValidation);
 	}
 	//customer care functions
-	public void customerCareSelectOrderingLogic() throws InterruptedException {
-		jswait.loadClick(customerCareFormOrderingLogicSelector);
-		jswait.loadClick(customerCareFormOrderingLogicRuleBased);
+	public void customerCareSelectPrioritizationLogic() throws InterruptedException {
+		jswait.loadClick(customerCareFormPrioritizationLogicSelector);
+		jswait.loadClick(customerCareFormPrioritizationLogicFIFO);
 	}
 	public void customerCareSelectOrderingRule() throws InterruptedException {
 		jswait.loadClick(customerCareFormOrderingRuleSelector);
@@ -919,8 +918,8 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	}
 	public void enterCustomerCareTouchpointDetails(String keyword) throws InterruptedException {
 		customerCareEnterTouchpointName(keyword);
-		customerCareSelectOrderingLogic();
-		customerCareSelectOrderingRule();
+		customerCareSelectPrioritizationLogic();
+//		customerCareSelectOrderingRule();
 		customerCareEnterRefreshEvery("3");
 		customerCareSelectTimeInterval();
 		customerCareEnterMaximumOffers("5");
@@ -967,9 +966,9 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		public void apiClickCancel() throws InterruptedException {
 			jswait.loadClick(apiFormCancelButton);
 		}
-		public void apiSelectOrderingLogic() throws InterruptedException {
-			jswait.loadClick(apiFormOrderingLogicSelector);
-			jswait.loadClick(apiFormOrderingLogicRuleBased);
+		public void apiSelectPrioritizationLogic() throws InterruptedException {
+			jswait.loadClick(apiFormPrioritizationLogicSelector);
+			jswait.loadClick(apiFormPrioritizationLogicFIFO);
 		}
 		public void apiSelectOrderingRule() throws InterruptedException {
 			jswait.loadClick(apiFormOrderingRuleSelector);
@@ -1004,8 +1003,8 @@ public void deleteUSSDTouchpoint() throws Throwable {
 			apiEnterTouchpointName(keyword);
 			apiSelectApplicationType();
 			apiSelectEventForTracking();
-			apiSelectOrderingLogic();
-			apiSelectOrderingRule();
+			apiSelectPrioritizationLogic();
+//			apiSelectOrderingRule();
 			apiEnterRefreshEvery("3");
 			apiSelectTimeInterval();
 			apiEnterMaximumOffers("5");
@@ -1015,7 +1014,7 @@ public void deleteUSSDTouchpoint() throws Throwable {
 			apiEnterTouchpointName(keyword);
 			apiSelectApplicationType();
 			apiSelectEventForTracking();
-			apiSelectOrderingLogic();
+			apiSelectPrioritizationLogic();
 			apiSelectOrderingRulelifo();
 			apiEnterRefreshEvery("5");
 			apiSelectTimeInterval();
@@ -1027,8 +1026,8 @@ public void deleteUSSDTouchpoint() throws Throwable {
 			apiEnterTouchpointName(keyword);
 			apiSelectApplicationType();
 			apiSelectEventForTracking();
-			apiSelectOrderingLogic();
-			apiSelectOrderingRulelifo();
+			apiSelectPrioritizationLogic();
+//			apiSelectOrderingRulelifo();
 			apiEnterRefreshEvery("5");
 			apiSelectTimeInterval();
 			apiEnterMaximumOffers("");
@@ -1387,11 +1386,12 @@ Assert.assertEquals(name,newname);
 				clickCreateNewTouchpoint();
 				triggerEnterTouchpointName("mandatory");
 				triggerClickSave();
-				selectTrigger();
-				triggerClickSave();
+				
 				triggerSelectPrioritizationLogic();
+//				triggerClickSave();
+//				triggerSelectOrderingRule();
 				triggerClickSave();
-				triggerSelectOrderingRule();
+				selectTrigger();
 				triggerClickSave();
 				triggerEnterRefreshEvery("3");
 				triggerClickSave();

@@ -239,7 +239,7 @@ Then navigate to intent management
 Then navigate to programs
 Then check details cancel button in programs "programdetails"
 @NX-1193
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: verify Create New Programs Schedule Refresh At option.
 Given login
 Then navigate to intent management
