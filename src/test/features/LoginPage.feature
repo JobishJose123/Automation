@@ -115,8 +115,9 @@ Then change url to landing
 Then verify login failure
 
 @NX-463 
-@closeBrowser
+@initBrowser
 Scenario: Verify the Branding Area Content of Login page
+Given neon is loaded
 Then Verify the Branding Area Content of Login page "Intelligent Customer Management" "Engage with customers by learning their behaviour and predicting what they want in real time"
 
 ##tochange
