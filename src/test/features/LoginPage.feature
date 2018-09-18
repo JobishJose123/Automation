@@ -135,6 +135,9 @@ Then verify forgot password by not adding username
 
 @NX-457
 @initBrowser @closeBrowser
-Scenario: Verify Forget Password Link by adding username
+Scenario: Verify Forget Password Link by adding username-457
 Given neon is loaded
-Then verify forgot password by adding username with "rahul.chandran@flytxt.com"
+Then verify forgot password by adding username with "rahul.krishnan@flytxt.com"
+
+
+
