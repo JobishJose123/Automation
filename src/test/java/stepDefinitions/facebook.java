@@ -37,13 +37,15 @@ public class facebook extends Init{
 	}
 	
 	@Then("^verify add facebook account option$")
-	public void verifyaddFacebookaccount() throws InterruptedException {
+	public void verifyaddFacebookaccount() throws Exception {
 	boolean flag=jswait.checkClickable(addFacebookaccount);
 	addFacebookaccount.click();
+	Exception facebook=new Exception("The account is already added");
 	if(flag=true) {
 		System.out.println("element is clickable");
 	}else {
 		System.out.println("element is not clickable");
+		 throw facebook;
 	}
 	// Store the current window handle
 	String winHandleBefore = driver.getWindowHandle();
