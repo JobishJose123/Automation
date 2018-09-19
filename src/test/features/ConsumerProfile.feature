@@ -192,7 +192,7 @@ Then verify events row
 
 
 @NX-2797  
-@initBrowser @closeBrowser
+@initBrowser
 Scenario: Verify whether fulfillment events are getting listed in Events tab-2797
 Given login
 Then navigate to precision marketer
@@ -206,7 +206,7 @@ Then click on apply button
 Then verify fulfillment events row
 
 @NX-2796  
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Verify whether conversion events are getting listed in Events tab-2796
 Given login
 Then navigate to precision marketer
@@ -222,7 +222,7 @@ Then verify conversion events row
 
 
 @NX-2808  
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Verify if the consumer is unsubscribed after 'unsubscribed' icon is clicked-2808
 Given login
 Then navigate to precision marketer
@@ -327,7 +327,7 @@ Then click usage metrics tab
 Then verify charts in usage metric screen
 
 @NX-2806
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Verify only the selected event type is getting displayed in the events tab-2806
 Given login
 Then navigate to precision marketer

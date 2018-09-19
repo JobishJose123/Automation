@@ -188,10 +188,11 @@ public class CustomerProfilePage extends Init{
 	private WebElement dailyTrendChart;
 	@FindBy(xpath="//div[@class='layout horizontal flex style-scope consumer-metrics']//paper-card[@class='metric layout vertical style-scope consumer-metrics x-scope paper-card-0']//div[@id='lineChart1']//svg//g//g[@class='sub _3']//g[@class='chart-body']//g[@class='dc-tooltip-list']//circle[1]")
 	private List <WebElement> circleList;
-	@FindBy(xpath=".//div[@id='lineChart1']//g[@class='sub _0']")
+//	@FindBy(xpath=".//div[@id='lineChart1']//g[@class='sub _0']")
+//	private WebElement circle;
+	
+	@FindBy(xpath=".//*[@id='lineChart1']/svg/g/g[3]/g/g[2]/g/circle[15]")
 	private WebElement circle;
-	
-	
 	
 	
 	//div[@id='lineChart1']//svg//g//g[@class='sub _0']//g[@class='chart-body']//g[@class='dc-tooltip-list']//circle[1]
@@ -780,7 +781,7 @@ public class CustomerProfilePage extends Init{
 		    System.out.println("color of selected attribute "+attrColor);
 		    
 		    Thread.sleep(8000);
-		    driver.findElement(By.xpath("//div[@id='lineChart1']/svg"));
+		   // driver.findElement(By.xpath("//div[@id='lineChart1']/svg"));
 		    String graphColor= circle.getCssValue("color");
 		    System.out.println("color of selected attribute "+graphColor);
 		    
@@ -820,7 +821,7 @@ public class CustomerProfilePage extends Init{
 			   
 			   String S=type.getText();
 			   System.out.println("S= "+S);
-			   Thread.sleep(3000);
+			   Thread.sleep(5000);
 			   
 			   assertTrue(driver.findElement(By.xpath(".//div[@val='event']//iron-list[@id='list']//data-table-row//span[contains(.,'"+S+"')]")).isDisplayed());
 			      

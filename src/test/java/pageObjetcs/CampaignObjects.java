@@ -140,7 +140,7 @@ public class CampaignObjects extends Init{
 	private WebElement optionsGraphicalDelete;
 	@FindBy(xpath = ".//paper-icon-item[contains(.,'Edit')]")
 	private WebElement optionsEditTargetCondtion;
-	@FindBy(xpath = "//paper-button[contains(.,'Edit')]")
+	@FindBy(xpath = "(//paper-item[contains(.,'Edit')])[1]")
 	private WebElement editCampaign;
 	@FindBy(xpath = "//iron-icon[@icon='icons:block']")
 	private WebElement abortCampaign;
@@ -736,6 +736,14 @@ public class CampaignObjects extends Init{
 		selectOfferCatalog(catalog);
 jswait.loadSendKeys(campaignattribute, "11");	}
 	
+	public void enterCampaignDeailsForUseTemplate(String name,String catalog) throws InterruptedException {
+		selectTypeInformational();
+		enterCampaignName(name);
+		enterCampaignDescription("Campaign to check bc creation in selenium");
+		selectOfferCatalog(catalog);
+
+	}
+	
 	
 	public void enterCampaignDeailsForExportCampaign() throws Throwable {
 		
@@ -893,6 +901,46 @@ jswait.loadSendKeys(campaignattribute, "11");	}
          wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
          clickSaveCampaignButton();
 	}
+	
+	
+	public void createCampaignForUseTemplate(String name,String catalog) throws InterruptedException {
+		enterCampaignDeailsForUseTemplate(name,catalog);
+		clickProceedButton();
+//		targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickTargetConditionViewToggle();
+//		targetConditionObjects.clickBasicTargetConditionWithAge();
+		clickProceedButton();
+		 wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//paper-input[2]/paper-input-container/div[2])[1]"))).click();
+    	 Thread.sleep(1000);
+    	 Calendar rightNow =Calendar.getInstance();
+    	 int hours = rightNow.get(Calendar.HOUR);
+    	 int min = rightNow.get(Calendar.MINUTE);
+    	 int am_pm = rightNow.get(Calendar.AM_PM);
+    	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+    	 int year = rightNow.get(Calendar.YEAR);
+    	 int month = rightNow.get(Calendar.MONTH)+1;
+    	 min+=2;
+    	 int rem = min%5;
+    	 rem = 5-rem;
+    	 min+=rem;
+    	 if(min>59){
+    		 min-=60;
+    		 hours++;
+    	 }
+    	 Actions builder = new Actions(driver);
+    	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+         builder.moveToElement(num).click().build().perform();
+         Thread.sleep(2000);
+    	 WebElement num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+         builder.moveToElement(num1).click().build().perform();
+         if(am_pm==0)
+        	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[1]"))).click();
+         else
+        	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[2]"))).click();
+         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
+         clickSaveCampaignButton();
+	}
+	
 	
 	
 	
@@ -1365,6 +1413,50 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
          
          clickSaveCampaignButton();
 	}
+	
+	
+	
+	
+	
+	public void editCampaignForUseTemplate(String name,String catalog) throws InterruptedException {
+		enterCampaignDeailsForUseTemplate(name,catalog);
+		clickProceedButton();
+		clickProceedButton();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//paper-card/paper-date-time-input/div/paper-input[2]/paper-input-container/div[2]"))).click();
+    	 Thread.sleep(1000);
+    	 Calendar rightNow =Calendar.getInstance();
+    	 int hours = rightNow.get(Calendar.HOUR);
+    	 int min = rightNow.get(Calendar.MINUTE);
+    	 int am_pm = rightNow.get(Calendar.AM_PM);
+    	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+    	 int year = rightNow.get(Calendar.YEAR);
+    	 int month = rightNow.get(Calendar.MONTH)+1;
+    	 min+=2;
+    	 int rem = min%5;
+    	 rem = 5-rem;
+    	 min+=rem;
+    	 if(min>59){
+    		 min-=60;
+    		 hours++;
+    	 }
+    	 Actions builder = new Actions(driver);
+    	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+         builder.moveToElement(num).click().build().perform();
+         Thread.sleep(2000);
+    	 WebElement num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+         builder.moveToElement(num1).click().build().perform();
+         if(am_pm==0)
+        	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[1]"))).click();
+         else
+        	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[2]"))).click();
+         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
+         
+         clickSaveCampaignButton();
+	}
+	
+	
+	
+	
 	
 	
 	public void editCampaignselsuer(String name,String catalog) throws InterruptedException {

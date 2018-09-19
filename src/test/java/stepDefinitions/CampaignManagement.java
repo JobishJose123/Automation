@@ -217,6 +217,30 @@ public class CampaignManagement extends Init{
 	 		dt.gteDateTime();
 	    	Thread.sleep(2000);
 	    }
+	 
+	 
+	 
+	 
+	 @Then("^edit campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\" for use template$")
+	    public void editCampaignForUseTemplate(String sheet, String catalogSheet) throws Throwable
+	    {
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		commonObjects.clickOptionsIcon();
+	 		campaignObjects.clickEditCampaignOption();
+	 		campaignObjects.editCampaignForUseTemplate(name+" Edited", catalog);
+	 		eM.setCell(1, 0, name+" Edited");
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    }
+	 
+	 
 	 @Then("^verify edited campaign from sheet \"([^\"]*)\"$")
 	    public void verifyEditedCampaign(String sheet) throws Throwable
 	    {
@@ -470,6 +494,29 @@ public class CampaignManagement extends Init{
 	    	campaignObjects.clickOnUseTemplateButton();
 	    	
 	    	campaignObjects.enterCampaignDeailsForExportCampaign();
+	    	
+	    	
+	    }
+	    
+	    
+	    @Then("^create campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\" for use template$")
+	    public void createCampaignForUseTemplate(String sheet,String catalogSheet) throws Throwable {
+	    	
+	    	campaignObjects.clickOnUseTemplateButton();
+	    	Thread.sleep(4000);
+	    	ExcelHelper catalogExcel = new ExcelHelper();
+	    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+	    	Thread.sleep(4000);
+	    	eM.setExcelFile("campaignInputData",sheet);
+	 		String name = (String) eM.getCell(1, 0);
+	 		String catalog = (String) catalogExcel.getCell(1, 0);
+	 		name =  RandomNameGenerator.getRandomName(name);
+	 		eM.setCell(1, 0, name);
+	 		campaignObjects.createCampaignForUseTemplate(name, catalog);
+	 		TimePicker dt = new TimePicker();
+	 		dt.gteDateTime();
+	    	Thread.sleep(2000);
+	    
 	    	
 	    	
 	    }
