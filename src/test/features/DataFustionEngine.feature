@@ -29,7 +29,7 @@ Then click Data Fusion Engine
 Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
 Then copy the job from sheet "Jobinput"
 
-@NX-4466 @closeBrowser
+@NX-4466 
 @initBrowser @closeBrowser
 Scenario: DK--->Verify the functionality of Copy option
 Given login
@@ -39,7 +39,7 @@ Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
 Then delete the job from sheet "Jobinput"
 
 
-@NX-4464 @closeBrowser
+@NX-4464 
 @initBrowser @closeBrowser
 Scenario: DK--->Verify the functionality of Edit option
 Given login
@@ -48,4 +48,13 @@ Then click Data Fusion Engine
 Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
 Then edit the job from sheet "Jobinput"
 
-  
+@NX-4390
+@initBrowser @closeBrowser
+Scenario: DK--->Verify the functionality of delimiter block using extract from file name
+Given login
+#Then random registration list is generated
+#Then random dnd list is generated
+Then create dk jobs for cheking delimiter from sheet "Delimiter_4390"
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then Open DK Job from sheet "Delimiter_4390" and verify "2" in ouput
