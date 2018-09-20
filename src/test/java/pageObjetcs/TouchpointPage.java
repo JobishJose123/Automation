@@ -62,7 +62,7 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath=".//form[@id='ussdForm']//paper-icon-button[@id='clearIcon']")
 	private WebElement ussdFormUssdApplicationClearButton;
 	
-	@FindBy(xpath="//label[contains(.,'USSD Application')]/following::vaadin-combo-box-item")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+SELENIUM_USSD_APP+"')]")
 	private WebElement ussdFormUssdApplication1;
 	@FindBy(xpath="((.//data-table-cell[@class='ussd-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
 	private WebElement ussdTouchpointEdit;
@@ -170,6 +170,9 @@ public class TouchpointPage extends Init{
 	private WebElement apideletebutton;
 	@FindBy(xpath=".//*[@id='deleteTP']/div/paper-button[@class='style-scope api-touchpoint-grid x-scope paper-button-0']")
 	private WebElement apideleteyes;
+	@FindBy(xpath="//*[@id='deleteTP']/div/paper-button[@class='style-scope ussd-touchpoint-grid x-scope paper-button-0']")
+	private WebElement ussddeleteyes;
+	
 	@FindBy(xpath="//paper-toast[@id='toast']//span[contains(.,'Touchpoint Deleted')]")
 	private WebElement deletewarningapi;
 	
@@ -409,6 +412,13 @@ public class TouchpointPage extends Init{
 //	@FindBy(xpath="")
 //	private WebElement ;
 
+public void clickUssdEditTouchpoint(String name) throws InterruptedException {
+		
+		Thread.sleep(2000);
+		jswait.loadClick("//data-table-cell[contains(.,'"+name+"')]/..//paper-icon-button[1]");
+		Thread.sleep(2000);
+       
+	}
 
  public void clickUssdEditTouchpoint() throws InterruptedException {
 		
@@ -1021,6 +1031,10 @@ public void deleteUSSDTouchpoint() throws Throwable {
 			apiEnterMaximumOffers("8");
 			apiClickSave();
 		}
+		public void editUssdTouchpointDetails(String keyword) throws InterruptedException {
+			ussdEnterTouchpointName(keyword);
+			ussdClickSave();
+		}
 		
 		public void editapiTouchpointDetailsvalidation(String keyword) throws InterruptedException {
 			apiEnterTouchpointName(keyword);
@@ -1073,6 +1087,18 @@ Assert.assertEquals(name,newname);
 			
 			
 		}
+		public void ussdedittouchpointcheck(String name) throws Exception {
+			Thread.sleep(5000);
+			boolean flag=jswait.checkVisible(apiedittouchpointcheck);
+			String newname=jswait.getTextFormElement("//data-table-cell[contains(.,'"+name+"')]");
+			System.out.println(newname);
+Assert.assertEquals(name,newname);
+			System.out.println("edit success");
+			
+			
+			
+		}
+		
 		public void apideletetouchpointcheck(String name) throws Exception {
 			Thread.sleep(5000);
 			String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'"+name+"')]");
@@ -1082,6 +1108,13 @@ Assert.assertEquals(name,newname);
 			checktouchpointsdeleteapi();
 		}
 		
+		public void ussddeletetouchpointcheck(String name) throws Exception {
+			Thread.sleep(5000);
+			jswait.loadClick("//data-table-cell[contains(.,'"+name+"')]/..//paper-icon-button[2]");
+			System.out.println(name);
+			jswait.loadClick(ussddeleteyes);
+			jswait.failIfVisible("//data-table-cell[contains(.,'"+name+"')]/..//paper-icon-button[2]");
+		}
 		
 		
 		
@@ -1141,7 +1174,8 @@ Assert.assertEquals(name,newname);
 				jswait.loadClick(ussdFormTimeInterval1);
 			}
 			public void ussdSelectUssdApplication() throws InterruptedException {
-				jswait.loadClick(ussdFormUssdApplicationSelector);
+				jswait.loadSendKeys(ussdFormUssdApplicationSelector,SELENIUM_USSD_APP);
+				Thread.sleep(2000);
 				jswait.loadClick(ussdFormUssdApplication1);
 				
 			}
@@ -1161,8 +1195,9 @@ Assert.assertEquals(name,newname);
 			}
 			public void enterUssdTouchpointDetails(String keyword) throws InterruptedException {
 				ussdEnterTouchpointName(keyword);
-				ussdSelectUssdApplication();
 				ussdSelectPrioritizationLogic();
+				ussdSelectUssdApplication();
+
 //				ussdSelectPrioritizationRule();
 				ussdEnterRefreshEvery("3");
 				ussdSelectTimeInterval();

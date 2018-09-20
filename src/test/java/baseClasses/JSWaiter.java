@@ -37,14 +37,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			}
 			
 			public boolean checkVisibility(WebElement element) {
+				try {
 				WebDriverWait wait = new WebDriverWait(driver, 8);
 				wait.until(ExpectedConditions.visibilityOf(element));
-				return element.isDisplayed();
+				return true;
+				}catch(Exception e) {
+					return false;
+				}
 			}
 			public boolean checkVisibility(String element) {
+				try {
 				WebDriverWait wait = new WebDriverWait(driver, 8);
 				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy((By.xpath(element))));
-				return driver.findElement(By.xpath(element)).isDisplayed();
+				return true;
+				}catch(Exception e) {
+					return false;
+				}
 			}
 			
 			public int tryClick(WebElement element) {
@@ -115,7 +123,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 					log.debug("no presence of loadMask");
 					Thread.sleep(400);
 					if(checkVisibility(element)==true)
-						return;
+						break;
 					Thread.sleep(1000);
 					loadMask.waitForLoadMask();
 					initialWait++;
@@ -136,7 +144,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 					log.debug("no presence of loadMask");
 					Thread.sleep(400);
 					if(checkVisibility(element)==true)
-						return;
+						break;
 					Thread.sleep(1000);
 					loadMask.waitForLoadMask();
 					initialWait++;

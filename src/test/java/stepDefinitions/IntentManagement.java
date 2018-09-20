@@ -1434,6 +1434,38 @@ System.out.println(editname+"program has edited successfully");
 		
 		//-----------------------------------------//
 		
+		@Then("^edit ussd touchpoint from sheet \"([^\"]*)\"$")
+		public void edit_ussd_touchpoint(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			
+			
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+//	 		name =  name.replaceAll("[0-9]", "")+n;
+	 		touchpointPage.clickUssdEditTouchpoint(name);
+		  touchpointPage.editUssdTouchpointDetails("edited "+name);
+		  String newname="edited "+name;
+		  System.out.println(newname);
+		  eh.setCell(1, 0, name);
+		  touchpointPage.ussdedittouchpointcheck(newname);
+		  
+		}
+		@Then("^delete ussd touchpoint from sheet \"([^\"]*)\"$")
+		public void delete_ussd_touchpoint(String sheet) throws Throwable {
+			Thread.sleep(4000);
+			eh.setExcelFile("touchpointInputData", sheet);
+			Random rn = new Random();
+	 		int  n = rn.nextInt(5000) + 1;
+	 		String name = (String) eh.getCell(1, 0);
+//	 		name =  name.replaceAll("[0-9]", "")+n;
+//	 		eh.setCell(1, 0, name);
+		  		  System.out.println(name);
+		  touchpointPage.ussddeletetouchpointcheck(name);
+		  
+		}
+		
 		@Then("^edit api touchpoint from sheet \"([^\"]*)\"$")
 		public void edit_api_touchpoint(String sheet) throws Throwable {
 			Thread.sleep(4000);
@@ -1444,10 +1476,11 @@ System.out.println(editname+"program has edited successfully");
 	 		int  n = rn.nextInt(5000) + 1;
 	 		String name = (String) eh.getCell(1, 0);
 	 		name =  name.replaceAll("[0-9]", "")+n;
-	 		eh.setCell(1, 0, name);
+	 		
 		  touchpointPage.editapiTouchpointDetails("edited "+name);
 		  String newname="edited "+name;
 		  System.out.println(newname);
+		  eh.setCell(1, 0, name);
 		  touchpointPage.apiedittouchpointcheck(newname);
 		  
 		}
