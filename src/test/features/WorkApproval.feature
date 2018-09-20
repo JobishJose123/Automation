@@ -392,7 +392,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then click on review button
     Then verify approve button displayed
     Then Logout from Neon application
-    Then login with the username "shinu.rajan@flytxt.com" and password "flytxt1!"
+    Then login with the username "joel.jose@flytxt.com" and password "flytxt"
     Then click on review button
     Then verify approve and activate button displayed
     Then Logout from Neon application
@@ -452,7 +452,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then check previous step and pass this
     Then pass next scenario based on this step
     
-   @NX-6381 @initBrowser @closeBrowser
+   @NX-6381 @initBrowser 
   Scenario: Verify the status of BC when rejected
   Given login
     Then navigate to configuration management
@@ -482,7 +482,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
     Then Request for bc approval
     Then Logout from Neon application
     Then login with user from sheet "user1" of file "workApproval"
@@ -504,17 +504,17 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
   @NX-6386 @initBrowser @closeBrowser
   Scenario: Verify whether notification is send to the creator user when BC/campaign is approved
    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
     #Given navigate to environment
     Then login with user from sheet "user1" of file "workApproval"
@@ -610,30 +610,30 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
   @NX-6388 @initBrowser 
   Scenario: Verify upon approval BC gets moved to Render scheduled
   Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet broadcastonly "approvalRule"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
-    Then Request for bc approval
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet broadcastonly "approvalRule"
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then naigate to "campaignBC" campaign view broadcasts
+    #Then click create new broadcast button
+    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
+    #Then Request for bc approval
     Then Logout from Neon application
     #Given navigate to environment 
     Then login with user from sheet "user1" of file "workApproval"
-    Then wait for 1 minutes
+    #Then wait for 1 minutes
     Then click on notification bell
     Then click on view all notifications
     Then click Review on notification from the sheet "one-offBC" of file "bcInputData"
     Then click on approve campaign
-    Then wait for 1 minutes
+    #Then wait for 1 minutes
     Then verify broadcast status render scheduled from sheet "one-offBC" of file "bcInputData"
     
     

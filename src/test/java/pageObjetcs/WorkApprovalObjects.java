@@ -841,7 +841,7 @@ Thread.sleep(5000);
 	}
 	public void isRejectedStatusDisplayed(String campaignName) throws InterruptedException
 	{
-		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'R')]"));
+		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]//following::vaadin-grid-cell-content[contains(.,'Rejected')]"));
 		Assert.assertTrue(approvalStatus.isDisplayed());
 	}
 	
@@ -955,7 +955,7 @@ Thread.sleep(5000);
 	
 	public void isRenderScheduledStatusDisplayed(String campaignName) throws InterruptedException
 	{
-		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'R')]"));
+		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]//following::vaadin-grid-cell-content[contains(.,'Render')]"));
 		Assert.assertTrue(approvalStatus.isDisplayed());
 	}
 	public void verifyHistoryandReview(String sheet) throws InterruptedException
