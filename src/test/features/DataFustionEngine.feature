@@ -14,7 +14,7 @@ Feature: DK
 #Sample Feature Definition Template
 @NX-4468
 @initBrowser @closeBrowser
-Scenario: DK--->Verify the functionality of Delete option
+Scenario: DK--->Verify the functionality of Save option
 Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
@@ -31,7 +31,7 @@ Then copy the job from sheet "Jobinput"
 
 @NX-4466 
 @initBrowser @closeBrowser
-Scenario: DK--->Verify the functionality of Copy option
+Scenario: DK--->Verify the functionality of Delete option
 Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
