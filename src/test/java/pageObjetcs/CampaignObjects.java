@@ -774,6 +774,22 @@ jswait.loadSendKeys(campaignattribute, "11");	}
 	}
 	
 	
+	public void CheckUsageMetricField() throws Throwable {
+		
+		 
+			Exception UsageMetricExcep=new Exception("Usage metric is not displaying while creating BC from use tempalte option");
+			if(driver.findElement(By.xpath("//usage-metric[@class='style-scope target-usage-metric']")).isDisplayed()) {
+				
+				System.out.println("Usage metric field is displaying while creating BC from use tempalte option");
+					
+			}
+			else
+				throw UsageMetricExcep;
+		
+	}
+	
+	
+	
 	
 	
 	public void verifyNumberOfOffersWhileCreateCampaign() throws InterruptedException {

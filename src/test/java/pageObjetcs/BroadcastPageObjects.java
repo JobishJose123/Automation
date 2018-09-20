@@ -1261,8 +1261,11 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		clickProceedButton();
 		selectBaseList(baseList);
 		Thread.sleep(3000);
-		campaignObjects.compareTextOfUsageMetricKPI();
+		campaignObjects.CheckUsageMetricField();
 	}
+	
+	
+	
 	
 	
 	
