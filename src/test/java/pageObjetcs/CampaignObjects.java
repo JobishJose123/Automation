@@ -774,6 +774,8 @@ jswait.loadSendKeys(campaignattribute, "11");	}
 	}
 	
 	
+	
+	
 	public void verifyNumberOfOffersWhileCreateCampaign() throws InterruptedException {
 		assertTrue(offerNumber.isDisplayed());
 		String offNumber=offerNumber.getText();

@@ -32,9 +32,37 @@ Then resume bc from sheet "recurringTriggerable"
   @NX-8712 @initBrowser
   Scenario: Verify whether pause option is available for active  campaigns NX-8712
     Given login
+    #Then navigate to configuration management
+    #Then naviagte to product classes
+    #Then create product class and number attribute from "TestProductClass"
+    #Then navigate to landing page
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to products
+    #Then navigate to product class "TestProductClass"
+    #Then click create new product button
+    #Then create product with attributes from sheet "fullDetails"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeEmail" offer to Offer Catalogue
+    #Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
+#		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+		Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
     Then enter details for new broadcast from sheet "recurringTriggerable" with "rechargeEmail"
     Then verify pause and resume option for campaign
     Then pause campaign from sheet "campaignBC"

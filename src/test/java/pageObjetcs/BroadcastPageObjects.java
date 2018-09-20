@@ -43,6 +43,7 @@ public class BroadcastPageObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	public ExcelHelper eh = new ExcelHelper();
+	CampaignObjects campaignObjects = new CampaignObjects();
 	CommonObjects commonObjects = new CommonObjects();
 
 	@FindBy(xpath="//paper-button[contains(.,'Create New Broadcast')]")
@@ -1240,6 +1241,31 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		}
 		clickProceedButton();
 	}
+	
+	
+	
+	
+	public void createBCForUseTemplate(String name, String bc_type, String baseList, String offer) throws Throwable {
+		ExcelHelper offerExcel = new ExcelHelper(); 
+    	offerExcel.setExcelFile("offerInputData", offer);
+		enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+		Thread.sleep(3000);
+		campaignObjects.compareTextOfUsageMetricKPI();
+	}
+	
+	
+	
 	
 	public void createBC(String name, String bc_type, String baseList, String offer,String condition,String inventory) throws InterruptedException {
 		ExcelHelper offerExcel = new ExcelHelper(); 
