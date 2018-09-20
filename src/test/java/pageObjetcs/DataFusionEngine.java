@@ -221,7 +221,27 @@ public class DataFusionEngine extends Init {
 	    jswait.loadClick(JobSave);		
 	}
 	
-	
+	public void Jobfilenameextraction() throws Exception{
+		jswait.loadClick(logiceditor);
+		jswait.loadClick(simulate);
+		File NormalInput = new File("DKInputfile\\Exception_input.txt");
+	    emailSelectResourceButton.sendKeys(NormalInput.getAbsolutePath());
+	    jswait.loadClick(result);
+	    Thread.sleep(5000);	   
+	    Exception skipexception=new Exception("filename extraction is not working");
+	   
+	   String name=jswait.getTextFormElement(".//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td/span[contains(.,'Exception_input')]").toString();
+	   System.out.println(name); 		
+	   if(name.equals("Exception_input"))
+	    {
+	    	
+	    System.out.println("filename extraction  is working");
+	    }else {
+	    	throw skipexception;
+	    }
+	    	
+	    jswait.loadClick(JobSave);		
+	}
 	
 	
 	

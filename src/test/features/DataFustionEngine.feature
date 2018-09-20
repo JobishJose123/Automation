@@ -67,3 +67,14 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then create dk jobs for cheking skip exception from sheet "skipexception"
 Then Open DK Job from sheet and verify skip exception "skipexception"
+
+@NX-3492
+@initBrowser
+Scenario: DK --> Verify the working of String value extraction from a filename
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create dk jobs for cheking filename Extraction from sheet "filenameextraction"
+Then open DK Job from sheet and verify filename extraction "filenameextraction"
+
+
