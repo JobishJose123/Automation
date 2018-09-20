@@ -1,4 +1,5 @@
 package pageObjetcs;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -93,6 +94,10 @@ public class DataFusionEngine extends Init {
 	
 	@FindBy(xpath=".//dk-ui/dk-workflow/div/*/paper-icon-button[@role='button']/iron-icon[@id='icon']")
 	private WebElement JobSave;
+	
+	
+	
+	
 	
 	
 	public void ClickDFEbutton() throws InterruptedException{
@@ -196,6 +201,30 @@ public class DataFusionEngine extends Init {
 		Assert.assertTrue("Job Not Edited", element.isDisplayed());
 		}
 
-		
+	
+	public void Jobcheckskipexception() throws Exception{
+		jswait.loadClick(logiceditor);
+		jswait.loadClick(simulate);
+		File NormalInput = new File("DKInputfile\\Exception_input.txt");
+	    emailSelectResourceButton.sendKeys(NormalInput.getAbsolutePath());
+	    jswait.loadClick(result);
+	    Thread.sleep(5000);	   
+	    Exception skipexception=new Exception("skip exception is not working");
+	    if(driver.findElements(By.xpath(".//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div[1]/table/tbody/tr[2]")).size()==0)
+	    {
+	    	
+	    System.out.println("skip exception is working");
+	    }else {
+	    	throw skipexception;
+	    }
+	    	
+	    jswait.loadClick(JobSave);		
+	}
+	
+	
+	
+	
+	
+	
 
 }
