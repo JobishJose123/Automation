@@ -67,7 +67,7 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Save')]")
 	private WebElement createProgramSaveButton;
-	@FindBy(xpath=".//div[@id='topBar']/paper-button[2]")
+	@FindBy(xpath=".//div[@id='topBar']/paper-button[4]")
 	private WebElement editProgramSaveButton;
 	
 	@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Proceed')]")
@@ -287,7 +287,7 @@ public class ProgramPage extends Init{
 	@FindBy(xpath=".//paper-item[@aria-selected='true' @value='true' and contains(.,'At')]")
 	private WebElement optionAtAfterSelection;
 	
-	@FindBy(xpath=".//label[contains(.,'Tracking session expires')]/../input")
+	@FindBy(xpath=".//h5[contains(.,'Tracking expires')]//following::input")
 	private WebElement trackingSessionField;
 	
 	@FindBy(xpath="//label[contains(.,'Product')]/../../../..//vaadin-combo-box-item[1]")
@@ -450,7 +450,7 @@ private WebElement rulessenderid2 ;
 		Thread.sleep(2000);
 		clickCustomerListField();
 		Thread.sleep(2000);
-		selectCustomerList("listname");
+		selectCustomerList(SELENIUM_LIST);
 		Thread.sleep(2000);
 		clickPorogramProceedButton();
 		Thread.sleep(2000);
@@ -544,10 +544,11 @@ private WebElement rulessenderid2 ;
 			
 		Thread.sleep(1000);
 //		eh.setExcelFile("listname",listname);
-		String list = listname; //(String) eh.getCell(1, 0);
+		String list = SELENIUM_LIST;
 		jswait.loadSendKeys(customerListField, list);
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+list+"')]")).click();
+		Thread.sleep(3000);
+		jswait.loadClick("//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+list+"')]");
+//		driver.findElement(By.xpath("//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+list+"')]")).click();
 		
 	}
    
@@ -808,7 +809,7 @@ private WebElement rulessenderid2 ;
 		jswait.loadSendKeys(addTouchpointTouchpointName, tp);
 		Thread.sleep(3000);
 		
-		driver.findElement(By.xpath("//*[@id='items']/vaadin-combo-box-item[contains(.,'2255-"+tp+"')]")).click();
+		driver.findElement(By.xpath("//*[@id='items']/vaadin-combo-box-item[contains(.,'"+tp+"')]")).click();
 		
 	}
 	public void addTouchPointSelectSmsTouchpointFromSheetnewshortcode(String sheet2) throws InterruptedException {

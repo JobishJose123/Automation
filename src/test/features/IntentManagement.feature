@@ -389,7 +389,7 @@ Then navigate to api
 Then create api touchpoint from sheet "apiTouchpoint"
 Then delete api touchpoint from sheet "apiTouchpoint"
 @NX-1572 
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify edit sms touchpoint creation 
 Given login
 Then navigate to intent management
@@ -403,28 +403,28 @@ Then edit sms touchpoint from sheet "smsTouchpoint"
     #Then naviagte to product classes
     #Then create product class and number attribute from "TestProductClass"
     #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    #Then navigate to offer management 
-    #Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeWAP" offer to Offer Catalogue
-    #Then navigate to landing page
-    #Then navigate to intent management
-    #Then navigate to programs
-    #Then click create program button
-    #Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog"
-    #Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    Then navigate to offer management 
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog"
+    Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails"
@@ -590,7 +590,7 @@ Then verify create program page with alert value
 	Then verify validation error messages for trigger touch point
 	
 	@NX-1436
-  @initBrowser @closeBrowser
+  @initBrowser
   Scenario: Verify the validations for the SMS touchpoint screen-1436
   Given login
   Then navigate to intent management
@@ -700,11 +700,12 @@ Then check trigger touchpoint in grid "triggerTouchpoint"
 @initBrowser
 Scenario: Verify displaying the edited touchpoint name in mapped program-8504
 Given login
-#Then navigate to intent management
-#Then navigate to touchpoints
-#Then navigate to sms
-#Then create sms touchpoint from sheet "smsTouchpoint"
-#Then check sms touchpoint in grid "smsTouchpoint"
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to sms
+Then create sms touchpoint from sheet "smsTouchpoint"
+Then check sms touchpoint in grid "smsTouchpoint"
+
 #Then navigate to landing page
 #Then navigate to configuration management
 #Then naviagte to product classes
@@ -735,8 +736,9 @@ Given login
 #Then navigate to sms
 #Then create sms touchpoint from sheet "smsTouchpoint"
 #Then check sms touchpoint in grid "smsTouchpoint"
-#Then navigate to landing page
-#Then navigate to landing page
+
+
+Then navigate to landing page
 Then navigate to intent management
 Then navigate to programs
 Then choose program from sheet "programdetails" for edit
@@ -844,7 +846,7 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and list "listname"
+    Then create new rule from sheet "fullDetails" and list ""
 
 
 @NX-7221 @initBrowser 

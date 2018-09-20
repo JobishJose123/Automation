@@ -27,7 +27,7 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement exploreSegments;
 	@FindBy(xpath="//label[text()='Analytics']/..")
 	private WebElement analytics;
-	@FindBy(xpath=".//vaadin-grid-table-cell//vaadin-grid-cell-content")
+	@FindBy(xpath=".//vaadin-grid-table-cell[2]//vaadin-grid-cell-content")
 	private WebElement segmentAnalysis;
 	@FindBy(xpath = "//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
 	private List <WebElement> optionsIconList;

@@ -9,6 +9,7 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import cucumber.api.java.en.Then;
+import pageObjetcs.CommonObjects;
 import pageObjetcs.SegmentAnalysisObjects;
 
 public class SegmentAnalysisSteps extends Init {
@@ -46,7 +47,6 @@ public class SegmentAnalysisSteps extends Init {
 	
 	@Then("^verify cluster tab$")
 	public void verifyClusterTab() throws InterruptedException {
-		
 		segmentObjects.verifyClustersTab();	
 	}
 	

@@ -2327,16 +2327,18 @@ Then wait until status of "Recurring" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition <Condition>
           Examples:
     |Condition|
-    #|digitalPersonaGT15|
-    #|customerDemographicsGT25|
-    #|learnedBehaviourGT35|
-    #|analyticalScoresGT45|
-    #|digitalEngagementGT235|
-    #|customerLocationInsightsGT5|
-    #|customerList|
-    #|discoveredClusters200|
-    #|customerDrivenEvent|
+    |digitalPersonaGT15|
+    |customerDemographicsGT25|
+    |learnedBehaviourGT35|
+    |analyticalScoresGT45|
+    |digitalEngagementGT235|
+    |customerLocationInsightsGT5|
+    |customerList|
+    |discoveredClusters200|
+    |customerDrivenEvent|
     |usageMetric|
+    |eventCounts|
+    |revenueMetric|
 
     
        @NX-4525 @initBrowser

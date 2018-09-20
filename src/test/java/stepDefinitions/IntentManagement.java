@@ -85,9 +85,9 @@ public class IntentManagement extends Init{
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
  		String name = (String) eh.getCell(1, 0);
- 		name =  name.replaceAll("[0-9]", "")+n;
- 		eh.setCell(1, 0, name);
+ 		name =  "smsTP"+n;
 		touchpointPage.createSmsTouchpoint(name);
+		eh.setCell(1, 0, name);
 	}
 	@Then("^verify sms touchpoint creation form$")
 	public void verify_sms_tp_creation_form() throws Throwable {
@@ -159,9 +159,11 @@ public class IntentManagement extends Init{
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
  		String name = (String) eh.getCell(1, 0);
- 		name =  name.replaceAll("[0-9]", "")+n;
- 		eh.setCell(1, 0, name);
+// 		name =  name.replaceAll("[0-9]", "")+n;
+ 		name = "apiTP"+n;
+ 		
 	  touchpointPage.createApiTouchpoint(name);
+	  eh.setCell(1, 0, name);
 	}
 
 	@Then("^check api touchpoint in grid \"([^\"]*)\"$")
@@ -212,8 +214,8 @@ public class IntentManagement extends Init{
 	
 	//-------------------------------------------------------------------------------------------//
 	@Then("^create new SMS touch point without filling mandatory fields$")
-	public void createSMSTouchpointWithoutMandatoryFields(String name) throws Throwable {
-	  touchpointPage.createSMSTouchpointWithoutMandatoryFields(name);
+	public void createSMSTouchpointWithoutMandatoryFields() throws Throwable {
+	  touchpointPage.createSMSTouchpointWithoutMandatoryFields("smsTP");
 	
 	}
 	@Then("^create new smart phone app touch point without filling mandatory fields$")
@@ -1212,7 +1214,7 @@ System.out.println(editname+"program has edited successfully");
 //		programPage.pgmtimeokbtn();
 //		programPage.programschserveon(); 
 //		programPage.prmshcserveonalldays();
-		//programPage.clickEditProgramSaveButton();
+		programPage.clickEditProgramSaveButton();
 		Thread.sleep(2000);
 		//programPage.programactivatebtn();
 		programPage.confirmProgramEditSave();
@@ -1475,8 +1477,8 @@ System.out.println(editname+"program has edited successfully");
 			Random rn = new Random();
 	 		int  n = rn.nextInt(5000) + 1;
 	 		String name = (String) eh.getCell(1, 0);
-	 		name =  name.replaceAll("[0-9]", "")+n;
-	 		eh.setCell(1, 0, name);
+//	 		name =  name.replaceAll("[0-9]", "")+n;
+//	 		eh.setCell(1, 0, name);
 		  		  System.out.println(name);
 		  touchpointPage.deletesmsTouchpoint(name);
 		  
@@ -1493,7 +1495,7 @@ System.out.println(editname+"program has edited successfully");
 			Random rn = new Random();
 	 		int  n = rn.nextInt(5000) + 1;
 	 		String name = (String) eh.getCell(1, 0);
-	 		name =  name.replaceAll("[0-9]", "")+n;
+//	 		name =  name.replaceAll("[0-9]", "")+n;
 	 		String newname="edited "+name;
 	 		eh.setCell(1, 0, newname);
 	 		Thread.sleep(3000);

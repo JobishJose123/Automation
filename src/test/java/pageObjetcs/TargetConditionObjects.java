@@ -31,6 +31,10 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionViewToggle;
 	@FindBy(xpath="//paper-item[contains(.,'Usage Metrics')]")
 	private WebElement targetConditionTypeUsageMetrics;
+	@FindBy(xpath="//paper-item[contains(.,'Revenue Metrics')]")
+	private WebElement targetConditionTypeRevenueMetrics;
+	@FindBy(xpath="//paper-item[contains(.,'Event Counts')]")
+	private WebElement targetConditionTypeEventCounts;
 		@FindBy(xpath="(//label[contains(.,'Condition')])[3]//following::input")
 	private WebElement customerLocationInsightConditionField;
 	@FindBy(xpath="//paper-item[contains(.,'By Month')]")
@@ -66,6 +70,10 @@ public class TargetConditionObjects extends Init {
 	private WebElement usageMetricField;
 	@FindBy(xpath="//paper-item[contains(.,'"+USAGE_METRIC_UNIQUE+"')]")
 	private WebElement usageMetricUnique;
+	@FindBy(xpath="//paper-item[contains(.,'"+SELENIUM_REVENUE_METRIC+"')]")
+	private WebElement revenueMetricSelect;
+	@FindBy(xpath="//paper-item[contains(.,'"+SELENIUM_EVENT_COUNTS+"')]")
+	private WebElement eventCountsSelect;
 	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[2]")
 	private WebElement metricDaySelector;
 	@FindBy(xpath="(//label[contains(.,'Select')]/../input)[1]")
@@ -575,6 +583,60 @@ public class TargetConditionObjects extends Init {
 		jswait.loadClick(usageMetricField);
 		jswait.loadSendKeys(usageMetricField,SELENIUM_USAGE_METRIC);
 		jswait.loadClick(usageMetricUnique);
+		jswait.loadClick(metricWeekSelector);
+		jswait.loadClick(metricByMonthOption);
+		jswait.loadClick(metricDaySelector);
+		jswait.loadClick(metricMaxOf);
+		jswait.loadClick(metricMaxOfMonthsSelect);
+		jswait.loadClick(metricMaxOfMonthThisMonth);
+		jswait.loadClick(metricMaxOfMonthLastMonth);
+		jswait.loadClick(metricMaxOfMonthLast2Month);
+		jswait.loadClick(metricMaxOfMonthLast3Month);
+		jswait.loadClick(metricMaxOfMonthLast4Month);
+		jswait.loadClick(metricMaxOfMonthLast5Month);
+		jswait.loadClick(metricMaxOfMonthLast6Month);
+		jswait.loadClick(metricMaxOfMonthLast7Month);
+		jswait.loadClick(metricMaxOfMonthLast8Month);
+		jswait.loadClick(metricMaxOfMonthLast9Month);
+		
+		jswait.loadClick(metricConditionField);
+		jswait.loadClick(conditionIsGreaterThan);
+		jswait.loadSendKeys(isGreaterThanValue,"0");
+		jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("revenueMetric")){
+			jswait.loadClick(targetConditionTypeSelector);
+		jswait.loadClick(targetConditionTypeRevenueMetrics);
+		jswait.loadClick(usageMetricField);
+		jswait.loadSendKeys(usageMetricField,SELENIUM_REVENUE_METRIC);
+		jswait.loadClick(revenueMetricSelect);
+		jswait.loadClick(metricWeekSelector);
+		jswait.loadClick(metricByMonthOption);
+		jswait.loadClick(metricDaySelector);
+		jswait.loadClick(metricMaxOf);
+		jswait.loadClick(metricMaxOfMonthsSelect);
+		jswait.loadClick(metricMaxOfMonthThisMonth);
+		jswait.loadClick(metricMaxOfMonthLastMonth);
+		jswait.loadClick(metricMaxOfMonthLast2Month);
+		jswait.loadClick(metricMaxOfMonthLast3Month);
+		jswait.loadClick(metricMaxOfMonthLast4Month);
+		jswait.loadClick(metricMaxOfMonthLast5Month);
+		jswait.loadClick(metricMaxOfMonthLast6Month);
+		jswait.loadClick(metricMaxOfMonthLast7Month);
+		jswait.loadClick(metricMaxOfMonthLast8Month);
+		jswait.loadClick(metricMaxOfMonthLast9Month);
+		
+		jswait.loadClick(metricConditionField);
+		jswait.loadClick(conditionIsGreaterThan);
+		jswait.loadSendKeys(isGreaterThanValue,"0");
+		jswait.loadClick(targetConditionSave);
+		}
+		else if(event.contentEquals("eventCounts")){
+			jswait.loadClick(targetConditionTypeSelector);
+		jswait.loadClick(targetConditionTypeEventCounts);
+		jswait.loadClick(usageMetricField);
+		jswait.loadSendKeys(usageMetricField,SELENIUM_EVENT_COUNTS);
+		jswait.loadClick(eventCountsSelect);
 		jswait.loadClick(metricWeekSelector);
 		jswait.loadClick(metricByMonthOption);
 		jswait.loadClick(metricDaySelector);
