@@ -697,7 +697,8 @@ public class TargetConditionObjects extends Init {
 			eM.setExcelFile("usageMetricInputData","usageMetric");
 	    	String name = (String) eM.getCell(1, 0);
 	    	Thread.sleep(2000);
-			
+	    	jswait.loadSendKeys(usageMetricField,name);
+	    	Thread.sleep(2000);
 			jswait.loadClick("//paper-item[contains(.,'"+name+"')]");
 			//jswait.loadClick(usageMetricUnique);
 			jswait.loadClick(metricWeekSelector);
