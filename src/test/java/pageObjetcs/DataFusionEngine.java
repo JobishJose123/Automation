@@ -243,7 +243,34 @@ public class DataFusionEngine extends Init {
 	    jswait.loadClick(JobSave);		
 	}
 	
-	
+	public void dfejobverification(String filename,String data,String xpath) throws Exception{
+		jswait.loadClick(logiceditor);
+		
+		jswait.loadClick(simulate);
+		
+		File NormalInput = new File("DKInputfile\\"+filename);
+	   
+		emailSelectResourceButton.sendKeys(NormalInput.getAbsolutePath());
+	   
+		jswait.loadClick(result);
+	    Thread.sleep(5000);	   
+	    
+	    Exception exception=new Exception("verification failed");
+	   
+	   String actualdata=jswait.getTextFormElement(xpath).toString();
+	   
+	   System.out.println(actualdata); 
+	   
+	   if(actualdata.equals(data))
+	    {
+	    	
+	    System.out.println("verification passed");
+	    }else {
+	    	throw exception;
+	    }
+	    	
+	    jswait.loadClick(JobSave);		
+	}
 	
 	
 
