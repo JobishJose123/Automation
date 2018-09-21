@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
@@ -10,6 +11,7 @@ import baseClasses.DK;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.PropHandler;
 import cucumber.api.java.en.Then;
 import pageObjetcs.BroadcastPageObjects;
 import pageObjetcs.CampaignObjects;
@@ -30,6 +32,7 @@ public class DataFusionEngineSteps extends Init {
 	OfferPageObjects offerPageObjects = new OfferPageObjects();
 	LoginPageObjects loginPage = new LoginPageObjects();
 	CommonObjects commonObjects = new CommonObjects();
+	PropHandler PropHandler=new PropHandler();
 	WorkApprovalObjects approvalPageObjects = new WorkApprovalObjects();
 	TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
@@ -231,8 +234,8 @@ public class DataFusionEngineSteps extends Init {
 		DataFusionEngineObjects.dfejobverification(filename,data,xpath);
 	}
 	
-	@Then("^open DK Job from sheet and verify job Operations of sheet \"([^\"]*)\" and file \"([^\"]*)\" with data \"([^\"]*)\"$")
-	public void Verifydfejoboperations(String sheet,String filename,String data) throws Exception {
+	@Then("^open DK Job from sheet and verify job Operations of sheet \"([^\"]*)\" and file \"([^\"]*)\" with data \"([^\"]*)\" with key \"([^\"]*)\"$")
+	public void Verifydfejoboperations(String sheet,String filename,String data,String keyword) throws Exception {
 		
 		Thread.sleep(2000);
 		
@@ -243,8 +246,10 @@ public class DataFusionEngineSteps extends Init {
 		commonObjects.clickOptionsIcon();
 		DataFusionEngineObjects.clickEditOption();
 		Thread.sleep(2000);
+		PropHandler.setPropertyFile("Datafusion.properties");
 		
-		String xpath=".//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td/span[contains(.,'Exception_input')]";
+		String xpath=PropHandler.getValue(keyword);
+//		String xpath=".//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td/span[contains(.,'Exception_input')]";
 		DataFusionEngineObjects.dfejobverification(filename,data,xpath);
 	}
 	

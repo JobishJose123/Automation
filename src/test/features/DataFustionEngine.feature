@@ -75,8 +75,8 @@ Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
 Then create dk jobs for cheking filename Extraction from sheet "filenameextraction"
-Then open DK Job from sheet and verify filename extraction of sheet "filenameextraction" and file "Exception_input.txt" with data "Exception_input"
-#Then open DK Job from sheet and verify job Operations of sheet "filenameextraction" and file "Exception_input.txt" with data "Exception_input"
+#Then open DK Job from sheet and verify filename extraction of sheet "filenameextraction" and file "Exception_input.txt" with data "Exception_input"
+Then open DK Job from sheet and verify job Operations of sheet "filenameextraction" and file "Exception_input.txt" with data "Exception_input" with key "filenameextraction"
 
 @NX-3491
 Scenario: DK --> Verify the working of String value extraction from a filename
