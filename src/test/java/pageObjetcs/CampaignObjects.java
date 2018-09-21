@@ -747,7 +747,7 @@ jswait.loadSendKeys(campaignattribute, "11");	}
 	
 	public void enterCampaignDeailsForExportCampaign() throws Throwable {
 		
-		selectTypeInformational();
+		//selectTypeInformational();
 		String name="Test_Camp";
 		enterCampaignName(name);
 		enterCampaignDescription("Campaign to check bc creation in selenium");
