@@ -76,7 +76,7 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then create dk jobs for cheking filename Extraction from sheet "filenameextraction"
 #Then open DK Job from sheet and verify filename extraction "filenameextraction"
-Then open DK Job from sheet and verify job Operations of sheet "filenameextraction" and file "Exception_input.txt" with data "Exception_input" and path ".//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td/span[contains(.,'Exception_input')]"
+Then open DK Job from sheet and verify job Operations of sheet "filenameextraction" and file "Exception_input.txt" with data "Exception_input"
 
 
 

@@ -243,34 +243,20 @@ public class DataFusionEngineSteps extends Init {
 		DataFusionEngineObjects.Jobfilenameextraction();
 	}
 	
-	@Then("^open DK Job from sheet and verify job Operations of sheet \"([^\"]*)\" and file \"([^\"]*)\" with data \"([^\"]*)\" and path \"([^\"]*)\"$")
-	public void Verifydfejoboperations(String sheet,String filename,String data,String xpath) throws Exception {
-		//DataFusionEngineObjects.ClickAddJobbutton();
+	@Then("^open DK Job from sheet and verify job Operations of sheet \"([^\"]*)\" and file \"([^\"]*)\" with data \"([^\"]*)\"$")
+	public void Verifydfejoboperations(String sheet,String filename,String data) throws Exception {
+		
 		Thread.sleep(2000);
-		//DataFusionEngineObjects.ClickAddJobbutton();
+		
 		eh.setExcelFile("DKInput", sheet);
-		//Random rn = new Random();
-		//int n = rn.nextInt(5000) + 1;
-		//String name = (String) eh.getCell(1, 0);
-		//name = name.replaceAll("[0-9]", "") + n;
-		//eh.setCell(1, 0, name);
+	
 		String JobName = (String) eh.getCell(1, 0);
 		commonObjects.filterName(JobName);
 		commonObjects.clickOptionsIcon();
 		DataFusionEngineObjects.clickEditOption();
 		Thread.sleep(2000);
-		//DataFusionEngineObjects.edit(JobName);
-		//String fileinput = (String) eh.getCell(1, 3);
-		//String fileoutput = (String) eh.getCell(1, 4);
-		//String regex = (String) eh.getCell(1, 5);
-		//DataFusionEngineObjects.Jobname(JobName);
-		//DataFusionEngineObjects.Selctconenctor();
-		//DataFusionEngineObjects.Hostname();
-		//DataFusionEngineObjects.SelectHostname();
-		//DataFusionEngineObjects.FileInput(fileinput);
-		//DataFusionEngineObjects.FileOutput(fileoutput);
-		//DataFusionEngineObjects.FileRegex(regex);
 		
+		String xpath=".//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td/span[contains(.,'Exception_input')]";
 		DataFusionEngineObjects.dfejobverification(filename,data,xpath);
 	}
 	
