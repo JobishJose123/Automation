@@ -215,24 +215,7 @@ public class DataFusionEngineSteps extends Init {
 //		r.postRequest("http://"+p.getValue("env")+"/dk-new/jobs", job);
 	}
 	
-	@Then("^open DK Job from sheet and verify filename extraction of sheet \"([^\"]*)\" and file \"([^\"]*)\" with data \"([^\"]*)\"$")
-	public void Verifyfilenameextraction(String sheet,String filename,String data) throws Exception {
-	
-		Thread.sleep(2000);
-		
-		eh.setExcelFile("DKInput", sheet);
-		
-		String JobName = (String) eh.getCell(1, 0);
-		commonObjects.filterName(JobName);
-		commonObjects.clickOptionsIcon();
-		DataFusionEngineObjects.clickEditOption();
-		Thread.sleep(2000);
-		
-		
-//		DataFusionEngineObjects.Jobfilenameextraction();
-		String xpath=".//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td/span[contains(.,'Exception_input')]";
-		DataFusionEngineObjects.dfejobverification(filename,data,xpath);
-	}
+
 	
 	@Then("^open DK Job from sheet and verify job Operations of sheet \"([^\"]*)\" and file \"([^\"]*)\" with data \"([^\"]*)\" with key \"([^\"]*)\"$")
 	public void Verifydfejoboperations(String sheet,String filename,String data,String keyword) throws Exception {
@@ -251,6 +234,30 @@ public class DataFusionEngineSteps extends Init {
 		String xpath=PropHandler.getValue(keyword);
 //		String xpath=".//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td/span[contains(.,'Exception_input')]";
 		DataFusionEngineObjects.dfejobverification(filename,data,xpath);
+	}
+	
+	@Then("^create dk jobs for cheking filename number extraction from sheet \"([^\"]*)\"$")
+	public void createDKJobfilenamenumberExtraction(String sheet) throws Exception {
+
+		eh.setExcelFile("DKInput", sheet);
+		
+		Random rn = new Random();
+		
+		int n = rn.nextInt(5000) + 1;
+		
+		String jobname = (String) eh.getCell(1, 0);
+		
+		jobname = jobname.replaceAll("[0-9]", "") + n;
+		
+		eh.setCell(1, 0, jobname);
+		System.out.println(jobname);
+		
+		String job = "{\"name\":\""+jobname+"\",\"extConName\":null,\"hostName\":\"flyftp\",\"inputPath\":\"inputpath\",\"outputPath\":\"outputpath\",\"regex\":\".*\",\"dkSchema\":\"<xml xmlns=\\\"http://www.w3.org/1999/xhtml\\\">\\n  <block type=\\\"flytxt\\\" id=\\\"u0m~iVrRcWYMEM2B2{rJ\\\" deletable=\\\"false\\\" x=\\\"-176\\\" y=\\\"82\\\">\\n    <field name=\\\"containsHeader\\\">FALSE</field>\\n    <field name=\\\"skipException\\\">FALSE</field>\\n    <field name=\\\"startBlackout\\\">0</field>\\n    <field name=\\\"endBlackout\\\">0</field>\\n    <field name=\\\"operation\\\">Hdfs</field>\\n    <field name=\\\"headers\\\">TRUE</field>\\n    <field name=\\\"archiveCheck\\\">TRUE</field>\\n    <field name=\\\"key\\\">null</field>\\n    <value name=\\\"lineName\\\">\\n      <block type=\\\"lists_create_with_extract\\\" id=\\\"p(?^da/A)56,z#lCK3#/\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_extract=\\\"0\\\"></mutation>\\n      </block>\\n    </value>\\n    <value name=\\\"fileName\\\">\\n      <block type=\\\"lists_create_with_extract\\\" id=\\\"{{,nmR,%`Cv^{tD%ZeU{\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_extract=\\\"1\\\"></mutation>\\n        <value name=\\\"ADD0\\\">\\n          <block type=\\\"delimiter\\\" id=\\\",[Bh4|0?oo_ax+E{=B^u\\\">\\n            <mutation items=\\\"1\\\"></mutation>\\n            <field name=\\\"delim\\\">_</field>\\n            <value name=\\\"next_marker_0\\\">\\n              <block type=\\\"field_extractor\\\" id=\\\"V[n:mGkPFuZ]y|A)(MJS\\\">\\n                <field name=\\\"NAME\\\">1</field>\\n                <field name=\\\"operation\\\">string</field>\\n                <field name=\\\"VAR\\\">__temp2</field>\\n              </block>\\n            </value>\\n          </block>\\n        </value>\\n      </block>\\n    </value>\\n    <value name=\\\"store_stream\\\">\\n      <block type=\\\"lists_create_with_stream\\\" id=\\\"t$zhGi(*AKu,-o`GImaM\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_stream=\\\"0\\\"></mutation>\\n      </block>\\n    </value>\\n    <value name=\\\"store_batch\\\">\\n      <block type=\\\"lists_create_with_batch\\\" id=\\\"klsocCP6=vQzfSf]]X?}\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_batch=\\\"1\\\"></mutation>\\n        <value name=\\\"ADD0\\\">\\n          <block type=\\\"output_field\\\" id=\\\"EkT;+a/+|/=|[6|[/JHs\\\">\\n            <mutation output_type=\\\"output_field\\\"></mutation>\\n            <field name=\\\"VAR\\\">__temp2</field>\\n          </block>\\n        </value>\\n      </block>\\n    </value>\\n    <value name=\\\"store_neon\\\">\\n      <block type=\\\"lists_create_with_neon\\\" id=\\\"Nmjp!i!~0J_x-Y.+~1Ia\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_neon=\\\"0\\\"></mutation>\\n      </block>\\n    </value>\\n  </block>\\n</xml>\",\"schema\":\"{\\\"name\\\":\\\"TestScript1537523614894\\\",\\\"inputFolder\\\":\\\"TestScript1537523614894\\\",\\\"outputfolder\\\":\\\"TestScript1537523614894\\\",\\\"regex\\\":\\\"TestScript1537523614894\\\",\\\"init\\\":\\\"m__temp2 = mf.createMarker(null,0, 0);\\\\n\\\\nhdfsStore.set(\\\\\\\"TestScript\\\\\\\");\\\\n\\\",\\\"absProcessor\\\":\\\"private Marker m__temp2 = mnull;\\\\n\\\\nprivate Router r_token_95 =  new Router(new int[]{1});\\\\nprivate byte[] token_95= \\\\\\\"_\\\\\\\".getBytes();\\\\n\\\\nprivate Store hdfsStore = new HdfsStore(outputFolder,\\\\\\\"__temp2\\\\\\\");\\\\n\\\",\\\"extract\\\":\\\"\\\",\\\"transformation\\\":\\\"\\\",\\\"store\\\":\\\"hdfsStore.save(data, fileName.toString(), m__temp2);\\\\n\\\",\\\"type\\\":\\\"single\\\",\\\"skipline\\\":false,\\\"done\\\":\\\"sb.append(hdfsStore.done()).append(\\\\\\\",\\\\\\\");\\\\n\\\",\\\"setStore\\\":\\\"fileName.splitAndGetMarkers(token_95,r_token_95,mf,m__temp2);\\\\nhdfsStore.set(fileNameStr);\\\\nhdfsStore.addHeader();\\\\n\\\",\\\"skipheader\\\":\\\"false\\\",\\\"fileName\\\":\\\"test\\\"}\"}";
+		
+		System.out.println(job);
+	
+		DK.createDKJob(job);
+
 	}
 	
 }
