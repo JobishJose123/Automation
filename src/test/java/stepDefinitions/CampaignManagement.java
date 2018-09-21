@@ -546,6 +546,17 @@ public class CampaignManagement extends Init{
 	    {
 	    	campaignObjects.navigateToCampaignCategories();
 	    }
+	    
+	    
+	    @Then("^verify toast message after successful export of a campaign$")
+	    public void verifyToastMessageAfterSuccessfulExportOfCampaign() throws Throwable
+	    {
+	    	campaignObjects.verifyToastMessageAfterSuccessfulExportOfCampaign();
+	    }
+	    
+	    
+	    
+	   
 	    @Then("^create new campaign category from sheet \"([^\"]*)\"$")
 	    public void create_new_campaign_category_from_sheet(String sheet) throws Throwable {
 	    	eM.setExcelFile("campaignCategoryInputData",sheet);
