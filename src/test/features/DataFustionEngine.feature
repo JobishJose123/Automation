@@ -84,3 +84,11 @@ Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
 
+@NX-4374
+@initBrowser @closeBrowser
+Scenario: DK --> Verify the functionality of extractLeading operator in Dynamic operator block
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create dk jobs for cheking extractLeading  from sheet "extractLeading"
+Then open DK Job from sheet and verify job Operations of sheet "extractLeading" and file "Operations_extractLeading.txt" with data "Le" with key "extractleading"
