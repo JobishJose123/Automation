@@ -251,13 +251,13 @@ public class DataFusionEngine extends Init {
 		File NormalInput = new File("DKInputfile\\"+filename);
 	   
 		emailSelectResourceButton.sendKeys(NormalInput.getAbsolutePath());
-	   
+		Thread.sleep(5000);	
 		jswait.loadClick(result);
 	    Thread.sleep(5000);	   
-	    
-	    Exception exception=new Exception("verification failed");
+	    String actualdata=jswait.getTextFormElement(xpath).toString();
+	    Exception exception=new Exception("verification failed because "+actualdata+" is not matching with "+data);
 	   
-	   String actualdata=jswait.getTextFormElement(xpath).toString();
+	 
 	   
 	   System.out.println(actualdata); 
 	   
