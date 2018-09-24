@@ -98,3 +98,10 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then create dk jobs for cheking filename number extraction from sheet "filenamenumber"
 Then open DK Job from sheet and verify job Operations of sheet "filenamenumber" and file "num_1234_check.txt" with data "1234" with key "filenamenumber"
+
+@NX-3489
+@initBrowser
+Scenario: DK --> Verify the working of String value extraction from a line
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
