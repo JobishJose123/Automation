@@ -60,7 +60,7 @@ Then click Data Fusion Engine
 Then Open DK Job from sheet "Delimiter_4390" and verify "2" in ouput
 
 @NX-4383
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: DK--->verify the functionality of skip exception block.
 Given login
 Then navigate to data foundation
@@ -69,7 +69,7 @@ Then create dk jobs for checking skip exception from sheet "skipexception"
 Then Open DK Job from sheet and verify skip exception "skipexception"
 
 @NX-3492
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: DK --> Verify the working of String value extraction from a filename
 Given login
 Then navigate to data foundation
@@ -91,7 +91,7 @@ Then create dk jobs for checking filename number extraction from sheet "filename
 Then open DK Job from sheet and verify job Operations of sheet "filenamenumber" and file "num_1234_check.txt" with data "1234" with key "filenamenumber"
 
 @NX-3491
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: DK --> Verify the working of String value extraction from a filename
 Given login
 Then navigate to data foundation
@@ -100,10 +100,39 @@ Then create dk jobs for checking filename number extraction from sheet "filename
 Then open DK Job from sheet and verify job Operations of sheet "filenamenumber" and file "num_1234_check.txt" with data "1234" with key "filenamenumber"
 
 @NX-3489
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: DK --> Verify the working of String value extraction from a line
 Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
 Then create dk jobs for checking String value extraction from a line from sheet "datafromline"
 Then open DK Job from sheet and verify job Operations of sheet "datafromline" and file "num_1234_check.txt" with data "test" with key "linestringextraction"
+
+@NX-3488
+@initBrowser @closeBrowser
+Scenario: DK --> Verify the working of String value extraction from a line
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create dk jobs for checking String value extraction from a line from sheet "datafromline"
+Then open DK Job from sheet and verify job Operations of sheet "datafromline" and file "num_1234_check.txt" with data "919895007879" with key "linenumberextraction"
+
+@NX-3490
+@initBrowser @closeBrowser
+Scenario: DK --> Verify the working of String value extraction from a line
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create dk jobs for checking String value extraction from a line from sheet "datafromline"
+Then open DK Job from sheet and verify job Operations of sheet "datafromline" and file "num_1234_check.txt" with data "01002018 00:01:00.0+0000" with key "linedateextraction"
+
+
+
+@NX-3493
+@initBrowser @closeBrowser
+Scenario: DK --> Verify the working of Date value extraction from a filename
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create dk jobs for checking date value extraction from a filename from sheet "filenamedate"
+Then open DK Job from sheet and verify job Operations of sheet "filenamedate" and file "date_01-01-2018_check.txt" with data "01002018 00:01:00.0+0000" with key "filenamedateextraction"

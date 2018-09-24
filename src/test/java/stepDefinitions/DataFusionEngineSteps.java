@@ -284,4 +284,28 @@ public class DataFusionEngineSteps extends Init {
 		DK.createDKJob(job);
 
 	}
+	
+	@Then("^create dk jobs for checking date value extraction from a filename from sheet \"([^\"]*)\"$")
+	public void createDKJobdateextractionfilename(String sheet) throws Exception {
+
+		eh.setExcelFile("DKInput", sheet);
+		
+		Random rn = new Random();
+		
+		int n = rn.nextInt(5000) + 1;
+		
+		String jobname = (String) eh.getCell(1, 0);
+		
+		jobname = jobname.replaceAll("[0-9]", "") + n;
+		
+		eh.setCell(1, 0, jobname);
+		System.out.println(jobname);
+		
+		String job = "{\"name\":\""+jobname+"\",\"extConName\":null,\"hostName\":\"flyftp\",\"inputPath\":\"input\",\"outputPath\":\"output\",\"regex\":\".*\",\"dkSchema\":\"<xml xmlns=\\\"http://www.w3.org/1999/xhtml\\\">\\n  <block type=\\\"flytxt\\\" id=\\\"u0m~iVrRcWYMEM2B2{rJ\\\" deletable=\\\"false\\\" x=\\\"-176\\\" y=\\\"82\\\">\\n    <field name=\\\"containsHeader\\\">FALSE</field>\\n    <field name=\\\"skipException\\\">FALSE</field>\\n    <field name=\\\"startBlackout\\\">0</field>\\n    <field name=\\\"endBlackout\\\">0</field>\\n    <field name=\\\"operation\\\">Hdfs</field>\\n    <field name=\\\"headers\\\">TRUE</field>\\n    <field name=\\\"archiveCheck\\\">TRUE</field>\\n    <field name=\\\"key\\\">null</field>\\n    <value name=\\\"lineName\\\">\\n      <block type=\\\"lists_create_with_extract\\\" id=\\\"p(?^da/A)56,z#lCK3#/\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_extract=\\\"0\\\"></mutation>\\n      </block>\\n    </value>\\n    <value name=\\\"fileName\\\">\\n      <block type=\\\"lists_create_with_extract\\\" id=\\\"{{,nmR,%`Cv^{tD%ZeU{\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_extract=\\\"1\\\"></mutation>\\n        <value name=\\\"ADD0\\\">\\n          <block type=\\\"delimiter\\\" id=\\\",[Bh4|0?oo_ax+E{=B^u\\\">\\n            <mutation items=\\\"1\\\"></mutation>\\n            <field name=\\\"delim\\\">_</field>\\n            <value name=\\\"next_marker_0\\\">\\n              <block type=\\\"field_extractor\\\" id=\\\"V[n:mGkPFuZ]y|A)(MJS\\\">\\n                <field name=\\\"NAME\\\">1</field>\\n                <field name=\\\"operation\\\">date</field>\\n                <field name=\\\"VAR\\\">__temp2</field>\\n              </block>\\n            </value>\\n          </block>\\n        </value>\\n      </block>\\n    </value>\\n    <statement name=\\\"transform\\\">\\n      <block type=\\\"tp_date_format\\\" id=\\\"%-%1z^CdzH7L|m2]ecE}\\\">\\n        <mutation tp_date_format=\\\"__temp2\\\"></mutation>\\n        <field name=\\\"dateFormat\\\">dd-mm-yyyy</field>\\n        <next>\\n          <block type=\\\"dynamic\\\" id=\\\"6(+OsYplrDWx-XK^{K;V\\\">\\n            <mutation operation=\\\"convertDate\\\"></mutation>\\n            <field name=\\\"m1\\\">__temp2</field>\\n            <field name=\\\"operation\\\">convertDate</field>\\n            <field name=\\\"m2\\\">__temp2</field>\\n            <field name=\\\"VAR\\\">__temp0</field>\\n          </block>\\n        </next>\\n      </block>\\n    </statement>\\n    <value name=\\\"store_stream\\\">\\n      <block type=\\\"lists_create_with_stream\\\" id=\\\"t$zhGi(*AKu,-o`GImaM\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_stream=\\\"0\\\"></mutation>\\n      </block>\\n    </value>\\n    <value name=\\\"store_batch\\\">\\n      <block type=\\\"lists_create_with_batch\\\" id=\\\"klsocCP6=vQzfSf]]X?}\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_batch=\\\"1\\\"></mutation>\\n        <value name=\\\"ADD0\\\">\\n          <block type=\\\"output_field\\\" id=\\\"EkT;+a/+|/=|[6|[/JHs\\\">\\n            <mutation output_type=\\\"output_field\\\"></mutation>\\n            <field name=\\\"VAR\\\">__temp0</field>\\n          </block>\\n        </value>\\n      </block>\\n    </value>\\n    <value name=\\\"store_neon\\\">\\n      <block type=\\\"lists_create_with_neon\\\" id=\\\"Nmjp!i!~0J_x-Y.+~1Ia\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_neon=\\\"0\\\"></mutation>\\n      </block>\\n    </value>\\n  </block>\\n</xml>\",\"schema\":\"{\\\"name\\\":\\\"TestScript1537783034951\\\",\\\"inputFolder\\\":\\\"TestScript1537783034951\\\",\\\"outputfolder\\\":\\\"TestScript1537783034951\\\",\\\"regex\\\":\\\"TestScript1537783034951\\\",\\\"init\\\":\\\"m__temp2 = mf.createMarker(null,0, 0);\\\\n\\\\nhdfsStore.set(\\\\\\\"TestScript\\\\\\\");\\\\n\\\",\\\"absProcessor\\\":\\\"private Marker m__temp2 = mnull;\\\\n\\\\nprivate Router r_token_95 =  new Router(new int[]{1});\\\\nprivate byte[] token_95= \\\\\\\"_\\\\\\\".getBytes();\\\\n\\\\nprivate Marker m__temp0 = mnull;\\\\n\\\\nprivate Store hdfsStore = new HdfsStore(outputFolder,\\\\\\\"__temp0\\\\\\\");\\\\n\\\",\\\"extract\\\":\\\"\\\",\\\"transformation\\\":\\\"  tpDate.parse(m__temp2,mf,\\\\\\\"dd-mm-yyyy\\\\\\\");\\\\n  m__temp0 = tpDate.convertDate(m__temp2, mf);\\\\n\\\",\\\"store\\\":\\\"hdfsStore.save(data, fileName.toString(), m__temp0);\\\\n\\\",\\\"type\\\":\\\"single\\\",\\\"skipline\\\":false,\\\"done\\\":\\\"sb.append(hdfsStore.done()).append(\\\\\\\",\\\\\\\");\\\\n\\\",\\\"setStore\\\":\\\"fileName.splitAndGetMarkers(token_95,r_token_95,mf,m__temp2);\\\\nhdfsStore.set(fileNameStr);\\\\nhdfsStore.addHeader();\\\\n\\\",\\\"skipheader\\\":\\\"false\\\",\\\"fileName\\\":\\\"test\\\"}\"}";
+		
+		System.out.println(job);
+	
+		DK.createDKJob(job);
+
+	}
 }
