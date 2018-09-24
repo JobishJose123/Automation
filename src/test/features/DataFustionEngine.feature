@@ -74,7 +74,7 @@ Scenario: DK --> Verify the working of String value extraction from a filename
 Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
-Then create dk jobs for cheking filename Extraction from sheet "filenameextraction"
+Then create dk jobs for checking filename Extraction from sheet "filenameextraction"
 Then open DK Job from sheet and verify job Operations of sheet "filenameextraction" and file "Exception_input.txt" with data "Exception_input" with key "filenameextraction"
 
 
@@ -87,7 +87,7 @@ Then click Data Fusion Engine
 Then create dk jobs for cheking extractLeading  from sheet "extractLeading"
 Then open DK Job from sheet and verify job Operations of sheet "extractLeading" and file "Operations_extractLeading.txt" with data "Le" with key "extractleading"
 
-Then create dk jobs for cheking filename number extraction from sheet "filenamenumber"
+Then create dk jobs for checking filename number extraction from sheet "filenamenumber"
 Then open DK Job from sheet and verify job Operations of sheet "filenamenumber" and file "num_1234_check.txt" with data "1234" with key "filenamenumber"
 
 @NX-3491
@@ -96,7 +96,7 @@ Scenario: DK --> Verify the working of String value extraction from a filename
 Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
-Then create dk jobs for cheking filename number extraction from sheet "filenamenumber"
+Then create dk jobs for checking filename number extraction from sheet "filenamenumber"
 Then open DK Job from sheet and verify job Operations of sheet "filenamenumber" and file "num_1234_check.txt" with data "1234" with key "filenamenumber"
 
 @NX-3489
@@ -105,3 +105,5 @@ Scenario: DK --> Verify the working of String value extraction from a line
 Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
+Then create dk jobs for checking String value extraction from a line from sheet "datafromline"
+Then open DK Job from sheet and verify job Operations of sheet "datafromline" and file "num_1234_check.txt" with data "test" with key "linestringextraction"
