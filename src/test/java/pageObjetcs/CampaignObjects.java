@@ -95,6 +95,9 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath="//span[contains(.,'Campaign Exported Successfully')]")
 	private WebElement successfulExportMessage;
 	
+	@FindBy(xpath="//span[contains(.,'Campaign imported successfully')]")
+	private WebElement successfulImportMessage;
+	
 	
 	
 	@FindBy(xpath=".//*[@id='createNew']//label[contains(.,'Name')]/../input")
@@ -1697,6 +1700,13 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
   public void verifyToastMessageAfterSuccessfulExportOfCampaign() throws InterruptedException {
 		Thread.sleep(2000);
 	  assertTrue(successfulExportMessage.isDisplayed());
+		
+		
+	}
+  
+  public void verifyToastMessageAfterSuccessfulImportOfCampaign() throws InterruptedException {
+		Thread.sleep(2000);
+	  assertTrue(successfulImportMessage.isDisplayed());
 		
 		
 	}

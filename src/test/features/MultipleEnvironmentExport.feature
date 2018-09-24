@@ -221,6 +221,66 @@ Feature: Test cases related to export campaign in multiple environment
    	
    	
    	
+   	@NX-8207 @initBrowser 
+    Scenario: Verify whether user can import after mapping is done - 8207
+	
+    Given login
+    Then navigate to data foundation
+    Then navigate to customer location insights
+    Then click create new customer location insight
+    Then enter new customer location insight details from sheet "name"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+		Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then navigate to system administration
+    Then navigate to export location
+    Then add new export location
+    Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then create new campaign with customer location insight from sheet "campaignBC" with catalog "defaultCatalog"
+    Then choose export to location option from sheet "campaignBC"
+		Then choose export location for campaign from sheet "locationdetails" of file "ExportCampaignLocation"
+		Then click username on topbar
+		Then logout
+		Then login to next environment
+    Then wait for 7 minutes
+		Then click on notification bell
+    Then click on view all notifications
+    Then click proceed on notification from the sheet "campaignBC" of file "campaignInputData"
+   	Then verify whether validation messasge for invalid usag metric shown
+   	Then map to the native condition
+   	Then verify color of KPI condition box after successful mapping
+   	Then select a category and import
+    Then verify toast message after successful import of a campaign
+   	
+   	
+   	
+   	
    	
    	
    	
@@ -627,4 +687,8 @@ Feature: Test cases related to export campaign in multiple environment
     Then choose export to location option from sheet "campaignBC"
 		Then choose export location for campaign from sheet "locationdetails" of file "ExportCampaignLocation"
 		Then verify toast message after successful export of a campaign
+		
+		
+		
+
     

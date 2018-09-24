@@ -554,6 +554,14 @@ public class CampaignManagement extends Init{
 	    	campaignObjects.verifyToastMessageAfterSuccessfulExportOfCampaign();
 	    }
 	    
+	   
+	    @Then("^verify toast message after successful import of a campaign$")
+	    public void verifyToastMessageAfterSuccessfulImportOfCampaign() throws Throwable
+	    {
+	    	campaignObjects.verifyToastMessageAfterSuccessfulImportOfCampaign();
+	    }
+	    
+	    
 	    
 	    
 	   
