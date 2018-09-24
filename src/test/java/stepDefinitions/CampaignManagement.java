@@ -934,6 +934,14 @@ public class CampaignManagement extends Init{
 		    	
 		    	campaignObjects.selectCategoryAndImport();
 		    }
+		    
+		    @Then("^click import button without selecting campaign category$")
+		    public void clickImportButtonWithoutSelectingACampaignCategory() throws Throwable {
+		    	
+		    	campaignObjects.clickImportButtonWithoutSelectingACampaignCategory();
+		    }
+		    
+		    
 
 
 		    @Then("^click on export location option of template from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
@@ -1173,6 +1181,14 @@ public class CampaignManagement extends Init{
 		    {
 		
 		 		campaignObjects.verifyImportButtonDisabled();
+		    }
+		    
+		    
+		    @Then("^verify select category error message$")
+		    public void verifySelectACategoryErrorMessage() throws Throwable
+		    {
+		
+		 		campaignObjects.verifySelectACategoryErrorMessage();
 		    }
 		    
 		   

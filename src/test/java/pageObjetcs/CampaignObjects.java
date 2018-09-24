@@ -206,6 +206,8 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath="//paper-button[@id='importBtn' and @aria-disabled='true' ]")
 	private WebElement importOptionDisabled;
 	
+	@FindBy(xpath="//paper-input-error[contains(.,'This field is required.')]")
+	private WebElement selectCampaignErrorMessage;
 	
 	
 	
@@ -822,6 +824,14 @@ jswait.loadSendKeys(campaignattribute, "11");	}
 		chooseCategory();
 		clickImportOption();
 	}
+	
+  public void clickImportButtonWithoutSelectingACampaignCategory() throws Exception {
+		
+		
+		clickImportOption();
+	}
+	
+	
 	
 	
 	public void scrollToCampaignCategoryAndCheckCount(String name) throws Exception {
@@ -1701,6 +1711,13 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
   public void verifyImportButtonDisabled() throws Exception {
 	  
 		assertTrue(importOptionDisabled.isDisplayed());
+		
+		}
+  
+  
+  public void verifySelectACategoryErrorMessage() throws Exception {
+	  
+		assertTrue(selectCampaignErrorMessage.isDisplayed());
 		
 		}
   
