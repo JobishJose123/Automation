@@ -203,7 +203,8 @@ public class CampaignObjects extends Init{
 	private WebElement targetedCustomersExpandCount;
 	
 	
-	
+	@FindBy(xpath="//paper-button[@id='importBtn' and @aria-disabled='true' ]")
+	private WebElement importOptionDisabled;
 	
 	
 	
@@ -1694,6 +1695,14 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 		assertTrue(convertedCustomersCount.isDisplayed());
 		
 	}
+  
+  
+  
+  public void verifyImportButtonDisabled() throws Exception {
+	  
+		assertTrue(importOptionDisabled.isDisplayed());
+		
+		}
   
   
   

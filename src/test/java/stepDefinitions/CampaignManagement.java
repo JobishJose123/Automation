@@ -1166,5 +1166,14 @@ public class CampaignManagement extends Init{
 		 		campaignObjects.verifyConvertedCustomersLabelAndCount();
 		    }
 		    
+		    
+		    
+		    @Then("^verify import button is disabled$")
+		    public void verifyImportButtonDisabled() throws Throwable
+		    {
+		
+		 		campaignObjects.verifyImportButtonDisabled();
+		    }
+		    
 		   
 }
