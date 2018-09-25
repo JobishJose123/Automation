@@ -136,3 +136,14 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then create dk jobs for checking date value extraction from a filename from sheet "filenamedate"
 Then open DK Job from sheet and verify job Operations of sheet "filenamedate" and file "date_01-01-2018_check.txt" with data "01002018 00:01:00.0+0000" with key "filenamedateextraction"
+
+@NX-4367 @NX-4371
+@initBrowser @closeBrowser
+Scenario: DK --> Verify the functionality of abs/extractDecimalFractionPart operator in Dynamic operator block
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create dk jobs for checking abs/extractDecimalFractionPart operator in Dynamic operator block from sheet "abs_fraction"
+Then open DK Job from sheet and verify job Operations of sheet "abs_fraction" and file "Operations_abs_fraction.txt" with data "2" with key "ABSvalue"
+Then navigate to landing page
+Then open DK Job from sheet and verify job Operations of sheet "abs_fraction" and file "Operations_abs_fraction.txt" with data "112" with key "FromNumber_Integerpart"
