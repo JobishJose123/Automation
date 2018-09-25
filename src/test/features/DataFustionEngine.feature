@@ -146,4 +146,6 @@ Then click Data Fusion Engine
 Then create dk jobs for checking abs/extractDecimalFractionPart operator in Dynamic operator block from sheet "abs_fraction"
 Then open DK Job from sheet and verify job Operations of sheet "abs_fraction" and file "Operations_abs_fraction.txt" with data "2" with key "ABSvalue"
 Then navigate to landing page
+Then navigate to data foundation
+Then click Data Fusion Engine
 Then open DK Job from sheet and verify job Operations of sheet "abs_fraction" and file "Operations_abs_fraction.txt" with data "112" with key "FromNumber_Integerpart"
