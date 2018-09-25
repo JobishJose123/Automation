@@ -92,7 +92,7 @@ Then open DK Job from sheet and verify job Operations of sheet "filenamenumber" 
 
 @NX-3491
 @initBrowser @closeBrowser
-Scenario: DK --> Verify the working of String value extraction from a filename
+Scenario: DK --> Verify the working of number value extraction from a filenam
 Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
@@ -107,7 +107,10 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then create dk jobs for checking String value extraction from a line from sheet "datafromline"
 Then open DK Job from sheet and verify job Operations of sheet "datafromline" and file "num_1234_check.txt" with data "test" with key "linestringextraction"
-
+Then pass next scenario based on this step
+@NX-4462
+Scenario: DK--->Verify the functionality FTP processor using valid Regex.
+    Then check previous step and pass this
 @NX-3488
 @initBrowser @closeBrowser
 Scenario: DK --> Verify the working of String value extraction from a line
@@ -149,3 +152,14 @@ Then navigate to landing page
 Then navigate to data foundation
 Then click Data Fusion Engine
 Then open DK Job from sheet and verify job Operations of sheet "abs_fraction" and file "Operations_abs_fraction.txt" with data "112" with key "FromNumber_Integerpart"
+
+@NX-4356
+@initBrowser
+Scenario: DK--->Verify the functionality of  GreaterThan operator in Dynamic operator block.
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create dk jobs for checking greaterthan funtion from sheet "filenamedate"
+Then open DK Job from sheet and verify job Operations of sheet "filenamedate" and file "num_1234_check.txt" with data "600" with key "greaterthanjob"
+
+

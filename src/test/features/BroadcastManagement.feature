@@ -2098,28 +2098,28 @@ Scenario: Email Channel --> Verify the preview, delivery and presentation of Ema
     Then pass next scenario based on this step
     
     @NX-2349
-      @initBrowser 
+       
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Forms.
     Then check previous step and pass this
     Then pass next scenario based on this step
     @NX-2347
-        @initBrowser 
+        
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Links.
     Then check previous step and pass this
     Then pass next scenario based on this step
        @NX-2348
-        @initBrowser 
+        
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Surveys.
     Then check previous step and pass this
     Then pass next scenario based on this step
     @NX-2397
-          @initBrowser 
+           
 Scenario: Email Channel -->Verify the URL's inside the email content is getting tracked on click
     Then check previous step and pass this
     Then pass next scenario based on this step
     
         @NX-2382
-          @initBrowser 
+          
 Scenario: Email Channel -->Verify the event Unsubscribed to emails is handled and differentiated or not.
     Then check previous step and pass this
     Then pass next scenario based on this step
