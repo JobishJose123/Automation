@@ -499,6 +499,17 @@ public class CampaignManagement extends Init{
 	    }
 	    
 	    
+	    @Then("^veify imported campaign template conditions are same after importing$")
+	    public void veifyImportedCampaignTemplateConditionsAreSameAfterImporting() throws Throwable {
+	    	
+	    	campaignObjects.clickOnUseTemplateButton();
+	    	
+	    	campaignObjects.enterCampaignDeailsForCompareTargetConditions();
+	    	
+	    	
+	    }
+	    
+	    
 	    @Then("^create campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\" for use template$")
 	    public void createCampaignForUseTemplate(String sheet,String catalogSheet) throws Throwable {
 	    	

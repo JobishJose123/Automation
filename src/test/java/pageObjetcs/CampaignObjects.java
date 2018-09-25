@@ -765,6 +765,18 @@ jswait.loadSendKeys(campaignattribute, "11");	}
 		compareTextOfUsageMetricKPI();
 	}
 	
+	
+public void enterCampaignDeailsForCompareTargetConditions() throws Throwable {
+		
+		//selectTypeInformational();
+		String name="Test_Camp";
+		enterCampaignName(name);
+		enterCampaignDescription("Campaign to check bc creation in selenium");
+		selectOfferCatalogForExportCapaign();
+		clickProceedButton();
+		compareTextOfTargetConditions();
+	}
+	
 	public void compareTextOfUsageMetricKPI() throws Throwable {
 		
 		  KPI_TEXT2=jswait.getTextFormElement("//usage-metric[@class='style-scope target-usage-metric']");
@@ -773,6 +785,24 @@ jswait.loadSendKeys(campaignattribute, "11");	}
 		    System.out.println("Text After Import:"+KPI_TEXT2);
 			Exception KPITextExcep=new Exception("Text are different after import");
 			if(KPI_TEXT1.equals(KPI_TEXT2)) {
+				
+				System.out.println("Text are same after import");
+					
+			}
+			else
+				throw KPITextExcep;
+		
+	}
+	
+	
+	public void compareTextOfTargetConditions() throws Throwable {
+		
+		TARGET_CONDITION_AFTER_IMPORT=jswait.getTextFormElement("//profile-field[@class='style-scope condition-form']");
+		
+		 System.out.println("Text Before Import:"+KPI_TEXT1);
+		    System.out.println("Text After Import:"+TARGET_CONDITION_AFTER_IMPORT);
+			Exception KPITextExcep=new Exception("Text are different after import");
+			if(KPI_TEXT1.equals(TARGET_CONDITION_AFTER_IMPORT)) {
 				
 				System.out.println("Text are same after import");
 					

@@ -83,6 +83,7 @@ public static Logger log;
 	public final String USAGE_METRIC_UNIQUE = "Unique_Metric";
 	public String KPI_TEXT1 ="";
 	public String KPI_TEXT2 ="";
+	public String TARGET_CONDITION_AFTER_IMPORT ="";
 
 	
 }
