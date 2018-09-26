@@ -559,6 +559,19 @@ public class CampaignManagement extends Init{
 	    	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
 			campaignObjects.clickOptionsExportToLocation();
 	    }
+	    
+	    @Then("^check export to location option available for campaign from sheet \"([^\"]*)\"$")
+	    public void checkExportToLocationOptionAvailableForCampaign(String sheet) throws Throwable
+	    {
+	    	eM.setExcelFile("campaignInputData", sheet);
+	    	String name = eM.getCell(1, 0).toString();
+	    	commonObjects.filterName(name);
+	    	
+//	    	Thread.sleep(30000);//NX-8537 bug wait
+	    	
+	    	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+			campaignObjects.checkExportToLocationOptionAvailableForCampaign();
+	    }
 	    @Then("^click create new broadcast button$")
 	    public void create_new_broadcast_button() throws Throwable
 	    {

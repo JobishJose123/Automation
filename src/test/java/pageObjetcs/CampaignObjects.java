@@ -262,6 +262,13 @@ public class CampaignObjects extends Init{
 	public void clickOptionsExportToLocation() throws InterruptedException {
 		jswait.loadClick(optionsExportToLocation);
 	}
+	
+	
+	public void checkExportToLocationOptionAvailableForCampaign() throws InterruptedException {
+		Thread.sleep(2000);
+		assertTrue(optionsExportToLocation.isDisplayed());
+	}
+	
 	public void optionsshowhistory() throws InterruptedException {
 		jswait.loadClick(optionsshowhistory);
 	}
