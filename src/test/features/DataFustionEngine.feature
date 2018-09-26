@@ -91,8 +91,8 @@ Then create dk jobs for checking filename number extraction from sheet "filename
 Then open DK Job from sheet and verify job Operations of sheet "filenamenumber" and file "num_1234_check.txt" with data "1234" with key "filenamenumber"
 
 @NX-3491
-@initBrowser @closeBrowser
-Scenario: DK --> Verify the working of number value extraction from a filenam
+@initBrowser
+Scenario: DK --> Verify the working of number value extraction from a filename
 Given login
 Then navigate to data foundation
 Then click Data Fusion Engine
@@ -161,5 +161,14 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then create dk jobs for checking greaterthan funtion from sheet "filenamedate"
 Then open DK Job from sheet and verify job Operations of sheet "filenamedate" and file "num_1234_check.txt" with data "600" with key "greaterthanjob"
+
+@NX-DfeNumberCheck
+@initBrowser
+Scenario: DK--->Verify the functionality of number operations in Dynamic operator block().
+Given login
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then create dk jobs for checking  number operations from sheet "numberoperations"
+Then open DK Job from sheet and verify job Operations of sheet "numberoperations" and file "Operations_Number.txt" with key "numeric"
 
 
