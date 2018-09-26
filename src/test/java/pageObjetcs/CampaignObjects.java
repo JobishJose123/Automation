@@ -100,6 +100,12 @@ public class CampaignObjects extends Init{
 	private WebElement successfulImportMessage;
 	
 	
+	@FindBy(xpath=".//div[@id='trigger']//paper-icon-button")
+	private WebElement optionsIconForCampaignTemplate;
+	
+	@FindBy(xpath="//paper-item[contains(.,'Edit')]")
+	private WebElement editOptionForCampaignTemplate;
+	
 	
 	@FindBy(xpath=".//*[@id='createNew']//label[contains(.,'Name')]/../input")
 	private WebElement categoryNameInput;
@@ -1804,6 +1810,17 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 	}
 
    
+  
+  public void verifyEditOptionForCampainTemplate() throws InterruptedException {
+	  
+	  
+	  Thread.sleep(2000);
+	  optionsIconForCampaignTemplate.click();
+	  Thread.sleep(2000);
+	  assertTrue(editOptionForCampaignTemplate.isDisplayed());
+		
+		
+	}
    
    
 

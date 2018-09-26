@@ -1237,5 +1237,14 @@ public class CampaignManagement extends Init{
 		    }
 		    
 		    
+		    @Then("^verify edit option for campaign template$")
+		    public void verifyEditOptionForCampainTemplate() throws Throwable
+		    {
+		
+		 		campaignObjects.verifyEditOptionForCampainTemplate();
+		    }
+		    
+		    
+		    
 		   
 }
