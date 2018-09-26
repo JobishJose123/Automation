@@ -510,6 +510,19 @@ public class CampaignManagement extends Init{
 	    }
 	    
 	    
+	    
+	    @Then("^clear campaign name field$")
+	    public void clearCampaignNameField() throws Throwable {
+	    	
+	    	campaignObjects.clearCampaignNameField();
+	    	
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
 	    @Then("^create campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\" for use template$")
 	    public void createCampaignForUseTemplate(String sheet,String catalogSheet) throws Throwable {
 	    	
@@ -1201,6 +1214,15 @@ public class CampaignManagement extends Init{
 		
 		 		campaignObjects.verifySelectACategoryErrorMessage();
 		    }
+		    
+		    
+		    @Then("^verify validation message for import page$")
+		    public void verifyValidationErrorMessageForImport() throws Throwable
+		    {
+		
+		 		campaignObjects.verifyValidationErrorMessageForImport();
+		    }
+		    
 		    
 		   
 }

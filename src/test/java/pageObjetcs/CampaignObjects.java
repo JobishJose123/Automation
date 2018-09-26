@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -160,6 +161,9 @@ public class CampaignObjects extends Init{
 	private WebElement campaignTemplateNameInput;
 	@FindBy(xpath = ".//paper-button[contains(.,'Use Template')]")
 	private WebElement useTemplateButton;
+	
+	@FindBy(xpath = "//label[contains(.,'Campaign Template Name')]/../input")
+	private WebElement campaignNameField;
 	@FindBy(xpath = "//div[@data-nodepos='responseData.conditions']")
 	private WebElement KPIConditionBox;
 	
@@ -207,7 +211,10 @@ public class CampaignObjects extends Init{
 	private WebElement importOptionDisabled;
 	
 	@FindBy(xpath="//paper-input-error[contains(.,'This field is required.')]")
-	private WebElement selectCampaignErrorMessage;
+	private WebElement selectCampaignCategoryErrorMessage;
+	
+	@FindBy(xpath="//paper-input-error[contains(.,'This field is required.')]")
+	private List <WebElement> selectImportPageErrorMessages;
 	
 	
 	
@@ -723,6 +730,13 @@ public class CampaignObjects extends Init{
 	public void clickOnUseTemplateButton() throws InterruptedException {
 		jswait.loadClick(useTemplateButton);
 	}
+	
+	
+	public void clearCampaignNameField() throws InterruptedException {
+		jswait.loadClick(campaignNameField);
+		campaignNameField.clear();
+	}
+	
 	public void checkCategoryName(String name) throws Exception {
 		
 		String st=commonObjects.getTextFormTextField(categoryName);
@@ -1747,7 +1761,22 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
   
   public void verifySelectACategoryErrorMessage() throws Exception {
 	  
-		assertTrue(selectCampaignErrorMessage.isDisplayed());
+		assertTrue(selectCampaignCategoryErrorMessage.isDisplayed());
+		
+		}
+  
+  public void verifyValidationErrorMessageForImport() throws Exception {
+	  
+	   int errorSize= selectImportPageErrorMessages.size();
+	   Exception sizeExcep= new Exception("Size Exception");
+	   
+	   if(errorSize==2) {
+		   
+		   System.out.println(("Size is "+errorSize));
+	   }
+	   
+	   else
+		   throw sizeExcep;
 		
 		}
   
