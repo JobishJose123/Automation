@@ -1246,5 +1246,14 @@ public class CampaignManagement extends Init{
 		    
 		    
 		    
+		    @Then("^check import status for campaign template$")
+		    public void checkImportStatusOfCampainTemplate() throws Throwable
+		    {
+		
+		 		campaignObjects.checkImportStatusOfCampainTemplate();
+		    }
+		    
+		    
+		    
 		   
 }

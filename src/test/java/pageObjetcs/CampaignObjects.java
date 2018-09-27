@@ -106,6 +106,9 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath="//paper-item[contains(.,'Edit')]")
 	private WebElement editOptionForCampaignTemplate;
 	
+	@FindBy(xpath="//data-table-cell[contains(.,'Imported')]")
+	private WebElement importStatusForCampaignTemplate;
+	
 	
 	@FindBy(xpath=".//*[@id='createNew']//label[contains(.,'Name')]/../input")
 	private WebElement categoryNameInput;
@@ -1821,6 +1824,18 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 		
 		
 	}
+  
+  
+public void checkImportStatusOfCampainTemplate() throws InterruptedException {
+	  
+	  
+	assertTrue(importStatusForCampaignTemplate.isDisplayed());
+		
+		
+	}
+  
+  
+  
    
    
 
