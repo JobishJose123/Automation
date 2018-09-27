@@ -320,14 +320,14 @@ private WebElement ruledays;
 private WebElement rulessenderid ;
 @FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 private WebElement addresssprule;
-@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')])[2]")
+@FindBy(xpath="(//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')])")
 private WebElement addresssprule2;
 
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which this broadcast can be sent')]//following::input[1]")
 private WebElement rulerouteid;
 @FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
 private WebElement ruleroute;
-@FindBy(xpath="(//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])[2]")
+@FindBy(xpath="(//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])")
 private WebElement ruleroute2;
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::input[1]")
 private WebElement rulerouteid2;
@@ -338,14 +338,30 @@ private WebElement rulerouteid2;
 private WebElement rulessenderid2 ;
 	
 	
+	@FindBy(xpath="//hexagon-content//span")
+	private WebElement topRuleStatus;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
 
 //===========================================================================================================================================================================//
 //                                                                         PROGRAM PAGE FUNCTIONS
@@ -359,6 +375,10 @@ private WebElement rulessenderid2 ;
 
    public void checkProgramTitleValidationErrorMessage() throws InterruptedException {
 		assertTrue(errorProgrammTitle.isDisplayed());
+	}
+   public String getTopSuleStatus() throws InterruptedException {
+		jswait.waitUntil(topRuleStatus);
+		return topRuleStatus.getText();
 	}
 	public void clickCreateProgramCancelButton() throws InterruptedException {
 		jswait.loadClick(createProgramCancelButton);
@@ -395,9 +415,9 @@ private WebElement rulessenderid2 ;
 		jswait.loadClick(programViewRulesButton);
 	}
 	
-	public void verifyRuleCreatedFromSheet(String name) throws InterruptedException {
+	public void verifyRuleCreatedFromSheet(String name) throws java.lang.Exception {
 		Thread.sleep(3000);
-		assertTrue(driver.findElement(By.xpath("//data-table-cell[contains(.,'"+name+"')]")).isDisplayed());
+		jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");
 	}
 	
 	
@@ -470,8 +490,10 @@ private WebElement rulessenderid2 ;
 	}
    
    //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-///
-   public void createNewProgramRule(String name,String listname)throws Exception {
-		
+   public void createNewProgramRule(String name,String listname,String touchpointList)throws Exception {
+		eh.setExcelFile("touchpointInputData", touchpointList);
+		System.out.println(touchpointList);
+		String touchpointType = eh.getCellByColumnName("type");
 		clickCreateNewRuleButton();
 		enterruleName();
 		clickSaveRuleButton();
@@ -496,11 +518,13 @@ private WebElement rulessenderid2 ;
 		ruleafterinput2(); 
 		ruledays();
 		Thread.sleep(2000);
+		if(!touchpointType.contentEquals("customer care")){
 		rulessenderid();
 		addresssprule();
 		Thread.sleep(3000);
 		rulerouteid();
 		ruleroute();
+   }
 		Thread.sleep(2000);
 		rulessenderid2();
 		addresssprule2();
@@ -809,7 +833,7 @@ private WebElement rulessenderid2 ;
 		jswait.loadSendKeys(addTouchpointTouchpointName, tp);
 		Thread.sleep(3000);
 		
-		driver.findElement(By.xpath("//*[@id='items']/vaadin-combo-box-item[contains(.,'"+tp+"')]")).click();
+		jswait.loadClick("//*[@id='items']/vaadin-combo-box-item[contains(.,'"+tp+"')]");
 		
 	}
 	public void addTouchPointSelectSmsTouchpointFromSheetnewshortcode(String sheet2) throws InterruptedException {
@@ -840,12 +864,26 @@ private WebElement rulessenderid2 ;
 		jswait.loadClick(addTouchpointSaveButton);
 	}
 	public void addTouchPointToProgramFromSheet(String sheet) throws InterruptedException {
-		addTouchPointSelectSmsChannel();
-		addTouchPointEnterKeywordAliase();
-		Thread.sleep(2000);
-		addTouchPointSelectSmsTouchpointFromSheet(sheet);
-		addTouchPointSelectSmsResponseChannel();
-		jswait.loadClick(addTouchpointSaveButton);
+		eh.setExcelFile("touchpointInputData",sheet);
+		String type = eh.getCellByColumnName("type");
+		String tpname = eh.getCell(1, 0).toString();
+		if(type.contentEquals("sms")) {
+			addTouchPointSelectSmsChannel();
+			addTouchPointEnterKeywordAliase();
+			Thread.sleep(2000);
+			addTouchPointSelectSmsTouchpointFromSheet(sheet);
+			addTouchPointSelectSmsResponseChannel();
+			jswait.loadClick(addTouchpointSaveButton);
+		}
+		else if(type.contentEquals("customer care")) {
+			addTouchPointSelectCCChannel();
+			//addTouchPointEnterKeywordAliase();
+			Thread.sleep(2000);
+			addTouchPointSelectSmsTouchpointFromSheet(sheet);
+			addTouchPointSelectCCResponseChannel();
+			jswait.loadClick(addTouchpointSaveButton);
+		}
+		
 	}
 	public void addTouchPointToProgramFromSheetnewshortcode(String sheet) throws InterruptedException {
 		addTouchPointSelectSmsChannel();
@@ -1152,16 +1190,8 @@ public void touchpointpgmdeletecheck() throws Exception{
 		jswait.loadSendKeys(programofferclick, offer);
 		Thread.sleep(3000);
 		System.out.println("Offer: "+offer);
-		
-		try {
-		assertTrue(driver.findElement(By.xpath(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]")).isDisplayed());
-		Thread.sleep(3000);
-		driver.findElement(By.xpath(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]")).click();
-		}
-		catch(Exception e) {
-			
-			
-		}
+			Thread.sleep(3000);
+			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
 	}
 
 	

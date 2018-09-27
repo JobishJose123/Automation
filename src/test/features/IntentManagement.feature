@@ -854,7 +854,7 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and list ""
+    Then create new rule from sheet "fullDetails" and list "" and touchpoint from sheet "smsTouchpoint"
 
 
 @NX-7221 @initBrowser 
@@ -895,9 +895,40 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and list "listname"
+    Then create new rule from sheet "fullDetails" and list "listname" and touchpoint from sheet "smsTouchpoint"
     Then verify rule created from sheet "rule"
     Then navigate to programs
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and list "listname"
+    Then create new rule from sheet "fullDetails" and list "listname" and touchpoint from sheet "smsTouchpoint"
     Then verify rule created from sheet "rule"
+    
+        @NX-programCreation @initBrowser 
+  Scenario: verify programCreatetion
+    Given login
+    #Then navigate to precision marketer
+    #Then navigate to offer management 
+    #Then navigate to offers
+    #Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to offer management 
+    #Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeSMS" offer to Offer Catalogue
+    #Then navigate to landing page
+     Then navigate to intent management
+    #Then navigate to touchpoints
+    #Then navigate to customer care
+    #Then create customer care touchpoint from sheet "CCTouchpoint"
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
+    Then choose program from sheet "programdetails"
+    Then create new rule from sheet "fullDetails" and list "listname" and touchpoint from sheet "CCTouchpoint"
+    Then verify rule created from sheet "rule"
+    Then wait for "A" status of rule
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+		Then navigate to customer profile
+		Then search msisdn "9446506807"
