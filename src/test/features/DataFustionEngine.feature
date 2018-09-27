@@ -162,7 +162,7 @@ Then click Data Fusion Engine
 Then create dk jobs for checking greaterthan funtion from sheet "filenamedate"
 Then open DK Job from sheet and verify job Operations of sheet "filenamedate" and file "num_1234_check.txt" with data "600" with key "greaterthanjob"
 
-@NX-DfeNumberCheck
+@NX-DfeNumberCheck 
 @initBrowser
 Scenario: DK--->Verify the functionality of number operations in Dynamic operator block().
 Given login
@@ -170,5 +170,45 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then create dk jobs for checking  number operations from sheet "numberoperations"
 Then open DK Job from sheet and verify job Operations of sheet "numberoperations" and file "Operations_Number.txt" with key "numeric"
+Then pass next scenario based on this step
+
+  @NX-3497  
+Scenario: DK --> Verify the functionality of addDouble operation in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+      @NX-3498 
+Scenario: DK --> Verify the functionality of addLong operation in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+      @NX-3502  
+Scenario: DK --> Verify the functionality of round operation in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+      @NX-4365 
+Scenario: DK--->Verify the functionality of subDouble operator in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+       @NX-4366
+Scenario: DK--->Verify the functionality of subLong operator in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+       @NX-4357 
+Scenario: DK--->Verify the functionality of lessThan operator in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+       @NX-3521
+Scenario: DK --> Verify the functioality of Test block with a Number value inside the IF condition.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+       @NX-3500
+Scenario: DK --> Verify the functionality of division operation in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+        @NX-3499
+Scenario: DK --> Verify the functionality of multiply operation in Dynamic operator block
+    Then check previous step and pass this
+    Then pass next scenario based on this step
 
 
