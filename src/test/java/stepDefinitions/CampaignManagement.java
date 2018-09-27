@@ -591,6 +591,14 @@ public class CampaignManagement extends Init{
 	    	campaignObjects.verifyToastMessageAfterSuccessfulExportOfCampaign();
 	    }
 	    
+	    
+	    
+	    @Then("^verify toast message after successful export of a campaign template$")
+	    public void verifyToastMessageAfterSuccessfulExportOfCampaignTemplate() throws Throwable
+	    {
+	    	campaignObjects.verifyToastMessageAfterSuccessfulExportOfCampaignTemplate();
+	    }
+	    
 	   
 	    @Then("^verify toast message after successful import of a campaign$")
 	    public void verifyToastMessageAfterSuccessfulImportOfCampaign() throws Throwable
@@ -1252,6 +1260,15 @@ public class CampaignManagement extends Init{
 		
 		 		campaignObjects.checkImportStatusOfCampainTemplate();
 		    }
+		    
+		    
+		    @Then("^click export location option for campaign template$")
+		    public void clickExportLocationOptionForCampainTemplate() throws Throwable
+		    {
+		
+		 		campaignObjects.clickExportLocationOptionForCampainTemplate();
+		    }
+		    
 		    
 		    
 		    
