@@ -321,7 +321,13 @@ public class DataFusionEngine extends Init {
 		 
 	   jswait.waitUntil("//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td[1]/span[text()='10']/../../td[2]/span[text()='10']/../../td[3]/span[text()='11']/../../td[4]/span[text()='15.0']/../../td[5]/span[text()='1112345474757']/../../td[6]/span[text()='20.3']/../../td[7]/span[text()='30.3']/../../td[8]/span[text()='40']/../../td[9]/span[text()='100.0']/../../td[10]/span[text()='105']/../../td[11]/span[text()='116']/../../td[12]/span[text()='1.0']/../../td[13]/span[text()='10']/../../td[14]/span[text()='5']/../../td[15]/span[text()='5.0']/../../td[16]/span[text()='5']/../../td[17]/span[text()='10']/../../td[18]/span[text()='10.0']/../../td[19]/span[text()='10.6']/../../td[20]/span[text()='11.0']/../../td[21]/span[text()='0.3000000000000007']/../../td[22]/span[text()='0.3']/../../td[23]/span[text()='30']/../../td[24]/span[text()='']/../../td[25]/span[text()='']/../../td[26]/span[text()='5.0']/../../td[27]/span[text()='']/../../td[28]/span[text()='10.6']/../../td[29]/span[text()='10.5678']");
 	 }else if(keyword.equals("String")){
-		 jswait.waitUntil("//table/tbody/tr[1]/td[1]/span[text()='10']/../../td[2]/span[text()='10']/../../td[3]/span[text()='11']");
+		 jswait.waitUntil("//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td[1]/span[contains(.,'Name')]/../../td[2]/span[contains(.,'test')]/../../td[3]/span[contains(.,'TEST')]/../../td[4]/span[contains(.,'4')]/../../td[5]/span[contains(.,'TEST')]/../../td[6]/span[contains(.,'test')]/../../td[7]/span[contains(.,'Nametest')]/../../td[8]/span[contains(.,'Name test')]/../../td[9]/span[contains(.,'testName')]/../../td[10]/span[contains(.,'test')]/../../td[11]/span[contains(.,'testName')]/../../td[12]/span[contains(.,'test')]/../../td[13]/span[contains(.,'Name')]/../../td[14]/span[contains(.,'test')]/../../td[15]/span[contains(.,'true')]/../../td[16]/span[contains(.,'true')]/../../td[17]/span[contains(.,'check')]/../../td[18]/span[contains(.,'check1')]/../../td[19]/span[contains(.,'CHECK')]/../../td[20]/span[contains(.,'CHECK1')]/../../td[21]/span[contains(.,'')]/../../td[22]/span[contains(.,'122')]/../../td[23]/span[contains(.,'3')]/../../td[24]/span[contains(.,'')]");
+	 }
+	 else if(keyword.equals("Date")){
+		 jswait.waitUntil("//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[2]/td[1]/span[contains(.,'01022017 00:00:00.0+0000')]/../../td[2]/span[contains(.,'15062017 01:02:00.0+0530')]/../../td[3]/span[contains(.,'17062017 02:02:00.0+0530')]/../../td[4]/span[contains(.,'176400000')]/../../td[5]/span[contains(.,'100')]/../../td[6]/span[contains(.,'1.2')]/../../td[7]/span[contains(.,'')]/../../td[8]/span[contains(.,'1000.0')]/../../td[9]/span[contains(.,'1000.0')]");
+	 }
+	 else if(keyword.equals("Lookup")){
+		 jswait.waitUntil("//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[2]/td[1]/span[contains(.,'919745087972')]/../../td[2]/span[contains(.,'3')]/../../td[3]/span[contains(.,'')]");
 	 }else {
 		 throw exception;
 	 }
@@ -331,5 +337,4 @@ public class DataFusionEngine extends Init {
 	}
 	
 	
-
 }
