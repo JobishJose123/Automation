@@ -727,7 +727,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919446506809"
+    Then enter customer number for send trial verification "919446506900"
     Then click on search button
     Then click on events tab
     Then choose all events
@@ -745,12 +745,12 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then verify send trail to numbers "9446506807" "9446506808" "9446506809" from sheet "STVWAP" with product "fullDetails"
+    Then verify send trail to numbers "919446506901" "919446506903" "919446506902" from sheet "STVWAP" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919446506809"
+    Then enter customer number for send trial verification "919446506902"
     Then click on search button
     Then click on events tab
     Then choose all events
@@ -761,7 +761,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919446506807"
+    Then enter customer number for send trial verification "919446506901"
     Then click on search button
     Then click on events tab
     Then choose all events
@@ -803,13 +803,13 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then verify send trail to ONE number from sheet "rechargeSMS" with product "fullDetails" and number "919446506807"
+    Then verify send trail to ONE number from sheet "rechargeSMS" with product "fullDetails" and number "919446506956"
     #Then verify send trail to number with multiple creative from sheet "rechargeSMS" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919446506807"
+    Then enter customer number for send trial verification "919446506956"
     Then click on search button
     Then click on events tab
     Then choose all events
@@ -823,13 +823,13 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then verify send trail to ONE number from sheet "rechargeSMS" with product "fullDetails" and number "919446506807"
+    Then verify send trail to ONE number from sheet "rechargeSMS" with product "fullDetails" and number "919446506957"
     #Then verify send trail to number with multiple creative from sheet "rechargeSMS" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919446506807"
+    Then enter customer number for send trial verification "919446506957"
     Then click on search button
     Then click on events tab
     Then choose all events
@@ -843,13 +843,13 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then verify send trail to ONE number with dynamic tag from sheet "rechargeSMS" with product "fullDetails" and number "919446506807"
+    Then verify send trail to ONE number with dynamic tag from sheet "rechargeSMS" with product "fullDetails" and number "919446506958"
     #Then verify send trail to number with multiple creative from sheet "rechargeSMS" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919446506807"
+    Then enter customer number for send trial verification "919446506958"
     Then click on search button
     Then click on events tab
     Then choose all events
@@ -863,13 +863,13 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then verify send trail for Emailtype to ONE number from sheet "rechargeEmail" with product "fullDetails" and number "919446506807"
+    Then verify send trail for Emailtype to ONE number from sheet "rechargeEmail" with product "fullDetails" and number "919446506959"
     #Then verify send trail to number with multiple creative from sheet "rechargeSMS" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919446506807"
+    Then enter customer number for send trial verification "919446506959"
     Then click on search button
     Then click on events tab
     Then choose all events
@@ -883,13 +883,13 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then verify send trail for Emailtype to ONE number from sheet "rechargeEmail" with product "fullDetails" and number "919446506807"
+    Then verify send trail for Emailtype to ONE number from sheet "rechargeEmail" with product "fullDetails" and number "919446506960"
     #Then verify send trail to number with multiple creative from sheet "rechargeSMS" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919446506807"
+    Then enter customer number for send trial verification "919446506960"
     Then click on search button
     Then click on events tab
     Then choose all events
@@ -910,7 +910,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then navigate to reports
     Then navigate to customer profile
     #Below number(Env 23) should be unique for each environment,and that needs to be checked in Transporter logs
-    Then enter customer number for send trial verification "'emailconenctorid'"
+    Then enter customer number for send trial verification "919446506809"
     Then click on search button
     Then click on events tab
     Then choose all events

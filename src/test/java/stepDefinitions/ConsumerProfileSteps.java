@@ -48,7 +48,7 @@ public class ConsumerProfileSteps extends Init{
 	}
 	@Then("^search msisdn \"([^\"]*)\"$")
 	public void searchMsisdn(String msisdn) throws InterruptedException, IOException {	
-		if(msisdn.length()<=10) {
+		if(msisdn.length()<10) {
 			msisdn = getMsisdn();
 		}
 		customerProfilePage.searchMsisdn(msisdn);

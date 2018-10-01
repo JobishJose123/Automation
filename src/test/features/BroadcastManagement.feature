@@ -2004,7 +2004,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then verify send trail to numbers "9446506807" "9446506808" "9446506809" from sheet "rechargeWAP" with product "fullDetails"
+    Then verify send trail to numbers "9446506953" "9446506954" "9446506955" from sheet "rechargeWAP" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -2376,7 +2376,7 @@ Then wait until status of "Recurring" is "Complete"
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then verify send trail to numbers "9446506807" "9446506808" "9446506809" from sheet "rechargeEmail" with product "fullDetails"
+    Then verify send trail to numbers "9446506950" "9446506951" "9446506952" from sheet "rechargeEmail" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management

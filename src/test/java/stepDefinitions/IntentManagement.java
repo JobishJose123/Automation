@@ -3,6 +3,7 @@ package stepDefinitions;
 import java.io.IOException;
 import java.util.Random;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.server.handler.FindElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.TimeoutImpl;
 import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.en.Then;
@@ -1299,7 +1301,7 @@ System.out.println(editname+"program has edited successfully");
 	 }
 	 
 	 @Then("^verify rule created from sheet \"([^\"]*)\"$")
-	 public void verifyRuleCreatedFromSheet(String sheet) throws InterruptedException {
+	 public void verifyRuleCreatedFromSheet(String sheet) throws Exception {
 		 Thread.sleep(2000);
 		    eh.setExcelFile("ruleInputData",sheet);
 			String name = (String) eh.getCell(1, 0);
@@ -1332,7 +1334,6 @@ System.out.println(editname+"program has edited successfully");
 			programPage.programschrefreshcycle();
 			programPage.programrefreshcyclecheck();
 		}
-		
 		
 		@Then("^create program Verify More Actions \"([^\"]*)\"$")
 		public void moreoptionsprograms(String sheet) throws Throwable {
@@ -1382,8 +1383,8 @@ System.out.println(editname+"program has edited successfully");
 				
 				
 			}	
-		 @Then("^create new rule from sheet \"([^\"]*)\" and list \"([^\"]*)\"$")
-			public void CreateNewRuleWithFromSheet(String sheet1,String list) throws Throwable {
+		 @Then("^create new rule from sheet \"([^\"]*)\" and list \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+			public void CreateNewRuleWithFromSheet(String sheet1,String list,String touchpointList) throws Throwable {
 				Thread.sleep(4000);
 		    	ExcelHelper programExcel = new ExcelHelper();
 		    	programExcel.setExcelFile("productInputData", sheet1);
@@ -1391,7 +1392,8 @@ System.out.println(editname+"program has edited successfully");
 		 		String name = (String) programExcel.getCell(1, 0);
 		 		Thread.sleep(4000);
 				//programPage.clickCreateProgramButton();
-				programPage.createNewProgramRule(name,list);
+		 		System.out.println(touchpointList);
+				programPage.createNewProgramRule(name,list,touchpointList);
 				
 				
 			}
@@ -1781,20 +1783,34 @@ System.out.println(editname+"program has edited successfully");
 		}
 		
 		
-		@Then("^create (\\d+) rule from sheet \"([^\"]*)\" and list \"([^\"]*)\"$")
-		public void create_rule_from_sheet_and_list(int arg1, String sheet1, String list) throws Throwable {
-			for(int i=0;i<arg1;i++) {
-				Thread.sleep(2000);
-				ExcelHelper programExcel = new ExcelHelper();
-		    	programExcel.setExcelFile("productInputData", sheet1);
-		    	
-		 		String name = "myy_rule_";
-		 		Thread.sleep(2000);
-				//programPage.clickCreateProgramButton();
-				programPage.createNewProgramRule(name+i,list);
-			}
-	    	
-		}
+//		@Then("^create (\\d+) rule from sheet \"([^\"]*)\" and list \"([^\"]*)\"$")
+//		public void create_rule_from_sheet_and_list(int arg1, String sheet1, String list) throws Throwable {
+//			for(int i=0;i<arg1;i++) {
+//				Thread.sleep(2000);
+//				ExcelHelper programExcel = new ExcelHelper();
+//		    	programExcel.setExcelFile("productInputData", sheet1);
+//		    	
+//		 		String name = "myy_rule_";
+//		 		Thread.sleep(2000);
+//				//programPage.clickCreateProgramButton();
+//				programPage.createNewProgramRule(name+i,list);
+//			}
+//	    	
+//		}
 		
+		
+		@Then("^wait for \"([^\"]*)\" status of rule$")
+		public void wait_for_status_of_rule_TO_DO(String statusExpected) throws Throwable {
+			String ruleStatus = programPage.getTopSuleStatus();
+			TimeoutImpl t = new TimeoutImpl();
+			t.startTimer();
+			while(!ruleStatus.contains(statusExpected)&& t.checkTimerMin(15)) {
+				ruleStatus = programPage.getTopSuleStatus();
+				System.out.println(ruleStatus);
+				driver.navigate().refresh();
+				Thread.sleep(5000);
+			}
+			Assert.assertTrue("Invalid status of BC",ruleStatus.contains(statusExpected));
+		}
 	
 }

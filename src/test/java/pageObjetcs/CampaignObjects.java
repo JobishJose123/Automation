@@ -96,6 +96,10 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath="//span[contains(.,'Campaign Exported Successfully')]")
 	private WebElement successfulExportMessage;
 	
+	
+	@FindBy(xpath="//span[contains(.,'Campaign Shared Successfully')]")
+	private WebElement successfulExportMessageOfCampaignTemplate;
+	
 	@FindBy(xpath="//span[contains(.,'Campaign imported successfully')]")
 	private WebElement successfulImportMessage;
 	
@@ -105,6 +109,11 @@ public class CampaignObjects extends Init{
 	
 	@FindBy(xpath="//paper-item[contains(.,'Edit')]")
 	private WebElement editOptionForCampaignTemplate;
+	
+
+	
+	@FindBy(xpath="//data-table-cell[contains(.,'Imported')]")
+	private WebElement importStatusForCampaignTemplate;
 	
 	
 	@FindBy(xpath=".//*[@id='createNew']//label[contains(.,'Name')]/../input")
@@ -1802,6 +1811,14 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 		
 	}
   
+  
+  public void verifyToastMessageAfterSuccessfulExportOfCampaignTemplate() throws InterruptedException {
+		Thread.sleep(2000);
+	  assertTrue(successfulExportMessageOfCampaignTemplate.isDisplayed());
+		
+		
+	}
+  
   public void verifyToastMessageAfterSuccessfulImportOfCampaign() throws InterruptedException {
 		Thread.sleep(2000);
 	  assertTrue(successfulImportMessage.isDisplayed());
@@ -1821,6 +1838,31 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 		
 		
 	}
+  
+  
+  
+public void clickExportLocationOptionForCampainTemplate() throws InterruptedException {
+	  
+	  
+	  Thread.sleep(2000);
+	  optionsIconForCampaignTemplate.click();
+	  Thread.sleep(2000);
+	  jswait.loadClick(optionsExportToLocation);
+		
+		
+	}
+  
+  
+public void checkImportStatusOfCampainTemplate() throws InterruptedException {
+	  
+	  
+	assertTrue(importStatusForCampaignTemplate.isDisplayed());
+		
+		
+	}
+  
+  
+  
    
    
 
