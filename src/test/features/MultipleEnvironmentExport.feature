@@ -1322,3 +1322,16 @@ Feature: Test cases related to export campaign in multiple environment
    	
    	
    	
+   	
+   	@NX-7954 @initBrowser 
+		Scenario: Verify whether on clicking Add button user can add the location details-7954
+    Given login
+    Then navigate to configuration management
+    Then navigate to system administration
+    Then navigate to export location
+    Then add new export location
+    Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then verify toast message for successful creation of export location 
+    
+   	
+   	

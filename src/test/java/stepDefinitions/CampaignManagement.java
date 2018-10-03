@@ -1269,7 +1269,16 @@ public class CampaignManagement extends Init{
 		 		campaignObjects.clickExportLocationOptionForCampainTemplate();
 		    }
 		    
+		  
 		    
+		    
+		    @Then("^verify toast message for successful creation of export location$")
+		    public void verifyToastMessageForSucessfulCreationOfExportLocation() throws Throwable
+		    {
+		
+		 		campaignObjects.verifyToastMessageForSucessfulCreationOfExportLocation();
+		    
+		    }
 		    
 		    
 		   

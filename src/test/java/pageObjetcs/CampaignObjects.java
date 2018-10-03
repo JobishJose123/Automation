@@ -115,6 +115,9 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath="//data-table-cell[contains(.,'Imported')]")
 	private WebElement importStatusForCampaignTemplate;
 	
+	@FindBy(xpath="//span[contains(.,'Export location added successfully')]")
+	private WebElement toastMessageForSucessfulCreationOfExportLocation;
+	
 	
 	@FindBy(xpath=".//*[@id='createNew']//label[contains(.,'Name')]/../input")
 	private WebElement categoryNameInput;
@@ -1861,7 +1864,13 @@ public void checkImportStatusOfCampainTemplate() throws InterruptedException {
 		
 	}
   
-  
+public void verifyToastMessageForSucessfulCreationOfExportLocation() throws InterruptedException {
+	  
+	Thread.sleep(2000);  
+	assertTrue(toastMessageForSucessfulCreationOfExportLocation.isDisplayed());
+		
+		
+	}
   
    
    
