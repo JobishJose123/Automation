@@ -327,7 +327,7 @@ public class DataFusionEngine extends Init {
 		 jswait.waitUntil("//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[2]/td[1]/span[contains(.,'01022017 00:00:00.0+0000')]/../../td[2]/span[contains(.,'15062017 01:02:00.0+0530')]/../../td[3]/span[contains(.,'17062017 02:02:00.0+0530')]/../../td[4]/span[contains(.,'176400000')]/../../td[5]/span[contains(.,'100')]/../../td[6]/span[contains(.,'1.2')]/../../td[7]/span[contains(.,'')]/../../td[8]/span[contains(.,'1000.0')]/../../td[9]/span[contains(.,'1000.0')]");
 	 }
 	 else if(keyword.equals("Lookup")){
-		 jswait.waitUntil("//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[2]/td[1]/span[contains(.,'919745087972')]/../../td[2]/span[contains(.,'3')]/../../td[3]/span[contains(.,'')]");
+		 jswait.waitUntil("//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[2]/td[1]/span[contains(.,'919745087972')]/../../td[2]/span[contains(.,'3')]/../../td[3]/span[contains(.,'')]/../../td[4]/span[contains(.,'')]");
 	 }else {
 		 throw exception;
 	 }

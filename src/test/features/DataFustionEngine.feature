@@ -198,6 +198,21 @@ Feature: DK
     Then check previous step and pass this
     Then pass next scenario based on this step
 
+  @NX-4364
+  Scenario: DK--->Verify the functionality of Min operator in Dynamic operator block
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-4363
+  Scenario: DK--->Verify the functionality of Max operator in Dynamic operator block
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-4369
+  Scenario: DK--->Verify the functionality of floor operator in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
   @NX-DfeStringCheck @initBrowser @closeBrowser
   Scenario: DK--->Verify the functionality of string operations in Dynamic operator block().
     Given login
@@ -272,6 +287,16 @@ Feature: DK
     Then check previous step and pass this
     Then pass next scenario based on this step
 
+  @NX-4378
+  Scenario: DK--->Verify the functionality of merge operator in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-4375
+  Scenario: DK--->Verify the functionality of extractTrailing operator in Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
   @NX-DfeDateCheck @initBrowser @closeBrowser
   Scenario: DK--->Verify the functionality of string operations in Dynamic operator block().
     Given login
@@ -286,7 +311,7 @@ Feature: DK
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-DfelookupCheck @initBrowser @closeBrowser
+  @NX-DfelookupCheck @initBrowser
   Scenario: DK--->Verify the functionality of string operations in Dynamic operator block().
     Given login
     Then navigate to data foundation
@@ -294,12 +319,18 @@ Feature: DK
     Then create dk jobs for checking lookup operations from sheet "dfelookupjob"
     Then open DK Job from sheet and verify job Operations of sheet "dfelookupjob" and file "Operations_Lookup.txt" with key "Lookup"
     Then pass next scenario based on this step
-     @NX-3531
+
+  @NX-3531
+  Scenario: DK --> Verify that the lookup operation working as expected when the lookup path is mention in the volume
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-9277
   Scenario: DK --> Verify that the lookup operation doesnt work when lookup file is not there in the specified location.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    
-       @NX-3530
+
+  @NX-3530
   Scenario: DK --> Verify that the lookup operation doesnt work when lookup file is not there in the specified location.
     Then check previous step and pass this
     Then pass next scenario based on this step
