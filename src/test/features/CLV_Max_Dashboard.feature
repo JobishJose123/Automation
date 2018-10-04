@@ -52,3 +52,4 @@ Feature: Dashboard page
     Then navigate to campaign performance monitor screen
     Then click on help icon
     Then verify help panel
+    

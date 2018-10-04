@@ -57,7 +57,7 @@ public class CustomerProfilePage extends Init{
 	private WebElement checkboxEventTypes;
 	@FindBy(xpath=".//div[@id='mainContainer']//iron-icon[@title='Apply']")
 	private WebElement applyButton;
-	@FindBy(xpath=".//paper-toast[@id='toast']//span[text()='Please select atleast one event type before applying']")
+	@FindBy(xpath="//span[text()='Please select at least one event type before applying']")
 	private WebElement applyToastMessage;
 	@FindBy(xpath=".//iron-data-table[@id='consumerSubList']//iron-icon[@title='Unsubscribe']")
 	private WebElement unsubscribeButton;
@@ -327,6 +327,7 @@ public class CustomerProfilePage extends Init{
  
  public void verifyToastMessagege() throws InterruptedException {
 		
+	    Thread.sleep(2000);
 		assertTrue(applyToastMessage.isDisplayed());
 	}
 

@@ -1333,5 +1333,35 @@ Feature: Test cases related to export campaign in multiple environment
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
     Then verify toast message for successful creation of export location 
     
+    
+    
+    
+    @NX-7952 @initBrowser 
+		Scenario: Verify whether on clicking edit button user can able to edit the added location details-7952
+    Given login
+    Then navigate to configuration management
+    Then navigate to system administration
+    Then navigate to export location
+    Then add new export location
+    Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then verify toast message for successful creation of export location 
+    Then navigate to export campaign location from sheet "locationdetails" and click edit button
+    Then edit export campaign location name
+    Then verify toast message for successful creation of export location 
+    
+    
    	
+   	
+   	
+   	 @NX-7953 @initBrowser 
+		Scenario: Verify whether on clicking delete button user can able to delete the added location details-7953
+    Given login
+    Then navigate to configuration management
+    Then navigate to system administration
+    Then navigate to export location
+    Then add new export location
+    Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then verify toast message for successful creation of export location 
+    Then navigate to export campaign location from sheet "locationdetails" and click delete button
+    
    	

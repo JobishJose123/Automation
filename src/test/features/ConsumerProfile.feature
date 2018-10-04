@@ -46,7 +46,7 @@ Then verify 5 tabs in customer profile page
 
 @NX-2851  
 @initBrowser @closeBrowser
-Scenario: Verify whether a message get displayed when no events are selected and clicked on Apply icon NX-2851
+Scenario: Verify whether a message get displayed when no events are selected and clicked on Apply icon-2851
 Given login
 Then navigate to precision marketer
 Then navigate to reports

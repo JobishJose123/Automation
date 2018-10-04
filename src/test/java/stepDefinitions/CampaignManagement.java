@@ -628,6 +628,25 @@ public class CampaignManagement extends Init{
 	    }
 	    
 	    
+	    @Then("^navigate to export campaign location from sheet \"([^\"]*)\" and click edit button$")
+	    public void navigate_to_export_campaign_location_from_sheet_and_edit(String sheet) throws Throwable {
+	    	eM.setExcelFile("ExportCampaignLocation",sheet);
+	    	String name = (String) eM.getCell(1, 0);
+	    	campaignObjects.scrollToExportCampaignLocationAndClickEditButton(name);
+	    }
+	    
+	    
+	    
+	    
+	    @Then("^navigate to export campaign location from sheet \"([^\"]*)\" and click delete button$")
+	    public void navigate_to_export_campaign_location_from_sheet_and_delete(String sheet) throws Throwable {
+	    	eM.setExcelFile("ExportCampaignLocation",sheet);
+	    	String name = (String) eM.getCell(1, 0);
+	    	campaignObjects.scrollToExportCampaignLocationAndClickDeleteButton(name);
+	    	campaignObjects.deleteExportLocationYesButton();
+	    
+	    }
+	    
 	    
 	    
 	    @Then("^navigate to templates tab$")
@@ -1277,6 +1296,15 @@ public class CampaignManagement extends Init{
 		    {
 		
 		 		campaignObjects.verifyToastMessageForSucessfulCreationOfExportLocation();
+		    
+		    }
+		    
+		    
+		    @Then("^edit export campaign location name$")
+		    public void editExportCampaignLocationName() throws Throwable
+		    {
+		
+		 		campaignObjects.editExportCampaignLocationName();
 		    
 		    }
 		    

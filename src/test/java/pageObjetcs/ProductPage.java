@@ -229,7 +229,7 @@ public class ProductPage extends Init{
 		//	jswait.scrollAndClick(".//vaadin-combo-box-overlay[@id='overlay']", ".//vaadin-combo-box-item[contains(.,'\"+partnerName+\"')]");
 			Thread.sleep(3000);
 //			assertTrue(driver.findElement(By.xpath(".//vaadin-combo-box-item[contains(.,'"+partnerName+"')]")).isDisplayed());
-			driver.findElement(By.xpath(".//vaadin-combo-box-item[25]")).click();
+			driver.findElement(By.xpath(".//vaadin-combo-box-item[2]")).click();
 			Thread.sleep(3000);
 			clickYesButton();
 			Thread.sleep(3000);

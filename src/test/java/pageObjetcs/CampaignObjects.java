@@ -29,6 +29,7 @@ public class CampaignObjects extends Init{
 	}
 	JSWaiter jswait = new JSWaiter();
 	CommonObjects commonObjects = new CommonObjects();
+	ExportCampaignLocationObjects  exportCampignLocationObject = new ExportCampaignLocationObjects();
 	public ExcelHelper eM = new ExcelHelper(); 
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	public TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
@@ -64,6 +65,9 @@ public class CampaignObjects extends Init{
 	
 	@FindBy(xpath="//span[contains(.,'1')]")
 	private WebElement templateCount;
+	
+	@FindBy(xpath="//paper-button[contains(.,'Yes')]")
+	private WebElement exportLocationYesButton;
 	
 	
 	@FindBy(xpath="//label[contains(.,'Please select a Campaign Category')]/../input")
@@ -886,6 +890,21 @@ public void enterCampaignDeailsForCompareTargetConditions() throws Throwable {
 	}
 	public void scrollToCampaignCategory(String name) throws Exception {
 		jswait.scrollAndClick("//campaign-category-chart", "//div[text()='"+name+"']");
+	}
+	
+	public void scrollToExportCampaignLocationAndClickEditButton(String name) throws Exception {
+		jswait.scrollAndClick("//data-table-row", "//data-table-cell[contains(.,'"+name+"')]//following::iron-icon[1]");
+	}
+	
+	
+	public void scrollToExportCampaignLocationAndClickDeleteButton(String name) throws Exception {
+		jswait.scrollAndClick("//data-table-row", "//data-table-cell[contains(.,'"+name+"')]//following::iron-icon[2]");
+	}
+	
+	public void deleteExportLocationYesButton() throws Exception {
+		
+		jswait.loadClick(exportLocationYesButton);
+		
 	}
 	
 	public void selectCategoryAndImport() throws Exception {
@@ -1844,7 +1863,7 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
   
   
   
-public void clickExportLocationOptionForCampainTemplate() throws InterruptedException {
+ public void clickExportLocationOptionForCampainTemplate() throws InterruptedException {
 	  
 	  
 	  Thread.sleep(2000);
@@ -1856,7 +1875,7 @@ public void clickExportLocationOptionForCampainTemplate() throws InterruptedExce
 	}
   
   
-public void checkImportStatusOfCampainTemplate() throws InterruptedException {
+ public void checkImportStatusOfCampainTemplate() throws InterruptedException {
 	  
 	  
 	assertTrue(importStatusForCampaignTemplate.isDisplayed());
@@ -1864,11 +1883,20 @@ public void checkImportStatusOfCampainTemplate() throws InterruptedException {
 		
 	}
   
-public void verifyToastMessageForSucessfulCreationOfExportLocation() throws InterruptedException {
+  public void verifyToastMessageForSucessfulCreationOfExportLocation() throws InterruptedException {
 	  
 	Thread.sleep(2000);  
 	assertTrue(toastMessageForSucessfulCreationOfExportLocation.isDisplayed());
 		
+		
+	}
+
+
+  public void editExportCampaignLocationName() throws InterruptedException {
+	  
+	
+	  exportCampignLocationObject.enterLocation(" edit");
+	  exportCampignLocationObject.clickSaveButton();
 		
 	}
   

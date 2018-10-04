@@ -416,8 +416,8 @@ Feature: generic product class
     Then verify create new rule with deactivated product from sheet "fullDetails"
     
     
-     @NX-7036 @initBrowser 
-  Scenario: Verify whether product class can be shared across partners- 7036
+    @NX-7036 @initBrowser 
+    Scenario: Verify whether product class can be shared across partners- 7036
     Given login
     Then navigate to configuration management
     Then naviagte to product classes
