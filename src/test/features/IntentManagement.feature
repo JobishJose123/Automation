@@ -904,7 +904,7 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     
         @NX-programCreation @initBrowser 
   Scenario: verify programCreatetion
-    Given login
+    Given login with selenium user
     #Then navigate to precision marketer
     #Then navigate to offer management 
     #Then navigate to offers
@@ -921,8 +921,8 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     #Then navigate to customer care
     #Then create customer care touchpoint from sheet "CCTouchpoint"
     Then navigate to programs
-    Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
+    #Then click create program button
+    #Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
     Then choose program from sheet "programdetails"
     Then create new rule from sheet "fullDetails" and list "listname" and touchpoint from sheet "CCTouchpoint"
     Then verify rule created from sheet "rule"
@@ -930,5 +930,12 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to reports
-		Then navigate to customer profile
+    Then navigate to customer profile
+    Then search msisdn "9446506807"
+    Then click on events tab
+    Then wait for offer eligible event in consumer profile
+    
+    Then navigate to reports
+		Then navigate to customer support
 		Then search msisdn "9446506807"
+		

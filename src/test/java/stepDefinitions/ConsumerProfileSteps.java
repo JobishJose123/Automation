@@ -65,7 +65,7 @@ public class ConsumerProfileSteps extends Init{
 		list.setExcelFile("registrationListInputData", "Sheet1");
 		eh.setExcelFile(list.getCell(1, 2).toString(), list.getCell(1, 2).toString());
 		jswait.waitUntil("//data-table-cell/span[contains(.,'"+msisdn+"')]");
-		if(msisdn.length()<=10) {
+		if(msisdn.length()<10) {
 			msisdn = getMsisdn();
 			jswait.waitUntil("//data-table-cell/span[contains(.,'First Name_q11')]/../..//span[contains(.,'Text')]/../..//span[contains(.,'"+eh.getCell(1, 1).toString()+"')]");
 			jswait.waitUntil("//data-table-cell/span[contains(.,'Last Name_q11')]/../..//span[contains(.,'Text')]/../..//span[contains(.,'"+eh.getCell(1, 2).toString()+"')]");
@@ -81,7 +81,7 @@ public class ConsumerProfileSteps extends Init{
 	@Then("^verify changing customer number from all tabs of \"([^\"]*)\"$")
 	public void verifyChangingCustomerNumberFromAllTabs(String msisdn) throws Exception {
 		list.setExcelFile("registrationListInputData", "Sheet1");
-		if(msisdn.length()<=10) {
+		if(msisdn.length()<10) {
 			msisdn = getMsisdn();
 		}
 		msisdn +=1;
@@ -109,7 +109,7 @@ public class ConsumerProfileSteps extends Init{
 	@Then("^enter customer number \"([^\"]*)\"$")
 	public void enterCustomerNumber(String msisdn) throws InterruptedException, IOException {
 		list.setExcelFile("registrationListInputData", "Sheet1");
-		if(msisdn.length()<=10) {
+		if(msisdn.length()<10) {
 			msisdn = getMsisdn();
 		}
 		customerObjects.enterCustomerNumber(msisdn);

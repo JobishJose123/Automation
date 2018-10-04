@@ -1,6 +1,9 @@
 package stepDefinitions;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -17,6 +20,7 @@ import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CommonObjects;
+import pageObjetcs.CustomerProfilePage;
 import pageObjetcs.IntentManagementPageObjects;
 import pageObjetcs.ProgramPage;
 import pageObjetcs.TouchpointPage;
@@ -1386,6 +1390,7 @@ System.out.println(editname+"program has edited successfully");
 		 @Then("^create new rule from sheet \"([^\"]*)\" and list \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
 			public void CreateNewRuleWithFromSheet(String sheet1,String list,String touchpointList) throws Throwable {
 				Thread.sleep(4000);
+				
 		    	ExcelHelper programExcel = new ExcelHelper();
 		    	programExcel.setExcelFile("productInputData", sheet1);
 		    	
@@ -1394,7 +1399,8 @@ System.out.println(editname+"program has edited successfully");
 				//programPage.clickCreateProgramButton();
 		 		System.out.println(touchpointList);
 				programPage.createNewProgramRule(name,list,touchpointList);
-				
+				dateForCompare = new Date();
+				System.out.println(dateForCompare);
 				
 			}
 	
@@ -1797,8 +1803,23 @@ System.out.println(editname+"program has edited successfully");
 //			}
 //	    	
 //		}
+		public String getLastOfferEligibleEventTime() {
+			try {
+				jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Eligible Event')]/..//data-table-cell[2]");
+				String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Eligible Event')]/..//data-table-cell[2]")).getText();
+				return latestTime;
+			}catch (Exception e) {
+				return "noOfferEligibleEventFound";
+			}
+		}
 		
-		
+		public boolean checkOfferEligibleEventTime(Date startTime, Date conversionTime) {
+			if(conversionTime.after(startTime))
+			return true;
+			else 
+				return false;
+			
+		}
 		@Then("^wait for \"([^\"]*)\" status of rule$")
 		public void wait_for_status_of_rule_TO_DO(String statusExpected) throws Throwable {
 			String ruleStatus = programPage.getTopSuleStatus();
@@ -1812,5 +1833,49 @@ System.out.println(editname+"program has edited successfully");
 			}
 			Assert.assertTrue("Invalid status of BC",ruleStatus.contains(statusExpected));
 		}
-	
+		
+		@Then("^wait for offer eligible event in consumer profile$")
+		//consumer-events//iron-list//data-table-row  
+		public void wait_for_Fullfillment_event() throws Throwable {
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+			customerProfilePage.clickEventTypesCheckBox();
+			customerProfilePage.clickEventTypesCheckBox();
+			customerProfilePage.clickOfferEligibleEventCheckBox();
+			customerProfilePage.clickSelectEventApplyButton();
+			Thread.sleep(2000);
+			TimeoutImpl t = new TimeoutImpl();
+			t.startTimer();
+			String date = getLastOfferEligibleEventTime();
+			if(date.equals("noOfferEligibleEventFound"))
+				date = "05 Sep 2000 04:18 PM";
+			Date timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+			System.out.println(timeStamp);
+			System.out.println(checkOfferEligibleEventTime(dateForCompare,timeStamp));
+			while(t.checkTimerMin(15) && !checkOfferEligibleEventTime(dateForCompare,timeStamp)) {
+				System.out.println("insie while"+dateForCompare+"::"+timeStamp);
+				Thread.sleep(5000);
+//				customerProfilePage.clickEventsTab();
+				customerProfilePage.clickEventTypesCheckBox();
+				customerProfilePage.clickSelectEventApplyButton();
+				Thread.sleep(2000);
+				customerProfilePage.clickEventTypesCheckBox();
+				customerProfilePage.clickOfferEligibleEventCheckBox();
+				customerProfilePage.clickSelectEventApplyButton();
+				Thread.sleep(2000);
+				
+				date = getLastOfferEligibleEventTime();
+				if(date.equals("noOfferEligibleEventFound"))
+					date = "05 Sep 2000 04:18 PM";
+				timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+				System.out.println(timeStamp);
+				System.out.println(getLastOfferEligibleEventTime());
+				
+			}
+			date = getLastOfferEligibleEventTime();
+			if(date.equals("noOfferEligibleEventFound"))
+				date = "05 Sep 2000 04:18 PM";
+			timeStamp = new SimpleDateFormat("dd MMM yyyy HH"
+					+ "+:mm a").parse(date);
+			Assert.assertTrue("offer eligible event not found", checkOfferEligibleEventTime(dateForCompare,timeStamp));
+		}
 }

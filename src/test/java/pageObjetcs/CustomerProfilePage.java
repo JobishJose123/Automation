@@ -229,6 +229,10 @@ public class CustomerProfilePage extends Init{
 	private WebElement fulfillmentEventCheckBox;
 	@FindBy(xpath="//iron-icon[@title='Apply']")
 	private WebElement selectEventApplyButton;
+	@FindBy(xpath="//div[contains(text(),'Customer Support')]/..")
+	private WebElement customerSupport;
+	@FindBy(xpath="//div[text()='Offer Eligible Event']/..")
+	private WebElement offerEligibleEventCheckBox;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -960,6 +964,11 @@ public void verifyTrialMessageEventDetailsDynamic(String sheet) throws Exception
 	 //Assert.assertTrue("Creative text ",gettext.contentEquals(""+list.getCell(1, 11).toString()+""));
 }  
     
-
+public void clickOfferEligibleEventCheckBox() throws InterruptedException {
+	jswait.loadClick(offerEligibleEventCheckBox);
+}
+	public void navigateToCustomerSupport() throws InterruptedException {
+	jswait.loadClick(customerSupport);
+}
 
 }

@@ -74,6 +74,10 @@ public class CommonSteps extends Init {
 	public void navigateToCustomerProfile() throws InterruptedException {
 		customerProfilePage.navigateToCustomerProfile();
 	}
+	@Then("^navigate to customer support")
+	public void navigateToCustomerSupport() throws InterruptedException {
+		customerProfilePage.navigateToCustomerSupport();
+	}
 	@Then("^close browser")
 	public void closeBrowser() throws InterruptedException {
 		driver.close();
@@ -184,6 +188,13 @@ public class CommonSteps extends Init {
 		 //driver.get("http://"+p.getValue("env"));
 		 loginPage.login((String) excelHelper.getCell(1, 0), (String) excelHelper.getCell(1, 1));
 		 //jswait.loadClick(loginButton);
+			
+		 
+    }
+	@Then("^login with selenium user$")
+    public void loginWithSeleniumUser() throws Exception {
+		 driver.get("http://"+p.getValue("env"));
+		 loginPage.login(p.getValue("seleniumUser"), p.getValue("seleniumPassword"));
 			
 		 
     }

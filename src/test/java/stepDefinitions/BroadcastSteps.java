@@ -1205,7 +1205,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 //		Thread.sleep(1500);
 
       	enterDeliveryTabDetails(bc_type,sheet);
-   	
+      	dateForCompare = new Date();
  }
 	@Then("^verify all operations of target using visual editor$")
 	public void verify_all_operations_of_target_using_visual_editor() throws Throwable {
@@ -2644,8 +2644,6 @@ public boolean checkConversionTime(Date startTime, Date conversionTime) {
 @Then("^wait for comversion event$")
 //consumer-events//iron-list//data-table-row  
 public void wait_for_comversion_event() throws Throwable {
-	Date startTime = new Date();
-	System.out.println(startTime);
 	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 	customerProfilePage.clickEventTypesCheckBox();
 	customerProfilePage.clickEventTypesCheckBox();
@@ -2659,8 +2657,8 @@ public void wait_for_comversion_event() throws Throwable {
 		date = "05 Sep 2000 04:18 PM";
 	Date timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
 	System.out.println(timeStamp);
-	System.out.println(checkConversionTime(startTime,timeStamp));
-	while(t.checkTimerMin(15) && !checkConversionTime(startTime,timeStamp)) {
+	System.out.println(checkConversionTime(dateForCompare,timeStamp));
+	while(t.checkTimerMin(15) && !checkConversionTime(dateForCompare,timeStamp)) {
 		System.out.println("insie while");
 		Thread.sleep(5000);
 //		customerProfilePage.clickEventsTab();
@@ -2684,18 +2682,19 @@ public void wait_for_comversion_event() throws Throwable {
 	if(date.equals("noConversionFound"))
 		date = "05 Sep 2000 04:18 PM";
 	timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
-	Assert.assertTrue("convertion event not found", checkConversionTime(startTime,timeStamp));
+	Assert.assertTrue("convertion event not found", checkConversionTime(dateForCompare,timeStamp));
 }
 
 public String getLastFullfillmentTime() {
 	try {
-		jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[2]");
-		String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[2]")).getText();
+		jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Fulfillment Success')]/..//data-table-cell[2]");
+		String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Fulfillment Success')]/..//data-table-cell[2]")).getText();
 		return latestTime;
 	}catch (Exception e) {
 		return "noFulfillmentFound";
 	}
 }
+
 public boolean checkFullfillmentTime(Date startTime, Date conversionTime) {
 	if(conversionTime.after(startTime))
 	return true;
@@ -2706,8 +2705,8 @@ public boolean checkFullfillmentTime(Date startTime, Date conversionTime) {
 @Then("^wait for reward in consumer profile$")
 //consumer-events//iron-list//data-table-row  
 public void wait_for_Fullfillment_event() throws Throwable {
-	Date startTime = new Date();
-	System.out.println(startTime);
+//	Date startTime = new Date();
+//	System.out.println(startTime);
 	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 	customerProfilePage.clickEventTypesCheckBox();
 	customerProfilePage.clickEventTypesCheckBox();
@@ -2721,8 +2720,8 @@ public void wait_for_Fullfillment_event() throws Throwable {
 		date = "05 Sep 2000 04:18 PM";
 	Date timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
 	System.out.println(timeStamp);
-	System.out.println(checkFullfillmentTime(startTime,timeStamp));
-	while(t.checkTimerMin(15) && !checkFullfillmentTime(startTime,timeStamp)) {
+	System.out.println(checkFullfillmentTime(dateForCompare,timeStamp));
+	while(t.checkTimerMin(15) && !checkFullfillmentTime(dateForCompare,timeStamp)) {
 		System.out.println("insie while");
 		Thread.sleep(5000);
 //		customerProfilePage.clickEventsTab();
@@ -2746,8 +2745,10 @@ public void wait_for_Fullfillment_event() throws Throwable {
 	if(date.equals("noFulfillmentFound"))
 		date = "05 Sep 2000 04:18 PM";
 	timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
-	Assert.assertTrue("fulfillment event not found", checkFullfillmentTime(startTime,timeStamp));
+	Assert.assertTrue("fulfillment event not found", checkFullfillmentTime(dateForCompare,timeStamp));
 }
+
+
 
 
 

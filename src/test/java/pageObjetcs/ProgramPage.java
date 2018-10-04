@@ -3,6 +3,7 @@ package pageObjetcs;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -34,6 +35,8 @@ public class ProgramPage extends Init{
 	
 	@FindBy(xpath=".//*[@id='programList']")
 	private WebElement programList;
+	@FindBy(xpath=".//*[@id='timeDialog']/div/paper-button[2]")
+	private WebElement refreshAtOkButton;
 	
 	@FindBy(xpath="//data-table-cell[contains(.,'Name')]")
 	private WebElement programListNameColumn;
@@ -370,7 +373,9 @@ private WebElement rulessenderid2 ;
 	public void clickCreateProgramButton() throws InterruptedException {
 		jswait.loadClick(createProgramButton);
 	}
-	
+	public void clickRefreshAtOkButton() throws InterruptedException {
+		jswait.loadClick(refreshAtOkButton);
+	}
 	
 
    public void checkProgramTitleValidationErrorMessage() throws InterruptedException {
@@ -539,6 +544,41 @@ private WebElement rulessenderid2 ;
 		programschstart(); 
 		prmshcselectnow();
 		Thread.sleep(2000);
+		Calendar rightNow =Calendar.getInstance();
+    	String mn = "";
+    	if(rightNow.get(Calendar.MONTH)+1<9) {
+    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+    	}
+    	else 
+    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+    	int hours = rightNow.get(Calendar.HOUR);
+      	 int min = rightNow.get(Calendar.MINUTE);
+      	 int am_pm = rightNow.get(Calendar.AM_PM);
+      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+      	 int year = rightNow.get(Calendar.YEAR);
+      	 int month = rightNow.get(Calendar.MONTH)+1;
+      	 min+=2;
+      	 int rem = min%5;
+      	 rem = 5-rem;
+      	 min+=rem;
+      	 if(min>59){
+      		 min-=60;
+      		 hours++;
+      	 }
+      	prmrefreshat();
+      	 Actions builder = new Actions(driver);
+       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+    	 Thread.sleep(1000);
+    	 builder.moveToElement(num1).click().build().perform();
+    	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+    	 Thread.sleep(1000);
+    	 builder.moveToElement(num1).click().build().perform();
+      	if(am_pm==0)
+      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+       else
+      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+      	clickRefreshAtOkButton();
 		programactivatebtn();
 		programconfirmactivateyes();
 		System.out.println("test");
@@ -1188,7 +1228,6 @@ public void touchpointpgmdeletecheck() throws Exception{
 		eh.setExcelFile("offerCatalogInputData",sheet2);
 		String offer = (String) eh.getCell(1, 0);
 		jswait.loadSendKeys(programofferclick, offer);
-		Thread.sleep(3000);
 		System.out.println("Offer: "+offer);
 			Thread.sleep(3000);
 			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
