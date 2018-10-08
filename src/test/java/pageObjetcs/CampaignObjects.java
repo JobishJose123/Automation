@@ -786,7 +786,8 @@ public class CampaignObjects extends Init{
 		enterCampaignName(name);
 		enterCampaignDescription("Campaign to check bc creation in selenium");
 		selectOfferCatalog(catalog);
-jswait.loadSendKeys(campaignattribute, "11");	}
+jswait.loadSendKeys(campaignattribute, "11");	
+		}
 	
 	public void enterCampaignDeailsForUseTemplate(String name,String catalog) throws InterruptedException {
 		selectTypeInformational();
