@@ -327,7 +327,7 @@ Then click usage metrics tab
 Then verify charts in usage metric screen
 
 @NX-2806
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify only the selected event type is getting displayed in the events tab-2806
 Given login
 Then navigate to precision marketer
@@ -353,7 +353,7 @@ Then verify events row
 
 
 @NX-2823   
-@initBrowser 
+@initBrowser @closeBrowser
 Scenario: Verify whether Customer Support tab shows the sent time,conversion time,reward time and status of reward-2823
 Given login
 Then navigate to precision marketer

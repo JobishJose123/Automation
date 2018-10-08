@@ -803,13 +803,7 @@ Then enter view values for cluster
 Then select radio button for view1
 Then click save cluster button
 Then toast messagewhile saving cluster with only view1 values
-#Then add KPI for segment analysis
-#Then click on options icon
-#Then verify cluster option
-#Then choose a segment analysis
-#Then verify cluster tab
-#Then click on options icon
-#Then click on cluster option
+
 
 
 
