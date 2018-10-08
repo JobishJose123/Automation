@@ -50,7 +50,7 @@ Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to customer care
-Then create customer care touchpoint from sheet "CCTouchpoint"
+#Then create customer care touchpoint from sheet "CCTouchpoint"
 Then check customer care touchpoint in grid "CCTouchpoint"
 
 @NX-434
@@ -896,7 +896,7 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     Then create new rule from sheet "fullDetails" and list "listname" and touchpoint from sheet "smsTouchpoint"
     Then verify rule created from sheet "rule"
     
-        @NX-programCreation @initBrowser 
+       @NX-programCreation @initBrowser 
   Scenario: verify programCreatetion
     Given login with selenium user
     #Then navigate to precision marketer

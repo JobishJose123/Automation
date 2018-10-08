@@ -3,25 +3,34 @@
 @InitialDataSetup
 Feature: data setup
 
+@NX-createCustomerCareTouchPoint
+@initBrowser @closeBrowser
+Scenario: create customer care touchpoint to be used in customerCare executive
+		Given login
+		Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to customer care
+    Then create customer care touchpoint from sheet "CCTouchpoint"
+    
 @NX-createDKJob
 @initBrowser @closeBrowser
 Scenario: create DK job for registration list upload and DNC list upload
-Given login
+#Given login
 #Then random registration list is generated
 #Then random dnd list is generated
-Then create dk jobs for list upload
+#Then create dk jobs for list upload
 Then move list to dk input for upload
 
-#@NX-createRegList
-#@initBrowser @closeBrowser
-#Scenario: create registration list in dx ui
-#Given login
-#Then navigate to data foundation
-#Then navigate to registration list
-#Then click create new registration list button
-#Then enter details of registration list
-#Then save registration list
-#Then navigate to landing page
+@NX-createRegList
+@initBrowser @closeBrowser
+Scenario: create registration list in dx ui
+Given login
+Then navigate to data foundation
+Then navigate to registration list
+Then click create new registration list button
+Then enter details of registration list
+Then save registration list
+Then navigate to landing page
 
 
 @NX-createDiscoveredClustersList

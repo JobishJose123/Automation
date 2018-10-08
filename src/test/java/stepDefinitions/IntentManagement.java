@@ -1835,7 +1835,6 @@ System.out.println(editname+"program has edited successfully");
 		}
 		
 		@Then("^wait for offer eligible event in consumer profile$")
-		//consumer-events//iron-list//data-table-row  
 		public void wait_for_Fullfillment_event() throws Throwable {
 			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 			customerProfilePage.clickEventTypesCheckBox();
@@ -1848,7 +1847,7 @@ System.out.println(editname+"program has edited successfully");
 			String date = getLastOfferEligibleEventTime();
 			if(date.equals("noOfferEligibleEventFound"))
 				date = "05 Sep 2000 04:18 PM";
-			Date timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+			Date timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 			System.out.println(timeStamp);
 			System.out.println(checkOfferEligibleEventTime(dateForCompare,timeStamp));
 			while(t.checkTimerMin(15) && !checkOfferEligibleEventTime(dateForCompare,timeStamp)) {
@@ -1866,7 +1865,7 @@ System.out.println(editname+"program has edited successfully");
 				date = getLastOfferEligibleEventTime();
 				if(date.equals("noOfferEligibleEventFound"))
 					date = "05 Sep 2000 04:18 PM";
-				timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+				timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 				System.out.println(timeStamp);
 				System.out.println(getLastOfferEligibleEventTime());
 				
@@ -1874,8 +1873,12 @@ System.out.println(editname+"program has edited successfully");
 			date = getLastOfferEligibleEventTime();
 			if(date.equals("noOfferEligibleEventFound"))
 				date = "05 Sep 2000 04:18 PM";
-			timeStamp = new SimpleDateFormat("dd MMM yyyy HH"
-					+ "+:mm a").parse(date);
+			timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 			Assert.assertTrue("offer eligible event not found", checkOfferEligibleEventTime(dateForCompare,timeStamp));
 		}
+		@Then("^accept offer in customer care$")
+		public void acceptOfferInCustomerCare() throws Throwable {
+			programPage.clickCustomerCareOfferAccept();
+		}
+		
 }

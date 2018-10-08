@@ -277,6 +277,10 @@ public class CommonObjects extends Init {
 	public void clickPlusIcon() throws InterruptedException {
 		jswait.loadClick(plusIcon);
 	}
+	
+	public void verifyInGrid(String text) throws Exception {
+		jswait.waitUntil("//data-table-cell[contains(.,'"+text+"')]");
+	}
 
 	public void clickDeactivateProductButton() throws InterruptedException {
 		jswait.loadClick(optionsDeactivate);

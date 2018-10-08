@@ -2655,7 +2655,7 @@ public void wait_for_comversion_event() throws Throwable {
 	String date = getLastConversionTime();
 	if(date.equals("noConversionFound"))
 		date = "05 Sep 2000 04:18 PM";
-	Date timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+	Date timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 	System.out.println(timeStamp);
 	System.out.println(checkConversionTime(dateForCompare,timeStamp));
 	while(t.checkTimerMin(15) && !checkConversionTime(dateForCompare,timeStamp)) {
@@ -2673,7 +2673,7 @@ public void wait_for_comversion_event() throws Throwable {
 		date = getLastConversionTime();
 		if(date.equals("noConversionFound"))
 			date = "05 Sep 2000 04:18 PM";
-		timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+		timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 		System.out.println(timeStamp);
 		System.out.println(getLastConversionTime());
 		
@@ -2681,7 +2681,7 @@ public void wait_for_comversion_event() throws Throwable {
 	date = getLastConversionTime();
 	if(date.equals("noConversionFound"))
 		date = "05 Sep 2000 04:18 PM";
-	timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+	timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 	Assert.assertTrue("convertion event not found", checkConversionTime(dateForCompare,timeStamp));
 }
 
@@ -2718,7 +2718,7 @@ public void wait_for_Fullfillment_event() throws Throwable {
 	String date = getLastFullfillmentTime();
 	if(date.equals("noFulfillmentFound"))
 		date = "05 Sep 2000 04:18 PM";
-	Date timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+	Date timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 	System.out.println(timeStamp);
 	System.out.println(checkFullfillmentTime(dateForCompare,timeStamp));
 	while(t.checkTimerMin(15) && !checkFullfillmentTime(dateForCompare,timeStamp)) {
@@ -2736,7 +2736,7 @@ public void wait_for_Fullfillment_event() throws Throwable {
 		date = getLastFullfillmentTime();
 		if(date.equals("noFulfillmentFound"))
 			date = "05 Sep 2000 04:18 PM";
-		timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+		timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 		System.out.println(timeStamp);
 		System.out.println(getLastFullfillmentTime());
 		
@@ -2744,7 +2744,7 @@ public void wait_for_Fullfillment_event() throws Throwable {
 	date = getLastFullfillmentTime();
 	if(date.equals("noFulfillmentFound"))
 		date = "05 Sep 2000 04:18 PM";
-	timeStamp = new SimpleDateFormat("dd MMM yyyy HH:mm a").parse(date);
+	timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 	Assert.assertTrue("fulfillment event not found", checkFullfillmentTime(dateForCompare,timeStamp));
 }
 

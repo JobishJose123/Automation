@@ -343,8 +343,8 @@ private WebElement rulessenderid2 ;
 	
 	@FindBy(xpath="//hexagon-content//span")
 	private WebElement topRuleStatus;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="//paper-item[contains(.,'Accept')]")
+	private WebElement customerCareOfferAccept;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -387,6 +387,9 @@ private WebElement rulessenderid2 ;
 	}
 	public void clickCreateProgramCancelButton() throws InterruptedException {
 		jswait.loadClick(createProgramCancelButton);
+	}
+	public void clickCustomerCareOfferAccept() throws InterruptedException {
+		jswait.loadClick(customerCareOfferAccept);
 	}
 	public void clickFilterButton() throws InterruptedException {
 		jswait.loadClick(filterButton);

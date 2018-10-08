@@ -903,8 +903,9 @@ public class RegistrationList extends Init{
     public void saveCustomerDrivenEvent() throws Exception{
 		registrationListPage.clickSaveButton();
 		CommonObjects commonObjects = new CommonObjects();
-		commonObjects.filterName(SELENIUM_CUSTOMER_DRIVEN_EVENT);
-		commonObjects.clickOptionsIcon();
+//		commonObjects.filterName(SELENIUM_CUSTOMER_DRIVEN_EVENT);
+//		commonObjects.clickOptionsIcon();
+		commonObjects.verifyInGrid(SELENIUM_CUSTOMER_DRIVEN_EVENT);
 	}
 	@Then("^save usage metric$")
     public void saveUsageMetric() throws Exception{
