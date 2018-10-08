@@ -43,12 +43,22 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement view2;
 	@FindBy(xpath=".//paper-radio-button[@name='view1']//div[@id='offRadio']")
 	private List <WebElement> view1RadioButton1;
+	
+	@FindBy(xpath="(.//paper-radio-button[@name='view2']//div[@id='offRadio'])[2]")
+	private List <WebElement> view1RadioButton2;
+	
+	
 	@FindBy(xpath=".//paper-button[contains(.,'Save')]")
 	private WebElement saveClusterButton;
 	@FindBy(xpath=".//span[contains(.,'A minimum of one KPI must be selected for each view.')]")
 	private WebElement toastSaveClusterWithView1;
 	
 	
+	@FindBy(xpath=".//*[@id='items']/vaadin-grid-table-row[1]/vaadin-grid-table-cell[4][contains(.,'Failed')]")
+	private WebElement clusterfailedstatus;
+	
+	@FindBy(xpath=".//*[@title='Refresh']")
+	private WebElement clusterRefresh;
 	
 	
 	
@@ -88,6 +98,17 @@ public class SegmentAnalysisObjects extends Init {
 		
 	}
 	
+	
+	public void selectRadioButtonForViews2() throws InterruptedException {
+		if(view1RadioButton2.size()>0) {
+			for(WebElement button: view1RadioButton2) {
+				jswait.loadClick(button);
+				
+			}
+			
+		}
+		
+	}
 	
 	
 	
@@ -149,7 +170,14 @@ public class SegmentAnalysisObjects extends Init {
 		
 	}
 	
-	
+   public void verifyclusterfailedstatus() throws InterruptedException {
+		Thread.sleep(5000);
+		jswait.loadClick(clusterRefresh);
+		Thread.sleep(5000);
+	   assertTrue(clusterfailedstatus.isDisplayed());
+		
+	}
+   
 	
 	
 }

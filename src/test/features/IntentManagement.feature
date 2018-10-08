@@ -933,3 +933,17 @@ Scenario: Verify by editing the existing short code and check by sending keyword
 		Then navigate to customer support
 		Then search msisdn "9446506807"
 		
+		@NX-8478 @initBrowser
+  Scenario: Verify Failure Case of Cluster Model.
+  Given login
+    Then navigate to intent management
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then choose a segment analysis with clusters
+    Then click on create new cluster button
+    Then enter view values for cluster
+    Then select radio button for view1
+    Then select radio button for view2
+    Then click save cluster button
+    Then verify cluster failed
+		

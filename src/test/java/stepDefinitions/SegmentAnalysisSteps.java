@@ -96,7 +96,23 @@ public class SegmentAnalysisSteps extends Init {
 	public void selectRadioButtonForViews() throws InterruptedException {
 		
 		segmentObjects.selectRadioButtonForViews();	
+		
 	}
+	
+	@Then("^select radio button for view2$")
+	public void selectRadioButtonForViews2() throws InterruptedException {
+		
+		segmentObjects.selectRadioButtonForViews2();	
+		
+	}
+	
+	@Then("^verify cluster failed$")
+	public void verifyclusterfailedstatus() throws InterruptedException {
+		
+		segmentObjects.verifyclusterfailedstatus();	
+		
+	}
+	
 	
 	@Then("^click save cluster button$")
 	public void clickSaveClusterButton() throws InterruptedException {
