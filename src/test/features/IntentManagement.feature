@@ -946,4 +946,44 @@ Scenario: Verify by editing the existing short code and check by sending keyword
     Then select radio button for view2
     Then click save cluster button
     Then verify cluster failed
+    
+    
+    
+    
+    @NX-4064
+    @initBrowser
+    Scenario: CC- Verify Program creation with CC touchpoint-NX-4064
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management 
+    Then navigate to offers
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to customer care
+    Then create customer care touchpoint from sheet "CCTouchpoint"
+    Then check customer care touchpoint in grid "CCTouchpoint"
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
 		
