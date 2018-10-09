@@ -89,8 +89,8 @@ Feature: Test suite on Offer creation
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then create new offer from sheet "informationalWAP" with product "singleProductPage"
-    Then verify "InformationalOne-offBC" offer in grid
+    Then create new offer from sheet "informationalWAP" with product "fullDetails"
+    Then verify "informationalWAP" offer in grid
 
    
   @NX-1345 @initBrowser @closeBrowser

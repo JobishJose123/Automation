@@ -1421,16 +1421,20 @@ public class OfferPageObjects extends Init {
 		clickProceedButton();
 
 		// ******************Rewards tab*****************:
-		if (eh.getCell(1, 2).toString().contains("Seeding")) {
-			clickRewardTypeInputField();
-			clickRewardTypeAny();
-		}
-		else {
-			clickRewardFirstRuleAdButton();
-			clickRewardTypeInputField();
-			clickRewardTypeAny();
-			enterSuccessMessage("Success from Selenium");
-			enterFailureMessage("Failure from Selenium");
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+			
+		
+				if (eh.getCell(1, 2).toString().contains("Seeding")) {
+					clickRewardTypeInputField();
+					clickRewardTypeAny();
+				}
+				else {
+					clickRewardFirstRuleAdButton();
+					clickRewardTypeInputField();
+					clickRewardTypeAny();
+					enterSuccessMessage("Success from Selenium");
+					enterFailureMessage("Failure from Selenium");
+				}
 		}
 
 	}

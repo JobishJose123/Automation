@@ -467,7 +467,7 @@ Feature: generic product class
     Then click on create new ofer button
     Then create new offer using deactivated product from sheet "rechargeWAP"
 
-  @NX-6177 @initBrowser @closeBrowser
+  @NX-61770 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating Informational offers- 6177
     Given login
     Then navigate to configuration management
