@@ -530,7 +530,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
   	Then navigate to configuration management
     Then navigate to campaign categories
@@ -623,7 +623,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
   	Then navigate to configuration management
     Then navigate to campaign categories
@@ -1039,7 +1039,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
   	Then navigate to configuration management
     Then navigate to campaign categories
@@ -1100,7 +1100,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to products
     Then navigate to product class "TestProductClass"
     Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
+    Then create product class without any attributes from "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -1141,7 +1141,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
   	Then navigate to configuration management
     Then navigate to campaign categories
@@ -1184,7 +1184,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
   	Then navigate to configuration management
     Then navigate to campaign categories
@@ -1233,7 +1233,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
   	Then navigate to configuration management
     Then navigate to campaign categories
@@ -1276,7 +1276,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
   	Then navigate to configuration management
     Then navigate to campaign categories
@@ -1374,7 +1374,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
     Then navigate to configuration management
     Then navigate to campaign categories
@@ -1417,7 +1417,7 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
     Then navigate to configuration management
     Then navigate to campaign categories

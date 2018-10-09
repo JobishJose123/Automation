@@ -263,7 +263,7 @@ Feature: Test cases related to export campaign location
     Then navigate to landing page
     Then navigate to configuration management
     Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
   	Then navigate to configuration management
     Then navigate to campaign categories
