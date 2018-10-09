@@ -118,7 +118,7 @@ Then verify login failure
 @initBrowser
 Scenario: Verify the Branding Area Content of Login page
 Given neon is loaded
-Then Verify the Branding Area Content of Login page "Intelligent Customer Management" "Engage with customers by learning their behaviour and predicting what they want in real time"
+Then Verify the Branding Area Content of Login page "Intelligent Customer Engagement" "Engage with customers by learning their behaviour and predicting what they want in real time"
 
 ##tochange
 @NX-4
@@ -137,7 +137,8 @@ Then verify forgot password by not adding username
 @initBrowser @closeBrowser
 Scenario: Verify Forget Password Link by adding username-457
 Given neon is loaded
-Then verify forgot password by adding username with "rahul.krishnan@flytxt.com"
+Then verify forgot password by adding username with "selenium.flytxt@gmail.com"
+Then reset password of selenium user
 
 
 

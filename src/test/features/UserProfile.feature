@@ -3,7 +3,7 @@
 
 
 @NX-UserProfile
-Feature: Title of your feature
+Feature: User Profile test cases with Top bar display of user
   I want to use this template for my feature file
 
 @NX-6038
@@ -17,7 +17,7 @@ Then verify dropdown
 @initBrowser
 Scenario: Verify  pop-up is displayed on clicking change password option
 Given neon is loaded
-Then login with "joel.jose@flytxt.com" and "flytxt"
+Then login with "selenium.flytxt@gmail.com" and "Flytxt.4"
 Then navigate to precision marketer
 Then click username on topbar
 Then click change password
@@ -28,18 +28,21 @@ Then click cancel in change password
 Scenario: Verify the functionality of Change password option
 Then click username on topbar
 Then click change password
-Then change password "flytxt1" from "flytxt"
+Then change password "flytxt1" from "Flytxt.4"
 Then logout
-Then login with "joel.jose@flytxt.com" and "flytxt1"
+Then login with "selenium.flytxt@gmail.com" and "flytxt1"
 Then click username on topbar
 Then click change password
-Then change password "flytxt" from "flytxt1"
+Then change password "Flytxt.4" from "flytxt1"
+Then click username on topbar
+Then logout
+Then login with "selenium.flytxt@gmail.com" and "Flytxt.4"
 
 @NX-6041
 @initBrowser @closeBrowser
 Scenario: Verify  error message shown if  new password and confirm password doesnâ€™t match
 Given neon is loaded
-Then login with "joel.jose@flytxt.com" and "flytxt"
+Then login with "selenium.flytxt@gmail.com" and "Flytxt.4"
 Then click username on topbar
 Then click change password
 Then change password "Newflytxt1" from "wrongPassword"

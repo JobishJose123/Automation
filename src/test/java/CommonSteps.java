@@ -11,6 +11,7 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
+import baseClasses.SQLHandler;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CommonObjects;
@@ -286,6 +287,13 @@ public class CommonSteps extends Init {
 		commonObjetcs.enterNewUsageMetricDetails(name, "Test Description");
 	
 	
+	}
+	@Then("^reset password of selenium user$")
+	public void reset_password_of_selenium_user() throws Throwable {
+		SQLHandler sql = new SQLHandler();
+		sql.init(p.getValue("dbUrl"),p.getValue("dbUsername"),p.getValue("dbPassword"));
+		int web_user_id = sql.getStringOfQuery("select web_user_id from web_user where email_address = \"selenium.flytxt@gmail.com\";");
+		sql.executeUpdate("update web_user set PASSWORD = \"riN2h0ZHFs6MBpnW8JggWqdk5lE=\" where web_user_id = "+web_user_id+";");
 	}
 
 }
