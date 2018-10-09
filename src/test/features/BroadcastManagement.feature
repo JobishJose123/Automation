@@ -760,7 +760,7 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast and configure TG and CG from sheet "one-offBC" with "rechargeWAP"
+    Then enter details for new broadcast and calculate TG and CG from sheet "one-offBC" with "rechargeWAP"
     Then activate bc
     Then verify bc created from sheet "one-offBC"
     
@@ -800,7 +800,7 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast and configure TG and CG from sheet "one-offBC" with "rechargeEmail"
+    Then enter details for new broadcast and calculate TG and CG from sheet "one-offBC" with "rechargeWAP"
     Then validate bc
     Then verify active option for bc
     Then verify bc created from sheet "one-offBC"
@@ -839,7 +839,7 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast and configure TG and CG from sheet "one-offBC" with "rechargeEmail"
+    Then enter details for new broadcast and calculate TG and CG from sheet "one-offBC" with "rechargeEmail"
     Then validate bc
     Then verify validate option for bc
     Then verify bc created from sheet "one-offBC"
@@ -879,13 +879,15 @@ Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then enter details for new broadcast and calculate TG and CG from sheet "one-offBC" with "rechargeWAP"
     Then validate bc
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then verify validating CG status for bc
     Then verify bc created from sheet "one-offBC"
+    
+    
     @NX-6529
 @initBrowser  @closeBrowser
 Scenario: Verify specifying the recurrence value as 10,20,30 etc NX-6529
