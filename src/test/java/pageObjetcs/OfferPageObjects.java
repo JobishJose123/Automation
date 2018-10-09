@@ -6,10 +6,12 @@ import static org.junit.Assert.assertTrue;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -786,11 +788,40 @@ public class OfferPageObjects extends Init {
 	}
 
 	public void checkOfferContextHelp() throws InterruptedException {
-		commonObjects.clickHelpIcon();
-		driver.switchTo().frame(offersContextHelp);
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(text(),'Offers')]")));
-		driver.switchTo().parentFrame();
-		commonObjects.clickContextHelpCloseIcon();
+//		commonObjects.clickHelpIcon();
+//		driver.switchTo().frame(offersContextHelp);
+//		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(text(),'Offers')]")));
+//		driver.switchTo().parentFrame();
+//		commonObjects.clickContextHelpCloseIcon();
+		
+		
+		
+		 Thread.sleep(3000);
+	        
+		 String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
+		   ((JavascriptExecutor)driver).executeScript("window.open()");
+		   ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+		    driver.switchTo().window(tabs2.get(1));
+		    driver.get(secondUrl);
+		    Thread.sleep(3000);
+		    driver.switchTo().frame(1);
+		    try{
+		    driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Offers')]"));
+		    driver.close();
+		    driver.switchTo().window(tabs2.get(0));
+		    }
+		    catch (Exception e) {
+		    	driver.close();
+			    driver.switchTo().window(tabs2.get(0));
+			    throw e;
+			}
+		    
+		
+		
+		
+		
+		
+		
 	}
 
 	public void enterOfferName(String name) throws InterruptedException {
