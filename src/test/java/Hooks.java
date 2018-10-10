@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -27,14 +28,13 @@ import cucumber.api.java.Before;
 	public class Hooks extends Init{
 	
 		@Before("@initBrowser")
-		public static void beforeSuite() throws InterruptedException, MalformedURLException {
+		public static void beforeSuite() throws InterruptedException, MalformedURLException, FileNotFoundException {
 			Init.init();
 		}
 		//After to take screenshot
 		@After
 		public void getscreenshot(Scenario scenario) throws Exception 
 	    {
-			if(scenario.getStatus().contentEquals("failed")) {
 			String path = new File( "." ).getCanonicalPath();
 			String tagStr = scenario.getSourceTagNames().toString();
 			tagStr = tagStr.replaceAll("\\[", " ");
@@ -53,10 +53,25 @@ import cucumber.api.java.Before;
 				i++;
 			}
 			String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+			System.out.println("code for custom report");
+			stringBuilderForCsvReport.setLength(0);
+			stringBuilderForCsvReport.append('\n');
+			stringBuilderForCsvReport.append(NXtag);
+			stringBuilderForCsvReport.append(',');
+			stringBuilderForCsvReport.append(scenario.getStatus());
+			stringBuilderForCsvReport.append(',');
+			stringBuilderForCsvReport.append(timeStamp);
+	  		printWriterForCsvReport.write(stringBuilderForCsvReport.toString());
+	  		printWriterForCsvReport.flush();
+	  		
+	  		
+			if(scenario.getStatus().contentEquals("failed")) {
+			
+			
 			System.out.println(scenario.getStatus());
 	            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-	            System.out.println(FileUtils.sizeOfDirectory(new File(path+"\\Screenshots")));
-	            FileUtils.copyFile(scrFile, new File(path+"\\Screenshots\\"+NXtag+"_"+timeStamp+".png"));
+	            System.out.println(FileUtils.sizeOfDirectory(new File(path+"/Screenshots")));
+	            FileUtils.copyFile(scrFile, new File(path+"/Screenshots/"+NXtag+"_"+timeStamp+".png"));
 			}
 	    }
 	@After("@closeBrowser")
@@ -65,10 +80,11 @@ import cucumber.api.java.Before;
 		try{    
 		    Process p = Runtime.getRuntime().exec("taskkill /im chromedriver2.37.exe /f");
 		    p.waitFor();
-//		    System.out.println(p.getInputStream());
-//		    p = Runtime.getRuntime().exec("taskkill /im chrome.exe /f");
-//		    p.waitFor();
 		    System.out.println(p.getInputStream());
+		    p = Runtime.getRuntime().exec("taskkill /im chrome.exe /f");
+		    p.waitFor();
+		    System.out.println(p.getInputStream());
+		    System.out.println("Then avalilable"+"after chrome close"+"After");
 
 		}catch( IOException ex ){
 		    //Validate the case the file can't be accesed (not enought permissions)

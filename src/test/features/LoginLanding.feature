@@ -1,7 +1,7 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary : checking postive flow of bc creation
 
-@NXLoginPage
+@NX-LoginLandingPage
 Feature: Login Page test cases with 
 
 	

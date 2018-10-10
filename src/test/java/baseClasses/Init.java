@@ -1,8 +1,11 @@
 package baseClasses;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
@@ -21,8 +24,10 @@ public static WebDriver driver;
 public static int passScenario = 0;
 public static PropHandler p = new PropHandler();
 public static Logger log;
-
-	public static void init() throws InterruptedException{
+public static File fileForCsvReport; 
+public static PrintWriter printWriterForCsvReport; 
+public static StringBuilder stringBuilderForCsvReport; 
+	public static void init() throws InterruptedException, FileNotFoundException{
 	System.out.println("Initializing Browser.....");
 	System.setProperty("webdriver.chrome.driver", "browser_files\\chromedriver2.37.exe");
 	driver =  new ChromeDriver();
@@ -33,6 +38,10 @@ public static Logger log;
 	}catch(Exception e) {
 		System.out.println("Could not create log file");
 	}
+//	String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+//	fileForCsvReport = new File("Run_"+timeStamp+".csv");
+//	printWriterForCsvReport= new PrintWriter(fileForCsvReport);
+//	stringBuilderForCsvReport= new StringBuilder();
 	}
 	public static void initPropFile() {
 		p.setPropertyFile("config.properties");	

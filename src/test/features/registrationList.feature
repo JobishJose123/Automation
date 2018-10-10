@@ -1,7 +1,7 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary : checking postive flow of bc creation
 
-
+@NX-registrationList
 Feature: positive flow of list upload and verification in cuctomer info
 
 	BC Creation
