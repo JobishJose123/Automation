@@ -1085,11 +1085,31 @@ public class OfferPageObjects extends Init {
 	}
 
 	public void checkProductContextHelp() throws InterruptedException {
-		commonObjects.clickHelpIcon();
-		driver.switchTo().frame(productContextHelp);
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(text(),'Products')]")));
-		driver.switchTo().parentFrame();
-		commonObjects.clickContextHelpCloseIcon();
+//		commonObjects.clickHelpIcon();
+//		driver.switchTo().frame(productContextHelp);
+//		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(text(),'Products')]")));
+//		driver.switchTo().parentFrame();
+//		commonObjects.clickContextHelpCloseIcon();
+		
+		Thread.sleep(3000);
+        
+		 String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
+		   ((JavascriptExecutor)driver).executeScript("window.open()");
+		   ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+		    driver.switchTo().window(tabs2.get(1));
+		    driver.get(secondUrl);
+		    Thread.sleep(3000);
+		    driver.switchTo().frame(1);
+		    try{
+		    	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(text(),'Products')]")));
+		    driver.close();
+		    driver.switchTo().window(tabs2.get(0));
+		    }
+		    catch (Exception e) {
+		    	driver.close();
+			    driver.switchTo().window(tabs2.get(0));
+			    throw e;
+			}
 	}
 
 	public void clickTrackSourceSelector() throws InterruptedException {
