@@ -221,28 +221,28 @@ Feature: Test cases related to export campaign location
     @NX-6867 @initBrowser 
 		Scenario: Verify whether category is displayed when use this template option on the exported campaign is used-6867
   	Given login
-  #	Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
-    #Then navigate to system administration
-    #Then navigate to export location
-    #Then add new export location
-    #Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
-#		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-#		Then choose export to location option from sheet "campaignBC"
-#		Then choose export location for campaign from sheet "locationdetails" of file "ExportCampaignLocation"
+  	Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+    Then navigate to system administration
+    Then navigate to export location
+    Then add new export location
+    Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
+		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+		Then choose export to location option from sheet "campaignBC"
+		Then choose export location for campaign from sheet "locationdetails" of file "ExportCampaignLocation"
 		Then click username on topbar
 		Then logout
 		Then login to next environment
-   #	Then wait for 7 minutes
-#		Then click on notification bell
-    #Then click on view all notifications
-    #Then click proceed on notification from the sheet "campaignBC" of file "campaignInputData"
-    #Then select a category and import
+   	Then wait for 7 minutes
+		Then click on notification bell
+    Then click on view all notifications
+    Then click proceed on notification from the sheet "campaignBC" of file "campaignInputData"
+    Then select a category and import
     Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "category" of file "CategoryEnv2"
