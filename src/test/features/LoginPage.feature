@@ -109,7 +109,7 @@ Then verify login failure
 
 @NX-464 
 @initBrowser
-Scenario: Verify changing the URL from Login to Home.do - This Test case will fail, defect is there
+Scenario: Verify changing the URL from Login to Home.do
 Given neon is loaded
 Then change url to landing
 Then verify login failure

@@ -48,7 +48,7 @@ public class ExportCampaignLocationObjects extends Init{
 		@FindBy(xpath="//paper-input-container[@id='inputContainer']//input")
 		private WebElement exportLocation;
 		
-		@FindBy(id="notifyNumber")
+		@FindBy(xpath="//*[contains(@src,'/images/notification.svg')]/..")
 		private WebElement notificationBell;
 		
 		@FindBy(xpath="//div[@id='contentWrapper']//div[contains(@class, 'messageStyle')]//div[contains(., 'View All')]")
@@ -199,6 +199,7 @@ public class ExportCampaignLocationObjects extends Init{
 		}
 		
 		public void clickNotificationBar()  throws InterruptedException {
+			Thread.sleep(2000);
 			jswait.loadClick(notificationBell);
 		}
 		

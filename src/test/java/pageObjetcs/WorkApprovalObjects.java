@@ -183,6 +183,7 @@ public class WorkApprovalObjects extends Init{
 	
 	public void createNewApprovalRule(String sheet) throws Throwable {
 		clickCreateNewApprovalRuleButton();
+		Thread.sleep(3000);
 		enterApprovalRuleDetailsFromSheet(sheet);
 		//clickSaveOfferButton();
 	}
@@ -601,7 +602,7 @@ catch(Exception e) {
 	}
 	public void enterLevel1User() throws InterruptedException {
 		
-		jswait.loadSendKeys(addUserField, "selenium.flytxt@gmail.com");
+		jswait.loadSendKeys(addUserField, "selenium.fly");
 		Thread.sleep(2000);
 	}
 	

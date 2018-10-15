@@ -804,7 +804,7 @@ public class OfferPageObjects extends Init {
 		    driver.switchTo().window(tabs2.get(1));
 		    driver.get(secondUrl);
 		    Thread.sleep(3000);
-		    driver.switchTo().frame(1);
+//		    driver.switchTo().frame(1);
 		    try{
 		    driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Offers')]"));
 		    driver.close();
@@ -1099,9 +1099,8 @@ public class OfferPageObjects extends Init {
 		    driver.switchTo().window(tabs2.get(1));
 		    driver.get(secondUrl);
 		    Thread.sleep(3000);
-		    driver.switchTo().frame(1);
 		    try{
-		    	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(text(),'Products')]")));
+		    	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(.,'Products')]")));
 		    driver.close();
 		    driver.switchTo().window(tabs2.get(0));
 		    }

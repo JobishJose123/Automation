@@ -171,6 +171,8 @@ public class CampaignObjects extends Init{
 	private WebElement optionsEditTargetCondtion;
 	@FindBy(xpath = "(//paper-item[contains(.,'Edit')])[1]")
 	private WebElement editCampaign;
+	@FindBy(xpath = "(//paper-button[contains(.,'Edit')])")
+	private WebElement editCampaignApproval;
 	@FindBy(xpath = "//iron-icon[@icon='icons:block']")
 	private WebElement abortCampaign;
 	@FindBy(xpath = ".//paper-item[contains(.,'Delete')]")
@@ -343,6 +345,9 @@ public class CampaignObjects extends Init{
 	}
 	public void clickEditCampaignOption() throws InterruptedException {
 		jswait.loadClick(editCampaign);
+	}
+	public void clickEditCampaignApprovalButton() throws InterruptedException {
+		jswait.loadClick(editCampaignApproval);
 	}
 	
 	public void approvalbutton() throws InterruptedException {
@@ -786,7 +791,7 @@ public class CampaignObjects extends Init{
 		enterCampaignName(name);
 		enterCampaignDescription("Campaign to check bc creation in selenium");
 		selectOfferCatalog(catalog);
-jswait.loadSendKeys(campaignattribute, "11");	
+//jswait.loadSendKeys(campaignattribute, "11");	
 		}
 	
 	public void enterCampaignDeailsForUseTemplate(String name,String catalog) throws InterruptedException {

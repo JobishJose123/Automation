@@ -266,7 +266,7 @@ public class CampaignManagement extends Init{
 	 		String catalog = (String) catalogExcel.getCell(1, 0);
  		commonObjects.clickOptionsIcon();
  		WorkApprovalObjects.clickreviewOption();
-	 		campaignObjects.clickEditCampaignOption();
+	 		campaignObjects.clickEditCampaignApprovalButton();
 	 		campaignObjects.editCampaignselsuer(name+"Editedbyseluser", catalog);
 	 		eM.setCell(1, 0, name+" Editedbyseluser");
 	 		TimePicker dt = new TimePicker();

@@ -1,125 +1,165 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary : generic product class test cases
 @NX-approvelworkflow
-Feature: generic product class
+Feature: approval workflow
 
-  @NX-6319 @initBrowser @closeBrowser
-  Scenario: Verify by creating new Approval Rule
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-
-  @NX-6320 @initBrowser @closeBrowser
-  Scenario: Verify by editing the rules displaying in Approval Rules
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then editApprovalRuleDetailsFromSheet "approvalRule"
-
-  @NX-6321 @initBrowser @closeBrowser
-  Scenario: Verify by deleting new Approval Rule
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then deleteApprovalRuleDetailsFromSheet "approvalRule"
-
-  @NX-6324 @initBrowser @closeBrowser
-  Scenario: Verify editing and deleting default rule
-    Given login
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then default ApprovalRule edit and delete
-
-  @NX-6322 @initBrowser 
-  Scenario: Verify whether warning message get displayed before deletion of rule
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then deleteApprovalRulecheckFromSheet "approvalRule"
-
-  @NX-6333 @initBrowser 
-  Scenario: Verify selecting the Approval Required for Campaign and BC activation checkbox
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then check the Approval campaign and BC activation checkbox "approvalRule"
-
-  @NX-6353 @initBrowser @closeBrowser
-  Scenario: Verify adding Campaign category to multiple rule
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then create new approval multiple rule from sheet "approvalRule"
-
-  @NX-6480 @initBrowser 
-  Scenario: Verify approving campaign/BC by navigating through BC page
-    Given login
+  #@NX-6319 @initBrowser @closeBrowser
+  #Scenario: Verify by creating new Approval Rule
+    #Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
+#
+  #@NX-6320 @initBrowser @closeBrowser
+  #Scenario: Verify by editing the rules displaying in Approval Rules
+    #Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
+    #Then editApprovalRuleDetailsFromSheet "approvalRule"
+#
+  #@NX-6321 @initBrowser @closeBrowser
+  #Scenario: Verify by deleting new Approval Rule
+    #Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
+    #Then deleteApprovalRuleDetailsFromSheet "approvalRule"
+    #Then pass next scenario based on this step
+    #
+     #@NX-6322 @initBrowser 
+  #Scenario: Verify whether warning message get displayed before deletion of rule
+  #Then check previous step and pass this
+  #Then deleteApprovalRulecheckFromSheet "approvalRule"
+ ## confirmation Yes is clicked in previous scenario. will throw exception if no confirmation 
+    #
+  #@NX-6324 @initBrowser @closeBrowser
+  #Scenario: Verify editing and deleting default rule
+    #Given login
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then default ApprovalRule edit and delete
+#
+  #@NX-6333 @initBrowser 
+  #Scenario: Verify selecting the Approval Required for Campaign and BC activation checkbox
+    #Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then check the Approval campaign and BC activation checkbox "approvalRule"
+#
+  #@NX-6353 @initBrowser @closeBrowser
+  #Scenario: Verify adding Campaign category to multiple rule
+    #Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
+    #Then create new approval multiple rule from sheet "approvalRule"
+#
+  #@NX-6480 @initBrowser 
+  #Scenario: Verify approving campaign/BC by navigating through BC page
+    #Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then click on create new ofer button
+    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    #Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeWAP" offer to Offer Catalogue
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    #Then Logout from Neon application
+     #Then login with selenium user
+       #Then click on notification bell
+    #Then click on view all notifications
+    #Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    #Then approve campaign by selenium user
+    #Then Logout from Neon application
+    #Then login
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then naigate to "campaignBC" campaign view broadcasts
+    #Then click create new broadcast button
+    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    #Then Request for bc approval
+    #Then Logout from Neon application
+    #Then login with selenium user
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then naigate to "campaignBC" campaign view broadcasts
+    #Then approve Broadcast by selenium user without notification navigation
+    #Then pass next scenario based on this step
+    #
+    #@NX-7592 @initBrowser 
+#Scenario: Verify Approval Work Flow for all type of One Off BCs
+    #Then check previous step and pass this
+    #
+  #@NX-6389 @initBrowser 
+  #Scenario: Verify whether approver can edit campaign/BC on clicking edit option from Review page
+    #Given login
     #Then navigate to configuration management
     #Then navigate to campaign categories
     #Then create new campaign category from sheet "CampaignCategory"
@@ -131,62 +171,19 @@ Feature: generic product class
     #Then navigate to life cycle marketing
     #Then navigate to campaign category from sheet "CampaignCategory"
     #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
-    Then Logout from Neon application
-     Then login with seleniumuser from sheet "seleniumuser"
-       Then click on notification bell
-    Then click on view all notifications
-    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
-    Then approve campaign by selenium user
-    Then Logout from Neon application
-    Then login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
-    Then Request for bc approval
-    Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then approve Broadcast by selenium user without notification navigation
-    Then pass next scenario based on this step
-    
-    @NX-7592 @initBrowser 
-Scenario: Verify Approval Work Flow for all type of One Off BCs
-    Then check previous step and pass this
-    
-  @NX-6389 @initBrowser 
-  Scenario: Verify whether approver can edit campaign/BC on clicking edit option from Review page
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
-    Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then navigate to precision marketer
-     Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    #Then edit campaign by selenium user
-    Then edit campaign from sheet by approve user "campaignBC" with catalog "defaultCatalog"
-    Then approve campaign by selenium user
-
-
-
-  @NX-6467 @initBrowser 
-  Scenario: Verify the details displaying while clicked on Show history
-    Given login
+    #Then Logout from Neon application
+    #Then login with selenium user
+    #Then navigate to precision marketer
+     #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then edit campaign from sheet by approve user "campaignBC" with catalog "defaultCatalog"
+    #Then approve campaign by selenium user
+#
+#
+#
+  #@NX-6467 @initBrowser 
+  #Scenario: Verify the details displaying while clicked on Show history
+    #Given login
     #Then navigate to configuration management
     #Then navigate to campaign categories
     #Then create new campaign category from sheet "CampaignCategory"
@@ -199,123 +196,123 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     #Then navigate to campaign category from sheet "CampaignCategory"
     #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     #Then naigate to "campaignBC" campaign show history
-    Then Logout from Neon application
-     Then login with seleniumuser from sheet "seleniumuser"
-       Then click on notification bell
-    Then click on view all notifications
-    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
-    Then approve campaign by selenium user
-    Then naigate to "campaignBC" campaign show historyapprove
-
-  @NX-6356 @initBrowser @closeBrowser
-  Scenario: Verify creation of BC without approval flow but for campaign
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet campaignonly "approvalRule"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
-    Then Logout from Neon application
-  Then login with seleniumuser from sheet "seleniumuser"
-       Then click on notification bell
-    Then click on view all notifications
-    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
-    Then approve campaign by selenium user
-    Then Logout from Neon application
-    Then login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
-    Then activate bc
-    
-
-
-    
-    
-    
-
-
-
-
-  @NX-6378 @initBrowser 
-  Scenario: Verify clicking the Review button from notification panel
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
-    Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-       Then click on notification bell
-    Then click on view all notifications
-    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
-    Then approve campaign by selenium user
-    Then Logout from Neon application
-    Then login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
-    Then Request for bc approval
-    Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then approve Broadcast by selenium user
-
-
-  @NX-6385 @initBrowser
-  Scenario: Verify by clicking Approve button and approving the BC
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
-    Then Logout from Neon application
-  Then login with seleniumuser from sheet "seleniumuser"
-       Then click on notification bell
-    Then click on view all notifications
-    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
-    Then approve campaign by selenium user
-    Then Logout from Neon application
-    Then login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
-    Then Request for bc approval
-    Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then approve Broadcast by selenium user
+    #Then Logout from Neon application
+     #Then login with selenium user
+       #Then click on notification bell
+    #Then click on view all notifications
+    #Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    #Then approve campaign by selenium user
+    #Then naigate to "campaignBC" campaign show historyapprove
+#
+  #@NX-6356 @initBrowser @closeBrowser
+  #Scenario: Verify creation of BC without approval flow but for campaign
+    #Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet campaignonly "approvalRule"
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    #Then Logout from Neon application
+  #Then login with selenium user
+       #Then click on notification bell
+    #Then click on view all notifications
+    #Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    #Then approve campaign by selenium user
+    #Then Logout from Neon application
+    #Then login
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then naigate to "campaignBC" campaign view broadcasts
+    #Then click create new broadcast button
+    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    #Then activate bc
+    #
+#
+#
+    #
+    #
+    #
+#
+#
+#
+#
+  #@NX-6378 @initBrowser 
+  #Scenario: Verify clicking the Review button from notification panel
+    #Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    #Then Logout from Neon application
+    #Then login with selenium user
+       #Then click on notification bell
+    #Then click on view all notifications
+    #Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    #Then approve campaign by selenium user
+    #Then Logout from Neon application
+    #Then login
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then naigate to "campaignBC" campaign view broadcasts
+    #Then click create new broadcast button
+    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    #Then Request for bc approval
+    #Then Logout from Neon application
+    #Then login with selenium user
+    #Then approve Broadcast by selenium user
+#
+#
+  #@NX-6385 @initBrowser
+  #Scenario: Verify by clicking Approve button and approving the BC
+    #Given login
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to configuration
+    #Then click approval rules option
+    #Then create new approval rule from sheet "approvalRule"
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    #Then Logout from Neon application
+  #Then login with selenium user
+       #Then click on notification bell
+    #Then click on view all notifications
+    #Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    #Then approve campaign by selenium user
+    #Then Logout from Neon application
+    #Then login
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then naigate to "campaignBC" campaign view broadcasts
+    #Then click create new broadcast button
+    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    #Then Request for bc approval
+    #Then Logout from Neon application
+    #Then login with selenium user
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
+    #Then naigate to "campaignBC" campaign view broadcasts
+    #Then approve Broadcast by selenium user
     
      
   @NX-6357 @initBrowser 
@@ -331,9 +328,9 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then create new approval rule from sheet broadcastonly "approvalRule"
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
-     Then login with seleniumuser from sheet "seleniumuser"
+     Then login with selenium user
        Then click on notification bell
     Then click on view all notifications
     Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
@@ -345,10 +342,10 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then Request for bc approval
     Then Logout from Neon application
-    Then login with seleniumuser from sheet "seleniumuser"
+    Then login with selenium user
     Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
@@ -482,7 +479,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then Request for bc approval
     Then Logout from Neon application
     Then login with user from sheet "user1" of file "workApproval"
@@ -504,17 +501,17 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
   @NX-6386 @initBrowser @closeBrowser
   Scenario: Verify whether notification is send to the creator user when BC/campaign is approved
    Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to configuration
-    #Then click approval rules option
-    #Then create new approval rule from sheet "approvalRule"
-    #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet "approvalRule"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then Logout from Neon application
     #Given navigate to environment
     Then login with user from sheet "user1" of file "workApproval"
@@ -547,7 +544,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then Logout from Neon application
     #Given navigate to environment
     #Then login with user from sheet "user1" of file "workApproval" 
-    Then login with seleniumuser from sheet "seleniumuser"
+    Then login with selenium user
     Then wait for 1 minutes
     Then click on notification bell
     Then click on view all notifications
@@ -595,7 +592,7 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     Then Logout from Neon application
     #Given navigate to environment 
     # Remove it after use
-    Then login with seleniumuser from sheet "seleniumuser"
+    Then login with selenium user
     #Then login with user from sheet "user1" of file "workApproval"
     Then wait for 1 minutes
     Then click on notification bell
@@ -610,21 +607,21 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
   @NX-6388 @initBrowser 
   Scenario: Verify upon approval BC gets moved to Render scheduled
   Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to configuration
-    #Then click approval rules option
-    #Then create new approval rule from sheet broadcastonly "approvalRule"
-    #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then naigate to "campaignBC" campaign view broadcasts
-    #Then click create new broadcast button
-    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"
-    #Then Request for bc approval
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet broadcastonly "approvalRule"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then Request for bc approval
     Then Logout from Neon application
     #Given navigate to environment 
     Then login with user from sheet "user1" of file "workApproval"
@@ -641,20 +638,20 @@ Scenario: Verify Approval Work Flow for all type of One Off BCs
     @initBrowser 
     Scenario: Verify whether Show history & Review option is available in context menu
     Given login
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to configuration
-    #Then click approval rules option
-    #Then create new approval rule from sheet "approvalRule"
-    #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
-    #Then naigate to "campaignBC" campaign show history
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then click approval rules option
+    Then create new approval rule from sheet "approvalRule"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign show history
     Then Logout from Neon application
-     Then login with seleniumuser from sheet "seleniumuser"
+     Then login with selenium user
      Then navigate to precision marketer
      Then navigate to life cycle marketing
    Then navigate to campaign category from sheet "CampaignCategory"

@@ -1,5 +1,6 @@
 
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,20 +12,25 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.runners.JUnit4;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.seleniumhq.jetty9.util.Fields.Field;
 import org.testng.annotations.BeforeSuite;
 
 import baseClasses.Init;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.runtime.ScenarioImpl;
 import gherkin.formatter.model.Feature;
+import gherkin.formatter.model.Result;
 //import reportDB.ExtractTags;
 	public class Hooks extends Init{
 	
@@ -36,6 +42,8 @@ import gherkin.formatter.model.Feature;
 		@After
 		public void getscreenshot(Scenario scenario) throws Exception 
 	    {
+			String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+			
 			String path = new File( "." ).getCanonicalPath();
 			String tagStr = scenario.getSourceTagNames().toString();
 			tagStr = tagStr.replaceAll("\\[", " ");
@@ -53,15 +61,38 @@ import gherkin.formatter.model.Feature;
 				}
 				i++;
 			}
-			String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-			System.out.println("code for custom report");
+			i = 0 ;
+			String feature = "";
+			while(i<tags.length) {
+				tags[i] = tags[i].trim();
+				if(tags[i].matches("@Feature-"))
+				{
+					feature = tags[i];
+				    break;
+				}
+				i++;
+			}
+			
+			String error = logError(scenario).toString();//.replace("\n", "<LINEBREAK>");
+			error = error.replace(",", "<COMMA>");
+//			error = error.replace("\t", "<TAB>");
+//			error = error.replace(" ", "<SPACE>");
+//			error = error.replace(System.getProperty("line.separator"), "<LINEBREAK>");
 			stringBuilderForCsvReport.setLength(0);
 			stringBuilderForCsvReport.append('\n');
 			stringBuilderForCsvReport.append(NXtag);
 			stringBuilderForCsvReport.append(',');
+			stringBuilderForCsvReport.append(feature);
+			stringBuilderForCsvReport.append(',');
+			stringBuilderForCsvReport.append(scenario.getName());
+			stringBuilderForCsvReport.append(',');
 			stringBuilderForCsvReport.append(scenario.getStatus());
 			stringBuilderForCsvReport.append(',');
+			stringBuilderForCsvReport.append(System.getProperty("user.name"));
+			stringBuilderForCsvReport.append(',');
 			stringBuilderForCsvReport.append(timeStamp);
+			stringBuilderForCsvReport.append(',');
+			stringBuilderForCsvReport.append(error);
 	  		printWriterForCsvReport.write(stringBuilderForCsvReport.toString());
 	  		printWriterForCsvReport.flush();
 	  		
@@ -75,6 +106,20 @@ import gherkin.formatter.model.Feature;
 	            FileUtils.copyFile(scrFile, new File(path+"/Screenshots/"+NXtag+"_"+timeStamp+".png"));
 			}
 	    }
+		private static String logError(Scenario scenario) {
+			   java.lang.reflect.Field field = FieldUtils.getField(((ScenarioImpl) scenario).getClass(), "stepResults", true);
+			   field.setAccessible(true);
+			   try {
+			       ArrayList<Result> results = (ArrayList<Result>) field.get(scenario);
+			       for (Result result : results) {
+			           if (result.getError() != null)
+			               return result.getError()+result.getErrorMessage().toString();
+			       }
+			   } catch (Exception e) {
+				   return "Error while logging error"+ e.toString();
+			   }
+			return "NULL";
+			}
 	@After("@closeBrowser")
 	public void afterClass(Scenario scenario){
 		driver.quit();
@@ -82,8 +127,8 @@ import gherkin.formatter.model.Feature;
 		    Process p = Runtime.getRuntime().exec("taskkill /im chromedriver2.37.exe /f");
 		    p.waitFor();
 		    System.out.println(p.getInputStream());
-		    p = Runtime.getRuntime().exec("taskkill /im chrome.exe /f");
-		    p.waitFor();
+//		    p = Runtime.getRuntime().exec("taskkill /im chrome.exe /f");
+//		    p.waitFor();
 		    System.out.println(p.getInputStream());
 		    System.out.println("Then avalilable"+"after chrome close"+"After");
 
