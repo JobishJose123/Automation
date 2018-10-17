@@ -35,7 +35,7 @@ public class CommonSteps extends Init {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(xpath="//*[@id='mainContainer']/paper-menu/div/hexagon-icon[4]/label")
+	@FindBy(xpath="//label[contains(text(),'Offer Management')]")
 	private WebElement offerManagement;
 	@FindBy(xpath="//label[text()='Reports']/..")
 	private WebElement reports;

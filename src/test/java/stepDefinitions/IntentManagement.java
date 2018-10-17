@@ -1812,6 +1812,15 @@ System.out.println(editname+"program has edited successfully");
 				return "noOfferEligibleEventFound";
 			}
 		}
+		public String getLastOfferAcceptedEventTime() {
+			try {
+				jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Accepted')]/..//data-table-cell[2]");
+				String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Accepted')]/..//data-table-cell[2]")).getText();
+				return latestTime;
+			}catch (Exception e) {
+				return "noOfferAcceptedEventFound";
+			}
+		}
 		
 		public boolean checkOfferEligibleEventTime(Date startTime, Date conversionTime) {
 			if(conversionTime.after(startTime))
@@ -1876,6 +1885,50 @@ System.out.println(editname+"program has edited successfully");
 			timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
 			Assert.assertTrue("offer eligible event not found", checkOfferEligibleEventTime(dateForCompare,timeStamp));
 		}
+		
+		@Then("^wait for offer accepted event in consumer profile$")
+		public void wait_for_offer_accepted_event() throws Throwable {
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+			customerProfilePage.clickEventTypesCheckBox();
+			customerProfilePage.clickEventTypesCheckBox();
+			customerProfilePage.clickOfferAcceptedEventCheckBox();
+			customerProfilePage.clickSelectEventApplyButton();
+			Thread.sleep(2000);
+			TimeoutImpl t = new TimeoutImpl();
+			t.startTimer();
+			String date = getLastOfferEligibleEventTime();
+			if(date.equals("noOfferEligibleEventFound"))
+				date = "05 Sep 2000 04:18 PM";
+			Date timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+			System.out.println(timeStamp);
+			System.out.println(checkOfferEligibleEventTime(dateForCompare,timeStamp));
+			while(t.checkTimerMin(15) && !checkOfferEligibleEventTime(dateForCompare,timeStamp)) {
+				System.out.println("insie while"+dateForCompare+"::"+timeStamp);
+				Thread.sleep(5000);
+//				customerProfilePage.clickEventsTab();
+				customerProfilePage.clickEventTypesCheckBox();
+				customerProfilePage.clickSelectEventApplyButton();
+				Thread.sleep(2000);
+				customerProfilePage.clickEventTypesCheckBox();
+				customerProfilePage.clickOfferAcceptedEventCheckBox();
+				customerProfilePage.clickSelectEventApplyButton();
+				Thread.sleep(2000);
+				
+				date = getLastOfferAcceptedEventTime();
+				if(date.equals("noOfferEligibleEventFound"))
+					date = "05 Sep 2000 04:18 PM";
+				timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+				System.out.println(timeStamp);
+				System.out.println(getLastOfferAcceptedEventTime());
+				
+			}
+			date = getLastOfferAcceptedEventTime();
+			if(date.equals("noOfferEligibleEventFound"))
+				date = "05 Sep 2000 04:18 PM";
+			timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+			Assert.assertTrue("offer eligible event not found", checkOfferEligibleEventTime(dateForCompare,timeStamp));
+		}
+		
 		@Then("^accept offer in customer care$")
 		public void acceptOfferInCustomerCare() throws Throwable {
 			programPage.clickCustomerCareOfferAccept();

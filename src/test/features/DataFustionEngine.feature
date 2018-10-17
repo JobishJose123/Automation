@@ -12,7 +12,7 @@ Feature: DK
   #""
   ## (Comments)
   #Sample Feature Definition Template
-  @NX-4468ir @initBrowser @closeBrowser
+  @NX-4468 @initBrowser @closeBrowser
   Scenario: DK--->Verify the functionality of Save option
     Given login
     Then navigate to data foundation

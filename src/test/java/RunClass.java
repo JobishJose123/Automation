@@ -52,7 +52,10 @@ public class RunClass
 	public static List<String> directoriesToNavigate = new LinkedList<String>();
     public static void main( String[] args ) throws IOException
     {    	
-			OptionPaneExample panel = new OptionPaneExample();
+//			OptionPaneExample panel = new OptionPaneExample();
+    	
+    	JUnitCore junit = new JUnitCore();
+		junit.run(RunTestJoel.class);
     }
 
 

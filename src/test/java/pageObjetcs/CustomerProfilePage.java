@@ -233,6 +233,8 @@ public class CustomerProfilePage extends Init{
 	private WebElement customerSupport;
 	@FindBy(xpath="//div[text()='Offer Eligible Event']/..")
 	private WebElement offerEligibleEventCheckBox;
+	@FindBy(xpath="//div[text()='Offer Accepted']/..")
+	private WebElement offerAcceptedEventCheckBox;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -966,6 +968,9 @@ public void verifyTrialMessageEventDetailsDynamic(String sheet) throws Exception
     
 public void clickOfferEligibleEventCheckBox() throws InterruptedException {
 	jswait.loadClick(offerEligibleEventCheckBox);
+}
+public void clickOfferAcceptedEventCheckBox() throws InterruptedException {
+	jswait.loadClick(offerAcceptedEventCheckBox);
 }
 	public void navigateToCustomerSupport() throws InterruptedException {
 	jswait.loadClick(customerSupport);

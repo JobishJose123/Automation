@@ -343,7 +343,7 @@ private WebElement rulessenderid2 ;
 	
 	@FindBy(xpath="//hexagon-content//span")
 	private WebElement topRuleStatus;
-	@FindBy(xpath="//paper-item[contains(.,'Accept')]")
+	@FindBy(xpath="//paper-button[contains(.,'Accept')]")
 	private WebElement customerCareOfferAccept;
 //	@FindBy(xpath="")
 //	private WebElement ;

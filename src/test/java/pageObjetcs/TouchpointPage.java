@@ -219,7 +219,7 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormPrioritizationRuleFIFO;
 	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'LIFO')]")
 	private WebElement smsFormPrioritizationRuleLIFO;
-	@FindBy(xpath="//label[contains(.,'Short Code')]/following::vaadin-combo-box-item")
+	@FindBy(xpath="//label[contains(.,'Short Code')]/following::vaadin-combo-box-item[contains(.,'"+SMS_SHORT_CODE+"')]")
 	private WebElement smsFormShortCode1;
 	
 	@FindBy(xpath="//label[contains(.,'Short Code')]/following::vaadin-combo-box-item[2]")
@@ -574,11 +574,12 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	}
 	public void enterSmsTouchpointDetails(String keyword) throws InterruptedException, IOException {
 		smsEnterKeyword(keyword);
+		smsSelectPrioritizationLogic();
 		smsSelectShortCode();
 		eh.setExcelFile("touchpointInputData", "smsTouchpoint");
  		String name = smsTouchpointName.getText();
  		eh.setCell(1, 0, name);
-		smsSelectPrioritizationLogic();
+		
 //		smsSelectPrioritizationRule();
 		smsEnterRefreshEvery("3");
 		smsSelectTimeInterval();

@@ -34,7 +34,7 @@ public class CampaignObjects extends Init{
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	public TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	
-	@FindBy(xpath=".//*[@id='mainContainer']/paper-menu/div/hexagon-icon[3]/label/..")
+	@FindBy(xpath="//label[contains(text(),'Life-Cycle Marketing')]")
 	private WebElement lifeCycleMarketing;
 	@FindBy(xpath="//paper-item[contains(.,'Export to Location')]")
 	private WebElement optionsExportToLocation;
