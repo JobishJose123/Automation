@@ -578,8 +578,12 @@ private WebElement recipientclick;
 	
 	public void getSendTimeData() throws InterruptedException, UnsupportedFlavorException, IOException {
 		
-		SEND_TIME_DATA=jswait.getTextFormElement("//h4[@class='style-scope broadcast-deliver-summary']");
-		System.out.print("Send Time:"+SEND_TIME_DATA);
+		String SendTime=jswait.getTextFormElement("//h4[@class='style-scope broadcast-deliver-summary']");
+		int index1=SendTime.indexOf(",");
+		
+		SEND_TIME_DATA=SendTime.substring(index1+2, index1+6);
+		System.out.println("Send Time Data:"+SEND_TIME_DATA);
+		System.out.println("SendTime:"+SendTime);
 	
 	}
 	
