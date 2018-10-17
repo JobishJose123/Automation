@@ -53,8 +53,13 @@ Feature: Test cases related to export campaign in multiple environment
    	
    	
    	@NX-8244 @initBrowser 
-  Scenario: Verify whether validation is showing when usage metric field for foreign KPI is not in native - 8244
+    Scenario: Verify whether validation is showing when usage metric field for foreign KPI is not in native - 8244
     Given login
+    Then navigate to data foundation
+    Then navigate to usage metric
+    Then click create new usage metric
+    Then enter new usage metric details from sheet "usageMetric"
+    Then navigate to landing page
 		Then navigate to configuration management
     Then navigate to campaign categories
     Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
@@ -102,6 +107,15 @@ Feature: Test cases related to export campaign in multiple environment
   Scenario: Verify whether mapping can be done when location insights condition is selected in foreign KPI conditions - 8243
     
     Given login
+    Then navigate to data foundation
+    Then navigate to usage metric
+    Then click create new usage metric
+    Then enter new usage metric details from sheet "usageMetric"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
 		Then navigate to configuration management
     Then navigate to campaign categories
     Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
@@ -159,6 +173,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then click create new customer location insight
     Then enter new customer location insight details from sheet "name"
     Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
 		Then navigate to configuration management
     Then navigate to campaign categories
     Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
@@ -212,6 +230,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to customer location insights
     Then click create new customer location insight
     Then enter new customer location insight details from sheet "name"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
 		Then navigate to configuration management
     Then navigate to campaign categories
@@ -331,6 +353,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then click create new customer location insight
     Then enter new customer location insight details from sheet "name"
     Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
 		Then navigate to configuration management
     Then navigate to campaign categories
     Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
@@ -398,6 +424,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then add new export location
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
     Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
@@ -446,6 +476,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to export location
     Then add new export location
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -501,6 +535,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then add new export location
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
     Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
@@ -539,7 +577,7 @@ Feature: Test cases related to export campaign in multiple environment
   	Then navigate to configuration management
     Then navigate to campaign categories
     Then create new campaign category from sheet "CampaignCategory1" of file "ExportCampaignLocation"
-     Then navigate to landing page
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
@@ -593,6 +631,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to export location
     Then add new export location
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -688,6 +730,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then add new export location
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
     Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
@@ -745,6 +791,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to export location
     Then add new export location
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -849,6 +899,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to export location
     Then add new export location
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -966,6 +1020,10 @@ Feature: Test cases related to export campaign in multiple environment
     Then add new export location
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
     Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
@@ -1011,6 +1069,14 @@ Feature: Test cases related to export campaign in multiple environment
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
     Then navigate to landing page
     Then navigate to precision marketer
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
     Then navigate to offer management
     Then navigate to products
     Then navigate to product class "TestProductClass"
@@ -1099,12 +1165,17 @@ Feature: Test cases related to export campaign in multiple environment
     Then add new export location
     Then enter export location from sheet "locationdetails" of file "ExportCampaignLocation"
     Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
     Then navigate to product class "TestProductClass"
     Then click create new product button
-    Then create product class without any attributes from "fullDetails"
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -1343,6 +1414,10 @@ Feature: Test cases related to export campaign in multiple environment
     @NX-7952 @initBrowser 
 		Scenario: Verify whether on clicking edit button user can able to edit the added location details-7952
     Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class without any attributes from "TestProductClass"
+    Then navigate to landing page
     Then navigate to configuration management
     Then navigate to system administration
     Then navigate to export location

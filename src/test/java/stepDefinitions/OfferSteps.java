@@ -1,11 +1,13 @@
 package stepDefinitions;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
 import org.mozilla.javascript.JavaScriptException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -171,7 +173,28 @@ public class OfferSteps extends Init {
 
 	@Then("^check product help icon$")
 	public void Check_Product_help_icon() throws Throwable {
-		offerPageObjects.checkProductContextHelp();
+		//offerPageObjects.checkProductContextHelp();
+		
+		
+		Thread.sleep(3000);
+        
+		 String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
+		   ((JavascriptExecutor)driver).executeScript("window.open()");
+		   ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+		    driver.switchTo().window(tabs2.get(1));
+		    driver.get(secondUrl);
+		    Thread.sleep(3000);
+		    driver.switchTo().frame(1);
+		    try{
+		    driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Products')]"));
+		    driver.close();
+		    driver.switchTo().window(tabs2.get(0));
+		    }
+		    catch (Exception e) {
+		    	driver.close();
+			    driver.switchTo().window(tabs2.get(0));
+			    throw e;
+			}
 	}
 
 	@Then("^filter offer from sheet \"([^\"]*)\"$")

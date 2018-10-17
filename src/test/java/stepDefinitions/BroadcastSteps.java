@@ -1,8 +1,10 @@
 package stepDefinitions;
 
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -178,7 +180,7 @@ public class BroadcastSteps extends Init{
 		}
 	}
 	
-	public void enterDeliveryTabDetails(String bc_type,String sheet) throws InterruptedException {
+	public void enterDeliveryTabDetails(String bc_type,String sheet) throws InterruptedException, UnsupportedFlavorException, IOException {
 		eM.setExcelFile("bcInputData",sheet);
 		Calendar rightNow =Calendar.getInstance();
     	String mn = "";
@@ -219,7 +221,7 @@ public class BroadcastSteps extends Init{
       			Thread.sleep(1000);
       			 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
       			
-      	     Thread.sleep(2000);
+      			Thread.sleep(2000);
       	   	 jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
       		 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
       	     builder.moveToElement(num).click().build().perform();
@@ -367,6 +369,10 @@ public class BroadcastSteps extends Init{
      				    Thread.sleep(2000);
       				     jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
       			}
+      	
+      	
+      	    
+	
 	}
 	
 	@Then("^verify selected campaign category name$")
@@ -438,7 +444,10 @@ public class BroadcastSteps extends Init{
 	@Then("^activate bc$")
     public void activateBc() throws Throwable
     {  
+		
 		broadcastPageObjects.clickCreateButton();
+		Thread.sleep(3000);
+		broadcastPageObjects.getSendTimeData();
 		broadcastPageObjects.clickActivateButton();
 		broadcastPageObjects.clickActivateConfirmYes();
 		Thread.sleep(10000);

@@ -301,10 +301,10 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement PermissionSave;
 	 
 	 
-	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
-     private WebElement sendTimeData;
-	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
-     private WebElement sendTimeText;
+//	 @FindBy(xpath = ".//p[contains(.,'"+SEND_TIME_DATA+"')]")
+//     private WebElement sendTimeData;
+//	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
+//     private WebElement sendTimeText;
 	 
 	
 	 
@@ -574,6 +574,15 @@ private WebElement recipientclick;
 	public void clickCreateButton() throws InterruptedException {
 		jswait.loadClick(createButtonBc);
 	}
+	
+	
+	public void getSendTimeData() throws InterruptedException, UnsupportedFlavorException, IOException {
+		
+		SEND_TIME_DATA=jswait.getTextFormElement("//h4[@class='style-scope broadcast-deliver-summary']");
+		System.out.print("Send Time:"+SEND_TIME_DATA);
+	
+	}
+	
 	public void clickCreateNewBroadcastButton() throws InterruptedException {
 		jswait.loadClick(createNewBroadcastButton);
 	}
@@ -889,8 +898,10 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		
 		clickBroadcastDeliveryDetails();
 		Thread.sleep(3000);
-		assertTrue(sendTimeData.isDisplayed());
-		assertTrue(sendTimeText.isDisplayed());
+		System.out.print("Send Time:"+SEND_TIME_DATA);
+		
+		assertTrue(driver.findElement(By.xpath(".//p[contains(.,'"+SEND_TIME_DATA+"')]")).isDisplayed());
+		assertTrue(driver.findElement(By.xpath(".//p[contains(.,'"+SEND_TIME_DATA+"')]")).isDisplayed());
 		
 		
 	}
