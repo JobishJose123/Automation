@@ -1,10 +1,8 @@
 package stepDefinitions;
 
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -180,7 +178,7 @@ public class BroadcastSteps extends Init{
 		}
 	}
 	
-	public void enterDeliveryTabDetails(String bc_type,String sheet) throws InterruptedException, UnsupportedFlavorException, IOException {
+	public void enterDeliveryTabDetails(String bc_type,String sheet) throws InterruptedException {
 		eM.setExcelFile("bcInputData",sheet);
 		Calendar rightNow =Calendar.getInstance();
     	String mn = "";
@@ -221,7 +219,7 @@ public class BroadcastSteps extends Init{
       			Thread.sleep(1000);
       			 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
       			
-      			Thread.sleep(2000);
+      	     Thread.sleep(2000);
       	   	 jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
       		 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
       	     builder.moveToElement(num).click().build().perform();
@@ -369,10 +367,6 @@ public class BroadcastSteps extends Init{
      				    Thread.sleep(2000);
       				     jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
       			}
-      	
-      	
-      	    
-	
 	}
 	
 	@Then("^verify selected campaign category name$")
@@ -444,10 +438,7 @@ public class BroadcastSteps extends Init{
 	@Then("^activate bc$")
     public void activateBc() throws Throwable
     {  
-		
 		broadcastPageObjects.clickCreateButton();
-		Thread.sleep(3000);
-		broadcastPageObjects.getSendTimeData();
 		broadcastPageObjects.clickActivateButton();
 		broadcastPageObjects.clickActivateConfirmYes();
 		Thread.sleep(10000);
@@ -651,13 +642,13 @@ public class BroadcastSteps extends Init{
 		commonObjects.clickOptionsIcon();
 		broadcastPageObjects.ClickCopyAsAnd();
 		broadcastPageObjects.ClickCopiedAnd();
-		broadcastPageObjects.AddAnd();
+		//broadcastPageObjects.AddAnd();
 	
 	    }
 	@Then("^verify create BC Notification$")
 	public void createBCNotification() throws Exception {
 		
-//		broadcastPageObjects.enterBroadcastBasicDetails("notification");
+//		broadcastPageObjects.enterBroadcastBasicDetails("notification","Unlimited");
 //		broadcastPageObjects.clickProceedButton();
 //		broadcastPageObjects.selectBaseList(BASE_LIST);
 //		//broadcastPageObjects.clickcreateTargetCondition();
@@ -1301,8 +1292,13 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 			currStatus = jswait.getTextFormElement("//vaadin-grid-table-row/vaadin-grid-table-cell[2]/vaadin-grid-cell-content");
 			Assert.assertEquals("Status of Bc is not chnaged",currStatus, status);
 		}
+		else if(type.contains("Seeding")) {
+			currStatus = jswait.getTextFormElement(".//*[@id='broadcastSeedList']//vaadin-grid-table-row/vaadin-grid-table-cell[2]/vaadin-grid-cell-content");
+			Assert.assertEquals("Status of Bc is not chnaged",currStatus, status);
+		}
 		else {
-			currStatus = jswait.getTextFormElement("//vaadin-grid-ta");
+			
+			currStatus = jswait.getTextFormElement(".//*[@id='broadcastTriggerList']//vaadin-grid-table-row/vaadin-grid-table-cell[2]/vaadin-grid-cell-content");
 			Assert.assertEquals("Status of Bc is not chnaged",currStatus, status);
 		}
 	}
@@ -1953,7 +1949,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
       		 day++;
       	 }
       	 Actions builder = new Actions(driver);
-      	broadcastPageObjects.createBCWithoutTargetCondition(name, bc_type,BASE_LIST2,offerExcel.getCell(1, 0).toString());
+      	broadcastPageObjects.createBCWithoutTargetCondition(name, bc_type,BASE_LIST,offerExcel.getCell(1, 0).toString());
       	
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);

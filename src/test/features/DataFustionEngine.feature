@@ -12,7 +12,7 @@ Feature: DK
   #""
   ## (Comments)
   #Sample Feature Definition Template
-  @NX-4468 @initBrowser @closeBrowser
+  @NX-4468ir @initBrowser @closeBrowser
   Scenario: DK--->Verify the functionality of Save option
     Given login
     Then navigate to data foundation
@@ -61,7 +61,7 @@ Feature: DK
     Then create dk jobs for checking skip exception from sheet "skipexception"
     Then Open DK Job from sheet and verify skip exception "skipexception"
 
-  @NX-3492 @initBrowser @closeBrowser
+  @NX-3492 @initBrowser
   Scenario: DK --> Verify the working of String value extraction from a filename
     Given login
     Then navigate to data foundation
