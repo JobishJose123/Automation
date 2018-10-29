@@ -203,7 +203,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement saveButtonBc;
 	@FindBy(xpath = ".//*[@id='confirmBox']//paper-button[2]")
 	private WebElement activateConfirmYes;
-	@FindBy(xpath = ".//*[@id='checkboxContainer']")
+	@FindBy(xpath = "(.//*[@id='checkboxContainer'])[2]")
 	private WebElement firstOfferCheckBox;
 	@FindBy(xpath = ".//div[@id='radioLabel' and contains(.,'Never')]/../div[1]")
 	private WebElement recurringBcEndNeverRadio;
@@ -236,7 +236,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement bccopyasand;
 	@FindBy(xpath = "(//iron-icon[@id='icon'])[23]")
 	private WebElement clickCopiedAnd;
-	@FindBy(xpath = "//target-form//condition-form[2]//following::paper-button[contains(text(),'Add AND')]")
+	@FindBy(xpath = "//target-form//condition-form[3]//following::paper-button[contains(text(),'Add AND')]")
 	private WebElement AddAnd; // change the form number for the conditions in the page
 	@FindBy(xpath = ".//*[@id='router']//paper-button[contains(text(),'Notifications')]")
 	private WebElement bcNotifications;
@@ -301,10 +301,10 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement PermissionSave;
 	 
 	 
-//	 @FindBy(xpath = ".//p[contains(.,'"+SEND_TIME_DATA+"')]")
-//     private WebElement sendTimeData;
-//	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
-//     private WebElement sendTimeText;
+	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
+     private WebElement sendTimeData;
+	 @FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
+     private WebElement sendTimeText;
 	 
 	
 	 
@@ -382,7 +382,7 @@ private WebElement recipientclick;
 	
 	//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
 	public void bcnotificationrecipient() throws InterruptedException {
-//		jswait.loadSendKeys(bcnotificationrecipient, "Selenium user");
+		jswait.loadSendKeys(bcnotificationrecipient, "Selenium user");
 		
 		wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE);
 		Thread.sleep(2000);
@@ -1902,10 +1902,11 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	   
 public void addNotificationuser() throws Exception{
 	
-	bcnotificationrecipient();
+	//bcnotificationrecipient();
 	Thread.sleep(2000);
 	
 	bcnotificationrecipientclick();
+	Thread.sleep(2000);
 	bcnotificationbeforesendingtime();
 	bcnotificationbeforesendingtime1min();
 	bcnotificationbeforeRendertime();

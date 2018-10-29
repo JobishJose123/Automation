@@ -77,7 +77,7 @@ public class SegmentAnalysisSteps extends Init {
 	@Then("^add KPI for segment analysis$")
 	public void addNewKPI() throws InterruptedException {
 		
-		segmentObjects.addNewKPI();	
+		segmentObjects.addNew3KPI();	
 	}
 	
 	@Then("^click on create new cluster button$")
@@ -126,6 +126,32 @@ public class SegmentAnalysisSteps extends Init {
 		segmentObjects.verifyToastSaveClusterWithView1();	
 	}
 	
+	
+	@Then("^filter segment analysis$")
+	public void filtersegment() throws InterruptedException {
+		
+		segmentObjects.filtersegment();	
+	}
+	
+	@Then("^check cluster details$")
+	public void clusterdetails() throws Exception {
+		
+		segmentObjects.clustertabledetails();	
+	}
+	
+	@Then("^check cluster details table and save cluster$")
+	public void clustertabledetailsandsave() throws Exception {
+		
+		segmentObjects.clustertabledetailsandsave();	
+	}
+	
+	
+	@Then("^create Segment Analysis$")
+	public void createSegmentAnalysis() throws InterruptedException {
+		
+		segmentObjects.createSegmentAnalysisbtn();	
+		segmentObjects.createSegmentAnalysis();
+	}
 	
 	
 	

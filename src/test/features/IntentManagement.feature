@@ -951,6 +951,46 @@ Then toast messagewhile saving cluster with only view1 values
     Then navigate to precision marketer
     
     
+    @NDX-4039 @initBrowser
+  Scenario: Verify Create SegmentAnalysis.
+  Given login
+    Then navigate to intent management
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then create Segment Analysis
+
+
+     @NX-8461
+     @initBrowser
+  Scenario: Check whether results for clustering is shown in table view.
+  Given login
+    Then navigate to intent management
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    #Then click on create new cluster button
+    #Then enter view values for cluster
+    #Then select radio button for view1
+    #Then select radio button for view2
+    #Then click save cluster button
+    Then check cluster details
+     
+     @NX-8464
+     @initBrowser
+  Scenario: Check whether each clusters details can be viewed and  save as cluster from the table result.
+  Given login
+    Then navigate to intent management
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    #Then click on create new cluster button
+    #Then enter view values for cluster
+    #Then select radio button for view1
+    #Then select radio button for view2
+    #Then click save cluster button
+    Then check cluster details
+    Then check cluster details table and save cluster
+    
      
     
     

@@ -407,9 +407,13 @@ Feature: Test cases related to export campaign in multiple environment
     Then navigate to templates tab
     Then find template from sheet "campaignBC"
     Then veify imported campaign template conditions are same after importing
+   	Then pass next scenario based on this step
    	
    	
-   	
+   	 @NX-8203
+  Scenario: Verify whether the imported campaign template comes under campaign template column
+    Then check previous step and pass this
+    Then pass next scenario based on this step
    	
    	
    	
