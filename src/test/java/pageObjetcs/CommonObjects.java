@@ -50,6 +50,8 @@ public class CommonObjects extends Init {
 	private WebElement plusIcon;
 	@FindBy(xpath = "//paper-button[contains(text(),'Yes')]")
 	private WebElement paperButtonYes;
+	@FindBy(xpath = "//paper-button[contains(text(),'OK')]")
+	private WebElement paperButtonOk;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement optionsEdit;
 	@FindBy(xpath = "//paper-item[contains(.,'Duplicate')]")
@@ -66,6 +68,8 @@ public class CommonObjects extends Init {
 	private WebElement targetConditionOptionsDelete;
 	@FindBy(xpath = "//paper-item[contains(.,'Deactivate')]")
 	private WebElement optionsDeactivate;
+	@FindBy(xpath = "//paper-item[contains(.,'Activate')]")
+	private WebElement optionsActivate;
 	@FindBy(xpath = "//*[@src='http://192.168.150.27/images/Flip1.svg']")
 	private WebElement targetConditionViewToggle;
 	@FindBy(xpath = "//paper-button[contains(.,'Activate')]")
@@ -137,6 +141,11 @@ public class CommonObjects extends Init {
 	 public void clickCreateNewCustomerLocationInsight() throws Throwable {
 		 
 		 jswait.loadClick(createNewCustomerLocationInsightButton);
+	 }
+	 
+public void clickActivateOption() throws Throwable {
+		 
+		 jswait.loadClick(optionsActivate);
 	 }
 	 
  public void clickCreateNewUsageMetric() throws Throwable {
@@ -311,6 +320,10 @@ public class CommonObjects extends Init {
 
 	public void clickConfirmYesButton() throws InterruptedException {
 		jswait.loadClick(paperButtonYes);
+	}
+	
+	public void clickConfirmOkButton() throws InterruptedException {
+		jswait.loadClick(paperButtonOk);
 	}
 
 	public void clickFilterResetButton() throws InterruptedException {

@@ -330,6 +330,11 @@ private WebElement recipientclick;
 	 private WebElement expiresAtoption;
 	 @FindBy(xpath=".//form[@id='bcExpiryForm']//label[contains(.,'Expires')]//following::iron-icon[5]")
 	 private WebElement expirestimezone ;
+	 @FindBy(xpath="//paper-radio-button[contains(.,'Saved Segments')]")
+	 private WebElement savedSegmentRadioButtion;
+	 @FindBy(xpath="//label[contains(.,'Saved Segments')]/../..//input")
+		 private WebElement savedSegmentSelectorField;
+	 
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -1307,7 +1312,13 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 			commonObjects.clickOptionsIcon();
 			targetConditionObjects.clickTargetConditionDeletet();
-			targetConditionObjects.clickBasicTargetCondition(condition);
+			if(condition.contains("segmentAgeGT40")) {
+				jswait.loadClick(savedSegmentRadioButtion);
+				jswait.loadClick(savedSegmentSelectorField);
+				jswait.loadClick("//paper-item[contains(.,'segmentAgeGT40')]");
+			}
+			else 
+				targetConditionObjects.clickBasicTargetCondition(condition);
 			Thread.sleep(3000);
 		
 		clickProceedButton();

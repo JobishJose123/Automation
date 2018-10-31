@@ -2530,21 +2530,34 @@ public void verifyTargetedCountForPartnerLevelCG() throws Throwable
 public void verifyImEventTargetCondition(String event) throws Throwable
 {  
 	broadcastPageObjects.clickTargetDetailsInBcView();
+	verifyTargetConditionDetails(event);
+}
+public void verifyTargetConditionDetails(String event) throws Throwable{
 	if(event.contentEquals("IMEventsOfferAccepted")){
-		jswait.waitUntil("//target-event[contains(.,'This event occured')]");
-		jswait.waitUntil("//b[contains(.,'Offer accepted')]");
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//target-event[contains(.,'This event occured')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//b[contains(.,'Offer accepted')]"));
 	}
 	else if(event.contentEquals("IMEventsOfferDeclined")){
-		jswait.waitUntil("//target-event[contains(.,'This event occured')]");
-		jswait.waitUntil("//b[contains(.,'Offer declined')]");
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//target-event[contains(.,'This event occured')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//b[contains(.,'Offer declined')]"));
 	}
 	else if(event.contentEquals("IMEventsOfferRecommended")){
-		jswait.waitUntil("//target-event[contains(.,'This event occured')]");
-		jswait.waitUntil("//b[contains(.,'Offer Recommended')]");
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//target-event[contains(.,'This event occured')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//b[contains(.,'Offer Recommended')]"));
 	}
 	else if(event.contentEquals("IMEventsCustomerCareUsage")){
-		jswait.waitUntil("//target-event[contains(.,'This event occured')]");
-		jswait.waitUntil("//b[contains(.,'Customer Care Usage')]");
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//target-event[contains(.,'This event occured')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//b[contains(.,'Customer Care Usage')]"));
+	}
+	else if(event.contains("segmentAgeGT40")){
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'Customer Profile Info')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'is greater than')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'40')]"));
+	}
+	else if(event.contains("segmentAgeGT30")){
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'Customer Profile Info')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'is greater than')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'30')]"));
 	}
 }
 

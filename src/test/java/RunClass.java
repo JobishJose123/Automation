@@ -55,7 +55,7 @@ public class RunClass
 //			OptionPaneExample panel = new OptionPaneExample();
     	
     	JUnitCore junit = new JUnitCore();
-		junit.run(RunTestJoel.class);
+		junit.run(RunTest.class);
     }
 
 
