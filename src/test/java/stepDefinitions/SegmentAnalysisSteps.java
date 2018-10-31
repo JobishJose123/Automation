@@ -145,6 +145,12 @@ public class SegmentAnalysisSteps extends Init {
 		segmentObjects.clustertabledetailsandsave();	
 	}
 	
+	@Then("^Navigate to Saved Segments$")
+	public void navigateToSavedSegments() throws Exception {
+		
+		segmentObjects.navigateToSavedSegments();	
+	}
+	
 	
 	@Then("^create Segment Analysis$")
 	public void createSegmentAnalysis() throws InterruptedException {
@@ -154,7 +160,29 @@ public class SegmentAnalysisSteps extends Init {
 	}
 	
 	
+	@Then("^Navigate to Discovered clusters$")
+	public void navigateToDiscoveredClusters() throws Exception {
+		
+		segmentObjects.NavigatetoDiscoveredClusters();	
+	}
 	
+	
+	@Then("^Navigate to 360 Customer Data$")
+	public void navigateTo360CustomerData() throws Exception {
+		
+		segmentObjects.navigateTo360CustomerData();	
+	}
+	@Then("^verify Discovered clusters$")
+	public void verifyDiscoveredClusters() throws Exception {
+		
+		segmentObjects.verifyDiscovredClusters();	
+	}
+	
+	@Then("^verify clusters tab ib segments$")
+	public void verifyclustertabinsegments() throws Exception {
+		
+		segmentObjects.verifyclustertabinsegments();	
+	}
 	
 	
 	

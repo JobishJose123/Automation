@@ -131,6 +131,36 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement saveclusterbtn;
 	@FindBy(xpath=".//label[contains(.,'Cluster Name')]/../input")
 	private WebElement saveclustername;
+	@FindBy(xpath=".//paper-card[contains(.,'Saved Segments')]")
+	private WebElement SavedSegments;
+	@FindBy(xpath=".//*[@id='aHref']/div/div[contains(.,'Discovered Clusters')]")
+	private WebElement DiscoveredClusters ;
+	@FindBy(xpath=".//*[@id='item111']/div[1]/data-table-cell[1]/span[contains (.,'test selenium cluster')]")
+	private WebElement discoverClusterCheck;
+	@FindBy(xpath=".//hexagon-icon[1]/label[contains(.,'Customer Data')]//following::a[1]")
+	private WebElement Customer360Data;
+	@FindBy(xpath="//data-table-cell[contains(.,'test selenium cluster')]")
+	private WebElement discoveredclusterscheck;
+	@FindBy(xpath=".//*[@id='items']/vaadin-grid-table-row[1]/vaadin-grid-table-cell[2]//a")
+	private WebElement segmentAnalysisnameclick;
+	@FindBy(xpath=".//*[@id='tabsContent']//div[contains(.,'Clusters')]")
+	private WebElement Clusterstab;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -154,6 +184,18 @@ public class SegmentAnalysisObjects extends Init {
 	public void navigateToAnalytics() throws InterruptedException {
 		jswait.loadClick(analytics);
 	}
+	
+	
+	public void navigateToSavedSegments() throws InterruptedException {
+		jswait.loadClick(SavedSegments);
+	}
+	
+	public void navigateTo360CustomerData() throws InterruptedException {
+		jswait.loadClick(Customer360Data);
+	}
+	
+
+	
 	public void clickExploreSegmentsOption() throws InterruptedException{
 		jswait.loadClick(exploreSegments);
 		Thread.sleep(3000);
@@ -332,6 +374,10 @@ public void clustertabledetailsandsave() throws Exception {
 		jswait.loadSendKeys(saveclustername, "test selenium cluster");
 		Thread.sleep(2000);
 		jswait.loadClick("//paper-button[contains(.,'Save')]");
+		Thread.sleep(3000);
+		jswait.loadClick("//paper-button[contains(.,'Close')]");
+		Thread.sleep(3000);
+		jswait.loadClick("//paper-button[contains(.,'Close')]");
 	}
 
 	
@@ -398,6 +444,33 @@ public void clustertabledetailsandsave() throws Exception {
 		
 	}
    
+   public void NavigatetoDiscoveredClusters() throws InterruptedException {
+		jswait.loadClick(DiscoveredClusters);
+		
+	}
+   
+   public void verifyDiscovredClusters() throws InterruptedException {
+	   Thread.sleep(5000);
+	   commonObjects.filterName("test selenium cluster");
+		Thread.sleep(5000);
+		   assertTrue(discoveredclusterscheck.isDisplayed());
+						
+	}
+   
 	
+   public void verifyclustertabinsegments() throws InterruptedException {
+	   Thread.sleep(5000);
+	   commonObjects.filterName("Segments");
+		Thread.sleep(5000);
+		jswait.loadClick(segmentAnalysisnameclick);
+		
+		Thread.sleep(5000);
+		   assertTrue(Clusterstab.isDisplayed());
+		   Thread.sleep(5000);
+			jswait.loadClick(Clusterstab);
+		
+		  
 	
+	}
+   
 }
