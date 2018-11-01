@@ -882,18 +882,18 @@ Feature: positive flow of im program creation
     #Then enter view values for cluster
     #Then select radio button for view1
     #Then select radio button for view2
+    #Then select radio button for view3
     #Then click save cluster button
     Then check cluster details
     Then check cluster details table and save cluster
-   Then navigate to landing page
-Then navigate to data foundation
-
+    Then navigate to landing page
+    Then navigate to data foundation
     Then Navigate to Discovered clusters
     Then verify Discovered clusters
-     Then pass next scenario based on this step
-    
-    @NX-8407
-     Scenario: Check whether Save cluster create a new list and saved in  Discovered Cluster.
+    Then pass next scenario based on this step
+
+  @NX-8407
+  Scenario: Check whether Save cluster create a new list and saved in  Discovered Cluster.
     Then check previous step and pass this
     Then pass next scenario based on this step
 
@@ -911,29 +911,56 @@ Then navigate to data foundation
     #Then click save cluster button
     Then check cluster details
     Then check cluster details table and save cluster
-   
     Then pass next scenario based on this step
 
   @NX-8426
   Scenario: verify the Sunburst Result of cluster.
     Then check previous step and pass this
     Then pass next scenario based on this step
+    
+    @NX-8405
+     Scenario: Check whether each clusters details can be viewed and  save as cluster from the table result.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+    @NX-8420
+    Scenario: Check whether all the clusters have view details page.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+    
 
   @NX-8446
   Scenario: Check whether KPIs selected to excluded are excluded  from the result.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    
-    @NX-8402
+
+  @NX-8402
   Scenario: Check whether results for clustering is shown in table view.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    
-    
-      @NX-8441 @initBrowser
+
+  @NX-8441 @initBrowser
   Scenario: Check whether new page/tab in segment analysis page  for cluster is available in IM.
     Given login
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
     Then verify clusters tab ib segments
+    
+    
+    
+     @NX-8396 @initBrowser
+  Scenario: Check whether Save Cluster option opens a pop up to give  cluster name.
+    Given login
+    Then navigate to intent management
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    #Then click on create new cluster button
+    #Then enter view values for cluster
+    #Then select radio button for view1
+    #Then select radio button for view2
+    #Then click save cluster button
+    Then check cluster details
+    Then check cluster details table and save cluster

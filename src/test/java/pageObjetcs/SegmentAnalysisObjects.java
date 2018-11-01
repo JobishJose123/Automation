@@ -45,6 +45,8 @@ public class SegmentAnalysisObjects extends Init {
 	@FindBy(xpath="(.//paper-radio-button[@name='view2']//div[@id='offRadio'])[2]")
 	private List <WebElement> view1RadioButton2;
 	
+	@FindBy(xpath="(.//paper-radio-button[@name='Exclude']//div[@id='offRadio'])[3]")
+	private List <WebElement> view1RadioButton3;
 	
 	@FindBy(xpath=".//paper-button[contains(.,'Save')]")
 	private WebElement saveClusterButton;
@@ -319,6 +321,17 @@ public class SegmentAnalysisObjects extends Init {
 	public void selectRadioButtonForViews2() throws InterruptedException {
 		if(view1RadioButton2.size()>0) {
 			for(WebElement button: view1RadioButton2) {
+				jswait.loadClick(button);
+				
+			}
+			
+		}
+		
+	}
+	
+	public void selectRadioButtonForViews3() throws InterruptedException {
+		if(view1RadioButton2.size()>0) {
+			for(WebElement button: view1RadioButton3) {
 				jswait.loadClick(button);
 				
 			}
