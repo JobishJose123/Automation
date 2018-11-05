@@ -917,18 +917,16 @@ Feature: positive flow of im program creation
   Scenario: verify the Sunburst Result of cluster.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    
-    @NX-8405
-     Scenario: Check whether each clusters details can be viewed and  save as cluster from the table result.
+
+  @NX-8405
+  Scenario: Check whether each clusters details can be viewed and  save as cluster from the table result.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    
-    @NX-8420
-    Scenario: Check whether all the clusters have view details page.
+
+  @NX-8420
+  Scenario: Check whether all the clusters have view details page.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    
-    
 
   @NX-8446
   Scenario: Check whether KPIs selected to excluded are excluded  from the result.
@@ -946,11 +944,17 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then verify clusters tab ib segments
-    
-    
-    
-     @NX-8396 @initBrowser
+    Then verify clusters tab in segments
+
+  @NX-8381 @initBrowser
+  Scenario: Check whether new page/tab in segment analysis page  for cluster is available in PM.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then verify clusters tab in segments
+
+  @NX-8396 @initBrowser
   Scenario: Check whether Save Cluster option opens a pop up to give  cluster name.
     Given login
     Then navigate to intent management
@@ -962,5 +966,35 @@ Feature: positive flow of im program creation
     #Then select radio button for view1
     #Then select radio button for view2
     #Then click save cluster button
+    Then check cluster details
+    Then check cluster details table and save cluster
+
+  @NX-8380 @initBrowser
+  Scenario: Check whether cluster option is available in the drop  down in PM.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    Then check cluster details
+    Then check cluster details table and save cluster
+
+  @NX-8456 @initBrowser
+  Scenario: Check whether Cluster can be saved from details page and  direct save.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    Then check cluster details
+    Then check cluster details table and save cluster
+    @NX-8372
+    @initBrowser
+  Scenario: Check whether Clustering model is available inside analytical  Models in PM.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
     Then check cluster details
     Then check cluster details table and save cluster

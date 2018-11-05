@@ -185,7 +185,7 @@ public class SegmentAnalysisSteps extends Init {
 		segmentObjects.verifyDiscovredClusters();	
 	}
 	
-	@Then("^verify clusters tab ib segments$")
+	@Then("^verify clusters tab in segments$")
 	public void verifyclustertabinsegments() throws Exception {
 		
 		segmentObjects.verifyclustertabinsegments();	
