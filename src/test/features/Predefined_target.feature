@@ -1,18 +1,17 @@
 #Author: joel.jose@flytxt.com
-
 @Feature-Predefinied_targets
 Feature: Predefined Targets
-	 test cases with label Predefined_targets
+  test cases with label Predefined_targets
 
-  @precondition-Predefinied_targets
-  @initBrowser
+  @precondition-Predefinied_targets @initBrowser
   Scenario: create saved segment as precondition
-  Given login
-  Then navigate to landing page
-  Then navigate to precision marketer
-  Then navigate to configuration
-  Then navigate to saved segments
-  Then create saved segment with condition "segmentAgeGT40"
+    Given login
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then navigate to saved segments
+    Then create saved segment with condition "segmentAgeGT40"
+
   @NX-2738 @initBrowser
   Scenario: Predefined Targets - Create a predefined target -2738
     Given login
@@ -24,6 +23,16 @@ Feature: Predefined Targets
   @NX-2739
   Scenario: Predefined Targets - Create a predefined target -2739
     Then edit saved segment with condition "segmentAgeGT40TEMP"
+    Then pass next scenario based on this step
+
+  @NX-2754
+  Scenario: Predefined Targets - Viewing active predefined targets NX-2744
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-2745
+  Scenario: Predefined Targets - Viewing active predefined targets NX-2744
+    Then check previous step and pass this
 
   @NX-2761
   Scenario: Predefined Targets - Deactivate active predefined targets -2761
@@ -46,6 +55,11 @@ Feature: Predefined Targets
 
   @NX-2744
   Scenario: Predefined Targets - Viewing active predefined targets NX-2744
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+  @NX-3340
+  Scenario: Predefined Targets - Filter active predefined targets - Filter by Name NX-3340
     Then check previous step and pass this
 
   @NX-2769 @initBrowser
@@ -86,9 +100,40 @@ Feature: Predefined Targets
     Then navigate to campaign category from sheet "CampaignCategory"
     #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
-    #Then click create new broadcast button
-    #Then enter details for new broadcast with condition segmentAgeGT40 from sheet "recurringMonthBC" with "rechargeWap"
-    #Then save bc
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition segmentAgeGT40 from sheet "recurringMonthBC" with "rechargeWap"
+    Then save bc
     Then navigate to "Recurring" broadcasts
     Then view broadcast from sheet "recurringMonthBC"
     Then check target condition "segmentAgeGT40"
+    
+     @NX-3311 @initBrowser
+  Scenario: Predefined Targets - Attaching a predefined target to a seeding BC.. -3310
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "seedingWAPoffer" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition segmentAgeGT40 from sheet "seedingRecurringBC" with "seedingWAPoffer"
+    Then save bc
+    Then navigate to "Seeding" broadcasts
+    Then view broadcast from sheet "seedingRecurringBC"
+    Then check target condition "segmentAgeGT40"
+
+    @NX-2747 @initBrowser
+  Scenario: Predefined targets - Attaching predefined targets to IAJ-2747
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then create Segment Analysis

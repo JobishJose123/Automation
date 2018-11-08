@@ -51,6 +51,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy((By.xpath(element))));
 				return true;
 				}catch(Exception e) {
+					System.out.println(e.getMessage());
 					return false;
 				}
 			}

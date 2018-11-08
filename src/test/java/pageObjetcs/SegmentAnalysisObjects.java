@@ -74,7 +74,7 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement createSegmentAnalysisListinput;
 	
 	
-	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'selenium_list')][1]")
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+SELENIUM_LIST+"')]")
 	private WebElement createSegmentAnalysisListselect;
 	
 	
@@ -147,6 +147,14 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement segmentAnalysisnameclick;
 	@FindBy(xpath=".//*[@id='tabsContent']//div[contains(.,'Clusters')]")
 	private WebElement Clusterstab;
+	
+	@FindBy(xpath="//paper-radio-button[contains(.,'Saved Segments')]")
+	 private WebElement savedSegmentRadioButtion;
+	 @FindBy(xpath="//paper-radio-button[contains(.,'Create')]")
+	 private WebElement createRadioButtion;
+	 @FindBy(xpath="//label[contains(.,'Saved Segments')]/../..//input")
+	 private WebElement savedSegmentSelectorField;
+	 
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")

@@ -2552,12 +2552,12 @@ public void verifyTargetConditionDetails(String event) throws Throwable{
 	else if(event.contains("segmentAgeGT40")){
 		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'Customer Profile Info')]"));
 		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'is greater than')]"));
-		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'40')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//profile-field[contains(.,'40')]"));
 	}
 	else if(event.contains("segmentAgeGT30")){
 		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'Customer Profile Info')]"));
 		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'is greater than')]"));
-		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'30')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//profile-field[contains(.,'30')]"));
 	}
 }
 

@@ -333,7 +333,7 @@ private WebElement recipientclick;
 	 @FindBy(xpath="//paper-radio-button[contains(.,'Saved Segments')]")
 	 private WebElement savedSegmentRadioButtion;
 	 @FindBy(xpath="//label[contains(.,'Saved Segments')]/../..//input")
-		 private WebElement savedSegmentSelectorField;
+	 private WebElement savedSegmentSelectorField;
 	 
 	// @FindBy(xpath="")
 	// private WebElement ;
@@ -2041,10 +2041,6 @@ public void Broadcast_Expiry() throws Exception{
 	}
 	
 	jswait.loadClick(expirestimezone);
-	
-
-	
-	
 }
 
 
