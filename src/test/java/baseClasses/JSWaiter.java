@@ -9,6 +9,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -801,6 +802,23 @@ public String getTextFormTextField(WebElement element)
 	text = result;
 	return text;
 }
+public String getGridColumnNumber(String columnXpath, String matchKey) {
+	WebDriverWait wait = new WebDriverWait(driver, 8);
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(columnXpath)));
+	List<WebElement> columnHeader = driver.findElements(By.xpath(columnXpath));
+	int status =0 ;
+	for(int i = 0;i<columnHeader.size();i++) {
+		if(columnHeader.get(i).getText().contains(matchKey)) {
+			status = i+1;
+			break;
+		}	
+	}
+	if(status!=0)
+		return String.valueOf(status);
+	else
+		return "couldnt fint header__"+matchKey;
+}
+
 }
 		
 	

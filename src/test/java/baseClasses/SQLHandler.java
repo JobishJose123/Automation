@@ -1,6 +1,7 @@
 package baseClasses;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -111,19 +112,31 @@ public class SQLHandler {
                 }
 
         }
-        public void addTouchpointToApiAuthPolicy(String touchpointName) throws SQLException {
+        public void addTouchpointToApiAuthPolicy(String touchpointName) throws SQLException, IOException, InterruptedException {
         	ResultSet rs = executeQuery("select * from api_auth_policy;");
+        	MarathonHelper m = new MarathonHelper();
+        	PropHandler p = new PropHandler();
+        	p.setPropertyFile("config.properties");
     		rs.last();
     		int numRows = rs.getRow();
     		int touchpointId = getTouchpointID(touchpointName);
-    		executeUpdate("insert into api_auth_policy values("+ ++numRows+","+touchpointId+",\""+"authKey"+touchpointId+"\",\"192.168.127.145\");");
+    		rs = executeQuery("select * from api_auth_policy where TOUCH_POINT_ID = "+touchpointId+";");
+    		if(!rs.first()) {
+    			executeUpdate("insert into api_auth_policy values("+ ++numRows+","+touchpointId+",\""+"authKey\",\""+p.getValue("machineIp")+"\");");
+    			m.scaleContainer(p.getValue("env"), p.getValue("api-server"),"0");
+    			Thread.sleep(8000);
+    			m.scaleContainer(p.getValue("env"), p.getValue("api-server"),"1");
+    			Thread.sleep(20000);
+    		}
+    		else
+    			System.out.println("row with the touchpoint already exist");
+    		
         }
-        
         
 	public static void main(String[] args) throws Exception {
 		SQLHandler sql = new SQLHandler();
 		PropHandler p = new PropHandler();
-//		sql.getIpAddress();
+		p.setPropertyFile("config.properties");
 		sql.init(p.getValue("dbUrl"),p.getValue("dbUsername"),p.getValue("dbPassword"));
 		int touchpointId = sql.getTouchpointID("touchpoint007");
 		

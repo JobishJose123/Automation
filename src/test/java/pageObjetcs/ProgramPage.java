@@ -145,11 +145,15 @@ public class ProgramPage extends Init{
 	private WebElement addTouchpointChannelSelectSMS;
 	@FindBy(xpath="//paper-item[text()='Customer Care']")
 	private WebElement addTouchpointChannelSelectCC;
+	@FindBy(xpath="//paper-item[text()='API']")
+	private WebElement addTouchpointChannelSelectApi;
 	
 	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/../../../../../../..//paper-item[text()='SMS']")
 	private WebElement addTouchpointResponseChannelSelectSMS;
 	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/../../../../../../..//paper-item[text()='CustomerCare']")
 	private WebElement addTouchpointResponseChannelSelectCC;
+	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/../../../../../../..//paper-item[text()='API']")
+	private WebElement addTouchpointResponseChannelSelectApi;
 	
 	@FindBy(xpath="//*[@id='addTouchpointForm']//paper-button[text()='Save']")
 	private WebElement addTouchpointSaveButton;
@@ -377,6 +381,12 @@ private WebElement rulessenderid2 ;
 		jswait.loadClick(refreshAtOkButton);
 	}
 	
+	public String getRuleLastRefreshTime() throws java.lang.Exception {
+		String col = jswait.getGridColumnNumber("//iron-data-table[@id='ruleList']//data-table-row[@header]//data-table-cell", "Last Refresh Date");
+		System.out.println("column header found at column :"+col);
+		jswait.waitUntil("//iron-data-table[@id='ruleList']//iron-list//data-table-cell["+col+"]");
+		return jswait.getTextFormElement("//iron-data-table[@id='ruleList']//iron-list//data-table-cell["+col+"]");
+	}
 
    public void checkProgramTitleValidationErrorMessage() throws InterruptedException {
 		assertTrue(errorProgrammTitle.isDisplayed());
@@ -526,7 +536,8 @@ private WebElement rulessenderid2 ;
 		ruleafterinput2(); 
 		ruledays();
 		Thread.sleep(2000);
-		if(!touchpointType.contentEquals("customer care")){
+		
+		if(touchpointType.contentEquals("sms")){
 		rulessenderid();
 		addresssprule();
 		Thread.sleep(3000);
@@ -853,6 +864,10 @@ private WebElement rulessenderid2 ;
 		jswait.loadClick(addTouchpointChannel);
 		jswait.loadClick(addTouchpointChannelSelectCC);
 	}
+	public void addTouchPointSelectApiChannel() throws InterruptedException {
+		jswait.loadClick(addTouchpointChannel);
+		jswait.loadClick(addTouchpointChannelSelectApi);
+	}
 	public void addTouchPointEnterKeywordAliase() throws InterruptedException {
 		jswait.loadSendKeys(addTouchpointKeywordAliases, "SampleKey");
 	}
@@ -899,6 +914,10 @@ private WebElement rulessenderid2 ;
 		jswait.loadClick(addTouchpointResponseChannel);
 		jswait.loadClick(addTouchpointResponseChannelSelectCC);
 	}
+	public void addTouchPointSelectApiResponseChannel() throws InterruptedException {
+		jswait.loadClick(addTouchpointResponseChannel);
+		jswait.loadClick(addTouchpointResponseChannelSelectApi);
+	}
 	public void addTouchPointToProgram() throws InterruptedException {
 		addTouchPointSelectSmsChannel();
 		addTouchPointEnterKeywordAliase();
@@ -925,6 +944,17 @@ private WebElement rulessenderid2 ;
 			addTouchPointSelectSmsTouchpointFromSheet(sheet);
 			addTouchPointSelectCCResponseChannel();
 			jswait.loadClick(addTouchpointSaveButton);
+		}
+		else if(type.contentEquals("api")) {
+			addTouchPointSelectApiChannel();
+			//addTouchPointEnterKeywordAliase();
+			Thread.sleep(2000);
+			addTouchPointSelectSmsTouchpointFromSheet(sheet);
+			addTouchPointSelectApiResponseChannel();
+			jswait.loadClick(addTouchpointSaveButton);
+		}
+		else {
+			Assert.assertTrue("adding given touchpoint not added in step", false);
 		}
 		
 	}

@@ -15,6 +15,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.MarathonHelper;
+import baseClasses.Request;
+import baseClasses.SQLHandler;
 import baseClasses.TimeoutImpl;
 import cucumber.api.PendingException;
 import cucumber.api.Scenario;
@@ -1932,6 +1935,40 @@ System.out.println(editname+"program has edited successfully");
 		@Then("^accept offer in customer care$")
 		public void acceptOfferInCustomerCare() throws Throwable {
 			programPage.clickCustomerCareOfferAccept();
+		}
+		
+		@Then("^wait until rule is picked$")
+		public void waituntilRuleIsPicked() throws Throwable {
+			TimeoutImpl t = new TimeoutImpl();
+			t.startTimer();
+			while(programPage.getRuleLastRefreshTime().isEmpty()&&t.checkTimerMin(15)) {
+				Thread.sleep(4000);
+				System.out.println("Waiting for rule to be picked by Conveyor Belt");
+			}
+		}
+		
+		@Then("^add touchpoint \"([^\"]*)\" to api_auth_policy$")
+		public void addTouchpointToAuthPolicy(String touchpointSheet) throws Throwable {
+			MarathonHelper m = new MarathonHelper();
+			eh.setExcelFile("touchpointInputData", touchpointSheet);
+			SQLHandler sql = new SQLHandler();
+			sql.init(p.getValue("dbUrl"),p.getValue("dbUsername"),p.getValue("dbPassword"));
+			sql.addTouchpointToApiAuthPolicy(eh.getCellByColumnName("api touchpoint name"));
+		}
+		
+		@Then("^hit api-server for \"([^\"]*)\"$")
+		public void hitApiServerForNumber(String number) throws Throwable {
+			StringBuilder str = new StringBuilder();
+			str.append("http://");
+			MarathonHelper m = new MarathonHelper();
+			str.append(m.getContainerNode(p.getValue("env"), p.getValue("api-server")));
+			str.append(":");
+			str.append(m.getContainerPort(p.getValue("env"), p.getValue("api-server")));
+			str.append("/rest/authkey/authKey/msisdn/"+number+"/offers");
+			System.out.println(str.toString());
+			Request req = new Request();
+			req.getRequest(str.toString(),"");
+			System.out.println(req.responseString);
 		}
 		
 }
