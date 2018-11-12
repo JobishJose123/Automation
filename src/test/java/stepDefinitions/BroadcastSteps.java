@@ -206,7 +206,7 @@ public class BroadcastSteps extends Init{
       		 day++;
       	 }
       	 Actions builder = new Actions(driver);
-      	if(bc_type.contains("one-off")){
+      	if(bc_type.contains("one-off")||bc_type.contains("seedingTriggerable")){
       		Thread.sleep(1000);
       			broadcastPageObjects.clickOneOffRadioButton();
 //      			 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
@@ -239,7 +239,7 @@ public class BroadcastSteps extends Init{
       	        
       	      jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
       		    Thread.sleep(2000);
-      					
+      		if(bc_type.contains("one-off")) {			
       		 jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
       		Thread.sleep(1000);
       		 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='"+date+"']");
@@ -273,9 +273,10 @@ public class BroadcastSteps extends Init{
       	  
       	  num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='timeDialog']/div/paper-button[2]"));
       	  builder.moveToElement(num1).click().build().perform();
+      		}
       	  Thread.sleep(1000);	
       	    }
-      	else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")||bc_type.contains("seedingTriggerableRecurringBC")){
+      	else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerableRecurringBC")){
       		Thread.sleep(2000);
       		if(bc_type.contentEquals("recurring")){
       				 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");

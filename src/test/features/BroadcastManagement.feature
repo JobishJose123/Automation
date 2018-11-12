@@ -507,7 +507,7 @@ Then check if "Seeding" bc status is "Active" from sheet "seedingRecurringBC"
 Scenario: Verify creation of seeding triggerable BC NX-7598
 Given login
 Then navigate to precision marketer
- #Then navigate to offer management
+ Then navigate to offer management
     #Then navigate to offers
     #Then click on create new ofer button
     #Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
@@ -517,7 +517,7 @@ Then navigate to precision marketer
     #Then Add "seedingWAPoffer" offer to Offer Catalogue
     Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then enter details for new broadcast from sheet "seedingTriggerableBC" with "seedingWAPoffer"
