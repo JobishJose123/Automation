@@ -998,3 +998,63 @@ Feature: positive flow of im program creation
     Then filter segment analysis
     Then check cluster details
     Then check cluster details table and save cluster
+    
+    
+    @NX-8387
+    @initBrowser
+  Scenario: Check whether name for each view is editable and result is showing the correct name.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    Then check cluster details
+    Then check cluster name and details
+
+   @NX-8395
+    @initBrowser
+  Scenario: Check whether Clusters are creted for both views  seperately and combination for both are shown.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    Then check cluster details
+    Then check clusters combination details
+    
+    @NX-8454
+      @initBrowser
+  Scenario: Check whether Clusters are creted for both views seperately and combination for both are shown.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    Then check cluster details
+    Then check clusters combination details
+    
+    @NX-8383
+ @initBrowser
+   Scenario: Check whether only the configured KPIs in explore  segments are available for clustering.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+  	Then click on create new cluster button
+    Then check cluster kpi's
+    
+@NX-8382
+@initBrowser
+Scenario: Check whether cluster can be created from explore segments  main page and job view page.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then verify create clusters option in segments
+    Then pass next scenario based on this step
+    
+    @NX-8442     
+  Scenario: Check whether cluster can be created from explore segments  main page and job view page.
+    Then check previous step and pass this
+    Then pass next scenario based on this step

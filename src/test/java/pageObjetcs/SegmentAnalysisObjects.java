@@ -29,6 +29,8 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement segmentAnalysis;
 	@FindBy(xpath = "//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
 	private List <WebElement> optionsIconList;
+	@FindBy(xpath = ".//*[@id='trigger']/paper-icon-button/iron-icon")
+	private WebElement optionsIconList1;
 	@FindBy(xpath=".//paper-tab//div[contains(.,'Clusters')]")
 	private WebElement clustersTab;
 	@FindBy(xpath=".//paper-item[contains(.,'Clusters')]")
@@ -74,7 +76,7 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement createSegmentAnalysisListinput;
 	
 	
-	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+SELENIUM_LIST+"')]")
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'selenium_list')]")
 	private WebElement createSegmentAnalysisListselect;
 	
 	
@@ -147,28 +149,26 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement segmentAnalysisnameclick;
 	@FindBy(xpath=".//*[@id='tabsContent']//div[contains(.,'Clusters')]")
 	private WebElement Clusterstab;
-	
-	@FindBy(xpath="//paper-radio-button[contains(.,'Saved Segments')]")
-	 private WebElement savedSegmentRadioButtion;
-	 @FindBy(xpath="//paper-radio-button[contains(.,'Create')]")
-	 private WebElement createRadioButtion;
-	 @FindBy(xpath="//label[contains(.,'Saved Segments')]/../..//input")
-	 private WebElement savedSegmentSelectorField;
-	 
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath=".//div[contains(.,'test1/test2')]")
+	private WebElement clusternamecheck;
+	@FindBy(xpath=".//*[@id='scrollable']//cluster-sunburst-chart//following::span[contains(.,'A1')]//following::span[contains(.,'0')]//following::span[contains(.,'91')]")
+	private WebElement combinationclusters;
+	@FindBy(xpath=".//*[@id='kpiForm']//label[contains(.,'Metric')]//following::iron-icon[2]")
+	private WebElement kpimetric;
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'Usage Metrics')]")
+	private WebElement kpimetricselect;
+	@FindBy(xpath=".//*[@id='select']/div/paper-item[contains(.,'ARPU')]")
+	private WebElement metricselect;
+	@FindBy(xpath="(//label[contains(.,'Select')])//following::iron-icon[2]")
+	private WebElement metrictoday;
+	@FindBy(xpath=".//*[@id='contentWrapper']/div/paper-listbox//paper-item[contains(.,'today')]")
+	private WebElement metrictodayselect;
+	@FindBy(xpath=".//*[@id='createForm']/div[2]/div[2]/div[contains(.,'KPI1')]")
+	private WebElement KPicheck1;
+	@FindBy(xpath=".//*[@id='createForm']/div[2]/div[3]/div[contains(.,'KPI2')]")
+	private WebElement KPicheck2;
+	@FindBy(xpath=".//*[@id='createForm']/div[2]/div[4]/div[contains(.,'KPI3')]")
+	private WebElement KPicheck3;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -267,7 +267,7 @@ public class SegmentAnalysisObjects extends Init {
 		Thread.sleep(2000);
 		int n=1;
 		int flag=0;
-		for(int i=0;i<3;i++) {
+		for(int i=0;i<2;i++) {
 			Thread.sleep(2000);
 			jswait.loadClick(createSegmentAnalysisKpibtn);
 			Thread.sleep(2000);
@@ -301,7 +301,34 @@ public class SegmentAnalysisObjects extends Init {
 		}
 		//flag++;
 		}
-				
+		
+		Thread.sleep(2000);
+		jswait.loadClick(createSegmentAnalysisKpibtn);
+		Thread.sleep(2000);
+		
+		String name="KPI3";
+		jswait.loadSendKeys(KpiName, name);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(KpiDesc, "testKpi");
+		Thread.sleep(2000);
+		jswait.loadSendKeys(KpiAttributetype, "Usage Metrics");
+		Thread.sleep(2000);
+	
+		jswait.loadClick(kpimetricselect);
+		Thread.sleep(2000);
+		jswait.loadClick(kpimetric);
+		Thread.sleep(2000);
+		jswait.loadClick(metricselect);
+		Thread.sleep(2000);
+		
+		Thread.sleep(2000);
+		jswait.loadClick(metrictoday);
+		Thread.sleep(2000);
+		jswait.loadClick(metrictodayselect);
+		jswait.loadClick(KpiConfrimbtn);
+		
+		
+		
 			}
 	
 	
@@ -374,6 +401,28 @@ public class SegmentAnalysisObjects extends Init {
 		}
 	
 	}
+	
+	
+	public void clusterkpicheck() throws Exception {
+		
+		Thread.sleep(2000);
+		Exception view=new Exception("The KPI's are not displayed");
+		try {
+			Thread.sleep(2000);
+			KPicheck1.isDisplayed();
+			Thread.sleep(2000);
+			KPicheck2.isDisplayed();
+			Thread.sleep(2000);
+			KPicheck3.isDisplayed();
+		
+		
+			}
+		catch(Exception e){
+			 throw view;
+		}
+	
+	}
+	
 	
 	
 public void clustertabledetailsandsave() throws Exception {
@@ -478,6 +527,43 @@ public void clustertabledetailsandsave() throws Exception {
 						
 	}
    
+   public void clusternamecheck() throws InterruptedException {
+	
+		Thread.sleep(5000);
+		   assertTrue(clusternamecheck.isDisplayed());
+						
+	}
+   
+   public void clusterscombinationcheck() throws Exception {
+	   Thread.sleep(2000);
+		jswait.loadClick(clusterdetailsicon);
+		Exception view=new Exception("Exclusion failed");
+		try {
+		
+		Thread.sleep(2000);
+//		clusterkpiExclusioncheck.isDisplayed();
+		Thread.sleep(5000);
+		  
+			}
+		catch(Exception e){
+			 throw view;
+		}
+		Thread.sleep(2000);
+		jswait.loadClick(saveclusterbtn);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(saveclustername, "test selenium cluster");
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-button[contains(.,'Save')]");
+		Thread.sleep(3000);
+		jswait.loadClick("//paper-button[contains(.,'Close')]");
+		Thread.sleep(3000);
+		 assertTrue(combinationclusters.isDisplayed());
+		jswait.loadClick("//paper-button[contains(.,'Close')]");
+		
+						
+	}
+  
+   
 	
    public void verifyclustertabinsegments() throws InterruptedException {
 	   Thread.sleep(5000);
@@ -490,8 +576,27 @@ public void clustertabledetailsandsave() throws Exception {
 		   Thread.sleep(5000);
 			jswait.loadClick(Clusterstab);
 		
-		  
-	
+	}
+   
+   public void verifycreateclusterinsegmentspage() throws InterruptedException {
+	   Thread.sleep(5000);
+	   commonObjects.filterName("Segments");
+		Thread.sleep(5000);
+		jswait.loadClick(segmentAnalysisnameclick);
+		
+		Thread.sleep(5000);
+		   assertTrue(Clusterstab.isDisplayed());
+		   Thread.sleep(5000);
+			jswait.loadClick(Clusterstab);
+			Thread.sleep(2000);
+			jswait.loadClick(optionsIconList1);
+			
+			//clickOptionsIcon();
+			Thread.sleep(2000);
+			jswait.loadClick(clustersOption);
+			Thread.sleep(3000);
+			 assertTrue(createClusterButton.isDisplayed());
+			
 	}
    
 }

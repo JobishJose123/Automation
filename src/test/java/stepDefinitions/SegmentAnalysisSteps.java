@@ -149,8 +149,23 @@ public class SegmentAnalysisSteps extends Init {
 	@Then("^check cluster details table and save cluster$")
 	public void clustertabledetailsandsave() throws Exception {
 		
+		
 		segmentObjects.clustertabledetailsandsave();	
 	}
+	
+	@Then("^check cluster name and details$")
+	public void checknameandDetails() throws Exception {
+		segmentObjects.clusternamecheck();
+		
+		segmentObjects.clustertabledetailsandsave();	
+	}
+	
+	@Then("^check clusters combination details$")
+	public void clusterscombainedDetails() throws Exception {
+		segmentObjects.clusternamecheck();
+		segmentObjects.clusterscombinationcheck();
+	}
+	
 	
 	@Then("^Navigate to Saved Segments$")
 	public void navigateToSavedSegments() throws Exception {
@@ -192,8 +207,17 @@ public class SegmentAnalysisSteps extends Init {
 	}
 	
 	
+	@Then("^check cluster kpi's$")
+	public void clusterkpicheck() throws Exception {
+		
+		segmentObjects.clusterkpicheck();	
+	}
 	
-	
+	@Then("^verify create clusters option in segments$")
+	public void verifycreateclusterinsegmentspage() throws Exception {
+		
+		segmentObjects.verifycreateclusterinsegmentspage();	
+	}
 	
 	
 	
