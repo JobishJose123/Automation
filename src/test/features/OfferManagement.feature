@@ -100,7 +100,7 @@ Feature: Test suite on Offer creation
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "seedingWAPoffer" with product "singleProductPage"
-    Then verify "seedingWAPoffer" offer in grid
+    Then verify "seedingWAPoffer" offer in gridw
 
 
 

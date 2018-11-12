@@ -69,7 +69,7 @@ Feature: Test suite on Offer creation
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-    Then verify "seedingWAPoffer" offer in gridw
+    Then verify "seedingWAPoffer" offer in grid
  
  @Usagebased_offer @initBrowser 
   Scenario: Create offer:Track: Verify creating Usage Based offers NX-1347
@@ -104,5 +104,4 @@ Feature: Test suite on Offer creation
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "STVWAP" with product "fullDetails"
-    Then verify "STVWAP" offer in grid
-    
+    Then verify "STVWAP" offer in grid    
