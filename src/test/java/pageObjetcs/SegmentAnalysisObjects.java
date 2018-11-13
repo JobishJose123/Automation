@@ -578,6 +578,7 @@ public void clustertabledetailsandsave() throws Exception {
 		
 	}
    
+   
    public void verifycreateclusterinsegmentspage() throws InterruptedException {
 	   Thread.sleep(5000);
 	   commonObjects.filterName("Segments");

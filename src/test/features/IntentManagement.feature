@@ -1043,6 +1043,14 @@ Feature: positive flow of im program creation
     Then filter segment analysis
   	Then click on create new cluster button
     Then check cluster kpi's
+    Then pass next scenario based on this step
+    
+    @NX-8443     
+  Scenario: Check whether only the configured KPIs in explore  segments are available for clustering.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+    
     
 @NX-8382
 @initBrowser
@@ -1121,3 +1129,38 @@ Scenario: Check whether cluster can be created from explore segments  main page 
     #Then search msisdn "9446506807"
     #Then click on events tab
     #Then wait for offer accepted event in consumer profile
+    
+    @NX-8384
+    @initBrowser
+  Scenario: Check whether the KPIs selected for view1 is included in  view1 and like view2.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    Then check cluster details
+    
+    
+    
+      @NX-8440 @initBrowser
+  Scenario: Check whether cluster option is available in the drop  down in IM.
+    Given login
+    Then navigate to intent management
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    Then check cluster details
+    Then check cluster details table and save cluster
+    
+        @NX-8430
+    @initBrowser
+  Scenario: Check whether Clustering model is available inside analytical  Models in IM.
+    Given login
+    Then navigate to intent management
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    Then check cluster details
+    Then check cluster details table and save cluster
+    
+    
