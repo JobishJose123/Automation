@@ -32,6 +32,8 @@ public class CommonObjects extends Init {
 	private WebElement filterIcon2;
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Name')]/..//input")
 	private WebElement filterFormName;
+	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Status')]/..//input")
+	private WebElement filterFormstatus;
 	@FindBy(xpath = "(//*[@id='filterForm']//label[contains(.,'Name')]/..//input)[2]")
 	private WebElement filterFormName2;
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Partner')]/..//input")
@@ -303,6 +305,10 @@ public void clickActivateOption() throws Throwable {
 		jswait.loadClick(filterFormApply2);
 	}
 
+	public void enterFilterstatus(String name) throws InterruptedException {
+		jswait.loadSendKeys(filterFormstatus, name);
+	}
+	
 	public void enterFilterFormname(String name) throws InterruptedException {
 		jswait.loadSendKeys(filterFormName, name);
 	}
@@ -336,8 +342,21 @@ public void clickActivateOption() throws Throwable {
 		clickFilterApplyButton();
 	}
 	
+	public void filterStatus(String name) throws InterruptedException {
+		clickFilterIcon();
+		Thread.sleep(2000);
+		jswait.loadClick(".//label[contains(.,'Status')]//following::iron-icon[1]");
+		Thread.sleep(3000);
+		jswait.loadClick(".//paper-item[contains(.,'"+name+"')]");
+		Thread.sleep(2000);
+		jswait.loadClick(filterFormName);
+		Thread.sleep(2000);
+		clickFilterApplyButton();
+	}
+	
 	public void filterNameEnv(String name) throws InterruptedException {
 		clickFilterIcon2();
+		
 		enterFilterFormname2(name);
 		clickFilterApplyButton2();
 	}

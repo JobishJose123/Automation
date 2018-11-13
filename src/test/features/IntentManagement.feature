@@ -1146,11 +1146,11 @@ Scenario: Check whether cluster can be created from explore segments  main page 
   Scenario: Check whether cluster option is available in the drop  down in IM.
     Given login
     Then navigate to intent management
-    Then navigate to analytics
+        Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
-    Then check cluster details
-    Then check cluster details table and save cluster
+    #Then filter segment analysis
+    Then verify create clusters option in all completed segments
+    #Then verify create clusters option in segments
     
         @NX-8430
     @initBrowser

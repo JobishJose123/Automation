@@ -600,4 +600,12 @@ public void clustertabledetailsandsave() throws Exception {
 			
 	}
    
+   public void verifyclusteroptioninSegments() throws InterruptedException {
+	   Thread.sleep(5000);
+	   commonObjects.filterStatus("Completed");
+		
+		
+	}
+   
+   
 }

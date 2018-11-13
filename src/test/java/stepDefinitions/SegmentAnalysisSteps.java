@@ -219,7 +219,11 @@ public class SegmentAnalysisSteps extends Init {
 		segmentObjects.verifycreateclusterinsegmentspage();	
 	}
 	
-	
+	@Then("^verify create clusters option in all completed segments$")
+	public void verifycreateclusterforallcompleted() throws Exception {
+		
+		segmentObjects.verifyclusteroptioninSegments();	
+	}
 	
 	
 	
