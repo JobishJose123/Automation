@@ -526,7 +526,7 @@ Feature: positive flow of im program creation
     Then create new trigger touch point without filling mandatory fields
     Then verify validation error messages for trigger touch point
 
-  @NX-1436 @initBrowser
+  @NX-1436 @initBrowser @closeBrowser
   Scenario: Verify the validations for the SMS touchpoint screen-1436
     Given login
     Then navigate to intent management
@@ -553,7 +553,7 @@ Feature: positive flow of im program creation
     Then create new smart phone app touch point without filling mandatory fields
     Then verify validation error messages for smart phone app touch point
 
-  @NX-1571 @initBrowser
+  @NX-1571 @initBrowser @closeBrowser
   Scenario: Field level validation check for USSD touchpoint during edit-1571
     Given login
     Then navigate to intent management
@@ -586,14 +586,14 @@ Feature: positive flow of im program creation
     Then navigate to api
     Then create api touchpoint validation check from sheet "apiTouchpoint"
 
-  @NX-1564 @initBrowser
+  @NX-1564 @initBrowser @closeBrowser
   Scenario: Verify create validation sms touchpoint creation
     Given login
     Then navigate to intent management
     Then navigate to touchpoints
     Then create sms touchpoint validation check from sheet "smsTouchpoint"
 
-  @NX-8415 @initBrowser
+  @NX-8415 @initBrowser @closeBrowser
   Scenario: Verify edit sms touchpoint creation_8415
     Given login
     Then navigate to intent management
@@ -601,7 +601,7 @@ Feature: positive flow of im program creation
     Then create sms touchpoint from sheet "smsTouchpoint"
     Then edit sms touchpoint from sheet "smsTouchpoint"
 
-  @NX-8422 @initBrowser
+  @NX-8422 @initBrowser @closeBrowser
   Scenario: Verify new Trigger touchpoint creation
     Given login
     Then navigate to intent management
@@ -618,7 +618,7 @@ Feature: positive flow of im program creation
     Then navigate to smart phone app
     Then create new smart phone app touch point from sheet "appTouchpoint"
 
-  @NX-8504 @initBrowser
+  @NX-8504 @initBrowser @closeBrowser
   Scenario: Verify displaying the edited touchpoint name in mapped program-8504
     Given login
     Then navigate to intent management
@@ -667,7 +667,7 @@ Feature: positive flow of im program creation
     Then choose program from sheet "programdetails" for edit
     Then verify edited program for touchpoint from sheet "smsTouchpoint"
 
-  @NX-8390 @initBrowser
+  @NX-8390 @initBrowser @closeBrowser
   Scenario: Verify whether edit icon is available for all the touchpoints-8390
     Given login
     Then navigate to intent management
@@ -684,7 +684,7 @@ Feature: positive flow of im program creation
     Then navigate to ussd
     Then verify edit button for USSD touchpoint
 
-  @NX-8459 @initBrowser
+  @NX-8459 @initBrowser @closeBrowser
   Scenario: Check whether Cluster page/tab is available for Segment  analysis if model is not activated-8459
     Given login
     Then navigate to intent management
@@ -695,7 +695,7 @@ Feature: positive flow of im program creation
     Then choose a segment analysis
     Then verify cluster tab
 
-  @NX-8453 @initBrowser
+  @NX-8453 @initBrowser @closeBrowser
   Scenario: Check by creating Cluster by configuring KPIs for a  single view--View1/View2-8453
     Given login
     Then navigate to intent management
@@ -708,7 +708,7 @@ Feature: positive flow of im program creation
     Then click save cluster button
     Then toast messagewhile saving cluster with only view1 values
 
-  @NX-7221 @initBrowser
+  @NX-7221 @initBrowser @closeBrowser
   Scenario: Verify adding a new rule to an active program without changing the basic configuration program- 7221
     Given login
     Then navigate to configuration management
@@ -795,7 +795,7 @@ Feature: positive flow of im program creation
     Then click on events tab
     Then wait for offer eligible event in consumer profile
 
-  @NX-8478 @initBrowser
+  @NX-8478 @initBrowser @closeBrowser
   Scenario: Verify Failure Case of Cluster Model.
     Given login
     Then navigate to intent management
@@ -809,7 +809,7 @@ Feature: positive flow of im program creation
     Then click save cluster button
     Then verify cluster failed
 
-  @NX-8495 @initBrowser
+  @NX-8495 @initBrowser @closeBrowser
   Scenario: Verify by editing the existing short code and check by sending keyword to new short code for the customer
     Given login
     #Then navigate to configuration management
@@ -849,7 +849,7 @@ Feature: positive flow of im program creation
     Then navigate to landing page
     Then navigate to precision marketer
 
-  @NDX-4039 @initBrowser
+  @NDX-4039 @initBrowser @closeBrowser
   Scenario: Verify Create SegmentAnalysis.
     Given login
     Then navigate to intent management
@@ -857,7 +857,7 @@ Feature: positive flow of im program creation
     Then navigate to explore segments
     Then create Segment Analysis
 
-  @NX-8461 @initBrowser
+  @NX-8461 @initBrowser @closeBrowser
   Scenario: Check whether results for clustering is shown in table view.
     Given login
     Then navigate to intent management
@@ -871,7 +871,7 @@ Feature: positive flow of im program creation
     #Then click save cluster button
     Then check cluster details
 
-  @NX-8464 @initBrowser
+  @NX-8464 @initBrowser @closeBrowser
   Scenario: Check whether each clusters details can be viewed and  save as cluster from the table result.
     Given login
     Then navigate to intent management
@@ -897,7 +897,7 @@ Feature: positive flow of im program creation
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-8446 @initBrowser
+  @NX-8446 @initBrowser @closeBrowser
   Scenario: Check whether KPIs selected to excluded are excluded  from the result.
     Given login
     Then navigate to intent management
@@ -938,7 +938,7 @@ Feature: positive flow of im program creation
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-8441 @initBrowser
+  @NX-8441 @initBrowser @closeBrowser
   Scenario: Check whether new page/tab in segment analysis page  for cluster is available in IM.
     Given login
     Then navigate to intent management
@@ -946,7 +946,7 @@ Feature: positive flow of im program creation
     Then navigate to explore segments
     Then verify clusters tab in segments
 
-  @NX-8381 @initBrowser
+  @NX-8381 @initBrowser @closeBrowser
   Scenario: Check whether new page/tab in segment analysis page  for cluster is available in PM.
     Given login
     Then navigate to precision marketer
@@ -954,7 +954,7 @@ Feature: positive flow of im program creation
     Then navigate to explore segments
     Then verify clusters tab in segments
 
-  @NX-8396 @initBrowser
+  @NX-8396 @initBrowser @closeBrowser
   Scenario: Check whether Save Cluster option opens a pop up to give  cluster name.
     Given login
     Then navigate to intent management
@@ -969,7 +969,7 @@ Feature: positive flow of im program creation
     Then check cluster details
     Then check cluster details table and save cluster
 
-  @NX-8380 @initBrowser
+  @NX-8380 @initBrowser @closeBrowser
   Scenario: Check whether cluster option is available in the drop  down in PM.
     Given login
     Then navigate to precision marketer
@@ -979,7 +979,7 @@ Feature: positive flow of im program creation
     Then check cluster details
     Then check cluster details table and save cluster
 
-  @NX-8456 @initBrowser
+  @NX-8456 @initBrowser @closeBrowser
   Scenario: Check whether Cluster can be saved from details page and  direct save.
     Given login
     Then navigate to precision marketer
@@ -989,7 +989,7 @@ Feature: positive flow of im program creation
     Then check cluster details
     Then check cluster details table and save cluster
     @NX-8372
-    @initBrowser
+    @initBrowser @closeBrowser
   Scenario: Check whether Clustering model is available inside analytical  Models in PM.
     Given login
     Then navigate to precision marketer
@@ -1001,7 +1001,7 @@ Feature: positive flow of im program creation
     
     
     @NX-8387
-    @initBrowser
+    @initBrowser @closeBrowser
   Scenario: Check whether name for each view is editable and result is showing the correct name.
     Given login
     Then navigate to precision marketer
@@ -1012,7 +1012,7 @@ Feature: positive flow of im program creation
     Then check cluster name and details
 
    @NX-8395
-    @initBrowser
+    @initBrowser @closeBrowser
   Scenario: Check whether Clusters are creted for both views  seperately and combination for both are shown.
     Given login
     Then navigate to precision marketer
@@ -1023,7 +1023,7 @@ Feature: positive flow of im program creation
     Then check clusters combination details
     
     @NX-8454
-      @initBrowser
+      @initBrowser @closeBrowser
   Scenario: Check whether Clusters are creted for both views seperately and combination for both are shown.
     Given login
     Then navigate to precision marketer
@@ -1034,7 +1034,7 @@ Feature: positive flow of im program creation
     Then check clusters combination details
     
     @NX-8383
- @initBrowser
+ @initBrowser @closeBrowser
    Scenario: Check whether only the configured KPIs in explore  segments are available for clustering.
     Given login
     Then navigate to precision marketer
@@ -1053,7 +1053,7 @@ Feature: positive flow of im program creation
     
     
 @NX-8382
-@initBrowser
+@initBrowser @closeBrowser
 Scenario: Check whether cluster can be created from explore segments  main page and job view page.
     Given login
     Then navigate to precision marketer
@@ -1067,7 +1067,7 @@ Scenario: Check whether cluster can be created from explore segments  main page 
     Then check previous step and pass this
     Then pass next scenario based on this step
     
-        @NX-3100 @initBrowser
+        @NX-3100 @initBrowser @closeBrowser
   Scenario: API- Verify getoffer for API -3100
     Given login
     #Then navigate to configuration management
@@ -1131,7 +1131,7 @@ Scenario: Check whether cluster can be created from explore segments  main page 
     #Then wait for offer accepted event in consumer profile
     
     @NX-8384
-    @initBrowser
+    @initBrowser @closeBrowser
   Scenario: Check whether the KPIs selected for view1 is included in  view1 and like view2.
     Given login
     Then navigate to precision marketer
@@ -1142,18 +1142,18 @@ Scenario: Check whether cluster can be created from explore segments  main page 
     
     
     
-      @NX-8440 @initBrowser
+      @NX-8440 @initBrowser @closeBrowser
   Scenario: Check whether cluster option is available in the drop  down in IM.
     Given login
     Then navigate to intent management
         Then navigate to analytics
     Then navigate to explore segments
-    #Then filter segment analysis
-    Then verify create clusters option in all completed segments
-    #Then verify create clusters option in segments
+    Then filter segment analysis
+    
+    Then verify create clusters option in segments
     
         @NX-8430
-    @initBrowser
+    @initBrowser @closeBrowser
   Scenario: Check whether Clustering model is available inside analytical  Models in IM.
     Given login
     Then navigate to intent management
@@ -1162,5 +1162,14 @@ Scenario: Check whether cluster can be created from explore segments  main page 
     Then filter segment analysis
     Then check cluster details
     Then check cluster details table and save cluster
+    
+    @NX-8439
+      @initBrowser @closeBrowser
+  Scenario: Check whether new cluster option is available in  all the Completed  explore segments jobs in IM.
+    Given login
+    Then navigate to intent management
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then verify create clusters option in all completed segments
     
     

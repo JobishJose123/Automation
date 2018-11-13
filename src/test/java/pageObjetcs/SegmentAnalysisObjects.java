@@ -29,6 +29,10 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement segmentAnalysis;
 	@FindBy(xpath = "//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
 	private List <WebElement> optionsIconList;
+	@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[2]")
+	private WebElement optionsIcon2;
+	@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[3]")
+	private WebElement optionsIcon3;
 	@FindBy(xpath = ".//*[@id='trigger']/paper-icon-button/iron-icon")
 	private WebElement optionsIconList1;
 	@FindBy(xpath=".//paper-tab//div[contains(.,'Clusters')]")
@@ -603,7 +607,19 @@ public void clustertabledetailsandsave() throws Exception {
    public void verifyclusteroptioninSegments() throws InterruptedException {
 	   Thread.sleep(5000);
 	   commonObjects.filterStatus("Completed");
+	   Thread.sleep(2000);
+	 clickOptionsIcon();
+		Thread.sleep(2000);
 		
+		assertTrue(clustersOption.isDisplayed());
+		Thread.sleep(2000);
+		jswait.loadClick(optionsIcon2);
+		Thread.sleep(2000);
+		assertTrue(clustersOption.isDisplayed());
+		Thread.sleep(2000);
+		jswait.loadClick(optionsIcon3);
+		Thread.sleep(2000);
+		assertTrue(clustersOption.isDisplayed());
 		
 	}
    
