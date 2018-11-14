@@ -173,10 +173,10 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement KPicheck2;
 	@FindBy(xpath=".//*[@id='createForm']/div[2]/div[4]/div[contains(.,'KPI3')]")
 	private WebElement KPicheck3;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath=".//*[@id='scrollable']/div/div/cluster-center-table[1]//vaadin-grid-table-header-cell[contains(.,'test1')]//following::vaadin-grid-table-header-cell[contains(.,'KPI1')]")
+	private WebElement kpicheckclustertable;
+	@FindBy(xpath=".//*[@id='scrollable']/div/div/cluster-center-table[2]//vaadin-grid-table-header-cell[contains(.,'test2')]//following::vaadin-grid-table-header-cell[contains(.,'KPI2')]")
+	private WebElement kpicheckclustertable2;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -569,16 +569,30 @@ public void clustertabledetailsandsave() throws Exception {
   
    
 	
-   public void verifyclustertabinsegments() throws InterruptedException {
-	   Thread.sleep(5000);
-	   commonObjects.filterName("Segments");
-		Thread.sleep(5000);
-		jswait.loadClick(segmentAnalysisnameclick);
+   public void verifyclustertabinsegments() throws Exception {
+	   Thread.sleep(2000);
+		jswait.loadClick(clusterdetailsicon);
+		Exception view=new Exception("Exclusion failed");
+		try {
 		
+		Thread.sleep(2000);
+//		clusterkpiExclusioncheck.isDisplayed();
 		Thread.sleep(5000);
-		   assertTrue(Clusterstab.isDisplayed());
-		   Thread.sleep(5000);
-			jswait.loadClick(Clusterstab);
+		  
+			}
+		catch(Exception e){
+			 throw view;
+		}
+		Thread.sleep(2000);
+		jswait.loadClick(saveclusterbtn);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(saveclustername, "test selenium cluster");
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-button[contains(.,'Save')]");
+		Thread.sleep(3000);
+		jswait.loadClick("//paper-button[contains(.,'Close')]");
+		Thread.sleep(3000);
+		 assertTrue(combinationclusters.isDisplayed());
 		
 	}
    
@@ -595,8 +609,6 @@ public void clustertabledetailsandsave() throws Exception {
 			jswait.loadClick(Clusterstab);
 			Thread.sleep(2000);
 			jswait.loadClick(optionsIconList1);
-			
-			//clickOptionsIcon();
 			Thread.sleep(2000);
 			jswait.loadClick(clustersOption);
 			Thread.sleep(3000);
@@ -610,7 +622,6 @@ public void clustertabledetailsandsave() throws Exception {
 	   Thread.sleep(2000);
 	 clickOptionsIcon();
 		Thread.sleep(2000);
-		
 		assertTrue(clustersOption.isDisplayed());
 		Thread.sleep(2000);
 		jswait.loadClick(optionsIcon2);
@@ -621,6 +632,36 @@ public void clustertabledetailsandsave() throws Exception {
 		Thread.sleep(2000);
 		assertTrue(clustersOption.isDisplayed());
 		
+	}
+   
+   public void clustertablekpischeck() throws Exception {
+		
+		Thread.sleep(2000);
+		jswait.loadClick(clusterdetailsicon);
+		Exception view=new Exception("Exclusion failed");
+		try {
+		
+		Thread.sleep(2000);
+		clusterkpiExclusioncheck.isDisplayed();
+			}
+		catch(Exception e){
+			 throw view;
+		}
+		Thread.sleep(2000);
+		jswait.loadClick(saveclusterbtn);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(saveclustername, "test selenium cluster");
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-button[contains(.,'Save')]");
+		Thread.sleep(3000);
+		jswait.loadClick("//paper-button[contains(.,'Close')]");
+		Thread.sleep(3000);
+		
+		kpicheckclustertable.isDisplayed();
+Thread.sleep(3000);
+		
+		kpicheckclustertable2.isDisplayed();
+		jswait.loadClick("//paper-button[contains(.,'Close')]");
 	}
    
    

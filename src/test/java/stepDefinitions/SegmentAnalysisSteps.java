@@ -225,6 +225,12 @@ public class SegmentAnalysisSteps extends Init {
 		segmentObjects.verifyclusteroptioninSegments();	
 	}
 	
+	@Then("^verify clusters kpis in views$")
+	public void clustertablekpischeck() throws Exception {
+		
+		segmentObjects.verifyclustertabinsegments();	
+	}
+	
 	
 	
 }

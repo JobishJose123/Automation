@@ -988,8 +988,8 @@ Feature: positive flow of im program creation
     Then filter segment analysis
     Then check cluster details
     Then check cluster details table and save cluster
-    @NX-8372
-    @initBrowser @closeBrowser
+
+  @NX-8372 @initBrowser @closeBrowser
   Scenario: Check whether Clustering model is available inside analytical  Models in PM.
     Given login
     Then navigate to precision marketer
@@ -998,10 +998,8 @@ Feature: positive flow of im program creation
     Then filter segment analysis
     Then check cluster details
     Then check cluster details table and save cluster
-    
-    
-    @NX-8387
-    @initBrowser @closeBrowser
+
+  @NX-8387 @initBrowser @closeBrowser
   Scenario: Check whether name for each view is editable and result is showing the correct name.
     Given login
     Then navigate to precision marketer
@@ -1011,8 +1009,7 @@ Feature: positive flow of im program creation
     Then check cluster details
     Then check cluster name and details
 
-   @NX-8395
-    @initBrowser @closeBrowser
+  @NX-8395 @initBrowser @closeBrowser
   Scenario: Check whether Clusters are creted for both views  seperately and combination for both are shown.
     Given login
     Then navigate to precision marketer
@@ -1021,9 +1018,8 @@ Feature: positive flow of im program creation
     Then filter segment analysis
     Then check cluster details
     Then check clusters combination details
-    
-    @NX-8454
-      @initBrowser @closeBrowser
+
+  @NX-8454 @initBrowser @closeBrowser
   Scenario: Check whether Clusters are creted for both views seperately and combination for both are shown.
     Given login
     Then navigate to precision marketer
@@ -1032,42 +1028,38 @@ Feature: positive flow of im program creation
     Then filter segment analysis
     Then check cluster details
     Then check clusters combination details
-    
-    @NX-8383
- @initBrowser @closeBrowser
-   Scenario: Check whether only the configured KPIs in explore  segments are available for clustering.
+
+  @NX-8383 @initBrowser @closeBrowser
+  Scenario: Check whether only the configured KPIs in explore  segments are available for clustering.
     Given login
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
     Then filter segment analysis
-  	Then click on create new cluster button
+    Then click on create new cluster button
     Then check cluster kpi's
     Then pass next scenario based on this step
-    
-    @NX-8443     
+
+  @NX-8443
   Scenario: Check whether only the configured KPIs in explore  segments are available for clustering.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    
-    
-    
-@NX-8382
-@initBrowser @closeBrowser
-Scenario: Check whether cluster can be created from explore segments  main page and job view page.
+
+  @NX-8382 @initBrowser @closeBrowser
+  Scenario: Check whether cluster can be created from explore segments  main page and job view page.
     Given login
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
     Then verify create clusters option in segments
     Then pass next scenario based on this step
-    
-    @NX-8442     
+
+  @NX-8442
   Scenario: Check whether cluster can be created from explore segments  main page and job view page.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    
-        @NX-3100 @initBrowser @closeBrowser
+
+  @NX-3100 @initBrowser @closeBrowser
   Scenario: API- Verify getoffer for API -3100
     Given login
     #Then navigate to configuration management
@@ -1118,20 +1110,19 @@ Scenario: Check whether cluster can be created from explore segments  main page 
     #Then wait for offer eligible event in consumer profile
     Then add touchpoint "apiTouchpoint" to api_auth_policy
     Then hit api-server for "9446506807"
-    
-    
-    #Then navigate to reports
-    #Then navigate to customer support
-    #Then search msisdn "9446506807"
-    #Then accept offer in customer care
-    #Then navigate to reports
-    #Then navigate to customer profile
-    #Then search msisdn "9446506807"
-    #Then click on events tab
-    #Then wait for offer accepted event in consumer profile
-    
-    @NX-8384
-    @initBrowser @closeBrowser
+
+  #Then navigate to reports
+  #Then navigate to customer support
+  #Then search msisdn "9446506807"
+  #Then accept offer in customer care
+  #Then navigate to reports
+  #Then navigate to customer profile
+  #Then search msisdn "9446506807"
+  #Then click on events tab
+  #Then wait for offer accepted event in consumer profile
+  
+  
+  @NX-8384 @initBrowser 
   Scenario: Check whether the KPIs selected for view1 is included in  view1 and like view2.
     Given login
     Then navigate to precision marketer
@@ -1139,21 +1130,18 @@ Scenario: Check whether cluster can be created from explore segments  main page 
     Then navigate to explore segments
     Then filter segment analysis
     Then check cluster details
-    
-    
-    
-      @NX-8440 @initBrowser @closeBrowser
+ 		Then verify clusters kpis in views 
+ 
+  @NX-8440 @initBrowser @closeBrowser
   Scenario: Check whether cluster option is available in the drop  down in IM.
     Given login
     Then navigate to intent management
-        Then navigate to analytics
+    Then navigate to analytics
     Then navigate to explore segments
     Then filter segment analysis
-    
     Then verify create clusters option in segments
-    
-        @NX-8430
-    @initBrowser @closeBrowser
+
+  @NX-8430 @initBrowser @closeBrowser
   Scenario: Check whether Clustering model is available inside analytical  Models in IM.
     Given login
     Then navigate to intent management
@@ -1162,14 +1150,60 @@ Scenario: Check whether cluster can be created from explore segments  main page 
     Then filter segment analysis
     Then check cluster details
     Then check cluster details table and save cluster
-    
-    @NX-8439
-      @initBrowser @closeBrowser
+
+  @NX-8439 @initBrowser @closeBrowser
   Scenario: Check whether new cluster option is available in  all the Completed  explore segments jobs in IM.
     Given login
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
     Then verify create clusters option in all completed segments
+    
+  @NX-8379 @initBrowser
+  Scenario: Check whether new cluster option is available in  all the Completed  explore segments jobs in PM.
+    Given login
+    Then navigate to precision marketer
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then verify create clusters option in all completed segments
+    
+    
+   
+   @NX-8408
+   @initBrowser
+  Scenario: Check whether Saved cluster can be targeted for sending BC.
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet with clusters "one-offBC" with "rechargeWAP"
+    Then activate bc
+    Then verify bc created from sheet "one-offBC"
     
     
