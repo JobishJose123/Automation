@@ -1206,4 +1206,13 @@ Feature: positive flow of im program creation
     Then activate bc
     Then verify bc created from sheet "one-offBC"
     
+    @NX-8376
+    @initBrowser
+  Scenario: Check the cluster option is only available once model is  activated in PM.
+    Given login
+    Then navigate to license Generator
+    Then login to license Generator
+    Then license Generator details "6.1.1"
+    Then license Generator for all Features
+    
     

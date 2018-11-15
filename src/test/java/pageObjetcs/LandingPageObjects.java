@@ -58,7 +58,8 @@ public class LandingPageObjects extends Init{
 	private WebElement changePasswordSaveButton;
 	@FindBy(xpath=".//*[@id='changePassword']//paper-button[1]")
 	private WebElement changePasswordCancelButton;
-	
+	@FindBy(xpath="//span[contains(text(),'Manage License')]/..")
+	private WebElement profileNameDropdownManageLicense;
 	
 	
 	
@@ -105,6 +106,11 @@ public class LandingPageObjects extends Init{
 	public void clickDropdownEditProfile() throws InterruptedException {
 		jswait.loadClick(profileNameDropdownEditProfile);
 	}
+	public void clickDropdownManageLicense() throws InterruptedException {
+		jswait.loadClick(profileNameDropdownManageLicense);
+	}
+	
+	
 	public void clickDropdownPreferences() throws InterruptedException {
 		jswait.loadClick(profileNameDropdownPreferenes);
 	}

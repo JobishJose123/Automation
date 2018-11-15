@@ -130,15 +130,73 @@ public class CommonObjects extends Init {
 	 @FindBy(xpath=".//paper-button[contains(.,'Save')]")
 		private WebElement customerLocationInsighSaveButton;
 	
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	//==============================License Generator UI=======================================// 
+		@FindBy(xpath=".//*[@id='username']")
+		private WebElement liceneseGeneratorUsernameinput;
+		@FindBy(xpath=".//*[@id='password']")
+		private WebElement liceneseGeneratorPasswordinput;
+		@FindBy(xpath=".//*[@id='login']")
+		private WebElement liceneseGeneratorLoginbtn;
+		@FindBy(xpath="/html//input[@id='organization']")
+		private WebElement liceneseGeneratorOrganizationInput;
+		@FindBy(xpath="/html//input[@id='productId']")
+		private WebElement licenseProductIdInput;
+		@FindBy(xpath="/html//select[@id='versionSelect']")
+		private WebElement versionselectdropdown;
+		
+		//-----------Applications------------//
+		@FindBy(xpath="//div[@id='Applications']/div[contains(.,'Precision Marketer')]/input[@name='licensedFeatures']")
+		private WebElement enablePrecisionMarketer;
+		@FindBy(xpath="//div[@id='Applications']/div[contains(.,'Intent Management')]/input[@name='licensedFeatures']")
+		private WebElement enableIntentManagement;
+		@FindBy(xpath="//div[@id='Applications']/div[contains(.,'Insights Workbench')]/input[@name='licensedFeatures']")
+		private WebElement enableInsightsWorkbench;
+		
+		//-----------Packaged models------------//
+		@FindBy(xpath="//div[@id='Packaged_Models']/div[contains(.,'Churn Propensity')]/input[@name='licensedFeatures']")
+		private WebElement enableChurnPropensity;
+		@FindBy(xpath="//div[@id='Packaged_Models']/div[contains(.,'Multiview Clustering')]/input[@name='licensedFeatures']")
+		private WebElement enableMultiviewClustering;
+		@FindBy(xpath="//div[@id='Packaged_Models']/div[contains(.,'Adaptive Cognizance')]/input[@name='licensedFeatures']")
+		private WebElement enableAdaptiveCognizance;
+		@FindBy(xpath="//div[@id='Packaged_Models']/div[contains(.,'Trend Analysis')]/input[@name='licensedFeatures']")
+		private WebElement enableTrendAnalysis;
+		
+		//-----------Miscellaneous------------//
+		@FindBy(xpath="//div[@id='Miscellaneous']/div[contains(.,'Impact Estimation (Zain)')]/input[@name='licensedFeatures']")
+		private WebElement enableImpactEstimation;
+		@FindBy(xpath="//div[@id='Miscellaneous']/div[contains(.,'Customer Data Extraction (Zain)')]/input[@name='licensedFeatures']")
+		private WebElement enableCustomerDataExtraction;
+		@FindBy(xpath="//div[@id='Miscellaneous']/div[contains(.,'Target Inheritance (Zain)')]/input[@name='licensedFeatures']")
+		private WebElement enableTargetInheritance;
+		
+		//-----------FB&AI------------//
+		@FindBy(xpath="//div[@id='Digital_Plus']//input[@name='licensedFeatures']")
+		private WebElement enableFacebook;
+		
+		@FindBy(xpath="//div[@id='AI']/div[contains(.,'Robo X')]/input[@name='licensedFeatures']")
+		private WebElement enableRoboX;
+		
+		
+//		@FindBy(xpath="")
+//		private WebElement ;
+//		@FindBy(xpath="")
+//		private WebElement ;
+//		@FindBy(xpath="")
+//		private WebElement ;
+//		@FindBy(xpath="")
+//		private WebElement ;
+//		@FindBy(xpath="")
+//		private WebElement ;
+//		@FindBy(xpath="")
+//		private WebElement ;
+//		@FindBy(xpath="")
+//		private WebElement ;
+//		@FindBy(xpath="")
+//		private WebElement ;
+//		@FindBy(xpath="")
+//		private WebElement ;
+
 	 
 	 public void clickCreateNewCustomerLocationInsight() throws Throwable {
 		 
@@ -424,5 +482,59 @@ public void clickActivateOption() throws Throwable {
 		String result = (String) clipboard.getData(DataFlavor.stringFlavor);
 		text = result;
 		return text;
+	}
+	
+	
+	
+	public void LIcenseGeneratorLogin() throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadSendKeys(liceneseGeneratorUsernameinput,"flyops@flytxt.com");
+		Thread.sleep(2000);
+		jswait.loadSendKeys(liceneseGeneratorPasswordinput,"flyL1c3nc3");
+		Thread.sleep(1000);
+		jswait.loadClick(liceneseGeneratorLoginbtn);
+	}
+	
+	public void LIcenseGeneratordetailspage(String Version) throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadSendKeys(liceneseGeneratorOrganizationInput,"flytxt");
+		Thread.sleep(2000);
+		jswait.loadSendKeys(licenseProductIdInput,Keys.chord(Keys.CONTROL, "v"));
+		Thread.sleep(2000);
+		jswait.loadClick(versionselectdropdown);
+		Thread.sleep(3000);
+		jswait.loadClick("//select[@id='versionSelect']/option[.='"+Version+"']");
+	
+	}
+	
+	
+	public void LIcenseGeneratorenableallFeatures() throws Exception {
+
+		Thread.sleep(2000);
+		jswait.loadClick(enablePrecisionMarketer);
+		Thread.sleep(2000);
+		jswait.loadClick(enableIntentManagement);
+		Thread.sleep(2000);
+		jswait.loadClick(enableInsightsWorkbench);
+		Thread.sleep(2000);
+		jswait.loadClick(enableChurnPropensity);
+		Thread.sleep(2000);
+		jswait.loadClick(enableMultiviewClustering);
+		Thread.sleep(2000);
+		jswait.loadClick(enableAdaptiveCognizance);
+		Thread.sleep(2000);
+		jswait.loadClick(enableTrendAnalysis);
+		Thread.sleep(2000);
+		jswait.loadClick(enableRoboX);
+		Thread.sleep(2000);
+		jswait.loadClick(enableFacebook);
+		Thread.sleep(2000);
+		jswait.loadClick(enableImpactEstimation);
+		Thread.sleep(2000);
+		jswait.loadClick(enableCustomerDataExtraction);
+		Thread.sleep(2000);
+		jswait.loadClick(enableTargetInheritance);
+		
+		
 	}
 }

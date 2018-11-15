@@ -295,5 +295,33 @@ public class CommonSteps extends Init {
 		int web_user_id = sql.getStringOfQuery("select web_user_id from web_user where email_address = \"selenium.flytxt@gmail.com\";");
 		sql.executeUpdate("update web_user set PASSWORD = \"riN2h0ZHFs6MBpnW8JggWqdk5lE=\" where web_user_id = "+web_user_id+";");
 	}
-
+	
+	
+	
+	@Then("^navigate to license Generator")
+	public void navigateToLicenseGenerator() throws InterruptedException {
+		Thread.sleep(2000);
+		driver.get("http://192.168.150.44:9900/index.html");
+		
+	}
+	
+	@Then("^login to license Generator")
+	public void loginToLicenseGenerator() throws InterruptedException {
+		Thread.sleep(2000);
+		commonObjetcs.LIcenseGeneratorLogin();
+	}
+	
+	@Then("^license Generator details \"([^\"]*)\"$")
+	public void LicenseGeneratorDetails(String version) throws InterruptedException {
+		Thread.sleep(2000);
+		commonObjetcs.LIcenseGeneratordetailspage(version);
+	}
+	
+	@Then("^license Generator for all Features")
+	public void LicenseGeneratorAllFeatures() throws Exception {
+		Thread.sleep(2000);
+		commonObjetcs.LIcenseGeneratorenableallFeatures();
+	}
+	
+	
 }
