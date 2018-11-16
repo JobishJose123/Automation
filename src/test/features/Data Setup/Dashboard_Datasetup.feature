@@ -42,24 +42,29 @@ Feature: Test suite Dashboard_data setup
     Then save bc
     #Create_SeedingTriggerBC
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "seedingTriggerableBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_15 from sheet "seedingTriggerableBC" with "SeedingSMS"
     Then save bc
     #Create_SeedingoneoffBC
-    Then enter details for new broadcast from sheet "one-offBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_20 from sheet "one-offBC" with "SeedingSMS"
     Then save bc
+    Then save details of seedingoneoff
     #Create_NormalRecurringBC
-    Then enter details for new broadcast from sheet "recurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_25  from sheet "recurringBC" with "rechargeSMS"
     Then save bc
     #Create_SeedingTriggerRecurringBC
-    Then enter details for new broadcast from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_30  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
     Then save bc
     #SeedingRecurringBC
-    Then enter details for new broadcast from sheet "recurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_35  from sheet "seedingRecurringBC" with "SeedingSMS"
     Then save bc
     #Create_TriggerOneoffBC
-    Then enter details for new broadcast from sheet "TriggerOneoff" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_40  from sheet "TriggerOneoff" with "rechargeSMS"
     Then save bc
     #Create_TriggerRecurringBC
-    Then enter details for new broadcast from sheet "TriggerReccurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_45  from sheet "TriggerReccurringBC" with "rechargeSMS"
     Then save bc 
+    Then save details of datasetup
+    
+    
+    
   

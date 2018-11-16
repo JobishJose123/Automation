@@ -367,4 +367,19 @@ public class CommonSteps extends Init {
 		
 	}
 	
+	@Then("^save details of datasetup$")
+	public void saveDetailsofdatasetup() throws Exception {
+		Thread.sleep(2000);
+		commonObjetcs.savedetailsofdatasetup();
+	}
+	
+	@Then("^save details of seedingoneoff$")
+	public void saveDetailsofseedingoneoff() throws Exception {
+		Thread.sleep(2000);
+		commonObjetcs.saveDetailsofseedingoneoff();
+	}
+	
+	
+	
+	
 }

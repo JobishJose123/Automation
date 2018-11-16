@@ -5,7 +5,10 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,13 +17,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
-import net.sourceforge.htmlunit.corejs.javascript.ast.ThrowStatement;
 
 public class CommonObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
+	public ExcelHelper eh = new ExcelHelper();
 
 	public CommonObjects() {
 		PageFactory.initElements(driver, this);
@@ -639,6 +643,69 @@ if(Feature.contentEquals("Precision Marketer")) {
 
 		
 }
+	public void saveDetailsofseedingoneoff() throws Exception {
+		eh.setExcelFile("bcInputData","one-offBC");
+		String name=eh.getCellByColumnName("BC Name");
+		eh.setCell("seedingbcname",name);
+	}
+	
+	
+	
+	public void savedetailsofdatasetup() throws Exception {
+		File file = new File("datasetupdetails.csv");
+		StringBuilder builder = new StringBuilder();
+	
+			PrintWriter writer = new PrintWriter(file);
+		
+		eh.setExcelFile("campaignCategoryInputData","CampaignCategory");
+		builder.append(eh.getCellByColumnName("Category Name"));
+		builder.append('\n');
+		
+		eh.setExcelFile("campaignInputData","campaignBC");
+		builder.append(eh.getCellByColumnName("Campaign Name"));
+		builder.append('\n');
+
+		
+		
+		
+		eh.setExcelFile("bcInputData","one-offBC");
+		builder.append(eh.getCellByColumnName("BC Name"));
+		builder.append('\n');
+		
+		eh.setExcelFile("bcInputData","seedingTriggerableBC");
+		builder.append(eh.getCellByColumnName("BC Name"));
+		builder.append('\n');
+		
+		eh.setExcelFile("bcInputData","one-offBC");
+		builder.append(eh.getCellByColumnName("seedingbcname"));
+		builder.append('\n');
+		
+		eh.setExcelFile("bcInputData","recurringBC");
+		builder.append(eh.getCellByColumnName("BC Name"));
+		builder.append('\n');
+
+		eh.setExcelFile("bcInputData","seedingTriggerableRecurringBC");
+		builder.append(eh.getCellByColumnName("BC Name"));
+		builder.append('\n');
+
+		eh.setExcelFile("bcInputData","seedingRecurringBC");
+		builder.append(eh.getCellByColumnName("BC Name"));
+		builder.append('\n');
+
+		eh.setExcelFile("bcInputData","TriggerOneoff");
+		builder.append(eh.getCellByColumnName("BC Name"));
+		builder.append('\n');
+		
+		eh.setExcelFile("bcInputData","TriggerReccurringBC");
+		builder.append(eh.getCellByColumnName("BC Name"));
+		builder.append('\n');
+		
+		
+		writer.write(builder.toString());
+		builder.setLength(0);
+		writer.flush();
+		
+	}
 	
 	
 }
