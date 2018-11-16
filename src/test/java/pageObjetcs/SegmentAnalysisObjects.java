@@ -1,5 +1,6 @@
 package pageObjetcs;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.itextpdf.text.log.SysoCounter;
 
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -177,6 +180,9 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement kpicheckclustertable;
 	@FindBy(xpath=".//*[@id='scrollable']/div/div/cluster-center-table[2]//vaadin-grid-table-header-cell[contains(.,'test2')]//following::vaadin-grid-table-header-cell[contains(.,'KPI2')]")
 	private WebElement kpicheckclustertable2;
+	
+	@FindBy(xpath="//div[contains(@class,'profile-name')]/..")
+	private WebElement topbarProfileName;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -403,7 +409,8 @@ public class SegmentAnalysisObjects extends Init {
 		catch(Exception e){
 			 throw view;
 		}
-	
+		Thread.sleep(3000);
+		jswait.loadClick("//paper-button[contains(.,'Close')]");
 	}
 	
 	
@@ -658,11 +665,27 @@ public void clustertabledetailsandsave() throws Exception {
 		Thread.sleep(3000);
 		
 		kpicheckclustertable.isDisplayed();
-Thread.sleep(3000);
+		Thread.sleep(3000);
 		
 		kpicheckclustertable2.isDisplayed();
 		jswait.loadClick("//paper-button[contains(.,'Close')]");
 	}
    
+   public void verifyclusteroptiondisableinSegments() throws Exception {
+	   Thread.sleep(5000);
+	   commonObjects.filterStatus("Completed");
+	   Thread.sleep(2000);
+	 clickOptionsIcon();
+		Thread.sleep(2000);
+		try {
+		assertFalse(clustersOption.isDisplayed());
+		Thread.sleep(2000);
+		}
+		catch(Exception e) {
+			System.out.println("The cluster option is disabled");
+		}
+		
+		
+	}
    
 }

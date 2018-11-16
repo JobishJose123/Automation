@@ -1059,8 +1059,68 @@ Feature: positive flow of im program creation
     Then check previous step and pass this
     Then pass next scenario based on this step
 
- 
-  @NX-8384 @initBrowser 
+  @NX-3100 @initBrowser @closeBrowser
+  Scenario: API- Verify getoffer for API -3100
+    Given login
+    #Then navigate to configuration management
+    #Then naviagte to product classes
+    #Then create product class and number attribute from "TestProductClass"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to products
+    #Then navigate to product class "TestProductClass"
+    #Then click create new product button
+    #Then create product with attributes from sheet "fullDetails"
+    #Then navigate to landing page
+    #
+    #
+    #Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then navigate to offers
+    #Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to offer management
+    #Then Navigate to Offer Catalogue
+    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+    #Then Add "rechargeSMS" offer to Offer Catalogue
+    #Then navigate to landing page
+    #Then navigate to intent management
+    #Then navigate to touchpoints
+    #Then navigate to api
+    #Then create api touchpoint from sheet "apiTouchpoint"
+    #Then check api touchpoint in grid "apiTouchpoint"
+    #Then navigate to programs
+    #Then click create program button
+    #Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpoint"
+    #Then choose program from sheet "programdetails"
+    #Then create new rule from sheet "fullDetails" and list "listname" and touchpoint from sheet "apiTouchpoint"
+    #Then verify rule created from sheet "rule"
+    #Then wait for "A" status of rule
+    #Then wait until rule is picked
+    #
+    #
+    #Then navigate to landing page
+    #Then navigate to precision marketer
+    #Then navigate to reports
+    #Then navigate to customer profile
+    #Then search msisdn "9446506807"
+    #Then click on events tab
+    #Then wait for offer eligible event in consumer profile
+    Then add touchpoint "apiTouchpoint" to api_auth_policy
+    Then hit api-server for "9446506807"
+
+  #Then navigate to reports
+  #Then navigate to customer support
+  #Then search msisdn "9446506807"
+  #Then accept offer in customer care
+  #Then navigate to reports
+  #Then navigate to customer profile
+  #Then search msisdn "9446506807"
+  #Then click on events tab
+  #Then wait for offer accepted event in consumer profile
+  @NX-8384 @initBrowser
   Scenario: Check whether the KPIs selected for view1 is included in  view1 and like view2.
     Given login
     Then navigate to precision marketer
@@ -1068,8 +1128,8 @@ Feature: positive flow of im program creation
     Then navigate to explore segments
     Then filter segment analysis
     Then check cluster details
- 		Then verify clusters kpis in views 
- 
+    Then verify clusters kpis in views
+
   @NX-8440 @initBrowser @closeBrowser
   Scenario: Check whether cluster option is available in the drop  down in IM.
     Given login
@@ -1096,7 +1156,7 @@ Feature: positive flow of im program creation
     Then navigate to analytics
     Then navigate to explore segments
     Then verify create clusters option in all completed segments
-    
+
   @NX-8379 @initBrowser
   Scenario: Check whether new cluster option is available in  all the Completed  explore segments jobs in PM.
     Given login
@@ -1104,11 +1164,8 @@ Feature: positive flow of im program creation
     Then navigate to analytics
     Then navigate to explore segments
     Then verify create clusters option in all completed segments
-    
-    
-   
-   @NX-8408
-   @initBrowser
+
+  @NX-8408 @initBrowser
   Scenario: Check whether Saved cluster can be targeted for sending BC.
     Given login
     Then navigate to configuration management
@@ -1143,151 +1200,31 @@ Feature: positive flow of im program creation
     Then enter details for new broadcast from sheet with clusters "one-offBC" with "rechargeWAP"
     Then activate bc
     Then verify bc created from sheet "one-offBC"
-    
-    @NX-8376
-    @initBrowser
-  Scenario: Check the cluster option is only available once model is  activated in PM.
+
+  @NX-8376 @initBrowser
+  Scenario: Check the cluster option is only available once model is activated in PM.
     Given login
+    Then Manage License copy Productkey
+    Then logout
     Then navigate to license Generator
     Then login to license Generator
-    Then license Generator details "6.1.1"
+    Then license Generator details for version "6.1.1"
     Then license Generator for all Features
-    
-         @NX-3107 @initBrowser 
-  Scenario: API- Verify that consumer is able to pull stv offers(Application Type = General && Event For Tracking = Accepted Event) -3107
-    Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
-    #Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "STVSMS" with product "fullDetails"
-    Then navigate to offer management
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "STVSMS" offer to Offer Catalogue
-    Then navigate to landing page
+    Then login
+    Then Manage License apply new license
     Then navigate to intent management
-    Then navigate to programs
-    Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpoint"
-    Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and offer "STVSMS" and touchpoint from sheet "apiTouchpoint"
-    Then verify rule created from sheet "rule"
-    Then wait for "A" status of rule
-    Then wait until rule is picked
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to reports
-    Then navigate to customer profile
-    Then search msisdn "9446506807"
-    Then click on events tab
-    Then wait for offer eligible event in consumer profile
-    Then get-offer api-server for "9446506807"
-    Then wait for offer recommended event in consumer profile
-    
-    @NX-3109 @initBrowser 
-  Scenario: API- Verify that consumer is able to pull usage offers(Application Type = General && Event For Tracking = Accepted Event) -3107
-    Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then create new offer from sheet "usageBasedSMS" with product "fullDetails"
-    #Then navigate to offer management
-    #Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "usageBasedSMS" offer to Offer Catalogue
-    #Then navigate to landing page
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then filter segment analysis
+    Then check cluster details
+    Then Manage License copy Productkey
+    Then logout
+    Then navigate to license Generator
+    Then license Generator details for version "6.1.1"
+    Then Disable license for This Features "Multiview Clustering"
+    Then login
+    Then Manage License apply new license
     Then navigate to intent management
-    Then navigate to programs
-    Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpoint"
-    Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and offer "usageBasedSMS" and touchpoint from sheet "apiTouchpoint"
-    Then verify rule created from sheet "rule"
-    Then wait for "A" status of rule
-    Then wait until rule is picked
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to reports
-    Then navigate to customer profile
-    Then search msisdn "9446506807"
-    Then click on events tab
-    Then wait for offer eligible event in consumer profile
-    #Then get-offer api-server for "9446506807"
-    Then wait for offer recommended event in consumer profile
-	
-	@NX-3100 @initBrowser @closeBrowser
-  Scenario: API- Verify getoffer for API -3100
-    Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeSMS" offer to Offer Catalogue
-    #Then navigate to landing page
-    #Then navigate to intent management
-    #Then navigate to programs
-    #Then click create program button
-    #Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpoint"
-    #Then choose program from sheet "programdetails"
-    #Then create new rule from sheet "fullDetails" and list "listname" and touchpoint from sheet "apiTouchpoint"
-    #Then verify rule created from sheet "rule"
-    #Then wait for "A" status of rule
-    #Then wait until rule is picked
-    #Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to reports
-    Then navigate to customer profile
-    Then search msisdn "9446506807"
-    Then click on events tab
-    Then wait for offer eligible event in consumer profile
-    Then get-offer api-server for "9446506807"
-    Then wait for offer recommended event in consumer profile
-    
-    Then accept api-server for "9446506807"
-    #Then navigate to reports
-    #Then navigate to customer support
-    #Then search msisdn "9446506807"
-    #Then accept offer in customer care
-    #Then navigate to reports
-    #Then navigate to customer profile
-    #Then search msisdn "9446506807"
-    #Then click on events tab
-    Then wait for offer accepted event in consumer profile
+    Then navigate to analytics
+    Then navigate to explore segments
+    Then verify clusters disabled in segments

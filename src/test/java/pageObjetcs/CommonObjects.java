@@ -178,18 +178,17 @@ public class CommonObjects extends Init {
 		private WebElement enableRoboX;
 		
 		
-//		@FindBy(xpath="")
-//		private WebElement ;
-//		@FindBy(xpath="")
-//		private WebElement ;
-//		@FindBy(xpath="")
-//		private WebElement ;
-//		@FindBy(xpath="")
-//		private WebElement ;
-//		@FindBy(xpath="")
-//		private WebElement ;
-//		@FindBy(xpath="")
-//		private WebElement ;
+		@FindBy(xpath="/html//button[@id='generateLicense']")
+		private WebElement generateLicensebtn;
+		@FindBy(xpath="/html//button[@id='copyToClipboard']")
+		private WebElement copyToClipboardbtn;
+	
+		@FindBy(xpath="//paper-icon-button[@id='copyBtn']")
+		private WebElement managelicenseproductidcopybtn;
+		@FindBy(xpath=".//*[@id='upgradeBtn']")
+		private WebElement managelicenselicenseupgradebtn;
+		@FindBy(xpath="//label[contains(.,'License Key')]//following::textarea")
+		private WebElement managelicenseTextarea;
 //		@FindBy(xpath="")
 //		private WebElement ;
 //		@FindBy(xpath="")
@@ -535,6 +534,111 @@ public void clickActivateOption() throws Throwable {
 		Thread.sleep(2000);
 		jswait.loadClick(enableTargetInheritance);
 		
+		Thread.sleep(2000);
+		jswait.loadClick(generateLicensebtn);
+		Thread.sleep(2000);
+		jswait.loadClick(copyToClipboardbtn);
+		Thread.sleep(2000);
+		driver.switchTo().alert().accept();
+		
 		
 	}
+	
+	public void LIcenseGeneratorenableallFeatures2() throws Exception {
+
+		Thread.sleep(2000);
+		jswait.loadClick(enablePrecisionMarketer);
+		Thread.sleep(2000);
+		jswait.loadClick(enableIntentManagement);
+		Thread.sleep(2000);
+		jswait.loadClick(enableInsightsWorkbench);
+		Thread.sleep(2000);
+		jswait.loadClick(enableChurnPropensity);
+		Thread.sleep(2000);
+		jswait.loadClick(enableMultiviewClustering);
+		Thread.sleep(2000);
+		jswait.loadClick(enableAdaptiveCognizance);
+		Thread.sleep(2000);
+		jswait.loadClick(enableTrendAnalysis);
+		Thread.sleep(2000);
+		jswait.loadClick(enableRoboX);
+		Thread.sleep(2000);
+		jswait.loadClick(enableFacebook);
+		Thread.sleep(2000);
+		jswait.loadClick(enableImpactEstimation);
+		Thread.sleep(2000);
+		jswait.loadClick(enableCustomerDataExtraction);
+		Thread.sleep(2000);
+		jswait.loadClick(enableTargetInheritance);
+		
+	}
+	
+	
+	public void clickmanagelicensePdtIdCopyBtn() throws InterruptedException {
+		jswait.loadClick(managelicenseproductidcopybtn);
+	}
+	
+	public void clickmanagelicenselicenseupgradebtn() throws InterruptedException {
+		jswait.loadClick(managelicenselicenseupgradebtn);
+	}
+	
+	public void clickmanagelicenselicenseapply() throws InterruptedException {
+		jswait.loadSendKeys(managelicenseTextarea,Keys.chord(Keys.CONTROL, "v"));
+	}
+	
+	
+	
+	public void LIcenseGeneratordisableanyFeatures(String Feature) throws Exception {
+		LIcenseGeneratorenableallFeatures2();
+	System.out.println(Feature);
+		Thread.sleep(2000);
+if(Feature.contentEquals("Precision Marketer")) {
+	Thread.sleep(2000);
+		jswait.loadClick(enablePrecisionMarketer);
+}else if(Feature.contentEquals("Intent Management")) {
+		Thread.sleep(2000);
+		jswait.loadClick(enableIntentManagement);
+}else if(Feature.contentEquals("Insights Workbench")) {
+		Thread.sleep(2000);
+		jswait.loadClick(enableInsightsWorkbench);
+}else if(Feature.contentEquals("Churn Propensity")) {
+		Thread.sleep(2000);
+		jswait.loadClick(enableChurnPropensity);
+}else if(Feature.contentEquals("Multiview Clustering")) {		
+		Thread.sleep(2000);
+		jswait.loadClick(enableMultiviewClustering);
+}else if(Feature.contentEquals("Adaptive Cognizance")) {	
+		Thread.sleep(2000);	
+		jswait.loadClick(enableAdaptiveCognizance);
+}else if(Feature.contentEquals("Trend Analysis")) {			
+		Thread.sleep(2000);
+		jswait.loadClick(enableTrendAnalysis);
+}else if(Feature.contentEquals("Robo X")) {			
+		Thread.sleep(2000);
+		jswait.loadClick(enableRoboX);
+}else if(Feature.contentEquals("Facebook")) {		
+		Thread.sleep(2000);
+		jswait.loadClick(enableFacebook);
+}else if(Feature.contentEquals("Impact Estimation (Zain)")) {			
+		Thread.sleep(2000);
+		jswait.loadClick(enableImpactEstimation);
+}else if(Feature.contentEquals("Customer Data Extraction (Zain)")) {			
+		Thread.sleep(2000);
+		jswait.loadClick(enableCustomerDataExtraction);
+}else if(Feature.contentEquals("Target Inheritance (Zain)")) { 			
+		Thread.sleep(2000);
+		jswait.loadClick(enableTargetInheritance);		
+}else {System.out.println("no feature found");} 
+
+		Thread.sleep(2000);
+		jswait.loadClick(generateLicensebtn);
+		Thread.sleep(2000);
+		jswait.loadClick(copyToClipboardbtn);
+		Thread.sleep(2000);
+		driver.switchTo().alert().accept();
+
+		
+}
+	
+	
 }

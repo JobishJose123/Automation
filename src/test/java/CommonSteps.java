@@ -56,6 +56,8 @@ public class CommonSteps extends Init {
     }
 	@Then("^logout")
 	public void logout() throws InterruptedException {
+		landingPage.clickProfileNameTopbar();
+		Thread.sleep(2000);
 		landingPage.clickDropdownLogout();
 	}
 	@Then("^navigate to precision marketer")
@@ -311,7 +313,7 @@ public class CommonSteps extends Init {
 		commonObjetcs.LIcenseGeneratorLogin();
 	}
 	
-	@Then("^license Generator details \"([^\"]*)\"$")
+	@Then("^license Generator details for version \"([^\"]*)\"$")
 	public void LicenseGeneratorDetails(String version) throws InterruptedException {
 		Thread.sleep(2000);
 		commonObjetcs.LIcenseGeneratordetailspage(version);
@@ -323,5 +325,46 @@ public class CommonSteps extends Init {
 		commonObjetcs.LIcenseGeneratorenableallFeatures();
 	}
 	
+	@Then("^Disable license for This Features \"([^\"]*)\"$")
+	public void LicenseGeneratorAllFeatures(String Feature) throws Exception {
+		Thread.sleep(2000);
+		commonObjetcs.LIcenseGeneratordisableanyFeatures(Feature) ;
+	}
+	
+	
+	
+	@Then("^Manage License copy Productkey")
+	public void Manageproductkey() throws Exception {
+		Thread.sleep(2000);
+		landingPage.clickProfileNameTopbar();
+		Thread.sleep(2000);
+		landingPage.clickDropdownManageLicense();
+		Thread.sleep(3000);
+		commonObjetcs.clickmanagelicensePdtIdCopyBtn();
+		Thread.sleep(2000);
+		jswait.loadClick(".//paper-button[contains(.,'OK')]");
+		
+		
+		
+	}
+	
+	
+	@Then("^Manage License apply new license")
+	public void applynewlicense() throws Exception {
+		Thread.sleep(2000);
+		landingPage.clickProfileNameTopbar();
+		Thread.sleep(2000);
+		landingPage.clickDropdownManageLicense();
+		Thread.sleep(3000);
+		commonObjetcs.clickmanagelicenselicenseupgradebtn();
+		Thread.sleep(2000);
+		commonObjetcs.clickmanagelicenselicenseapply();
+		Thread.sleep(2000);
+		jswait.loadClick(".//*[@id='saveBtn']");
+		
+		Thread.sleep(2000);
+		jswait.loadClick(".//paper-button[contains(.,'OK')]");
+		
+	}
 	
 }

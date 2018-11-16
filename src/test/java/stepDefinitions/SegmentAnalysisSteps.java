@@ -1,15 +1,11 @@
 package stepDefinitions;
 
-import java.util.Random;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import cucumber.api.java.en.Then;
-import pageObjetcs.CommonObjects;
 import pageObjetcs.SegmentAnalysisObjects;
 
 public class SegmentAnalysisSteps extends Init {
@@ -228,8 +224,20 @@ public class SegmentAnalysisSteps extends Init {
 	@Then("^verify clusters kpis in views$")
 	public void clustertablekpischeck() throws Exception {
 		
-		segmentObjects.verifyclustertabinsegments();	
+		segmentObjects.verifyclustertabinsegments();
+		
 	}
+	
+	@Then("^verify clusters disabled in segments$")
+	public void clusterdisablecheck() throws Exception {
+		
+		segmentObjects.verifyclusteroptiondisableinSegments();
+		
+	}
+	
+	
+
+	
 	
 	
 	
