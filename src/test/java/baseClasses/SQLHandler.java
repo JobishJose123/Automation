@@ -126,7 +126,9 @@ public class SQLHandler {
     			m.scaleContainer(p.getValue("env"), p.getValue("api-server"),"0");
     			Thread.sleep(8000);
     			m.scaleContainer(p.getValue("env"), p.getValue("api-server"),"1");
-    			Thread.sleep(20000);
+    			for(int i=0;i<10;i++) {
+    				Thread.sleep(20000);
+    			}
     		}
     		else
     			System.out.println("row with the touchpoint already exist");

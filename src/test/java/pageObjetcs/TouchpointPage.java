@@ -59,6 +59,8 @@ public class TouchpointPage extends Init{
 	private WebElement ussdFormHeading;
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'USSD Application')]/../input")
 	private WebElement ussdFormUssdApplicationSelector;
+	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'USSD Application')]/../input")
+	private WebElement ussdFormUssdApplicationSelectorInApi;
 	@FindBy(xpath=".//form[@id='ussdForm']//paper-icon-button[@id='clearIcon']")
 	private WebElement ussdFormUssdApplicationClearButton;
 	
@@ -130,10 +132,14 @@ public class TouchpointPage extends Init{
 	private WebElement apiFormPrioritizationRuleFIFO;
 	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'LIFO')]")
 	private WebElement apiFormPrioritizationRuleLIFO;
-	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'FIFO')]")
 	private WebElement apiFormPrioritizationLogicFIFO;
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'LIFO')]")
+	private WebElement apiFormPrioritizationLogicLIFO;
 	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'Hours')]")
-	private WebElement apiFormTimeInterval1;
+	private WebElement apiFormTimeIntervalHours;
+	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'Days')]")
+	private WebElement apiFormTimeIntervalDays;
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Time Interval')]/../..//input")
 	private WebElement apiFormTimeIntervalSelector;
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Touchpoint Name')]/../input")
@@ -160,8 +166,12 @@ public class TouchpointPage extends Init{
 	private WebElement apiFormEventForTracking;
 	@FindBy(xpath="//paper-item[contains(.,'General')]")
 	private WebElement apiFormApplicationTypeGeneral;
+	@FindBy(xpath="//paper-item[contains(.,'USSD')]")
+	private WebElement apiFormApplicationTypeUssd;
 	@FindBy(xpath="//paper-item[contains(.,'Accepted Event')]")
 	private WebElement apiFormEventForTrackingAcceptedEvent;
+	@FindBy(xpath="//paper-item[contains(.,'Recommended Event')]")
+	private WebElement apiFormEventForTrackingRecommendedEvent;
 	@FindBy(xpath="((.//data-table-cell[@class='api-touchpoint-grid style-scope']//paper-icon-button[1])//iron-icon[1])[1]")
 	private WebElement Apiedittouchpoints;
 	@FindBy(xpath="(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited apiTouch')]")
@@ -977,9 +987,13 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		public void apiClickCancel() throws InterruptedException {
 			jswait.loadClick(apiFormCancelButton);
 		}
-		public void apiSelectPrioritizationLogic() throws InterruptedException {
+		public void apiSelectPrioritizationLogicFifo() throws InterruptedException {
 			jswait.loadClick(apiFormPrioritizationLogicSelector);
 			jswait.loadClick(apiFormPrioritizationLogicFIFO);
+		}
+		public void apiSelectPrioritizationLogicLifo() throws InterruptedException {
+			jswait.loadClick(apiFormPrioritizationLogicSelector);
+			jswait.loadClick(apiFormPrioritizationLogicLIFO);
 		}
 		public void apiSelectPrioritizationRule() throws InterruptedException {
 			jswait.loadClick(apiFormPrioritizationRuleSelector);
@@ -994,16 +1008,29 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		public void apiEnterRefreshEvery(String name) throws InterruptedException {
 			jswait.loadSendKeys(apiFormRefreshEvery, name);
 		}
-		public void apiSelectTimeInterval() throws InterruptedException {
+		public void apiSelectTimeIntervalHours() throws InterruptedException {
 			jswait.loadClick(apiFormTimeIntervalSelector);
-			jswait.loadClick(apiFormTimeInterval1);
+			jswait.loadClick(apiFormTimeIntervalHours);
 		}
-		public void apiSelectApplicationType() throws InterruptedException {
+		public void apiSelectTimeIntervalDays() throws InterruptedException {
+			jswait.loadClick(apiFormTimeIntervalSelector);
+			jswait.loadClick(apiFormTimeIntervalDays);
+		}
+		public void apiSelectApplicationTypeGeneral() throws InterruptedException {
 			jswait.loadClick(apiFormApplicationType);
 			jswait.loadClick(apiFormApplicationTypeGeneral);
 			
 		}
-		public void apiSelectEventForTracking() throws InterruptedException {
+		public void apiSelectApplicationTypeUssd() throws InterruptedException {
+			jswait.loadClick(apiFormApplicationType);
+			jswait.loadClick(apiFormApplicationTypeUssd);
+			
+		}
+		public void apiSelectEventForTrackingRecommended() throws InterruptedException {
+			jswait.loadClick(apiFormEventForTracking);
+			jswait.loadClick(apiFormEventForTrackingRecommendedEvent);
+		}
+		public void apiSelectEventForTrackingAccepted() throws InterruptedException {
 			jswait.loadClick(apiFormEventForTracking);
 			jswait.loadClick(apiFormEventForTrackingAcceptedEvent);
 		}
@@ -1012,23 +1039,56 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		}
 		public void enterApiTouchpointDetails(String keyword) throws InterruptedException {
 			apiEnterTouchpointName(keyword);
-			apiSelectApplicationType();
-			apiSelectEventForTracking();
-			apiSelectPrioritizationLogic();
+			apiSelectApplicationTypeGeneral();
+			apiSelectEventForTrackingAccepted();
+			apiSelectPrioritizationLogicFifo();
 //			apiSelectPrioritizationRule();
 			apiEnterRefreshEvery("3");
-			apiSelectTimeInterval();
+			apiSelectTimeIntervalHours();
 			apiEnterMaximumOffers("5");
+		}
+		
+		public void enterApiTouchpointDetails(String name,String applicationType,String eventForTracking,String refreshEvery, String timeInterval,String prioritizationLogic,String maximumOffers) throws InterruptedException {
+			apiEnterTouchpointName(name);
+			if(applicationType.contentEquals("General")) {
+				apiSelectApplicationTypeGeneral();
+			}
+			else if(applicationType.contentEquals("USSD")) {
+				apiSelectApplicationTypeUssd();
+				ussdSelectUssdApplicationInApi();
+			}
+			if(eventForTracking.contentEquals("Accepted Event")) {
+				apiSelectEventForTrackingAccepted();
+			}
+			else if(eventForTracking.contentEquals("Recommended Event")) {
+				apiSelectEventForTrackingRecommended();
+			}
+			if(prioritizationLogic.contentEquals("FIFO")) {
+				apiSelectPrioritizationLogicFifo();
+			}
+			else if(prioritizationLogic.contentEquals("LIFO")) {
+				apiSelectPrioritizationLogicLifo();
+			}
+			
+//			apiSelectPrioritizationRule();
+			apiEnterRefreshEvery(refreshEvery);
+			if(timeInterval.contentEquals("Hours")) {
+				apiSelectTimeIntervalHours();
+			}
+			else if(timeInterval.contentEquals("Days")) {
+				apiSelectTimeIntervalDays();
+			}
+			apiEnterMaximumOffers(maximumOffers);
 		}
 		
 		public void editapiTouchpointDetails(String keyword) throws InterruptedException {
 			apiEnterTouchpointName(keyword);
-			apiSelectApplicationType();
-			apiSelectEventForTracking();
-			apiSelectPrioritizationLogic();
+			apiSelectApplicationTypeGeneral();
+			apiSelectEventForTrackingAccepted();
+			apiSelectPrioritizationLogicFifo();
 //			apiSelectPrioritizationRulelifo();
 			apiEnterRefreshEvery("5");
-			apiSelectTimeInterval();
+			apiSelectTimeIntervalHours();
 			apiEnterMaximumOffers("8");
 			apiClickSave();
 		}
@@ -1039,12 +1099,12 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		
 		public void editapiTouchpointDetailsvalidation(String keyword) throws InterruptedException {
 			apiEnterTouchpointName(keyword);
-			apiSelectApplicationType();
-			apiSelectEventForTracking();
-			apiSelectPrioritizationLogic();
+			apiSelectApplicationTypeGeneral();
+			apiSelectEventForTrackingAccepted();
+			apiSelectPrioritizationLogicFifo();
 //			apiSelectPrioritizationRulelifo();
 			apiEnterRefreshEvery("5");
-			apiSelectTimeInterval();
+			apiSelectTimeIntervalHours();
 			apiEnterMaximumOffers("");
 			apiClickSave();
 			boolean flag=jswait.checkVisible(apivalidation);
@@ -1056,9 +1116,10 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		
 		
 		
-		public void createApiTouchpoint(String keyword) throws InterruptedException {
+		public void createApiTouchpoint(String name,String applicationType,String eventForTracking,String refreshEvery, String timeInterval,String prioritizationLogic,String maximumOffers) throws InterruptedException {
 			clickCreateNewTouchpoint();
-			enterApiTouchpointDetails(keyword);
+			System.out.println(name+applicationType+eventForTracking+refreshEvery+timeInterval+prioritizationLogic+maximumOffers);
+			enterApiTouchpointDetails(name,applicationType,eventForTracking,refreshEvery, timeInterval, prioritizationLogic, maximumOffers);
 			apiClickSave();
 		}
 		
@@ -1176,6 +1237,12 @@ Assert.assertEquals(name,newname);
 			}
 			public void ussdSelectUssdApplication() throws InterruptedException {
 				jswait.loadSendKeys(ussdFormUssdApplicationSelector,SELENIUM_USSD_APP);
+				Thread.sleep(2000);
+				jswait.loadClick(ussdFormUssdApplication1);
+				
+			}
+			public void ussdSelectUssdApplicationInApi() throws InterruptedException {
+				jswait.loadSendKeys(ussdFormUssdApplicationSelectorInApi,SELENIUM_USSD_APP);
 				Thread.sleep(2000);
 				jswait.loadClick(ussdFormUssdApplication1);
 				

@@ -169,9 +169,8 @@ public class IntentManagement extends Init{
  		int  n = rn.nextInt(5000) + 1;
  		String name = (String) eh.getCell(1, 0);
 // 		name =  name.replaceAll("[0-9]", "")+n;
- 		name = "apiTP"+n;
- 		
-	  touchpointPage.createApiTouchpoint(name);
+ 		name = "apiTP"+n;	
+	  touchpointPage.createApiTouchpoint(name,eh.getCellByColumnName("Application Type"),eh.getCellByColumnName("Event For Tracking"),eh.getCellByColumnName("Refresh  Every"),eh.getCellByColumnName("Time Interval"),eh.getCellByColumnName("Prioritization Logic"),eh.getCellByColumnName("Maximum Offers"));
 	  eh.setCell(1, 0, name);
 	}
 
@@ -1390,18 +1389,20 @@ System.out.println(editname+"program has edited successfully");
 				
 				
 			}	
-		 @Then("^create new rule from sheet \"([^\"]*)\" and list \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
-			public void CreateNewRuleWithFromSheet(String sheet1,String list,String touchpointList) throws Throwable {
+		 @Then("^create new rule from sheet \"([^\"]*)\" and offer \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+			public void CreateNewRuleWithFromSheet(String sheet1,String offerType,String touchpointList) throws Throwable {
 				Thread.sleep(4000);
 				
 		    	ExcelHelper programExcel = new ExcelHelper();
 		    	programExcel.setExcelFile("productInputData", sheet1);
+		    	ExcelHelper offerExcel = new ExcelHelper();
+		    	offerExcel.setExcelFile("offerInputData", offerType);
 		    	
 		 		String name = (String) programExcel.getCell(1, 0);
 		 		Thread.sleep(4000);
 				//programPage.clickCreateProgramButton();
 		 		System.out.println(touchpointList);
-				programPage.createNewProgramRule(name,list,touchpointList);
+				programPage.createNewProgramRule(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 				dateForCompare = new Date();
 				System.out.println(dateForCompare);
 				
@@ -1815,6 +1816,15 @@ System.out.println(editname+"program has edited successfully");
 				return "noOfferEligibleEventFound";
 			}
 		}
+		public String getLastOfferRecommendedEventTime() {
+			try {
+				jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2]");
+				String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2]")).getText();
+				return latestTime;
+			}catch (Exception e) {
+				return "noOfferRecommendedEventFound";
+			}
+		}
 		public String getLastOfferAcceptedEventTime() {
 			try {
 				jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Accepted')]/..//data-table-cell[2]");
@@ -1826,6 +1836,13 @@ System.out.println(editname+"program has edited successfully");
 		}
 		
 		public boolean checkOfferEligibleEventTime(Date startTime, Date conversionTime) {
+			if(conversionTime.after(startTime))
+			return true;
+			else 
+				return false;
+			
+		}
+		public boolean checkOfferRecommendedEventTime(Date startTime, Date conversionTime) {
 			if(conversionTime.after(startTime))
 			return true;
 			else 
@@ -1889,6 +1906,49 @@ System.out.println(editname+"program has edited successfully");
 			Assert.assertTrue("offer eligible event not found", checkOfferEligibleEventTime(dateForCompare,timeStamp));
 		}
 		
+		@Then("^wait for offer recommended event in consumer profile$")
+		public void wait_for_Recommended_event() throws Throwable {
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+			customerProfilePage.clickEventTypesCheckBox();
+			customerProfilePage.clickEventTypesCheckBox();
+			customerProfilePage.clickOfferRecommendedEventCheckBox();
+			customerProfilePage.clickSelectEventApplyButton();
+			Thread.sleep(2000);
+			TimeoutImpl t = new TimeoutImpl();
+			t.startTimer();
+			String date = getLastOfferRecommendedEventTime();
+			if(date.equals("noOfferRecommendedEventFound"))
+				date = "05 Sep 2000 04:18 PM";
+			Date timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+			System.out.println(timeStamp);
+			System.out.println(checkOfferRecommendedEventTime(dateForCompare,timeStamp));
+			while(t.checkTimerMin(15) && !checkOfferRecommendedEventTime(dateForCompare,timeStamp)) {
+				System.out.println("insie while"+dateForCompare+"::"+timeStamp);
+				Thread.sleep(5000);
+//				customerProfilePage.clickEventsTab();
+				customerProfilePage.clickEventTypesCheckBox();
+				customerProfilePage.clickSelectEventApplyButton();
+				Thread.sleep(2000);
+				customerProfilePage.clickEventTypesCheckBox();
+				customerProfilePage.clickOfferRecommendedEventCheckBox();
+				customerProfilePage.clickSelectEventApplyButton();
+				Thread.sleep(2000);
+				
+				date = getLastOfferRecommendedEventTime();
+				if(date.equals("noOfferRecommendedEventFound"))
+					date = "05 Sep 2000 04:18 PM";
+				timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+				System.out.println(timeStamp);
+				System.out.println(getLastOfferRecommendedEventTime());
+				
+			}
+			date = getLastOfferRecommendedEventTime();
+			if(date.equals("noOfferRecommendedEventFound"))
+				date = "05 Sep 2000 04:18 PM";
+			timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+			Assert.assertTrue("offer Recommended event not found", checkOfferRecommendedEventTime(dateForCompare,timeStamp));
+		}
+		
 		@Then("^wait for offer accepted event in consumer profile$")
 		public void wait_for_offer_accepted_event() throws Throwable {
 			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
@@ -1942,6 +2002,7 @@ System.out.println(editname+"program has edited successfully");
 			TimeoutImpl t = new TimeoutImpl();
 			t.startTimer();
 			while(programPage.getRuleLastRefreshTime().isEmpty()&&t.checkTimerMin(15)) {
+				driver.navigate().refresh();
 				Thread.sleep(4000);
 				System.out.println("Waiting for rule to be picked by Conveyor Belt");
 			}
@@ -1956,8 +2017,8 @@ System.out.println(editname+"program has edited successfully");
 			sql.addTouchpointToApiAuthPolicy(eh.getCellByColumnName("api touchpoint name"));
 		}
 		
-		@Then("^hit api-server for \"([^\"]*)\"$")
-		public void hitApiServerForNumber(String number) throws Throwable {
+		@Then("^get-offer api-server for \"([^\"]*)\"$")
+		public void getOfferApiServerForNumber(String number) throws Throwable {
 			StringBuilder str = new StringBuilder();
 			str.append("http://");
 			MarathonHelper m = new MarathonHelper();
@@ -1965,6 +2026,21 @@ System.out.println(editname+"program has edited successfully");
 			str.append(":");
 			str.append(m.getContainerPort(p.getValue("env"), p.getValue("api-server")));
 			str.append("/rest/authkey/authKey/msisdn/"+number+"/offers");
+			System.out.println(str.toString());
+			Request req = new Request();
+			req.getRequest(str.toString(),"");
+			System.out.println(req.responseString);
+		}
+		
+		@Then("^accept api-server for \"([^\"]*)\"$")
+		public void acceptApiServerForNumber(String number) throws Throwable {
+			StringBuilder str = new StringBuilder();
+			str.append("http://");
+			MarathonHelper m = new MarathonHelper();
+			str.append(m.getContainerNode(p.getValue("env"), p.getValue("api-server")));
+			str.append(":");
+			str.append(m.getContainerPort(p.getValue("env"), p.getValue("api-server")));
+			str.append("/rest/authkey/authKey/msisdn/"+number+"/kpi/events");
 			System.out.println(str.toString());
 			Request req = new Request();
 			req.getRequest(str.toString(),"");

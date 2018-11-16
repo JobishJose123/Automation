@@ -120,6 +120,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement EventFieldSelector;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldAge;
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+GROUP_ID_PROFILE_FIELD+"')]")
+	private WebElement CustomerInsightFieldGroupId;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::label[contains(.,'List')]/../..//input")
 	private WebElement CustomerListFieldSelector;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+BASE_LIST+"')]")
@@ -157,6 +159,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement nowSelect;
 	@FindBy(xpath="//paper-item[contains(.,'is greater than')]")
 	private WebElement conditionIsGreaterThan;
+	@FindBy(xpath="//paper-item[text()='is']")
+	private WebElement conditionIs;
 	@FindBy(xpath="//paper-item[contains(.,'is on')]")
 	private WebElement customerLocationInsightCondition;
 	@FindBy(xpath="//paper-item[contains(.,'is subscribed')]")
@@ -658,6 +662,9 @@ public class TargetConditionObjects extends Init {
 		jswait.loadSendKeys(isGreaterThanValue,"0");
 		jswait.loadClick(targetConditionSave);
 		}
+		else if(event.contains("groupIdCondition_")){
+			clickBasicTargetConditionWithGroupId(event);
+		}
 			
 	 }
 	 
@@ -671,6 +678,20 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsNot);
 			jswait.loadSendKeys(isGreaterThanValue,"30");
+			jswait.loadClick(targetConditionSave);
+	 }
+	 public void clickBasicTargetConditionWithGroupId(String condition) throws InterruptedException {
+//		 	jswait.loadClick(createConditionButton);
+		    StringBuilder sb = new StringBuilder();
+			sb.append(condition.split("_")[1]);
+			System.out.println("GroupId parsed from condition::::"+sb.toString());
+		    jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(CustomerInsightFieldGroupId);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIs);
+			jswait.loadSendKeys(isGreaterThanValue,sb.toString());
 			jswait.loadClick(targetConditionSave);
 	 }
 	 

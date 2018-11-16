@@ -500,6 +500,8 @@ public class RegistrationList extends Init{
         sb.append("45");
         sb.append(',');
         sb.append("235");
+        sb.append(',');
+        sb.append("1010");
         pw.write(sb.toString());
         sb.setLength(0);
         
@@ -537,6 +539,8 @@ public class RegistrationList extends Init{
         sb.append("45");
         sb.append(',');
         sb.append("235");
+        sb.append(',');
+        sb.append("1010");
         pw.write(sb.toString());
         sb.setLength(0);
         
@@ -574,6 +578,8 @@ public class RegistrationList extends Init{
         sb.append("45");
         sb.append(',');
         sb.append("235");
+        sb.append(',');
+        sb.append("1010");
         pw.write(sb.toString());
         sb.setLength(0);
         pw.flush();
@@ -689,6 +695,15 @@ public class RegistrationList extends Init{
 	jswait.loadClick("//paper-item[contains(.,'Normal')]");
 	jswait.loadClick("//create-profile//label[text()='Type']/../input");
 	jswait.loadClick("//create-profile//paper-item[text()='Text']");
+	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+	
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input",GROUP_ID_PROFILE_FIELD);
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+	jswait.loadClick("//paper-item[contains(.,'Normal')]");
+	jswait.loadClick("//create-profile//label[text()='Type']/../input");
+	jswait.loadClick("//create-profile//paper-item[text()='Number']");
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");

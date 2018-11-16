@@ -128,3 +128,34 @@ Then check and add profile fields
     Then navigate to rewards
     Then create new reward type
     Then navigate to landing page
+    
+     @NX-createDefaultApiTouchpoint @initBrowser
+  Scenario: create api touchpoint GA
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to api
+    Then create api touchpoint from sheet "apiTouchpoint"
+    Then check api touchpoint in grid "apiTouchpoint"
+    Then add touchpoint "apiTouchpoint" to api_auth_policy
+    
+    @NX-createDefaultApiTouchpointUR @initBrowser
+  Scenario: create api touchpoint UR
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to api
+    Then create api touchpoint from sheet "apiTouchpointUR"
+    Then check api touchpoint in grid "apiTouchpointUR"
+    Then add touchpoint "apiTouchpointUR" to api_auth_policy
+    
+     @NX-createDefaultApiTouchpointGR @initBrowser
+  Scenario: create api touchpoint GR
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to api
+    Then create api touchpoint from sheet "apiTouchpointUR"
+    Then check api touchpoint in grid "apiTouchpointUR"
+    Then add touchpoint "apiTouchpointUR" to api_auth_policy
+    

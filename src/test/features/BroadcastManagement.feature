@@ -508,16 +508,16 @@ Scenario: Verify creation of seeding triggerable BC NX-7598
 Given login
 Then navigate to precision marketer
  Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-    #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "seedingWAPoffer" offer to Offer Catalogue
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "seedingWAPoffer" offer to Offer Catalogue
     Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
-#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then enter details for new broadcast from sheet "seedingTriggerableBC" with "seedingWAPoffer"
@@ -2306,21 +2306,41 @@ Then wait until status of "Recurring" is "Complete"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
     
+     @NX-targetingTestCasesDataSetup @initBrowser
+    Scenario: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8856 
+     Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    
     @NX-targetingTestCases @initBrowser
     Scenario Outline: Verify BC targeting with System Events categor,Verify whether new system event is displayed for trial messages -8856 
-    Given login
-    Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeWAP" offer to Offer Catalogue
+   Given login
+   Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     Then enter details for new broadcast with condition <Condition> from sheet "one-offBC" with "rechargeWap"
@@ -2347,23 +2367,23 @@ Then wait until status of "Recurring" is "Complete"
     Scenario: Verify creating new reward type -4525 
     Given login
     Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    #Then navigate to offer management 
-    #Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeWAP" offer to Offer Catalogue
-    #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then naigate to "campaignBC" campaign view broadcasts
-    #Then click create new broadcast button
-    #Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
-      #Then activate bc
-    #Then wait until status of "one-offBC" is "Complete"
-    #Then provide file for conversion
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
+    Then activate bc
+    Then wait until status of "one-offBC" is "Complete"
+    Then provide file for conversion
     Then navigate to reports
     Then navigate to customer profile
     Then search msisdn "912255225505"

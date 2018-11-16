@@ -508,7 +508,7 @@ private WebElement rulessenderid2 ;
 	}
    
    //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-///
-   public void createNewProgramRule(String name,String listname,String touchpointList)throws Exception {
+   public void createNewProgramRule(String name,String listname,String touchpointList, String offerType)throws Exception {
 		eh.setExcelFile("touchpointInputData", touchpointList);
 		System.out.println(touchpointList);
 		String touchpointType = eh.getCellByColumnName("type");
@@ -527,6 +527,8 @@ private WebElement rulessenderid2 ;
 		Thread.sleep(2000);
 		clickPorogramProceedButton();
 		//System.out.println("test");
+		
+		if(!offerType.contains("STV")) {
 		clickTrackingSessionField();
 		Thread.sleep(3000);
 		optionAfterselect();
@@ -536,7 +538,7 @@ private WebElement rulessenderid2 ;
 		ruleafterinput2(); 
 		ruledays();
 		Thread.sleep(2000);
-		
+		}
 		if(touchpointType.contentEquals("sms")){
 		rulessenderid();
 		addresssprule();
@@ -644,7 +646,7 @@ private WebElement rulessenderid2 ;
    
    public void rulessenderid() throws InterruptedException {
 	   Thread.sleep(2000);
-		jswait.loadClick(rulessenderid);
+		jswait.loadSendKeys(rulessenderid,SENDER_SMPP);
 	}
    
    public void addresssprule() throws InterruptedException {
@@ -662,7 +664,7 @@ private WebElement rulessenderid2 ;
    
    public void rulerouteid() throws InterruptedException {
 	   Thread.sleep(2000);
-		jswait.loadClick(rulerouteid);
+		jswait.loadSendKeys(rulerouteid,ROUTE_SMPP);
 		
 		
 	}
