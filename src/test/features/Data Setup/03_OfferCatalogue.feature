@@ -192,7 +192,6 @@ Feature: Test suite Offer and offer catelogue
     Then create new offer from sheet "rechargeSMS" with product "fullDetails"
     Then verify "rechargeSMS" offer in grid
     Then navigate to life cycle marketing
-	  #When navigate to precision marketer
 	  Then navigate to offer management 
 	  Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
@@ -225,7 +224,6 @@ Feature: Test suite Offer and offer catelogue
     Then create new offer from sheet "rechargeSMS" with product "fullDetails"
     Then verify "rechargeSMS" offer in grid
     Then navigate to life cycle marketing
-	  #When navigate to precision marketer
 	  Then navigate to offer management 
 	  Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
@@ -258,7 +256,6 @@ Feature: Test suite Offer and offer catelogue
     Then create new offer from sheet "rechargeSMS" with product "fullDetails"
     Then verify "rechargeSMS" offer in grid
     Then navigate to life cycle marketing
-	  #When navigate to precision marketer
 	  Then navigate to offer management 
 	  Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
