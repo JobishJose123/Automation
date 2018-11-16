@@ -96,6 +96,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	public String KPI_TEXT2 ="";
 	public String SEND_TIME_DATA ="";
 	public String TARGET_CONDITION_AFTER_IMPORT ="";
+	public String TRIGGER = "Trigger_2018";
 
 	
 }

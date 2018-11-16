@@ -206,3 +206,69 @@ Feature: Test suite Offer and offer catelogue
     Then enter details for new broadcast from sheet "recurringBC" with "SeedingSMS"
     Then save bc
   
+  @Create_TriggerOneoffBC
+  @initBrowser 
+  Scenario: Verify Creating Trigger Oneoff BC
+  Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "SeedingSMS" with product "fullDetails"
+    Then verify "SeedingSMS" offer in grid
+    Then navigate to life cycle marketing
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    Then verify "rechargeSMS" offer in grid
+    Then navigate to life cycle marketing
+	  #When navigate to precision marketer
+	  Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then Add "SeedingSMS" offer to Offer Catalogue      
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "TriggerOneoff" with "rechargeSMS"
+    Then save bc
+  
+  @Create_TriggerRecurringBC
+  @initBrowser 
+  Scenario: Verify Creating Trigger recurring BC
+  Given login
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "SeedingSMS" with product "fullDetails"
+    Then verify "SeedingSMS" offer in grid
+    Then navigate to life cycle marketing
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    Then verify "rechargeSMS" offer in grid
+    Then navigate to life cycle marketing
+	  #When navigate to precision marketer
+	  Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then Add "SeedingSMS" offer to Offer Catalogue      
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "TriggerReccurringBC" with "rechargeSMS"
+    Then save bc
+  

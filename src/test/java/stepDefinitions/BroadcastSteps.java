@@ -278,12 +278,12 @@ public class BroadcastSteps extends Init{
       	    }
       	else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerableRecurringBC")){
       		Thread.sleep(2000);
-      		if(bc_type.contentEquals("recurring")){
+      		//if(bc_type.contentEquals("recurring")){
       				 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
       				 jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
       				 jswait.loadClick(".//*[@id='months']//div[@date='"+date+"']");
       				 jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
-      		}	
+      		//}	
       		     Thread.sleep(2000);
       				 jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
       				 jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
