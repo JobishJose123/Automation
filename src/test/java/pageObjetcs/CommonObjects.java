@@ -6,7 +6,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -652,22 +652,33 @@ if(Feature.contentEquals("Precision Marketer")) {
 	
 	
 	public void savedetailsofdatasetup() throws Exception {
-		File file = new File("datasetupdetails.csv");
+		
+//		File file = new File(("datasetupdetails.csv"),true);
+		try {
+			
+			File log = new File("datasetupdetails.csv");
+		FileOutputStream file=new FileOutputStream("datasetupdetails.csv",true);
+		
 		StringBuilder builder = new StringBuilder();
+		 if(log.exists()==false){
+	            System.out.println("We had to make a new file.");
+	            log.createNewFile();
+	    }
 	
-			PrintWriter writer = new PrintWriter(file);
+			PrintWriter writer = new PrintWriter(log);
+			
 		
 		eh.setExcelFile("campaignCategoryInputData","CampaignCategory");
 		builder.append(eh.getCellByColumnName("Category Name"));
-		builder.append('\n');
+		builder.append(',');
+		
+		
 		
 		eh.setExcelFile("campaignInputData","campaignBC");
 		builder.append(eh.getCellByColumnName("Campaign Name"));
-		builder.append('\n');
+		builder.append(',');
 
-		
-		
-		
+						
 		eh.setExcelFile("bcInputData","one-offBC");
 		builder.append(eh.getCellByColumnName("BC Name"));
 		builder.append('\n');
@@ -704,8 +715,15 @@ if(Feature.contentEquals("Precision Marketer")) {
 		writer.write(builder.toString());
 		builder.setLength(0);
 		writer.flush();
-		
+		}catch(Exception e) {
+			System.out.println("test");
+		}
 	}
+	
+	
+	
+	
+	
 	
 	
 }
