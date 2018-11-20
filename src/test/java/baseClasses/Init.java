@@ -97,6 +97,10 @@ public static StringBuilder stringBuilderForCsvReport;
 	public String SEND_TIME_DATA ="";
 	public String TARGET_CONDITION_AFTER_IMPORT ="";
 	public String TRIGGER = "Trigger_2018";
+	public static int campaigncatarowcount=1;
+	public static int campaignrowcount=1;
+	public static int offercatarowcount=1;
+	public static int bcrowcount=1;
 
 	
 }

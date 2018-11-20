@@ -25,6 +25,8 @@ public class CommonObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	public ExcelHelper eh = new ExcelHelper();
+	
+	public ExcelHelper mainexcel = new ExcelHelper();
 
 	public CommonObjects() {
 		PageFactory.initElements(driver, this);
@@ -651,78 +653,81 @@ if(Feature.contentEquals("Precision Marketer")) {
 	
 	
 	
-	public void savedetailsofdatasetup() throws Exception {
+public void savedetailsofdatasetup() throws Exception {
 		
 //		File file = new File(("datasetupdetails.csv"),true);
-		try {
-			
-			File log = new File("datasetupdetails.csv");
-		FileOutputStream file=new FileOutputStream("datasetupdetails.csv",true);
 		
-		StringBuilder builder = new StringBuilder();
-		 if(log.exists()==false){
-	            System.out.println("We had to make a new file.");
-	            log.createNewFile();
-	    }
-	
-			PrintWriter writer = new PrintWriter(log);
 			
+			//File file = new File("datasetupdetails.xls");
+//		FileOutputStream file=new FileOutputStream("datasetupdetails.csv",true);
 		
+//		StringBuilder builder = new StringBuilder();
+//		 
+//	
+//			PrintWriter writer = new PrintWriter(file);
+			mainexcel.setExcelFile("datasetupdetails","sheet1");
+			
+			for (int cat=0;cat<8;) {
+				System.out.println(campaigncatarowcount);
 		eh.setExcelFile("campaignCategoryInputData","CampaignCategory");
-		builder.append(eh.getCellByColumnName("Category Name"));
-		builder.append(',');
+		mainexcel.setCell(campaigncatarowcount,1,eh.getCellByColumnName("Category Name"));
+		cat++;
+		campaigncatarowcount++;
+			}
 		
-		
-		
-		eh.setExcelFile("campaignInputData","campaignBC");
-		builder.append(eh.getCellByColumnName("Campaign Name"));
-		builder.append(',');
-
-						
-		eh.setExcelFile("bcInputData","one-offBC");
-		builder.append(eh.getCellByColumnName("BC Name"));
-		builder.append('\n');
-		
-		eh.setExcelFile("bcInputData","seedingTriggerableBC");
-		builder.append(eh.getCellByColumnName("BC Name"));
-		builder.append('\n');
-		
-		eh.setExcelFile("bcInputData","one-offBC");
-		builder.append(eh.getCellByColumnName("seedingbcname"));
-		builder.append('\n');
-		
-		eh.setExcelFile("bcInputData","recurringBC");
-		builder.append(eh.getCellByColumnName("BC Name"));
-		builder.append('\n');
-
-		eh.setExcelFile("bcInputData","seedingTriggerableRecurringBC");
-		builder.append(eh.getCellByColumnName("BC Name"));
-		builder.append('\n');
-
-		eh.setExcelFile("bcInputData","seedingRecurringBC");
-		builder.append(eh.getCellByColumnName("BC Name"));
-		builder.append('\n');
-
-		eh.setExcelFile("bcInputData","TriggerOneoff");
-		builder.append(eh.getCellByColumnName("BC Name"));
-		builder.append('\n');
-		
-		eh.setExcelFile("bcInputData","TriggerReccurringBC");
-		builder.append(eh.getCellByColumnName("BC Name"));
-		builder.append('\n');
-		
-		
-		writer.write(builder.toString());
-		builder.setLength(0);
-		writer.flush();
-		}catch(Exception e) {
-			System.out.println("test");
-		}
+			
+			
+			for (int offcat=0;offcat<8;) {
+			eh.setExcelFile("offerCatalogInputData","defaultCatalog");
+			mainexcel.setCell(offercatarowcount,2,eh.getCellByColumnName("Catalog Name"));
+			offcat++;
+			offercatarowcount++;
+	}
+			
+	
+			
+			for (int campaign=0;campaign<8;) {
+				eh.setExcelFile("campaignInputData","campaignBC");
+			mainexcel.setCell(campaignrowcount,3,eh.getCellByColumnName("Campaign Name"));
+			campaign++;
+			campaignrowcount++;
 	}
 	
-	
-	
-	
+			
+		eh.setExcelFile("bcInputData","one-offBC");
+		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("BC Name"));
+		bcrowcount++;
+		
+		eh.setExcelFile("bcInputData","seedingTriggerableBC");
+		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("BC Name"));
+		bcrowcount++;
+		
+		eh.setExcelFile("bcInputData","one-offBC");
+		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("seedingbcname"));
+		bcrowcount++;
+		
+		eh.setExcelFile("bcInputData","recurringBC");
+		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("BC Name"));
+		bcrowcount++;
+
+		eh.setExcelFile("bcInputData","seedingTriggerableRecurringBC");
+		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("BC Name"));
+		bcrowcount++;
+
+		eh.setExcelFile("bcInputData","seedingRecurringBC");
+		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("BC Name"));
+		bcrowcount++;
+
+		eh.setExcelFile("bcInputData","TriggerOneoff");
+		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("BC Name"));
+		bcrowcount++;
+		
+		eh.setExcelFile("bcInputData","TriggerReccurringBC");
+		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("BC Name"));
+		bcrowcount++;
+		
+		
+		}
 	
 	
 	
