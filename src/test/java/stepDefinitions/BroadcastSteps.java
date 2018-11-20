@@ -206,7 +206,7 @@ public class BroadcastSteps extends Init{
       		 day++;
       	 }
       	 Actions builder = new Actions(driver);
-      	if(bc_type.contains("one-off")||bc_type.contains("seedingTriggerable")){
+      	if(bc_type.contentEquals("one-off")||bc_type.contentEquals("seedingTriggerable")){
       		Thread.sleep(1000);
       			broadcastPageObjects.clickOneOffRadioButton();
 //      			 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
@@ -239,7 +239,7 @@ public class BroadcastSteps extends Init{
       	        
       	      jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
       		    Thread.sleep(2000);
-      		if(bc_type.contains("one-off")) {			
+      		if(bc_type.contentEquals("one-off")) {			
       		 jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
       		Thread.sleep(1000);
       		 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='"+date+"']");
@@ -276,8 +276,9 @@ public class BroadcastSteps extends Init{
       		}
       	  Thread.sleep(1000);	
       	    }
-      	else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerableRecurringBC")){
+      	else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurring")||bc_type.contentEquals("seedingTriggerableRecurringBC")){
       		Thread.sleep(2000);
+      		System.out.println("Inside recurring");
       		//if(bc_type.contentEquals("recurring")){
       				 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
       				 jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
@@ -718,7 +719,7 @@ public class BroadcastSteps extends Init{
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
 
-if(bc_type.contains("one-off")){
+if(bc_type.contentEquals("one-off")){
 	Thread.sleep(1000);
 		broadcastPageObjects.clickOneOffRadioButton();
 //		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
@@ -787,7 +788,7 @@ if(bc_type.contains("one-off")){
   builder.moveToElement(num1).click().build().perform();
   Thread.sleep(1000);	
     }
-else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")){
+else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurring")||bc_type.contentEquals("seedingTriggerable")){
 	Thread.sleep(2000);
 	if(bc_type.contentEquals("recurring")){
 			 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
@@ -898,7 +899,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
 
-if(bc_type.contains("one-off")){
+if(bc_type.contentEquals("one-off")){
 	Thread.sleep(1000);
 		broadcastPageObjects.clickOneOffRadioButton();
 //		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
@@ -967,7 +968,7 @@ if(bc_type.contains("one-off")){
   builder.moveToElement(num1).click().build().perform();
   Thread.sleep(1000);	
     }
-else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")){
+else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurring")||bc_type.contentEquals("seedingTriggerable")){
 	Thread.sleep(2000);
 	if(bc_type.contentEquals("recurring")){
 			 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
@@ -2034,7 +2035,7 @@ else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
 
-if(bc_type.contains("one-off")){
+if(bc_type.contentEquals("one-off")){
 	Thread.sleep(1000);
 		broadcastPageObjects.clickOneOffRadioButton();
 //		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
@@ -2103,7 +2104,7 @@ if(bc_type.contains("one-off")){
   builder.moveToElement(num1).click().build().perform();
   Thread.sleep(1000);	
     }
-else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")){
+else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurring")||bc_type.contentEquals("seedingTriggerable")){
 	Thread.sleep(2000);
 	if(bc_type.contentEquals("recurring")){
 			 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
@@ -2198,7 +2199,7 @@ public void waitUntilChildBCStatus(String bcSheet, String statusExpected) throws
 {  
 	eh.setExcelFile("bcInputData", bcSheet);
 	String bc_type = eh.getCellByColumnName("Type");
-	if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")) {
+	if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurring")||bc_type.contentEquals("seedingTriggerable")) {
 	Calendar rightNow =Calendar.getInstance();
 	CalenderUtility cal = new CalenderUtility();
 	if(eh.getCellByColumnName("Recurrance Pattern").contentEquals("months")) {
@@ -2386,7 +2387,7 @@ public void create_new_broadcast_with_1M_subscribers_and_configur_partner_level_
 //	 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //	Thread.sleep(1500);
 
-if(bc_type.contains("one-off")){
+if(bc_type.contentEquals("one-off")){
 Thread.sleep(1000);
 	broadcastPageObjects.clickOneOffRadioButton();
 //	 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
@@ -2455,7 +2456,7 @@ num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time
 builder.moveToElement(num1).click().build().perform();
 Thread.sleep(1000);	
 }
-else if(bc_type.contains("recurring")||bc_type.contains("seedingRecurring")||bc_type.contains("seedingTriggerable")){
+else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurring")||bc_type.contentEquals("seedingTriggerable")){
 Thread.sleep(2000);
 if(bc_type.contentEquals("recurring")){
 		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
