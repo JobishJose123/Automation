@@ -49,7 +49,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	//CONFIGURATIONS
 	public static Date dateForCompare = new Date();
 	public final String INVENTORY_ONE_PER_DAY = "sel_one_per_day";
-	public final String BASE_LIST = "selenium_list";
+	public final String BASE_LIST = "selenium_list_regression";
 	public final String BASE_LIST_FOR_USE_TEMPLATE = "target_list";
 	public final String BASE_LISTNack = "selenium_list NACK";
 	public final String PREFERRED_LANGUAGE_PROFILE_FIELD = "Preferred Language_q11";

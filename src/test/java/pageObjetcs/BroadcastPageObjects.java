@@ -1068,7 +1068,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	public void selectTrackSession() throws InterruptedException {
 		jswait.loadClick(trackSessionSelector);
 		jswait.loadClick(trackSessionAfter);
-		jswait.loadSendKeys(trackSession2Days, "5");
+		jswait.loadSendKeys(trackSession2Days, "1");
 	}
 
 	public void selectTrackingSource() throws InterruptedException {
@@ -1300,7 +1300,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();

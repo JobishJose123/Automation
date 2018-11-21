@@ -1,10 +1,12 @@
 package stepDefinitions;
 
+import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.TimeoutImpl;
 import cucumber.api.java.en.Then;
 import pageObjetcs.SegmentAnalysisObjects;
 
@@ -235,8 +237,19 @@ public class SegmentAnalysisSteps extends Init {
 		
 	}
 	
+	@Then("^wait until status of cluster is complete$")
+	public void waitUntilBCStatus() throws Throwable
+	{  
+		
+		segmentObjects.Clustersstatuscheck();
 	
-
+	}
+	@Then("^verify clusters kpi exclude check$")
+	public void clusterkpiexclusioncheck() throws Exception {
+		
+		segmentObjects.clusterkpiexclusioncheck();
+		
+	}
 	
 	
 	

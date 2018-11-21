@@ -857,18 +857,19 @@ Feature: positive flow of im program creation
     Then navigate to explore segments
     Then create Segment Analysis
 
-  @NX-8461 @initBrowser @closeBrowser
+  @NX-8461 @initBrowser 
   Scenario: Check whether results for clustering is shown in table view.
     Given login
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
     Then filter segment analysis
-    #Then click on create new cluster button
-    #Then enter view values for cluster
-    #Then select radio button for view1
-    #Then select radio button for view2
-    #Then click save cluster button
+    Then click on create new cluster button
+    Then enter view values for cluster
+    Then select radio button for view1
+    Then select radio button for view2
+    Then click save cluster button
+    
     Then check cluster details
 
   @NX-8464 @initBrowser @closeBrowser
@@ -878,12 +879,13 @@ Feature: positive flow of im program creation
     Then navigate to analytics
     Then navigate to explore segments
     Then filter segment analysis
-    #Then click on create new cluster button
-    #Then enter view values for cluster
-    #Then select radio button for view1
-    #Then select radio button for view2
-    #Then select radio button for view3
-    #Then click save cluster button
+    Then click on create new cluster button
+    Then enter view values for cluster
+    Then select radio button for view1
+    Then select radio button for view2
+    Then select radio button for view3
+    Then click save cluster button
+    Then wait until status of cluster is complete
     Then check cluster details
     Then check cluster details table and save cluster
     Then navigate to landing page
@@ -897,18 +899,21 @@ Feature: positive flow of im program creation
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-8446 @initBrowser @closeBrowser
+  @NX-8446 @initBrowser 
   Scenario: Check whether KPIs selected to excluded are excluded  from the result.
     Given login
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
     Then filter segment analysis
-    #Then click on create new cluster button
-    #Then enter view values for cluster
-    #Then select radio button for view1
-    #Then select radio button for view2
-    #Then click save cluster button
+    Then click on create new cluster button
+    Then enter view values for cluster
+    Then select radio button for view1
+    Then select radio button for view2
+    Then select radio button for view3
+    Then click save cluster button
+    Then wait until status of cluster is complete
+    Then verify clusters kpi exclude check
     Then check cluster details
     Then check cluster details table and save cluster
     Then pass next scenario based on this step
@@ -917,6 +922,12 @@ Feature: positive flow of im program creation
   Scenario: verify the Sunburst Result of cluster.
     Then check previous step and pass this
     Then pass next scenario based on this step
+      @NX-8385
+  Scenario: verify the Sunburst Result of cluster.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+
+
 
   @NX-8405
   Scenario: Check whether each clusters details can be viewed and  save as cluster from the table result.
@@ -1069,6 +1080,7 @@ Feature: positive flow of im program creation
     Then filter segment analysis
     Then check cluster details
     Then verify clusters kpis in views
+    
 
   @NX-8440 @initBrowser @closeBrowser
   Scenario: Check whether cluster option is available in the drop  down in IM.
@@ -1169,13 +1181,13 @@ Feature: positive flow of im program creation
     Then navigate to explore segments
     Then verify clusters disabled in segments
     
-     @NX-8376
-    @initBrowser
-  Scenario: Check the cluster option is only available once model is  activated in PM.
-    Given login
-    Then navigate to license Generator
-    Then login to license Generator
-    Then license Generator details "6.1.1"
-    Then license Generator for all Features
+     #@NX-8376
+    #@initBrowser
+  #Scenario: Check the cluster option is only available once model is  activated in PM.
+    #Given login
+    #Then navigate to license Generator
+    #Then login to license Generator
+    #Then license Generator details for version "6.1.1"
+    #Then license Generator for all Features
     
 

@@ -2,10 +2,12 @@ package pageObjetcs;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 import java.util.List;
 import java.util.Random;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,6 +17,7 @@ import com.itextpdf.text.log.SysoCounter;
 
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.TimeoutImpl;
 
 public class SegmentAnalysisObjects extends Init {
 	CommonObjects commonObjects = new CommonObjects();
@@ -54,7 +57,7 @@ public class SegmentAnalysisObjects extends Init {
 	@FindBy(xpath="(.//paper-radio-button[@name='view2']//div[@id='offRadio'])[2]")
 	private List <WebElement> view1RadioButton2;
 	
-	@FindBy(xpath="(.//paper-radio-button[@name='Exclude']//div[@id='offRadio'])[3]")
+	@FindBy(xpath="(.//paper-radio-button[@name='view2']//div[@id='offRadio'])[3]//following::div[@id='offRadio']")
 	private List <WebElement> view1RadioButton3;
 	
 	@FindBy(xpath=".//paper-button[contains(.,'Save')]")
@@ -136,8 +139,9 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement clusterstableview;
 	@FindBy(xpath="(.//vaadin-grid-table-body[@id='items']//paper-icon-button[@id='detailsButton'])[1]")
 	private WebElement clusterdetailsicon;
-	@FindBy(xpath=".//*[@id='item1']/div[1]/data-table-cell[1]/span[contains(.,'3')]/../../data-table-cell[2]/span[contains(.,'0.000')]/../../data-table-cell[3]/span[contains(.,'0.000')]/../../data-table-cell[4]/span[contains(.,'0.000')]/../../data-table-cell[5]/span[contains(.,'0.000')]/../../data-table-cell[6]/span[contains(.,'0.000')]")
+	@FindBy(xpath=".//*[@id='items']/vaadin-grid-table-row[1]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement clusterkpiExclusioncheck;
+	
 	@FindBy(xpath="//paper-button[contains(.,'Save Cluster')]")
 	private WebElement saveclusterbtn;
 	@FindBy(xpath=".//label[contains(.,'Cluster Name')]/../input")
@@ -183,8 +187,8 @@ public class SegmentAnalysisObjects extends Init {
 	
 	@FindBy(xpath="//div[contains(@class,'profile-name')]/..")
 	private WebElement topbarProfileName;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath=".//*[@id='items']/vaadin-grid-table-row[1]/vaadin-grid-table-cell[4]/vaadin-grid-cell-content")
+	private WebElement clusterstatusgrid;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -352,6 +356,7 @@ public class SegmentAnalysisObjects extends Init {
 	}
 	
 	public void selectRadioButtonForViews() throws InterruptedException {
+		Thread.sleep(2000);
 		if(view1RadioButton1.size()>0) {
 			for(WebElement button: view1RadioButton1) {
 				jswait.loadClick(button);
@@ -364,6 +369,7 @@ public class SegmentAnalysisObjects extends Init {
 	
 	
 	public void selectRadioButtonForViews2() throws InterruptedException {
+		Thread.sleep(2000);
 		if(view1RadioButton2.size()>0) {
 			for(WebElement button: view1RadioButton2) {
 				jswait.loadClick(button);
@@ -375,6 +381,7 @@ public class SegmentAnalysisObjects extends Init {
 	}
 	
 	public void selectRadioButtonForViews3() throws InterruptedException {
+		Thread.sleep(2000);
 		if(view1RadioButton2.size()>0) {
 			for(WebElement button: view1RadioButton3) {
 				jswait.loadClick(button);
@@ -410,7 +417,7 @@ public class SegmentAnalysisObjects extends Init {
 			 throw view;
 		}
 		Thread.sleep(3000);
-		jswait.loadClick("//paper-button[contains(.,'Close')]");
+		//jswait.loadClick("//paper-button[contains(.,'Close')]");
 	}
 	
 	
@@ -645,15 +652,7 @@ public void clustertabledetailsandsave() throws Exception {
 		
 		Thread.sleep(2000);
 		jswait.loadClick(clusterdetailsicon);
-		Exception view=new Exception("Exclusion failed");
-		try {
-		
-		Thread.sleep(2000);
-		clusterkpiExclusioncheck.isDisplayed();
-			}
-		catch(Exception e){
-			 throw view;
-		}
+	
 		Thread.sleep(2000);
 		jswait.loadClick(saveclusterbtn);
 		Thread.sleep(2000);
@@ -686,6 +685,46 @@ public void clustertabledetailsandsave() throws Exception {
 		}
 		
 		
+	}
+	public String getTopclusterStatus() throws InterruptedException {
+		jswait.waitUntil(clusterstatusgrid);
+		String status = clusterstatusgrid.getText();
+		return status;
+	}
+	
+	public String clusterkpiExclusioncheck() throws InterruptedException {
+		jswait.waitUntil(clusterkpiExclusioncheck);
+		String status = clusterkpiExclusioncheck.getText();
+		return status;
+	}
+   
+   
+   
+   public void Clustersstatuscheck() throws InterruptedException {
+	   
+		String statusOfcluster = getTopclusterStatus();
+		TimeoutImpl t = new TimeoutImpl();
+		t.startTimer();
+		while(!statusOfcluster.contains("Completed")&& t.checkTimerMin(7)) {
+			statusOfcluster = getTopclusterStatus();
+			System.out.println(statusOfcluster);
+			Thread.sleep(3000);
+			jswait.loadClick("//paper-icon-button[@icon='icons:refresh']");
+		}
+	   
+		
+	}
+   public void clusterkpiexclusioncheck() throws Exception {
+	   String status = clusterkpiExclusioncheck();
+	   System.out.println(status);
+		try {
+			assertEquals(status,"KPI1");
+			
+		}catch(Exception e) {
+			
+		}
+		  
+						
 	}
    
 }
