@@ -2016,7 +2016,7 @@ System.out.println(editname+"program has edited successfully");
 			sql.init(p.getValue("dbUrl"),p.getValue("dbUsername"),p.getValue("dbPassword"));
 			sql.addTouchpointToApiAuthPolicy(eh.getCellByColumnName("api touchpoint name"));
 		}
-		
+		String offerRecommended = "";
 		@Then("^get-offer api-server for \"([^\"]*)\"$")
 		public void getOfferApiServerForNumber(String number) throws Throwable {
 			StringBuilder str = new StringBuilder();
@@ -2029,6 +2029,7 @@ System.out.println(editname+"program has edited successfully");
 			System.out.println(str.toString());
 			Request req = new Request();
 			req.getRequest(str.toString(),"");
+			offerRecommended = req.responseString;
 			System.out.println(req.responseString);
 		}
 		

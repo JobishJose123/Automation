@@ -155,7 +155,17 @@ Then check and add profile fields
     Then navigate to intent management
     Then navigate to touchpoints
     Then navigate to api
-    Then create api touchpoint from sheet "apiTouchpointUR"
-    Then check api touchpoint in grid "apiTouchpointUR"
-    Then add touchpoint "apiTouchpointUR" to api_auth_policy
+    Then create api touchpoint from sheet "apiTouchpointGR"
+    Then check api touchpoint in grid "apiTouchpointGR"
+    Then add touchpoint "apiTouchpointGR" to api_auth_policy
     
+    
+    @NX-createDefaultApiTouchpointUA @initBrowser
+  Scenario: create api touchpoint UA
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to api
+    Then create api touchpoint from sheet "apiTouchpointUA"
+    Then check api touchpoint in grid "apiTouchpointUA"
+    Then add touchpoint "apiTouchpointUA" to api_auth_policy

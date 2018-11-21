@@ -122,7 +122,7 @@ public class SQLHandler {
     		int touchpointId = getTouchpointID(touchpointName);
     		rs = executeQuery("select * from api_auth_policy where TOUCH_POINT_ID = "+touchpointId+";");
     		if(!rs.first()) {
-    			executeUpdate("insert into api_auth_policy values("+ ++numRows+","+touchpointId+",\""+"authKey\",\""+p.getValue("machineIp")+"\");");
+    			executeUpdate("insert into api_auth_policy values("+ ++numRows+","+touchpointId+",\""+""+touchpointName+"\",\""+p.getValue("machineIp")+"\");");
     			m.scaleContainer(p.getValue("env"), p.getValue("api-server"),"0");
     			Thread.sleep(8000);
     			m.scaleContainer(p.getValue("env"), p.getValue("api-server"),"1");
