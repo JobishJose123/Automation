@@ -2,13 +2,13 @@
 #Keywords Summary :Offer and offer catelogue for regression data setup
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
 
-@Offercatalogue_datasetup
-Feature: Test suite Offer and offer catelogue
-  Create all types of offers and offer catelogue
+@BCCreation_datasetup
+Feature: Test suite for Broadcast creation
+  Create all types of Braodcast
 
-  @Create_one-offBC
-  @initBrowser 
-  Scenario: Verify Creating one-off BC with Offer Catalogue with rechargeSMS and SeedingSMS offers
+  @NDX-4887
+  @initBrowser @closeBrowser
+  Scenario: Verify Creating one-off BC
     Given login
     Then navigate to configuration management
     Then navigate to campaign categories
@@ -40,8 +40,8 @@ Feature: Test suite Offer and offer catelogue
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeSMS"
     Then save bc
     
-  @Create_SeedingTriggerBC
-  @initBrowser 
+  @NDX-4891
+  @initBrowser @closeBrowser
   Scenario: Verify Creating Seeding Trigger BC
   Given login
     Then navigate to configuration management
@@ -73,9 +73,9 @@ Feature: Test suite Offer and offer catelogue
     Then enter details for new broadcast from sheet "seedingTriggerableBC" with "SeedingSMS"
     Then save bc
   
-  @Create_SeedingoneoffBC
-  @initBrowser 
-  Scenario: Verify Creating one-off BC with Offer Catalogue with rechargeSMS and SeedingSMS offers
+  @NDX-4892
+  @initBrowser @closeBrowser
+  Scenario: Verify Creating  Seeding one-offBC
     Given login
     Then navigate to configuration management
     Then navigate to campaign categories
@@ -107,9 +107,9 @@ Feature: Test suite Offer and offer catelogue
     Then enter details for new broadcast from sheet "one-offBC" with "SeedingSMS"
     Then save bc
   
-  @Create_NormalRecurringBC
-  @initBrowser 
-  Scenario: Verify Creating RecurringBC
+  @NDX-4894
+  @initBrowser @closeBrowser
+  Scenario: Verify Creating Normal RecurringBC
   Given login
     Then navigate to configuration management
     Then navigate to campaign categories
@@ -140,8 +140,9 @@ Feature: Test suite Offer and offer catelogue
     Then enter details for new broadcast from sheet "recurringBC" with "rechargeSMS"
     Then save bc
     
- @Create_SeedingTriggerRecurringBC
-  @initBrowser 
+    
+  @NDX-4888
+  @initBrowser @closeBrowser
   Scenario: Verify Creating Seeding Trigger recurring BC
   Given login
     Then navigate to configuration management
@@ -173,9 +174,9 @@ Feature: Test suite Offer and offer catelogue
     Then enter details for new broadcast from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
     Then save bc
   
-  @SeedingRecurringBC
-  @initBrowser 
-  Scenario: Verify Creating RecurringBC
+  @NDX-4890	
+  @initBrowser @closeBrowser
+  Scenario: Verify Creating Seeding RecurringBC
   Given login
     Then navigate to configuration management
     Then navigate to campaign categories
@@ -205,8 +206,8 @@ Feature: Test suite Offer and offer catelogue
     Then enter details for new broadcast from sheet "recurringBC" with "SeedingSMS"
     Then save bc
   
-  @Create_TriggerOneoffBC
-  @initBrowser 
+  @NDX-4893
+  @initBrowser @closeBrowser
   Scenario: Verify Creating Trigger Oneoff BC
   Given login
     Then navigate to configuration management
@@ -237,8 +238,8 @@ Feature: Test suite Offer and offer catelogue
     Then enter details for new broadcast from sheet "TriggerOneoff" with "rechargeSMS"
     Then save bc
   
-  @Create_TriggerRecurringBC
-  @initBrowser 
+  @NDX-4895	
+  @initBrowser @closeBrowser
   Scenario: Verify Creating Trigger recurring BC
   Given login
     Then navigate to configuration management

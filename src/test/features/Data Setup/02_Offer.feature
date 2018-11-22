@@ -6,90 +6,9 @@
 Feature: Test suite on Offer creation
   Create all types of offers
 
-  @SMS_Offer @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating offers with SMS channel NX-1349
-    Given login
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-    Then verify "rechargeSMS" offer in grid
-
-  @VoicePush_Offer @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-1351
-    Given login
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeVoicePush" with product "fullDetails"
-    Then verify "rechargeVoicePush" offer in grid
-    Then pass next scenario based on this step
-
-@WapPush_Offer @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating offers with Wap Push channel NX-1353
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then verify "rechargeWAP" offer in grid
-    Then pass next scenario based on this step
-
-  @Balence-Deduction_offer @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating Balance-Deduction offers NX-1346
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "balanceDeductionWAP" with product "fullDetails"
-    Then verify "balanceDeductionWAP" offer in grid
-
-@Combo_offer @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating Combo-Offer offers NX-6175
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "comboOfferWAP" with product "fullDetails"
-    Then verify "comboOfferWAP" offer in grid
-
- @Informational_Offer @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating Informational offers NX-6177
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "informationalWAP" with product "fullDetails"
-    Then verify "informationalWAP" offer in grid
- 
- @Seeding_Offer @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating Seeding offers NX-1345
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-    Then verify "seedingWAPoffer" offer in grid
- 
- @Usagebased_offer @initBrowser 
-  Scenario: Create offer:Track: Verify creating Usage Based offers NX-1347
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "usageBasedWAP" with product "fullDetails"
-    Then verify "usageBasedWAP" offer in grid
- 
-  @Email_offers @initBrowser
-  Scenario: Email Channel -->Verify the Create offer using Email as a channel. NX-2419 
-    Given login
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
-     
- @Recharge_offer @initBrowser
-  Scenario: Create offer:Track: Verify creating Recharge offers 
+       
+ @NDX-5165 @initBrowser
+  Scenario: Verify the Create offer using WAP Push Channel and Recharge offer Type 
     Given login
     Then navigate to precision marketer
     Then navigate to offer management
@@ -97,11 +16,28 @@ Feature: Test suite on Offer creation
     Then create new offer from sheet "rechargeWAP" with product "fullDetails"
     Then verify recharge offer from sheet "rechargeWAP"
    
-  @STV_Offer @initBrowser
-  Scenario: Create offer:Track: Verify creating STV offers 
+  @NDX-5164 @initBrowser
+  Scenario: Verify the Create offer using SMS Channel and STV Type
     Given login
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "STVWAP" with product "fullDetails"
-    Then verify "STVWAP" offer in grid    
+    Then verify "STVWAP" offer in grid
+  
+    @STVSMS_offers @initBrowser
+  Scenario: Email Channel -->Verify the Create offer using STVSMS 
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "STVSMS" with product "fullDetails"
+      
+@USgaeSMS_offers @initBrowser
+  Scenario: Email Channel -->Verify the Create offer using USgaeSMS 
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "USgaeSMS" with product "fullDetails"  
+    

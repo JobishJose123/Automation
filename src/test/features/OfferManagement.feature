@@ -918,6 +918,24 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then verify trial message event
     #Then verify trial message event details from sheet "rechargeSMS"
     
+    @NDX-5165 @initBrowser @closeBrowser
+  Scenario: Verify the Create offer using WAP Push Channel and Recharge offer Type 
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then verify recharge offer from sheet "rechargeWAP"
+   
+  @NDX-5164 @initBrowser @closeBrowser
+  Scenario: Verify the Create offer using SMS Channel and STV Type
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "STVWAP" with product "fullDetails"
+    Then verify "STVWAP" offer in grid
+    
     
     
     
