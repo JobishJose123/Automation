@@ -1262,6 +1262,7 @@ public void touchpointpgmdeletecheck() throws Exception{
 		
 		eh.setExcelFile("offerCatalogInputData",sheet2);
 		String offer = (String) eh.getCell(1, 0);
+		Thread.sleep(3000);
 		jswait.loadSendKeys(programofferclick, offer);
 		System.out.println("Offer: "+offer);
 			Thread.sleep(3000);

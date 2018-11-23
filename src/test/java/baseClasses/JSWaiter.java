@@ -803,7 +803,7 @@ public String getTextFormTextField(WebElement element)
 	return text;
 }
 public String getGridColumnNumber(String columnXpath, String matchKey) {
-	WebDriverWait wait = new WebDriverWait(driver, 8);
+	WebDriverWait wait = new WebDriverWait(driver, 20);
 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(columnXpath)));
 	List<WebElement> columnHeader = driver.findElements(By.xpath(columnXpath));
 	int status =0 ;

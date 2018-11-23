@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 import java.sql.*;
 import java.util.Enumeration;
 
-public class SQLHandler {
+public class SQLHandler extends Init{
 	
 		    private Statement statement = null;
 		    private PreparedStatement preparedStatement = null;
@@ -21,6 +21,10 @@ public class SQLHandler {
 		     String USER = "";
 		     String PASS = "";
 		    
+		     public SQLHandler() throws IOException, Exception {
+		    	 init(p.getValue("dbUrl"),p.getValue("dbUsername"),p.getValue("dbPassword"));
+		     }
+		     
 		    public void init(String dbUrl,String username,String password) throws Exception {
 	        	Class.forName("com.mysql.cj.jdbc.Driver");
 	        	JDBC_DRIVER = "com.mysql.jdbc.Driver";  

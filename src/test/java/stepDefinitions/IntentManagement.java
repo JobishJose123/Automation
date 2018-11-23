@@ -12,6 +12,8 @@ import org.openqa.selenium.remote.server.handler.FindElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.sun.mail.imap.protocol.BODY;
+
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -64,9 +66,14 @@ public class IntentManagement extends Init{
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
  		String name = (String) eh.getCell(1, 0);
- 		name =  name.replaceAll("[0-9]", "")+n;
- 		eh.setCell(1, 0, name);
+ 		if(name.contains("default")) {
+ 			name =  name.replaceAll("[0-9]", "");
+ 		}
+ 		else {
+ 		    name = name.replaceAll("[0-9]", "")+n;
+ 		}
 		touchpointPage.createTriggerTouchpoint(name);
+		eh.setCell(1, 0, name);
 	}
 	@Then("^check touchpoint landing page$")
 	public void checkTouchpointLandingPage() throws Throwable{
@@ -168,8 +175,12 @@ public class IntentManagement extends Init{
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
  		String name = (String) eh.getCell(1, 0);
-// 		name =  name.replaceAll("[0-9]", "")+n;
- 		name = "apiTP"+n;	
+ 		if(name.contains("default")) {
+ 			name =  name.replaceAll("[0-9]", "");
+ 		}
+ 		else {
+ 		    name = name.replaceAll("[0-9]", "")+n;
+ 		}	
 	  touchpointPage.createApiTouchpoint(name,eh.getCellByColumnName("Application Type"),eh.getCellByColumnName("Event For Tracking"),eh.getCellByColumnName("Refresh  Every"),eh.getCellByColumnName("Time Interval"),eh.getCellByColumnName("Prioritization Logic"),eh.getCellByColumnName("Maximum Offers"));
 	  eh.setCell(1, 0, name);
 	}
@@ -1908,6 +1919,11 @@ System.out.println(editname+"program has edited successfully");
 		
 		@Then("^wait for offer recommended event in consumer profile$")
 		public void wait_for_Recommended_event() throws Throwable {
+			Date now = new Date();
+			Calendar calendar = Calendar.getInstance();
+			int min = calendar.get(Calendar.MINUTE);
+			now.setMinutes(min-2);
+			dateForCompare = now;
 			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 			customerProfilePage.clickEventTypesCheckBox();
 			customerProfilePage.clickEventTypesCheckBox();
@@ -2016,35 +2032,62 @@ System.out.println(editname+"program has edited successfully");
 			sql.init(p.getValue("dbUrl"),p.getValue("dbUsername"),p.getValue("dbPassword"));
 			sql.addTouchpointToApiAuthPolicy(eh.getCellByColumnName("api touchpoint name"));
 		}
-		String offerRecommended = "";
-		@Then("^get-offer api-server for \"([^\"]*)\"$")
-		public void getOfferApiServerForNumber(String number) throws Throwable {
+		String offerRecommended = "{\"status\":{\"code\":200,\"message\":\"Success\"},\"offers\":{\"offer\":[{\"id\":\"111\",\"message\":\"Enjoy the offer with 25 extar TT\",\"shortMessage\":\"Bonus offer\",\"message-encoding\":\"UTF-8\",\"message-lang\":\"English (UK)\",\"offerType\":\"usage\",\"category\":\"Balance Top ups\",\"order\":1},{\"id\":\"110\",\"message\":\"Enjoy the offer with 25 extar TT\",\"shortMessage\":\"Bonus offer\",\"message-encoding\":\"UTF-8\",\"message-lang\":\"English (UK)\",\"offerType\":\"usage\",\"category\":\"Balance Top ups\",\"order\":2}]}}";
+		
+		public int getRuleId(String ruleName) throws IOException, Exception {
+			SQLHandler sql = new SQLHandler();
+			return sql.getStringOfQuery("select SEGMENT_OFFER_ID from im_segment_offer where SEGMENT_NAME=\""+ruleName+"\";");
+		}
+		@Then("^get-offer api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
+		public void getOfferApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
 			StringBuilder str = new StringBuilder();
 			str.append("http://");
 			MarathonHelper m = new MarathonHelper();
-			str.append(m.getContainerNode(p.getValue("env"), p.getValue("api-server")));
+			str.append(p.getValue("nginxIp"));
 			str.append(":");
-			str.append(m.getContainerPort(p.getValue("env"), p.getValue("api-server")));
-			str.append("/rest/authkey/authKey/msisdn/"+number+"/offers");
+			str.append("8092");
+			eh.setExcelFile("touchpointInputData", touchpointSheet);
+			str.append("/rest/authkey/"+eh.getCellByColumnName("api touchpoint name")+"/msisdn/"+number+"/offers");
 			System.out.println(str.toString());
 			Request req = new Request();
 			req.getRequest(str.toString(),"");
 			offerRecommended = req.responseString;
 			System.out.println(req.responseString);
+			eh.setExcelFile("ruleInputData", ruleSheet);
+			SQLHandler sql = new SQLHandler();
+			int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
+			Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
 		}
 		
-		@Then("^accept api-server for \"([^\"]*)\"$")
-		public void acceptApiServerForNumber(String number) throws Throwable {
+		@Then("^accept api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
+		public void acceptApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
+			StringBuilder postBody = new StringBuilder();
+			postBody.append("{\"event\":[\r\n" + 
+					"{ \"id\":\"104\", \"type\":\"POST\", \"value\":\"");
+			eh.setExcelFile("ruleInputData", ruleSheet);
+			int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
+			postBody.append(ruleId);
+			postBody.append("\", \"date\":\"");
+			Date now = new Date();
+			Calendar calendar = Calendar.getInstance();
+			int min = calendar.get(Calendar.MINUTE);
+			now.setMinutes(min+2);
+			String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+			postBody.append(timeStamp);
+			postBody.append(" +0530\" }");
+			postBody.append("]}");
+			System.out.println(postBody.toString());
 			StringBuilder str = new StringBuilder();
 			str.append("http://");
 			MarathonHelper m = new MarathonHelper();
-			str.append(m.getContainerNode(p.getValue("env"), p.getValue("api-server")));
+			str.append(p.getValue("nginxIp"));
 			str.append(":");
-			str.append(m.getContainerPort(p.getValue("env"), p.getValue("api-server")));
-			str.append("/rest/authkey/authKey/msisdn/"+number+"/kpi/events");
+			str.append("8092");
+			eh.setExcelFile("touchpointInputData", touchpointSheet);
+			str.append("/rest/authkey/"+eh.getCellByColumnName("api touchpoint name")+"/msisdn/"+number+"/kpi/events");
 			System.out.println(str.toString());
 			Request req = new Request();
-			req.getRequest(str.toString(),"");
+			req.postRequest(str.toString(), postBody.toString());
 			System.out.println(req.responseString);
 		}
 		

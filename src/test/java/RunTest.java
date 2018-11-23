@@ -43,7 +43,7 @@ import cucumber.api.java.en.Then;
 @CucumberOptions(
         features = { "src/test/features" },
 		glue = {"classpath:"},
-		tags = {"@NX-1349"},
+		tags = {"@NX-9213"},
 		plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:output/report.html",
         "html:target/81", "json:target/81/cucumber.json",

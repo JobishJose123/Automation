@@ -1000,7 +1000,7 @@ public void enterCampaignDeailsForCompareTargetConditions() throws Throwable {
 //		targetConditionObjects.clickTargetConditionViewToggle();
 		targetConditionObjects.clickBasicTargetConditionWithAge();
 		clickProceedButton();
-		 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='router']/app-route[9]/campaign-form/wizard-tab/div/iron-pages/campaign-schedule/form/paper-card/paper-date-time-input/div/paper-input[2]/paper-input-container/div[2]"))).click();
+		 wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//campaign-schedule//paper-input-container)[2]//input"))).click();
     	 Thread.sleep(1000);
     	 Calendar rightNow =Calendar.getInstance();
     	 int hours = rightNow.get(Calendar.HOUR);
