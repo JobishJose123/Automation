@@ -977,8 +977,14 @@ public class OfferSteps extends Init {
 	public void VerifyEmailSendTrialSMSOneNum(String sheet, String productSheet, String number) throws Throwable {
 		offerPageObjects.EmailSendTrialSMSOneNum(sheet, productSheet, number);
 	}
-	
-	
+	@Then("^add a new Product for offer from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void Edit_Offer(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.EditOffer_Product(sheet, productSheet);
+	}
+	@Then("^navigate to offer from sheet \"([^\"]*)\" and verify product name from \"([^\"]*)\"$")
+	public void Verify_Product_InOffer(String sheet, String productSheet) throws Throwable {
+		offerPageObjects.Verify_Product_InOffer(sheet, productSheet);
+	}
 	
 	
 

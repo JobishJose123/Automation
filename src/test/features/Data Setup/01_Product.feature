@@ -5,9 +5,9 @@
 @Product_datasetup
 Feature: Product class and Product creation
 
-@NX-1011
+@NX-1222
 @initBrowser  @closeBrowser
-Scenario: Products Grid: Verify the product details displayed in the Products screen NX-1011
+Scenario: Products Grid: Create Prodcut from Productclass other than prepaid telecom 
 Given login
 Then navigate to configuration management
 Then naviagte to product classes
@@ -20,3 +20,14 @@ Then navigate to product class "TestProductClass"
 Then click create new product button
 #Then create product with attributes from sheet "fullDetails"
 Then create product with attributes from sheet "fullDetails"
+
+@NX-1112
+@initBrowser  
+Scenario: Create product from prepaid telecom
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to products
+Then navigate to prepaid telecom
+Then click create new product button
+Then create single product from sheet "singleProductPage"

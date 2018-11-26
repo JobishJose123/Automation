@@ -56,6 +56,8 @@ public class OfferPageObjects extends Init {
 	private WebElement offerCategory;
 	@FindBy(xpath = "//*[contains(.,'Create New Offer')]/following::paper-button[contains(.,'Proceed')]")
 	private WebElement offerProceedButton;
+	@FindBy(xpath = "//*[contains(.,'Edit Offer')]/following::paper-button[contains(.,'Proceed')]")
+	private WebElement EditofferProceedButton;	
 	@FindBy(xpath = "//paper-button[contains(.,'Proceed')]")
 	private WebElement offerEditProceedButton;
 	@FindBy(xpath = ".//*[@id='check']/div/iron-pages/offer-products/form/div/div[2]/paper-button")
@@ -1189,6 +1191,9 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(offerProceedButton);
 	}
 	
+	public void EditScreen_clickProceedButton() throws InterruptedException {
+		jswait.loadClick(EditofferProceedButton);
+	}
 
 	public void chooseOfferType() throws InterruptedException {
 		jswait.loadClick(offerType);
@@ -2058,5 +2063,27 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(sendTrialEmailPageClose);
 		
 	}
-
+	public void EditOffer_Product(String sheet, String productSheet) throws Throwable {
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		String productToAdd = (String) prodcutFile.getCell(1, 0);
+		clickOfferAddButton();
+		commonObjects.filterName(productToAdd);
+		jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
+		clickDialogBoxAddButton();
+		EditScreen_clickProceedButton();
+		EditScreen_clickProceedButton();
+		EditScreen_clickProceedButton();
+		clickSaveOfferButton();
+			}
+	
+	public void Verify_Product_InOffer(String sheet, String productSheet) throws Throwable {
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		String productToCheck = (String) prodcutFile.getCell(1, 0);
+		EditScreen_clickProceedButton();
+		WebElement element = driver.findElement(By.xpath("//span[contains(.,'" + productToCheck + "')]"));
+		assertTrue("Prduct '"+ productToCheck +"' not found, offer not edited", element.isDisplayed());
+		
+	}
 }
