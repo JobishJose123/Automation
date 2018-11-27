@@ -6,8 +6,8 @@
 Feature: Test suite Dashboard_data setup
   Create all types of BC for dashboard
 #=============================================================================================================#
-  @CapaignCatagory1_Campaign1_AllBC
-  @initBrowser 
+  @CapaignCatagory1_Campaign1_AllBC 
+  @initBrowser @closeBrowser
   Scenario: Verify Creating CapaignCatagory1 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to configuration management
@@ -133,7 +133,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory1_Campaign3_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign3 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -194,7 +194,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory1_Campaign4_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign4 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -255,7 +255,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory1_Campaign5_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -317,7 +317,7 @@ Feature: Test suite Dashboard_data setup
     
     #=============================================================================================================#
   @CapaignCatagory2_Campaign1_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory2 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to configuration management
@@ -382,7 +382,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
    #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory2_Campaign2_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory2 with Campaign2 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -421,6 +421,7 @@ Feature: Test suite Dashboard_data setup
     Then activate bc
     Then save details of seedingoneoff
     #Create_NormalRecurringBC
+    Then click create new broadcast button
     Then enter details for new broadcast with condition groupIdCondition_65  from sheet "recurringBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerRecurringBC
@@ -442,7 +443,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory2_Campaign3_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory2 with Campaign3 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -503,7 +504,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory2_Campaign4_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory2 with Campaign4 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -564,7 +565,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory2_Campaign5_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory2 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -625,7 +626,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
     #=============================================================================================================#
   @CapaignCatagory3_Campaign1_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory3 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to configuration management
@@ -690,7 +691,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
    #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory3_Campaign2_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign2 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -751,7 +752,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory3_Campaign3_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign3 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -812,7 +813,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory3_Campaign4_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign4 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -874,7 +875,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory3_Campaign5_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -935,7 +936,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
     #=============================================================================================================#
   @CapaignCatagory4_Campaign1_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory4 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to configuration management
@@ -966,42 +967,41 @@ Feature: Test suite Dashboard_data setup
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     #Create_one-offBC
-    Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_10 from sheet "one-offBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_210 from sheet "one-offBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerBC
     Then click create new broadcast button
-    Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_15 from sheet "seedingTriggerableBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_215 from sheet "seedingTriggerableBC" with "SeedingSMS"
     Then activate bc
     #Create_SeedingoneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_20 from sheet "seedingoneoff" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_220 from sheet "seedingoneoff" with "SeedingSMS"
     Then activate bc
     Then save details of seedingoneoff
     #Create_NormalRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_25  from sheet "recurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_225  from sheet "recurringBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerRecurringBC
-    Then enter details for new broadcast with condition groupIdCondition_30  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition groupIdCondition_230  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
     Then activate bc
     #SeedingRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_35  from sheet "seedingRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_235  from sheet "seedingRecurringBC" with "SeedingSMS"
     Then activate bc
     #Create_TriggerOneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_40  from sheet "TriggerOneoff" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_240  from sheet "TriggerOneoff" with "rechargeSMS"
     Then activate bc
     #Create_TriggerRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_45  from sheet "TriggerReccurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_245  from sheet "TriggerReccurringBC" with "rechargeSMS"
     Then activate bc 
     Then save details of datasetup
    #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory4_Campaign2_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory4 with Campaign2 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -1028,41 +1028,41 @@ Feature: Test suite Dashboard_data setup
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     #Create_one-offBC
-    Then enter details for new broadcast with condition groupIdCondition_50 from sheet "one-offBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_250 from sheet "one-offBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_55 from sheet "seedingTriggerableBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_255 from sheet "seedingTriggerableBC" with "SeedingSMS"
     Then activate bc
     #Create_SeedingoneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_60 from sheet "seedingoneoff" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_260 from sheet "seedingoneoff" with "SeedingSMS"
     Then activate bc
     Then save details of seedingoneoff
     #Create_NormalRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_65  from sheet "recurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_265  from sheet "recurringBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_70  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_270  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
     Then activate bc
     #SeedingRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_75  from sheet "seedingRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_275  from sheet "seedingRecurringBC" with "SeedingSMS"
     Then activate bc
     #Create_TriggerOneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_80  from sheet "TriggerOneoff" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_280  from sheet "TriggerOneoff" with "rechargeSMS"
     Then activate bc
     #Create_TriggerRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_85  from sheet "TriggerReccurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_285  from sheet "TriggerReccurringBC" with "rechargeSMS"
     Then activate bc 
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory4_Campaign3_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory4 with Campaign3 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -1089,41 +1089,41 @@ Feature: Test suite Dashboard_data setup
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     #Create_one-offBC
-    Then enter details for new broadcast with condition groupIdCondition_90 from sheet "one-offBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_290 from sheet "one-offBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_95 from sheet "seedingTriggerableBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_295 from sheet "seedingTriggerableBC" with "SeedingSMS"
     Then activate bc
     #Create_SeedingoneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_100 from sheet "seedingoneoff" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_300 from sheet "seedingoneoff" with "SeedingSMS"
     Then activate bc
     Then save details of seedingoneoff
     #Create_NormalRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_105  from sheet "recurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_305  from sheet "recurringBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_110  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_310  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
     Then activate bc
     #SeedingRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_115  from sheet "seedingRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_315  from sheet "seedingRecurringBC" with "SeedingSMS"
     Then activate bc
     #Create_TriggerOneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_120  from sheet "TriggerOneoff" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_320  from sheet "TriggerOneoff" with "rechargeSMS"
     Then activate bc
     #Create_TriggerRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_125  from sheet "TriggerReccurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_325  from sheet "TriggerReccurringBC" with "rechargeSMS"
     Then activate bc 
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory4_Campaign4_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign4 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -1150,41 +1150,41 @@ Feature: Test suite Dashboard_data setup
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     #Create_one-offBC
-    Then enter details for new broadcast with condition groupIdCondition_130 from sheet "one-offBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_330 from sheet "one-offBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_135 from sheet "seedingTriggerableBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_335 from sheet "seedingTriggerableBC" with "SeedingSMS"
     Then activate bc
     #Create_SeedingoneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_140 from sheet "seedingoneoff" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_340 from sheet "seedingoneoff" with "SeedingSMS"
     Then activate bc
     Then save details of seedingoneoff
     #Create_NormalRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_145  from sheet "recurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_345  from sheet "recurringBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_150  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_350  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
     Then activate bc
     #SeedingRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_155  from sheet "seedingRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_355  from sheet "seedingRecurringBC" with "SeedingSMS"
     Then activate bc
     #Create_TriggerOneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_160  from sheet "TriggerOneoff" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_360  from sheet "TriggerOneoff" with "rechargeSMS"
     Then activate bc
     #Create_TriggerRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_165  from sheet "TriggerReccurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_365  from sheet "TriggerReccurringBC" with "rechargeSMS"
     Then activate bc 
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
       @CapaignCatagory4_Campaign5_AllBC
-  @initBrowser 
+  @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory4 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -1211,47 +1211,47 @@ Feature: Test suite Dashboard_data setup
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     #Create_one-offBC
-    Then enter details for new broadcast with condition groupIdCondition_170 from sheet "one-offBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_370 from sheet "one-offBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_175 from sheet "seedingTriggerableBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_375 from sheet "seedingTriggerableBC" with "SeedingSMS"
     Then activate bc
     #Create_SeedingoneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_180 from sheet "seedingoneoff" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_380 from sheet "seedingoneoff" with "SeedingSMS"
     Then activate bc
     Then save details of seedingoneoff
     #Create_NormalRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_185  from sheet "recurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_385  from sheet "recurringBC" with "rechargeSMS"
     Then activate bc
     #Create_SeedingTriggerRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_190  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_390  from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
     Then activate bc
     #SeedingRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_195  from sheet "seedingRecurringBC" with "SeedingSMS"
+    Then enter details for new broadcast with condition groupIdCondition_395  from sheet "seedingRecurringBC" with "SeedingSMS"
     Then activate bc
     #Create_TriggerOneoffBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_200  from sheet "TriggerOneoff" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_400  from sheet "TriggerOneoff" with "rechargeSMS"
     Then activate bc
     #Create_TriggerRecurringBC
     Then click create new broadcast button
-    Then enter details for new broadcast with condition groupIdCondition_205  from sheet "TriggerReccurringBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition groupIdCondition_405  from sheet "TriggerReccurringBC" with "rechargeSMS"
     Then activate bc 
     Then save details of datasetup
       
-        #@testdatawrite @initBrowser
+        #@testdatawrite @initBrowser @closeBrowser 
   #Scenario: test data write.
     #Given login
     #Then save details of seedingoneoff
     #Then save details of datasetup
     #Then save details of datasetup
   #
-       #@testdatawrite2 @initBrowser
+       #@testdatawrite2 @initBrowser @closeBrowser 
   #Scenario: test data write.
     #Given login
     #Then save details of seedingoneoff

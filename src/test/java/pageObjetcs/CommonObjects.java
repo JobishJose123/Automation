@@ -702,8 +702,8 @@ public void savedetailsofdatasetup() throws Exception {
 		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("BC Name"));
 		bcrowcount++;
 		
-		eh.setExcelFile("bcInputData","one-offBC");
-		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("seedingbcname"));
+		eh.setExcelFile("bcInputData","seedingoneoff");
+		mainexcel.setCell(bcrowcount,4,eh.getCellByColumnName("BC Name"));
 		bcrowcount++;
 		
 		eh.setExcelFile("bcInputData","recurringBC");

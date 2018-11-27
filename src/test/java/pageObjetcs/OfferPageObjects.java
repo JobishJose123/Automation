@@ -391,6 +391,19 @@ public class OfferPageObjects extends Init {
 	 private WebElement rewardFirstRuleAdButton;
 	 @FindBy(xpath="//span[contains(.,'Change')]/../input")
 	 private WebElement emailcreativechangebtn ;
+	 
+	 @FindBy(xpath=".//label[contains(.,'Text')]//following::textarea")
+	 private WebElement facebookcreativetextInput;
+	 @FindBy(xpath="//label[contains(.,'Select Facebook Page')]//following::iron-icon[1]")
+	 private WebElement facebookpageselect;
+	 @FindBy(xpath="//paper-item[contains(.,'NEONxTel')]")
+	 private WebElement facebookpage;
+	 @FindBy(xpath=".//*[@id='browse']//following::input[1]")
+	 private WebElement fbvideoinput;
+	@FindBy(xpath = ".//*[@id='file']")
+	private WebElement facebookimageButton;
+	 
+	 
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -1609,6 +1622,8 @@ public class OfferPageObjects extends Init {
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		else if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		else if (eh.getCell(1, 3).toString().contains("Facebook"))
+			enterfacebookCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		else if (eh.getCell(1, 3).toString().contains("Email")) {
 			 
 			 if(testMode!="NULL") {verifySetAsDefaultCheckboxinCreativeTab();	
@@ -2086,4 +2101,45 @@ public class OfferPageObjects extends Init {
 		assertTrue("Prduct '"+ productToCheck +"' not found, offer not edited", element.isDisplayed());
 		
 	}
+	
+	public void enterfacebookCreative(String profile,String type ) throws Exception {
+		   
+		System.out.println("inside fb creative");
+		System.out.println(profile);
+		System.out.println(type);
+		
+		jswait.loadClick(facebookpageselect);
+		Thread.sleep(3000);
+		
+		jswait.loadClick(facebookpage);
+		
+	   if(type.equalsIgnoreCase("image")) {
+	   		   
+	   jswait.loadClick(".//*[@id='rectMain']//div[contains(.,'Single Image')]");
+	   
+	   File image = new File("facebookinput\\Hydrangeas.jpg");
+	   Thread.sleep(2000);
+	   facebookimageButton.sendKeys(image.getAbsolutePath());
+	
+	   Thread.sleep(2000);
+	   jswait.loadSendKeys(facebookcreativetextInput,"This is a test promoting");
+	   
+	   Thread.sleep(50000);
+	   
+	}else if(type.equalsIgnoreCase("video")) {
+		
+		  jswait.loadClick(".//*[@id='rectMain']//div[contains(.,'Single Video')]");
+		   
+		   File video = new File("facebookinput\\welcome.mp4");
+		   Thread.sleep(2000);
+		   fbvideoinput.sendKeys(video.getAbsolutePath());
+		  			 			   
+		   Thread.sleep(2000);
+		   jswait.loadSendKeys(facebookcreativetextInput,"This is a test promoting");
+		   Thread.sleep(50000);
+		
+	}
+	   
+   }
+	
 }

@@ -574,7 +574,7 @@ public class CampaignManagement extends Init{
 	    }
 	    @Then("^click create new broadcast button$")
 	    public void create_new_broadcast_button() throws Throwable
-	    {
+	    { Thread.sleep(3000);
 	    	campaignObjects.clickCreateNewBroadcastButton();
 	    	Thread.sleep(3000);
 	    }
