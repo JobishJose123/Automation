@@ -47,7 +47,7 @@ public class CommonSteps extends Init {
 	@Given("^login$")
     public void loginuser() throws Exception {
 
-		 driver.get("http://"+p.getValue("env"));
+		 driver.get("https://"+p.getValue("env"));
 		 loginPage.login(p.getValue("username"), p.getValue("password"));
 		 
 		 //handle robox

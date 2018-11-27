@@ -16,7 +16,7 @@ Feature: Title of your feature
 #Then click facebook option
 #Then verify add facebook account option
 
-@NX-facebook
+@NX-facebookvideo
  @initBrowser 
   Scenario: Create offer:Track: Verify creating offers with facebook channel
     Given login
@@ -24,3 +24,12 @@ Feature: Title of your feature
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "rechargevideoFacebook" with product "singleProductPage"
+    
+    @NX-facebookimage
+ @initBrowser 
+  Scenario: Create offer:Track: Verify creating offers with facebook channel
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeimageFacebook" with product "singleProductPage"
