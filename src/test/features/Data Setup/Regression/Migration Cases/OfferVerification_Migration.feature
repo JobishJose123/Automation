@@ -22,3 +22,11 @@ Feature: Test suite for offer verification with migration test cases
     Then edit offer
     Then navigate to offer from sheet "usageBasedWAP" and verify product name from "singleProductPage"
     
+    
+    
+    
+    
+    
+    
+    
+    

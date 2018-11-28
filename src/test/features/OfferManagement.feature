@@ -332,7 +332,7 @@ Feature: Test suite on Offer creation
     Then navigate to offers
     Then verify creative  tab colours
 
-  @NX-889 @initBrowser @closeBrowser
+  @NX-889 @initBrowser 
   Scenario: Create offer: Creative: Verify clicking on the add button in the creative tab.. NX-889
     Given login
     When navigate to precision marketer
@@ -462,7 +462,8 @@ Feature: Test suite on Offer creation
   Scenario: Create offer: Creative: Verify adding new dynamic tag variable with consumer profile source NX-948
     Then check previous step and pass this
     Then pass next scenario based on this step
-
+    
+    
   @NX-951 
   Scenario: Create offer: Creative: Verify saving the newly added dynamic variable NX-951
     Then check previous step and pass this
@@ -837,7 +838,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     #Then verify trial message event
     Then verify trial message event details from sheet "rechargeSMS"
     
-    @NX-5177 @initBrowser @closeBrowser
+    @NX-5177 @initBrowser 
     Scenario: STC--> Verify whether dynamic tags are working properly
     Given login
     When navigate to precision marketer

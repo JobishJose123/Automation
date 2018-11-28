@@ -1604,8 +1604,21 @@ public class OfferPageObjects extends Init {
 			 selectCreativeLanguageEnglish();
 			 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		}
-			
-	}
+		}
+	private void enterDynamic() throws InterruptedException {
+		   // TODO Auto-generated method stub
+		   jswait.loadClick(mapVariablecreativeIcon);
+		   //clickMapVariableCancelButton();
+		   //jswait.loadClick(emailMapVariable);
+		   MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
+		   try{
+			   clickMapVariableFirstVariable();
+		   }catch(Exception e) {
+			   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
+		   }
+		   clickMapVariableOkButton();
+		
+		}
 	public void enterEmailCreativeTabDetails(ExcelHelper eh) throws Throwable {
 		selectCreativeLanguageEnglish();
 		if (eh.getCell(1, 3).toString().contains("Email")) {
@@ -1619,7 +1632,13 @@ public class OfferPageObjects extends Init {
 			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		}
 		else if (eh.getCell(1, 3).toString().contains("SMS"))
+			{
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			
+		    if (((String) eh.getCell(1, 20)).contains("DYNAMICTAG")) {
+			enterDynamic();
+		}
+			}		
 		else if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		else if (eh.getCell(1, 3).toString().contains("Facebook"))
@@ -1634,6 +1653,7 @@ public class OfferPageObjects extends Init {
 			 else
 				 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		}
+		
 			
 	}
 
