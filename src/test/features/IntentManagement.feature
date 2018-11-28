@@ -55,23 +55,6 @@ Feature: positive flow of im program creation
     Then create api touchpoint from sheet "apiTouchpoint"
     Then check api touchpoint in grid "apiTouchpoint"
 
-  ##need to craete ussd application in legacy first
-  @NX-435 @initBrowser
-  Scenario: Verify new USSD touchpoint creation
-    Given login
-    Then navigate to intent management
-    Then navigate to touchpoints
-    Then navigate to ussd
-    Then create ussd touchpoint from sheet "ussdTouchpoint"
-    Then check ussd touchpoint in grid "ussdTouchpoint"
-    Then edit ussd touchpoint from sheet "ussdTouchpoint"
-    Then delete ussd touchpoint from sheet "ussdTouchpoint"
-    Then pass next scenario based on this step
-
-  ####Linked cases TP deleted after test
-  @NX-8427
-  Scenario: Verify USSD touchpoint edit functionality 8427
-    Then check previous step and pass this
 
   @NX-436 @initBrowser @closeBrowser
   Scenario: Verify Cancel button functionality for SMS TP

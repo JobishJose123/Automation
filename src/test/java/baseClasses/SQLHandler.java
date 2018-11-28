@@ -126,7 +126,7 @@ public class SQLHandler extends Init{
     		int touchpointId = getTouchpointID(touchpointName);
     		rs = executeQuery("select * from api_auth_policy where TOUCH_POINT_ID = "+touchpointId+";");
     		if(!rs.first()) {
-    			executeUpdate("insert into api_auth_policy values("+ ++numRows+","+touchpointId+",\""+""+touchpointName+"\",\""+p.getValue("machineIp")+"\");");
+    			executeUpdate("insert into api_auth_policy values("+ ++numRows+","+touchpointId+",\""+""+touchpointName+"\",\""+p.getValue("machineIp")+"\",\""+touchpointName+"_SEL"+"\");");
     			m.scaleContainer(p.getValue("env"), p.getValue("api-server"),"0");
     			Thread.sleep(8000);
     			m.scaleContainer(p.getValue("env"), p.getValue("api-server"),"1");
@@ -140,14 +140,15 @@ public class SQLHandler extends Init{
         }
         
 	public static void main(String[] args) throws Exception {
-		SQLHandler sql = new SQLHandler();
-		PropHandler p = new PropHandler();
-		p.setPropertyFile("config.properties");
-		sql.init(p.getValue("dbUrl"),p.getValue("dbUsername"),p.getValue("dbPassword"));
-		int touchpointId = sql.getTouchpointID("touchpoint007");
 		
+//		PropHandler p = new PropHandler();
+		p.setPropertyFile("config.properties");
+		
+		SQLHandler sql = new SQLHandler();
+//		sql.init("jdbc:mysql://node1.qaenv06.flytxt.com:31388/neon",p.getValue("dbUsername"),p.getValue("dbPassword"));
+		int touchpointId = sql.getTouchpointID("apiTP344");
 		System.out.println(touchpointId);
-		sql.addTouchpointToApiAuthPolicy("touchpoint007");
+//		sql.addTouchpointToApiAuthPolicy("touchpoint007");
 	}
 
 }
