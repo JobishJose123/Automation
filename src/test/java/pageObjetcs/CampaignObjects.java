@@ -1905,8 +1905,6 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 	  exportCampignLocationObject.clickSaveButton();
 		
 	}
-  
-   
    
 
 }

@@ -8,6 +8,7 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.InputEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -33,6 +34,8 @@ import baseClasses.EmailHandlergmail;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.PdfReader;
+import baseClasses.SQLHandler;
 import baseClasses.TimeoutImpl;
 
 public class BroadcastPageObjects extends Init {
@@ -41,8 +44,10 @@ public class BroadcastPageObjects extends Init {
 	}
 
 	JSWaiter jswait = new JSWaiter();
+	PdfReader pdfReader=new PdfReader();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	public ExcelHelper eh = new ExcelHelper();
+	public ExcelHelper eM= new ExcelHelper();
 	CampaignObjects campaignObjects = new CampaignObjects();
 	CommonObjects commonObjects = new CommonObjects();
 
@@ -334,6 +339,10 @@ private WebElement recipientclick;
 	 private WebElement savedSegmentRadioButtion;
 	 @FindBy(xpath="//label[contains(.,'Saved Segments')]/../..//input")
 	 private WebElement savedSegmentSelectorField;
+	 @FindBy(xpath="(//div//vaadin-grid-table-body//vaadin-grid-table-row//vaadin-grid-table-cell//vaadin-grid-cell-content)[1]")
+	 private WebElement newlyCreatedBC ;
+	 @FindBy(xpath="(//vaadin-grid-table-cell//vaadin-grid-cell-content)[2]")
+	 private WebElement statusOfBC;
 	 
 	// @FindBy(xpath="")
 	// private WebElement ;
@@ -2041,7 +2050,40 @@ public void Broadcast_Expiry() throws Exception{
 	jswait.loadClick(expirestimezone);
 }
 
+public void verifyExportBroadcast(String sheet) throws FileNotFoundException, IOException, Exception {
 
+	eM.setExcelFile("bcInputData", sheet);
+	String name = eM.getCell(1, 0).toString();
+	System.out.println(name);
+	//System.out.println("Checking downloaded PDF");
+	//String newBCName = newlyCreatedBC.getText();
+	String statusOFbroadcast=statusOfBC.getText();
+	//System.out.println(newBCName);
+	// replacing the spaces with _ for created new variable 'newBCNameWithOutSpace'
+	String newBCNameWithOutSpace = name.replaceAll("[^a-zA-Z0-9-]", "_");
+
+	//System.out.println(newBCNameWithOutSpace);
+
+	// to print the system username like computer name
+	// System.out.println(systemUserName);
+	// System.out.println("waiting for PDF");
+	//Thread.sleep(3000);
+	System.out.println(statusOFbroadcast);
+	String systemUserName = System.getProperty("user.name");
+	SQLHandler sql = new SQLHandler();
+	String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + name
+			+ "';";
+	int bcID = sql.getStringOfQuery(query);
+	//System.out.println(bcID);
+	String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+	System.out.println(path);
+	System.out.println("open PDF property class");
+	Thread.sleep(1000);
+  // to load the pdf file
+	pdfReader.loadPDFFile(path, name,statusOFbroadcast);
+
+	System.out.println("Verified PDF");
+}
 
 
 
