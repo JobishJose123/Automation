@@ -8,7 +8,7 @@ Feature: Test suite for offer verification with migration test cases
  
 @NDX-5174
  @initBrowser @closeBrowser 
-  Scenario: Edit Product details from a migrated offer and verify that the edited product details are mapped correctly in offer
+  Scenario: Edit Product details from a MIGRATED offer and verify that the edited product details are mapped correctly in offer
     Given login
     When navigate to precision marketer
     Then navigate to offer management
@@ -21,6 +21,18 @@ Feature: Test suite for offer verification with migration test cases
     Then filter offer from sheet "usageBasedWAP"
     Then edit offer
     Then navigate to offer from sheet "usageBasedWAP" and verify product name from "singleProductPage"
+    
+@NDX-5399
+ @initBrowser @closeBrowser
+ Scenario: Edit Dynamic tag details in creative tab from a MIGRATED offer and verify that the edited product details are mapped correctly in offer
+   Given login
+   When navigate to precision marketer
+   Then navigate to offer management
+   Then navigate to offers
+   Then create new offer from sheet "rechargeSMS_Dynamic" with product "fullDetails"
+   Then filter offer from sheet "rechargeSMS_Dynamic"
+   Then edit offer
+   Then edit creative details and verify the same from sheet "rechargeSMS_Dynamic" 
     
     
     

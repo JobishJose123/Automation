@@ -985,7 +985,10 @@ public class OfferSteps extends Init {
 	public void Verify_Product_InOffer(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.Verify_Product_InOffer(sheet, productSheet);
 	}
-	
+	@Then("^edit creative details and verify the same from sheet \"([^\"]*)\"$")
+	public void EditDynanicTag_Offer(String sheet) throws Throwable {
+		offerPageObjects.EditCreative(sheet);		
+	}
 	
 
 

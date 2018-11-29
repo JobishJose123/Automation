@@ -2161,5 +2161,35 @@ public class OfferPageObjects extends Init {
 	}
 	   
    }
-	
+	public void EditCreative(String sheet) throws Throwable {
+		Thread.sleep(1000);
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		Thread.sleep(1000);
+		CreativeTitle.sendKeys("edited");
+		smsCreativeDetails.sendKeys("edited");
+		String title = commonObjects.getTextFormTextField(CreativeTitle);
+		String creativedetails = commonObjects.getTextFormTextField(smsCreativeDetails);
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickSaveOfferButton();
+		//clickOfferEditProceedButton();
+		//clickOfferEditProceedButton();
+		//clickSaveOfferButton();
+		Thread.sleep(2000);
+		chooseOffer(sheet);
+		commonObjects.clickOptionsIcon();
+		//chooseOffer(sheet);
+		clickEditOffer();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		Thread.sleep(1000);
+		String Editedtitle = commonObjects.getTextFormTextField(CreativeTitle);
+		String Editedcreativedetails = commonObjects.getTextFormTextField(smsCreativeDetails);
+		System.out.println("test");
+		System.out.println("Edited Creative detail is" +Editedcreativedetails+ "");
+		System.out.println("Creative detail is" +creativedetails+ "");
+		assertTrue("CreativeTitle is not saved correctly after editing", Editedtitle.equals(title));
+		assertTrue("CreativeDetails is not saved correctly after editing", Editedcreativedetails.equals(creativedetails));
+	}
 }

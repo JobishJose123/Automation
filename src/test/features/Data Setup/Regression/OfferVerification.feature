@@ -22,13 +22,13 @@ Feature: Test suite for offer verification test cases
     Then edit offer
     Then navigate to offer from sheet "usageBasedWAP" and verify product name from "singleProductPage"
     
- @NDX-1234
- @initBrowser
- Scenario: Edit Dynamic tag details in creative tab from a new offer and verify that the edited product details are mapped correctly in offer
- Given login
- When navigate to precision marketer
- Then navigate to offer management
- Then navigate to offers
- #Then verify adding dynamic variable in creative tab
- #Then verify editing added variable
- Then create new offer from sheet "rechargeSMS_Dynamic" with product "fullDetails"
+ @NDX-5398
+ @initBrowser @closeBrowser
+  Scenario: Edit Dynamic tag details in creative tab from a new offer and verify that the edited creative details are mapped correctly in offer
+    Given login
+    When navigate to precision marketer
+ 		Then navigate to offer management
+ 		Then navigate to offers
+ 		Then filter offer from sheet "rechargeSMS_Dynamic"
+ 		Then edit offer
+ 		Then edit creative details and verify the same from sheet "rechargeSMS_Dynamic" 
