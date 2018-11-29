@@ -989,7 +989,10 @@ public class OfferSteps extends Init {
 	public void EditDynanicTag_Offer(String sheet) throws Throwable {
 		offerPageObjects.EditCreative(sheet);		
 	}
-	
+	@Then("^edit Track Period from offer from sheet \"([^\"]*)\" and verify the edited details$")
+	public void EditTrack_Offer(String sheet) throws Throwable {
+		offerPageObjects.EditTrack(sheet);		
+	}
 
 
 

@@ -2192,4 +2192,16 @@ public class OfferPageObjects extends Init {
 		assertTrue("CreativeTitle is not saved correctly after editing", Editedtitle.equals(title));
 		assertTrue("CreativeDetails is not saved correctly after editing", Editedcreativedetails.equals(creativedetails));
 	}
+	public void EditTrack(String sheet) throws Exception {
+		// TODO Auto-generated method stub
+		Thread.sleep(1000);
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		Thread.sleep(1000);
+		jswait.loadClick("//form[@id='trackForm']//data-table-cell[text()='2']/..//iron-icon[contains(@icon,'edit')]");
+		addTrackingRuleSecondConditionParameterSelectAge.sendKeys("1");
+		//createSecondDefaultTrackingRuleCondition();
+		//clickOfferEditProceedButton();
+	}
 }

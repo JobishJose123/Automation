@@ -29,7 +29,7 @@ Feature: Test suite for offer verification with migration test cases
    When navigate to precision marketer
    Then navigate to offer management
    Then navigate to offers
-   Then create new offer from sheet "rechargeSMS_Dynamic" with product "fullDetails"
+   #Then create new offer from sheet "rechargeSMS_Dynamic" with product "fullDetails"
    Then filter offer from sheet "rechargeSMS_Dynamic"
    Then edit offer
    Then edit creative details and verify the same from sheet "rechargeSMS_Dynamic" 

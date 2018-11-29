@@ -32,3 +32,14 @@ Feature: Test suite for offer verification test cases
  		Then filter offer from sheet "rechargeSMS_Dynamic"
  		Then edit offer
  		Then edit creative details and verify the same from sheet "rechargeSMS_Dynamic" 
+ 
+   @NX-123 @initBrowser 
+  Scenario: Email Channel -->Verify the Create offer using STVSMS 
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    #Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    Then filter offer from sheet "rechargeSMS"
+    Then edit offer
+    Then edit Track Period from offer from sheet "rechargeSMS" and verify the edited details
