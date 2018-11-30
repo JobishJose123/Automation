@@ -248,6 +248,8 @@ public class OfferPageObjects extends Init {
 	 private WebElement addTrackingRuleConditionDeleteButton;
 	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[text()='Save']")
 	 private WebElement addTrackingRuleSaveButton;
+	 @FindBy(xpath="//form[@id='trackRuleForm']//div[2]//paper-button[contains(.,'Save')]")
+	 private WebElement EditTrackingRuleSaveButton;
 	 @FindBy(xpath="//form[@id='trackRuleForm']//paper-button[text()='Save']")
 	 private WebElement editTrackingRuleSaveButton;
 	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[text()='Cancel']")
@@ -2192,7 +2194,7 @@ public class OfferPageObjects extends Init {
 		assertTrue("CreativeTitle is not saved correctly after editing", Editedtitle.equals(title));
 		assertTrue("CreativeDetails is not saved correctly after editing", Editedcreativedetails.equals(creativedetails));
 	}
-	public void EditTrack(String sheet) throws Exception {
+	public void EditTrack(String sheet) throws Throwable {
 		// TODO Auto-generated method stub
 		Thread.sleep(1000);
 		clickOfferEditProceedButton();
@@ -2200,7 +2202,27 @@ public class OfferPageObjects extends Init {
 		clickOfferEditProceedButton();
 		Thread.sleep(1000);
 		jswait.loadClick("//form[@id='trackForm']//data-table-cell[text()='2']/..//iron-icon[contains(@icon,'edit')]");
-		addTrackingRuleSecondConditionParameterSelectAge.sendKeys("1");
+		//addTrackingRuleSecondConditionConditionValue.sendKeys("1");
+		driver.findElement(By.xpath("//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input")).sendKeys("1");
+		String value = commonObjects.getTextFormTextField("//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input");
+		jswait.loadClick(editTrackingRuleSaveButton);
+		clickOfferEditProceedButton();
+		clickSaveOfferButton();
+		Thread.sleep(2000);
+		chooseOffer(sheet);
+		commonObjects.clickOptionsIcon();
+		//chooseOffer(sheet);
+		clickEditOffer();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		Thread.sleep(1000);
+		jswait.loadClick("//form[@id='trackForm']//data-table-cell[text()='2']/..//iron-icon[contains(@icon,'edit')]");
+		String editedvalue = commonObjects.getTextFormTextField("//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input");
+		jswait.loadClick(editTrackingRuleSaveButton);
+		System.out.println("Edited value is" +editedvalue+ "");
+		System.out.println("Orginal value is" +value+ "");
+		assertTrue("CreativeTitle is not saved correctly after editing", editedvalue.equals(value));
 		//createSecondDefaultTrackingRuleCondition();
 		//clickOfferEditProceedButton();
 	}

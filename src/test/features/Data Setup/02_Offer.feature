@@ -25,28 +25,21 @@ Feature: Test suite on Offer creation
     Then create new offer from sheet "STVWAP" with product "fullDetails"
     Then verify "STVWAP" offer in grid
   
-    @STVSMS_offers @initBrowser @closeBrowser
-  Scenario: Email Channel -->Verify the Create offer using STVSMS 
-    Given login
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "STVSMS" with product "fullDetails"
+   @rechargeSMS @initBrowser @closeBrowser
+   Scenario: Email Channel -->Verify the Create offer using STVSMS 
+     Given login
+     Then navigate to precision marketer
+     Then navigate to offer management
+     Then navigate to offers
+     Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+     Then verify "rechargeSMS" offer in grid
       
-@USgaeSMS_offers @initBrowser @closeBrowser
-  Scenario: Email Channel -->Verify the Create offer using USgaeSMS 
-    Given login
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "USgaeSMS" with product "fullDetails"  
-    
- @NDX-5397
- @initBrowser @closeBrowser
- Scenario: Verify cerating SMS channel,Recharge Type offer with Dynamic tag
- Given login
- When navigate to precision marketer
- Then navigate to offer management
- Then navigate to offers
- Then create new offer from sheet "rechargeSMS_Dynamic" with product "fullDetails"
- Then verify "rechargeSMS_Dynamic" offer in grid
+   @NDX-5397
+   @initBrowser @closeBrowser
+   Scenario: Verify cerating SMS channel,Recharge Type offer with Dynamic tag
+     Given login
+ 		When navigate to precision marketer
+ 		Then navigate to offer management
+ 		Then navigate to offers
+ 		Then create new offer from sheet "rechargeSMS_Dynamic" with product "fullDetails"
+ 		Then verify "rechargeSMS_Dynamic" offer in grid
