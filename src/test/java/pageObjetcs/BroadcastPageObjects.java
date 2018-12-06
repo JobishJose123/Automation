@@ -137,7 +137,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement CGConfigure;
 	@FindBy(xpath = ".//paper-dialog[@id='changeLRSettings']//div[contains(.,'Define Limit')]")
 	private WebElement defineLimit;
-	@FindBy(xpath = ".//div/label[contains(.,'Limit Recipients')]/../input")
+	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]//following::input[2]")
 	private WebElement enterLimitField;
 	@FindBy(xpath = ".//paper-dialog[@id='changeLRSettings']//paper-button[contains(.,'Save')]")
 	private WebElement defineLimitSave;
@@ -339,13 +339,9 @@ private WebElement recipientclick;
 	 private WebElement savedSegmentRadioButtion;
 	 @FindBy(xpath="//label[contains(.,'Saved Segments')]/../..//input")
 	 private WebElement savedSegmentSelectorField;
-	 @FindBy(xpath="(//div//vaadin-grid-table-body//vaadin-grid-table-row//vaadin-grid-table-cell//vaadin-grid-cell-content)[1]")
-	 private WebElement newlyCreatedBC ;
-	 @FindBy(xpath="(//vaadin-grid-table-cell//vaadin-grid-cell-content)[2]")
-	 private WebElement statusOfBC;
 	 
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 @FindBy(xpath="//p[contains(.,'DNC Count')]//following::p[1]")
+	 private WebElement DNC_count_bc ;
 	// @FindBy(xpath="")
 		// private WebElement ;
 		// @FindBy(xpath="")
@@ -1121,6 +1117,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	// ----------------------------------------------------------------//
 
 	public void selectSenderAndRoute() throws InterruptedException {
+		
 		jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 		jswait.loadClick(senderIdBroadcastAdressSmpp);
 		jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
@@ -1338,8 +1335,8 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			{
 				selectSenderAndRouteEmail();
 			}
-			else
-				selectSenderAndRoute();
+			else if(offerExcel.getCellByColumnName("Channel").contains("Facebook"))
+				selectSenderAndRouteFacebook();
 		}
 		else {
 			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
@@ -1355,9 +1352,15 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	}
 	
 	public void createBCWithCopyOption() throws InterruptedException {
-		
+		Thread.sleep(2000);
+		commonObjects.clickOptionsIcon();
+		Thread.sleep(2000);
+		commonObjects.clickCopyOption();
+		Thread.sleep(2000);
 		clickProceedButton();
+		Thread.sleep(2000);
 		clickProceedButton();
+		Thread.sleep(2000);
 		clickProceedButton();
 	}
 	
@@ -1497,7 +1500,38 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("Informational"))
+		if(bc_type.contentEquals("facebook")){
+			selectTrackSession();
+			selectTrackingSource();
+					
+			jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_SMPP);
+			// jswait.loadClick(senderIdFulfillmentSelector);
+			// Thread.sleep(4000);
+			jswait.loadClick(senderIdFulfillmentAdressSmpp);
+			// wait.until(ExpectedConditions.elementToBeClickable(senderIdFulfillmentAdressSmpp)).click();
+			jswait.loadSendKeys(routeFulfillment, ROUTE_SMPP);
+			Thread.sleep(2000);
+			jswait.loadClick(routeFulfillmentSmppRobioutbound);
+					
+//				  	  Thread.sleep(1000);	
+//				  	  jswait.loadClick("//label[contains(.,'Expires')]//following::iron-icon[1]");
+//				  	  Thread.sleep(3000);
+//				  	  jswait.loadClick("//label[contains(.,'Expires')]//following::paper-item[contains(.,'After')]");
+//				  	  
+//				  	  Thread.sleep(2000);
+//				  	  jswait.loadSendKeys("//label[contains(.,'Expires')]//following::input[2]","1");
+//				  	  
+//					  Thread.sleep(1000);	
+//				  	  jswait.loadClick("//label[contains(.,'Expires')]//following::iron-icon[2]");
+//				  	  Thread.sleep(3000);
+//				  	  jswait.loadClick("//label[contains(.,'Expires')]//following::paper-item[contains(.,'Days')]");
+//				  	  
+//				  	  Thread.sleep(2000);
+//				  	  jswait.loadSendKeys("//label[contains(.,'Budget Amount')]//following::input[1]","50");
+//					
+					
+				}
+		else if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
@@ -1706,13 +1740,47 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		
 		clickProceedButton();
 		selectOffer(offer);
-		if(!bc_type.contains("Informational"))
+		System.out.println(bc_type);
+if(bc_type.contentEquals("facebook")){
+	selectTrackSession();
+	selectTrackingSource();
+			
+	jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_SMPP);
+	// jswait.loadClick(senderIdFulfillmentSelector);
+	// Thread.sleep(4000);
+	jswait.loadClick(senderIdFulfillmentAdressSmpp);
+	// wait.until(ExpectedConditions.elementToBeClickable(senderIdFulfillmentAdressSmpp)).click();
+	jswait.loadSendKeys(routeFulfillment, ROUTE_SMPP);
+	Thread.sleep(2000);
+	jswait.loadClick(routeFulfillmentSmppRobioutbound);
+			
+//		  	  Thread.sleep(1000);	
+//		  	  jswait.loadClick("//label[contains(.,'Expires')]//following::iron-icon[1]");
+//		  	  Thread.sleep(3000);
+//		  	  jswait.loadClick("//label[contains(.,'Expires')]//following::paper-item[contains(.,'After')]");
+//		  	  
+//		  	  Thread.sleep(2000);
+//		  	  jswait.loadSendKeys("//label[contains(.,'Expires')]//following::input[2]","1");
+//		  	  
+//			  Thread.sleep(1000);	
+//		  	  jswait.loadClick("//label[contains(.,'Expires')]//following::iron-icon[2]");
+//		  	  Thread.sleep(3000);
+//		  	  jswait.loadClick("//label[contains(.,'Expires')]//following::paper-item[contains(.,'Days')]");
+//		  	  
+//		  	  Thread.sleep(2000);
+//		  	  jswait.loadSendKeys("//label[contains(.,'Budget Amount')]//following::input[1]","50");
+//			
+			
+		}
+		
+		else if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
 			selectTrackingSource();
 			selectSenderAndRoute();
 		}
-		else {
+		 
+		else{
 			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
 			jswait.loadClick(senderIdBroadcastAdressSmpp);
 			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
@@ -1734,10 +1802,13 @@ public void verifyViewOptionForBC() throws InterruptedException {
 //		jswait.loadClick(defineLimitSave);
 		jswait.loadClick(CGConfigure);
 		jswait.loadClick(defineCGSize);
+		
+		jswait.loadSendKeys(".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]//following::input[1]", "10");
+		Thread.sleep(2000);
 		jswait.loadClick(defineCGLimitSave);
-//		jswait.loadClick(calculateLimit);
-//		Thread.sleep(4000);;
-//		assertTrue(calculateText.isDisplayed());
+		jswait.loadClick(calculateLimit);
+		Thread.sleep(4000);;
+		assertTrue(calculateText.isDisplayed());
 		Thread.sleep(2000);
 		
 	}
@@ -2016,6 +2087,36 @@ public void Verifyemail(String sheet) throws Exception {
 //	assertTrue(fromid.contains(""flyops@flytxt.com" <flyops@flytxt.com>"));
 		}
 
+
+
+public void selectSenderAndRouteFacebook() throws InterruptedException {
+//	jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+//	jswait.loadClick(senderIdBroadcastAdressSmpp);
+//	jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+//	jswait.loadClick(routeBroadcastSmppRobioutbound);
+	jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_SMPP);
+	// jswait.loadClick(senderIdFulfillmentSelector);
+	// Thread.sleep(4000);
+	jswait.loadClick(senderIdFulfillmentAdressSmpp);
+	// wait.until(ExpectedConditions.elementToBeClickable(senderIdFulfillmentAdressSmpp)).click();
+	jswait.loadSendKeys(routeFulfillment, ROUTE_SMPP);
+	Thread.sleep(2000);
+	jswait.loadClick(routeFulfillmentSmppRobioutbound);
+}
+
+
+public void Verify_DNC_Exclusion(String sheet,String count) throws Exception {
+	System.out.println("inside the verify DNC" );
+	eh.setExcelFile("bcInputData",sheet);
+	String name = (String) eh.getCell(1, 0);
+	
+	String DCNcount=DNC_count_bc.getText();
+	Thread.sleep(3000);
+	Assert.assertEquals(DCNcount, count, "Count is Matching");
+	
+
+		}
+
 public void Broadcast_Expiry() throws Exception{
 	Thread.sleep(2000);
 	jswait.loadClick(bcExpiryclick);
@@ -2050,42 +2151,39 @@ public void Broadcast_Expiry() throws Exception{
 	jswait.loadClick(expirestimezone);
 }
 
-public void verifyExportBroadcast(String sheet) throws FileNotFoundException, IOException, Exception {
-
-	eM.setExcelFile("bcInputData", sheet);
-	String name = eM.getCell(1, 0).toString();
-	System.out.println(name);
-	//System.out.println("Checking downloaded PDF");
-	//String newBCName = newlyCreatedBC.getText();
-	String statusOFbroadcast=statusOfBC.getText();
-	//System.out.println(newBCName);
-	// replacing the spaces with _ for created new variable 'newBCNameWithOutSpace'
-	String newBCNameWithOutSpace = name.replaceAll("[^a-zA-Z0-9-]", "_");
-
-	//System.out.println(newBCNameWithOutSpace);
-
-	// to print the system username like computer name
-	// System.out.println(systemUserName);
-	// System.out.println("waiting for PDF");
-	//Thread.sleep(3000);
-	System.out.println(statusOFbroadcast);
-	String systemUserName = System.getProperty("user.name");
-	SQLHandler sql = new SQLHandler();
-	String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + name
-			+ "';";
-	int bcID = sql.getStringOfQuery(query);
-	//System.out.println(bcID);
-	String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
-	System.out.println(path);
-	System.out.println("open PDF property class");
-	Thread.sleep(1000);
-  // to load the pdf file
-	pdfReader.loadPDFFile(path, name,statusOFbroadcast);
-
-	System.out.println("Verified PDF");
-}
-
-
-
+//public void verifyExportBroadcast(String sheet) throws FileNotFoundException, IOException, Exception {
+//
+//	eM.setExcelFile("bcInputData", sheet);
+//	String name = eM.getCell(1, 0).toString();
+//	System.out.println(name);
+//	//System.out.println("Checking downloaded PDF");
+//	//String newBCName = newlyCreatedBC.getText();
+//	//String statusOFbroadcast=statusOfBC.getText();
+//	//System.out.println(newBCName);
+//	// replacing the spaces with _ for created new variable 'newBCNameWithOutSpace'
+//	String newBCNameWithOutSpace = name.replaceAll("[^a-zA-Z0-9-]", "_");
+//
+//	//System.out.println(newBCNameWithOutSpace);
+//
+//	// to print the system username like computer name
+//	// System.out.println(systemUserName);
+//	// System.out.println("waiting for PDF");
+//	//Thread.sleep(3000);
+//	System.out.println(statusOFbroadcast);
+//	String systemUserName = System.getProperty("user.name");
+//	SQLHandler sql = new SQLHandler();
+//	String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + name
+//			+ "';";
+//	int bcID = sql.getStringOfQuery(query);
+//	//System.out.println(bcID);
+//	String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+//	System.out.println(path);
+//	System.out.println("open PDF property class");
+//	Thread.sleep(1000);
+//  // to load the pdf file
+//	pdfReader.loadPDFFile(path, name,statusOFbroadcast);
+//
+//	System.out.println("Verified PDF");
+//}
 
 }

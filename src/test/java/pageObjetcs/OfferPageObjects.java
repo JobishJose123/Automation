@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,12 +22,14 @@ import org.testng.Assert;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.RandomNameGenerator;
 import pageObjetcs.Admin.OfferAttributesPage;
 
 public class OfferPageObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	CommonObjects commonObjects = new CommonObjects();
+	RandomNameGenerator RandomNameGenerator=new RandomNameGenerator();
 	public ExcelHelper eh = new ExcelHelper();
 	OfferAttributesPage offerAttributesPage = new OfferAttributesPage();
 
@@ -1258,12 +1259,10 @@ public class OfferPageObjects extends Init {
 
 	public void enterDetailsTabFields(String sheet) throws InterruptedException, IOException {
 		eh.setExcelFile("offerInputData", sheet);
-		Random rn = new Random();
-		int n = rn.nextInt(5000) + 1;
 		String name = (String) eh.getCell(1, 0);
-		name = name.replaceAll("[0-9]", "") + n;
-		eh.setCell(1, 0, name);
-		enterOfferName(name);
+		String newname=RandomNameGenerator.getRandomName(name);
+		eh.setCell(1, 0,newname);
+		enterOfferName(newname);
 		enterOfferDescription((String) eh.getCell(1, 1));
 		selectOfferType(eh.getCell(1, 2).toString());
 		selectOfferChannel(eh.getCell(1, 3).toString());
@@ -2157,7 +2156,7 @@ public class OfferPageObjects extends Init {
 		   fbvideoinput.sendKeys(video.getAbsolutePath());
 		  			 			   
 		   Thread.sleep(2000);
-		   jswait.loadSendKeys(facebookcreativetextInput,"This is a test promoting");
+		   jswait.loadSendKeys(facebookcreativetextInput,"This is Just for Testing");
 		   Thread.sleep(50000);
 		
 	}
@@ -2226,4 +2225,8 @@ public class OfferPageObjects extends Init {
 		//createSecondDefaultTrackingRuleCondition();
 		//clickOfferEditProceedButton();
 	}
+	
+	
+	
+	
 }

@@ -1281,7 +1281,7 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-3412 @initBrowser @closeBrowser
+    @NX-3412 @initBrowser 
     Scenario: Calculate Targets - Creating One-Off BC with DNC exclusion, Target Group and Control Group-3412
     Given login
     Then navigate to configuration management

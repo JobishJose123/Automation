@@ -6,7 +6,7 @@ public class RandomNameGenerator {
 		
 		public static String getRandomName(String name) {
 			Random rn = new Random();
-	 		int  n = rn.nextInt(5000) + 1;
+	 		int  n = rn.nextInt(10000) + 1;
 	 		name =  name.replaceAll("[-_ ][Ee]dited", "");
 	 		name =  name.replaceAll("[-_ ][Ee]d", "");
 	 		name =  name.replaceAll("[-_ ]*", "");

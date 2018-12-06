@@ -937,6 +937,22 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then create new offer from sheet "STVWAP" with product "fullDetails"
     Then verify "STVWAP" offer in grid
     
+        @Nx-logincheck @initBrowser @closeBrowser
+  Scenario: Verify the Create offer using WAP Push Channel and Recharge offer Type 
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then verify recharge offer from sheet "rechargeWAP"
+        Then Logout from Neon application
+     Then login with selenium user
+       Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then verify recharge offer from sheet "rechargeWAP"
+    
     
     
     

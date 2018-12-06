@@ -11,6 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.server.handler.FindElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -74,6 +75,13 @@ public class OfferSteps extends Init {
 		commonObjects.filterName(eh.getCell(1, 0).toString());
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//*[contains(.,'" + eh.getCell(1, 0).toString() + "')]")));
+		Thread.sleep(2000);
+		jswait.loadClick("//data-table-cell[contains(.,'" + eh.getCell(1, 0).toString() + "')]");
+		
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//label[contains(.,'Channel Type')]//following::label[contains(.,'" + eh.getCell(1, 3).toString() + "')]")));
+		
+		
 	}
 
 	WebDriverWait wait = new WebDriverWait(driver, 15);
@@ -242,6 +250,12 @@ public class OfferSteps extends Init {
 		commonObjects.filterName(offerName+"Edited");
 		commonObjects.clickOptionsIcon();
 	}
+	
+	
+	
+	
+	
+	
 	@Then("^delete offer from sheet \"([^\"]*)\"$")
 	public void deleteOffer(String sheet) throws Throwable {
 		eh.setExcelFile("offerInputData", sheet);
@@ -985,6 +999,7 @@ public class OfferSteps extends Init {
 	public void Verify_Product_InOffer(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.Verify_Product_InOffer(sheet, productSheet);
 	}
+
 	@Then("^edit creative details and verify the same from sheet \"([^\"]*)\"$")
 	public void EditDynanicTag_Offer(String sheet) throws Throwable {
 		offerPageObjects.EditCreative(sheet);		
@@ -993,6 +1008,81 @@ public class OfferSteps extends Init {
 	public void EditTrack_Offer(String sheet) throws Throwable {
 		offerPageObjects.EditTrack(sheet);		
 	}
+
+
+//	
+//	@Then("^filter offer from sheet \"([^\"]*)\"$")
+//	public void filter_offer_from_sheet(String sheet) throws Throwable {
+//		eh.setExcelFile("offerInputData", sheet);
+//		String offerName = (String) eh.getCell(1, 0);
+//		commonObjects.filterName(offerName);
+//		
+//	}
+	
+	
+	
+	
+	@Then("^verify edit offer from sheet \"([^\"]*)\"$")
+	public void editOffernew(String sheet) throws Throwable {
+		eh.setExcelFile("offerInputData", sheet);
+		String offerName = (String) eh.getCell(1, 0);
+		Thread.sleep(2000);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		
+		offerPageObjects.enterOfferName(offerName+"Ed");
+		eh.setCell(1, 0,offerName+"Ed");
+		offerPageObjects.selectOfferChannel(eh.getCell(1, 3).toString());
+		if(jswait.checkVisibility(("//span[contains(.,'Changing this channel will result in deleting all the creative details configured. Continue?')]"))) {
+			Thread.sleep(3000);
+			jswait.loadClick("//paper-button[contains(.,'Yes')]");
+			Thread.sleep(3000);
+			offerPageObjects.clickOfferEditProceedButton();
+			offerPageObjects.clickOfferEditProceedButton();
+			offerPageObjects.enterCreativeTabDetails(eh,"test");
+			offerPageObjects.clickOfferEditProceedButton();
+			offerPageObjects.clickOfferEditProceedButton();
+			offerPageObjects.clickSaveOfferButton();
+			Thread.sleep(9000);
+			//offerPageObjects.clickOfferEditProceedButton();
+			commonObjects.filterName(offerName+"Ed");
+			//commonObjects.clickOptionsIcon();
+		}else {
+		
+		Thread.sleep(3000);
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.enterCreativeTabDetails(eh,"test");
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickOfferEditProceedButton();
+		offerPageObjects.clickSaveOfferButton();
+		commonObjects.filterName(offerName+"Edited");
+		commonObjects.clickOptionsIcon();
+		}
+	}
+	
+	
+	
+	@Then("^verify bc summary in grid \"([^\"]*)\"$")
+	
+	public void verifybcsummary(String sheet) throws Throwable {
+		eh.setExcelFile("bcInputData", sheet);
+		commonObjects.filterName(eh.getCell(1, 0).toString());
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//*[contains(.,'" + eh.getCell(1, 0).toString() + "')]")));
+		Thread.sleep(2000);
+		commonObjects.clickOptionsIcon();
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-item[contains(.,'View')]");
+		
+		Thread.sleep(2000);
+		jswait.loadClick("//h4[@id='headingdet']//following::iron-icon[1]");
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("(//p[contains(.,'Name')])[1]//following::p[contains(.,'" + eh.getCell(1, 0).toString() + "')]")));
+		
+		
+	}
+
 
 
 
