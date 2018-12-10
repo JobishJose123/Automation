@@ -1082,9 +1082,12 @@ public class OfferSteps extends Init {
 		
 		
 	}
+	@Then("^edit Reward from offer from sheet \"([^\"]*)\" and verify the edited details$")
+	public void EditReward_Offer(String sheet) throws Throwable {
+		offerPageObjects.EditReward(sheet);		
+	}
 
-
-
+   
 
 }
 

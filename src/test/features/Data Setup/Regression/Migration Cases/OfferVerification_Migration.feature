@@ -44,10 +44,17 @@ Feature: Test suite for offer verification with migration test cases
     Then filter offer from sheet "rechargeSMS"
     Then edit offer
     Then edit Track Period from offer from sheet "rechargeSMS" and verify the edited details
-    
-    
-    
-    
+  
+   @NDX-5503
+  @initBrowser @closeBrowser 
+   Scenario: edit reward tab success message from Migrated offer with SMS channel with type recharge and verify the edited details
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then filter offer from sheet "rechargeSMS"
+    Then edit offer
+    Then edit Reward from offer from sheet "rechargeSMS" and verify the edited details
     
     
     

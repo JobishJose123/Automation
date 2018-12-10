@@ -2226,7 +2226,31 @@ public class OfferPageObjects extends Init {
 		//clickOfferEditProceedButton();
 	}
 	
-	
+	public void EditReward(String sheet) throws Throwable {
+		Thread.sleep(1000);
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		Thread.sleep(1000);
+		enterSuccessMessage("Success from Selenium_edited");
+		String value = commonObjects.getTextFormTextField(successMessage);
+		clickSaveOfferButton();
+		Thread.sleep(2000);
+		chooseOffer(sheet);
+		commonObjects.clickOptionsIcon();
+		//chooseOffer(sheet);
+		clickEditOffer();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		Thread.sleep(1000);
+		String editedvalue = commonObjects.getTextFormTextField(successMessage);
+		System.out.println("Edited value is" +editedvalue+ "");
+		System.out.println("Orginal value is" +value+ "");
+		assertTrue("Success message is not saved correctly after editing", editedvalue.equals(value));
+	}
 	
 	
 }
