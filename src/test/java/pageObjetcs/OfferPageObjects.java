@@ -1636,9 +1636,12 @@ public class OfferPageObjects extends Init {
 			{
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 			
-		    if (((String) eh.getCell(1, 20)).contains("DYNAMICTAG")) {
-			enterDynamic();
-		}
+			try{if (((String) eh.getCell(1, 20)).contains("DYNAMICTAG")) {
+				enterDynamic();
+			}
+			    }catch(Exception e) {
+			    	System.out.println("NO DYNAMIC TAG");
+			    }
 			}		
 		else if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
@@ -2251,6 +2254,76 @@ public class OfferPageObjects extends Init {
 		System.out.println("Orginal value is" +value+ "");
 		assertTrue("Success message is not saved correctly after editing", editedvalue.equals(value));
 	}
+	
+	@FindBy(xpath = "(//data-table-row//data-table-cell[1])[10]")
+	private WebElement firstRule;
+	@FindBy(xpath = "(//data-table-row//data-table-cell[1])[11]")
+	private WebElement secondRule;
+	
+	public String getFirstRuleName() {
+		String getFirstRule=firstRule.getText();
+		return getFirstRule;
+	}
+	
+	
+	public void enterOfferDetailsFromSheetForMultipleCreative(String sheet, String productSheet, String testMode) throws Throwable {
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
+		// ******************Products tab*****************:
+		Thread.sleep(3000);
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+
+		// ******************Creative tab*****************:
+		enterCreativeTabDetails(eh,testMode);
+		jswait.loadClick(addCreativeButton);
+		enterSecondCreativeTabDetails(eh);
+		clickProceedButton();
+		Thread.sleep(3000);
+
+		// ******************Track tab*****************:
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+			enterTrackTabDetails(eh);
+			createFirstDefaultTrackingRuleCondition();
+			getFirstRuleName();
+			createSecondDefaultTrackingRuleCondition();
+		}
+		clickProceedButton();
+
+		// ******************Rewards tab*****************:
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+			
+		
+				if (eh.getCell(1, 2).toString().contains("Seeding")) {
+					clickRewardTypeInputField();
+					clickRewardTypeAny();
+				}
+				else {
+					clickRewardFirstRuleAdButton();
+					clickRewardTypeInputField();
+					clickRewardTypeAny();
+					enterSuccessMessage("Success from Selenium");
+					enterFailureMessage("Failure from Selenium");
+				}
+		}
+
+	}
+	public void createOfferWithMultipleCreatives(String sheet, String productSheet,String testMode) throws Throwable {
+		clickCreateNewOfferButton();
+		enterOfferDetailsFromSheetForMultipleCreative(sheet, productSheet, testMode);
+		clickSaveOfferButton();
+	}
+	
+	
 	
 	
 }

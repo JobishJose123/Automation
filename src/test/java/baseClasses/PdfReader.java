@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
@@ -24,161 +27,268 @@ import com.lowagie.text.pdf.PdfTable;
 
 import org.junit.Assert;
 import pageObjetcs.BroadcastPageObjects;
+import pageObjetcs.OfferPageObjects;
+import stepDefinitions.Myclassforcodetesting;
 
 public class PdfReader {
 
-//	static String path = "C:\\Users\\mallikharjuna.ankem\\Downloads\\BC_oneOffBC4865_4415.pdf";
-//	static String bcName = "oneOffBC4865";
+//	static String path = "C:\\Users\\mallikharjuna.ankem\\Downloads\\BC_oneOffBC4424_4683.pdf";
+//	static String bcName = "oneOffBC4424";
 //	static String bcstatus = "planned";
 
-	public void loadPDFFile(String path, String bcName, String bcstatus)
-			throws Exception, IOException, FileNotFoundException {
+	PDDocument document = null;
+	String readTextFromPdf;
+	
+	public String path(String bcName) throws Exception {
+		
+		String newBCNameWithOutSpace = bcName.replaceAll("[^a-zA-Z0-9-]", "_");
+		String systemUserName = System.getProperty("user.name");
+		System.out.println(systemUserName);
+		SQLHandler sql = new SQLHandler();
+		String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + bcName
+				+ "';";
+		int bcID = sql.getStringOfQuery(query);
+		// System.out.println(bcID);
+		String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+		System.out.println(path);
+		return path;
+	}
 
-		PDDocument document = null;
-		String readTextFromPdf;
-
+	public void loadPDFFile(String path) throws Exception, IOException, FileNotFoundException {
+  
+			
+		
 		try {
 			File file = new File(path);
 			FileInputStream fis = new FileInputStream(file);
 			document = PDDocument.load(fis);
 			System.out.println("file loaded");
-			PDFTextStripper pdfTextStripper = new PDFTextStripper();
-			System.out.println("reading text from pdf");
-			// to store the pdf data into string
-			readTextFromPdf = pdfTextStripper.getText(document);
-			// System.out.println(readTextFromPdf);
-
-			String[] str17 = readTextFromPdf.split("\\n");
-			String expectedString = str17[1];
-			String expetedStatus = str17[10];
-
-			String actualstatus = "Status " + bcstatus;
-
-
-			String actualString = "Broadcast :  " + bcName;
-			expectedString = expectedString.trim();
-			expetedStatus = expetedStatus.trim();
-			// System.out.println(expetedStatus);
-			// System.out.println(actualstatus);
-
-//			System.out.println("Lenghth of PDF string:" + expectedString.length());
-//			System.out.println("Lenghth of Formed String:" + actualString.length());
-
-//			System.out.println("Lenghth of PDF string status:" + expetedStatus.length());
-//			System.out.println("Lenghth of Formed String status :" + actualstatus.length());
-
-			
-			Assert.assertEquals(actualString, expectedString);
-			
-
-			if (expectedString.contentEquals(actualString)) {
-				System.out.println(" Actual BC name = " + actualString + " and Expected BC name= " + expectedString
-						+ " are equal");
-			} else {
-				System.out.println("Actual BC name = " + actualString + " and Expected BC name= " + expectedString
-						+ " are not equal");
-			}
-
-			Assert.assertEquals(actualstatus, expetedStatus);
-			
-			if (expetedStatus.contentEquals(actualstatus)) {
-
-				System.out.println(" Actual  : " + actualstatus + " and Expected : " + expetedStatus);
-			} else {
-				System.out.println(" Actual  : " + actualstatus + " and Expected : " + expetedStatus);
-			}
-			// Assert.assertTrue(readTextFromPdf.contains("Broadcast : " + bcName));
-
-			// System.out.println(" Assert: Actual BC name : "+actualString+" and Expected
-			// BC name: "+expectedString+" are equal");
-
-			document.close();
-			System.out.println("PDF Document closed");
-
+            fis.close();
 		} catch (Exception e) {
 
 			e.printStackTrace();
 			System.out.println("File not found");
 		}
+	}
+	
+	
+	public void verifyMultipleTrackingRules(String path) throws Exception {
+		
+		loadPDFFile(path);
+		PDFTextStripper pdfTextStripper = new PDFTextStripper();
+		readTextFromPdf = pdfTextStripper.getText(document);
+		String[] str17 = readTextFromPdf.split("\\n");
+		System.out.println(readTextFromPdf);
+		String firstRuleFromPDF = str17[36].trim();
+		System.out.println(firstRuleFromPDF);
+		String secondRuleFromPDF=str17[45].trim();
+		System.out.println(secondRuleFromPDF);
+		//OfferPageObjects op=new OfferPageObjects();
+		//String getfirstRule=op.getFirstRuleName();
+		String firstRule="Rule Name:firstRule(Priority:2)";
+		String secondRule="Rule Name:secondRule(Priority:3)";
+		Assert.assertEquals(firstRule,firstRuleFromPDF );
+		Assert.assertEquals(secondRule, secondRuleFromPDF);
+		document.close();
+		System.out.println("PDF Closed");
+	}
+	
+	public void verifyExportedBroadcastDateAndTime(String path, String afterClickOnExport,String addingthreemin) throws Exception {
+		
+		
+		loadPDFFile(path);
+		
+		PDFTextStripper pdfTextStripper = new PDFTextStripper();
+		//System.out.println("reading text from pdf");
+		// to store the pdf data into string
+		readTextFromPdf = pdfTextStripper.getText(document);
+		//System.out.println(readTextFromPdf);
+       	String[] str17 = readTextFromPdf.split("\\n");
+		String exportedDate = str17[str17.length - 1];
+		System.out.println(exportedDate);
+		document.close();
+		System.out.println("PDF Document closed");
+		
+		DateFormat newDateFormate = new SimpleDateFormat("dd MMM yyyy hh:mm");
+		Date getTimeAfterExportPDF=newDateFormate.parse(afterClickOnExport);
+		Date addingMinutes= newDateFormate.parse(addingthreemin);
+		Date exportedTimeFromFooter=newDateFormate.parse(exportedDate.substring(14, 31));
+		
+		System.out.println(getTimeAfterExportPDF);
+		System.out.println(exportedTimeFromFooter);
+		System.out.println(addingMinutes);
+		
+		//Assert.assertEquals((getTimeAfterExportPDF.equals(exportedTimeFromPDF)||getTimeAfterExportPDF.after(exportedTimeFromPDF)),exportedTimeFromPDF.before(addingMinutes));
+		Assert.assertTrue(exportedTimeFromFooter.before(addingMinutes)&&(exportedTimeFromFooter.after(getTimeAfterExportPDF)||exportedTimeFromFooter.equals(getTimeAfterExportPDF)));		
+		System.out.println("Verified PDF Footer");
+		
+	}
 
-		// System.out.println(str17[1]);
-		// System.out.println(str17[1].length());
-//	String substr=newstr.substring(13,25);
-//	System.out.println(substr);
-//	System.out.println(bcName);
+	public void verifyBroadcastNameWithStatusInPDF(String path,String bcName,String bcstatus) throws Exception {
 
-		// Assert.assertTrue(readTextFromPdf.contains("Status "+ bcstatus));
+		
+		loadPDFFile(path);
+		
+		PDFTextStripper pdfTextStripper = new PDFTextStripper();
+		System.out.println("reading text from pdf");
+		// to store the pdf data into string
+		readTextFromPdf = pdfTextStripper.getText(document);
+		//System.out.println(readTextFromPdf);
 
-//			if (readTextFromPdf.contains("Broadcast :  " + bcName)) {
-//
-//				System.out.println("Boadcast name " + bcName);
-//			}
+		String[] str17 = readTextFromPdf.split("\\n");
+		String expectedBCName = str17[1];
+		String expetedStatus = str17[10];
 
-//			if (readTextFromPdf.contains("Status " + bcstatus)) {
-//
-//				System.out.println("Status of BC " + bcstatus);
-//			}
+		String actualstatus = "Status " + bcstatus;
 
-//			System.out.println("if condition started");
+		String actualBCName = "Broadcast :  " + bcName;
+		expectedBCName = expectedBCName.trim();
+		expetedStatus = expetedStatus.trim();
+		// System.out.println(expetedStatus);
+		// System.out.println(actualstatus);
 
-//		String text=pdfTextStripper.getPageEnd();
-//		String text1=pdfTextStripper.getPageStart();
-//		String text2=pdfTextStripper.getArticleStart();
+		// System.out.println("Lenghth of PDF string:" + expectedString.length());
+		// System.out.println("Lenghth of Formed String:" + actualString.length());
 
-//			if (readTextFromPdf.contains(bcName)) {
-//				System.out.println("Downloaded PDF contains braodcast name- "+bcName);
-//				// Assert.assertEquals(textFromPdf.contains(bcName));
-//				
-//			}
+		// System.out.println("Lenghth of PDF string status:" + expetedStatus.length());
+		// System.out.println("Lenghth of Formed String status :" +
+		// actualstatus.length());
 
-//			 String lines[] = readTextFromPdf.split("\\r?\\n");
-//             for (String line : lines) {
-//                 //System.out.println(line);
-//                 if (line.contains(bcName)) {
-//     				System.out.println(line);
-//     				
-//     				
-//     			}
-//             }
+		 Assert.assertEquals(actualBCName, expectedBCName);
 
-		/*
-		 * String[] str = text.split("Broadcast");
-		 * System.out.println("StartBroadcast@@@@@@@@@@@@@@@@@@@");
-		 * System.out.println(str[1]);
-		 * System.out.println("endBroadcast@@@@@@@@@@@@@@@@@@@");
-		 * System.out.println(text.split("Basic Details", 4)); String[] str1 =
-		 * text.split("Broadcast");
-		 * System.out.println("Basic Details@@@@@@@@@@@@@@@@@@@");
-		 * System.out.println(str1[2]);
-		 * System.out.println("endBasic Details @@@@@@@@@@@@@@@@@@@@@@");
-		 * 
-		 * String[] str2 = text.split("Broadcast");
-		 * System.out.println("Target Details@@@@@@@@@@@@@@@@@@@");
-		 * System.out.println(str2[3]);
-		 * System.out.println("endTarget Details @@@@@@@@@@@@@@@@@@@@@@");
-		 */
+		if (expectedBCName.contentEquals(actualBCName)) {
+			System.out.println(
+					" Actual BC name = " + actualBCName + " and Expected BC name= " + expectedBCName + " are equal");
+		} else {
+			System.out.println(
+					"Actual BC name = " + actualBCName + " and Expected BC name= " + expectedBCName + " are not equal");
+		}
 
-		/*
-		 * PDPage page = document.getPage(1); //PDPageContentStream contentStream = new
-		 * PDPageContentStream(document, page);
-		 * 
-		 * //Begin the Content stream contentStream.beginText();
-		 * 
-		 * reading the doument information PDDocumentInformation pdd =
-		 * document.getDocumentInformation(); System.out.println(pdd.getTitle());
-		 * System.out.println(pdd.getSubject());
-		 * System.out.println(pdd.getCreationDate());
-		 * System.out.println(pdd.getKeywords());
-		 * 
-		 * // closing the PDF //contentStream.close();
-		 */
+		 Assert.assertEquals(actualstatus, expetedStatus);
+
+		if (expetedStatus.contentEquals(actualstatus)) {
+
+			System.out.println(" Actual  : " + actualstatus + " and Expected : " + expetedStatus);
+		} else {
+			System.out.println(" Actual  : " + actualstatus + " and Expected : " + expetedStatus);
+		}
+		// Assert.assertTrue(readTextFromPdf.contains("Broadcast : " + bcName));
+
+		// System.out.println(" Assert: Actual BC name : "+actualString+" and Expected
+		// BC name: "+expectedString+" are equal");
+
+		document.close();
+		
+		System.out.println("PDF Document closed");
 
 	}
 
-//	public static void main(String[] args) throws IOException, Exception, FileNotFoundException {
-//		PdfReader pf = new PdfReader();
-//
-//		pf.loadPDFFile(path, bcName, bcstatus);
-//	}
+	public void verifyBroadcastName(String bcName,String path) throws Exception, IOException, FileNotFoundException {
+			
+		loadPDFFile(path);
+		PDFTextStripper pdfTextStripper = new PDFTextStripper();
+		System.out.println("reading text from pdf");
+		// to store the pdf data into string
+		readTextFromPdf = pdfTextStripper.getText(document);
+		// System.out.println(readTextFromPdf);
 
+		String[] getBCName = readTextFromPdf.split("\\n");
+		String expectedBCName = getBCName[1];
+		String actualBCName = "Broadcast :  " + bcName;
+		expectedBCName = expectedBCName.trim();
+		
+		Assert.assertEquals(actualBCName, expectedBCName);
+		
+		if (expectedBCName.contentEquals(actualBCName)) {
+			System.out.println(" Actual BC name = " + actualBCName + " and Expected BC name= " + expectedBCName + " are equal");
+		} else {
+			System.out.println("Actual BC name = " + actualBCName + " and Expected BC name= " + expectedBCName + " are not equal");
+		}
+
+		document.close();
+		System.out.println("PDF Document closed");
+
+	}
+
+	
+	public void renameAndDeletePDF(String BroadcastName,String BroadcastStatus) throws Exception {
+		
+		String systemUserName = System.getProperty("user.name");
+		String reNameFilePath="C:\\Users\\"+systemUserName+"\\Downloads\\ReNamedPDFS\\"+BroadcastName+"_"+BroadcastStatus+".pdf";
+		String pathOfFile=path(BroadcastName);
+		try {
+			
+			File originalFile= new File(pathOfFile);
+			//Thread.sleep(2000);
+			File reNameFile=new File(reNameFilePath);
+			Thread.sleep(2000);
+			if(originalFile.exists()) {
+				Thread.sleep(2000);
+			boolean b=originalFile.renameTo(reNameFile);
+						if(b==true) {
+			System.out.println("fileRenamed file path is: "+reNameFilePath);
+			
+			}else {
+				System.out.println("file not renamed");
+			}
+			}else {
+				System.out.println("file not exists in path : "+pathOfFile);
+			}
+			
+			
+			
+		}catch (Exception e) {
+			System.out.println("File not found");
+		}
+		
+		
+	}
+	
+/*public void loadCampaignPDFFile(String path) throws Exception, IOException, FileNotFoundException {
+  		
+		try {
+			File file = new File(path);
+			FileInputStream fis = new FileInputStream(file);
+			document = PDDocument.load(fis);
+			System.out.println("file loaded");
+            fis.close();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			System.out.println("File not found");
+		}
+	}
+*/
+public void verifyExportedCampaignDateAndTime(String path, String afterClickOnExport,String addingthreemin,String query) throws Exception {
+	
+	
+	loadPDFFile(path);
+	
+	PDFTextStripper pdfTextStripper = new PDFTextStripper();
+	//System.out.println("reading text from pdf");
+	// to store the pdf data into string
+	readTextFromPdf = pdfTextStripper.getText(document);
+	//System.out.println(readTextFromPdf);
+   	String[] str17 = readTextFromPdf.split("\\n");
+	String exportedDate = str17[str17.length - 1];
+	System.out.println(exportedDate);
+	document.close();
+	System.out.println("PDF Document closed");
+	
+	DateFormat newDateFormate = new SimpleDateFormat("dd MMM yyyy hh:mm");
+	Date getTimeAfterExportPDF=newDateFormate.parse(afterClickOnExport);
+	Date addingMinutes= newDateFormate.parse(addingthreemin);
+	Date exportedTimeFromFooter=newDateFormate.parse(exportedDate.substring(13, 31));
+	
+	System.out.println(getTimeAfterExportPDF);
+	System.out.println(exportedTimeFromFooter);
+	System.out.println(addingMinutes);
+	
+	//Assert.assertEquals((getTimeAfterExportPDF.equals(exportedTimeFromPDF)||getTimeAfterExportPDF.after(exportedTimeFromPDF)),exportedTimeFromPDF.before(addingMinutes));
+	Assert.assertTrue(exportedTimeFromFooter.before(addingMinutes)&&(exportedTimeFromFooter.after(getTimeAfterExportPDF)||exportedTimeFromFooter.equals(getTimeAfterExportPDF)));		
+	System.out.println("Verified campaign PDF Footer");
+	
 }
+}
+
+

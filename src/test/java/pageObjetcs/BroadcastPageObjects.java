@@ -10,6 +10,8 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.InputEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +29,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-
+import baseClasses.CalenderUtility;
 import baseClasses.EmailHandler;
 import baseClasses.EmailHandlergmail;
 //import baseClasses.EmailHandlergmail;
@@ -50,7 +52,7 @@ public class BroadcastPageObjects extends Init {
 	public ExcelHelper eM= new ExcelHelper();
 	CampaignObjects campaignObjects = new CampaignObjects();
 	CommonObjects commonObjects = new CommonObjects();
-
+	CalenderUtility calenderUtility=new CalenderUtility();
 	@FindBy(xpath="//paper-button[contains(.,'Create New Broadcast')]")
 	private WebElement createNewBroadcastButton;
 	@FindBy(xpath = "//paper-item[contains(.,'View Broadcasts')]")
@@ -2185,5 +2187,126 @@ public void Broadcast_Expiry() throws Exception{
 //
 //	System.out.println("Verified PDF");
 //}
+
+@FindBy(xpath="(//vaadin-grid-table-row[1]//vaadin-grid-table-cell[2])[2]")
+private WebElement statusOfBC;
+
+@FindBy(xpath="//paper-icon-button[@id='exportBtn']//iron-icon[@id='icon']")
+private WebElement exportBtnViewBC;
+@FindBy(xpath="//div[@id='tabsContainer']//paper-tab//div[contains(.,'Seedings Broadcasts')]")
+	 private WebElement seedingsBroadcastInBCPage ;
+@FindBy(xpath="//div[@val='broadcastSeedingViews']//paper-icon-button[@icon='filter-list']//*[@id=\"icon\"]")
+private WebElement seedingsBroadcastFilterOption;
+
+	 public void seedingsBroadcastFilterOption() throws InterruptedException {
+	 jswait.loadClick(seedingsBroadcastFilterOption);
+}
+
+
+public void exportBroadcastAsPDF() throws InterruptedException {
+System.out.println("Exporting the PDF");
+	commonObjects.clickOptionsIcon();
+	clickExportBroadcastOption();
+	
+	}
+
+public void verifyExportedBCwithNameAndStatus(String sheet) throws FileNotFoundException, IOException, Exception {
+	Thread.sleep(4000);
+	eM.setExcelFile("bcInputData", sheet);
+	String bcNamefromSheet = eM.getCell(1, 0).toString();
+	// to provide broadcast name and Broadcast Status
+	//String statusOFbroadcast = statusOfBC.getText();
+	 String statusOFbroadcast = getTopBcStatus();
+	 
+	 String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + bcNamefromSheet
+				+ "';";	
+	 String newBCNameWithOutSpace = bcNamefromSheet.replaceAll("[^a-zA-Z0-9-]", "_");
+		String systemUserName = System.getProperty("user.name");
+		System.out.println(systemUserName);
+		SQLHandler sql = new SQLHandler();
+		//String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + bcName
+		//		+ "';";
+		int bcID = sql.getStringOfQuery(query);
+		// System.out.println(bcID);
+		String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+		System.out.println(path);
+	pdfReader.verifyBroadcastNameWithStatusInPDF(path,bcNamefromSheet,statusOFbroadcast);
+	Thread.sleep(2000);
+	System.out.println("Verified PDF  ");
+}
+
+public void verifyExportedBCForRename(String sheet) throws FileNotFoundException, IOException, Exception {
+	Thread.sleep(3000);
+	
+	eM.setExcelFile("bcInputData", sheet);
+	String bcNamefromSheet = eM.getCell(1, 0).toString();
+	// to provide broadcast name and Broadcast Status
+	//String statusOFbroadcast = statusOfBC.getText();
+	String statusOFbroadcast = getTopBcStatus();
+			
+	pdfReader.renameAndDeletePDF(bcNamefromSheet, statusOFbroadcast);
+	Thread.sleep(2000);
+	commonObjects.toggleAutoRefresh();
+	System.out.println("Verified PDF ");
+}
+
+public void verifyExportedTimeForBC(String sheet) throws FileNotFoundException, IOException, Exception {
+	
+	DateFormat dateFormat = new SimpleDateFormat("dd MMM YYYY hh:mm");
+	String afterClickOnExport = calenderUtility.getCurrentDate("dd MMM YYYY hh:mm");
+	System.out.println(afterClickOnExport);
+	Calendar cal = Calendar.getInstance();
+	cal.add(Calendar.MINUTE, 3);
+	String addingthreemin = dateFormat.format(cal.getTime());
+	
+	System.out.println(afterClickOnExport);
+	Thread.sleep(4000);
+	eM.setExcelFile("bcInputData", sheet);
+	String bcNamefromSheet = eM.getCell(1, 0).toString();
+	
+	String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + bcNamefromSheet
+			+ "';";
+	String newBCNameWithOutSpace = bcNamefromSheet.replaceAll("[^a-zA-Z0-9-]", "_");
+	String systemUserName = System.getProperty("user.name");
+	System.out.println(systemUserName);
+	SQLHandler sql = new SQLHandler();
+	//String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + bcName
+	//		+ "';";
+	int bcID = sql.getStringOfQuery(query);
+	// System.out.println(bcID);
+	String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+	System.out.println(path);		
+	
+	// to provide broadcast name and Broadcast Status
+	pdfReader.verifyExportedBroadcastDateAndTime(path,afterClickOnExport,addingthreemin);
+	
+}
+
+public void verifyExportBroadcastInSummaryPage(String sheet) throws FileNotFoundException, IOException, Exception {
+	Thread.sleep(2000);
+	eM.setExcelFile("bcInputData", sheet);
+	String bcNamefromSheet = eM.getCell(1, 0).toString();
+	
+	String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + bcNamefromSheet
+			+ "';";
+	String newBCNameWithOutSpace = bcNamefromSheet.replaceAll("[^a-zA-Z0-9-]", "_");
+	String systemUserName = System.getProperty("user.name");
+	System.out.println(systemUserName);
+	SQLHandler sql = new SQLHandler();
+	//String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + bcName
+	//		+ "';";
+	int bcID = sql.getStringOfQuery(query);
+	// System.out.println(bcID);
+	String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+	System.out.println(path);
+	
+	pdfReader.verifyBroadcastName(bcNamefromSheet,path);
+	System.out.println("Verified PDF");
+}
+
+public void clickOnSeedingsBroadcast() throws InterruptedException {
+	jswait.loadClick(seedingsBroadcastInBCPage);
+
+}
 
 }

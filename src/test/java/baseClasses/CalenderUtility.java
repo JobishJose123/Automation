@@ -1,7 +1,10 @@
 package baseClasses;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CalenderUtility {
 
@@ -33,4 +36,14 @@ public class CalenderUtility {
 				return rightNow.get(Calendar.DAY_OF_MONTH);
 				
 	}
+	
+	// to get the current date for specific format String DateFormate="dd MMM YYYY hh:mm aaa z" if you want it to change the date format follow your format ;
+			public String getCurrentDate(String DateFormate) {	 
+			 DateFormat dateFormat = new SimpleDateFormat(DateFormate);//03 Dec 2018 01:48 PM IST
+			 Date date = new Date();		 
+			 String date1= dateFormat.format(date);		 
+//			 System.out.println("Current date and time is " +date1);
+			 
+			  return date1;
+			}
 }

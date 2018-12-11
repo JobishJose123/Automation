@@ -46,6 +46,11 @@ public class OfferSteps extends Init {
 	// offerPageObjects.navigateToOffer();
 	// }
 
+	@Then("^create new offer with Multiple creatives from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void create_new_offer_with_Multiple_creatives_from_sheet_with_product(String sheet, String productSheet) throws Throwable {
+	   offerPageObjects.createOfferWithMultipleCreatives(sheet, productSheet, "NUll");
+	}
+	
 	@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
 	public void create_new_Offer(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.createOffer(sheet, productSheet,"NULL");
