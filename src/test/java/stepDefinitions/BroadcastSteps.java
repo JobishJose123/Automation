@@ -3228,7 +3228,12 @@ public void verify_DNC_Exclusion(String sheet,String count) throws Throwable {
 
 }
 
+@Then("^verify targetcount from bc from sheet$")
+public void verify_Target_count() throws Throwable {
+	
+	broadcastPageObjects.Verify_targetcountbc();
 
+}
 
 
 

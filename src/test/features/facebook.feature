@@ -272,7 +272,7 @@ Scenario: Verify BC level CG exclusions for the BC with Facebook Offer.
     
       @NX-7487
         @initBrowser 
-Scenario: Verify whether notifications are received  fo the DNC consumers .
+Scenario: Verify whether notifications are received for the DNC consumers .
     Given login
     #Then navigate to BC page
     Then navigate to configuration management
@@ -294,5 +294,6 @@ Scenario: Verify whether notifications are received  fo the DNC consumers .
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-      Then enter details for new broadcast with DNC exclusion and calculate TG and CG from sheet "facebookoneoff" with "rechargeimageFacebook"
-        Then activate bc
+    Then enter details for new broadcast with DNC exclusion and calculate TG and CG from sheet "facebookoneoff" with "rechargeimageFacebook"
+    Then activate bc
+    Then verify DNC Exclusion from bc from sheet "facebookoneoff" with DNC count "50"

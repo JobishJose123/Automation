@@ -945,6 +945,8 @@ public void enterCampaignDeailsForCompareTargetConditions() throws Throwable {
 		jswait.scrollIntoView("//campaign-category-chart", "//div[text()='"+name+"']");
 	}
 	public void createCampaignTemplate(String name) throws InterruptedException {
+		jswait.loadClick("//paper-tab//div[contains(.,'Campaign Templates')]");
+		clickCreateCampaignTemplateButton();
 		enterCampaignTemplateName(name);
 		enterCampaignDescription("Desc for Template");
 		clickProceedButton();

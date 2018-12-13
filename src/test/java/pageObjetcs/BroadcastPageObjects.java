@@ -344,6 +344,14 @@ private WebElement recipientclick;
 	 
 	 @FindBy(xpath="//p[contains(.,'DNC Count')]//following::p[1]")
 	 private WebElement DNC_count_bc ;
+	 @FindBy(xpath="//paper-button[contains(.,'Calculate')]//following::label[@class='calc style-scope stats-calculate']")
+	 private WebElement targetcountstatus ;
+	 @FindBy(xpath="//paper-button[contains(.,'Target Count:')]")
+	 private WebElement targetcountbtn ;
+	 @FindBy(xpath="//label[contains(.,'Target Count')]//following::label[contains(.,'200')]")
+	 private WebElement targetverify;
+	 @FindBy(xpath="//paper-button[contains(.,'Calculate')]")
+	 private WebElement calculatebtn;
 	// @FindBy(xpath="")
 		// private WebElement ;
 		// @FindBy(xpath="")
@@ -1594,8 +1602,10 @@ public void verifyViewOptionForBC() throws InterruptedException {
 
 
 	public void validateNameField() throws InterruptedException, UnsupportedFlavorException, IOException {
-		enterBroadcastName("efwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaqwqw");
-		Assert.assertTrue(commonObjects.getTextFormTextField(broadcastName).length() == 50,
+		enterBroadcastName("efwefwefwefwefwefwefwefwefwefw");
+		int count=commonObjects.getTextFormTextField(broadcastName).length();
+		System.out.println(count);
+		Assert.assertTrue(commonObjects.getTextFormTextField(broadcastName).length() == 30,
 				"Error in character limit of name field");
 	}
 
@@ -1610,8 +1620,10 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	}
 
 	public void validatePurposeField() throws InterruptedException, UnsupportedFlavorException, IOException {
-		enterBroadcastName(
-				"aaaaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasasdsd");
+		enterBroadcastName("efwefwefwefwefwefwefwefwefwefw");
+		jswait.loadSendKeys(broadcastPurpose, "aaaaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasasdsd");
+		int count=commonObjects.getTextFormTextField(broadcastPurpose).length();
+		System.out.println(count);
 		Assert.assertTrue(commonObjects.getTextFormTextField(broadcastPurpose).length() == 500,
 				"Error in character limit of purpose field");
 	}
@@ -1623,7 +1635,9 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		selectInventory1();
 		selectTrigger1();
 		selectTrigger2();
-		List<WebElement> tags = driver.findElements(By.xpath("//paper-tag/div"));
+		List<WebElement> tags = driver.findElements(By.xpath("//paper-tags[@id='paperTags']/div"));
+		int tagssize=tags.size();
+		System.out.println(tagssize);
 		Assert.assertTrue(tags.size() == 2, "error in multi select field");
 	}
 	
@@ -2112,6 +2126,9 @@ public void Verify_DNC_Exclusion(String sheet,String count) throws Exception {
 	eh.setExcelFile("bcInputData",sheet);
 	String name = (String) eh.getCell(1, 0);
 	
+	commonObjects.clickOptionsIcon();
+	jswait.loadClick("//label[contains(.,'View')]");
+	
 	String DCNcount=DNC_count_bc.getText();
 	Thread.sleep(3000);
 	Assert.assertEquals(DCNcount, count, "Count is Matching");
@@ -2308,5 +2325,45 @@ public void clickOnSeedingsBroadcast() throws InterruptedException {
 	jswait.loadClick(seedingsBroadcastInBCPage);
 
 }
+
+
+
+public void Verify_targetcountbc() throws Exception {
+Thread.sleep(2000);
+
+jswait.loadClick("//li//span[contains(.,'Target')]");
+
+String statusOfcalculate = targetcountstatus.getText();
+TimeoutImpl t = new TimeoutImpl();
+t.startTimer();
+
+boolean flag=true;
+System.out.println("the flag is"+flag);
+while((flag!=false)&& t.checkTimerMin(15)) {
+	statusOfcalculate = targetcountstatus.getText();
+	System.out.println(statusOfcalculate);
+	Thread.sleep(3000);
+	
+	try {
+	targetcountbtn.isEnabled();
+	System.out.println(flag);
+	flag=false;
+	}catch(Exception e) {
+		
+	}
+}
+Thread.sleep(2000);
+jswait.loadClick(targetcountbtn);
+Thread.sleep(2000);
+try {
+targetverify.isDisplayed();
+}catch(Exception e)
+{System.out.println(e);}
+
+jswait.loadClick("//h2[contains(.,'Calculated Counts ')]//following::paper-icon-button[@id='clear'][1]");
+clickProceedButton();
+clickProceedButton();
+
+	}
 
 }
