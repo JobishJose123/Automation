@@ -1,0 +1,11 @@
+%pyspark
+import sys
+lib_path = '/usr/local/zeppelin/custom-lib/flytxtSparkLib'
+sys.path.append(lib_path)
+sys_path_set = set(sys.path)
+from flytxtSparkLib import flytxtSparkLib
+sparkLib=flytxtSparkLib(sc,z)
+dataFrame=sparkLib.getDataFrameWithName("D2", True)
+dataFrame.show(5)
+sparkLib.updateCustomerMetric(dataFrame,'CONSUMER_ID','Age_q11','Date_q11','set','Selenium Revenue Metric_q11',True,True,True)
+sparkLib.updateCustomerProfile(dataFrame,'CONSUMER_ID','Demographics_q11','set','Age_q11')

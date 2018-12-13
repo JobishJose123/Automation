@@ -1,201 +1,204 @@
-msisdn,first name,last name,country,email,language 1,language 2,balance,boolean,age,device id,location insight,digital persona,demographic,larned behaviour,analytical scores,digital engagement,event-number,event-text,event-date(ddMMyy),event-quantity,event-value,usage metric value,usage metric date,usage metric value2,usage metric date2
-919717802050,nqqldq,aqgxih,Pakisthan,nqqldq@gmail.com,Malayalam,Mandarin,24,Yes,37,4444,5,18,25,34,47,235,18,ijioni,120918,25,34,37,120918,50,100918
-919446506900,mpgixt,afrqtw,USA,mpgixt@gmail.com,Malayalam,Tamil,13,Yes,48,4444,5,17,25,37,47,238,17,okjj,120918,25,37,48,120918,45,100918
-919446506903,byqixm,poqnkc,Pakisthan,byqixm@gmail.com,English,Urdu,141,No,41,5555,4,18,24,34,48,234,18,fdgf,120918,24,34,41,120918,56,100918
-919446506902,yuotch,pgpzdj,Korea,yuotch@gmail.com,English,Tamil,200,Yes,47,4444,4,14,24,38,48,238,14,dfg,120918,24,38,47,120918,35,100918
-919922730005,weaupo,zjsesm,Pakisthan,weaupo@gmail.com,Hindi,Urdu,242,No,17,5555,8,18,28,34,44,234,18,fg,120918,28,34,17,120918,45,100918
-919922730006,gtzarn,ggbfvs,India,gtzarn@gmail.com,English,Tamil,16,Yes,62,4444,4,15,24,35,48,238,15,dfg,120918,24,35,62,120918,65,100918
-919922730007,kixpdo,duukff,Korea,kixpdo@gmail.com,English,Tamil,87,Yes,49,4444,4,14,24,38,48,238,14,dfg,120918,24,38,49,120918,70,100918
-919922730008,ppxyle,mzvqzs,USA,ppxyle@gmail.com,Malayalam,Spanish,103,No,41,5555,5,17,25,37,47,237,17,g,120918,25,37,41,120918,45,100918
-919922730009,ojhdxt,ekrvex,Pakisthan,ojhdxt@gmail.com,English,Urdu,166,Yes,46,4444,4,18,24,34,48,234,18,fdgf,120918,24,34,46,120918,71,100918
-919922730010,ekierf,ysfiqj,Korea,ekierf@gmail.com,English,Spanish,209,Yes,45,4444,4,14,24,38,48,237,14,fdgf,120918,24,38,45,120918,34,100918
-919922730011,czlaqg,mabnwk,Korea,czlaqg@gmail.com,Malayalam,Spanish,299,No,52,5555,5,14,25,38,47,237,14,dfg,120918,25,38,52,120918,72,100918
-919922730012,dpvgnn,vthsui,Korea,dpvgnn@gmail.com,English,Urdu,5,Yes,22,4444,4,14,24,38,48,234,14,gdf,120918,24,38,22,120918,18,100918
-919922730013,mhttnh,vtknet,USA,mhttnh@gmail.com,Hindi,Tamil,150,No,60,5555,8,17,28,37,44,238,17,g,120918,28,37,60,120918,23,100918
-919922730014,ytpmsf,ayegse,Korea,ytpmsf@gmail.com,English,Mandarin,389,No,37,5555,4,14,24,38,48,235,14,dfg,120918,24,38,37,120918,50,100918
-919922730015,xyezdt,tjdqwx,India,xyezdt@gmail.com,English,Urdu,281,No,20,5555,4,15,24,35,48,234,15,g,120918,24,35,20,120918,45,100918
-919922730016,uamacj,dxonnn,Korea,uamacj@gmail.com,English,Mandarin,330,Yes,55,4444,4,14,24,38,48,235,14,dfg,120918,24,38,55,120918,56,100918
-919922730017,qxvbbr,whnnab,USA,qxvbbr@gmail.com,English,Urdu,60,No,24,5555,4,17,24,37,48,234,17,g,120918,24,37,24,120918,35,100918
-919922730018,yrnltc,guuijk,Korea,yrnltc@gmail.com,Korean,Urdu,216,Yes,63,4444,7,14,27,38,45,234,14,ijioni,120918,27,38,63,120918,45,100918
-919922730019,fkemei,bwngvq,Pakisthan,fkemei@gmail.com,Korean,Mandarin,256,No,27,5555,7,18,27,34,45,235,18,okjj,120918,27,34,27,120918,65,100918
-919922730020,ozgcgk,otjzne,USA,ozgcgk@gmail.com,Korean,Urdu,321,Yes,25,4444,7,17,27,37,45,234,17,fdgf,120918,27,37,25,120918,64,100918
-919922730021,jvapof,ysimrg,Korea,jvapof@gmail.com,Hindi,Urdu,383,No,55,5555,8,14,28,38,44,234,14,dfg,120918,28,38,55,120918,26,100918
-919922730022,erndvy,sezqvq,USA,erndvy@gmail.com,Hindi,Urdu,117,Yes,17,4444,8,17,28,37,44,234,17,fg,120918,28,37,17,120918,19,100918
-919922730023,nkoexa,lsikfv,Pakisthan,nkoexa@gmail.com,Hindi,Urdu,385,No,27,5555,8,18,28,34,44,234,18,dfg,120918,28,34,27,120918,26,100918
-919922730024,pwbikh,rionnk,India,pwbikh@gmail.com,Korean,Tamil,327,Yes,67,4444,7,15,27,35,45,238,15,dfg,120918,27,35,67,120918,20,100918
-919922730025,pfudjn,reyqxt,Korea,pfudjn@gmail.com,Korean,Urdu,123,No,51,5555,7,14,27,38,45,234,14,g,120918,27,38,51,120918,18,100918
-919922730026,xdpusk,adxurj,USA,xdpusk@gmail.com,English,Urdu,378,Yes,63,4444,4,17,24,37,48,234,17,fdgf,120918,24,37,63,120918,27,100918
-919922730027,udrqvk,ojpikz,Korea,udrqvk@gmail.com,Korean,Spanish,130,Yes,72,4444,7,14,27,38,45,237,14,fdgf,120918,27,38,72,120918,62,100918
-919922730028,anaqiz,qwmacp,Korea,anaqiz@gmail.com,English,Urdu,185,Yes,69,4444,4,14,24,38,48,234,14,dfg,120918,24,38,69,120918,44,100918
-919922730029,ouhlsa,ntudmw,Korea,ouhlsa@gmail.com,Hindi,Mandarin,173,Yes,50,4444,8,14,28,38,44,235,14,gdf,120918,28,38,50,120918,45,100918
-919922730030,ztteaj,buetdr,USA,ztteaj@gmail.com,Hindi,Tamil,5,No,68,5555,8,17,28,37,44,238,17,g,120918,28,37,68,120918,52,100918
-919922730031,stayhz,gkrlbd,India,stayhz@gmail.com,English,Spanish,216,No,24,5555,4,15,24,35,48,237,15,dfg,120918,24,35,24,120918,47,100918
-919922730032,rclqgl,zuafsj,Pakisthan,rclqgl@gmail.com,Hindi,Mandarin,280,No,57,5555,8,18,28,34,44,235,18,g,120918,28,34,57,120918,40,100918
-919922730033,jesyhn,gbcram,India,jesyhn@gmail.com,Korean,Mandarin,164,Yes,56,4444,7,15,27,35,45,235,15,dfg,120918,27,35,56,120918,66,100918
-919922730034,tlgofy,ajmdkk,USA,tlgofy@gmail.com,Korean,Spanish,280,No,28,5555,7,17,27,37,45,237,17,g,120918,27,37,28,120918,69,100918
-919922730035,ciqztv,jsrzhk,India,ciqztv@gmail.com,Korean,Mandarin,123,Yes,20,4444,7,15,27,35,45,235,15,ijioni,120918,27,35,20,120918,41,100918
-919922730036,kulsgh,ozjxcf,Korea,kulsgh@gmail.com,Malayalam,Urdu,392,Yes,22,4444,5,14,25,38,47,234,14,okjj,120918,25,38,22,120918,52,100918
-919922730037,iotmbj,ppffqd,India,iotmbj@gmail.com,Korean,Mandarin,320,Yes,19,4444,7,15,27,35,45,235,15,fdgf,120918,27,35,19,120918,52,100918
-919922730038,lkayzk,jowbqe,Pakisthan,lkayzk@gmail.com,Korean,Mandarin,344,Yes,29,4444,7,18,27,34,45,235,18,dfg,120918,27,34,29,120918,29,100918
-919922730039,ekszjn,txsrtm,India,ekszjn@gmail.com,English,Spanish,357,No,53,5555,4,15,24,35,48,237,15,fg,120918,24,35,53,120918,53,100918
-919922730040,llpevy,sgftht,USA,llpevy@gmail.com,English,Tamil,76,No,65,5555,4,17,24,37,48,238,17,dfg,120918,24,37,65,120918,65,100918
-919922730041,yxdyib,hicyrd,India,yxdyib@gmail.com,Malayalam,Urdu,230,No,74,5555,5,15,25,35,47,234,15,dfg,120918,25,35,74,120918,74,100918
-919922730042,nnnsvh,dvuogl,Korea,nnnsvh@gmail.com,English,Tamil,185,Yes,52,4444,4,14,24,38,48,238,14,g,120918,24,38,52,120918,52,100918
-919922730043,tthpzw,owutqj,India,tthpzw@gmail.com,Korean,Mandarin,50,No,39,5555,7,15,27,35,45,235,15,fdgf,120918,27,35,39,120918,39,100918
-919922730044,joicpq,kfooxq,Pakisthan,joicpq@gmail.com,Malayalam,Tamil,11,Yes,26,4444,5,18,25,34,47,238,18,fdgf,120918,25,34,26,120918,26,100918
-919922730045,klqxmr,fxzezk,Korea,klqxmr@gmail.com,English,Urdu,378,Yes,61,4444,4,14,24,38,48,234,14,dfg,120918,24,38,61,120918,61,100918
-919922730046,spidpk,bmvyxl,USA,spidpk@gmail.com,English,Spanish,388,No,42,5555,4,17,24,37,48,237,17,gdf,120918,24,37,42,120918,42,100918
-919922730047,rdgxcr,vqvdgt,Pakisthan,rdgxcr@gmail.com,Hindi,Urdu,385,Yes,57,4444,8,18,28,34,44,234,18,g,120918,28,34,57,120918,57,100918
-919922730048,awzhql,igycpv,USA,awzhql@gmail.com,Korean,Mandarin,222,No,29,5555,7,17,27,37,45,235,17,dfg,120918,27,37,29,120918,29,100918
-919922730049,vnqmzv,uolzua,India,vnqmzv@gmail.com,Korean,Mandarin,243,No,25,5555,7,15,27,35,45,235,15,g,120918,27,35,25,120918,25,100918
-919922730050,vnfsng,oztpux,USA,vnfsng@gmail.com,Hindi,Tamil,241,Yes,54,4444,8,17,28,37,44,238,17,dfg,120918,28,37,54,120918,54,100918
-919922730051,usulrh,qngtyz,Pakisthan,usulrh@gmail.com,English,Urdu,194,Yes,16,4444,4,18,24,34,48,234,18,g,120918,24,34,16,120918,16,100918
-919922730052,yuvvql,tvpkcd,India,yuvvql@gmail.com,Malayalam,Spanish,96,Yes,39,4444,5,15,25,35,47,237,15,ijioni,120918,25,35,39,120918,39,100918
-919922730053,ohccrt,dbypbp,Korea,ohccrt@gmail.com,Hindi,Spanish,106,Yes,45,4444,8,14,28,38,44,237,14,okjj,120918,28,38,45,120918,45,100918
-919922730054,lcoblj,dpqdfn,Pakisthan,lcoblj@gmail.com,Korean,Urdu,269,No,59,5555,7,18,27,34,45,234,18,fdgf,120918,27,34,59,120918,59,100918
-919922730055,fkkoom,fvzskr,Korea,fkkoom@gmail.com,English,Tamil,197,Yes,55,4444,4,14,24,38,48,238,14,dfg,120918,24,38,55,120918,55,100918
-919922730056,nxcbgy,tbhlwg,Pakisthan,nxcbgy@gmail.com,English,Tamil,364,No,64,5555,4,18,24,34,48,238,18,fg,120918,24,34,64,120918,64,100918
-919922730057,getquu,plzpgd,USA,getquu@gmail.com,English,Tamil,283,No,29,5555,4,17,24,37,48,238,17,dfg,120918,24,37,29,120918,29,100918
-919922730058,olicgn,qoymeg,India,olicgn@gmail.com,English,Tamil,260,No,60,5555,4,15,24,35,48,238,15,dfg,120918,24,35,60,120918,60,100918
-919922730059,zcyfge,adsems,Korea,zcyfge@gmail.com,English,Mandarin,33,No,26,5555,4,14,24,38,48,235,14,g,120918,24,38,26,120918,26,100918
-919922730060,hpsxut,obteqd,Korea,hpsxut@gmail.com,Korean,Urdu,17,Yes,20,4444,7,14,27,38,45,234,14,fdgf,120918,27,38,20,120918,20,100918
-919922730061,xxsxjn,ttwsxg,USA,xxsxjn@gmail.com,Hindi,Spanish,289,Yes,55,4444,8,17,28,37,44,237,17,fdgf,120918,28,37,55,120918,55,100918
-919922730062,apzudb,isaigw,Korea,apzudb@gmail.com,Hindi,Urdu,7,No,57,5555,8,14,28,38,44,234,14,dfg,120918,28,38,57,120918,57,100918
-919922730063,vcykcb,kvrlup,USA,vcykcb@gmail.com,English,Tamil,234,Yes,30,4444,4,17,24,37,48,238,17,gdf,120918,24,37,30,120918,30,100918
-919922730064,klorit,cjqomj,USA,klorit@gmail.com,English,Urdu,33,Yes,44,4444,4,17,24,37,48,234,17,g,120918,24,37,44,120918,44,100918
-919922730065,gizdxo,loxpks,USA,gizdxo@gmail.com,Korean,Tamil,398,Yes,26,4444,7,17,27,37,45,238,17,dfg,120918,27,37,26,120918,26,100918
-919922730066,oxisqj,xsleuc,Pakisthan,oxisqj@gmail.com,English,Spanish,278,No,17,5555,4,18,24,34,48,237,18,g,120918,24,34,17,120918,17,100918
-919922730067,xtqofa,qiyyim,Korea,xtqofa@gmail.com,Hindi,Urdu,297,No,64,5555,8,14,28,38,44,234,14,dfg,120918,28,38,64,120918,64,100918
-919922730068,isfard,xcbizh,USA,isfard@gmail.com,Korean,Urdu,93,No,36,5555,7,17,27,37,45,234,17,g,120918,27,37,36,120918,36,100918
-919922730069,lgpvgy,lyeykf,Pakisthan,lgpvgy@gmail.com,English,Spanish,336,Yes,73,4444,4,18,24,34,48,237,18,ijioni,120918,24,34,73,120918,73,100918
-919922730070,czfceu,gkimwk,USA,czfceu@gmail.com,Malayalam,Tamil,7,No,28,5555,5,17,25,37,47,238,17,okjj,120918,25,37,28,120918,28,100918
-919922730071,rpvtoj,pnwweu,India,rpvtoj@gmail.com,Hindi,Tamil,199,Yes,26,4444,8,15,28,35,44,238,15,fdgf,120918,28,35,26,120918,26,100918
-919922730072,ffpqly,qyayls,Korea,ffpqly@gmail.com,Malayalam,Mandarin,362,No,72,5555,5,14,25,38,47,235,14,dfg,120918,25,38,72,120918,72,100918
-919922730073,eectak,ofjakq,Pakisthan,eectak@gmail.com,Hindi,Mandarin,237,Yes,31,4444,8,18,28,34,44,235,18,fg,120918,28,34,31,120918,31,100918
-919922730074,londup,zxtszd,Korea,londup@gmail.com,Hindi,Urdu,301,Yes,23,4444,8,14,28,38,44,234,14,dfg,120918,28,38,23,120918,23,100918
-919922730075,dlckxc,mvppkq,India,dlckxc@gmail.com,Malayalam,Mandarin,385,No,15,5555,5,15,25,35,47,235,15,dfg,120918,25,35,15,120918,15,100918
-919922730076,chlbbr,qzqmfc,India,chlbbr@gmail.com,English,Tamil,302,No,68,5555,4,15,24,35,48,238,15,g,120918,24,35,68,120918,68,100918
-919922730077,bmxvrl,cchbba,Korea,bmxvrl@gmail.com,Korean,Spanish,151,No,54,5555,7,14,27,38,45,237,14,fdgf,120918,27,38,54,120918,54,100918
-919922730078,rpsntb,jhvhip,India,rpsntb@gmail.com,Malayalam,Tamil,81,Yes,21,4444,5,15,25,35,47,238,15,fdgf,120918,25,35,21,120918,21,100918
-919922730079,cyrmwd,vqjnta,Korea,cyrmwd@gmail.com,Hindi,Tamil,261,No,20,5555,8,14,28,38,44,238,14,dfg,120918,28,38,20,120918,20,100918
-919922730080,oujsni,zeqwuz,Korea,oujsni@gmail.com,Hindi,Spanish,19,Yes,70,4444,8,14,28,38,44,237,14,gdf,120918,28,38,70,120918,70,100918
-919922730081,yofgox,pbwiby,Korea,yofgox@gmail.com,Malayalam,Urdu,40,No,17,5555,5,14,25,38,47,234,14,g,120918,25,38,17,120918,17,100918
-919922730082,ruajid,mlipya,Korea,ruajid@gmail.com,Hindi,Spanish,221,Yes,17,4444,8,14,28,38,44,237,14,dfg,120918,28,38,17,120918,17,100918
-919922730083,fgkmiw,fxptjs,Pakisthan,fgkmiw@gmail.com,Korean,Urdu,244,No,35,5555,7,18,27,34,45,234,18,g,120918,27,34,35,120918,35,100918
-919922730084,asrkho,oyocon,Pakisthan,asrkho@gmail.com,Hindi,Tamil,147,Yes,68,4444,8,18,28,34,44,238,18,dfg,120918,28,34,68,120918,68,100918
-919922730085,axrxic,jsbyxx,Pakisthan,axrxic@gmail.com,Korean,Tamil,327,Yes,59,4444,7,18,27,34,45,238,18,g,120918,27,34,59,120918,59,100918
-919922730086,gvnsel,dnkadw,USA,gvnsel@gmail.com,Hindi,Mandarin,395,No,66,5555,8,17,28,37,44,235,17,ijioni,120918,28,37,66,120918,66,100918
-919922730087,sqgudg,onqajv,Korea,sqgudg@gmail.com,Korean,Urdu,62,No,17,5555,7,14,27,38,45,234,14,okjj,120918,27,38,17,120918,17,100918
-919922730088,gfvvzw,vkmqla,USA,gfvvzw@gmail.com,Hindi,Urdu,74,Yes,48,4444,8,17,28,37,44,234,17,fdgf,120918,28,37,48,120918,48,100918
-919922730089,ylkwlk,tcxbvg,Pakisthan,ylkwlk@gmail.com,Hindi,Urdu,160,Yes,19,4444,8,18,28,34,44,234,18,dfg,120918,28,34,19,120918,19,100918
-919922730090,sahdyn,nqonaz,India,sahdyn@gmail.com,Hindi,Spanish,185,Yes,58,4444,8,15,28,35,44,237,15,fg,120918,28,35,58,120918,58,100918
-919922730091,jqkada,zujyby,Pakisthan,jqkada@gmail.com,English,Urdu,248,Yes,74,4444,4,18,24,34,48,234,18,dfg,120918,24,34,74,120918,74,100918
-919922730092,sfytgg,lckrtb,Pakisthan,sfytgg@gmail.com,Malayalam,Tamil,135,Yes,50,4444,5,18,25,34,47,238,18,dfg,120918,25,34,50,120918,50,100918
-919922730093,vceyqi,frpjlm,Pakisthan,vceyqi@gmail.com,English,Mandarin,368,Yes,28,4444,4,18,24,34,48,235,18,g,120918,24,34,28,120918,28,100918
-919922730094,nrwnem,trulmh,India,nrwnem@gmail.com,Korean,Urdu,216,No,40,5555,7,15,27,35,45,234,15,fdgf,120918,27,35,40,120918,40,100918
-919922730095,tpqttx,pthrmz,Korea,tpqttx@gmail.com,Korean,Mandarin,376,No,73,5555,7,14,27,38,45,235,14,fdgf,120918,27,38,73,120918,73,100918
-919922730096,nwkwck,tdurkj,India,nwkwck@gmail.com,Korean,Tamil,106,No,74,5555,7,15,27,35,45,238,15,dfg,120918,27,35,74,120918,74,100918
-919922730097,ebjzse,xuhmdw,USA,ebjzse@gmail.com,English,Spanish,70,No,44,5555,4,17,24,37,48,237,17,gdf,120918,24,37,44,120918,44,100918
-919922730098,zoddke,spsirm,USA,zoddke@gmail.com,Malayalam,Tamil,152,No,67,5555,5,17,25,37,47,238,17,g,120918,25,37,67,120918,67,100918
-919922730099,lvcvpg,paiaff,Pakisthan,lvcvpg@gmail.com,English,Spanish,375,No,26,5555,4,18,24,34,48,237,18,dfg,120918,24,34,26,120918,26,100918
-919922730100,crulam,amrtaz,Pakisthan,crulam@gmail.com,Korean,Tamil,359,No,24,5555,7,18,27,34,45,238,18,g,120918,27,34,24,120918,24,100918
-919922730101,kujrxv,sijgqr,Korea,kujrxv@gmail.com,English,Mandarin,147,No,31,5555,4,14,24,38,48,235,14,dfg,120918,24,38,31,120918,31,100918
-919922730102,tomdna,yvmrgh,Pakisthan,tomdna@gmail.com,English,Spanish,77,No,71,5555,4,18,24,34,48,237,18,g,120918,24,34,71,120918,71,100918
-919922730103,dxsbwv,clhqen,India,dxsbwv@gmail.com,English,Spanish,189,Yes,61,4444,4,15,24,35,48,237,15,ijioni,120918,24,35,61,120918,61,100918
-919922730104,vdfnfy,cjmmtk,Pakisthan,vdfnfy@gmail.com,Hindi,Urdu,273,Yes,33,4444,8,18,28,34,44,234,18,okjj,120918,28,34,33,120918,33,100918
-919922730105,tfotdb,fajwpj,USA,tfotdb@gmail.com,English,Tamil,137,Yes,58,4444,4,17,24,37,48,238,17,fdgf,120918,24,37,58,120918,58,100918
-919922730106,hvgrfa,ozhgrc,India,hvgrfa@gmail.com,Malayalam,Spanish,92,Yes,15,4444,5,15,25,35,47,237,15,dfg,120918,25,35,15,120918,15,100918
-919922730107,homdxk,yuhsaq,India,homdxk@gmail.com,Korean,Mandarin,248,No,46,5555,7,15,27,35,45,235,15,fg,120918,27,35,46,120918,46,100918
-919922730108,wouqmm,xbtncm,Korea,wouqmm@gmail.com,Malayalam,Spanish,111,No,29,5555,5,14,25,38,47,237,14,dfg,120918,25,38,29,120918,29,100918
-919922730109,lemegh,gvtrrh,Korea,lemegh@gmail.com,Hindi,Urdu,383,Yes,18,4444,8,14,28,38,44,234,14,dfg,120918,28,38,18,120918,18,100918
-919922730110,jmdxwd,jgecqf,India,jmdxwd@gmail.com,Hindi,Mandarin,350,No,71,5555,8,15,28,35,44,235,15,g,120918,28,35,71,120918,71,100918
-919922730111,wqjzyr,iwrjcj,India,wqjzyr@gmail.com,Malayalam,Mandarin,6,Yes,20,4444,5,15,25,35,47,235,15,fdgf,120918,25,35,20,120918,20,100918
-919922730112,qzgwdh,keyxnu,USA,qzgwdh@gmail.com,English,Mandarin,10,Yes,53,4444,4,17,24,37,48,235,17,fdgf,120918,24,37,53,120918,53,100918
-919922730113,zveeow,xxjduo,Pakisthan,zveeow@gmail.com,Malayalam,Spanish,155,Yes,48,4444,5,18,25,34,47,237,18,dfg,120918,25,34,48,120918,48,100918
-919922730114,spidzm,kxlisv,India,spidzm@gmail.com,English,Mandarin,76,No,34,5555,4,15,24,35,48,235,15,gdf,120918,24,35,34,120918,34,100918
-919922730115,jsqslp,wdhfcv,Korea,jsqslp@gmail.com,Hindi,Tamil,166,Yes,68,4444,8,14,28,38,44,238,14,g,120918,28,38,68,120918,68,100918
-919922730116,cwsyxj,dpmzqe,Korea,cwsyxj@gmail.com,English,Urdu,348,Yes,24,4444,4,14,24,38,48,234,14,dfg,120918,24,38,24,120918,24,100918
-919922730117,ittfvr,jnjquw,Pakisthan,ittfvr@gmail.com,English,Tamil,118,Yes,40,4444,4,18,24,34,48,238,18,g,120918,24,34,40,120918,40,100918
-919922730118,tzbgzx,cgvdsk,Pakisthan,tzbgzx@gmail.com,English,Mandarin,224,No,50,5555,4,18,24,34,48,235,18,dfg,120918,24,34,50,120918,50,100918
-919922730119,avxryi,rwhvoe,USA,avxryi@gmail.com,Korean,Spanish,138,No,17,5555,7,17,27,37,45,237,17,g,120918,27,37,17,120918,17,100918
-919922730120,jvwvzg,bupvox,Korea,jvwvzg@gmail.com,Hindi,Tamil,241,Yes,67,4444,8,14,28,38,44,238,14,ijioni,120918,28,38,67,120918,67,100918
-919922730121,nmnomb,iedbny,Korea,nmnomb@gmail.com,Malayalam,Urdu,44,Yes,20,4444,5,14,25,38,47,234,14,okjj,120918,25,38,20,120918,20,100918
-919922730122,fbruxv,ptwfeb,USA,fbruxv@gmail.com,Malayalam,Mandarin,42,No,40,5555,5,17,25,37,47,235,17,fdgf,120918,25,37,40,120918,40,100918
-919922730123,xkqrwb,zkdcya,Pakisthan,xkqrwb@gmail.com,Hindi,Urdu,135,Yes,47,4444,8,18,28,34,44,234,18,dfg,120918,28,34,47,120918,47,100918
-919922730124,dscade,gklcxq,India,dscade@gmail.com,Korean,Spanish,330,Yes,42,4444,7,15,27,35,45,237,15,fg,120918,27,35,42,120918,42,100918
-919922730125,mpdvhm,jqorqx,Pakisthan,mpdvhm@gmail.com,Hindi,Mandarin,57,Yes,44,4444,8,18,28,34,44,235,18,dfg,120918,28,34,44,120918,44,100918
-919922730126,fydajt,okddbw,Pakisthan,fydajt@gmail.com,Hindi,Urdu,120,No,67,5555,8,18,28,34,44,234,18,dfg,120918,28,34,67,120918,67,100918
-919922730127,samjha,tsyrbz,India,samjha@gmail.com,Korean,Mandarin,147,Yes,46,4444,7,15,27,35,45,235,15,g,120918,27,35,46,120918,46,100918
-919922730128,fsvikw,wczdpq,Korea,fsvikw@gmail.com,Malayalam,Tamil,117,Yes,46,4444,5,14,25,38,47,238,14,fdgf,120918,25,38,46,120918,46,100918
-919922730129,uaqcku,skztgh,Korea,uaqcku@gmail.com,English,Urdu,76,No,49,5555,4,14,24,38,48,234,14,fdgf,120918,24,38,49,120918,49,100918
-919922730130,spgthc,klizbc,Korea,spgthc@gmail.com,Hindi,Urdu,28,Yes,25,4444,8,14,28,38,44,234,14,dfg,120918,28,38,25,120918,25,100918
-919922730131,egjfyf,matvvb,Pakisthan,egjfyf@gmail.com,Hindi,Spanish,149,No,57,5555,8,18,28,34,44,237,18,gdf,120918,28,34,57,120918,57,100918
-919922730132,prmbdj,qgwcth,USA,prmbdj@gmail.com,Hindi,Urdu,246,No,71,5555,8,17,28,37,44,234,17,g,120918,28,37,71,120918,71,100918
-919922730133,fsfkcd,apljha,USA,fsfkcd@gmail.com,English,Urdu,23,Yes,48,4444,4,17,24,37,48,234,17,dfg,120918,24,37,48,120918,48,100918
-919922730134,pnkzsz,smwtfq,USA,pnkzsz@gmail.com,Hindi,Mandarin,138,No,24,5555,8,17,28,37,44,235,17,g,120918,28,37,24,120918,24,100918
-919922730135,soggyo,ymqnra,Korea,soggyo@gmail.com,Korean,Spanish,120,No,42,5555,7,14,27,38,45,237,14,dfg,120918,27,38,42,120918,42,100918
-919922730136,gwthpv,kbzvrv,USA,gwthpv@gmail.com,Hindi,Spanish,273,No,45,5555,8,17,28,37,44,237,17,g,120918,28,37,45,120918,45,100918
-919922730137,rylyol,icegwl,India,rylyol@gmail.com,Korean,Mandarin,92,No,46,5555,7,15,27,35,45,235,15,ijioni,120918,27,35,46,120918,46,100918
-919922730138,pkmqap,ogwgpb,India,pkmqap@gmail.com,Hindi,Urdu,102,Yes,24,4444,8,15,28,35,44,234,15,okjj,120918,28,35,24,120918,24,100918
-919922730139,quqdlb,gcivib,Korea,quqdlb@gmail.com,Malayalam,Tamil,120,Yes,30,4444,5,14,25,38,47,238,14,fdgf,120918,25,38,30,120918,30,100918
-919922730140,sfcffj,mmvnaw,Korea,sfcffj@gmail.com,Korean,Tamil,188,Yes,21,4444,7,14,27,38,45,238,14,dfg,120918,27,38,21,120918,21,100918
-919922730141,wrfqzy,tjbtys,Pakisthan,wrfqzy@gmail.com,English,Tamil,305,No,58,5555,4,18,24,34,48,238,18,fg,120918,24,34,58,120918,58,100918
-919922730142,uhgfab,erurbg,Korea,uhgfab@gmail.com,Malayalam,Urdu,250,No,19,5555,5,14,25,38,47,234,14,dfg,120918,25,38,19,120918,19,100918
-919922730143,xzcrfc,xjcmzt,Korea,xzcrfc@gmail.com,Hindi,Urdu,194,Yes,66,4444,8,14,28,38,44,234,14,dfg,120918,28,38,66,120918,66,100918
-919922730144,wuhiuf,jcfcbx,Pakisthan,wuhiuf@gmail.com,Korean,Mandarin,257,Yes,23,4444,7,18,27,34,45,235,18,g,120918,27,34,23,120918,23,100918
-919922730145,csnpkt,zesmjd,Korea,csnpkt@gmail.com,English,Urdu,109,Yes,28,4444,4,14,24,38,48,234,14,fdgf,120918,24,38,28,120918,28,100918
-919922730146,vpbzwm,iupnun,India,vpbzwm@gmail.com,Malayalam,Mandarin,173,No,54,5555,5,15,25,35,47,235,15,fdgf,120918,25,35,54,120918,54,100918
-919922730147,mhmkbj,qatukg,USA,mhmkbj@gmail.com,Malayalam,Spanish,40,Yes,34,4444,5,17,25,37,47,237,17,dfg,120918,25,37,34,120918,34,100918
-919922730148,qhvxzl,xeaxho,Korea,qhvxzl@gmail.com,English,Mandarin,377,No,70,5555,4,14,24,38,48,235,14,gdf,120918,24,38,70,120918,70,100918
-919922730149,iudwji,pxaodg,India,iudwji@gmail.com,Hindi,Mandarin,216,No,45,5555,8,15,28,35,44,235,15,g,120918,28,35,45,120918,45,100918
-919922730150,xmivml,vcfmom,India,xmivml@gmail.com,Korean,Tamil,45,No,71,5555,7,15,27,35,45,238,15,dfg,120918,27,35,71,120918,71,100918
-919922730151,lgsavh,obbcal,USA,lgsavh@gmail.com,Malayalam,Tamil,347,Yes,34,4444,5,17,25,37,47,238,17,g,120918,25,37,34,120918,34,100918
-919922730152,gayvme,ruzhbo,Pakisthan,gayvme@gmail.com,Hindi,Tamil,338,Yes,72,4444,8,18,28,34,44,238,18,dfg,120918,28,34,72,120918,72,100918
-919922730153,hhszdg,zowdxy,USA,hhszdg@gmail.com,Malayalam,Mandarin,334,No,18,5555,5,17,25,37,47,235,17,g,120918,25,37,18,120918,18,100918
-919922730154,ttlags,lpnrfy,USA,ttlags@gmail.com,English,Urdu,342,Yes,23,4444,4,17,24,37,48,234,17,ijioni,120918,24,37,23,120918,23,100918
-919922730155,yyynzw,cgtero,USA,yyynzw@gmail.com,Malayalam,Spanish,254,Yes,50,4444,5,17,25,37,47,237,17,okjj,120918,25,37,50,120918,50,100918
-919922730156,pfcccy,swovcs,USA,pfcccy@gmail.com,Malayalam,Mandarin,346,No,45,5555,5,17,25,37,47,235,17,fdgf,120918,25,37,45,120918,45,100918
-919922730157,mpdbob,zdvvsp,India,mpdbob@gmail.com,Hindi,Tamil,60,No,56,5555,8,15,28,35,44,238,15,dfg,120918,28,35,56,120918,56,100918
-919922730158,fwuokx,dcqrrg,USA,fwuokx@gmail.com,Malayalam,Tamil,151,No,35,5555,5,17,25,37,47,238,17,fg,120918,25,37,35,120918,35,100918
-919922730159,phsrwh,iygqxe,USA,phsrwh@gmail.com,Hindi,Mandarin,137,No,45,5555,8,17,28,37,44,235,17,dfg,120918,28,37,45,120918,45,100918
-919922730160,llrovu,fijlgn,Korea,llrovu@gmail.com,Hindi,Tamil,17,No,65,5555,8,14,28,38,44,238,14,dfg,120918,28,38,65,120918,65,100918
-919922730161,eirfum,ikbndg,India,eirfum@gmail.com,English,Spanish,224,No,47,5555,4,15,24,35,48,237,15,g,120918,24,35,47,120918,70,100918
-919922730162,crunpw,ryasnp,India,crunpw@gmail.com,Hindi,Tamil,84,Yes,40,4444,8,15,28,35,44,238,15,fdgf,120918,28,35,40,120918,45,100918
-919922730163,mchmom,wazdab,Korea,mchmom@gmail.com,Korean,Urdu,163,No,66,5555,7,14,27,38,45,234,14,fdgf,120918,27,38,66,120918,71,100918
-919922730164,enymqy,plwmym,USA,enymqy@gmail.com,Malayalam,Mandarin,26,No,69,5555,5,17,25,37,47,235,17,dfg,120918,25,37,69,120918,34,100918
-919922730165,onslmo,hsasdc,Korea,onslmo@gmail.com,Malayalam,Urdu,317,No,41,5555,5,14,25,38,47,234,14,gdf,120918,25,38,41,120918,72,100918
-919922730166,tkxtsm,lkcksz,USA,tkxtsm@gmail.com,Malayalam,Urdu,206,Yes,52,4444,5,17,25,37,47,234,17,g,120918,25,37,52,120918,18,100918
-919922730167,fxhsor,ddighe,Pakisthan,fxhsor@gmail.com,Malayalam,Tamil,262,Yes,52,4444,5,18,25,34,47,238,18,dfg,120918,25,34,52,120918,23,100918
-919922730168,suefzi,setqes,USA,suefzi@gmail.com,Korean,Mandarin,298,No,68,5555,7,17,27,37,45,235,17,g,120918,27,37,68,120918,50,100918
-919922730169,kbdrxd,elagzd,Pakisthan,kbdrxd@gmail.com,English,Spanish,293,Yes,41,4444,4,18,24,34,48,237,18,dfg,120918,24,34,41,120918,45,100918
-919922730170,lvezir,vttsxq,USA,lvezir@gmail.com,English,Spanish,12,Yes,69,4444,4,17,24,37,48,237,17,g,120918,24,37,69,120918,56,100918
-919922730171,inmrtc,xqwcqj,India,inmrtc@gmail.com,Hindi,Spanish,367,Yes,19,4444,8,15,28,35,44,237,15,ijioni,120918,28,35,19,120918,35,100918
-919922730172,eqhdqe,sbcxeg,India,eqhdqe@gmail.com,English,Urdu,135,No,23,5555,4,15,24,35,48,234,15,okjj,120918,24,35,23,120918,45,100918
-919922730173,ahnmbj,jgpzsc,Korea,ahnmbj@gmail.com,Hindi,Tamil,13,No,30,5555,8,14,28,38,44,238,14,fdgf,120918,28,38,30,120918,65,100918
-919922730174,wvhckx,ghfzll,India,wvhckx@gmail.com,Malayalam,Mandarin,53,No,35,5555,5,15,25,35,47,235,15,dfg,120918,25,35,35,120918,64,100918
-919922730175,mlgvhz,anecsm,Korea,mlgvhz@gmail.com,Korean,Urdu,235,No,34,5555,7,14,27,38,45,234,14,fg,120918,27,38,34,120918,26,100918
-919922730176,vglmja,hpwunw,Korea,vglmja@gmail.com,Malayalam,Spanish,121,No,19,5555,5,14,25,38,47,237,14,dfg,120918,25,38,19,120918,19,100918
-919922730177,pqvvyu,gxdmbt,USA,pqvvyu@gmail.com,Korean,Tamil,348,Yes,26,4444,7,17,27,37,45,238,17,dfg,120918,27,37,26,120918,26,100918
-919922730178,mvgptj,iwaagz,Pakisthan,mvgptj@gmail.com,Korean,Tamil,35,No,20,5555,7,18,27,34,45,238,18,g,120918,27,34,20,120918,20,100918
-919922730179,ecjifs,srumqn,Korea,ecjifs@gmail.com,Korean,Spanish,106,No,18,5555,7,14,27,38,45,237,14,fdgf,120918,27,38,18,120918,18,100918
-919922730180,pxyfer,iecyhd,Pakisthan,pxyfer@gmail.com,Malayalam,Tamil,252,Yes,27,4444,5,18,25,34,47,238,18,fdgf,120918,25,34,27,120918,27,100918
-919922730181,ltwxqv,dnalek,Pakisthan,ltwxqv@gmail.com,Korean,Spanish,91,Yes,62,4444,7,18,27,34,45,237,18,dfg,120918,27,34,62,120918,62,100918
-919922730182,izevjs,oiondl,India,izevjs@gmail.com,Malayalam,Mandarin,321,Yes,44,4444,5,15,25,35,47,235,15,gdf,120918,25,35,44,120918,44,100918
-919922730183,uhxjqu,rzowse,Pakisthan,uhxjqu@gmail.com,Hindi,Urdu,47,No,45,5555,8,18,28,34,44,234,18,g,120918,28,34,45,120918,45,100918
-919922730184,dwxdmv,zcahsc,Pakisthan,dwxdmv@gmail.com,Korean,Tamil,44,No,52,5555,7,18,27,34,45,238,18,dfg,120918,27,34,52,120918,52,100918
-919922730185,kninkd,isagcb,USA,kninkd@gmail.com,Korean,Tamil,214,Yes,42,4444,7,17,27,37,45,238,17,g,120918,27,37,42,120918,47,100918
-919922730186,uetqrh,xlkdgy,India,uetqrh@gmail.com,Malayalam,Urdu,333,Yes,26,4444,5,15,25,35,47,234,15,dfg,120918,25,35,26,120918,40,100918
-919922730187,vrlcml,zckemp,Korea,vrlcml@gmail.com,Hindi,Urdu,126,No,34,5555,8,14,28,38,44,234,14,g,120918,28,38,34,120918,66,100918
-919922730188,kgtydo,vkswps,Korea,kgtydo@gmail.com,Malayalam,Tamil,167,No,67,5555,5,14,25,38,47,238,14,ijioni,120918,25,38,67,120918,69,100918
-919922730189,flzrkk,cdoyqj,Korea,flzrkk@gmail.com,Korean,Mandarin,377,Yes,72,4444,7,14,27,38,45,235,14,okjj,120918,27,38,72,120918,41,100918
-919922730190,fafakj,elxfdu,India,fafakj@gmail.com,Malayalam,Tamil,86,No,51,5555,5,15,25,35,47,238,15,fdgf,120918,25,35,51,120918,52,100918
-919922730191,qpbiaq,vqrjeo,USA,qpbiaq@gmail.com,Malayalam,Tamil,332,No,37,5555,5,17,25,37,47,238,17,dfg,120918,25,37,37,120918,52,100918
-919922730192,dgjjrz,mgehzz,USA,dgjjrz@gmail.com,Korean,Tamil,174,Yes,19,4444,7,17,27,37,45,238,17,fg,120918,27,37,19,120918,68,100918
-919922730193,zamnet,depdvg,Pakisthan,zamnet@gmail.com,Korean,Mandarin,99,No,35,5555,7,18,27,34,45,235,18,dfg,120918,27,34,35,120918,41,100918
-919922730194,tanaou,qryubg,Pakisthan,tanaou@gmail.com,Malayalam,Urdu,222,No,44,5555,5,18,25,34,47,234,18,dfg,120918,25,34,44,120918,69,100918
-919922730195,ufbqri,bznams,Pakisthan,ufbqri@gmail.com,Malayalam,Tamil,2,Yes,45,4444,5,18,25,34,47,238,18,g,120918,25,34,45,120918,19,100918
-919922730196,jasptm,pybtfa,USA,jasptm@gmail.com,Hindi,Urdu,227,No,73,5555,8,17,28,37,44,234,17,fdgf,120918,28,37,73,120918,23,100918
-919922730197,bstcxd,pvekwt,USA,bstcxd@gmail.com,Malayalam,Spanish,54,Yes,29,4444,5,17,25,37,47,237,17,fdgf,120918,25,37,29,120918,30,100918
-919446506807,joel,jose,India,joel.jose@flytxt.com,Malayalam,English,200,Yes,25,6666,5,15,25,35,45,235,15,dfg,120918,25,35,25,120918,35,100918
-919446506808,joel1,jose1,India,joel.kallely95@gmail.com,Malayalam,English,201,No,26,6666,5,15,25,35,45,235,15,gdf,120918,25,35,26,120918,34,100918
-919446506809,selenium,flytxt,India,selenium.flytxt@gmail.com,Malayalam,English,150,No,28,6666,5,15,25,35,45,235,15,g,120918,25,35,28,120918,50,100918
+msisdn,first name,last name,country,email,language 1,language 2,balance,boolean,age,device id,location insight,digital persona,demographic,larned behaviour,analytical scores,digital engagement,event-number,event-text,event-date(ddMMyy),event-quantity,event-value,usage metric value,usage metric date,usage metric value2,usage metric date2,Date Time
+919717802050.00,nqqldq,aqgxih,Pakisthan,nqqldq@gmail.com,Malayalam,Mandarin,24,Yes,37,4444,5,18,25,34,47,235,18,ijioni,120918,25,34,37,120918,50,100918,12/11/2018 10:12
+919446506900.00,mpgixt,afrqtw,USA,mpgixt@gmail.com,Malayalam,Tamil,13,Yes,48,4444,5,17,25,37,47,238,17,okjj,120918,25,37,48,120918,45,100918,12/11/2018 10:12
+919446506903.00,byqixm,poqnkc,Pakisthan,byqixm@gmail.com,English,Urdu,141,No,41,5555,4,18,24,34,48,234,18,fdgf,120918,24,34,41,120918,56,100918,12/11/2018 10:12
+919446506902.00,yuotch,pgpzdj,Korea,yuotch@gmail.com,English,Tamil,200,Yes,47,4444,4,14,24,38,48,238,14,dfg,120918,24,38,47,120918,35,100918,12/11/2018 10:12
+919922730005.00,weaupo,zjsesm,Pakisthan,weaupo@gmail.com,Hindi,Urdu,242,No,17,5555,8,18,28,34,44,234,18,fg,120918,28,34,17,120918,45,100918,12/11/2018 10:12
+919922730006.00,gtzarn,ggbfvs,India,gtzarn@gmail.com,English,Tamil,16,Yes,62,4444,4,15,24,35,48,238,15,dfg,120918,24,35,62,120918,65,100918,12/11/2018 10:12
+919922730007.00,kixpdo,duukff,Korea,kixpdo@gmail.com,English,Tamil,87,Yes,49,4444,4,14,24,38,48,238,14,dfg,120918,24,38,49,120918,70,100918,12/11/2018 10:12
+919922730008.00,ppxyle,mzvqzs,USA,ppxyle@gmail.com,Malayalam,Spanish,103,No,41,5555,5,17,25,37,47,237,17,g,120918,25,37,41,120918,45,100918,12/11/2018 10:12
+919922730009.00,ojhdxt,ekrvex,Pakisthan,ojhdxt@gmail.com,English,Urdu,166,Yes,46,4444,4,18,24,34,48,234,18,fdgf,120918,24,34,46,120918,71,100918,12/11/2018 10:12
+919922730010.00,ekierf,ysfiqj,Korea,ekierf@gmail.com,English,Spanish,209,Yes,45,4444,4,14,24,38,48,237,14,fdgf,120918,24,38,45,120918,34,100918,12/11/2018 10:12
+919922730011.00,czlaqg,mabnwk,Korea,czlaqg@gmail.com,Malayalam,Spanish,299,No,52,5555,5,14,25,38,47,237,14,dfg,120918,25,38,52,120918,72,100918,12/11/2018 10:12
+919922730012.00,dpvgnn,vthsui,Korea,dpvgnn@gmail.com,English,Urdu,5,Yes,22,4444,4,14,24,38,48,234,14,gdf,120918,24,38,22,120918,18,100918,12/11/2018 10:12
+919922730013.00,mhttnh,vtknet,USA,mhttnh@gmail.com,Hindi,Tamil,150,No,60,5555,8,17,28,37,44,238,17,g,120918,28,37,60,120918,23,100918,12/11/2018 10:12
+919922730014.00,ytpmsf,ayegse,Korea,ytpmsf@gmail.com,English,Mandarin,389,No,37,5555,4,14,24,38,48,235,14,dfg,120918,24,38,37,120918,50,100918,12/11/2018 10:12
+919922730015.00,xyezdt,tjdqwx,India,xyezdt@gmail.com,English,Urdu,281,No,20,5555,4,15,24,35,48,234,15,g,120918,24,35,20,120918,45,100918,12/11/2018 10:12
+919922730016.00,uamacj,dxonnn,Korea,uamacj@gmail.com,English,Mandarin,330,Yes,55,4444,4,14,24,38,48,235,14,dfg,120918,24,38,55,120918,56,100918,12/11/2018 10:12
+919922730017.00,qxvbbr,whnnab,USA,qxvbbr@gmail.com,English,Urdu,60,No,24,5555,4,17,24,37,48,234,17,g,120918,24,37,24,120918,35,100918,12/11/2018 10:12
+919922730018.00,yrnltc,guuijk,Korea,yrnltc@gmail.com,Korean,Urdu,216,Yes,63,4444,7,14,27,38,45,234,14,ijioni,120918,27,38,63,120918,45,100918,12/11/2018 10:12
+919922730019.00,fkemei,bwngvq,Pakisthan,fkemei@gmail.com,Korean,Mandarin,256,No,27,5555,7,18,27,34,45,235,18,okjj,120918,27,34,27,120918,65,100918,12/11/2018 10:12
+919922730020.00,ozgcgk,otjzne,USA,ozgcgk@gmail.com,Korean,Urdu,321,Yes,25,4444,7,17,27,37,45,234,17,fdgf,120918,27,37,25,120918,64,100918,12/11/2018 10:12
+919922730021.00,jvapof,ysimrg,Korea,jvapof@gmail.com,Hindi,Urdu,383,No,55,5555,8,14,28,38,44,234,14,dfg,120918,28,38,55,120918,26,100918,12/11/2018 10:12
+919922730022.00,erndvy,sezqvq,USA,erndvy@gmail.com,Hindi,Urdu,117,Yes,17,4444,8,17,28,37,44,234,17,fg,120918,28,37,17,120918,19,100918,12/11/2018 10:12
+919922730023.00,nkoexa,lsikfv,Pakisthan,nkoexa@gmail.com,Hindi,Urdu,385,No,27,5555,8,18,28,34,44,234,18,dfg,120918,28,34,27,120918,26,100918,12/11/2018 10:12
+919922730024.00,pwbikh,rionnk,India,pwbikh@gmail.com,Korean,Tamil,327,Yes,67,4444,7,15,27,35,45,238,15,dfg,120918,27,35,67,120918,20,100918,12/11/2018 10:12
+919922730025.00,pfudjn,reyqxt,Korea,pfudjn@gmail.com,Korean,Urdu,123,No,51,5555,7,14,27,38,45,234,14,g,120918,27,38,51,120918,18,100918,12/11/2018 10:12
+919922730026.00,xdpusk,adxurj,USA,xdpusk@gmail.com,English,Urdu,378,Yes,63,4444,4,17,24,37,48,234,17,fdgf,120918,24,37,63,120918,27,100918,12/11/2018 10:12
+919922730027.00,udrqvk,ojpikz,Korea,udrqvk@gmail.com,Korean,Spanish,130,Yes,72,4444,7,14,27,38,45,237,14,fdgf,120918,27,38,72,120918,62,100918,12/11/2018 10:12
+919922730028.00,anaqiz,qwmacp,Korea,anaqiz@gmail.com,English,Urdu,185,Yes,69,4444,4,14,24,38,48,234,14,dfg,120918,24,38,69,120918,44,100918,12/11/2018 10:12
+919922730029.00,ouhlsa,ntudmw,Korea,ouhlsa@gmail.com,Hindi,Mandarin,173,Yes,50,4444,8,14,28,38,44,235,14,gdf,120918,28,38,50,120918,45,100918,12/11/2018 10:12
+919922730030.00,ztteaj,buetdr,USA,ztteaj@gmail.com,Hindi,Tamil,5,No,68,5555,8,17,28,37,44,238,17,g,120918,28,37,68,120918,52,100918,12/11/2018 10:12
+919922730031.00,stayhz,gkrlbd,India,stayhz@gmail.com,English,Spanish,216,No,24,5555,4,15,24,35,48,237,15,dfg,120918,24,35,24,120918,47,100918,12/11/2018 10:12
+919922730032.00,rclqgl,zuafsj,Pakisthan,rclqgl@gmail.com,Hindi,Mandarin,280,No,57,5555,8,18,28,34,44,235,18,g,120918,28,34,57,120918,40,100918,12/11/2018 10:12
+919922730033.00,jesyhn,gbcram,India,jesyhn@gmail.com,Korean,Mandarin,164,Yes,56,4444,7,15,27,35,45,235,15,dfg,120918,27,35,56,120918,66,100918,12/11/2018 10:12
+919922730034.00,tlgofy,ajmdkk,USA,tlgofy@gmail.com,Korean,Spanish,280,No,28,5555,7,17,27,37,45,237,17,g,120918,27,37,28,120918,69,100918,12/11/2018 10:12
+919922730035.00,ciqztv,jsrzhk,India,ciqztv@gmail.com,Korean,Mandarin,123,Yes,20,4444,7,15,27,35,45,235,15,ijioni,120918,27,35,20,120918,41,100918,12/11/2018 10:12
+919922730036.00,kulsgh,ozjxcf,Korea,kulsgh@gmail.com,Malayalam,Urdu,392,Yes,22,4444,5,14,25,38,47,234,14,okjj,120918,25,38,22,120918,52,100918,12/11/2018 10:12
+919922730037.00,iotmbj,ppffqd,India,iotmbj@gmail.com,Korean,Mandarin,320,Yes,19,4444,7,15,27,35,45,235,15,fdgf,120918,27,35,19,120918,52,100918,12/11/2018 10:12
+919922730038.00,lkayzk,jowbqe,Pakisthan,lkayzk@gmail.com,Korean,Mandarin,344,Yes,29,4444,7,18,27,34,45,235,18,dfg,120918,27,34,29,120918,29,100918,12/11/2018 10:12
+919922730039.00,ekszjn,txsrtm,India,ekszjn@gmail.com,English,Spanish,357,No,53,5555,4,15,24,35,48,237,15,fg,120918,24,35,53,120918,53,100918,12/11/2018 10:12
+919922730040.00,llpevy,sgftht,USA,llpevy@gmail.com,English,Tamil,76,No,65,5555,4,17,24,37,48,238,17,dfg,120918,24,37,65,120918,65,100918,12/11/2018 10:12
+919922730041.00,yxdyib,hicyrd,India,yxdyib@gmail.com,Malayalam,Urdu,230,No,74,5555,5,15,25,35,47,234,15,dfg,120918,25,35,74,120918,74,100918,12/11/2018 10:12
+919922730042.00,nnnsvh,dvuogl,Korea,nnnsvh@gmail.com,English,Tamil,185,Yes,52,4444,4,14,24,38,48,238,14,g,120918,24,38,52,120918,52,100918,12/11/2018 10:12
+919922730043.00,tthpzw,owutqj,India,tthpzw@gmail.com,Korean,Mandarin,50,No,39,5555,7,15,27,35,45,235,15,fdgf,120918,27,35,39,120918,39,100918,12/11/2018 10:12
+919922730044.00,joicpq,kfooxq,Pakisthan,joicpq@gmail.com,Malayalam,Tamil,11,Yes,26,4444,5,18,25,34,47,238,18,fdgf,120918,25,34,26,120918,26,100918,12/11/2018 10:12
+919922730045.00,klqxmr,fxzezk,Korea,klqxmr@gmail.com,English,Urdu,378,Yes,61,4444,4,14,24,38,48,234,14,dfg,120918,24,38,61,120918,61,100918,12/11/2018 10:12
+919922730046.00,spidpk,bmvyxl,USA,spidpk@gmail.com,English,Spanish,388,No,42,5555,4,17,24,37,48,237,17,gdf,120918,24,37,42,120918,42,100918,12/11/2018 10:12
+919922730047.00,rdgxcr,vqvdgt,Pakisthan,rdgxcr@gmail.com,Hindi,Urdu,385,Yes,57,4444,8,18,28,34,44,234,18,g,120918,28,34,57,120918,57,100918,12/11/2018 10:12
+919922730048.00,awzhql,igycpv,USA,awzhql@gmail.com,Korean,Mandarin,222,No,29,5555,7,17,27,37,45,235,17,dfg,120918,27,37,29,120918,29,100918,12/11/2018 10:12
+919922730049.00,vnqmzv,uolzua,India,vnqmzv@gmail.com,Korean,Mandarin,243,No,25,5555,7,15,27,35,45,235,15,g,120918,27,35,25,120918,25,100918,12/11/2018 10:12
+919922730050.00,vnfsng,oztpux,USA,vnfsng@gmail.com,Hindi,Tamil,241,Yes,54,4444,8,17,28,37,44,238,17,dfg,120918,28,37,54,120918,54,100918,12/11/2018 10:12
+919922730051.00,usulrh,qngtyz,Pakisthan,usulrh@gmail.com,English,Urdu,194,Yes,16,4444,4,18,24,34,48,234,18,g,120918,24,34,16,120918,16,100918,12/11/2018 10:12
+919922730052.00,yuvvql,tvpkcd,India,yuvvql@gmail.com,Malayalam,Spanish,96,Yes,39,4444,5,15,25,35,47,237,15,ijioni,120918,25,35,39,120918,39,100918,12/11/2018 10:12
+919922730053.00,ohccrt,dbypbp,Korea,ohccrt@gmail.com,Hindi,Spanish,106,Yes,45,4444,8,14,28,38,44,237,14,okjj,120918,28,38,45,120918,45,100918,12/11/2018 10:12
+919922730054.00,lcoblj,dpqdfn,Pakisthan,lcoblj@gmail.com,Korean,Urdu,269,No,59,5555,7,18,27,34,45,234,18,fdgf,120918,27,34,59,120918,59,100918,12/11/2018 10:12
+919922730055.00,fkkoom,fvzskr,Korea,fkkoom@gmail.com,English,Tamil,197,Yes,55,4444,4,14,24,38,48,238,14,dfg,120918,24,38,55,120918,55,100918,12/11/2018 10:12
+919922730056.00,nxcbgy,tbhlwg,Pakisthan,nxcbgy@gmail.com,English,Tamil,364,No,64,5555,4,18,24,34,48,238,18,fg,120918,24,34,64,120918,64,100918,12/11/2018 10:12
+919922730057.00,getquu,plzpgd,USA,getquu@gmail.com,English,Tamil,283,No,29,5555,4,17,24,37,48,238,17,dfg,120918,24,37,29,120918,29,100918,12/11/2018 10:12
+919922730058.00,olicgn,qoymeg,India,olicgn@gmail.com,English,Tamil,260,No,60,5555,4,15,24,35,48,238,15,dfg,120918,24,35,60,120918,60,100918,12/11/2018 10:12
+919922730059.00,zcyfge,adsems,Korea,zcyfge@gmail.com,English,Mandarin,33,No,26,5555,4,14,24,38,48,235,14,g,120918,24,38,26,120918,26,100918,12/11/2018 10:12
+919922730060.00,hpsxut,obteqd,Korea,hpsxut@gmail.com,Korean,Urdu,17,Yes,20,4444,7,14,27,38,45,234,14,fdgf,120918,27,38,20,120918,20,100918,12/11/2018 10:12
+919922730061.00,xxsxjn,ttwsxg,USA,xxsxjn@gmail.com,Hindi,Spanish,289,Yes,55,4444,8,17,28,37,44,237,17,fdgf,120918,28,37,55,120918,55,100918,12/11/2018 10:12
+919922730062.00,apzudb,isaigw,Korea,apzudb@gmail.com,Hindi,Urdu,7,No,57,5555,8,14,28,38,44,234,14,dfg,120918,28,38,57,120918,57,100918,12/11/2018 10:12
+919922730063.00,vcykcb,kvrlup,USA,vcykcb@gmail.com,English,Tamil,234,Yes,30,4444,4,17,24,37,48,238,17,gdf,120918,24,37,30,120918,30,100918,12/11/2018 10:12
+919922730064.00,klorit,cjqomj,USA,klorit@gmail.com,English,Urdu,33,Yes,44,4444,4,17,24,37,48,234,17,g,120918,24,37,44,120918,44,100918,12/11/2018 10:12
+919922730065.00,gizdxo,loxpks,USA,gizdxo@gmail.com,Korean,Tamil,398,Yes,26,4444,7,17,27,37,45,238,17,dfg,120918,27,37,26,120918,26,100918,12/11/2018 10:12
+919922730066.00,oxisqj,xsleuc,Pakisthan,oxisqj@gmail.com,English,Spanish,278,No,17,5555,4,18,24,34,48,237,18,g,120918,24,34,17,120918,17,100918,12/11/2018 10:12
+919922730067.00,xtqofa,qiyyim,Korea,xtqofa@gmail.com,Hindi,Urdu,297,No,64,5555,8,14,28,38,44,234,14,dfg,120918,28,38,64,120918,64,100918,12/11/2018 10:12
+919922730068.00,isfard,xcbizh,USA,isfard@gmail.com,Korean,Urdu,93,No,36,5555,7,17,27,37,45,234,17,g,120918,27,37,36,120918,36,100918,12/11/2018 10:12
+919922730069.00,lgpvgy,lyeykf,Pakisthan,lgpvgy@gmail.com,English,Spanish,336,Yes,73,4444,4,18,24,34,48,237,18,ijioni,120918,24,34,73,120918,73,100918,12/11/2018 10:12
+919922730070.00,czfceu,gkimwk,USA,czfceu@gmail.com,Malayalam,Tamil,7,No,28,5555,5,17,25,37,47,238,17,okjj,120918,25,37,28,120918,28,100918,12/11/2018 10:12
+919922730071.00,rpvtoj,pnwweu,India,rpvtoj@gmail.com,Hindi,Tamil,199,Yes,26,4444,8,15,28,35,44,238,15,fdgf,120918,28,35,26,120918,26,100918,12/11/2018 10:12
+919922730072.00,ffpqly,qyayls,Korea,ffpqly@gmail.com,Malayalam,Mandarin,362,No,72,5555,5,14,25,38,47,235,14,dfg,120918,25,38,72,120918,72,100918,12/11/2018 10:12
+919922730073.00,eectak,ofjakq,Pakisthan,eectak@gmail.com,Hindi,Mandarin,237,Yes,31,4444,8,18,28,34,44,235,18,fg,120918,28,34,31,120918,31,100918,12/11/2018 10:12
+919922730074.00,londup,zxtszd,Korea,londup@gmail.com,Hindi,Urdu,301,Yes,23,4444,8,14,28,38,44,234,14,dfg,120918,28,38,23,120918,23,100918,12/11/2018 10:12
+919922730075.00,dlckxc,mvppkq,India,dlckxc@gmail.com,Malayalam,Mandarin,385,No,15,5555,5,15,25,35,47,235,15,dfg,120918,25,35,15,120918,15,100918,12/11/2018 10:12
+919922730076.00,chlbbr,qzqmfc,India,chlbbr@gmail.com,English,Tamil,302,No,68,5555,4,15,24,35,48,238,15,g,120918,24,35,68,120918,68,100918,12/11/2018 10:12
+919922730077.00,bmxvrl,cchbba,Korea,bmxvrl@gmail.com,Korean,Spanish,151,No,54,5555,7,14,27,38,45,237,14,fdgf,120918,27,38,54,120918,54,100918,12/11/2018 10:12
+919922730078.00,rpsntb,jhvhip,India,rpsntb@gmail.com,Malayalam,Tamil,81,Yes,21,4444,5,15,25,35,47,238,15,fdgf,120918,25,35,21,120918,21,100918,12/11/2018 10:12
+919922730079.00,cyrmwd,vqjnta,Korea,cyrmwd@gmail.com,Hindi,Tamil,261,No,20,5555,8,14,28,38,44,238,14,dfg,120918,28,38,20,120918,20,100918,12/11/2018 10:12
+919922730080.00,oujsni,zeqwuz,Korea,oujsni@gmail.com,Hindi,Spanish,19,Yes,70,4444,8,14,28,38,44,237,14,gdf,120918,28,38,70,120918,70,100918,12/11/2018 10:12
+919922730081.00,yofgox,pbwiby,Korea,yofgox@gmail.com,Malayalam,Urdu,40,No,17,5555,5,14,25,38,47,234,14,g,120918,25,38,17,120918,17,100918,12/11/2018 10:12
+919922730082.00,ruajid,mlipya,Korea,ruajid@gmail.com,Hindi,Spanish,221,Yes,17,4444,8,14,28,38,44,237,14,dfg,120918,28,38,17,120918,17,100918,12/11/2018 10:12
+919922730083.00,fgkmiw,fxptjs,Pakisthan,fgkmiw@gmail.com,Korean,Urdu,244,No,35,5555,7,18,27,34,45,234,18,g,120918,27,34,35,120918,35,100918,12/11/2018 10:12
+919922730084.00,asrkho,oyocon,Pakisthan,asrkho@gmail.com,Hindi,Tamil,147,Yes,68,4444,8,18,28,34,44,238,18,dfg,120918,28,34,68,120918,68,100918,12/11/2018 10:12
+919922730085.00,axrxic,jsbyxx,Pakisthan,axrxic@gmail.com,Korean,Tamil,327,Yes,59,4444,7,18,27,34,45,238,18,g,120918,27,34,59,120918,59,100918,12/11/2018 10:12
+919922730086.00,gvnsel,dnkadw,USA,gvnsel@gmail.com,Hindi,Mandarin,395,No,66,5555,8,17,28,37,44,235,17,ijioni,120918,28,37,66,120918,66,100918,12/11/2018 10:12
+919922730087.00,sqgudg,onqajv,Korea,sqgudg@gmail.com,Korean,Urdu,62,No,17,5555,7,14,27,38,45,234,14,okjj,120918,27,38,17,120918,17,100918,12/11/2018 10:12
+919922730088.00,gfvvzw,vkmqla,USA,gfvvzw@gmail.com,Hindi,Urdu,74,Yes,48,4444,8,17,28,37,44,234,17,fdgf,120918,28,37,48,120918,48,100918,12/11/2018 10:12
+919922730089.00,ylkwlk,tcxbvg,Pakisthan,ylkwlk@gmail.com,Hindi,Urdu,160,Yes,19,4444,8,18,28,34,44,234,18,dfg,120918,28,34,19,120918,19,100918,12/11/2018 10:12
+919922730090.00,sahdyn,nqonaz,India,sahdyn@gmail.com,Hindi,Spanish,185,Yes,58,4444,8,15,28,35,44,237,15,fg,120918,28,35,58,120918,58,100918,12/11/2018 10:12
+919922730091.00,jqkada,zujyby,Pakisthan,jqkada@gmail.com,English,Urdu,248,Yes,74,4444,4,18,24,34,48,234,18,dfg,120918,24,34,74,120918,74,100918,12/11/2018 10:12
+919922730092.00,sfytgg,lckrtb,Pakisthan,sfytgg@gmail.com,Malayalam,Tamil,135,Yes,50,4444,5,18,25,34,47,238,18,dfg,120918,25,34,50,120918,50,100918,12/11/2018 10:12
+919922730093.00,vceyqi,frpjlm,Pakisthan,vceyqi@gmail.com,English,Mandarin,368,Yes,28,4444,4,18,24,34,48,235,18,g,120918,24,34,28,120918,28,100918,12/11/2018 10:12
+919922730094.00,nrwnem,trulmh,India,nrwnem@gmail.com,Korean,Urdu,216,No,40,5555,7,15,27,35,45,234,15,fdgf,120918,27,35,40,120918,40,100918,12/11/2018 10:12
+919922730095.00,tpqttx,pthrmz,Korea,tpqttx@gmail.com,Korean,Mandarin,376,No,73,5555,7,14,27,38,45,235,14,fdgf,120918,27,38,73,120918,73,100918,12/11/2018 10:12
+919922730096.00,nwkwck,tdurkj,India,nwkwck@gmail.com,Korean,Tamil,106,No,74,5555,7,15,27,35,45,238,15,dfg,120918,27,35,74,120918,74,100918,12/11/2018 10:12
+919922730097.00,ebjzse,xuhmdw,USA,ebjzse@gmail.com,English,Spanish,70,No,44,5555,4,17,24,37,48,237,17,gdf,120918,24,37,44,120918,44,100918,12/11/2018 10:12
+919922730098.00,zoddke,spsirm,USA,zoddke@gmail.com,Malayalam,Tamil,152,No,67,5555,5,17,25,37,47,238,17,g,120918,25,37,67,120918,67,100918,12/11/2018 10:12
+919922730099.00,lvcvpg,paiaff,Pakisthan,lvcvpg@gmail.com,English,Spanish,375,No,26,5555,4,18,24,34,48,237,18,dfg,120918,24,34,26,120918,26,100918,12/11/2018 10:12
+919922730100.00,crulam,amrtaz,Pakisthan,crulam@gmail.com,Korean,Tamil,359,No,24,5555,7,18,27,34,45,238,18,g,120918,27,34,24,120918,24,100918,12/11/2018 10:12
+919922730101.00,kujrxv,sijgqr,Korea,kujrxv@gmail.com,English,Mandarin,147,No,31,5555,4,14,24,38,48,235,14,dfg,120918,24,38,31,120918,31,100918,12/11/2018 10:12
+919922730102.00,tomdna,yvmrgh,Pakisthan,tomdna@gmail.com,English,Spanish,77,No,71,5555,4,18,24,34,48,237,18,g,120918,24,34,71,120918,71,100918,12/11/2018 10:12
+919922730103.00,dxsbwv,clhqen,India,dxsbwv@gmail.com,English,Spanish,189,Yes,61,4444,4,15,24,35,48,237,15,ijioni,120918,24,35,61,120918,61,100918,12/11/2018 10:12
+919922730104.00,vdfnfy,cjmmtk,Pakisthan,vdfnfy@gmail.com,Hindi,Urdu,273,Yes,33,4444,8,18,28,34,44,234,18,okjj,120918,28,34,33,120918,33,100918,12/11/2018 10:12
+919922730105.00,tfotdb,fajwpj,USA,tfotdb@gmail.com,English,Tamil,137,Yes,58,4444,4,17,24,37,48,238,17,fdgf,120918,24,37,58,120918,58,100918,12/11/2018 10:12
+919922730106.00,hvgrfa,ozhgrc,India,hvgrfa@gmail.com,Malayalam,Spanish,92,Yes,15,4444,5,15,25,35,47,237,15,dfg,120918,25,35,15,120918,15,100918,12/11/2018 10:12
+919922730107.00,homdxk,yuhsaq,India,homdxk@gmail.com,Korean,Mandarin,248,No,46,5555,7,15,27,35,45,235,15,fg,120918,27,35,46,120918,46,100918,12/11/2018 10:12
+919922730108.00,wouqmm,xbtncm,Korea,wouqmm@gmail.com,Malayalam,Spanish,111,No,29,5555,5,14,25,38,47,237,14,dfg,120918,25,38,29,120918,29,100918,12/11/2018 10:12
+919922730109.00,lemegh,gvtrrh,Korea,lemegh@gmail.com,Hindi,Urdu,383,Yes,18,4444,8,14,28,38,44,234,14,dfg,120918,28,38,18,120918,18,100918,12/11/2018 10:12
+919922730110.00,jmdxwd,jgecqf,India,jmdxwd@gmail.com,Hindi,Mandarin,350,No,71,5555,8,15,28,35,44,235,15,g,120918,28,35,71,120918,71,100918,12/11/2018 10:12
+919922730111.00,wqjzyr,iwrjcj,India,wqjzyr@gmail.com,Malayalam,Mandarin,6,Yes,20,4444,5,15,25,35,47,235,15,fdgf,120918,25,35,20,120918,20,100918,12/11/2018 10:12
+919922730112.00,qzgwdh,keyxnu,USA,qzgwdh@gmail.com,English,Mandarin,10,Yes,53,4444,4,17,24,37,48,235,17,fdgf,120918,24,37,53,120918,53,100918,12/11/2018 10:12
+919922730113.00,zveeow,xxjduo,Pakisthan,zveeow@gmail.com,Malayalam,Spanish,155,Yes,48,4444,5,18,25,34,47,237,18,dfg,120918,25,34,48,120918,48,100918,12/11/2018 10:12
+919922730114.00,spidzm,kxlisv,India,spidzm@gmail.com,English,Mandarin,76,No,34,5555,4,15,24,35,48,235,15,gdf,120918,24,35,34,120918,34,100918,12/11/2018 10:12
+919922730115.00,jsqslp,wdhfcv,Korea,jsqslp@gmail.com,Hindi,Tamil,166,Yes,68,4444,8,14,28,38,44,238,14,g,120918,28,38,68,120918,68,100918,12/11/2018 10:12
+919922730116.00,cwsyxj,dpmzqe,Korea,cwsyxj@gmail.com,English,Urdu,348,Yes,24,4444,4,14,24,38,48,234,14,dfg,120918,24,38,24,120918,24,100918,12/11/2018 10:12
+919922730117.00,ittfvr,jnjquw,Pakisthan,ittfvr@gmail.com,English,Tamil,118,Yes,40,4444,4,18,24,34,48,238,18,g,120918,24,34,40,120918,40,100918,12/11/2018 10:12
+919922730118.00,tzbgzx,cgvdsk,Pakisthan,tzbgzx@gmail.com,English,Mandarin,224,No,50,5555,4,18,24,34,48,235,18,dfg,120918,24,34,50,120918,50,100918,12/11/2018 10:12
+919922730119.00,avxryi,rwhvoe,USA,avxryi@gmail.com,Korean,Spanish,138,No,17,5555,7,17,27,37,45,237,17,g,120918,27,37,17,120918,17,100918,12/11/2018 10:12
+919922730120.00,jvwvzg,bupvox,Korea,jvwvzg@gmail.com,Hindi,Tamil,241,Yes,67,4444,8,14,28,38,44,238,14,ijioni,120918,28,38,67,120918,67,100918,12/11/2018 10:12
+919922730121.00,nmnomb,iedbny,Korea,nmnomb@gmail.com,Malayalam,Urdu,44,Yes,20,4444,5,14,25,38,47,234,14,okjj,120918,25,38,20,120918,20,100918,12/11/2018 10:12
+919922730122.00,fbruxv,ptwfeb,USA,fbruxv@gmail.com,Malayalam,Mandarin,42,No,40,5555,5,17,25,37,47,235,17,fdgf,120918,25,37,40,120918,40,100918,12/11/2018 10:12
+919922730123.00,xkqrwb,zkdcya,Pakisthan,xkqrwb@gmail.com,Hindi,Urdu,135,Yes,47,4444,8,18,28,34,44,234,18,dfg,120918,28,34,47,120918,47,100918,12/11/2018 10:12
+919922730124.00,dscade,gklcxq,India,dscade@gmail.com,Korean,Spanish,330,Yes,42,4444,7,15,27,35,45,237,15,fg,120918,27,35,42,120918,42,100918,12/11/2018 10:12
+919922730125.00,mpdvhm,jqorqx,Pakisthan,mpdvhm@gmail.com,Hindi,Mandarin,57,Yes,44,4444,8,18,28,34,44,235,18,dfg,120918,28,34,44,120918,44,100918,12/11/2018 10:12
+919922730126.00,fydajt,okddbw,Pakisthan,fydajt@gmail.com,Hindi,Urdu,120,No,67,5555,8,18,28,34,44,234,18,dfg,120918,28,34,67,120918,67,100918,12/11/2018 10:12
+919922730127.00,samjha,tsyrbz,India,samjha@gmail.com,Korean,Mandarin,147,Yes,46,4444,7,15,27,35,45,235,15,g,120918,27,35,46,120918,46,100918,12/11/2018 10:12
+919922730128.00,fsvikw,wczdpq,Korea,fsvikw@gmail.com,Malayalam,Tamil,117,Yes,46,4444,5,14,25,38,47,238,14,fdgf,120918,25,38,46,120918,46,100918,12/11/2018 10:12
+919922730129.00,uaqcku,skztgh,Korea,uaqcku@gmail.com,English,Urdu,76,No,49,5555,4,14,24,38,48,234,14,fdgf,120918,24,38,49,120918,49,100918,12/11/2018 10:12
+919922730130.00,spgthc,klizbc,Korea,spgthc@gmail.com,Hindi,Urdu,28,Yes,25,4444,8,14,28,38,44,234,14,dfg,120918,28,38,25,120918,25,100918,12/11/2018 10:12
+919922730131.00,egjfyf,matvvb,Pakisthan,egjfyf@gmail.com,Hindi,Spanish,149,No,57,5555,8,18,28,34,44,237,18,gdf,120918,28,34,57,120918,57,100918,12/11/2018 10:12
+919922730132.00,prmbdj,qgwcth,USA,prmbdj@gmail.com,Hindi,Urdu,246,No,71,5555,8,17,28,37,44,234,17,g,120918,28,37,71,120918,71,100918,12/11/2018 10:12
+919922730133.00,fsfkcd,apljha,USA,fsfkcd@gmail.com,English,Urdu,23,Yes,48,4444,4,17,24,37,48,234,17,dfg,120918,24,37,48,120918,48,100918,12/11/2018 10:12
+919922730134.00,pnkzsz,smwtfq,USA,pnkzsz@gmail.com,Hindi,Mandarin,138,No,24,5555,8,17,28,37,44,235,17,g,120918,28,37,24,120918,24,100918,12/11/2018 10:12
+919922730135.00,soggyo,ymqnra,Korea,soggyo@gmail.com,Korean,Spanish,120,No,42,5555,7,14,27,38,45,237,14,dfg,120918,27,38,42,120918,42,100918,12/11/2018 10:12
+919922730136.00,gwthpv,kbzvrv,USA,gwthpv@gmail.com,Hindi,Spanish,273,No,45,5555,8,17,28,37,44,237,17,g,120918,28,37,45,120918,45,100918,12/11/2018 10:12
+919922730137.00,rylyol,icegwl,India,rylyol@gmail.com,Korean,Mandarin,92,No,46,5555,7,15,27,35,45,235,15,ijioni,120918,27,35,46,120918,46,100918,12/11/2018 10:12
+919922730138.00,pkmqap,ogwgpb,India,pkmqap@gmail.com,Hindi,Urdu,102,Yes,24,4444,8,15,28,35,44,234,15,okjj,120918,28,35,24,120918,24,100918,12/11/2018 10:12
+919922730139.00,quqdlb,gcivib,Korea,quqdlb@gmail.com,Malayalam,Tamil,120,Yes,30,4444,5,14,25,38,47,238,14,fdgf,120918,25,38,30,120918,30,100918,12/11/2018 10:12
+919922730140.00,sfcffj,mmvnaw,Korea,sfcffj@gmail.com,Korean,Tamil,188,Yes,21,4444,7,14,27,38,45,238,14,dfg,120918,27,38,21,120918,21,100918,12/11/2018 10:12
+919922730141.00,wrfqzy,tjbtys,Pakisthan,wrfqzy@gmail.com,English,Tamil,305,No,58,5555,4,18,24,34,48,238,18,fg,120918,24,34,58,120918,58,100918,12/11/2018 10:12
+919922730142.00,uhgfab,erurbg,Korea,uhgfab@gmail.com,Malayalam,Urdu,250,No,19,5555,5,14,25,38,47,234,14,dfg,120918,25,38,19,120918,19,100918,12/11/2018 10:12
+919922730143.00,xzcrfc,xjcmzt,Korea,xzcrfc@gmail.com,Hindi,Urdu,194,Yes,66,4444,8,14,28,38,44,234,14,dfg,120918,28,38,66,120918,66,100918,12/11/2018 10:12
+919922730144.00,wuhiuf,jcfcbx,Pakisthan,wuhiuf@gmail.com,Korean,Mandarin,257,Yes,23,4444,7,18,27,34,45,235,18,g,120918,27,34,23,120918,23,100918,12/11/2018 10:12
+919922730145.00,csnpkt,zesmjd,Korea,csnpkt@gmail.com,English,Urdu,109,Yes,28,4444,4,14,24,38,48,234,14,fdgf,120918,24,38,28,120918,28,100918,12/11/2018 10:12
+919922730146.00,vpbzwm,iupnun,India,vpbzwm@gmail.com,Malayalam,Mandarin,173,No,54,5555,5,15,25,35,47,235,15,fdgf,120918,25,35,54,120918,54,100918,12/11/2018 10:12
+919922730147.00,mhmkbj,qatukg,USA,mhmkbj@gmail.com,Malayalam,Spanish,40,Yes,34,4444,5,17,25,37,47,237,17,dfg,120918,25,37,34,120918,34,100918,12/11/2018 10:12
+919922730148.00,qhvxzl,xeaxho,Korea,qhvxzl@gmail.com,English,Mandarin,377,No,70,5555,4,14,24,38,48,235,14,gdf,120918,24,38,70,120918,70,100918,12/11/2018 10:12
+919922730149.00,iudwji,pxaodg,India,iudwji@gmail.com,Hindi,Mandarin,216,No,45,5555,8,15,28,35,44,235,15,g,120918,28,35,45,120918,45,100918,12/11/2018 10:12
+919922730150.00,xmivml,vcfmom,India,xmivml@gmail.com,Korean,Tamil,45,No,71,5555,7,15,27,35,45,238,15,dfg,120918,27,35,71,120918,71,100918,12/11/2018 10:12
+919922730151.00,lgsavh,obbcal,USA,lgsavh@gmail.com,Malayalam,Tamil,347,Yes,34,4444,5,17,25,37,47,238,17,g,120918,25,37,34,120918,34,100918,12/11/2018 10:12
+919922730152.00,gayvme,ruzhbo,Pakisthan,gayvme@gmail.com,Hindi,Tamil,338,Yes,72,4444,8,18,28,34,44,238,18,dfg,120918,28,34,72,120918,72,100918,12/11/2018 10:12
+919922730153.00,hhszdg,zowdxy,USA,hhszdg@gmail.com,Malayalam,Mandarin,334,No,18,5555,5,17,25,37,47,235,17,g,120918,25,37,18,120918,18,100918,12/11/2018 10:12
+919922730154.00,ttlags,lpnrfy,USA,ttlags@gmail.com,English,Urdu,342,Yes,23,4444,4,17,24,37,48,234,17,ijioni,120918,24,37,23,120918,23,100918,12/11/2018 10:12
+919922730155.00,yyynzw,cgtero,USA,yyynzw@gmail.com,Malayalam,Spanish,254,Yes,50,4444,5,17,25,37,47,237,17,okjj,120918,25,37,50,120918,50,100918,12/11/2018 10:12
+919922730156.00,pfcccy,swovcs,USA,pfcccy@gmail.com,Malayalam,Mandarin,346,No,45,5555,5,17,25,37,47,235,17,fdgf,120918,25,37,45,120918,45,100918,12/11/2018 10:12
+919922730157.00,mpdbob,zdvvsp,India,mpdbob@gmail.com,Hindi,Tamil,60,No,56,5555,8,15,28,35,44,238,15,dfg,120918,28,35,56,120918,56,100918,12/11/2018 10:12
+919922730158.00,fwuokx,dcqrrg,USA,fwuokx@gmail.com,Malayalam,Tamil,151,No,35,5555,5,17,25,37,47,238,17,fg,120918,25,37,35,120918,35,100918,12/11/2018 10:12
+919922730159.00,phsrwh,iygqxe,USA,phsrwh@gmail.com,Hindi,Mandarin,137,No,45,5555,8,17,28,37,44,235,17,dfg,120918,28,37,45,120918,45,100918,12/11/2018 10:12
+919922730160.00,llrovu,fijlgn,Korea,llrovu@gmail.com,Hindi,Tamil,17,No,65,5555,8,14,28,38,44,238,14,dfg,120918,28,38,65,120918,65,100918,12/11/2018 10:12
+919922730161.00,eirfum,ikbndg,India,eirfum@gmail.com,English,Spanish,224,No,47,5555,4,15,24,35,48,237,15,g,120918,24,35,47,120918,70,100918,12/11/2018 10:12
+919922730162.00,crunpw,ryasnp,India,crunpw@gmail.com,Hindi,Tamil,84,Yes,40,4444,8,15,28,35,44,238,15,fdgf,120918,28,35,40,120918,45,100918,12/11/2018 10:12
+919922730163.00,mchmom,wazdab,Korea,mchmom@gmail.com,Korean,Urdu,163,No,66,5555,7,14,27,38,45,234,14,fdgf,120918,27,38,66,120918,71,100918,12/11/2018 10:12
+919922730164.00,enymqy,plwmym,USA,enymqy@gmail.com,Malayalam,Mandarin,26,No,69,5555,5,17,25,37,47,235,17,dfg,120918,25,37,69,120918,34,100918,12/11/2018 10:12
+919922730165.00,onslmo,hsasdc,Korea,onslmo@gmail.com,Malayalam,Urdu,317,No,41,5555,5,14,25,38,47,234,14,gdf,120918,25,38,41,120918,72,100918,12/11/2018 10:12
+919922730166.00,tkxtsm,lkcksz,USA,tkxtsm@gmail.com,Malayalam,Urdu,206,Yes,52,4444,5,17,25,37,47,234,17,g,120918,25,37,52,120918,18,100918,12/11/2018 10:12
+919922730167.00,fxhsor,ddighe,Pakisthan,fxhsor@gmail.com,Malayalam,Tamil,262,Yes,52,4444,5,18,25,34,47,238,18,dfg,120918,25,34,52,120918,23,100918,12/11/2018 10:12
+919922730168.00,suefzi,setqes,USA,suefzi@gmail.com,Korean,Mandarin,298,No,68,5555,7,17,27,37,45,235,17,g,120918,27,37,68,120918,50,100918,12/11/2018 10:12
+919922730169.00,kbdrxd,elagzd,Pakisthan,kbdrxd@gmail.com,English,Spanish,293,Yes,41,4444,4,18,24,34,48,237,18,dfg,120918,24,34,41,120918,45,100918,12/11/2018 10:12
+919922730170.00,lvezir,vttsxq,USA,lvezir@gmail.com,English,Spanish,12,Yes,69,4444,4,17,24,37,48,237,17,g,120918,24,37,69,120918,56,100918,12/11/2018 10:12
+919922730171.00,inmrtc,xqwcqj,India,inmrtc@gmail.com,Hindi,Spanish,367,Yes,19,4444,8,15,28,35,44,237,15,ijioni,120918,28,35,19,120918,35,100918,12/11/2018 10:12
+919922730172.00,eqhdqe,sbcxeg,India,eqhdqe@gmail.com,English,Urdu,135,No,23,5555,4,15,24,35,48,234,15,okjj,120918,24,35,23,120918,45,100918,12/11/2018 10:12
+919922730173.00,ahnmbj,jgpzsc,Korea,ahnmbj@gmail.com,Hindi,Tamil,13,No,30,5555,8,14,28,38,44,238,14,fdgf,120918,28,38,30,120918,65,100918,12/11/2018 10:12
+919922730174.00,wvhckx,ghfzll,India,wvhckx@gmail.com,Malayalam,Mandarin,53,No,35,5555,5,15,25,35,47,235,15,dfg,120918,25,35,35,120918,64,100918,12/11/2018 10:12
+919922730175.00,mlgvhz,anecsm,Korea,mlgvhz@gmail.com,Korean,Urdu,235,No,34,5555,7,14,27,38,45,234,14,fg,120918,27,38,34,120918,26,100918,12/11/2018 10:12
+919922730176.00,vglmja,hpwunw,Korea,vglmja@gmail.com,Malayalam,Spanish,121,No,19,5555,5,14,25,38,47,237,14,dfg,120918,25,38,19,120918,19,100918,12/11/2018 10:12
+919922730177.00,pqvvyu,gxdmbt,USA,pqvvyu@gmail.com,Korean,Tamil,348,Yes,26,4444,7,17,27,37,45,238,17,dfg,120918,27,37,26,120918,26,100918,12/11/2018 10:12
+919922730178.00,mvgptj,iwaagz,Pakisthan,mvgptj@gmail.com,Korean,Tamil,35,No,20,5555,7,18,27,34,45,238,18,g,120918,27,34,20,120918,20,100918,12/11/2018 10:12
+919922730179.00,ecjifs,srumqn,Korea,ecjifs@gmail.com,Korean,Spanish,106,No,18,5555,7,14,27,38,45,237,14,fdgf,120918,27,38,18,120918,18,100918,12/11/2018 10:12
+919922730180.00,pxyfer,iecyhd,Pakisthan,pxyfer@gmail.com,Malayalam,Tamil,252,Yes,27,4444,5,18,25,34,47,238,18,fdgf,120918,25,34,27,120918,27,100918,12/11/2018 10:12
+919922730181.00,ltwxqv,dnalek,Pakisthan,ltwxqv@gmail.com,Korean,Spanish,91,Yes,62,4444,7,18,27,34,45,237,18,dfg,120918,27,34,62,120918,62,100918,12/11/2018 10:12
+919922730182.00,izevjs,oiondl,India,izevjs@gmail.com,Malayalam,Mandarin,321,Yes,44,4444,5,15,25,35,47,235,15,gdf,120918,25,35,44,120918,44,100918,12/11/2018 10:12
+919922730183.00,uhxjqu,rzowse,Pakisthan,uhxjqu@gmail.com,Hindi,Urdu,47,No,45,5555,8,18,28,34,44,234,18,g,120918,28,34,45,120918,45,100918,12/11/2018 10:12
+919922730184.00,dwxdmv,zcahsc,Pakisthan,dwxdmv@gmail.com,Korean,Tamil,44,No,52,5555,7,18,27,34,45,238,18,dfg,120918,27,34,52,120918,52,100918,12/11/2018 10:12
+919922730185.00,kninkd,isagcb,USA,kninkd@gmail.com,Korean,Tamil,214,Yes,42,4444,7,17,27,37,45,238,17,g,120918,27,37,42,120918,47,100918,12/11/2018 10:12
+919922730186.00,uetqrh,xlkdgy,India,uetqrh@gmail.com,Malayalam,Urdu,333,Yes,26,4444,5,15,25,35,47,234,15,dfg,120918,25,35,26,120918,40,100918,12/11/2018 10:12
+919922730187.00,vrlcml,zckemp,Korea,vrlcml@gmail.com,Hindi,Urdu,126,No,34,5555,8,14,28,38,44,234,14,g,120918,28,38,34,120918,66,100918,12/11/2018 10:12
+919922730188.00,kgtydo,vkswps,Korea,kgtydo@gmail.com,Malayalam,Tamil,167,No,67,5555,5,14,25,38,47,238,14,ijioni,120918,25,38,67,120918,69,100918,12/11/2018 10:12
+919922730189.00,flzrkk,cdoyqj,Korea,flzrkk@gmail.com,Korean,Mandarin,377,Yes,72,4444,7,14,27,38,45,235,14,okjj,120918,27,38,72,120918,41,100918,12/11/2018 10:12
+919922730190.00,fafakj,elxfdu,India,fafakj@gmail.com,Malayalam,Tamil,86,No,51,5555,5,15,25,35,47,238,15,fdgf,120918,25,35,51,120918,52,100918,12/11/2018 10:12
+919922730191.00,qpbiaq,vqrjeo,USA,qpbiaq@gmail.com,Malayalam,Tamil,332,No,37,5555,5,17,25,37,47,238,17,dfg,120918,25,37,37,120918,52,100918,12/11/2018 10:12
+919922730192.00,dgjjrz,mgehzz,USA,dgjjrz@gmail.com,Korean,Tamil,174,Yes,19,4444,7,17,27,37,45,238,17,fg,120918,27,37,19,120918,68,100918,12/11/2018 10:12
+919922730193.00,zamnet,depdvg,Pakisthan,zamnet@gmail.com,Korean,Mandarin,99,No,35,5555,7,18,27,34,45,235,18,dfg,120918,27,34,35,120918,41,100918,12/11/2018 10:12
+919922730194.00,tanaou,qryubg,Pakisthan,tanaou@gmail.com,Malayalam,Urdu,222,No,44,5555,5,18,25,34,47,234,18,dfg,120918,25,34,44,120918,69,100918,12/11/2018 10:12
+919922730195.00,ufbqri,bznams,Pakisthan,ufbqri@gmail.com,Malayalam,Tamil,2,Yes,45,4444,5,18,25,34,47,238,18,g,120918,25,34,45,120918,19,100918,12/11/2018 10:12
+919922730196.00,jasptm,pybtfa,USA,jasptm@gmail.com,Hindi,Urdu,227,No,73,5555,8,17,28,37,44,234,17,fdgf,120918,28,37,73,120918,23,100918,12/11/2018 10:12
+919922730197.00,bstcxd,pvekwt,USA,bstcxd@gmail.com,Malayalam,Spanish,54,Yes,29,4444,5,17,25,37,47,237,17,fdgf,120918,25,37,29,120918,30,100918,12/11/2018 10:12
+919446506807.00,joel,jose,India,joel.jose@flytxt.com,Malayalam,English,200,Yes,25,6666,5,15,25,35,45,235,15,dfg,120918,25,35,25,120918,35,100918,12/11/2018 10:12
+919446506808.00,joel1,jose1,India,joel.kallely95@gmail.com,Malayalam,English,201,No,26,6666,5,15,25,35,45,235,15,gdf,120918,25,35,26,120918,34,100918,12/11/2018 10:12
+919446506809.00,selenium,flytxt,India,selenium.flytxt@gmail.com,Malayalam,English,150,No,28,6666,5,15,25,35,45,235,15,g,120918,25,35,28,120918,50,100918,12/11/2018 10:12
+919922730002.00,nqqldq,aqgxih,Pakisthan,nqqldq@gmail.com,Malayalam,Mandarin,24,Yes,37,4444,5,18,25,34,47,235,18,ijioni,120918,25,34,37,120918,50,100918,12/11/2018 10:12
+919922730003.00,mpgixt,afrqtw,USA,mpgixt@gmail.com,Malayalam,Tamil,13,Yes,48,4444,5,17,25,37,47,238,17,okjj,120918,25,37,48,120918,45,100918,12/11/2018 10:12
+919922730004.00,byqixm,poqnkc,Pakisthan,byqixm@gmail.com,English,Urdu,141,No,41,5555,4,18,24,34,48,234,18,fdgf,120918,24,34,41,120918,56,100918,12/11/2018 10:12

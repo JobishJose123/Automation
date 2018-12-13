@@ -1,0 +1,9 @@
+%spark.r
+library(devtools)
+library(rPython)
+install('/usr/local/zeppelin/custom-lib/flytxtSparkLib/flytxtRSparkLib')
+install.packages('/usr/local/zeppelin/custom-lib/flytxtRSparkLib/flytxtRSparkLib.tar.xz', repos = NULL, type="source")
+library(FLytxtRSparkLib)
+dataFrame=getDataFrameWithName ('D2',"System Global","Model",FALSE)
+showDF(dataFrame)
+updateEvent(D2,1001,'set','System Global',dfFields)

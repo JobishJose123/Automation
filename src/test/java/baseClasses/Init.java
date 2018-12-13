@@ -101,6 +101,8 @@ public static StringBuilder stringBuilderForCsvReport;
 	public static int campaignrowcount=1;
 	public static int offercatarowcount=1;
 	public static int bcrowcount=1;
+	public final String SEL_COUNTRY="Country_q11";
+	public final String SELENIUM_DATE="Date_q11";
 
 	
 }

@@ -1,0 +1,29 @@
+Error in python.exec(python.command): No Custom DataFrame was found!
+
+
++————+——-+———–+
+| CONSUMER_ID|Age_q11|Country_q11|
++————+——-+———–+
+|919922730002|   48.0|        USA|
+|919922730003|   41.0|  Pakisthan|
+|919922730004|   47.0|      Korea|
+|919922730005|   17.0|  Pakisthan|
+|919922730006|   62.0|      India|
+|919922730007|   49.0|      Korea|
+|919922730008|   41.0|        USA|
+|919922730009|   46.0|  Pakisthan|
+|919922730010|   45.0|      Korea|
+|919922730011|   52.0|      Korea|
+|919922730012|   22.0|      Korea|
+|919922730013|   60.0|        USA|
+|919922730014|   37.0|      Korea|
+|919922730015|   20.0|      India|
+|919922730016|   55.0|      Korea|
+|919922730017|   24.0|        USA|
+|919922730018|   63.0|      Korea|
+|919922730019|   27.0|  Pakisthan|
+|919922730020|   25.0|        USA|
+|919922730021|   55.0|      Korea|
++————+——-+———–+
+only showing top 20 rows
+[1] “Dataframe Succesfully submitted for profile upload”
