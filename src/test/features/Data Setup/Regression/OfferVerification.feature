@@ -54,3 +54,12 @@ Feature: Test suite for offer verification test cases
     Then filter offer from sheet "rechargeSMS"
     Then edit offer
     Then edit Reward from offer from sheet "rechargeSMS" and verify the edited details
+    
+     @NDX-5602 @initBrowser @closeBrowser
+     Scenario: Verify Copy/Duplicating a NEW offer  
+     Given login
+     Then navigate to precision marketer
+     Then navigate to offer management
+     Then navigate to offers
+     Then verify "rechargeSMS" offer in grid
+     Then Duplicate/copy offer from sheet "rechargeSMS"

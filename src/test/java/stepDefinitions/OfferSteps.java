@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -1092,7 +1093,15 @@ public class OfferSteps extends Init {
 		offerPageObjects.EditReward(sheet);		
 	}
 
-   
+	@Then("^Duplicate/copy offer from sheet \"([^\"]*)\"$")
+	public void ClickCopy(String sheet) throws IOException, Exception {
+		eh.setExcelFile("offerInputData", sheet);
+		String JobName = (String) eh.getCell(1, 0);
+		offerPageObjects.CopyOffer(JobName);
+		Thread.sleep(3000);
+		//String partnerName= DataFusionEngineObjects.Hostname().getText();
+			
+	}
 
 }
 

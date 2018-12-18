@@ -26,14 +26,14 @@ Feature: Test suite on Offer creation
     Then verify "STVWAP" offer in grid
   
    @rechargeSMS @initBrowser @closeBrowser
-   Scenario: Email Channel -->Verify the Create offer using STVSMS 
+   Scenario: Email Channel -->Verify the Create offer using Recharge type and SMS channel 
      Given login
      Then navigate to precision marketer
      Then navigate to offer management
      Then navigate to offers
      Then create new offer from sheet "rechargeSMS" with product "fullDetails"
      Then verify "rechargeSMS" offer in grid
-      
+         
    @NDX-5397
    @initBrowser @closeBrowser
    Scenario: Verify cerating SMS channel,Recharge Type offer with Dynamic tag

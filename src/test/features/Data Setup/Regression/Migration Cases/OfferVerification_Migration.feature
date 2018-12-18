@@ -56,6 +56,15 @@ Feature: Test suite for offer verification with migration test cases
     Then edit offer
     Then edit Reward from offer from sheet "rechargeSMS" and verify the edited details
     
+    @NDX-5603 @initBrowser @closeBrowser
+    Scenario: Verify Copy/Duplicating a MIGRATED offer  
+     Given login
+     Then navigate to precision marketer
+     Then navigate to offer management
+     Then navigate to offers
+     Then verify "rechargeSMS" offer in grid
+     Then Duplicate/copy offer from sheet "rechargeSMS"
+    
     
     
     

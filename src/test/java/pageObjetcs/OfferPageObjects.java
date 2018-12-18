@@ -83,6 +83,8 @@ public class OfferPageObjects extends Init {
 	private WebElement voiceCreativeOptional4;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement optionsEdit;
+	@FindBy(xpath = "//paper-item[contains(.,'Duplicate')]")
+	private WebElement optionsDuplicate;
 	@FindBy(xpath = "//div[@id='topBar']//paper-button[contains(.,'Cancel')]")
 	private WebElement cancelOfferButton;
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]/..//input")
@@ -2323,7 +2325,27 @@ public class OfferPageObjects extends Init {
 		clickSaveOfferButton();
 	}
 	
+	public void clickDuplicateoffer() throws InterruptedException {
+		jswait.loadClick(optionsDuplicate);		
+	}
 	
-	
+	public void CopyOffer(String offername) throws InterruptedException, Exception, IOException{
+		commonObjects.filterName(offername);
+		commonObjects.clickOptionsIcon();
+		clickDuplicateoffer();
+		Thread.sleep(2000);
+		String copiedoffername = commonObjects.getTextFormTextField(offerName);
+		System.out.println("name of copied offer is:  " +copiedoffername );
+		clickProceedButton();
+		clickProceedButton();
+		clickProceedButton();
+		clickProceedButton();
+		clickSaveOfferButton();
+		commonObjects.filterName(copiedoffername);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+copiedoffername+"')]"));
+		Assert.assertTrue(element.isDisplayed(), "Copied job not found");
+		}
+		
 	
 }
