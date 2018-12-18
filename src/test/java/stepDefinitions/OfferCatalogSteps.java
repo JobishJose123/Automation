@@ -53,7 +53,7 @@ public class OfferCatalogSteps extends Init{
 	    {
 	     eM.setExcelFile("offerInputData",sheet);
 	 	 catalogPageObjects.clickCatalogAddOffers();
-	 	 commonObjects.filterName(eM.getCell(1, 0).toString());
+	 	 commonObjects.filterWorkaround(eM.getCell(1, 0).toString());
 	 	 jswait.loadClick("//data-table-cell[contains(.,'"+eM.getCell(1, 0)+"')]");
 	 	 catalogPageObjects.clickAddToCatalogButton();
 	    }

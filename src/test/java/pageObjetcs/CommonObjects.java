@@ -405,6 +405,13 @@ public void clickActivateOption() throws Throwable {
 		clickFilterApplyButton();
 	}
 	
+	public void filterWorkaround(String name) throws InterruptedException {
+		clickFilterIcon();                            //issue in filter
+		clickFilterResetButton();						//issue in filter
+		filterName(name);
+	}
+	
+	
 	public void filterStatus(String name) throws InterruptedException {
 		clickFilterIcon();
 		Thread.sleep(2000);
@@ -416,6 +423,7 @@ public void clickActivateOption() throws Throwable {
 		Thread.sleep(2000);
 		clickFilterApplyButton();
 	}
+	
 	
 	public void filterNameEnv(String name) throws InterruptedException {
 		clickFilterIcon2();

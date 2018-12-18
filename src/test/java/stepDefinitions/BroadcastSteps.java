@@ -1242,7 +1242,13 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
     
     }
 	
-	
+	@Then("^navigate to Seeding Bc tab$")
+    public void navigatetoseedingBC() throws Throwable
+    { 
+		Thread.sleep(2000);
+		jswait.loadClick("//div[@id='tabsContent']//div[contains(.,'Seedings Broadcasts')]");
+    
+    }	
 	
 	
 	

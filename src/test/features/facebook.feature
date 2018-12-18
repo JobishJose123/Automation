@@ -264,7 +264,7 @@ Scenario: Verify BC level CG exclusions for the BC with Facebook Offer.
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-      Then enter details for new broadcast with 1M subscribers and configure TG and CG from sheet "facebookoneoff" with "rechargeimageFacebook"
+    Then enter details for new broadcast with 1M subscribers and configure TG and CG from sheet "facebookoneoff" with "rechargeimageFacebook"
     Then validate bc
     Then verify bc created from sheet "facebookoneoff"
     Then verify validating CG status for bc
