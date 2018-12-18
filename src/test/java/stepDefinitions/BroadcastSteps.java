@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
-
+import baseClasses.SQLHandler;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -3236,6 +3236,88 @@ public void verify_Target_count() throws Throwable {
 }
 
 
+@Then("^verify edit option of bc from sheet \"([^\"]*)\"$")
+public void verifyEditBc(String sheet) throws Throwable
+{  
+	eM.setExcelFile("bcInputData", sheet);
+	String beforeEditBcNamefromSheet = eM.getCell(1, 0).toString();
+	System.out.println("before editing BCNAME"+beforeEditBcNamefromSheet);
+	Thread.sleep(20000);
+	commonObjects.clickOptionsIcon();
+	commonObjects.clickEditOption();
+	ExcelHelper list = new ExcelHelper();
+	list.setExcelFile("registrationListInputData", "Sheet1");
+	eM.setExcelFile("bcInputData",sheet);    	
+		String name = (String) eM.getCell(1, 0);
+		name =  RandomNameGenerator.getRandomName(name);
+		eM.setCell(1, 0, name);
+	broadcastPageObjects.enterBroadcastName(name);
+	broadcastPageObjects.clickProceedButton();
+	broadcastPageObjects.clickProceedButton();
+	broadcastPageObjects.clickProceedButton();
+	eM.setExcelFile("bcInputData",sheet);
+	  	String bc_type =(String) eM.getCell(1, 7);
+	enterDeliveryTabDetails(bc_type,sheet);
+	broadcastPageObjects.clickCreateButton();
+	broadcastPageObjects.clickSaveButton();
+	eM.setExcelFile("bcInputData", sheet);
+	String afterEditBcNamefromSheet = eM.getCell(1, 0).toString();
+	System.out.println("After editing BCNAME"+afterEditBcNamefromSheet);
+	Assert.assertNotEquals("Boadcast name Edited", beforeEditBcNamefromSheet, afterEditBcNamefromSheet);
+			
+}
+
+
+
+
+@Then("^enter details for new broadcast from sheet \"([^\"]*)\" with \"([^\"]*)\" with language \"([^\"]*)\"$")
+public void enter_details_for_new_broadcast_from_sheet_with_with_language(String sheet, String offer, String language) throws Throwable {
+
+
+Thread.sleep(3000);
+ExcelHelper list = new ExcelHelper();
+list.setExcelFile("registrationListInputData", "Sheet1");
+eM.setExcelFile("bcInputData",sheet);
+//String baseList = list.getCell(1, 2).toString();
+ExcelHelper offerExcel = new ExcelHelper(); 
+offerExcel.setExcelFile("offerInputData", offer);
+	String name = (String) eM.getCell(1, 0);
+	name =  RandomNameGenerator.getRandomName(name);
+	eM.setCell(1, 0, name);
+  	String bc_type =(String) eM.getCell(1, 7);
+Calendar rightNow =Calendar.getInstance();
+String mn = "";
+if(rightNow.get(Calendar.MONTH)+1<9) {
+	mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+}
+else 
+	mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+int hours = rightNow.get(Calendar.HOUR);
+	 int min = rightNow.get(Calendar.MINUTE);
+	 int am_pm = rightNow.get(Calendar.AM_PM);
+	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+	 int year = rightNow.get(Calendar.YEAR);
+	 int month = rightNow.get(Calendar.MONTH)+1;
+	 min+=2;
+	 int rem = min%5;
+	 rem = 5-rem;
+	 min+=rem;
+	 if(min>59){
+		 min-=60;
+		 hours++;
+	 }
+	 if((String)eM.getCell(1, 6)=="later"){
+		 day++;
+	 }
+	 Actions builder = new Actions(driver);
+	broadcastPageObjects.createBCWithLanguage(name, bc_type,BASE_LIST,offer,language);
+	
+// jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
+//Thread.sleep(1500);
+
+	enterDeliveryTabDetails(bc_type,sheet);
+}
 
 
 }

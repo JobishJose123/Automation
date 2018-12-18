@@ -1907,6 +1907,108 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 	  exportCampignLocationObject.clickSaveButton();
 		
 	}
+  
+  @FindBy(xpath = ".//paper-button[contains(.,'Add OR')]")
+	private WebElement addORButton;
+
+public void clickAddORButton() throws InterruptedException {
+		jswait.loadClick(addORButton);
+	}
+
+public void createCampaignWithAddMultipleOROption(String name,String catalog,String recurrence,String endType, String recurringFrequency) throws InterruptedException {
+		enterCampaignDeails(name,catalog);
+		clickProceedButton();
+		targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickBasicTargetConditionWithAge();
+//		clickAddORButton();
+		for (int i=1;i<=11;i++) {
+			targetConditionObjects.clickBasicTargetConditionWithAgeForOR();
+			jswait.loadClick("(.//*[@id='conditionCard']/paper-button[2])["+i+"]");
+			
+			
+			jswait.loadClick("(.//paper-button[contains(.,'Add OR')])["+i+"]");
+			if(i==11) {
+				
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[1])[12]");
+			}
+						
+			//jswait.loadClick("(.//*[@id='conditionCard']/paper-button[2])["+i+"]");
+		}
+		
+		clickProceedButton();
+		 wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//campaign-schedule//paper-input-container)[2]//input"))).click();
+  	 Thread.sleep(1000);
+  	 Calendar rightNow =Calendar.getInstance();
+  	 int hours = rightNow.get(Calendar.HOUR);
+  	 int min = rightNow.get(Calendar.MINUTE);
+  	 int am_pm = rightNow.get(Calendar.AM_PM);
+  	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+  	 int year = rightNow.get(Calendar.YEAR);
+  	 int month = rightNow.get(Calendar.MONTH)+1;
+  	 min+=2;
+  	 int rem = min%5;
+  	 rem = 5-rem;
+  	 min+=rem;
+  	 if(min>59){
+  		 min-=60;
+  		 hours++;
+  	 }
+  	 Actions builder = new Actions(driver);
+  	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+       builder.moveToElement(num).click().build().perform();
+       Thread.sleep(2000);
+  	 WebElement num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+       builder.moveToElement(num1).click().build().perform();
+       if(am_pm==0)
+      	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[1]"))).click();
+       else
+      	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[2]"))).click();
+       wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
+       Thread.sleep(1000);
+       
+		if (recurrence.equalsIgnoreCase("Yes")) {
+			jswait.loadClick("(//*[@id=\"checkboxContainer\"])[2]");
+
+			if (endType.equalsIgnoreCase("After")) {
+				jswait.loadClick(
+						"//paper-card[@class='style-scope campaign-schedule x-scope paper-card-0']//div[3]//paper-dropdown-menu[1]//paper-menu-button[1]//div[1]//div[1]//paper-input[1]//paper-input-container[1]//div[2]//div[1]//input[1]");
+				jswait.loadClick("//paper-item[text()='After']");
+				jswait.loadClick(
+						"//paper-input[@type='number']//paper-input-container[@class='style-scope paper-input x-scope paper-input-container-0']//input[@id='input']");
+				jswait.loadSendKeys(
+						"//paper-input[@type='number']//paper-input-container[@class='style-scope paper-input x-scope paper-input-container-0']//input[@id='input']",
+						"2");
+				jswait.loadClick("//div[@class='input-content style-scope paper-input-container']//input[@id='input']");
+				jswait.loadClick("//paper-item[text()='Daily']");
+				jswait.loadSendKeys("(//div[@id=\"labelAndInputContainer\"]//input[@id=\"input\"])[12]",
+						recurringFrequency);
+			} else if (endType.equalsIgnoreCase("At")) {
+				jswait.loadClick(
+						"//paper-card[@class='style-scope campaign-schedule x-scope paper-card-0']//div[3]//paper-dropdown-menu[1]//paper-menu-button[1]//div[1]//div[1]//paper-input[1]//paper-input-container[1]//div[2]//div[1]//input[1]");
+				jswait.loadClick("//paper-item[text()='At']");
+
+				jswait.loadClick("//div[@class='input-content style-scope paper-input-container']//input[@id='input']");
+				jswait.loadClick("//paper-item[text()='Daily']");
+
+				System.out.println("Please implement the code");
+			} else if (endType.equalsIgnoreCase("Never")) {
+
+				jswait.loadClick(
+						"//paper-card[@class='style-scope campaign-schedule x-scope paper-card-0']//div[3]//paper-dropdown-menu[1]//paper-menu-button[1]//div[1]//div[1]//paper-input[1]//paper-input-container[1]//div[2]//div[1]//input[1]");
+				jswait.loadClick("//paper-item[text()='Never']");
+				jswait.loadClick("//div[@class='input-content style-scope paper-input-container']//input[@id='input']");
+				jswait.loadClick("//paper-item[text()='Daily']");
+				jswait.loadSendKeys("(//div[@id=\"labelAndInputContainer\"]//input[@id=\"input\"])[12]",
+						recurringFrequency);
+			}
+
+		} else {
+			System.out.println("No Recurring campaign");
+		}
+
+       clickSaveCampaignButton();
+	}
+	
    
 
 }

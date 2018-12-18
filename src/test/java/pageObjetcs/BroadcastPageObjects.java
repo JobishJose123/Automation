@@ -1302,8 +1302,6 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 		
 	
-	
-	
 	public void createBC(String name, String bc_type, String baseList, String offer,String condition,String inventory) throws InterruptedException {
 		ExcelHelper offerExcel = new ExcelHelper(); 
     	offerExcel.setExcelFile("offerInputData", offer);
@@ -1330,11 +1328,20 @@ public void verifyViewOptionForBC() throws InterruptedException {
 				jswait.loadClick(savedSegmentRadioButtion);
 				jswait.loadClick(savedSegmentSelectorField);
 				jswait.loadClick("//paper-item[contains(.,'segmentAgeGT40')]");
-			}
-			else 
+			}else if(condition.equals("SegmentForMoreThanTenConditions")) {
+				jswait.loadClick(savedSegmentRadioButtion);
+				jswait.loadClick(savedSegmentSelectorField);
+				jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditions')]");
+			}else if(condition.equals("SegmentForMoreThanTenConditionsOR")) {
+				jswait.loadClick(savedSegmentRadioButtion);
+				jswait.loadClick(savedSegmentSelectorField);
+				jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditionsOR')]");
+			}else { 
 				targetConditionObjects.clickBasicTargetCondition(condition);
+			}
+			
 			Thread.sleep(3000);
-		
+					
 		clickProceedButton();
 		selectOffer(offerExcel.getCellByColumnName("Offer Name"));
 		if(!bc_type.contains("Informational"))
@@ -1345,8 +1352,11 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			{
 				selectSenderAndRouteEmail();
 			}
-			else if(offerExcel.getCellByColumnName("Channel").contains("Facebook"))
-				selectSenderAndRouteFacebook();
+			else if(offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
+				selectSenderAndRouteFacebook(); }
+			else
+					selectSenderAndRoute();
+			
 		}
 		else {
 			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
@@ -1360,6 +1370,8 @@ public void verifyViewOptionForBC() throws InterruptedException {
 		}
 		clickProceedButton();
 	}
+	
+	
 	
 	public void createBCWithCopyOption() throws InterruptedException {
 		Thread.sleep(2000);
@@ -2365,5 +2377,82 @@ clickProceedButton();
 clickProceedButton();
 
 	}
+
+@FindBy(xpath="(//paper-icon-button[@id='toggleIcon'])[4]")
+private WebElement clickOnLanguageToggleIcon ;
+@FindBy(xpath="//div[@id='labelAndInputContainer']//input[@placeholder='Select a Language']")
+ private WebElement selectALanguage ;
+@FindBy(xpath="(//paper-icon-button[@id='clearIcon'])[4]")
+private WebElement clearSelectALanguage ;
+//@FindBy(xpath="//vaadin-combo-box-item[contains(text(),'"+LANGUAGE1+"')]")
+//private WebElement selectALanguageFromDropDown ;
+
+
+public void createBCWithLanguage(String name, String bc_type, String baseList, String offer,String language) throws InterruptedException {
+ExcelHelper offerExcel = new ExcelHelper(); 
+offerExcel.setExcelFile("offerInputData", offer);
+enterBroadcastBasicDetails(name,INVENTORY_UNLIMITED);
+if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+System.out.println("inside triggerable");
+jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+Thread.sleep(1000);
+jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+Thread.sleep(2000);
+jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
+Thread.sleep(1500);
+}
+clickProceedButton();
+selectBaseList(baseList);
+jswait.loadClick(CGConfigure);
+jswait.loadClick(noControlGroupRadioButton);
+jswait.loadClick(defineCGLimitSave);
+clickProceedButton();
+selectOffer(offerExcel.getCellByColumnName("Offer Name"));
+
+if(LANGUAGE1.equalsIgnoreCase(language)) {
+jswait.loadClick(clearSelectALanguage);
+jswait.loadClick(selectALanguage);
+jswait.loadSendKeys(selectALanguage, language);
+jswait.loadClick("//vaadin-combo-box-item[contains(text(),'"+LANGUAGE1+"')]");
+}else if(LANGUAGE2.equalsIgnoreCase(language)) {
+jswait.loadClick(clearSelectALanguage);
+jswait.loadClick(selectALanguage);
+jswait.loadSendKeys(selectALanguage, language);
+jswait.loadClick("//vaadin-combo-box-item[contains(text(),'"+LANGUAGE2+"')]");
+}else {
+jswait.loadClick(clearSelectALanguage);
+jswait.loadClick(selectALanguage);
+jswait.loadSendKeys(selectALanguage,"Customer P");
+jswait.loadClick("//vaadin-combo-box-item[contains(text(),'Customer Preferred')]");
+}
+
+
+if(!bc_type.contains("Informational"))
+{
+selectTrackSession();
+selectTrackingSource();
+if(offerExcel.getCellByColumnName("Channel").contains("Email"))
+{
+	selectSenderAndRouteEmail();
+}
+else
+	selectSenderAndRoute();
+}
+else {
+jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+jswait.loadClick(senderIdBroadcastAdressSmpp);
+jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+
+jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+
+}
+clickProceedButton();
+}
+
+
+
+
 
 }

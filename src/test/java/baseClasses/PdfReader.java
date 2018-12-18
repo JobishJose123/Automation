@@ -8,7 +8,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
@@ -72,13 +75,31 @@ public class PdfReader {
 	}
 	
 	
-	public void verifyMultipleTrackingRules(String path) throws Exception {
+	
+	public void verifyMultipleTrackingRulesAndCreatives(String path) throws Exception {
 		
 		loadPDFFile(path);
 		PDFTextStripper pdfTextStripper = new PDFTextStripper();
 		readTextFromPdf = pdfTextStripper.getText(document);
 		String[] str17 = readTextFromPdf.split("\\n");
-		System.out.println(readTextFromPdf);
+		//System.out.println(readTextFromPdf);
+		String language1FromPDF = str17[56].trim();
+		String language2FromPDF = str17[60].trim();
+		Init init=new Init();
+//		String Language1=init.LANGUAGE1;
+//		String Language2=init.LANGUAGE2;
+//		System.out.println(language1FromPDF);
+//		System.out.println(language1FromPDF);
+		Assert.assertTrue((language1FromPDF.contains(init.LANGUAGE1)&&language2FromPDF.contains(init.LANGUAGE2))||(language1FromPDF.contains(init.LANGUAGE2)&&language2FromPDF.contains(init.LANGUAGE1)));
+		
+		if((language1FromPDF.contains(init.LANGUAGE1)&&language2FromPDF.contains(init.LANGUAGE2))||(language1FromPDF.contains(init.LANGUAGE2)&&language2FromPDF.contains(init.LANGUAGE1))) {
+			System.out.println("Multiple crative verified");
+			
+		}else {
+			System.out.println("Multiple crative not verified");
+		}
+		
+		
 		String firstRuleFromPDF = str17[36].trim();
 		System.out.println(firstRuleFromPDF);
 		String secondRuleFromPDF=str17[45].trim();
@@ -94,7 +115,7 @@ public class PdfReader {
 	}
 	
 	public void verifyExportedBroadcastDateAndTime(String path, String afterClickOnExport,String addingthreemin) throws Exception {
-		
+		System.out.println("verifyExportedBroadcastDateAndTime...Started");
 		
 		loadPDFFile(path);
 		
@@ -244,21 +265,129 @@ public class PdfReader {
 		
 	}
 	
-/*public void loadCampaignPDFFile(String path) throws Exception, IOException, FileNotFoundException {
-  		
-		try {
-			File file = new File(path);
-			FileInputStream fis = new FileInputStream(file);
-			document = PDDocument.load(fis);
-			System.out.println("file loaded");
-            fis.close();
-		} catch (Exception e) {
 
-			e.printStackTrace();
-			System.out.println("File not found");
+	
+	public void verifySegmentConditionWithMoreThanTenCreatedConditions(String path) throws FileNotFoundException, IOException, Exception {
+		loadPDFFile(path);
+		PDFTextStripper pdfTextStripper = new PDFTextStripper();
+		//System.out.println("reading text from pdf");
+		// to store the pdf data into string
+		readTextFromPdf = pdfTextStripper.getText(document);
+		String[] str17 = readTextFromPdf.split("\\n");
+		System.out.println(readTextFromPdf);
+		List<String> al=new ArrayList<String>();
+		List<String> expectedListAND=new ArrayList<String>();
+		List<String> expectedListOR=new ArrayList<String>();
+		
+		for(String pdfData:str17) {
+			
+			al.add(pdfData.trim());
+		}
+				
+		int indexSegmentConditions=al.indexOf("Segment Conditions");
+		//System.out.println(indexSegmentConditions);
+		int indexOfferDetails=al.indexOf("Offer Details");
+		//System.out.println(indexOfferDetails);
+		List<String> subList = al.subList(indexSegmentConditions+1, indexOfferDetails);
+//		System.out.println(subList);
+//		System.out.println(subList.size());
+		expectedListAND.add("selenium_list is subscribed");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Profi le Info Age_q11 is greater than 18");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Profi le Info Age_q11 is greater than 19");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Profi le Info Age_q11 is less than 100");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Profi le Info Balance_q11  is greater than 5");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Profi le Info Balance_q11  is less than 200");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Profi le Info First Name_q11 contains 'A'");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Profi le Info Boolean_q11  Yes");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Profi le Info Languages_q11 any of Malayalam , English , Korean , Hindi , Spanish");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Profi le Info Country_q11  is not set");
+		expectedListAND.add("And");
+		expectedListAND.add("Customer Device Info Device ID_q11  is equal to 1");
+		
+		
+		expectedListOR.add("selenium_list is subscribed");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Profi le Info Age_q11 is greater than 18");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Profi le Info Age_q11 is greater than 19");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Profi le Info Age_q11 is less than 100");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Profi le Info Balance_q11  is greater than 5");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Profi le Info Balance_q11  is less than 200");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Profi le Info First Name_q11 contains 'A'");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Profi le Info Boolean_q11  Yes");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Profi le Info Languages_q11 any of Malayalam , English , Korean , Hindi , Spanish");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Profi le Info Country_q11  is not set");
+		expectedListOR.add("Or");
+		expectedListOR.add("Customer Device Info Device ID_q11  is equal to 1");
+		
+		if(subList.equals(expectedListAND)) {
+			Assert.assertTrue(subList.equals(expectedListAND));
+			System.out.println("AND Operation Segment conditions verified");
+			
+		}else if(subList.equals(expectedListOR))
+		{
+			Assert.assertTrue(subList.equals(expectedListOR));
+			System.out.println("OR Operation Segment conditions verified");
+			
+		}else if((subList.get(0)).equals("Customer Profi le Info Age_q11 is greater than 18")) {
+			
+			Assert.assertTrue((subList.get(0)).equals("Customer Profi le Info Age_q11 is greater than 18"));
+			System.out.println("Single Segment condition Verified"+subList);
+			
+		} else {
+			System.out.println("Available segment condition is:"+subList);
 		}
 	}
-*/
+	
+	public void verifyNoDoNotContactlistsAreExcluded(String path) throws FileNotFoundException, IOException, Exception {
+		
+		loadPDFFile(path);
+		
+		PDFTextStripper pdfTextStripper = new PDFTextStripper();
+		//System.out.println("reading text from pdf");
+		// to store the pdf data into string
+		readTextFromPdf = pdfTextStripper.getText(document);
+		//System.out.println(readTextFromPdf);
+	   	String[] str17 = readTextFromPdf.split("\\n");
+	   	List<String> al=new ArrayList<String>();
+		//List<String> expectedList=new ArrayList<String>();
+		
+		for(String pdfData:str17) {
+			
+			al.add(pdfData.trim());
+		}		
+		
+		int indexofDNDListExculed=al.indexOf("DND Lists Excluded No Do Not Contact l ists are excluded");
+		//System.out.println(indexofDNDListExculed);
+		int indexdofSegmentCondition=al.indexOf("Segment Conditions");
+		//System.out.println(indexdofSegmentCondition);
+		List<String> subList=al.subList(indexofDNDListExculed, indexdofSegmentCondition);
+		//System.out.println(donotcl);
+		
+		if((subList.get(0)).equals("DND Lists Excluded No Do Not Contact l ists are excluded")) {
+		Assert.assertTrue((subList.get(0)).equals("DND Lists Excluded No Do Not Contact l ists are excluded"));
+		System.out.println("No Do Not Contact l ists are excluded is Verified");
+		}else {
+			System.out.println("No Do Not Contact lists are excluded is not Verified"+subList.get(0));
+		}
+	}
+	
 public void verifyExportedCampaignDateAndTime(String path, String afterClickOnExport,String addingthreemin,String query) throws Exception {
 	
 	
@@ -289,6 +418,138 @@ public void verifyExportedCampaignDateAndTime(String path, String afterClickOnEx
 	System.out.println("Verified campaign PDF Footer");
 	
 }
+
+public Date verifyGettingBcModifiedTime(String path) throws FileNotFoundException, IOException, Exception {
+	
+	
+	loadPDFFile(path);
+	
+	PDFTextStripper pdfTextStripper = new PDFTextStripper();
+	//System.out.println("reading text from pdf");
+	// to store the pdf data into string
+	readTextFromPdf = pdfTextStripper.getText(document);
+	String[] str17 = readTextFromPdf.split("\\n");
+	//System.out.println(readTextFromPdf);
+	List<String> al=new ArrayList<String>();
+			
+	for(String pdfData:str17) {
+		
+		al.add(pdfData.trim());
+	}
+	int indexOfModifiedBySysAdmin=al.indexOf("Modified by System Administrator");
+	System.out.println(indexOfModifiedBySysAdmin);
+	
+	int indexOfBcAttributes=al.indexOf("Broadcast Attributes");
+	System.out.println(indexOfBcAttributes);
+	
+	List<String> subList = al.subList(indexOfModifiedBySysAdmin+1, indexOfBcAttributes);
+	System.out.println(subList);
+	String getModifiedTime=subList.get(0);
+	System.out.println(getModifiedTime.substring(14, 34));
+	DateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aaa");
+	Date dateaftercon = simpleDateFormat.parse(getModifiedTime.substring(14, 34));
+	System.out.println(dateaftercon);
+	return dateaftercon;
+	
+	
+}
+
+
+public void verifyCampaignPDFMoreThanTenConditions(String path, String endType, String CurrentSysDateAndTime,String recurringFrequency) throws FileNotFoundException, IOException, Exception {
+	
+		loadPDFFile(path);
+
+		PDFTextStripper pdfTextStripper = new PDFTextStripper();
+		// System.out.println("reading text from pdf");
+		// to store the pdf data into string
+		readTextFromPdf = pdfTextStripper.getText(document);
+		String[] str17 = readTextFromPdf.split("\\n");
+		//System.out.println(readTextFromPdf);
+		List<String> al = new ArrayList<String>();
+		List<String> expectedListOR = new ArrayList<String>();
+
+		for (String pdfData : str17) {
+
+			al.add(pdfData.trim());
+		}
+
+		for (int i = 1; i <= 11; i++) {
+			expectedListOR.add("Customer Profi le Info Age_q11 is greater than 18");
+			expectedListOR.add("Or");
+			if (i == 11) {
+				expectedListOR.remove(21);
+			}
+
+		}
+
+		int indexOfTargetConditions = al.indexOf("Target Conditions");
+		int indexOfSchedule = al.indexOf("Schedule");
+
+		List<String> subList = al.subList(indexOfTargetConditions + 1, indexOfSchedule);
+		//System.out.println(subList);
+
+	
+		Assert.assertTrue("Verified Multiple OR (more Than 10 ) conditions in campaign PDF", subList.equals(expectedListOR));
+
+		if (endType.equalsIgnoreCase("After")) {
+
+			int indexOfSchedule1 = al.indexOf("Schedule");
+			int indexOFIsRecurringYes = al.indexOf("Render At Real Time");
+
+			List<String> subList1 = al.subList(indexOfSchedule1 + 1, indexOFIsRecurringYes);
+			//System.out.println(subList1);
+
+			String getSchedulaTime = subList1.get(0);
+			System.out.println(getSchedulaTime);
+			System.out.println(getSchedulaTime.substring(11, 31));
+			DateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm");
+			Date dateaftercon = simpleDateFormat.parse(getSchedulaTime.substring(11, 31));
+			System.out.println(dateaftercon);
+			Date CurrentSystemDateAndTime = simpleDateFormat.parse(CurrentSysDateAndTime);
+			Assert.assertTrue("Verified campaign Schedule Date and Time", dateaftercon.after(CurrentSystemDateAndTime));
+			Assert.assertTrue("Verified Schedule camapign time Zone", subList1.get(1).contentEquals("IST"));
+			Assert.assertTrue("Verified Campaign Recurrence Pattern",
+					subList1.get(5).contentEquals("Recurrence Pattern Recur every"+recurringFrequency+"Days(s)"));
+
+		} else if (endType.equalsIgnoreCase("At")) {
+
+			int indexOfSchedule1 = al.indexOf("Schedule");
+			int indexOFIsRecurringYes = al.indexOf("Is Recurring Yes");
+
+			List<String> subList1 = al.subList(indexOfSchedule1 + 1, indexOFIsRecurringYes);
+			//System.out.println(subList1);
+
+			String getSchedulaTime = subList1.get(0);
+			System.out.println(getSchedulaTime);
+			System.out.println(getSchedulaTime.substring(11, 31));
+			DateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm");
+			Date dateaftercon = simpleDateFormat.parse(getSchedulaTime.substring(11, 31));
+			System.out.println(dateaftercon);
+			Date CurrentSystemDateAndTime = simpleDateFormat.parse(CurrentSysDateAndTime);
+			Assert.assertTrue("Verified campaign Schedule Date and Time", dateaftercon.after(CurrentSystemDateAndTime));
+
+		} else if (endType.equalsIgnoreCase("Null")) {
+
+			int indexOfSchedule1 = al.indexOf("Schedule");
+			int indexOFIsRecurringYes = al.indexOf("Is Recurring Yes");
+
+			List<String> subList1 = al.subList(indexOfSchedule1 + 1, indexOFIsRecurringYes);
+			System.out.println(subList1);
+
+			String getSchedulaTime = subList1.get(0);
+			System.out.println(getSchedulaTime);
+			System.out.println(getSchedulaTime.substring(11, 31));
+			DateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm");
+			Date dateaftercon = simpleDateFormat.parse(getSchedulaTime.substring(11, 31));
+			System.out.println(dateaftercon);
+			Date CurrentSystemDateAndTime = simpleDateFormat.parse(CurrentSysDateAndTime);
+			Assert.assertTrue("Verified campaign Schedule Date and Time", dateaftercon.after(CurrentSystemDateAndTime));
+
+		}
+
+	}
+
+
 }
 
 
