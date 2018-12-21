@@ -198,9 +198,11 @@ public class OfferSteps extends Init {
 		    driver.switchTo().window(tabs2.get(1));
 		    driver.get(secondUrl);
 		    Thread.sleep(3000);
-		    driver.switchTo().frame(1);
+		   // driver.switchTo().frame(1);
 		    try{
-		    driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Products')]"));
+		   // driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Products')]"));
+		   String getTextProductHelpPage= driver.findElement(By.xpath("//*[@id=\"topic-content\"]/div[1]/h1[1]/span/span[contains(text(),'Products')]")).getText();
+		    Assert.assertTrue(getTextProductHelpPage.contentEquals("Products"));
 		    driver.close();
 		    driver.switchTo().window(tabs2.get(0));
 		    }
@@ -415,10 +417,13 @@ public class OfferSteps extends Init {
 		offerPageObjects.clickRewardAddButton();
 		offerPageObjects.enterSuccessMessage(
 				"More the 500 chars Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mi lacus. Maecenas tempus, urna vel efficitur porttitor, nisi mauris rutrum risus, sed sollicitudin ligula urna a turpis. Nullam sit amet elit posuere, semper ligula ut, euismod felis. Duis vel tellus sed magna facilisis eleifend vitae in leo. Aenean odio quam, aliquet egestas massa vel, aliquam scelerisque mi. Donec scelerisque a odio in consectetur. Nulla in nisi quis felis faucibus pellentesque. Vivamus euismod orci ac nullam. after");
-		offerPageObjects.verifyRewardSucessMessage();
+		//offerPageObjects.verifyRewardSucessMessage();
 		offerPageObjects.enterFailureMessage(
 				"More the 500 chars Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mi lacus. Maecenas tempus, urna vel efficitur porttitor, nisi mauris rutrum risus, sed sollicitudin ligula urna a turpis. Nullam sit amet elit posuere, semper ligula ut, euismod felis. Duis vel tellus sed magna facilisis eleifend vitae in leo. Aenean odio quam, aliquet egestas massa vel, aliquam scelerisque mi. Donec scelerisque a odio in consectetur. Nulla in nisi quis felis faucibus pellentesque. Vivamus euismod orci ac nullam. after");
-		offerPageObjects.verifyRewardFailureMessage();
+		//offerPageObjects.verifyRewardFailureMessage();
+		offerPageObjects.clickProceedButton();
+		Thread.sleep(2000);
+		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Create New Offer')]/following::paper-button[contains(.,'Proceed')]")).isDisplayed(), "Success and failure message boxes entered text more than 500 characters");
 	}
 
 	@Then("^verify response messages of creatives added$")
@@ -724,9 +729,9 @@ public class OfferSteps extends Init {
 	public void verifyLabelAfterSelectingDynamicVariables() throws Throwable {
 		Thread.sleep(2000);
 
-//		offerPageObjects.clickMapVariableIcon();
+		offerPageObjects.clickMapVariableIcon();
 		//jswait.waitUntil("//label[text()='(0 variable selected)']");
-		offerPageObjects.MapVariableFilterName("city");
+		offerPageObjects.MapVariableFilterName("sel_var1");
 		offerPageObjects.clickMapVariableFirstVariable();
 		Thread.sleep(2000);
 		jswait.waitUntil("//label[text()='(1 variable selected)']");

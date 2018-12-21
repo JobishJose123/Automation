@@ -814,8 +814,6 @@ public class OfferPageObjects extends Init {
 //		driver.switchTo().parentFrame();
 //		commonObjects.clickContextHelpCloseIcon();
 		
-		
-		
 		 Thread.sleep(3000);
 	        
 		 String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
@@ -826,7 +824,9 @@ public class OfferPageObjects extends Init {
 		    Thread.sleep(3000);
 //		    driver.switchTo().frame(1);
 		    try{
-		    driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Offers')]"));
+		    //driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Offers')]"));
+		    String getTextOfferHelpPage=driver.findElement(By.xpath("//*[@id=\"topic-content\"]/div[1]/h1[1]/span/span[contains(text(),'Offers')]")).getText();
+		    Assert.assertTrue(getTextOfferHelpPage.contentEquals("Offers"));
 		    driver.close();
 		    driver.switchTo().window(tabs2.get(0));
 		    }
@@ -1393,8 +1393,8 @@ public class OfferPageObjects extends Init {
 		prodcutFile.setExcelFile("productInputData", productSheet);
 		String productToAdd = (String) prodcutFile.getCell(1, 0);
 		clickOfferAddButton();
-		commonObjects.filterName(productToAdd);
-		jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
+			commonObjects.filterName(productToAdd);
+			jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
 		clickDialogBoxAddButton();
 	}
 

@@ -846,4 +846,17 @@ public class TargetConditionObjects extends Init {
 //		 action.click(targetGraphicalCustomerInsight).clickAndHold(targetGraphicalCustomerInsight).moveToElement(graphicalTargetCanvas).release(graphicalTargetCanvas).build().perform();
 
 	}
+	
+	 public void clickBasicTargetConditionWithAgeForOR() throws InterruptedException {
+//		 	jswait.loadClick(createConditionButton);
+		    jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(CustomerInsightFieldAge);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"18");
+			}
+	 
+			
 }

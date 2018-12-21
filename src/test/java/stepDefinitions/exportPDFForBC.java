@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 
@@ -15,6 +16,7 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.PdfReader;
+import baseClasses.RandomNameGenerator;
 import baseClasses.SQLHandler;
 import cucumber.api.java.en.Then;
 
@@ -35,6 +37,7 @@ public class exportPDFForBC extends Init{
 	PdfReader pdfReader=new PdfReader();
 	CommonObjects commonObjects = new CommonObjects();
 	CalenderUtility calenderUtility=new CalenderUtility();
+	BroadcastSteps broadcastSteps=new BroadcastSteps();
 	public exportPDFForBC() {
 		PageFactory.initElements(driver, this);
 	}
@@ -104,7 +107,7 @@ public class exportPDFForBC extends Init{
 	    broadcastPageObjects.verifyExportedBCForRename(sheet);
 	}
 	
-	@Then("^Verify the multiple tracking rules from downloaded pdf from sheet \"([^\"]*)\"$")
+	@Then("^Verify the multiple tracking rules and creatives from downloaded pdf from sheet \"([^\"]*)\"$")
 	public void verify_the_multiple_tracking_rules_from_downloaded_pdf_from_sheet(String sheet) throws Throwable {
 		Thread.sleep(2000);
 		eM.setExcelFile("bcInputData", sheet);
@@ -126,7 +129,7 @@ public class exportPDFForBC extends Init{
 		String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
 		System.out.println(path);
 		
-		pdfReader.verifyMultipleTrackingRules(path);
+		pdfReader.verifyMultipleTrackingRulesAndCreatives(path);
 		Thread.sleep(2000);
 		
 		System.out.println("Verified PDF multipletracking rules ");
@@ -163,6 +166,129 @@ public class exportPDFForBC extends Init{
 		// to provide broadcast name and Broadcast Status
 		pdfReader.verifyExportedCampaignDateAndTime(path,afterClickOnExport,addingthreemin,query);
 	}
+	
+	@Then("^Verify that Segment condition with more than ten created conditions is displayed in pdf generated from sheet \"([^\"]*)\"$")
+	public void verify_that_Segment_condition_with_more_than_ten_created_conditions_is_displayed_in_pdf_generated_from_sheet(String sheet) throws Throwable {
+	    
+		
+		Thread.sleep(2000);
+		eM.setExcelFile("bcInputData", sheet);
+		String bcNamefromSheet = eM.getCell(1, 0).toString();
+		String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + bcNamefromSheet
+				+ "';";		
+		
+		String newBCNameWithOutSpace = bcNamefromSheet.replaceAll("[^a-zA-Z0-9-]", "_");
+		String systemUserName = System.getProperty("user.name");
+		//System.out.println(systemUserName);
+		SQLHandler sql = new SQLHandler();
+		int bcID = sql.getStringOfQuery(query);
+		// System.out.println(bcID);
+		String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+		System.out.println(path);
+		
+		pdfReader.verifySegmentConditionWithMoreThanTenCreatedConditions(path);
+		Thread.sleep(2000);
+		
+		System.out.println("Verified PDF multiple segment conditions ");
+		
+	}
+	@Then("^Verify that No Do Not Contact lists are excluded message is displayed in pdf from sheet \"([^\"]*)\"$")
+	public void verify_that_No_Do_Not_Contact_lists_are_excluded_message_is_displayed_in_pdf_from_sheet(String sheet) throws Throwable {
+		Thread.sleep(2000);
+		eM.setExcelFile("bcInputData", sheet);
+		String bcNamefromSheet = eM.getCell(1, 0).toString();
+		String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='" + bcNamefromSheet
+				+ "';";		
+		
+		String newBCNameWithOutSpace = bcNamefromSheet.replaceAll("[^a-zA-Z0-9-]", "_");
+		String systemUserName = System.getProperty("user.name");
+		//System.out.println(systemUserName);
+		SQLHandler sql = new SQLHandler();
+		int bcID = sql.getStringOfQuery(query);
+		// System.out.println(bcID);
+		String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+		System.out.println(path);
+		pdfReader.verifyNoDoNotContactlistsAreExcluded(path);
+	    
+	}
+	
+	@Then("^verify after edited the of bc from sheet \"([^\"]*)\"$")
+	public void verifyEditBc(String sheet) throws Throwable {
+		eM.setExcelFile("bcInputData", sheet);
+		String beforeEditBcNamefromSheet = eM.getCell(1, 0).toString();
+		System.out.println("before editing BCNAME" + beforeEditBcNamefromSheet);
+		String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='"
+				+ beforeEditBcNamefromSheet + "';";
+
+		String newBCNameWithOutSpace = beforeEditBcNamefromSheet.replaceAll("[^a-zA-Z0-9-]", "_");
+		String systemUserName = System.getProperty("user.name");
+		// System.out.println(systemUserName);
+		SQLHandler sql = new SQLHandler();
+		int bcID = sql.getStringOfQuery(query);
+		// System.out.println(bcID);
+		String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+		System.out.println(path);
+
+		Date beforeeditDate = pdfReader.verifyGettingBcModifiedTime(path);
+
+		Thread.sleep(2000);
+
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditOption();
+		ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		eM.setExcelFile("bcInputData", sheet);
+		String name = (String) eM.getCell(1, 0);
+		name = RandomNameGenerator.getRandomName(name);
+		eM.setCell(1, 0, name);
+		broadcastPageObjects.enterBroadcastName(name);
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.clickProceedButton();
+		eM.setExcelFile("bcInputData", sheet);
+		String bc_type = (String) eM.getCell(1, 7);
+		broadcastSteps.enterDeliveryTabDetails(bc_type, sheet);
+		broadcastPageObjects.clickCreateButton();
+		broadcastPageObjects.clickSaveButton();
+		eM.setExcelFile("bcInputData", sheet);
+		String afterEditBcNamefromSheet = eM.getCell(1, 0).toString();
+		System.out.println("After editing BCNAME" + afterEditBcNamefromSheet);
+		Assert.assertNotEquals("Boadcast name Edited", beforeEditBcNamefromSheet, afterEditBcNamefromSheet);
+
+		commonObjects.filterName(afterEditBcNamefromSheet);
+		Thread.sleep(2000);
+
+		broadcastPageObjects.exportBroadcastAsPDF();
+
+		Thread.sleep(2000);
+
+		String query1 = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='"
+				+ afterEditBcNamefromSheet + "';";
+
+		String newBCNameWithOutSpace1 = afterEditBcNamefromSheet.replaceAll("[^a-zA-Z0-9-]", "_");
+
+		// System.out.println(systemUserName);
+
+		int bcID1 = sql.getStringOfQuery(query1);
+		// System.out.println(bcID);
+		String path1 = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace1 + "_" + bcID1
+				+ ".pdf";
+		System.out.println(path);
+		Date afterEditDate = pdfReader.verifyGettingBcModifiedTime(path1);
+
+		Assert.assertTrue(afterEditDate.after(beforeeditDate));
+		
+	}
+ 
+		
+	
+	@Then("^Verify after edit the security groups export PDF option in BC page and View from sheet \"([^\"]*)\"$")
+	public void verify_after_edit_the_security_groups_export_PDF_option_in_BC_page_and_View(String sheet) throws Throwable {
+	   
+		
+	}
+
+	
 	
 	
 }

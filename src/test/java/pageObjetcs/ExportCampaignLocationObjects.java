@@ -92,8 +92,13 @@ public class ExportCampaignLocationObjects extends Init{
 		public void editSecurityGroup(String groupName)  throws InterruptedException {
 			Thread.sleep(1500);
 			jswait.loadClick(driver.findElement(By.xpath("//data-table-row//span[text() ='"+groupName+"']/../../..//data-table-cell[9]//paper-icon-button")));
-			Thread.sleep(500);
-			jswait.loadClick(driver.findElement(By.xpath("//div[@id = 'contentWrapper']//paper-item[1]")));
+			//jswait.loadClick(driver.findElement(By.xpath("//data-table-row//span[text() ='"+groupName+"']//parent::data-table-cell//parent::div//data-table-cell[9]//paper-menu-button")));
+			Thread.sleep(2000);
+			if(groupName.equalsIgnoreCase("Super Administrator")) {
+				jswait.loadClick(driver.findElement(By.xpath("(//div[@id = 'contentWrapper']//paper-item[1])[8]")));
+			}else {
+				jswait.loadClick(driver.findElement(By.xpath("//div[@id = 'contentWrapper']//paper-item[1]")));
+			}
 			Thread.sleep(1000);
 		}
 		

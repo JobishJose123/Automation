@@ -237,12 +237,12 @@ Feature: generic product class
   Scenario: Verify whether created and modified timestamps are displayed in the product listing page  NX-7028
     Then verify timestamps in product grid
 
-  @NX-7031 @closeBrowser
+  @NX-7031 
   Scenario: Verify whether details of the products are shown when clicked on the row  NX-7031
     Then verify SelClass product details in grid
     Then pass next scenario based on this step
 
-  @NX-7109
+  @NX-7109 @closeBrowser
   Scenario: Verify the attribute label is displayed when the  product is expanded NX-7109
     Then check previous step and pass this
 
@@ -335,6 +335,7 @@ Feature: generic product class
     Then navigate to product class "TestProductClass"
     Then deactivate the product with attributes from sheet "fullDetails"
     Then navigate to landing page
+    Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then click on options and view broadcast
