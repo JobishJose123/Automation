@@ -1,14 +1,4 @@
-+------------+----------------+-------+-------------------+
-| CONSUMER_ID|Demographics_q11|Age_q11|           Date_q11|
-+------------+----------------+-------+-------------------+
-|919922730002|            25.0|   48.0|2018-12-11 10:12:55|
-|919922730003|            24.0|   41.0|2018-12-11 10:12:55|
-|919922730004|            24.0|   47.0|2018-12-11 10:12:55|
-|919922730005|            28.0|   17.0|2018-12-11 10:12:55|
-|919922730006|            24.0|   62.0|2018-12-11 10:12:55|
-+------------+----------------+-------+-------------------+
-only showing top 5 rows
 
-Dataframe Succesfully submitted for metric upload
-select oz.ATTRIBUTE_ID,oz.ENTITY_ID,ap.PROFILE_FIELD_TYPE_ID from oz_entity_attribute oz inner join app_partner_profile_field ap on oz.ATTRIBUTE_NAME=ap.PARTNER_PROFILE_FIELD_ID where ap.STATUS_ID=0 and ENTITY_TYPE_ID=1 and ap.PARTNER_PROFILE_FIELD_NAME= 'Age_q11'
 Dataframe Succesfully submitted for profile upload
+Dataframe Succesfully submitted for metric upload
+Dataframe Succesfully submitted for event upload

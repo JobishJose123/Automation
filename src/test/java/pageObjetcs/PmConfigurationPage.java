@@ -117,13 +117,13 @@ public class PmConfigurationPage extends Init{
 	public void selwctList() throws InterruptedException {
 		jswait.loadSendKeys(listSelectorField,SELENIUM_LIST);
 	}
-	public void enterSavedSegmentDetails(String segmentName, String condition) throws InterruptedException {
-		if(condition.contains("segmentAgeGT40")) {
+	public void enterSavedSegmentDetails(String segmentName) throws InterruptedException {
+//		if(condition.contains("segmentAgeGT40")) {
 			enterSavedSegmentName(segmentName);
 			jswait.loadSendKeys(segmentDescriptionField, segmentName+"_Description");
 			jswait.loadSendKeys(listSelectorField,SELENIUM_LIST);
 			jswait.loadClick(listSelect);
-			targetConditionObjects.clickBasicTargetConditionWithAge("40");
-		}
+			targetConditionObjects.clickBasicTargetCondition(segmentName);
+//		}
 	}	
 }

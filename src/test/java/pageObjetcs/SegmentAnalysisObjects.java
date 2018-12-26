@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjetcs.CommonObjects;
 
 import com.itextpdf.text.log.SysoCounter;
 
@@ -23,9 +24,13 @@ public class SegmentAnalysisObjects extends Init {
 	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
+	Init Init =new Init();
 	public SegmentAnalysisObjects() {
 		PageFactory.initElements(driver, this);
 	}
+	
+	@FindBy(xpath="//div[text()='Insight Workbench']/../..")
+	private WebElement IM;
 
 	@FindBy(xpath="//*[@id='sym1' and @icon='app-primary:segments']")
 	private WebElement exploreSegments;
@@ -189,20 +194,79 @@ public class SegmentAnalysisObjects extends Init {
 	private WebElement topbarProfileName;
 	@FindBy(xpath=".//*[@id='items']/vaadin-grid-table-row[1]/vaadin-grid-table-cell[4]/vaadin-grid-cell-content")
 	private WebElement clusterstatusgrid;
+	@FindBy(xpath="//paper-ripple[@id='ink']/..")
+	private WebElement Optionbtn;
+	
+	@FindBy(xpath="//paper-item[@class='style-scope analysis-list x-scope paper-item-1'][contains(.,'Edit')]")
+	private WebElement EditSegment ;
+
+	@FindBy(xpath="(//div[@id='offRadio'])[2]")
+   private WebElement CreateRadiobtn;
+
+	@FindBy(xpath="//paper-button[contains(. , 'Create Condition')]")
+     private WebElement CreateCondition ;
+	
+	@FindBy(xpath="(//div[@id='offRadio'])[3]")
+	private WebElement SavedSegmentsRadiobtn;
+
+	
+	@FindBy(xpath="//paper-button[@class='style-scope segment-analysis x-scope paper-button-0'][contains(., 'Start New Analysis')]/..")
+    private WebElement StartNewAnalysis;
+	
+	@FindBy(xpath="(//iron-icon[@id='icon'])[1]")
+	private WebElement EditSegmentAnalysisName;
+	
+   @FindBy(xpath="(//input[@id='input'][@class='style-scope paper-input'])[1]")
+    private WebElement SegmentAnalysisNameInput;
+   
+	@FindBy(xpath="(//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down'])[1]")
+	private WebElement dropDown;
+	
+	@FindBy(xpath="//paper-item[contains(.,'Customer Demographic')]")
+	private WebElement ConditionType1;
+	
+   @FindBy(xpath="//label[@id='paper-input-label-177']/..")
+  private WebElement ClickField1 ;
+
+   @FindBy(xpath="//paper-item[@class='style-scope paper-autocomplete x-scope paper-item-1 iron-selected']")
+	private WebElement Field1;
+
+@FindBy(xpath="//label[@id='paper-input-label-181']")
+	private WebElement ClickCondition1 ;
+
+	@FindBy(xpath="//paper-item[contains(.,'is greater than or equal to')]")
+	private WebElement Condition1;
+	
+@FindBy(xpath="(//input[@id='input'])[6]")
+	private WebElement Value1 ;
+	
+	@FindBy(xpath="//paper-button[contains(.,'Save')][@id='saveButton']")
+	private WebElement SaveCondition1 ;
+	
+	@FindBy(xpath="(//input[@is='iron-input'])[3]")
+	private WebElement SavedSegmentInput ;
+	
+	
+	@FindBy(xpath="//paper-item[contains(.,'digitalPersonaGT15')]")
+	private WebElement SavedSegmentName;
+	
+
+	
+	@FindBy(xpath="(//paper-icon-button[@icon='icons:delete'])[1]")
+	private WebElement deleteKPI;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	
+	
+	
 	
 	
 	public void navigateToAnalytics() throws InterruptedException {
@@ -241,7 +305,7 @@ public class SegmentAnalysisObjects extends Init {
 	public void createSegmentAnalysis() throws InterruptedException {
 		jswait.loadClick(createSegmentAnalysisList);
 		Thread.sleep(3000);
-		jswait.loadSendKeys(createSegmentAnalysisListinput, "selenium_list");
+		jswait.loadSendKeys(createSegmentAnalysisListinput, BASE_LIST);
 		Thread.sleep(2000);
 		jswait.loadClick(createSegmentAnalysisListselect);
 		Thread.sleep(2000);
@@ -297,10 +361,10 @@ public class SegmentAnalysisObjects extends Init {
 		Thread.sleep(2000);
 		jswait.loadClick(KpiAttributetypeclick);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(kpitype, "Age_q11");
+		jswait.loadSendKeys(kpitype, AGE_PROFILE_FIELD);
 		
 		if(flag==1) {
-			jswait.loadSendKeys(kpitype, "Balance_q11");
+			jswait.loadSendKeys(kpitype, BALANCE_PROFILE_FIELD);
 			Thread.sleep(2000);
 			jswait.loadClick(kpitypeselect2);
 			Thread.sleep(2000);
@@ -726,5 +790,89 @@ public void clustertabledetailsandsave() throws Exception {
 		  
 						
 	}
+   //=====================================================================================================================================================================================//
    
+   public void SegmentName(String  SegmentName)throws Exception{
+	   jswait.loadClick(StartNewAnalysis);
+	   jswait.loadClick(EditSegmentAnalysisName);
+	   jswait.loadSendKeys( SegmentAnalysisNameInput ,SegmentName);
+	 
+	   jswait.loadClick(createSegmentAnalysisList);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(createSegmentAnalysisListinput, BASE_LIST);
+		Thread.sleep(2000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+BASE_LIST+"')]");
+	addNew3KPI();
+	
+	Thread.sleep(2000);
+	
+	jswait.loadClick(Topproccedbtn);
+	Thread.sleep(2000);
+	jswait.loadSendKeys(SaveAnalysisDescinput,"test");
+						
+	Thread.sleep(2000);
+	jswait.loadSendKeys(SaveAnalysisSetPermission,"selenium.flytxt@gmail.com");
+	Thread.sleep(3000);
+	jswait.loadClick(userselect);
+	Thread.sleep(2000);
+	jswait.loadClick(SaveAnalysisBtn);
+   }
+   
+   public void editSegmentAnalysis() throws Exception{
+	   commonObjects.clickOptionsIcon();
+	   commonObjects.clickEditOption() ;
+
+}
+   
+   public void changeTargetConditionCreate() throws Exception{
+	   jswait.loadClick(CreateRadiobtn);
+	   jswait.loadClick(CreateCondition);
+	   jswait.loadClick(dropDown);
+	   jswait.loadClick(ConditionType1);
+	   jswait.loadClick(ClickField1);
+	   jswait.loadClick(Field1);
+	   jswait.loadClick(ClickCondition1);
+	   jswait.loadClick(Condition1);
+	   jswait.loadSendKeys(Value1, "60");
+	   jswait.loadClick(SaveCondition1);
+	   jswait.loadClick(Topproccedbtn);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(SaveAnalysisDescinput,"test");
+		Thread.sleep(2000);
+		jswait.loadSendKeys(SaveAnalysisSetPermission,"selenium.flytxt@gmail.com");
+		Thread.sleep(3000);
+		jswait.loadClick(userselect);
+		Thread.sleep(2000);
+		jswait.loadClick(SaveAnalysisBtn);
+   }
+   public void changeTargetConditinSavedSegment() throws Exception{
+	   jswait.loadClick(SavedSegmentsRadiobtn);
+	   jswait.loadClick(SavedSegmentInput);
+	   jswait.loadClick(SavedSegmentName);
+	   jswait.loadClick(Topproccedbtn);
+	   jswait.loadClick(SaveAnalysisBtn);
+	   }
+   public void addKPI() throws Exception{
+	   jswait.loadClick(createSegmentAnalysisKpibtn);
+		Thread.sleep(2000);
+		
+	jswait.loadSendKeys(KpiName, "KPI4");
+	Thread.sleep(2000);
+	jswait.loadSendKeys(KpiDesc, "testKpi");
+	Thread.sleep(2000);
+	jswait.loadSendKeys(KpiAttributetype, "Customer Demographics");
+	Thread.sleep(2000);
+	jswait.loadClick(KpiAttributetypeclick);
+	Thread.sleep(2000);
+	jswait.loadSendKeys(kpitype,DEMOGRAPHICS_FIELD);
+	jswait.loadClick(KpiConfrimbtn);
+	jswait.loadClick(Topproccedbtn);
+	jswait.loadClick(SaveAnalysisBtn);
+	//
+	   
+   }
+   public void deleteKPI() throws Exception{
+	   jswait.loadClick(deleteKPI);
+	   
+   }
 }

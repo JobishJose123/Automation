@@ -680,6 +680,15 @@ public class RegistrationList extends Init{
 	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 	
 	jswait.loadClick("//paper-button[contains(.,'Create')]");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Date");
+	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
+	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");
+	jswait.loadClick("//paper-item[contains(.,'Normal')]");
+	jswait.loadClick("//create-profile//label[text()='Type']/../input");
+	jswait.loadClick("//create-profile//paper-item[text()='Date']");
+	jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
+	
+	jswait.loadClick("//paper-button[contains(.,'Create')]");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Name')]/../input","Last Name_q11");
 	jswait.loadSendKeys("//create-profile//label[contains(.,'Description')]/..//textarea","q11");
 	jswait.loadClick("//create-profile//label[contains(.,'Context Type')]/../input");

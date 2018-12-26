@@ -3,15 +3,6 @@
 Feature: Predefined Targets
   test cases with label Predefined_targets
 
-  @precondition-Predefinied_targets @initBrowser
-  Scenario: create saved segment as precondition
-    Given login
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then navigate to saved segments
-    Then create saved segment with condition "segmentAgeGT40"
-
   @NX-2738 @initBrowser
   Scenario: Predefined Targets - Create a predefined target -2738
     Given login

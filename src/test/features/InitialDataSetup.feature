@@ -195,3 +195,12 @@ Then check and add profile fields
   @NX-2874
   Scenario: Verify whether Ussd application created in Legacy page is displayed in Neonx ui 2874
     Then check previous step and pass this
+    
+  @precondition-Predefinied_targets @initBrowser
+  Scenario: create saved segment as precondition
+    Given login
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then navigate to saved segments
+    Then create saved segment with condition "digitalPersonaGT15"

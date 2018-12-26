@@ -115,6 +115,11 @@ public class ModelPageObjects extends Init {
 	@FindBy(xpath="//paper-button[contains(.,'Save & Extract')]")
 	private WebElement SaveExtract;
 	
+	@FindBy(xpath="//paper-icon-button[@icon='refresh']")
+
+	private WebElement refresh;
+	
+	
 	@FindBy(xpath="(//paper-icon-button[@class='icon-btn style-scope dataframe-box x-scope paper-icon-button-0'])[1]")
 	private WebElement edit;
 	
@@ -187,12 +192,12 @@ public class ModelPageObjects extends Init {
 		Thread.sleep(3000);
 	}
 	
-	public void inputdata( String arg1) throws Exception {
+	public void inputdata( String arg1,String arg2 ,String arg3 ) throws Exception {
 		
 		driver.switchTo().frame(0);//switch frame
 			Thread.sleep(3000);
 			TextFileUtil textFile=new TextFileUtil();
-			String input=textFile.readTxtFile(arg1);
+			String input=textFile.readTxtFile(arg1).replaceAll("\\%\\$MODEL_NAME\\$\\%", arg2+"/"+arg3);
 			//jswait.loadSendKeys(inputdata,input);
 			 Toolkit toolkit = Toolkit.getDefaultToolkit();
 		   	   Clipboard clipboard = toolkit.getSystemClipboard();
@@ -203,6 +208,7 @@ public class ModelPageObjects extends Init {
 	}
 	
 	public void navigatetoInputs()throws Exception{
+		Thread.sleep(2000);
 		jswait.loadClick(Inputs);
 		jswait.loadClick("(//paper-button[contains(.,'Add')])[1]");
 	
@@ -226,13 +232,13 @@ public class ModelPageObjects extends Init {
 		jswait.loadClick(Attribute3);
 		jswait.loadClick(Next);
 		jswait.loadClick(SaveExtract);
+		Thread.sleep(3000);
 		
 	}
 
 	public String getDataframeStatus() throws Exception{
-	    	jswait.loadClick(edit);
-			jswait.loadClick(savedata);
-			Thread.sleep(5000);
+	    	jswait.loadClick(refresh);
+			Thread.sleep(9000);
 			return DataFrameCurrStatus.getText();
 	}
 	

@@ -4,8 +4,14 @@ lib_path = '/usr/local/zeppelin/custom-lib/flytxtSparkLib'
 sys.path.append(lib_path)
 sys_path_set = set(sys.path)
 from flytxtSparkLib import flytxtSparkLib
+from pyspark.sql.functions import date_format
+from datetime import datetime
+from pyspark.sql.functions import lit,current_date,current_timestamp
 sparkLib=flytxtSparkLib(sc,z)
 dataFrame=sparkLib.getDataFrameWithName("D2", True)
-dataFrame.show(5)
-sparkLib.updateCustomerMetric(dataFrame,'CONSUMER_ID','Age_q11','Date_q11','set','Selenium Revenue Metric_q11',True,True,True)
 sparkLib.updateCustomerProfile(dataFrame,'CONSUMER_ID','Demographics_q11','set','Age_q11')
+dataFrame = dataFrame.withColumn("date_format",date_format('Date','ddMMYYYY HH:MM:SS'))
+# dataFrame.show(5)
+sparkLib.updateCustomerMetric(dataFrame,'CONSUMER_ID','Age_q11','date_format','set','Selenium Revenue Metric_q11','TRUE','TRUE','TRUE')
+fieldMap={'msisdn':'CONSUMER_ID','subDomain1':'Demographics_q11','eventDate':'date_format','eventValue':'Age_q11'}
+sparkLib.updateEvent(dataFrame,1004,'set','System Global',fieldMap)

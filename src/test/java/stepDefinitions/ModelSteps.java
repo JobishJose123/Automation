@@ -48,9 +48,11 @@ public class ModelSteps extends Init{
 		 modelPage.navigatetoCreateNewModel();
 	 }
 	 
-	 @Then("^Enter model input from file \"([^\"]*)\"$")
-	 public void enter_model_input_from_file_and_run(String arg1) throws Exception{
-		 modelPage.inputdata(arg1);
+	 @Then("^Enter model input from file \"([^\"]*)\" with \"([^\"]*)\" and \"([^\"]*)\"$")
+	 public void enter_model_input_from_file_and_run(String arg1,String arg2 ,String arg3 ) throws Exception{
+		 eh.setExcelFile("Model", arg3);//set excel file
+		 String name = eh.getCellByColumnName("Model_Name");//get sheet name
+		 modelPage.inputdata(arg1 , arg2 , name);
 	    
 	 }
 	 
@@ -86,7 +88,7 @@ public class ModelSteps extends Init{
 			currStatus= modelPage.getDataframeStatus();
 			}
 			Assert.assertTrue("Required status not found", frameStatus.contentEquals(currStatus));
-	 }
+	 } 
 	 
 	 
 	 
@@ -108,14 +110,14 @@ public class ModelSteps extends Init{
 		}
 		Assert.assertTrue("Required status not found", status.contentEquals(currStatus));
 }
-@Then("^add a customer base list$")
-public void add_a_customer_base_list() throws Throwable {
-    modelPage.addList(BASE_LIST);
+      @Then("^add a customer base list$")
+       public void add_a_customer_base_list() throws Throwable {
+       modelPage.addList(BASE_LIST);
 }
 
-	  @Then("^Verify model output from file \"([^\"]*)\"$")
-	 public void verify_model_output_from_file(String data) throws Exception {
-		 modelPage.outputdata(data);
+	   @Then("^Verify model output from file \"([^\"]*)\"$")
+	   public void verify_model_output_from_file(String data) throws Exception {
+	   modelPage.outputdata(data);
 	 }
 	 
 	 

@@ -6,8 +6,10 @@ import org.openqa.selenium.support.PageFactory;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.RandomNameGenerator;
 import baseClasses.TimeoutImpl;
 import cucumber.api.java.en.Then;
+import pageObjetcs.CommonObjects;
 import pageObjetcs.SegmentAnalysisObjects;
 
 public class SegmentAnalysisSteps extends Init {
@@ -15,10 +17,14 @@ public class SegmentAnalysisSteps extends Init {
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	SegmentAnalysisObjects segmentObjects=new SegmentAnalysisObjects();
+	CommonObjects CommonObjects=new CommonObjects();
+
 	
 	public SegmentAnalysisSteps() {
 		PageFactory.initElements(driver, this);
 	}
+	
+
 
 	@Then("^navigate to analytics$")
 	public void navigateToAnalytics() throws InterruptedException {
@@ -30,7 +36,9 @@ public class SegmentAnalysisSteps extends Init {
 	public void navigateToExploreSegments() throws InterruptedException{
 		
 		segmentObjects.clickExploreSegmentsOption();
+		
 	}
+	
 	
 	@Then("^choose a segment analysis$")
 	public void chooseASegmentanalysis() throws InterruptedException{
@@ -252,6 +260,54 @@ public class SegmentAnalysisSteps extends Init {
 	}
 	
 	
+//=========================================================================================================================================================================================//
+	
+	@Then("^create SegmentAnalysis \"([^\"]*)\"$")
+	public void enterSegmentAnalysisName(String AnalysisName) throws Exception{
+		 eh.setExcelFile("SegmentAnalysis", AnalysisName);//set excel file
+		 String name = eh.getCellByColumnName("Segment_Analysis");//get sheet name
+		 name = RandomNameGenerator.getRandomName(name);//append new random name
+		 segmentObjects.SegmentName(name); //pass new name to SegmentName()
+		 eh.setCell("Segment_Analysis",name);
+		 
+	}
 	
 	
-}
+	@Then("^edit the Segment Analysis job \"([^\"]*)\"$")                                      // filter a job
+		public void editSegmentAnalysis(String SegmentAnalysisSheet) throws Exception{
+		 eh.setExcelFile("SegmentAnalysis", SegmentAnalysisSheet);//set excel file
+		 String Segmentname = eh.getCellByColumnName("Segment_Analysis").toString();
+		 CommonObjects.filterName(Segmentname);
+	      segmentObjects.editSegmentAnalysis();
+	      			 
+	}
+
+	@Then("^change the target condition to create and save$")
+	public void changeTargetConditionCreate() throws Exception{
+		segmentObjects.changeTargetConditionCreate();
+	}
+	
+	@Then("^change the target condition to Saved Segment and save$")
+	public void changeTargetConditinSavedSegment() throws Exception{
+		segmentObjects.changeTargetConditinSavedSegment();
+	}
+	
+	@Then("^add a KPI$")
+	public void addKPI() throws Exception{
+		segmentObjects.addKPI();
+	}
+	
+	@Then("^delete a KPI$")
+	public void deleteKPI() throws Exception{
+		segmentObjects.deleteKPI();
+	}
+	@Then("^edit a KPI$")
+	public void editKPI() throws Exception{
+		
+	}
+	}
+	
+	
+	
+
+

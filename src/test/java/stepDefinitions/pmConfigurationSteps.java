@@ -31,7 +31,7 @@ public class pmConfigurationSteps extends Init{
 			commonObjects.clickOptionsIcon();
 		}catch(Exception e) {
 			pmConfigurationPage.clickCreateNewSegmentButton();
-			pmConfigurationPage.enterSavedSegmentDetails(name+"_Segment", name);
+			pmConfigurationPage.enterSavedSegmentDetails(name);
 			pmConfigurationPage.clickSegmentSaveButton();
 		}
     }
