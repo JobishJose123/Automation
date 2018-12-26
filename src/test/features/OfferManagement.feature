@@ -526,32 +526,40 @@ Feature: Test suite on Offer creation
     Then navigate to offers
     Then verify selecting set as default check box for multiple track sources
 
-    @NX-2993 @initBrowser @closeBrowser
-  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-2993
+  @NX-2993 @initBrowser
+  Scenario: Create offer:Track:Verify Creating BC by selecting the Informational Offers, Verify creating offers with Voice Push channel NX-2993
     Given login
-    When navigate to precision marketer
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to prepaid telecom
+    Then click create new product button
+    Then create single product from sheet "singleProductPage"
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "informationalWAP" with product "singleProductPage"
-     Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add "informationalWAP" offer to Offer Catalogue
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "informationalWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "InformationalOne-offBC" with "InformationalOne-offBC"
-    
-    
-    #@NX-4513 @initBrowser 
-    #Scenario: create alertff
-    #Given login
-    #Then create alert
-    
-    
-     @NX-4513 @initBrowser 
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "InformationalOne-offBC" with "informationalWAP"
+    Then save bc
+
+  #@NX-4513 @initBrowser
+  #Scenario: create alertff
+  #Given login
+  #Then create alert
+  @NX-4513 @initBrowser
   Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
     Given login
     Then navigate to configuration management
@@ -606,8 +614,7 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
     Then pass next scenario based on this step
 
 
-  @NX-2329
-  @initBrowser
+  @NX-2329  
   Scenario: Verify for the Add Variable icon in the Creative tab NX-2329
     Then check previous step and pass this
     Then pass next scenario based on this step
@@ -616,11 +623,12 @@ Then enter details for new broadcast from sheet "InformationalOne-offBC" with "I
  
   Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
     Then check previous step and pass this
+    Then pass next scenario based on this step
     
     @NX-2414
      Scenario: Email Channel -->Verify the change button as per the design document
     Then check previous step and pass this
-    Then pass next scenario based on this step
+    #Then pass next scenario based on this step
     
     @NX-2419 @initBrowser
   Scenario: Email Channel -->Verify the Create offer using Email as a channel. NX-2419 

@@ -11,6 +11,8 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import cucumber.api.java.en.Then;
+//import junit.framework.Assert;
+import org.junit.Assert; 
 import pageObjetcs.AdminPageObjects;
 import pageObjetcs.BroadcastPageObjects;
 import pageObjetcs.CommonObjects;
@@ -313,7 +315,13 @@ public class GenericProductDefinitionSteps extends Init{
 	@Then("^navigate to product class after changing partner \"([^\"]*)\"$")
     public void navigateToProductClass(String sheet) throws Exception {
 		eh.setExcelFile("productClassInputData",sheet);
+		try {
 		jswait.scrollAndClick("//iron-scroll-threshold", eh.getCell(1, 0).toString());
+		
+		Assert.assertTrue(false);
+		}catch(Exception e) {
+			Assert.assertTrue(true);
+		}
 //		Actions clickAction = new Actions(driver);
 //        WebElement scrollablePane = driver.findElement(By.xpath("//iron-scroll-threshold"));
 //        clickAction.moveToElement(scrollablePane).click().build().perform();

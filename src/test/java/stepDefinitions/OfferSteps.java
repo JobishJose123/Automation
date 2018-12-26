@@ -179,9 +179,19 @@ public class OfferSteps extends Init {
 		String sheet2 = "fullDetails";
 		eh.setExcelFile("productInputData", sheet2);
 		String prod_name = (String) eh.getCell(1, 0);
+		
 		commonObjects.filterName(prod_name);
 		Thread.sleep(3000);
-		offerPageObjects.checkAddProductsCheckBox();
+		try {
+		Assert.assertTrue(driver.findElement(By.xpath("//span[contains(.,'"+prod_name+"')]")).isDisplayed(),"Deactivated Product is dislayed");
+		System.out.println("Deactivated Product is dislayed");
+		Assert.assertTrue(false);
+		
+		}catch (Exception e) {
+			Assert.assertTrue(true,"Deactivated Product name"+prod_name+" is not dislayed");
+			System.out.println("Deactivated Product name"+prod_name+" is not dislayed");
+		}
+		//offerPageObjects.checkAddProductsCheckBox();
 
 	}
 
@@ -415,15 +425,17 @@ public class OfferSteps extends Init {
 		offerPageObjects.enterTrackTabDetails(eh);
 		offerPageObjects.clickProceedButton();
 		offerPageObjects.clickRewardAddButton();
+		offerPageObjects.clickRewardTypeInputField();
+		offerPageObjects.enterReward();
 		offerPageObjects.enterSuccessMessage(
 				"More the 500 chars Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mi lacus. Maecenas tempus, urna vel efficitur porttitor, nisi mauris rutrum risus, sed sollicitudin ligula urna a turpis. Nullam sit amet elit posuere, semper ligula ut, euismod felis. Duis vel tellus sed magna facilisis eleifend vitae in leo. Aenean odio quam, aliquet egestas massa vel, aliquam scelerisque mi. Donec scelerisque a odio in consectetur. Nulla in nisi quis felis faucibus pellentesque. Vivamus euismod orci ac nullam. after");
 		//offerPageObjects.verifyRewardSucessMessage();
 		offerPageObjects.enterFailureMessage(
 				"More the 500 chars Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mi lacus. Maecenas tempus, urna vel efficitur porttitor, nisi mauris rutrum risus, sed sollicitudin ligula urna a turpis. Nullam sit amet elit posuere, semper ligula ut, euismod felis. Duis vel tellus sed magna facilisis eleifend vitae in leo. Aenean odio quam, aliquet egestas massa vel, aliquam scelerisque mi. Donec scelerisque a odio in consectetur. Nulla in nisi quis felis faucibus pellentesque. Vivamus euismod orci ac nullam. after");
 		//offerPageObjects.verifyRewardFailureMessage();
-		offerPageObjects.clickProceedButton();
+		offerPageObjects.clickSaveOfferButton();
 		Thread.sleep(2000);
-		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Create New Offer')]/following::paper-button[contains(.,'Proceed')]")).isDisplayed(), "Success and failure message boxes entered text more than 500 characters");
+		Assert.assertTrue(driver.findElement(By.xpath("//paper-button[contains(.,'Save Offer')]")).isDisplayed(), "Success and failure message boxes entered text more than 500 characters");
 	}
 
 	@Then("^verify response messages of creatives added$")

@@ -2090,7 +2090,7 @@ Scenario: Email Channel --> Verify the preview, delivery and presentation of Ema
     Then Create New Offer Catalogue from sheet "defaultCatalog"
     Then Add "rechargeEmail" offer to Offer Catalogue
     Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"F
+    Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button

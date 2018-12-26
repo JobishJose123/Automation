@@ -122,8 +122,9 @@ Feature: generic product class
   Scenario: Verify whether product class module is available NX-6971
     Then check previous step and pass this
 
-  @NX-6980
-  Scenario: Verify the Name field(100 characters)
+  @NX-6980 @initBrowser
+  Scenario: Verify the Name field(200 characters)
+  Given login
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -468,7 +469,7 @@ Feature: generic product class
     Then click on create new ofer button
     Then create new offer using deactivated product from sheet "rechargeWAP"
 
-  @NX-61770 @initBrowser @closeBrowser
+  @NX-6177 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating Informational offers- 6177
     Given login
     Then navigate to configuration management
@@ -492,13 +493,13 @@ Feature: generic product class
     Then click on create new ofer button
     Then create new offer from sheet "informationalWAP" with product "fullDetails"
     
-     @NX-7059 @initBrowser 
+     @NX-7059 @initBrowser @closeBrowser 
   Scenario: Verify activating the one off BC after the deactivating the product - 7059
     Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
@@ -534,18 +535,17 @@ Feature: generic product class
      @NX-7034 @initBrowser 
   Scenario: Verify whether all the details are shown  as in the offer list page on clicking the offer row in the BC Offer selection page - 7034
     Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
-    
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
- #		Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+ 		Then navigate to offer management
 		Then navigate to offers
     Then click on create new ofer button
     Then create new offer from sheet "informationalWAP" with product "fullDetails"

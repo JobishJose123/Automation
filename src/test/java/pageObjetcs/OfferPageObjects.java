@@ -1438,10 +1438,10 @@ public class OfferPageObjects extends Init {
 		enterOfferDescription(desc);
 		clickOfferTypeField();
 		Thread.sleep(2000);
-		chooseOfferType();
+		//chooseOfferType();
 		Thread.sleep(2000);
-		// driver.findElement(By.xpath("//paper-item[contains(.,'"+eh.getCell(1,
-		// 2)+"')]")).click();
+		//driver.findElement(By.xpath("//paper-item[contains(.,'"+eh.getCell(1,2)+"')]")).click();
+		jswait.loadClick("//paper-item[contains(.,'Recharge')]");
 		clickOfferChannel();
 		Thread.sleep(2000);
 		// driver.findElement(By.xpath("//paper-item[contains(.,'"+eh.getCell(1,

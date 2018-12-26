@@ -628,13 +628,15 @@ public class ProductTestCaseSteps extends Init{
 	}
 	@Then("^verify name field character limit$")
     public void verifyProductNameCharacterLimit() throws Exception {
-		productPage.enterCreateProductName("aasdfsdddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffsdf");
+		productPage.enterCreateProductName("aasdfsdddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffsdfsdddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff203");
+		Thread.sleep(2000);
 		String text = productPage.getTextFromNameField();
-		Assert.assertTrue(text.length()==100, "More than 100 characters accepted in name field");
+		Assert.assertTrue(text.length()<=200, "More than 200 characters accepted in name field");
 	}
 	@Then("^verify description field character limit$")
     public void verifyProductDescriptionCharacterLimit() throws Exception {
 		productPage.enterCreateProductDescription("aasdfsdddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffsdfsdddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+		Thread.sleep(2000);
 		String text = productPage.getTextFromDescrptionField();
 		Assert.assertTrue(text.length()==200, "More than 200 characters accepted in Description field");
 	}
