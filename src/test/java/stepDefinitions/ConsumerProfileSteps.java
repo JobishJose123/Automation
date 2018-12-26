@@ -27,7 +27,7 @@ public class ConsumerProfileSteps extends Init{
 	public String getMsisdn() throws IOException {
 		String line = "";
 		list.setExcelFile("registrationListInputData", "Sheet1");
-		BufferedReader br = new BufferedReader(new FileReader("ExcelFiles\\"+list.getCell(1, 0).toString()));
+		BufferedReader br = new BufferedReader(new FileReader("ExcelFiles\\list_91992273.csv"));
 		line = br.readLine();
 		line = br.readLine();
 		System.out.println(line);

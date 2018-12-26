@@ -232,11 +232,13 @@ public void createApprovalRuleDetailsFromSheetWithTwoApprovers(String sheet) thr
 		saveRuleName();
 		clickAddUserButton();
 		enterLevel1User();
+		Thread.sleep(2000);
 		chooseLevel1User();
 		clickAddUserNameSave();
 		addLevel2Approver();
 		clickAddUserButton2();
 		enterLevel2User();
+		Thread.sleep(2000);
 		chooseLevel2User();
 		clickAddUserNameSave();
 		clickCheckboxes();
@@ -829,8 +831,9 @@ Thread.sleep(5000);
 	}
 	
 	public void clickOnCampaignReviewButton() throws InterruptedException {
-		Thread.sleep(2000);
-		seleniumusernotificationclick.click();
+		Thread.sleep(5000);
+		jswait.loadClick(seleniumusernotificationclick);
+		
 		Notificationreviewbtn();
 		Thread.sleep(2000);
 	}
@@ -860,6 +863,7 @@ Thread.sleep(5000);
 	}
 	
 	public void isApprovedButtonDisplayed() {
+		wait.until(ExpectedConditions.visibilityOf(Approvebtn));
 		Assert.assertTrue(Approvebtn.isDisplayed());
 	}
 	

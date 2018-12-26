@@ -24,6 +24,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.seleniumhq.jetty9.util.Fields.Field;
 import org.testng.annotations.BeforeSuite;
 
+import baseClasses.GoogleSpreadsheetImpl;
 import baseClasses.Init;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -73,20 +74,46 @@ import gherkin.formatter.model.Result;
 				i++;
 			}
 			
-			String error = logError(scenario).toString();//.replace("\n", "<LINEBREAK>");
-			error = error.replace(",", "<COMMA>");
+			String error = logError(scenario).toString();
+//			.replace("\n", "<LINEBREAK>");
+//			error = error.replace(",", "<COMMA>");
 //			error = error.replace("\t", "<TAB>");
 //			error = error.replace(" ", "<SPACE>");
 //			error = error.replace(System.getProperty("line.separator"), "<LINEBREAK>");
+			
+			boolean googleSpreadsheetReport = false;
+			try {
+				if(p.getValue("googleSpreadsheetReport").contentEquals("true"))
+					googleSpreadsheetReport = true;
+			}catch(Exception e) {
+				System.out.println("error in fetching googleSpreadsheetReport from config. False by default");
+			}
+			if(googleSpreadsheetReport) {
+				GoogleSpreadsheetImpl sqs = new GoogleSpreadsheetImpl();
+				sqs.initializeService();
+		    	sqs.setSpreadsheet(p.getValue("googleSpreadsheetReportWorkbookId"),System.getProperty("user.name"));
+		    	int lastRow = Integer.parseInt(sqs.getCell(0, 7))-1;
+		    	sqs.setCell(lastRow, 0,NXtag );
+		    	sqs.setCell(lastRow, 1,scenario.getStatus());
+		    	sqs.setCell(lastRow, 2,scenario.getName() );
+		    	sqs.setCell(lastRow, 3,feature);
+		    	sqs.setCell(lastRow, 4,System.getProperty("user.name") );
+		    	sqs.setCell(lastRow, 5,timeStamp );
+		    	int lineChar = error.indexOf("\n");
+		    	sqs.setCell(lastRow, 6,error.substring(0, lineChar));
+		    	
+			}
+			
+			
 			stringBuilderForCsvReport.setLength(0);
 			stringBuilderForCsvReport.append('\n');
 			stringBuilderForCsvReport.append(NXtag);
 			stringBuilderForCsvReport.append(',');
+			stringBuilderForCsvReport.append(scenario.getStatus());
+			stringBuilderForCsvReport.append(',');
 			stringBuilderForCsvReport.append(feature);
 			stringBuilderForCsvReport.append(',');
 			stringBuilderForCsvReport.append(scenario.getName());
-			stringBuilderForCsvReport.append(',');
-			stringBuilderForCsvReport.append(scenario.getStatus());
 			stringBuilderForCsvReport.append(',');
 			stringBuilderForCsvReport.append(System.getProperty("user.name"));
 			stringBuilderForCsvReport.append(',');
@@ -105,6 +132,7 @@ import gherkin.formatter.model.Result;
 	            System.out.println(FileUtils.sizeOfDirectory(new File(path+"/Screenshots")));
 	            FileUtils.copyFile(scrFile, new File(path+"/Screenshots/"+NXtag+"_"+timeStamp+".png"));
 			}
+			
 	    }
 		private static String logError(Scenario scenario) {
 			   java.lang.reflect.Field field = FieldUtils.getField(((ScenarioImpl) scenario).getClass(), "stepResults", true);

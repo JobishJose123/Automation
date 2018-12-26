@@ -196,11 +196,25 @@ Then check and add profile fields
   Scenario: Verify whether Ussd application created in Legacy page is displayed in Neonx ui 2874
     Then check previous step and pass this
     
-  @precondition-Predefinied_targets @initBrowser
+    
+    @NX-2874  @closeBrowser
+  Scenario: Verify whether Ussd application created in Legacy page is displayed in Neonx ui 2874
+    Then check previous step and pass this
+    
+    @NX-createUssdTouchpoint @initBrowser
+  Scenario: create ussd touchpoint
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to ussd
+    Then create ussd touchpoint from sheet "ussdTouchpoint"
+    Then check ussd touchpoint in grid "ussdTouchpoint"
+    
+      @precondition-Predefinied_targets @initBrowser
   Scenario: create saved segment as precondition
     Given login
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to configuration
     Then navigate to saved segments
-    Then create saved segment with condition "digitalPersonaGT15"
+    Then create saved segment with condition "segmentAgeGT40"

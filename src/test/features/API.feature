@@ -6,8 +6,7 @@ Feature: Test cases for API
   I want to use this template for my feature file
   
   
-
-    
+     
     @NX-3126TEST @initBrowser 
   Scenario: API- Verify whether track sessions are persited(Application Type = General && Event For Tracking = Recommended Event) -3126
     Given login
@@ -33,10 +32,10 @@ Feature: Test cases for API
     #Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
-    #Then click create program button
-    #Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR_default"
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointGR_default"
+    Then create new rule from sheet "fullDetails" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
     Then verify rule created from sheet "rule"
     Then wait for "A" status of rule
     Then wait until rule is picked

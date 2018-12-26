@@ -11,9 +11,9 @@ Feature: Campaign Category creation
 Scenario: create new campaign category 
 Given login
 Then navigate to configuration management
-    Then navigate to configuration management
     Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
+    Then create new campaign category from sheet "campaignCategory"
+  Then save "campaignCategoryInputData" data to spreadsheet from "campaignCategory" with string campaign category from CampaignCategory
   
 
   

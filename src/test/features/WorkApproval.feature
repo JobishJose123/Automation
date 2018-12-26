@@ -370,7 +370,7 @@ Feature: approval workflow
     
 
   #For the following tests, we used selenium user and shinu.rajan as approvers. Going forward need to change implementation to read users from excel
-  @NX-6335 @initBrowser @closeBrowser
+  @NX-6335 @initBrowser 
   Scenario: Verify Campaign creation with approval rule flow
     Given login
     Then navigate to configuration management
@@ -383,12 +383,14 @@ Feature: approval workflow
     Then create new approval rule from sheet "approvalRule" with two approvers
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
+    Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog" with two approvers
     Then Logout from Neon application
-    Then login with the username "selenium.flytxt@gmail.com" and password "Flytxt.4"
+    Then wait for 1 minutes
+    Then login with selenium user
     Then click on review button
     Then verify approve button displayed
     Then Logout from Neon application
+    Then wait for 1 minutes
     Then login with the username "joel.jose@flytxt.com" and password "flytxt"
     Then click on review button
     Then verify approve and activate button displayed

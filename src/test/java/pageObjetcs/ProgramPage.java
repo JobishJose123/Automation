@@ -147,6 +147,8 @@ public class ProgramPage extends Init{
 	private WebElement addTouchpointChannelSelectCC;
 	@FindBy(xpath="//paper-item[text()='API']")
 	private WebElement addTouchpointChannelSelectApi;
+	@FindBy(xpath="//paper-item[text()='USSD']")
+	private WebElement addTouchpointChannelSelectUssd;
 	
 	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/../../../../../../..//paper-item[text()='SMS']")
 	private WebElement addTouchpointResponseChannelSelectSMS;
@@ -154,6 +156,8 @@ public class ProgramPage extends Init{
 	private WebElement addTouchpointResponseChannelSelectCC;
 	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/../../../../../../..//paper-item[text()='API']")
 	private WebElement addTouchpointResponseChannelSelectApi;
+	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/../../../../../../..//paper-item[text()='USSD']")
+	private WebElement addTouchpointResponseChannelSelectUssd;
 	
 	@FindBy(xpath="//*[@id='addTouchpointForm']//paper-button[text()='Save']")
 	private WebElement addTouchpointSaveButton;
@@ -870,6 +874,10 @@ private WebElement rulessenderid2 ;
 		jswait.loadClick(addTouchpointChannel);
 		jswait.loadClick(addTouchpointChannelSelectApi);
 	}
+	public void addTouchPointSelectUssdChannel() throws InterruptedException {
+		jswait.loadClick(addTouchpointChannel);
+		jswait.loadClick(addTouchpointChannelSelectUssd);
+	}
 	public void addTouchPointEnterKeywordAliase() throws InterruptedException {
 		jswait.loadSendKeys(addTouchpointKeywordAliases, "SampleKey");
 	}
@@ -920,6 +928,10 @@ private WebElement rulessenderid2 ;
 		jswait.loadClick(addTouchpointResponseChannel);
 		jswait.loadClick(addTouchpointResponseChannelSelectApi);
 	}
+	public void addTouchPointSelectUssdResponseChannel() throws InterruptedException {
+		jswait.loadClick(addTouchpointResponseChannel);
+		jswait.loadClick(addTouchpointResponseChannelSelectUssd);
+	}
 	public void addTouchPointToProgram() throws InterruptedException {
 		addTouchPointSelectSmsChannel();
 		addTouchPointEnterKeywordAliase();
@@ -953,6 +965,14 @@ private WebElement rulessenderid2 ;
 			Thread.sleep(2000);
 			addTouchPointSelectSmsTouchpointFromSheet(sheet);
 			addTouchPointSelectApiResponseChannel();
+			jswait.loadClick(addTouchpointSaveButton);
+		}
+		else if(type.contentEquals("ussd")) {
+			addTouchPointSelectUssdChannel();
+			//addTouchPointEnterKeywordAliase();
+			Thread.sleep(2000);
+			addTouchPointSelectSmsTouchpointFromSheet(sheet);
+			addTouchPointSelectUssdResponseChannel();
 			jswait.loadClick(addTouchpointSaveButton);
 		}
 		else {

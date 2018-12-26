@@ -3,8 +3,7 @@
 
 
 @NX-consumer_profileTestSuite
-Feature: Title of your feature
-  I want to use this template for my feature file
+Feature: consumer profile test cases
 
 @NX-2773
 @initBrowser

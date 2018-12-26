@@ -81,11 +81,11 @@ public class GoogleSpreadsheetImpl {
     	 return service;
     }
     
-    public String getCell(int row,int col) throws GeneralSecurityException, IOException {
-    	col++;
+    public String getCell(int row,int col) throws GeneralSecurityException, IOException { 
+    	row++;
     	char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
     	ValueRange response = service.spreadsheets().values()
-                .get(SPREADSHEET_ID, range+"!"+alphabet[row]+col)
+                .get(SPREADSHEET_ID, range+"!"+alphabet[col]+row)
                 .execute();
         List<List<Object>> values = response.getValues();
         List rowVal = values.get(0);
@@ -93,18 +93,52 @@ public class GoogleSpreadsheetImpl {
         return rowVal.get(0).toString();
     }
     public void setCell(int row,int col,String data) throws IOException, GeneralSecurityException {
-    	col++;
     	char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
       List<List<Object>> writeData = new ArrayList<>();
-      
+      row+=1;
           List<Object> dataRow = new ArrayList<>();
           dataRow.add(data);
           writeData.add(dataRow);
       ValueRange vr = new ValueRange().setValues(writeData).setMajorDimension("ROWS");
       service.spreadsheets().values()
-              .update(SPREADSHEET_ID, range+"!"+alphabet[row]+col, vr)
+              .update(SPREADSHEET_ID, range+"!"+alphabet[col]+row, vr)
               .setValueInputOption("RAW")
               .execute();
+    }
+    public int getLastUsedRow() throws IOException, GeneralSecurityException {
+    	int col =0;
+    	int row=1;
+    	
+    	char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    	ValueRange response = service.spreadsheets().values()
+                .get(SPREADSHEET_ID, range+"!"+alphabet[col]+row)
+                .execute();
+    	String value = "";
+    	 try{
+    		 List<List<Object>> values = response.getValues();
+    		 List rowVal = values.get(0);
+    		  value = (String) rowVal.get(0);
+//             System.out.println("Value:"+rowVal.get(0));
+    	 }catch(Exception e) {
+    		 return 0;
+    	 }
+         
+    	while(!value.isEmpty()) {
+    		row++;
+    		response = service.spreadsheets().values()
+                    .get(SPREADSHEET_ID, range+"!"+alphabet[col]+row)
+                    .execute();
+    		try{
+       		 List<List<Object>> values = response.getValues();
+       		 List rowVal = values.get(0);
+       		  value = (String) rowVal.get(0);
+//                System.out.println("Value:"+rowVal.get(0));
+       	 }catch(Exception e) {
+       		 return --row;
+       	 }
+    	}
+    	return -1;
+        
     }
     
     
@@ -114,10 +148,10 @@ public class GoogleSpreadsheetImpl {
     public static void main(String... args) throws IOException, GeneralSecurityException {
     	GoogleSpreadsheetImpl sqs = new GoogleSpreadsheetImpl();
     	sqs.initializeService();
-    	sqs.setSpreadsheet("1WpzKjJUrs4tRBIreEIsZAPkb3QFDmWIlnFRwbTVcMAY","Sheet1");
-       sqs.getCell(3, 3);
-       sqs.setCell(3, 3,"Joel");
-       sqs.getCell(3, 3);
+    	sqs.setSpreadsheet("1TxPWapq2Ai6XQyuBKhyG-1RZ0IliYOVW-Qga4FNhMf4","one-offBC");
+//       sqs.getCell(3, 3);
+//       System.out.println(sqs.getLastUsedRow());
+       sqs.getCell(0, 1);
     }
 
 
