@@ -400,6 +400,12 @@ public void clickActivateOption() throws Throwable {
 	}
 
 	public void filterName(String name) throws InterruptedException {
+		Thread.sleep(2000);
+		clickFilterIcon();
+		Thread.sleep(2000);
+		enterFilterFormname(name);
+		Thread.sleep(2000);
+		clickFilterResetButton();
 		clickFilterIcon();
 		enterFilterFormname(name);
 		clickFilterApplyButton();

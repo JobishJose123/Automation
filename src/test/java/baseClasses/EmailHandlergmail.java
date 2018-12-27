@@ -1,26 +1,23 @@
 package baseClasses;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Address;
+import javax.mail.FetchProfile;
+import javax.mail.Flags;
+import javax.mail.Flags.Flag;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Part;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.search.FlagTerm;
 
 
 
@@ -30,8 +27,8 @@ public class EmailHandlergmail {
 	public static List<String> fetch() {
 		 String pop3Host = "pop.gmail.com";// change accordingly
 	      String storeType = "pop3";
-	      String user = "selenium.flytxt@gmail.com";// change accordingly
-	      String password = "Flytxt.4";// change accordingly
+	      final String user = "selenium.flytxt@gmail.com";// change accordingly
+	      final String password = "Flytxt.4";// change accordingly
 		
 		      try {
 		         // create properties field
@@ -40,9 +37,13 @@ public class EmailHandlergmail {
 		         properties.put("mail.pop3.host", pop3Host);
 		         properties.put("mail.pop3.port", "995");
 		         properties.put("mail.pop3.starttls.enable", "true");
-		         Session emailSession = Session.getDefaultInstance(properties);
+		        // Session emailSession = Session.getDefaultInstance(properties);
 		         // emailSession.setDebug(true);
-
+		         Session emailSession = Session.getInstance(properties, new javax.mail.Authenticator() {
+		        	    protected PasswordAuthentication getPasswordAuthentication() {
+		        	        return new PasswordAuthentication(user, password);
+		        	    }
+		        	});
 		         // create the POP3 store object and connect with the pop server
 		         Store store = emailSession.getStore("pop3s");
 
@@ -51,17 +52,30 @@ public class EmailHandlergmail {
 		         // create the folder object and open it
 		         Folder emailFolder = store.getFolder("INBOX");
 		         emailFolder.open(Folder.READ_ONLY);
-		         Message[] messages = emailFolder.getMessages();
+		         
+		         //Message[] messages = emailFolder.getMessages();
+		         //==========================
+		         
+		         Message[] messages = emailFolder.search(new FlagTerm(new Flags(Flag.SEEN), false));
+		         
+		         FetchProfile fp = new FetchProfile();
+		         fp.add(FetchProfile.Item.ENVELOPE);
+		         fp.add(FetchProfile.Item.CONTENT_INFO);
+		         emailFolder.fetch(messages, fp);
+		         //=====================================
+		         
 //		         BufferedReader reader = new BufferedReader(new InputStreamReader(
+		         
 //			      System.in));
 
 		         // retrieve the messages from the folder in an array and print it
 		         
 		         System.out.println("messages.length---" + messages.length);
 
-		         for (int i = 0; i < messages.length; i++) {
+		         for (int i = 0, n = messages.length; i < n; i++) {
 		            Message message = messages[i];
 		            System.out.println("---------------------------------");
+		            System.out.println("Email Number " + (i + 1));
 		            emaildata.add(writePart(message).toString());
 		           
 		            emaildata.add(message.getSubject().toString());

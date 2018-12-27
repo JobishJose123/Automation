@@ -41,10 +41,12 @@ public class DataFusionEngine extends Init {
 //===========================================================================================================================================================================//
 //          ELEMENTS
 //===========================================================================================================================================================================//
-	@FindBy(xpath="//paper-scroll-header-panel[@id='flytxt-menu-style']/*//label[.='Data Fusion Engine']")
+	@FindBy(xpath="//paper-scroll-header-panel[@id='flytxt-menu-style']/*//label[.='Connectors']")
 	private WebElement DataFusionEnginebutton;
 	@FindBy(xpath="/html//div[@id='mainContainer']//*/div/paper-button[contains(.,'Add Job')]")
 	private WebElement AddJobbutton;
+	
+	
 	
 	@FindBy(xpath = ".//paper-item[contains(.,'Delete')]")
 	private WebElement jobdelete;

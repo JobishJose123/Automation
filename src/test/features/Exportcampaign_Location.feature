@@ -267,7 +267,7 @@ Feature: Test cases related to export campaign location
 		Then click username on topbar
 		Then logout
 		Then login to next environment
-   	Then wait for 7 minutes
+   	
 		Then click on notification bell
     Then click on view all notifications
     Then click proceed on notification from the sheet "campaignBC" of file "campaignInputData"

@@ -304,7 +304,7 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement clickusers;
 	 @FindBy(xpath="//paper-dialog[@id='addUserDialog']//span[.='Broadcast Edit Permissions']")
 	 private WebElement PermissionTitle;
-	 @FindBy(xpath="//paper-dialog[@id='addUserDialog']//paper-button[2][contains(.,Save)]")
+	 @FindBy(xpath="//paper-button[contains(.,'Save')]")
 	 private WebElement PermissionSave;
 	 
 	 
@@ -406,7 +406,7 @@ private WebElement recipientclick;
 		
 		wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE);
 		Thread.sleep(2000);
-		jswait.loadClick(recipientclick);
+		//jswait.loadClick(recipientclick);
 	}
 	
 	public void bcnotificationbeforesendingtime() throws InterruptedException {
@@ -2019,11 +2019,12 @@ if(bc_type.contentEquals("facebook")){
 	   
 public void addNotificationuser() throws Exception{
 	
-	//bcnotificationrecipient();
+	bcnotificationrecipient();
 	Thread.sleep(2000);
 	
 	bcnotificationrecipientclick();
 	Thread.sleep(2000);
+	
 	bcnotificationbeforesendingtime();
 	bcnotificationbeforesendingtime1min();
 	bcnotificationbeforeRendertime();
