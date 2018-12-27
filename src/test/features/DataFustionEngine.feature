@@ -53,7 +53,7 @@ Feature: DK
     Then click Data Fusion Engine
     Then Open DK Job from sheet "Delimiter_4390" and verify "2" in ouput
 
-  @NX-4383 @initBrowser @closeBrowser
+  @NX-4383 @initBrowser 
   Scenario: DK--->verify the functionality of skip exception block.
     Given login
     Then navigate to data foundation
@@ -69,7 +69,7 @@ Feature: DK
     Then create dk jobs for checking filename Extraction from sheet "filenameextraction"
     Then open DK Job from sheet and verify job Operations of sheet "filenameextraction" and file "Exception_input.txt" with data "Exception_input" with key "filenameextraction"
 
-  @NX-4374 @initBrowser @closeBrowser
+  @NX-4374 @initBrowser 
   Scenario: DK --> Verify the functionality of extractLeading operator in Dynamic operator block
     Given login
     Then navigate to data foundation
@@ -143,8 +143,8 @@ Feature: DK
     Then click Data Fusion Engine
     Then create dk jobs for checking greaterthan funtion from sheet "filenamedate"
     Then open DK Job from sheet and verify job Operations of sheet "filenamedate" and file "num_1234_check.txt" with data "600" with key "greaterthanjob"
-
-  @NX-DfeNumberCheck @initBrowser @closeBrowser
+#-----------------------------------------------------------------------------------------------------------------
+  @NX-DfeNumberCheck @initBrowser 
   Scenario: DK--->Verify the functionality of number operations in Dynamic operator block().
     Given login
     Then navigate to data foundation
@@ -213,7 +213,7 @@ Feature: DK
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-DfeStringCheck @initBrowser @closeBrowser
+  @NX-DfeStringCheck @initBrowser 
   Scenario: DK--->Verify the functionality of string operations in Dynamic operator block().
     Given login
     Then navigate to data foundation
@@ -297,7 +297,7 @@ Feature: DK
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-DfeDateCheck @initBrowser @closeBrowser
+  @NX-DfeDateCheck @initBrowser
   Scenario: DK--->Verify the functionality of string operations in Dynamic operator block().
     Given login
     Then navigate to data foundation
