@@ -132,9 +132,9 @@ public class RewardTypePage extends Init{
 		jswait.loadSendKeys(rewardParameterDisplayName, displayName);
 		jswait.loadSendKeys(rewardParameterName, parameterName);
 		jswait.loadClick(rewardParameterTypeDropDown);
-		if(type.contains("SINGLE_SELECT"))
+		if(type.contains("SINGLE_SELECT")) {
 			jswait.loadClick(rewardParameterTypeSingleSelect);
-		else if(type.contains("NUMBER")) {
+		}else if(type.contains("NUMBER")) {
 			jswait.loadClick(rewardParameterTypeNumber);
 			jswait.loadClick(rewardParameterMandatoryCheckbox);
 		}
@@ -144,7 +144,9 @@ public class RewardTypePage extends Init{
 			jswait.loadClick(rewardParameterHiddenCheckbox);
 		}
 		jswait.loadSendKeys(rewardParameterUIOrder, order);
+		if(!type.contains("SINGLE_SELECT")) {
 		jswait.loadSendKeys(rewardParameterDefaultValue, "defaultValue");
+		}
 		jswait.loadClick(rewartdParameterSaveButton);
 	}
 	public void deleteFirstParameter() throws InterruptedException{
