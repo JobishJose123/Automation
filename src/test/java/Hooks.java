@@ -99,8 +99,14 @@ import gherkin.formatter.model.Result;
 		    	sqs.setCell(lastRow, 3,feature);
 		    	sqs.setCell(lastRow, 4,System.getProperty("user.name") );
 		    	sqs.setCell(lastRow, 5,timeStamp );
-		    	int lineChar = error.indexOf("\n");
-		    	sqs.setCell(lastRow, 6,error.substring(0, lineChar));
+		    	try{
+		    		int lineChar = error.indexOf("\n");
+		    		sqs.setCell(lastRow, 6,error.substring(0, lineChar));
+		    	}
+		    	catch(Exception e) {
+		    		sqs.setCell(lastRow, 6,"no ERROR");
+		    	}
+		    	
 		    	
 			}
 			

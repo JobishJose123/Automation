@@ -2382,7 +2382,7 @@ Then wait until status of "Recurring" is "Complete"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWap"
     Then activate bc
     Then wait until status of "one-offBC" is "Complete"
     Then provide file for conversion

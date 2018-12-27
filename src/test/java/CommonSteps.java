@@ -62,6 +62,8 @@ public class CommonSteps extends Init {
     	sqs.initializeService();
     	
     	sqs.setSpreadsheet("1TxPWapq2Ai6XQyuBKhyG-1RZ0IliYOVW-Qga4FNhMf4","DataSetup");
+    	int lastRow = Integer.parseInt(sqs.getCell(0, 4))-1;
+    	forExcelSpreadsheet = lastRow;
     	if(forExcelSpreadsheet == -1) {
     		forExcelSpreadsheet = sqs.getLastUsedRow();
     	}
