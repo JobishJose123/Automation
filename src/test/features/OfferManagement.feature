@@ -564,7 +564,8 @@ Feature: Test suite on Offer creation
     Given login
     Then navigate to configuration management
     Then navigate to rewards
-    Then create new reward type
+    #Then create new reward type
+    Then create new reward type for test
     Then verify created reward type
     @NX-4513
   Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513

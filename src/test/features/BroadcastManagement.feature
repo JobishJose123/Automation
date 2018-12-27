@@ -2388,7 +2388,7 @@ Then wait until status of "Recurring" is "Complete"
     Then provide file for conversion
     Then navigate to reports
     Then navigate to customer profile
-    Then search msisdn "912255225505"
+    Then search msisdn "919446506807"
     Then click on events tab
     Then wait for comversion event
     Then remove file for conversion
@@ -2410,7 +2410,7 @@ Then wait until status of "Recurring" is "Complete"
     Then navigate to offer management
     Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then Add "rechargeEmail" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
