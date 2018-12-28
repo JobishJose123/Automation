@@ -1393,6 +1393,7 @@ public class OfferPageObjects extends Init {
 		prodcutFile.setExcelFile("productInputData", productSheet);
 		String productToAdd = (String) prodcutFile.getCell(1, 0);
 		clickOfferAddButton();
+		Thread.sleep(15000);
 			commonObjects.filterName(productToAdd);
 			jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
 		clickDialogBoxAddButton();
