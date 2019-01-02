@@ -12,7 +12,7 @@ Feature: DK
   #""
   ## (Comments)
   #Sample Feature Definition Template
-  @NX-4468ir @initBrowser @closeBrowser
+  @NX-4468 @initBrowser @closeBrowser
   Scenario: DK--->Verify the functionality of Save option
     Given login
     Then navigate to data foundation
@@ -53,7 +53,7 @@ Feature: DK
     Then click Data Fusion Engine
     Then Open DK Job from sheet "Delimiter_4390" and verify "2" in ouput
 
-  @NX-4383 @initBrowser 
+  @NX-4383 @initBrowser @closeBrowser
   Scenario: DK--->verify the functionality of skip exception block.
     Given login
     Then navigate to data foundation
@@ -61,7 +61,7 @@ Feature: DK
     Then create dk jobs for checking skip exception from sheet "skipexception"
     Then Open DK Job from sheet and verify skip exception "skipexception"
 
-  @NX-3492 @initBrowser
+  @NX-3492 @initBrowser @closeBrowser
   Scenario: DK --> Verify the working of String value extraction from a filename
     Given login
     Then navigate to data foundation
@@ -69,13 +69,14 @@ Feature: DK
     Then create dk jobs for checking filename Extraction from sheet "filenameextraction"
     Then open DK Job from sheet and verify job Operations of sheet "filenameextraction" and file "Exception_input.txt" with data "Exception_input" with key "filenameextraction"
 
-  @NX-4374 @initBrowser 
+  @NX-4374 @initBrowser
   Scenario: DK --> Verify the functionality of extractLeading operator in Dynamic operator block
     Given login
     Then navigate to data foundation
     Then click Data Fusion Engine
     Then create dk jobs for cheking extractLeading  from sheet "extractLeading"
-    Then open DK Job from sheet and verify job Operations of sheet "extractLeading" and file "Operations_extractLeading.txt" with data "Le" with key "extractleading"
+    #Operations_extractLeading.txt-----> stringoperations
+    Then open DK Job from sheet and verify job Operations of sheet "extractLeading" and file "stringoperations.txt" with data "Na" with key "extractleading"
     Then create dk jobs for checking filename number extraction from sheet "filenamenumber"
     Then open DK Job from sheet and verify job Operations of sheet "filenamenumber" and file "num_1234_check.txt" with data "1234" with key "filenamenumber"
 
@@ -87,7 +88,7 @@ Feature: DK
     Then create dk jobs for checking filename number extraction from sheet "filenamenumber"
     Then open DK Job from sheet and verify job Operations of sheet "filenamenumber" and file "num_1234_check.txt" with data "1234" with key "filenamenumber"
 
-  @NX-3489 @initBrowser @closeBrowser
+  @NX-3489 @initBrowser
   Scenario: DK --> Verify the working of String value extraction from a line
     Given login
     Then navigate to data foundation
@@ -96,11 +97,11 @@ Feature: DK
     Then open DK Job from sheet and verify job Operations of sheet "datafromline" and file "num_1234_check.txt" with data "test" with key "linestringextraction"
     Then pass next scenario based on this step
 
-  @NX-4462
+  @NX-4462 @closeBrowser
   Scenario: DK--->Verify the functionality FTP processor using valid Regex.
     Then check previous step and pass this
 
-  @NX-3488 @initBrowser @closeBrowser
+  @NX-3488 @initBrowser
   Scenario: DK --> Verify the working of String value extraction from a line
     Given login
     Then navigate to data foundation
@@ -108,7 +109,7 @@ Feature: DK
     Then create dk jobs for checking String value extraction from a line from sheet "datafromline"
     Then open DK Job from sheet and verify job Operations of sheet "datafromline" and file "num_1234_check.txt" with data "919895007879" with key "linenumberextraction"
 
-  @NX-3490 @initBrowser @closeBrowser
+  @NX-3490 @initBrowser
   Scenario: DK --> Verify the working of String value extraction from a line
     Given login
     Then navigate to data foundation
@@ -116,7 +117,7 @@ Feature: DK
     Then create dk jobs for checking String value extraction from a line from sheet "datafromline"
     Then open DK Job from sheet and verify job Operations of sheet "datafromline" and file "num_1234_check.txt" with data "01002018 00:01:00.0+0000" with key "linedateextraction"
 
-  @NX-3493 @initBrowser @closeBrowser
+  @NX-3493 @initBrowser
   Scenario: DK --> Verify the working of Date value extraction from a filename
     Given login
     Then navigate to data foundation
@@ -124,7 +125,7 @@ Feature: DK
     Then create dk jobs for checking date value extraction from a filename from sheet "filenamedate"
     Then open DK Job from sheet and verify job Operations of sheet "filenamedate" and file "date_01-01-2018_check.txt" with data "01002018 00:01:00.0+0000" with key "filenamedateextraction"
 
-  @NX-4367 @NX-4371 @initBrowser @closeBrowser
+  @NX-4367  @initBrowser
   Scenario: DK --> Verify the functionality of abs/extractDecimalFractionPart operator in Dynamic operator block
     Given login
     Then navigate to data foundation
@@ -135,6 +136,11 @@ Feature: DK
     Then navigate to data foundation
     Then click Data Fusion Engine
     Then open DK Job from sheet and verify job Operations of sheet "abs_fraction" and file "Operations_abs_fraction.txt" with data "112" with key "FromNumber_Integerpart"
+    Then pass next scenario based on this step
+
+  @NX-4371 @closeBrowser
+  Scenario: DK --> Verify the functionality of abs/extractDecimalFractionPart operator in Dynamic operator block
+    Then check previous step and pass this
 
   @NX-4356 @initBrowser @closeBrowser
   Scenario: DK--->Verify the functionality of  GreaterThan operator in Dynamic operator block.
@@ -143,8 +149,9 @@ Feature: DK
     Then click Data Fusion Engine
     Then create dk jobs for checking greaterthan funtion from sheet "filenamedate"
     Then open DK Job from sheet and verify job Operations of sheet "filenamedate" and file "num_1234_check.txt" with data "600" with key "greaterthanjob"
-#-----------------------------------------------------------------------------------------------------------------
-  @NX-DfeNumberCheck @initBrowser 
+
+  #-----------------------------------------------------------------------------------------------------------------
+  @NX-DfeNumberCheck @initBrowser
   Scenario: DK--->Verify the functionality of number operations in Dynamic operator block().
     Given login
     Then navigate to data foundation
@@ -208,12 +215,12 @@ Feature: DK
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-4369
+  @NX-4369 @closeBrowser
   Scenario: DK--->Verify the functionality of floor operator in Dynamic operator block.
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-DfeStringCheck @initBrowser 
+  @NX-DfeStringCheck @initBrowser
   Scenario: DK--->Verify the functionality of string operations in Dynamic operator block().
     Given login
     Then navigate to data foundation
@@ -292,7 +299,7 @@ Feature: DK
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-4375
+  @NX-4375 @closeBrowser
   Scenario: DK--->Verify the functionality of extractTrailing operator in Dynamic operator block.
     Then check previous step and pass this
     Then pass next scenario based on this step
@@ -306,7 +313,7 @@ Feature: DK
     Then open DK Job from sheet and verify job Operations of sheet "Dateoperations" and file "datecheck.txt" with key "Date"
     Then pass next scenario based on this step
 
-  @NX-3496
+  @NX-3496 @closeBrowser
   Scenario: DK --> Verify the functionality of contains operation for a string value using Dynamic operator block.
     Then check previous step and pass this
     Then pass next scenario based on this step
@@ -330,7 +337,7 @@ Feature: DK
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-3530
+  @NX-3530 @closeBrowser
   Scenario: DK --> Verify that the lookup operation doesnt work when lookup file is not there in the specified location.
     Then check previous step and pass this
     Then pass next scenario based on this step
