@@ -68,7 +68,7 @@ public class TargetConditionObjects extends Init {
 	private WebElement targetConditionTypeSelector;
 	@FindBy(xpath="//label[contains(.,'Metric')]/../..//input")
 	private WebElement usageMetricField;
-	@FindBy(xpath="//paper-item[contains(.,'"+USAGE_METRIC_UNIQUE+"')]")
+	@FindBy(xpath="//paper-item[contains(.,'"+SELENIUM_USAGE_METRIC+"')]")
 	private WebElement usageMetricUnique;
 	@FindBy(xpath="//paper-item[contains(.,'"+SELENIUM_REVENUE_METRIC+"')]")
 	private WebElement revenueMetricSelect;
@@ -423,6 +423,7 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(CustomerListSelection);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsSubscribed);
+			jswait.loadClick(targetConditionSave);
 		}
 		else if(event.contentEquals("discoveredClusters200")){
 			jswait.loadClick(targetConditionTypeSelector);
@@ -431,6 +432,7 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(CustomerListSelection);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsSubscribed);
+			jswait.loadClick(targetConditionSave);
 		}
 		else if(event.contentEquals("customerDemographicsGT25")){
 			jswait.loadClick(targetConditionTypeSelector);
@@ -476,6 +478,8 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerLocationInsights);
 			jswait.loadClick(CustomerInsightFieldSelector);
+			Thread.sleep(3000);
+			CustomerInsightFieldSelector.sendKeys(LOCATION_PROFILE_FIELD);
 			jswait.loadClick(CustomerInsightLocation);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsLessThan);
