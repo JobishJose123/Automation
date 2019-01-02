@@ -126,6 +126,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement CustomerListFieldSelector;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+BASE_LIST+"')]")
 	private WebElement CustomerListSelection;
+	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+SELENIUM_DISCOVERED_CLUSTERS_LIST+"')]")
+	private WebElement discoveredClustersListSelection;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD_UNIQUE+"')]")
 	private WebElement CustomerInsightFieldAgeUnique;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+SITE_ID_PROFILE_FIELD+"')]")
@@ -429,7 +431,7 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerList);
 			jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_DISCOVERED_CLUSTERS_LIST);
-			jswait.loadClick(CustomerListSelection);
+			jswait.loadClick(discoveredClustersListSelection);
 			jswait.loadClick(conditionSelector);
 			jswait.loadClick(conditionIsSubscribed);
 			jswait.loadClick(targetConditionSave);
