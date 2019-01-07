@@ -269,7 +269,7 @@ public class SegmentAnalysisSteps extends Init {
 		 eh.setExcelFile("SegmentAnalysis", AnalysisName);//set excel file
 		 String name = eh.getCellByColumnName("Segment_Analysis");//get sheet name
 		 name = RandomNameGenerator.getRandomName(name);//append new random name
-		 segmentObjects.SegmentName(name); //pass new name to SegmentName()
+		 segmentObjects.SegmentName(name,"none"); //pass new name to SegmentName()
 		 eh.setCell("Segment_Analysis",name);
 		 
 	}

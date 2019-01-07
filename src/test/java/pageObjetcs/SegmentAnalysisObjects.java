@@ -953,12 +953,17 @@ public void clustertabledetailsandsave() throws Exception {
 	   return SegmentAnalysisJobstatus.getText();
 	   
    }
-   public void SegmentName(String  SegmentName)throws Exception{
+   public void SegmentName(String  SegmentName,String condition)throws Exception{
 	   jswait.loadClick(StartNewAnalysis);
 	   Thread.sleep(3000);
 	   jswait.loadClick(EditSegmentAnalysisName);
 	   jswait.loadSendKeys( SegmentAnalysisNameInput ,SegmentName);
-	 
+	 if(condition.contains("segment")) {
+		 changeTargetConditinSavedSegment(); 
+	 }
+	 if(!condition.contains("none")) {
+		 changeTargetConditionCreate(); 
+	 }
 	   jswait.loadClick(createSegmentAnalysisList);
 		Thread.sleep(3000);
 		jswait.loadSendKeys(createSegmentAnalysisListinput, BASE_LIST);
