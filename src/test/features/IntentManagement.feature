@@ -838,7 +838,9 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then create Segment Analysis
+    Then create SegmentAnalysis from sheet "SegmentAnalysisName"
+    Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
+Then wait until Segment Analysis job status is changed to "C"
 
   @NX-8461 @initBrowser 
   Scenario: Check whether results for clustering is shown in table view.
@@ -846,13 +848,14 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then click on create new cluster button
     Then enter view values for cluster
     Then select radio button for view1
     Then select radio button for view2
     Then click save cluster button
-    
+    Then wait until status of cluster is complete
     Then check cluster details
 
   @NX-8464 @initBrowser @closeBrowser
@@ -861,7 +864,8 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then click on create new cluster button
     Then enter view values for cluster
     Then select radio button for view1
@@ -888,7 +892,8 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then click on create new cluster button
     Then enter view values for cluster
     Then select radio button for view1
@@ -932,13 +937,13 @@ Feature: positive flow of im program creation
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-8441 @initBrowser @closeBrowser
+  @NX-8441 @initBrowser 
   Scenario: Check whether new page/tab in segment analysis page  for cluster is available in IM.
     Given login
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then verify clusters tab in segments
+    Then verify cluster tab
 
   @NX-8381 @initBrowser @closeBrowser
   Scenario: Check whether new page/tab in segment analysis page  for cluster is available in PM.
@@ -954,7 +959,8 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     #Then click on create new cluster button
     #Then enter view values for cluster
     #Then select radio button for view1
@@ -969,7 +975,8 @@ Feature: positive flow of im program creation
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then check cluster details
     Then check cluster details table and save cluster
 
@@ -979,7 +986,8 @@ Feature: positive flow of im program creation
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+     Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then check cluster details
     Then check cluster details table and save cluster
 
@@ -989,7 +997,8 @@ Feature: positive flow of im program creation
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+     Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then check cluster details
     Then check cluster details table and save cluster
 
@@ -999,7 +1008,8 @@ Feature: positive flow of im program creation
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+     Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then check cluster details
     Then check cluster name and details
 
@@ -1009,7 +1019,8 @@ Feature: positive flow of im program creation
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+     Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then check cluster details
     Then check clusters combination details
 
@@ -1019,17 +1030,19 @@ Feature: positive flow of im program creation
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+     Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then check cluster details
     Then check clusters combination details
 
-  @NX-8383 @initBrowser @closeBrowser
+  @NX-8383 @initBrowser 
   Scenario: Check whether only the configured KPIs in explore  segments are available for clustering.
     Given login
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then click on create new cluster button
     Then check cluster kpi's
     Then pass next scenario based on this step
@@ -1071,7 +1084,8 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then verify create clusters option in segments
 
   @NX-8430 @initBrowser @closeBrowser
@@ -1080,7 +1094,8 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then check cluster details
     Then check cluster details table and save cluster
 
@@ -1150,7 +1165,8 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+ Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then check cluster details
     Then Manage License copy Productkey
     Then logout
