@@ -55,7 +55,7 @@ import gherkin.formatter.model.Result;
 			int i = 0 ;
 			while(i<tags.length) {
 				tags[i] = tags[i].trim();
-				if(tags[i].matches("@NX-[0-9]+"))
+				if(tags[i].matches("@NX-[0-9]+") || tags[i].matches("@NDX-[0-9]+"))
 				{
 					NXtag = tags[i];
 				    break;
