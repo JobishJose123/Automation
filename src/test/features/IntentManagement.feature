@@ -943,6 +943,9 @@ Then wait until Segment Analysis job status is changed to "C"
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
+    Then check cluster details
     Then verify cluster tab
 
   @NX-8381 @initBrowser @closeBrowser
@@ -951,6 +954,9 @@ Then wait until Segment Analysis job status is changed to "C"
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
+    Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
+    Then check cluster details
     Then verify clusters tab in segments
 
   @NX-8396 @initBrowser @closeBrowser
@@ -1073,7 +1079,8 @@ Then wait until Segment Analysis job status is changed to "C"
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
-    Then filter segment analysis
+      Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+    Then select Cluster Option
     Then check cluster details
     Then verify clusters kpis in views
     
@@ -1085,7 +1092,7 @@ Then wait until Segment Analysis job status is changed to "C"
     Then navigate to analytics
     Then navigate to explore segments
     Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
-    Then select Cluster Option
+    #Then select Cluster Option
     Then verify create clusters option in segments
 
   @NX-8430 @initBrowser @closeBrowser
