@@ -490,7 +490,7 @@ Feature: Test suite on Offer creation
     Then verify deleting added variable
     Then pass next scenario based on this step
 
-  @NX-945 @closeBrowser
+  @NX-945 
   Scenario: Create offer: Creative: Verify save option after selecting the dynamic variable NX-945
     Then check previous step and pass this
     
@@ -560,24 +560,24 @@ Feature: Test suite on Offer creation
   #Given login
   #Then create alert
   @NX-4513 @initBrowser
-  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+  Scenario: Verify creating new reward type
     Given login
     Then navigate to configuration management
     Then navigate to rewards
     #Then create new reward type
     Then create new reward type for test
     Then verify created reward type
-    @NX-4513
-  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+    @NX-4518
+  Scenario: Verify editing reward parameter
     Then edit reward parameter
-    @NX-4513
-  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+    @NX-4519
+  Scenario: Verify deleting reward parameter
     Then delete reward parameter
-    @NX-4513
-  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+    @NX-4516
+  Scenario: Verify editing reward type
     Then edit created reward type
-    @NX-4513 @closeBrowser
-  Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-4513
+    @NX-4517 @closeBrowser
+  Scenario: Verify deleting reward type
     Then delete created reward type
     
     @NX-7307 @initBrowser  @closeBrowser
