@@ -13,8 +13,11 @@ import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -51,14 +54,14 @@ import gherkin.formatter.model.Result;
 			tagStr = tagStr.replaceAll("\\]", " ");
 			tagStr = tagStr.trim();
 			String[] tags = tagStr.split(",");
-			String NXtag = "";
+			List<String> NXtag = new ArrayList<String>();
 			int i = 0 ;
 			while(i<tags.length) {
 				tags[i] = tags[i].trim();
 				if(tags[i].matches("@NX-[0-9]+") || tags[i].matches("@NDX-[0-9]+"))
 				{
-					NXtag = tags[i];
-				    break;
+					NXtag.add(tags[i]);
+//				    break;
 				}
 				i++;
 			}
@@ -89,45 +92,47 @@ import gherkin.formatter.model.Result;
 				System.out.println("error in fetching googleSpreadsheetReport from config. False by default");
 			}
 			if(googleSpreadsheetReport) {
-				GoogleSpreadsheetImpl sqs = new GoogleSpreadsheetImpl();
+						GoogleSpreadsheetImpl sqs = new GoogleSpreadsheetImpl();
 				sqs.initializeService();
-		    	sqs.setSpreadsheet(p.getValue("googleSpreadsheetReportWorkbookId"),System.getProperty("user.name"));
-		    	int lastRow = Integer.parseInt(sqs.getCell(0, 7))-1;
-		    	sqs.setCell(lastRow, 0,NXtag );
-		    	sqs.setCell(lastRow, 1,scenario.getStatus());
-		    	sqs.setCell(lastRow, 2,scenario.getName() );
-		    	sqs.setCell(lastRow, 3,feature);
-		    	sqs.setCell(lastRow, 4,System.getProperty("user.name") );
-		    	sqs.setCell(lastRow, 5,timeStamp );
-		    	try{
-		    		int lineChar = error.indexOf("\n");
-		    		sqs.setCell(lastRow, 6,error.substring(0, lineChar));
+				sqs.setSpreadsheet(p.getValue("googleSpreadsheetReportWorkbookId"),System.getProperty("user.name"));
+				for(int k=0;k<NXtag.size();k++) {
+				    	int lastRow = Integer.parseInt(sqs.getCell(0, 7))-1;
+				    	sqs.setCell(lastRow, 0,NXtag.get(k) );
+				    	sqs.setCell(lastRow, 1,scenario.getStatus());
+				    	sqs.setCell(lastRow, 2,scenario.getName() );
+				    	sqs.setCell(lastRow, 3,feature);
+				    	sqs.setCell(lastRow, 4,System.getProperty("user.name") );
+				    	sqs.setCell(lastRow, 5,timeStamp );
+				    	try{
+				    		int lineChar = error.indexOf("\n");
+				    		sqs.setCell(lastRow, 6,error.substring(0, lineChar));
+				    	}
+				    	catch(Exception e) {
+				    		sqs.setCell(lastRow, 6,"no ERROR");
+				    	}
 		    	}
-		    	catch(Exception e) {
-		    		sqs.setCell(lastRow, 6,"no ERROR");
-		    	}
-		    	
 		    	
 			}
 			
-			
-			stringBuilderForCsvReport.setLength(0);
-			stringBuilderForCsvReport.append('\n');
-			stringBuilderForCsvReport.append(NXtag);
-			stringBuilderForCsvReport.append(',');
-			stringBuilderForCsvReport.append(scenario.getStatus());
-			stringBuilderForCsvReport.append(',');
-			stringBuilderForCsvReport.append(feature);
-			stringBuilderForCsvReport.append(',');
-			stringBuilderForCsvReport.append(scenario.getName());
-			stringBuilderForCsvReport.append(',');
-			stringBuilderForCsvReport.append(System.getProperty("user.name"));
-			stringBuilderForCsvReport.append(',');
-			stringBuilderForCsvReport.append(timeStamp);
-			stringBuilderForCsvReport.append(',');
-			stringBuilderForCsvReport.append(error);
-	  		printWriterForCsvReport.write(stringBuilderForCsvReport.toString());
-	  		printWriterForCsvReport.flush();
+			for(int k=0;k<NXtag.size();k++) {
+					stringBuilderForCsvReport.setLength(0);
+					stringBuilderForCsvReport.append('\n');
+					stringBuilderForCsvReport.append(NXtag.get(k));
+					stringBuilderForCsvReport.append(',');
+					stringBuilderForCsvReport.append(scenario.getStatus());
+					stringBuilderForCsvReport.append(',');
+					stringBuilderForCsvReport.append(feature);
+					stringBuilderForCsvReport.append(',');
+					stringBuilderForCsvReport.append(scenario.getName());
+					stringBuilderForCsvReport.append(',');
+					stringBuilderForCsvReport.append(System.getProperty("user.name"));
+					stringBuilderForCsvReport.append(',');
+					stringBuilderForCsvReport.append(timeStamp);
+					stringBuilderForCsvReport.append(',');
+					stringBuilderForCsvReport.append(error);
+			  		printWriterForCsvReport.write(stringBuilderForCsvReport.toString());
+			  		printWriterForCsvReport.flush();
+			}
 	  		
 	  		
 			if(scenario.getStatus().contentEquals("failed")) {
