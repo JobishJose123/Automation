@@ -688,9 +688,9 @@ Feature: Test suite on Offer creation
     Then verify delete added variable
     
     
-      @NX-1348 @initBrowser
+      @NX-1348 @NX-1352 @initBrowser
   Scenario: Create offer:Track: Verify creating Recharge offers 
-         Given login
+    Given login
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
