@@ -135,7 +135,7 @@ Then create single product from sheet "singleProductPage"
 Then check if "singleProductPage" products with same price under open market
 
 
-@NX-1055
+@NX-1055 @NX-1015
 @initBrowser @closeBrowser
 Scenario: Create Product: Verify the product with Segmented scope NX-1055, NX-1015
 Given login

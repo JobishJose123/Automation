@@ -3,7 +3,7 @@
 Feature: Test suite on Offer creation
   I want to check all test cases related to offer page
 
-  @NX-1349 @NX-3035 @initBrowser @closeBrowser
+  @NX-1349 @NX-3035 @NX-975 @NX-960 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating offers with SMS channel NX-1349
     Given login
     Then navigate to precision marketer
