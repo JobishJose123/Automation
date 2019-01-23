@@ -240,8 +240,8 @@ public class EmailHandler {
 
       String host = "pop.gmail.com";// change accordingly
       String mailStoreType = "pop3";
-      String username = "selenium.flytxt@gmail.com";// change accordingly
-      String password = "Flytxt.4";// change accordingly
+      String username = "joel.jose@flytxt.com";// change accordingly
+      String password = "flymail1!";// change accordingly
 
       fetch(host, mailStoreType, username, password);
 

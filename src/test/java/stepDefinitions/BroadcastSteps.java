@@ -88,6 +88,15 @@ public class BroadcastSteps extends Init{
 			Thread.sleep(5000);
 			jswait.waitUntil("//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//vaadin-grid-cell-content[contains(.,'Paused')]");
 		}
+		else if(eh.getCellByColumnName("Type2").contentEquals("seedingTriggerable")){
+			
+			jswait.loadClick("//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
+			jswait.loadClick(".//paper-menu-button[@id='broadcastTriggerGridMenu']/iron-dropdown[@id='dropdown']//paper-menu[@role='menu']/div/paper-item[contains(.,'Pause')]");
+			jswait.loadClick(".//*[@id='confirmBoxPause']//paper-button[contains(text(),'Yes')]");
+			jswait.loadClick("(//div[@id='toggleButton'])[2]");
+			Thread.sleep(5000);
+			jswait.waitUntil("//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//vaadin-grid-cell-content[contains(.,'Paused')]");
+		}
 		else if(eh.getCellByColumnName("Type").contentEquals("seedingRecurring")|| eh.getCellByColumnName("Type").contentEquals("seedingTriggerableRecurringBC")){
 			jswait.loadClick(".//*[@id='broadcastSeedList']//vaadin-grid-cell-content[contains(.,'"+eh.getCellByColumnName("BC Name")+"')]/../..//iron-icon");
 			jswait.loadClick(".//*[@id='broadcastSeedGridMenu']//paper-item[contains(.,'Pause')]");

@@ -12,7 +12,7 @@ Feature: DK
   #""
   ## (Comments)
   #Sample Feature Definition Template
-  @NX-4468 @initBrowser @closeBrowser
+  @NX-4468 @initBrowser 
   Scenario: DK--->Verify the functionality of Save option
     Given login
     Then navigate to data foundation
@@ -43,7 +43,7 @@ Feature: DK
     Then create a DK Job from sheet "Jobinput" and verify "2" in ouput
     Then edit the job from sheet "Jobinput"
 
-  @NX-4390 @initBrowser @closeBrowser
+  @NX-4390 @initBrowser 
   Scenario: DK--->Verify the functionality of delimiter block using extract from file name
     Given login
     #Then random registration list is generated
@@ -214,6 +214,11 @@ Feature: DK
   Scenario: DK--->Verify the functionality of Max operator in Dynamic operator block
     Then check previous step and pass this
     Then pass next scenario based on this step
+    
+      @NX-4372
+  Scenario: DK--->Verify the functionality of extractDecimalIntegerPart operator in Dynamic operator block
+    Then check previous step and pass this
+    Then pass next scenario based on this step
 
   @NX-4369 @closeBrowser
   Scenario: DK--->Verify the functionality of floor operator in Dynamic operator block.
@@ -241,6 +246,11 @@ Feature: DK
 
   @NX-3535
   Scenario: DK --> Verify the functionality of AND operation using Logical operator block inside Ternary operator.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+      @NX-4380
+  Scenario: DK--->Verify the functionality of length operator in Dynamic operator block.
     Then check previous step and pass this
     Then pass next scenario based on this step
 
@@ -305,7 +315,7 @@ Feature: DK
     Then pass next scenario based on this step
 
   @NX-DfeDateCheck @initBrowser
-  Scenario: DK--->Verify the functionality of string operations in Dynamic operator block().
+  Scenario: DK--->Verify the functionality of date operations in Dynamic operator block().
     Given login
     Then navigate to data foundation
     Then click Data Fusion Engine
@@ -313,11 +323,28 @@ Feature: DK
     Then open DK Job from sheet and verify job Operations of sheet "Dateoperations" and file "datecheck.txt" with key "Date"
     Then pass next scenario based on this step
 
-  @NX-3496 @closeBrowser
-  Scenario: DK --> Verify the functionality of contains operation for a string value using Dynamic operator block.
+  @NX-3496 
+  Scenario: DK --> Verify the functionality of contains operation for a date value using Dynamic operator block.
     Then check previous step and pass this
     Then pass next scenario based on this step
 
+@NX-3495
+Scenario: DK --> Verify the dynamic operator block for date value to filter the dates using Before functionality.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+    
+    @NX-3522
+Scenario: DK --> Verify the functioality of Test block with a Date value inside the IF condition.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
+    
+    
+
+@NX-3522 @closeBrowser
+  Scenario: DK --> Verify the functionality of contains operation for a date value using Dynamic operator block.
+    Then check previous step and pass this
+    Then pass next scenario based on this step
   @NX-DfelookupCheck @initBrowser
   Scenario: DK--->Verify the functionality of string operations in Dynamic operator block().
     Given login

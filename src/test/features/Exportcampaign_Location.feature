@@ -51,7 +51,7 @@ Feature: Test cases related to export campaign location
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then verify campaign created from sheet "campaignBC"
     
-    @NX-7957 @initBrowser @closeBrowser
+    @NX-7957 @initBrowser
   	Scenario: Verify whether user can save location details with invalid details
   	Given login
   	Then navigate to configuration management
@@ -81,7 +81,7 @@ Feature: Test cases related to export campaign location
 		Then verify the location name from sheet "locationdetails" of file "ExportCampaignLocation" can be selected from the drop down
     
     
-    @NX-8184 @initBrowser @closeBrowser
+    @NX-8184 @initBrowser 
  		Scenario: Verify imported campaign template can be used for new campaign creation
  		Given login
     Then navigate to configuration management
@@ -121,7 +121,7 @@ Feature: Test cases related to export campaign location
   Scenario: Verify the exported campaign contains all the target conditions
     Then check previous step and pass this
     
-    @NX-8193 @initBrowser @closeBrowser
+    @NX-8193 @initBrowser 
    Scenario: Verify whether share option is available for imported campaign template
  		Given login
  		Then navigate to configuration management
@@ -345,6 +345,11 @@ Feature: Test cases related to export campaign location
     Then navigate to templates tab
     Then find template from sheet "campaignBC"
     Then check usage metric KPI showing while click on use template option
-		
-		
+	
+	#----------------do not uncommand	for normal run
+#		@NX-deleteall @initBrowser 
+#		Scenario: delete all export locations
+#		Given login
+#		Then delete all locations
+#----------------------		
 		

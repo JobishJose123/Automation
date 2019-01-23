@@ -97,7 +97,22 @@ public class ExportPdfForCampaignSteps extends Init{
 	}
 	
 	
-	
+		
+		@Then("^delete all locations$")
+		public void delete_all_locations() throws Throwable {
+			Thread.sleep(2000);
+			driver.get("https://192.168.150.209/#/platform-setting/systemAdministration/exportCampaign");
+			
+			Thread.sleep(2000);
+			for(int i=1;i<40;) {
+			jswait.loadClick("(//data-table-cell//div[contains(@class,'edit')]/paper-item[2]/iron-icon)[2]");
+			
+			
+			
+			jswait.loadClick("//div/paper-button[contains(.,'Yes')]");
+			
+			i++;}
+		}
 	
 
 }

@@ -90,7 +90,7 @@ Scenario: Verify if Consumer Info tab is populated with valid data
 Then verify details in customer info page of ""
 
 @NX-2793 @run_this
-@closeBrowser
+
 Scenario: Verify whether user is able to change the subscriber from all the tabs.
 Then verify changing customer number from all tabs of ""
 

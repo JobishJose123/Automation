@@ -33,7 +33,7 @@ Feature: Dashboard page
     
     
     @NX-5576
-    @initBrowser @closeBrowser
+    @initBrowser
     Scenario: Verify whether Configure,Activate,Deactivate options are available in grid icon of each dashboard- 5576
     Given login
     Then navigate to configuration management

@@ -7,13 +7,13 @@ Feature: Test suite for offer verification test cases
  
  
 @NDX-5175
- @initBrowser @closeBrowser
+ @initBrowser 
   Scenario: Edit Product details from a new offer and verify that the edited product details are mapped correctly in offer
     Given login
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    #Then create new offer from sheet "usageBasedWAP" with product "fullDetails"
+    Then create new offer from sheet "usageBasedWAP" with product "fullDetails"
     Then filter offer from sheet "usageBasedWAP"
     Then edit offer
     Then remove product for offer from sheet "usageBasedWAP"

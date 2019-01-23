@@ -146,7 +146,7 @@ public class CampaignObjects extends Init{
 	private WebElement statusIcon;
 	@FindBy(xpath=".//paper-dialog[@id='confirmBoxResume']//paper-button[contains(.,'Yes')]")
 	private WebElement confirmResumeYes;
-	@FindBy(xpath=".//*[@id='createNew']//paper-button[contains(.,'Save')]")
+	@FindBy(xpath="//paper-button[contains(.,'Save')]")
 	private WebElement campaignCategorySave;
 	@FindBy(xpath="//paper-button[contains(.,'Export')]")
 	private WebElement exportLocationButton;
@@ -565,9 +565,9 @@ public class CampaignObjects extends Init{
 	public void verifyTargetdCustomersLabelAndCount() throws Exception {
 		
 	
-	    Thread.sleep(300000);
+	    Thread.sleep(3000);
 	    driver.navigate().refresh();
-		assertTrue(targetedCustomersLabel.isDisplayed());
+//		assertTrue(targetedCustomersLabel.isDisplayed());
 		String count1=targetedCustomersCount.getText();
 		String count2=targetedCustomersExpandCount.getText();
 		System.out.println("Count1 "+count1);
@@ -945,8 +945,8 @@ public void enterCampaignDeailsForCompareTargetConditions() throws Throwable {
 		jswait.scrollIntoView("//campaign-category-chart", "//div[text()='"+name+"']");
 	}
 	public void createCampaignTemplate(String name) throws InterruptedException {
-		jswait.loadClick("//paper-tab//div[contains(.,'Campaign Templates')]");
-		clickCreateCampaignTemplateButton();
+//		jswait.loadClick("//paper-tab//div[contains(.,'Campaign Templates')]");
+//		clickCreateCampaignTemplateButton();
 		enterCampaignTemplateName(name);
 		enterCampaignDescription("Desc for Template");
 		clickProceedButton();
@@ -1773,7 +1773,7 @@ public void verifyColorOfKPIConditionTextAfterMapping() throws Throwable {
 		WebElement edit = driver.findElement(By.xpath("//data-table-cell[contains(.,'"+name+"')]/..//data-table-cell//paper-menu-button"));
 		jswait.loadClick(edit);
 		Thread.sleep(4000);
-		WebElement exportCampaignOption = driver.findElement(By.xpath("//data-table-cell[contains(.,'"+name+"')]/..//paper-item[2]"));
+		WebElement exportCampaignOption = driver.findElement(By.xpath("(//data-table-cell[contains(.,'"+name+"')]/..//paper-item[1])[2]"));
 		jswait.loadClick(exportCampaignOption);
 	}
    

@@ -13,21 +13,21 @@ Then navigate to precision marketer
  Then navigate to offer management
     Then navigate to offers
     Then click on create new ofer button
-    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
     Then navigate to offer management 
 	  Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeEmail" offer to Offer Catalogue
+    Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then enter details for new broadcast from sheet "recurringTriggerable" with "rechargeEmail"
+Then enter details for new broadcast from sheet "TriggerReccurringBC" with "rechargeWAP"
 Then activate bc
-Then navigate to "Recurring" broadcasts
-Then pause bc from sheet "recurringTriggerable"
-Then resume bc from sheet "recurringTriggerable"
+Then navigate to "Triggerable" broadcasts
+Then pause bc from sheet "TriggerReccurringBC"
+Then resume bc from sheet "TriggerReccurringBC"
 
   @NX-8712 @initBrowser
   Scenario: Verify whether pause option is available for active  campaigns NX-8712
@@ -47,16 +47,16 @@ Then resume bc from sheet "recurringTriggerable"
     #Then click create new product button
     #Then create product with attributes from sheet "fullDetails"
     #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeEmail" with product "fullDetails"
-    #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeEmail" offer to Offer Catalogue
-    #Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
