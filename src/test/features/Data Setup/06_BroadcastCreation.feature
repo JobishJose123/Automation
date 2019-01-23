@@ -349,3 +349,29 @@ Feature: Test suite for Broadcast creation
     |IMEventsCustomerCareUsage|
     |customerDeviceInfo|
     |segmentAgeGT40|
+    
+    @NX-monthlyRecurringBCDataSetup
+@initBrowser 
+Scenario: Verify specifying the recurrence value as 10,20,30 etc NX-6529
+Given login
+Then navigate to precision marketer
+    Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeSMS"
+Then save bc
+Then save "bcInputData" data to spreadsheet from "recurringMonthBC" with string Joel Test-recurring bc with monthly recurring
+
+ #@NX-monthlyRecurringBCDataSetup
+#@initBrowser  @closeBrowser
+#Scenario: Verify specifying the recurrence value as 10,20,30 etc NX-6529
+#Given login
+#Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeSMS"
+#Then save bc
+#Then save "bcInputData" data to spreadsheet from "recurringMonthBC" with string Joel Test-recurring bc with monthly recurring

@@ -1920,7 +1920,7 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
       		 day++;
       	 }
       	 Actions builder = new Actions(driver);
-      	broadcastPageObjects.createBCAndSelectDNCListForPartnerLevelCG(name, bc_type,BASE_LIST4,offerExcel.getCell(1, 0).toString());
+      	broadcastPageObjects.createBCAndSelectDNCListForPartnerLevelCG(name, bc_type,SELENIUM_DND_LIST,offerExcel.getCell(1, 0).toString());
       	
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
@@ -2661,7 +2661,7 @@ public void verifyBCTargetedCount(String sheet,String condition) throws Throwabl
 	}
 	else if(condition.contentEquals("customerList")) {
 //		targetStr = list.getCellByColumnName("digitalPersonaGT15");
-		int expected = 200; //Integer.parseInt(targetStr);
+		int expected = 215; //Integer.parseInt(targetStr);
 		Assert.assertEquals("expected count not equal to actual count; List count hardcoded to 200",expected, targeted);
 		Assert.assertEquals("sent count not equal to targeted count",sent, targeted);
 	}
@@ -2931,14 +2931,17 @@ public void verifyTargetConditionDetails(String event) throws Throwable{
 		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//b[contains(.,'Customer Care Usage')]"));
 	}
 	else if(event.contains("segmentAgeGT40")){
-		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'Customer Profile Info')]"));
-		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'is greater than')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//profile-field[contains(.,'Customer Profile Info')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//profile-field[contains(.,'is greater than')]"));
 		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//profile-field[contains(.,'40')]"));
 	}
 	else if(event.contains("segmentAgeGT30")){
-		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'Customer Profile Info')]"));
-		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//*[contains(.,'is greater than')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//profile-field[contains(.,'Customer Profile Info')]"));
+		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//profile-field[contains(.,'is greater than')]"));
 		Assert.assertTrue("condition not displayed",jswait.checkVisibility("//profile-field[contains(.,'30')]"));
+	}
+	else {
+		Assert.assertTrue("condition not handled in if else",false);
 	}
 }
 

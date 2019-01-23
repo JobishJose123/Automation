@@ -958,19 +958,23 @@ public void clustertabledetailsandsave() throws Exception {
 	   Thread.sleep(3000);
 	   jswait.loadClick(EditSegmentAnalysisName);
 	   jswait.loadSendKeys( SegmentAnalysisNameInput ,SegmentName);
-	 if(condition.contains("segment")) {
-		 changeTargetConditinSavedSegment(); 
-	 }
-	 if(!condition.contains("none")) {
-		 changeTargetConditionCreate(); 
-	 }
+	 
 	   jswait.loadClick(createSegmentAnalysisList);
 		Thread.sleep(3000);
 		jswait.loadSendKeys(createSegmentAnalysisListinput, BASE_LIST);
 		Thread.sleep(2000);
 		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+BASE_LIST+"')]");
+		if(condition.contains("segment")) {
+			 changeTargetConditinSavedSegment(); 
+		 }
+		else if(!condition.contains("none") && !condition.contains("segment")) {
+			 TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+			 targetConditionObjects.clickBasicTargetCondition(condition);
+		 }
+		System.out.println("before KPI");
 	addNew3KPI();
-	
+	System.out.println("after KPI");
+
 	Thread.sleep(2000);
 	
 	jswait.loadClick(Topproccedbtn);

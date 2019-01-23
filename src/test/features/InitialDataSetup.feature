@@ -197,10 +197,6 @@ Then check and add profile fields
     Then check previous step and pass this
     
     
-    @NX-2874  @closeBrowser
-  Scenario: Verify whether Ussd application created in Legacy page is displayed in Neonx ui 2874
-    Then check previous step and pass this
-    
     @NX-createUssdTouchpoint @initBrowser
   Scenario: create ussd touchpoint
     Given login
@@ -218,3 +214,39 @@ Then check and add profile fields
     Then navigate to configuration
     Then navigate to saved segments
     Then create saved segment with condition "segmentAgeGT40"
+    
+    @NX-createDefaultData 
+@initBrowser 
+Scenario: Create default data that is used everywhere
+Given login
+Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "default"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "default"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "default"
+    Then click create new product button
+    Then create product with attributes from sheet "default"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "defaultrechargeWAP" with product "default"
+    Then click on create new ofer button
+    Then create new offer from sheet "defaultseedingWAPoffer" with product "default"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "default"
+    Then Add "defaultrechargeWAP" offer to Offer Catalogue
+    Then Add "defaultseedingWAPoffer" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "default"
+    Then create new campaign from sheet "default" with catalog "default"
+    Then naigate to "default" campaign view broadcasts

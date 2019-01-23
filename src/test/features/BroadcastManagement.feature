@@ -8,14 +8,14 @@ Feature: Test cases related to Broadcast Management
 @initBrowser 
 Scenario: Create BC-Details tab: Verify Create New BC lands in the details tab.
 Given login
-Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+#Then navigate to configuration management
+    #Then naviagte to product classes
+    #Then create product class and number attribute from "TestProductClass"
+    #Then navigate to landing page
+    #Then navigate to configuration management
+    #Then navigate to campaign categories
+    #Then create new campaign category from sheet "CampaignCategory"
+    #Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
@@ -2341,11 +2341,11 @@ Then wait until status of "Recurring" is "Complete"
    Given login
    Then navigate to precision marketer
     Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to campaign category from sheet "default"
+    #Then create new campaign from sheet "campaignBC" with catalog "default"
+    Then naigate to "default" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition <Condition> from sheet "one-offBC" with "rechargeWap"
+    Then enter details for new broadcast with condition <Condition> from sheet "one-offBC" with "defaultrechargeWAP"
       Then activate bc
     Then wait until status of "one-offBC" is "Complete"
     Then verify targeted and sent count of "one-offBC" with condition <Condition>

@@ -1,9 +1,13 @@
 package baseClasses;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -26,21 +30,17 @@ String file = "";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		sh = workbook.getSheet(sheet);
+			sh = workbook.getSheet(sheet);
 		
     }
-    public void setCsvFile(String filename, String sheet)
+    public void setCsvFile(String filename) throws IOException
     {
-		try {
-			workbook = new HSSFWorkbook(new FileInputStream(new File("ExcelFiles\\"+filename+".xls")));
-			file = "ExcelFiles\\"+filename+".csv";
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		sh = workbook.getSheet(sheet);
-		
+    	String line = "";
+    	BufferedReader br = new BufferedReader(new FileReader("ExcelFiles\\"+filename+".csv"));
+		line = br.readLine();
+		line = br.readLine();
+		System.out.println(line);
+		String[] msisdn = line.split(",");		
     }
     public void setCell(int r,int c,String val) throws IOException{
     	Row row = sh.getRow(r);
@@ -103,5 +103,15 @@ String file = "";
     		}	
     	}
 		return colNum;
+    }
+    
+    public static void main(String args[]) {
+    	
+    	ExcelHelper eh = new ExcelHelper();
+    	eh.setExcelFile("touchpointInputData", "apiTouchpointUR");
+ 		String name = (String) eh.getCell(1, 0);
+	  System.out.println(name);//+eh.getCellByColumnName("Application Type")+eh.getCellByColumnName("Event For Tracking")+eh.getCellByColumnName("Refresh  Every")+eh.getCellByColumnName("Time Interval")+eh.getCellByColumnName("Prioritization Logic")+eh.getCellByColumnName("Maximum Offers"));
+	  
+	  
     }
 }

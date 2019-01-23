@@ -38,12 +38,12 @@ import cucumber.api.java.en.Then;
         overviewChartsReport = true,
         pdfPageSize = "A4 Landscape",
         toPDF = true,
-        outputFolder = "target/81",
+        outputFolder = "target/${user.name}/DATE(dd-MM-yyyy_HH-mm)",
         retryCount = 0)
 @CucumberOptions(
         features = { "src/test/features" },
 		glue = {"classpath:"},
-		tags = {"@NX-9213"},
+		tags = {"@NX-3100"},
 		plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:output/report.html",
         "html:target/81", "json:target/81/cucumber.json",
@@ -72,11 +72,11 @@ public class RunTest extends Init
 		stringBuilderForCsvReport.setLength(0);
 		stringBuilderForCsvReport.append("Test Case Number");
 		stringBuilderForCsvReport.append(',');
+		stringBuilderForCsvReport.append("Status");
+		stringBuilderForCsvReport.append(',');
 		stringBuilderForCsvReport.append("Feature");
 		stringBuilderForCsvReport.append(',');
 		stringBuilderForCsvReport.append("Scenario");
-		stringBuilderForCsvReport.append(',');
-		stringBuilderForCsvReport.append("Status");
 		stringBuilderForCsvReport.append(',');
 		stringBuilderForCsvReport.append("Run By");
 		stringBuilderForCsvReport.append(',');

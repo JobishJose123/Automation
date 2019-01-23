@@ -381,7 +381,9 @@ public class IntentManagement extends Init{
 		programPage.clickPorogramProceedButton();
 		programPage.enterProgramName("testMandatoryFields");
 		programPage.clickPorogramProceedButton();
-		programPage.selectOfferCatalog();
+		ExcelHelper catalogExcel = new ExcelHelper();
+		catalogExcel.setExcelFile("offerCatalogInputData", "defaultCatalog");
+		programPage.selectOfferCatalog(catalogExcel.getCellByColumnName("Catalog Name"));
 		programPage.clickPorogramProceedButton();
 		programPage.clickCreateProgramAddTouchpointButton();
 	}
@@ -1511,14 +1513,9 @@ System.out.println(editname+"program has edited successfully");
 		@Then("^delete api touchpoint from sheet \"([^\"]*)\"$")
 		public void delete_api_touchpoint(String sheet) throws Throwable {
 			Thread.sleep(4000);
-			
 			eh.setExcelFile("touchpointInputData", sheet);
-			Random rn = new Random();
-	 		int  n = rn.nextInt(5000) + 1;
 	 		String name = (String) eh.getCell(1, 0);
-	 		name =  name.replaceAll("[0-9]", "")+n;
-	 		eh.setCell(1, 0, name);
-		  		  System.out.println(name);
+		  	System.out.println("deleting touchpoint:::"+name);
 		  touchpointPage.apideletetouchpointcheck(name);
 		  
 		  

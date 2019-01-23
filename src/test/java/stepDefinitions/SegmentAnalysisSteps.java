@@ -274,6 +274,16 @@ public class SegmentAnalysisSteps extends Init {
 		 
 	}
 	
+	@Then("^create SegmentAnalysis from sheet \"([^\"]*)\" with condition \"([^\"]*)\"$")
+	public void create_Segment_Analysis_from_sheet_with_condition(String AnalysisName,String condition) throws Exception{
+		 eh.setExcelFile("SegmentAnalysis", AnalysisName);//set excel file
+		 String name = eh.getCellByColumnName("Segment_Analysis");//get sheet name
+		 name = RandomNameGenerator.getRandomName(name);//append new random name
+		 segmentObjects.SegmentName(name,condition); //pass new name to SegmentName()
+		 eh.setCell("Segment_Analysis",name);
+		 
+	}
+	
 	 @Then("^filter the Segment Analysis job for status check from sheet \"([^\"]*)\"$")                                    // filter a job
 	public void filter_the_Segment_Analysis_job_for_status_check_from_sheet(String SegmentAnalysisSheet) throws Exception{
 	 eh.setExcelFile("SegmentAnalysis", SegmentAnalysisSheet);//set excel file

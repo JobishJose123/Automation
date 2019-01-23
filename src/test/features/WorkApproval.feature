@@ -317,7 +317,7 @@ Feature: approval workflow
      
   @NX-6357 @initBrowser 
   Scenario: Verify creation of BC without approval flow but not for campaign
-    Given login
+    Given login with selenium user
     Then navigate to configuration management
     Then navigate to campaign categories
     Then create new campaign category from sheet "CampaignCategory"

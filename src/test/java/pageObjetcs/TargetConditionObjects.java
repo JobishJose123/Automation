@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.AWTException;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -397,6 +398,16 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(nowSelect);
 			jswait.loadClick(targetConditionSave);
 		}
+		else if(event.contentEquals("segmentAgeGT40")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+			jswait.loadClick(CustomerInsightFieldSelector);
+			jswait.loadClick(CustomerInsightFieldAge);
+			jswait.loadClick(conditionSelector);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"40");
+			jswait.loadClick(targetConditionSave);
+		}
 		else if(event.contentEquals("customerDrivenEvent")){
 			jswait.loadClick(targetConditionTypeSelector);
 			jswait.loadClick(targetConditionTypeCustomerDrivenEvents);
@@ -670,6 +681,9 @@ public class TargetConditionObjects extends Init {
 		}
 		else if(event.contains("groupIdCondition_")){
 			clickBasicTargetConditionWithGroupId(event);
+		}
+		else {
+			Assert.assertFalse("Condition not handled in Target", true);
 		}
 			
 	 }

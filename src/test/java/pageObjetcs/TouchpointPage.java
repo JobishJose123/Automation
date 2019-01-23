@@ -624,7 +624,7 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 		
 		//String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited apiTouch')]");
 		Thread.sleep(2000);
-		assertTrue(driver.findElement(By.xpath(".//data-table-cell[@class='customercare-touchpoint-grid style-scope' and contains(.,'"+name+"')]")).isDisplayed());
+		assertTrue(driver.findElement(By.xpath(".//span[contains(.,'"+name+"')]")).isDisplayed());
 //		System.out.println(newname);
 //       Assert.assertEquals(name,newname);
 //		System.out.println("edit success");
@@ -721,14 +721,16 @@ public void createTouchpointWithAlertValue() throws Throwable {
 public void createNewCustomerCareTouchpointAndDelete() throws Throwable {
 	
 	Thread.sleep(3000);
-	custEnterTouchpointName("Test Touch point007");
+	Random rn = new Random();
+	int  n = rn.nextInt(5000) + 1;
+	String newname = "TouchPointDelete"+n;
+	custEnterTouchpointName(newname);
 	custTriggerSelectPrioritizationLogic();
 //	custTriggerSelectPrioritizationRule();
 	custTriggerEnterRefreshEvery("3");
 	custTriggerSelectTimeInterval();
 	custTriggerEnterMaximumOffers("4");
 	custClickSave();
-	String newname="Test Touch point007";
 	System.out.println(newname);
 	custedittouchpointcheck(newname);
 	clickDeleteCustTouchpoint();
@@ -801,18 +803,12 @@ public void deleteUSSDTouchpoint() throws Throwable {
 			}
 			else{System.out.println("cant find element");}
 	}
-	public void createsmsTouchpointDetailsvalidation(String keyword) throws InterruptedException {
+	public void createsmsTouchpointDetailsvalidation(String keyword) throws InterruptedException, IOException {
 		System.out.println("inside sms validation");
 		navigateToSms();
 		clickCreateNewTouchpoint();
 		System.out.println(keyword);
-		smsSelectShortCode();
-		smsEnterKeyword(keyword);
-		smsSelectPrioritizationLogic();
-//		smsSelectPrioritizationRule();
-		smsEnterRefreshEvery("3");
-		smsSelectTimeInterval();
-		smsEnterMaximumOffers("");
+		enterSmsTouchpointDetails(keyword);
 		smsClickSave();
 		
 		boolean flag=jswait.checkVisible(smsvalidation);
@@ -1160,14 +1156,24 @@ Assert.assertEquals(name,newname);
 			
 			
 		}
-		
+		public void clickToucpointDeleteButton(String touchpointName) throws InterruptedException {
+			jswait.loadClick("//span[contains(.,'"+touchpointName+"')]/../..//paper-icon-button[2]//iron-icon[1]");
+		}
 		public void apideletetouchpointcheck(String name) throws Exception {
 			Thread.sleep(5000);
-			String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'"+name+"')]");
+//			String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'"+name+"')]");
 			System.out.println(name);
-			jswait.loadClick(apideletebutton);
+			clickToucpointDeleteButton(name);
 			jswait.loadClick(apideleteyes);
-			checktouchpointsdeleteapi();
+//			checktouchpointsdeleteapi();
+			Thread.sleep(5000);
+			try {
+				clickToucpointDeleteButton(name);
+				Assert.assertTrue("element not deleted after clicking delte, waiting for 5 SEC", false);
+			}
+			catch(Exception e) {
+				
+			}
 		}
 		
 		public void ussddeletetouchpointcheck(String name) throws Exception {

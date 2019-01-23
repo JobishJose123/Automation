@@ -50,81 +50,55 @@ Feature: Predefined Targets
     Then pass next scenario based on this step
 
   @NX-3340
+  @closeBrowser
   Scenario: Predefined Targets - Filter active predefined targets - Filter by Name NX-3340
     Then check previous step and pass this
 
-  @NX-2769 @initBrowser
+  @NX-2769 @initBrowser  @closeBrowser
   Scenario: Predefined Targets - Attaching a predefined target to a one-off BC. -2769
     Given login
     Then navigate to precision marketer
-    Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    #Then navigate to offer management
-    #Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to campaign category from sheet "default"
+    Then naigate to "default" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition segmentAgeGT40 from sheet "one-offBC" with "rechargeWap"
+    Then enter details for new broadcast with condition segmentAgeGT40 from sheet "one-offBC" with "defaultrechargeWap"
     Then save bc
     Then view broadcast from sheet "one-offBC"
     Then check target condition "segmentAgeGT40"
 
-  @NX-3310 @initBrowser
+  @NX-3310 @initBrowser  @closeBrowser
   Scenario: Predefined Targets - Attaching a predefined target to a recurring BC. -3310
     Given login
     Then navigate to precision marketer
-    Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    #Then navigate to offer management
-    #Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to campaign category from sheet "default"
+    Then naigate to "default" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition segmentAgeGT40 from sheet "recurringMonthBC" with "rechargeWap"
+    Then enter details for new broadcast with condition segmentAgeGT40 from sheet "recurringMonthBC" with "defaultrechargeWap"
     Then save bc
     Then navigate to "Recurring" broadcasts
     Then view broadcast from sheet "recurringMonthBC"
     Then check target condition "segmentAgeGT40"
     
-     @NX-3311 @initBrowser
+     @NX-3311 @initBrowser  @closeBrowser
   Scenario: Predefined Targets - Attaching a predefined target to a seeding BC.. -3310
     Given login
     Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-    Then navigate to offer management
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "seedingWAPoffer" offer to Offer Catalogue
     Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to campaign category from sheet "default"
+    Then naigate to "default" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition segmentAgeGT40 from sheet "seedingRecurringBC" with "seedingWAPoffer"
+    Then enter details for new broadcast with condition segmentAgeGT40 from sheet "seedingRecurringBC" with "defaultseedingWAPoffer"
     Then save bc
     Then navigate to "Seeding" broadcasts
     Then view broadcast from sheet "seedingRecurringBC"
     Then check target condition "segmentAgeGT40"
 
-    @NX-2747 @initBrowser
+    @NX-2747 @initBrowser 
   Scenario: Predefined targets - Attaching predefined targets to IAJ-2747
     Given login
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
-    Then create Segment Analysis
+		Then create SegmentAnalysis from sheet "SegmentAnalysisName" with condition "segmentAgeGT40"

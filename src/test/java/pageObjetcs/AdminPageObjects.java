@@ -450,7 +450,7 @@ public class AdminPageObjects extends Init{
 	 
 	 public void changePartnerControlGroupSettings() throws Exception {
 		   
-		 selectBaseList("CG20_1M_List");
+		 selectBaseList(SELENIUM_LIST);
 		 changeCGPercentage();
 		
 	   }

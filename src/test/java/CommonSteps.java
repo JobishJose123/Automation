@@ -122,6 +122,11 @@ public class CommonSteps extends Init {
 		Thread.sleep(2000);
 		landingPage.clickDropdownLogout();
 	}
+	@Then("^refresh")
+	public void refresh() throws InterruptedException {
+		driver.navigate().refresh();
+		Thread.sleep(8000);
+	}
 	@Then("^navigate to precision marketer")
 	public void navigateToPrecisionMarketer() throws InterruptedException {
 		landingPage.navigateToPrecisionMarketer();

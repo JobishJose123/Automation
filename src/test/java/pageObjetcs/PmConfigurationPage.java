@@ -118,11 +118,16 @@ public class PmConfigurationPage extends Init{
 		jswait.loadSendKeys(listSelectorField,SELENIUM_LIST);
 	}
 	public void enterSavedSegmentDetails(String segmentName) throws InterruptedException {
+		
+		System.out.println(segmentName);
 //		if(condition.contains("segmentAgeGT40")) {
 			enterSavedSegmentName(segmentName);
 			jswait.loadSendKeys(segmentDescriptionField, segmentName+"_Description");
 			jswait.loadSendKeys(listSelectorField,SELENIUM_LIST);
 			jswait.loadClick(listSelect);
+			if(segmentName.contains("TEMP"))
+				segmentName = segmentName.replaceAll("TEMP", "");
+			System.out.println(segmentName);
 			targetConditionObjects.clickBasicTargetCondition(segmentName);
 //		}
 	}	

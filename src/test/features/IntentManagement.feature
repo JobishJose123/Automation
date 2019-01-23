@@ -19,7 +19,7 @@ Feature: positive flow of im program creation
     Then click create new touchpoint
     Then verify sms touchpoint creation form
 
-  @NX-430 @initBrowser @closeBrowser
+  @NX-430 @NX-2053 @initBrowser @closeBrowser
   Scenario: Verify new SMS touchpoint creation 430
     Given login
     Then navigate to intent management
@@ -43,7 +43,7 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to touchpoints
     Then navigate to customer care
-    #Then create customer care touchpoint from sheet "CCTouchpoint"
+    Then create customer care touchpoint from sheet "CCTouchpoint"
     Then check customer care touchpoint in grid "CCTouchpoint"
 
   @NX-434 @initBrowser @closeBrowser
@@ -343,9 +343,11 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to touchpoints
     Then create sms touchpoint from sheet "smsTouchpoint"
+     Then refresh
+      Then navigate to sms
     Then edit sms touchpoint from sheet "smsTouchpoint"
 
-  @NX-3315 @initBrowser
+  @NX-3315 @initBrowser @closeBrowser
   Scenario: Verify Selecting the 'AT'option in the rules tab- 3315
     Given login
     #Then navigate to configuration management
@@ -379,7 +381,7 @@ Feature: positive flow of im program creation
     Then choose program from sheet "programdetails"
     Then verify tracking field while create new rule from sheet "fullDetails"
 
-  @NX-2083 @initBrowser
+  @NX-2083 @initBrowser @closeBrowser
   Scenario: Verify Cross site scripting in Customer care touch point edit page-2083
     Given login
     Then navigate to intent management
@@ -388,7 +390,7 @@ Feature: positive flow of im program creation
     Then click customer care edit touchpoint
     Then edit touchpoint with alert value
 
-  @NX-2079 @initBrowser
+  @NX-2079 @initBrowser @closeBrowser
   Scenario: Verify Cross site scripting for create new touch point-2079
     Given login
     Then navigate to intent management
@@ -397,7 +399,7 @@ Feature: positive flow of im program creation
     Then click create new touchpoint
     Then create new touchpoint with alert value
 
-  @NX-1578 @initBrowser
+  @NX-1578 @initBrowser @closeBrowser
   Scenario: Verify delete sms touchpoint creation
     Given login
     Then navigate to intent management
@@ -405,7 +407,7 @@ Feature: positive flow of im program creation
     Then create sms touchpoint from sheet "smsTouchpoint"
     Then delete sms touchpoint from sheet "smsTouchpoint"
 
-  @NX-1579 @initBrowser
+  @NX-1579 @initBrowser @closeBrowser
   Scenario: Verify Customer Care touchpoint delete functionality-1579
     Given login
     Then navigate to intent management
@@ -414,7 +416,7 @@ Feature: positive flow of im program creation
     Then click create new touchpoint
     Then create new customer care touchpoint and delete
 
-  @NX-1575 @NX-8393 @initBrowser
+  @NX-1575 @NX-8393 @initBrowser @closeBrowser
   Scenario: Verify Customer Care touchpoint edit functionality-1575
     Given login
     Then navigate to intent management
@@ -423,7 +425,7 @@ Feature: positive flow of im program creation
     Then click customer care edit touchpoint
     Then edit customer care touchpoint
 
-  @NX-2106 @initBrowser
+  @NX-2106 @initBrowser @closeBrowser
   Scenario: Verify Cross Site Scripting in Editing Customer Care Touch Point-2106
     Given login
     Then navigate to intent management
@@ -432,7 +434,7 @@ Feature: positive flow of im program creation
     Then click customer care edit touchpoint
     Then edit customer care touchpoint with security alert
 
-  @NX-1570 @initBrowser
+  @NX-1570 @initBrowser @closeBrowser
   Scenario: Verify validation API touchpoint  creation
     Given login
     Then navigate to intent management
@@ -553,12 +555,14 @@ Feature: positive flow of im program creation
     Then navigate to customer care
     Then verify edit and delete button touchpoint
 
-  @NX-1568 @initBrowser
+  @NX-1568 @initBrowser @closeBrowser
   Scenario: Verify edit validation sms touchpoint creation
     Given login
     Then navigate to intent management
     Then navigate to touchpoints
     Then create sms touchpoint from sheet "smsTouchpoint"
+     Then refresh
+      Then navigate to sms
     Then edit sms touchpoint validation check from sheet "smsTouchpoint"
 
   @NX-1566 @initBrowser @closeBrowser
@@ -582,6 +586,8 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to touchpoints
     Then create sms touchpoint from sheet "smsTouchpoint"
+     Then refresh
+      Then navigate to sms
     Then edit sms touchpoint from sheet "smsTouchpoint"
 
   @NX-8422 @initBrowser @closeBrowser
@@ -601,7 +607,7 @@ Feature: positive flow of im program creation
     Then navigate to smart phone app
     Then create new smart phone app touch point from sheet "appTouchpoint"
 
-  @NX-8504 @initBrowser @closeBrowser
+  @NX-8504 @NX-7192 @initBrowser @closeBrowser
   Scenario: Verify displaying the edited touchpoint name in mapped program-8504
     Given login
     Then navigate to intent management
@@ -610,31 +616,10 @@ Feature: positive flow of im program creation
     Then create sms touchpoint from sheet "smsTouchpoint"
     Then check sms touchpoint in grid "smsTouchpoint"
     Then navigate to landing page
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
     Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then verify create program page "programdetails" and offer catalog sheet "default" and touchpoint from sheet "smsTouchpoint"
     Then navigate to touchpoints
     Then navigate to sms
     Then create sms touchpoint from sheet "smsTouchpoint"
@@ -643,7 +628,7 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails" for edit
-    Then verify edit program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then verify edit program page "programdetails" and offer catalog sheet "default" and touchpoint from sheet "smsTouchpoint"
     Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
@@ -667,12 +652,15 @@ Feature: positive flow of im program creation
     Then navigate to ussd
     Then verify edit button for USSD touchpoint
 
-  @NX-8459 @initBrowser @closeBrowser
+  @NX-8459 @initBrowser @closeBro
   Scenario: Check whether Cluster page/tab is available for Segment  analysis if model is not activated-8459
     Given login
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
+    Then create SegmentAnalysis from sheet "SegmentAnalysisName"
+Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
+Then wait until status is changed to "C"
     Then click on options icon
     Then verify cluster option
     Then choose a segment analysis
@@ -694,21 +682,10 @@ Feature: positive flow of im program creation
   @NX-7221 @initBrowser @closeBrowser
   Scenario: Verify adding a new rule to an active program without changing the basic configuration program- 7221
     Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    Then create new offer from sheet "rechargeSMS" with product "default"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -729,11 +706,11 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+    Then create new rule from sheet "default" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
     Then verify rule created from sheet "rule"
     Then navigate to programs
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+    Then create new rule from sheet "default" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
     Then verify rule created from sheet "rule"
 
   @NX-4064 @initBrowser
@@ -778,7 +755,7 @@ Feature: positive flow of im program creation
     Then click on events tab
     Then wait for offer eligible event in consumer profile
 
-  @NX-8478 @initBrowser @closeBrowser
+  @NX-8478 @initBrowser 
   Scenario: Verify Failure Case of Cluster Model.
     Given login
     Then navigate to intent management

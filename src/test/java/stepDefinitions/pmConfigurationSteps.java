@@ -51,7 +51,7 @@ public class pmConfigurationSteps extends Init{
 		commonObjects.clickOptionsIcon();
 		commonObjects.clickEditOption();
 		BroadcastSteps broadcastSteps = new BroadcastSteps();
-		broadcastSteps.verifyTargetConditionDetails("segmentAgeGT40");
+		broadcastSteps.verifyTargetConditionDetails("segmentAgeGT30");
 		pmConfigurationPage.clickSegmentSaveButton();
 	}
 	
@@ -95,7 +95,7 @@ public class pmConfigurationSteps extends Init{
 		commonObjects.clickOptionsIcon();
 		commonObjects.clickEditOption();
 		BroadcastSteps broadcastSteps = new BroadcastSteps();
-		broadcastSteps.verifyTargetConditionDetails("segmentAgeGT40");
+		broadcastSteps.verifyTargetConditionDetails("segmentAgeGT30");
 		pmConfigurationPage.clickSegmentSaveButton();
 	}
 	

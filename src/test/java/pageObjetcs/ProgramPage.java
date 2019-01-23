@@ -532,7 +532,7 @@ private WebElement rulessenderid2 ;
 		clickPorogramProceedButton();
 		//System.out.println("test");
 		
-		if(!offerType.contains("STV")) {
+//		if(!offerType.contains("STV")) {
 		clickTrackingSessionField();
 		Thread.sleep(3000);
 		optionAfterselect();
@@ -542,7 +542,7 @@ private WebElement rulessenderid2 ;
 		ruleafterinput2(); 
 		ruledays();
 		Thread.sleep(2000);
-		}
+//		}
 		if(touchpointType.contentEquals("sms")){
 		rulessenderid();
 		addresssprule();
@@ -765,6 +765,10 @@ private WebElement rulessenderid2 ;
 	public void selectOfferCatalog() throws InterruptedException {
 		jswait.loadClick(createProgramChooseOfferCatalog);
 		jswait.loadClick(createProgramCatalogSelect);
+	}
+	public void selectOfferCatalog(String catalog) throws InterruptedException {
+		jswait.loadSendKeys(createProgramChooseOfferCatalog,catalog);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+catalog+"')]");
 	}
 	public void enterProgramDetails(String name)throws InterruptedException {
 		
