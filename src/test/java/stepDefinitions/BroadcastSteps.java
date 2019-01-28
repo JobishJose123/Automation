@@ -3422,4 +3422,137 @@ int hours = rightNow.get(Calendar.HOUR);
 }
 
 
+@Then("^BC Settings page validation$")
+public void bc_Settings_page_validation() throws Throwable {
+   
+}
+
+
+
+@Then("^click on BC edit button from sheet \"([^\"]*)\"$")
+public void click_on_BC_edit_button_from_sheet(String sheet) throws Throwable {
+	eh.setExcelFile("bcInputData", sheet);
+	commonObjects.filterName(eh.getCell(1, 0).toString());
+	commonObjects.clickOptionsIcon();
+	commonObjects.clickEditOption(); 
+}
+
+@Then("^click on BC edit button from workbook \"([^\"]*)\" sheet \"([^\"]*)\"$")
+public void click_on_BC_edit_button_from_workbook_sheet(String workbook, String sheet) throws Throwable {
+	eh.setExcelFile(workbook, sheet);
+	commonObjects.filterName(eh.getCell(1, 0).toString());
+	commonObjects.clickOptionsIcon();
+	commonObjects.clickEditOption();
+}
+
+
+@Then("^view the bc from workbook \"([^\"]*)\" in sheet \"([^\"]*)\"$")
+public void view_the_bc_from_workbook_in_sheet(String workbook, String sheet) throws Throwable {
+	
+	eh.setExcelFile(workbook, sheet);
+	String name = (String) eh.getCell(1, 0);
+	commonObjects.filterName(name);	
+	//broadcastPageObjects.broadcastView(name);
+	commonObjects.clickOptionsIcon();
+	broadcastPageObjects.clickBroadcastViewOption();
+	Thread.sleep(2000);
+    
+}
+
+//****************Editing*****************************
+
+@Then("^editing the BC from sheet \"([^\"]*)\" basic details With edit data from sheet \"([^\"]*)\"$")
+public void editing_the_BC_from_sheet_basic_details_With_edit_data_from_sheet(String oneoffsheet, String oneoffeditsheet) throws Throwable {
+	eh.setExcelFile("bcInputData", oneoffsheet);
+	String bcName=(eh.getCell(1, 0).toString())+"Edited";
+	eh.setExcelFile("bcInputDataForEdit", oneoffeditsheet);
+	eh.setCell(1, 0, bcName);
+	broadcastPageObjects.editingTheBcBasicDeatils(bcName, oneoffeditsheet);
+	broadcastPageObjects.clickProceedButton();
+	broadcastPageObjects.clickProceedButton();
+	broadcastPageObjects.clickProceedButton();
+		
+}
+
+
+@Then("^edit the broadcast with taget condition (.*)$")
+public void edit_the_broadcast_with_taget_condition(String condition) throws Throwable {
+	System.out.println(condition);
+	Thread.sleep(8000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(6000);
+	broadcastPageObjects.editingTheBCTargetConditionDetails(condition);
+	broadcastPageObjects.clickProceedButton();
+	broadcastPageObjects.clickProceedButton();	
+}
+
+
+@Then("^edit the Delevery tab details from workbook \"([^\"]*)\" sheet \"([^\"]*)\"$")
+public void edit_the_Delevery_tab_details_from_workbook_sheet(String workbook, String sheet) throws Throwable {
+	Thread.sleep(3000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(2000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(2000);
+	broadcastPageObjects.clickProceedButton();
+	
+	broadcastPageObjects.editTheDeleveryTabDetails(sheet);
+	
+}	
+
+
+
+@Then("^edit the target List in taget tab from workbook \"([^\"]*)\" sheet \"([^\"]*)\"$")
+public void edit_the_target_List_in_taget_tab_from_workbook_sheet(String workbook, String sheet) throws Throwable {
+	eh.setExcelFile(workbook, sheet);	
+	Thread.sleep(3000);
+	broadcastPageObjects.clickProceedButton();
+	broadcastPageObjects.selectBaseList(eh.getCell(1, 5).toString());
+	Thread.sleep(3000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(3000);
+	broadcastPageObjects.clickProceedButton();
+}
+
+
+
+//************Verification**********************
+
+@Then("^verify the basic details before editing the BC data from sheet \"([^\"]*)\"$")
+public void verify_the_basic_details_before_editing_the_BC_data_from_sheet(String sheet) throws Throwable {
+	broadcastPageObjects.verifyTheBcBasicDetailsBeforeEdit(sheet);
+}
+
+
+
+
+@Then("^verify the basic details from Broadcast View and data sheet \"([^\"]*)\"$")
+public void verify_the_basic_details_from_Broadcast_View_and_data_sheet(String sheet) throws Throwable {
+	
+		broadcastPageObjects.verifyTheBcBasicDetails(sheet);
+		
+}
+
+@Then("^verify the target conditions from Broadcast View and condition (.*)$")
+public void verify_the_target_conditions_from_Broadcast_View_and_condition_customerWasSentTheTrialMessage(String condition) throws Throwable {
+	broadcastPageObjects.verifyTheBCTargetConditionDetails(condition);
+}
+
+
+@Then("^Verify the BC Delivery tab details from Broadcast View from workbook \"([^\"]*)\" in sheet \"([^\"]*)\"$")
+public void verify_the_BC_Delivery_tab_details_from_Broadcast_View_from_workbook_in_sheet(String workbook, String sheet) throws Throwable {
+    
+	broadcastPageObjects.verifyDeleveryTabDetails(workbook,sheet);
+	
+}
+
+@Then("^verify the BC taget List in BC View from workbook \"([^\"]*)\" sheet \"([^\"]*)\"$")
+public void verify_the_BC_taget_List_in_BC_View_from_workbook_sheet(String workbook, String sheet) throws Throwable {
+	
+	broadcastPageObjects.verifyTheBCTargetList(workbook,sheet);
+	
+}
+
+
+
 }

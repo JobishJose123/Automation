@@ -39,6 +39,7 @@ import baseClasses.JSWaiter;
 import baseClasses.PdfReader;
 import baseClasses.SQLHandler;
 import baseClasses.TimeoutImpl;
+import stepDefinitions.BroadcastSteps;
 
 public class BroadcastPageObjects extends Init {
 	public BroadcastPageObjects() {
@@ -2453,7 +2454,238 @@ clickProceedButton();
 }
 
 
+public void clickOnSavedSegments() throws InterruptedException {
+	
+	jswait.loadClick(savedSegmentRadioButtion);
+}
+
+public void selectSavedSegmentSelectorField(String condition) throws Exception {
+	
+	jswait.loadClick(savedSegmentSelectorField);
+	jswait.loadClick("//paper-item[contains(.,'"+condition+"')]");
+}
+
+//******************Editing the BC*********************
+
+public void selectLabelDynamically(String label) throws InterruptedException {
+	jswait.loadClick(labelSelector);
+	jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+label+"')]");
+}
 
 
+
+
+	public void editingTheBcBasicDeatils(String bcName, String sheet1) throws InterruptedException {
+		eh.setExcelFile("bcInputDataForEdit", sheet1);
+		enterBroadcastName(bcName);
+		enterBroadcastPurpose(eh.getCell(1, 2).toString());
+		selectLabelDynamically(eh.getCell(1, 3).toString());
+//		String trigger=eh.getCell(1, 7).toString();
+//		if (trigger.contentEquals("triggerable") || trigger.contentEquals("seedingTriggerable")|| trigger.contentEquals("seedingTriggerableRecurringBC")) {
+//			System.out.println("inside triggerable");
+//			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+//			Thread.sleep(1000);
+//			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+//			Thread.sleep(2000);
+//			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
+//			Thread.sleep(1500);
+//			}
+		selectInventory(eh.getCell(1, 4).toString());	
+	}
+	
+	public void editingTheBCTargetConditionDetails(String condition) throws Exception {
+		TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+		commonObjects.clickOptionsIcon();
+		targetConditionObjects.clickTargetConditionDeletet();
+		if(condition.contains("segmentAgeGT40")) {
+			clickOnSavedSegments();
+			selectSavedSegmentSelectorField(condition);
+		}else if(condition.equals("SegmentForMoreThanTenConditions")) {
+			clickOnSavedSegments();
+			selectSavedSegmentSelectorField(condition);
+		}else if(condition.equals("SegmentForMoreThanTenConditionsOR")) {
+		     clickOnSavedSegments();
+			selectSavedSegmentSelectorField(condition);
+		}else { 
+			targetConditionObjects.clickBasicTargetCondition(condition);
+		}
+			
+		
+		
+	}
+	
+	
+	
+	
+	public void editTheDeleveryTabDetails(String sheet) throws Exception {
+		BroadcastSteps broascastSteps= new BroadcastSteps();
+		eh.setExcelFile("bcInputDataForEdit", sheet);
+		
+		broascastSteps.enterDeliveryTabDetails(eh.getCell(1, 7).toString(),sheet);	
+	}
+	
+	
+	
+	//*****************************verification******************
+	
+	public void verifyTheBcBasicDetailsBeforeEdit(String sheet) throws Exception {
+		jswait.loadClick(basicDetailsBC);
+		Thread.sleep(3000);
+		eh.setExcelFile("bcInputData", sheet);
+		Assert.assertTrue(driver.findElement(By.xpath(".//p[contains(.,'"+eh.getCell(1, 0).toString()+"')]")).isDisplayed());
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'Purpose of BC is NOTHING')]"));
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'Crossell')]"));
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+INVENTORY_UNLIMITED+"')]"));
+	}
+	
+	public void verifyTheBcBasicDetails(String sheet) throws InterruptedException {
+		jswait.loadClick(basicDetailsBC);
+		Thread.sleep(3000);
+		eh.setExcelFile("bcInputDataForEdit", sheet);		
+		Assert.assertTrue(driver.findElement(By.xpath(".//p[contains(.,'"+eh.getCell(1, 0).toString()+"')]")).isDisplayed());
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+eh.getCell(1, 2).toString()+"')]"));
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+eh.getCell(1, 3).toString()+"')]"));
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+eh.getCell(1, 4).toString()+"')]"));
+				
+		eM.setExcelFile("campaignInputData","campaignBC");
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+eM.getCell(1, 0).toString()+"')]"));
+				
+	}
+	
+	public void verifyTheBCTargetList(String workbook, String sheet) throws InterruptedException {
+		eh.setExcelFile(workbook, sheet);
+		assertTrue(targetDetailsBC.isDisplayed());
+		jswait.loadClick(targetDetailsBC);
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+eh.getCell(1,5).toString()+"')]"));
+		// BASE_LIST		
+	}
+	
+	public void verifyDeleveryTabDetails(String workbook, String sheet) throws InterruptedException {
+
+		jswait.loadClick(deliveryDetailsBC);
+
+		Calendar rightNow = Calendar.getInstance();
+
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH) + 2;
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min -= 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+
+		String date = "";
+		String month1 = new SimpleDateFormat("MMM").format(month);
+
+			if (am_pm == 0) {
+				date = day + " " + month1 + " " + year + " " + String.format("%02d", hours) + ":"
+						+ String.format("%02d", min) + " AM " + "GMT+05:30";
+			} else {
+				date = day + " " + month1 + " " + year + " " + String.format("%02d", hours) + ":"
+						+ String.format("%02d", min) + " PM " + "GMT+05:30";
+			}
+			System.out.println(date);
+		
+		eh.setExcelFile(workbook, sheet);
+		if ((eh.getCell(1, 7).toString()).contains("one-off")) {
+			try {
+				Assert.assertTrue(
+						jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'" + date + "')]"));
+			} catch (Exception e) {
+				if (am_pm == 0) {
+					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
+							+ String.format("%02d", "59") + " AM " + "GMT+05:30";
+				} else {
+					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
+							+ String.format("%02d", "59") + " PM " + "GMT+05:30";
+				}
+				System.out.println("catch" + date);
+			}
+
+		} else if ((eh.getCell(1, 7).toString()).contains("recurring")) {
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'22 Jan 2019')]"));
+		}
+
+	}
+	
+
+	public void verifyTheBCTargetConditionDetails(String segmentCondition) throws InterruptedException {
+		jswait.loadClick(targetDetailsBC);
+		if(segmentCondition.contentEquals("customerWasSentTheTrialMessage")) {
+		Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));
+		
+		}else if(segmentCondition.contentEquals("digitalPersonaGT15")) {
+			Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+DIGITAL_PERSONA_FIELD+"')]"));
+			
+		}else if(segmentCondition.contentEquals("customerDemographicsGT25")) {
+			Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+DEMOGRAPHICS_FIELD+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("learnedBehaviourGT35")) {
+			Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+LEARNED_BEHAVIOR_FIELD+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("analyticalScoresGT45")) {
+			Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("digitalEngagementGT235")) {
+			Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+DIGITAL_ENGAGEMENT_FIELD+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("customerLocationInsightsGT5")) {
+			Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+LOCATION_PROFILE_FIELD+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("customerList")) {
+			Assert.assertTrue(jswait.checkVisibility("//fixed-segment//b[contains(.,'"+BASE_LIST+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("discoveredClusters200")) {
+			Assert.assertTrue(jswait.checkVisibility("//fixed-segment//b[contains(.,'"+SELENIUM_DISCOVERED_CLUSTERS_LIST+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("customerDrivenEvent")) {
+			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("usageMetric")) {
+			Assert.assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'"+SELENIUM_USAGE_METRIC+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("eventCounts")) {
+			Assert.assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'"+SELENIUM_EVENT_COUNTS+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("revenueMetric")) {
+			Assert.assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'"+SELENIUM_REVENUE_METRIC+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("IMEventsOfferAccepted")) {
+			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Offer accepted')]"));	
+			
+		}else if(segmentCondition.contentEquals("IMEventsCustomerCareUsage")) {
+			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer Care Usage')]"));	
+			
+		}else if(segmentCondition.contentEquals("customerDeviceInfo")) {
+			Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+DEVICE_INFO_FIELD+"')]"));	
+			
+		}else if(segmentCondition.contentEquals("segmentAgeGT40")) {
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Segment Name')]/..//p[contains(.,'segmentAgeGT40')]"));	
+			
+		}else if(segmentCondition.contentEquals("customerWasSentTheTrialMessage")) {
+			Assert.assertTrue(jswait.checkVisibility("//target-event[contains(.,'This event has not occured')]"));
+			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));
+			
+		}else if(segmentCondition.contentEquals("customerDrivenEventNotOccurred")) {
+			Assert.assertTrue(jswait.checkVisibility("//target-event[contains(.,'This event has not occured')]"));
+			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]"));	
+		}
+		else if(segmentCondition.contentEquals("conditionForANDOperation")||segmentCondition.contentEquals("conditionForOROperation")) {
+			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));	
+			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]"));	
+		}	
+	}
+	
+	
 
 }
+
+
+

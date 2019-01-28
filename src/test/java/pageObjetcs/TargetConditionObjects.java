@@ -387,306 +387,327 @@ public class TargetConditionObjects extends Init {
 	 }
 	 
 	 public void clickBasicTargetCondition(String event) throws InterruptedException {
-		if(event.contentEquals("IMEventsOfferAccepted")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadSendKeys(EventFieldSelector,"Offer accepted");
-			jswait.loadClick(eventOfferAccepted);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("segmentAgeGT40")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeCustomerProfileInfo);
-			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(CustomerInsightFieldAge);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsGreaterThan);
-			jswait.loadSendKeys(isGreaterThanValue,"40");
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("customerDrivenEvent")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeCustomerDrivenEvents);
-			jswait.loadSendKeys(EventFieldSelector,SELENIUM_CUSTOMER_DRIVEN_EVENT);
-			jswait.loadClick(eventCustomerDrivenEvent);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("digitalPersonaGT15")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeCustomerDigitalPersona);
-			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(digitalPersonaField);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsGreaterThan);
-			jswait.loadSendKeys(isGreaterThanValue,"15");
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("customerList")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeCustomerList);
-			jswait.loadSendKeys(CustomerListFieldSelector,BASE_LIST);
-			jswait.loadClick(CustomerListSelection);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsSubscribed);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("discoveredClusters200")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeCustomerList);
-			jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_DISCOVERED_CLUSTERS_LIST);
-			jswait.loadClick(discoveredClustersListSelection);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsSubscribed);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("customerDemographicsGT25")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeCustomerDemographics);
-			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(demographicsField);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsGreaterThan);
-			jswait.loadSendKeys(isGreaterThanValue,"25");
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("learnedBehaviourGT35")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeLearnedBehaviors);
-			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(learnedBehaviorField);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsGreaterThan);
-			jswait.loadSendKeys(isGreaterThanValue,"35");
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("analyticalScoresGT45")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeAIPoweredAnalyticalScores);
-			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(analyticalScoresField);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsGreaterThan);
-			jswait.loadSendKeys(isGreaterThanValue,"45");
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("digitalEngagementGT235")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeDigitalEngagementPreferences);
-			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(digitalEngagementField);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsGreaterThan);
-			jswait.loadSendKeys(isGreaterThanValue,"235");
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("customerLocationInsightsGT5")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeCustomerLocationInsights);
-			jswait.loadClick(CustomerInsightFieldSelector);
-			Thread.sleep(3000);
-			CustomerInsightFieldSelector.sendKeys(LOCATION_PROFILE_FIELD);
-			jswait.loadClick(CustomerInsightLocation);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsLessThan);
-			jswait.loadSendKeys(isGreaterThanValue,"5");
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("customerDeviceInfo")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeCustomerDeviceInfo);
-			jswait.loadClick(CustomerInsightFieldSelector);
-			jswait.loadClick(CustomerDeviceInfo);
-			jswait.loadClick(conditionSelector);
-			jswait.loadClick(conditionIsNot);
-			jswait.loadSendKeys(isGreaterThanValue,"6666");
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("customerWasSentTheMessage")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadSendKeys(EventFieldSelector,"Customer was sent the message");
-			jswait.loadClick(eventCustomerWasSentTheMessage);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("customerWasSentTheTrialMessage")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadSendKeys(EventFieldSelector,"Customer was sent the trial message");
-			jswait.loadClick(eventCustomerWasSentTheTrialMessage);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("IMEventsOfferDeclined")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadSendKeys(EventFieldSelector,"Offer declined");
-			jswait.loadClick(eventOfferDeclined);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("IMEventsOfferRecommended")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadSendKeys(EventFieldSelector,"Offer Recommended");
-			jswait.loadClick(eventOfferRecommended);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("IMEventsCustomerCareUsage")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadSendKeys(EventFieldSelector,"Customer Care Usage");
-			jswait.loadClick(eventOfferCustomerCareUsage);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		//to change
-		else if(event.contentEquals("IMEventsOfferDeclined")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadSendKeys(EventFieldSelector,"Offer declined");
-			jswait.loadClick(eventOfferDeclined);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("IMEventsOfferRecommended")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadSendKeys(EventFieldSelector,"Offer Recommended");
-			jswait.loadClick(eventOfferRecommended);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("IMEventsCustomerCareUsage")){
-			jswait.loadClick(targetConditionTypeSelector);
-			jswait.loadClick(targetConditionTypeSystemEvents);
-			jswait.loadSendKeys(EventFieldSelector,"Customer Care Usage");
-			jswait.loadClick(eventOfferCustomerCareUsage);
-			jswait.loadClick(eventDateAndTimeSelector);
-			jswait.loadClick(allEventsBefore);
-			jswait.loadClick(selectFieldSelector);
-			jswait.loadClick(nowSelect);
-			jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("usageMetric")){
-			jswait.loadClick(targetConditionTypeSelector);
-		jswait.loadClick(targetConditionTypeUsageMetrics);
-		jswait.loadClick(usageMetricField);
-		jswait.loadSendKeys(usageMetricField,SELENIUM_USAGE_METRIC);
-		jswait.loadClick(usageMetricUnique);
-		jswait.loadClick(metricWeekSelector);
-		jswait.loadClick(metricByMonthOption);
-		jswait.loadClick(metricDaySelector);
-		jswait.loadClick(metricMaxOf);
-		jswait.loadClick(metricMaxOfMonthsSelect);
-		jswait.loadClick(metricMaxOfMonthThisMonth);
-		jswait.loadClick(metricMaxOfMonthLastMonth);
-		jswait.loadClick(metricMaxOfMonthLast2Month);
-		jswait.loadClick(metricMaxOfMonthLast3Month);
-		jswait.loadClick(metricMaxOfMonthLast4Month);
-		jswait.loadClick(metricMaxOfMonthLast5Month);
-		jswait.loadClick(metricMaxOfMonthLast6Month);
-		jswait.loadClick(metricMaxOfMonthLast7Month);
-		jswait.loadClick(metricMaxOfMonthLast8Month);
-		jswait.loadClick(metricMaxOfMonthLast9Month);
-		
-		jswait.loadClick(metricConditionField);
-		jswait.loadClick(conditionIsGreaterThan);
-		jswait.loadSendKeys(isGreaterThanValue,"0");
-		jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("revenueMetric")){
-			jswait.loadClick(targetConditionTypeSelector);
-		jswait.loadClick(targetConditionTypeRevenueMetrics);
-		jswait.loadClick(usageMetricField);
-		jswait.loadSendKeys(usageMetricField,SELENIUM_REVENUE_METRIC);
-		jswait.loadClick(revenueMetricSelect);
-		jswait.loadClick(metricWeekSelector);
-		jswait.loadClick(metricByMonthOption);
-		jswait.loadClick(metricDaySelector);
-		jswait.loadClick(metricMaxOf);
-		jswait.loadClick(metricMaxOfMonthsSelect);
-		jswait.loadClick(metricMaxOfMonthThisMonth);
-		jswait.loadClick(metricMaxOfMonthLastMonth);
-		jswait.loadClick(metricMaxOfMonthLast2Month);
-		jswait.loadClick(metricMaxOfMonthLast3Month);
-		jswait.loadClick(metricMaxOfMonthLast4Month);
-		jswait.loadClick(metricMaxOfMonthLast5Month);
-		jswait.loadClick(metricMaxOfMonthLast6Month);
-		jswait.loadClick(metricMaxOfMonthLast7Month);
-		jswait.loadClick(metricMaxOfMonthLast8Month);
-		jswait.loadClick(metricMaxOfMonthLast9Month);
-		
-		jswait.loadClick(metricConditionField);
-		jswait.loadClick(conditionIsGreaterThan);
-		jswait.loadSendKeys(isGreaterThanValue,"0");
-		jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contentEquals("eventCounts")){
-			jswait.loadClick(targetConditionTypeSelector);
-		jswait.loadClick(targetConditionTypeEventCounts);
-		jswait.loadClick(usageMetricField);
-		jswait.loadSendKeys(usageMetricField,SELENIUM_EVENT_COUNTS);
-		jswait.loadClick(eventCountsSelect);
-		jswait.loadClick(metricWeekSelector);
-		jswait.loadClick(metricByMonthOption);
-		jswait.loadClick(metricDaySelector);
-		jswait.loadClick(metricMaxOf);
-		jswait.loadClick(metricMaxOfMonthsSelect);
-		jswait.loadClick(metricMaxOfMonthThisMonth);
-		jswait.loadClick(metricMaxOfMonthLastMonth);
-		jswait.loadClick(metricMaxOfMonthLast2Month);
-		jswait.loadClick(metricMaxOfMonthLast3Month);
-		jswait.loadClick(metricMaxOfMonthLast4Month);
-		jswait.loadClick(metricMaxOfMonthLast5Month);
-		jswait.loadClick(metricMaxOfMonthLast6Month);
-		jswait.loadClick(metricMaxOfMonthLast7Month);
-		jswait.loadClick(metricMaxOfMonthLast8Month);
-		jswait.loadClick(metricMaxOfMonthLast9Month);
-		
-		jswait.loadClick(metricConditionField);
-		jswait.loadClick(conditionIsGreaterThan);
-		jswait.loadSendKeys(isGreaterThanValue,"0");
-		jswait.loadClick(targetConditionSave);
-		}
-		else if(event.contains("groupIdCondition_")){
-			clickBasicTargetConditionWithGroupId(event);
-		}
-		else {
-			Assert.assertFalse("Condition not handled in Target", true);
-		}
+			if(event.contentEquals("IMEventsOfferAccepted")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Offer accepted");
+				jswait.loadClick(eventOfferAccepted);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("customerDrivenEvent")||event.contentEquals("customerDrivenEventNotOccurred")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerDrivenEvents);
+				jswait.loadSendKeys(EventFieldSelector,SELENIUM_CUSTOMER_DRIVEN_EVENT);
+				jswait.loadClick(eventCustomerDrivenEvent);
+				if(event.contentEquals("customerDrivenEventNotOccurred")) {
+					jswait.loadClick("(//*[@id=\"checkboxContainer\"])[2]");
+				}
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("digitalPersonaGT15")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerDigitalPersona);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(digitalPersonaField);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsGreaterThan);
+				jswait.loadSendKeys(isGreaterThanValue,"15");
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("customerList")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerList);
+				jswait.loadSendKeys(CustomerListFieldSelector,BASE_LIST);
+				jswait.loadClick(CustomerListSelection);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsSubscribed);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("discoveredClusters200")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerList);
+				jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_DISCOVERED_CLUSTERS_LIST);
+				jswait.loadClick(discoveredClustersListSelection);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsSubscribed);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("customerDemographicsGT25")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerDemographics);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(demographicsField);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsGreaterThan);
+				jswait.loadSendKeys(isGreaterThanValue,"25");
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("learnedBehaviourGT35")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeLearnedBehaviors);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(learnedBehaviorField);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsGreaterThan);
+				jswait.loadSendKeys(isGreaterThanValue,"35");
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("analyticalScoresGT45")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeAIPoweredAnalyticalScores);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(analyticalScoresField);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsGreaterThan);
+				jswait.loadSendKeys(isGreaterThanValue,"45");
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("digitalEngagementGT235")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeDigitalEngagementPreferences);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(digitalEngagementField);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsGreaterThan);
+				jswait.loadSendKeys(isGreaterThanValue,"235");
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("customerLocationInsightsGT5")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerLocationInsights);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				Thread.sleep(3000);
+				CustomerInsightFieldSelector.sendKeys(LOCATION_PROFILE_FIELD);
+				jswait.loadClick(CustomerInsightLocation);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsLessThan);
+				jswait.loadSendKeys(isGreaterThanValue,"5");
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("customerDeviceInfo")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerDeviceInfo);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(CustomerDeviceInfo);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsNot);
+				jswait.loadSendKeys(isGreaterThanValue,"6666");
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("customerWasSentTheMessage")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Customer was sent the message");
+				jswait.loadClick(eventCustomerWasSentTheMessage);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("customerWasSentTheTrialMessage")||event.contentEquals("customerWasSentTheTrialMessageNOtOccurred")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Customer was sent the trial message");
+				jswait.loadClick(eventCustomerWasSentTheTrialMessage);
+				if(event.contentEquals("customerWasSentTheTrialMessageNOtOccurred")){
+					jswait.loadClick("(//*[@id=\"checkboxContainer\"])[2]");
+				}
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("IMEventsOfferDeclined")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Offer declined");
+				jswait.loadClick(eventOfferDeclined);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("IMEventsOfferRecommended")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Offer Recommended");
+				jswait.loadClick(eventOfferRecommended);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("IMEventsCustomerCareUsage")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Customer Care Usage");
+				jswait.loadClick(eventOfferCustomerCareUsage);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			//to change
+			else if(event.contentEquals("IMEventsOfferDeclined")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Offer declined");
+				jswait.loadClick(eventOfferDeclined);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("IMEventsOfferRecommended")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Offer Recommended");
+				jswait.loadClick(eventOfferRecommended);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("IMEventsCustomerCareUsage")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Customer Care Usage");
+				jswait.loadClick(eventOfferCustomerCareUsage);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("usageMetric")){
+				jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeUsageMetrics);
+			jswait.loadClick(usageMetricField);
+			jswait.loadSendKeys(usageMetricField,SELENIUM_USAGE_METRIC);
+			jswait.loadClick(usageMetricUnique);
+			jswait.loadClick(metricWeekSelector);
+			jswait.loadClick(metricByMonthOption);
+			jswait.loadClick(metricDaySelector);
+			jswait.loadClick(metricMaxOf);
+			jswait.loadClick(metricMaxOfMonthsSelect);
+			jswait.loadClick(metricMaxOfMonthThisMonth);
+			jswait.loadClick(metricMaxOfMonthLastMonth);
+			jswait.loadClick(metricMaxOfMonthLast2Month);
+			jswait.loadClick(metricMaxOfMonthLast3Month);
+			jswait.loadClick(metricMaxOfMonthLast4Month);
+			jswait.loadClick(metricMaxOfMonthLast5Month);
+			jswait.loadClick(metricMaxOfMonthLast6Month);
+			jswait.loadClick(metricMaxOfMonthLast7Month);
+			jswait.loadClick(metricMaxOfMonthLast8Month);
+			jswait.loadClick(metricMaxOfMonthLast9Month);
 			
-	 }
+			jswait.loadClick(metricConditionField);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"0");
+			jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("revenueMetric")){
+				jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeRevenueMetrics);
+			jswait.loadClick(usageMetricField);
+			jswait.loadSendKeys(usageMetricField,SELENIUM_REVENUE_METRIC);
+			jswait.loadClick(revenueMetricSelect);
+			jswait.loadClick(metricWeekSelector);
+			jswait.loadClick(metricByMonthOption);
+			jswait.loadClick(metricDaySelector);
+			jswait.loadClick(metricMaxOf);
+			jswait.loadClick(metricMaxOfMonthsSelect);
+			jswait.loadClick(metricMaxOfMonthThisMonth);
+			jswait.loadClick(metricMaxOfMonthLastMonth);
+			jswait.loadClick(metricMaxOfMonthLast2Month);
+			jswait.loadClick(metricMaxOfMonthLast3Month);
+			jswait.loadClick(metricMaxOfMonthLast4Month);
+			jswait.loadClick(metricMaxOfMonthLast5Month);
+			jswait.loadClick(metricMaxOfMonthLast6Month);
+			jswait.loadClick(metricMaxOfMonthLast7Month);
+			jswait.loadClick(metricMaxOfMonthLast8Month);
+			jswait.loadClick(metricMaxOfMonthLast9Month);
+			
+			jswait.loadClick(metricConditionField);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"0");
+			jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("eventCounts")){
+				jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeEventCounts);
+			jswait.loadClick(usageMetricField);
+			jswait.loadSendKeys(usageMetricField,SELENIUM_EVENT_COUNTS);
+			jswait.loadClick(eventCountsSelect);
+			jswait.loadClick(metricWeekSelector);
+			jswait.loadClick(metricByMonthOption);
+			jswait.loadClick(metricDaySelector);
+			jswait.loadClick(metricMaxOf);
+			jswait.loadClick(metricMaxOfMonthsSelect);
+			jswait.loadClick(metricMaxOfMonthThisMonth);
+			jswait.loadClick(metricMaxOfMonthLastMonth);
+			jswait.loadClick(metricMaxOfMonthLast2Month);
+			jswait.loadClick(metricMaxOfMonthLast3Month);
+			jswait.loadClick(metricMaxOfMonthLast4Month);
+			jswait.loadClick(metricMaxOfMonthLast5Month);
+			jswait.loadClick(metricMaxOfMonthLast6Month);
+			jswait.loadClick(metricMaxOfMonthLast7Month);
+			jswait.loadClick(metricMaxOfMonthLast8Month);
+			jswait.loadClick(metricMaxOfMonthLast9Month);
+			
+			jswait.loadClick(metricConditionField);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"0");
+			jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contains("groupIdCondition_")){
+				clickBasicTargetConditionWithGroupId(event);
+			}
+			else if(event.contains("conditionForANDOperation")||event.contains("conditionForOROperation")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Customer was sent the trial message");
+				jswait.loadClick(eventCustomerWasSentTheTrialMessage);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+				
+				if(event.contains("conditionForANDOperation")) {
+				clickManualAndButton();
+				}else {
+					clickManualOrButton();
+				}
+				
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerDrivenEvents);
+				jswait.loadSendKeys(EventFieldSelector,SELENIUM_CUSTOMER_DRIVEN_EVENT);
+				jswait.loadClick(eventCustomerDrivenEvent);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[2])[2]");
+				
+			}
+				
+		 }
 	 
 	 
 	 public void clickBasicTargetConditionWithAgeAndConsumerInsight() throws InterruptedException {
