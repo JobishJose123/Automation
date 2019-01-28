@@ -87,6 +87,8 @@ public class SegmentAnalysisObjects extends Init {
 	@FindBy(xpath=".//*[@id='analysisForm']//paper-icon-button[2]")
 	private WebElement createSegmentAnalysisList;
 	
+	@FindBy(xpath="//a[@class='analysisName style-scope analysis-list']")
+	private WebElement SelectAnalysisName;
 	
 	
 	
@@ -1119,6 +1121,9 @@ public void clustertabledetailsandsave() throws Exception {
 		jswait.loadClick(SaveAnalysisBtn);
 		
 	    }
+   public void SelectSegmentAnalysis() throws Exception{
+		jswait.loadClick(SelectAnalysisName);
+	}
    
    public void CreateMicroSegment() throws Exception{
 	   commonObjects.clickOptionsIcon();
@@ -1131,7 +1136,7 @@ public void clustertabledetailsandsave() throws Exception {
        jswait.loadClick(Computebtn);
        Thread.sleep(3000);
      jswait.loadClick(MicroSegmentSavebtn);
-     jswait.loadClick(SaveAnalysisBtn);
+    // jswait.loadClick(SaveAnalysisBtn);
 		
    }
    
@@ -1181,20 +1186,13 @@ public void clustertabledetailsandsave() throws Exception {
 //		  Assert.assertTrue("job not deleted", false);
 //	  }
 	  
-	  try{
-		  Assert.assertFalse(driver.findElement(By.xpath("//a[@class='analysisName style-scope analysis-list'][contains(.,'"+jobName+"')])")).isDisplayed());
-	  }
-	  catch(Exception e) {
-	  
-	  }}
+	  Assert.assertFalse(jswait.checkVisibility("//a[@class='analysisName style-scope analysis-list'][contains(.,'"+jobName+"')])"));
+  }
 	  
 public void TargetCount() throws Exception {
-	 
-		 try{Assert.assertTrue(driver.findElement(By.xpath("//b[@class='style-scope analysis-list'][contains(.,'205')]")).isDisplayed());
-	 }
-		 catch(Exception e) {
-		 }
-		 }
+
+	Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope analysis-list'][contains(.,'218')]"));
+}
 
   public void editCrossTab() throws Exception{
 	  commonObjects.clickOptionsIcon();

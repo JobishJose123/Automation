@@ -458,7 +458,7 @@ public void verifydeletecheckbox(String sheet) throws Exception {
 public void deleteApprovalRuleDefault() throws Exception {
 	
 	Thread.sleep(9000);
-	filterWorkaround("Campaigns and Broadcasts");
+	commonObjects.filterName("Campaigns and Broadcasts");
 	commonObjects.clickOptionsIcon();
 	Thread.sleep(9000);
 	 

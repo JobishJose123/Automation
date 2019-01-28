@@ -7,7 +7,7 @@ Feature: Test suite Offer and offer catelogue
   Create all types of offers and offer catelogue
 
 @Create_OfferCatalogue
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Verify Creating Offer Catalogue with rechargeSMS and SeedingSMS offer
   Given login
   When navigate to precision marketer
@@ -16,4 +16,6 @@ Scenario: Verify Creating Offer Catalogue with rechargeSMS and SeedingSMS offer
   Then Create New Offer Catalogue from sheet "defaultCatalog"
   Then Add "rechargeSMS" offer to Offer Catalogue
   Then Add "SeedingSMS" offer to Offer Catalogue
-  Then save "offerCatalogInputData" data to spreadsheet from "defaultCatalog" with string offer catalog with recharge and seeding offer
+  Then save "offerCatalogInputData" data to spreadsheet from "defaultCatalog" with string offer catalog with recharge and seeding offer 
+  
+ 

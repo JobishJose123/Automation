@@ -38,6 +38,10 @@ public class SegmentAnalysisSteps extends Init {
 		segmentObjects.clickExploreSegmentsOption();
 		
 	}
+	@Then("^Select Segment Analysis job$")
+	public void SelectSegmentAnalysis() throws Exception{
+		segmentObjects.SelectSegmentAnalysis();
+	}
 	
 	
 	@Then("^choose a segment analysis$")

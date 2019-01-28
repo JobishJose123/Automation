@@ -24,12 +24,10 @@ Then navigate to analytics
 Then navigate to explore segments
 Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
 Then Create Micro Segment
-Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
-Then wait until Segment Analysis job status is changed to "C"
 
 
 
-@NDX-5645    @initBrowser
+@NDX-5646 @NDX-5645    @initBrowser
 Scenario: Create Cross-Tab for a for a job which is in completed status
 Given login
 Then navigate to intent management
@@ -40,7 +38,7 @@ Then Create Cross-Tab
 
 
 
-@NDX-1234    @initBrowser
+@NDX-5694    @initBrowser
 Scenario: Create Cluster for a for a job which is in completed status
 Given login
 Then navigate to intent management
@@ -75,11 +73,10 @@ Then navigate to analytics
 Then navigate to explore segments
 Then filter the Segment Analysis job from sheet "SegmentAnalysisCopy"
 Then Create Micro Segment
-Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
-Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5645    @initBrowser
+
+@NDX-5646    @initBrowser
 Scenario: Create Cross-Tab for a for a job which is in completed status
 Given login
 Then navigate to intent management
@@ -89,8 +86,9 @@ Then filter the Segment Analysis job from sheet "SegmentAnalysisCopy"
 Then Create Cross-Tab
 
 
-@NDX-    @initBrowser
-Scenario: Check whether results for clustering is shown in table view.
+@NDX-5694   @initBrowser
+Scenario: Create Cluster for a for a job which is in completed status
+
 Given login
 Then navigate to intent management
 Then navigate to analytics

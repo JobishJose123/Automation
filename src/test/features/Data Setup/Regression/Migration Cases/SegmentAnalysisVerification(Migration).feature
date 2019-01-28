@@ -85,29 +85,17 @@ Then filter the Segment Analysis job for status check from sheet "SegmentAnalysi
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-   @initBrowser  @closeBrowser
-Scenario: Edit a Micro-Segment for Segment Analysis Job(Migration) which is in Completed Status.
-Given login
-Then navigate to intent management
-Then navigate to analytics
-Then navigate to explore segments
-Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
-Then edit Micro-Segment
-Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
-Then wait until Segment Analysis job status is changed to "C"
-
-
-#@NDX- @initBrowser
-#Scenario: Edit a Cross-Tab for a Segment Analysis job(Migration) which is in Completed Status
+#@NDX-   @initBrowser  @closeBrowser
+#Scenario: Edit a Micro-Segment for Segment Analysis Job(Migration) which is in Completed Status.
 #Given login
 #Then navigate to intent management
 #Then navigate to analytics
 #Then navigate to explore segments
 #Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
-#Then edit Cross-tab
+#Then edit Micro-Segment
 #Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
 #Then wait until Segment Analysis job status is changed to "C"
-#
+
 
 @NDX-5570  @initBrowser  @closeBrowser
 Scenario: Copy a Segment Analysis Job(Migration)
@@ -195,26 +183,14 @@ Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnaly
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-   @initBrowser  @closeBrowser
-Scenario: Edit a Micro-Segment for Segment Analysis job_Copy(Migration) which is in Completed Status.
-Given login
-Then navigate to intent management
-Then navigate to analytics
-Then navigate to explore segments
-Then filter the Segment Analysis job Copy from sheet "SegmentAnalysisCopy"
-Then edit Micro-Segment
-Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnalysisCopy"
-Then wait until Segment Analysis job status is changed to "C"
-
-
 #@NDX-   @initBrowser  @closeBrowser
-#Scenario: Edit Cross-tab for Segment Analysis job_Copy(Migration) which is in Completed Status.
+#Scenario: Edit a Micro-Segment for Segment Analysis job_Copy(Migration) which is in Completed Status.
 #Given login
 #Then navigate to intent management
 #Then navigate to analytics
 #Then navigate to explore segments
 #Then filter the Segment Analysis job Copy from sheet "SegmentAnalysisCopy"
-#Then edit Cross-tab
+#Then edit Micro-Segment
 #Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnalysisCopy"
 #Then wait until Segment Analysis job status is changed to "C"
 
