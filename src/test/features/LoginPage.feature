@@ -9,8 +9,8 @@ Feature: Login Page test cases with
 @initBrowser @closeBrowser
 Scenario: Verify the Login of NEON
 Given neon is loaded
-Then login with "flyops@flytxt.com" and "flytxt"
-Then verify login success
+#Then login with "flyops@flytxt.com" and "flytxt"
+#Then verify login success
 
 
 @NX-446

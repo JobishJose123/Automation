@@ -53,7 +53,7 @@ public class OfferCatalogSteps extends Init{
 	    {
 	     eM.setExcelFile("offerInputData",sheet);
 	 	 catalogPageObjects.clickCatalogAddOffers();
-	 	 commonObjects.filterWorkaround(eM.getCell(1, 0).toString());
+	 	 commonObjects.filterName(eM.getCell(1, 0).toString());
 	 	 jswait.loadClick("//data-table-cell[contains(.,'"+eM.getCell(1, 0)+"')]");
 	 	 catalogPageObjects.clickAddToCatalogButton();
 	    }
@@ -305,9 +305,9 @@ public class OfferCatalogSteps extends Init{
 		   ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
 		    driver.switchTo().window(tabs2.get(1));
 		    driver.get(secondUrl);
-		    driver.switchTo().frame(1);
+		    //driver.switchTo().frame(1);
 		    try{
-		    driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Catalog')]"));
+		    driver.findElement(By.xpath("//h1//span[contains(text(),'Catalog')]"));
 		    driver.close();
 		    driver.switchTo().window(tabs2.get(0));
 		    }
@@ -475,5 +475,44 @@ public class OfferCatalogSteps extends Init{
 		public void verifyLabelsOfOfferCatalog() throws Throwable {
 		   catalogPageObjects.verifyHeaders();
 		}
+	   
+	   @Then("^navigate to Offer Catalog page$")
+	   public void navigate_to_Offer_Catalog_page() throws Exception{
+		   catalogPageObjects.OffercatalogPage();
+	   }
+	   
+	   @Then("^filter the Offer Catalog from sheet \"([^\"]*)\"$")
+	   public void filter_the_Offer_Catalog_from_sheet(String arg1) throws Exception{
+		   eh.setExcelFile("offerCatalogInputData", arg1);
+		   String CatalogName=eh.getCellByColumnName("Catalog Name");
+		   catalogPageObjects.FilterOfferCatalog(CatalogName);
+	   }
+	   @Then("^edit the Offer Catalog$")
+	   public void edit_the_Offer_Catalog() throws Exception{
+		   catalogPageObjects.editOfferCatalog();
+	   }
+	   @Then("^verify the offer from sheet \"([^\"]*)\" is displayed for the Catalog$")
+	   public void verify_the_offer_from_sheet_is_displayed_for_the_Catalog(String OfferName) throws Exception{
+		   eM.setExcelFile("offerInputData",OfferName);
+		   String str=eM.getCell(1,0).toString();
+		   catalogPageObjects.viewOfferinCatalog(str);
+	   }
+	   @Then("^view the details of the offer$")
+	   public void view_details_of_the_offer() throws Exception{
+	   catalogPageObjects.detailsOfOffer();
+	   }
+	   @Then("^add offer to the catlog from sheet \"([^\"]*)\" and verify$")
+	   public void add_offer_to_the_catlog_from_sheet_and_verify(String addOffer) throws Throwable {
+		  catalogPageObjects.clickCatalogAddOffers();
+	      eh.setExcelFile("offerInputData",addOffer);
+	      String addOffer2 = eh.getCellByColumnName("Offer Name").toString();
+	      commonObjects.filterName(addOffer2);
+	      catalogPageObjects.addOfferToCatalog(addOffer2);
+	   }
+	   @Then("^delete the Offer from sheet \"([^\"]*)\" and verify$")
+	   public void delete_the_Offer_from_sheet_and_verify(String offerToDelete) throws Throwable {
+		   catalogPageObjects.deleteOffer(offerToDelete);
+	   }
+
 
 }

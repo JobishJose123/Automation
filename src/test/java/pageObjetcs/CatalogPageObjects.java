@@ -1,6 +1,7 @@
 package pageObjetcs;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
@@ -84,26 +85,26 @@ public class CatalogPageObjects extends Init{
 	private WebElement gridHeaderOffers;
 	@FindBy(xpath="//paper-dialog//*[contains(text(),'Create New Catalog')]")
 	private WebElement createNewCatalogHeader;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="//paper-button[contains(.,'Offer Catalog')]")
+	private WebElement OfferCatalogPage;
+    @FindBy(xpath="(//paper-item[contains(.,'Edit')])[1]")
+    private WebElement editCatalogOption;
+	@FindBy(xpath="(//label[contains(.,'Description')]//following::input[@id='input'])[1]")
+	private WebElement editCatalogDesp ;
+	@FindBy(xpath="//paper-button[contains(.,'Save')]")
+	private WebElement SaveOfferCatalog;
+	@FindBy(xpath="//data-table-cell[contains(.,'SeleniumEdit')]")
+	private WebElement verifyEditCatalogDesp ;
+	@FindBy(xpath="//paper-item[contains(.,'View Offers')]")
+	private WebElement viewOfferTab ;
+	@FindBy(xpath="(//data-table-cell[@class='catalogue-offer-listing style-scope'])[2]")
+	private WebElement OfferName ;
+	@FindBy(xpath="//data-table-row-detail[@class='style-scope catalogue-offer-listing']")
+	private WebElement OfferDetails;
+	@FindBy(xpath="(//data-table-checkbox[@class='x-scope data-table-checkbox-0 style-scope add-offer-detail'])[2]")
+	private WebElement CheckBoxToAddOffer;
+	@FindBy(xpath="(//paper-icon-button[@icon='delete'])[2]")
+	private WebElement deleteOfferFromCatalog;
 
 	public void enterCatalogName(String name) throws InterruptedException {
 		jswait.loadSendKeys(catalogName, name);
@@ -232,5 +233,47 @@ public class CatalogPageObjects extends Init{
 	  clickCreateCatalogButton();
 	  jswait.checkVisible(createNewCatalogHeader);
 	}
+  
+  public void OffercatalogPage() throws Exception{          
+	  jswait.loadClick(OfferCatalogPage);
+  }
+  
+  public void FilterOfferCatalog(String offerCatalogName) throws Exception{
+	  commonObjects.filterName(offerCatalogName);
+	  Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+offerCatalogName+"')]"));
+	  commonObjects.clickOptionsIcon();		  
+	  }
+  
+public void editOfferCatalog() throws Exception{
+	jswait.loadClick(editCatalogOption);
+	jswait.loadSendKeys(editCatalogDesp,"SeleniumEdit");
+	jswait.loadClick(SaveOfferCatalog);
+	Thread.sleep(3000);
+	assertTrue("Edited changes not reflected",verifyEditCatalogDesp.isDisplayed());
+	}
+public void viewOfferinCatalog(String OfferName) throws Exception{
+	commonObjects.clickOptionsIcon();	
+	jswait.loadClick(viewOfferTab);
+	Thread.sleep(2000);
+	Assert.assertTrue(jswait.checkVisibility("//data-table-cell[@class='catalogue-offer-listing style-scope'][contains(.,'"+OfferName+"')]"));
+	
+}
 
+public void detailsOfOffer() throws Exception{
+	jswait.loadClick(OfferName);
+	Thread.sleep(2000);
+	assertTrue("offer details not displayed",OfferDetails.isDisplayed());
+}
+public void addOfferToCatalog(String addOffer2) throws Exception{
+	System.out.println(addOffer2);
+	jswait.loadClick(CheckBoxToAddOffer);
+	clickAddToCatalogButton();
+	Thread.sleep(2000);
+	assertTrue(jswait.checkVisibility("//data-table-cell[@class='catalogue-offer-listing style-scope'][contains(.,'"+addOffer2+"')]"));
+
+}
+public void deleteOffer(String offerToDelete) throws Exception{
+        jswait.loadClick(deleteOfferFromCatalog);
+        assertFalse(jswait.checkVisibility("//data-table-cell[@class='add-offer-detail style-scope'][contains(.,'"+offerToDelete+"')]"));
+}
 }

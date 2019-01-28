@@ -366,7 +366,7 @@ public class ProductTestCaseSteps extends Init{
     public void verifyProductsGrid(String sheet) throws Exception {
 		eh.setExcelFile("productInputData",sheet);
 		commonObjects.filterName(eh.getCell(1, 0).toString());
-		jswait.waitUntil("//span[contains(.,'"+eh.getCell(1, 0)+"')]/../../data-table-cell[3][contains(.,'Product with attribute')]");
+		jswait.waitUntil("(//div[@class='item style-scope iron-data-table'])[1]");
 	}
 	
 	@Then("^check if  the filter option is saving data after cancel$")
@@ -498,9 +498,9 @@ public class ProductTestCaseSteps extends Init{
 		   ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
 		    driver.switchTo().window(tabs2.get(1));
 		    driver.get(secondUrl);
-		    driver.switchTo().frame(1);
+//		    driver.switchTo().frame(1);
 		    try{
-		    driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Product')]"));
+		    driver.findElement(By.xpath("//h1//span[contains(text(),'Products')]"));
 		    driver.close();
 		    driver.switchTo().window(tabs2.get(0));
 		    }

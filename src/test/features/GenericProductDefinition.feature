@@ -27,8 +27,8 @@ Feature: generic product class
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-7088 @initBrowser
-  Scenario: Verify creation of product in a product class without any attributes NX-7188
+  @NX-7118 @initBrowser
+  Scenario: Verify creation of product in a product class without any attributes NX-7118
     Given login
     Then navigate to configuration management
     Then naviagte to product classes
@@ -146,7 +146,7 @@ Feature: generic product class
   Scenario: Verify whether product can be added when clicked on the add button in the product listing page NX-7055
     Then check previous step and pass this
 
-  @NX-6979 @closeBrowser
+  @NX-6979 @initBrowser @closeBrowser
   Scenario: Verify whether products are listed when clicked on the view products NX6979
     Then veirfy SelClass product "fullDetails" in grid
 
@@ -435,7 +435,7 @@ Feature: generic product class
     
     
 
-  @NX-6966 @initBrowser @closeBrowser
+  @NX-6966 @initBrowser 
   Scenario: Verify whether products are partner specific- 6966
     Given login
     Then navigate to precision marketer

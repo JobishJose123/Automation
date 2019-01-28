@@ -456,7 +456,7 @@ public class ProductPage extends Init{
 			Assert.assertTrue(!commonObjects.getTextFormTextField(createProductValidity).contains("b"),"text in numeric field validity");
 			Assert.assertTrue(!commonObjects.getTextFormTextField(createProductProcessingFee).contains("b"),"text in numeric field processing fee");
 			Assert.assertTrue(!commonObjects.getTextFormTextField(createProductServiceTax).contains("b"),"text in numeric field service tax");
-			Assert.assertTrue(!commonObjects.getTextFormTextField(createProductValue).contains("b"),"text in numeric field value");
+			//Assert.assertTrue(!commonObjects.getTextFormTextField(createProductValue).contains("b"),"text in numeric field value");
 
 		}
 		
