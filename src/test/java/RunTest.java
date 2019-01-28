@@ -41,7 +41,7 @@ import cucumber.api.java.en.Then;
         outputFolder = "target/${user.name}/DATE(dd-MM-yyyy_HH-mm)",
         retryCount = 0)
 @CucumberOptions(
-        features = { "src/test/features" },
+        features = { "src/test/features"},
 		glue = {"classpath:"},
 		tags = {"@NX-3100"},
 		plugin = {
@@ -66,7 +66,7 @@ public class RunTest extends Init
 	public static void beforeClass() throws ParseException, IOException, InterruptedException {
 		initPropFile();
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		fileForCsvReport = new File("Run_"+timeStamp+".csv");
+		fileForCsvReport = new File("CSV_Reports//Run_"+timeStamp+".csv");
 		printWriterForCsvReport= new PrintWriter(fileForCsvReport);
 		stringBuilderForCsvReport= new StringBuilder();
 		stringBuilderForCsvReport.setLength(0);
