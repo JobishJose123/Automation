@@ -2711,7 +2711,7 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 	
 	
 	
-	@FindBy(xpath="//data-table-cell//iron-icon[@icon='icons:remove-circle']")
+	@FindBy(xpath="//data-table-cell[5]//iron-icon[@icon='icons:remove-circle']")
 	private List<WebElement> dncRemoveIcon;
 	
 
