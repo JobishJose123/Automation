@@ -2738,7 +2738,7 @@ public void selectDNCList(String dndListType) throws InterruptedException {
 		jswait.loadClick(DNCListCloseButton);
 		}
 		else if(dndListType.equals("both")) {
-			
+			System.out.println("test");
 			
 		}
 		
