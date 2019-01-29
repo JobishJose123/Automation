@@ -122,6 +122,12 @@ public class BroadcastPageObjects extends Init {
 	
 	@FindBy(xpath = "//paper-item[contains(.,'"+SELENIUM_DND_LIST+"')]")
 	private WebElement DNCList;
+	
+	@FindBy(xpath = "//paper-item[contains(.,'"+SELENIUM_MANDATORY_DND_LIST+"')]")
+	private WebElement seleniumDNDMandatoryList;
+	@FindBy(xpath = "//paper-item[contains(.,'"+SELENIUM_OPTIONAL_DND_LIST+"')]")
+	private WebElement seleniumDNDOptionalList;
+	
 	@FindBy(xpath = ".//paper-button[contains(.,'DNC Exclusions')]")
 	private WebElement DNCExclusionOption;
 	@FindBy(xpath = ".//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']")
@@ -894,6 +900,8 @@ private WebElement recipientclick;
 	}
 	
 	
+	
+	
 	public void verifyActiveOptionForBC() throws InterruptedException {
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../.."))).click();
@@ -1303,7 +1311,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 	
 		
 	
-	public void createBC(String name, String bc_type, String baseList, String offer,String condition,String inventory) throws InterruptedException {
+	public void createBC(String name, String bc_type, String baseList, String offer,String condition,String inventory, String dndExclusion) throws InterruptedException {
 		ExcelHelper offerExcel = new ExcelHelper(); 
     	offerExcel.setExcelFile("offerInputData", offer);
 		enterBroadcastBasicDetails(name,inventory);
@@ -1342,7 +1350,8 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			}
 			
 			Thread.sleep(3000);
-					
+			selectDNCList(dndExclusion);
+			
 		clickProceedButton();
 		selectOffer(offerExcel.getCellByColumnName("Offer Name"));
 		if(!bc_type.contains("Informational"))
@@ -2497,6 +2506,10 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 		TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 		commonObjects.clickOptionsIcon();
 		targetConditionObjects.clickTargetConditionDeletet();
+		if(condition.contains("conditionForOROperation")) {
+			commonObjects.clickOptionsIcon();
+			targetConditionObjects.clickTargetConditionDeletet();
+		}
 		if(condition.contains("segmentAgeGT40")) {
 			clickOnSavedSegments();
 			selectSavedSegmentSelectorField(condition);
@@ -2679,11 +2692,57 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 		}
 		else if(segmentCondition.contentEquals("conditionForANDOperation")||segmentCondition.contentEquals("conditionForOROperation")) {
 			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));	
-			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]"));	
-		}	
+			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]"));
+			if(segmentCondition.contentEquals("conditionForOROperation")) {
+			Assert.assertTrue(jswait.checkVisibility("//paper-card[@class='mainCard display-target style-scope targets-display x-scope paper-card-0']//div[contains(.,'Or')]"));
+			}
+			Assert.assertTrue(jswait.checkVisibility("//paper-card[@class='mainCard display-target style-scope targets-display x-scope paper-card-0']//div[contains(.,'And')]"));
+			
+		}else if(segmentCondition.contentEquals("sharedMetricOtherPartner")) {
+			Assert.assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'"+SELENIUM_SHARED_METRIC+"')]"));	
+				
+		}else {
+			Assert.assertTrue(false,"NO target condition selected ");
+		}
 	}
 	
 	
+	//**************************************************//
+	
+	
+	
+	@FindBy(xpath="//data-table-cell//iron-icon[@icon='icons:remove-circle']")
+	private List<WebElement> dncRemoveIcon;
+	
+
+	
+public void selectDNCList(String dndListType) throws InterruptedException {
+		
+	Thread.sleep(4000);
+	jswait.loadClick(DNCExclusionOption);
+	System.out.println(dncRemoveIcon.size());
+	
+	 for (WebElement webElement : dncRemoveIcon) {
+		 Thread.sleep(1000);
+			jswait.loadClick("//iron-icon[@title='Remove']");
+		
+	}
+	 
+		if(dndListType.equals("both")) {
+		jswait.loadClick(DNCListTextbox);
+		jswait.loadClick(seleniumDNDMandatoryList);
+		jswait.loadClick(DNCListAddButton);
+		jswait.loadClick(DNCListTextbox);
+		jswait.loadClick(seleniumDNDOptionalList);
+		jswait.loadClick(DNCListAddButton);
+		jswait.loadClick(DNCListCloseButton);
+		}
+		else if(dndListType.equals("both")) {
+			
+			
+		}
+		
+		}
 
 }
 

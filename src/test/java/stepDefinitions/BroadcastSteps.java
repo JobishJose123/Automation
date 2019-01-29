@@ -45,6 +45,7 @@ public class BroadcastSteps extends Init{
 	
 	public ExcelHelper eM = new ExcelHelper();
 	public ExcelHelper eh = new ExcelHelper();
+	String dncExclusion="mandatory";
 	CampaignObjects campaignObjects = new CampaignObjects();
 	AdminPageObjects adminPageObjects = new AdminPageObjects();
 	CatalogPageObjects catalogPageObjects = new CatalogPageObjects();
@@ -1502,7 +1503,14 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
       		 day++;
       	 }
       	 Actions builder = new Actions(driver);
-      	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer,condition, INVENTORY_UNLIMITED);
+      	 eh.setExcelFile("bcInputData", sheet);
+      	String DNCExclusion = "";
+      	 try{
+      		 DNCExclusion = eh.getCellByColumnName("DNCExclusion");
+      	 }catch (Exception e) {
+      		DNCExclusion = "mandatory";
+		}
+      	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer,condition, INVENTORY_UNLIMITED,DNCExclusion);
       	
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
@@ -3257,7 +3265,7 @@ public void create_new_broadcast_with_target_condition_freq_exclusion(String con
   		 day++;
   	 }
   	 Actions builder = new Actions(driver);
-  	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer,condition, INVENTORY_ONE_PER_DAY);
+  	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer,condition, INVENTORY_ONE_PER_DAY,dncExclusion);
   	
 //	 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //	Thread.sleep(1500);
@@ -3553,6 +3561,30 @@ public void verify_the_BC_taget_List_in_BC_View_from_workbook_sheet(String workb
 	
 }
 
+//**************//
+@Then("^enter details for new Broadcast and select any DNC exclusion\\(both,optional,mandatory,none\\)list from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
+public void enter_details_for_new_Broadcast_and_select_any_DNC_exclusion_both_optional_mandatory_none_list_from_sheet_with(String sheet, String offer) throws Throwable {
+	Thread.sleep(3000);
+	ExcelHelper list = new ExcelHelper();
+	list.setExcelFile("registrationListInputData", "Sheet1");
+	eM.setExcelFile("bcInputData",sheet);
+//	String baseList = list.getCell(1, 2).toString();
+	ExcelHelper offerExcel = new ExcelHelper(); 
+	offerExcel.setExcelFile("offerInputData", offer);
+		String name = (String) eM.getCell(1, 0);
+		name =  RandomNameGenerator.getRandomName(name);
+		eM.setCell(1, 0, name);
+	  	String bc_type =(String) eM.getCell(1, 7);
+	
+  	broadcastPageObjects.createBCAndSelectDNCList(name, bc_type,BASE_LIST,offerExcel.getCell(1, 0).toString());
+  	
+
+
+  	enterDeliveryTabDetails(bc_type,sheet);
+  	
+  	
+  	
+}
 
 
 }

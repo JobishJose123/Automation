@@ -103,8 +103,21 @@ Feature: Test suite for Broadcast Editing
       #| IMEventsOfferAccepted          |
       #| IMEventsCustomerCareUsage      |
       #| customerDeviceInfo             |
+      #| sharedMetricOtherPartner  |
       #| customerDrivenEventNotOccurred  |
       #| customerWasSentTheTrialMessageNOtOccurred |
       #| conditionForANDOperation |
       | conditionForOROperation  |
       #| segmentAgeGT40                 |
+      
+      @NDX-DNCExclusionBC @initBrowser 
+     Scenario: Verify Creating one-off BC with DNCExclusionBC
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBothExclution" with "rechargeSMS"
+    Then save bc
+    Then view the bc from workbook "bcInputData" in sheet "one-offBC"

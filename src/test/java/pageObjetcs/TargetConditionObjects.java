@@ -71,6 +71,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement usageMetricField;
 	@FindBy(xpath="//paper-item[contains(.,'"+SELENIUM_USAGE_METRIC+"')]")
 	private WebElement usageMetricUnique;
+	@FindBy(xpath="//paper-item[contains(.,'"+SELENIUM_SHARED_METRIC+"')]")
+	private WebElement sharedMetricUnique;
 	@FindBy(xpath="//paper-item[contains(.,'"+SELENIUM_REVENUE_METRIC+"')]")
 	private WebElement revenueMetricSelect;
 	@FindBy(xpath="//paper-item[contains(.,'"+SELENIUM_EVENT_COUNTS+"')]")
@@ -679,6 +681,7 @@ public class TargetConditionObjects extends Init {
 				clickBasicTargetConditionWithGroupId(event);
 			}
 			else if(event.contains("conditionForANDOperation")||event.contains("conditionForOROperation")){
+				
 				jswait.loadClick(targetConditionTypeSelector);
 				jswait.loadClick(targetConditionTypeSystemEvents);
 				jswait.loadSendKeys(EventFieldSelector,"Customer was sent the trial message");
@@ -706,6 +709,34 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[2])[2]");
 				
 			}
+			else if(event.contentEquals("sharedMetricOtherPartner")){
+			jswait.loadClick(targetConditionTypeSelector);
+			jswait.loadClick(targetConditionTypeUsageMetrics);
+			jswait.loadClick(usageMetricField);
+			jswait.loadSendKeys(usageMetricField,SELENIUM_SHARED_METRIC);
+			jswait.loadClick(sharedMetricUnique);
+			jswait.loadClick(metricWeekSelector);
+			jswait.loadClick(metricByMonthOption);
+			jswait.loadClick(metricDaySelector);
+			jswait.loadClick(metricMaxOf);
+			jswait.loadClick(metricMaxOfMonthsSelect);
+			jswait.loadClick(metricMaxOfMonthThisMonth);
+			jswait.loadClick(metricMaxOfMonthLastMonth);
+			jswait.loadClick(metricMaxOfMonthLast2Month);
+			jswait.loadClick(metricMaxOfMonthLast3Month);
+			jswait.loadClick(metricMaxOfMonthLast4Month);
+			jswait.loadClick(metricMaxOfMonthLast5Month);
+			jswait.loadClick(metricMaxOfMonthLast6Month);
+			jswait.loadClick(metricMaxOfMonthLast7Month);
+			jswait.loadClick(metricMaxOfMonthLast8Month);
+			jswait.loadClick(metricMaxOfMonthLast9Month);
+			
+			jswait.loadClick(metricConditionField);
+			jswait.loadClick(conditionIsGreaterThan);
+			jswait.loadSendKeys(isGreaterThanValue,"0");
+			jswait.loadClick(targetConditionSave);
+			}
+			
 				
 		 }
 	 
