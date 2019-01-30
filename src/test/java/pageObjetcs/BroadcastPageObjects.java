@@ -123,9 +123,9 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = "//paper-item[contains(.,'"+SELENIUM_DND_LIST+"')]")
 	private WebElement DNCList;
 	
-	@FindBy(xpath = "//paper-item[contains(.,'"+SELENIUM_MANDATORY_DND_LIST+"')]")
+	@FindBy(xpath = "//paper-item[text()='"+SELENIUM_MANDATORY_DND_LIST+"']")
 	private WebElement seleniumDNDMandatoryList;
-	@FindBy(xpath = "//paper-item[contains(.,'"+SELENIUM_OPTIONAL_DND_LIST+"')]")
+	@FindBy(xpath = "//paper-item[text()='"+SELENIUM_OPTIONAL_DND_LIST+"']")
 	private WebElement seleniumDNDOptionalList;
 	
 	@FindBy(xpath = ".//paper-button[contains(.,'DNC Exclusions')]")
@@ -1354,6 +1354,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			
 		clickProceedButton();
 		selectOffer(offerExcel.getCellByColumnName("Offer Name"));
+		System.out.println("bc_type="+bc_type);
 		if(!bc_type.contains("Informational"))
 		{
 			selectTrackSession();
@@ -2718,12 +2719,14 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 	
 public void selectDNCList(String dndListType) throws InterruptedException {
 		
-	Thread.sleep(4000);
+	Thread.sleep(2000);
 	jswait.loadClick(DNCExclusionOption);
-	System.out.println(dncRemoveIcon.size());
+	Thread.sleep(3000);
 	
-	 for (WebElement webElement : dncRemoveIcon) {
-		 Thread.sleep(1000);
+	List<WebElement> removeButton = driver.findElements(By.xpath("//iron-data-table//iron-icon[@icon='icons:remove-circle']"));
+	System.out.println(removeButton.size());
+	 for (WebElement webElement : removeButton) {
+		 Thread.sleep(3000);
 			jswait.loadClick("//iron-icon[@title='Remove']");
 		
 	}
