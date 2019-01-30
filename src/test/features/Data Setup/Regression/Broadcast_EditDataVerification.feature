@@ -20,8 +20,8 @@
 Feature: Test suite for Broadcast Editing
   Editing all types of Braodcast
 
-  @NDX-editingOneOffBcBasicDetails @initBrowser
-  Scenario: Verify Creating one-off BC and edit the basic details 
+  @NDX-editingOneOffBcBasicDetails @initBrowser @closeBrowser
+  Scenario: Verify Creating one-off BC and edit the basic details
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -41,9 +41,9 @@ Feature: Test suite for Broadcast Editing
     Then save bc
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then verify the basic details from Broadcast View and data sheet "one-offBCEdit"
-    
-    @NDX-VerifyBCDeliverDetails @initBrowser
-    Scenario: Verify Creating one-off BC and edit the Delivery details
+
+  @NDX-VerifyBCDeliverDetails @initBrowser @closeBrowser
+  Scenario: Verify Creating one-off BC and edit the Delivery details
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -55,9 +55,32 @@ Feature: Test suite for Broadcast Editing
     Then save bc
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
-    
-    @NDX-VerifyBCTargetList @initBrowser
-    Scenario: Verify Creating one-off BC and edit the Delivery details
+
+  @NDX-targetSelection @initBrowser @closeBrowser
+  Scenario Outline: Verify Creating one-off BC and edit the targetSelection <condition>
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "One-time" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
+    Then edit the targetSelection <Condition> for BC
+    Then save bc
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+    Then verify the BC targetSelection <Condition> in BC View
+
+    Examples: 
+      | Condition     |
+      | None          |
+      | Create        |
+      | SavedSegments |
+      | None          |
+      | SavedSegments |
+      | Create        |
+
+  @NDX-VerifyBCTargetList @initBrowser @closeBrowser
+  Scenario: Verify Creating one-off BC and edit the target list details
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -69,9 +92,22 @@ Feature: Test suite for Broadcast Editing
     Then save bc
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
-    
-    
-  @NDX-editingBcTargetDetails @initBrowser 
+
+  @NDX-VerifyBCOffer @initBrowser @closeBrowser
+  Scenario: Verify Creating one-off BC and edit the offer details details
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "One-time" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
+    Then edit the offer for BC from workbook "bcInputDataForEdit" sheet "one-offBCEdit" with offer "rechargeWAP"
+    Then save bc
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+    Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "one-offBCEdit" with offer "rechargeWAP"
+
+  @NDX-editingBcTargetDetails @initBrowser @closeBrowser
   Scenario Outline: Verify Creating one-off BC with given <condition>
     Given login
     When navigate to precision marketer
@@ -86,32 +122,47 @@ Feature: Test suite for Broadcast Editing
     Then verify the target conditions from Broadcast View and condition <Condition>
 
     Examples: 
-      | Condition                      |
-      #| customerWasSentTheTrialMessage |
-      #| digitalPersonaGT15             |
-      #| customerDemographicsGT25       |
-      #| learnedBehaviourGT35           |
-      #| analyticalScoresGT45           |
-      #| digitalEngagementGT235         |
-      #| customerLocationInsightsGT5    |
-      #| customerList                   |
-      #| discoveredClusters200          |
-      #| customerDrivenEvent            |
-      #| usageMetric                    |
-      #| eventCounts                    |
-      #| revenueMetric                  |
-      #| IMEventsOfferAccepted          |
-      #| IMEventsCustomerCareUsage      |
-      #| customerDeviceInfo             |
-      #| sharedMetricOtherPartner  |
-      #| customerDrivenEventNotOccurred  |
-      #| customerWasSentTheTrialMessageNOtOccurred |
-      #| conditionForANDOperation |
-      | conditionForOROperation  |
-      #| segmentAgeGT40                 |
-      
-      @NDX-DNCExclusionBC @initBrowser 
-     Scenario: Verify Creating one-off BC with DNCExclusionBC
+      | Condition |
+  #| customerWasSentTheTrialMessage |
+  #| digitalPersonaGT15             |
+  #| customerDemographicsGT25       |
+  #| learnedBehaviourGT35           |
+  #| analyticalScoresGT45           |
+  #| digitalEngagementGT235         |
+  #| customerLocationInsightsGT5    |
+  #| customerList                   |
+  #| discoveredClusters200          |
+  #| customerDrivenEvent            |
+  #| usageMetric                    |
+  #| eventCounts                    |
+  #| revenueMetric                  |
+  #| IMEventsOfferAccepted          |
+  #| IMEventsCustomerCareUsage      |
+  #| customerDeviceInfo             |
+  #| sharedMetricOtherPartner  |
+  #| customerDrivenEventNotOccurred  |
+  | customerWasSentTheTrialMessageNOtOccurred |
+  #| conditionForANDOperation |
+  #| conditionForOROperation |
+  #| segmentAgeGT40                 |
+ 
+  
+  @NDX-VerifyBCexpiry @initBrowser @closeBrowser
+  Scenario: Verify Creating one-off BC and edit the offer details details
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "One-time" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
+    Then edit the offer for BC expiry
+    Then save bc
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+    Then verify the BC expiry in BC View
+  
+  @NDX-DNCExclusionBC @initBrowser @closeBrowser
+  Scenario: Verify Creating one-off BC with DNCExclusionBC
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing

@@ -375,6 +375,25 @@ private WebElement recipientclick;
 		// private WebElement ;
 		// @FindBy(xpath="")
 		// private WebElement ;
+	 
+	 @FindBy(xpath="//paper-button[@class='btn-back style-scope broadcast-offer-selected x-scope paper-button-0']")
+	 private WebElement backToOffers ;
+	 
+	  public void backToOffers() throws InterruptedException {
+		jswait.loadClick(backToOffers);
+	}
+ 
+ public void targetDetailsBC() throws InterruptedException {
+	 jswait.loadClick(targetDetailsBC);
+ }
+ 
+ public void savedSegmentSelectorField() throws InterruptedException  {
+	 jswait.loadClick(savedSegmentSelectorField);
+ }
+ 
+ public void offerDetailsBC() throws InterruptedException {
+	 jswait.loadClick(offerDetailsBC);
+ }
 
 	public void enterBroadcastName(String name) throws InterruptedException {
 		jswait.loadSendKeys(broadcastName, name);
@@ -2702,6 +2721,9 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 		}else if(segmentCondition.contentEquals("sharedMetricOtherPartner")) {
 			Assert.assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'"+SELENIUM_SHARED_METRIC+"')]"));	
 				
+		}else if(segmentCondition.contentEquals("SegmentForMoreThanTenConditions")) {
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Segment Name')]/..//p[contains(.,'SegmentForMoreThanTenConditions')]"));	
+			
 		}else {
 			Assert.assertTrue(false,"NO target condition selected ");
 		}
@@ -2740,8 +2762,9 @@ public void selectDNCList(String dndListType) throws InterruptedException {
 		jswait.loadClick(DNCListAddButton);
 		jswait.loadClick(DNCListCloseButton);
 		}
-		else if(dndListType.equals("both")) {
+		else if(dndListType.equals("mandatory")) {
 			System.out.println("test");
+			jswait.loadClick(DNCListCloseButton);
 			
 		}
 		

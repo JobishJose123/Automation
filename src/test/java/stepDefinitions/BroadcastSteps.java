@@ -214,8 +214,24 @@ public class BroadcastSteps extends Init{
 			min -= 60;
 			hours++;
 		}
-		if ((String) eM.getCell(1, 6) == "later") {
-			day++;
+		try {
+			eM.setExcelFile("bcInputData", sheet);
+			if ((String) eM.getCell(1, 6) == "later") {
+				day++;
+			}
+		} catch (Exception e) {
+			System.out.println("edit days");
+			eh.setExcelFile("bcInputDataForEdit", sheet);
+			if ((String) eh.getCell(1, 6) == "later") {
+				day++;
+			}else if((eh.getCell(1, 6).toString()).contains("After2Days")) {
+				 day=rightNow.get(Calendar.DAY_OF_MONTH)+2;
+				//day=day+2;
+				System.out.println("Days"+day);
+				date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+						+ String.format("%02d", day);
+				System.out.println(date);
+			}
 		}
 		Actions builder = new Actions(driver);
 		if (bc_type.contentEquals("one-off") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("one-offInformational")) {
@@ -3456,7 +3472,7 @@ public void click_on_BC_edit_button_from_workbook_sheet(String workbook, String 
 
 @Then("^view the bc from workbook \"([^\"]*)\" in sheet \"([^\"]*)\"$")
 public void view_the_bc_from_workbook_in_sheet(String workbook, String sheet) throws Throwable {
-	
+	Thread.sleep(2000);
 	eh.setExcelFile(workbook, sheet);
 	String name = (String) eh.getCell(1, 0);
 	commonObjects.filterName(name);	
@@ -3522,6 +3538,66 @@ public void edit_the_target_List_in_taget_tab_from_workbook_sheet(String workboo
 	broadcastPageObjects.clickProceedButton();
 }
 
+@Then("^edit the offer for BC from workbook \"([^\"]*)\" sheet \"([^\"]*)\" with offer \"([^\"]*)\"$")
+public void edit_the_offer_for_BC_from_workbook_sheet(String workbook, String sheet,String offer) throws Throwable {
+	eh.setExcelFile(workbook, sheet);	
+	Thread.sleep(1000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(4000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(3000);
+	broadcastPageObjects.backToOffers();
+	ExcelHelper offerExcel = new ExcelHelper(); 
+	offerExcel.setExcelFile("offerInputData", offer);
+	broadcastPageObjects.selectOffer(offerExcel.getCellByColumnName("Offer Name"));
+	
+	broadcastPageObjects.selectTrackSession();
+	broadcastPageObjects.selectTrackingSource();
+	Thread.sleep(3000);
+	broadcastPageObjects.clickProceedButton();
+}
+
+@Then("^edit the targetSelection (.*) for BC$")
+public void edit_the_targetSelection_None_for_BC(String targetSelection) throws Throwable {
+	Thread.sleep(4000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(2000);
+	if(targetSelection.contains("None")){
+		broadcastPageObjects.clickTargetConditionNoneOption();
+		
+	}else
+		if(targetSelection.contains("Create")){
+			
+			
+			broadcastPageObjects.clickcreateTargetCondition();
+			
+			
+		}else
+			if(targetSelection.contains("SavedSegments")){
+				broadcastPageObjects.clickOnSavedSegments();
+				broadcastPageObjects.selectSavedSegmentSelectorField("SegmentForMoreThanTenConditions");
+			}
+	
+	Thread.sleep(2000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(2000);
+	broadcastPageObjects.clickProceedButton();
+}
+
+@Then("^edit the offer for BC expiry$")
+public void edit_the_offer_for_BC_expiry() throws Throwable {
+	Thread.sleep(4000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(2000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(2000);
+	broadcastPageObjects.clickProceedButton();
+	Thread.sleep(2000);
+	broadcastPageObjects.Broadcast_Expiry();
+	
+}
+
+
 
 
 //************Verification**********************
@@ -3561,30 +3637,39 @@ public void verify_the_BC_taget_List_in_BC_View_from_workbook_sheet(String workb
 	
 }
 
-//**************//
-@Then("^enter details for new Broadcast and select any DNC exclusion\\(both,optional,mandatory,none\\)list from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
-public void enter_details_for_new_Broadcast_and_select_any_DNC_exclusion_both_optional_mandatory_none_list_from_sheet_with(String sheet, String offer) throws Throwable {
-	Thread.sleep(3000);
-	ExcelHelper list = new ExcelHelper();
-	list.setExcelFile("registrationListInputData", "Sheet1");
-	eM.setExcelFile("bcInputData",sheet);
-//	String baseList = list.getCell(1, 2).toString();
+@Then("^verify the BC offer in BC View from workbook \"([^\"]*)\" sheet \"([^\"]*)\" with offer \"([^\"]*)\"$")
+public void verify_the_BC_offer_in_BC_View_from_workbook_sheet_with_offer(String workbook, String sheet, String offer) throws Throwable {
+	broadcastPageObjects.offerDetailsBC();
 	ExcelHelper offerExcel = new ExcelHelper(); 
 	offerExcel.setExcelFile("offerInputData", offer);
-		String name = (String) eM.getCell(1, 0);
-		name =  RandomNameGenerator.getRandomName(name);
-		eM.setCell(1, 0, name);
-	  	String bc_type =(String) eM.getCell(1, 7);
+	String offerName = offerExcel.getCellByColumnName("Offer Name");
+	Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Offer Name')]/..//p[contains(.,'"+offerName+"')]"));
 	
-  	broadcastPageObjects.createBCAndSelectDNCList(name, bc_type,BASE_LIST,offerExcel.getCell(1, 0).toString());
-  	
-
-
-  	enterDeliveryTabDetails(bc_type,sheet);
-  	
-  	
-  	
 }
+
+@Then("^verify the BC targetSelection (.*) in BC View$")
+public void verify_the_BC_targetSelection_None_in_BC_View(String targetSelection) throws Throwable {
+	broadcastPageObjects.targetDetailsBC();
+	Thread.sleep(2000);
+	if(targetSelection.contains("None")) {
+		Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Segment condition not configured.')]"));
+	}else
+		if(targetSelection.contains("Create")) {
+			Assert.assertTrue(jswait.checkVisibility("//profile-field[contains(.,'Customer Profile Info')]//b[contains(.,'Age_q11')]"));
+		}else
+			if(targetSelection.contains("SavedSegments")) {
+				Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Segment Name')]/..//p[contains(.,'SegmentForMoreThanTenConditions')]"));
+			}
+
+}
+
+@Then("^verify the BC expiry in BC View$")
+public void verify_the_BC_expiry_in_BC_View() throws Throwable {
+	Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Broadcast expiry settings')]/..//p//a[contains(.,'At')]/..//a[contains(.,'On')]/..//a[contains(.,'Scheduled Day')]"));
+}
+
+//**************//
+
 
 
 }
