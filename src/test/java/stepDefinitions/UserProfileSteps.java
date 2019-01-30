@@ -22,7 +22,9 @@ public class UserProfileSteps extends Init{
 	
 	@Then("^click username on topbar")
 	public void clickUsernameOnTopbar() throws InterruptedException {
+		
 		landingPage.clickProfileNameTopbar();
+	
 	}
 	
 	@Then("^verify dropdown")

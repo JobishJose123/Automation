@@ -43,7 +43,8 @@ import cucumber.api.java.en.Then;
 @CucumberOptions(
         features = { "src/test/features"},
 		glue = {"classpath:"},
-		tags = {"@NX-3100"},
+		tags = {"  \r\n" + 
+				"  @NDX-oneOffBcForDataSetup"},
 		plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:output/report.html",
         "html:target/81", "json:target/81/cucumber.json",

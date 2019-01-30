@@ -55,7 +55,9 @@ public class OfferSteps extends Init {
 	@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
 	public void create_new_Offer(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.createOffer(sheet, productSheet,"NULL");
-	}@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\" for test$")
+		}
+	
+	@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\" for test$")
 	public void create_new_Offer_test(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.createOffer(sheet, productSheet,"test");
 	}
@@ -1125,7 +1127,10 @@ public class OfferSteps extends Init {
 		//String partnerName= DataFusionEngineObjects.Hostname().getText();
 			
 	}
-
+	
+	
+	
+	   
 }
 
 

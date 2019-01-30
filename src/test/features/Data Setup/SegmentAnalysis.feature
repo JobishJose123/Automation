@@ -24,6 +24,7 @@ Then navigate to analytics
 Then navigate to explore segments
 Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
 Then Create Micro Segment
+Then save the Micro Segment
 
 
 
@@ -73,6 +74,20 @@ Then navigate to analytics
 Then navigate to explore segments
 Then filter the Segment Analysis job from sheet "SegmentAnalysisCopy"
 Then Create Micro Segment
+Then save the Micro Segment 
+
+
+@NDX-6352 @initBrowser
+Scenario: Create a BC with target condition as Saved Segment(saved from Micro-Segment)
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then create a broadcast from sheet "one-offBC" with "rechargeSMS" target condition with Saved Segment
+Then save bc
+
 
 
 

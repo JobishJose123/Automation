@@ -2347,6 +2347,8 @@ public class OfferPageObjects extends Init {
 		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+copiedoffername+"')]"));
 		Assert.assertTrue(element.isDisplayed(), "Copied job not found");
 		}
+	
+
 		
 	
 }

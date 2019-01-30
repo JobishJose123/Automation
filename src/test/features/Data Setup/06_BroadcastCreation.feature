@@ -23,22 +23,22 @@ Feature: Test suite for Broadcast creation
       
      Examples:
     |Condition|
-    |customerWasSentTheTrialMessage|
-    |digitalPersonaGT15|
-    |customerDemographicsGT25|
-    |learnedBehaviourGT35|
-    |analyticalScoresGT45|
-    |digitalEngagementGT235|
-    |customerLocationInsightsGT5|
-    |customerList|
-    |discoveredClusters200|
-    |customerDrivenEvent|
-    |usageMetric|
-    |eventCounts|
-    |revenueMetric|
-    |IMEventsOfferAccepted|
-    |IMEventsCustomerCareUsage|
-    |customerDeviceInfo|
+    #|customerWasSentTheTrialMessage|
+    #|digitalPersonaGT15|
+    #|customerDemographicsGT25|
+    #|learnedBehaviourGT35|
+    #|analyticalScoresGT45|
+    #|digitalEngagementGT235|
+    #|customerLocationInsightsGT5|
+    #|customerList|
+    #|discoveredClusters200|
+    #|customerDrivenEvent|
+    #|usageMetric|
+    #|eventCounts|
+    #|revenueMetric|
+    #|IMEventsOfferAccepted|
+    #|IMEventsCustomerCareUsage|
+    #|customerDeviceInfo|
     |segmentAgeGT40|
     
       @NX-createCampaignForRecurringBcs

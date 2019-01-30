@@ -1,6 +1,9 @@
 package stepDefinitions;
 
+import java.util.Calendar;
+
 import org.junit.Assert;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 import baseClasses.ExcelHelper;
@@ -11,13 +14,17 @@ import baseClasses.TimeoutImpl;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.SegmentAnalysisObjects;
+import pageObjetcs.BroadcastPageObjects;
 
 public class SegmentAnalysisSteps extends Init {
 	
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
+	ExcelHelper eM = new ExcelHelper();
+	BroadcastPageObjects broadcastPageObjects=new BroadcastPageObjects();
 	SegmentAnalysisObjects segmentObjects=new SegmentAnalysisObjects();
 	CommonObjects CommonObjects=new CommonObjects();
+	BroadcastSteps 	BroadcastStepsObjects=new 	BroadcastSteps();
 
 	
 	public SegmentAnalysisSteps() {
@@ -418,6 +425,58 @@ public class SegmentAnalysisSteps extends Init {
 	@Then("^find the Target count$")
 	public void find_the_target_count() throws Exception{
 		segmentObjects.TargetCount() ;
+	}
+	@Then("^save the Micro Segment$")
+	public void save_the_Micro_Segment() throws Throwable {
+		segmentObjects.saveMicroSegment();
+		
+	    
+	}
+	@Then("^create a broadcast from sheet \"([^\"]*)\" with \"([^\"]*)\" target condition with Saved Segment$")
+	public void enter_details_for_new_broadcast_from_sheet_with_target_condition_as_saved_segment_from_sheet(String BCName, String OfferName) throws Throwable {
+		ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		eM.setExcelFile("bcInputData",BCName);
+//		String baseList = list.getCell(1, 2).toString();
+		ExcelHelper offerExcel = new ExcelHelper(); 
+		offerExcel.setExcelFile("offerInputData", OfferName);
+			String name = (String) eM.getCell(1, 0);
+			name =  RandomNameGenerator.getRandomName(name);
+			eM.setCell(1, 0, name);
+		  	String bc_type =(String) eM.getCell(1, 7);
+		Calendar rightNow =Calendar.getInstance();
+		String mn = "";
+		if(rightNow.get(Calendar.MONTH)+1<9) {
+			mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		}
+		else 
+			mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+		int hours = rightNow.get(Calendar.HOUR);
+	  	 int min = rightNow.get(Calendar.MINUTE);
+	  	 int am_pm = rightNow.get(Calendar.AM_PM);
+	  	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+	  	 int year = rightNow.get(Calendar.YEAR);
+	  	 int month = rightNow.get(Calendar.MONTH)+1;
+	  	 min+=2;
+	  	 int rem = min%5;
+	  	 rem = 5-rem;
+	  	 min+=rem;
+	  	 if(min>59){
+	  		 min-=60;
+	  		 hours++;
+	  	 }
+	  	 if((String)eM.getCell(1, 6)=="later"){
+	  		 day++;
+	  	 }
+	  	 Actions builder = new Actions(driver);
+	  	segmentObjects.createBCWithMicroSegmentSaved(name,bc_type,BASE_LIST,OfferName, INVENTORY_ONE_PER_DAY);
+	  	
+//		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
+//		Thread.sleep(1500);
+
+	  	BroadcastStepsObjects.enterDeliveryTabDetails(bc_type,BCName);
+		
 	}
 	
 	

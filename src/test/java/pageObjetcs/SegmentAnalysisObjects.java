@@ -19,6 +19,7 @@ import pageObjetcs.CommonObjects;
 import com.google.api.services.gmail.Gmail.Users;
 import com.itextpdf.text.log.SysoCounter;
 
+import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.TimeoutImpl;
@@ -27,6 +28,7 @@ public class SegmentAnalysisObjects extends Init {
 	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
+	BroadcastPageObjects broadcastPageObjects=new BroadcastPageObjects();
 	Init Init =new Init();
 	public SegmentAnalysisObjects() {
 		PageFactory.initElements(driver, this);
@@ -424,6 +426,17 @@ private WebElement ClickCondition2;
 	
 	@FindBy(xpath="(//paper-button[contains(.,'Save')])[1]")
 	private WebElement CrossTabSave;
+	
+	@FindBy(xpath="//b[@class='style-scope tree-map'][contains(.,'Micro-Segment')]")
+	private WebElement MicroSegmentName;
+	
+	@FindBy(xpath="//paper-item[contains(.,'Saved Segment')]")
+	private WebElement SavedSegmentbtn;
+	
+	
+	
+	@FindBy(xpath="//paper-button[@class='saveBtn style-scope saved-segment-option x-scope paper-button-0'][contains(.,'Save')]")
+	private WebElement SaveMicroSegmentNameToSavedSegment;
 	
 	public void navigateToAnalytics() throws InterruptedException {
 		jswait.loadClick(analytics);
@@ -1136,7 +1149,7 @@ public void clustertabledetailsandsave() throws Exception {
        jswait.loadClick(Computebtn);
        Thread.sleep(3000);
      jswait.loadClick(MicroSegmentSavebtn);
-    // jswait.loadClick(SaveAnalysisBtn);
+     jswait.loadClick(SaveAnalysisBtn);
 		
    }
    
@@ -1199,8 +1212,37 @@ public void TargetCount() throws Exception {
 	  jswait.loadClick(CrossTabbtn);
 	  
   }
+  public void saveMicroSegment() throws Exception{
+	String Name = MicroSegmentName.getText();
+	  commonObjects.clickOptionsIcon();
+	  jswait.loadClick(SavedSegmentbtn);
+	  jswait.loadClick(SaveMicroSegmentNameToSavedSegment);
+	  
+  }
+
+	public void createBCWithMicroSegmentSaved(String name, String bc_type, String baseList, String offer,String inventory) throws InterruptedException {
+		ExcelHelper offerExcel = new ExcelHelper(); 
+  	offerExcel.setExcelFile("offerInputData", offer);
+	broadcastPageObjects.enterBroadcastBasicDetails(name,inventory);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			Thread.sleep(1500);
+		}
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectBaseList(baseList);
+		jswait.loadClick(SavedSegmentsRadiobtn);
+		broadcastPageObjects.clickProceedButton();
+		broadcastPageObjects.selectBaseList(baseList);
+//		jswait.loadClick(CGConfigure);
+//		jswait.loadClick(noControlGroupRadioButton);
+//		jswait.loadClick(defineCGLimitSave);
 
 
-
+	}
 	  }
 
