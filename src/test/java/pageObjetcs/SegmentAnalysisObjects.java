@@ -1230,7 +1230,7 @@ public void TargetCount() throws Exception {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		broadcastPageObjects.clickProceedButton();

@@ -178,8 +178,12 @@ public class TargetConditionObjects extends Init {
 	private WebElement eventOfferDeclined;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer was sent the message')]")
 	private WebElement eventCustomerWasSentTheMessage;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer was eligible for Offer')]")
+	private WebElement eventCustomerWaseligibleforoffer;
+	
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer was sent the trial message')]")
 	private WebElement eventCustomerWasSentTheTrialMessage;
+	
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer Recommended')]")
 	private WebElement eventOfferRecommended;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer Care Usage')]")
@@ -238,14 +242,14 @@ public class TargetConditionObjects extends Init {
 		 private List <WebElement> duplicatedTargetConditionCard;
 		 
 		 
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
-		// @FindBy(xpath="")
-		// private WebElement ;
+		 @FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'Boolean_q11')]")
+		 private WebElement Boolean_q11;
+		 @FindBy(xpath="//paper-item[text()='Yes']")
+		 private WebElement booleanYes;
+		 @FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'Languages_q11')]")
+		 private WebElement languages_q11 ;
+		 @FindBy(xpath="//paper-item[text()='matches any of']")
+		 private WebElement matchesOFAny;
 		// @FindBy(xpath="")
 		// private WebElement ;
 		// @FindBy(xpath="")
@@ -735,6 +739,188 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(conditionIsGreaterThan);
 			jswait.loadSendKeys(isGreaterThanValue,"0");
 			jswait.loadClick(targetConditionSave);
+			}
+			
+			
+			else if(event.contentEquals("allTargetConditions")) {
+				//for Age>24
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(CustomerInsightFieldAge);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsGreaterThan);
+				jswait.loadSendKeys(isGreaterThanValue,"24");
+				jswait.loadClick(targetConditionSave);
+				Thread.sleep(2000);
+				//for boolean=Yes
+				jswait.loadClick(".//paper-button[contains(.,'Add AND')]");
+				
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(Boolean_q11);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(booleanYes);
+				
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[2])[2]");
+				
+				Thread.sleep(2000);
+				//for language=malayalam
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[2]");
+				
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(languages_q11);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(matchesOFAny);
+				jswait.loadClick("//field-list[@class='layout vertical flex style-scope profile-field']//paper-tags-dropdown[@id='tagDropDown']//input[@id='input']");
+				jswait.loadClick("//field-list[@class='layout vertical flex style-scope profile-field']//iron-icon[@class='style-scope paper-tags-dropdown x-scope iron-icon-0']");
+				jswait.loadClick("//paper-item[text()='Malayalam']");
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[3]");
+				
+				Thread.sleep(2000);
+				//for usage metric
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[3]");
+								
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeUsageMetrics);
+				jswait.loadClick(usageMetricField);
+				jswait.loadSendKeys(usageMetricField,SELENIUM_USAGE_METRIC);
+				jswait.loadClick(usageMetricUnique);
+				jswait.loadClick(metricWeekSelector);
+				jswait.loadClick(metricByMonthOption);
+				jswait.loadClick(metricDaySelector);
+				jswait.loadClick(metricMaxOf);
+				jswait.loadClick(metricMaxOfMonthsSelect);
+				jswait.loadClick(metricMaxOfMonthThisMonth);
+				jswait.loadClick(metricMaxOfMonthLastMonth);
+				jswait.loadClick(metricMaxOfMonthLast2Month);
+				jswait.loadClick(metricMaxOfMonthLast3Month);
+				jswait.loadClick(metricMaxOfMonthLast4Month);
+				jswait.loadClick(metricMaxOfMonthLast5Month);
+				jswait.loadClick(metricMaxOfMonthLast6Month);
+				jswait.loadClick(metricMaxOfMonthLast7Month);
+				jswait.loadClick(metricMaxOfMonthLast8Month);
+				jswait.loadClick(metricMaxOfMonthLast9Month);
+				jswait.loadClick(metricConditionField);
+				jswait.loadClick(conditionIsGreaterThan);
+				jswait.loadSendKeys(isGreaterThanValue,"0");
+				
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[4]");
+				Thread.sleep(2000);
+				//for shared metric
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[4]");
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeUsageMetrics);
+				jswait.loadClick(usageMetricField);
+				jswait.loadSendKeys(usageMetricField,SELENIUM_SHARED_METRIC);
+				jswait.loadClick(sharedMetricUnique);
+				jswait.loadClick(metricWeekSelector);
+				jswait.loadClick(metricByMonthOption);
+				jswait.loadClick(metricDaySelector);
+				jswait.loadClick(metricMaxOf);
+				jswait.loadClick(metricMaxOfMonthsSelect);
+				jswait.loadClick(metricMaxOfMonthThisMonth);
+				jswait.loadClick(metricMaxOfMonthLastMonth);
+				jswait.loadClick(metricMaxOfMonthLast2Month);
+				jswait.loadClick(metricMaxOfMonthLast3Month);
+				jswait.loadClick(metricMaxOfMonthLast4Month);
+				jswait.loadClick(metricMaxOfMonthLast5Month);
+				jswait.loadClick(metricMaxOfMonthLast6Month);
+				jswait.loadClick(metricMaxOfMonthLast7Month);
+				jswait.loadClick(metricMaxOfMonthLast8Month);
+				jswait.loadClick(metricMaxOfMonthLast9Month);
+				
+				jswait.loadClick(metricConditionField);
+				jswait.loadClick(conditionIsGreaterThan);
+				jswait.loadSendKeys(isGreaterThanValue,"0");
+				
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[5]");
+				Thread.sleep(2000);
+				//for shared list
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[5]");
+								
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerList);
+				jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_SHARED_List);
+				jswait.loadClick(CustomerListSelection);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsSubscribed);
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[6]");
+				
+				Thread.sleep(2000);
+				//for system event not occured 
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[6]");
+				
+				
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Customer was sent the trial message");
+				jswait.loadClick(eventCustomerWasSentTheTrialMessage);
+				jswait.loadClick("//div[contains(text(),'Occurred')]");
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[7]");
+				Thread.sleep(2000);
+				//for system event occured
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[7]");
+				
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Customer was eligible for Offer");
+				jswait.loadClick(eventCustomerWaseligibleforoffer);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				
+				
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[8]");
+				Thread.sleep(2000);
+				//for custom event occured
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[8]");	
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerDrivenEvents);
+				jswait.loadSendKeys(EventFieldSelector,SELENIUM_CUSTOMER_DRIVEN_EVENT);
+				jswait.loadClick(eventCustomerDrivenEvent);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[9]");
+				Thread.sleep(2000);
+				//for custom event not occured
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[9]");
+				
+				
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerDrivenEvents);
+				jswait.loadSendKeys(EventFieldSelector,SELENIUM_CUSTOMER_DRIVEN_EVENT);
+				jswait.loadClick(eventCustomerDrivenEvent);
+				jswait.loadClick("//div[contains(text(),'Occurred')]");
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[10]");
+				Thread.sleep(2000);
+				//for customer list subscribed
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[10]");
+				
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerList);
+				jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_Target_List);
+				jswait.loadClick(CustomerListSelection);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsSubscribed);
+				
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[11]");
 			}
 			
 				

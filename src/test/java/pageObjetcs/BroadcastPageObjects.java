@@ -378,6 +378,8 @@ private WebElement recipientclick;
 	 
 	 @FindBy(xpath="//paper-button[@class='btn-back style-scope broadcast-offer-selected x-scope paper-button-0']")
 	 private WebElement backToOffers ;
+	 @FindBy(xpath="//paper-button[@class='btn-back style-scope broadcast-offer-selected x-scope paper-button-0']")
+	 private WebElement clearSavedSegment ;
 	 
 	  public void backToOffers() throws InterruptedException {
 		jswait.loadClick(backToOffers);
@@ -849,7 +851,7 @@ private WebElement recipientclick;
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1319,7 +1321,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1340,7 +1342,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1425,7 +1427,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1463,7 +1465,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1501,7 +1503,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1541,7 +1543,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1611,7 +1613,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1697,7 +1699,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1738,7 +1740,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1788,7 +1790,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'trigger')]");
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 			Thread.sleep(1500);
 		}
 		clickProceedButton();
@@ -1992,7 +1994,7 @@ if(bc_type.contentEquals("facebook")){
 				Thread.sleep(1000);
 				jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 				Thread.sleep(2000);
-				jswait.loadClick("//paper-item[contains(.,'trigger')]");
+				jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
 				Thread.sleep(1500);
 			}
 			clickProceedButton();
@@ -2209,6 +2211,33 @@ public void Broadcast_Expiry() throws Exception{
 		min -= 60;
 		hours++;
 	}
+	
+	jswait.loadClick("//paper-date-time-input[contains(@class,'style-scope schedule-expiry-settings x-scope paper-date-time-input-0')]//div[contains(@class,'container style-scope paper-date-time-input')]//input[@id='input']");
+	
+	Actions builder = new Actions(driver);
+	
+	WebElement num = driver.findElement(By.xpath(
+			".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
+	builder.moveToElement(num).click().build().perform();
+	Thread.sleep(2000);
+	// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
+	WebElement num1 = driver.findElement(By.xpath(
+			".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
+	Thread.sleep(1000);
+	builder.moveToElement(num1).click().build().perform();
+	// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
+	// num1 =
+	// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
+	// style-scope paper-clock-selector'][41]"));
+	// builder.moveToElement(num1).click().build().perform();
+	// Thread.sleep(2000);
+	if (am_pm == 0)
+		jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+	else
+		jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+
+	jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
+	Thread.sleep(2000);
 	
 	jswait.loadClick(expirestimezone);
 }
@@ -2702,7 +2731,7 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 		}else if(segmentCondition.contentEquals("segmentAgeGT40")) {
 			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Segment Name')]/..//p[contains(.,'segmentAgeGT40')]"));	
 			
-		}else if(segmentCondition.contentEquals("customerWasSentTheTrialMessage")) {
+		}else if(segmentCondition.contentEquals("customerWasSentTheTrialMessageNOtOccurred")) {
 			Assert.assertTrue(jswait.checkVisibility("//target-event[contains(.,'This event has not occured')]"));
 			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));
 			
