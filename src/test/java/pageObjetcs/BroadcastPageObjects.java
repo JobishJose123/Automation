@@ -2768,36 +2768,46 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 	
 
 	
-public void selectDNCList(String dndListType) throws InterruptedException {
+	public void selectDNCList(String dndListType) throws InterruptedException {
 		
-	Thread.sleep(2000);
-	jswait.loadClick(DNCExclusionOption);
-	Thread.sleep(3000);
-	
-	List<WebElement> removeButton = driver.findElements(By.xpath("//iron-data-table//iron-icon[@icon='icons:remove-circle']"));
-	System.out.println(removeButton.size());
-	 for (WebElement webElement : removeButton) {
-		 Thread.sleep(3000);
-			jswait.loadClick("//iron-icon[@title='Remove']");
+		Thread.sleep(2000);
+		jswait.loadClick(DNCExclusionOption);
+		Thread.sleep(3000);
 		
-	}
-	 
-		if(dndListType.equals("both")) {
-		jswait.loadClick(DNCListTextbox);
-		jswait.loadClick(seleniumDNDMandatoryList);
-		jswait.loadClick(DNCListAddButton);
-		jswait.loadClick(DNCListTextbox);
-		jswait.loadClick(seleniumDNDOptionalList);
-		jswait.loadClick(DNCListAddButton);
-		jswait.loadClick(DNCListCloseButton);
-		}
-		else if(dndListType.equals("mandatory")) {
-			System.out.println("test");
-			jswait.loadClick(DNCListCloseButton);
+		List<WebElement> removeButton = driver.findElements(By.xpath("//iron-data-table//iron-icon[@icon='icons:remove-circle']"));
+		System.out.println(removeButton.size());
+		 for (WebElement webElement : removeButton) {
+			 Thread.sleep(3000);
+				jswait.loadClick("//iron-icon[@title='Remove']");
 			
 		}
-		
-		}
+		 
+			if(dndListType.equals("both")) {
+				jswait.loadClick(DNCListTextbox);
+				jswait.loadClick(seleniumDNDMandatoryList);
+				jswait.loadClick(DNCListAddButton);
+				jswait.loadClick(DNCListTextbox);
+				jswait.loadClick(seleniumDNDOptionalList);
+				jswait.loadClick(DNCListAddButton);
+				System.out.println("both DNC exclusion list selected");
+			}
+			else if(dndListType.equals("mandatory")) {
+				jswait.loadClick(DNCListTextbox);
+				jswait.loadClick(seleniumDNDMandatoryList);
+				jswait.loadClick(DNCListAddButton);	
+				System.out.println("mandatory DNC exclusion list selected");
+			}
+			else if(dndListType.equals("optional")) {
+				jswait.loadClick(DNCListTextbox);
+				jswait.loadClick(seleniumDNDOptionalList);
+				jswait.loadClick(DNCListAddButton);
+				System.out.println("No DNC exclusion list selected");
+			}
+			else if(dndListType.equals("none")) {
+				System.out.println("optional DNC exclusion list selected");
+			}
+			jswait.loadClick(DNCListCloseButton);
+			}
 
 }
 
