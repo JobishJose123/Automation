@@ -342,6 +342,8 @@ private WebElement recipientclick;
 	 private WebElement expirestime ;
 	 @FindBy(xpath="//form[@id='bcExpiryForm']//paper-item[contains(.,'At')]")
 	 private WebElement expiresAtoption;
+	 @FindBy(xpath="//form[@id='bcExpiryForm']//paper-item[contains(.,'After')]")
+	 private WebElement expiresAfteroption;
 	 @FindBy(xpath=".//form[@id='bcExpiryForm']//label[contains(.,'Expires')]//following::iron-icon[5]")
 	 private WebElement expirestimezone ;
 	 @FindBy(xpath="//paper-radio-button[contains(.,'Saved Segments')]")
@@ -359,8 +361,8 @@ private WebElement recipientclick;
 	 private WebElement targetverify;
 	 @FindBy(xpath="//paper-button[contains(.,'Calculate')]")
 	 private WebElement calculatebtn;
-	// @FindBy(xpath="")
-		// private WebElement ;
+	 @FindBy(xpath="//schedule-expiry-settings//paper-input-wrapper//input[@id=\"input\"]")
+		 private WebElement bcExpireAfterHours ;
 		// @FindBy(xpath="")
 		// private WebElement ;
 		// @FindBy(xpath="")
@@ -2181,6 +2183,20 @@ public void Verify_DNC_Exclusion(String sheet,String count) throws Exception {
 
 		}
 
+
+public void Broadcast_Expiry(String Expires) throws Exception {
+	
+	Thread.sleep(2000);
+	jswait.loadClick(bcExpiryclick);
+	Thread.sleep(2000);
+	jswait.loadClick(expirestime);
+	Thread.sleep(2000);
+	jswait.loadClick(expiresAfteroption);
+	Thread.sleep(2000);
+	jswait.loadSendKeys(bcExpireAfterHours,Expires);
+	
+}
+
 public void Broadcast_Expiry() throws Exception{
 	Thread.sleep(2000);
 	jswait.loadClick(bcExpiryclick);
@@ -2633,7 +2649,7 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 		int am_pm = rightNow.get(Calendar.AM_PM);
 		int day = rightNow.get(Calendar.DAY_OF_MONTH) + 2;
 		int year = rightNow.get(Calendar.YEAR);
-		int month = rightNow.get(Calendar.MONTH) + 1;
+		int month = rightNow.get(Calendar.MONTH);
 		min -= 2;
 		int rem = min % 5;
 		rem = 5 - rem;
@@ -2644,7 +2660,8 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 		}
 
 		String date = "";
-		String month1 = new SimpleDateFormat("MMM").format(month);
+		String month1=(calenderUtility.getMonthForInt(month)).substring(0,3);
+		
 
 			if (am_pm == 0) {
 				date = day + " " + month1 + " " + year + " " + String.format("%02d", hours) + ":"

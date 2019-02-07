@@ -122,7 +122,7 @@ public class TargetConditionObjects extends Init {
 	@FindBy(xpath="//input[@placeholder='Event']")
 	private WebElement EventFieldSelector;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
-	private WebElement CustomerInsightFieldAge;
+	private WebElement CustomerInsightFieldAge;	
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+GROUP_ID_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldGroupId;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::label[contains(.,'List')]/../..//input")
@@ -141,7 +141,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement CustomerDeviceInfo;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+BALANCE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldBalance;
-	
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+SELENIUM_TARGET_GROUP+"')]")
+	 private WebElement seleniumTargetGroup;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DEMOGRAPHICS_FIELD+"')]")
 	private WebElement demographicsField;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_PERSONA_FIELD+"')]")
@@ -250,8 +251,7 @@ public class TargetConditionObjects extends Init {
 		 private WebElement languages_q11 ;
 		 @FindBy(xpath="//paper-item[text()='matches any of']")
 		 private WebElement matchesOFAny;
-		// @FindBy(xpath="")
-		// private WebElement ;
+		 
 		// @FindBy(xpath="")
 		// private WebElement ;
 		// @FindBy(xpath="")
@@ -742,7 +742,7 @@ public class TargetConditionObjects extends Init {
 			}
 			
 			
-			else if(event.contentEquals("allTargetConditions")) {
+			else if(event.contains("allTargetConditions")) {
 				//for Age>24
 				jswait.loadClick(targetConditionTypeSelector);
 				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
@@ -858,6 +858,7 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(targetConditionTypeSelector);
 				jswait.loadClick(targetConditionTypeSystemEvents);
 				jswait.loadSendKeys(EventFieldSelector,"Customer was sent the trial message");
+				Thread.sleep(2000);
 				jswait.loadClick(eventCustomerWasSentTheTrialMessage);
 				jswait.loadClick("//div[contains(text(),'Occurred')]");
 				jswait.loadClick(eventDateAndTimeSelector);
@@ -921,8 +922,33 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(conditionIsSubscribed);
 				
 				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[11]");
+				Thread.sleep(2000);
+				//for Traget group
+				String value=event.substring(19,event.length());
+				jswait.loadClick("(.//paper-button[contains(.,'Add AND')])[11]");
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadSendKeys(CustomerInsightFieldSelector,"Target");
+				Thread.sleep(2000);
+				jswait.loadClick(seleniumTargetGroup);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIs);
+				jswait.loadSendKeys(isGreaterThanValue,value);
+				
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[contains(.,'Save')])[12]");
 			}
-			
+			else if(event.contains("targetGroup")){
+				String value=event.substring(11,event.length());
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadSendKeys(CustomerInsightFieldSelector,"Target");
+				Thread.sleep(2000);
+				jswait.loadClick(seleniumTargetGroup);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIs);
+				jswait.loadSendKeys(isGreaterThanValue,value);
+				jswait.loadClick(targetConditionSave);
+			}
 				
 		 }
 	 

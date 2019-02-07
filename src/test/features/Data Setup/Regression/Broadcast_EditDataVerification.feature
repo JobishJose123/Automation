@@ -28,7 +28,7 @@ Feature: Test suite for Broadcast Editing
     Then navigate to campaign category from sheet "campaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition allTargetConditions30 from sheet "one-offBC" with "rechargeSMS"
     Then save bc
     Then view the bc from workbook "bcInputData" in sheet "one-offBC"
     Then verify the basic details before editing the BC data from sheet "one-offBC"
@@ -149,30 +149,30 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
     
-  @NDX-VerifyBCexpiry @NDX-5930 @initBrowser @closeBrowser
-  Scenario: Verify the BC after edit Broadcast expiry One-Off BC(NEW)
+  @NDX-VerifyBCexpiry @NDX-5930 @initBrowser
+  Scenario: Verify the BC after edit Broadcast expiry One-Off BC
     Given login
-    When navigate to precision marketer
+  When navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "campaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then navigate to "One-time" broadcasts
     Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
-    Then edit the offer for BC expiry
+    Then edit the offer for BC expiry After hours "2"
     Then save bc
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
-    Then verify the BC expiry in BC View
+    Then verify the BC expiry in BC View After hours "2"
     
 #    ************************ Trigger OneOFF BC**************
    @NDX-editingTriggerOneOffBcBasicDetails @initBrowser 
-  Scenario: Verify Creating one-off BC and edit the basic details
+  Scenario: Verify Creating tRIGGERone-off BC and edit the basic details
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "campaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition allTargetConditions from sheet "TriggerOneoff" with "rechargeSMS"
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "TriggerOneoff" with "rechargeSMS"
     Then save bc
     Then view the bc from workbook "bcInputData" in sheet "TriggerOneoff"
     Then verify the basic details before editing the BC data from sheet "TriggerOneoff"
@@ -244,29 +244,28 @@ Feature: Test suite for Broadcast Editing
 
     Examples: 
       | Condition |
-      |allTargetConditions|
-#  | customerWasSentTheTrialMessage |
-#  | digitalPersonaGT15             |
-#  | customerDemographicsGT25       |
-#  | learnedBehaviourGT35           |
-#  | analyticalScoresGT45           |
-#  | digitalEngagementGT235         |
-#  | customerLocationInsightsGT5    |
-#  | customerList                   |
-#  | discoveredClusters200          |
-#  | customerDrivenEvent            |
-#  | usageMetric                    |
-#  | eventCounts                    |
-#  | revenueMetric                  |
-#  | IMEventsOfferAccepted          |
-#  | IMEventsCustomerCareUsage      |
-#  | customerDeviceInfo             |
-#  | sharedMetricOtherPartner  |
-#  | customerDrivenEventNotOccurred  |
-#  | customerWasSentTheTrialMessageNOtOccurred |
-#  | conditionForANDOperation |
-#  | conditionForOROperation |
-#  | segmentAgeGT40                 |
+       | customerWasSentTheTrialMessage |
+  | digitalPersonaGT15             |
+  | customerDemographicsGT25       |
+  | learnedBehaviourGT35           |
+  | analyticalScoresGT45           |
+  | digitalEngagementGT235         |
+  | customerLocationInsightsGT5    |
+  | customerList                   |
+  | discoveredClusters200          |
+  | customerDrivenEvent            |
+  | usageMetric                    |
+  | eventCounts                    |
+  | revenueMetric                  |
+  | IMEventsOfferAccepted          |
+  | IMEventsCustomerCareUsage      |
+  | customerDeviceInfo             |
+  | sharedMetricOtherPartner  |
+  | customerDrivenEventNotOccurred  |
+  | customerWasSentTheTrialMessageNOtOccurred |
+  | conditionForANDOperation |
+  | conditionForOROperation |
+  | segmentAgeGT40                 |
  
    @NDX-VerifyTriggeroneoffBcTargetList @initBrowser @closeBrowser
   Scenario: Verify Creating one-off BC and edit the target list details
@@ -291,10 +290,10 @@ Feature: Test suite for Broadcast Editing
     Then naigate to "campaignBC" campaign view broadcasts
     Then navigate to "One-time" broadcasts
     Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
-    Then edit the offer for BC expiry
+    Then edit the offer for BC expiry After hours "2"
     Then save bc
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
-    Then verify the BC expiry in BC View
+    Then verify the BC expiry in BC View After hours "2"
     
     
     
@@ -317,8 +316,7 @@ Feature: Test suite for Broadcast Editing
     Then navigate to campaign category from sheet "campaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-#    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBothExclution" with "rechargeSMS"
-Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
     Then activate bc
     Then wait until status of "one-offBC" is "Completed"
     Then provide file for conversion

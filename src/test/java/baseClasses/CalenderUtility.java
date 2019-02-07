@@ -1,6 +1,7 @@
 package baseClasses;
 
 import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,5 +58,16 @@ public class CalenderUtility {
 				CalenderUtility c = new CalenderUtility();
 				System.out.println(c.calculateMonthlyReccuranceWeekend(5));
 				
+			}
+			
+			
+			public String getMonthForInt(int month) {
+			    String month1 = "invalid";
+			    DateFormatSymbols dfs = new DateFormatSymbols();
+			    String[] months = dfs.getMonths();
+			    if (month >= 0 && month <= 11 ) {
+			        month1 = months[month];
+			    }
+			    return month1;
 			}
 }

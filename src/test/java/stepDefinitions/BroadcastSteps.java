@@ -45,7 +45,6 @@ public class BroadcastSteps extends Init{
 	
 	public ExcelHelper eM = new ExcelHelper();
 	public ExcelHelper eh = new ExcelHelper();
-	String dncExclusion="mandatory";
 	CampaignObjects campaignObjects = new CampaignObjects();
 	AdminPageObjects adminPageObjects = new AdminPageObjects();
 	CatalogPageObjects catalogPageObjects = new CatalogPageObjects();
@@ -1524,7 +1523,7 @@ else if(bc_type.contentEquals("recurring")||bc_type.contentEquals("seedingRecurr
       	 try{
       		 DNCExclusion = eh.getCellByColumnName("DNCExclusion");
       	 }catch (Exception e) {
-      		DNCExclusion = "mandatory";
+      		DNCExclusion = "none";
 		}
       	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer,condition, INVENTORY_UNLIMITED,DNCExclusion);
       	
@@ -3281,7 +3280,16 @@ public void create_new_broadcast_with_target_condition_freq_exclusion(String con
   		 day++;
   	 }
   	 Actions builder = new Actions(driver);
-  	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer,condition, INVENTORY_ONE_PER_DAY,dncExclusion);
+  	 
+  	 
+  	 eh.setExcelFile("bcInputData", sheet);
+   	String DNCExclusion = "";
+   	 try{
+   		 DNCExclusion = eh.getCellByColumnName("DNCExclusion");
+   	 }catch (Exception e) {
+   		DNCExclusion = "none";
+		}
+  	broadcastPageObjects.createBC(name, bc_type,BASE_LIST,offer,condition, INVENTORY_ONE_PER_DAY,DNCExclusion);
   	
 //	 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //	Thread.sleep(1500);
@@ -3584,8 +3592,9 @@ public void edit_the_targetSelection_None_for_BC(String targetSelection) throws 
 	broadcastPageObjects.clickProceedButton();
 }
 
-@Then("^edit the offer for BC expiry$")
-public void edit_the_offer_for_BC_expiry() throws Throwable {
+
+@Then("^edit the offer for BC expiry After hours \"([^\"]*)\"$")
+public void edit_the_offer_for_BC_expiry_After_hours(String expiry) throws Throwable {
 	Thread.sleep(4000);
 	broadcastPageObjects.clickProceedButton();
 	Thread.sleep(2000);
@@ -3593,10 +3602,8 @@ public void edit_the_offer_for_BC_expiry() throws Throwable {
 	Thread.sleep(2000);
 	broadcastPageObjects.clickProceedButton();
 	Thread.sleep(2000);
-	broadcastPageObjects.Broadcast_Expiry();
-	
+	broadcastPageObjects.Broadcast_Expiry(expiry);
 }
-
 
 
 
@@ -3665,8 +3672,21 @@ public void verify_the_BC_targetSelection_None_in_BC_View(String targetSelection
 
 @Then("^verify the BC expiry in BC View$")
 public void verify_the_BC_expiry_in_BC_View() throws Throwable {
-	Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Broadcast expiry settings')]/..//p//a[contains(.,'At')]/..//a[contains(.,'On')]/..//a[contains(.,'Scheduled Day')]"));
+	
+	broadcastPageObjects.clickBroadcastDeliveryDetails();
+	Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Broadcast expiry settings')]/..//p//a[contains(.,'After')]/..//a[contains(.,'2')]"));
+	}
+
+
+
+@Then("^verify the BC expiry in BC View After hours \"([^\"]*)\"$")
+public void verify_the_BC_expiry_in_BC_View_After_hours(String hours) throws Throwable {
+	broadcastPageObjects.clickBroadcastDeliveryDetails();
+	Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Broadcast expiry settings')]/..//p//a[contains(.,'After')]/..//a[contains(.,'"+hours+"')]"));
 }
+
+
+
 
 //**************//
 
