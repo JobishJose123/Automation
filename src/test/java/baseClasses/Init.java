@@ -109,6 +109,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	public final String SELENIUM_DATE="Date";
 	public final String SELENIUM_SHARED_List = "selenium_list_shared";
 	public final String SELENIUM_Target_List = "selenium_list_target";
+	public final String SELENIUM_TARGET_GROUP="Target Group_q11";
 }
 //public class Init {
 //public static WebDriver driver;
