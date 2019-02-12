@@ -345,8 +345,9 @@ private WebElement rulerouteid2;
 
 	
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]/../input")
+private WebElement rulessenderid2 
 //form[@id='deliverySegment']//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::input[1]")
-private WebElement rulessenderid2 ;
+;
 	
 	
 	@FindBy(xpath="//hexagon-content//span")
@@ -532,7 +533,7 @@ private WebElement rulessenderid2 ;
 		clickPorogramProceedButton();
 		//System.out.println("test");
 		
-//		if(!offerType.contains("STV")) {
+		if(!offerType.contains("STV")) {
 		clickTrackingSessionField();
 		Thread.sleep(3000);
 		optionAfterselect();
@@ -542,17 +543,31 @@ private WebElement rulessenderid2 ;
 		ruleafterinput2(); 
 		ruledays();
 		Thread.sleep(2000);
-//		}
+	}
 		if(touchpointType.contentEquals("sms")){
-		rulessenderid();
-		addresssprule();
-		Thread.sleep(3000);
-		rulerouteid();
-		ruleroute();
+//		rulessenderid();
+//		addresssprule();
+//		Thread.sleep(3000);
+//		rulerouteid();
+//		ruleroute();
+//			Thread.sleep(2000);
+//			rulessenderid2();
+//			addresssprule2();
+//			Thread.sleep(2000);
+//			rulerouteid2(); 
+//			ruleroute2();
+			Thread.sleep(2000);
+			rulessenderid();
+			addresssprule();
+			
+			Thread.sleep(2000);
+			rulerouteid2(); 
+			ruleroute2();
    }
 		Thread.sleep(2000);
-		rulessenderid2();
-		addresssprule2();
+		rulessenderid();
+		addresssprule();
+		
 		Thread.sleep(2000);
 		rulerouteid2(); 
 		ruleroute2();
@@ -703,9 +718,10 @@ private WebElement rulessenderid2 ;
    
    public void rulerouteid2() throws InterruptedException {
 	   Thread.sleep(2000);
-		jswait.loadClick(rulerouteid2);
-//		 Thread.sleep(2000);
-//			jswait.loadClick(rulerouteid2);
+//	   jswait.loadClick(ruleroute2);
+////		jswait.loadClick(rulerouteid2);
+////		 Thread.sleep(2000);
+			jswait.loadClick(rulerouteid2);
 	}
    
    

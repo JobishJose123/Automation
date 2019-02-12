@@ -65,6 +65,15 @@ public class ConsumerProfileSteps extends Init{
 		list.setExcelFile("registrationListInputData", "Sheet1");
 		eh.setExcelFile(list.getCell(1, 2).toString(), list.getCell(1, 2).toString());
 		jswait.waitUntil("//data-table-cell/span[contains(.,'"+msisdn+"')]");
+		
+		String line = "";
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		BufferedReader br = new BufferedReader(new FileReader("ExcelFiles\\list_91992273.csv"));
+		line = br.readLine();
+		line = br.readLine();
+		System.out.println(line);
+		String[] userData = line.split(",");
+		
 		if(msisdn.length()<10) {
 			msisdn = getMsisdn();
 			jswait.waitUntil("//data-table-cell/span[contains(.,'First Name_q11')]/../..//span[contains(.,'Text')]/../..//span[contains(.,'"+eh.getCell(1, 1).toString()+"')]");

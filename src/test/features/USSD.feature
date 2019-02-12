@@ -2,13 +2,13 @@
 #Keywords Summary :
 
 @NX-API_Test_Cases
-Feature: Test cases for API
+Feature: Test cases for USSD
   I want to use this template for my feature file
   
   
      
-    @NX-9282 @initBrowser
-  Scenario: API- Verify Offer Eligible event for API -9282
+    @NX-ussd @initBrowser
+  Scenario: API- Verify Offer Eligible event for USSD
     Given login
     #Then navigate to configuration management
     #Then naviagte to product classes
@@ -21,21 +21,21 @@ Feature: Test cases for API
     #Then click create new product button
     #Then create product with attributes from sheet "fullDetails"
     #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-    #Then navigate to offer management
-    #Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeSMS" offer to Offer Catalogue
-    #Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "STVSMS" with product "fullDetails"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
-    #Then click create program button
-    #Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointUA_default"
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointUA_default"
+    Then create new rule from sheet "fullDetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
     Then verify rule created from sheet "rule"
     Then wait for "A" status of rule
     Then wait until rule is picked

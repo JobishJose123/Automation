@@ -1117,12 +1117,19 @@ System.out.println(editname+"program has edited successfully");
 	public void verify_create_program_page_from_sheet(String sheet1, String sheet2, String sheet3) throws Throwable {
 		Thread.sleep(4000);
     	ExcelHelper programExcel = new ExcelHelper();
+//    	ExcelHelper programExcel2 = new ExcelHelper();
+    	
     	programExcel.setExcelFile("programInputData", sheet1);
+    	
+//    	programExcel2.setExcelFile("programInputDataedit", sheet1);
+    	
     	Random rn = new Random();
     	int  n = rn.nextInt(5000) + 1;
  		String name = (String) programExcel.getCell(1, 0);
   		name =  name.replaceAll("[0-9]", "")+n;
  		programExcel.setCell(1, 0, name);
+ 		
+ 		
  		Thread.sleep(4000);
 		programPage.clickCreateProgramButton();
 		programPage.enterProgramDetailsfromSheet(name,sheet2);
@@ -1311,7 +1318,7 @@ System.out.println(editname+"program has edited successfully");
 	 public void chooseProgramFromSheet(String sheet) throws InterruptedException {
 		 
 		    eh.setExcelFile("programInputData",sheet);
-			String name = (String) eh.getCell(1, 0);
+			String name = (String) eh.getCell(1,0);
 		    filterWorkaround(name);
 		    commonObjects.clickOptionsIcon();
 		    programPage.clickPorogramViewRulesButton();
@@ -1407,7 +1414,7 @@ System.out.println(editname+"program has edited successfully");
 				Thread.sleep(4000);
 				
 		    	ExcelHelper programExcel = new ExcelHelper();
-		    	programExcel.setExcelFile("productInputData", sheet1);
+		    	programExcel.setExcelFile("programInputData", sheet1);
 		    	ExcelHelper offerExcel = new ExcelHelper();
 		    	offerExcel.setExcelFile("offerInputData", offerType);
 		    	

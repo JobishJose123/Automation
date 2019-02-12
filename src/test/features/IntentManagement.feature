@@ -156,7 +156,7 @@ Feature: positive flow of im program creation
     Then verify create program page "programdetails"
     Then click on edit button of programs
 
-  @NX-1236 @initBrowser @closeBrowser
+  @NX-1236 @initBrowser 
   Scenario: Verify creating a new the program in Intent management
     Given login
     Then navigate to intent management
