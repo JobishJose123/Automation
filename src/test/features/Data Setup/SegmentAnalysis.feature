@@ -85,7 +85,7 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then create a broadcast from sheet "one-offBC" with "rechargeSMS" target condition with Saved Segment
+Then enter details for new broadcast with condition SegmentAnalysis from sheet "one-offBC" with "rechargeWap"
 Then save bc
 
 

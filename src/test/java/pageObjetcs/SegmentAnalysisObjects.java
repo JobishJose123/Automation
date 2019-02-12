@@ -385,6 +385,9 @@ private WebElement ClickCondition2;
 	
 	@FindBy(xpath="(//iron-icon[@icon='icons:close'])[1]")
     private WebElement CloseSlabOfAPI	;	
+	
+	 @FindBy(xpath="//label[contains(.,'Saved Segments')]/../..//input")
+private WebElement savedSegmentSelectorField;
 
 	
 	
@@ -1220,29 +1223,6 @@ public void TargetCount() throws Exception {
 	  
   }
 
-	public void createBCWithMicroSegmentSaved(String name, String bc_type, String baseList, String offer,String inventory) throws InterruptedException {
-		ExcelHelper offerExcel = new ExcelHelper(); 
-  	offerExcel.setExcelFile("offerInputData", offer);
-	broadcastPageObjects.enterBroadcastBasicDetails(name,inventory);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
-			System.out.println("inside triggerable");
-			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
-			Thread.sleep(1000);
-			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
-			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
-			Thread.sleep(1500);
-		}
-		broadcastPageObjects.clickProceedButton();
-		broadcastPageObjects.selectBaseList(baseList);
-		jswait.loadClick(SavedSegmentsRadiobtn);
-		broadcastPageObjects.clickProceedButton();
-		broadcastPageObjects.selectBaseList(baseList);
-//		jswait.loadClick(CGConfigure);
-//		jswait.loadClick(noControlGroupRadioButton);
-//		jswait.loadClick(defineCGLimitSave);
-
-
-	}
+	
 	  }
 
