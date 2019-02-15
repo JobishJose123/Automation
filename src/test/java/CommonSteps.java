@@ -49,7 +49,11 @@ public class CommonSteps extends Init {
 	@FindBy(xpath="//*[@id='loginButton']")
     private WebElement loginButton;
 	
+	@FindBy(xpath="//div[contains(.,'Program Reports')][@class='subHeading style-scope clv-reports']//following::div[@class='hex style-scope hexagon-content']")
+	private WebElement programReports;
 	
+	@FindBy(xpath="(//div[contains(.,'Broadcast Reports')][@class='subHeading style-scope clv-reports']//following::div[@class='hex style-scope hexagon-content'])[1]")
+	private WebElement broadcastReports;
 	
 	
 	
@@ -216,6 +220,14 @@ public class CommonSteps extends Init {
 	@Then("^wait for (\\d+) sec")
 	public void waitForSec(int sec) throws InterruptedException {
 		Thread.sleep(sec+1000);
+	}	
+	@Then("^navigate to program reports$")
+		public void programReport() throws Exception{
+	jswait.loadClick(programReports);
+	}
+	@Then("^navigate to broadcast reports$")
+	public void broadcastReport() throws Exception{
+		jswait.loadClick(broadcastReports);
 	}
 	@Then("^navigate to products$")
 	public void naviagte_to_products() throws Exception

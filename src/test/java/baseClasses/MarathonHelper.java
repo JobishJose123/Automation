@@ -28,7 +28,7 @@ public class MarathonHelper {
 	public void scaleContainer(String env,String container,String instance) throws IOException, InterruptedException {
 		Request r = new Request();
 		String data = "{\"instances\":"+instance+"}";
-		r.putRequest("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA==", data);
+		r.putRequest("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA==", data);  //Container path .Base64 format 
 		while(getContainerStatus(env,container)!=Integer.parseInt(instance)){
 			Thread.sleep(3000);
 			System.out.println("waiting for scaling");
@@ -95,7 +95,7 @@ public class MarathonHelper {
 	
 	public String getJson(String env,String container) throws IOException {
 		Request r = new Request();
-		r.getRequest("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA==");
+		r.getRequest("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA=="); 
 		String JSONStr = r.responseString;
 		return JSONStr;
 	}
