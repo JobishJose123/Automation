@@ -1368,7 +1368,14 @@ public void verifyViewOptionForBC() throws InterruptedException {
 				jswait.loadClick(savedSegmentRadioButtion);
 				jswait.loadClick(savedSegmentSelectorField);
 				jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditionsOR')]");
-			}else { 
+				
+			}
+			else if(condition.equals("SegmentAnalysis")) {
+				jswait.loadClick(savedSegmentRadioButtion);
+				jswait.loadClick(savedSegmentSelectorField);
+				
+				jswait.loadClick("(//paper-item[contains(.,'"+condition+"')])[1]");
+}else { 
 				targetConditionObjects.clickBasicTargetCondition(condition);
 			}
 			

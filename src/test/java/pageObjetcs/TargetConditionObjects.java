@@ -251,6 +251,12 @@ public class TargetConditionObjects extends Init {
 		 private WebElement languages_q11 ;
 		 @FindBy(xpath="//paper-item[text()='matches any of']")
 		 private WebElement matchesOFAny;
+		 @FindBy(xpath="//paper-item[contains(.,'is any of')]")  
+		private WebElement conditionIsAnyOf;
+		 @FindBy(xpath="(.//*[@id='conditionForm']//field-simple/div//paper-input//input)[2]")
+			private WebElement addOneMoreValue;
+			@FindBy(xpath="//paper-icon-button[@icon='icons:add']")
+			private WebElement add;
 		 
 		// @FindBy(xpath="")
 		// private WebElement ;
@@ -454,6 +460,18 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(conditionSelector);
 				jswait.loadClick(conditionIsGreaterThan);
 				jswait.loadSendKeys(isGreaterThanValue,"25");
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("IsAnyOf")) {
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(CustomerInsightFieldBalance);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsAnyOf);
+				jswait.loadSendKeys(isGreaterThanValue,"200");
+				jswait.loadClick(add);
+				jswait.loadSendKeys(addOneMoreValue,"141");
 				jswait.loadClick(targetConditionSave);
 			}
 			else if(event.contentEquals("learnedBehaviourGT35")){
@@ -681,6 +699,7 @@ public class TargetConditionObjects extends Init {
 			jswait.loadSendKeys(isGreaterThanValue,"0");
 			jswait.loadClick(targetConditionSave);
 			}
+			
 			else if(event.contains("groupIdCondition_")){
 				clickBasicTargetConditionWithGroupId(event);
 			}
