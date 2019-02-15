@@ -1,4 +1,4 @@
-package pageObjetcs;
+ package pageObjetcs;
 
 import static org.junit.Assert.assertTrue;
 
@@ -153,8 +153,6 @@ public class TargetConditionObjects extends Init {
 	private WebElement analyticalScoresField;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+DIGITAL_ENGAGEMENT_FIELD+"')]")
 	private WebElement digitalEngagementField;
-	
-	
 	@FindBy(xpath="//label[text()='Condition']/../..//input")
 	private WebElement conditionSelector;
 	@FindBy(xpath="//label[text()='Event Date and Time']/../..//input")
@@ -167,8 +165,6 @@ public class TargetConditionObjects extends Init {
 	private WebElement nowSelect;
 	@FindBy(xpath="//paper-item[contains(.,'is greater than')]")
 	private WebElement conditionIsGreaterThan;
-	@FindBy(xpath="//paper-item[contains(.,'is any of')]")
-	private WebElement conditionIsAnyOf;
 	@FindBy(xpath="//paper-item[text()='is']")
 	private WebElement conditionIs;
 	@FindBy(xpath="//paper-item[contains(.,'is on')]")
@@ -199,10 +195,6 @@ public class TargetConditionObjects extends Init {
 	private WebElement conditionIsLessThan;
 	@FindBy(xpath=".//*[@id='conditionForm']//field-simple/div//paper-input//input")
 	private WebElement isGreaterThanValue;
-	@FindBy(xpath="(.//*[@id='conditionForm']//field-simple/div//paper-input//input)[2]")
-	private WebElement addOneMoreValue;
-	@FindBy(xpath="//paper-icon-button[@icon='icons:add']")
-	private WebElement add;
 	@FindBy(xpath=".//*[@id='conditionCard']/paper-button[2]")
 	private WebElement targetConditionSave;
 	@FindBy(xpath=".//div[@id='single'][2]//paper-button[contains(.,'Save')]")
@@ -388,7 +380,6 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(targetConditionSave);
 	 }
 	 
-	 
 	 public void clickBasicTargetConditionWithUniqueKPI() throws InterruptedException {
 //		 	jswait.loadClick(createConditionButton);
 		    jswait.loadClick(targetConditionTypeSelector);
@@ -463,18 +454,6 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(conditionSelector);
 				jswait.loadClick(conditionIsGreaterThan);
 				jswait.loadSendKeys(isGreaterThanValue,"25");
-				jswait.loadClick(targetConditionSave);
-			}
-			else if(event.contentEquals("IsAnyOf")) {
-				jswait.loadClick(targetConditionTypeSelector);
-				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
-				jswait.loadClick(CustomerInsightFieldSelector);
-				jswait.loadClick(CustomerInsightFieldBalance);
-				jswait.loadClick(conditionSelector);
-				jswait.loadClick(conditionIsAnyOf);
-				jswait.loadSendKeys(isGreaterThanValue,"200");
-				jswait.loadClick(add);
-				jswait.loadSendKeys(addOneMoreValue,"141");
 				jswait.loadClick(targetConditionSave);
 			}
 			else if(event.contentEquals("learnedBehaviourGT35")){
@@ -970,6 +949,22 @@ public class TargetConditionObjects extends Init {
 				jswait.loadSendKeys(isGreaterThanValue,value);
 				jswait.loadClick(targetConditionSave);
 			}
+			else if(event.contains("SharedcustomerList")){
+								
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerList);
+				jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_SHARED_List);
+				jswait.loadClick(CustomerListSelection);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsSubscribed);
+				jswait.loadClick(targetConditionSave);
+				
+			}
+			
+			else {
+				Assert.assertTrue("NO Target condition selected",false);
+			}
+			
 				
 		 }
 	 

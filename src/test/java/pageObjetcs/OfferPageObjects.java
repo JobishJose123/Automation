@@ -94,6 +94,11 @@ public class OfferPageObjects extends Init {
 	
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'Selenium_reward')]")
 	private WebElement rewardTypeAnySelector;
+	
+	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'sample_flow')]")
+	private WebElement rewardTypeSampleFlowSelector;
+	
+	
 	@FindBy(xpath = "//label[contains(@class,'style-scope paper-input') and contains(text(),'Source')]/..//input")
 	private WebElement trackSourceSelector;
 	@FindBy(xpath = "//*[@id='form']//label[contains(.,'Title')]/..//input")
@@ -1153,6 +1158,11 @@ public class OfferPageObjects extends Init {
 	public void clickRewardTypeAny() throws InterruptedException {
 		jswait.loadClick(rewardTypeAnySelector);
 	}
+	
+	public void clickrewardTypeSampleFlowSelector() throws InterruptedException {
+		jswait.loadClick(rewardTypeSampleFlowSelector);
+	}
+
 
 	public void clickSaveOfferButton() throws InterruptedException {
 		jswait.loadClick(saveOfferButton);
@@ -1498,7 +1508,8 @@ public class OfferPageObjects extends Init {
 		
 				if (eh.getCell(1, 2).toString().contains("Seeding")) {
 					clickRewardTypeInputField();
-					clickRewardTypeAny();
+					//clickRewardTypeAny();
+					clickrewardTypeSampleFlowSelector();
 				}
 				else {
 					clickRewardFirstRuleAdButton();

@@ -1,7 +1,6 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer and offer catelogue for regression data setup
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
-
 @AllBCCreation_datasetup
 Feature: Test suite for Broadcast creation
   Create all types of Braodcast
@@ -23,22 +22,22 @@ Feature: Test suite for Broadcast creation
       
      Examples:
     |Condition|
-    #|customerWasSentTheTrialMessage|
-    #|digitalPersonaGT15|
-    #|customerDemographicsGT25|
-    #|learnedBehaviourGT35|
-    #|analyticalScoresGT45|
-    #|digitalEngagementGT235|
-    #|customerLocationInsightsGT5|
-    #|customerList|
-    #|discoveredClusters200|
-    #|customerDrivenEvent|
-    #|usageMetric|
-    #|eventCounts|
-    #|revenueMetric|
-    #|IMEventsOfferAccepted|
-    #|IMEventsCustomerCareUsage|
-    #|customerDeviceInfo|
+    |customerWasSentTheTrialMessage|
+    |digitalPersonaGT15|
+    |customerDemographicsGT25|
+    |learnedBehaviourGT35|
+    |analyticalScoresGT45|
+    |digitalEngagementGT235|
+    |customerLocationInsightsGT5|
+    |customerList|
+    |discoveredClusters200|
+    |customerDrivenEvent|
+    |usageMetric|
+    |eventCounts|
+    |revenueMetric|
+    |IMEventsOfferAccepted|
+    |IMEventsCustomerCareUsage|
+    |customerDeviceInfo|
     |segmentAgeGT40|
     
       @NX-createCampaignForRecurringBcs

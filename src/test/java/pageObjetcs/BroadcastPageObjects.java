@@ -1368,13 +1368,7 @@ public void verifyViewOptionForBC() throws InterruptedException {
 				jswait.loadClick(savedSegmentRadioButtion);
 				jswait.loadClick(savedSegmentSelectorField);
 				jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditionsOR')]");
-			}
-			else if(condition.equals("SegmentAnalysis")) {
-				jswait.loadClick(savedSegmentRadioButtion);
-				jswait.loadClick(savedSegmentSelectorField);
-				
-				jswait.loadClick("(//paper-item[contains(.,'"+condition+"')])[1]");
-}else { 
+			}else { 
 				targetConditionObjects.clickBasicTargetCondition(condition);
 			}
 			
@@ -2616,16 +2610,22 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 		jswait.loadClick(basicDetailsBC);
 		Thread.sleep(3000);
 		eh.setExcelFile("bcInputData", sheet);
+		String bc_type=eh.getCell(1, 7).toString();
 		Assert.assertTrue(driver.findElement(By.xpath(".//p[contains(.,'"+eh.getCell(1, 0).toString()+"')]")).isDisplayed());
 		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'Purpose of BC is NOTHING')]"));
 		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'Crossell')]"));
 		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+INVENTORY_UNLIMITED+"')]"));
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(text(),'Triggers')]/..//p[contains(.,'"+TRIGGER+"')]"));
+		}
 	}
 	
 	public void verifyTheBcBasicDetails(String sheet) throws InterruptedException {
 		jswait.loadClick(basicDetailsBC);
 		Thread.sleep(3000);
-		eh.setExcelFile("bcInputDataForEdit", sheet);		
+		eh.setExcelFile("bcInputDataForEdit", sheet);	
+		String bc_type=eh.getCell(1, 7).toString();
 		Assert.assertTrue(driver.findElement(By.xpath(".//p[contains(.,'"+eh.getCell(1, 0).toString()+"')]")).isDisplayed());
 		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+eh.getCell(1, 2).toString()+"')]"));
 		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+eh.getCell(1, 3).toString()+"')]"));
@@ -2633,6 +2633,11 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 				
 		eM.setExcelFile("campaignInputData","campaignBC");
 		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+eM.getCell(1, 0).toString()+"')]"));
+		
+if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(text(),'Triggers')]/..//p[contains(.,'"+TRIGGER+"')]"));
+		}
 				
 	}
 	
@@ -2687,15 +2692,35 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 				if (am_pm == 0) {
 					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
 							+ String.format("%02d", "59") + " AM " + "GMT+05:30";
+					Assert.assertTrue(
+							jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'" + date + "')]"));
 				} else {
 					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
 							+ String.format("%02d", "59") + " PM " + "GMT+05:30";
+					Assert.assertTrue(
+							jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'" + date + "')]"));
 				}
 				System.out.println("catch" + date);
 			}
 
-		} else if ((eh.getCell(1, 7).toString()).contains("recurring")) {
-			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'22 Jan 2019')]"));
+		} else if ((eh.getCell(1, 7).toString()).contains("recurring")|| (eh.getCell(1, 7).toString()).contentEquals("seedingRecurring")
+				|| (eh.getCell(1, 7).toString()).contentEquals("seedingTriggerableRecurringBC")) {
+			try {
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'"+date+"')]"));
+			}catch (Exception e) {
+				if (am_pm == 0) {
+					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
+							+ String.format("%02d", "59") + " AM " + "GMT+05:30";
+					Assert.assertTrue(
+							jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'"+date+"')]"));
+				} else {
+					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
+							+ String.format("%02d", "59") + " PM " + "GMT+05:30";
+					Assert.assertTrue(
+							jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'"+date+"')]"));
+				}
+				System.out.println("catch" + date);
+			}
 		}
 
 	}
@@ -2776,6 +2801,10 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 		}else if(segmentCondition.contentEquals("SegmentForMoreThanTenConditions")) {
 			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Segment Name')]/..//p[contains(.,'SegmentForMoreThanTenConditions')]"));	
 			
+		}else if(segmentCondition.contentEquals("SharedcustomerList")) {
+			
+			Assert.assertTrue(jswait.checkVisibility("//fixed-segment//b[contains(.,'"+SELENIUM_SHARED_List+"')]"));
+			
 		}else {
 			Assert.assertTrue(false,"NO target condition selected ");
 		}
@@ -2824,14 +2853,17 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 				jswait.loadClick(DNCListTextbox);
 				jswait.loadClick(seleniumDNDOptionalList);
 				jswait.loadClick(DNCListAddButton);
-				System.out.println("No DNC exclusion list selected");
+				System.out.println("optional DNC exclusion list selected");
 			}
 			else if(dndListType.equals("none")) {
-				System.out.println("optional DNC exclusion list selected");
+								
+				System.out.println("No DNC exclusion list selected");
 			}
 			jswait.loadClick(DNCListCloseButton);
 			}
 
+	
+	
 }
 
 

@@ -38,6 +38,45 @@ public class CommonObjects extends Init {
 	private WebElement filterIcon2;
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Name')]/..//input")
 	private WebElement filterFormName;
+	
+	@FindBy(xpath = "//div[@val='broadcastTriggerableViews'][@class='style-scope broadcast-list iron-selected']//flytxt-grid-filter[@class='custom-filter style-scope broadcast-list x-scope flytxt-grid-filter-0']//iron-icon[@id='icon']")
+	private WebElement TriggerableFilterIcon;
+	@FindBy(xpath = "//div[@val='broadcastTriggerableViews']//form[@id='filterForm']//label[contains(.,'Name')]/..//input")
+	private WebElement filterTriggerFormName;
+	@FindBy(xpath = "//div[@val='broadcastTriggerableViews']/..//div[@class='style-scope broadcast-list iron-selected']//paper-button[@class='style-scope flytxt-grid-filter x-scope paper-button-0'][contains(text(),'Reset Filters')]")
+	private WebElement resetTriggarableFilterForm;
+	@FindBy(xpath = "//div[@val='broadcastTriggerableViews']/..//div[@class='style-scope broadcast-list iron-selected']//paper-button[@class='style-scope flytxt-grid-filter x-scope paper-button-0'][contains(text(),'Apply')]")
+	private WebElement applyTriggarableFilterForm;
+	@FindBy(xpath = "//div[@val='broadcastTriggerableViews']/..//div[@class='style-scope broadcast-list iron-selected']//paper-button[@class='style-scope flytxt-grid-filter x-scope paper-button-0'][contains(text(),'Cancel')]")
+	private WebElement cancelTriggarableFilterForm;
+	
+	@FindBy(xpath = "//div[@val='broadcastRecurringViews'][@class='style-scope broadcast-list iron-selected']//flytxt-grid-filter[@class='custom-filter style-scope broadcast-list x-scope flytxt-grid-filter-0']//iron-icon[@id='icon']")
+	private WebElement recurrinFilterIcon;
+	@FindBy(xpath = "//div[@val='broadcastRecurringViews']/.//paper-button[@class='style-scope flytxt-grid-filter x-scope paper-button-0'][contains(text(),'Cancel')]")
+	private WebElement cancelRecurringFilterForm;
+	@FindBy(xpath = "//div[@val='broadcastRecurringViews']//form[@id='filterForm']//label[contains(.,'Name')]/..//input")
+	private WebElement filterRecurringFormName;
+	@FindBy(xpath = "//div[@val='broadcastRecurringViews']/.//paper-button[@class='style-scope flytxt-grid-filter x-scope paper-button-0'][contains(text(),'Apply')]")
+	private WebElement applyRecurringFilterForm;
+	@FindBy(xpath = "//div[@val='broadcastRecurringViews']/.//paper-button[@class='style-scope flytxt-grid-filter x-scope paper-button-0'][contains(text(),'Reset Filters')]")
+	private WebElement resetRecurringFilterForm;
+	
+
+	@FindBy(xpath = "//div[@val='broadcastSeedingViews'][@class='style-scope broadcast-list iron-selected']//flytxt-grid-filter[@class='custom-filter style-scope broadcast-list x-scope flytxt-grid-filter-0']//iron-icon[@id='icon']")
+	private WebElement seedingBCFilterIcon;
+	@FindBy(xpath = "//div[@val='broadcastSeedingViews']/..//div[@class='style-scope broadcast-list iron-selected']//paper-button[@class='style-scope flytxt-grid-filter x-scope paper-button-0'][contains(text(),'Cancel')]")
+	private WebElement cancelSeedingFilterForm;
+	@FindBy(xpath = "//div[@val='broadcastSeedingViews']//form[@id='filterForm']//label[contains(.,'Name')]/..//input")
+	private WebElement filetrSeedingFormName;
+	@FindBy(xpath = "//div[@val='broadcastSeedingViews']/..//div[@class='style-scope broadcast-list iron-selected']//paper-button[@class='style-scope flytxt-grid-filter x-scope paper-button-0'][contains(text(),'Apply')]")
+	private WebElement applySeedingFilterForm ;
+	@FindBy(xpath = "//div[@val='broadcastSeedingViews']/..//div[@class='style-scope broadcast-list iron-selected']//paper-button[@class='style-scope flytxt-grid-filter x-scope paper-button-0'][contains(text(),'Reset Filters')]")
+	private WebElement resetSeedingFilterForm;
+	
+	
+	
+	
+	
 	@FindBy(xpath = "//*[@id='filterForm']//label[contains(.,'Status')]/..//input")
 	private WebElement filterFormstatus;
 	@FindBy(xpath = "(//*[@id='filterForm']//label[contains(.,'Name')]/..//input)[2]")
@@ -54,6 +93,16 @@ public class CommonObjects extends Init {
 	private WebElement filterFormReset;
 	@FindBy(xpath = "//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
 	private WebElement optionsIcon;
+	
+	@FindBy(xpath = "//div[@val='broadcastSeedingViews']//vaadin-grid[@id='broadcastSeedList']//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row[1]//vaadin-grid-cell-content//paper-icon-button//iron-icon[@id='icon']")
+	private WebElement seedingOptionsIcon;
+	
+	@FindBy(xpath = "//div[@val='broadcastTriggerableViews']//vaadin-grid[@id='broadcastTriggerList']//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row[1]//vaadin-grid-cell-content//paper-icon-button//iron-icon[@id='icon']")
+	private WebElement triggerOptionsIcon;
+	
+	@FindBy(xpath = "//div[@val='broadcastRecurringViews']//vaadin-grid[@id='broadcastRecurList']//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row[1]//vaadin-grid-cell-content//paper-icon-button//iron-icon[@id='icon']")
+	private WebElement recurringOptionsIcon;
+	
 	@FindBy(xpath = "//*[@d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z']/../../..")
 	private WebElement plusIcon;
 	@FindBy(xpath = "//paper-button[contains(text(),'Yes')]")
@@ -267,6 +316,22 @@ public void clickActivateOption() throws Throwable {
 		jswait.loadClick(filterIcon);
 	}
 	
+	public void clickTrggerableFilterIcon() throws InterruptedException {
+		jswait.loadClick(TriggerableFilterIcon);
+	}
+	
+	public void clickRecurringFilterIcon() throws InterruptedException {
+		jswait.loadClick(recurrinFilterIcon);
+	}
+	
+	public void clickSeedingFilterIcon() throws InterruptedException {
+		jswait.loadClick(seedingBCFilterIcon);
+	}
+	
+	
+	
+	
+	
 	public void clickFilterIcon2() throws InterruptedException {
 		jswait.loadClick(filterIcon2);
 	}
@@ -375,6 +440,19 @@ public void clickActivateOption() throws Throwable {
 	public void enterFilterFormname(String name) throws InterruptedException {
 		jswait.loadSendKeys(filterFormName, name);
 	}
+	
+	public void enterTriggarableFilterFormname(String name) throws InterruptedException {
+		jswait.loadSendKeys(filterTriggerFormName, name);
+	}
+	
+	public void enterRecurringFilterFormname(String name) throws InterruptedException {
+		jswait.loadSendKeys(filterRecurringFormName, name);
+	}
+	
+	public void enterSeedingFilterFormname(String name) throws InterruptedException {
+		jswait.loadSendKeys(filetrSeedingFormName, name);
+	}
+	
 	public void enterFilterFormname2(String name) throws InterruptedException {
 		jswait.loadSendKeys(filterFormName2, name);
 	}
@@ -398,11 +476,37 @@ public void clickActivateOption() throws Throwable {
 	public void clickFilterResetButton() throws InterruptedException {
 		jswait.loadClick(filterFormReset);
 	}
+	
+	public void clickTriggarableFilterResetButton() throws InterruptedException {
+		jswait.loadClick(resetTriggarableFilterForm);
+	}
+
+	
+	public void clickRecurringFilterResetButton() throws InterruptedException {
+		jswait.loadClick(resetRecurringFilterForm);
+	}
+
+	
+	public void clickSeedingFilterResetButton() throws InterruptedException {
+		jswait.loadClick(resetSeedingFilterForm);
+	}
+
+	public void clickTriggarableFilterApplyButton() throws InterruptedException {
+		jswait.loadClick(applyTriggarableFilterForm);
+	}
+	
+	public void clickRecurringFilterApplyButton() throws InterruptedException {
+		jswait.loadClick(applyRecurringFilterForm);
+	}
+	
+	public void clickSeedingFilterApplyButton() throws InterruptedException {
+		jswait.loadClick(applySeedingFilterForm);
+	}
 
 	public void filterName(String name) throws InterruptedException {
 		Thread.sleep(10000);
 		Thread.sleep(10000);
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		clickFilterIcon();
 		Thread.sleep(2000);
 		enterFilterFormname(name);
@@ -411,6 +515,67 @@ public void clickActivateOption() throws Throwable {
 		clickFilterIcon();
 		enterFilterFormname(name);
 		clickFilterApplyButton();
+	}
+	
+	public void filterBCName(String sheetname, String name) throws InterruptedException {
+		Thread.sleep(10000);
+		Thread.sleep(10000);
+		//Thread.sleep(10000);
+		if(sheetname.contains("one-offBC")||sheetname.contains("TriggerOneoff")) {
+		clickFilterIcon();
+		Thread.sleep(2000);
+		enterFilterFormname(name);
+		Thread.sleep(2000);
+		clickFilterResetButton();
+		clickFilterIcon();
+		enterFilterFormname(name);
+		clickFilterApplyButton();
+		}else if(sheetname.contains("seeding")){
+			clickSeedingFilterIcon();
+				Thread.sleep(2000);
+				enterSeedingFilterFormname(name);
+				Thread.sleep(2000);
+				clickSeedingFilterResetButton();
+				clickSeedingFilterIcon();
+				enterSeedingFilterFormname(name);
+				clickSeedingFilterApplyButton();
+		}else if(sheetname.contains("TriggerReccurringBC")) {
+			clickTrggerableFilterIcon();
+			Thread.sleep(2000);
+			enterTriggarableFilterFormname(name);
+			Thread.sleep(2000);	
+			clickTriggarableFilterResetButton();
+			clickTrggerableFilterIcon();
+			enterTriggarableFilterFormname(name);
+			clickTriggarableFilterApplyButton();					
+		}else if(sheetname.contentEquals("recurringBC")||sheetname.contentEquals("recurringBCEdit")) {
+			clickRecurringFilterIcon();
+			Thread.sleep(2000);
+			enterRecurringFilterFormname(name);
+			Thread.sleep(2000);
+			clickRecurringFilterResetButton();
+			clickRecurringFilterIcon();
+			enterRecurringFilterFormname(name);
+			clickRecurringFilterApplyButton();
+			
+		}
+		
+		
+		
+	}
+	
+	
+	public void clickBCOptionsIcon(String sheet) throws InterruptedException {
+		if(sheet.contains("one-offBC")||sheet.contains("TriggerOneoff")) {
+			jswait.loadClick(optionsIcon);
+		}else if(sheet.contains("seeding")) {
+			jswait.loadClick(seedingOptionsIcon);			
+		}else if(sheet.contains("TriggerReccurringBC")) {
+			jswait.loadClick(triggerOptionsIcon);
+		}else if(sheet.contentEquals("recurringBC")||sheet.contentEquals("recurringBCEdit")) {
+			jswait.loadClick(recurringOptionsIcon);
+		}
+		
 	}
 	
 	public void filterWorkaround(String name) throws InterruptedException {
