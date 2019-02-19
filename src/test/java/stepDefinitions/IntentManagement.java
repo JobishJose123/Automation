@@ -8,21 +8,16 @@ import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.remote.server.handler.FindElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.sun.mail.imap.protocol.BODY;
 
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.MarathonHelper;
+import baseClasses.RandomNameGenerator;
 import baseClasses.Request;
 import baseClasses.SQLHandler;
 import baseClasses.TimeoutImpl;
-import cucumber.api.PendingException;
-import cucumber.api.Scenario;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.CustomerProfilePage;
@@ -31,6 +26,7 @@ import pageObjetcs.ProgramPage;
 import pageObjetcs.TouchpointPage;
 
 public class IntentManagement extends Init{
+	RandomNameGenerator RandomNameGenerator=new RandomNameGenerator();
 	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
 	public ExcelHelper eh = new ExcelHelper(); 
@@ -672,7 +668,11 @@ System.out.println(editname+"program has edited successfully");
 		Thread.sleep(5000);
 		commonObjects.clickOptionsIcon();
 		commonObjects.clickDeleteOption();
-		System.out.println("deleted");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//paper-button[text()='Yes']")).click();
+		commonObjects.filterName(name);
+		Assert.assertFalse(jswait.checkVisibility("///span[@innertext='"+name+"']"));
+		
 	}
 	
 	@Then("^Verify delete TP entry on touchpoint tab$")
@@ -1133,6 +1133,7 @@ System.out.println(editname+"program has edited successfully");
  		Thread.sleep(4000);
 		programPage.clickCreateProgramButton();
 		programPage.enterProgramDetailsfromSheet(name,sheet2);
+		
 		programPage.clickCreateProgramAddTouchpointButton();
 		programPage.addTouchPointToProgramFromSheet(sheet3);
 		programPage.clickPorogramProceedButton();
@@ -1208,26 +1209,62 @@ System.out.println(editname+"program has edited successfully");
 		 
 		 
 	 }
+	 @Then("^choose program from sheet \"([^\"]*)\" after edited$")
+	 public void chooseProgramFromSheetFromSheetafteredited(String sheet) throws InterruptedException {
+		 
+		    eh.setExcelFile("programInputDataedit",sheet);
+			String name = (String) eh.getCell(1, 0);
+		    filterWorkaround(name);
+		    commonObjects.clickOptionsIcon();
+		    programPage.clickEditProgramButton();
+		 
+		 
+	 }
 	 
 	  
 	   
 	   @Then("^verify edit program page \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
 	public void verify_edit_program_page_from_sheet(String sheet1, String sheet2, String sheet3) throws Throwable {
-//		Thread.sleep(4000);
-//    	ExcelHelper programExcel = new ExcelHelper();
-//    	programExcel.setExcelFile("programInputData", sheet1);
-//    	Random rn = new Random();
-//    	int  n = rn.nextInt(5000) + 1;
-// 		String name = (String) programExcel.getCell(1, 0);
-//  		name =  name.replaceAll("[0-9]", "")+n;
-// 		programExcel.setCell(1, 0, name);
-// 		Thread.sleep(4000);
-//		programPage.clickCreateProgramButton();
-//		programPage.enterProgramDetailsfromSheet(name,sheet2);
-		programPage.clickPorogramProceedButton();
+		Thread.sleep(4000);
+    	ExcelHelper programExcel = new ExcelHelper();
+    	programExcel.setExcelFile("programInputDataedit", sheet1);
+    
+ 		String name = (String) programExcel.getCell(1,0);
+
+ 		RandomNameGenerator.getRandomName(name);
+ 		programExcel.setCell(1,0,name);
+ 		Thread.sleep(4000);
+ 		System.out.println(name);
+ 		
+
+		programPage.enterProgramDetailsfromSheet(name,sheet2);
+		
+		commonObjects.clickOptionsIcon();
+		jswait.loadClick("//paper-item[contains(.,'Delete')]");
 		programPage.clickCreateProgramAddTouchpointButton();
 		programPage.addTouchPointToProgramFromSheet(sheet3);
 		programPage.clickPorogramProceedButton();
+		
+		programPage.programschend();
+		programPage.prmshcselectnoend();
+		programPage.programschrefreshcycle();
+		programPage.prmshcselectdays();
+		Thread.sleep(2000);
+		programPage.prmeverylabel();
+		programPage.prmrecycleinputclick();
+		programPage.prmrecycleinput();
+		programPage.prmrefreshat();
+		programPage.pgmtimeokbtn();
+		programPage.programschserveon(); 
+		programPage.prmshcserveonSpecdays();
+		programPage.programserveonevery();
+		programPage.programserveoneverydata();
+		programPage.checkboxdaysmonday();
+		programPage.prmshcserveonSpecificdayscheck();
+		
+//		programPage.clickCreateProgramAddTouchpointButton();
+//		programPage.addTouchPointToProgramFromSheet(sheet3);
+//		programPage.clickPorogramProceedButton();
 //		programPage.programschstart();
 //		programPage.prmshcselectnow();
 //		programPage.programschend();
@@ -1247,6 +1284,7 @@ System.out.println(editname+"program has edited successfully");
 		//programPage.programactivatebtn();
 		programPage.confirmProgramEditSave();
 		System.out.println("program has edited successfully");
+	
 	}
 	   
 	   
@@ -2095,4 +2133,22 @@ System.out.println(editname+"program has edited successfully");
 			System.out.println(req.responseString);
 		}
 		
+		
+		
+		
+		   @Then("^verify edited program page \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+			public void verify_edited_program_page_from_sheet(String sheet1, String sheet2, String sheet3) throws Throwable {
+				Thread.sleep(4000);
+		    	ExcelHelper programExcel = new ExcelHelper();
+		    	programExcel.setExcelFile("programInputDataedit", sheet1);
+		    
+		 		String name = (String) programExcel.getCell(1,0);
+		 		Thread.sleep(4000);
+		 		System.out.println(name);
+				programPage.compareProgramDetailsfromSheet(name,sheet2);
+				programPage.verifyTouchPointToProgramFromSheet(sheet3);
+				
+				System.out.println("program has edited successfully");
+			
+			}
 }

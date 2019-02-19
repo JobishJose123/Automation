@@ -24,6 +24,7 @@ public class ProgramPage extends Init{
 	private static final Exception Exception = null;
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
+	CommonObjects commonObjects = new CommonObjects();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	public ProgramPage() {
 		PageFactory.initElements(driver, this);
@@ -354,8 +355,8 @@ private WebElement rulessenderid2
 	private WebElement topRuleStatus;
 	@FindBy(xpath="//paper-button[contains(.,'Accept')]")
 	private WebElement customerCareOfferAccept;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="//iron-list[@id='list']/div[@id='items']//data-table-row/div[1]/data-table-cell[1]")
+	private WebElement programtouchpointname;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //@FindBy(xpath="")
@@ -545,31 +546,24 @@ private WebElement rulessenderid2
 		Thread.sleep(2000);
 	}
 		if(touchpointType.contentEquals("sms")){
-//		rulessenderid();
-//		addresssprule();
-//		Thread.sleep(3000);
-//		rulerouteid();
-//		ruleroute();
-//			Thread.sleep(2000);
-//			rulessenderid2();
-//			addresssprule2();
-//			Thread.sleep(2000);
-//			rulerouteid2(); 
-//			ruleroute2();
-			Thread.sleep(2000);
+			System.out.println("inside sms");
 			rulessenderid();
-			addresssprule();
-			
 			Thread.sleep(2000);
-			rulerouteid2(); 
-			ruleroute2();
+			addresssprule();
+
+			Thread.sleep(2000);
+			rulerouteid();
+			Thread.sleep(2000);
+			ruleroute();
+			Thread.sleep(2000);
+			
    }
+		rulessenderid2();
 		Thread.sleep(2000);
-		rulessenderid();
-		addresssprule();
-		
+		addresssprule2();
 		Thread.sleep(2000);
-		rulerouteid2(); 
+		rulerouteid2();
+		Thread.sleep(2000);
 		ruleroute2();
 		clickPorogramProceedButton();
 		
@@ -937,6 +931,7 @@ private WebElement rulessenderid2
 	
 	
 	public void addTouchPointSelectSmsResponseChannel() throws InterruptedException {
+		Thread.sleep(2000);
 		jswait.loadClick(addTouchpointResponseChannel);
 		jswait.loadClick(addTouchpointResponseChannelSelectSMS);
 	}
@@ -968,6 +963,7 @@ private WebElement rulessenderid2
 			addTouchPointEnterKeywordAliase();
 			Thread.sleep(2000);
 			addTouchPointSelectSmsTouchpointFromSheet(sheet);
+			Thread.sleep(2000);
 			addTouchPointSelectSmsResponseChannel();
 			jswait.loadClick(addTouchpointSaveButton);
 		}
@@ -1125,7 +1121,47 @@ private WebElement rulessenderid2
 
 		
 	public void prmrefreshat() throws InterruptedException {
+		
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		Actions builder = new Actions(driver);
+		Thread.sleep(2000);
 		jswait.loadClick(prmrefreshat);
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='hours']");
+		WebElement num = driver.findElement(By.xpath(
+				".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
+		builder.moveToElement(num).click().build().perform();
+		Thread.sleep(2000);
+		// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
+		jswait.loadClick("//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='minutes']");
+		Thread.sleep(2000);
+		WebElement num1 = driver.findElement(By.xpath(
+				".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num1).click().build().perform();
+		
+		
 		}
 
 	public void pgmtimeokbtn() throws InterruptedException {
@@ -1306,6 +1342,8 @@ public void touchpointpgmdeletecheck() throws Exception{
 		jswait.loadSendKeys(programofferclick, offer);
 		System.out.println("Offer: "+offer);
 			Thread.sleep(3000);
+			jswait.loadSendKeys(programofferclick, offer);
+			Thread.sleep(3000);
 			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
 	}
 
@@ -1370,6 +1408,8 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 		
 		
 	}
+  
+  
    public void createNewProgramRuleWithDeactivatedProduct(String name)throws Exception {
 		
 		clickCreateNewRuleButton();
@@ -1447,6 +1487,48 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 				
 			}
 		}
+	
+	//----------------------------------------------------------//
+	 public void compareProgramDetailsfromSheet(String name, String sheet)throws Exception {
+			eh.setExcelFile("offerCatalogInputData",sheet);
+			String offer = (String) eh.getCell(1, 0);
+			Thread.sleep(3000);
+			System.out.println(name);
+			String testname=commonObjects.getTextFormTextField(createProgramName);
+			String testapi=commonObjects.getTextFormTextField(programofferclick);
+			Thread.sleep(4000);
+			
+					
+		Assert.assertEquals(name,testname);   
+		Thread.sleep(3000);
+		Assert.assertEquals(offer,testapi);  
+					
+			Thread.sleep(4000);
+			clickPorogramProceedButton();
+			
+			
+		}
+	 public void verifyTouchPointToProgramFromSheet(String sheet) throws Exception {
+			eh.setExcelFile("touchpointInputData",sheet);
+			String tpname = eh.getCell(1, 0).toString();
+			String touchpoint=programtouchpointname.getText();
+			System.out.println(touchpoint);
+			Thread.sleep(2000);
+			Assert.assertEquals(tpname,touchpoint);
+			Thread.sleep(2000);
+			clickPorogramProceedButton();
+			Thread.sleep(4000);
+			String serveon=commonObjects.getTextFormTextField(programschserveon);
+			Thread.sleep(2000);
+			Assert.assertEquals("Specific Days",serveon);
+			Thread.sleep(2000);
+			String Refreshcycle=commonObjects.getTextFormTextField(programschrefreshcycle);
+			Thread.sleep(2000);
+			Assert.assertEquals("Days",Refreshcycle);
+			}
+	 
+	
+	
 	
 	
 }
