@@ -1510,8 +1510,13 @@ public class OfferPageObjects extends Init {
 					clickRewardTypeInputField();
 					//clickRewardTypeAny();
 					clickrewardTypeSampleFlowSelector();
-				}
-				else {
+				}else if(eh.getCell(1, 2).toString().contains("Recharge")) {
+					clickRewardFirstRuleAdButton();
+					clickRewardTypeInputField();
+					clickrewardTypeSampleFlowSelector();
+					enterSuccessMessage("Success from SampleFlow");
+					enterFailureMessage("Failure from SampleFlow");
+				}else {
 					clickRewardFirstRuleAdButton();
 					clickRewardTypeInputField();
 					clickRewardTypeAny();

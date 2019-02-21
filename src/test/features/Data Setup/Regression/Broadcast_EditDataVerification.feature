@@ -86,8 +86,8 @@ Feature: Test suite for Broadcast Editing
   
   
 
-  @NDX-editingOneOffBcBasicDetails @NDX-5801 @initBrowser
-  Scenario: Verify Creating one-off BC and edit the basic details
+  @NDX-5801 @initBrowser @closeBrowser
+  Scenario: Verify the BC after edit the basic detais of One-offBC
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -108,8 +108,8 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then verify the basic details from Broadcast View and data sheet "one-offBCEdit"
 
-  @NDX-VerifyBCDeliverDetails @NDX-5874 @initBrowser @closeBrowser
-  Scenario: Verify one-off BC and edit the Delivery details
+  @NDX-5874 @initBrowser
+  Scenario: Verify one-off BC and edit the Delivery details , Verify the BC after edit Start and End Time of One-Off Bc
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -122,8 +122,8 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
 
-    @NDX-VerifyBCOffer @NDX-5872 @initBrowser @closeBrowser
-  Scenario: Verify one-off BC and edit the offer details 
+    @NDX-5872 @initBrowser @closeBrowser
+  Scenario: Verify BC after edit with offer in offer selection page
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -137,8 +137,9 @@ Feature: Test suite for Broadcast Editing
     Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "one-offBCEdit" with offer "rechargeWAP"
 
 
-  @NDX-targetSelection @NDX-5836, @NDX-5868 @initBrowser @closeBrowser
+  @NDX-5836, @NDX-5868 @initBrowser @closeBrowser
   Scenario Outline: Verify one-off BC and edit the targetSelection <Condition>
+#                    Verify BC after edit with new Saved segment One-Off BC
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -161,7 +162,7 @@ Feature: Test suite for Broadcast Editing
       | Create        |
 
  
-  @NDX-editingBcTargetDetails @initBrowser @closeBrowser
+  @NDX-5826,@NDX-5827,@NDX-5828,@NDX-5829,@NDX-5838,@NDX-5846,@NDX-5850,@NDX-5854,@NDX-5866,@NDX-5870,@NDX-6382,@NDX-6384 @initBrowser @closeBrowser
   Scenario Outline: Verify one-off BC edit with given <Condition>
 #    
     Given login
@@ -202,8 +203,10 @@ Feature: Test suite for Broadcast Editing
 #  | IMEventsOfferAccepted          |
 #  | IMEventsCustomerCareUsage      |
 #  | customerDeviceInfo             |
-   @NDX-VerifyBCTargetList @NDX-5834  @initBrowser @closeBrowser
-  Scenario: Verify one-off BC and edit the target list details
+
+   @NDX-5834  @initBrowser @closeBrowser
+  Scenario: Verify one-off BC and edit the target list details 
+  Verify the BC after edit the Base list in Target page One-Off BC
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -216,8 +219,8 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
     
-  @NDX-VerifyBCexpiry @NDX-5930 @initBrowser
-  Scenario: Verify the BC after edit Broadcast expiry One-Off BC
+   @NDX-5930 @initBrowser
+  Scenario: Verify the One-Off BC Broadcast expiry after edit
     Given login
   When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -231,7 +234,7 @@ Feature: Test suite for Broadcast Editing
     Then verify the BC expiry in BC View After hours "2"
     
 #    ************************ Trigger OneOFF BC**************
-   @NDX-editingTriggerOneOffBcBasicDetails @initBrowser @closeBrowser
+   @NDX-6204 @initBrowser @closeBrowser
   Scenario: Verify Creating TriggerOne-off BC and edit the basic details
     Given login
     When navigate to precision marketer
@@ -253,8 +256,8 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerOneoffEdit"
     Then verify the basic details from Broadcast View and data sheet "TriggerOneoffEdit"
     
-     @NDX-VerifyTriggeroneoffBCDeliverDetails  @initBrowser @closeBrowser
-  Scenario: Verify one-off BC and edit the Delivery details
+     @NDX-6254 @initBrowser @closeBrowser
+  Scenario: Verify Trigger one-off BC and edit the Delivery details
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -267,8 +270,8 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerOneoffEdit"
     Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "TriggerOneoffEdit"
     
-    @NDX-editTriggeroneoffBCOffer @initBrowser @closeBrowser
-  Scenario: Verify TriggerOne-off BC and edit the offer details details
+    @NDX-6252 @initBrowser @closeBrowser
+  Scenario: Verify TriggerOne-off BC and edit the offer details 
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -283,7 +286,7 @@ Feature: Test suite for Broadcast Editing
     
     
     
-    @NDX-TriggeroneofftargetSelection @initBrowser @closeBrowser
+    @NDX-6216,@NDX-6248 @initBrowser @closeBrowser
   Scenario Outline: Verify TriggerOne-off BC and edit the targetSelection <Condition>
     Given login
     When navigate to precision marketer
@@ -307,7 +310,7 @@ Feature: Test suite for Broadcast Editing
       | Create        |
 
  
-  @NDX-editingTriggeroneoffBcTargetDetails @initBrowser @closeBrowser
+  @NDX-6206,@NDX-6207,@NDX-6208,@NDX-6209,@NDX-6218,@NDX-6226,@NDX-6230,@NDX-6234,@NDX-6246,@NDX-6250,@NDX-6406,@NDX-6408 @initBrowser @closeBrowser
   Scenario Outline: Verify TriggerOne-off BC Edit with given <Condition>
     Given login
     When navigate to precision marketer
@@ -348,7 +351,7 @@ Feature: Test suite for Broadcast Editing
 #  | IMEventsCustomerCareUsage      |
 #  | customerDeviceInfo             |
 
-   @NDX-VerifyTriggeroneoffBcTargetList @initBrowser @closeBrowser
+   @NDX-6214 @initBrowser @closeBrowser
   Scenario: Verify TriggerOne-off BC and edit the target list details
     Given login
     When navigate to precision marketer
@@ -362,8 +365,8 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "TriggerOneoffEdit"
     
-  @NDX-VerifyTriggeroneoffBCexpiry @initBrowser @closeBrowser
-  Scenario: Verify TriggerOne-off BC and edit the offer details details
+  @NDX-6256 @initBrowser @closeBrowser
+  Scenario: Verify TriggerOne-off BC after edit Broadcast expiry 
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -381,7 +384,7 @@ Feature: Test suite for Broadcast Editing
  #    ************************ Seeding OneOFF BC**************   
     
     
-    @NDX-editSeedingOneOffForDataSetup  @initBrowser @closeBrowser
+    @NDX-6040  @initBrowser @closeBrowser
   Scenario: Verify Creating and editing the basic details of Seeding one-offBC
   Given login 
 	When navigate to precision marketer 
@@ -408,7 +411,7 @@ Feature: Test suite for Broadcast Editing
     
     
     
-     @NDX-VerifySeedingBCDeliverDetails @NDX-5874 @initBrowser @closeBrowser
+     @NDX-6092 @initBrowser @closeBrowser
   Scenario: Verify seeding one-off BC and edit the Delivery details
     Given login
     When navigate to precision marketer
@@ -428,7 +431,7 @@ Feature: Test suite for Broadcast Editing
     
     
     
-     @NDX-VerifySeedingOneoffBCOffer @NDX-5872 @initBrowser @closeBrowser
+     @NDX-6090 @initBrowser @closeBrowser
   Scenario: Verify Seeding one-off BC edit the offer details 
     Given login
     When navigate to precision marketer
@@ -444,7 +447,7 @@ Feature: Test suite for Broadcast Editing
     Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "seedingoneoffEdit" with offer "seedingWAPoffer"
 
 
-  @NDX-targetSelectionSeedingoneoffBC @initBrowser @closeBrowser
+  @NDX-6052,@NDX-6086 @initBrowser @closeBrowser
   Scenario Outline: Verify Seeding one-off BC and edit the targetSelection <Condition>
     Given login
     When navigate to precision marketer
@@ -469,9 +472,8 @@ Feature: Test suite for Broadcast Editing
       | Create        |
 
  
-  @NDX-editingSeedingoneoffBcTargetDetails @initBrowser @closeBrowser
+  @NDX-6042,@NDX-6043,@NDX-6044,@NDX-6045,@NDX-6054,@NDX-6062,@NDX-6066,@NDX-6070,@NDX-6084,@NDX-6088,@NDX-6394,@NDX-6396 @initBrowser @closeBrowser
   Scenario Outline: Verify Seeding one-off BC edit with given <Condition>
-#    NDX-5826,NDX-5827,NDX-5828,NDX-5829,NDX-5838,NDX-5840,NDX-5842,NDX-5844,NDX-5846,NDX-5848,NDX-5850,NDX-5852,NDX-5854,NDX-5856,NDX-5858,NDX-5860,NDX-5862,NDX-5864,NDX-5866,NDX-5870
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -513,7 +515,7 @@ Feature: Test suite for Broadcast Editing
 #  | customerDeviceInfo             |
 
 
-   @NDX-VerifyseedingoneoffBCTargetList   @initBrowser @closeBrowser
+   @NDX-6050 @initBrowser @closeBrowser
   Scenario: Verify Seeding one-off BC and edit the target list details
     Given login
     When navigate to precision marketer
@@ -528,7 +530,7 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingoneoffEdit"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingoneoffEdit"
     
-  @NDX-VerifyseedingBCexpiry  @initBrowser @closeBrowser
+  @NDX-6094 @initBrowser @closeBrowser
   Scenario: Verify the Seeding one off BC after edit Broadcast expiry 
     Given login
   When navigate to precision marketer
@@ -546,7 +548,7 @@ Feature: Test suite for Broadcast Editing
 #    ************************ Seeding Triggerable BC**************    
     
     
-  @NDX-editSeedingTrigForDataSetup  @initBrowser @closeBrowser
+  @NDX-5986 @initBrowser @closeBrowser
   Scenario: Verify Creating and editing the basic details of Seeding triggarable BC
   Given login 
 	When navigate to precision marketer 
@@ -572,7 +574,7 @@ Feature: Test suite for Broadcast Editing
 	
         
     
-     @NDX-VerifySeedingTrigBCDeliverDetails  @initBrowser @closeBrowser
+     @NDX-6036  @initBrowser @closeBrowser
   Scenario: Verify seeding Triggerable BC and edit the Delivery details
     Given login
     When navigate to precision marketer
@@ -592,7 +594,7 @@ Feature: Test suite for Broadcast Editing
     
     
     
-     @NDX-VerifySeedingTrigBCOffer @NDX-5872 @initBrowser @closeBrowser
+     @NDX-6034 @initBrowser @closeBrowser
   Scenario: Verify Seeding Triggerable BC edit the offer details 
     Given login
     When navigate to precision marketer
@@ -608,7 +610,7 @@ Feature: Test suite for Broadcast Editing
     Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "seedingTriggerableBCEdit" with offer "seedingWAPoffer"
 
 
-  @NDX-targetSelectionSeedingTrigBC @initBrowser @closeBrowser
+  @NDX-5998, @NDX-6030 @initBrowser @closeBrowser
   Scenario Outline: Verify Seeding Trggerable BC and edit the targetSelection <Condition>
     Given login
     When navigate to precision marketer
@@ -633,9 +635,9 @@ Feature: Test suite for Broadcast Editing
       | Create        |
 
  
-  @NDX-editingSeedingTrigBcTargetDetails @initBrowser @closeBrowser
+  @NDX-5988 @initBrowser @closeBrowser
   Scenario Outline: Verify Seeding Trggerable BC edit with given <Condition>
-#    NDX-5826,NDX-5827,NDX-5828,NDX-5829,NDX-5838,NDX-5840,NDX-5842,NDX-5844,NDX-5846,NDX-5848,NDX-5850,NDX-5852,NDX-5854,NDX-5856,NDX-5858,NDX-5860,NDX-5862,NDX-5864,NDX-5866,NDX-5870
+# @NDX-5989,@NDX-5990,@NDX-5991,@NDX-6000,@NDX-6008,@NDX-6012,@NDX-6016,@NDX-6028,@NDX-6032,@NDX-6038,@NDX-6390,@NDX-6392
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -677,7 +679,7 @@ Feature: Test suite for Broadcast Editing
 #  | customerDeviceInfo             |
 
 
-   @NDX-VerifyseedingTrigBCTargetList   @initBrowser @closeBrowser
+   @NDX-5996  @initBrowser @closeBrowser
   Scenario: Verify Seeding triggerable BC and edit the target list details
     Given login
     When navigate to precision marketer
@@ -692,7 +694,7 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingTriggerableBCEdit"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingTriggerableBCEdit"
     
-  @NDX-VerifyseedingTrigBCexpiry  @initBrowser @closeBrowser
+  @NDX-6038  @initBrowser @closeBrowser
   Scenario: Verify the Seeding Triggerable BC after edit Broadcast expiry 
     Given login
   When navigate to precision marketer
@@ -714,7 +716,7 @@ Feature: Test suite for Broadcast Editing
    #    ************************ Seeding Recurring BC**************   
     
     
-    @NDX-editSeedingRecurForDataSetup  @initBrowser @closeBrowser
+    @NDX-6150  @initBrowser @closeBrowser
   Scenario: Verify Creating and editing the basic details of Seeding Recurring
   Given login 
 	When navigate to precision marketer 
@@ -741,7 +743,7 @@ Feature: Test suite for Broadcast Editing
     
     
     
-     @NDX-VerifySeedingRecurBCDeliverDetails  @initBrowser @closeBrowser
+     @NDX-6200  @initBrowser @closeBrowser
   Scenario: Verify seeding Recurring BC and edit the Delivery details
     Given login
     When navigate to precision marketer
@@ -755,13 +757,9 @@ Feature: Test suite for Broadcast Editing
     Then navigate to "Seedings Broadcasts" broadcasts
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingRecurringBCEdit"
     Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "seedingRecurringBCEdit"
+      
     
-    
-    
-    
-    
-    
-     @NDX-VerifySeedingRecurBCOffer @NDX-5872 @initBrowser @closeBrowser
+     @NDX-6198 @initBrowser @closeBrowser
   Scenario: Verify Seeding Recurring BC edit the offer details 
     Given login
     When navigate to precision marketer
@@ -777,7 +775,7 @@ Feature: Test suite for Broadcast Editing
     Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "seedingRecurringBCEdit" with offer "seedingWAPoffer"
 
 
-  @NDX-targetSelectionSeedingRecurBC @initBrowser @closeBrowser
+  @NDX-6162,NDX-6194 @initBrowser @closeBrowser
   Scenario Outline: Verify Seeding Recurring BC and edit the targetSelection <Condition>
     Given login
     When navigate to precision marketer
@@ -802,9 +800,9 @@ Feature: Test suite for Broadcast Editing
       | Create        |
 
  
-  @NDX-editingSeedingRecurBcTargetDetails @initBrowser @closeBrowser
+  @NDX-6152 @initBrowser @closeBrowser
   Scenario Outline: Verify Seeding Recurring BC edit with given <Condition>
-#    NDX-5826,NDX-5827,NDX-5828,NDX-5829,NDX-5838,NDX-5840,NDX-5842,NDX-5844,NDX-5846,NDX-5848,NDX-5850,NDX-5852,NDX-5854,NDX-5856,NDX-5858,NDX-5860,NDX-5862,NDX-5864,NDX-5866,NDX-5870
+#   NDX-6153,NDX-6154,NDX-6155,NDX-6164,NDX-6172,NDX-6176,NDX-6180,NDX-6192,NDX-6196,NDX-6402,NDX-6404
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -846,7 +844,7 @@ Feature: Test suite for Broadcast Editing
 #  | customerDeviceInfo             |
 
 
-   @NDX-VerifyseedingRecurBCTargetList   @initBrowser @closeBrowser
+   @NDX-6160  @initBrowser @closeBrowser
   Scenario: Verify Seeding Recurring BC and edit the target list details
     Given login
     When navigate to precision marketer
@@ -861,7 +859,7 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingRecurringBCEdit"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingRecurringBCEdit"
     
-  @NDX-VerifyseedingRecurBCexpiry  @initBrowser @closeBrowser
+  @NDX-6202 @initBrowser @closeBrowser
   Scenario: Verify the Seeding Recurring BC after edit Broadcast expiry 
     Given login
   When navigate to precision marketer
@@ -881,7 +879,7 @@ Feature: Test suite for Broadcast Editing
    #    ************************ seeding Triggerable Recurring BC**************   
     
     
-    @NDX-editSeedingTrigRecurForDataSetup  @initBrowser @closeBrowser
+    @NDX-6096  @initBrowser @closeBrowser
   Scenario: Verify Creating and editing the basic details of seeding Triggerable Recurring BC
   Given login 
 	When navigate to precision marketer 
@@ -908,7 +906,7 @@ Feature: Test suite for Broadcast Editing
     
     
     
-     @NDX-SeedingTrigRecurBCDeliverDetails  @initBrowser @closeBrowser
+     @NDX-6146 @initBrowser @closeBrowser
   Scenario: Verify seeding Triggerable Recurring BC and edit the Delivery details
     Given login
     When navigate to precision marketer
@@ -928,7 +926,7 @@ Feature: Test suite for Broadcast Editing
     
     
     
-     @NDX-VerifySeedingTrigRecurBCOffer  @initBrowser @closeBrowser
+     @NDX-6144  @initBrowser @closeBrowser
   Scenario: Verify seeding Triggerable Recurring BC edit the offer details 
     Given login
     When navigate to precision marketer
@@ -944,7 +942,7 @@ Feature: Test suite for Broadcast Editing
     Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd" with offer "seedingWAPoffer"
 
 
-  @NDX-targetSelectionSeedTrigRecurBC @initBrowser @closeBrowser
+  @NDX-6108,@NDX-6140 @initBrowser @closeBrowser
   Scenario Outline: Verify seeding Triggerable Recurring BC and edit the targetSelection <Condition>
     Given login
     When navigate to precision marketer
@@ -969,9 +967,9 @@ Feature: Test suite for Broadcast Editing
       | Create        |
 
  
-  @NDX-editSeedingTrigRecurBcTargetDetails @initBrowser @closeBrowser
+  @NDX-6098  @initBrowser @closeBrowser
   Scenario Outline: Verify seeding Triggerable Recurring BC edit with given <Condition>
-#    NDX-5826,NDX-5827,NDX-5828,NDX-5829,NDX-5838,NDX-5840,NDX-5842,NDX-5844,NDX-5846,NDX-5848,NDX-5850,NDX-5852,NDX-5854,NDX-5856,NDX-5858,NDX-5860,NDX-5862,NDX-5864,NDX-5866,NDX-5870
+#   NDX-6099,NDX-6100,NDX-6101,NDX-6110,NDX-6118,NDX-6122,NDX-6126,NDX-6138,NDX-6142,NDX-6398,NDX-6400
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1014,7 +1012,7 @@ Feature: Test suite for Broadcast Editing
 #  | customerDeviceInfo             |
 
 
-   @NDX-VerifyseedingTrigRecurBCTargetList   @initBrowser @closeBrowser
+   @NDX-6106 @initBrowser @closeBrowser
   Scenario: Verify seeding Triggerable Recurring BC and edit the target list details
     Given login
     When navigate to precision marketer
@@ -1029,7 +1027,7 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingTriggerableRecurringBCEd"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
     
-  @NDX-VerifyseedingTrigRecurBCexpiry  @initBrowser @closeBrowser
+  @NDX-6148 @initBrowser @closeBrowser
   Scenario: Verify the seeding Triggerable Recurring BC after edit Broadcast expiry 
     Given login
   When navigate to precision marketer
@@ -1050,7 +1048,7 @@ Feature: Test suite for Broadcast Editing
    #    ************************ Trigger Recurring BC**************   
     
     
-    @NDX-editTriggerRecurForDataSetup  @initBrowser @closeBrowser
+    @NDX-6258  @initBrowser @closeBrowser
   Scenario: Verify Creating and editing the basic details of Trigger Recurring BC
   Given login 
 	When navigate to precision marketer 
@@ -1077,7 +1075,7 @@ Feature: Test suite for Broadcast Editing
     
     
     
-     @NDX-TriggerRecurBCDeliverDetails  @initBrowser @closeBrowser
+     @NDX-6308  @initBrowser @closeBrowser
   Scenario: Verify  Trigger Recurring BC and edit the Delivery details
     Given login
     When navigate to precision marketer
@@ -1090,14 +1088,10 @@ Feature: Test suite for Broadcast Editing
     Then save bc
     Then navigate to "Triggerable Broadcasts" broadcasts
     Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
-    Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
+    Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit" 
     
     
-    
-    
-    
-    
-     @NDX-VerifyTriggerRecurBCOffer  @initBrowser 
+     @NDX-6306 @initBrowser 
   Scenario: Verify Trigger Recurring BC edit the offer details 
     Given login
     When navigate to precision marketer
@@ -1113,7 +1107,7 @@ Feature: Test suite for Broadcast Editing
     Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit" with offer "rechargeWAP"
 
 
-  @NDX-targetSelectionTriggerRecurBC @initBrowser @closeBrowser
+  @NDX-6270,@NDX-6302 @initBrowser @closeBrowser
   Scenario Outline: Verify Trigger Recurring BC and edit the targetSelection <Condition>
     Given login
     When navigate to precision marketer
@@ -1138,9 +1132,9 @@ Feature: Test suite for Broadcast Editing
       | Create        |
 
  
-  @NDX-editTriggerRecurBcTargetDetails @initBrowser @closeBrowser
+  @NDX-6260 @initBrowser @closeBrowser
   Scenario Outline: Verify Trigger Recurring BC edit with given <Condition>
-#    
+#    NDX-6261,NDX-6262,NDX-6263,NDX-6272,NDX-6280,NDX-6284,NDX-6288,NDX-6300,NDX-6304,NDX-6410,NDX-6412 
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1182,7 +1176,7 @@ Feature: Test suite for Broadcast Editing
 #  | customerDeviceInfo             |
 
 
-   @NDX-VerifyTriggerRecurBCTargetList   @initBrowser @closeBrowser
+   @NDX-6268 @initBrowser @closeBrowser
   Scenario: Verify Trigger Recurring BC and edit the target list details
     Given login
     When navigate to precision marketer
@@ -1197,7 +1191,7 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
     
-  @NDX-VerifyTriggerRecurBCexpiry  @initBrowser @closeBrowser
+  @NDX-6310  @initBrowser @closeBrowser
   Scenario: Verify the Trigger Recurring BC after edit Broadcast expiry 
     Given login
   When navigate to precision marketer
@@ -1220,7 +1214,7 @@ Feature: Test suite for Broadcast Editing
   #    ************************ Recurring BC**************   
     
     
-    @NDX-editRecurringBCForDataSetup  @initBrowser
+    @NDX-5932 @initBrowser
   Scenario: Verify Creating and editing the basic details of Recurring BC
   Given login 
 	When navigate to precision marketer 
@@ -1247,7 +1241,7 @@ Feature: Test suite for Broadcast Editing
     
     
     
-     @NDX-RecurringBCDeliverDetails  @initBrowser @closeBrowser
+     @NDX-5982  @initBrowser @closeBrowser
   Scenario: Verify Recurring BC and edit the Delivery details
     Given login
     When navigate to precision marketer
@@ -1261,13 +1255,9 @@ Feature: Test suite for Broadcast Editing
     Then navigate to "Recurring Broadcasts" broadcasts
     Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
     Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
-    
-    
-    
-    
-    
-    
-     @NDX-VerifyRecurringBCOffer  @initBrowser 
+      
+        
+     @NDX-5980  @initBrowser 
   Scenario: Verify Recurring BC edit the offer details 
     Given login
     When navigate to precision marketer
@@ -1283,7 +1273,7 @@ Feature: Test suite for Broadcast Editing
     Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "recurringBCEdit" with offer "rechargeWAP"
 
 
-  @NDX-targetSelectionRecurringBC @initBrowser @closeBrowser
+  @NDX-5944,@NDX-5976 @initBrowser @closeBrowser
   Scenario Outline: Verify Recurring BC and edit the targetSelection <Condition>
     Given login
     When navigate to precision marketer
@@ -1308,9 +1298,9 @@ Feature: Test suite for Broadcast Editing
       | Create        |
 
  
-  @NDX-editRecurringBCTargetDetails @initBrowser @closeBrowser
+  @NDX-5934 @initBrowser @closeBrowser
   Scenario Outline: Verify Recurring BC edit with given <Condition>
-#    
+#   NDX-5935,NDX-5936,NDX-5937,NDX-5946,NDX-5954,NDX-5958,NDX-5962,NDX-5974,NDX-5978,NDX-6386,NDX-6388
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1352,7 +1342,7 @@ Feature: Test suite for Broadcast Editing
 #  | customerDeviceInfo             |
 
 
-   @NDX-VerifyRecurringBCTargetList   @initBrowser @closeBrowser
+   @NDX-5942 @initBrowser @closeBrowser
   Scenario: Verify Recurring BC and edit the target list details
     Given login
     When navigate to precision marketer
@@ -1367,8 +1357,8 @@ Feature: Test suite for Broadcast Editing
     Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
     
-  @NDX-VerifyRecurringBCexpiry  @initBrowser @closeBrowser
-  Scenario: Verify the Trigger Recurring BC after edit Broadcast expiry 
+  @NDX-5984 @initBrowser @closeBrowser
+  Scenario: Verify the  Recurring BC after edit Broadcast expiry 
     Given login
   When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1386,19 +1376,29 @@ Feature: Test suite for Broadcast Editing
   
 #  *********** Verify Child BC dates *************
   
-  @NDX-VerifyRecurringBCChilds  @initBrowser 
-  Scenario: Verify Recurring Bc child BCs Dates
-   Given login 
+  @NDX-VerifyRecurringBCChilds @initBrowser 
+Scenario: Verify Recurring Bc child BCs Dates 
+	Given login 
 	When navigate to precision marketer 
 	Then navigate to life cycle marketing 
 	Then navigate to campaign category from sheet "campaignCategory" 
 	Then naigate to "campaignBC" campaign view broadcasts 
 	Then click create new broadcast button 
 	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "recurringBC" with "rechargeSMS" 
-    Then save bc
-#    Then verify the Child BC count and recurring dates from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
+	Then activate bc
+	Then verify the Child BC count and recurring dates from workbook "bcInputData" in sheet "recurringBC"
     
-    
+    @NDX-VerifyTrigRecurringBCChilds @initBrowser 
+Scenario: Verify Recurring Bc child BCs Dates 
+	Given login 
+	When navigate to precision marketer 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "campaignCategory" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "TriggerReccurringBC" with "rechargeSMS" 
+	Then activate bc
+	Then verify the Child BC count and recurring dates from workbook "bcInputData" in sheet "TriggerReccurringBC"
   
   
   

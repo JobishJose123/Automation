@@ -1,6 +1,5 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary : checking postive flow of bc creation
-
 @NX-BroadcastManagement
 Feature: Test cases related to Broadcast Management
 
@@ -1745,7 +1744,7 @@ Then verify delivery details from "recurringMonthBC"
     Then Search BC and check for permissions from "one-offBC"   
     
     @NX-8862 @initBrowser
-    Scenario:Verify BC targeting with Customer Profile Info category-8862
+    Scenario: Verify BC targeting with Customer Profile Info category-8862
     Given login
     Then navigate to precision marketer
     #Then navigate to offer management
@@ -1770,7 +1769,7 @@ Then verify delivery details from "recurringMonthBC"
     Then click create new broadcast button
 		Then enter details for new broadcast with condition digitalEngagementGT235 from sheet "one-offBC" with "rechargeWap"
     Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     Then verify targeted and sent count of "one-offBC" with condition digitalEngagementGT235
     
     
@@ -2101,35 +2100,29 @@ Scenario: Email Channel --> Verify the preview, delivery and presentation of Ema
     Then verify email from sheet "one-offBC"
     Then pass next scenario based on this step
     
-    @NX-2349
-       
+    @NX-2349       
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Forms.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    @NX-2347
-        
+    @NX-2347        
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Links.
     Then check previous step and pass this
     Then pass next scenario based on this step
-       @NX-2348
-        
+       @NX-2348        
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Surveys.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    @NX-2397
-           
+    @NX-2397           
 Scenario: Email Channel -->Verify the URL's inside the email content is getting tracked on click
     Then check previous step and pass this
     Then pass next scenario based on this step
     
-        @NX-2382
-          
+        @NX-2382          
 Scenario: Email Channel -->Verify the event Unsubscribed to emails is handled and differentiated or not.
     Then check previous step and pass this
     Then pass next scenario based on this step
     
-    @NX-2395
-             @initBrowser 
+    @NX-2395 @initBrowser 
 Scenario: Verify attached images of different format in Email
     Then check previous step and pass this
     Then pass next scenario based on this step 
@@ -2259,7 +2252,7 @@ Then wait until status of "Recurring" is "Complete"
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then verify send trail to numbers "9446506807" "9446506808" "9446506809" from sheet "rechargeWAP" with product "fullDetails"
+    Then verify send trail to numbers "9491750000" "9491750001" "" from sheet "rechargeWAP" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management

@@ -3,11 +3,17 @@ package stepDefinitions;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import baseClasses.SQLHandler;
+
+import org.apache.commons.collections4.bag.CollectionBag;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,6 +22,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+//import com.google.common.collect.Collections2;
 import com.itextpdf.text.log.SysoCounter;
 
 import baseClasses.CalenderUtility;
@@ -55,7 +62,7 @@ public class BroadcastSteps extends Init {
 	TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
-
+	CalenderUtility calender=new CalenderUtility();
 	@Then("^check if create new bc lands in details tab$")
 	public void checkLandingOfCreateNewBc() throws Throwable {
 		broadcastPageObjects.enterBroadcastName("check");
@@ -220,7 +227,7 @@ public class BroadcastSteps extends Init {
 		}
 	}
 
-	public void enterDeliveryTabDetails(String bc_type, String sheet) throws InterruptedException {
+	public void enterDeliveryTabDetails(String bc_type, String sheet) throws InterruptedException, Exception {
 		eM.setExcelFile("bcInputData", sheet);
 		Calendar rightNow = Calendar.getInstance();
 		String mn = "";
@@ -244,7 +251,11 @@ public class BroadcastSteps extends Init {
 			min -= 60;
 			hours++;
 		}
-		
+		 if(min==0)
+			{
+				min+=5;
+			}
+			
 			
 		
 		try {
@@ -265,6 +276,30 @@ public class BroadcastSteps extends Init {
 				System.out.println(date);
 			}
 		}
+		// we are getting the broadcast start date and stored in sheet , row 1 column 11
+		String Start_Date="";
+		if(sheet.contains("Edit")||sheet.contains("seedingTriggerableRecurringBCEd")){
+			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+			if(am_pm==0) {
+			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
+			}else {
+				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+			}
+			eh.setExcelFile("bcInputDataForEdit", sheet);
+			eh.setCell(1, 11, Start_Date);
+		}else {
+			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+			if(am_pm==0) {
+			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
+			}else {
+				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+			}
+			eM.setExcelFile("bcInputData", sheet);
+			eM.setCell(1, 11, Start_Date);
+			
+		}
+		
+		
 		Actions builder = new Actions(driver);
 		if (bc_type.contentEquals("one-off") || bc_type.contentEquals("seedingTriggerable")
 				|| bc_type.contentEquals("one-offInformational")) {
@@ -537,10 +572,13 @@ public class BroadcastSteps extends Init {
 			Thread.sleep(1000);
 			try {
 				if (eM.getCellByColumnName("Recurrance Pattern").contains("days")) {
+					// to get the recurence time and stored into bcinputdata wb and recurring bc sheets in column 11, row 1 
+//					String bcRecurTime=hours+":"+min;
+//					eM.setCell(1, 11, bcRecurTime);
 					
 					String recurringDays=(eM.getCellByColumnName("Recurrance Pattern").toString()).substring(0);
 					
-					System.out.println("Selecting the"+recurringDays+" recurrence pattren in days");
+					System.out.println("Selecting the"+ recurringDays +" recurrence pattren");
 					
 					jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
 					Thread.sleep(1000);
@@ -609,13 +647,19 @@ public class BroadcastSteps extends Init {
 				jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
 			} catch (Exception e) {
 				eh.setExcelFile("bcInputDataForEdit", sheet);
+				
+				System.out.println("Inside catch");
 
+				String recurringDays="";
 				if (eh.getCellByColumnName("Recurrance Pattern").contains("days")) {
 					
-                    String recurringDays=(eM.getCellByColumnName("Recurrance Pattern").toString()).substring(0);
+					try {
+                   recurringDays=(eh.getCellByColumnName("Recurrance Pattern").toString()).substring(0);
 					
-					System.out.println("Selecting the"+recurringDays+" recurrence pattren in days");
-					
+					System.out.println("Selecting the"+ recurringDays +" recurrence pattren");
+					}catch (Exception ep) {
+					 recurringDays="1";
+					}
 					
 					jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
 					Thread.sleep(1000);
@@ -645,7 +689,7 @@ public class BroadcastSteps extends Init {
 						jswait.loadClick("//paper-item[contains(.,'Weekend Day')]");
 					} else {
 						jswait.loadClick("//label[contains(.,'Select days')]/..//input");
-						String daysStr = eM.getCellByColumnName("Recur on");
+						String daysStr = eh.getCellByColumnName("Recur on");
 						String[] days = daysStr.split(",");
 						jswait.loadClick("//*[@id='dayDialog']//div[text()='" + rightNow.get(Calendar.DAY_OF_MONTH)
 								+ "']/../..");
@@ -1703,6 +1747,7 @@ public class BroadcastSteps extends Init {
 	@Then("^save bc$")
 	public void save_bc() throws Throwable {
 		broadcastPageObjects.clickCreateButton();
+		Thread.sleep(1000);
 		broadcastPageObjects.clickSaveButton();
 	}
 
@@ -3628,7 +3673,7 @@ public class BroadcastSteps extends Init {
 		Thread.sleep(2000);
 		broadcastPageObjects.clickProceedButton();
 
-		broadcastPageObjects.editTheDeleveryTabDetails(sheet);
+		broadcastPageObjects.editTheDeleveryTabDetails(workbook,sheet);
 
 	}
 
@@ -3779,6 +3824,109 @@ public class BroadcastSteps extends Init {
 						+ "')]"));
 	}
 
-//**************//
+	
+	@Then("^verify the Child BC count and recurring dates from workbook \"([^\"]*)\" in sheet \"([^\"]*)\"$")
+	public void verify_the_Child_BC_count_and_recurring_dates_from_workbook_in_sheet(String workbook, String sheet) throws Throwable {
+		eh.setExcelFile(workbook, sheet);
+		String bcName = eh.getCell(1, 0).toString();
+		commonObjects.filterName(bcName);
+		Thread.sleep(2000);
+		String output = "";
 
+		List<WebElement> recurChilds = driver.findElements(By.xpath(
+				"//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row//vaadin-grid-table-cell[1]//vaadin-grid-cell-content[contains(.,'"
+						+ bcName + "')]/../..//vaadin-grid-table-cell[3]//vaadin-grid-cell-content"));
+
+		System.out.println(recurChilds.size());
+
+		ArrayList<String> getData = new ArrayList<String>();
+		String getTextFromElement;
+		for (WebElement webElement : recurChilds) {
+			//System.out.println(webElement.getText());
+			getTextFromElement=webElement.getText();
+			getData.add(getTextFromElement);	
+		}
+		 Collections.sort(getData);
+		System.out.println("getdatasort" + getData);
+
+		String dates = eh.getCell(1, 11).toString();
+		String s1 = (eh.getCellByColumnName("Recurrance Pattern").toString());
+		//System.out.println(s1.substring(0, 1));
+		int recurringDays = Integer.parseInt(s1.substring(0, 1));
+		//System.out.println(recurringDays);
+		SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy hh:mm a");
+		Calendar c = Calendar.getInstance();
+		Date db = new Date();
+		Date gh = df.parse(dates);
+		//System.out.println(gh);
+		c.setTime(gh); 		
+		
+		for (int i=0;i<getData.size();i++) {
+			output = df.format(c.getTime());
+			System.out.println("before list"+getData.get(i));
+			System.out.println("before"+output);
+			Assert.assertTrue((getData.get(i)).equalsIgnoreCase(output));
+			c.add(Calendar.DATE, recurringDays);
+		}
+	}
+
+	
+//*******Copy BC*******//
+	
+	
+	@Then("^click on BC Copy button from workbook \"([^\"]*)\" sheet \"([^\"]*)\"$")
+	public void click_on_BC_Copy_button_from_workbook_sheet(String workbook, String sheet) throws Throwable {
+		eh.setExcelFile(workbook, sheet);
+		String name = eh.getCell(1, 0).toString();
+		commonObjects.filterBCName(sheet, name);
+		commonObjects.clickBCOptionsIcon(sheet);
+		commonObjects.clickCopyOption();
+	}
+
+	@Then("^Save the copied BC from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void save_the_copied_BC_from_workbook_and_sheet(String workbook, String sheet) throws Throwable {
+		Thread.sleep(3000);
+		eM.setExcelFile(workbook, sheet);
+		String bcName=eM.getCell(1,0).toString();
+		eM.setCell(1,0,bcName+"_Copy");
+		broadcastPageObjects.clickProceedButton();
+		Thread.sleep(3000);
+		broadcastPageObjects.clickProceedButton();
+		Thread.sleep(3000);
+		broadcastPageObjects.clickProceedButton();
+		Thread.sleep(2000);
+		//broadcastPageObjects.clickCreateButton();
+		//Thread.sleep(2000);
+		//broadcastPageObjects.clickSaveButton();
+	}
+
+	@Then("^Verify the Copied Bc in view page workbook \"([^\"]*)\" sheet \"([^\"]*)\" with \"([^\"]*)\" condition (.*)$")
+	public void verify_the_Copied_Bc_in_view_page_sheet_with_condition_digitalPersonaGT(String workbook, String bcSheet, String offerSheet,String condition) throws Throwable {
+	    
+		broadcastPageObjects.verifyTheBcBasicDetailsBeforeEdit(bcSheet);
+		Thread.sleep(2000);
+		broadcastPageObjects.verifyTheBCTargetConditionDetails(condition);
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+BASE_LIST+"')]"));
+		
+		Thread.sleep(2000);
+		broadcastPageObjects.offerDetailsBC();
+		eM.setExcelFile("offerInputData", offerSheet);
+		String offerName = eM.getCellByColumnName("Offer Name");
+		Assert.assertTrue(
+				jswait.checkVisibility("//p[contains(.,'Offer Name')]/..//p[contains(.,'" + offerName + "')]"));
+		Thread.sleep(2000);
+		broadcastPageObjects.verifyDeleveryTabDetails(workbook,bcSheet);
+	}
+	
+	@Then("^click on toggleAutoRefresh$")
+	public void click_on_toggleAutoRefresh() throws Throwable {
+		commonObjects.toggleAutoRefresh();
+	}
+//	@Then("^click on toggleAutoRefresh$")
+//	public void click_on_toggleAutoRefresh() throws Throwable {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new PendingException();
+//	}
+	
 }

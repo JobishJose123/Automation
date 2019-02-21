@@ -2602,9 +2602,9 @@ public void selectLabelDynamically(String label) throws InterruptedException {
 	
 	
 	
-	public void editTheDeleveryTabDetails(String sheet) throws Exception {
+	public void editTheDeleveryTabDetails(String workbook,String sheet) throws Exception {
 		BroadcastSteps broascastSteps= new BroadcastSteps();
-		eh.setExcelFile("bcInputDataForEdit", sheet);
+		eh.setExcelFile(workbook, sheet);
 		
 		broascastSteps.enterDeliveryTabDetails(eh.getCell(1, 7).toString(),sheet);	
 	}
@@ -2659,82 +2659,28 @@ if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTrigge
 	public void verifyDeleveryTabDetails(String workbook, String sheet) throws InterruptedException {
 
 		jswait.loadClick(deliveryDetailsBC);
-
-		Calendar rightNow = Calendar.getInstance();
-
-		int hours = rightNow.get(Calendar.HOUR);
-		int min = rightNow.get(Calendar.MINUTE);
-		int am_pm = rightNow.get(Calendar.AM_PM);
-		int day = rightNow.get(Calendar.DAY_OF_MONTH) + 2;
-		int year = rightNow.get(Calendar.YEAR);
-		int month = rightNow.get(Calendar.MONTH);
-		min -= 2;
-		int rem = min % 5;
-		rem = 5 - rem;
-		min += rem;
-		if (min > 59) {
-			min -= 60;
-			hours++;
-		}
-
-		String date = "";
-		String month1=(calenderUtility.getMonthForInt(month)).substring(0,3);
-		
-
-			if (am_pm == 0) {
-				date = day + " " + month1 + " " + year + " " + String.format("%02d", hours) + ":"
-						+ String.format("%02d", min) + " AM " + "GMT+05:30";
-			} else {
-				date = day + " " + month1 + " " + year + " " + String.format("%02d", hours) + ":"
-						+ String.format("%02d", min) + " PM " + "GMT+05:30";
-			}
-			System.out.println(date);
 		
 		eh.setExcelFile(workbook, sheet);
-		if ((eh.getCell(1, 7).toString()).contains("one-off")) {
-			try {
-				Assert.assertTrue(
-						jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'" + date + "')]"));
-			} catch (Exception e) {
-				if (am_pm == 0) {
-					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
-							+ String.format("%02d", "59") + " AM " + "GMT+05:30";
-					Assert.assertTrue(
-							jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'" + date + "')]"));
-				} else {
-					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
-							+ String.format("%02d", "59") + " PM " + "GMT+05:30";
-					Assert.assertTrue(
-							jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'" + date + "')]"));
-				}
-				System.out.println("catch" + date);
-			}
-
-		} else if ((eh.getCell(1, 7).toString()).contains("recurring")|| (eh.getCell(1, 7).toString()).contentEquals("seedingRecurring")
-				|| (eh.getCell(1, 7).toString()).contentEquals("seedingTriggerableRecurringBC")) {
-			try {
-			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'"+date+"')]"));
-			}catch (Exception e) {
-				if (am_pm == 0) {
-					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
-							+ String.format("%02d", "59") + " AM " + "GMT+05:30";
-					Assert.assertTrue(
-							jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'"+date+"')]"));
-				} else {
-					date = day + " " + month1 + " " + year + " " + String.format("%02d", hours + 1) + ":"
-							+ String.format("%02d", "59") + " PM " + "GMT+05:30";
-					Assert.assertTrue(
-							jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'"+date+"')]"));
-				}
-				System.out.println("catch" + date);
-			}
-		}
-
+		String Start_Date=eh.getCell(1, 11).toString();
+		System.out.println(Start_Date);
+		String bcType=eh.getCell(1, 7).toString();
+		  if ((eh.getCell(1, 7).toString()).contains("recurring")||(eh.getCell(1, 7).toString()).contentEquals("seedingRecurring") ||
+				  (eh.getCell(1, 7).toString()).contentEquals("seedingTriggerableRecurringBC"))
+				  { Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'"+Start_Date+"')]")); 
+				  }
+		  else if(bcType.contains("one-off")||bcType.contains("seedingTriggerable")) {
+					 Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'"+Start_Date+"')]"));
+			  
+		  }else {
+			  Assert.assertTrue(false,"Delevery date miss match");
+		  }
+		
 	}
 	
 
 	public void verifyTheBCTargetConditionDetails(String segmentCondition) throws InterruptedException {
 		jswait.loadClick(targetDetailsBC);
+		Thread.sleep(2000);
 		if(segmentCondition.contentEquals("customerWasSentTheTrialMessage")) {
 		Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));
 		
