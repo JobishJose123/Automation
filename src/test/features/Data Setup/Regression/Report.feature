@@ -36,3 +36,44 @@ Then filter broadcast from sheet "one-offBC"
 Then verify acknowledged conversion and fulfillment % are "100 %","100 %" and "100 %"
 
 
+@NDX-6876  @initBrowser @closeBrowser
+Scenario Outline: Verify the profile field with <Name> uploaded in customer profile in customer info tab
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then click customer profile and enter the msisdn "919491750000"
+Then verify the profile values for <Name>
+
+Examples:
+
+|Name|
+|"DEMOGRAPHICS_FIELD"|
+|"SITE_ID_PROFILE_FIELD"|
+|"BALANCE_PROFILE_FIELD"|
+|"DIGITAL_PERSONA_FIELD"|
+|"SEL_COUNTRY"|
+
+@NDX-7347 @initBrowser
+Scenario: Verify the event uploaded in customer profile in event tab
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then click customer profile and enter the msisdn "919491750000"
+Then click event tab
+Then verify the event displayed
+
+
+@NDX-7351 @initBrowser
+Scenario: Verify the mertic uploaded in customer profile in metrics tab 
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then click customer profile and enter the msisdn "919491750000"
+Then click metric tab
+Then verify the metric data
+
+
+
+
+
+
