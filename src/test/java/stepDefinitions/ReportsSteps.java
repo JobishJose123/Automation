@@ -8,6 +8,7 @@ import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
 import baseClasses.TextFileUtil;
 import cucumber.api.java.en.Then;
+import junit.framework.Assert;
 import pageObjetcs.ReportPageObjects;
 
 public class ReportsSteps extends Init{
@@ -69,5 +70,34 @@ public void filter_the_broadcast(String sheet) throws Exception{
 	String bcName=eh.getCellByColumnName("BC Name");
 	ReportPageObject.filterbroadcast(bcName);
 }
+
+@Then("^click customer profile and enter the msisdn \"([^\"]*)\"$")
+public void click_customer_profile_and_enter_the_msisdn(String number) throws Exception{
+	ReportPageObject.entermsisdn(number);
+}
+@Then("^verify the profile values for \"([^\"]*)\"$")
+public void verify_the_profile_values(String profileType) throws Throwable {
+	ReportPageObject.customerprofile(profileType);
+	
+}
+@Then("^click event tab$")
+public void click_event_tab() throws Throwable {
+	ReportPageObject.eventTab();
+}
+
+
+@Then("^verify the event displayed$")
+public void verify_the_event_displayed() throws Throwable {
+	ReportPageObject.eventVerify();
+}
+@Then("^click metric tab$")
+public void click_metric_tab() throws Throwable {
+	ReportPageObject.metricTab();
+}
+@Then("^verify the metric data$")
+public void verify_the_metric_data() throws Throwable {
+	ReportPageObject.verifyMetricData();
+}
+
 	 
 }

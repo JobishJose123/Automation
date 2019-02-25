@@ -38,7 +38,7 @@ public class OfferSteps extends Init {
 	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 	CommonObjects commonObjects = new CommonObjects();
 	RewardTypePage rewardTypePage = new RewardTypePage();
-
+	ExcelHelper eM = new ExcelHelper();
 	public OfferSteps() {
 		PageFactory.initElements(driver, this);
 	}
@@ -1128,9 +1128,44 @@ public class OfferSteps extends Init {
 			
 	}
 	
-	
-	
+	@Then("^add a new reward and save offer$")
+	public void add_a_new_reward_and_save_offer() throws Throwable {
+		offerPageObjects.addNewReward();
+	}
+
+	@Then("^verify the condition (.*) in the detail tab for the offer from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void verify_the_condition_reward_deleted_in_the_detail_tab_for_the_offer_from_sheet_with_product(String condition ,String sheetOffer, String sheetProduct) throws Throwable {
+		eh.setExcelFile("offerInputData", sheetOffer);
+		String offerName= eh.getCellByColumnName("Offer Name");
+		eM.setExcelFile("productInputData", sheetProduct);
+		String productName=eM.getCellByColumnName("Product Name");
+		offerPageObjects.viewOfferDetails(condition,offerName,productName);
 	   
+	}
+	@Then("^delete reward and save$")
+	public void delete_reward() throws Exception{
+		offerPageObjects.deleteReward();
+	}
+	@Then("^filter the offer copy from sheet \"([^\"]*)\"$")
+	public void filter_the_offer_copy_from_sheet(String sheet) throws Throwable {
+		eh.setExcelFile("offerInputData", sheet);
+		String offerCopyName= eh.getCellByColumnName("Offer Name");
+		String offer = offerCopyName +"_Copy";
+		offerPageObjects.filterOfferCopy(offer);
+	}
+	
+	@Then("^save the offer and filter the offer from sheet \"([^\"]*)\"$")
+	public void save_the_offer_and_filter_the_offer_from_sheet(String sheet) throws Exception {
+		eh.setExcelFile("offerInputData", sheet);
+		String offerName= eh.getCellByColumnName("Offer Name");
+		offerPageObjects.saveAndToFilterOffer(offerName);
+	}
+	@Then("^filter the offer for verification from sheet \"([^\"]*)\"$")
+	public void filter_the_offer_for_verification_from_sheet(String offerSheet) throws Exception  {
+		eh.setExcelFile("offerInputData", offerSheet);
+		String offerName= eh.getCellByColumnName("Offer Name");
+		offerPageObjects.filterForVerification(offerName);
+}
 }
 
 

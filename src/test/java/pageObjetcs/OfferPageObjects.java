@@ -413,6 +413,16 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = ".//*[@id='file']")
 	private WebElement facebookimageButton;
 	 
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'sel_reward')]")
+    private WebElement selectTheRewardName ;
+
+	 @FindBy(xpath="//paper-button[contains(.,'Add')][@class='style-scope rewards-container x-scope paper-button-0']")
+	 private WebElement addNewRewardbtn ;
+	 @FindBy(xpath="//div[@class='layout vertical style-scope rewards-list']//following::iron-icon[@icon='icons:close']")
+	 private WebElement deleteReward;
+	 
+	 @FindBy(xpath = "//paper-button[contains(.,'Cancel')][@class='cancel-button style-scope offer-form x-scope paper-button-0']")
+		private WebElement cancelbtn;
 	 
 //	 @FindBy(xpath="")
 //	 private WebElement ;
@@ -1405,6 +1415,7 @@ public class OfferPageObjects extends Init {
 		clickOfferAddButton();
 		Thread.sleep(15000);
 			commonObjects.filterName(productToAdd);
+			Thread.sleep(3000);
 			jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
 		clickDialogBoxAddButton();
 	}
@@ -2192,6 +2203,7 @@ public class OfferPageObjects extends Init {
 		CreativeTitle.sendKeys("edited");
 		smsCreativeDetails.sendKeys("edited");
 		String title = commonObjects.getTextFormTextField(CreativeTitle);
+		Thread.sleep(2000);
 		String creativedetails = commonObjects.getTextFormTextField(smsCreativeDetails);
 		clickOfferEditProceedButton();
 		clickOfferEditProceedButton();
@@ -2360,8 +2372,84 @@ public class OfferPageObjects extends Init {
 		clickSaveOfferButton();
 		commonObjects.filterName(copiedoffername);
 		Thread.sleep(2000);
-		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+copiedoffername+"')]"));
-		Assert.assertTrue(element.isDisplayed(), "Copied job not found");
+//		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+copiedoffername+"')]"));
+//		Assert.assertTrue(element.isDisplayed(), "Copied job not found");
+		}
+	
+
+	public void addNewReward() throws Exception{
+	clickOfferEditProceedButton();
+	clickOfferEditProceedButton();
+	clickOfferEditProceedButton();
+	clickOfferEditProceedButton();
+	Thread.sleep(2000);
+	jswait.loadClick(addNewRewardbtn);
+	clickRewardTypeInputField();
+	jswait.loadClick(selectTheRewardName);
+	clickSaveOfferButton();
+	Thread.sleep(2000);
+}
+public void deleteReward() throws Exception{
+	clickOfferEditProceedButton();
+	clickOfferEditProceedButton();
+	clickOfferEditProceedButton();
+	clickOfferEditProceedButton();
+	jswait.loadClick(deleteReward);
+	clickSaveOfferButton();
+	Thread.sleep(2000);
+}
+	public void viewOfferDetails(String condition, String offerName, String productName) throws Exception{
+		jswait.loadClick("//data-table-cell[contains(.,'"+offerName+"')]");
+		Thread.sleep(2000);
+		if(condition.contentEquals("reward added")) {
+		Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'"+SEL_REWARD+"')]"));
+		}
+		else if(condition.contentEquals("reward deleted")) {
+			Assert.assertFalse(jswait.checkVisibility("//label[contains(.,'Selenium_reward')]"));
+		}
+		else if(condition.contentEquals("product added")) {
+			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'"+productName+"')]"));
+		}
+		else if(condition.contentEquals("dynamic tag edited")) {
+			Assert.assertTrue(jswait.checkVisibility("(//label[contains(.,'Message')]//following::label[contains(.,'edited')])[1]"));
+			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'Description')]//following::label[contains(.,'edited')]"));
+		}
+		else if(condition.contentEquals("track source edited")) {
+			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'181')]"));
+		}
+		else if(condition.contentEquals("reward succedd message edited")) {
+			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'Success from Selenium_edited')]"));
+		}
+		else if(condition.contentEquals("offer copy")) {
+			String offerCopyName= offerName +"_Copy";
+			System.out.println("copied offer name is :"+offerCopyName);
+			Thread.sleep(2000);
+			Thread.sleep(3000);
+			jswait.loadClick("//data-table-cell[contains(.,'"+offerCopyName+"')]");
+			Thread.sleep(3000);
+			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+offerCopyName+"')]//following::label[contains(.,'"+productName+"')]"));
+			Assert.assertTrue(jswait.checkVisibility("(//data-table-cell[contains(.,'SMS')])[4]"));
+			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+offerCopyName+"')]//following::label[contains(.,'"+TRACK_SOURCE+"')]"));
+			Thread.sleep(2000);
+			
+		}
+		
+	}
+		public void filterOfferCopy(String offer) throws Exception{
+			commonObjects.filterName(offer);
+			
+		
+	}
+		public void saveAndToFilterOffer(String offerName) throws Exception{
+			clickOfferEditProceedButton();
+			clickOfferEditProceedButton();
+			clickSaveOfferButton();
+			commonObjects.filterName(offerName);
+			
+		}
+		public void filterForVerification(String offerName) throws Exception{
+			jswait.loadClick(cancelbtn);
+			commonObjects.filterName(offerName);
 		}
 	
 
