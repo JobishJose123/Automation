@@ -1166,6 +1166,7 @@ public class OfferSteps extends Init {
 		String offerName= eh.getCellByColumnName("Offer Name");
 		offerPageObjects.filterForVerification(offerName);
 }
+	
 }
 
 

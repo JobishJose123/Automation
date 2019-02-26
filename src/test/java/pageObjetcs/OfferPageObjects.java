@@ -2431,6 +2431,7 @@ public void deleteReward() throws Exception{
 			Assert.assertTrue(jswait.checkVisibility("(//data-table-cell[contains(.,'SMS')])[4]"));
 			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+offerCopyName+"')]//following::label[contains(.,'"+TRACK_SOURCE+"')]"));
 			Thread.sleep(2000);
+			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+offerCopyName+"')]//following::label[contains(.,'"+SEL_REWARD+"')]"));
 			
 		}
 		
@@ -2451,8 +2452,11 @@ public void deleteReward() throws Exception{
 			jswait.loadClick(cancelbtn);
 			commonObjects.filterName(offerName);
 		}
+		
+		
+		}
 	
 
 		
 	
-}
+
