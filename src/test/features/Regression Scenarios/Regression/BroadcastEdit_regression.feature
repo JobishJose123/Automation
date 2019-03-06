@@ -285,7 +285,7 @@ Feature: Test suite for Broadcast Editing for Migration
 #  | IMEventsCustomerCareUsage      |
 #  | customerDeviceInfo             |
 
-   @@NDX-6214 @initBrowser @closeBrowser
+   @NDX-6214 @initBrowser @closeBrowser
   Scenario: Verify TriggerOne-off BC and edit the target list details Migration
     Given login
     When navigate to precision marketer
@@ -942,11 +942,6 @@ Feature: Test suite for Broadcast Editing for Migration
   
   
    #    ************************ Trigger Recurring BC**************   
-    
-   
-	
-    
-    
     
     @NDX-6308 @initBrowser @closeBrowser
   Scenario: Verify  Trigger Recurring BC and edit the Delivery details Migration
