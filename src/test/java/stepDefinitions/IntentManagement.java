@@ -19,10 +19,12 @@ import baseClasses.Request;
 import baseClasses.SQLHandler;
 import baseClasses.TimeoutImpl;
 import cucumber.api.java.en.Then;
+import pageObjetcs.BroadcastPageObjects;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.CustomerProfilePage;
 import pageObjetcs.IntentManagementPageObjects;
 import pageObjetcs.ProgramPage;
+import pageObjetcs.TargetConditionObjects;
 import pageObjetcs.TouchpointPage;
 
 public class IntentManagement extends Init{
@@ -30,10 +32,12 @@ public class IntentManagement extends Init{
 	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
 	public ExcelHelper eh = new ExcelHelper(); 
+	TargetConditionObjects TargetConditionObjects=new TargetConditionObjects();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	IntentManagementPageObjects intentManagementPage = new IntentManagementPageObjects();
 	TouchpointPage touchpointPage = new TouchpointPage();
 	ProgramPage programPage = new ProgramPage();
+	BroadcastPageObjects broadcastPageObjects=new BroadcastPageObjects();
 	@Then("^navigate to touchpoints")
 	public void navigateToTouchpoints() throws InterruptedException {
 		intentManagementPage.navigateToTouchpoints();
@@ -2148,7 +2152,156 @@ System.out.println(editname+"program has edited successfully");
 				programPage.compareProgramDetailsfromSheet(name,sheet2);
 				programPage.verifyTouchPointToProgramFromSheet(sheet3);
 				
-				System.out.println("program has edited successfully");
+				System.out.println("program has verified successfully");
 			
 			}
+		   
+		   
+		   @Then("^verify rule view from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
+			 public void verifyRuleviewFromSheet(String sheet,String sheet2) throws Exception {
+				 Thread.sleep(2000);
+				 ExcelHelper programExcel = new ExcelHelper();
+				    eh.setExcelFile("ruleInputData",sheet);
+					String name = (String) eh.getCell(1, 0);
+					programExcel.setExcelFile("productInputData", sheet2);
+					
+					String product=(String) programExcel.getCell(1, 0);
+				    programPage.verifyRuleviewFromSheet(name,product);
+				 
+				 
+			 }
+		   
+		   @Then("^verify rule deactivate$")
+			 public void verifyRuledeactivate() throws Exception {
+				 Thread.sleep(2000);
+				
+				    programPage.verifyRuledeactivate();
+				 
+				 
+			 }
+		   
+		   @Then("^verify rule Copy from sheet \"([^\"]*)\" with product sheet \"([^\"]*)\" and product class sheet \"([^\"]*)\"$")
+			 public void verifyRulecopy(String sheet,String sheet2,String sheet3) throws Exception {
+				 Thread.sleep(2000);
+				
+				    programPage.verifyRulecopy(sheet,sheet2,sheet3);
+				 
+				 
+			 }
+		   
+		   
+		   @Then("^edit new rule from sheet \"([^\"]*)\" and offer \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\" with taget condition (.*)$")
+			public void editRuleWithFromSheet(String sheet1,String offerType,String touchpointList,String condition) throws Throwable {
+				Thread.sleep(4000);
+				
+		    	ExcelHelper programExcel = new ExcelHelper();
+		    	programExcel.setExcelFile("ruleInputData", sheet1);
+		    	ExcelHelper offerExcel = new ExcelHelper();
+		    	offerExcel.setExcelFile("offerInputData", offerType);
+		    	
+		 		String name = (String) programExcel.getCell(1, 0);
+		 		Thread.sleep(4000);
+				//programPage.clickCreateProgramButton();
+		 		System.out.println(touchpointList);
+				programPage.editProgramRule(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"),condition);
+				dateForCompare = new Date();
+				System.out.println(dateForCompare);
+				
+			}
+		   
+			@Then("^edit the programrule with taget condition (.*)$")
+			public void edit_the_program_with_taget_condition(String condition) throws Throwable {
+				System.out.println(condition);
+				Thread.sleep(3000);
+				
+				Thread.sleep(3000);
+				programPage.editingTheprogramruleTargetConditionDetails(condition);
+				
+			}
+		   
+			
+			  @Then("^verify rule view after edit from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
+				 public void verifyRuleviewaftereditFromSheet(String sheet,String sheet2) throws Exception {
+					 Thread.sleep(2000);
+					 ExcelHelper programExcel = new ExcelHelper();
+					    eh.setExcelFile("ruleInputData",sheet);
+						String name = (String) eh.getCell(1, 0);
+						programExcel.setExcelFile("productInputData", sheet2);
+						
+						String product=(String) programExcel.getCell(1, 0);
+					    programPage.verifyRuleviewaftereditFromSheet(name,product);
+					 
+					 
+				 }
+				@Then("^edit the targetSelection (.*) for programrule$")
+				public void edit_the_targetSelection_None_for_BC(String targetSelection) throws Throwable {
+					Thread.sleep(3000);
+					commonObjects.clickOptionsIcon();
+					jswait.loadClick("(//paper-item[contains(.,'Edit')])[1]");
+					
+					Thread.sleep(2000);
+					if (targetSelection.contains("None")) {
+						broadcastPageObjects.clickTargetConditionNoneOption();
+
+					} else if (targetSelection.contains("Create")) {
+
+						broadcastPageObjects.clickcreateTargetCondition();
+						Thread.sleep(2000);
+						jswait.loadClick("//paper-button[contains(.,'Create Condition')]");
+						TargetConditionObjects.clickBasicTargetConditionWithAge();
+
+					} else if (targetSelection.contains("SavedSegments")) {
+						broadcastPageObjects.clickOnSavedSegments();
+						broadcastPageObjects.selectSavedSegmentSelectorField("SegmentForMoreThanTenConditions");
+					}
+					
+					
+					Thread.sleep(2000);
+//					broadcastPageObjects.clickProceedButton();
+//					Thread.sleep(2000);
+//					broadcastPageObjects.clickProceedButton();
+//					Thread.sleep(2000);
+//					broadcastPageObjects.clickProceedButton();
+					
+					jswait.loadClick("//paper-button[contains(.,'Save')]");
+			      	Thread.sleep(2000);
+			      	jswait.loadClick("(//paper-button[contains(.,'Yes')][1])[1]");
+			      	
+			      	if(jswait.checkVisibility("//span[contains(.,'Changes have been saved and will be active on the next refresh cycle.  If all intended changes are done, click Close else click Continue.')]")==true) {
+			      		Thread.sleep(2000);
+			      		jswait.loadClick("//paper-button[contains(.,'Close')]");
+			      	} 
+			       	
+				}
+				
+				
+				  @Then("^verify rule target selection (.*) after edit from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
+					 public void verifyRuletargetselectionaftereditFromSheet(String condition,String sheet,String sheet2) throws Exception {
+						 Thread.sleep(2000);
+						 ExcelHelper programExcel = new ExcelHelper();
+						    eh.setExcelFile("ruleInputData",sheet);
+							String name = (String) eh.getCell(1, 0);
+							programExcel.setExcelFile("productInputData", sheet2);
+							
+							String product=(String) programExcel.getCell(1, 0);
+						    programPage.verifyRuletargetselectionaftereditFromSheet(name,product,condition);
+						 
+						 
+					 }
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 }
+

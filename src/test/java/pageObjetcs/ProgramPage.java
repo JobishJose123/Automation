@@ -25,6 +25,7 @@ public class ProgramPage extends Init{
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	CommonObjects commonObjects = new CommonObjects();
+	BroadcastPageObjects broadcastPageObjects=new BroadcastPageObjects();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	public ProgramPage() {
 		PageFactory.initElements(driver, this);
@@ -357,6 +358,11 @@ private WebElement rulessenderid2
 	private WebElement customerCareOfferAccept;
 	@FindBy(xpath="//iron-list[@id='list']/div[@id='items']//data-table-row/div[1]/data-table-cell[1]")
 	private WebElement programtouchpointname;
+	
+	 @FindBy(xpath="//label[contains(.,'Saved Segments')]/../..//input")
+	 private WebElement savedSegmentSelectorField;
+	 @FindBy(xpath="//paper-radio-button[contains(.,'Saved Segments')]")
+	 private WebElement savedSegmentRadioButtion;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //@FindBy(xpath="")
@@ -1343,7 +1349,7 @@ public void touchpointpgmdeletecheck() throws Exception{
 		System.out.println("Offer: "+offer);
 			Thread.sleep(3000);
 			jswait.loadSendKeys(programofferclick, offer);
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
 	}
 
@@ -1527,8 +1533,477 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 			Assert.assertEquals("Days",Refreshcycle);
 			}
 	 
+	 public void verifyRuleviewFromSheet(String name,String product) throws java.lang.Exception {
+			Thread.sleep(3000);
+			jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");
+			Thread.sleep(2000);
+			System.out.println(name);
+//			commonObjects.clickOptionsIcon();
+//			commonObjects.filterName(name);
+			Thread.sleep(2000);
+			commonObjects.clickOptionsIcon();
+			jswait.loadClick("//paper-item[contains(.,'View')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Target Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'selenium_list')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Offer Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'"+product+"')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Delivery Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Schedule Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			
+			
+		}
+	 
+	 public void verifyRuledeactivate() throws java.lang.Exception { 
+		 driver.navigate().refresh();
+		 Thread.sleep(2000);
+		 driver.navigate().refresh();
+		 Thread.sleep(2000);
+			commonObjects.clickOptionsIcon();
+			jswait.loadClick("//paper-item[contains(.,'Deactivate')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//span[@title='Inactive'][contains(.,'I')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//paper-toast[contains(.,'Rule deactivated.')]");
+			
+					}
 	
-	
-	
+	 public void verifyRulecopy (String sheet,String sheet2,String sheet3) throws java.lang.Exception {
+		 eh.setExcelFile("ruleInputData",sheet);
+		 ExcelHelper pdt = new ExcelHelper();
+		 ExcelHelper pdtclass = new ExcelHelper();
+		 
+		 pdtclass.setExcelFile("productClassInputData", sheet3);
+		 
+		 pdt.setExcelFile("productInputData", sheet2);
+			String name = eh.getCell(1, 0).toString();	
+			String productname = pdt.getCell(1, 0).toString();
+			String productclass = pdtclass.getCell(1, 0).toString();
+		 
+		 Thread.sleep(2000);
+			commonObjects.clickOptionsIcon();
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'Copy')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//h4[contains(.,'"+name+"_copy')]");
+			Thread.sleep(2000);
+			clickPorogramProceedButton();
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-button[contains(.,'View Details')]");
+			Thread.sleep(2000);
+		    jswait.checkVisibility("(//label[contains(.,'Channel')]//following::label[contains(.,'SMS')])[1]");
+		    Thread.sleep(2000);
+		    jswait.checkVisibility("(//label[contains(.,'Offer Type')]//following::label[contains(.,'STV')])[1]");
+		    Thread.sleep(2000);
+		    jswait.checkVisibility("(//label[contains(.,'Track Source Name')]//following::label[contains(.,'A_track_Sel')])[1]");
+						
+		    Thread.sleep(2000);
+		    jswait.checkVisibility("(//label[contains(.,'Track Source Name')]//following::label[contains(.,'A_track_Sel')])[1]");
+		    Thread.sleep(2000);
+		    jswait.checkVisibility("//h4[contains(.,'Product Details')]//following::label[contains(.,'Name')][1]//following::label[contains(.,'"+productname+"')]");
+		    Thread.sleep(2000);
+		    jswait.checkVisibility("//h4[contains(.,'Product Details')]//following::label[contains(.,'Product Class Name')][1]//following::label[contains(.,'"+productclass+"')]");
+		    jswait.loadClick("(//paper-button[contains(.,'OK')])[2]");
+		    Thread.sleep(2000);
+			clickPorogramProceedButton();
+			 Thread.sleep(2000);
+				clickPorogramProceedButton();
+			String Refreshcycle=commonObjects.getTextFormTextField(programschrefreshcycle);
+			Thread.sleep(2000);
+			Assert.assertEquals("Days",Refreshcycle);
+					}
+	 
+	 
+	 //------------------------------//
+	 
+	   public void editProgramRule(String name,String listname,String touchpointList, String offerType,String condition)throws Exception {
+			eh.setExcelFile("touchpointInputData", touchpointList);
+			System.out.println(touchpointList);
+			String touchpointType = eh.getCellByColumnName("type");
+			commonObjects.clickOptionsIcon();
+			jswait.loadClick("(//paper-item[contains(.,'Edit')])[1]");
+			Thread.sleep(2000);
+			jswait.loadClick("(//h4[@class='style-scope create-rule']//following::iron-icon[1])[1]");
+			Thread.sleep(2000);
+			
+			jswait.loadSendKeys("//h4[contains(.,'"+name+"')]//following::label[@class='style-scope paper-input'][1]//..//input", "Edited"+name);
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-icon-button[@title=\"Save\"]//iron-icon");
+			
+			//clickSaveRuleButton();
+			Thread.sleep(2000);
+			clickCustomerListField();
+			Thread.sleep(2000);
+			selectCustomerList(listname);
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-radio-button[contains(.,'Create')]");
+			editingTheprogramruleTargetConditionDetails(condition);
+			verifyTheprogramTargetConditionDetails(condition); 
+			clickPorogramProceedButton();
+			Thread.sleep(2000);
+			clickProductFieldOption();
+			chooseProduct(name);
+			Thread.sleep(2000);
+			clickPorogramProceedButton();
+			//System.out.println("test");
+			
+			if(!offerType.contains("STV")) {
+			clickTrackingSessionField();
+			Thread.sleep(3000);
+			optionAfterselect();
+			Thread.sleep(3000);
+			ruledelivryafterinput();
+			Thread.sleep(3000);
+			ruleafterinput2(); 
+			ruledays();
+			Thread.sleep(2000);
+		}
+			if(touchpointType.contentEquals("sms")){
+				System.out.println("inside sms");
+				rulessenderid();
+				Thread.sleep(2000);
+				addresssprule();
+
+				Thread.sleep(2000);
+				rulerouteid();
+				Thread.sleep(2000);
+				ruleroute();
+				Thread.sleep(2000);
+				
+	   }
+			rulessenderid2();
+			Thread.sleep(2000);
+			addresssprule2();
+			Thread.sleep(2000);
+			rulerouteid2();
+			Thread.sleep(2000);
+			ruleroute2();
+			clickPorogramProceedButton();
+			
+			
+			// same path for both program and rule thats why used this fns here//
+			Thread.sleep(2000);
+//			programschstart(); 
+//			prmshcselectnow();
+			Thread.sleep(2000);
+			Calendar rightNow =Calendar.getInstance();
+	    	String mn = "";
+	    	if(rightNow.get(Calendar.MONTH)+1<9) {
+	    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+	    	}
+	    	else 
+	    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+			String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+	    	int hours = rightNow.get(Calendar.HOUR);
+	      	 int min = rightNow.get(Calendar.MINUTE);
+	      	 int am_pm = rightNow.get(Calendar.AM_PM);
+	      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+	      	 int year = rightNow.get(Calendar.YEAR);
+	      	 int month = rightNow.get(Calendar.MONTH)+1;
+	      	 min+=2;
+	      	 int rem = min%5;
+	      	 rem = 5-rem;
+	      	 min+=rem;
+	      	 if(min>59){
+	      		 min-=60;
+	      		 hours++;
+	      	 }
+	      	prmrefreshat();
+	      	 Actions builder = new Actions(driver);
+	       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+	    	 Thread.sleep(1000);
+	    	 builder.moveToElement(num1).click().build().perform();
+	    	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+	    	 Thread.sleep(1000);
+	    	 builder.moveToElement(num1).click().build().perform();
+	      	if(am_pm==0)
+	      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+	       else
+	      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+	      	clickRefreshAtOkButton();
+//			programactivatebtn();
+//			programconfirmactivateyes();
+	      	jswait.loadClick("//paper-button[contains(.,'Save')][2]");
+	      	Thread.sleep(2000);
+	      	jswait.loadClick("(//paper-button[contains(.,'Yes')][1])[1]");
+	      	
+	      	if(jswait.checkVisibility("//span[contains(.,'Changes have been saved and will be active on the next refresh cycle.  If all intended changes are done, click Close else click Continue.')]")==true) {
+	      		Thread.sleep(2000);
+	      		jswait.loadClick("//paper-button[contains(.,'Close')]");
+	      	} 
+			System.out.println("test");
+			Thread.sleep(2000);
+			commonObjects.clickOptionsIcon();
+			jswait.loadClick("//paper-item[contains(.,'View')]");
+			
+			
+			
+		}
+	   public void selectSavedSegmentSelectorField(String condition) throws Exception {
+			
+			jswait.loadClick(savedSegmentSelectorField);
+			jswait.loadClick("//paper-item[contains(.,'"+condition+"')]");
+		}
+	   public void clickOnSavedSegments() throws InterruptedException {
+			
+			jswait.loadClick(savedSegmentRadioButtion);
+		}
+	 
+	 
+	   public void editingTheprogramruleTargetConditionDetails(String condition) throws Exception {
+			TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+//			commonObjects.clickOptionsIcon();
+//			targetConditionObjects.clickTargetConditionDeletet();
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-button[contains(.,'Create Condition')]");
+			Thread.sleep(2000);
+			if(condition.contains("conditionForOROperation")) {
+				commonObjects.clickOptionsIcon();
+				targetConditionObjects.clickTargetConditionDeletet();
+			}
+			if(condition.contains("segmentAgeGT40")) {
+				clickOnSavedSegments();
+				selectSavedSegmentSelectorField(condition);
+			}else if(condition.equals("SegmentForMoreThanTenConditions")) {
+				clickOnSavedSegments();
+				selectSavedSegmentSelectorField(condition);
+			}else if(condition.equals("SegmentForMoreThanTenConditionsOR")) {
+			     clickOnSavedSegments();
+				selectSavedSegmentSelectorField(condition);
+			}else { 
+				targetConditionObjects.clickBasicTargetCondition(condition);
+				
+			}
+				
+			
+			
+		}
+	   
+	   public void verifyRuleeditviewFromSheet(String name,String product) throws java.lang.Exception {
+			Thread.sleep(3000);
+			jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");
+			Thread.sleep(2000);
+			System.out.println(name);
+//			commonObjects.clickOptionsIcon();
+//			commonObjects.filterName(name);
+			Thread.sleep(2000);
+			commonObjects.clickOptionsIcon();
+			jswait.loadClick("//paper-item[contains(.,'View')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Target Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'selenium_list')]");
+			
+			
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Offer Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'"+product+"')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Delivery Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Schedule Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			
+			
+		}
+	   
+	   public void verifyRuleviewaftereditFromSheet(String name,String product) throws java.lang.Exception {
+			Thread.sleep(3000);
+			//jswait.waitUntil("//h3[contains(.,'Editedautorule2794')]");
+			Thread.sleep(2000);
+			System.out.println(name);
+//			commonObjects.clickOptionsIcon();
+//			commonObjects.filterName(name);
+			Thread.sleep(2000);
+//			commonObjects.clickOptionsIcon();
+			//jswait.loadClick("//paper-item[contains(.,'View')]");
+			Thread.sleep(2000);
+			System.out.println("inside rules view");
+			jswait.loadClick("//h4[contains(.,'Target Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'selenium_list')]");
+			Thread.sleep(2000);
+			//----------------------
+			
+			
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Age_q11')]//..//field-simple[contains(.,'is greater than')]//span[contains(.,'24')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Boolean_q11')]//..//field-simple[contains(.,'')]//span[contains(.,'Yes')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Languages_q11')]//..//field-list[contains(.,'matches any of')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//usage-metric[contains(.,'Usage Metrics')]//b[contains(.,'Selenium Usage Metric_q11')]//..//..//field-simple[contains(.,'is greater than')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//usage-metric[contains(.,'Usage Metrics')]//b[contains(.,'Selenium_Metric Shared_q11')]//..//..//field-simple[contains(.,'is greater than')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//fixed-segment[contains(.,' is subscribed')]//b[contains(.,'selenium_list_shared')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//paper-card[contains(.,'All events before')]//target-event[contains(.,'This event has not occured.')]//b[contains(.,'Customer was sent the trial message')]//..//span[contains(.,'And')]//..//b[contains(.,'Recency:')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//div[contains(.,'All events before')]//b[contains(.,'Customer was eligible for Offer')]//..//span[contains(.,'And')]//..//b[contains(.,'Entirely during the time period:')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//paper-card[contains(.,'All events before')]//target-event[contains(.,'This event occured.')]//..//b[contains(.,'Selenium event_q11')]//..//span[contains(.,'And')]//..//field-date-part-date[contains(.,'now (target time')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//fixed-segment[contains(.,' is subscribed')]//b[contains(.,'selenium_list_target')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//profile-field[contains(.,'Customer Profile Info')]//..//b[contains(.,'Target Group_q11')]//..//field-simple[contains(.,'is')]//..//span[contains(.,'10')]");
+//			Thread.sleep(2000);
+			
+			
+			
+			jswait.loadClick("//h4[contains(.,'Offer Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'"+product+"')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Delivery Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
+			Thread.sleep(2000);
+			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//h4[contains(.,'Schedule Details')]//following::iron-icon[2]");
+			Thread.sleep(2000);
+			
+			
+		}
+	   public void verifyTheprogramTargetConditionDetails(String segmentCondition) throws InterruptedException {
+			
+			Thread.sleep(2000);
+			if(segmentCondition.contentEquals("customerWasSentTheTrialMessage")) {
+			Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));
+			
+			}else if(segmentCondition.contentEquals("digitalPersonaGT15")) {
+				Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+DIGITAL_PERSONA_FIELD+"')]"));
+				
+			}else if(segmentCondition.contentEquals("customerDemographicsGT25")) {
+				Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+DEMOGRAPHICS_FIELD+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("learnedBehaviourGT35")) {
+				Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+LEARNED_BEHAVIOR_FIELD+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("analyticalScoresGT45")) {
+				Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("digitalEngagementGT235")) {
+				Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+DIGITAL_ENGAGEMENT_FIELD+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("customerLocationInsightsGT5")) {
+				Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+LOCATION_PROFILE_FIELD+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("customerList")) {
+				Assert.assertTrue(jswait.checkVisibility("//fixed-segment//b[contains(.,'"+BASE_LIST+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("discoveredClusters200")) {
+				Assert.assertTrue(jswait.checkVisibility("//fixed-segment//b[contains(.,'"+SELENIUM_DISCOVERED_CLUSTERS_LIST+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("customerDrivenEvent")) {
+				Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("usageMetric")) {
+				Assert.assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'"+SELENIUM_USAGE_METRIC+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("eventCounts")) {
+				Assert.assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'"+SELENIUM_EVENT_COUNTS+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("revenueMetric")) {
+				Assert.assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'"+SELENIUM_REVENUE_METRIC+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("IMEventsOfferAccepted")) {
+				Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Offer accepted')]"));	
+				
+			}else if(segmentCondition.contentEquals("IMEventsCustomerCareUsage")) {
+				Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer Care Usage')]"));	
+				
+			}else if(segmentCondition.contentEquals("customerDeviceInfo")) {
+				Assert.assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'"+DEVICE_INFO_FIELD+"')]"));	
+				
+			}else if(segmentCondition.contentEquals("segmentAgeGT40")) {
+				Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Segment Name')]/..//p[contains(.,'segmentAgeGT40')]"));	
+				
+			}else if(segmentCondition.contentEquals("customerWasSentTheTrialMessageNOtOccurred")) {
+				Assert.assertTrue(jswait.checkVisibility("//target-event[contains(.,'This event has not occured')]"));
+				Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));
+				
+			}else if(segmentCondition.contentEquals("customerDrivenEventNotOccurred")) {
+				Assert.assertTrue(jswait.checkVisibility("//target-event[contains(.,'This event has not occured')]"));
+				Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]"));	
+			}
+			else if(segmentCondition.contentEquals("conditionForANDOperation")||segmentCondition.contentEquals("conditionForOROperation")) {
+				Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));	
+				Assert.assertTrue(jswait.checkVisibility("//target-event//b[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]"));
+				if(segmentCondition.contentEquals("conditionForOROperation")) {
+				Assert.assertTrue(jswait.checkVisibility("//paper-card[@class='mainCard display-target style-scope targets-display x-scope paper-card-0']//div[contains(.,'Or')]"));
+				}
+				Assert.assertTrue(jswait.checkVisibility("//paper-card[@class='mainCard display-target style-scope targets-display x-scope paper-card-0']//div[contains(.,'And')]"));
+				
+			}else if(segmentCondition.contentEquals("sharedMetricOtherPartner")) {
+				Assert.assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'"+SELENIUM_SHARED_METRIC+"')]"));	
+					
+			}else if(segmentCondition.contentEquals("SegmentForMoreThanTenConditions")) {
+				Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Segment Name')]/..//p[contains(.,'SegmentForMoreThanTenConditions')]"));	
+				
+			}else if(segmentCondition.contentEquals("SharedcustomerList")) {
+				
+				Assert.assertTrue(jswait.checkVisibility("//fixed-segment//b[contains(.,'"+SELENIUM_SHARED_List+"')]"));
+				
+			}else {
+				Assert.assertTrue(false);
+			}
+		}
+	 
+	   public void verifyRuletargetselectionaftereditFromSheet(String condition,String name,String product) throws java.lang.Exception {
+			commonObjects.clickOptionsIcon();
+			jswait.loadClick("//paper-item[contains(.,'Edit')]");
+			Thread.sleep(2000);
+			if(condition.contains("Create")) {
+			driver.findElement(By.xpath("/html//form[@id='createSegment']//paper-radio-group[@role='radiogroup']/paper-radio-button[2]//div[@id='onRadio']")).isEnabled();
+			Thread.sleep(2000);
+			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Age_q11')]//..//field-simple[contains(.,'is greater than')]//span[contains(.,'18')]");
+			}else if(condition.contains("SavedSegments")) {
+				
+				System.out.println("saved segments");
+				
+				String savedSegment=commonObjects.getTextFormTextField(savedSegmentSelectorField);
+				System.out.println(savedSegment);
+				Thread.sleep(2000);
+				Assert.assertEquals("SegmentForMoreThanTenConditions",savedSegment);
+				
+				
+			}
+			
+			
+
+			
+		}
+	 
+	 
 	
 }
