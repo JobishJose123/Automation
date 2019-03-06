@@ -29,6 +29,7 @@ import baseClasses.CalenderUtility;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.Navigation;
 import baseClasses.RandomNameGenerator;
 import baseClasses.ShellExecuter;
 import baseClasses.TimeoutImpl;
@@ -2750,7 +2751,7 @@ public class BroadcastSteps extends Init {
 		String statusOfBc = broadcastPageObjects.getTopBcStatus();
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
-		while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(15)) {
+		while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(20)) {
 			statusOfBc = broadcastPageObjects.getTopBcStatus();
 			System.out.println(statusOfBc);
 			Thread.sleep(3000);
@@ -3613,6 +3614,26 @@ public class BroadcastSteps extends Init {
 	public void bc_Settings_page_validation() throws Throwable {
 
 	}
+	
+	@Then("^click on Archive from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void click_on_Archive_from_workbook_and_sheet(String workbook, String sheet) throws Throwable {
+		eh.setExcelFile(workbook, sheet);
+		String name = eh.getCell(1, 0).toString();
+		commonObjects.filterBCName(sheet, name);
+		commonObjects.clickBCOptionsIcon(sheet);
+		commonObjects.clickArchiveOption();
+	}
+	
+	@Then("^click on delete from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void click_on_delete_from_workbook_and_sheet(String workbook, String sheet) throws Throwable {
+		eh.setExcelFile(workbook, sheet);
+		String name = eh.getCell(1, 0).toString();
+		commonObjects.filterBCName(sheet, name);
+		commonObjects.clickBCOptionsIcon(sheet);
+		commonObjects.clickDeleteOption();
+	}
+
+
 
 	@Then("^click on BC edit button from workbook \"([^\"]*)\" sheet \"([^\"]*)\"$")
 	public void click_on_BC_edit_button_from_workbook_sheet(String workbook, String sheet) throws Throwable {
@@ -3642,10 +3663,18 @@ public class BroadcastSteps extends Init {
 	@Then("^editing the BC from sheet \"([^\"]*)\" basic details With edit data from sheet \"([^\"]*)\"$")
 	public void editing_the_BC_from_sheet_basic_details_With_edit_data_from_sheet(String oneoffsheet,
 			String oneoffeditsheet) throws Throwable {
-		eh.setExcelFile("bcInputData", oneoffsheet);
-		String bcName = (eh.getCell(1, 0).toString()) + "Edited";
-		eh.setExcelFile("bcInputDataForEdit", oneoffeditsheet);
-		eh.setCell(1, 0, bcName);
+		String bcName="";
+		if(oneoffsheet.contains("Edit")||oneoffsheet.contains("seedingTriggerableRecurringBCEd")) {
+			eh.setExcelFile("bcInputDataForEdit", oneoffeditsheet);
+			 bcName = (eh.getCell(1, 0).toString()) + "Edited";
+			eh.setCell(1, 0, bcName);
+		}else {
+			eh.setExcelFile("bcInputData", oneoffsheet);
+			 bcName = (eh.getCell(1, 0).toString()) + "Edited";
+			 eh.setExcelFile("bcInputDataForEdit", oneoffeditsheet);
+			eh.setCell(1, 0, bcName);
+		}
+				
 		broadcastPageObjects.editingTheBcBasicDeatils(bcName, oneoffeditsheet);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.clickProceedButton();
@@ -3716,10 +3745,14 @@ public class BroadcastSteps extends Init {
 		Thread.sleep(2000);
 		if (targetSelection.contains("None")) {
 			broadcastPageObjects.clickTargetConditionNoneOption();
-
+			
 		} else if (targetSelection.contains("Create")) {
 
 			broadcastPageObjects.clickcreateTargetCondition();
+			TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+			commonObjects.clickOptionsIcon();
+			targetConditionObjects.clickTargetConditionDeletet();
+			targetConditionObjects.clickBasicTargetConditionWithAge();
 
 		} else if (targetSelection.contains("SavedSegments")) {
 			broadcastPageObjects.clickOnSavedSegments();
@@ -3829,15 +3862,35 @@ public class BroadcastSteps extends Init {
 	public void verify_the_Child_BC_count_and_recurring_dates_from_workbook_in_sheet(String workbook, String sheet) throws Throwable {
 		eh.setExcelFile(workbook, sheet);
 		String bcName = eh.getCell(1, 0).toString();
-		commonObjects.filterName(bcName);
-		Thread.sleep(2000);
+		//Navigation navigation=new Navigation();
+		//navigation.refreshPage();
+		Thread.sleep(8000);
+		
 		String output = "";
+		List<WebElement> recurChilds=null;
+		
 
-		List<WebElement> recurChilds = driver.findElements(By.xpath(
-				"//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row//vaadin-grid-table-cell[1]//vaadin-grid-cell-content[contains(.,'"
-						+ bcName + "')]/../..//vaadin-grid-table-cell[3]//vaadin-grid-cell-content"));
+		if (sheet.contains("seeding")) {
+			Thread.sleep(8000);
+			commonObjects.filterName(bcName+"_re");
+			Thread.sleep(2000);
+			commonObjects.toggleAutoRefresh();
+			Thread.sleep(1000);
+			commonObjects.toggleAutoRefresh();
+			Thread.sleep(1000);
+			recurChilds = driver.findElements(By.xpath("//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row//vaadin-grid-table-cell[1]//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[3]//vaadin-grid-cell-content"));
 
-		System.out.println(recurChilds.size());
+			System.out.println("Size of seedingReward recur bcs" + recurChilds.size());
+		} else {
+			commonObjects.filterName(bcName);
+			Thread.sleep(2000);
+			recurChilds = driver.findElements(By.xpath(
+					"//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row//vaadin-grid-table-cell[1]//vaadin-grid-cell-content[contains(.,'"
+							+ bcName + "')]/../..//vaadin-grid-table-cell[3]//vaadin-grid-cell-content"));
+
+			System.out.println("size of recurring bcs" + recurChilds.size());
+		}
+
 
 		ArrayList<String> getData = new ArrayList<String>();
 		String getTextFromElement;
@@ -3846,7 +3899,7 @@ public class BroadcastSteps extends Init {
 			getTextFromElement=webElement.getText();
 			getData.add(getTextFromElement);	
 		}
-		 Collections.sort(getData);
+//		 Collections.sort(getData);
 		System.out.println("getdatasort" + getData);
 
 		String dates = eh.getCell(1, 11).toString();
@@ -3861,13 +3914,33 @@ public class BroadcastSteps extends Init {
 		//System.out.println(gh);
 		c.setTime(gh); 		
 		
+//		for (int i=0;i<getData.size();i++) {
+//			output = df.format(c.getTime());
+//			System.out.println("before list"+getData.get(i));
+//			System.out.println("before"+output);
+//			if((getData.get(i)).equalsIgnoreCase(output)){
+//			Assert.assertTrue(true);
+//			}else {
+//				Assert.assertTrue("NO child BC spawn",false);
+//			}
+//			c.add(Calendar.DATE, recurringDays);
+//		}
+		int recurringDays1=recurringDays*2;
+		c.add(Calendar.DATE, recurringDays1);
+		//System.out.println(Calendar.DATE);
 		for (int i=0;i<getData.size();i++) {
 			output = df.format(c.getTime());
 			System.out.println("before list"+getData.get(i));
 			System.out.println("before"+output);
-			Assert.assertTrue((getData.get(i)).equalsIgnoreCase(output));
-			c.add(Calendar.DATE, recurringDays);
+			if((getData.get(i)).equalsIgnoreCase(output)){
+			Assert.assertTrue(true);
+			}else {
+				Assert.assertTrue("NO child BC spawn",false);
+			}
+			c.add(Calendar.DATE, -recurringDays);
 		}
+		
+		
 	}
 
 	
@@ -3888,13 +3961,24 @@ public class BroadcastSteps extends Init {
 		Thread.sleep(3000);
 		eM.setExcelFile(workbook, sheet);
 		String bcName=eM.getCell(1,0).toString();
-		eM.setCell(1,0,bcName+"_Copy");
+		//eM.setCell(1, 0, bcName+"_Copy");
+			if(sheet.contains("seedingTriggerableRecurringBC")) {
+			eh.setExcelFile("bcInputDataForEdit", "seedingTriggerableRecurringBCEd");
+			eh.setCell(1,0,bcName+"_Copy");
+		}else {
+			eh.setExcelFile("bcInputDataForEdit",sheet+"Edit");
+			eh.setCell(1,0,bcName+"_Copy");
+		}
+		
 		broadcastPageObjects.clickProceedButton();
 		Thread.sleep(3000);
 		broadcastPageObjects.clickProceedButton();
 		Thread.sleep(3000);
 		broadcastPageObjects.clickProceedButton();
+		
 		Thread.sleep(2000);
+		System.out.println("Delivery tab details entering ...");
+		broadcastPageObjects.editTheDeleveryTabDetails(workbook,sheet);
 		//broadcastPageObjects.clickCreateButton();
 		//Thread.sleep(2000);
 		//broadcastPageObjects.clickSaveButton();
@@ -3916,17 +4000,37 @@ public class BroadcastSteps extends Init {
 		Assert.assertTrue(
 				jswait.checkVisibility("//p[contains(.,'Offer Name')]/..//p[contains(.,'" + offerName + "')]"));
 		Thread.sleep(2000);
-		broadcastPageObjects.verifyDeleveryTabDetails(workbook,bcSheet);
+		if (workbook.contains("Edit")) {
+			if (bcSheet.contains("seedingTriggerableRecurringBC")) {
+				broadcastPageObjects.verifyDeleveryTabDetails(workbook, bcSheet + "Ed");
+			} else {
+				broadcastPageObjects.verifyDeleveryTabDetails(workbook, bcSheet + "Edit");
+			}
+		} else {
+			broadcastPageObjects.verifyDeleveryTabDetails(workbook, bcSheet);
+		}
 	}
 	
 	@Then("^click on toggleAutoRefresh$")
 	public void click_on_toggleAutoRefresh() throws Throwable {
 		commonObjects.toggleAutoRefresh();
 	}
-//	@Then("^click on toggleAutoRefresh$")
-//	public void click_on_toggleAutoRefresh() throws Throwable {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new PendingException();
-//	}
+
+	
+	
+
+@Then("^Save bcInputData data to registrationListInputData \"([^\"]*)\" from \"([^\"]*)\" with condition (.*)$")
+public void save_bcInputData_data_to_registrationListInputData_from_with_condition_customerWasSentTheTrialMessage(String registraionSheet, String bcSheet,String condition) throws Throwable {
+	 eh.setExcelFile("bcInputData", bcSheet);
+	   
+	    String BCname=eh.getCell(1,0).toString();
+	    BCname=BCname+"-"+condition;
+	     eM.setExcelFile("registrationListInputData","WithOutDNC");
+	     int rows=eM.numRows();
+	    int cols=eM.numCols();
+	    eM.addCells(rows,0,BCname);	    
+	   System.out.println(eM.getCell(rows, 0).toString());
+}
+
 	
 }

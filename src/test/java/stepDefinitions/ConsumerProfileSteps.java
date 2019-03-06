@@ -149,6 +149,11 @@ public class ConsumerProfileSteps extends Init{
 		customerObjects.chooseAllEvents();	
 	}
 	
+	@Then("^choose Acknowledged event$")
+	public void choose_Acknowledged_event() throws Throwable {
+		customerObjects.clickOnAckEventCheckBox();
+	}
+	
 	@Then("^click on apply button$")
 	public void clickApplyButton() throws Exception {
 		
@@ -361,5 +366,22 @@ public class ConsumerProfileSteps extends Init{
 		customerObjects.verifyTrialMessageEventDetailsDynamic(sheet);
 		
 	}
+	
+		
+	@Then("^verify Acknowledged event from BC Sheet \"([^\"]*)\" and \"([^\"]*)\" offer \"([^\"]*)\"$")
+	public void verify_Acknowledged_event_from_BC_Sheet_and_offer(String bcSheet, String campaignSheet, String offerSheet) throws Throwable {
+	   if(bcSheet.contains("Edit")||bcSheet.contains("seedingTriggerableRecurringBCEd")) {
+		eh.setExcelFile("bcInputDataForEdit", bcSheet);
+	 }else {
+		 eh.setExcelFile("bcInputData", bcSheet);
+	 }
+	   String bcName=eh.getCell(1, 0).toString();
+	   eh.setExcelFile("campaignInputData", campaignSheet);
+	   String CampaignName=eh.getCell(1,0).toString();
+	   eh.setExcelFile("offerInputData", offerSheet);
+	   String offerName=eh.getCell(1, 0).toString();
+	   customerObjects. verifyAcknowledgedEvent(bcName,CampaignName,offerName);
+	}
+	
    
 }

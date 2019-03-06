@@ -104,7 +104,16 @@ String file = "";
     	}
 		return colNum;
     }
-    
+ 
+    public void addCells(int r, int c, String Data) throws Exception {
+    	Row row = sh.createRow(r);
+    	Cell cell = row.createCell(c);
+    	cell.getCellTypeEnum();
+    	cell.setCellValue(Data);
+    	FileOutputStream outFile =new FileOutputStream(new File(file));  //Creating new file
+        workbook.write(outFile);   //printing the data in the new file
+        outFile.close(); 
+    }
     public static void main(String args[]) {
     	
     	ExcelHelper eh = new ExcelHelper();

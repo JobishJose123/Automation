@@ -111,6 +111,8 @@ public class CommonObjects extends Init {
 	private WebElement paperButtonOk;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement optionsEdit;
+	@FindBy(xpath = "//paper-item[contains(.,'Archive')]")
+	private WebElement optionsArchive;
 	@FindBy(xpath = "//paper-item[contains(.,'Duplicate')]")
 	private WebElement optionsDuplicate;
 	@FindBy(xpath = "//paper-item[contains(.,'Copy')]")
@@ -135,7 +137,7 @@ public class CommonObjects extends Init {
 	private WebElement createNewCustomerLocationInsightButton;
 	@FindBy(xpath="//paper-button[text()='Create']")
 	private WebElement createNewUsageMetricButton;
-
+	
 	@FindBy(xpath = "//*[@id='sym2']")
 	private WebElement offers;
 	@FindBy(xpath = ".//*[@id='items']/div[1]")
@@ -351,6 +353,10 @@ public void clickActivateOption() throws Throwable {
 
 	public void clickEditOption() throws InterruptedException {
 		jswait.loadClick(optionsEdit);
+	}
+	
+	public void clickArchiveOption() throws InterruptedException {
+		jswait.loadClick(optionsArchive); 
 	}
 
 	public void clickDuplicateOption() throws InterruptedException {

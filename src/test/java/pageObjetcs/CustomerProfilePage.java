@@ -147,6 +147,8 @@ public class CustomerProfilePage extends Init{
 	private WebElement eventsTable;
 	@FindBy(xpath="//search-events[@class='style-scope consumer-events x-scope search-events-0']/div[@class='layout horizontal style-scope search-events']/paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab/div[contains(.,'Last 90 Days')]")
 	private WebElement SearchEvents90;
+	@FindBy(xpath="//search-events[@class='style-scope consumer-events x-scope search-events-0']/div[@class='layout horizontal style-scope search-events']/paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab/div[contains(.,'Last 7 Days')]")
+	private WebElement SearchEvents7;
 	@FindBy(xpath=".//customer-support//search-events//paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab/div[contains(.,'Last 90 Days')]")
 	private WebElement customerSupportSearchEvents90;
 	
@@ -310,6 +312,11 @@ public class CustomerProfilePage extends Init{
 			return true;
 		}
 		else return false;
+	}
+	
+	public void searchEventsDynammically(String eventTime) throws Exception {
+		
+		jswait.loadClick("//search-events[@class='style-scope consumer-events x-scope search-events-0']/div[@class='layout horizontal style-scope search-events']/paper-tabs[@role='tablist']/div[@id='tabsContainer']/div[@id='tabsContent']/paper-tab/div[contains(.,'"+eventTime+"')]");
 	}
 	
  public void enterCustomerNumber(String number) throws InterruptedException {
@@ -521,9 +528,46 @@ public class CustomerProfilePage extends Init{
 	   assertTrue(offerLabel.isDisplayed());
 	   assertTrue(broadcastLabel.isDisplayed());
 	   assertTrue(priceLabel.isDisplayed());
+	   Thread.sleep(4000);
 	   
 	   
-	   
+ }
+ 
+ public void verifyAcknowledgedEvent(String bcName,String campaignName,String OfferName) throws Exception{
+	 
+	 searchEventsDynammically("Last 7 Days");
+	 Thread.sleep(3000);
+	List<WebElement> ackEvents = driver.findElements(By.xpath("//data-table-row//data-table-cell[4]//span[contains(.,'Campaign: "+campaignName+"')]"));
+	Thread.sleep(1000);
+	System.out.println(ackEvents.size());
+	 int count=1;
+	 
+	for (WebElement webElement : ackEvents) {
+		if((webElement.getText()).contains(campaignName)) {
+		System.out.println(webElement.getText());
+		try { 
+		jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Acknowledged'])["+count+"]");
+		 System.out.println("");
+	        jswait.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'"+OfferName+"')]");
+			boolean booledn = jswait.checkVisibility("//label[contains(.,'Broadcast')]/..//label[contains(.,'"+bcName+"')]");
+			System.out.println(booledn);
+			if(booledn==true) {
+				Assert.assertTrue(true);
+			}else {
+				System.out.println(bcName);
+			}
+		 }catch (Exception e) {
+			
+		}
+		 Thread.sleep(2000);
+		 count++;
+		}
+	}
+	 
+ }
+ 
+ public void clickOnAckEventCheckBox() throws InterruptedException {
+	  jswait.loadClick("(//div//paper-checkbox//div[@id='checkboxLabel'][contains(.,'Acknowledged')])[1]");
  }
  
  public void addMaxAttributes() throws Exception {

@@ -2659,22 +2659,30 @@ if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTrigge
 	public void verifyDeleveryTabDetails(String workbook, String sheet) throws InterruptedException {
 
 		jswait.loadClick(deliveryDetailsBC);
-		
+
 		eh.setExcelFile(workbook, sheet);
-		String Start_Date=eh.getCell(1, 11).toString();
+		String Start_Date = eh.getCell(1, 11).toString();
 		System.out.println(Start_Date);
-		String bcType=eh.getCell(1, 7).toString();
-		  if ((eh.getCell(1, 7).toString()).contains("recurring")||(eh.getCell(1, 7).toString()).contentEquals("seedingRecurring") ||
-				  (eh.getCell(1, 7).toString()).contentEquals("seedingTriggerableRecurringBC"))
-				  { Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'"+Start_Date+"')]")); 
-				  }
-		  else if(bcType.contains("one-off")||bcType.contains("seedingTriggerable")) {
-					 Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'"+Start_Date+"')]"));
-			  
-		  }else {
-			  Assert.assertTrue(false,"Delevery date miss match");
-		  }
-		
+		String bcType = eh.getCell(1, 7).toString();
+
+		if ((eh.getCell(1, 7).toString()).contains("recurring")
+				|| (eh.getCell(1, 7).toString()).contentEquals("seedingRecurring")
+				|| (eh.getCell(1, 7).toString()).contentEquals("seedingTriggerableRecurringBC")) {
+			String rucurrence = (eh.getCell(1, 8).toString()).substring(0, 1);
+			Assert.assertTrue(
+					jswait.checkVisibility("//p[contains(.,'Start Date')]/..//p[contains(.,'" + Start_Date + "')]"));
+			Assert.assertTrue(jswait.checkVisibility(
+					"//p[contains(.,'Recurrence Pattern')]/..//p//a[contains(.,'Recur every')]/..//a[contains(.,'"
+							+ rucurrence + "')]"));
+		} else if (bcType.contains("one-off") || bcType.contains("seedingTriggerable"))// ||bcType.contains("Triggerone-offBC")
+		{
+			Assert.assertTrue(
+					jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'" + Start_Date + "')]"));
+
+		} else {
+			Assert.assertTrue(false, "Delevery date miss match");
+		}
+
 	}
 	
 
@@ -2757,6 +2765,10 @@ if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTrigge
 		}else if(segmentCondition.contentEquals("SharedcustomerList")) {
 			
 			Assert.assertTrue(jswait.checkVisibility("//fixed-segment//b[contains(.,'"+SELENIUM_SHARED_List+"')]"));
+			
+		}else if(segmentCondition.contentEquals("targetGroup")) {
+			
+			Assert.assertTrue(jswait.checkVisibility("//profile-field[contains(.,'Customer Profile Info')]/..//profile-field//b[contains(.,'Target Group_q11')]"));
 			
 		}else {
 			Assert.assertTrue(false,"NO target condition selected ");
