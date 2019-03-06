@@ -159,10 +159,7 @@ Copy and Editing all types of Braodcast Migration
     Then save bc
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then verify the BC expiry in BC View After hours "2"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then navigate to "One-time" broadcasts
+    
     
        
 #    ************************ Trigger OneOFF BC************** 
@@ -320,6 +317,10 @@ Verify BC after edit with new Saved segment TriggerOneoff BC
     Then save bc
     Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerOneoffEdit"
     Then verify the BC expiry in BC View After hours "2"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "One-time" broadcasts
     Then click on delete from workbook "bcInputDataForEdit" and sheet "one-offBCEdit"
     
      #    ************************ Seeding OneOFF BC**************   
