@@ -98,6 +98,9 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'sample_flow')]")
 	private WebElement rewardTypeSampleFlowSelector;
 	
+	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+	private WebElement rewardTypesel_reward;
+	
 	
 	@FindBy(xpath = "//label[contains(@class,'style-scope paper-input') and contains(text(),'Source')]/..//input")
 	private WebElement trackSourceSelector;
@@ -1169,6 +1172,12 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(rewardTypeAnySelector);
 	}
 	
+	
+	
+	public void clickrewardTypesel_reward() throws InterruptedException {
+		jswait.loadClick(rewardTypesel_reward);
+	}
+	
 	public void clickrewardTypeSampleFlowSelector() throws InterruptedException {
 		jswait.loadClick(rewardTypeSampleFlowSelector);
 	}
@@ -1520,17 +1529,21 @@ public class OfferPageObjects extends Init {
 				if (eh.getCell(1, 2).toString().contains("Seeding")) {
 					clickRewardTypeInputField();
 					//clickRewardTypeAny();
-					clickrewardTypeSampleFlowSelector();
+					//clickrewardTypeSampleFlowSelector();
+					clickrewardTypesel_reward();
 				}else if(eh.getCell(1, 2).toString().contains("Recharge")) {
 					clickRewardFirstRuleAdButton();
 					clickRewardTypeInputField();
-					clickrewardTypeSampleFlowSelector();
-					enterSuccessMessage("Success from SampleFlow");
-					enterFailureMessage("Failure from SampleFlow");
+					//clickrewardTypeSampleFlowSelector();
+					clickrewardTypesel_reward();
+					
+					enterSuccessMessage("Success from Selenium");
+					enterFailureMessage("Failure from Selenium");
 				}else {
 					clickRewardFirstRuleAdButton();
 					clickRewardTypeInputField();
-					clickRewardTypeAny();
+					//clickRewardTypeAny();
+					clickrewardTypesel_reward();
 					enterSuccessMessage("Success from Selenium");
 					enterFailureMessage("Failure from Selenium");
 				}
