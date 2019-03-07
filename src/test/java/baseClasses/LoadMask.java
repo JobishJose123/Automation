@@ -18,7 +18,7 @@ public class LoadMask extends Init{
 		}
 		return loadMaskStatus;
 	}
-	public void waitForLoadMask() throws InterruptedException {
+	public void waitForLoadMask() throws InterruptedException {     //wait until the loadMask is invisible
 		while(getLoadMaskStatus().contains("block")) {
 			 Thread.sleep(1000);
 		}

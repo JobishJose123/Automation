@@ -315,9 +315,9 @@ Feature: approval workflow
     #Then approve Broadcast by selenium user
     
      
-  @NX-6357 @initBrowser 
+  @NX-6357 @initBrowser @closeBrowser
   Scenario: Verify creation of BC without approval flow but not for campaign
-    Given login with selenium user
+    Given login
     Then navigate to configuration management
     Then navigate to campaign categories
     Then create new campaign category from sheet "CampaignCategory"
@@ -329,20 +329,21 @@ Feature: approval workflow
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then Logout from Neon application
-     Then login with selenium user
-       Then click on notification bell
-    Then click on view all notifications
-    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
-    Then approve campaign by selenium user
-    Then Logout from Neon application
-    Then login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
+    #Then Logout from Neon application
+   #Then login with selenium user
+     #Then click on notification bell
+    #Then click on view all notifications
+    Then wait for 1 minutes
+    #Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    #Then approve campaign by selenium user
+    #Then Logout from Neon application
+    #Then login
+    #Then navigate to precision marketer
+    #Then navigate to life cycle marketing
+    #Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeSMS"
     Then Request for bc approval
     Then Logout from Neon application
     Then login with selenium user
@@ -352,7 +353,7 @@ Feature: approval workflow
     Then naigate to "campaignBC" campaign view broadcasts
     Then approve Broadcast by selenium user
 
-  @NX-6363 @initBrowser 
+  @NX-6363 @initBrowser @closeBrowser
   Scenario: Verify whether status of BC get changed to Waiting for Approval once it is sent for approval
     Given login
     Then navigate to configuration management
@@ -367,10 +368,27 @@ Feature: approval workflow
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet for approval "campaignBC" with catalog "defaultCatalog"
     Then verify campaign status waiting for approval from sheet "campaignBC" of file "campaignInputData"
+    Then Logout from Neon application
+    Then login with selenium user
+    Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
+    Then approve campaign by selenium user
+    Then Logout from Neon application
+    Then login
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeSMS"
+    Then Request for bc approval
+    Then verify bc status changed to waitinf for approval from sheet "one-offBC" of file "bcInputData" 
+    
     
 
-  #For the following tests, we used selenium user and shinu.rajan as approvers. Going forward need to change implementation to read users from excel
-  @NX-6335 @initBrowser 
+  
+  @NX-6335 @initBrowser @closeBrowser
   Scenario: Verify Campaign creation with approval rule flow
     Given login
     Then navigate to configuration management
@@ -389,9 +407,10 @@ Feature: approval workflow
     Then login with selenium user
     Then click on review button
     Then verify approve button displayed
+    Then click on approve campaign
     Then Logout from Neon application
     Then wait for 1 minutes
-    Then login with the username "joel.jose@flytxt.com" and password "flytxt"
+    Then login with user from sheet "user2" of file "workApproval"
     Then click on review button
     Then verify approve and activate button displayed
     Then Logout from Neon application
@@ -451,7 +470,7 @@ Feature: approval workflow
     Then check previous step and pass this
     Then pass next scenario based on this step
     
-   @NX-6381 @initBrowser 
+   @NX-6381 @initBrowser @closeBrowser
   Scenario: Verify the status of BC when rejected
   Given login
     Then navigate to configuration management
@@ -481,7 +500,7 @@ Feature: approval workflow
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeSMS"
     Then Request for bc approval
     Then Logout from Neon application
     Then login with user from sheet "user1" of file "workApproval"
@@ -529,7 +548,7 @@ Feature: approval workflow
     Then click on view all notifications
     Then verify approved message of campaign from the sheet "campaignBC" of file "campaignInputData"
     
-  @NX-6387 @initBrowser 
+  @NX-6387 @initBrowser
   Scenario: Verify whether BC get activate only after atleast  1 approver from all configured levels approves the BC
   Given login
     Then navigate to configuration management
@@ -562,6 +581,21 @@ Feature: approval workflow
     Then click on approve campaign
     Then wait for 1 minutes
     Then verify campaign status approved from sheet "campaignBC" of file "campaignInputData"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeSMS"
+    Then Request for bc approval
+    Then Logout from Neon application
+    #Given navigate to environment 
+    Then login with user from sheet "user1" of file "workApproval"
+    #Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+    Then click Review on notification from the sheet "one-offBC" of file "bcInputData"
+    Then click on approve campaign
+    #Then wait for 1 minutes
+    Then verify broadcast status render scheduled from sheet "one-offBC" of file "bcInputData"
+    
     Then pass next scenario based on this step
     
    @NX-6365
@@ -606,7 +640,7 @@ Feature: approval workflow
     Then verify campaign status approved from sheet "campaignBC" of file "campaignInputData"
     
     
-  @NX-6388 @initBrowser 
+  @NX-6388 @initBrowser @closeBrowser
   Scenario: Verify upon approval BC gets moved to Render scheduled
   Given login
     Then navigate to configuration management
@@ -622,7 +656,7 @@ Feature: approval workflow
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeSMS"
     Then Request for bc approval
     Then Logout from Neon application
     #Given navigate to environment 

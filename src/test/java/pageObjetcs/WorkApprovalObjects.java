@@ -26,6 +26,7 @@ public class WorkApprovalObjects extends Init{
 	CampaignObjects CampaignObjects=new CampaignObjects();
 	AddExportLocationSteps AddExportLocationSteps=new AddExportLocationSteps();
 	
+	
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -602,15 +603,15 @@ catch(Exception e) {
  	    addApprovalRuleName.clear();
 	    jswait.loadSendKeys(addApprovalRuleName, name);
 	}
-	public void enterLevel1User() throws InterruptedException {
-		
-		jswait.loadSendKeys(addUserField, "selenium.fly");
+	public void enterLevel1User() throws Exception {
+		String user1 = p.getValue("seleniumUser");
+		jswait.loadSendKeys(addUserField, user1);
 		Thread.sleep(2000);
 	}
 	
-	public void enterLevel2User() throws InterruptedException {
-		
-		jswait.loadSendKeys(addUserField, "joel.jose@flytxt.com");
+	public void enterLevel2User() throws Exception {
+		String user2 = p.getValue("user2");
+		jswait.loadSendKeys(addUserField, user2);
 		Thread.sleep(2000);
 	}
 	public void enterCategory() throws InterruptedException {
@@ -631,8 +632,11 @@ catch(Exception e) {
 		Thread.sleep(2000);
 	}
 	
-	public void chooseLevel2User() throws InterruptedException {
-		jswait.loadClick(ruleUserName2);
+	public void chooseLevel2User() throws Exception {
+		String user2 =p.getValue("user2");
+		user2=user2.stripTrailing();
+		System.out.println(user2);
+		jswait.loadClick("//paper-item[contains(.,'"+user2+"')]");
 		Thread.sleep(2000);
 	} 
 	public void clickAddUserNameSave() throws InterruptedException {
@@ -984,6 +988,11 @@ Thread.sleep(5000);
     	}
     	Thread.sleep(2000);
     	
+	}
+	public void verifyBCStatusWaitingForApproval(String bcName) throws Exception{
+		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'Waiting for Approval')]"));
+		Assert.assertTrue(approvalStatus.isDisplayed());
+		
 	}
 	
 }

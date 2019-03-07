@@ -243,5 +243,11 @@ public class workApprovalflow extends Init {
 	public void verify_historyandreview(String sheet) throws Throwable {
 		approvalPageObjects.verifyHistoryandReview(sheet);
 	}
+	@Then("^verify bc status changed to waitinf for approval from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
+	public void verify_bc_status_changed_to_waitinf_for_approval_from_sheet_of_file(String bcsheet, String bcExcelFile) throws Throwable {
+	   eh.setExcelFile(bcExcelFile, bcsheet);
+	   String bcName = (String) eh.getCell(1, 0);
+	   approvalPageObjects.verifyBCStatusWaitingForApproval(bcName);
+	}
 
 }
