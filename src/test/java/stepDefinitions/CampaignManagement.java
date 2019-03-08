@@ -27,6 +27,7 @@ public class CampaignManagement extends Init{
 	public ExcelHelper eM = new ExcelHelper(); 
 	CampaignObjects campaignObjects = new CampaignObjects();
 	CommonObjects commonObjects = new CommonObjects();
+	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	LoginPageObjects loginPage = new LoginPageObjects();
 	WorkApprovalObjects WorkApprovalObjects=new WorkApprovalObjects();
@@ -212,9 +213,10 @@ public class CampaignManagement extends Init{
 	 		commonObjects.clickOptionsIcon();
 	 		campaignObjects.clickEditCampaignOption();
 	 		campaignObjects.editCampaign(name+" Edited", catalog);
-	 		eM.setCell(1, 0, name+" Edited");
+	 		//eM.setCell(1, 0, name+" Edited");
 	 		TimePicker dt = new TimePicker();
 	 		dt.gteDateTime();
+	 		eM.setCell(1, 0, name+" Edited");
 	    	Thread.sleep(2000);
 	    }
 	 
@@ -1309,5 +1311,36 @@ public class CampaignManagement extends Init{
 		    }
 		    
 		    
-		   
+			 @Then("^click on Campaign edit button from sheet \"([^\"]*)\"$")
+			    public void clickCampaignEditOption(String sheet) throws Throwable
+			    {
+			    	Thread.sleep(2000);
+			    	eM.setExcelFile("campaignInputData",sheet);
+			 		String name = (String) eM.getCell(1, 0);
+			 		commonObjects.filterName(name);
+			 		commonObjects.clickOptionsIcon();
+			 		campaignObjects.clickEditCampaignOption();
+			    }
+			 
+				@Then("^edit the campaign with taget condition (.*)$")
+				public void edit_the_campaign_with_taget_condition(String condition) throws Throwable {
+					System.out.println(condition);
+					Thread.sleep(3000);
+					broadcastPageObjects.clickProceedButton();
+					Thread.sleep(3000);
+					broadcastPageObjects.editingTheBCTargetConditionDetails(condition);
+					broadcastPageObjects.clickProceedButton();
+					campaignObjects.clickSaveCampaignButton();
+				}
+				 @Then("^click on Campaign view button from sheet \"([^\"]*)\"$")
+				    public void clickCampaignViewOption(String sheet) throws Throwable
+				    {
+				    	Thread.sleep(2000);
+				    	eM.setExcelFile("campaignInputData",sheet);
+				 		String name = (String) eM.getCell(1, 0);
+				 		commonObjects.filterName(name);
+				 		commonObjects.clickOptionsIcon();
+						broadcastPageObjects.clickBroadcastViewOption();
+						Thread.sleep(2000);				 		
+				    }
 }
