@@ -1308,11 +1308,12 @@ Then click create new broadcast button
 Then enter details for new broadcast with condition IsAnyOf from sheet "one-offBC" with "rechargeWAP"
 Then activate bc
 Then wait until status of "one-offBC" is "Targeting"
+Then click on toggleAutoRefresh
 Then wait until status of "one-offBC" is "Completed"
   
     
     @NDX-verifyBCNotification  @initBrowser 
-  Scenario: Verify Creating the oneoff Bc
+  Scenario: Verify BC Notification for one-off Bc
   
     Given login
     When navigate to precision marketer
