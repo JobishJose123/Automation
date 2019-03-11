@@ -2288,8 +2288,17 @@ System.out.println(editname+"program has edited successfully");
 						 
 						 
 					 }
+				  @Then("^navigate to rules$")
+					 public void navigatetorules() throws Exception {
+						 Thread.sleep(2000);
+					
+						    programPage.navigatetorules();
+						 
+						 
+					 }
 				
-				
+			
+				 
 				
 				
 				

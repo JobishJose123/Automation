@@ -4,6 +4,8 @@
 Feature: For IntentManagement datasetup.
 
   @initBrowser @createintentmanagementdatasetup
+  @NDX-7144, @NDX-7141, @NDX-7140, @NDX-7137 @NDX-7136 @NDX-7133, @NDX-7132, @NDX-7125, @NDX-5711
+  
   
   Scenario: Verify create a program
     Given login
@@ -47,30 +49,30 @@ Feature: For IntentManagement datasetup.
     Then choose program from sheet "CCprogram"
     Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
 
-  #@initBrowser @createprogramrulereg
-  #Scenario: Verify create a program rule
-    #Given login
-    #Then navigate to landing page
-    #Then navigate to intent management
-    #Then navigate to programs
-    #Then choose program from sheet "SMSprogram"
-    #Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-    #Then verify rule created from sheet "rule"
-    #Then navigate to programs
-    #Then choose program from sheet "APIprogram"
-    #Then create new rule from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
-    #Then verify rule created from sheet "rule"
-    #Then navigate to programs
-    #Then choose program from sheet "USSDprogram"
-    #Then create new rule from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
-    #Then verify rule created from sheet "rule"
-    #Then navigate to programs
-    #Then choose program from sheet "CCprogram"
-    #Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
-    #Then verify rule created from sheet "rule"
-    #Then navigate to programs
+   
+  
+   @initBrowser @createprogramdeletedatasetup
+  
+  Scenario: Verify create a program delete
+    Given login
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "programdelete" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+		Then choose program from sheet "programdelete"
+    Then create new rule from sheet "ruledelete" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 
 
+  @initBrowser @createprogramdeactivatedatasetup
+  
+  Scenario: Verify create a program delete
+    Given login
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "programruledeactivate" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+		Then choose program from sheet "programruledeactivate"
+    Then create new rule from sheet "ruledelete" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 
     
     

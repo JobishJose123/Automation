@@ -2003,7 +2003,15 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 
 			
 		}
-	 
+	   public void navigatetorules() throws java.lang.Exception {
+		   Thread.sleep(2000);
+			commonObjects.clickOptionsIcon();
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'View Rules')]");
+			Thread.sleep(2000);
+			
+			
+			}
 	 
 	
 }

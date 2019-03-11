@@ -77,48 +77,40 @@ Feature: For IntentManagement Regression.
     Given login
     Then navigate to landing page
     Then navigate to intent management
-    Then navigate to programs
-    Then click create program button
-    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+   
     Then navigate to programs
     Then choose program from sheet "SMSprogram" for edit
     Then verify edit program page "SMSprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "smsTouchpointedit"
     Then choose program from sheet "SMSprogram" after edited
     Then verify edited program page "SMSprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "smsTouchpointedit"
-    #Then navigate to programs
-    #Then click create program button
-    #Then verify create program page "APIprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    #Then navigate to programs
-    #Then choose program from sheet "APIprogram" for edit
-    #Then verify edit program page "APIprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "apiTouchpointGR"
-    #Then choose program from sheet "APIprogram" after edited
-    #Then verify edited program page "APIprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "apiTouchpointedit"
-    #Then navigate to programs
-    #Then click create program button
-    #Then verify create program page "USSDprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    #Then navigate to programs
-    #Then choose program from sheet "USSDprogram" for edit
-    #Then verify edit program page "USSDprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ussdTouchpoint"
-    #Then choose program from sheet "USSDprogram" after edited
-    #Then verify edited program page "USSDprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ussdTouchpointedit"
-    #Then navigate to programs
-    #Then click create program button
-    #Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    #Then navigate to programs
-    #Then choose program from sheet "CCprogram" for edit
-    #Then verify edit program page "CCprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "CCTouchpoint"
-    #Then choose program from sheet "CCprogram" after edited
-    #Then verify edited program page "CCprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ccTouchpointedit"
+
+    Then navigate to programs
+    Then choose program from sheet "APIprogram" for edit
+    Then verify edit program page "APIprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "apiTouchpointGR"
+    Then choose program from sheet "APIprogram" after edited
+    Then verify edited program page "APIprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "apiTouchpointedit"
+   
+    Then navigate to programs
+    Then choose program from sheet "USSDprogram" for edit
+    Then verify edit program page "USSDprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ussdTouchpoint"
+    Then choose program from sheet "USSDprogram" after edited
+    Then verify edited program page "USSDprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ussdTouchpointedit"
+    Then navigate to programs
+  
+    Then choose program from sheet "CCprogram" for edit
+    Then verify edit program page "CCprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "CCTouchpoint"
+    Then choose program from sheet "CCprogram" after edited
+    Then verify edited program page "CCprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ccTouchpointedit"
 
   @initBrowser @createprogramdelete
-  
+  @NDX-5729
   Scenario: Verify create a program delete
     Given login
     Then navigate to intent management
     Then navigate to programs
     Then click create program button
-    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    #Then verify delete a program "SMSprogram"
+    Then verify create program page "programdelete" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then verify delete a program "programdelete"
     
     
       @initBrowser @programruleview
@@ -132,7 +124,7 @@ Feature: For IntentManagement Regression.
     Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
     Then choose program from sheet "SMSprogram"
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-    #Then verify rule created from sheet "rule"
+    Then verify rule created from sheet "rule"
     Then verify rule view from sheet "rule" and product "fullDetails"
     
        
@@ -151,14 +143,13 @@ Feature: For IntentManagement Regression.
     Then verify rule deactivate
     
     @initBrowser @programrulecopy
-    @NDX-5755, @NDX-5752
+    @NDX-6894
   Scenario: Verify program rule copy
     Given login
     Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
-    Then click create program button
-    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+   
     Then choose program from sheet "SMSprogram"
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 		Then verify rule Copy from sheet "rule" with product sheet "fullDetails" and product class sheet "TestProductClass"
@@ -171,8 +162,7 @@ Feature: For IntentManagement Regression.
     Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
-    #Then click create program button
-    #Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+   
     Then choose program from sheet "SMSprogram"
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
     Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint" with taget condition <Condition>
@@ -193,7 +183,8 @@ Feature: For IntentManagement Regression.
 #	| segmentAgeGT40                 |
 
    @initBrowser @programrulecopyedit
-
+@NDX-6908, @NDX-6906, @NDX-6904
+@NDX-6902, @NDX-6900, @NDX-6898, @NDX-6350, @NDX-6897, @NDX-6338
  Scenario Outline: Verify program rule copy edit <Condition>
     Given login
     Then navigate to landing page
@@ -225,7 +216,14 @@ Feature: For IntentManagement Regression.
 
 
 		@initBrowser @programruleeditnone
-    @NDX-5755, @NDX-5752
+    
+    
+    @NDX-6336
+@NDX-6334, @NDX-6332
+@NDX-6330
+@NDX-6327
+    
+
   Scenario Outline: Verify program rule edit <Condition>
     Given login
     Then navigate to landing page
@@ -241,12 +239,12 @@ Feature: For IntentManagement Regression.
    
     Examples: 
       | Condition |
-      #| None     |
-      #| Create        |
+      | None     |
+      | Create        |
       | SavedSegments |
-      #| None          |
-      #| SavedSegments |
-      #| Create        |
+      | None          |
+      | SavedSegments |
+      | Create        |
 
     
     
