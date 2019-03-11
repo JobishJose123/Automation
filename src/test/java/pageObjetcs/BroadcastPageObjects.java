@@ -283,7 +283,7 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement bcnotificationbeforeRendertime ;
 	 @FindBy(xpath="//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::paper-listbox//paper-item[2]")
 	 private WebElement bcnotificationbeforerendertime1min ;
-	 @FindBy(xpath="//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'Selenium user')]")
+	 @FindBy(xpath="//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'selenium user')]")
 	 private WebElement bcnotificationrecipientclick;
 	 @FindBy(xpath="//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'System Administrator')]")
 	 private WebElement bcnotificationrecipientclick2;
@@ -432,9 +432,9 @@ private WebElement recipientclick;
 	
 	//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
 	public void bcnotificationrecipient() throws InterruptedException {
-		jswait.loadSendKeys(bcnotificationrecipient, "Selenium user");
+		jswait.loadSendKeys(bcnotificationrecipient, "selenium");
 		
-		wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE);
+		wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE,Keys.BACK_SPACE);
 		Thread.sleep(2000);
 		//jswait.loadClick(recipientclick);
 	}
@@ -770,6 +770,17 @@ private WebElement recipientclick;
 	 
 	  
 	}
+  
+  public void defaultSendID() throws Exception {
+	  
+	  jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+		jswait.loadClick(senderIdBroadcastAdressSmpp);
+		jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+
+		jswait.loadClick(routeBroadcastSmppRobioutbound);	
+
+		//jswait.loadClick(routeBroadcastSmppRobiOutbond);	
+  }
 	
 	
   public void verifyExportBroadcast() throws InterruptedException {

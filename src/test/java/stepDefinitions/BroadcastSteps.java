@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.itextpdf.text.log.SysoCounter;
 
 import baseClasses.CalenderUtility;
+import baseClasses.EmailHelper;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -3732,8 +3733,35 @@ public class BroadcastSteps extends Init {
 		offerExcel.setExcelFile("offerInputData", offer);
 		broadcastPageObjects.selectOffer(offerExcel.getCellByColumnName("Offer Name"));
 
+		
 		broadcastPageObjects.selectTrackSession();
 		broadcastPageObjects.selectTrackingSource();
+		
+//		String bc_type=eh.getCell(1, 7).toString();
+//		
+//		System.out.println("bc_type="+bc_type);
+//		if(!bc_type.contains("Informational"))
+//		{
+//			broadcastPageObjects.selectTrackSession();
+//			broadcastPageObjects.selectTrackingSource();
+//			if(offerExcel.getCellByColumnName("Channel").contains("Email"))
+//			{
+//				broadcastPageObjects.selectSenderAndRouteEmail();
+//			}
+//			else if(offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
+//				broadcastPageObjects.selectSenderAndRouteFacebook(); }
+//			else
+//				broadcastPageObjects.selectSenderAndRoute();
+//			
+//		}
+//		else {
+//			broadcastPageObjects.defaultSendID();
+//
+//		}
+//		
+		
+		
+		
 		Thread.sleep(3000);
 		broadcastPageObjects.clickProceedButton();
 	}
@@ -4030,6 +4058,47 @@ public void save_bcInputData_data_to_registrationListInputData_from_with_conditi
 	    int cols=eM.numCols();
 	    eM.addCells(rows,0,BCname);	    
 	   System.out.println(eM.getCell(rows, 0).toString());
+}
+
+@Then("^verify the BC notification in mail \"([^\"]*)\" from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+public void verify_the_BC_notification_in_mail_from_workbook_and_sheet(String status,String workbook, String sheet) throws Throwable {
+	Thread.sleep(2000);
+	eh.setExcelFile(workbook, sheet);
+	String bcName=eh.getCell(1, 0).toString();
+	EmailHelper emailHelper= new EmailHelper();
+	Thread.sleep(5000);
+	String fromAddrForBCNotification="";
+	String subjectOfEmail="";
+	
+	if(status.contentEquals("Rendering")) {
+	fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";// you pass your from address- swapna.p@flytxt.com
+	subjectOfEmail= "Broadcast Rendering Notification - "+bcName;//BCNotification is BC name
+	}else if(status.contentEquals("Delivering")) {
+		 fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";
+		 subjectOfEmail="Broadcast Delivery Notification - "+bcName;
+	}else if(status.contentEquals("Completed")){
+		fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";
+		subjectOfEmail="Broadcast Finished - "+bcName;
+	}
+	
+	Date emailRecivedDate = emailHelper.getMailRecivedDate(fromAddrForBCNotification, subjectOfEmail);
+	System.out.println("email recived Date"+emailRecivedDate);
+	String bcStartDate=(eh.getCell(1, 11).toString()).substring(0, 20);
+	bcStartDate=bcStartDate.trim();
+	System.out.println(bcStartDate);
+	
+		if(status.contentEquals("Completed")) {
+			SimpleDateFormat sdf= new SimpleDateFormat("dd MMM yyyy hh:mm a");
+			  Date bcdate = sdf.parse(bcStartDate);
+			  System.out.println(bcdate);
+			  Assert.assertTrue(bcdate.before(emailRecivedDate));
+		}else {	
+	SimpleDateFormat sdf= new SimpleDateFormat("dd MMM yyyy hh:mm a");
+	  Date bcdate = sdf.parse(bcStartDate);
+	  System.out.println(bcdate);
+	  Assert.assertTrue(emailRecivedDate.before(bcdate));
+		}
+   
 }
 
 	

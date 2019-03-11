@@ -25,7 +25,7 @@ Feature: Test suite for Broadcast Editing for Migration
  
 
   
-  @NDX-5874 @initBrowser
+  @NDX-5874 @initBrowser @closeBrowser
   Scenario: Verify one-off BC and edit the Delivery details , Verify the BC after edit Start and End Time of One-Off Bc Migration
     Given login
     When navigate to precision marketer
@@ -40,7 +40,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
 
 
-@NDX-5801 @initBrowser @closeBrowser
+@NDX-5801 @initBrowser  @closeBrowser
   Scenario: Verify the BC after edit the basic detais of One-offBC Migration
     Given login
     When navigate to precision marketer
@@ -56,7 +56,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
 
-    @NDX-5872 @initBrowser @closeBrowser
+    @NDX-5872 @initBrowser  @closeBrowser
   Scenario: Verify BC after edit with offer in offer selection page Migration
     Given login
     When navigate to precision marketer
@@ -1311,10 +1311,27 @@ Then wait until status of "one-offBC" is "Targeting"
 Then wait until status of "one-offBC" is "Completed"
   
     
+    @NDX-verifyBCNotification  @initBrowser 
+  Scenario: Verify Creating the oneoff Bc
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
+    Then verify create BC Notification
+    Then activate bc
+    Then wait until status of "one-offBC" is "Targeting"
+    Then verify the BC notification in mail "Rendering" from workbook "bcInputData" and sheet "one-offBC"
+     Then verify the BC notification in mail "Delivering" from workbook "bcInputData" and sheet "one-offBC"
+    Then click on toggleAutoRefresh
+    Then wait until status of "one-offBC" is "Completed"
+    Then verify the BC notification in mail "Completed" from workbook "bcInputData" and sheet "one-offBC"
     
-  
-  
-  
+    
+    
 #  @NDX-7128 @initBrowser
 #Scenario: Verify the BC gets Completed with target condition as 
 #Given login
