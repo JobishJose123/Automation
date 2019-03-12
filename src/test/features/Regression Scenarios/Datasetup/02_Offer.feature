@@ -179,3 +179,13 @@ Feature: Test suite on Offer creation
  		Then create new offer from sheet "rechargevideoFacebook" with product "fullDetails"
  		Then verify "rechargevideoFacebook" offer in grid
  		Then save "offerInputData" data to spreadsheet from "rechargevideoFacebook" with string rechargevideoFacebook offer with fullDetails product
+ 		
+ 		 @STVSMS @initBrowser @closeBrowser
+   Scenario: SMS Channel -->Verify the Create offer using STVSMS 
+     Given login
+     Then navigate to precision marketer
+     Then navigate to offer management
+     Then navigate to offers
+     Then create new offer from sheet "STVSMS" with product "fullDetails"
+     Then verify "STVSMS" offer in grid
+     Then save "offerInputData" data to spreadsheet from "STVSMS" with string recharge sms offer with fullDetails product

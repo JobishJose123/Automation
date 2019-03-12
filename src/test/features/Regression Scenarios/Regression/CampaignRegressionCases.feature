@@ -1,6 +1,5 @@
 #Author: rahul.chandran@flytxt.com
 #Keywords Summary : to create campaign for data setup
-#DEPENDENCY- Run Feature file Datasetup/Campaign.feature
 #Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
 
 
@@ -19,10 +18,10 @@ Feature: Campaign Regression Cases
     Then edit the campaign with taget condition <Condition>
     Then click on Campaign view button from sheet "campaignBC"
     Then verify the target conditions from Broadcast View and condition <Condition>
+    #Target condition verification is same in both BC and Campaign page,above function is actually verifying in campaign page 
     
 Examples: 
   | Condition |
 	| customerWasSentTheTrialMessage |
 	| customerList                   |
-    
-    
+     

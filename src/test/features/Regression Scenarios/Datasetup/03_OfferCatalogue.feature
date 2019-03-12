@@ -21,6 +21,7 @@ Scenario: Verify Creating Offer Catalogue with rechargeSMS and SeedingSMS offer
   Then Add "rechargeVoicePush" offer to Offer Catalogue
   Then Add "rechargeEmail" offer to Offer Catalogue
   Then Add "rechargeVoicePush" offer to Offer Catalogue
+  Then Add "STVSMS" offer to Offer Catalogue
   Then save "offerCatalogInputData" data to spreadsheet from "defaultCatalog" with string offer catalog with recharge and seeding offer 
   
  
