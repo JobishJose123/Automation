@@ -3,7 +3,7 @@
 @NX-intentmanagemen
 Feature: For IntentManagement Regression.
 
-  @initBrowser @createprogramreg
+  @initBrowser @createprogramreg 
   
   @NDX-7136, @NDX-7133, @NDX-7132, @NDX-7125, @NDX-5711
   
@@ -157,7 +157,7 @@ Feature: For IntentManagement Regression.
 		Then verify rule Copy from sheet "rule" with product sheet "fullDetails" and product class sheet "TestProductClass"
 		
 		
-		@initBrowser @programruleedit
+		@initBrowser @programruleeditreg
     @NDX-5755, @NDX-5752
   Scenario Outline: Verify program rule edit <Condition>
     Given login
@@ -172,17 +172,21 @@ Feature: For IntentManagement Regression.
    
     Examples: 
       | Condition |
-	| customerWasSentTheTrialMessage |
-	| customerList                   |
-	| SharedcustomerList             |
-	| customerDrivenEvent            |
-	| usageMetric                    |
+#	| customerWasSentTheTrialMessage |
+#	| customerList                   |
+#	| SharedcustomerList             |
+#	| customerDrivenEvent            |
+#	| usageMetric                    |
 #	| sharedMetricOtherPartner  |
 #	| customerDrivenEventNotOccurred  |
 #	| customerWasSentTheTrialMessageNOtOccurred |
 #	| conditionForANDOperation |
 #	| conditionForOROperation |
 #	| segmentAgeGT40                 |
+	|System_Event_Occured|
+	|System_Event_not_Occured|
+	|user_Event_not_Occured|
+	|user_Event_Occured|
 
    @initBrowser @programrulecopyedit
 @NDX-6908, @NDX-6906, @NDX-6904
@@ -218,15 +222,8 @@ Feature: For IntentManagement Regression.
 
 
 		@initBrowser @programruleeditnone
-    
-    
-    @NDX-6336
-@NDX-6334, @NDX-6332
-@NDX-6330
-@NDX-6327
-    
-
-  Scenario Outline: Verify program rule edit <Condition>
+    @NDX-6336, @NDX-6334, @NDX-6332, @NDX-6330, @NDX-6327
+      Scenario Outline: Verify program rule edit <Condition>
     Given login
     Then navigate to landing page
     Then navigate to intent management
@@ -238,8 +235,7 @@ Feature: For IntentManagement Regression.
     Then edit the targetSelection <Condition> for programrule
     Then verify rule target selection <Condition> after edit from sheet "rule" and product "fullDetails"
     
-   
-    Examples: 
+       Examples: 
       | Condition |
       | None     |
       | Create        |
