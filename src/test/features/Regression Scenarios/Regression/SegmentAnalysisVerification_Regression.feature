@@ -213,8 +213,8 @@ Given login
 Then navigate to intent management
 Then navigate to analytics
 Then navigate to explore segments
-Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
-Then delete Segment Analysis job from sheet "SegmentAnalysisName"
+Then filter the Segment Analysis job from sheet "SegmentAnalysisJobToDelete"
+Then delete Segment Analysis job from sheet "SegmentAnalysisJobToDelete"
 
 
 
