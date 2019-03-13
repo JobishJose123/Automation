@@ -363,6 +363,15 @@ private WebElement recipientclick;
 	 private WebElement calculatebtn;
 	 @FindBy(xpath="//schedule-expiry-settings//paper-input-wrapper//input[@id=\"input\"]")
 		 private WebElement bcExpireAfterHours ;
+	 @FindBy(xpath="//div[contains(.,'Recurring Broadcasts')][@class='tab-content style-scope paper-tab']")
+	 private WebElement recurringBroadcastTab ;
+	 @FindBy(xpath="//div[contains(.,'One-time Broadcasts')][@class='tab-content style-scope paper-tab']")
+	 private WebElement onetimebcTab;
+	 @FindBy(xpath="(//span[contains(.,'Activate this broadcast')]//following::paper-button[contains(.,'Yes')])[1]")
+	 private WebElement yesToActivate;
+	 @FindBy(xpath="//paper-dialog[@id='editConfirmBox']//following::paper-button[contains(.,'Yes')]")
+	 private WebElement yesToEditDeliverTab ;
+
 		// @FindBy(xpath="")
 		// private WebElement ;
 		// @FindBy(xpath="")
@@ -2838,7 +2847,23 @@ if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTrigge
 			jswait.loadClick(DNCListCloseButton);
 			}
 
+	public void recurringbcTab() throws Exception{
+		jswait.loadClick(recurringBroadcastTab);
+	}
+	public void filterTheRecurringBc(String bcSheet,String bcName) throws Exception{
+		commonObjects.filterBCName(bcSheet, bcName);
+	}
 	
+	public void activateRecurringbc(String bcSheet) throws Throwable{
+		commonObjects.clickBCOptionsIcon(bcSheet);
+		commonObjects.clickActivateOption();
+		jswait.loadClick(yesToActivate);
+		jswait.loadClick(yesToEditDeliverTab);
+	}
+	public void oneTimebcTab() throws Exception{
+		jswait.loadClick(onetimebcTab);
+	}
+
 	
 }
 

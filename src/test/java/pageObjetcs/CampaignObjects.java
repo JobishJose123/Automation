@@ -258,6 +258,15 @@ public class CampaignObjects extends Init{
 	private WebElement secondLevelUserSelect ;
 	@FindBy(xpath=".//label[contains(.,'attr_2')]/..//input")
 	private WebElement campaignattribute;
+
+
+@FindBy(xpath=".//*[@id='topBar']/paper-button[contains(.,'Create')]")
+	private WebElement Bccreatebtn ;
+	
+	@FindBy(xpath=".//*[@id='broadcastSummary']//paper-button[contains(.,'Request Approval')]")
+	private WebElement bcRequestApproval;
+
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -2007,7 +2016,15 @@ public void createCampaignWithAddMultipleOROption(String name,String catalog,Str
 
        clickSaveCampaignButton();
 	}
-	
+public void selectBothUserForBCApproval() throws Exception{
+	Thread.sleep(2000);
+	firstleveluserselect();
+    secondLevelUserSelect();
+    Bccreatebtn.click();
+	bcRequestApproval.click();
+    approvalboxOKbtn();
+}
+
    
 
 }

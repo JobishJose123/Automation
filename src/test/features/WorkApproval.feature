@@ -548,7 +548,7 @@ Feature: approval workflow
     Then click on view all notifications
     Then verify approved message of campaign from the sheet "campaignBC" of file "campaignInputData"
     
-  @NX-6387 @initBrowser
+  @NX-6387 @initBrowser @closeBrowser
   Scenario: Verify whether BC get activate only after atleast  1 approver from all configured levels approves the BC
   Given login
     Then navigate to configuration management
@@ -579,12 +579,17 @@ Feature: approval workflow
     Then click on view all notifications
     Then click Review on notification from the sheet "campaignBC" of file "campaignInputData"
     Then click on approve campaign
-    Then wait for 1 minutes
     Then verify campaign status approved from sheet "campaignBC" of file "campaignInputData"
+    Then Logout from Neon application
+  	Then login with user from sheet "defaultUser" of file "workApproval"
+  	Then navigate to precision marketer
+  	Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeSMS"
     Then Request for bc approval
+    Then select the user for bc approval
     Then Logout from Neon application
     #Given navigate to environment 
     Then login with user from sheet "user1" of file "workApproval"
@@ -593,7 +598,13 @@ Feature: approval workflow
     Then click on view all notifications
     Then click Review on notification from the sheet "one-offBC" of file "bcInputData"
     Then click on approve campaign
-    #Then wait for 1 minutes
+   Then Logout from Neon application
+    Then login with user from sheet "user2" of file "workApproval" 
+    Then wait for 1 minutes
+    Then click on notification bell
+    Then click on view all notifications
+     Then click Review on notification from the sheet "one-offBC" of file "bcInputData"
+    Then click on approve campaign
     Then verify broadcast status render scheduled from sheet "one-offBC" of file "bcInputData"
     
     Then pass next scenario based on this step

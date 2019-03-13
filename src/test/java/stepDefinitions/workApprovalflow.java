@@ -35,6 +35,7 @@ public class workApprovalflow extends Init {
 		PageFactory.initElements(driver, this);
 	}
 
+	
 	@Then("^navigate to configuration$")
 	public void navigateToAnalytics() throws InterruptedException {
 		approvalPageObjects.navigateToConfiguration();

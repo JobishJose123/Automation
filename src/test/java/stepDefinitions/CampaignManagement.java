@@ -1343,4 +1343,9 @@ public class CampaignManagement extends Init{
 						broadcastPageObjects.clickBroadcastViewOption();
 						Thread.sleep(2000);				 		
 				    }
+				 @Then("^select the user for bc approval$")
+				    public void bcApprovalByBothUser() throws Exception{
+				    	Thread.sleep(2000);
+				    campaignObjects.selectBothUserForBCApproval();
+				 }
 }

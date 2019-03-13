@@ -632,6 +632,7 @@ catch(Exception e) {
 		Thread.sleep(2000);
 	}
 	
+	
 	public void chooseLevel2User() throws Exception {
 		String user2 =p.getValue("user2");
 		user2=user2.stripTrailing();

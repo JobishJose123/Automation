@@ -4043,6 +4043,7 @@ public class BroadcastSteps extends Init {
 	public void click_on_toggleAutoRefresh() throws Throwable {
 		commonObjects.toggleAutoRefresh();
 	}
+	
 
 	
 	
@@ -4099,6 +4100,21 @@ public void verify_the_BC_notification_in_mail_from_workbook_and_sheet(String st
 	  Assert.assertTrue(emailRecivedDate.before(bcdate));
 		}
    
+}
+@Then("^wait until status of \"([^\"]*)\" from file \"([^\"]*)\" is \"([^\"]*)\"$")
+public void wait_until_status_of_from_file_is(String bcSheet, String bcFile, String status) throws Throwable {
+	eh.setExcelFile(bcFile, bcSheet);
+	commonObjects.filterName(eh.getCellByColumnName("BC Name"));
+	commonObjects.toggleAutoRefresh();
+	String statusOfBc = broadcastPageObjects.getTopBcStatus();
+	TimeoutImpl t = new TimeoutImpl();
+	t.startTimer();
+	while (!statusOfBc.contains(status) && t.checkTimerMin(20)) {
+		statusOfBc = broadcastPageObjects.getTopBcStatus();
+		System.out.println(statusOfBc);
+		Thread.sleep(3000);
+	}
+	Assert.assertTrue("Invalid status of BC", statusOfBc.contains(status));
 }
 
 	
