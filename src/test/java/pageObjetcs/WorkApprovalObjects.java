@@ -635,7 +635,7 @@ catch(Exception e) {
 	
 	public void chooseLevel2User() throws Exception {
 		String user2 =p.getValue("user2");
-		user2=user2.stripTrailing();
+		user2=user2.trim();
 		System.out.println(user2);
 		jswait.loadClick("//paper-item[contains(.,'"+user2+"')]");
 		Thread.sleep(2000);
