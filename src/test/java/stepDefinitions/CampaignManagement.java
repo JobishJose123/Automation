@@ -1330,6 +1330,7 @@ public class CampaignManagement extends Init{
 					Thread.sleep(3000);
 					broadcastPageObjects.editingTheBCTargetConditionDetails(condition);
 					broadcastPageObjects.clickProceedButton();
+					campaignObjects.enterCampaignStartTime();
 					campaignObjects.clickSaveCampaignButton();
 				}
 				 @Then("^click on Campaign view button from sheet \"([^\"]*)\"$")

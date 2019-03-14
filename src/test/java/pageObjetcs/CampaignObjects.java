@@ -2025,6 +2025,51 @@ public void selectBothUserForBCApproval() throws Exception{
     approvalboxOKbtn();
 }
 
-   
+ public void enterCampaignStartTime() throws Exception{
+	 Thread.sleep(1000);
+	 Calendar rightNow =Calendar.getInstance();
+	 String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+	 
+	 Actions builder = new Actions(driver);
+	Thread.sleep(1000);
+	jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+	Thread.sleep(1000);
+	jswait.loadClick("/html//div[@id='mainContainer']//app-router[@id='router']/app-route[11]/campaign-form//iron-pages[@class='style-scope wizard-tab']//div[@date='" + date + "']");
+	Thread.sleep(1000);
+	jswait.loadClick("//paper-dialog[@id='dateDialog']/div/paper-button[2]");
+	wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//campaign-schedule//paper-input-container)[2]//input"))).click();
+	 Thread.sleep(1000);
+	 int hours = rightNow.get(Calendar.HOUR);
+	 int min = rightNow.get(Calendar.MINUTE);
+	 int am_pm = rightNow.get(Calendar.AM_PM);
+	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+	 int year = rightNow.get(Calendar.YEAR);
+	 int month = rightNow.get(Calendar.MONTH)+1;
+	 min+=2;
+	 int rem = min%5;
+	 rem = 5-rem;
+	 min+=rem;
+	 if(min>59){
+		 min-=60;
+		 hours++;
+	 }
+    WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+    builder.moveToElement(num).click().build().perform();
+    Thread.sleep(2000);
+	 WebElement num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+    builder.moveToElement(num1).click().build().perform();
+    if(am_pm==0)
+   	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[1]"))).click();
+    else
+   	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[2]"))).click();
+    wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
+
+ }  
 
 }
