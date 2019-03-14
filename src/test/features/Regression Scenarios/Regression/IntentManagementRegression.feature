@@ -3,10 +3,10 @@
 @NX-intentmanagemen
 Feature: For IntentManagement Regression.
 
-  @initBrowser @createprogramreg 
-  
-  @NDX-7136, @NDX-7133, @NDX-7132, @NDX-7125, @NDX-5711
-  
+
+   	 @createprogramreg 
+    @NDX-7136, @NDX-7133, @NDX-7132, @NDX-7125, @NDX-5711
+  @initBrowser
   Scenario: Verify create a program
     Given login
     Then navigate to configuration management
@@ -29,25 +29,25 @@ Feature: For IntentManagement Regression.
     Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
     Then Add "STVSMS" offer to Offer Catalogue
-    Then navigate to landing page
-    Then navigate to intent management
-    Then navigate to programs
-    Then click create program button
-    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-     Then choose program from sheet "SMSprogram"
-    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-    Then navigate to programs
-    Then verify create program page "APIprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR"
-    Then choose program from sheet "APIprogram"
-    Then create new rule from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
-    Then navigate to programs
-    Then verify create program page "USSDprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
-    Then choose program from sheet "USSDprogram"
-    Then create new rule from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
-    Then navigate to programs
-    Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
-    Then choose program from sheet "CCprogram"
-    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+#    Then navigate to landing page
+#    Then navigate to intent management
+#    Then navigate to programs
+#    Then click create program button
+#    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+#     Then choose program from sheet "SMSprogram"
+#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+#    Then navigate to programs
+#    Then verify create program page "APIprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR"
+#    Then choose program from sheet "APIprogram"
+#    Then create new rule from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
+#    Then navigate to programs
+#    Then verify create program page "USSDprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+#    Then choose program from sheet "USSDprogram"
+#    Then create new rule from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+#    Then navigate to programs
+#    Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
+#    Then choose program from sheet "CCprogram"
+#    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
 
   @initBrowser @createprogramrulereg
   Scenario: Verify create a program rule
@@ -72,9 +72,9 @@ Feature: For IntentManagement Regression.
     Then verify rule created from sheet "rule"
     Then navigate to programs
 
-  @initBrowser @createprogramedit
+   @createprogramedit
   @NDX-7337 @NDX-7336 @NDX-7335 @NDX-5725 @NDX-7328 @NDX-7327 @NDX-7326 @NDX-5722 @NDX-7321 @NDX-7320 @NDX-7319 @NDX-5716 @NDX-5719 @NDX-7315 @NDX-7314 @NDX-7313
-  
+  @initBrowser
   Scenario: Verify create a program edit
     Given login
     Then navigate to landing page

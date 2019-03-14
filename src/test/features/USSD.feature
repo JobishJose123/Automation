@@ -1,6 +1,5 @@
 #Author: your.email@your.domain.com
 #Keywords Summary :
-
 @NX-API_Test_Cases
 Feature: Test cases for USSD
   I want to use this template for my feature file
@@ -311,21 +310,21 @@ Feature: Test cases for USSD
   @NX-3118 @initBrowser 
   Scenario: API- Verify that consumer is able to pull stv offers(Application Type = USSD && Event For Tracking = Accepted Event) -3118
     Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then create new offer from sheet "STVSMS" with product "default"
+    Then create new offer from sheet "STVSMS" with product "fullDetails"
     Then navigate to offer management
     Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
@@ -334,9 +333,9 @@ Feature: Test cases for USSD
     Then navigate to intent management
     Then navigate to programs
     Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointUA_default"
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR"
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and offer "STVSMS" and touchpoint from sheet "apiTouchpointUA_default"
+    Then create new rule from sheet "fullDetails" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
     Then verify rule created from sheet "rule"
     Then wait for "A" status of rule
     Then wait until rule is picked

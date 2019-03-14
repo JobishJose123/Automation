@@ -142,7 +142,7 @@ Feature: positive flow of im program creation
 
   @NX-1236 @initBrowser 
   Scenario: Verify creating a new the program in Intent management
-    Given loginUU
+    Given login
     Then navigate to intent management
     Then navigate to programs
     Then click create program button
