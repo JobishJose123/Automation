@@ -1349,4 +1349,36 @@ public class CampaignManagement extends Init{
 				    	Thread.sleep(2000);
 				    campaignObjects.selectBothUserForBCApproval();
 				 }
+				 @Then("^create new recurring campaign from sheet \"([^\"]*)\" with catalog \"([^\"]*)\"$")
+				    public void create_new_recurring_campaign(String sheet, String catalogSheet) throws Throwable
+				    {
+				    	Thread.sleep(4000);
+				    	ExcelHelper catalogExcel = new ExcelHelper();
+				    	catalogExcel.setExcelFile("offerCatalogInputData", catalogSheet);
+				    	Thread.sleep(4000);
+				    	eM.setExcelFile("campaignInputData",sheet);
+				 		String name = (String) eM.getCell(1, 0);
+				 		String catalog = (String) catalogExcel.getCell(1, 0);
+				 		name =  RandomNameGenerator.getRandomName(name);
+				 		eM.setCell(1, 0, name);
+				 		campaignObjects.clickCreateNewCampaignButton();
+				 		campaignObjects.createRecurringCampaign(name, catalog);
+
+
+				 		TimePicker dt = new TimePicker();
+				 		dt.gteDateTime();
+				    	Thread.sleep(2000);
+				    }
+				 @Then("^edit the campaign recurrece from sheet \"([^\"]*)\"$")
+				    public void clickCampaignRecurrence(String sheet) throws Throwable
+				    {
+				    	Thread.sleep(2000);
+						campaignObjects.enterCampaignDescription("EDITED Campaign to check bc creation in selenium");
+						campaignObjects.clickProceedButton();
+						campaignObjects.clickProceedButton();
+						campaignObjects.enterCampaignStartTime();
+						campaignObjects.editCampaignRecurringDetails();	
+						campaignObjects.clickSaveCampaignButton();
+						
+				    }
 }

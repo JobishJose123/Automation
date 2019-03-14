@@ -2070,6 +2070,62 @@ public void selectBothUserForBCApproval() throws Exception{
    	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[2]"))).click();
     wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
 
- }  
+ }
+ public void createRecurringCampaign(String name,String catalog) throws Exception {
+		enterCampaignDeails(name,catalog);
+		clickProceedButton();
+		targetConditionObjects.clickCreateTargetConditionButton();
+//		targetConditionObjects.clickTargetConditionViewToggle();
+		targetConditionObjects.clickBasicTargetConditionWithAge();
+		clickProceedButton();
+		 wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//campaign-schedule//paper-input-container)[2]//input"))).click();
+ 	 Thread.sleep(1000);
+ 	 Calendar rightNow =Calendar.getInstance();
+ 	 int hours = rightNow.get(Calendar.HOUR);
+ 	 int min = rightNow.get(Calendar.MINUTE);
+ 	 int am_pm = rightNow.get(Calendar.AM_PM);
+ 	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+ 	 int year = rightNow.get(Calendar.YEAR);
+ 	 int month = rightNow.get(Calendar.MONTH)+1;
+ 	 min+=2;
+ 	 int rem = min%5;
+ 	 rem = 5-rem;
+ 	 min+=rem;
+ 	 if(min>59){
+ 		 min-=60;
+ 		 hours++;
+ 	 }
+ 	 Actions builder = new Actions(driver);
+ 	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+      builder.moveToElement(num).click().build().perform();
+      Thread.sleep(2000);
+ 	 WebElement num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+      builder.moveToElement(num1).click().build().perform();
+      if(am_pm==0)
+     	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[1]"))).click();
+      else
+     	 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='heading']/iron-selector[2]/div[2]"))).click();
+      wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='timeDialog']/div/paper-button[2]"))).click();
+      enterCampaignRecurringDetails();
+      clickSaveCampaignButton();
+	}
+	public void enterCampaignRecurringDetails() throws Exception {
+		jswait.loadClick("//div/paper-checkbox[@role='checkbox']/div[contains(.,'Recurring')]/../div[1]");
+		jswait.loadClick("//label[.='End Type']//../Input");
+		jswait.loadClick("//paper-listbox[@role='listbox']/paper-item[contains(.,'Never')]");
+		jswait.loadClick("//label[.='Recurring Pattern']//../Input");
+		jswait.loadClick("//paper-listbox[@role='listbox']/paper-item[contains(.,'Daily')]");
+		jswait.loadClick("//div//label[.='Recurring Frequency']//../input[@id='input']");
+		jswait.loadSendKeys("//div//label[.='Recurring Frequency']//../input[@id='input']", "12");
+
+	}
+	public void editCampaignRecurringDetails() throws Exception {
+		jswait.loadClick("//label[.='Recurring Pattern']//../Input");
+		jswait.loadClick("//paper-listbox[@role='listbox']/paper-item[contains(.,'Weekly')]");
+		jswait.loadClick("//div//label[.='Recurring Frequency']//../input[@id='input']");
+		jswait.loadSendKeys("//div//label[.='Recurring Frequency']//../input[@id='input']", "13");
+		jswait.loadClick("//paper-card/weekday-selector/paper-checkbox[1]/div[@id='checkboxContainer']");
+		
+	}
 
 }

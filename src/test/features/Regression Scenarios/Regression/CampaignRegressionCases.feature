@@ -25,3 +25,15 @@ Examples:
 	| customerWasSentTheTrialMessage |
 	| customerList                   |
      
+@NDX-campaignRecurringEdit
+  @initBrowser 
+  Scenario: Verify Editing campaign recurruence and shedule
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then click on Campaign edit button from sheet "campaignBC"
+    Then edit the campaign recurrece from sheet "campaignBC"
+    Then click on Campaign view button from sheet "campaignBC"
+    #Then verify the recurrence 
+  

@@ -48,7 +48,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Feb 12, 2019 11:07:52 AM</span>
+                    <span class='label suite-start-time blue darken-3'>Mar 14, 2019 07:50:48 PM</span>
 				</a>
 			</li>
 			<li>
@@ -75,7 +75,6 @@
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
 						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
-						<li status='skip'><a href='#!'>Skip <i class='material-icons cyan-text'>redo</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -88,9 +87,9 @@
 					<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@NX-BroadcastFunctionality</a></li>
+					<li><a href='#'>@NDX-CampaignRegressionCases</a></li>
+					<li><a href='#'>@NDX-campaignRecurringEdit</a></li>
 					<li><a href='#'>@initBrowser</a></li>
-					<li><a href='#'>@createprogramrulereg</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -168,10 +167,10 @@
 					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='25%'><span class='strong'>5</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='85.714%'><span class='strong'>6</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='5%'>1</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='70%'>14</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='14.286%'>1</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -187,20 +186,20 @@
 				
 				<li class='test displayed active has-leaf fail' status='fail' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>For IntentManagement Regression.</span>
-						<span class='test-time'>Feb 12, 2019 11:07:52 AM</span>
+						<span class='test-name'>Campaign Regression Cases</span>
+						<span class='test-time'>Mar 14, 2019 07:50:49 PM</span>
 						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
 <div class='scenario node' test-id='2' status='fail'>
 	<div class='category-list'>
+		<span class='category label white-text'>@NDX-campaignRecurringEdit</span>
 		<span class='category label white-text'>@initBrowser</span>
-		<span class='category label white-text'>@createprogramrulereg</span>
 	</div>
-	<span class='duration right label'>0h 3m 44s+279ms</span>
+	<span class='duration right label'>0h 2m 23s+996ms</span>
 	<div class='desc'>
 		<b>Scenario</b>
-		<span class="desc-text">Verify create a program rule</span>
+		<span class="desc-text">Verify Editing campaign recurruence and shedule</span>
 	</div>
 	<ul class='steps'>
 		<li test-id='3' class='node given pass' status='pass'>
@@ -211,11 +210,11 @@
 				<div class='pre'>passed</div>
 			
 		</li>
-		<li test-id='4' class='node then pass' status='pass'>
+		<li test-id='4' class='node when pass' status='pass'>
 			
-			<b>Then</b>
+			<b>When</b>
 			
-			<span class="bdd-step-name">Then navigate to landing page</span>
+			<span class="bdd-step-name">When navigate to precision marketer</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -223,7 +222,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to intent management</span>
+			<span class="bdd-step-name">Then navigate to life cycle marketing</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -231,7 +230,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to programs</span>
+			<span class="bdd-step-name">Then navigate to campaign category from sheet "campaignCategory"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -239,142 +238,57 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then choose program from sheet "SMSprogram"</span>
+			<span class="bdd-step-name">Then click on Campaign edit button from sheet "campaignBC"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
-		<li test-id='8' class='node then fail' status='fail'>
+		<li test-id='8' class='node then pass' status='pass'>
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"</span>
-				<div class='pre'><textarea>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: [[ChromeDriver: chrome on XP (22431de0823e13e9d8a5d34a2b81c9ef)] -> xpath: //form[@id='scheduleForm']//label[text()='Start Date']/..//*[@id='input']] (tried for 8 second(s) with 500 MILLISECONDS interval)
+			<span class="bdd-step-name">Then edit the campaign recurrece from sheet "campaignBC"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='9' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then click on Campaign view button from sheet "campaignBC"</span>
+				<div class='pre'><textarea>org.openqa.selenium.WebDriverException: unknown error: Element <iron-icon id="icon" class="style-scope paper-icon-button x-scope iron-icon-1" alt="menu">...</iron-icon> is not clickable at point (1338, 408). Other element would receive the click: <vaadin-grid-table-outer-scroller id="outerscroller" class="style-scope vaadin-grid-table">...</vaadin-grid-table-outer-scroller>
+  (Session info: chrome=72.0.3626.119)
+  (Driver info: chromedriver=2.37.544315 (730aa6a5fdba159ac9f4c1e8cbc59bf1b5ce12b7),platform=Windows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
 Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
-System info: host: 'FLY-DT241', ip: '192.168.128.41', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_65'
+System info: host: 'FLY-LP703', ip: '192.168.19.73', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_161'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\SYAM~1.KRI\AppData...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 71.0.3578.98, webStorageEnabled: true}
-Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
-	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:82)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:231)
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\RAHUL~1.CHA\AppDat...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 72.0.3626.119, webStorageEnabled: true}
+Session ID: 99de0391883cc4c815e870646b9e8f15
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:83)
+	at sun.reflect.GeneratedMethodAccessor14.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy22.click(Unknown Source)
 	at baseClasses.JSWaiter.clickElement(JSWaiter.java:33)
 	at baseClasses.JSWaiter.loadClick(JSWaiter.java:96)
-	at pageObjetcs.ProgramPage.programschstart(ProgramPage.java:1072)
-	at pageObjetcs.ProgramPage.createNewProgramRule(ProgramPage.java:579)
-	at stepDefinitions.IntentManagement.CreateNewRuleWithFromSheet(IntentManagement.java:1425)
-	at ✽.Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"(Data Setup/Regression/IntentManagementRegression.feature:47)
+	at pageObjetcs.CommonObjects.clickOptionsIcon(CommonObjects.java:419)
+	at stepDefinitions.CampaignManagement.clickCampaignViewOption(CampaignManagement.java:1343)
+	at ✽.Then click on Campaign view button from sheet "campaignBC"(Regression Scenarios/Regression/CampaignRegressionCases.feature:37)
 </textarea></div>
-			
-		</li>
-		<li test-id='9' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then verify rule created from sheet "rule"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='10' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then navigate to programs</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='11' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then choose program from sheet "APIprogram"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='12' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then create new rule from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='13' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then verify rule created from sheet "rule"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='14' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then navigate to programs</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='15' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then choose program from sheet "USSDprogram"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='16' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then create new rule from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='17' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then verify rule created from sheet "rule"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='18' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then navigate to programs</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='19' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then choose program from sheet "CCprogram"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='20' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='21' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then verify rule created from sheet "rule"</span>
-				<div class='pre'>skipped</div>
-			
-		</li>
-		<li test-id='22' class='node then skip' status='skip'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then navigate to programs</span>
-				<div class='pre'>skipped</div>
 			
 		</li>
 	</ul>
@@ -433,7 +347,7 @@ Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
 				
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NX-BroadcastFunctionality</span>
+						<span class='category-name'>@NDX-CampaignRegressionCases</span>
 						<span class='category-status right'>
 							<span class='label fail'>1</span>
 						</span>
@@ -456,8 +370,42 @@ Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
 								</thead>
 								<tbody>
 									<tr>
-										<td>Feb 12, 2019 11:07:52 AM</td>
-										<td class='linked' test-id='1'>For IntentManagement Regression.</td>
+										<td>Mar 14, 2019 07:50:49 PM</td>
+										<td class='linked' test-id='1'>Campaign Regression Cases</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@NDX-campaignRecurringEdit</span>
+						<span class='category-status right'>
+							<span class='label fail'>1</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							
+							<span class='label red lighten-1 white-text'>Failed: 1</span>
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Mar 14, 2019 07:50:49 PM</td>
+										<td class='linked' test-id='2'>Campaign Regression Cases.Verify Editing campaign recurruence and shedule</td>
 										<td><span class='test-status fail'>fail</span></td>
 									</tr>
 								</tbody>
@@ -490,42 +438,8 @@ Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
 								</thead>
 								<tbody>
 									<tr>
-										<td>Feb 12, 2019 11:07:52 AM</td>
-										<td class='linked' test-id='2'>For IntentManagement Regression..Verify create a program rule</td>
-										<td><span class='test-status fail'>fail</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</li>
-				<li class='category displayed active'>
-					<div class='category-heading'>
-						<span class='category-name'>@createprogramrulereg</span>
-						<span class='category-status right'>
-							<span class='label fail'>1</span>
-						</span>
-					</div>
-					<div class='category-content hide'>
-						<div class='category-status-counts'>
-							
-							<span class='label red lighten-1 white-text'>Failed: 1</span>
-							
-						</div>
-					
-						<div class='category-tests'>
-							<table class='bordered table-results'>
-								<thead>
-									<tr>
-										<th>Timestamp</th>
-										<th>TestName</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Feb 12, 2019 11:07:52 AM</td>
-										<td class='linked' test-id='2'>For IntentManagement Regression..Verify create a program rule</td>
+										<td>Mar 14, 2019 07:50:49 PM</td>
+										<td class='linked' test-id='2'>Campaign Regression Cases.Verify Editing campaign recurruence and shedule</td>
 										<td><span class='test-status fail'>fail</span></td>
 									</tr>
 								</tbody>
@@ -572,7 +486,7 @@ Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
 
                         <li class='exception displayed active'>
                             <div class='exception-heading'>
-                                <span class='exception-name'>org.openqa.selenium.TimeoutException</span>
+                                <span class='exception-name'>org.openqa.selenium.WebDriverException</span>
                                 <span class='exception-count right'><span class='label red lighten-1 white-text'>1</span></span>
                             </div>
                             <div class='exception-content hide'>
@@ -587,22 +501,41 @@ Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
                                         </thead>
                                         <tbody>
                                                     <tr>
-                                                        <td>Feb 12, 2019 11:09:33 AM</td>
-                                                        <td class='linked' test-id='8'>For IntentManagement Regression..Verify create a program rule.Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"</td>
-                                                        <td><pre><textarea>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: [[ChromeDriver: chrome on XP (22431de0823e13e9d8a5d34a2b81c9ef)] -> xpath: //form[@id='scheduleForm']//label[text()='Start Date']/..//*[@id='input']] (tried for 8 second(s) with 500 MILLISECONDS interval)
+                                                        <td>Mar 14, 2019 07:52:28 PM</td>
+                                                        <td class='linked' test-id='9'>Campaign Regression Cases.Verify Editing campaign recurruence and shedule.Then click on Campaign view button from sheet "campaignBC"</td>
+                                                        <td><pre><textarea>org.openqa.selenium.WebDriverException: unknown error: Element <iron-icon id="icon" class="style-scope paper-icon-button x-scope iron-icon-1" alt="menu">...</iron-icon> is not clickable at point (1338, 408). Other element would receive the click: <vaadin-grid-table-outer-scroller id="outerscroller" class="style-scope vaadin-grid-table">...</vaadin-grid-table-outer-scroller>
+  (Session info: chrome=72.0.3626.119)
+  (Driver info: chromedriver=2.37.544315 (730aa6a5fdba159ac9f4c1e8cbc59bf1b5ce12b7),platform=Windows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
 Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
-System info: host: 'FLY-DT241', ip: '192.168.128.41', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_65'
+System info: host: 'FLY-LP703', ip: '192.168.19.73', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_161'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\SYAM~1.KRI\AppData...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 71.0.3578.98, webStorageEnabled: true}
-Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
-	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:82)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:231)
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\RAHUL~1.CHA\AppDat...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 72.0.3626.119, webStorageEnabled: true}
+Session ID: 99de0391883cc4c815e870646b9e8f15
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:83)
+	at sun.reflect.GeneratedMethodAccessor14.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy22.click(Unknown Source)
 	at baseClasses.JSWaiter.clickElement(JSWaiter.java:33)
 	at baseClasses.JSWaiter.loadClick(JSWaiter.java:96)
-	at pageObjetcs.ProgramPage.programschstart(ProgramPage.java:1072)
-	at pageObjetcs.ProgramPage.createNewProgramRule(ProgramPage.java:579)
-	at stepDefinitions.IntentManagement.CreateNewRuleWithFromSheet(IntentManagement.java:1425)
-	at ✽.Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"(Data Setup/Regression/IntentManagementRegression.feature:47)
+	at pageObjetcs.CommonObjects.clickOptionsIcon(CommonObjects.java:419)
+	at stepDefinitions.CampaignManagement.clickCampaignViewOption(CampaignManagement.java:1343)
+	at ✽.Then click on Campaign view button from sheet "campaignBC"(Regression Scenarios/Regression/CampaignRegressionCases.feature:37)
 </textarea></pre></td>
                                                     </tr>
                                         </tbody>
@@ -641,25 +574,25 @@ Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>20</div>
+					<div class='panel-lead'>7</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Feb 12, 2019 11:07:52 AM</div>
+					<div class='panel-lead'>Mar 14, 2019 07:50:48 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Feb 12, 2019 11:11:37 AM</div>
+			 		<div class='panel-lead'>Mar 14, 2019 07:53:13 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>225,064ms</div>
+					<div class='panel-lead'>144,831ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -674,19 +607,19 @@ Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
 							<th>Others</th>
 						</tr>
 						<tr>
-							<td>@NX-BroadcastFunctionality</td>
+							<td>@NDX-CampaignRegressionCases</td>
+							<td>0</td>
+							<td>1</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>@NDX-campaignRecurringEdit</td>
 							<td>0</td>
 							<td>1</td>
 							<td>0</td>
 						</tr>
 						<tr>
 							<td>@initBrowser</td>
-							<td>0</td>
-							<td>1</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<td>@createprogramrulereg</td>
 							<td>0</td>
 							<td>1</td>
 							<td>0</td>
@@ -721,14 +654,14 @@ Session ID: 22431de0823e13e9d8a5d34a2b81c9ef
 				infoChild: 0,
 				exceptionsChild: 1,
 				
-				passGrandChild: 5,
+				passGrandChild: 6,
 				failGrandChild: 1,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,
 				warningGrandChild: 0,
-				skipGrandChild: 14,
+				skipGrandChild: 0,
 				infoGrandChild: 0,
-				exceptionsGrandChild: 15,
+				exceptionsGrandChild: 1,
 			};
 		</script>
 		
