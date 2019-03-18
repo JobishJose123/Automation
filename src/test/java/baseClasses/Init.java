@@ -93,7 +93,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	public final String AGE_DYNAMIC_VARIABLE = "Age_Q990";
 	public final String NAME_PROFILE_FIELD = "First Name_q11";
 	public final String SELENIUM_PARTNER = "selenium_partner";
-	public final String INVENTORY_UNLIMITED = "Unlimited";
+	
 	public final String USAGE_METRIC_UNIQUE = "Unique_Metric";
 	public String KPI_TEXT1 ="";
 	public String KPI_TEXT2 ="";
@@ -111,6 +111,9 @@ public static StringBuilder stringBuilderForCsvReport;
 	public final String SELENIUM_Target_List = "selenium_list_target";
 	public final String SELENIUM_TARGET_GROUP="Target Group_q11";
 	public final String SEL_REWARD ="sel_reward";
+	public final String INVENTORY_UNLIMITED = "Unlimited";
+	public final String INVENTORY_ONEPERDAY="sel_one_per_day";
+	public final String INVENTORY_BLACKOUTALWAYS="selenium_blackout_always";
 }
 //public class Init {
 //public static WebDriver driver;
