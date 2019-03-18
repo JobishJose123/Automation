@@ -11,6 +11,10 @@ Feature: For IntentManagement customer care Regression.
     Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
     Then choose program from sheet "CCprogram"
     Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+    Then wait for 2 minutes
+    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+    Then wait for 2 minutes
+    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
     Then verify rule created from sheet "rule"
     Then wait for "A" status of rule
     Then logout

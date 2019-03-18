@@ -537,7 +537,9 @@ private WebElement rulessenderid2
 		clickProductFieldOption();
 		chooseProduct(name);
 		Thread.sleep(2000);
-		clickPorogramProceedButton();
+		selectoffersinrules();
+		Thread.sleep(2000);
+		
 		//System.out.println("test");
 		
 		if(!offerType.contains("STV")) {
@@ -2010,6 +2012,24 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 			jswait.loadClick("//paper-item[contains(.,'View Rules')]");
 			Thread.sleep(2000);
 			
+			
+			}
+	   
+	   public void selectoffersinrules() throws java.lang.Exception {
+		   int i=programoffer;
+		   Thread.sleep(2000);
+			if(jswait.checkVisibility("//paper-button[contains(.,'Select Offer')]")) {			
+			jswait.loadClick("//paper-button[contains(.,'Select Offer')]");
+			Thread.sleep(2000);
+			jswait.loadClick("(//h4[contains(.,'Offer')][1])["+i+"]");
+			Thread.sleep(2000);
+			
+			jswait.loadClick("//paper-button[contains(.,'Done')]");
+			programoffer++;
+			clickPorogramProceedButton();
+			}else{
+				clickPorogramProceedButton();
+			}
 			
 			}
 	 
