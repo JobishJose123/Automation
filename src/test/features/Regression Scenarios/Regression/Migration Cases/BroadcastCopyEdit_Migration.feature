@@ -321,7 +321,7 @@ Verify BC after edit with new Saved segment TriggerOneoff BC
     Then navigate to campaign category from sheet "campaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then navigate to "One-time" broadcasts
-    Then click on delete from workbook "bcInputDataForEdit" and sheet "one-offBCEdit"
+    Then click on delete from workbook "bcInputDataForEdit" and sheet "TriggerOneoffEdit"
     Then click on toggleAutoRefresh
      #    ************************ Seeding OneOFF BC**************   
     

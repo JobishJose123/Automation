@@ -1312,8 +1312,8 @@ Then click on toggleAutoRefresh
 Then wait until status of "one-offBC" is "Completed"
   
     
-    @NDX-verifyBCNotification  @initBrowser 
-  Scenario: Verify BC Notification for one-off Bc
+    @NDX-7945  @initBrowser 
+  Scenario: Verify BC Notification for one-off Bc new
   
     Given login
     When navigate to precision marketer
@@ -1324,11 +1324,9 @@ Then wait until status of "one-offBC" is "Completed"
     Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
     Then verify create BC Notification
     Then activate bc
-    Then wait until status of "one-offBC" is "Targeting"
+   Then wait until status of "one-offBC" is "Completed"
     Then verify the BC notification in mail "Rendering" from workbook "bcInputData" and sheet "one-offBC"
-     Then verify the BC notification in mail "Delivering" from workbook "bcInputData" and sheet "one-offBC"
-    Then click on toggleAutoRefresh
-    Then wait until status of "one-offBC" is "Completed"
+     Then verify the BC notification in mail "Delivering" from workbook "bcInputData" and sheet "one-offBC" 
     Then verify the BC notification in mail "Completed" from workbook "bcInputData" and sheet "one-offBC"
     
     
@@ -1366,22 +1364,4 @@ Then wait until status of "one-offBC" is "Completed"
   
   
   
-  #  @NDX-DNCExclusionBC @initBrowser 
-#  Scenario: Verify Creating one-off BC with DNCExclusionBC
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then click create new broadcast button
-#    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
-#    Then activate bc
-#    Then wait until status of "one-offBC" is "Completed"
-#    Then provide file for conversion
-#    Then navigate to reports
-#    Then navigate to customer profile
-#    Then search msisdn "919491750002"
-#    Then click on events tab
-#    Then wait for comversion event
-#    Then remove file for conversion
-#    Then wait for reward in consumer profile
+  

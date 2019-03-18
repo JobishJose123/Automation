@@ -6,8 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -114,6 +118,117 @@ String file = "";
         workbook.write(outFile);   //printing the data in the new file
         outFile.close(); 
     }
+    
+    
+    public void addDataToParllelSheet(String parllelRunSheet, String bcName, String campaignName,String camapignCategoryName,String offerName,String condition,String inventory,String description, String bcType, String bcSheet) throws Exception {
+    	setExcelFile("parallelRunBC", parllelRunSheet);
+    	int countrows=sh.getLastRowNum()-sh.getFirstRowNum();
+    	Row newrow=sh.createRow(countrows+1);
+    	Cell cell;
+    	if(newrow.getLastCellNum()==-1) {
+    		
+            cell=newrow.createCell(0); 
+			cell.setCellValue("Broadcast");
+			
+			cell=newrow.createCell(1);
+			cell.setCellValue(bcName);
+			
+			cell=newrow.createCell(2);
+			cell.setCellValue(description);
+			
+			CalenderUtility cu = new CalenderUtility();
+			cell=newrow.createCell(3);
+			cell.setCellValue(cu.getCurrentDate("dd MMM YYYY hh:mm aaa z"));
+			
+			cell=newrow.createCell(4);
+			cell.setCellValue(camapignCategoryName);
+			
+			cell=newrow.createCell(5);
+			cell.setCellValue(campaignName);
+			
+			cell=newrow.createCell(6);
+			cell.setCellValue(offerName);
+			
+			cell=newrow.createCell(7);
+			cell.setCellValue(inventory);
+			
+			cell=newrow.createCell(8);
+			cell.setCellValue(bcType);
+			
+			cell=newrow.createCell(9);
+			cell.setCellValue(bcSheet);
+    	}
+
+    	FileOutputStream outFile =new FileOutputStream(new File(file));  //Creating new file
+        workbook.write(outFile);   //printing the data in the new file
+        outFile.close();
+        Thread.sleep(1000);
+    	
+    }
+    
+    
+    public LinkedHashMap<String, String> extractDataFromExcelFile(String sheet,String bcColName, String collName) throws Exception {
+    	setExcelFile("parallelRunBC", sheet);
+		 int countrows=sh.getLastRowNum()-sh.getFirstRowNum();
+		 System.out.println(countrows);
+		 //int coll=1;
+		 //ArrayList<String> al=new ArrayList<String>();
+		int Coll1= getColumnNumber(bcColName);
+		int Coll2=getColumnNumber(collName);
+		 LinkedHashMap<String,String> lhm=new LinkedHashMap<String,String>(); 
+		 for(int i=1;i<=countrows;i++) {
+          lhm.put((sh.getRow(i).getCell(Coll1)).toString(),(sh.getRow(i).getCell(Coll2)).toString());
+
+		 }
+		
+		 return lhm;
+	}
+	
+	
+    /****
+     * 
+     * when data available in excel we insert the data dynamically into last row
+     * 
+     * @param args parllelworkbook: parllelRunBC, sheet: parllelRunBC, status: we are taken from UI and inserted here
+     * @throws Exception 
+     */
+	public void insertLastColumnValues(String parllelworkbook, String sheet, String status,String bcname, String searchcolumn,String writeColumn) throws Exception {
+		setExcelFile(parllelworkbook, sheet);
+		int countrows = sh.getLastRowNum() - sh.getFirstRowNum();
+		//int columncount = sh.getRow(1).getLastCellNum();
+		//System.out.println(columncount);
+		int getCellNumber=getColumnNumber(searchcolumn);
+		int columnNumber = getColumnNumber(writeColumn);
+		System.out.println("searchcolumn number "+ getCellNumber);
+		System.out.println("writeColumn  number "+ columnNumber);
+		for(int row=1;row<=countrows;row++) {
+			
+			if(sh.getRow(row).getCell(getCellNumber).toString().contentEquals(bcname)){
+				
+					System.out.println("enter data to excel");
+			if(sh.getRow(row).getCell(columnNumber)==null){
+			     Cell column = sh.getRow(row).createCell(columnNumber);
+			     //column.getCellTypeEnum();
+			      column.setCellValue(status);
+			      }else {
+						sh.getRow(row).getCell(columnNumber).setCellValue(status);
+					}
+			
+			 
+			}//outer if
+		
+		}//for
+		
+		
+		
+		FileOutputStream outFile =new FileOutputStream(new File(file));  //Creating new file
+        workbook.write(outFile);   //printing the data in the new file
+        outFile.close();
+        Thread.sleep(1000);
+
+	}//method
+    
+    
     public static void main(String args[]) {
     	
     	ExcelHelper eh = new ExcelHelper();

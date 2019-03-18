@@ -1303,8 +1303,8 @@ Scenario: Verify Triggerable Recurring Bc child BCs Dates
     
     
   
-  @NDX-bCNOtification
-  Scenario: Verify BC Notification for one-off Bc
+  @NDX-7946
+  Scenario: Verify BC Notification for one-off Bc migration
   
     Given login
     When navigate to precision marketer
@@ -1314,11 +1314,9 @@ Scenario: Verify Triggerable Recurring Bc child BCs Dates
     Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerOneoffEdit"
     Then edit the Delevery tab details from workbook "bcInputDataForEdit" sheet "TriggerOneoffEdit"
 	Then activate bc
-    Then wait until status of "one-offBC" is "Targeting"
+     Then wait until status of "one-offBC" is "Completed"
     Then verify the BC notification in mail "Rendering" from workbook "bcInputDataForEdit" and sheet "TriggerOneoffEdit"
     Then verify the BC notification in mail "Delivering" from workbook "bcInputDataForEdit" and sheet "TriggerOneoffEdit"
-    Then click on toggleAutoRefresh
-    Then wait until status of "one-offBC" is "Completed"
     Then verify the BC notification in mail "Completed" from workbook "bcInputDataForEdit" and sheet "TriggerOneoffEdit"
     
     

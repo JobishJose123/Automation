@@ -17,7 +17,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import baseClasses.CalenderUtility;
 import baseClasses.ExcelHelper;
+import baseClasses.GoogleSpreadsheetImpl;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 
@@ -915,7 +917,61 @@ public void savedetailsofdatasetup() throws Exception {
 		
 		
 		}
+
+
+public void speadSheetTestFunction(String excelFile, String bcSheet, String key,String speadSheetID, String speadSheetName) throws Exception {
+	System.out.println("Inside Test Function"+bcSheet+":::::"+key); 
+	GoogleSpreadsheetImpl sqs = new GoogleSpreadsheetImpl();
+	eh.setExcelFile(excelFile, bcSheet);
+	sqs.initializeService();
 	
+	sqs.setSpreadsheet(speadSheetID,speadSheetName);
+	int lastRow = Integer.parseInt(sqs.getCell(0, 4))-1;
+	forExcelSpreadsheet = lastRow;
+	if(forExcelSpreadsheet == -1) {
+		forExcelSpreadsheet = sqs.getLastUsedRow();
+	}
+	int row = forExcelSpreadsheet++;
+//	System.out.println(row);
+	if(excelFile.contentEquals("bcInputData")) {
+		sqs.setCell(row, 0, "Broadcast");
+		sqs.setCell(row, 1, eh.getCellByColumnName("BC Name"));
+	}
+	else if(excelFile.contentEquals("offerInputData")) {
+		sqs.setCell(row, 0, "Offer");
+		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+	}
+	else if(excelFile.contentEquals("productInputData")) {
+		sqs.setCell(row, 0, "Product");
+		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+	}
+	else if(excelFile.contentEquals("productClassInputData")) {
+		sqs.setCell(row, 0, "Product Class");
+		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+	}
+	else if(excelFile.contentEquals("offerCatalogInputData")) {
+		sqs.setCell(row, 0, "Offer Catalog");
+		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+	}
+	else if(excelFile.contentEquals("campaignCategoryInputData")) {
+		sqs.setCell(row, 0, "Campaign Category");
+		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+	}
+	else if(excelFile.contentEquals("campaignInputData")) {
+		sqs.setCell(row, 0, "Campaign");
+		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+	}
+	else {
+		Exception e = new Exception("Excel file not adde to else if");
+		throw e;
+	}
+	sqs.setCell(row, 2, key);
+	CalenderUtility cu = new CalenderUtility();
+	sqs.setCell(row, 3, cu.getCurrentDate("dd MMM YYYY hh:mm aaa z"));
+}
+	
+
+
 	
 	
 }

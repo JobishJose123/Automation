@@ -87,7 +87,7 @@ Feature: Data set up for edit and copy BCs
     Then navigate to campaign category from sheet "campaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
+	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
     Then save bc
     
      @NDX-CreateTriggerOneoffBC  @initBrowser

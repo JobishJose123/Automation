@@ -47,7 +47,9 @@ import pageObjetcs.LoginPageObjects;
 import pageObjetcs.OfferPageObjects;
 import pageObjetcs.TargetConditionObjects;
 import pageObjetcs.dkpageobjects;
-
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 public class BroadcastSteps extends Init {
 
 	JSWaiter jswait = new JSWaiter();
@@ -4043,7 +4045,6 @@ public class BroadcastSteps extends Init {
 	public void click_on_toggleAutoRefresh() throws Throwable {
 		commonObjects.toggleAutoRefresh();
 	}
-	
 
 	
 	
@@ -4101,21 +4102,138 @@ public void verify_the_BC_notification_in_mail_from_workbook_and_sheet(String st
 		}
    
 }
-@Then("^wait until status of \"([^\"]*)\" from file \"([^\"]*)\" is \"([^\"]*)\"$")
-public void wait_until_status_of_from_file_is(String bcSheet, String bcFile, String status) throws Throwable {
-	eh.setExcelFile(bcFile, bcSheet);
-	commonObjects.filterName(eh.getCellByColumnName("BC Name"));
-	commonObjects.toggleAutoRefresh();
-	String statusOfBc = broadcastPageObjects.getTopBcStatus();
-	TimeoutImpl t = new TimeoutImpl();
-	t.startTimer();
-	while (!statusOfBc.contains(status) && t.checkTimerMin(20)) {
-		statusOfBc = broadcastPageObjects.getTopBcStatus();
-		System.out.println(statusOfBc);
-		Thread.sleep(3000);
+@Then("^enter details for new broadcast with condition (.*) from sheet \"([^\"]*)\" with \"([^\"]*)\" and inventory \"([^\"]*)\"$")
+public void enter_details_for_new_broadcast_with_condition_digitalPersonaGT_from_sheet_with_and_inventory(String condition, String sheet, String offer, String inventory) throws Throwable {
+   
+	System.out.println(condition);
+	Thread.sleep(3000);
+	ExcelHelper list = new ExcelHelper();
+	list.setExcelFile("registrationListInputData", "Sheet1");
+	eM.setExcelFile("bcInputData", sheet);
+//	String baseList = list.getCell(1, 2).toString();
+	ExcelHelper offerExcel = new ExcelHelper();
+	offerExcel.setExcelFile("offerInputData", offer);
+	String name = (String) eM.getCell(1, 0);
+	name = RandomNameGenerator.getRandomName(name);
+	eM.setCell(1, 0, name);
+	String bc_type = (String) eM.getCell(1, 7);
+	
+	eh.setExcelFile("bcInputData", sheet);
+	String DNCExclusion = "";
+	try {
+		DNCExclusion = eh.getCellByColumnName("DNCExclusion");
+	} catch (Exception e) {
+		DNCExclusion = "none";
 	}
-	Assert.assertTrue("Invalid status of BC", statusOfBc.contains(status));
+	
+	if(inventory.equalsIgnoreCase("Unlimited")){
+		broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_UNLIMITED, DNCExclusion);
+	}else if(inventory.equalsIgnoreCase("OneperDay")){ 
+		broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_ONEPERDAY, DNCExclusion);
+	}else if(inventory.equalsIgnoreCase("BlackoutAlways")) {
+		broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_BLACKOUTALWAYS, DNCExclusion);
+	}else {
+		System.out.println("no invetory selected, default inventory unlimited ");
+		broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_UNLIMITED, DNCExclusion);
+	}
+	
+	enterDeliveryTabDetails(bc_type, sheet);
 }
 
+
+
+@Then("^save \"([^\"]*)\" migration data to spreadsheet from \"([^\"]*)\" with string (.*)$")
+public void save_migration_data_to_spreadsheet_from_with_string_one_off_bc_blackout_with_condition_Condition(String workbook, String bcsheet, String key) throws Throwable {
+String speadSheetID="1JZx7woJSspCYbBdhujwtjCq-TmS778rC68NfLPRJH84";
+String speadSheetName="Migration";
+
+commonObjects.speadSheetTestFunction(workbook, bcsheet, key, speadSheetID, speadSheetName);
+
+}
+
+@Then("^add the BC Data to \"([^\"]*)\" from BCsheet \"([^\"]*)\" campaignname \"([^\"]*)\" campaign category \"([^\"]*)\" offer \"([^\"]*)\" condition \"([^\"]*)\" inventory \"([^\"]*)\" with string (.*)$")
+public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition_inventory_with_string(String parllelRunSheet, String bcSheet, String campaignSheet, String campaignCategory, String offerSheet, String condition, String inventory, String description) throws Throwable {
+
+eh.setExcelFile("bcInputData", bcSheet);
+String bcName=eh.getCell(1,0).toString();
+String bcType=eh.getCell(1,7).toString();
+
+eh.setExcelFile("offerInputData", offerSheet);
+String offername=eh.getCell(1,0).toString();
+
+eh.setExcelFile("campaignCategoryInputData", campaignCategory);
+String campaignCategoryName=eh.getCell(1,0).toString();
+
+eh.setExcelFile("campaignInputData", campaignSheet);
+String campaignName=eh.getCell(1,0).toString();
+
+eh.addDataToParllelSheet(parllelRunSheet, bcName, campaignName, campaignCategoryName, offername, condition, inventory, description, bcType,bcSheet);
 	
 }
+
+/***
+* 
+* @param parallelRunBCSheet , hm.getKey()=bcname, hm.getValue()=bcSheet
+* @throws Throwable
+*/
+@Then("^Activate the BCs from sheet \"([^\"]*)\"$")
+public void activate_the_BCs_from_sheet(String parallelRunBCSheet) throws Throwable {
+eh.setExcelFile("parallelRunBC", parallelRunBCSheet);
+Thread.sleep(2000);
+String statusOfBC="";
+// here we passing the parameters sheetname and for bcname: Name(coulmn name), for bcsheet : BCSheet(column name) keys are bcname and values are bcsheet like(oneoffBC, rucurringBC)
+LinkedHashMap<String, String> dataList = eh.extractDataFromExcelFile(parallelRunBCSheet,"Name","BCSheet");
+for (Entry<String, String> hm: dataList.entrySet()) {
+
+	try { 
+
+		broadcastPageObjects.navigate_to_broadcasts(hm.getValue());
+	    commonObjects.filterBCName(hm.getValue(), hm.getKey());
+	    Thread.sleep(1000);
+	    statusOfBC=broadcastPageObjects.getTopBcStatus(hm.getValue(),hm.getKey());
+	    
+			if (statusOfBC.equals("Planned")) {
+				commonObjects.clickBCOptionsIcon(hm.getValue());
+				commonObjects.clickEditOption();
+
+				edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", hm.getValue());
+				activateBc();
+
+				Thread.sleep(3000);
+				broadcastPageObjects.navigate_to_broadcasts(hm.getValue());
+				commonObjects.filterBCName(hm.getValue(), hm.getKey());
+				// broadcastPageObjects.getTopBcStatus(bcSheetName,bcname);
+				statusOfBC = broadcastPageObjects.getTopBcStatus(hm.getValue(), hm.getKey());
+
+				eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, statusOfBC, hm.getKey(), "Name",
+						"StatusofBC");
+
+				Thread.sleep(3000);
+
+				System.out.println(hm.getKey() + " is acivated");
+			} else {
+
+				statusOfBC = broadcastPageObjects.getTopBcStatus(hm.getValue(), hm.getKey());
+
+				eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, statusOfBC, hm.getKey(), "Name",
+						"StatusofBC");
+			}
+		
+	}catch (Exception e) {
+		commonObjects.filterBCName(hm.getValue(), hm.getKey());
+		statusOfBC=broadcastPageObjects.getTopBcStatus(hm.getValue(),hm.getKey());
+		System.out.println(statusOfBC);
+		eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,statusOfBC, hm.getKey(), "Name","StatusofBC" );
+		//System.out.println(hm.getKey()+" is not acivated");
+		}
+		
+		
+	   
+}
+
+Thread.sleep(2000);
+}
+	
+}
+
+
