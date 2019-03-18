@@ -1381,4 +1381,12 @@ public class CampaignManagement extends Init{
 						campaignObjects.clickSaveCampaignButton();
 						
 				    }
+				 
+				 @Then("^verify the campaign recurrece from sheet \"([^\"]*)\"$")
+				    public void verifyCampaignRecurrence(String sheet) throws Throwable
+				    {   
+				    	Thread.sleep(2000);
+				    	campaignObjects.verifyCampaignview();						
+				    }
+				 
 }

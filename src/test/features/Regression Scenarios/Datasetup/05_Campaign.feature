@@ -5,7 +5,7 @@
 @NDX-createcampaignFeature
 Feature: campaign for data setup
 
-  @NDX-createcampaign
+   @NDX-5495, @NDX-5495
    @initBrowser @closeBrowser
   Scenario: Verify creating campaign for data setup
     Given login
@@ -15,14 +15,14 @@ Feature: campaign for data setup
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with catalog from campaignBc with defautCatalog
 
-@NDX-createrecurringcampaign
+  @NDX-8010, @NDX-356
    @initBrowser @closeBrowser
-  Scenario: Verify creating campaign for data setup
+  Scenario: Verify creating a recurring campaign for data setup
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "campaignCategory"
-    Then create new recurring campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then create new recurring campaign from sheet "recurringcampaign" with catalog "defaultCatalog"
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with catalog from campaignBc with defautCatalog
       
     

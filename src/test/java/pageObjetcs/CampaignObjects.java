@@ -265,24 +265,37 @@ public class CampaignObjects extends Init{
 	
 	@FindBy(xpath=".//*[@id='broadcastSummary']//paper-button[contains(.,'Request Approval')]")
 	private WebElement bcRequestApproval;
-
 	
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="/html//h4[contains(.,'Basic Details')]")
+	private WebElement Campaignviewbasicdetails;
+	
+	@FindBy(xpath="/html//h4[contains(.,'Schedule Details')]")
+	private WebElement Campaignviewscheduledetails;
+	
+	
+    @FindBy(xpath="//div/paper-checkbox[@role='checkbox']/div[contains(.,'Recurring')]/../div[1]")
+    private WebElement Recurringcheckbox;
+    
+    @FindBy(xpath="//label[.='End Type']//../Input")
+    private WebElement EndtypeInput;
+    
+    @FindBy(xpath="//paper-listbox[@role='listbox']/paper-item[contains(.,'Never')]")
+    private WebElement Endtypeoptions ;
+    
+    @FindBy(xpath="//label[.='Recurring Pattern']//../Input")
+    private WebElement RecurringpatternInput;
+    
+    @FindBy(xpath="//paper-listbox[@role='listbox']/paper-item[contains(.,'Daily')]")
+    private WebElement RecrrungpatternDaily; 
+    
+    @FindBy(xpath="//div//label[.='Recurring Frequency']//../input[@id='input']")
+    private WebElement RecurringfrequencyInput;
+    
+    @FindBy(xpath="//paper-listbox[@role='listbox']/paper-item[contains(.,'Weekly')]")
+    private WebElement RecrrungpatternWeekly;
+    
+    @FindBy(xpath="//paper-card/weekday-selector/paper-checkbox[1]/div[@id='checkboxContainer']")
+    private WebElement RecurSunday;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -2110,22 +2123,30 @@ public void selectBothUserForBCApproval() throws Exception{
       clickSaveCampaignButton();
 	}
 	public void enterCampaignRecurringDetails() throws Exception {
-		jswait.loadClick("//div/paper-checkbox[@role='checkbox']/div[contains(.,'Recurring')]/../div[1]");
-		jswait.loadClick("//label[.='End Type']//../Input");
-		jswait.loadClick("//paper-listbox[@role='listbox']/paper-item[contains(.,'Never')]");
-		jswait.loadClick("//label[.='Recurring Pattern']//../Input");
-		jswait.loadClick("//paper-listbox[@role='listbox']/paper-item[contains(.,'Daily')]");
-		jswait.loadClick("//div//label[.='Recurring Frequency']//../input[@id='input']");
-		jswait.loadSendKeys("//div//label[.='Recurring Frequency']//../input[@id='input']", "12");
+		jswait.loadClick(Recurringcheckbox);
+		jswait.loadClick(EndtypeInput);
+		jswait.loadClick(Endtypeoptions);
+		jswait.loadClick(RecurringpatternInput);
+		jswait.loadClick(RecrrungpatternDaily);
+		jswait.loadClick(RecurringfrequencyInput);
+		jswait.loadSendKeys(RecurringfrequencyInput, "12");
 
 	}
 	public void editCampaignRecurringDetails() throws Exception {
-		jswait.loadClick("//label[.='Recurring Pattern']//../Input");
-		jswait.loadClick("//paper-listbox[@role='listbox']/paper-item[contains(.,'Weekly')]");
-		jswait.loadClick("//div//label[.='Recurring Frequency']//../input[@id='input']");
-		jswait.loadSendKeys("//div//label[.='Recurring Frequency']//../input[@id='input']", "13");
-		jswait.loadClick("//paper-card/weekday-selector/paper-checkbox[1]/div[@id='checkboxContainer']");
+		jswait.loadClick(RecurringpatternInput);
+		jswait.loadClick(RecrrungpatternWeekly);
+		jswait.loadClick(RecurringfrequencyInput);
+		jswait.loadSendKeys(RecurringfrequencyInput, "13");
+		jswait.loadClick(RecurSunday);
 		
 	}
+	
+	public void verifyCampaignview() throws Exception {
+		jswait.loadClick(Campaignviewbasicdetails);
+    	assertTrue("In correct campaign details", driver.findElement(By.xpath("/html//iron-collapse[@id='detailTab']/paper-card//p[.='EDITED Campaign to check bc creation in selenium']")).isDisplayed());
+    	jswait.loadClick(Campaignviewscheduledetails);
+    	Thread.sleep(2000);
+    	assertTrue("Element not displayed", driver.findElement(By.linkText("13 week(s)   On Sunday")).isDisplayed());    	
+	}   
 
 }
