@@ -2,7 +2,7 @@
 #Keywords Summary :Offer creation for regression data setup
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
 
-@Offer_datasetupRegression
+@Offer_verificationRegression
 Feature: Test suite for offer verification test cases
  
  
