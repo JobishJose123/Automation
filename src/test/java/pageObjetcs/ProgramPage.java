@@ -540,6 +540,7 @@ private WebElement rulessenderid2
 		selectoffersinrules();
 		Thread.sleep(2000);
 		
+		
 		//System.out.println("test");
 		
 		if(!offerType.contains("STV")) {
@@ -552,7 +553,8 @@ private WebElement rulessenderid2
 		ruleafterinput2(); 
 		ruledays();
 		Thread.sleep(2000);
-	}
+		}
+	
 		if(touchpointType.contentEquals("sms")){
 			System.out.println("inside sms");
 			rulessenderid();
@@ -574,6 +576,7 @@ private WebElement rulessenderid2
 		Thread.sleep(2000);
 		ruleroute2();
 		clickPorogramProceedButton();
+		
 		
 		
 		// same path for both program and rule thats why used this fns here//
@@ -1352,6 +1355,8 @@ public void touchpointpgmdeletecheck() throws Exception{
 			Thread.sleep(3000);
 			jswait.loadSendKeys(programofferclick, offer);
 			Thread.sleep(4000);
+			jswait.loadSendKeys(programofferclick, offer);
+			Thread.sleep(3000);
 			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
 	}
 

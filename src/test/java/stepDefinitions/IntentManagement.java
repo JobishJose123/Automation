@@ -1631,6 +1631,16 @@ System.out.println(editname+"program has edited successfully");
 		}
 		
 		
+	
+		
+		@Then("^navigate to rules after edit$")
+		public void navigatetorulesafteredit() throws Throwable {
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-button[contains(.,'Rules')]");
+			driver.navigate().refresh();
+			Thread.sleep(2000);
+		    
+		}
 		
 		
 		
@@ -2298,10 +2308,58 @@ System.out.println(editname+"program has edited successfully");
 					 }
 				
 			
-				 
+				  @Then("^verify offer \"([^\"]*)\"$")
+					 public void verify_The_offer_in_CS(String offertype) throws Exception {
+					  String offer;
+						 Thread.sleep(2000);
+						 
+						 offer=jswait.getTextFormElement("//data-table-row/div[@class='cells style-scope data-table-row']/data-table-cell[@class='customer-assessment style-scope']/span[contains(.,'"+offertype+"')]");
+						 System.out.println(offer);
+						 Assert.assertEquals(offer,offertype);
+						 
+					 }
 				
+				  @Then("^enter msisdn again for refresh \"([^\"]*)\"$")
+					 public void msisdnrefresh(String num) throws Exception {
+					  String key=num;
+						 Thread.sleep(2000);
+					
+						jswait.loadClick("//paper-icon-button[@icon=\"icons:create\"]");
+						Thread.sleep(2000);
+						jswait.loadSendKeys("//label[contains(text(),'Customer Number')]/../input", key);
+						 
+						 
+					 }
 				
+				  @Then("^Customercare offer accept$")
+					 public void customercareofferaccept() throws Exception {
+						 Thread.sleep(2000);
+						 jswait.loadClick("//paper-button[contains(.,'Accept')]");
+						 Thread.sleep(2000);
+						 jswait.loadClick("(//paper-button[contains(.,'Yes')])[1]");
+						 Thread.sleep(2000);
+						 
+						 jswait.loadClick("//div[@class='tab-content style-scope paper-tab'][contains(.,'History')]");
+						 Thread.sleep(4000);
+						 driver.navigate().refresh();
+						 String status=jswait.getTextFormElement("//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div/data-table-row/div/data-table-cell[9]");
+						 System.out.println(status);
+						 Thread.sleep(2000);
+							Assert.assertEquals("Accepted, No Reward",status);
+					 }
 				
+				  @Then("^change Customercare Prioritization Logic to \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+					 public void changeprioritizationlogic(String type,String sheet) throws Exception {
+						 Thread.sleep(2000);
+						 ExcelHelper programExcel = new ExcelHelper();
+						    eh.setExcelFile("touchpointInputData",sheet);
+							String name = (String) eh.getCell(1, 0);
+							Thread.sleep(2000);
+							touchpointPage.customercaretouchpointsclick(name);
+						 
+						touchpointPage.customerCareSelectPrioritizationLogicnew(type);
+						 
+					 }
 				
 				
 				
