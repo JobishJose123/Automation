@@ -296,6 +296,44 @@ public class CampaignObjects extends Init{
     
     @FindBy(xpath="//paper-card/weekday-selector/paper-checkbox[1]/div[@id='checkboxContainer']")
     private WebElement RecurSunday;
+    @FindBy(xpath="//iron-icon[@icon='icons:block']")
+	private WebElement abortCamapign;
+	@FindBy(xpath="(//paper-dialog[@id='confirmBoxAbort']//following::paper-button[contains(.,'Yes')])[1]")
+	private WebElement campaignAbortYes ;
+	@FindBy(xpath="(//span[@class='style-scope campaign-list'])[1]")
+	private WebElement statusOfCamapign;
+	@FindBy(xpath="//paper-item[contains(.,'Show History')]")
+	private WebElement showHistory;
+	@FindBy(xpath="//div[@class='buttons style-scope campaign-list']//following::paper-button[contains(.,'OK')]")
+	private WebElement history0K;
+	@FindBy(xpath = ".//div[@class='heading layout horizontal justified style-scope create-approval-rule']//input/../input")
+	private WebElement addApprovalRuleName;
+	@FindBy(xpath = "//paper-button[contains(.,'Create New Approval Rule')]")
+	private WebElement createNewApprovalRuleButton;
+	@FindBy(xpath = ".//div[@class='heading layout horizontal justified style-scope create-approval-rule']//h4[contains(.,'Untitled Rule')]//paper-icon-button")
+	private WebElement editRuleNameButton;
+	@FindBy(xpath = ".//paper-checkbox")
+	private List <WebElement> checkboxes;
+	@FindBy(xpath = ".//div[@class='layout horizontal center end-justified style-scope create-approval-rule']//paper-icon-button[@title='Save']")
+	private WebElement saveRuleName;
+	
+	
+	@FindBy(xpath = "//label[contains(.,'Select required')]/../input")
+	private WebElement addUserField;
+	@FindBy(xpath = "//paper-button[contains(.,'Add User')]")
+	private WebElement addUserButton;
+	@FindBy(xpath = ".//div[@class='buttons style-scope approver-level-details']//paper-button[contains(.,'Save')]")
+	private WebElement addUserSave;
+	@FindBy(xpath = ".//div[@class='buttons style-scope create-approval-rule']//paper-button[contains(.,'Save')]")
+	private WebElement addCategorySave;
+	@FindBy(xpath = "//paper-button[contains(.,'Save')]")
+	private WebElement approvalRuleSave;
+	@FindBy(xpath = ".//label[contains(.,'Select required campaign categories')]//following::input[1]")
+	private WebElement cataloginput;
+	@FindBy(xpath = "//paper-button[contains(.,'Add Category')]")
+	private WebElement addCategoryButton;
+	@FindBy(xpath = ".//label[contains(.,'Select required campaign categories')]//following::iron-icon[1]")
+	private WebElement addCategoryDropdown;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -2147,6 +2185,58 @@ public void selectBothUserForBCApproval() throws Exception{
     	jswait.loadClick(Campaignviewscheduledetails);
     	Thread.sleep(2000);
     	assertTrue("Element not displayed", driver.findElement(By.linkText("13 week(s)   On Sunday")).isDisplayed());    	
-	}   
+	}  
+	public String getStatusOfCampaign(String campaignName) throws Exception{
+		String status= "";
+		 status=statusOfCamapign.getAttribute("title");		
+		return status;
+	}
+	
+	public void abortCampaign(String campaignName) throws Exception{
+		commonObjects.clickOptionsIcon();
+		jswait.loadClick(abortCamapign);
+		jswait.loadClick(campaignAbortYes);
+		Thread.sleep(2000);
+		
+	}
+	public void showHistoryDetailsOfCampaign(String statusShown) throws Exception{
+		commonObjects.clickOptionsIcon();
+		jswait.loadClick(showHistory);
+		Thread.sleep(2000);
+		assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+statusShown+"')]"));
+		Thread.sleep(2000);
+		jswait.loadClick(history0K);
+	}
+	public void newApprovalForCampaignHistory(String approvalname,String campaignname) throws Exception{
+		jswait.loadClick(createNewApprovalRuleButton);
+ 	   jswait.loadClick(editRuleNameButton);
+ 	  addApprovalRuleName.clear();
+ 	  jswait.loadSendKeys(addApprovalRuleName, approvalname);
+ 	 jswait.loadClick(saveRuleName);
+ 	jswait.loadClick(addUserButton);
+ 	String user1 = p.getValue("seleniumUser");
+ System.out.println(user1);
+ 	Thread.sleep(2000);
+ jswait.loadSendKeys(addUserField, user1);
+	Thread.sleep(2000);
+	jswait.loadSendKeys(addUserField, user1);
+	jswait.loadClick("//paper-item[contains(.,'"+user1+"')]");
+	jswait.loadClick(addUserSave);
+	Thread.sleep(2000);
+	if(checkboxes.size()>0) 
+		for(WebElement checkbox: checkboxes) 
+			jswait.loadClick(checkbox);
+	Thread.sleep(2000);
+	jswait.loadClick(addCategoryButton);
+	jswait.loadSendKeys(cataloginput, campaignname);
+	Thread.sleep(2000);
+	jswait.loadClick(addCategoryDropdown);
+	Thread.sleep(2000);
+	wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item[contains(.,'"+campaignname+"')]"))).click();
+	jswait.loadClick(addCategorySave);
+	Thread.sleep(2000);
+	jswait.loadClick(approvalRuleSave);
+	}
+	
 
 }
