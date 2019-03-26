@@ -28,7 +28,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import baseClasses.CalenderUtility;
-import baseClasses.EmailHandler;
 import baseClasses.EmailHandlergmail;
 //import baseClasses.EmailHandlergmail;
 import baseClasses.ExcelHelper;
@@ -60,14 +59,18 @@ public class BroadcastPageObjects extends Init {
 	private WebElement exportBroadcast;
 	@FindBy(xpath = "//paper-item[contains(.,'View')]")
 	private WebElement broadcastView;
-	@FindBy(xpath = ".//paper-icon-button[@icon='block']")
-	private WebElement broadcastAbort;
-	@FindBy(xpath = ".//paper-item[contains(.,'Copy')]")
-	private WebElement broadcastCopy;
-	@FindBy(xpath = ".//paper-item[contains(.,'View Details')]")
-	private WebElement broadcastViewDetails;
-	@FindBy(xpath = ".//paper-icon-button[@icon='av:pause-circle-filled']")
-	private WebElement broadcastPause;
+	 @FindBy(xpath = "//paper-icon-button[@icon='block']")
+		private WebElement broadcastAbort;
+		@FindBy(xpath = "//paper-icon-button[@icon='pan-tool']")
+		private WebElement broadcastAbortOtherThanOneTime;
+		
+		
+		@FindBy(xpath = ".//paper-item[contains(.,'Copy')]")
+		private WebElement broadcastCopy;
+		@FindBy(xpath = ".//paper-item[contains(.,'View Details')]")
+		private WebElement broadcastViewDetails;
+		@FindBy(xpath = "//paper-icon-button[@icon='av:pause-circle-filled']")
+		private WebElement broadcastPause;;
 	@FindBy(xpath = ".//paper-item[contains(.,'Send Trial')]")
 	private WebElement broadcastSendTrial;
 	@FindBy(xpath = "//paper-button[contains(.,'Send')]")
@@ -85,7 +88,7 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = "//label[contains(.,'Please enter the email addresses/MSISDNs of recipients')]//following::input[1]")
 	private WebElement sendTrialMailIdField;
 
-	@FindBy(xpath = ".//paper-dialog[@id='confirmBoxAbort']//paper-button[contains(.,'Yes')]")
+	@FindBy(xpath = "//paper-dialog[@id='confirmBoxAbort']//paper-button[contains(.,'Yes')]")
 	private WebElement broadcastAbortYes;
 	@FindBy(xpath = "//paper-dialog[@id='confirmBoxPause']//paper-button[contains(.,'Yes')]")
 	private WebElement broadcastPauseYes;
@@ -228,6 +231,10 @@ public class BroadcastPageObjects extends Init {
 	private WebElement recurringBcEndAtRadio;
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[1]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGrid;
+	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[3]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
+	private WebElement topBcStatusGridForRecurrChild;
+	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[3]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
+	private WebElement topBcStatusGridForSeedingChild;
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[1]/vaadin-grid-table-cell[5]/vaadin-grid-cell-content")
 	private WebElement topBcTargetedGrid;
 	@FindBy(xpath = ".//label[contains(.,'Start Date/Time')]")
@@ -359,8 +366,17 @@ public class BroadcastPageObjects extends Init {
 	private WebElement calculatebtn;
 	@FindBy(xpath = "//schedule-expiry-settings//paper-input-wrapper//input[@id=\"input\"]")
 	private WebElement bcExpireAfterHours;
-	// @FindBy(xpath="")
-	// private WebElement ;
+	@FindBy(xpath = "//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
+	private WebElement filterIcon;
+	@FindBy(xpath="(//div[@id='toggleButton'])[2]")
+	 private WebElement autoRefreshButtonTrigger;
+	@FindBy(xpath="(//div[@id='toggleButton'])[3]")
+	 private WebElement autoRefreshButtonRecurr;
+	@FindBy(xpath="(//div[@id='toggleButton'])[4]")
+	 private WebElement autoRefreshButtonSeeding;
+	 @FindBy(xpath="//span[contains(.,'Do you want to abort all related broadcasts')]//following::paper-button[contains(.,'Yes')]")
+	 private WebElement AbortYes ;
+	
 	// @FindBy(xpath="")
 	// private WebElement ;
 	// @FindBy(xpath="")
@@ -2800,7 +2816,7 @@ public class BroadcastPageObjects extends Init {
 			status = getTopBcStatusOfSeeding(bcName);
 		} else if (sheetname.contains("TriggerReccurringBC")) {
 			status = getTopBcStatusofTrigger(bcName);
-		} else if (sheetname.contentEquals("recurringBC") || sheetname.contentEquals("recurringBCEdit")) {
+		} else if (sheetname.contentEquals("recurringBC") || sheetname.contentEquals("recurringBCEdit")|| sheetname.contentEquals("recurringBCForPause") ){
 			status = getTopBcStatusOfRecurring(bcName);
 		}
 
@@ -2822,5 +2838,65 @@ public class BroadcastPageObjects extends Init {
 		} // elseif end
 
 	}
+	public void pauseBC(String bctype) throws Exception {
+		  
+		  commonObjects.BCOptionIcon(bctype);
+		  clickPauseBroadcastOption();
+		  clickPauseYesButton();
+		  Thread.sleep(3000);
 
-}// class
+	}
+	public void abortBC(String bctype) throws Exception {
+
+		 commonObjects.BCOptionIcon(bctype);
+		 if(bctype.equalsIgnoreCase("onetime")) {
+		clickAbortBroadcastOption();
+		clickAbortYesButton();
+		 }
+		 else {
+			 jswait.loadClick(broadcastAbortOtherThanOneTime);
+			 jswait.loadClick(AbortYes);
+		 }
+		
+		Thread.sleep(3000);
+//		commonObjects.clickOptionsIcon();
+//		clickAbortBroadcastOption();
+//		clickAbortYesButton();
+//		verifyStatusOfBCAfterAbortion();
+	}
+
+	public String getTopBcStatus(String sheetname, String bcName,String bctype) throws Exception {
+		String status = "";
+
+		if (bctype.contains("onetime") ) {
+			jswait.waitUntil(topBcStatusGrid);
+			status = topBcStatusGrid.getText();
+		} else if (bctype.contains("seeding")) {
+			status = getTopBcStatusOfSeeding(bcName);
+			
+		} else if (bctype.contains("trigger")) {
+			status = getTopBcStatusofTrigger(bcName);
+		} else if (bctype.contentEquals("recurring") ){
+			status = getTopBcStatusOfRecurring(bcName);
+		
+		}
+
+		return status;
+		
+	}
+
+	public String getStatusForChildBC(String sheetname, String bcName) throws Exception{
+		String status = "";
+
+		
+			jswait.waitUntil(topBcStatusGridForRecurrChild);
+			status = topBcStatusGridForRecurrChild.getText();
+			return status;
+	}
+}
+
+
+
+
+
+

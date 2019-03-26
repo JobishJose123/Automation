@@ -143,18 +143,18 @@ public class ProductPage extends Init{
 	
 	
 	
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="//paper-button[contains(.,'Proceed')]")
+	private WebElement ProceedButtonbtn ;
+	@FindBy(xpath="(//div[@class='button layout horizontal end-justified style-scope offer-products']//following::paper-button[contains(.,'Add')])[2]")
+   private WebElement Addbtn;
+	@FindBy(xpath="(//div[@class='flex-end-justified style-scope offer-products']//following::paper-button[contains(.,'Cancel')]//following::paper-button[contains(.,'Add')])[1]")
+	private WebElement addProductbtn ;
+	@FindBy(xpath="//paper-button[contains(.,'Save Offer')]")
+	private WebElement SaveOfferbtn;
+	@FindBy(xpath="//paper-button[contains(.,'Yes')]")
+	private WebElement YesbtnToDelete;
+	@FindBy(xpath="//span[contains(.,'edited')]")
+	private WebElement productEdited ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -459,6 +459,60 @@ public class ProductPage extends Init{
 			//Assert.assertTrue(!commonObjects.getTextFormTextField(createProductValue).contains("b"),"text in numeric field value");
 
 		}
+		public void enterDetailsOfProduct(String Productname,String productSheet) throws Exception{
+			eh.setExcelFile("productInputData",productSheet);
+			enterCreateProductName(Productname);
+			jswait.loadSendKeys(createProductDescription, "product created by Selenium");
+		}
+		public void editTheProduct() throws Exception{
+			commonObjects.clickOptionsIcon();
+			commonObjects.clickEditOption();
+			jswait.loadSendKeys(createProductDescription, "product created by Selenium edited");
+			clickCreateProductSaveButton();
+		}
 		
-
+		public void deleteProduct() throws Exception{
+			commonObjects.clickOptionsIcon();
+			commonObjects.clickDeleteOption();
+			jswait.loadClick(YesbtnToDelete);
+			Thread.sleep(2000);
+		}
+		public void editOfferToAddProduct() throws Exception{
+			commonObjects.clickOptionsIcon();
+			commonObjects.clickEditOption();
+			Thread.sleep(2000);
+			
+		}
+		public void addProduct(String productName) throws Exception{
+			jswait.loadClick(ProceedButtonbtn);
+			jswait.loadClick(Addbtn);
+			commonObjects.filterName(productName);
+			jswait.loadClick("//span[contains(.,'"+productName+"')]");
+			jswait.loadClick(addProductbtn);
+			Thread.sleep(2000);
+			jswait.loadClick(ProceedButtonbtn);
+			jswait.loadClick(ProceedButtonbtn);
+			jswait.loadClick(ProceedButtonbtn);
+			jswait.loadClick(SaveOfferbtn);
+			
+		}
+		public void viewOfferTab(String productname) throws Exception{
+			commonObjects.clickOptionsIcon();
+			Thread.sleep(2000);
+			jswait.loadClick("(//data-table-cell[contains(.,'"+productname+"')]//following::paper-item[contains(.,'View Offers')])[1]");
+		}
+		
+		public void verifyOfferDisplayed(String offerName) throws Exception{
+			Thread.sleep(2000);
+			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+offerName+"')]"));
+		}
+		
+		public void verifyProductDelete(String productname) throws Exception{
+			Assert.assertFalse(jswait.checkVisibility("//data-table-cell[contains(.,'"+productname+"')]"));
+			
+		}
+public void verifyProductEdited() throws Exception{
+	Thread.sleep(2000);
+	Assert.assertTrue(productEdited.isDisplayed());
+}
 }

@@ -1,7 +1,6 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer creation for regression data setup
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
-
 @Offer_verificationRegression
 Feature: Test suite for offer verification test cases
  
@@ -13,7 +12,7 @@ Feature: Test suite for offer verification test cases
     When navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then create new offer from sheet "usageBasedWAP" with product "fullDetails"
+#    Then create new offer from sheet "usageBasedWAP" with product "fullDetails"
     Then filter offer from sheet "usageBasedWAP"
     Then edit offer
     Then remove product for offer from sheet "usageBasedWAP"

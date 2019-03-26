@@ -28,6 +28,7 @@ import org.testng.Assert;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.RandomNameGenerator;
 import cucumber.api.java.en.Then;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.OfferPageObjects;
@@ -751,4 +752,90 @@ public class ProductTestCaseSteps extends Init{
 		jswait.waitUntil("//label[contains(.,'NO ATTRIBUTES HERE')]");
 		jswait.waitUntil("//label[contains(.,'SelClass')]");
 	}
+	
+	@Then("^enter the name and description from sheet \"([^\"]*)\"$")
+	public void enter_the_name_and_description_from_sheet(String productSheet) throws Exception {
+		eh.setExcelFile("productInputData",productSheet);
+		String name=eh.getCellByColumnName("Product Name");
+		 name = RandomNameGenerator.getRandomName(name);
+		 eh.setCell("Product Name",name);
+		productPage.enterDetailsOfProduct(name,productSheet);
+		productPage.clickCreateProductSaveButton();
+	}
+	@Then("^click View Product for the product class from sheet \"([^\"]*)\"$")
+	public void click_View_Product_for_the_product_class_from_sheet(String productClass) throws Throwable {
+		eh.setExcelFile("productClassInputData",productClass);
+		String name = (String) eh.getCell(1, 0);
+		jswait.loadClick("(//h4[contains(.,'"+name+"')]//following::a[contains(.,'View')])[1]");
+	    
+	}
+
+	@Then("^filter the product from sheet \"([^\"]*)\"$")
+	public void filter_the_product_from_sheet(String productSheet) throws Exception {
+		eh.setExcelFile("productInputData",productSheet);
+		String productname=eh.getCellByColumnName("Product Name");
+	    commonObjects.filterName(productname);
+	}
+
+	@Then("^edit the product$")
+	public void edit_the_product() throws Exception {
+		productPage.editTheProduct();
+			}
+
+	@Then("^verify the edited changes are reflected$")
+	public void verify_the_edited_changes_are_reflected() throws Exception {
+		
+	    
+	}
+	@Then("^delete the product$")
+	public void delete_the_product() throws Exception {
+		productPage.deleteProduct();
+	}
+
+	@Then("^verify the product from sheet \"([^\"]*)\" is deleted$")
+	public void verify_the_product_from_sheet_is_deleted(String productsheet) throws Exception {
+		eh.setExcelFile("productInputData",productsheet);
+		String productname=eh.getCellByColumnName("Product Name");
+		productPage.verifyProductDelete(productname);
+		
+		
+	}
+	@Then("^filter the offer from sheet \"([^\"]*)\"$")
+	public void filter_the_offer_from_sheet(String offerSheet) throws Exception {
+		eh.setExcelFile("offerInputData",offerSheet);
+		String offername=eh.getCellByColumnName("Offer Name");
+	    commonObjects.filterName(offername);
+	}
+
+	@Then("^edit the offer$")
+	public void edit_the_offer() throws Throwable {
+		productPage.editOfferToAddProduct();
+	}
+
+	@Then("^add the product to the offer from sheet \"([^\"]*)\" and save offer$")
+	public void add_the_product_to_the_offer_from_sheet_and_save_offer(String productSheet) throws Exception {
+		eh.setExcelFile("productInputData",productSheet);
+		String productname=eh.getCellByColumnName("Product Name");
+		productPage.addProduct(productname);
+	}
+
+	@Then("^click the view offer tab for the product from sheet \"([^\"]*)\"$")
+	public void click_the_view_offer_tab_for_the_product_from_sheet(String productSheet) throws Exception {
+		eh.setExcelFile("productInputData",productSheet);
+		String productname=eh.getCellByColumnName("Product Name");
+		productPage.viewOfferTab(productname);
+	}
+	@Then("^verify the offer from sheet \"([^\"]*)\" is displayed$")
+	public void verify_the_offer_from_sheet_is_displayed(String offerSheet) throws Exception {
+		eh.setExcelFile("offerInputData",offerSheet);
+		String offername=eh.getCellByColumnName("Offer Name");
+		productPage.verifyOfferDisplayed(offername);
+		
+	}
+	@Then("^verify the edited changes are displayed$")
+	public void verify_the_edited_changes_are_displayed() throws Exception {
+		productPage.verifyProductEdited();
+	}
+	
+
 }

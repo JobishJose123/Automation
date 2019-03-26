@@ -304,6 +304,10 @@ public class TouchpointPage extends Init{
 	private WebElement customerCareFormPrioritizationRuleFIFO;
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
 	private WebElement customerCareFormPrioritizationLogicFIFO;
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'LIFO')]")
+	private WebElement customerCareFormPrioritizationLogicLIFO;
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
+	private WebElement customerCareFormPrioritizationLogicBESTFITALGORITHM;
 	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'Hours')]")
 	private WebElement customerCareFormTimeInterval1;
 	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Time Interval')]/../..//input")
@@ -1588,5 +1592,80 @@ Assert.assertEquals(name,newname);
 
 			}
 			
+			public void customercaretouchpointsclick(String name) throws Exception {
+				Thread.sleep(5000);
+				
+				boolean flag=jswait.checkClickable(".//data-table-cell[contains(@class,'customercare-touchpoint-grid style-scope') and contains(.//span,'"+name+"')]//following::paper-icon-button[2]");
+				if (flag==true){
+					Thread.sleep(2000);
+				jswait.loadClick(".//data-table-cell[contains(@class,'customercare-touchpoint-grid style-scope') and contains(.//span,'"+name+"')]//following::paper-icon-button[2]");}
+				
+				else{jswait.scrollIntoView("#customerTable [class='style-scope iron-data-table x-scope iron-list-1']",".//data-table-cell[contains(@class,'customercare-touchpoint-grid style-scope') and contains(.//span,'"+name+"')]//following::paper-icon-button[2]");}
+				
+				
+				
+			}
+
+			
+			public void customerCareSelectPrioritizationLogicnew(String type) throws InterruptedException {
+				
+				if(type.equalsIgnoreCase("FIFO")){
+				
+				jswait.loadClick(customerCareFormPrioritizationLogicSelector);
+				jswait.loadClick(customerCareFormPrioritizationLogicFIFO);
+				}else if (type.equalsIgnoreCase("LIFO")){
+				
+					jswait.loadClick(customerCareFormPrioritizationLogicSelector);
+					jswait.loadClick(customerCareFormPrioritizationLogicLIFO);
+				}else if (type.equalsIgnoreCase("BEST FIT ALGORITHM")){
+				
+					jswait.loadClick(customerCareFormPrioritizationLogicSelector);
+					jswait.loadClick(customerCareFormPrioritizationLogicBESTFITALGORITHM);
+				}
+				Thread.sleep(2000);
+				jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+				
+			
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

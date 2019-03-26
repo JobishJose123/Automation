@@ -1,8 +1,7 @@
 #Author:shobina.k@flytxt.com
 #Feature:Before executing this feature make sure to execute @IntentManagement.feature, @BroadcastManagement.feature
-
 @NDX-Report
-Feature: Program and Broadcast Report Verfication                   
+Feature: Program Report Verfication  (Migration)                 
 #
 #@NDX-6966 @initBrowser
 #Scenario: Verify metric update in Data Health Check by creating a Data QC job
@@ -15,8 +14,8 @@ Feature: Program and Broadcast Report Verfication
 #The navigate to data health check
 
 
-@NDX-6966  @initBrowser
-Scenario: Verfiy the conversion % and fulfillment % for programs
+@NDX-6967  @initBrowser @closeBrowser
+Scenario: Verfiy the conversion % and fulfillment % for programs (Migration)
 Given login
 Then navigate to intent management
 Then navigate to reports
@@ -26,18 +25,8 @@ Then verify the impression value is "2"
 Then verify whether the conversion and fulfillment % are "100 %" and "100 %"
 
 
-@NDX-6809 @initBrowser
-Scenario: Verify the conversion % and fulfillment % for Broadcasts
-Given login
-Then navigate to precision marketer
-Then navigate to reports
-Then navigate to broadcast reports
-Then filter broadcast from sheet "one-offBC"
-Then verify acknowledged conversion and fulfillment % are "100 %","100 %" and "100 %"
-
-
 @NDX-6876  @initBrowser @closeBrowser
-Scenario Outline: Verify the profile field with <Name> uploaded in customer profile in customer info tab
+Scenario Outline: Verify the profile field with <Name> uploaded in customer profile in customer info tab (Migration)
 Given login
 Then navigate to precision marketer
 Then navigate to reports
@@ -53,8 +42,8 @@ Examples:
 |"DIGITAL_PERSONA_FIELD"|
 |"SEL_COUNTRY"|
 
-@NDX-7347 @initBrowser
-Scenario: Verify the event uploaded in customer profile in event tab
+@NDX-7349 @initBrowser @closeBrowser
+Scenario: Verify the event uploaded in customer profile in event tab (Migration)
 Given login
 Then navigate to precision marketer
 Then navigate to reports
@@ -63,8 +52,8 @@ Then click event tab
 Then verify the event displayed
 
 
-@NDX-7351 @initBrowser
-Scenario: Verify the mertic uploaded in customer profile in metrics tab 
+@NDX-7353 @initBrowser @closeBrowser
+Scenario: Verify the mertic uploaded in customer profile in metrics tab (Migration) 
 Given login
 Then navigate to precision marketer
 Then navigate to reports

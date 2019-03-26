@@ -1330,6 +1330,156 @@ Then wait until status of "one-offBC" is "Completed"
     Then verify the BC notification in mail "Completed" from workbook "bcInputData" and sheet "one-offBC"
     
     
+    @NDX-5775 
+ @initBrowser @closeBrowser
+ Scenario: Verify pausing of a One-time Broadcast new
+ Given login
+ Then navigate to precision marketer
+ Then navigate to life cycle marketing
+ Then navigate to campaign category from sheet "CampaignCategory"
+ Then naigate to "campaignBC" campaign view broadcasts
+ Then click on BC edit button from workbook "bcInputData" sheet "one-offBCForPause"
+ Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
+ Then activate bc
+Then wait until status of "one-offBCForPause" from file "bcInputData" is "Delivering" for bctype "onetime" 
+Then pause bc for bctype "onetime"
+Then wait until status of "one-offBCForPause" from file "bcInputData" is "Paused" for bctype "onetime" 
+ 
+@NDX-8005 
+@initBrowser @closeBrowser
+Scenario: Verify pausing of a Recurring Broadcast new
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "CampaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then navigate to "Recurring Broadcasts" broadcasts
+Then click on BC edit button from workbook "bcInputData" sheet "recurringBCForPause"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "recurringBCForPause"
+Then activate bc
+Then navigate to "Recurring Broadcasts" broadcasts
+Then filter the bc from file "bcInputData" of sheet "recurringBCForPause" for bctype "recurring"
+Then pause bc for bctype "recurring"
+Then wait until status of "recurringBCForPause" from file "bcInputData" is "Paused" for bctype "recurring" 
+Then navigate to "One-time" broadcasts
+Then wait until status of recurring child bc from sheet "recurringBCForPause" is "Paused" 
+
+
+@NDX-8016
+ @initBrowser @closeBrowser
+Scenario: Verify pausing of a seedingRecurring Broadcast new
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "CampaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then navigate to "Seedings Broadcasts" broadcasts
+Then click on BC edit button from workbook "bcInputData" sheet "seedingRecurringBCForPause"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
+Then activate bc
+Then navigate to "Seedings Broadcasts" broadcasts
+Then filter the bc from file "bcInputData" of sheet "seedingRecurringBCForPause" for bctype "seeding"
+Then pause bc for bctype "seeding"
+Then wait until status of "seedingRecurringBCForPause" from file "bcInputData" is "Paused" for bctype "seeding" 
+Then navigate to "One-time" broadcasts
+Then wait until status of "seedingRecurringBCForPause" from file "bcInputData" is "Paused" for bctype "onetime"
+
+@NDX-8015 
+@initBrowser @closeBrowser
+Scenario: Verify pausing of a seedingoneoff Broadcast new
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "CampaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then navigate to "Seedings Broadcasts" broadcasts
+Then click on BC edit button from workbook "bcInputData" sheet "seedingoneoffForPause"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
+Then activate bc
+Then navigate to "Seedings Broadcasts" broadcasts
+Then filter the bc from file "bcInputData" of sheet "seedingoneoffForPause" for bctype "seeding"
+Then pause bc for bctype "seeding"
+Then wait until status of "seedingoneoffForPause" from file "bcInputData" is "Paused" for bctype "seeding" 
+Then navigate to "One-time" broadcasts
+Then wait until status of "seedingoneoffForPause" from file "bcInputData" is "Paused" for bctype "onetime"
+
+
+
+@NDX-8060 
+@initBrowser @closeBrowser
+ Scenario: Verify abort of a One-time Broadcast new
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "CampaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click on BC edit button from workbook "bcInputData" sheet "one-offBCForAbort"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
+Then activate bc
+Then wait until status of "one-offBCForAbort" from file "bcInputData" is "Render Scheduled" for bctype "onetime" 
+Then abort bc for bctype "onetime"
+Then wait until status of "one-offBCForAbort" from file "bcInputData" is "Aborted" for bctype "onetime" 
+ 
+@NDX-8062 
+@initBrowser @closeBrowser
+Scenario: Verify abort of a Recurring Broadcast new
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "CampaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then navigate to "Recurring Broadcasts" broadcasts
+Then click on BC edit button from workbook "bcInputData" sheet "recurringBCForAbort"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "recurringBCForAbort"
+Then activate bc
+Then navigate to "Recurring Broadcasts" broadcasts
+Then filter the bc from file "bcInputData" of sheet "recurringBCForAbort" for bctype "recurring"
+Then abort bc for bctype "recurring"
+Then wait until status of "recurringBCForAbort" from file "bcInputData" is "Canceled" for bctype "recurring" 
+Then navigate to "One-time" broadcasts
+Then wait until status of recurring child bc from sheet "recurringBCForAbort" is "Aborted" 
+
+#@NDX-8064 @initBrowser @closeBrowser
+#Scenario: Verify abort of a seedingRecurring Broadcast new
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "CampaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then navigate to "Seedings Broadcasts" broadcasts
+#Then click on BC edit button from workbook "bcInputData" sheet "seedingRecurringBCForAbort"
+#Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
+#Then activate bc
+#Then navigate to "Seedings Broadcasts" broadcasts
+#Then filter the bc from file "bcInputData" of sheet "seedingRecurringBCForAbort" for bctype "seeding"
+#Then abort bc for bctype "seeding"
+#Then wait until status of "seedingRecurringBCForAbort" from file "bcInputData" is "Canceled" for bctype "seeding" 
+#Then navigate to "Recurring Broadcasts" broadcasts
+#Then wait until status of "seedingRecurringBCForAbort" from file "bcInputData" is "Aborted" for bctype "seeding"
+#Then navigate to "Triggerable Broadcasts" broadcasts
+#Then wait until status of child bc of "seedingRecurringBCForAbort" is "Aborted"  
+#
+#
+#@NDX-8066 @initBrowser @closeBrowser
+#Scenario: Verify abort of a seedingoneoff Broadcast new
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "CampaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then navigate to "Seedings Broadcasts" broadcasts
+#Then click on BC edit button from workbook "bcInputData" sheet "seedingoneoffForAbort"
+#Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
+#Then activate bc
+#Then navigate to "Seedings Broadcasts" broadcasts
+#Then abort bc for bctype "seeding"
+#Then wait until status of "seedingoneoffForAbort" from file "bcInputData" is "Canceled" for bctype "seeding" 
+#Then navigate to "One-time" broadcasts
+#Then wait until status of child bc of "seedingoneoffForAbort" is "Aborted"
+ 
+ 
+ 
+ 
     
 #  @NDX-7128 @initBrowser
 #Scenario: Verify the BC gets Completed with target condition as 
