@@ -17,7 +17,7 @@
 ## (Comments)
 #Sample Feature Definition Template
 @BroadcastEdit_regression
-Feature: Test suite for Broadcast Editing for Migration
+Feature: Test suite for Broadcast Editing for NEW
   Editing all types of Braodcast
   
  
@@ -26,7 +26,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
   
   @NDX-5874 @initBrowser @closeBrowser
-  Scenario: Verify one-off BC and edit the Delivery details , Verify the BC after edit Start and End Time of One-Off Bc Migration
+  Scenario: Verify one-off BC and edit the Delivery details , Verify the BC after edit Start and End Time of One-Off Bc NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -41,7 +41,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
 @NDX-5801 @initBrowser  @closeBrowser
-  Scenario: Verify the BC after edit the basic detais of One-offBC Migration
+  Scenario: Verify the BC after edit the basic detais of One-offBC NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -57,7 +57,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
     @NDX-5872 @initBrowser  @closeBrowser
-  Scenario: Verify BC after edit with offer in offer selection page Migration
+  Scenario: Verify BC after edit with offer in offer selection page NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -75,7 +75,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
   @NDX-5836 @NDX-5868 @initBrowser @closeBrowser
-  Scenario Outline: Verify one-off BC and edit the targetSelection <Condition> Migration
+  Scenario Outline: Verify one-off BC and edit the targetSelection <Condition> NEW
 #                    Verify BC after edit with new Saved segment One-Off BC
     Given login
     When navigate to precision marketer
@@ -100,7 +100,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
  
  @NDX-5826 @initBrowser @closeBrowser
-  Scenario Outline: Verify one-off BC edit with given <Condition> Migration <tag>
+  Scenario Outline: Verify one-off BC edit with given <Condition> NEW
 #   @NDX-5827 @NDX-5828 @NDX-5829 @NDX-5838 @NDX-5846 @NDX-5850 @NDX-5854 @NDX-5866 @NDX-5870 @NDX-6382,@NDX-6384   
     Given login
     When navigate to precision marketer
@@ -142,7 +142,7 @@ Feature: Test suite for Broadcast Editing for Migration
 #  | customerDeviceInfo             |
 
    @NDX-5834  @initBrowser @closeBrowser
-  Scenario: Verify one-off BC and edit the target list details Migration
+  Scenario: Verify one-off BC and edit the target list details NEW
   Verify the BC after edit the Base list in Target page One-Off BC
     Given login
     When navigate to precision marketer
@@ -157,7 +157,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
     
    @NDX-5930 @initBrowser
-  Scenario: Verify the One-Off BC Broadcast expiry after edit Migration
+  Scenario: Verify the One-Off BC Broadcast expiry after edit NEW
     Given login
   When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -174,7 +174,7 @@ Feature: Test suite for Broadcast Editing for Migration
    
     
      @NDX-6254 @initBrowser @closeBrowser
-  Scenario: Verify Trigger one-off BC and edit the Delivery details Migration
+  Scenario: Verify Trigger one-off BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -189,7 +189,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
     @NDX-6204  @initBrowser @closeBrowser
-  Scenario: Verify Creating TriggerOne-off BC and edit the basic details Migration
+  Scenario: Verify Creating TriggerOne-off BC and edit the basic details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -205,7 +205,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
     @NDX-6252 @initBrowser @closeBrowser
-  Scenario: Verify TriggerOne-off BC and edit the offer details Migration
+  Scenario: Verify TriggerOne-off BC and edit the offer details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -221,7 +221,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
     @NDX-6216,@NDX-6248 @initBrowser @closeBrowser
-  Scenario Outline: Verify TriggerOne-off BC and edit the targetSelection <Condition> Migration
+  Scenario Outline: Verify TriggerOne-off BC and edit the targetSelection <Condition> NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -245,7 +245,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
  
    @NDX-6206 @NDX-6207,@NDX-6208,@NDX-6209,@NDX-6218,@NDX-6226,@NDX-6230,@NDX-6234,@NDX-6246,@NDX-6250,@NDX-6406,@NDX-6408 @initBrowser @closeBrowser
-  Scenario Outline: Verify TriggerOne-off BC Edit with given <Condition> Migration
+  Scenario Outline: Verify TriggerOne-off BC Edit with given <Condition> NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -286,7 +286,7 @@ Feature: Test suite for Broadcast Editing for Migration
 #  | customerDeviceInfo             |
 
    @NDX-6214 @initBrowser @closeBrowser
-  Scenario: Verify TriggerOne-off BC and edit the target list details Migration
+  Scenario: Verify TriggerOne-off BC and edit the target list details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -300,7 +300,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "TriggerOneoffEdit"
     
   @NDX-6256 @initBrowser @closeBrowser
-  Scenario: Verify TriggerOne-off BC after edit Broadcast expiry Migration
+  Scenario: Verify TriggerOne-off BC after edit Broadcast expiry NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -319,7 +319,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
      @NDX-6092 @initBrowser @closeBrowser
-  Scenario: Verify seeding one-off BC and edit the Delivery details Migration
+  Scenario: Verify seeding one-off BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -335,7 +335,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
     @NDX-6040  @initBrowser @closeBrowser
-  Scenario: Verify Creating and editing the basic details of Seeding one-offBC Migration
+  Scenario: Verify Creating and editing the basic details of Seeding one-offBC NEW
   Given login 
 	When navigate to precision marketer 
 	Then navigate to life cycle marketing 
@@ -352,7 +352,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
      @NDX-6090   @initBrowser @closeBrowser
-  Scenario: Verify Seeding one-off BC edit the offer details Migration
+  Scenario: Verify Seeding one-off BC edit the offer details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -368,7 +368,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
   @NDX-6052,@NDX-6086 @initBrowser @closeBrowser
-  Scenario Outline: Verify Seeding one-off BC and edit the targetSelection <Condition> Migration
+  Scenario Outline: Verify Seeding one-off BC and edit the targetSelection <Condition> NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -393,7 +393,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
  
   @NDX-6042  @initBrowser @closeBrowser
-  Scenario Outline: Verify Seeding one-off BC edit with given <Condition> Migration
+  Scenario Outline: Verify Seeding one-off BC edit with given <Condition> NEW
 #  @NDX-6043,@NDX-6044,@NDX-6045,@NDX-6054,@NDX-6062,@NDX-6066,@NDX-6070,@NDX-6084,@NDX-6088,@NDX-6394,@NDX-6396
     Given login
     When navigate to precision marketer
@@ -437,7 +437,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
    @NDX-6050 @initBrowser @closeBrowser
-  Scenario: Verify Seeding one-off BC and edit the target list details Migration
+  Scenario: Verify Seeding one-off BC and edit the target list details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -452,7 +452,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingoneoffEdit"
     
   @NDX-6094 @initBrowser @closeBrowser
-  Scenario: Verify the Seeding one off BC after edit Broadcast expiry Migration
+  Scenario: Verify the Seeding one off BC after edit Broadcast expiry NEW
     Given login
   When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -474,7 +474,7 @@ Feature: Test suite for Broadcast Editing for Migration
         
     
      @NDX-6036  @initBrowser @closeBrowser
-  Scenario: Verify seeding Triggerable BC and edit the Delivery details Migration
+  Scenario: Verify seeding Triggerable BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -490,7 +490,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
   @NDX-5986 @initBrowser @closeBrowser
-  Scenario: Verify Creating and editing the basic details of Seeding triggarable BC Migration
+  Scenario: Verify Creating and editing the basic details of Seeding triggarable BC NEW
   Given login 
 	When navigate to precision marketer 
 	Then navigate to life cycle marketing 
@@ -507,7 +507,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
     @NDX-6034 @initBrowser @closeBrowser
-  Scenario: Verify Seeding Triggerable BC edit the offer details Migration
+  Scenario: Verify Seeding Triggerable BC edit the offer details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -523,7 +523,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
  @NDX-5998 @NDX-6030 @initBrowser @closeBrowser
-  Scenario Outline: Verify Seeding Trggerable BC and edit the targetSelection <Condition> Migration
+  Scenario Outline: Verify Seeding Trggerable BC and edit the targetSelection <Condition> NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -548,7 +548,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
  
   @NDX-5988 @initBrowser @closeBrowser
-  Scenario Outline: Verify Seeding Trggerable BC edit with given <Condition> Migration
+  Scenario Outline: Verify Seeding Trggerable BC edit with given <Condition> NEW
 #@NDX-5989,@NDX-5990,@NDX-5991,@NDX-6000,@NDX-6008,@NDX-6012,@NDX-6016,@NDX-6028,@NDX-6032,@NDX-6038,@NDX-6390,@NDX-6392
     Given login
     When navigate to precision marketer
@@ -592,7 +592,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
    @NDX-5996  @initBrowser @closeBrowser
-  Scenario: Verify Seeding triggerable BC and edit the target list details Migration
+  Scenario: Verify Seeding triggerable BC and edit the target list details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -607,7 +607,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingTriggerableBCEdit"
     
    @NDX-6038  @initBrowser @closeBrowser
-  Scenario: Verify the Seeding Triggerable BC after edit Broadcast expiry Migration
+  Scenario: Verify the Seeding Triggerable BC after edit Broadcast expiry NEW
     Given login
   When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -634,7 +634,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
      @NDX-6200   @initBrowser @closeBrowser
-  Scenario: Verify seeding Recurring BC and edit the Delivery details Migration
+  Scenario: Verify seeding Recurring BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -649,7 +649,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "seedingRecurringBCEdit"
       
       @NDX-6150  @initBrowser @closeBrowser
-  Scenario: Verify Creating and editing the basic details of Seeding Recurring Migration
+  Scenario: Verify Creating and editing the basic details of Seeding Recurring NEW
   Given login 
 	When navigate to precision marketer 
 	Then navigate to life cycle marketing 
@@ -665,7 +665,7 @@ Feature: Test suite for Broadcast Editing for Migration
       
     
      @NDX-6198 @initBrowser @closeBrowser
-  Scenario: Verify Seeding Recurring BC edit the offer details  Migration
+  Scenario: Verify Seeding Recurring BC edit the offer details  NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -681,7 +681,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
   @NDX-6162 @NDX-6194  @initBrowser @closeBrowser
-  Scenario Outline: Verify Seeding Recurring BC and edit the targetSelection <Condition> Migration
+  Scenario Outline: Verify Seeding Recurring BC and edit the targetSelection <Condition> NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -706,7 +706,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
  
   @NDX-6152  @initBrowser @closeBrowser
-  Scenario Outline: Verify Seeding Recurring BC edit with given <Condition> Migration
+  Scenario Outline: Verify Seeding Recurring BC edit with given <Condition> NEW
 # NDX-6153,NDX-6154,NDX-6155,NDX-6164,NDX-6172,NDX-6176,NDX-6180,NDX-6192,NDX-6196,NDX-6402,NDX-6404
     Given login
     When navigate to precision marketer
@@ -750,7 +750,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
    @NDX-6160 @initBrowser @closeBrowser
-  Scenario: Verify Seeding Recurring BC and edit the target list details Migration
+  Scenario: Verify Seeding Recurring BC and edit the target list details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -765,7 +765,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingRecurringBCEdit"
     
   @NDX-6202 @initBrowser @closeBrowser
-  Scenario: Verify the Seeding Recurring BC after edit Broadcast expiry Migration
+  Scenario: Verify the Seeding Recurring BC after edit Broadcast expiry NEW
     Given login
   When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -789,7 +789,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
      @NDX-6146 @initBrowser @closeBrowser
-  Scenario: Verify seeding Triggerable Recurring BC and edit the Delivery details Migration
+  Scenario: Verify seeding Triggerable Recurring BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -806,7 +806,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
     @NDX-6096  @initBrowser @closeBrowser
-  Scenario: Verify Creating and editing the basic details of seeding Triggerable Recurring BC Migration
+  Scenario: Verify Creating and editing the basic details of seeding Triggerable Recurring BC NEW
   Given login 
 	When navigate to precision marketer 
 	Then navigate to life cycle marketing 
@@ -823,7 +823,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
     @NDX-6144  @initBrowser @closeBrowser
-  Scenario: Verify seeding Triggerable Recurring BC edit the offer details Migration
+  Scenario: Verify seeding Triggerable Recurring BC edit the offer details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -839,7 +839,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
  @NDX-6108 @NDX-6140 @initBrowser @closeBrowser
-  Scenario Outline: Verify seeding Triggerable Recurring BC and edit the targetSelection <Condition> Migration
+  Scenario Outline: Verify seeding Triggerable Recurring BC and edit the targetSelection <Condition> NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -864,7 +864,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
  
   @NDX-6098  @initBrowser @closeBrowser
-  Scenario Outline: Verify seeding Triggerable Recurring BC edit with given <Condition> Migration
+  Scenario Outline: Verify seeding Triggerable Recurring BC edit with given <Condition> NEW
    #   NDX-6099,NDX-6100,NDX-6101,NDX-6110,NDX-6118,NDX-6122,NDX-6126,NDX-6138,NDX-6142,NDX-6398,NDX-6400
     Given login
     When navigate to precision marketer
@@ -909,7 +909,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
    @NDX-6106 @initBrowser @closeBrowser
-  Scenario: Verify seeding Triggerable Recurring BC and edit the target list details Migration
+  Scenario: Verify seeding Triggerable Recurring BC and edit the target list details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -924,7 +924,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
     
   @NDX-6148 @initBrowser @closeBrowser
-  Scenario: Verify the seeding Triggerable Recurring BC after edit Broadcast expiry Migration
+  Scenario: Verify the seeding Triggerable Recurring BC after edit Broadcast expiry NEW
     Given login
   When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -944,7 +944,7 @@ Feature: Test suite for Broadcast Editing for Migration
    #    ************************ Trigger Recurring BC**************   
     
     @NDX-6308 @initBrowser @closeBrowser
-  Scenario: Verify  Trigger Recurring BC and edit the Delivery details Migration
+  Scenario: Verify  Trigger Recurring BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -960,7 +960,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
      
     @NDX-6258 @initBrowser @closeBrowser
-  Scenario: Verify Creating and editing the basic details of Trigger Recurring BC Migration
+  Scenario: Verify Creating and editing the basic details of Trigger Recurring BC NEW
   Given login 
 	When navigate to precision marketer 
 	Then navigate to life cycle marketing 
@@ -975,7 +975,7 @@ Feature: Test suite for Broadcast Editing for Migration
 	Then verify the basic details from Broadcast View and data sheet "TriggerReccurringBCEdit"
     
     @NDX-6306 @initBrowser 
-  Scenario: Verify Trigger Recurring BC edit the offer details Migration
+  Scenario: Verify Trigger Recurring BC edit the offer details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -991,7 +991,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
   @NDX-6270 @NDX-6302 @initBrowser @closeBrowser
-  Scenario Outline: Verify Trigger Recurring BC and edit the targetSelection <Condition> Migration
+  Scenario Outline: Verify Trigger Recurring BC and edit the targetSelection <Condition> NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1016,7 +1016,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
  
   @NDX-6260 @initBrowser @closeBrowser
-  Scenario Outline: Verify Trigger Recurring BC edit with given <Condition> Migration
+  Scenario Outline: Verify Trigger Recurring BC edit with given <Condition> NEW
 #    NDX-6261,NDX-6262,NDX-6263,NDX-6272,NDX-6280,NDX-6284,NDX-6288,NDX-6300,NDX-6304,NDX-6410,NDX-6412
     Given login
     When navigate to precision marketer
@@ -1060,7 +1060,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
    @NDX-6268 @initBrowser @closeBrowser
-  Scenario: Verify Trigger Recurring BC and edit the target list details Migration
+  Scenario: Verify Trigger Recurring BC and edit the target list details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1075,7 +1075,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
     
   @NDX-6310  @initBrowser @closeBrowser
-  Scenario: Verify the Trigger Recurring BC after edit Broadcast expiry Migration
+  Scenario: Verify the Trigger Recurring BC after edit Broadcast expiry NEW
     Given login
   When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1102,7 +1102,7 @@ Feature: Test suite for Broadcast Editing for Migration
     
     
    @NDX-5982   @initBrowser @closeBrowser
-  Scenario: Verify Recurring BC and edit the Delivery details Migration
+  Scenario: Verify Recurring BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1118,7 +1118,7 @@ Feature: Test suite for Broadcast Editing for Migration
       
       
       @NDX-5932 @initBrowser
-  Scenario: Verify Creating and editing the basic details of Recurring BC Migration
+  Scenario: Verify Creating and editing the basic details of Recurring BC NEW
   Given login 
 	When navigate to precision marketer 
 	Then navigate to life cycle marketing 
@@ -1136,7 +1136,7 @@ Feature: Test suite for Broadcast Editing for Migration
       
         
      @NDX-5980  @initBrowser 
-  Scenario: Verify Recurring BC edit the offer details Migration
+  Scenario: Verify Recurring BC edit the offer details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1152,7 +1152,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
   @NDX-5944 @NDX-5976 @initBrowser @closeBrowser
-  Scenario Outline: Verify Recurring BC and edit the targetSelection <Condition> Migration
+  Scenario Outline: Verify Recurring BC and edit the targetSelection <Condition> NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1177,7 +1177,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
  
  @NDX-5934 @initBrowser @closeBrowser
-  Scenario Outline: Verify Recurring BC edit with given <Condition> Migration
+  Scenario Outline: Verify Recurring BC edit with given <Condition> NEW
     #   NDX-5935,NDX-5936,NDX-5937,NDX-5946,NDX-5954,NDX-5958,NDX-5962,NDX-5974,NDX-5978,NDX-6386,NDX-6388
     Given login
     When navigate to precision marketer
@@ -1221,7 +1221,7 @@ Feature: Test suite for Broadcast Editing for Migration
 
 
   @NDX-5942 @initBrowser @closeBrowser
-  Scenario: Verify Recurring BC and edit the target list details Migration
+  Scenario: Verify Recurring BC and edit the target list details NEW
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -1236,7 +1236,7 @@ Feature: Test suite for Broadcast Editing for Migration
     Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
     
  @NDX-5984 @initBrowser @closeBrowser
-  Scenario: Verify the  Recurring BC after edit Broadcast expiry Migration
+  Scenario: Verify the  Recurring BC after edit Broadcast expiry NEW
     Given login
   When navigate to precision marketer
     Then navigate to life cycle marketing

@@ -7,7 +7,7 @@ Feature: Test suite for Broadcast creation
   
 
   
-  @NDX-oneOffBcForDataSetup
+  @NDX-oneOffBcForDataSetup @NDX-4887
   @initBrowser @closeBrowser
   Scenario Outline: Verify Creating one-off BC with given condition
     Given login
@@ -50,7 +50,7 @@ Feature: Test suite for Broadcast creation
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with defaultCatalog for recurring bc
     
-     @NDX-recurringBcForDataSetup
+     @NDX-recurringBcForDataSetup @NDX-4894
   @initBrowser @closeBrowser
   Scenario Outline: Verify Creating one-off BC with <Condition>
     Given login
@@ -94,7 +94,7 @@ Feature: Test suite for Broadcast creation
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with defaultCatalog for recurring bc
     
-  @NDX-seedingTriggerBcForDataSetup
+  @NDX-seedingTriggerBcForDataSetup @NDX-4891
   @initBrowser @closeBrowser
   Scenario Outline: Verify Creating Seeding Trigger BC
   Given login
@@ -139,7 +139,7 @@ Feature: Test suite for Broadcast creation
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with defaultCatalog for recurring bc
     
     
-    @NDX-seedingOneOffForDataSetup
+    @NDX-seedingOneOffForDataSetup @NDX-4892
   @initBrowser @closeBrowser
   Scenario Outline: Verify Creating  Seeding one-offBC
   Given login
@@ -184,7 +184,7 @@ Feature: Test suite for Broadcast creation
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with defaultCatalog for recurring bc
     
     
-     @NDX-seedingTriggerableRecurringBCForDataSetup
+     @NDX-seedingTriggerableRecurringBCForDataSetup @NDX-4888
   @initBrowser @closeBrowser
   Scenario Outline: Verify Creating Seeding Trigger recurring BC
   Given login
@@ -228,7 +228,7 @@ Feature: Test suite for Broadcast creation
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with defaultCatalog for recurring bc
     
-     @NDX-SeedingrecurringBCForDataSetup
+     @NDX-SeedingrecurringBCForDataSetup @NDX-4890
   @initBrowser @closeBrowser
   Scenario Outline: Verify Creating Seeding recurring BC
   Given login
@@ -272,7 +272,7 @@ Feature: Test suite for Broadcast creation
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with defaultCatalog for recurring bc
     
-    @NDX-TriggerOneoffForDataSetup
+    @NDX-TriggerOneoffForDataSetup @NDX-4893
   @initBrowser @closeBrowser
   Scenario Outline: Verify Creating Trigger Oneoff BC
   Given login
@@ -316,7 +316,7 @@ Feature: Test suite for Broadcast creation
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with defaultCatalog for recurring bc
     
     
-      @NDX-TriggerReccurringBCForDataSetup
+      @NDX-TriggerReccurringBCForDataSetup @NDX-4895
   @initBrowser @closeBrowser
   Scenario Outline: Verify Creating Trigger recurring BC
   Given login
@@ -349,7 +349,7 @@ Feature: Test suite for Broadcast creation
     |customerDeviceInfo|
     |segmentAgeGT40|
     
-    @NX-monthlyRecurringBCDataSetup
+    @NX-monthlyRecurringBCDataSetup @NX-6529
 @initBrowser 
 Scenario: Verify specifying the recurrence value as 10,20,30 etc NX-6529
 Given login
