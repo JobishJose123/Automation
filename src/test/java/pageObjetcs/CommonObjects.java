@@ -248,13 +248,20 @@ public class CommonObjects extends Init {
 		private WebElement managelicenselicenseupgradebtn;
 		@FindBy(xpath="//label[contains(.,'License Key')]//following::textarea")
 		private WebElement managelicenseTextarea;
+		@FindBy(xpath="//label[text()='Reports']/..")
+		private WebElement reports;
+		
 //		@FindBy(xpath="")
 //		private WebElement ;
 //		@FindBy(xpath="")
 //		private WebElement ;
 //		@FindBy(xpath="")
 //		private WebElement ;
-
+		
+		
+public void clickOnReports() throws Exception {
+	jswait.loadClick(reports);
+}
 	 
 	 public void clickCreateNewCustomerLocationInsight() throws Throwable {
 		 

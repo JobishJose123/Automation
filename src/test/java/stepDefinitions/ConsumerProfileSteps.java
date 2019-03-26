@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 
 import org.openqa.selenium.support.PageFactory;
 
@@ -13,11 +15,13 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import cucumber.api.java.en.Then;
+import pageObjetcs.CommonObjects;
 import pageObjetcs.CustomerProfilePage;
 
 public class ConsumerProfileSteps extends Init{
 	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 	CustomerProfilePage customerObjects= new CustomerProfilePage();
+	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
 	ExcelHelper eh = new ExcelHelper();
 	ExcelHelper list = new ExcelHelper();
@@ -382,6 +386,105 @@ public class ConsumerProfileSteps extends Init{
 	   String offerName=eh.getCell(1, 0).toString();
 	   customerObjects. verifyAcknowledgedEvent(bcName,CampaignName,offerName);
 	}
+	
+	@Then("^verify the Acknowledgement event from Sheet  \"([^\"]*)\" and inventory \"([^\"]*)\"$")
+	public void verify_the_Acknowledgement_event_from_Sheet_and_inventory(String parallelRunBCSheet, String inventory) throws Throwable {
+	   System.out.println("event verification");
+		String bcName="";
+		String campaignName="";
+		String offerName="";
+		String msisdn="";
+		eh.setExcelFile("parallelRunBC", parallelRunBCSheet);
+		
+		int bcNameColumn = eh.getColumnNumber("Name");
+		int campaignColumn = eh.getColumnNumber("Campaign name");
+		int offerNamecolumn = eh.getColumnNumber("offer name");
+		int msisdnColumn = eh.getColumnNumber("MSISDN");
+		
+		LinkedHashMap<String, String> dataList = eh.extractDataFromExcelFile(parallelRunBCSheet, "Name", "Inventory");
+		
+		System.out.println(dataList);
+		for (Entry<String, String> hm: dataList.entrySet()) {
+			
+			commonObjects.clickOnReports();
+			customerProfilePage.navigateToCustomerProfile();
+			
+			if(hm.getValue().equals("Unlimited")){
+				
+				bcName=hm.getKey();
+				campaignName=eh.getCell(bcNameColumn, campaignColumn).toString();
+				offerName=eh.getCell(bcNameColumn, offerNamecolumn).toString();
+				msisdn=eh.getCell(bcNameColumn, msisdnColumn).toString();
+				System.out.println("mssidn"+msisdn);
+				System.out.println("bcname"+bcName);
+				System.out.println("campaign name"+campaignName);
+				System.out.println("offer Name"+offerName);
+				
+			}
+			
+			customerObjects.enterCustomerNumber(msisdn);
+					
+			customerObjects.clickSearchNumberIcon();
+			customerObjects.clickEventsTab();
+			customerObjects.chooseAllEvents();
+			customerObjects.clickApplyButton();
+			customerObjects.chooseAllEvents();
+			customerObjects.clickOnAckEventCheckBox();
+			customerObjects.clickApplyButton();
+			customerObjects. verifyAcknowledgedEvent(bcName,campaignName,offerName);
+			
+			
+		
+		}
+		
+	}
+
+	@Then("^verify the Conversion event from Sheet  \"([^\"]*)\" and inventory \"([^\"]*)\"$")
+	public void verify_the_Conversion_event_from_Sheet_and_inventory(String parallelRunBCSheet, String inventory) throws Throwable {
+	   
+		String bcName="";
+		String campaignName="";
+		String offerName="";
+		String msisdn="";
+		eh.setExcelFile("parallelRunBC", parallelRunBCSheet);
+		
+		int bcNameColumn = eh.getColumnNumber("Name");
+		int campaignColumn = eh.getColumnNumber("Campaign name");
+		int offerNamecolumn = eh.getColumnNumber("offer name");
+		int msisdnColumn = eh.getColumnNumber("MSISDN");
+		
+		LinkedHashMap<String, String> dataList = eh.extractDataFromExcelFile(parallelRunBCSheet, "Name", "Inventory");
+		
+		System.out.println(dataList);
+		for (Entry<String, String> hm: dataList.entrySet()) {
+			if(hm.getValue().equals("Unlimited")){
+				
+				bcName=hm.getKey();
+				campaignName=eh.getCell(bcNameColumn, campaignColumn).toString();
+				offerName=eh.getCell(bcNameColumn, offerNamecolumn).toString();
+				msisdn=eh.getCell(bcNameColumn, msisdnColumn).toString();
+				System.out.println("mssidn"+msisdn);
+				System.out.println("bcname"+bcName);
+				System.out.println("campaign name"+campaignName);
+				System.out.println("offer Name"+offerName);
+				
+			}
+			
+			customerObjects.enterCustomerNumber("9491750004");
+			
+			customerObjects.clickSearchNumberIcon();
+			customerObjects.clickEventsTab();
+			customerObjects.chooseAllEvents();
+			customerObjects.clickApplyButton();
+			customerObjects.chooseAllEvents();
+			customerObjects.clickOnAckEventCheckBox();
+			customerObjects.clickApplyButton();
+			customerObjects. verifyAcknowledgedEvent(bcName,campaignName,offerName);
+		
+		}
+	}
+
+	
 	
    
 }

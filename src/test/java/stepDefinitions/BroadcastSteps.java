@@ -62,6 +62,7 @@ public class BroadcastSteps extends Init {
 	OfferPageObjects offerPageObjects = new OfferPageObjects();
 	LoginPageObjects loginPage = new LoginPageObjects();
 	CommonObjects commonObjects = new CommonObjects();
+	CustomerProfilePage customerObjects= new CustomerProfilePage();
 	dkpageobjects dkpageobjects = new dkpageobjects();
 	TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
@@ -4234,6 +4235,62 @@ for (Entry<String, String> hm: dataList.entrySet()) {
 Thread.sleep(2000);
 }
 	
-}
+
+@Then("^verify the activated Bcs from Sheet \"([^\"]*)\" and inventory \"([^\"]*)\" with condition \"([^\"]*)\"$")
+public void verify_the_activated_Bcs_from_Sheet_and_inventory_with_condition(String parallelRunBCSheet, String inventory, String targetCondition) throws Throwable {
+    int count=0;
+    boolean boolean1;
+	eh.setExcelFile("parallelRunBC", parallelRunBCSheet);
+	LinkedHashMap<String, String> dataList = eh.extractDataFromExcelFile(parallelRunBCSheet,"Name","Inventory");
+	
+	for (Entry<String, String> hm: dataList.entrySet()) {
+	
+		
+	 if(hm.getValue().equals("BlackoutAlways")&&inventory.equals("BlackoutAlways")) {
+		 commonObjects.filterName(hm.getKey());
+		 
+		 boolean1 = jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Blackout Snooze')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
+	
+		if(boolean1==true)
+			eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,"Pass", hm.getKey(), "Name","StatusOfTestcase");
+		else
+			eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,"Fail", hm.getKey(), "Name","StatusOfTestcase");
+	
+	 }else if(hm.getValue().equals("OneperDay")&&inventory.equals("OneperDay")) {
+		 commonObjects.filterName(hm.getKey());
+		
+			 if(count==0) {
+		 jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
+		 ++count;
+		 System.out.println(hm.getKey()+" one per day 1st bc");
+			 }else if(count>=1) {
+			 jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
+		System.out.println(hm.getKey()+" one per day 2nd bc");
+		 }
+			 
+	 }else if(hm.getValue().equals("Unlimited")&&inventory.equals("Unlimited")) {
+		 commonObjects.filterName(hm.getKey());
+		
+		if(hm.getKey().contains("seeding"))
+		  boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
+		 else
+		 boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
+		 
+		 if(boolean1==true)
+				eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,"Pass", hm.getKey(), "Name","StatusOfTestcase");
+			else
+				eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,"Fail", hm.getKey(), "Name","StatusOfTestcase");
+	 }
+		
+		
+	}//for
+	
+	
+}//method
+
+	
+
+
+}//class
 
 

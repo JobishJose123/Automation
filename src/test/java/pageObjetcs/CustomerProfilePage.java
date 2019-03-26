@@ -239,6 +239,28 @@ public class CustomerProfilePage extends Init{
 	private WebElement offerAcceptedEventCheckBox;
 	@FindBy(xpath="//div[text()='Offer Recommended']/..")
 	private WebElement offerRecommendedEventCheckBox;
+	
+	
+	// in consumer profile filter option 
+		@FindBy(xpath="(//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..)[2]")
+		private WebElement eventTabFilter;
+		@FindBy(xpath="//input[@title='Details']")
+		private WebElement enterEventDetails;
+		@FindBy(xpath="//data-table-column-filter-dialog[@class='style-scope consumer-events x-scope data-table-column-filter-dialog-0']//paper-button[@class='style-scope data-table-column-filter-dialog x-scope paper-button-0'][contains(text(),'Apply')]")
+		private WebElement filterApplyButton;
+		
+		public void clickOnEventTabFilter() throws Exception {
+			jswait.loadClick(eventTabFilter);
+		}
+		public void enterEventDetails(String searchData) throws Exception {
+			jswait.loadSendKeys(enterEventDetails, searchData);
+		}
+		public void filterApplyButton() throws Exception {
+			jswait.loadClick(filterApplyButton);
+		}
+	
+	
+	
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -533,38 +555,91 @@ public class CustomerProfilePage extends Init{
 	   
  }
  
- public void verifyAcknowledgedEvent(String bcName,String campaignName,String OfferName) throws Exception{
+public void verifyAcknowledgedEvent(String bcName,String campaignName,String OfferName) throws Exception{
 	 
-	 searchEventsDynammically("Last 7 Days");
-	 Thread.sleep(3000);
-	List<WebElement> ackEvents = driver.findElements(By.xpath("//data-table-row//data-table-cell[4]//span[contains(.,'Campaign: "+campaignName+"')]"));
+	 searchEventsDynammically("Last 3 Days");
+	 Thread.sleep(2000);
+	 clickOnEventTabFilter();
+	 enterEventDetails(campaignName);
+	 filterApplyButton();
+	 Thread.sleep(2000);
+	List<WebElement> ackEvents = driver.findElements(By.xpath("//data-table-row//data-table-cell[4]//span[contains(.,'Campaign: "+campaignName+"')][@title]"));
 	Thread.sleep(1000);
 	System.out.println(ackEvents.size());
 	 int count=1;
 	 
 	for (WebElement webElement : ackEvents) {
-		if((webElement.getText()).contains(campaignName)) {
-		System.out.println(webElement.getText());
-		try { 
-		jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Acknowledged'])["+count+"]");
-		 System.out.println("");
-	        jswait.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'"+OfferName+"')]");
-			boolean booledn = jswait.checkVisibility("//label[contains(.,'Broadcast')]/..//label[contains(.,'"+bcName+"')]");
-			System.out.println(booledn);
-			if(booledn==true) {
-				Assert.assertTrue(true);
-			}else {
-				System.out.println(bcName);
-			}
-		 }catch (Exception e) {
-			
-		}
-		 Thread.sleep(2000);
-		 count++;
+			if ((webElement.getText()).contains(campaignName)) {
+				System.out.println(webElement.getText());
+				try {
+					//jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Acknowledged'])["+count+"]");
+					Thread.sleep(1000);
+					jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Acknowledged']/../..//data-table-cell[4]//span[text()='Campaign: "+campaignName+"'])["+count+"]");
+					Thread.sleep(1000);
+					jswait.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'" + OfferName + "')]");
+					boolean booledn = jswait.checkVisibility(
+							"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
+					System.out.println(booledn);
+					if (booledn == true) {
+						Assert.assertTrue(true);
+					}
+					 else {
+						System.out.println(bcName);
+					}
+				} catch (Exception e) {
+					System.out.println("catch block");
+					Assert.assertTrue("No Ack Event Raised",false);
+				}
+				Thread.sleep(2000);
+				count++;
 		}
 	}
 	 
  }
+
+
+
+public void verifyConversionEvent(String bcName,String campaignName,String OfferName) throws Exception {
+	
+	searchEventsDynammically("Last 3 Days");
+	 Thread.sleep(2000);
+	 clickOnEventTabFilter();
+	 enterEventDetails(campaignName);
+	 filterApplyButton();
+	 Thread.sleep(2000);
+	List<WebElement> ackEvents = driver.findElements(By.xpath("//data-table-row//data-table-cell[4]//span[contains(.,'Campaign: "+campaignName+"')]"));
+	Thread.sleep(1000);
+	System.out.println(ackEvents.size());
+	 int count=1;
+	 
+	 for (WebElement webElement : ackEvents) {
+			if ((webElement.getText()).contains(campaignName)) {
+				System.out.println(webElement.getText());
+				try {
+					//jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Acknowledged'])["+count+"]");
+					Thread.sleep(1000);
+					jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Conversion']/../..//data-table-cell[4]//span[text()='Campaign: campaignBC6632'])["+count+"]");
+					Thread.sleep(1000);
+					jswait.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'" + OfferName + "')]");
+					boolean booledn = jswait.checkVisibility(
+							"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
+					System.out.println(booledn);
+					if (booledn == true) {
+						Assert.assertTrue(true);
+					}
+					 else {
+						System.out.println(bcName);
+					}
+				} catch (Exception e) {
+					System.out.println("catch block");
+					Assert.assertTrue("No Ack",false);
+				}
+				Thread.sleep(2000);
+				count++;
+		}
+	}
+	
+}
  
  public void clickOnAckEventCheckBox() throws InterruptedException {
 	  jswait.loadClick("(//div//paper-checkbox//div[@id='checkboxLabel'][contains(.,'Acknowledged')])[1]");
