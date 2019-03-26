@@ -14,6 +14,7 @@ import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
 import baseClasses.TimePicker;
+import baseClasses.TimeoutImpl;
 import cucumber.api.java.en.Then;
 import pageObjetcs.BroadcastPageObjects;
 import pageObjetcs.CampaignObjects;
@@ -1388,5 +1389,51 @@ public class CampaignManagement extends Init{
 				    	Thread.sleep(2000);
 				    	campaignObjects.verifyCampaignview();						
 				    }
+				
+				 @Then("^abort campaign from sheet \"([^\"]*)\"$")
+								 public void abort_campaign_from_sheet(String campaignSheet) throws Throwable {
+									 eM.setExcelFile("campaignInputData", campaignSheet);
+									 String campaignName=eM.getCellByColumnName("Campaign Name");
+									 campaignObjects.abortCampaign(campaignName);
+								    
+								 }
+								 
+								 @Then("^wait until campaign from sheet \"([^\"]*)\" status is \"([^\"]*)\"$")
+								 public void wait_until_campaign_from_sheet_status_is(String campaignSheet, String statusExpected) throws Throwable {
+									 eM.setExcelFile("campaignInputData", campaignSheet);
+									    String campaignName=eM.getCellByColumnName("Campaign Name");
+									    commonObjects.filterName(campaignName);
+									    commonObjects.toggleAutoRefresh();
+									    Thread.sleep(2000);
+										String campaignStatus = campaignObjects.getStatusOfCampaign(campaignName);
+										TimeoutImpl t = new TimeoutImpl();
+										t.startTimer();
+										while (!campaignStatus.contains(statusExpected) && t.checkTimerMin(5)) {
+											campaignStatus = campaignObjects.getStatusOfCampaign(campaignName);
+											System.out.println(campaignStatus);
+											Thread.sleep(3000);
+										}
+										Thread.sleep(3000);
+										Assert.assertTrue(campaignStatus.contains(statusExpected));
+								 }
+								 
+								 @Then("^verify \"([^\"]*)\" status is in show history$")
+								 public void verify_status_is_in_show_history(String statusShown) throws Exception {
+									 campaignObjects.showHistoryDetailsOfCampaign(statusShown);
+								 }
+								 
+								 @Then("^create new approval rule from sheet \"([^\"]*)\" with campaign category from sheet \"([^\"]*)\"$")
+								 public void create_new_approval_rule_from_sheet_with_camapign_category_from_sheet(String approvalSheet, String campaignSheet) throws Exception {
+				                         eM.setExcelFile("appRuleInputData", approvalSheet);
+				                     	String approvalname = (String) eM.getCell(1, 0);
+				                     	approvalname =  RandomNameGenerator.getRandomName(approvalname);
+				                 	    eM.setCell(1, 0, approvalname);
+				                 	    
+				                 	   eM.setExcelFile("campaignCategoryInputData", campaignSheet);
+				               	       String campaignname = (String) eM.getCell(1, 0);
+				               	    campaignObjects.newApprovalForCampaignHistory(approvalname,campaignname);
+				                 	    
+				}
+				}
 				 
-}
+

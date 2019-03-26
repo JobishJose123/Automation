@@ -4287,10 +4287,61 @@ public void verify_the_activated_Bcs_from_Sheet_and_inventory_with_condition(Str
 	
 	
 }//method
+@Then("^filter the bc from file \"([^\"]*)\" of sheet \"([^\"]*)\" for bctype \"([^\"]*)\"$")
+public void filter_the_bc_from_sheet_with(String bcfile, String bcsheet, String bctype ) throws Throwable {
+	eh.setExcelFile(bcfile, bcsheet);
+	String bcName=eh.getCellByColumnName("BC Name");
+	commonObjects.filterBC(bcName,bctype);
+}
+
+
+@Then("^pause bc for bctype \"([^\"]*)\"$")
+public void pause_bc_for_other_than_oneoff_from_sheet(String bctype) throws Throwable {
+	broadcastPageObjects.pauseBC(bctype);
+
+}
+
+@Then("^wait until status of \"([^\"]*)\" from file \"([^\"]*)\" is \"([^\"]*)\" for bctype \"([^\"]*)\"$")
+public void wait_until_status_of_from_file_is_for_bctype(String bcsheet, String bcfile, String status, String bctype) throws Throwable {
+	eh.setExcelFile(bcfile, bcsheet);
+    String bcName=eh.getCellByColumnName("BC Name");
+    commonObjects.filterBC(bcName,bctype);
+	String statusOfBc = broadcastPageObjects.getTopBcStatus(bcsheet,bcName,bctype);
+	TimeoutImpl t = new TimeoutImpl();
+	t.startTimer();
+	while (!statusOfBc.contains(status) && t.checkTimerMin(20)) {
+		statusOfBc = broadcastPageObjects.getTopBcStatus(bcsheet,bcName,bctype);
+		System.out.println(statusOfBc);
+		Thread.sleep(3000);
+	}
+	Assert.assertTrue("Invalid status of BC", statusOfBc.contains(status));
+}
+
+@Then("^wait until status of recurring child bc from sheet \"([^\"]*)\" is \"([^\"]*)\"$")
+public void wait_until_status_of_recurring_child_bc_from_sheet_is(String bcsheet, String statusExpected) throws Throwable {
+	eh.setExcelFile("bcInputData", bcsheet);
+    String bcName=eh.getCellByColumnName("BC Name");
+    commonObjects.filterName(bcName);
+	String statusOfBc = broadcastPageObjects.getStatusForChildBC(bcsheet,bcName);
+	TimeoutImpl t = new TimeoutImpl();
+	t.startTimer();
+	while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(20)) {
+		statusOfBc = broadcastPageObjects.getStatusForChildBC(bcsheet,bcName);
+		System.out.println(statusOfBc);
+		Thread.sleep(3000);
+	}
+	Assert.assertTrue("Invalid status of BC", statusOfBc.contains(statusExpected));
+
+}
+@Then("^abort bc for bctype \"([^\"]*)\"$")
+public void abort_bc_for_bctype(String bctype) throws Exception {
+	broadcastPageObjects.abortBC(bctype);
+}
+}
 
 	
 
 
-}//class
+
 
 

@@ -175,4 +175,113 @@ Feature: Data set up for edit and copy BCs
     Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "recurringBC" with "rechargeSMS"
     Then save bc
     
+      
+      @NDX-CreateOneoffBCForPause  @initBrowser 
+  Scenario: Verify Creating the oneoff Bc to verify the functioning of Pause
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBCForPause" with "rechargeSMS"
+    Then save bc
+    
+    
+    
+      @NDX-CreaterecurringBCForPause  @initBrowser 
+  Scenario: Verify Creating the recurringBC to verify the functioning of Pause
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "recurringBCForPause" with "rechargeSMS"
+    Then save bc
+    
+    
+    
+    
+        @NDX-CreateSeedingrecurringBCForPause  @initBrowser 
+  Scenario: Verify Creating the seedingRecurringBC Bc to verify the functioning of Pause
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "seedingRecurringBCForPause" with "SeedingWAPOffer"
+    Then save bc
+    
+    
+      @NDX-CreateSeedingOneoffBCForPause  @initBrowser 
+  Scenario: Verify Creating the seeding oneoff Bc to verify the functioning of Pause
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "seedingoneoffForPause" with "seedingWAPoffer"
+    Then save bc
+    
+     
+      @NDX-CreateOneoffBCForAbort  @initBrowser 
+  Scenario: Verify Creating the oneoff Bc to verify the functioning of Pause
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBCForAbort" with "rechargeWAP"
+    Then save bc
+    
+    
+    
+      @NDX-CreaterecurringBCForAbort  @initBrowser 
+  Scenario: Verify Creating the recurringBC to verify the functioning of Pause
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "recurringBCForAbort" with "rechargeWAP"
+    Then save bc
+    
+    
+    
+    
+        @NDX-CreateSeedingrecurringBCForAbort  @initBrowser 
+  Scenario: Verify Creating the seedingRecurringBC Bc to verify the functioning of Pause
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "seedingRecurringBCForAbort" with "SeedingWAPOffer"
+    Then save bc
+    
+    
+      @NDX-CreateSeedingOneoffBCForAbort  @initBrowser 
+  Scenario: Verify Creating the seeding oneoff Bc to verify the functioning of Pause
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "seedingoneoffForAbort" with "seedingWAPoffer"
+    Then save bc
   

@@ -250,6 +250,14 @@ public class CommonObjects extends Init {
 		private WebElement managelicenseTextarea;
 		@FindBy(xpath="//label[text()='Reports']/..")
 		private WebElement reports;
+		@FindBy(xpath="(//div[@id='toggleButton'])[1]")
+		 private WebElement autoRefreshButtononetime;
+		@FindBy(xpath="(//div[@id='toggleButton'])[2]")
+		 private WebElement autoRefreshButtonTrigger;
+		@FindBy(xpath="(//div[@id='toggleButton'])[3]")
+		 private WebElement autoRefreshButtonRecurr;
+		@FindBy(xpath="(//div[@id='toggleButton'])[4]")
+		 private WebElement autoRefreshButtonSeeding;
 		
 //		@FindBy(xpath="")
 //		private WebElement ;
@@ -563,7 +571,7 @@ public void clickActivateOption() throws Throwable {
 			clickTrggerableFilterIcon();
 			enterTriggarableFilterFormname(name);
 			clickTriggarableFilterApplyButton();					
-		}else if(sheetname.contentEquals("recurringBC")||sheetname.contentEquals("recurringBCEdit")) {
+		}else if(sheetname.contentEquals("recurringBC")||sheetname.contentEquals("recurringBCEdit")||sheetname.contentEquals("recurringBCForAbort")||sheetname.contentEquals("recurringBCForPause")) {
 			clickRecurringFilterIcon();
 			Thread.sleep(2000);
 			enterRecurringFilterFormname(name);
@@ -587,7 +595,7 @@ public void clickActivateOption() throws Throwable {
 			jswait.loadClick(seedingOptionsIcon);			
 		}else if(sheet.contains("TriggerReccurringBC")) {
 			jswait.loadClick(triggerOptionsIcon);
-		}else if(sheet.contentEquals("recurringBC")||sheet.contentEquals("recurringBCEdit")) {
+		}else if(sheet.contentEquals("recurringBC")||sheet.contentEquals("recurringBCEdit")||sheet.contentEquals("recurringBCForAbort")||sheet.contentEquals("recurringBCForPause")) {
 			jswait.loadClick(recurringOptionsIcon);
 		}
 		
@@ -978,7 +986,70 @@ public void speadSheetTestFunction(String excelFile, String bcSheet, String key,
 }
 	
 
+public void filterBC(String bcname,String bctype) throws Exception{
+Thread.sleep(10000);
+Thread.sleep(10000);
+//Thread.sleep(10000);
+if(bctype.equalsIgnoreCase("onetime")) {
+clickFilterIcon();
+Thread.sleep(2000);
+enterFilterFormname(bcname);
+Thread.sleep(2000);
+clickFilterResetButton();
+clickFilterIcon();
+enterFilterFormname(bcname);
+clickFilterApplyButton();
+jswait.loadClick(autoRefreshButtononetime);
+}else if(bctype.equalsIgnoreCase("seeding")){
+clickSeedingFilterIcon();
+	Thread.sleep(2000);
+	enterSeedingFilterFormname(bcname);
+	Thread.sleep(2000);
+	clickSeedingFilterResetButton();
+	clickSeedingFilterIcon();
+	enterSeedingFilterFormname(bcname);
+	clickSeedingFilterApplyButton();
+	jswait.loadClick(autoRefreshButtonSeeding);	
+}else if(bctype.equalsIgnoreCase("trigger")) {
+clickTrggerableFilterIcon();
+Thread.sleep(2000);
+enterTriggarableFilterFormname(bcname);
+Thread.sleep(2000);	
+clickTriggarableFilterResetButton();
+clickTrggerableFilterIcon();
+enterTriggarableFilterFormname(bcname);
+clickTriggarableFilterApplyButton();	
+jswait.loadClick(autoRefreshButtonTrigger);
+}else if(bctype.equalsIgnoreCase("recurring")){
+clickRecurringFilterIcon();
+Thread.sleep(2000);
+enterRecurringFilterFormname(bcname);
+Thread.sleep(2000);
+clickRecurringFilterResetButton();
+clickRecurringFilterIcon();
+enterRecurringFilterFormname(bcname);
+clickRecurringFilterApplyButton();
+jswait.loadClick(autoRefreshButtonRecurr);
+
+
+
+}
+}
+
+public void BCOptionIcon(String bctype) throws Exception{
+if(bctype.equalsIgnoreCase("onetime")) {
+	jswait.loadClick(optionsIcon);
+}else if(bctype.equalsIgnoreCase("seeding")) {
+	jswait.loadClick(seedingOptionsIcon);			
+}else if(bctype.equalsIgnoreCase("trigger")) {
+	jswait.loadClick(triggerOptionsIcon);
+}else if(bctype.equalsIgnoreCase("recurring")) {
+	jswait.loadClick(recurringOptionsIcon);
+}
+
+}
+}
 
 	
 	
-}
+
