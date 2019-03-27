@@ -1398,42 +1398,65 @@ public class CampaignManagement extends Init{
 								    
 								 }
 								 
-								 @Then("^wait until campaign from sheet \"([^\"]*)\" status is \"([^\"]*)\"$")
-								 public void wait_until_campaign_from_sheet_status_is(String campaignSheet, String statusExpected) throws Throwable {
-									 eM.setExcelFile("campaignInputData", campaignSheet);
-									    String campaignName=eM.getCellByColumnName("Campaign Name");
-									    commonObjects.filterName(campaignName);
-									    commonObjects.toggleAutoRefresh();
-									    Thread.sleep(2000);
-										String campaignStatus = campaignObjects.getStatusOfCampaign(campaignName);
-										TimeoutImpl t = new TimeoutImpl();
-										t.startTimer();
-										while (!campaignStatus.contains(statusExpected) && t.checkTimerMin(5)) {
-											campaignStatus = campaignObjects.getStatusOfCampaign(campaignName);
-											System.out.println(campaignStatus);
-											Thread.sleep(3000);
-										}
-										Thread.sleep(3000);
-										Assert.assertTrue(campaignStatus.contains(statusExpected));
-								 }
+ @Then("^wait until campaign from sheet \"([^\"]*)\" status is \"([^\"]*)\"$")
+ public void wait_until_campaign_from_sheet_status_is(String campaignSheet, String statusExpected) throws Throwable {
+eM.setExcelFile("campaignInputData", campaignSheet);
+String campaignName=eM.getCellByColumnName("Campaign Name");
+commonObjects.filterName(campaignName);
+commonObjects.toggleAutoRefresh();
+Thread.sleep(2000);
+String campaignStatus = campaignObjects.getStatusOfCampaign(campaignName);
+TimeoutImpl t = new TimeoutImpl();
+t.startTimer();
+while (!campaignStatus.contains(statusExpected) && t.checkTimerMin(5)) {
+campaignStatus = campaignObjects.getStatusOfCampaign(campaignName);
+System.out.println(campaignStatus);
+Thread.sleep(3000);
+}
+Thread.sleep(3000);
+Assert.assertTrue(campaignStatus.contains(statusExpected));
+}
 								 
-								 @Then("^verify \"([^\"]*)\" status is in show history$")
-								 public void verify_status_is_in_show_history(String statusShown) throws Exception {
-									 campaignObjects.showHistoryDetailsOfCampaign(statusShown);
-								 }
+@Then("^verify \"([^\"]*)\" status is in show history$")
+public void verify_status_is_in_show_history(String statusShown) throws Exception {
+campaignObjects.showHistoryDetailsOfCampaign(statusShown);
+}
 								 
-								 @Then("^create new approval rule from sheet \"([^\"]*)\" with campaign category from sheet \"([^\"]*)\"$")
-								 public void create_new_approval_rule_from_sheet_with_camapign_category_from_sheet(String approvalSheet, String campaignSheet) throws Exception {
-				                         eM.setExcelFile("appRuleInputData", approvalSheet);
-				                     	String approvalname = (String) eM.getCell(1, 0);
-				                     	approvalname =  RandomNameGenerator.getRandomName(approvalname);
-				                 	    eM.setCell(1, 0, approvalname);
+@Then("^create new approval rule from sheet \"([^\"]*)\" with campaign category from sheet \"([^\"]*)\"$")
+public void create_new_approval_rule_from_sheet_with_camapign_category_from_sheet(String approvalSheet, String campaignSheet) throws Exception {
+eM.setExcelFile("appRuleInputData", approvalSheet);
+String approvalname = (String) eM.getCell(1, 0);
+approvalname =  RandomNameGenerator.getRandomName(approvalname);
+eM.setCell(1, 0, approvalname);
+eM.setExcelFile("campaignCategoryInputData", campaignSheet);
+String campaignname = (String) eM.getCell(1, 0);
+campaignObjects.newApprovalForCampaignHistory(approvalname,campaignname);
 				                 	    
-				                 	   eM.setExcelFile("campaignCategoryInputData", campaignSheet);
-				               	       String campaignname = (String) eM.getCell(1, 0);
-				               	    campaignObjects.newApprovalForCampaignHistory(approvalname,campaignname);
-				                 	    
-				}
-				}
-				 
+}
+ @Then("^navigate to campaign template$")
+public void navigate_to_campaign_template() throws Throwable {
+campaignObjects.navigateToCampaigTemplate();
+}
+@Then("^enter the details of campaign template from sheet \"([^\"]*)\" and save$")
+public void enter_the_details_of_campaign_template_from_sheet_and_save(String campaignSheet) throws Exception {
+		eM.setExcelFile("campaignInputData", campaignSheet);	
+		String campaignTemplateName=(String) eM.getCell(1, 0);
+		campaignTemplateName=RandomNameGenerator.getRandomName(campaignTemplateName);
+		eM.setCell(1, 0,campaignTemplateName );
+		campaignObjects.detailsOfCampaignTemplate(campaignTemplateName);
+ }
+@Then("^filter the campaign template from sheet \"([^\"]*)\"$")
+public void filter_the_campaign_template_from_sheet(String campaignSheet) throws Throwable {
+	eM.setExcelFile("campaignInputData", campaignSheet);	
+	String campaignTemplateName=(String) eM.getCell(1, 0);
+	commonObjects.filterName(campaignTemplateName);
+}
+@Then("^edit the campaign template with target condition (.*)$")
+public void edit_the_campaign_template_with_target_condition(String condition) throws Throwable {
+	commonObjects.clickOptionsIcon();
+	commonObjects.clickEditOption();
+	campaignObjects.editTargetConditionOfCampaignTemplate(condition);
+	
+}
+}
 

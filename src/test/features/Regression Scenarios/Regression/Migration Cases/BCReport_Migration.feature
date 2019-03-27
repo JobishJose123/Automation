@@ -10,4 +10,4 @@ Then navigate to precision marketer
 Then navigate to reports
 Then navigate to broadcast reports
 Then filter broadcast from sheet "one-offBC"
-Then verify acknowledged conversion and fulfillment % are "100 %","100 %" and "100 %"
+Then verify acknowledged conversion and fulfillment % are "100 %", "100 %" and "100 %"

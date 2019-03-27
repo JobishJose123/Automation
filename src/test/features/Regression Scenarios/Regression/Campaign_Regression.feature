@@ -5,11 +5,11 @@
 Feature: Campaign Regression Cases
 
 
-  @NDX-campaignEdit
+  @NDX-5550, @NDX-5511, @NDX-5518, @NDX-5527, @NDX-5528, @NDX-8011 
   @initBrowser 
   Scenario Outline: Verify Editing campaign with target condition <Condition>
     Given login
-    Then navigate to precision marketer
+   When navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "campaignCategory"
     Then click on Campaign edit button from sheet "campaignBC"
@@ -19,21 +19,31 @@ Feature: Campaign Regression Cases
     #Target condition verification is same in both BC and Campaign page,above function is actually verifying in campaign page 
     
 Examples: 
-  | Condition |
+      | Condition | 
 	| customerWasSentTheTrialMessage |
 	| customerList                   |
+	| SharedcustomerList             |
+	| customerDrivenEvent            |
+	| usageMetric                    |
+	| sharedMetricOtherPartner  |
+	| customerDrivenEventNotOccurred  |
+	| customerWasSentTheTrialMessageNOtOccurred |
+	| conditionForANDOperation |
+	| conditionForOROperation |
+	| segmentAgeGT40                 |
      
-@NDX-campaignRecurringEdit
+@NDX-5496, @NDX-5498
   @initBrowser 
   Scenario: Verify Editing campaign recurruence and shedule
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "campaignCategory"
-    Then click on Campaign edit button from sheet "campaignBC"
-    Then edit the campaign recurrece from sheet "campaignBC"
-    Then click on Campaign view button from sheet "campaignBC"
-    #Then verify the recurrence 
+   Then click on Campaign edit button from sheet "recurringcampaign"
+    Then edit the campaign recurrece from sheet "recurringcampaign"
+    Then click on Campaign view button from sheet "recurringcampaign"
+    Then verify the campaign recurrece from sheet "recurringcampaign"
+ 
     
     
 @NDX-5554 
@@ -95,3 +105,31 @@ Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategoryShowHistory"
 Then verify "Approved" status is in show history
+
+@NDX-5530,NDX-5524,NDX-5515,NDX-5514,NDX-5513,NDX-5504
+@initBrowser
+Scenario Outline: Edit the target condition for the camapign template
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then navigate to campaign template
+Then filter the campaign template from sheet "CampaignTemplate"
+Then edit the campaign template with target condition <condition>
+Then verify the edited changes are reflected
+
+Examples:
+|condition|
+    |customerWasSentTheTrialMessage|
+    |digitalPersonaGT15|
+    |customerDemographicsGT25|
+    |learnedBehaviourGT35|
+    |analyticalScoresGT45|
+    |digitalEngagementGT235|
+    |customerLocationInsightsGT5|
+    |customerList|
+    |discoveredClusters200|
+    |customerDrivenEvent|
+    |usageMetric|
+    |eventCounts|
+    |revenueMetric|

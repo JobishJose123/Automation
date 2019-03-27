@@ -334,10 +334,33 @@ public class CampaignObjects extends Init{
 	private WebElement addCategoryButton;
 	@FindBy(xpath = ".//label[contains(.,'Select required campaign categories')]//following::iron-icon[1]")
 	private WebElement addCategoryDropdown;
+	@FindBy(xpath="//paper-tab[@val='templates']//div[contains(.,'Campaign Templates')]")
+	private WebElement campaignTemplate;
+	@FindBy(xpath="//paper-button[contains(.,'Create Campaign template')]")
+	private WebElement createNewTemplatebtn ;
+	@FindBy(xpath="(//label[contains(.,'Name')][@for='input']//following::input)[1]")
+	private WebElement inputTemplateName ;
+	@FindBy(xpath="//textarea[@id='textarea']")
+	private WebElement inputDescription;
+	@FindBy(xpath="//paper-button[contains(.,'Proceed')]")
+	private WebElement proceedbtn;
+	@FindBy(xpath="//paper-button[contains(.,'Save')][3]")
+	private WebElement Savebtn ;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
 //	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+	
 
 
 	public void clickOptionsViewBroadcasts() throws InterruptedException {
@@ -2238,5 +2261,29 @@ public void selectBothUserForBCApproval() throws Exception{
 	jswait.loadClick(approvalRuleSave);
 	}
 	
-
+public void navigateToCampaigTemplate() throws Exception{
+	jswait.loadClick(campaignTemplate);
+	jswait.loadClick(createNewTemplatebtn);
+}
+public void detailsOfCampaignTemplate(String campaignTemplateName) throws Exception{
+	jswait.loadClick(inputTemplateName);
+	Thread.sleep(2000);
+	jswait.loadSendKeys(inputTemplateName, campaignTemplateName);
+	jswait.loadSendKeys(inputDescription, "template by selenium");
+	Thread.sleep(2000);
+	jswait.loadClick(proceedbtn);
+targetConditionObjects.clickCreateTargetConditionButton();
+targetConditionObjects.clickBasicTargetConditionWithAge();
+jswait.loadClick(Savebtn);
+}
+public void editTargetConditionOfCampaignTemplate(String condition) throws Exception{
+	clickProceedButton();
+	verifyTargetConditionCard();
+	clickOptionsIcon();
+	Thread.sleep(3000);
+	clickEditTargetCondtion();
+	targetConditionObjects.clickBasicTargetCondition(condition);
+	Thread.sleep(3000);
+	clickSaveCampaignTemplate();
+}
 }

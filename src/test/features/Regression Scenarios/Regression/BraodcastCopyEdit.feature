@@ -1428,40 +1428,14 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then verify Acknowledged event from BC Sheet "one-offBC" and "campaignBC" offer "rechargeSMS"
 
 
-    @NDX-1234 @initBrowser @closeBrowser
-		Scenario: Verify pausing of a One-time Broadcast
-		 Given login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
-    Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
-    Then activate bc
-    Then wait until status of "one-offBCEdit" from file "bcInputDataForEdit" is "Delivering"
-    Then pause bc
-    Then wait until status of "one-offBCEdit" from file "bcInputDataForEdit" is "Paused"
+
+
+
  
-@NDX-2345 @initBrowser
-Scenario: Verify pausing of a Recurring Broadcast
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "CampaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then navigate to recurring broadcasts
-Then click on BC edit button from workbook "bcInputData" sheet "recurringBC"
-Then edit the Delevery tab details from workbook "bcInputData" sheet "recurringBC"
-Then activate bc
-Then navigate to recurring broadcasts
-Then filter the bc from sheet "recurringBC" with "seedingWAPoffer"
-#Then activate the recurring bc from sheet "recurringBC"
-#Then edit the Delevery tab details from workbook "bcInputData" sheet "recurringBC"
-Then pause bc
-Then wait until status of "recurringBC" from file "bcInputData" is "Paused"
-Then click one-time broadcast
-Then filter the bc from sheet "recurringBC" with "seedingWAPoffer"
-Then wait until status of "recurringBC" from file "bcInputData" is "Paused"
+
+
+
+
 
     
     
