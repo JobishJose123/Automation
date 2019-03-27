@@ -53,7 +53,7 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
 #	|user_Event_not_Occured|
 #	|user_Event_Occured|
   
-      @initBrowser @NX-cctouchpoint2
+      @initBrowser @NX-cctouchpointLIFO @NDX-8143
   Scenario: Verify create a customer care program full flow
     Given login
 #      Then navigate to intent management
@@ -118,7 +118,7 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
     Then navigate to customer care
     Then change Customercare Prioritization Logic to "LIFO" from sheet "CCTouchpoint"
     
-          @initBrowser @NX-cctouchpointfifo
+          @initBrowser @NX-cctouchpointfifo @NDX-8141
   Scenario: Verify create a customer care program full flow
     Given login
       Then navigate to intent management

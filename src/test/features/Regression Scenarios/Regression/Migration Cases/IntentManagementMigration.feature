@@ -4,7 +4,7 @@
 Feature: For IntentManagement Regression.
 
    @createprogramedit
-  @NDX-7337 @NDX-7336 @NDX-7335 @NDX-5725 @NDX-7328 @NDX-7327 @NDX-7326 @NDX-5722 @NDX-7321 @NDX-7320 @NDX-7319 @NDX-5716 @NDX-5719 @NDX-7315 @NDX-7314 @NDX-7313
+ @NDX-5742,@NDX-5755,@NDX-5740,@NDX-7333,@NDX-7334,@NDX-7332,@NDX-5726,@NDX-7330,@NDX-7331,@NDX-7329,@NDX-5723,@NDX-7130,@NDX-7317,@NDX-7318,@NDX-7316,@NDX-5720
   @initBrowser
   Scenario: Verify create a program edit
     Given login
@@ -120,8 +120,7 @@ Feature: For IntentManagement Regression.
 	|user_Event_Occured|
 
    @initBrowser @programrulecopyedit
-@NDX-6908, @NDX-6906, @NDX-6904
-@NDX-6902, @NDX-6900, @NDX-6898, @NDX-6350, @NDX-6897, @NDX-6338
+@NDX-6909,@NDX-6907,@NDX-6905,@NDX-6903,@NDX-6901,@NDX-6899,@NDX-6896,@NDX-6349,@NDX-6337,@NDX-6335,@NDX-6333,@NDX-6331,@NDX-6329,@NDX-6326,@NDX-6324
  Scenario Outline: Verify program rule copy edit <Condition>
     Given login
     Then navigate to landing page
@@ -176,4 +175,5 @@ Feature: For IntentManagement Regression.
 
     
     
+
     
