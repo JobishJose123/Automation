@@ -1449,14 +1449,18 @@ public void enter_the_details_of_campaign_template_from_sheet_and_save(String ca
 public void filter_the_campaign_template_from_sheet(String campaignSheet) throws Throwable {
 	eM.setExcelFile("campaignInputData", campaignSheet);	
 	String campaignTemplateName=(String) eM.getCell(1, 0);
-	commonObjects.filterName(campaignTemplateName);
+	commonObjects.filterTemplate(campaignTemplateName);
 }
 @Then("^edit the campaign template with target condition (.*)$")
 public void edit_the_campaign_template_with_target_condition(String condition) throws Throwable {
-	commonObjects.clickOptionsIcon();
-	commonObjects.clickEditOption();
+	commonObjects.clickOptionsIcon2();
+	commonObjects.clickEditOption2();
 	campaignObjects.editTargetConditionOfCampaignTemplate(condition);
 	
+}
+@Then("^verify the camapign template edited with condition (.*) are reflected$")
+public void verify_campaign_template_edited_(String condition) throws Exception{
+	campaignObjects.verifyCampaignTemplateTaregetCondition(condition);
 }
 }
 

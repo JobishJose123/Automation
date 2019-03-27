@@ -95,6 +95,8 @@ public class CommonObjects extends Init {
 	private WebElement filterFormReset;
 	@FindBy(xpath = "//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..")
 	private WebElement optionsIcon;
+	@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[2]")
+	private WebElement optionsIcon2;
 	
 	@FindBy(xpath = "//div[@val='broadcastSeedingViews']//vaadin-grid[@id='broadcastSeedList']//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row[1]//vaadin-grid-cell-content//paper-icon-button//iron-icon[@id='icon']")
 	private WebElement seedingOptionsIcon;
@@ -113,6 +115,8 @@ public class CommonObjects extends Init {
 	private WebElement paperButtonOk;
 	@FindBy(xpath = "//paper-item[contains(.,'Edit')]")
 	private WebElement optionsEdit;
+	@FindBy(xpath = "(//paper-item[contains(.,'Edit')])[1]")
+	private WebElement optionsEdit2;
 	@FindBy(xpath = "//paper-item[contains(.,'Archive')]")
 	private WebElement optionsArchive;
 	@FindBy(xpath = "//paper-item[contains(.,'Duplicate')]")
@@ -371,7 +375,9 @@ public void clickActivateOption() throws Throwable {
 	public void clickEditOption() throws InterruptedException {
 		jswait.loadClick(optionsEdit);
 	}
-	
+	public void clickEditOption2() throws InterruptedException {
+		jswait.loadClick(optionsEdit2);
+	}
 	public void clickArchiveOption() throws InterruptedException {
 		jswait.loadClick(optionsArchive); 
 	}
@@ -435,6 +441,10 @@ public void clickActivateOption() throws Throwable {
 	public void clickOptionsIcon() throws InterruptedException {
 		jswait.loadClick(optionsIcon);
 	}
+	public void clickOptionsIcon2() throws InterruptedException {
+		jswait.loadClick(optionsIcon2);
+	}
+
 
 	public void clickPlusIcon() throws InterruptedException {
 		jswait.loadClick(plusIcon);
@@ -1048,7 +1058,20 @@ if(bctype.equalsIgnoreCase("onetime")) {
 }
 
 }
+public void filterTemplate(String campaignTemplateName) throws Exception{
+		Thread.sleep(10000);
+	Thread.sleep(10000);
+	//Thread.sleep(10000);
+	clickFilterIcon2();
+	Thread.sleep(2000);
+	enterFilterFormname2(campaignTemplateName);
+	Thread.sleep(2000);
+	
+	clickFilterApplyButton2();
 }
+
+}
+
 
 	
 	

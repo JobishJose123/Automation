@@ -2263,9 +2263,10 @@ public void selectBothUserForBCApproval() throws Exception{
 	
 public void navigateToCampaigTemplate() throws Exception{
 	jswait.loadClick(campaignTemplate);
-	jswait.loadClick(createNewTemplatebtn);
+Thread.sleep(2000);
 }
 public void detailsOfCampaignTemplate(String campaignTemplateName) throws Exception{
+	jswait.loadClick(createNewTemplatebtn);
 	jswait.loadClick(inputTemplateName);
 	Thread.sleep(2000);
 	jswait.loadSendKeys(inputTemplateName, campaignTemplateName);
@@ -2285,5 +2286,59 @@ public void editTargetConditionOfCampaignTemplate(String condition) throws Excep
 	targetConditionObjects.clickBasicTargetCondition(condition);
 	Thread.sleep(3000);
 	clickSaveCampaignTemplate();
+}
+public void verifyCampaignTemplateTaregetCondition(String segmentCondition) throws Exception{
+	commonObjects.clickOptionsIcon2();
+	commonObjects.clickEditOption2();
+	clickProceedButton();
+	Thread.sleep(3000);
+	if (segmentCondition.contentEquals("customerWasSentTheTrialMessage")) {
+	assertTrue(
+				jswait.checkVisibility("//target-event//b[contains(.,'Customer was sent the trial message')]"));
+
+	} else if (segmentCondition.contentEquals("digitalPersonaGT15")) {
+	assertTrue(
+				jswait.checkVisibility("//profile-field//b[contains(.,'" + DIGITAL_PERSONA_FIELD + "')]"));
+
+	} else if (segmentCondition.contentEquals("customerDemographicsGT25")) {
+		assertTrue(jswait.checkVisibility("//profile-field//b[contains(.,'" + DEMOGRAPHICS_FIELD + "')]"));
+
+	} else if (segmentCondition.contentEquals("learnedBehaviourGT35")) {
+		assertTrue(
+				jswait.checkVisibility("//profile-field//b[contains(.,'" + LEARNED_BEHAVIOR_FIELD + "')]"));
+
+	} else if (segmentCondition.contentEquals("analyticalScoresGT45")) {
+		assertTrue(
+				jswait.checkVisibility("//profile-field//b[contains(.,'" + ANALYTICAL_SCORES_FIELD + "')]"));
+
+	} else if (segmentCondition.contentEquals("digitalEngagementGT235")) {
+		assertTrue(
+				jswait.checkVisibility("//profile-field//b[contains(.,'" + DIGITAL_ENGAGEMENT_FIELD + "')]"));
+
+	} else if (segmentCondition.contentEquals("customerLocationInsightsGT5")) {
+		assertTrue(
+				jswait.checkVisibility("//profile-field//b[contains(.,'" + LOCATION_PROFILE_FIELD + "')]"));
+
+	} else if (segmentCondition.contentEquals("customerList")) {
+		assertTrue(jswait.checkVisibility("//fixed-segment//b[contains(.,'" + BASE_LIST + "')]"));
+
+	} else if (segmentCondition.contentEquals("discoveredClusters200")) {
+		assertTrue(jswait
+				.checkVisibility("//fixed-segment//b[contains(.,'" + SELENIUM_DISCOVERED_CLUSTERS_LIST + "')]"));
+
+	} else if (segmentCondition.contentEquals("customerDrivenEvent")) {
+		assertTrue(
+				jswait.checkVisibility("//target-event//b[contains(.,'" + SELENIUM_CUSTOMER_DRIVEN_EVENT + "')]"));
+
+	} else if (segmentCondition.contentEquals("usageMetric")) {
+		assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'" + SELENIUM_USAGE_METRIC + "')]"));
+
+	} else if (segmentCondition.contentEquals("eventCounts")) {
+		assertTrue(jswait.checkVisibility("//usage-metric//b[contains(.,'" + SELENIUM_EVENT_COUNTS + "')]"));
+
+	} else if (segmentCondition.contentEquals("revenueMetric")) {
+	assertTrue(
+				jswait.checkVisibility("//usage-metric//b[contains(.,'" + SELENIUM_REVENUE_METRIC + "')]"));
+}
 }
 }

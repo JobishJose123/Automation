@@ -106,7 +106,7 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategoryShowHistory"
 Then verify "Approved" status is in show history
 
-@NDX-5531,NDX-5525,NDX-5516,NDX-5514,NDX-5507,NDX-5505
+@NDX-5531 @NDX-5525 @NDX-5516 @NDX-5514 @NDX-5507 @NDX-5505
 @initBrowser
 Scenario Outline: Edit the target condition for the camapign template
 Given login
@@ -116,20 +116,19 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then navigate to campaign template
 Then filter the campaign template from sheet "CampaignTemplate"
 Then edit the campaign template with target condition <condition>
-Then verify the edited changes are reflected
-
+Then filter the campaign template from sheet "CampaignTemplate"
+Then verify the camapign template edited with condition <condition> are reflected
 Examples:
 |condition|
-    |customerWasSentTheTrialMessage|
     |digitalPersonaGT15|
-    |customerDemographicsGT25|
-    |learnedBehaviourGT35|
-    |analyticalScoresGT45|
-    |digitalEngagementGT235|
-    |customerLocationInsightsGT5|
-    |customerList|
-    |discoveredClusters200|
-    |customerDrivenEvent|
-    |usageMetric|
-    |eventCounts|
-    |revenueMetric|
+#    |customerDemographicsGT25|
+#    |learnedBehaviourGT35|
+#    |analyticalScoresGT45|
+#    |digitalEngagementGT235|
+#    |customerLocationInsightsGT5|
+#    |customerList|
+#    |discoveredClusters200|
+#    |customerDrivenEvent|
+#    |usageMetric|
+#    |eventCounts|
+#    |revenueMetric|
