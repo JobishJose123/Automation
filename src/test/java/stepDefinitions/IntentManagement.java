@@ -1460,7 +1460,8 @@ System.out.println(editname+"program has edited successfully");
 		    	ExcelHelper offerExcel = new ExcelHelper();
 		    	offerExcel.setExcelFile("offerInputData", offerType);
 		    	
-		 		String name = (String) programExcel.getCell(1, 0);
+		 		String name = (String) programExcel.getCell(1,0);
+		 		
 		 		Thread.sleep(4000);
 				//programPage.clickCreateProgramButton();
 		 		System.out.println(touchpointList);

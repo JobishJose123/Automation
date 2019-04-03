@@ -50,7 +50,7 @@ Feature: For IntentManagement datasetup.
    
   
    @createprogramdeletedatasetup
-   @initBrowser @initBrowser
+   @initBrowser 
   Scenario: Verify create a program delete
     Given login
     Then navigate to intent management
@@ -58,11 +58,11 @@ Feature: For IntentManagement datasetup.
     Then click create program button
     Then verify create program page "programdelete" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
 		Then choose program from sheet "programdelete"
-    Then create new rule from sheet "ruledelete" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then create new rule from sheet "programdelete" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 
 
    @createprogramdeactivatedatasetup
-  @initBrowser @initBrowser
+  @initBrowser
    Scenario: Verify create a program delete
     Given login
     Then navigate to intent management
@@ -70,11 +70,11 @@ Feature: For IntentManagement datasetup.
     Then click create program button
     Then verify create program page "programruledeactivate" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
 	Then choose program from sheet "programruledeactivate"
-    Then create new rule from sheet "ruledelete" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then create new rule from sheet "programruledeactivate" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 
     
       @createprogramstartsat
-   @initBrowser @initBrowser
+   @initBrowser 
   Scenario: Verify create a program starts at
     Given login
     Then navigate to intent management

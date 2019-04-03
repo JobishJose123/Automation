@@ -716,16 +716,16 @@ private WebElement rulessenderid2
    public void rulessenderid2() throws InterruptedException {
 	   Thread.sleep(4000);
 	   //wait.until(ExpectedConditions.visibilityOf(rulessenderid2)).click();
-		jswait.loadClick(rulessenderid2);
-//		Thread.sleep(2000);
 //		jswait.loadClick(rulessenderid2);
+		Thread.sleep(2000);
+		jswait.loadClick(rulessenderid2);
 	}
    
    public void rulerouteid2() throws InterruptedException {
 	   Thread.sleep(2000);
 //	   jswait.loadClick(ruleroute2);
-////		jswait.loadClick(rulerouteid2);
-////		 Thread.sleep(2000);
+//		jswait.loadClick(rulerouteid2);
+		 Thread.sleep(2000);
 			jswait.loadClick(rulerouteid2);
 	}
    
@@ -1395,14 +1395,18 @@ public void touchpointpgmdeletecheck() throws Exception{
 	public void selectOfferCatalogfromsheet(String sheet2) throws InterruptedException {
 		
 		eh.setExcelFile("offerCatalogInputData",sheet2);
-		String offer = (String) eh.getCell(1, 0);
+		String offer = (String) eh.getCell(1,0);
 		Thread.sleep(3000);
 		jswait.loadSendKeys(programofferclick, offer);
 		System.out.println("Offer: "+offer);
 			Thread.sleep(3000);
+			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
+			Thread.sleep(3000);
+			jswait.loadClick("//label[contains(.,'Offer Catalog')]//..//paper-icon-button[@id='clearIcon']");
+			Thread.sleep(3000);
 			jswait.loadSendKeys(programofferclick, offer);
 			Thread.sleep(4000);
-			jswait.loadSendKeys(programofferclick, offer);
+//			jswait.loadSendKeys(programofferclick, offer);
 			Thread.sleep(3000);
 			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
 	}
@@ -1682,7 +1686,7 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 					}
 	 
 	 
-	 //------------------------------//
+	 //------------------------------//===
 	 
 	   public void editProgramRule(String name,String listname,String touchpointList, String offerType,String condition)throws Exception {
 			eh.setExcelFile("touchpointInputData", touchpointList);
@@ -1728,10 +1732,11 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 		}
 			if(touchpointType.contentEquals("sms")){
 				System.out.println("inside sms");
+				jswait.loadClick("//label[(contains(.,'Sender ID: Broadcast message would appear from this ID'))]//following::paper-icon-button[@id='clearIcon'][1]");
 				rulessenderid();
 				Thread.sleep(2000);
 				addresssprule();
-
+jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be sent'))]//following::paper-icon-button[@id='clearIcon'][1]");
 				Thread.sleep(2000);
 				rulerouteid();
 				Thread.sleep(2000);
@@ -1739,10 +1744,15 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 				Thread.sleep(2000);
 				
 	   }
-			rulessenderid2();
+			
+			Thread.sleep(2000);
+			jswait.loadClick("//label[(contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID'))]//following::paper-icon-button[@id='clearIcon'][1]");
+						rulessenderid2();
+			
 			Thread.sleep(2000);
 			addresssprule2();
 			Thread.sleep(2000);
+			jswait.loadClick("//label[(contains(.,'Route over which Fulfillment success or failure confirmation message can be sent'))]//following::paper-icon-button[@id='clearIcon'][1]");
 			rulerouteid2();
 			Thread.sleep(2000);
 			ruleroute2();
