@@ -1,8 +1,6 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary : checking campaign pause
-
-
-@NX-CampaignPause
+@NX-CampaignPause123
 Feature: campaign pause
 
 @NX-8715

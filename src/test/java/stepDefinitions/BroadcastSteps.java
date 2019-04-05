@@ -3511,13 +3511,13 @@ public class BroadcastSteps extends Init {
 			day++;
 		}
 		Actions builder = new Actions(driver);
-		broadcastPageObjects.createBC(name, bc_type, "test selenium cluster", offer);
+		broadcastPageObjects.createBC(name, bc_type, SELENIUM_DISCOVERED_CLUSTERS_LIST, offer);
 
 //	 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //	Thread.sleep(1500);
 
 		enterDeliveryTabDetails(bc_type, sheet);
-		broadcastPageObjects.Broadcast_Expiry();
+//		broadcastPageObjects.Broadcast_Expiry();
 
 	}
 

@@ -1,31 +1,31 @@
 #Author: joel.jose@flytxt.com
 #Summary : Test Cases of Consumer Profile
-
-
 @NX-consumer_profileTestSuite
 Feature: consumer profile test cases
 
-@NX-2773
+
+
 @initBrowser
+@NX-2773
 Scenario: Verify if Reports module is introduced to UI.
 Given login
 Then navigate to precision marketer
 Then navigate to reports
 
-@NX-2775
 
+@NX-2775
 Scenario: Verify whether breadcrumbs are displayed in the page.
 Then navigate to customer profile
 Then verify whether breadcrumbs are displayed in the page
 
 @NX-2776
 Scenario: Verify whether user can search for a consumer by specifying the MSISDN.
-Then search msisdn ""
+Then search msisdn "919491750000"
 
 @NX-2780
 @closeBrowser
 Scenario: Verify for the search button after number is entered.
-Then verify customer info page of ""
+Then verify customer info page of "919491750000"
 
 
 @NX-2786   
@@ -50,7 +50,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then click on event type checkbox
@@ -65,7 +65,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click subscribed to lists tab
 Then click unsubscribe button
@@ -81,18 +81,19 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn ""
-Then verify customer info page of ""
+Then search msisdn "919491750000"
+Then verify customer info page of "919491750000"
 
 ###################PENDING
 @NX-2792   @run_this
 Scenario: Verify if Consumer Info tab is populated with valid data
-Then verify details in customer info page of ""
+Then verify details in customer info page of "919491750000"
 
-@NX-2793 @run_this
 
+ @run_this
+@NX-2793
 Scenario: Verify whether user is able to change the subscriber from all the tabs.
-Then verify changing customer number from all tabs of ""
+Then verify changing customer number from all tabs of "919491750000"
 
 
 
@@ -100,13 +101,13 @@ Then verify changing customer number from all tabs of ""
 
 
 @NX-2817   
-@initBrowser @closeBrowser
+@initBrowser
 Scenario: Verify whether user is able to add,delete & uncheck attributes that is displayed-2817
 Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click usage metrics tab
 Then verify add delete check and uncheck of attributes
@@ -118,7 +119,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then verify include sub partners option
 
@@ -130,7 +131,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click subscribed to lists tab
 Then verify subscribed to lists
@@ -142,7 +143,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then verify events row
@@ -155,7 +156,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click usage metrics tab
 Then try to add more than five attributse and check for toast message
@@ -168,7 +169,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click customer support tab
 Then verify events row in customer support page
@@ -181,7 +182,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then choose all events
@@ -197,7 +198,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then choose all events
@@ -211,7 +212,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then choose all events
@@ -227,7 +228,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click subscribed to lists tab
 Then click unsubscribe button
@@ -240,7 +241,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click customer support tab
 Then verify events row in customer support tab
@@ -252,7 +253,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click customer support tab
 Then verify events row in customer support page
@@ -264,7 +265,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then verify tab selected by default
@@ -277,7 +278,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then choose all events
@@ -293,7 +294,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click usage metrics tab
 Then verify for saving checked attributes
@@ -307,7 +308,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click usage metrics tab
 Then verify Color of selected attribute and graph
@@ -320,7 +321,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click usage metrics tab
 Then verify charts in usage metric screen
@@ -332,7 +333,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then verify selected events displayed in the events tab
@@ -344,7 +345,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then verify events row
@@ -358,7 +359,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click customer support tab
 Then verify events row in customer support events time details
@@ -372,7 +373,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click on events tab
 Then verify event types selected by default
@@ -385,7 +386,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then enter customer number "number"
+Then enter customer number "919491750000"
 Then click on search button
 Then click usage metrics tab
 Then verify mouse hover in usage metrics tab

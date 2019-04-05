@@ -4,8 +4,8 @@
 Feature: For IntentManagement Regression.
 
 
-   	 @createprogramreg 
-    @NDX-7136, @NDX-7133, @NDX-7132, @NDX-7125, @NDX-5711
+   	 @createprogramreg123 
+    @NDX-7136, @NDX-7133, @NDX-7132, @NDX-7125, @NDX-5711,@NDX-5732
   @initBrowser
   Scenario: Verify create a program
     Given login
@@ -37,14 +37,14 @@ Feature: For IntentManagement Regression.
 #     Then choose program from sheet "SMSprogram"
 #    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
     Then navigate to programs
-    Then verify create program page "APIprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR"
-    Then choose program from sheet "APIprogram"
-    Then create new rule from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
-    Then navigate to programs
-    Then verify create program page "USSDprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
-    Then choose program from sheet "USSDprogram"
-    Then create new rule from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
-    Then navigate to programs
+#    Then verify create program page "APIprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR"
+#    Then choose program from sheet "APIprogram"
+#    Then create new rule from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
+#    Then navigate to programs
+#    Then verify create program page "USSDprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+#    Then choose program from sheet "USSDprogram"
+#    Then create new rule from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+#    Then navigate to programs
     Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
     Then choose program from sheet "CCprogram"
     Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
@@ -92,13 +92,13 @@ Feature: For IntentManagement Regression.
 #    Then choose program from sheet "APIprogram" after edited
 #    Then verify edited program page "APIprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "apiTouchpointedit"
    
-    Then navigate to programs
-    Then choose program from sheet "USSDprogram" for edit
-    Then verify edit program page "USSDprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ussdTouchpointedit"
-    Then choose program from sheet "USSDprogram" after edited
-    Then verify edited program page "USSDprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ussdTouchpointedit"
-    Then navigate to programs
-  
+#    Then navigate to programs
+#    Then choose program from sheet "USSDprogram" for edit
+#    Then verify edit program page "USSDprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ussdTouchpointedit"
+#    Then choose program from sheet "USSDprogram" after edited
+#    Then verify edited program page "USSDprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ussdTouchpointedit"
+#    Then navigate to programs
+#  
     Then choose program from sheet "CCprogram" for edit
     Then verify edit program page "CCprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "ccTouchpointedit"
     Then choose program from sheet "CCprogram" after edited
@@ -145,7 +145,7 @@ Feature: For IntentManagement Regression.
     Then verify rule deactivate
     
     @initBrowser @programrulecopy11
-    @NDX-6894
+    @NDX-6894 @NDX-6321
   Scenario: Verify program rule copy
     Given login
     Then navigate to landing page
@@ -158,8 +158,8 @@ Feature: For IntentManagement Regression.
 		
 		
 		@initBrowser @programruleeditreg
-    @NDX-5755, @NDX-5752
-  Scenario Outline: Verify program rule edit <Condition>
+    @NDX-5755, @NDX-5752,@NDX-6319,@NDX-6317,@NDX-6073	
+      Scenario Outline: Verify program rule edit <Condition>
     Given login
     Then navigate to landing page
     Then navigate to intent management
@@ -178,7 +178,7 @@ Feature: For IntentManagement Regression.
 
 	
 	@initBrowser @programruleeditreg
-    @NDX-5755, @NDX-5752
+    @NDX-5755, @NDX-5752 @NDX-5818S
   Scenario Outline: Verify program rule edit <Condition>
     Given login
     Then navigate to landing page
@@ -197,8 +197,8 @@ Feature: For IntentManagement Regression.
 	| sharedMetricOtherPartner  |
 	
 	@initBrowser @programruleeditreg
-    @NDX-5755, @NDX-5752
-  Scenario Outline: Verify program rule edit <Condition>
+    @NDX-5755, @NDX-5752,@NDX-5824,@NDX-5814	
+      Scenario Outline: Verify program rule edit <Condition>
     Given login
     Then navigate to landing page
     Then navigate to intent management
@@ -217,8 +217,8 @@ Feature: For IntentManagement Regression.
 	
 	
 		@initBrowser @programruleeditreg123
-    @NDX-5755, @NDX-5752
-  Scenario Outline: Verify program rule edit <Condition>
+    @NDX-5755, @NDX-5752,@NDX-5822,@NDX-5820	
+      Scenario Outline: Verify program rule edit <Condition>
     Given login
     Then navigate to landing page
     Then navigate to intent management
@@ -237,7 +237,7 @@ Feature: For IntentManagement Regression.
 	
 
    @initBrowser @programrulecopyedit11
-@NDX-6908, @NDX-6906, @NDX-6904
+@NDX-6908, @NDX-6906, @NDX-6904 @NDX-5818
 @NDX-6902, @NDX-6900, @NDX-6898, @NDX-6350, @NDX-6897, @NDX-6338
  Scenario Outline: Verify program rule copy edit <Condition>
     Given login

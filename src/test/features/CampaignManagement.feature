@@ -1,6 +1,6 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary : checking postive flow of bc creation
-@NX-Campaign
+@NX-Campaign123
 Feature: campaign management
 
   #########################recurring bc

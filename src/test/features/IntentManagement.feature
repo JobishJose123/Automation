@@ -603,7 +603,7 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to programs
     Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "default" and touchpoint from sheet "smsTouchpoint"
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
     Then navigate to touchpoints
     Then navigate to sms
     Then create sms touchpoint from sheet "smsTouchpoint"
@@ -612,7 +612,7 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails" for edit
-    Then verify edit program page "programdetails" and offer catalog sheet "default" and touchpoint from sheet "smsTouchpoint"
+    Then verify edit program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
     Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
@@ -650,7 +650,7 @@ Then wait until status is changed to "C"
     Then choose a segment analysis
     Then verify cluster tab
 
-  @NX-8453 @initBrowser @closeBrowser
+  @NX-8453 @initBrowser
   Scenario: Check by creating Cluster by configuring KPIs for a  single view--View1/View2-8453
     Given login
     Then navigate to intent management
@@ -756,10 +756,10 @@ Then wait until status is changed to "C"
   @NX-8495 @initBrowser @closeBrowser
   Scenario: Verify by editing the existing short code and check by sending keyword to new short code for the customer
     Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to products
@@ -1086,30 +1086,30 @@ Then wait until Segment Analysis job status is changed to "C"
   @NX-8408 @initBrowser
   Scenario: Check whether Saved cluster can be targeted for sending BC.
     Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
     Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"

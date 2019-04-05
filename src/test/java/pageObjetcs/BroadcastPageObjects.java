@@ -341,9 +341,9 @@ public class BroadcastPageObjects extends Init {
 
 	@FindBy(xpath = ".//form[@id='bcExpiryForm']//paper-checkbox//div[contains(.,'Broadcast Expiry')]")
 	private WebElement bcExpiryclick;
-	@FindBy(xpath = " .//form[@id='bcExpiryForm']//label[contains(.,'Expires')]//following::iron-icon[1]")
+	@FindBy(xpath = " .//form[@id='bcExpiryForm']//label[contains(.,'Expires')]//following::iron-icon[2]")
 	private WebElement expirestime;
-	@FindBy(xpath = "//form[@id='bcExpiryForm']//paper-item[contains(.,'At')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'At')]")
 	private WebElement expiresAtoption;
 	@FindBy(xpath = "//form[@id='bcExpiryForm']//paper-item[contains(.,'After')]")
 	private WebElement expiresAfteroption;
@@ -2201,11 +2201,11 @@ public class BroadcastPageObjects extends Init {
 		// builder.moveToElement(num1).click().build().perform();
 		// Thread.sleep(2000);
 		if (am_pm == 0)
-			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[3]");
 		else
-			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[3]");
 
-		jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
+		jswait.loadClick("(.//*[@id='timeDialog']/div/paper-button[contains(.,'OK')])[3]");
 		Thread.sleep(2000);
 
 		jswait.loadClick(expirestimezone);
