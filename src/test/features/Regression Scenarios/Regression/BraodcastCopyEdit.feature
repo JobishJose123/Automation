@@ -1377,12 +1377,12 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then click on toggleAutoRefresh
     Then wait until status of "one-offBC" is "Completed"
     Then click on toggleAutoRefresh
-    Then click on Archive from workbook "bcInputDataForEdit" and sheet "one-offBCEdit"
+    Then click on Archive from workbook "bcInputData" and sheet "one-offBC"
 #    Then view the bc from workbook "bcInputData" in sheet "one-offBC"
 #    Then Verify the Copied Bc in view page workbook "bcInputData" sheet "one-offBC" with "rechargeSMS" condition SharedcustomerList
     Then navigate to reports
     Then navigate to customer profile
-    Then enter customer number for send trial verification "919491750000"
+    Then enter customer number for send trial verification "919491750004"
     Then click on search button
     Then click on events tab
     Then choose all events
@@ -1425,7 +1425,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then choose all events
     Then choose Acknowledged event
     Then click on apply button
-    Then verify Acknowledged event from BC Sheet "one-offBC" and "campaignBC" offer "rechargeSMS"
+    Then verify Acknowledged event from BC Sheet "TriggerOneoff" and "campaignBC" offer "rechargeSMS"
 
 
 

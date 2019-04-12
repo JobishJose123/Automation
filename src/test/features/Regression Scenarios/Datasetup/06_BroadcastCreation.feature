@@ -9,7 +9,7 @@ Feature: Test suite for Broadcast creation
   
   @NDX-oneOffBcForDataSetup @NDX-4887
   @initBrowser @closeBrowser
-  Scenario Outline: Verify Creating one-off BC with given condition
+  Scenario Outline: Verify Creating one-off BC with given <Condition>
     Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -52,7 +52,7 @@ Feature: Test suite for Broadcast creation
     
      @NDX-recurringBcForDataSetup @NDX-4894
   @initBrowser @closeBrowser
-  Scenario Outline: Verify Creating one-off BC with <Condition>
+  Scenario Outline: Verify Creating recurring BC with <Condition>
     Given login
     Then navigate to precision marketer
     Then navigate to life cycle marketing
@@ -61,7 +61,7 @@ Feature: Test suite for Broadcast creation
     Then click create new broadcast button
     Then enter details for new broadcast with condition <Condition> from sheet "recurringBC" with "rechargeSMS"
       Then save bc
-       Then save "bcInputData" data to spreadsheet from "recurringBC" with string one-off bc with condition: <Condition>
+       Then save "bcInputData" data to spreadsheet from "recurringBC" with string recurring bc with condition: <Condition>
       
         Examples:
     |Condition|
@@ -86,7 +86,7 @@ Feature: Test suite for Broadcast creation
     
      @NX-createCampaignForseedingTriggerableBC
    @initBrowser @closeBrowser
-  Scenario: Verify Creating campaign for recurring BC
+  Scenario: Verify Creating campaign for Seeding Trigger BC
    Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -105,7 +105,7 @@ Feature: Test suite for Broadcast creation
     Then click create new broadcast button
      Then enter details for new broadcast with condition <Condition> from sheet "seedingTriggerableBC" with "SeedingSMS"
     Then save bc
-    Then save "bcInputData" data to spreadsheet from "seedingTriggerableBC" with string one-off bc with condition: <Condition>
+    Then save "bcInputData" data to spreadsheet from "seedingTriggerableBC" with string Seeding Trigger BC with condition: <Condition>
     
     Examples:
     |Condition|
@@ -130,7 +130,7 @@ Feature: Test suite for Broadcast creation
     
     @NX-createCampaignForseedingOneOff
    @initBrowser @closeBrowser
-  Scenario: Verify Creating campaign for recurring BC
+  Scenario: Verify Creating campaign for Seeding one-offBC
    Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -150,7 +150,7 @@ Feature: Test suite for Broadcast creation
     Then click create new broadcast button
      Then enter details for new broadcast with condition <Condition> from sheet "one-offBC" with "SeedingSMS"
     Then save bc
-    Then save "bcInputData" data to spreadsheet from "one-offBC" with string one-off bc with condition: <Condition>
+    Then save "bcInputData" data to spreadsheet from "one-offBC" with string Seeding one-offBC with condition: <Condition>
     
     Examples:
     |Condition|
@@ -175,7 +175,7 @@ Feature: Test suite for Broadcast creation
     
     @NX-createCampaignForseedingTriggerableRecurringBC
    @initBrowser @closeBrowser
-  Scenario: Verify Creating campaign for recurring BC
+  Scenario: Verify Creating campaign for Seeding Trigger recurring BC
    Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -195,7 +195,7 @@ Feature: Test suite for Broadcast creation
     Then click create new broadcast button
      Then enter details for new broadcast with condition <Condition> from sheet "seedingTriggerableRecurringBC" with "SeedingSMS"
     Then save bc
-     Then save "bcInputData" data to spreadsheet from "seedingTriggerableRecurringBC" with string one-off bc with condition: <Condition>
+     Then save "bcInputData" data to spreadsheet from "seedingTriggerableRecurringBC" with string Seeding Trigger recurring BC with condition: <Condition>
     
     Examples:
     |Condition|
@@ -220,7 +220,7 @@ Feature: Test suite for Broadcast creation
     
     @NX-createCampaignForSeedingrecurringBC
    @initBrowser @closeBrowser
-  Scenario: Verify Creating campaign for recurring BC
+  Scenario: Verify Creating campaign for Seeding recurring BC
    Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -239,7 +239,7 @@ Feature: Test suite for Broadcast creation
     Then click create new broadcast button
      Then enter details for new broadcast with condition <Condition> from sheet "recurringBC" with "SeedingSMS"
     Then save bc
-    Then save "bcInputData" data to spreadsheet from "recurringBC" with string one-off bc with condition: <Condition>
+    Then save "bcInputData" data to spreadsheet from "recurringBC" with string Seeding recurring BC with condition: <Condition>
     
     Examples:
     |Condition|
@@ -264,7 +264,7 @@ Feature: Test suite for Broadcast creation
     
     @NX-createCampaignForTriggerOneoff
    @initBrowser @closeBrowser
-  Scenario: Verify Creating campaign for recurring BC
+  Scenario: Verify Creating campaign for Trigger Oneoff BC
    Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -283,7 +283,7 @@ Feature: Test suite for Broadcast creation
     Then click create new broadcast button
      Then enter details for new broadcast with condition <Condition> from sheet "TriggerOneoff" with "SeedingSMS"
     Then save bc
-    Then save "bcInputData" data to spreadsheet from "TriggerOneoff" with string one-off bc with condition: <Condition>
+    Then save "bcInputData" data to spreadsheet from "TriggerOneoff" with string Trigger Oneoff BC with condition: <Condition>
     
     Examples:
     |Condition|
@@ -307,7 +307,7 @@ Feature: Test suite for Broadcast creation
   
   @NX-createCampaignForTriggerReccurringBC
    @initBrowser @closeBrowser
-  Scenario: Verify Creating campaign for recurring BC
+  Scenario: Verify Creating campaign for Trigger recurring BC
    Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing
@@ -327,7 +327,7 @@ Feature: Test suite for Broadcast creation
     Then click create new broadcast button
      Then enter details for new broadcast with condition <Condition> from sheet "TriggerReccurringBC" with "rechargeSMS"
     Then save bc
-    Then save "bcInputData" data to spreadsheet from "TriggerReccurringBC" with string one-off bc with condition: <Condition>
+    Then save "bcInputData" data to spreadsheet from "TriggerReccurringBC" with string Trigger recurring BC with condition: <Condition>
     
     Examples:
     |Condition|
@@ -360,7 +360,7 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeSMS"
 Then save bc
-Then save "bcInputData" data to spreadsheet from "recurringMonthBC" with string Joel Test-recurring bc with monthly recurring
+Then save "bcInputData" data to spreadsheet from "recurringMonthBC" with string  Test-recurring bc with monthly recurring
 
  #@NX-monthlyRecurringBCDataSetup
 #@initBrowser  @closeBrowser

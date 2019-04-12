@@ -260,7 +260,7 @@ Scenario: To Verify the selected Broadcast can be viewed-7612
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-582
+  @NX-582 @closeBrowser
   Scenario: Create BC: Choose Offers: Verify selecting the offers from the all offers grid  NX-582
     Then check previous step and pass this
 
@@ -590,43 +590,14 @@ Scenario: Create New Broadcast: verify create BC Notification
     Then wait until status of "one-offBC" is "Complete"
     Then verify email notifications from sheet "one-offBC"
     Then pass next scenario based on this step
-    @NX-7593
-      @initBrowser 
+    @NX-7593      
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Forms.
     Then check previous step and pass this
     Then pass next scenario based on this step
-    @NX-7350
-        @initBrowser 
+    @NX-7350     @closeBrowser    
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Links.
     Then check previous step and pass this
     Then pass next scenario based on this step
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1913,7 +1884,7 @@ Then verify delivery details from "recurringMonthBC"
     Then Search BC and Click on Sendtrial from "one-offBC"    
     
     @NX-6244
-   @initBrowser @closeBrowser
+   @initBrowser 
    Scenario: CVerify Configuration management have the provision to set week days and weekend days NX-6244
    Given login
    Then navigate to configuration management
@@ -1921,7 +1892,7 @@ Then verify delivery details from "recurringMonthBC"
    Then verify weekdays and weekend settings
    Then pass next scenario based on this step
 
-  @NX-6340 
+  @NX-6340 @closeBrowser
   Scenario: Verify whether week settings option is displayed under partner settings NX-6340
     Then check previous step and pass this
     
@@ -1983,10 +1954,10 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition "customerLocationInsights" from sheet "one-offBC" with "rechargeEmail"
+    Then enter details for new broadcast with condition customerLocationInsightsGT5 from sheet "one-offBC" with "rechargeEmail"
     Then save bc
     Then view broadcast from sheet "one-offBC"
-    Then check target condition "customerLocationInsights"
+    Then check target condition "customerLocationInsightsGT5"
     
      @NX-8870 @initBrowser @closeBrowser
     Scenario: Verify BC targeting with Customer Device  Info category -8870
@@ -1996,9 +1967,9 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition "customerDeviceInfo" from sheet "one-offBC" with "rechargeEmail"
+    Then enter details for new broadcast with condition customerDeviceInfo from sheet "one-offBC" with "rechargeEmail"
     Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     Then verify targeted and sent count of "one-offBC" with condition "customerDeviceInfo"
     
     @NX-8868 @NX-5195 @initBrowser @closeBrowser
@@ -2023,9 +1994,9 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition "customerWasSentTheTrialMessage" from sheet "one-offBC" with "rechargeWap"
+    Then enter details for new broadcast with condition customerWasSentTheTrialMessage from sheet "one-offBC" with "rechargeWap"
     Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     Then verify targeted and sent count of "one-offBC" with condition "customerWasSentTheTrialMessage"
 
      @NX-4936 @initBrowser @closeBrowser
@@ -2056,7 +2027,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then click create new broadcast button
     Then enter details for new broadcast with condition "digitalPersonaGT25" from sheet "one-offBC" with "rechargeWap"
     Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     Then verify targeted and sent count of "one-offBC" with condition "digitalPersonaGT25"
     
       
@@ -2064,39 +2035,39 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     @initBrowser 
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Call to Action Buttons.
  Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeEmail" with product "fullDetails"
-    #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeEmail" offer to Offer Catalogue
-    #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    #Then naigate to "campaignBC" campaign view broadcasts
-    #Then click create new broadcast button
-    #Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"	
-   #	Then activate bc
-    #Then verify bc created from sheet "one-offBC"
-    #Then wait until status of "one-offBC" is "Complete"
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeEmail" offer to Offer Catalogue
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"	
+   	Then activate bc
+    Then verify bc created from sheet "one-offBC"
+    Then wait until status of "one-offBC" is "Completed"
     Then verify email from sheet "one-offBC"
     Then pass next scenario based on this step
     
@@ -2122,7 +2093,7 @@ Scenario: Email Channel -->Verify the event Unsubscribed to emails is handled an
     Then check previous step and pass this
     Then pass next scenario based on this step
     
-    @NX-2395 @initBrowser 
+    @NX-2395 @closeBrowser
 Scenario: Verify attached images of different format in Email
     Then check previous step and pass this
     Then pass next scenario based on this step 
@@ -2193,7 +2164,7 @@ Then enter details for new broadcast from sheet "recurringMonthBC" with "recharg
 Then activate bc
 Then navigate to "One-time" broadcasts
 Then navigate to "Recurring" broadcasts
-Then wait until status of "Recurring" is "Complete"
+Then wait until status of "Recurring" is "Completed"
 
  Then verify email from sheet "Recurring"
 
@@ -2270,7 +2241,7 @@ Then wait until status of "Recurring" is "Complete"
     Then click create new broadcast button
     Then enter details for new broadcast with condition customerWasSentTheTrialMessage from sheet "one-offBC" with "rechargeWap"
     Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     Then verify targeted and sent count of "one-offBC" with condition "customerWasSentTheTrialMessage"
     
 
@@ -2340,7 +2311,7 @@ Then wait until status of "Recurring" is "Complete"
     Then click create new broadcast button
     Then enter details for new broadcast with condition <Condition> from sheet "one-offBC" with "defaultrechargeWAP"
       Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     Then verify targeted and sent count of "one-offBC" with condition <Condition>
           Examples:
     |Condition|
@@ -2377,7 +2348,7 @@ Then wait until status of "Recurring" is "Complete"
     Then click create new broadcast button
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeWap"
     Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     Then provide file for conversion
     Then navigate to reports
     Then navigate to customer profile
@@ -2411,7 +2382,7 @@ Then wait until status of "Recurring" is "Complete"
     Then click create new broadcast button
     Then enter details for new broadcast with condition customerWasSentTheTrialMessage from sheet "one-offBC" with "rechargeEmail"
     Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     Then verify targeted and sent count of "one-offBC" with condition "customerWasSentTheTrialMessage"
 
   @NX-2418 @initBrowser
@@ -2449,7 +2420,7 @@ Then wait until status of "Recurring" is "Complete"
     Then enter details for new broadcast from sheet for NACK "one-offBC" with "rechargeEmail"
     Then activate bc
     Then verify bc created from sheet "one-offBC"
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     Then verify targeted and sent count of "one-offBC" with condition Nacklist
     
     @NX-3569 @initBrowser
@@ -2471,7 +2442,7 @@ Then wait until status of "Recurring" is "Complete"
     Then click create new broadcast button
     Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap" to check frequency exclusion
       Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
     
     Then verify frequency exclusion
     
@@ -2561,5 +2532,5 @@ Then wait until status of "Recurring" is "Complete"
     Then enter details for new broadcast and calculate TG and CG from sheet "one-offBC" with "rechargeWAP"
     Then verify targetcount from bc from sheet
     Then activate bc
-    Then wait until status of "one-offBC" is "Complete"
+    Then wait until status of "one-offBC" is "Completed"
    

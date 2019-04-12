@@ -83,8 +83,8 @@ public class PdfReader {
 		readTextFromPdf = pdfTextStripper.getText(document);
 		String[] str17 = readTextFromPdf.split("\\n");
 		//System.out.println(readTextFromPdf);
-		String language1FromPDF = str17[56].trim();
-		String language2FromPDF = str17[60].trim();
+		String language1FromPDF = str17[54].trim();
+		String language2FromPDF = str17[58].trim();
 		Init init=new Init();
 //		String Language1=init.LANGUAGE1;
 //		String Language2=init.LANGUAGE2;
@@ -100,9 +100,9 @@ public class PdfReader {
 		}
 		
 		
-		String firstRuleFromPDF = str17[36].trim();
+		String firstRuleFromPDF = str17[34].trim();
 		System.out.println(firstRuleFromPDF);
-		String secondRuleFromPDF=str17[45].trim();
+		String secondRuleFromPDF=str17[43].trim();
 		System.out.println(secondRuleFromPDF);
 		//OfferPageObjects op=new OfferPageObjects();
 		//String getfirstRule=op.getFirstRuleName();

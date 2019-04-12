@@ -339,10 +339,20 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = "(//label[contains(.,'Recipient')]//following::paper-icon-button[2])[2]")
 	private WebElement recipientclick;
 
+//	@FindBy(xpath = ".//form[@id='bcExpiryForm']//paper-checkbox//div[contains(.,'Broadcast Expiry')]")
+//	private WebElement bcExpiryclick;
+	
 	@FindBy(xpath = ".//form[@id='bcExpiryForm']//paper-checkbox//div[contains(.,'Broadcast Expiry')]")
 	private WebElement bcExpiryclick;
-	@FindBy(xpath = " .//form[@id='bcExpiryForm']//label[contains(.,'Expires')]//following::iron-icon[2]")
+	
+	
+//	@FindBy(xpath = " .//form[@id='bcExpiryForm']//label[contains(.,'Expires')]//following::iron-icon[2]")
+//	private WebElement expirestime;
+	
+	@FindBy(xpath = "//paper-input-container[@id='inputContainer']//div[@class='input-content style-scope paper-input-container']//input[@id='input']")
 	private WebElement expirestime;
+	
+	
 	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'At')]")
 	private WebElement expiresAtoption;
 	@FindBy(xpath = "//form[@id='bcExpiryForm']//paper-item[contains(.,'After')]")
@@ -2417,6 +2427,11 @@ public class BroadcastPageObjects extends Init {
 //@FindBy(xpath="//vaadin-combo-box-item[contains(text(),'"+LANGUAGE1+"')]")
 //private WebElement selectALanguageFromDropDown ;
 
+	public void selectALanguage() throws Exception {
+		jswait.loadSendKeys(selectALanguage, "Customer P");
+		jswait.loadClick("//vaadin-combo-box-item[contains(text(),'Customer Preferred')]");
+	}
+	
 	public void createBCWithLanguage(String name, String bc_type, String baseList, String offer, String language)
 			throws InterruptedException {
 		ExcelHelper offerExcel = new ExcelHelper();

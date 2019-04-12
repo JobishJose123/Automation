@@ -3736,6 +3736,11 @@ public class BroadcastSteps extends Init {
 		offerExcel.setExcelFile("offerInputData", offer);
 		broadcastPageObjects.selectOffer(offerExcel.getCellByColumnName("Offer Name"));
 
+		try {
+			broadcastPageObjects.selectALanguage();
+		}catch (Exception e) {
+			System.out.println("language already selected");
+		}
 		
 		broadcastPageObjects.selectTrackSession();
 		broadcastPageObjects.selectTrackingSource();
