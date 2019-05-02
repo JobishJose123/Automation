@@ -64,6 +64,9 @@ public class SegmentAnalysisSteps extends Init {
 	
 	@Then("^verify cluster tab$")
 	public void verifyClusterTab() throws InterruptedException {
+		Thread.sleep(2000);
+//		jswait.loadClick("//a[@class='analysisName style-scope analysis-list']/..");
+		Thread.sleep(2000);
 		segmentObjects.verifyClustersTab();	
 	}
 	
@@ -219,7 +222,7 @@ public class SegmentAnalysisSteps extends Init {
 	
 	@Then("^verify clusters tab in segments$")
 	public void verifyclustertabinsegments() throws Exception {
-		
+		Thread.sleep(5000);
 		segmentObjects.verifyclustertabinsegments();	
 	}
 	

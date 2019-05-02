@@ -327,7 +327,7 @@ Then click usage metrics tab
 Then verify charts in usage metric screen
 
 @NX-2806
-@initBrowser @closeBrowser
+@initBrowser 
 Scenario: Verify only the selected event type is getting displayed in the events tab-2806
 Given login
 Then navigate to precision marketer

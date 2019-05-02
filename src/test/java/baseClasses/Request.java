@@ -24,6 +24,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
@@ -34,7 +35,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Request {
+public class Request extends Init{
 	
 	final static String USER_AGENT = "Mozilla/5.0";
 	String encodedAuthorization = null;  //  am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==
@@ -111,6 +112,21 @@ public class Request {
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(urlStr);
         request.setHeader("Content-type", "application/json");
+        request.setEntity(entity);
+        HttpResponse response = httpClient.execute(request);
+        System.out.println(response.getStatusLine().getStatusCode());
+        System.out.println(response.toString());
+	}
+	
+	public void postRequestsession(String urlStr, String jobPayload) throws ClientProtocolException, IOException {
+		String session=((ChromeDriver) driver).getSessionId().toString();
+		StringEntity entity = new StringEntity(jobPayload,
+                ContentType.APPLICATION_JSON);
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost request = new HttpPost(urlStr);
+        request.setHeader("Content-type", "application/json");
+        request.setHeader("Authorisation","session="+session);
+       
         request.setEntity(entity);
         HttpResponse response = httpClient.execute(request);
         System.out.println(response.getStatusLine().getStatusCode());

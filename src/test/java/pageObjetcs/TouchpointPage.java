@@ -359,7 +359,7 @@ public class TouchpointPage extends Init{
 	private WebElement selectTrigger;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement triggerTouchpointName;
-	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Trigger')]/following::vaadin-combo-box-item[contains(text(),'t')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(..,'Trigger')][2]")
 	private WebElement triggerFormTriggerSelect;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Prioritization Logic')]/../input")
 	private WebElement triggerFormProritizationLogicSelector;
@@ -400,9 +400,9 @@ public class TouchpointPage extends Init{
 	private WebElement triggerFormMaximumOffers;
 	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Maximum offers')]/../input")
 	private WebElement custTriggerFormMaximumOffers;
-	@FindBy(xpath=".//*[@id='triggerForm']//paper-button[contains(.,'Save')]")
+	@FindBy(xpath="(.//paper-button[contains(.,'Save')])[3]")
 	private WebElement triggerFormSaveButton;
-	@FindBy(xpath=".//*[@id='triggerForm']//paper-button[contains(.,'Cancel')]")
+	@FindBy(xpath="(//paper-button[contains(.,'Cancel')])[3]")
 	private WebElement triggerFormCancelButton;
 	@FindBy(xpath=".//*[@id='addTriggerModal']")
 	private WebElement triggerFormDialogBox;
@@ -892,10 +892,14 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		
 		triggerSelectPrioritizationLogic();
 		selectTrigger();
+		jswait.loadClick("//label[contains(.,'Inventory')]//following::paper-icon-button[2]");
+		Thread.sleep(2000);
+		jswait.loadSendKeys("//label[contains(.,'Inventory')]//..//input", "Unlimited");
 //		triggerSelectPrioritizationRule();
+		jswait.loadClick("(//vaadin-combo-box-item[contains(..,'sel_unlimited')])[2]");
 		triggerEnterRefreshEvery("3");
 		triggerSelectTimeInterval();
-		triggerEnterMaximumOffers("5");
+//		triggerEnterMaximumOffers("5");
 	}
 	public void editTriggerTouchpointDetails(String name) throws InterruptedException {
 		triggerEnterTouchpointName(name);
@@ -904,12 +908,13 @@ public void deleteUSSDTouchpoint() throws Throwable {
 //		triggerFormPrioritizationRuleLIFO();
 		triggerEnterRefreshEvery("2");
 		triggerSelectTimeInterval();
-		triggerEnterMaximumOffers("2");
+//		triggerEnterMaximumOffers("2");
 		triggerClickSave();
 	}
 	public void createTriggerTouchpoint(String keyword) throws InterruptedException {
 		clickCreateNewTouchpoint();
 		enterTriggerTouchpointDetails(keyword);
+		
 		triggerClickSave();
 	}
 	public void editTriggerTouchpoint(String keyword) throws InterruptedException {

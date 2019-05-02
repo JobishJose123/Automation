@@ -56,7 +56,7 @@ Feature: positive flow of im program creation
     Then navigate to trigger
     Then verify cancel button of trigger touchpoint
 
-  @NX-445 @initBrowser @closeBrowser
+  @NX-445 @initBrowser 
   Scenario: Verify Trigger touchpoint delete functionality
     Given login
     Then navigate to intent management
@@ -594,21 +594,21 @@ Feature: positive flow of im program creation
   @NX-8504 @NX-7192 @initBrowser @closeBrowser
   Scenario: Verify displaying the edited touchpoint name in mapped program-8504
     Given login
-    Then navigate to intent management
-    Then navigate to touchpoints
-    Then navigate to sms
-    Then create sms touchpoint from sheet "smsTouchpoint"
-    Then check sms touchpoint in grid "smsTouchpoint"
-    Then navigate to landing page
-    Then navigate to intent management
-    Then navigate to programs
-    Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    Then navigate to touchpoints
-    Then navigate to sms
-    Then create sms touchpoint from sheet "smsTouchpoint"
-    Then check sms touchpoint in grid "smsTouchpoint"
-    Then navigate to landing page
+#    Then navigate to intent management
+#    Then navigate to touchpoints
+#    Then navigate to sms
+#    Then create sms touchpoint from sheet "smsTouchpoint"
+#    Then check sms touchpoint in grid "smsTouchpoint"
+#    Then navigate to landing page
+#    Then navigate to intent management
+#    Then navigate to programs
+#    Then click create program button
+#    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+#    Then navigate to touchpoints
+#    Then navigate to sms
+#    Then create sms touchpoint from sheet "smsTouchpoint"
+#    Then check sms touchpoint in grid "smsTouchpoint"
+#    Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails" for edit
@@ -642,9 +642,9 @@ Feature: positive flow of im program creation
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
-    Then create SegmentAnalysis from sheet "SegmentAnalysisName"
+#    Then create SegmentAnalysis from sheet "SegmentAnalysisName"
 Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
-Then wait until status is changed to "C"
+#Then wait until status is changed to "C"
     Then click on options icon
     Then verify cluster option
     Then choose a segment analysis
@@ -663,38 +663,38 @@ Then wait until status is changed to "C"
     Then click save cluster button
     Then toast messagewhile saving cluster with only view1 values
 
-  @NX-7221 @initBrowser @closeBrowser
+  @NX-7221 @initBrowser 
   Scenario: Verify adding a new rule to an active program without changing the basic configuration program- 7221
     Given login
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeSMS" with product "default"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeSMS" offer to Offer Catalogue
-    Then navigate to landing page
-    Then navigate to intent management
-    Then navigate to touchpoints
-    Then navigate to sms
-    Then create sms touchpoint from sheet "smsTouchpoint"
-    Then navigate to landing page
-    Then navigate to intent management
-    Then navigate to programs
-    Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeSMS" offer to Offer Catalogue
+#    Then navigate to landing page
+#    Then navigate to intent management
+#    Then navigate to touchpoints
+#    Then navigate to sms
+#    Then create sms touchpoint from sheet "smsTouchpoint"
+#    Then navigate to landing page
+#    Then navigate to intent management
+#    Then navigate to programs
+#    Then click create program button
+#    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+#    Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "default" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+    Then create new rule from sheet "programdetails" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
     Then verify rule created from sheet "rule"
     Then navigate to programs
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "default" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+    Then create new rule from sheet "programdetails" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
     Then verify rule created from sheet "rule"
 
   @NX-4064 @initBrowser
@@ -726,16 +726,16 @@ Then wait until status is changed to "C"
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then search msisdn "9446506807"
+    Then search msisdn "919491750000"
     Then click on events tab
     Then wait for offer eligible event in consumer profile
     Then navigate to reports
     Then navigate to customer support
-    Then search msisdn "9446506807"
+    Then search msisdn "919491750000"
     Then accept offer in customer care
     Then navigate to reports
     Then navigate to customer profile
-    Then search msisdn "9446506807"
+    Then search msisdn "919491750000"
     Then click on events tab
     Then wait for offer eligible event in consumer profile
 
@@ -745,6 +745,7 @@ Then wait until status is changed to "C"
     Then navigate to intent management
     Then navigate to analytics
     Then navigate to explore segments
+    Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
     Then choose a segment analysis with clusters
     Then click on create new cluster button
     Then enter view values for cluster
@@ -753,7 +754,7 @@ Then wait until status is changed to "C"
     Then click save cluster button
     Then verify cluster failed
 
-  @NX-8495 @initBrowser @closeBrowser
+  @NX-8495 @initBrowser 
   Scenario: Verify by editing the existing short code and check by sending keyword to new short code for the customer
     Given login
     Then navigate to configuration management
@@ -905,20 +906,17 @@ Then wait until Segment Analysis job status is changed to "C"
     Then navigate to analytics
     Then navigate to explore segments
     Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
-    Then select Cluster Option
-    Then check cluster details
+
     Then verify cluster tab
 
-  @NX-8381 @initBrowser @closeBrowser
+  @NX-8381 @initBrowser
   Scenario: Check whether new page/tab in segment analysis page  for cluster is available in PM.
     Given login
     Then navigate to precision marketer
     Then navigate to analytics
     Then navigate to explore segments
     Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
-    Then select Cluster Option
-    Then check cluster details
-    Then verify clusters tab in segments
+   Then verify cluster tab
 
   @NX-8396 @initBrowser @closeBrowser
   Scenario: Check whether Save Cluster option opens a pop up to give  cluster name.
@@ -928,11 +926,11 @@ Then wait until Segment Analysis job status is changed to "C"
     Then navigate to explore segments
     Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
     Then select Cluster Option
-    #Then click on create new cluster button
-    #Then enter view values for cluster
-    #Then select radio button for view1
-    #Then select radio button for view2
-    #Then click save cluster button
+    Then click on create new cluster button
+    Then enter view values for cluster
+    Then select radio button for view1
+    Then select radio button for view2
+    Then click save cluster button
     Then check cluster details
     Then check cluster details table and save cluster
 
@@ -1086,30 +1084,30 @@ Then wait until Segment Analysis job status is changed to "C"
   @NX-8408 @initBrowser
   Scenario: Check whether Saved cluster can be targeted for sending BC.
     Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to configuration management
-#    Then navigate to campaign categories
-#    Then create new campaign category from sheet "CampaignCategory"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to products
-#    Then navigate to product class "TestProductClass"
-#    Then click create new product button
-#    Then create product with attributes from sheet "fullDetails"
-#    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then click on create new ofer button
-#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-#    Then navigate to offer management
-#    Then Navigate to Offer Catalogue
-#    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "rechargeWAP" offer to Offer Catalogue
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"

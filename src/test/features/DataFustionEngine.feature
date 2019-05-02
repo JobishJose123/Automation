@@ -53,7 +53,7 @@ Feature: DK
     Then click Data Fusion Engine
     Then Open DK Job from sheet "Delimiter_4390" and verify "2" in ouput
 
-  @NX-4383 @initBrowser @closeBrowser
+  @NX-4383 @initBrowser 
   Scenario: DK--->verify the functionality of skip exception block.
     Given login
     Then navigate to data foundation

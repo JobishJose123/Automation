@@ -1,6 +1,5 @@
 #Author: your.email@your.domain.com
 #Keywords Summary :
-
 @NX-API_Test_Cases
 Feature: Test cases for API
   I want to use this template for my feature file

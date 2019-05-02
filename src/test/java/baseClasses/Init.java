@@ -32,6 +32,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	System.setProperty("webdriver.chrome.driver", "browser_files\\chromedriver2.37.exe");
 	driver =  new ChromeDriver();
 	driver.manage().window().maximize();
+	
 	try {
 		System.out.println(System.getProperty("log"));
 		log = Logger.getLogger("automatioLog");
