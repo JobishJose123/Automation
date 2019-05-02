@@ -41,10 +41,10 @@ public class DashboardObjects extends Init{
 	@FindBy(xpath="(//iron-icon[@id='icon']//following::img[@draggable='false'])[2]")
 	private WebElement homePage;
 //	
-//	@FindBy(xpath="")
-//	private WebElement 
-//	@FindBy(xpath="")
-//	private WebElement 
+	@FindBy(xpath="(//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down'])[2]")
+	private WebElement dropDownIcon; 
+	@FindBy(xpath="(//paper-item[@id='filterItem'])[3]")
+	private WebElement selectMonth;
 //	
 //	@FindBy(xpath="")
 //	private WebElement 
@@ -75,6 +75,11 @@ public class DashboardObjects extends Init{
 	}
    public void clickCampaignPerformanceMonitor() throws Exception{
 	   jswait.loadClick(CampaignPerformanceMonitor);
+	   Thread.sleep(2000);
+	   jswait.loadClick(dropDownIcon);
+	   Thread.sleep(2000);
+	   jswait.loadClick(selectMonth);
+	   
    }
    public void verifyTheValues() throws Exception{
 	  Thread.sleep(2000);
@@ -94,15 +99,21 @@ public class DashboardObjects extends Init{
    public void clickMonthlyPerformanceSnapshot() throws Exception{
 	   jswait.loadClick(MonthlyPerformanceSnapshot);
 	   Thread.sleep(2000);
+	   jswait.loadClick(dropDownIcon);
+	   Thread.sleep(2000);
+	   jswait.loadClick(selectMonth);
    }
    
    public void clickCustomerEventSpread() throws Exception{
 	   jswait.loadClick(CustomerEventSpread);
 	   Thread.sleep(2000);
+	   jswait.loadClick(dropDownIcon);
+	   Thread.sleep(2000);
+ jswait.loadClick(selectMonth);
 	   
    }
    public void verifyValuesInCustomerEventSpread() throws Exception{
-	   for(int i=1;i<=5;i++) {
+	   for(int i=1;i<=2;i++) {
 		   Thread.sleep(2000);
 		   String dashboardValue = driver.findElement(By.xpath("(//div[@class='number-cover style-scope canvas-report-view dc-chart'])["+i+"]")).getText();
 		   Thread.sleep(2000);
@@ -119,6 +130,9 @@ public class DashboardObjects extends Init{
 		   Thread.sleep(2000);
 		   jswait.loadClick(DigitalExperienceMonitor);
 		   Thread.sleep(2000);
+		   jswait.loadClick(dropDownIcon);
+		   Thread.sleep(2000);
+// jswait.loadClick(selectMonth);
 	   }
 	  
 	   public void verifyIMDashboardValues() throws Exception{
@@ -138,6 +152,8 @@ public class DashboardObjects extends Init{
 	 public void clickTouchpointCustomerCare() throws Exception{
 		 jswait.loadClick(TouchpointCustomerCare);
 		 Thread.sleep(2000);
+		 jswait.loadClick(dropDownIcon);
+		   jswait.loadClick(selectMonth);
 	 }
 	 public void navigateToHomePage() throws Exception{
 		 jswait.loadClick(homePage);

@@ -3141,7 +3141,10 @@ public class BroadcastSteps extends Init {
 			Assert.assertTrue("condition not displayed",
 					jswait.checkVisibility("//profile-field[contains(.,'is greater than')]"));
 			Assert.assertTrue("condition not displayed", jswait.checkVisibility("//profile-field[contains(.,'30')]"));
-		} else {
+		} else if(event.contains("analyticalScoresGT45")) {
+			Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope profile-field'][contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]"));
+	}
+		else {
 			Assert.assertTrue("condition not handled in if else", false);
 		}
 	}

@@ -1,6 +1,4 @@
 #Author: nikhil.b@flytxt.com
-
-
 @NX-OfferCatalog
 Feature: Offer Catalogue test cases
 
@@ -15,7 +13,8 @@ Scenario: Verify Creating Offer Catalogue NX-1125
   Then create single product from sheet "singleProductPage"
 	Then navigate to offer management 
 	Then navigate to offers
-  Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
+	 Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
+#  Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
   Then navigate to offer management 
 	Then Navigate to Offer Catalogue
   Then Create New Offer Catalogue from sheet "defaultCatalog"
@@ -26,7 +25,6 @@ Scenario: Verify Creating Offer Catalogue NX-1125
   
 	
 @initBrowser @closeBrowser @NX-1126
-
 Scenario: Verify Canceling Offer Catalogue 
 Given login
 Then navigate to precision marketer
@@ -36,7 +34,6 @@ Then Cancel the New offer Catalogue
 
 
 @initBrowser @closeBrowser @NX-1146
-
 Scenario: Verify Canceling Selected Offer 
   Given login
 	When navigate to precision marketer
@@ -123,10 +120,10 @@ Scenario: Verify displaying offers in Offer catalog when more than 50 offers are
 Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Add fifty more offers to Offer Catalogue
-  Then navigate to offer management 
+		Then Navigate to Offer Catalogue
+Then Create New Offer Catalogue from sheet "defaultCatalog"
+ Then Add fifty more offers to Offer Catalogue
+ Then navigate to offer management 
 	Then Navigate to Offer Catalogue
 	Then verify catalog "defaultCatalog" with 50 offers
   

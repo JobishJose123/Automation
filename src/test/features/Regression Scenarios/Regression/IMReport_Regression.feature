@@ -14,22 +14,22 @@ Feature: Program Report Verfication (Regression)
 #The navigate to data health check
 
 
-@NDX-6966  @initBrowser @closeBrowser
+@NDX-6966  @initBrowser
 Scenario: Verfiy the conversion % and fulfillment % for programs (Regression)
 Given login
 Then navigate to intent management
 Then navigate to reports
 Then navigate to program reports
 Then filter program from sheet "SMSprogram"
-Then verify the impression value is "2" 
+Then verify the impression value is "1" 
 Then verify whether the conversion and fulfillment % are "100 %" and "100 %"
 
-@NDX-6876  @initBrowser @closeBrowser
+@NDX-6876  @initBrowser 
 Scenario Outline: Verify the profile field with <Name> uploaded in customer profile in customer info tab (Regression)
 Given login
 Then navigate to precision marketer
 Then navigate to reports
-Then click customer profile and enter the msisdn "919491750000"
+Then click customer profile and enter the msisdn "919491750001"
 Then verify the profile values for <Name>
 
 Examples:
@@ -41,12 +41,12 @@ Examples:
 |"DIGITAL_PERSONA_FIELD"|
 |"SEL_COUNTRY"|
 
-@NDX-7347 @initBrowser @closeBrowser
+@NDX-7347 @initBrowser 
 Scenario: Verify the event uploaded in customer profile in event tab (Regression)
 Given login
 Then navigate to precision marketer
 Then navigate to reports
-Then click customer profile and enter the msisdn "919491750000"
+Then click customer profile and enter the msisdn "919491750001"
 Then click event tab
 Then verify the event displayed
 
@@ -56,7 +56,7 @@ Scenario: Verify the mertic uploaded in customer profile in metrics tab (Regress
 Given login
 Then navigate to precision marketer
 Then navigate to reports
-Then click customer profile and enter the msisdn "919491750000"
+Then click customer profile and enter the msisdn "919491750001"
 Then click metric tab
 Then verify the metric data
 

@@ -341,7 +341,7 @@ private WebElement ClickCondition2;
 	@FindBy(xpath="//iron-icon[@icon='icons:content-copy']")
 	private WebElement Copybtn;
 	
-	@FindBy(xpath="//span[@class='style-scope analysis-list']")
+	@FindBy(xpath="//vaadin-grid-table-cell//span[@class='style-scope analysis-list']")
 	private WebElement SegmentAnalysisJobstatus;
 	
 	@FindBy(xpath="//paper-button[contains(.,'Add AND')]")
@@ -968,7 +968,11 @@ public void clustertabledetailsandsave() throws Exception {
    
    public String getSegmentAnalysisJobStatus() throws Exception{
 	   jswait.loadClick(AutoRefreshbtn);
-	   return SegmentAnalysisJobstatus.getText();
+	   Thread.sleep(2000);
+	String status = driver.findElement(By.xpath("//span[@class='style-scope analysis-list']")).getText();
+	System.out.println(status);
+//	   return SegmentAnalysisJobstatus.getText();
+	return status;
 	   
    }
    public void SegmentName(String  SegmentName,String condition)throws Exception{
@@ -1000,6 +1004,8 @@ public void clustertabledetailsandsave() throws Exception {
 	jswait.loadSendKeys(SaveAnalysisDescinput,"test");
 						
 	Thread.sleep(2000);
+	jswait.loadSendKeys(SaveAnalysisSetPermission,"selenium.flytxt@gmail.com");
+	Thread.sleep(3000);
 	jswait.loadSendKeys(SaveAnalysisSetPermission,"selenium.flytxt@gmail.com");
 	Thread.sleep(3000);
 	jswait.loadClick(userselect);
@@ -1104,7 +1110,7 @@ public void clustertabledetailsandsave() throws Exception {
    public void deleteKPI() throws Exception{
 	   jswait.loadClick(deleteKPI);
 	   Thread.sleep(2000);
-	   Assert.assertTrue(driver.findElement(By.xpath("//vaadin-grid-cell-content[contains(.,'KPI1')]")).isDisplayed());
+	   Assert.assertTrue(driver.findElement(By.xpath("//vaadin-grid-cell-content[contains(.,'KPI3')]")).isDisplayed());
 	   Thread.sleep(2000);
 	   jswait.loadClick(OKbtn);
 	   Thread.sleep(2000);
@@ -1197,7 +1203,7 @@ public void clustertabledetailsandsave() throws Exception {
 	  Thread.sleep(3000);
 	  
 	  
-//	  List<WebElement> el = driver.findElements(By.xpath("//a[@class='analysisName style-scope analysis-list'][contains(.,'"+jobName+"')])"));
+//  List<WebElement> el = driver.findElements(By.xpath("//a[@class='analysisName style-scope analysis-list'][contains(.,'"+jobName+"')])"));
 //	  if(el.size()==0) {
 //		  Assert.assertTrue("job not deleted", false);
 //	  }
@@ -1207,7 +1213,7 @@ public void clustertabledetailsandsave() throws Exception {
 	  
 public void TargetCount() throws Exception {
 
-	Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope analysis-list'][contains(.,'1000')]"));
+	Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope analysis-list'][contains(.,'1,019')]"));
 }
 
   public void editCrossTab() throws Exception{
@@ -1216,7 +1222,7 @@ public void TargetCount() throws Exception {
 	  
   }
   public void saveMicroSegment() throws Exception{
-	String Name = MicroSegmentName.getText();
+//	String Name = MicroSegmentName.getText();
 	  commonObjects.clickOptionsIcon();
 	  jswait.loadClick(SavedSegmentbtn);
 	  jswait.loadClick(SaveMicroSegmentNameToSavedSegment);

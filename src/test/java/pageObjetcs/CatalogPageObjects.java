@@ -56,7 +56,7 @@ public class CatalogPageObjects extends Init{
 	private WebElement filterFormOfferChannel;
 	@FindBy(xpath="//*[@id='filterForm']//label[contains(text(),'Channel')]/../..//iron-icon")
 	private WebElement filterFormOfferChannelDropdownIcon;
-	@FindBy(xpath="//iron-list//data-table-row//data-table-cell[3]")
+	@FindBy(xpath="(//data-table-cell[@class='offer-catalogue-grid style-scope'])[3]")
 	private WebElement catalogGridOfferCount;
 	@FindBy(xpath="//h4[contains(text(),'Product Details')]")
 	private WebElement offerExpandHeader;

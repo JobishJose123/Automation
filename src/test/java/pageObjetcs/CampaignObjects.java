@@ -2092,10 +2092,14 @@ public void createCampaignWithAddMultipleOROption(String name,String catalog,Str
 	}
 public void selectBothUserForBCApproval() throws Exception{
 	Thread.sleep(2000);
-	firstleveluserselect();
-    secondLevelUserSelect();
-    Bccreatebtn.click();
+	Bccreatebtn.click();
 	bcRequestApproval.click();
+	firstleveluserselect();
+	Thread.sleep(2000);
+    secondLevelUserSelect();
+    Thread.sleep(2000);
+//    Bccreatebtn.click();
+//	bcRequestApproval.click();
     approvalboxOKbtn();
 }
 

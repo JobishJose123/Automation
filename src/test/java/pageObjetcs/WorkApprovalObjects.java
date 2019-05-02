@@ -850,20 +850,26 @@ Thread.sleep(5000);
 	}
 	public void isRejectedStatusDisplayed(String campaignName) throws InterruptedException
 	{
-		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]//following::vaadin-grid-cell-content[contains(.,'Rejected')]"));
+		System.out.println(campaignName);
+		Thread.sleep(2000);
+		WebElement approvalStatus = driver.findElement(By.xpath("(//vaadin-grid-cell-content[contains(.,'"+campaignName+"')]//following::span[contains(.,'R')]//span[contains(.,'R')])[1]"));
+		Thread.sleep(2000);
 		Assert.assertTrue(approvalStatus.isDisplayed());
 	}
 	
 	public void isApprovedStatusDisplayed(String campaignName) throws InterruptedException
 	{
+		Thread.sleep(2000);
 		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'A')]"));
+		Thread.sleep(2000);
 		Assert.assertTrue(approvalStatus.isDisplayed());
 	}
 	public void addLevel2Approver() throws InterruptedException {
 		jswait.loadClick(addLevel);
 	}
 	
-	public void isApprovedAndActivateButtonDisplayed() {
+	public void isApprovedAndActivateButtonDisplayed() throws Exception{
+		Thread.sleep(2000);
 		Assert.assertTrue(ApproveActivatebtn.isDisplayed());
 	}
 	
@@ -916,6 +922,7 @@ Thread.sleep(5000);
 		String scrollPanel = "//iron-list[@id='list']";
 		jswait.scrollIntoView(scrollPanel, campaignName); 
 		WebElement element = driver.findElement(By.xpath("//span[contains(@class, 'notification-listing') and contains(.,'"+campaignName+"') and contains(.,'has been rejected by')]"));
+		Thread.sleep(2000);
 		Assert.assertTrue(element.isDisplayed());
 		Thread.sleep(2000);
 	}
@@ -991,7 +998,9 @@ Thread.sleep(5000);
     	
 	}
 	public void verifyBCStatusWaitingForApproval(String bcName) throws Exception{
+		Thread.sleep(2000);
 		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'Waiting for Approval')]"));
+		Thread.sleep(2000);
 		Assert.assertTrue(approvalStatus.isDisplayed());
 		
 	}

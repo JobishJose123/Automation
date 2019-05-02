@@ -26,6 +26,7 @@ import clojure.reflect.java__init;
 public class ModelPageObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
 	Init Init =new Init();
+	CommonObjects CommonObjects=new CommonObjects();
 	public ModelPageObjects() {
 		PageFactory.initElements(driver, this);
 	}
@@ -165,8 +166,8 @@ public class ModelPageObjects extends Init {
 	
 	
 //	
-//	@FindBy(xpath="(//textarea)[5]")
-//	private WebElement TemplateInput;
+	@FindBy(xpath="(//paper-button[contains(.,'Add')])[1]")
+	private WebElement Addbtn;
 
 
 
@@ -192,25 +193,34 @@ public class ModelPageObjects extends Init {
 		Thread.sleep(3000);
 	}
 	
-	public void inputdata( String arg1,String arg2 ,String arg3 ) throws Exception {
+	public void inputdata( String inputCodeFile,String modelType ,String modelName ) throws Exception {
 		
 		driver.switchTo().frame(0);//switch frame
 			Thread.sleep(3000);
 			TextFileUtil textFile=new TextFileUtil();
-			String input=textFile.readTxtFile(arg1).replaceAll("\\%\\$MODEL_NAME\\$\\%", arg2+"/"+arg3);
-			//jswait.loadSendKeys(inputdata,input);
+			Thread.sleep(2000);
+			String input=textFile.readTxtFile(inputCodeFile).replaceAll("Affinity/SelModel7665", modelType+"/"+modelName);
+//			jswait.loadSendKeys(inputdata,input);
 			 Toolkit toolkit = Toolkit.getDefaultToolkit();
 		   	   Clipboard clipboard = toolkit.getSystemClipboard();
 		   	StringSelection selection = new StringSelection(input);
 		   	clipboard.setContents(selection, selection);
 		   	inputdata.sendKeys(Keys.CONTROL,"v");
 		   	driver.switchTo().defaultContent();
+	   	jswait.loadClick("//div[@class='content style-scope data-analytics']");
+	   	Thread.sleep(5000);
+		   	driver.navigate().refresh();
+		   	jswait.loadClick("(//data-table-cell[contains(.,'"+modelName+"')]//following::paper-icon-button)[1]");
+		   	Thread.sleep(2000);
+		   jswait.loadClick("(//data-table-cell[contains(.,'"+modelName+"')]//following::paper-item[contains(.,'Edit')])[1]");
+		   	Thread.sleep(2000);
+		   	
 	}
 	
 	public void navigatetoInputs()throws Exception{
 		Thread.sleep(2000);
 		jswait.loadClick(Inputs);
-		jswait.loadClick("(//paper-button[contains(.,'Add')])[1]");
+		jswait.loadClick(Addbtn);
 	
 }
 	public void DataframeCreation(String Dataframe,String des)throws Exception{

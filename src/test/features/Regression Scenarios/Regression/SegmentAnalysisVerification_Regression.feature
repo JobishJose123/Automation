@@ -1,7 +1,6 @@
 #Author: shobina.k@flytxt.com
 #Summary :Segment Analysis Verification
-
-@SegmentAnalysis_datasetup
+@SegmentAnalysis_Regression
 Feature: Verification of Segment Analysis job(Regression)
 
 @NDX-5654 @initBrowser @closeBrowser
@@ -38,7 +37,7 @@ Then change the target condition to Saved Segment and save
 Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
 Then wait until Segment Analysis job status is changed to "C"
 
-@NDX-5552 @initBrowser  @closeBrowser
+@NDX-5553 @initBrowser  @closeBrowser
 Scenario: Edit a Segment Analysis job(Regression) by adding a KPI.
 Given login
 Then navigate to intent management
@@ -62,7 +61,7 @@ Then filter the Segment Analysis job for status check from sheet "SegmentAnalysi
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5568 @initBrowser  @closeBrowser
+@NDX-5569 @initBrowser  @closeBrowser
 Scenario: Edit a Segment Analysis job(Regression) by editing a KPI.
 Given login
 Then navigate to intent management
@@ -109,7 +108,7 @@ Then wait until Segment Analysis job status is changed to "C"
 #Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5570  @initBrowser  @closeBrowser
+@NDX-5571  @initBrowser  @closeBrowser
 Scenario: Copy a Segment Analysis Job(Regression)
 Given login
 Then navigate to intent management
@@ -121,7 +120,7 @@ Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnaly
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5584 @initBrowser  
+@NDX-5583 @initBrowser  
 Scenario: Edit target condition of a Segment Analysis job_Copy(Regression) which
 is in Completed status
 Given login
@@ -134,7 +133,7 @@ Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnaly
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5582 @initBrowser  @closeBrowser
+@NDX-5556 @initBrowser  @closeBrowser
 Scenario: Edit target condition of a Segment Analysis job_Copy(Regression) which
 is in Completed status. 
 Given login
@@ -147,7 +146,7 @@ Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnaly
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5574 @initBrowser @closeBrowser
+@NDX-5575 @initBrowser @closeBrowser
 Scenario: Edit a Segment Analysis job_Copy(Regression) by adding a KPI.
 Given login
 Then navigate to intent management
@@ -165,13 +164,13 @@ Given login
 Then navigate to intent management
 Then navigate to analytics
 Then navigate to explore segments
-Then edit the Segment Analysis job Copy from sheet "SegmentAnalysisName"
+Then edit the Segment Analysis job Copy from sheet "SegmentAnalysisCopy"
 Then delete a KPI
-Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
+Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisCopy"
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5576 @initBrowser  @closeBrowser
+@NDX-5577 @initBrowser  @closeBrowser
 Scenario: Edit a Segment Analysis job_Copy(Regression) by editing a KPI.
 Given login
 Then navigate to intent management
@@ -183,7 +182,7 @@ Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnaly
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5651 @initBrowser  @closeBrowser
+@NDX-5652 @initBrowser  @closeBrowser
 Scenario: Rerun a Segment Analysis job_Copy(Regression)
 Given login
 Then navigate to intent management

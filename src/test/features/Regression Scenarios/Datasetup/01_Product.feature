@@ -1,8 +1,7 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer creation for regression data setup
 #Feature: Offer :
-
-@Product_datasetup
+@NDX-Product_datasetup
 Feature: Product class and Product creation
 
 @NX-1222

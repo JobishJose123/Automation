@@ -1,8 +1,7 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer creation for regression data setup
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
-
-@AllOffer_datasetup
+@NDX-AllOffer_datasetup
 Feature: Test suite on Offer creation
   Create all types of offers
 

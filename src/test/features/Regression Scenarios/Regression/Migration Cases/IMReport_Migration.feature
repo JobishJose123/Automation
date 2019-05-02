@@ -25,7 +25,7 @@ Then verify the impression value is "2"
 Then verify whether the conversion and fulfillment % are "100 %" and "100 %"
 
 
-@NDX-6876  @initBrowser @closeBrowser
+@NDX-6875  @initBrowser @closeBrowser
 Scenario Outline: Verify the profile field with <Name> uploaded in customer profile in customer info tab (Migration)
 Given login
 Then navigate to precision marketer

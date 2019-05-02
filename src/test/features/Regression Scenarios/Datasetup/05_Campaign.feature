@@ -3,7 +3,7 @@
 @NDX-createcampaignFeature
 Feature: campaign for data setup
 
-@NDX-5495, @NDX-5495
+@NDX-5495, @NDX-5494
   @NDX-createcampaign
    @initBrowser @closeBrowser
   Scenario: Verify creating campaign for data setup

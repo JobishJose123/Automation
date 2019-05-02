@@ -1,6 +1,4 @@
 #Author:shobina.k@flytxt.com
-
-
 @NDX-Dashboard
 Feature: PM AND IM Dashboard
 
@@ -12,21 +10,25 @@ Then navigate to dashboard
 Then click campaign Performance Monitor
 Then verify the values displayed 
 
-@NDX-7169 
+@NDX-7169 @initBrowser @closeBrowser
 Scenario: Verify the values displayed in the Monthly Performance Snapshot Dashboard 
+Given login
+Then navigate to precision marketer
 Then navigate to dashboard
 Then click monthly performance snapshot
 Then verify the values displayed
 
-@NDX-7171
+@NDX-7171 @initBrowser @closeBrowser
 Scenario: Verify the values displayed in the Customer Events Spread Dashboard 
+Given login
+Then navigate to precision marketer
 Then navigate to dashboard
 Then click customer event spread
 Then verfiy values displayed in customer events spread
 
-@NDX-7226  
+@NDX-7226   @initBrowser @closeBrowser
 Scenario: Verify the values displayed in the Digital Experience Monitor Dashboar
-Then navigate to home page
+Given login
 Then navigate to intent management
 Then navigate to dashboard
 Then click digital experience monitor

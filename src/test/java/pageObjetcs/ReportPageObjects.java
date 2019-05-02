@@ -38,8 +38,8 @@ public class ReportPageObjects extends Init{
 //	@FindBy(xpath="(//paper-item[contains(.,'2 Min')])[2]")
 //   private WebElement ChooseFrequency;
 //	
-//	@FindBy(xpath="//paper-button[contains(.,'Activate')]")
-//    private WebElement ActivateQCJobbtn;
+	@FindBy(xpath="(//paper-icon-button[@title='Remove'])[2]")
+    private WebElement DeleteFilter;
 	
 	@FindBy(xpath="//iron-icon[@icon='icons:filter-list']")
   private WebElement setFilter;
@@ -127,6 +127,8 @@ private WebElement customerProfile;
 //	}
 	public void filterProgram(String programName) throws Exception{
 		jswait.loadClick(setFilter);
+		jswait.loadClick(DeleteFilter);
+		jswait.loadClick(DeleteFilter);
 		jswait.loadClick(inputColumn);
 		jswait.loadClick(program);
 		jswait.loadClick(setCondition);
@@ -140,7 +142,7 @@ private WebElement customerProfile;
 		System.out.println(conversion);
 		System.out.println(fulfillment);
 		Assert.assertTrue(jswait.checkVisibility("(//div[contains(.,'Conversion %')]//div[@title='"+conversion+"'])[1]"));
-		Assert.assertTrue(jswait.checkVisibility("(//div[contains(.,'Fulfillment %')]//div[@title='"+fulfillment+"'])[2]"));
+		Assert.assertTrue(jswait.checkVisibility("//div[contains(.,'Fulfillment %')]//div[@title='"+fulfillment+"']"));
 		
 		
 	}
@@ -218,7 +220,7 @@ private WebElement customerProfile;
 	 }
 	 
 	 public void eventVerify() throws Exception{
-		 Assert.assertTrue(jswait.checkVisibility("//div[contains(.,'"+SELENIUM_USAGE_METRIC+"')]"));
+		 Assert.assertTrue(jswait.checkVisibility("//div[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]"));
 	 }
 	 public void metricTab() throws Exception{
 		 jswait.loadClick(metricTab);

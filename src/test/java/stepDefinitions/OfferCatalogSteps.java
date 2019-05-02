@@ -292,7 +292,9 @@ public class OfferCatalogSteps extends Init{
 		   commonObjects.filterName(eM.getCell(1, 0).toString());
 		   String offerCount = catalogPageObjects.getOfferCountFromGrid();
 		   System.out.println(offerCount);
+		   Thread.sleep(3000);
 		   int count= Integer.parseInt(offerCount);
+		   System.out.println(count);
 		   Assert.assertTrue(count>30, "added offers less than 30");
 	   }
 	   @Then("^Verify Help Of Offer Catalogue$")
