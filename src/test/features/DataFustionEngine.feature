@@ -59,7 +59,7 @@ Feature: DK
     Then navigate to data foundation
     Then click Data Fusion Engine
     Then create dk jobs for checking skip exception from sheet "skipexception"
-    Then Open DK Job from sheet and verify skip exception "skipexception"
+   Then Open DK Job from sheet and verify skip exception "skipexception"
 
   @NX-3492 @initBrowser @closeBrowser
   Scenario: DK --> Verify the working of String value extraction from a filename

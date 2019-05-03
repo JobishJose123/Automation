@@ -118,14 +118,15 @@ public class Request extends Init{
         System.out.println(response.toString());
 	}
 	
-	public void postRequestsession(String urlStr, String jobPayload) throws ClientProtocolException, IOException {
-		String session=((ChromeDriver) driver).getSessionId().toString();
+	public void postRequestwithsession(String urlStr, String jobPayload) throws Exception {
+		String id=getsessionid(p.getValue("env"));
+		
 		StringEntity entity = new StringEntity(jobPayload,
                 ContentType.APPLICATION_JSON);
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(urlStr);
         request.setHeader("Content-type", "application/json");
-        request.setHeader("Authorisation","session="+session);
+        request.setHeader("Cookie","NEONDXSESSIONID="+id);
        
         request.setEntity(entity);
         HttpResponse response = httpClient.execute(request);
@@ -166,8 +167,7 @@ public class Request extends Init{
 		wr.close();
 
 		int responseCode = con.getResponseCode();
-//		System.out.println("\nSending 'POST' request to URL : " + url);
-//		System.out.println("Post parameters : " + urlParameters);
+		System.out.println("Post parameters : " + urlParameters);
 		System.out.println("Response Code : " + responseCode);
 		getResponseString();
 	}
@@ -211,6 +211,24 @@ public class Request extends Init{
 		
 
 	}
+	
+	public String getsessionid(String env) throws Exception{
+		Request req = new Request();
+//		req.postRequest(urlStr, jobPayload);
+	req.postRequest_payload("http://"+env+"/neon-ws/login", "username=flyops%40flytxt.com&password=flytxt&remember-me=false");
+		System.out.println(req.responseString);
+		List<String> cookies = req.getCookies();
+		System.out.println(cookies.get(0));
+		String id =cookies.toString();
+		String sessionid=(String) id.subSequence(17,49);
+		System.out.println(id.subSequence(17,49));
+		return sessionid;
+		
+	}
+	
+	
+	
+	
 	public List<String> getCookies(){
 		List<String> cookies = con.getHeaderFields().get("Set-Cookie");
 		return cookies;
@@ -221,17 +239,20 @@ public class Request extends Init{
 
 				Request req = new Request();
 //				req.postRequest(urlStr, jobPayload);
-//				req.postRequest_payload("http://192.168.150.27/neon-ws/login", "username=flyops%40flytxt.com&password=flytxt&remember-me=false");
-//				System.out.println(req.responseString);
-//				List<String> cookies = req.getCookies();
-//				System.out.println(cookies.get(0));
+			req.postRequest_payload("http://192.168.150.209/neon-ws/login", "username=flyops%40flytxt.com&password=flytxt&remember-me=false");
+				System.out.println(req.responseString);
+				List<String> cookies = req.getCookies();
+				System.out.println(cookies.get(0));
+				String id =cookies.toString();
+				
+				System.out.println(id.subSequence(17,49));
 //				for(int i=3;i<=30;i++) {
 //					req.postRequestWithCookie("http://192.168.150.27/neon-ws/saveSegmentRule","{\"name\":\"newRule"+i+"\",\"programId\":11,\"targetDetails\":{\"baseListType\":\"none\",\"targetType\":null,\"targetConfiguration\":null,\"registrationListObj\":{\"createdDate\":\"2018-08-21T06:37:07.000+0000\",\"updateDate\":\"2018-08-21T06:37:07.000+0000\",\"createdUser\":null,\"updatedUser\":null,\"description\":\"Description\",\"dncType\":0,\"lastFullCount\":null,\"memberCount\":0,\"name\":\"selenium_list\",\"partnerId\":1,\"type\":{\"name\":\"Standard\"},\"listType\":\"standard\",\"sharedPartnerList\":null,\"status\":\"active\",\"partnerName\":\"System Global\",\"ostrichEntityId\":0,\"targets\":0},\"regListId\":478},\"offerDetails\":{\"productId\":1,\"offers\":[{\"touchpointId\":\"4\",\"offerId\":1}],\"productObj\":{\"createdDate\":\"2018-07-12T12:24:47.000+0000\",\"updateDate\":\"2018-08-21T08:00:13.000+0000\",\"createdUser\":\"System Administrator\",\"updatedUser\":\"System Administrator\",\"productId\":1,\"description\":\"Product with attribute\",\"name\":\"singleProd379\",\"partnerId\":1,\"categoryName\":null,\"configuration\":\"{\\\"SelAttr_1017\\\":[\\\"181\\\"],\\\"PriceValue\\\":[\\\"100\\\"],\\\"price\\\":[\\\"10\\\"]}\",\"activated\":true,\"productJson\":null}},\"scheduleDetails\":{\"startDate\":\"2018-08-23T05:37:38.199Z\",\"endDate\":null,\"timeZone\":49,\"refreshCycle\":\"Daily\",\"refreshFrequency\":1,\"refreshTime\":\"00:00\",\"weekDays\":{\"weekDay\":[]},\"servesOn\":{\"weekDays\":{\"weekDay\":null},\"refreshFrequency\":null},\"setEndDate\":null,\"setStartDate\":\"2018-08-22T05:37:38.199Z\",\"timezoneObj\":{\"sortOrder\":49,\"description\":\"(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi\",\"gmtOffset\":\"+05:30\",\"javaTimeZoneId\":\"Asia/Calcutta\",\"offset\":19800000},\"timezoneId\":49},\"trackingDetails\":{\"timezoneObj\":{\"sortOrder\":49,\"description\":\"(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi\",\"gmtOffset\":\"+05:30\",\"javaTimeZoneId\":\"Asia/Calcutta\",\"offset\":19800000},\"timeZoneId\":49},\"routingDetails\":{\"broadcastMessageMobileAddressId\":1,\"broadcastMessageRouteId\":1,\"responseMessageMobileAddressId\":1,\"responseMessageRouteId\":1},\"operation\":\"ACTIVATE\"}",cookies.get(0));
 //					Thread.sleep(2000);
 //				}
 				
-//				System.out.println(req.responseString);
-//		postRequest();
+				System.out.println(req.responseString);
+		postRequest();
 //		r.getRequest("https://flytxt.atlassian.net/rest/api/2/issue/NX-7116?fields=customfield_11160", "am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==");
 //		System.out.println(r.responseString);
 //		r.putRequest("http://192.168.150.27/neon-ws/broadcastApps","Zmx5b3BzQGZseXR4dC5jb206Zmx5dHh0", "{\"createdDate\":\"2018-07-05T05:28:11.000+0000\",\"updateDate\":\"2018-07-05T05:28:11.000+0000\",\"createdUser\":\"System Administrator\",\"updatedUser\":\"System Administrator\",\"name\":\"seedTrSeedFromCopy\",\"description\":\"Purpose of BC is NOTHING\",\"status\":\"planned\",\"applicationInstanceType\":\"SEEDING_RECURRING_BROADCAST\",\"partnerId\":1,\"activatedDate\":\"2018-07-04T12:35:43.000+0000\",\"deleted\":false,\"hidden\":false,\"message\":null,\"bcLevelCgCount\":null,\"targetCountMap\":null,\"broadcastParameters\":{\"deliverDetails\":{\"timezoneId\":null,\"recurring\":true,\"recurringConfiguration\":{\"recurringRange\":{\"startDate\":\"2018-07-05T12:35:41.680Z\",\"cycleEndDate\":null,\"type\":\"NEVER\",\"endType\":1,\"recurrenceCount\":null,\"timezoneId\":49,\"timezone\":\"Asia/Calcutta\",\"startCycleOnEndOfMonth\":false,\"endCycleOnEndOfMonth\":false},\"recurringPattern\":{\"type\":\"DAILY\",\"recurringInterval\":1,\"startTimeString\":\"18:05\"},\"renderSchedule\":{\"sendImmediately\":true,\"renderTargetAlways\":false,\"type\":null,\"renderScheduleType\":null,\"renderTimeAt\":null,\"renderTimeBefore\":null},\"thisRecurrencePosition\":null},\"broadcastExpirySettings\":{},\"broadcastNotificationList\":[],\"recurringStr\":\"true\",\"startTimeStr\":\"6:05 PM\",\"timezoneObj\":{\"sortOrder\":49,\"description\":\"(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi\",\"gmtOffset\":\"+05:30\",\"javaTimeZoneId\":\"Asia/Calcutta\",\"offset\":19800000}},\"targetDetails\":{\"limitRecipients\":null,\"controlGroupPercentage\":null,\"bcValidationDetails\":{\"cgSelectionMode\":1,\"fixedPercentage\":10,\"confidenceLevel\":null,\"marginOfError\":null},\"dndListIdsToExclude\":[]},\"offerDetails\":{\"trackingDetails\":{\"expirySettings\":{\"trackingEnabled\":true,\"absolute\":false,\"absoluteDate\":null,\"relativeTime\":\"ad5\",\"timeZoneId\":49},\"trackSourceId\":237,\"convertAll\":\"false\",\"rewardAllConversions\":\"false\",\"trackSourceName\":\"A_track_Sel\"},\"routingDetails\":{\"messagingChannel\":\"WAP\",\"broadcastMessageMobileAddressId\":1,\"responseMessageMobileAddressId\":1,\"broadcastMessageRouteId\":1,\"responseMessageRouteId\":1,\"broadcastMessageMobileAddressName\":\"Address-SMPP\",\"responseMessageMobileAddressName\":\"Address-SMPP\"},\"temporalOffers\":[],\"preferredLanguageId\":1},\"timezoneId\":null,\"abortBroadcastsForPreviousRevision\":false},\"operation\":\"ACTIVATE\",\"triggerable\":false,\"sustainabilityPeriod\":null,\"cgValidationEnabled\":false,\"broadcastTriggerList\":null,\"fbAdBudget\":null,\"minDailyFbBudget\":null,\"statusId\":21,\"recurringParentId\":null,\"previousRevisionBroadcastId\":null,\"approvers\":null,\"approverList\":null,\"targetValue\":\"create\",\"labelObj\":{\"createdDate\":\"2014-05-29T13:56:09.000+0000\",\"updateDate\":null,\"createdUser\":\"System Administrator\",\"updatedUser\":null,\"centerName\":\"Crossell\",\"description\":null,\"address1\":null,\"address2\":null,\"address3\":null,\"city\":null,\"county\":null,\"countryId\":null,\"phoneNumber\":null,\"faxNumber\":null,\"emailAddress\":null,\"partnerId\":1},\"inventoryObj\":{\"channelType\":-1,\"inventoryLimit\":-1,\"inventoryName\":\"Unlimited\",\"inventoryPriority\":1,\"isDefault\":false,\"sendingPriority\":2,\"status\":\"active\",\"createdPartnerId\":1,\"sharedPartnerList\":null,\"partnerName\":\"System Global\",\"blackoutRuleName\":\"Black-CG\",\"freqRuleName\":\"Rule-1\"},\"offer\":\"/offers/1681\",\"selectedLanguage\":\"English (UK)\",\"campaignName\":\"campaignBC711\",\"target\":\"http://192.168.150.27/neon-ws/targets/5942\",\"campaign\":\"/campaigns/1060\",\"label\":\"http://192.168.150.27/neon-ws/labels/1001\",\"inventoryDefinition\":\"http://192.168.150.27/neon-ws/partnerInventoryDefinitions/21\",\"registrationList\":\"http://192.168.150.27/neon-ws/registrationLists/845\",\"broadcastTrigger\":null}");
@@ -240,36 +261,36 @@ public class Request extends Init{
 		
 		
 //		String[] testCases = {};
-		for(int i =0;i<testCases.length;i++)
-			{
-			r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206Zmx5bWFpbDEh", "{\r\n" + 
-			
-				"   \"fields\": {\r\n" + 
-				"       \"customfield_11173\":{\"value\":\"YES\"}\r\n" + 
-				"   }\r\n" + 
-				"}");
-			System.out.println(r.responseString);
-			System.out.println(testCases[i]+": changed maintenance status to:YES");
-			
-//			r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
+//		for(int i =0;i<testCases.length;i++)
+//			{
+//			r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206Zmx5bWFpbDEh", "{\r\n" + 
 //			
 //				"   \"fields\": {\r\n" + 
-//				"       \"customfield_11172\":{\"value\":\"NO\"}\r\n" + 
+//				"       \"customfield_11173\":{\"value\":\"YES\"}\r\n" + 
 //				"   }\r\n" + 
 //				"}");
-//			System.out.println(testCases[i]+": changed automated status to:");
-//			System.err.print("YES");
-//		r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
-//				"   \"fields\": {\r\n" + 
-//				"       \"customfield_11175\":{\"value\":\"6.1 GA\"}\r\n" +
-//				"   }\r\n" + 
-//				"}");
-//		r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
-//				"   \"fields\": {\r\n" + 
-//				"       \"customfield_11174\":{\"name\":\"rahul.krishnan\"}\r\n"+
-//				"   }\r\n" + 
-//				"}");
-			}
+//			System.out.println(r.responseString);
+//			System.out.println(testCases[i]+": changed maintenance status to:YES");
+//			
+////			r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
+////			
+////				"   \"fields\": {\r\n" + 
+////				"       \"customfield_11172\":{\"value\":\"NO\"}\r\n" + 
+////				"   }\r\n" + 
+////				"}");
+////			System.out.println(testCases[i]+": changed automated status to:");
+////			System.err.print("YES");
+////		r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
+////				"   \"fields\": {\r\n" + 
+////				"       \"customfield_11175\":{\"value\":\"6.1 GA\"}\r\n" +
+////				"   }\r\n" + 
+////				"}");
+////		r.putRequest("https://flytxt.atlassian.net/rest/api/2/issue/"+testCases[i],"am9lbC5qb3NlQGZseXR4dC5jb206U3BsZW5kZXIuMjc3MQ==", "{\r\n" + 
+////				"   \"fields\": {\r\n" + 
+////				"       \"customfield_11174\":{\"name\":\"rahul.krishnan\"}\r\n"+
+////				"   }\r\n" + 
+////				"}");
+//			}
 		
 //		r.getRequest("http://192.168.150.253/dk-new/jobs?projection=jobView&page=0&size=50&name=selenium_list", "dcdcdc");
 //		System.out.println(r.responseString);
