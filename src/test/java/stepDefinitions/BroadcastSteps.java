@@ -1664,7 +1664,7 @@ public class BroadcastSteps extends Init {
 //    	String baseList = list.getCell(1, 2).toString();
 		ExcelHelper offerExcel = new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offer);
-		String name = (String) eM.getCell(1, 0);
+		String name = (String) eM.getCell(1,0);
 		name = RandomNameGenerator.getRandomName(name);
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);

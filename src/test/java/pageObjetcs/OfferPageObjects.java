@@ -1420,7 +1420,7 @@ public class OfferPageObjects extends Init {
 	public void enterProductTabFields(String productSheet) throws InterruptedException, IOException {
 		ExcelHelper prodcutFile = new ExcelHelper();
 		prodcutFile.setExcelFile("productInputData", productSheet);
-		String productToAdd = (String) prodcutFile.getCell(1, 0);
+		String productToAdd = (String) prodcutFile.getCell(1,0);
 		clickOfferAddButton();
 		Thread.sleep(15000);
 			commonObjects.filterName(productToAdd);
