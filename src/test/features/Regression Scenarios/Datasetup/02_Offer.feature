@@ -188,3 +188,49 @@ Feature: Test suite on Offer creation
      Then create new offer from sheet "STVSMS" with product "fullDetails"
      Then verify "STVSMS" offer in grid
      Then save "offerInputData" data to spreadsheet from "STVSMS" with string recharge sms offer with fullDetails product
+     
+     
+#     /**
+#      * this method is user for creating the offers with different types of rewards
+#      * 
+#      * to passing the rewards type like below
+#      * default- only we can select default reward
+#      * oneruleonereward- we can crate one rule and select one reward for that rule , and we can select default reward also
+#      * onerulemultiplerewards-we can crate one rule and select 2 reward for that rule and we can select default reward also
+#      * firstrulefirstreward- we can create only one rule and selecting for reward for that rule only
+#      * multiplerulesmultiplerewards- we can create multiple rules and selecting the multiple rewards for those rules, and we can select default reward also
+#      * 
+#Creative: singlecreative(it selects the one creative and language English )
+# multiplecreative (we can create 2 creatives with 2 languages )
+#      */
+     
+     @NDX-OneRuleOneReward @initBrowser 
+     Scenario: Create a onerule one reward recharge sms offer
+     Given login
+     Then navigate to precision marketer
+     Then navigate to offer management
+     Then navigate to offers
+     Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "multiplecreative"
+     Then verify "SeedingSMS" offer in grid
+     
+#     Examples:
+#     |sheet||rewards|
+#     |rechargeSMS||default|
+#     |rechargeSMS||oneruleonereward|
+#     |rechargeSMS||onerulemultiplerewards|
+#     |rechargeSMS||firstrulefirstreward|
+#     |rechargeSMS||multiplerulesmultiplerewards|
+#     |SeedingSMS||default|
+#     |SeedingSMS||oneruleonereward|
+#     |SeedingSMS||onerulemultiplerewards|
+#     |SeedingSMS||firstrulefirstreward|
+#     |SeedingSMS||multiplerulesmultiplerewards|
+     
+     
+     
+     
+#     Then save "offerInputData" data to spreadsheet from "onerulemultiplerewards" with string recharge sms offer with fullDetails product
+     
+     
+     
+     

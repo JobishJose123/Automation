@@ -427,6 +427,75 @@ public class OfferPageObjects extends Init {
 	 @FindBy(xpath = "//paper-button[contains(.,'Cancel')][@class='cancel-button style-scope offer-form x-scope paper-button-0']")
 		private WebElement cancelbtn;
 	 
+	 @FindBy(xpath="//seeding-reward//vaadin-combo-box[@id='reward']//input")
+		private WebElement seedingRewardInputType;
+		
+		@FindBy(xpath="//rewards-container[2]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
+		private WebElement firstRuleFirstRewardInputField;
+		
+		@FindBy(xpath="//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]/..//input")
+		private WebElement firstRuleSecondRewardInputField;
+		
+		
+		@FindBy(xpath = "//rewards-container[1]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
+		private WebElement defaultFirstRewardTypeInputField;
+		
+		@FindBy(xpath = "//rewards-container[1]//rewards-list[2]//label[contains(.,'Reward Type')]/..//input")
+		private WebElement defaultSecondRewardTypeInputField;
+		
+		@FindBy(xpath="//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
+		private WebElement secondRuleFirstRewardInputField;
+		
+		@FindBy(xpath="//seeding-reward//add-seeding-reward//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+		private WebElement selectSeedingReward;
+		
+		@FindBy(xpath="//rewards-container[1]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+		private WebElement defaultRuleSecondReward;
+		
+		@FindBy(xpath="//rewards-container[2]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+		private WebElement selectFirstRuleFirstReward;
+		
+		@FindBy(xpath="//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+		private WebElement selectSecondRuleFirstReward;
+		
+		@FindBy(xpath="//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+		private WebElement selectFirstRuleSecondReward;
+		
+		@FindBy(xpath="//rewards-container[2]//label[contains(text(),'Response on success')]/..//textarea")
+		private WebElement FirstRuleSuccessMessage;
+		@FindBy(xpath="//rewards-container[2]//label[contains(text(),'Response on Failure')]/..//textarea")
+		private WebElement FirstRuleFailureMessage;
+		
+		@FindBy(xpath="//rewards-container[3]//label[contains(text(),'Response on success')]/..//textarea")
+		private WebElement secondRuleSuccessMessage;
+		@FindBy(xpath="//rewards-container[3]//label[contains(text(),'Response on Failure')]/..//textarea")
+		private WebElement secondRuleFailureMessage;
+		
+		@FindBy(xpath="//rewards-container[1]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on success')]/..//textarea")
+		private WebElement defaultSecondCreativeSuccessMessage;
+		
+		@FindBy(xpath="//rewards-container[1]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on Failure')]/..//textarea")
+		private WebElement defaultSecondCreativeFailureMessage;
+		
+		@FindBy(xpath="//rewards-container[2]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on success')]/..//textarea")
+		private WebElement firstRuleSecondCreativeSuccessMessage;
+		
+		@FindBy(xpath="//rewards-container[2]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on Failure')]/..//textarea")
+		private WebElement firstRuleSecondCreativeFailureMessage;
+		
+		@FindBy(xpath="//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on success')]/..//textarea")
+		private WebElement secondRuleSecondCreativeSuccessMessage;
+		
+		@FindBy(xpath="//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on Failure')]/..//textarea")
+		private WebElement secondRuleSecondCreativeFailureMessage;
+		
+		 @FindBy(xpath="//rewards-container[3]//paper-button")
+		 private WebElement rewardSecondRuleAdButton;
+		 
+		 @FindBy(xpath="//rewards-container[1]//paper-button")
+		 private WebElement rewardDefaultRuleAdButton;
+		 
+	 
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -2465,6 +2534,274 @@ public void deleteReward() throws Exception{
 			jswait.loadClick(cancelbtn);
 			commonObjects.filterName(offerName);
 		}
+		
+		public void clickRewardDefaultRuleAdButton() throws InterruptedException {
+			jswait.loadClick(rewardDefaultRuleAdButton);
+		}
+		
+		 public void clickRewardSecondRuleAdButton() throws InterruptedException {
+			jswait.loadClick(rewardSecondRuleAdButton);
+		}
+	 
+	 public void clickSeedingRewardTypeInputField() throws InterruptedException {
+		jswait.loadClick(seedingRewardInputType);
+		jswait.loadSendKeys(seedingRewardInputType,SEL_REWARD);
+		
+	}
+	
+	
+	
+	public void clickFirstRuleFirstReward() throws InterruptedException {
+		
+		jswait.loadClick(firstRuleFirstRewardInputField);
+		jswait.loadSendKeys(firstRuleFirstRewardInputField, SEL_REWARD);
+	}
+	
+	public void clickFirstRuleSecondRewardInputField() throws InterruptedException {
+		
+		jswait.loadClick(firstRuleSecondRewardInputField);
+		jswait.loadSendKeys(firstRuleSecondRewardInputField, SEL_REWARD);
+	}
+	
+public void clickSecondRuleSecondRewardInputField() throws InterruptedException {
+		
+		jswait.loadClick(secondRuleFirstRewardInputField);
+		jswait.loadSendKeys(secondRuleFirstRewardInputField,SEL_REWARD);
+	}
+	
+	
+	
+	public void clickDefualtFirstRewardTypeInputField() throws InterruptedException {
+		jswait.loadClick(defaultFirstRewardTypeInputField);
+	}
+	
+	public void clickDefaultSecondRewardTypeInputField() throws InterruptedException {
+		jswait.loadClick(defaultSecondRewardTypeInputField);
+	}
+	 
+	 
+	 public void clickSeedingRewardTypesel_reward() throws InterruptedException {
+		jswait.loadClick(selectSeedingReward);
+	}
+	
+	
+	public void clickdefaultRuleSecondReward() throws InterruptedException {
+		jswait.loadClick(defaultRuleSecondReward);
+	}
+	
+	
+	
+	public void selectFirstRuleFirstReward() throws InterruptedException {
+		jswait.loadClick(selectFirstRuleFirstReward);
+		
+	}
+	
+	public void selectFirstRuleSecondReward() throws InterruptedException {
+		jswait.loadClick(selectFirstRuleSecondReward);
+		
+	}
+	
+	public void selectSecondRuleFirstReward() throws InterruptedException {
+		jswait.loadClick(selectSecondRuleFirstReward);
+		
+	}
+	 
+	 
+	 
+	 public void enterFirstRuleSuccessMessage(String message) throws InterruptedException {
+		
+		jswait.loadSendKeys(FirstRuleSuccessMessage, message);
+	}
+	
+	
+public void enterFirstRuleFailureMessage(String message) throws InterruptedException {
+	jswait.loadSendKeys(FirstRuleFailureMessage, message);
+}
+	 
+	 public void enterSecondRuleSuccessMessage(String message) throws InterruptedException {
+	
+	jswait.loadSendKeys(secondRuleSuccessMessage, message);
+}
+
+public void enterSecondRuleFailureMessage(String message) throws InterruptedException {
+	jswait.loadSendKeys(secondRuleFailureMessage, message);
+}
+
+	 public void enterdefaultSecondCreativeSuccessMessage(String message) throws InterruptedException {
+		jswait.loadSendKeys(defaultSecondCreativeSuccessMessage, message);
+	}
+	
+	public void enterdefaultSecondCreativeFailureMessage(String message) throws InterruptedException {
+		jswait.loadSendKeys(defaultSecondCreativeFailureMessage, message);
+	}
+	
+	public void enterfirstRuleSecondCreativeSuccessMessage(String message) throws InterruptedException {
+		jswait.loadSendKeys(firstRuleSecondCreativeSuccessMessage, message);
+	}
+	
+	public void enterfirstRuleSecondCreativeFailureMessage(String message) throws InterruptedException {
+		jswait.loadSendKeys(firstRuleSecondCreativeFailureMessage, message);
+	}
+	
+	public void entersecondRuleSecondCreativeSuccessMessage(String message) throws InterruptedException {
+		jswait.loadSendKeys(secondRuleSecondCreativeSuccessMessage, message);
+	}
+	
+	public void entersecondRuleSecondCreativeFailureMessage(String message) throws InterruptedException {
+		jswait.loadSendKeys(secondRuleSecondCreativeFailureMessage, message);
+	}
+	
+	
+	 
+	 public void createDefaultRuleFirstReward(String creativeType) throws InterruptedException {
+		
+		clickRewardDefaultRuleAdButton();
+		clickDefualtFirstRewardTypeInputField();
+		clickrewardTypesel_reward();
+		enterSuccessMessage("Default Reward Success from Selenium");
+		enterFailureMessage("Default Reward Failure from Selenium");
+		
+		if(creativeType.equals("multiplecreative")) {
+			enterdefaultSecondCreativeSuccessMessage("Default Reward Success from Selenium 2nd creative");
+			enterdefaultSecondCreativeFailureMessage("Default Reward Failure from Selenium 2nd creative");
+		}
+	}
+
+	public void createFirstRuleFirstReward(String creativeType) throws Exception {
+		
+		clickRewardFirstRuleAdButton();
+		clickFirstRuleFirstReward();
+		selectFirstRuleFirstReward();
+		enterFirstRuleSuccessMessage("Success from Selenium from first rule");
+		enterFirstRuleFailureMessage("Failure from Selenium from first rule");
+		if(creativeType.equals("multiplecreative")) {
+			
+			enterfirstRuleSecondCreativeSuccessMessage("Success from Selenium from first rule 2nd creative");
+			enterfirstRuleSecondCreativeFailureMessage("Failure from Selenium from first rule 2nd creative");
+		}
+	}
+	
+	public void createSecondRuleFirstReward(String creativeType) throws InterruptedException {
+		
+		clickRewardSecondRuleAdButton();
+		clickSecondRuleSecondRewardInputField();
+		selectSecondRuleFirstReward();
+		enterSecondRuleSuccessMessage("Success from Selenium from 2nd rule");
+		enterSecondRuleFailureMessage("Success from Selenium from 2nd rule");
+		
+		if(creativeType.equals("multiplecreative")) {
+			entersecondRuleSecondCreativeSuccessMessage("Success from Selenium from second rule 2nd creative");
+			entersecondRuleSecondCreativeFailureMessage("Failure from Selenium from second rule 2nd creative");
+		}
+	}
+	
+	public void selectSeedingReward(String offerType) throws InterruptedException {
+		if(offerType.contains("Seeding")) {
+		clickSeedingRewardTypeInputField();
+		clickSeedingRewardTypesel_reward();
+		}else {
+			System.out.println("not a seeding offer, offer type is"+offerType);
+		}
+	}
+	
+	public void createOffer(String sheet, String productSheet, String rewardType, String creativeType) throws Throwable {
+
+		String testMode = "";
+		clickCreateNewOfferButton();
+
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+		String offerType=eh.getCell(1, 2).toString();
+		
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
+		// ******************Products tab*****************:
+		Thread.sleep(3000);
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+
+		// ******************Creative tab*****************:
+		if (creativeType.equals("singlecreative")) {
+			enterCreativeTabDetails(eh, testMode);
+			clickProceedButton();
+			Thread.sleep(3000);
+		} else if (creativeType.equals("multiplecreative")) {
+
+			enterCreativeTabDetails(eh, testMode);
+			jswait.loadClick(addCreativeButton);
+			enterSecondCreativeTabDetails(eh);
+			clickProceedButton();
+			Thread.sleep(3000);
+
+		} else {
+			System.out.println("No creative created");
+		}
+
+		// ******************Track tab*****************:
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+			enterTrackTabDetails(eh);
+			if (rewardType.equals("oneruleonereward") || rewardType.equals("onerulemultiplerewards")
+					|| rewardType.equals("firstrulefirstreward")) {
+				createFirstDefaultTrackingRuleCondition();
+			} else if (rewardType.equals("multiplerulesmultiplerewards")) {
+				createFirstDefaultTrackingRuleCondition();
+				createSecondDefaultTrackingRuleCondition();
+			} else if (rewardType.equals("default")) {
+				System.out.println("No rules are created , only deafult rule available");
+			} else {
+				Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
+			} // inner if else
+
+		} // track tab if
+
+		clickProceedButton();
+
+		// ******************Rewards tab*****************:
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+
+			if (rewardType.equals("oneruleonereward")) {
+				createDefaultRuleFirstReward(creativeType);
+				createFirstRuleFirstReward(creativeType);
+				selectSeedingReward(offerType);
+				
+			} else if (rewardType.equals("onerulemultiplerewards")) {
+				createDefaultRuleFirstReward(creativeType);
+				clickRewardDefaultRuleAdButton();
+				clickDefaultSecondRewardTypeInputField();
+				clickdefaultRuleSecondReward();
+				createFirstRuleFirstReward(creativeType);
+				clickRewardFirstRuleAdButton();
+				clickFirstRuleSecondRewardInputField();
+				selectFirstRuleSecondReward();
+				selectSeedingReward(offerType);
+				
+
+			} else if (rewardType.equals("multiplerulesmultiplerewards")) {
+				createDefaultRuleFirstReward(creativeType);
+				createFirstRuleFirstReward(creativeType);
+				createSecondRuleFirstReward(creativeType);
+				selectSeedingReward(offerType);
+				
+			} else if (rewardType.equals("default")) {
+				createDefaultRuleFirstReward(creativeType);
+			selectSeedingReward(offerType);
+			
+			} else if (rewardType.equals("firstrulefirstreward")) {
+				createFirstRuleFirstReward(creativeType);
+				selectSeedingReward(offerType);
+		
+			} else {
+				System.out.println("No Rule for selecting the Rewards");
+				Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
+			}
+
+		}
+
+		clickSaveOfferButton();
+
+	}
 		
 		
 		}
