@@ -112,6 +112,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	public final String SELENIUM_Target_List = "selenium_list_target";
 	public final String SELENIUM_TARGET_GROUP="Target Group_q11";
 	public final String SEL_REWARD ="sel_reward";
+	public final String SELENIUM_REWARD="selenium_reward";
 	public final String INVENTORY_UNLIMITED = "Unlimited";
 	public final String INVENTORY_ONEPERDAY="sel_one_per_day";
 	public final String INVENTORY_BLACKOUTALWAYS="selenium_blackout_always";

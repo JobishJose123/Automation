@@ -210,7 +210,7 @@ Feature: Test suite on Offer creation
      Then navigate to precision marketer
      Then navigate to offer management
      Then navigate to offers
-     Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "multiplecreative"
+     Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "onerulemultiplerewards" with creative type "singlecreative"
      Then verify "SeedingSMS" offer in grid
      
 #     Examples:

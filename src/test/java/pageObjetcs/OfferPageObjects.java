@@ -449,16 +449,16 @@ public class OfferPageObjects extends Init {
 		@FindBy(xpath="//seeding-reward//add-seeding-reward//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
 		private WebElement selectSeedingReward;
 		
-		@FindBy(xpath="//rewards-container[1]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+		@FindBy(xpath="//rewards-container[1]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")
 		private WebElement defaultRuleSecondReward;
 		
 		@FindBy(xpath="//rewards-container[2]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
 		private WebElement selectFirstRuleFirstReward;
 		
-		@FindBy(xpath="//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+		@FindBy(xpath="//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")
 		private WebElement selectSecondRuleFirstReward;
 		
-		@FindBy(xpath="//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+		@FindBy(xpath="//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")
 		private WebElement selectFirstRuleSecondReward;
 		
 		@FindBy(xpath="//rewards-container[2]//label[contains(text(),'Response on success')]/..//textarea")
@@ -2560,13 +2560,13 @@ public void deleteReward() throws Exception{
 	public void clickFirstRuleSecondRewardInputField() throws InterruptedException {
 		
 		jswait.loadClick(firstRuleSecondRewardInputField);
-		jswait.loadSendKeys(firstRuleSecondRewardInputField, SEL_REWARD);
+		jswait.loadSendKeys(firstRuleSecondRewardInputField, SELENIUM_REWARD);
 	}
 	
 public void clickSecondRuleSecondRewardInputField() throws InterruptedException {
 		
 		jswait.loadClick(secondRuleFirstRewardInputField);
-		jswait.loadSendKeys(secondRuleFirstRewardInputField,SEL_REWARD);
+		jswait.loadSendKeys(secondRuleFirstRewardInputField,SELENIUM_REWARD);
 	}
 	
 	
