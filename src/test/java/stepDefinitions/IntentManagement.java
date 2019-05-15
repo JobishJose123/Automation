@@ -31,6 +31,7 @@ public class IntentManagement extends Init{
 	RandomNameGenerator RandomNameGenerator=new RandomNameGenerator();
 	CommonObjects commonObjects = new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
+	MarathonHelper MarathonHelper =new MarathonHelper();
 	public ExcelHelper eh = new ExcelHelper(); 
 	TargetConditionObjects TargetConditionObjects=new TargetConditionObjects();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -2100,6 +2101,7 @@ System.out.println(editname+"program has edited successfully");
 			StringBuilder str = new StringBuilder();
 			str.append("http://");
 			MarathonHelper m = new MarathonHelper();
+			
 			str.append(p.getValue("nginxIp"));
 			str.append(":");
 			str.append("8092");
@@ -2407,7 +2409,29 @@ System.out.println(editname+"program has edited successfully");
 						System.out.println("program has created successfully");
 					}
 				
-				
+				  @Then("^login to the vcust$")
+					 public void getvcustportid() throws Exception {
+						 Thread.sleep(2000);
+					
+						    String port;
+						   port= MarathonHelper.getContainerPort("192.168.150.253","neon/infra/vcust");
+						   String node=MarathonHelper.getContainerNode("192.168.150.253","neon/infra/vcust");
+						   System.out.println("node is "+node);
+						   
+						   System.out.println(port);
+						   String url=node.concat(":"+port);
+						   System.out.println(url);
+						   
+						   driver.get("http://"+url.stripLeading());
+						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='name']")).sendKeys(p.getValue("username"));
+						 Thread.sleep(2000);
+						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='pass']")).sendKeys(p.getValue("vcustpass"));
+						 Thread.sleep(2000);
+						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='submit']")).click();
+						
+						
+						    
+					 }
 				
 				
 				
