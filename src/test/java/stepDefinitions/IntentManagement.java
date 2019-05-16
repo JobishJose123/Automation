@@ -1904,6 +1904,16 @@ System.out.println(editname+"program has edited successfully");
 			}
 		}
 		
+		public String getmessagerecevied() {
+			try {
+				jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2]");
+				String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2]")).getText();
+				return latestTime;
+			}catch (Exception e) {
+				return "noOfferRecommendedEventFound";
+			}
+		}
+		
 		public boolean checkOfferEligibleEventTime(Date startTime, Date conversionTime) {
 			if(conversionTime.after(startTime))
 			return true;
@@ -2433,7 +2443,83 @@ System.out.println(editname+"program has edited successfully");
 						    
 					 }
 				
+				  @Then("^hit with vcust SMS with number \"([^\"]*)\" with destination adrs \"([^\"]*)\"$")
+					 public void getvcustmessage(String number,String desadd) throws Exception {
+						 Thread.sleep(2000);
+						 jswait.loadClick("//a[@href='inject_mo.htm']");	
+						 
+						 Thread.sleep(2000);
+						 driver.findElement(By.xpath("//textarea[@name='short_message']")).clear();
+						 jswait.loadSendKeys("//textarea[@name='short_message']","This is test sms");
 				
+						 Thread.sleep(2000);
+						 driver.findElement(By.xpath("//input[@name='source_addr']")).clear();
+						 jswait.loadSendKeys("//input[@name='source_addr']",number);
+						 Thread.sleep(2000);
+						 driver.findElement(By.xpath("//input[@name='destination_addr']")).clear();
+						 jswait.loadSendKeys("//input[@name='destination_addr']",desadd);
+						 Thread.sleep(2000);
+						 jswait.loadClick("//input[@name='submit']");
+					
+						
+						
+						    
+					 }
+				  @Then("^navigate to the neon again$")
+					 public void navigateback() throws Exception {
+						 Thread.sleep(2000);
+						 driver.get("http://"+p.getValue("env"));
+		
+					 }
+				  
+					@Then("^wait for Message Recevied in consumer profile$")
+					public void wait_for_MessageRecevied() throws Throwable {
+						Date now = new Date();
+						Calendar calendar = Calendar.getInstance();
+						int min = calendar.get(Calendar.MINUTE);
+						now.setMinutes(min-2);
+						dateForCompare = now;
+						CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+						customerProfilePage.clickEventTypesCheckBox();
+						customerProfilePage.clickEventTypesCheckBox();
+						customerProfilePage.clickMessageReceivedCheckBoxCheckBox();
+						customerProfilePage.clickSelectEventApplyButton();
+						Thread.sleep(2000);
+						TimeoutImpl t = new TimeoutImpl();
+						t.startTimer();
+						String date = getLastOfferRecommendedEventTime();
+						if(date.equals("noOfferRecommendedEventFound"))
+							date = "05 Sep 2000 04:18 PM";
+						Date timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+						System.out.println(timeStamp);
+						System.out.println(checkOfferRecommendedEventTime(dateForCompare,timeStamp));
+						while(t.checkTimerMin(15) && !checkOfferRecommendedEventTime(dateForCompare,timeStamp)) {
+							System.out.println("insie while"+dateForCompare+"::"+timeStamp);
+							Thread.sleep(5000);
+//							customerProfilePage.clickEventsTab();
+							customerProfilePage.clickEventTypesCheckBox();
+							customerProfilePage.clickSelectEventApplyButton();
+							Thread.sleep(2000);
+							customerProfilePage.clickEventTypesCheckBox();
+							customerProfilePage.clickMessageReceivedCheckBoxCheckBox();
+							customerProfilePage.clickSelectEventApplyButton();
+							Thread.sleep(2000);
+							
+//							date = getLastOfferRecommendedEventTime();
+//							if(date.equals("noOfferRecommendedEventFound"))
+//								date = "05 Sep 2000 04:18 PM";
+//							timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+//							System.out.println(timeStamp);
+//							System.out.println(getLastOfferRecommendedEventTime());
+							
+						}
+//						date = getLastOfferRecommendedEventTime();
+//						if(date.equals("noOfferRecommendedEventFound"))
+//							date = "05 Sep 2000 04:18 PM";
+//						timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+//						Assert.assertTrue("offer Recommended event not found", checkOfferRecommendedEventTime(dateForCompare,timeStamp));
+					}
+				  
 				
 				
 				

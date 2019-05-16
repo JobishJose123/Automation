@@ -239,6 +239,8 @@ public class CustomerProfilePage extends Init{
 	private WebElement offerAcceptedEventCheckBox;
 	@FindBy(xpath="//div[text()='Offer Recommended']/..")
 	private WebElement offerRecommendedEventCheckBox;
+	@FindBy(xpath="//div[text()='Message Received']/..")
+	private WebElement MessageReceivedCheckBox;
 	
 	
 	// in consumer profile filter option 
@@ -1089,6 +1091,9 @@ public void verifyTrialMessageEventDetailsDynamic(String sheet) throws Exception
     
 public void clickOfferEligibleEventCheckBox() throws InterruptedException {
 	jswait.loadClick(offerEligibleEventCheckBox);
+}
+public void clickMessageReceivedCheckBoxCheckBox() throws InterruptedException {
+	jswait.loadClick(MessageReceivedCheckBox);
 }
 public void clickOfferRecommendedEventCheckBox() throws InterruptedException {
 	jswait.loadClick(offerRecommendedEventCheckBox);
