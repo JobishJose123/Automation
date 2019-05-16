@@ -34,6 +34,7 @@ import baseClasses.Navigation;
 import baseClasses.RandomNameGenerator;
 import baseClasses.ShellExecuter;
 import baseClasses.TimeoutImpl;
+import ch.qos.logback.core.joran.action.Action;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -4344,9 +4345,423 @@ public void wait_until_status_of_recurring_child_bc_from_sheet_is(String bcsheet
 @Then("^abort bc for bctype \"([^\"]*)\"$")
 public void abort_bc_for_bctype(String bctype) throws Exception {
 	broadcastPageObjects.abortBC(bctype);
+	
 }
+	
+	public void oneOffBCDeliverTab(String sheet,String bc_type) throws Exception{
+	eM.setExcelFile("bcInputData", sheet);
+	Calendar rightNow = Calendar.getInstance();
+	String mn = "";
+	if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+		mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+	} else
+		mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+	String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+	int hours = rightNow.get(Calendar.HOUR);
+	int min = rightNow.get(Calendar.MINUTE);
+	int am_pm = rightNow.get(Calendar.AM_PM);
+	int day = rightNow.get(Calendar.DAY_OF_MONTH);
+	int year = rightNow.get(Calendar.YEAR);
+	int month = rightNow.get(Calendar.MONTH) + 1;
+	min += 2;
+	int rem = min % 5;
+	rem = 5 - rem;
+	min += rem;
+	if (min > 59) {
+		min -= 60;
+		hours++;
+	}
+	 if(min==0)
+		{
+			min+=5;
+		}
+		
+		
+	
+	try {
+		eM.setExcelFile("bcInputData", sheet);
+		if ((String) eM.getCell(1, 6) == "later") {
+			day++;
+		}
+	} catch (Exception e) {
+		System.out.println("edit days");
+		eh.setExcelFile("bcInputDataForEdit", sheet);
+		if ((String) eh.getCell(1, 6) == "later") {
+			day++;
+		} else if ((eh.getCell(1, 6).toString()).contains("After2Days")) {
+			day = rightNow.get(Calendar.DAY_OF_MONTH) + 2;
+			// day=day+2;
+			System.out.println("Days" + day);
+			date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-" + String.format("%02d", day);
+			System.out.println(date);
+		}
+	}
+	// we are getting the broadcast start date and stored in sheet , row 1 column 11
+	String Start_Date="";
+	if(sheet.contains("Edit")||sheet.contains("seedingTriggerableRecurringBCEd")){
+		String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+		if(am_pm==0) {
+		Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
+		}else {
+			 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+		}
+		eh.setExcelFile("bcInputDataForEdit", sheet);
+		eh.setCell(1, 11, Start_Date);
+	}else {
+		String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+		if(am_pm==0) {
+		Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
+		}else {
+			 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+		}
+		eM.setExcelFile("bcInputData", sheet);
+		eM.setCell(1, 11, Start_Date);
+		
+	}
+	
+	
+	Actions builder = new Actions(driver);
+	if (bc_type.contentEquals("one-off") || bc_type.contentEquals("seedingTriggerable")
+			|| bc_type.contentEquals("one-offInformational")) {
+		Thread.sleep(1000);
+		broadcastPageObjects.clickOneOffRadioButton();
+		// jswait.loadClick(".//div[@id='radioLabel' and
+		// contains(.,'One-off')]/../div[1]");
+		Thread.sleep(1000);
+		jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
+		Thread.sleep(1000);
+		jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='" + date + "']");
+		Thread.sleep(1000);
+		jswait.loadClick(
+				".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+		Thread.sleep(1000);
+		jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
+
+		Thread.sleep(2000);
+		jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
+		WebElement num = driver.findElement(By.xpath(
+				".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
+		builder.moveToElement(num).click().build().perform();
+		Thread.sleep(2000);
+		// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
+		WebElement num1 = driver.findElement(By.xpath(
+				".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num1).click().build().perform();
+		// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
+		// num1 =
+		// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
+		// style-scope paper-clock-selector'][41]"));
+		// builder.moveToElement(num1).click().build().perform();
+		// Thread.sleep(2000);
+		if (am_pm == 0)
+			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+		else
+			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+
+		jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
+		Thread.sleep(2000);
+		if (bc_type.contentEquals("one-off")) {
+			jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
+			Thread.sleep(1000);
+			jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='" + date + "']");
+			Thread.sleep(1000);
+			jswait.loadClick(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2]");
+			Thread.sleep(3000);
+			jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[2]//paper-input[2]//input");
+			Thread.sleep(2000);
+			num = driver.findElement(By.xpath(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+							+ (hours + 1) + "]"));
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(1000);
+			// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
+			WebElement num2 = driver.findElement(By.xpath(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["
+							+ (min + 1) + "]"));
+			builder.moveToElement(num2).click().build().perform();
+			Thread.sleep(1000);
+			// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
+			// num1 =
+			// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
+			// style-scope paper-clock-selector'][21]"));
+			// builder.moveToElement(num1).click().build().perform();
+			// Thread.sleep(1000);
+			if (am_pm == 0) {
+				num1 = driver.findElement(By.xpath(
+						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
+				builder.moveToElement(num1).click().build().perform();
+
+			} else {
+				num1 = driver.findElement(By.xpath(
+						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[2]"));
+				builder.moveToElement(num1).click().build().perform();
+			}
+
+			num1 = driver.findElement(By.xpath(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='timeDialog']/div/paper-button[2]"));
+			builder.moveToElement(num1).click().build().perform();
+			Thread.sleep(1000);
+		} else if (bc_type.contentEquals("one-offInformational")) {
+			jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
+			Thread.sleep(1000);
+			jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='" + date + "']");
+			Thread.sleep(1000);
+			jswait.loadClick(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2]");
+			Thread.sleep(3000);
+			jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[2]//paper-input[2]//input");
+			Thread.sleep(2000);
+			num = driver.findElement(By.xpath(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+							+ (hours + 1) + "]"));
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(1000);
+			// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
+			WebElement num2 = driver.findElement(By.xpath(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["
+							+ (min + 1) + "]"));
+			builder.moveToElement(num2).click().build().perform();
+			Thread.sleep(1000);
+			// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
+			// num1 =
+			// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
+			// style-scope paper-clock-selector'][21]"));
+			// builder.moveToElement(num1).click().build().perform();
+			// Thread.sleep(1000);
+			if (am_pm == 0) {
+				num1 = driver.findElement(By.xpath(
+						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
+				builder.moveToElement(num1).click().build().perform();
+
+			} else {
+				num1 = driver.findElement(By.xpath(
+						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[2]"));
+				builder.moveToElement(num1).click().build().perform();
+			}
+
+			num1 = driver.findElement(By.xpath(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='timeDialog']/div/paper-button[2]"));
+			builder.moveToElement(num1).click().build().perform();
+			Thread.sleep(1000);
+		}
+		// Thread.sleep(1000);
+	} else if (bc_type.contentEquals("one-off") || bc_type.contentEquals("facebook")) {
+		Thread.sleep(1000);
+		broadcastPageObjects.clickOneOffRadioButton();
+		// jswait.loadClick(".//div[@id='radioLabel' and
+		// contains(.,'One-off')]/../div[1]");
+		Thread.sleep(1000);
+		jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
+		Thread.sleep(1000);
+		jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='" + date + "']");
+		Thread.sleep(1000);
+		jswait.loadClick(
+				".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+		Thread.sleep(1000);
+		jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
+
+		Thread.sleep(2000);
+		jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
+		WebElement num = driver.findElement(By.xpath(
+				".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
+		builder.moveToElement(num).click().build().perform();
+		Thread.sleep(2000);
+		// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
+		WebElement num1 = driver.findElement(By.xpath(
+				".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num1).click().build().perform();
+		// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
+		// num1 =
+		// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
+		// style-scope paper-clock-selector'][41]"));
+		// builder.moveToElement(num1).click().build().perform();
+		// Thread.sleep(2000);
+		if (am_pm == 0)
+			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+		else
+			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+
+		jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
+		Thread.sleep(2000);
+		if (bc_type.contentEquals("facebook")) {
+			jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
+			Thread.sleep(1000);
+			jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='" + date + "']");
+			Thread.sleep(1000);
+			jswait.loadClick(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2]");
+			Thread.sleep(3000);
+			jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[2]//paper-input[2]//input");
+			Thread.sleep(2000);
+			num = driver.findElement(By.xpath(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+							+ (hours + 1) + "]"));
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(1000);
+			// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
+			WebElement num2 = driver.findElement(By.xpath(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["
+							+ (min + 1) + "]"));
+			builder.moveToElement(num2).click().build().perform();
+			Thread.sleep(1000);
+			// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
+			// num1 =
+			// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
+			// style-scope paper-clock-selector'][21]"));
+			// builder.moveToElement(num1).click().build().perform();
+			// Thread.sleep(1000);
+			if (am_pm == 0) {
+				num1 = driver.findElement(By.xpath(
+						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
+				builder.moveToElement(num1).click().build().perform();
+
+			} else {
+				num1 = driver.findElement(By.xpath(
+						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[2]"));
+				builder.moveToElement(num1).click().build().perform();
+			}
+
+			num1 = driver.findElement(By.xpath(
+					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='timeDialog']/div/paper-button[2]"));
+			builder.moveToElement(num1).click().build().perform();
+		}
+		Thread.sleep(1000);
+		jswait.loadClick("//label[contains(.,'Expires')]//following::iron-icon[1]");
+		Thread.sleep(3000);
+		jswait.loadClick("//label[contains(.,'Expires')]//following::paper-item[contains(.,'After')]");
+
+		Thread.sleep(2000);
+		jswait.loadSendKeys("//label[contains(.,'Expires')]//following::input[2]", "1");
+
+		Thread.sleep(1000);
+		jswait.loadClick("//label[contains(.,'Expires')]//following::iron-icon[2]");
+		Thread.sleep(3000);
+		jswait.loadClick("//label[contains(.,'Expires')]//following::paper-item[contains(.,'Days')]");
+
+		Thread.sleep(2000);
+		jswait.loadSendKeys("//label[contains(.,'Budget Amount')]//following::input[1]", "50");
+}
+	}
+	
+	public void recurringBCDelieverTab(String bcSheet,String endType,String targetRenderTime,String bcExpiry) throws Exception {
+		Actions builder =new Actions(driver);
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		 if(min==0)
+			{
+				min+=5;
+			}
+		jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
+		jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+		jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
+		jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+		// }
+		Thread.sleep(2000);
+		jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
+		jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
+		WebElement num = driver.findElement(By.xpath(
+				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+						+ (hours + 1) + "]"));
+		builder.moveToElement(num).click().build().perform();
+		Thread.sleep(2000);
+		// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+		WebElement num1 = driver.findElement(By.xpath(
+				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+						+ (min + 1) + "]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num1).click().build().perform();
+		Thread.sleep(1000);
+		if (am_pm == 0)
+			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
+		
+		else
+			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
+		Thread.sleep(1000);
+		num1 = driver.findElement(By.xpath(
+				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
+		builder.moveToElement(num1).click().build().perform();
+		broadcastPageObjects.recurringBCDeliverTabDetails(bcSheet,endType,targetRenderTime,bcExpiry);
+		
+	}
+//==========================================================================================================================================//
+@Then("^create bc from sheet \"([^\"]*)\" with inventory \"([^\"]*)\"$")
+public void create_bc_from_sheet_with_inventory(String bcSheet, String inventory) throws Throwable {
+	eM.setExcelFile("bcInputData", bcSheet);
+	String bcName = (String) eM.getCell(1, 0);
+	bcName = RandomNameGenerator.getRandomName(bcName);
+	eM.setCell(1, 0, bcName);
+	String bc_type = (String) eM.getCell(1, 7);
+	broadcastPageObjects.enterBasicDetailsOfBC(bcName,inventory);
 }
 
+@Then("^enter target tab details target condition (.*) type \"([^\"]*)\" TG \"([^\"]*)\" CG \"([^\"]*)\" DNC \"([^\"]*)\"$")
+public void enter_target_tab_details_target_condition_type_TG_CG_DNC(String condition,String targetType, String TG, String CG, String DNC) throws Exception {
+	broadcastPageObjects.enterTargetTabDetails(condition,targetType,TG,CG,DNC);
+}
+
+@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with \"([^\"]*)\" track session expires \"([^\"]*)\" filter criteria \"([^\"]*)\" give reward to \"([^\"]*)\"$")
+public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_track_session_expires_filter_criteria_give_reward_to(String offerSheet, String bcSheet, String creative, String trackExpires, String filterCriteria, String giveRewardsTo) throws Throwable {
+	eM.setExcelFile("bcInputData", bcSheet);
+	String bc_type = (String) eM.getCell(1, 7);
+	broadcastPageObjects.selectOffer(offerSheet,bc_type,creative,trackExpires,filterCriteria,giveRewardsTo);
+
+}
+
+@Then("^enter deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
+	eM.setExcelFile("bcInputData", bcSheet);
+	String bc_type = (String) eM.getCell(1, 7);
+	if(bc_type.equalsIgnoreCase("recurring")) {
+		broadcastPageObjects.recurringBCDeliverTabDetails(endType,targetRenderTime,bcExpiry,bcSheet);
+	}
+	else {
+	enterDeliveryTabDetails(bc_type,bcSheet);
+}
+}
+@Then("^add the BC Data to \"([^\"]*)\" from BCsheet \"([^\"]*)\" campaignname \"([^\"]*)\" campaign category \"([^\"]*)\" offer \"([^\"]*)\" condition \"([^\"]*)\"$")
+public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition(String bcDataSheet, String bcSheet, String campaignSheet, String campaignCategorySheet, String offerSheet, String condition) throws Throwable {
+	eh.setExcelFile("bcInputData", bcSheet);
+	String bcName=eh.getCell(1,0).toString();
+	String bcType=eh.getCell(1,7).toString();
+
+	eh.setExcelFile("offerInputData", offerSheet);
+	String offername=eh.getCell(1,0).toString();
+	String channel=eh.getCell(1,3).toString();
+	String offerType=eh.getCell(1,2).toString();
+
+	eh.setExcelFile("campaignCategoryInputData", campaignCategorySheet);
+	String campaignCategoryName=eh.getCell(1,0).toString();
+
+	eh.setExcelFile("campaignInputData", campaignSheet);
+	String campaignName=eh.getCell(1,0).toString();
+
+	eh.addDataToParllelSheet(bcDataSheet, bcName, campaignName, campaignCategoryName, offername, condition, channel, offerType, bcType,bcSheet);
+}
+}
 	
 
 

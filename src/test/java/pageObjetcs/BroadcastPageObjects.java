@@ -387,23 +387,90 @@ public class BroadcastPageObjects extends Init {
 	 @FindBy(xpath="//span[contains(.,'Do you want to abort all related broadcasts')]//following::paper-button[contains(.,'Yes')]")
 	 private WebElement AbortYes ;
 	
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
-	// @FindBy(xpath="")
-	// private WebElement ;
+	 @FindBy(xpath="//label[@id='label']//following::input[@placeholder='Select a Language']")
+	 private WebElement selectLanguage;
+	 @FindBy(xpath="//vaadin-combo-box-overlay[contains(.,'Portuguese (Brazil)')]")
+	 private WebElement selectPortuguese ;
+	 @FindBy(xpath="//paper-button[contains(.,'Target Group')]")
+	 private WebElement selectTargetGroup ;
+	 @FindBy(xpath="//div[@id='radioContainer']//following::div[contains(.,'No Limit')][@id='radioLabel']")
+	private WebElement noLimitTGRadiobtn;
+	 @FindBy(xpath="(//div[@class='buttons style-scope cvm-settings']//paper-button[contains(.,'Save')])[2]")
+	 private WebElement TGSavebtn ;
+	 @FindBy(xpath="(//div[@class='buttons style-scope cvm-settings']//paper-button[contains(.,'Save')])[1]")
+	 private WebElement CGSavebtn ;
+	 @FindBy(xpath="//paper-button[contains(.,'Control Group')]")
+	 private WebElement selectControlGroup;
 
 	@FindBy(xpath = "//paper-button[@class='btn-back style-scope broadcast-offer-selected x-scope paper-button-0']")
 	private WebElement backToOffers;
 	@FindBy(xpath = "//paper-button[@class='btn-back style-scope broadcast-offer-selected x-scope paper-button-0']")
 	private WebElement clearSavedSegment;
+	@FindBy(xpath = "//div[@id='radioContainer']//following::div[contains(.,'No Control Group')][@id='radioLabel']")
+	private WebElement noControlGroup;
+	@FindBy(xpath = "//div[@id='radioContainer']//following::div[contains(.,'Fixed percentage')][@id='radioLabel']")
+	private WebElement fixedPercentageOfTargetBase;
+	@FindBy(xpath = "(//input[@id='input'][@type='number'])[1]")
+	private WebElement fixedPercentNumber;
+	@FindBy(xpath = "(//h2[contains(.,'Exclude Do-Not-Contact List ')]//following::paper-icon-button[@id='clear'])[1]")
+	private WebElement DNCListClose;
+	@FindBy(xpath = "//paper-button[contains(.,'DNC Exclusions')]")
+	private WebElement DNCExclusion;
+	@FindBy(xpath = "//div[@id='radioLabel'][contains(.,'Never')]")
+	private WebElement neverRadiobtn;
+	@FindBy(xpath = "//div[@id='radioLabel'][contains(.,'At')]")
+	private WebElement atRadiobtn;
+	@FindBy(xpath = "//label[contains(.,'End Date/Time')]//following::input[1]")
+	private WebElement endDateInput;
+	@FindBy(xpath = "//label[contains(.,'End Date/Time')]//following::input[2]")
+	private WebElement endTimeInput;
+	@FindBy(xpath = "(//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2])[2]")
+	private WebElement dateOkbtn;
+	@FindBy(xpath = "(.//*[@id='timeDialog']/div/paper-button[2])[2]")
+	private WebElement timeOkbtn;
+	@FindBy(xpath = ".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input")
+	private WebElement recurrencePatternInput;
+	@FindBy(xpath = "//*[@id='deliver-card']//paper-item[contains(.,'Days')]")
+	private WebElement recurrencePatternDays;
+	@FindBy(xpath = "//*[contains(@class,'recurrence')]//input")
+	private WebElement recurrenceInput;
+	@FindBy(xpath = "//*[@id='deliver-card']//paper-item[contains(.,'Months')]")
+	private WebElement recurrencePatternMonth;
+	@FindBy(xpath = "//div[@id='radioLabel'][contains(.,'Select special day')]/..")
+	private WebElement selectSpecialDay;
+	@FindBy(xpath = "(//label[contains(.,'Order of the Day')]//following::input)[1]")
+	private WebElement  orderOfTheDayInput;
+	@FindBy(xpath = "//paper-item[contains(.,'5th')]")
+    private WebElement orederOfDay5;
+	@FindBy(xpath = "//label[contains(.,'Type of Day')]/..//input")
+	private WebElement TypeOfDayInput;
+	@FindBy(xpath = "//paper-item[contains(.,'Weekend Day')]")
+	private WebElement weekEndDay;
+	@FindBy(xpath = "//*[@id='deliver-card']//paper-item[contains(.,'Months')]")
+	private WebElement recurrencePatternMonths;
+	@FindBy(xpath = "//*[@id='deliver-card']//paper-item[contains(.,'Weeks')]")
+	private WebElement recurrencePatternWeeks;
+	@FindBy(xpath = "(//label[contains(.,'Start broadcasts at')]//following::input)[1]")
+	private WebElement startBroadcastAtInput;
+	@FindBy(xpath = "//div[@id='checkboxLabel'][contains(.,'Sunday')]")
+	private WebElement sunday;
+	@FindBy(xpath = "//div[@id='checkboxLabel'][contains(.,'Thursday')]")
+	private WebElement thursday;
+	@FindBy(xpath = "//div[contains(.,'Broadcast Expiry')][@id='checkboxLabel']")
+	private WebElement broadcastExpiryCheckbox;
+	@FindBy(xpath = "(//label[contains(.,'Expires')]//following::input)[1]")
+	private WebElement expiresInput;
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'After')]")
+	private WebElement expiresAfter;
+	@FindBy(xpath = "//label[contains(.,'Hours')]//preceding::input[1]")
+	private WebElement expiresTimeInput;
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'At')]")
+	private WebElement expiresAt;
+	@FindBy(xpath = "(.//*[@id='timeDialog']/div/paper-button[2])[3]")
+	private WebElement expiryTimeOkbtn;
+	@FindBy(xpath="(//label[contains(.,'Start broadcasts at')]//following::paper-button[contains(.,'OK')])[2]")
+	private WebElement  startBroadcastOkbtn;
+	
 
 	public void backToOffers() throws InterruptedException {
 		jswait.loadClick(backToOffers);
@@ -863,6 +930,7 @@ public class BroadcastPageObjects extends Init {
 
 	public void selectBaseList(String baseList) throws InterruptedException {
 		jswait.loadSendKeys(baseListSelector, baseList);
+		Thread.sleep(2000);
 		jswait.loadClick(
 				"//form[@id='baseListsForm']//following::vaadin-combo-box-item[contains(.,'" + baseList + "')]");
 	}
@@ -1226,7 +1294,9 @@ public class BroadcastPageObjects extends Init {
 	}
 
 	public void selectOffer(String offerName) throws InterruptedException {
+		
 		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
+		
 	}
 
 	public void selectFirstOffer() throws InterruptedException {
@@ -1351,7 +1421,7 @@ public class BroadcastPageObjects extends Init {
 	}
 
 	public void createBC(String name, String bc_type, String baseList, String offer, String condition, String inventory,
-			String dndExclusion) throws InterruptedException {
+			String dndExclusion) throws Exception {
 		ExcelHelper offerExcel = new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offer);
 		enterBroadcastBasicDetails(name, inventory);
@@ -2907,6 +2977,499 @@ public class BroadcastPageObjects extends Init {
 			jswait.waitUntil(topBcStatusGridForRecurrChild);
 			status = topBcStatusGridForRecurrChild.getText();
 			return status;
+	}
+	
+	public void createBCWithBroadcastAndPartnerLevel(String name, String bc_type, String baseList, String offer, String condition, String inventory,
+			String dndExclusion) throws Exception {
+		ExcelHelper offerExcel = new ExcelHelper();
+		offerExcel.setExcelFile("offerInputData", offer);
+		enterBroadcastBasicDetails(name, inventory);
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+			System.out.println("inside triggerable");
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(1000);
+			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'" + TRIGGER + "')]");
+			Thread.sleep(1500);
+		}
+		clickProceedButton();
+		selectBaseList(baseList);
+        TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+		commonObjects.clickOptionsIcon();
+		targetConditionObjects.clickTargetConditionDeletet();
+		if (condition.contains("segmentAgeGT40")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			jswait.loadClick(savedSegmentSelectorField);
+			jswait.loadClick("//paper-item[contains(.,'segmentAgeGT40')]");
+		} else if (condition.equals("SegmentForMoreThanTenConditions")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			jswait.loadClick(savedSegmentSelectorField);
+			jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditions')]");
+		} else if (condition.equals("SegmentForMoreThanTenConditionsOR")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			jswait.loadClick(savedSegmentSelectorField);
+			jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditionsOR')]");
+
+		} else if (condition.equals("SegmentAnalysis")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			jswait.loadClick(savedSegmentSelectorField);
+
+			jswait.loadClick("(//paper-item[contains(.,'" + condition + "')])[1]");
+		} else {
+			targetConditionObjects.clickBasicTargetCondition(condition);
+		}
+
+		Thread.sleep(3000);
+		selectDNCList(dndExclusion);
+
+		clickProceedButton();
+		selectOfferWithMultipleCreative(offerExcel.getCellByColumnName("Offer Name"),offerExcel.getCell(1, 20).toString());
+		System.out.println("bc_type=" + bc_type);
+		if (!bc_type.contains("Informational")) {
+			selectTrackSession();
+			selectTrackingSource();
+			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
+				selectSenderAndRouteEmail();
+			} else if (offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
+				selectSenderAndRouteFacebook();
+			} else
+				selectSenderAndRoute();
+
+		} else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);
+
+			// jswait.loadClick(routeBroadcastSmppRobiOutbond);
+
+		}
+		clickProceedButton();
+	}
+	
+	public void selectOfferWithMultipleCreative(String offerName,String SecondCreative) throws Exception{
+		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
+		if (SecondCreative.equalsIgnoreCase("extra Bonus Offer")) {
+			jswait.loadClick(selectLanguage);
+			jswait.loadClick(selectPortuguese);
+		}
+		else{
+			System.out.println("default language selected");
+		}
+		
+		
+	}
+//	======================================================================================================================================//
+	
+	
+	
+	
+	public void enterBasicDetailsOfBC(String bcName,String inventory) throws Exception{
+		jswait.loadSendKeys(broadcastName, bcName);
+		jswait.loadSendKeys(broadcastPurpose, "verify complete flow of bc");
+		jswait.loadClick(labelSelector);
+		jswait.loadClick(labelCrossell);
+		jswait.loadSendKeys(inventorySelector, inventory);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'" + inventory + "')]");
+		jswait.loadClick(proceedButton);
+		
+	}
+	public void enterTargetTabDetails(String condition,String targetType,String TG,String CG,String DNC) throws Exception{
+		selectBaseList(SELENIUM_LIST);
+		Thread.sleep(2000);
+		jswait.loadClick("//div[@id='radioContainer']//following::div[contains(.,'"+targetType+"')]");
+		Thread.sleep(1000);
+		jswait.loadClick(selectTargetGroup);
+		
+		if(TG.equalsIgnoreCase("no limit")) {
+			jswait.loadClick(noLimitTGRadiobtn);
+		}
+		else if(TG.equalsIgnoreCase("defineLimitFixed")){
+			
+		}
+		else if(TG.equalsIgnoreCase("defineLimitsDynamic")) {
+			
+		}
+		jswait.loadClick(TGSavebtn);
+		
+		jswait.loadClick(selectControlGroup);
+		if(CG.equalsIgnoreCase("no limits")) {
+			jswait.loadClick(noControlGroup);
+			
+		}
+		else if(CG.equalsIgnoreCase("fixedPercentage")) {
+			jswait.loadClick(fixedPercentageOfTargetBase);
+			jswait.loadSendKeys(fixedPercentNumber, "10");
+		}
+		else if(CG.equalsIgnoreCase("advancedParameters")) {
+			
+		}
+		jswait.loadClick(CGSavebtn);
+		selectDNCList(DNC);
+		TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+		if(targetType.equalsIgnoreCase("create")) {
+		commonObjects.clickOptionsIcon();
+		targetConditionObjects.clickTargetConditionDeletet();
+		}
+		else
+		if (condition.contains("segmentAgeGT40")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			jswait.loadClick(savedSegmentSelectorField);
+			jswait.loadClick("//paper-item[contains(.,'segmentAgeGT40')]");
+		} else if (condition.equals("SegmentForMoreThanTenConditions")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			jswait.loadClick(savedSegmentSelectorField);
+			jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditions')]");
+		} else if (condition.equals("SegmentForMoreThanTenConditionsOR")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			jswait.loadClick(savedSegmentSelectorField);
+			jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditionsOR')]");
+
+		} else if (condition.equals("SegmentAnalysis")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			jswait.loadClick(savedSegmentSelectorField);
+
+			jswait.loadClick("(//paper-item[contains(.,'" + condition + "')])[1]");
+		} else {
+			targetConditionObjects.clickBasicTargetCondition(condition);
+		}
+		
+		clickProceedButton();
+	}
+		
+	public void selectOffer(String offerSheet, String bc_type,String creative,String trackExpires,String filterCriteria,String giverRewardsTo) throws Exception{
+		ExcelHelper offerExcel=new ExcelHelper();
+		offerExcel.setExcelFile("offerInputData", offerSheet);
+		String offerName = offerExcel.getCellByColumnName("Offer Name");
+		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
+if(creative.equalsIgnoreCase("multipleCreative")) {
+	jswait.loadClick(selectLanguage);
+	jswait.loadClick(selectPortuguese);
+}
+else if (creative.equalsIgnoreCase("singleCreative")){
+	System.out.println("single creative");
+	
+}
+		if (!bc_type.contains("Informational")) {
+			selectTrackSession();
+			selectTrackingSource();
+			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
+				selectSenderAndRouteEmail();
+			} else if (offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
+				selectSenderAndRouteFacebook();
+			} else
+				selectSenderAndRoute();
+
+		} else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);
+
+		}
+		clickProceedButton();
+	}
+	
+	
+	public void recurringBCDeliverTabDetails(String endType,String targetRenderTime,String bcExpiry,String bcSheet)  throws Exception{
+		Actions builder =new Actions(driver);
+		eM.setExcelFile("bcInputData", bcSheet);
+		String recurrencePattern =eM.getCellByColumnName("Recurrance Pattern");
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		 if(min==0)
+			{
+				min+=5;
+			}
+			System.out.println("Inside recurring");
+			
+			
+			// if(bc_type.contentEquals("recurring")){
+			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
+			jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+			jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
+			jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+			// }
+			Thread.sleep(2000);
+			jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
+			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
+			WebElement num = driver.findElement(By.xpath(
+					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+							+ (hours + 1) + "]"));
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(2000);
+			// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+			WebElement num1 = driver.findElement(By.xpath(
+					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+							+ (min + 1) + "]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num1).click().build().perform();
+			Thread.sleep(1000);
+			if (am_pm == 0)
+				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
+			
+			else
+				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
+			Thread.sleep(1000);
+			num1 = driver.findElement(By.xpath(
+					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
+			builder.moveToElement(num1).click().build().perform();
+			// Thread.sleep(1000);
+			// jswait.loadClick("//form[@id='deliverDetailForm']//paper-input-container//label[contains(.,'Time
+			// Zone')]/..//input");
+			Thread.sleep(2000);
+			jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
+			Thread.sleep(1000);
+			jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
+			Thread.sleep(1000);
+		 if(endType.equalsIgnoreCase("never")) {
+				System.out.println("end type :"+endType);
+				jswait.loadClick(neverRadiobtn);
+		if(recurrencePattern.equalsIgnoreCase("daily")) {
+			jswait.loadClick(recurrencePatternInput);
+			Thread.sleep(1000);
+			jswait.loadClick(recurrencePatternDays);
+			Thread.sleep(1000);
+			jswait.loadSendKeys(recurrenceInput,"1");
+			Thread.sleep(1000);
+			
+		}
+		else if(recurrencePattern.equalsIgnoreCase("2days")) {
+			jswait.loadClick(recurrencePatternInput);
+			Thread.sleep(1000);
+			jswait.loadClick(recurrencePatternDays);
+			Thread.sleep(1000);
+			jswait.loadSendKeys(recurrenceInput,"2");
+			Thread.sleep(1000);
+		}
+		else if (recurrencePattern.equalsIgnoreCase("every week")) {
+			jswait.loadClick(recurrencePatternInput);
+		    Thread.sleep(1000);
+			jswait.loadClick(recurrencePatternWeeks);
+			Thread.sleep(2000);
+			jswait.loadSendKeys(recurrenceInput,"1");
+			Thread.sleep(1000);
+			jswait.loadClick(sunday);
+			jswait.loadClick(thursday);
+			
+		}
+		else if (recurrencePattern.equalsIgnoreCase("months")) {
+			    jswait.loadClick(recurrencePatternInput);
+			    Thread.sleep(1000);
+			    jswait.loadClick(recurrencePatternMonths);
+			    jswait.loadClick(recurrencePatternDays);
+				Thread.sleep(1000);
+				jswait.loadSendKeys(recurrenceInput,"1");
+				jswait.loadClick(selectSpecialDay);
+				Thread.sleep(1000);
+				jswait.loadClick(orderOfTheDayInput);
+				Thread.sleep(1000);
+				jswait.loadClick(orederOfDay5);
+				jswait.loadClick(TypeOfDayInput);
+				Thread.sleep(1000);
+				jswait.loadClick(weekEndDay);
+		}
+		jswait.loadClick(startBroadcastAtInput);
+		WebElement num2 = driver.findElement(By.xpath(
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
+		builder.moveToElement(num2).click().build().perform();
+		Thread.sleep(2000);
+		WebElement num3 = driver.findElement(By.xpath(
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num3).click().build().perform();
+		if (am_pm == 0)
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+		else
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+
+		
+	
+	if(targetRenderTime.equalsIgnoreCase("real time")) {
+		
+	}
+	else if(targetRenderTime.equalsIgnoreCase("broadcast schedule")) {
+		
+	}
+	if(bcExpiry.equalsIgnoreCase("after")) {
+		jswait.loadClick(broadcastExpiryCheckbox);
+		jswait.loadClick(expiresInput);
+		jswait.loadClick(expiresAfter);
+		jswait.loadSendKeys(expiresTimeInput,"24");
+	}
+	else if(bcExpiry.equalsIgnoreCase("at")){
+		jswait.loadClick(broadcastExpiryCheckbox);
+		jswait.loadClick(expiresInput);
+		jswait.loadClick(expiresAt);
+		jswait.loadClick(expiresTimeInput);
+		WebElement num4 = driver.findElement(By.xpath(
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 2) +"])[3]"));
+		builder.moveToElement(num4).click().build().perform();
+		Thread.sleep(2000);
+		WebElement num5 = driver.findElement(By.xpath(
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[3]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num5).click().build().perform();
+		if (am_pm == 0)
+			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+		else
+			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+
+		jswait.loadClick(expiryTimeOkbtn);
+	}
+		
+	}
+
+		 
+	else if(endType.equalsIgnoreCase("at")) {
+		System.out.println("end type :"+endType);
+		Thread.sleep(2000);
+		jswait.loadClick(atRadiobtn);
+		jswait.loadClick(endDateInput);
+		Thread.sleep(2000);
+		jswait.loadClick("(.//*[@id='months']//div[@date=('"+date2+"')])[2]");
+		jswait.loadClick(dateOkbtn);
+		Thread.sleep(2000);
+		jswait.loadClick(endTimeInput);
+		Thread.sleep(2000);
+		WebElement num6 = driver.findElement(By.xpath(
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
+		builder.moveToElement(num6).click().build().perform();
+		Thread.sleep(2000);
+		WebElement num7 = driver.findElement(By.xpath(
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num7).click().build().perform();
+		if (am_pm == 0)
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+		else
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+
+		jswait.loadClick(timeOkbtn);
+		{
+			if(recurrencePattern.equalsIgnoreCase("daily")) {
+				jswait.loadClick(recurrencePatternInput);
+				Thread.sleep(1000);
+				jswait.loadClick(recurrencePatternDays);
+				Thread.sleep(1000);
+				jswait.loadSendKeys(recurrenceInput,"1");
+				Thread.sleep(1000);
+				
+			}
+			else if(recurrencePattern.equalsIgnoreCase("2days")) {
+				jswait.loadClick(recurrencePatternInput);
+				Thread.sleep(1000);
+				jswait.loadClick(recurrencePatternDays);
+				Thread.sleep(1000);
+				jswait.loadSendKeys(recurrenceInput,"2");
+				Thread.sleep(1000);
+			}
+			else if (recurrencePattern.equalsIgnoreCase("every week")) {
+				jswait.loadClick(recurrencePatternInput);
+			    Thread.sleep(1000);
+				jswait.loadClick(recurrencePatternWeeks);
+				Thread.sleep(2000);
+				jswait.loadSendKeys(recurrenceInput,"1");
+				Thread.sleep(1000);
+				jswait.loadClick(sunday);
+				jswait.loadClick(thursday);
+				
+			}
+			else if (recurrencePattern.equalsIgnoreCase("months")) {
+				    jswait.loadClick(recurrencePatternInput);
+				    Thread.sleep(1000);
+				    jswait.loadClick(recurrencePatternMonths);
+				    jswait.loadClick(recurrencePatternDays);
+					Thread.sleep(1000);
+					jswait.loadSendKeys(recurrenceInput,"1");
+					jswait.loadClick(selectSpecialDay);
+					Thread.sleep(1000);
+					jswait.loadClick(orderOfTheDayInput);
+					Thread.sleep(1000);
+					jswait.loadClick(orederOfDay5);
+					jswait.loadClick(TypeOfDayInput);
+					Thread.sleep(1000);
+					jswait.loadClick(weekEndDay);
+			}
+			
+			jswait.loadClick(startBroadcastAtInput);
+			Thread.sleep(2000);
+			WebElement num8 = driver.findElement(By.xpath(
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[3]"));
+			builder.moveToElement(num8).click().build().perform();
+			Thread.sleep(2000);
+			WebElement num9 = driver.findElement(By.xpath(
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[3]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num9).click().build().perform();
+			if (am_pm == 0)
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[3]");
+			else
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[3]");
+jswait.loadClick(startBroadcastOkbtn);
+			}
+		
+		if(targetRenderTime.equalsIgnoreCase("real time")) {
+			
+		}
+		else if(targetRenderTime.equalsIgnoreCase("broadcast schedule")) {
+			
+		}
+		if(bcExpiry.equalsIgnoreCase("after")) {
+			jswait.loadClick(broadcastExpiryCheckbox);
+			jswait.loadClick(expiresInput);
+			jswait.loadClick(expiresAfter);
+			jswait.loadSendKeys(expiresTimeInput,"24");
+		}
+		else if(bcExpiry.equalsIgnoreCase("at")){
+			jswait.loadClick(broadcastExpiryCheckbox);
+			jswait.loadClick(expiresInput);
+			jswait.loadClick(expiresAt);
+			jswait.loadClick(expiresTimeInput);
+			WebElement num10 = driver.findElement(By.xpath(
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 2) +"])[4]"));
+			builder.moveToElement(num10).click().build().perform();
+			Thread.sleep(2000);
+			WebElement num11 = driver.findElement(By.xpath(
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[4]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num11).click().build().perform();
+			if (am_pm == 0)
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[4]");
+			else
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[4]");
+
+			
+			jswait.loadClick(expiryTimeOkbtn);
+			
+		}
+}
 	}
 }
 
