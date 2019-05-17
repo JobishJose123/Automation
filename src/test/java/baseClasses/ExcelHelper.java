@@ -227,6 +227,35 @@ String file = "";
         Thread.sleep(1000);
 
 	}//method
+	
+	public ArrayList<ArrayList<String>> readTheDataFromExcel(String workBook,String filename) throws IOException {
+
+		File file = new File("ExcelFiles\\" + workBook + ".xls");
+		FileInputStream fis = new FileInputStream(file);
+		workbook = new HSSFWorkbook(fis);
+		Sheet sheet = workbook.getSheet(filename);
+		// System.out.println(sheet.getRow(1).getCell(1).toString());
+		int numberofrows = sheet.getLastRowNum() - sheet.getFirstRowNum();
+		int numberofcolumns = sheet.getRow(1).getLastCellNum();
+		System.out.println(numberofrows + " " + numberofcolumns);
+		ArrayList<ArrayList<String>> outerList = new ArrayList<ArrayList<String>>();
+		String val = null;
+		for (int i = 1; i <= numberofrows; i++) {
+			ArrayList<String> innerList = new ArrayList<String>();
+			for (int j = 0; j < sheet.getRow(i).getLastCellNum(); j++) {
+
+				val = sheet.getRow(i).getCell(j).toString();
+				//System.out.println(val);
+				innerList.add(val);
+			}
+			// Adding inner list to outer list
+			outerList.add(i - 1, innerList);
+		}
+
+		return outerList;
+		
+	}
+	
     
     
     public static void main(String args[]) {

@@ -4464,7 +4464,154 @@ public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer
 
 	eh.addDataToParllelSheet(bcDataSheet, bcName, campaignName, campaignCategoryName, offername, condition, channel, offerType, bcType,bcSheet);
 }
+
+
+@Then("^\"([^\"]*)\" the conversion job name \"([^\"]*)\"$")
+public void the_conversion_job_name(String statusTypeOfJob, String jobName) throws Throwable {
+    
+    }
+
+@Then("^activate and verify the boadcats from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+public void activate_and_verify_the_boadcats_from_workbook_and_sheet(String workBook, String sheet) throws Throwable {
+		String statusOfBC = "";
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventory, bcSheet = "";
+		for (int i = 0; i < data.size(); i++) {
+			campaignObjects.navigateToLIfeCycleMarketing();
+			bcName = data.get(i).get(1);
+			campaignCategory = data.get(i).get(4);
+			campaignName = data.get(i).get(5);
+			offerName = data.get(i).get(6);
+			inventory = data.get(i).get(7);
+			bcSheet = data.get(i).get(9);
+			try {
+
+				campaignObjects.scrollToCampaignCategory(campaignCategory);
+				commonObjects.filterName(campaignName);
+				jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
+						+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+				campaignObjects.clickOptionsViewBroadcasts();
+
+				broadcastPageObjects.navigate_to_broadcasts(bcSheet);
+				commonObjects.filterBCName(bcSheet, bcName);
+				statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
+
+				if (statusOfBC.equals("Planned")) {
+					commonObjects.clickBCOptionsIcon(bcSheet);
+					commonObjects.clickEditOption();
+
+					edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
+					activateBc();
+
+					broadcastPageObjects.navigate_to_broadcasts(bcSheet);
+					commonObjects.filterBCName(bcSheet, bcName);
+					statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
+
+					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
+				} else {
+					System.out.println("Else block");
+					statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
+
+					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
+				}
+
+			} catch (Exception e) {
+
+				System.out.println("catchblock");
+
+			}
+
+		}
+
 }
+
+
+
+@Then("^verify the inventory \"([^\"]*)\" after completion of BCs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet(String inventory, String workbook, String sheet) throws Throwable {
+	int count=0;
+	boolean boolean1;
+	ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
+	String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "";
+	for (int i = 0; i < data.size(); i++) {
+		
+		campaignObjects.navigateToLIfeCycleMarketing();
+		bcName = data.get(i).get(1);
+		campaignCategory = data.get(i).get(4);
+		campaignName = data.get(i).get(5);
+		offerName = data.get(i).get(6);
+		inventoryFromSheet = data.get(i).get(7);
+		bcSheet = data.get(i).get(9);
+		try {
+
+			campaignObjects.scrollToCampaignCategory(campaignCategory);
+			commonObjects.filterName(campaignName);
+			jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
+					+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+			campaignObjects.clickOptionsViewBroadcasts();
+
+//			broadcastPageObjects.navigate_to_broadcasts(bcSheet);
+//			commonObjects.filterBCName(bcSheet, bcName);
+			
+			if(inventory.equals(inventoryFromSheet)&& inventory.equals("BlackoutAlways")) {
+				
+				commonObjects.filterName(bcName);
+				 
+				 boolean1 = jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Blackout Snooze')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
+			
+				if(boolean1==true)
+					eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+				else
+					eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+			
+			 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("OneperDay")) {
+				 commonObjects.filterName(bcName);
+				
+					 if(count==0) {
+						 boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
+				 ++count;
+				 System.out.println(bcName+" one per day 1st bc");
+				 if(boolean1==true)
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+					else
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");	
+				 }else if(count>=1) {
+						 boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
+				System.out.println(bcName+" one per day 2nd bc");
+				if(boolean1==true)
+					eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+				else
+					eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+				 }
+				 
+					 
+			 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("Unlimited")) {
+				 commonObjects.filterName(bcName);
+				
+				if(bcName.contains("seeding"))
+				  boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
+				 else
+				 boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
+				 
+				 if(boolean1==true)
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+					else
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+			 }
+				
+			
+			
+			
+		}catch (Exception e) {
+			
+		}
+	
+}
+
+}
+
+
+}//bc steps method
 	
 
 

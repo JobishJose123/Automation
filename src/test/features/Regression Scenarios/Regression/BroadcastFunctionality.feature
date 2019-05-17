@@ -3,7 +3,7 @@
 @NX-BroadcastFunctionality
 Feature: For broadcast functionality check
 
-##Create Product class, campaign category, product
+#Create Product class, campaign category, product
 @NDX-CreateDataForBC @initBrowser @closeBrowser
   Scenario: Verify BC targeting using all types of target conditions with one time BC
     Given login
@@ -24,43 +24,43 @@ Feature: For broadcast functionality check
 
 
 ##Create offers wil all channels for verifying BC with all channel and add to a catalog
-@NDX-CreateAllOffersForBC @initBrowser 
+@NDX-CreateAllOffersForBC1 @initBrowser 
  Scenario: Create offers with all channels for creating BC
     Given login
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
     Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-    Then create new offer from sheet "rechargeVoicePush" with product "fullDetails"
+#    Then create new offer from sheet "rechargeVoicePush" with product "fullDetails"
     
-    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+#    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
     Then create new offer from sheet "SeedingSMS" with product "fullDetails"
-    Then create new offer from sheet "seedingEmail" with product "fullDetails"
-    Then create new offer from sheet "seedingVoicePush" with product "fullDetails"
-    
+#    Then create new offer from sheet "seedingEmail" with product "fullDetails"
+#    Then create new offer from sheet "seedingVoicePush" with product "fullDetails"
+#    
     Then navigate to offer management
     Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then Add "rechargeEmail" offer to Offer Catalogue
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#   Then Add "rechargeEmail" offer to Offer Catalogue
     Then Add "rechargeSMS" offer to Offer Catalogue
-    Then Add "rechargeVoicePush" offer to Offer Catalogue
-    Then Add "seedingWAPoffer" offer to Offer Catalogue
-    Then Add "SeedingSMS" offer to Offer Catalogue
-    Then Add "seedingEmail" offer to Offer Catalogue
-    Then Add "seedingVoicePush" offer to Offer Catalogue
+#    Then Add "rechargeVoicePush" offer to Offer Catalogue
+#    Then Add "seedingWAPoffer" offer to Offer Catalogue
+   Then Add "SeedingSMS" offer to Offer Catalogue
+#    Then Add "seedingEmail" offer to Offer Catalogue
+#    Then Add "seedingVoicePush" offer to Offer Catalogue
 
 	#creating campaign category and and campaign for all bc functionality scenarios with this scenario
-  @CreateCampaign @initBrowser 
-  Scenario: Verify BC targeting using all types of target conditions with one time BC
-    Given login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-   Then naigate to "campaignBC" campaign view broadcasts
+#  @CreateCampaign @initBrowser 
+#  Scenario: Verify BC targeting using all types of target conditions with one time BC
+#    Given login
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#   Then naigate to "campaignBC" campaign view broadcasts
    
    
 #@NDX-7015 @initBrowser 
@@ -86,6 +86,15 @@ Feature: For broadcast functionality check
 #	Then enter details for new broadcast with condition allTargetConditions20 from sheet "one-offBothExclution" with "rechargeSMS"
 #	Then activate bc
 	
+	@CreateCampaignforblackout @initBrowser 
+  Scenario: Verify BC targeting using all types of target conditions with one time BC
+    Given login
+    Then navigate to precision marketer
+     Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+   Then naigate to "campaignBC" campaign view broadcasts
+	
 	
 	#	***************BlackoutAlways inventory *****************
 	
@@ -94,6 +103,13 @@ Feature: For broadcast functionality check
 	Scenario: create one off bc with blackout always
 	Given login
     Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then click on 
+#    Then Add "rechargeEmail" offer to Offer Catalogue    
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
@@ -140,6 +156,15 @@ Feature: For broadcast functionality check
     Then add the BC Data to "parallelRunBC" from BCsheet "seedingRecurringBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "SeedingSMS" condition "digitalPersonaGT15" inventory "BlackoutAlways" with string recurring bc BlackoutAlways with condition: digitalPersonaGT15
 	
 #	***************OneperDay inventory *****************
+
+@CreateCampaignoneperday @initBrowser 
+  Scenario: Verify BC targeting using all types of target conditions with one time BC
+    Given login
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+   Then naigate to "campaignBC" campaign view broadcasts
 
  @OneperDayOneoffbC @initBrowser 
 	Scenario: create one off bc with OneperDay
@@ -192,6 +217,15 @@ Feature: For broadcast functionality check
 	
 #	***************Unlimited inventory ******************
 	
+	@CreateCampaignunlimited @initBrowser 
+  Scenario: Verify BC targeting using all types of target conditions with one time BC
+    Given login
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+   Then naigate to "campaignBC" campaign view broadcasts
+	
 	@UnlimitedOneoffbC @initBrowser 
 	Scenario: create one off bc with Unlimited
 	Given login
@@ -242,50 +276,114 @@ Feature: For broadcast functionality check
     
     
     
-    @ActivateBC @initBrowser 
-	Scenario: Activating the BCs 
-	Given login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then Activate the BCs from sheet "parallelRunBC"
+#    @ActivateBC @initBrowser 
+#	Scenario: Activating the BCs 
+#	Given login
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then Activate the BCs from sheet "parallelRunBC"
+#    
+#    @verifyingBCsBlackout @initBrowser 
+#    Scenario: verify the activated Blackout BCs
+#    Given login
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then verify the activated Bcs from Sheet "parallelRunBC" and inventory "BlackoutAlways" with condition "digitalPersonaGT15"
+#    
+#    @verifyingBCsOneperDay @initBrowser 
+#    Scenario: verify the activated OneperDay BCs
+#    Given login
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then verify the activated Bcs from Sheet "parallelRunBC" and inventory "OneperDay" with condition "digitalPersonaGT15"
+#    
     
-    @verifyingBCsBlackout @initBrowser 
-    Scenario: verify the activated Blackout BCs
-    Given login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then verify the activated Bcs from Sheet "parallelRunBC" and inventory "BlackoutAlways" with condition "digitalPersonaGT15"
     
-    @verifyingBCsOneperDay @initBrowser 
-    Scenario: verify the activated OneperDay BCs
-    Given login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then verify the activated Bcs from Sheet "parallelRunBC" and inventory "OneperDay" with condition "digitalPersonaGT15"
-    
-    
-    
-    @verifyingBCsUnlimited @initBrowser 
-    Scenario: verify the activated Unlimited BCs
-    Given login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then verify the activated Bcs from Sheet "parallelRunBC" and inventory "Unlimited" with condition "digitalPersonaGT15"
+#    @verifyingBCsUnlimited @initBrowser 
+#    Scenario: verify the activated Unlimited BCs
+#    Given login
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then verify the activated Bcs from Sheet "parallelRunBC" and inventory "Unlimited" with condition "digitalPersonaGT15"
    
     
-    @verifyingBCsAckEvent @initBrowser 
-    Scenario: verify the activated Unlimited BCs
+#    @verifyingBCsAckEvent @initBrowser 
+#    Scenario: verify the activated Unlimited BCs
+#    Given login
+#    Then navigate to precision marketer
+#    Then verify the Acknowledgement event from Sheet "parallelRunBC" and inventory "Unlimited"
+	
+
+	@verifyBConversion @initBrowser
+Scenario: verify bc conversion 
+	Given login 
+#	Then navigate to configuration management 
+#	Then navigate to campaign categories 
+#	Then create new campaign category from sheet "campaignCategory" 
+#	Then navigate to landing page 
+	Then navigate to precision marketer 
+#	Then navigate to offer management 
+#	Then navigate to offers 
+#	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" 
+#	Then navigate to offer management 
+#	Then Navigate to Offer Catalogue 
+#	Then Create New Offer Catalogue from sheet "defaultCatalog" 
+#	Then Add "rechargeSMS" offer to Offer Catalogue 
+#	Then navigate to life cycle marketing 
+#	Then navigate to campaign category from sheet "campaignCategory" 
+#	Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog" 
+#	Then naigate to "campaignBC" campaign view broadcasts 
+#	Then click create new broadcast button 
+#	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
+#    Then activate bc
+#    Then wait until status of "one-offBC" is "Completed"
+    Then provide file for conversion
+#    Then "Activate" the conversion job name "conversionJobBySelenium"
+#    Then navigate to reports
+#    Then navigate to customer profile
+#    Then search msisdn "919491750002"
+#    Then click on events tab
+#    Then wait for comversion event
+#    Then remove file for conversion
+#    Then wait for reward in consumer profile
+    Then activate and verify the boadcats from workbook "parallelRunBC" and sheet "parallelRunBC"
+    
+    
+    @NDX-9000 @initBrowser
+    Scenario: Verify Black out Rule and frequency limit by creating 4 types of BCs with Black out Always-NEW
     Given login
     Then navigate to precision marketer
-    Then verify the Acknowledgement event from Sheet "parallelRunBC" and inventory "Unlimited"
-	
+    Then verify the inventory "BlackoutAlways" after completion of BCs from workbook "parallelRunBC" and sheet "parallelRunBC"
+    
+    @NDX-9002 @initBrowser
+    Scenario: Verify OneperDay and frequency limit by creating 4 types of BCs with OneperDay-NEW
+    Given login
+    Then navigate to precision marketer
+    Then verify the inventory "OneperDay" after completion of BCs from workbook "parallelRunBC" and sheet "parallelRunBC"
+    
+    @NDX-8998 @initBrowser
+    Scenario: Verify Unlimited and frequency limit by creating 4 types of BCs with Unlimited-NEW
+    Given login
+    Then navigate to precision marketer
+    Then verify the inventory "Unlimited" after completion of BCs from workbook "parallelRunBC" and sheet "parallelRunBC"
+    
+    
+     
+     
+     
+     
+     
+     
+     
+     
+     
 
 

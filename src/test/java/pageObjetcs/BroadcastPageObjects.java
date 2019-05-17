@@ -2,7 +2,7 @@ package pageObjetcs;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
-
+import java.util.ArrayList;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.datatransfer.UnsupportedFlavorException;
