@@ -393,7 +393,7 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then create bc from sheet "one-offBC" with inventory "Unlimited"
-Then enter target tab details target condition profilefieldNV type "create" TG "no limit" CG "fixedPercentage" DNC "none"
+Then enter target tab details target condition profilefieldNV type "Create" TG "no limit" CG "fixedPercentage" DNC "none"
 Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "one-offBC" with "single creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "after" from sheet "one-offBC"
 Then save bc
@@ -409,7 +409,7 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then create bc from sheet "one-offBC" with inventory "Unlimited"
-Then enter target tab details target condition customerList type "Create" TG "no limit" CG "no limits" DNC "none"
+Then enter target tab details target condition customerList type "Create" TG "no limit" CG "no limit" DNC "none"
 Then enter choose offer tab from sheet "rechargeWAP" for bc from sheet "one-offBC" with "multiple creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "none" from sheet "one-offBC"
 Then save bc
@@ -424,7 +424,7 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then create bc from sheet "one-offBC" with inventory "Unlimited"
-Then enter target tab details target condition usageMetric type "Create" TG "no limit" CG "no limits" DNC "none"
+Then enter target tab details target condition usageMetric type "Create" TG "no limit" CG "no limit" DNC "none"
 Then enter choose offer tab from sheet "rechargeEmail" for bc from sheet "one-offBC" with "single creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "none" from sheet "one-offBC"
 Then save bc
@@ -459,6 +459,7 @@ Then enter target tab details target condition segmentAgeGT40 type "Saved Segmen
 Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "recurrBCDaily" with "multiple creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "At" target render time "realTime" and broadcast expiry as "after" from sheet "recurrBCDaily"
 Then save bc
+Then add the BC Data to "BCDataStorage" from BCsheet "recurrBCDaily" campaignname "campaignBC" campaign category "CampaignCategory" offer "rechargeSMS" condition "segmentAgeGT40" 
 
 @NDX-CreateRecurringBC2 @initBrowser
 Scenario:  Create recurring bc with offer (WAP), recurrenece pattern (every week) ,target condition:customerDrivenEvent
@@ -473,7 +474,7 @@ Then enter target tab details target condition customerDrivenEvent type "None" T
 Then enter choose offer tab from sheet "rechargeWAP" for bc from sheet "recurrBCWeekly" with "single creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "never" target render time "realTime" and broadcast expiry as "none" from sheet "recurrBCWeekly"
 Then save bc
-
+Then add the BC Data to "BCDataStorage" from BCsheet "recurrBCWeekly" campaignname "campaignBC" campaign category "CampaignCategory" offer "rechargeWAP" condition "customerDrivenEvent"
 
 @NDX-CreateRecurringBC3 @initBrowser
 Scenario: Create recurring bc with offer (email), recurrenece pattern (specail day of the week) ,target condition:customerDrivenEventNotOccurred
@@ -488,6 +489,7 @@ Then enter target tab details target condition customerDrivenEventNotOccurred ty
 Then enter choose offer tab from sheet "rechargeEmail" for bc from sheet "recurringMonthSpecialBC" with "single creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "never" target render time "realTime" and broadcast expiry as "none" from sheet "recurringMonthSpecialBC"
 Then save bc
+Then add the BC Data to "BCDataStorage" from BCsheet "one-offBC" campaignname "recurringMonthSpecialBC" campaign category "CampaignCategory" offer "rechargeEmail" condition "customerDrivenEventNotOccurred"
 
 @NDX-CreateRecurringBC5 @initBrowser
 Scenario:  Create recurring bc with offer (SMS,dynamic tag usage), recurrenece pattern (every 2 days) ,target condition:SharedcustomerList
@@ -498,15 +500,72 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then create bc from sheet "recurringBC" with inventory "Unlimited"
-Then enter target tab details target condition SharedcustomerList type "create" TG "no limit" CG "no limit" DNC "none"
+Then enter target tab details target condition SharedcustomerList type "Create" TG "no limit" CG "no limit" DNC "none"
 Then enter choose offer tab from sheet "rechargeSMS_Dynamic" for bc from sheet "recurringBC" with "single creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "never" target render time "realTime" and broadcast expiry as "none" from sheet "recurringBC"
 Then save bc
-
-#@NDX-CreateSeedingOneOffBC1 @initBrowser
-
+Then add the BC Data to "BCDataStorage" from BCsheet "recurringBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "rechargeSMS_Dynamic" condition "SharedcustomerList"
 
 
+@NDX-CreateSeedingOneOffBC1 @initBrowser
+Scenario: Create seeding one-time with offer(SMS,multiple creative),having broadcast and partner level CG,Target condition:profilefieldNV
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then create bc from sheet "one-offBC" with inventory "Unlimited"
+Then enter target tab details target condition profilefieldNV type "Create" TG "no limit" CG "fixedPercentage" DNC "none"
+Then enter choose offer tab from sheet "SeedingSMS" for bc from sheet "one-offBC" with "single creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "after" from sheet "one-offBC"
+Then save bc
+Then add the BC Data to "BCDataStorage" from BCsheet "one-offBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "SeedingSMS" condition "profilefieldNV"
+
+@NDX-CreateSeedingOneOffBC2 @initBrowser
+Scenario: Create seeding one-time with offer(WAP)
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then create bc from sheet "one-offBC" with inventory "Unlimited"
+Then enter target tab details target condition profilefieldNV type "Create" TG "no limit" CG "no limits" DNC "none"
+Then enter choose offer tab from sheet "SeedingWAP" for bc from sheet "one-offBC" with "multiple creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "after" from sheet "one-offBC"
+Then save bc
+Then add the BC Data to "BCDataStorage" from BCsheet "one-offBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "SeedingWAP" condition "profilefieldNV"
+
+@NDX-CreateSeedingOneOffBC3 @initBrowser
+Scenario: Create seeding one-time with offer(email)
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then create bc from sheet "one-offBC" with inventory "Unlimited"
+Then enter target tab details target condition profilefieldNV type "Create" TG "no limit" CG "no limits" DNC "none"
+Then enter choose offer tab from sheet "seedingEmail" for bc from sheet "one-offBC" with "single creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "after" from sheet "one-offBC"
+Then save bc
+Then add the BC Data to "BCDataStorage" from BCsheet "one-offBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "seedingEmail" condition "profilefieldNV"
+
+@NDX-CreateSeedingOneOffBC4 @initBrowser
+Scenario: Create seeding one-time with offer(dynamic tag usage)
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then create bc from sheet "one-offBC" with inventory "Unlimited"
+Then enter target tab details target condition profilefieldNV type "none" TG "no limit" CG "no limits" DNC "none"
+Then enter choose offer tab from sheet "SeedingSMS_Dynamic" for bc from sheet "one-offBC" with "single creative" track session expires "At" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "after" from sheet "one-offBC"
+Then save bc
+Then add the BC Data to "BCDataStorage" from BCsheet "one-offBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "SeedingSMS_Dynamic" condition "profilefieldNV"
 
 
 

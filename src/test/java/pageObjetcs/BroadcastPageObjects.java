@@ -3096,7 +3096,7 @@ public class BroadcastPageObjects extends Init {
 		jswait.loadClick(TGSavebtn);
 		
 		jswait.loadClick(selectControlGroup);
-		if(CG.equalsIgnoreCase("no limits")) {
+		if(CG.equalsIgnoreCase("no limit")) {
 			jswait.loadClick(noControlGroup);
 			
 		}
@@ -3114,7 +3114,6 @@ public class BroadcastPageObjects extends Init {
 		commonObjects.clickOptionsIcon();
 		targetConditionObjects.clickTargetConditionDeletet();
 		}
-		else
 		if (condition.contains("segmentAgeGT40")) {
 			jswait.loadClick(savedSegmentRadioButtion);
 			jswait.loadClick(savedSegmentSelectorField);
@@ -3218,10 +3217,12 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 			// }
 			Thread.sleep(2000);
 			jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
+			Thread.sleep(2000);
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
 			WebElement num = driver.findElement(By.xpath(
 					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
 							+ (hours + 1) + "]"));
+			Thread.sleep(2000);
 			builder.moveToElement(num).click().build().perform();
 			Thread.sleep(2000);
 			// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
@@ -3283,7 +3284,7 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 			    jswait.loadClick(recurrencePatternInput);
 			    Thread.sleep(1000);
 			    jswait.loadClick(recurrencePatternMonths);
-			    jswait.loadClick(recurrencePatternDays);
+			    Thread.sleep(2000);
 				Thread.sleep(1000);
 				jswait.loadSendKeys(recurrenceInput,"1");
 				jswait.loadClick(selectSpecialDay);
@@ -3308,7 +3309,7 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
 		else
 			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
-
+          jswait.loadClick(startBroadcastOkbtn);
 		
 	
 	if(targetRenderTime.equalsIgnoreCase("real time")) {

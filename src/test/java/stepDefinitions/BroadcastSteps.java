@@ -4471,8 +4471,8 @@ public void the_conversion_job_name(String statusTypeOfJob, String jobName) thro
     
     }
 
-@Then("^activate and verify the boadcats from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
-public void activate_and_verify_the_boadcats_from_workbook_and_sheet(String workBook, String sheet) throws Throwable {
+@Then("^activate and verify the broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String workBook, String sheet) throws Throwable {
 		String statusOfBC = "";
 		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,sheet);
 		String bcName, campaignCategory, campaignName, offerName, inventory, bcSheet = "";
@@ -4605,13 +4605,118 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		}catch (Exception e) {
 			
 		}
-	
+	}
 }
 
+	@Then("^edit deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+	public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
+		Actions builder =new Actions(driver);
+		eM.setExcelFile("bcInputData", bcSheet);
+		String recurrencePattern =eM.getCellByColumnName("Recurrance Pattern");
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		 if(min==0)
+			{
+				min+=5;
+			}
+			System.out.println("Inside recurring");
+			
+			
+			// if(bc_type.contentEquals("recurring")){
+			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
+			jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+			jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
+			jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+			// }
+			Thread.sleep(2000);
+			jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
+			Thread.sleep(2000);
+			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
+			WebElement num = driver.findElement(By.xpath(
+					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+							+ (hours + 1) + "]"));
+			Thread.sleep(2000);
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(2000);
+			// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+			WebElement num1 = driver.findElement(By.xpath(
+					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+							+ (min + 1) + "]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num1).click().build().perform();
+			Thread.sleep(1000);
+			if (am_pm == 0)
+				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
+			
+			else
+				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
+			Thread.sleep(1000);
+			num1 = driver.findElement(By.xpath(
+					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
+			builder.moveToElement(num1).click().build().perform();
+	}
+
+
+//@Then("^verify the target count from sheet \"([^\"]*)\" also the channel \"([^\"]*)\" creative \"([^\"]*)\" of the bc from workbook \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+//public void verify_the_target_count_from_sheet_also_the_channel_creative_of_the_bc_from_sheet(String countSheet, String channel, String creative, String parallelRunBC, String bcStorageSheet) throws Throwable {
+//	int count=0;
+//	boolean boolean1;
+//	ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(parallelRunBC,bcStorageSheet);
+//	String bcName, campaignCategory, campaignName, offerName, channelFromSheet, bcSheet = "";
+//	for (int i = 0; i < data.size(); i++) {
+//		
+//		campaignObjects.navigateToLIfeCycleMarketing();
+//		bcName = data.get(i).get(1);
+//		campaignCategory = data.get(i).get(4);
+//		campaignName = data.get(i).get(5);
+//		offerName = data.get(i).get(6);
+//		channelFromSheet= data.get(i).get(7);
+//		bcSheet = data.get(i).get(9);
+//		try {
+//
+//			campaignObjects.scrollToCampaignCategory(campaignCategory);
+//			commonObjects.filterName(campaignName);
+//			jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
+//					+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+//			campaignObjects.clickOptionsViewBroadcasts();
+//			if(channel.equals(channelFromSheet)) {
+//				boolean1=jswait.checkVisibility("//p[contains(.,'Channel Type')]//following::p[contains(.,'"+channel+"')]");
+//			
+//			if(boolean1==true)
+//				eh.insertLastColumnValues("parallelRunBC", bcStorageSheet,"Pass", bcName, "Name","StatusOfTestcase");
+//			else
+//				eh.insertLastColumnValues("parallelRunBC", bcStorageSheet,"Fail", bcName, "Name","StatusOfTestcase");
+//		
+//		}else if()
+//		catch(Exception e) {
+//			
+		
+		
+//}
+
 }
-
-
-}//bc steps method
 	
 
 
