@@ -4527,86 +4527,7 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 
 
 
-@Then("^verify the inventory \"([^\"]*)\" after completion of BCs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
-public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet(String inventory, String workbook, String sheet) throws Throwable {
-	int count=0;
-	boolean boolean1;
-	ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
-	String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "";
-	for (int i = 0; i < data.size(); i++) {
-		
-		campaignObjects.navigateToLIfeCycleMarketing();
-		bcName = data.get(i).get(1);
-		campaignCategory = data.get(i).get(4);
-		campaignName = data.get(i).get(5);
-		offerName = data.get(i).get(6);
-		inventoryFromSheet = data.get(i).get(7);
-		bcSheet = data.get(i).get(9);
-		try {
 
-			campaignObjects.scrollToCampaignCategory(campaignCategory);
-			commonObjects.filterName(campaignName);
-			jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
-					+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
-			campaignObjects.clickOptionsViewBroadcasts();
-
-//			broadcastPageObjects.navigate_to_broadcasts(bcSheet);
-//			commonObjects.filterBCName(bcSheet, bcName);
-			
-			if(inventory.equals(inventoryFromSheet)&& inventory.equals("BlackoutAlways")) {
-				
-				commonObjects.filterName(bcName);
-				 
-				 boolean1 = jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Blackout Snooze')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
-			
-				if(boolean1==true)
-					eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-				else
-					eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
-			
-			 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("OneperDay")) {
-				 commonObjects.filterName(bcName);
-				
-					 if(count==0) {
-						 boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
-				 ++count;
-				 System.out.println(bcName+" one per day 1st bc");
-				 if(boolean1==true)
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-					else
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");	
-				 }else if(count>=1) {
-						 boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
-				System.out.println(bcName+" one per day 2nd bc");
-				if(boolean1==true)
-					eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-				else
-					eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
-				 }
-				 
-					 
-			 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("Unlimited")) {
-				 commonObjects.filterName(bcName);
-				
-				if(bcName.contains("seeding"))
-				  boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
-				 else
-				 boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
-				 
-				 if(boolean1==true)
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-					else
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
-			 }
-				
-			
-			
-			
-		}catch (Exception e) {
-			
-		}
-	}
-}
 
 	@Then("^edit deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
 	public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
@@ -4715,6 +4636,100 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		
 		
 //}
+	
+	@Then("^verify the inventory \"([^\"]*)\" after completion of BCs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet(String inventory, String workbook, String sheet) throws Throwable {
+		int count=0;
+		boolean boolean1;
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "";
+		for (int i = 0; i < data.size(); i++) {
+			
+			
+			bcName = data.get(i).get(1);
+			campaignCategory = data.get(i).get(4);
+			campaignName = data.get(i).get(5);
+			offerName = data.get(i).get(6);
+			inventoryFromSheet = data.get(i).get(7);
+			bcSheet = data.get(i).get(9);
+			
+			try {
+					
+				if(inventory.equals(inventoryFromSheet)&& inventory.equals("BlackoutAlways")) {
+					broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
+					boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Blackout Snooze",770,0,0);
+					if(boolean1==true)
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+					else
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+				
+				 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("OneperDay")) {
+					 broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
+						
+						 if(count==0) {
+							 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,770);
+					 ++count;
+					 System.out.println(bcName+" one per day 1st bc");
+					 if(boolean1==true)
+							eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+						else
+							eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");	
+					 }else if(count>=1) {
+						 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",0,0,0);	
+						 System.out.println(bcName+" one per day 2nd bc");
+					if(boolean1==true)
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+					else
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+					 }
+					 
+						 
+				 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("Unlimited")) {
+					 
+					 broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
+					 
+					 
+					if(bcName.contains("seeding"))
+						 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,0);
+					 else
+						 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,770);
+					 
+					 if(boolean1==true)
+							eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+						else
+							eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+				 }
+					
+				
+				
+				
+			}catch (Exception e) {
+				
+			}
+			
+		}
+	}
+
+
+
+	@Then("^adding existing offers from sheet \"([^\"]*)\" Offer Catalogue from sheet \"([^\"]*)\"$")
+	public void adding_existing_offers_from_sheet_Offer_Catalogue_from_sheet(String offerSheet, String catelogSheet) throws Throwable {
+		eM.setExcelFile("offerCatalogInputData",catelogSheet);
+		commonObjects.filterName(eM.getCell(1, 0).toString());
+		commonObjects.clickOptionsIcon();
+		catalogPageObjects.clickViewOffersOption();
+		catalogPageObjects.clickCatalogAddOffers();
+		eh.setExcelFile("offerInputData",offerSheet);
+		String addOffer = eh.getCellByColumnName("Offer Name").toString();
+		Thread.sleep(3000);
+	    commonObjects.filterName(addOffer);
+	    Thread.sleep(2000);
+	    catalogPageObjects.addOfferToCatalog(addOffer);
+	    Thread.sleep(4000);
+	}
+		
+	
+	
 
 }
 	

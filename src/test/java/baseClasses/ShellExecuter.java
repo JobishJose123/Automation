@@ -71,6 +71,70 @@ public class ShellExecuter extends Init{
 		    }
     }
     
+    
+    public ArrayList<String> executeScriptInfra(String command1) {
+//   	 String command1="cp /root/dk_testing_selenium/location1/source.txt /root/dk_testing_selenium/location2/";
+   	 ArrayList<String> ActualString = new ArrayList <String>();
+		    try{
+		    	
+		    	java.util.Properties config = new java.util.Properties(); 
+		    	config.put("StrictHostKeyChecking", "no");
+		    	JSch jsch = new JSch();
+		    	Session session=jsch.getSession(user, host, 22);
+		    	session.setPassword(password);
+		    	config.put(
+		    		    "PreferredAuthentications", 
+		    		    "publickey,keyboard-interactive,password");
+		    	session.setConfig(config);
+		    	session.connect();
+		    	System.out.println("Connected");
+		    	
+		    	Channel channel=session.openChannel("exec");
+		        ((ChannelExec)channel).setCommand(command1);
+		        channel.setInputStream(null);
+		        ((ChannelExec)channel).setErrStream(System.err);
+		        
+		        InputStream in=channel.getInputStream();
+		        channel.connect();
+		        byte[] tmp=new byte[1024];
+		        //ArrayList<String> ActualString = new ArrayList <String>();
+		        while(true){
+		          while(in.available()>0){
+		            int i=in.read(tmp, 0, 1024);
+		            if(i<0)break;	
+		            String WholeString = new String(tmp, 0, i);
+		            String[] str17 = WholeString.split("\\n");
+		            //ActualString.add(new String(tmp, 0, i));
+		            //System.out.println(ActualString);
+		    		for (String OrignalData : str17) {
+
+		    			ActualString.add(OrignalData.trim());
+		    		}
+		            
+		           //System.out.println(ActualString.size());
+		            //System.out.println(counter);
+		            //counter++;
+		            
+		            //System.out.print(new String(tmp, 0, i));
+		          }
+		          if(channel.isClosed()){
+		            System.out.println("exit-status: "+channel.getExitStatus());
+		            break;
+		          }
+		          try{Thread.sleep(1000);}catch(Exception ee){}
+		        }
+		        channel.disconnect();
+		        session.disconnect();
+		        System.out.println("DONE");
+		        //return ActualString;
+		    }catch(Exception e){
+		    	e.printStackTrace();
+		    }
+		  return ActualString;
+   }
+    
+    
+    
     public static void uploadDNDListForDkJob() throws IOException {
     	String csvFileData = "";
 		File csvfile = new File("ExcelFiles\\selenium_list_DND.csv");

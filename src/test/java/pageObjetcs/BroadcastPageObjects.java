@@ -42,6 +42,7 @@ public class BroadcastPageObjects extends Init {
 	public BroadcastPageObjects() {
 		PageFactory.initElements(driver, this);
 	}
+	LandingPageObjects landingPage = new LandingPageObjects();
 
 	JSWaiter jswait = new JSWaiter();
 	PdfReader pdfReader = new PdfReader();
@@ -120,7 +121,8 @@ public class BroadcastPageObjects extends Init {
 	private WebElement baseListSelector;
 	@FindBy(xpath = ".//paper-button[contains(.,'Target Group')]")
 	private WebElement TGConfigure;
-
+	@FindBy(xpath = ".//*[@id='contentWrapper']/div/paper-listbox/paper-item[contains(.,'At')]")
+	private WebElement trackSessionAT;
 	@FindBy(xpath = "//paper-item[contains(.,'" + SELENIUM_DND_LIST + "')]")
 	private WebElement DNCList;
 
@@ -3153,8 +3155,11 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 	
 }
 		if (!bc_type.contains("Informational")) {
-			selectTrackSession();
+			selectTrackSession(trackExpires);
 			selectTrackingSource();
+			selectFiletrCriteria(filterCriteria);
+			selectGiveRewardsTo(giverRewardsTo);
+			
 			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
 				selectSenderAndRouteEmail();
 			} else if (offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
@@ -3472,6 +3477,131 @@ jswait.loadClick(startBroadcastOkbtn);
 		}
 }
 	}
+	
+public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCount, int sentCount, int ackCount) throws InterruptedException {
+		
+		boolean elementVisible = jswait.checkVisibility(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'"+bcName+"')]/..//vaadin-grid-table-cell[2][contains(.,'"+statusOffBc+"')]/..//vaadin-grid-table-cell[4][contains(.,'"+targetCount+"')]/..//vaadin-grid-table-cell[5][contains(.,'"+sentCount+"')]/..//vaadin-grid-table-cell[6][contains(.,'"+ackCount+"')]");
+	return elementVisible;
+	}
+	
+	
+	public void navigateToLandingPageToBcFilterPage(String campaignCategory,String campaignName,String bcName) throws Exception {
+		campaignObjects.navigateToLIfeCycleMarketing();
+		campaignObjects.scrollToCampaignCategory(campaignCategory);
+		commonObjects.filterName(campaignName);
+		jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
+				+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+		campaignObjects.clickOptionsViewBroadcasts();
+		commonObjects.filterName(bcName);
+		
+	}
+	
+	
+	
+	public void selectFiletrCriteria(String filterCriteria) throws InterruptedException {
+		try {
+			jswait.loadClick(
+					"//div[@class='style-scope broadcast-offers-config']//p[contains(.,'Filter Criteria')]/..//div//paper-radio-group[@id='convert-all-radio']//div[@id='radioLabel'][contains(.,'"
+							+ filterCriteria + "')]");
+
+		} catch (Exception e) {
+			System.out.println("Selected rule based and Unique conversion of a customer");
+		}
+	}
+
+	public void selectGiveRewardsTo(String giverRewardsTo) throws InterruptedException {
+		try {
+			jswait.loadClick(
+					"//div//p[contains(.,'Give rewards to')]/..//paper-radio-group[@id='reward-all-radio']//paper-radio-button//div[@id='radioLabel'][contains(.,'"
+							+ giverRewardsTo + "')]");
+		} catch (Exception e) {
+			System.out.println("Selected rule based and Unique conversion of a customer");
+		}
+	}
+	
+	public void selectTrackSession(String trackExpires) throws InterruptedException {
+		if(trackExpires.equals("After")) {
+		jswait.loadClick(trackSessionSelector);
+		jswait.loadClick(trackSessionAfter);
+		jswait.loadSendKeys(trackSession2Days, "5");
+		}else if(trackExpires.equals("At")) {
+			
+			Calendar rightNow = Calendar.getInstance();
+			String mn = "";
+			if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+				mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			} else
+				mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+			String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+					+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+			String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+					+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
+			int hours = rightNow.get(Calendar.HOUR);
+			int min = rightNow.get(Calendar.MINUTE);
+			int am_pm = rightNow.get(Calendar.AM_PM);
+			int day = rightNow.get(Calendar.DAY_OF_MONTH);
+			int year = rightNow.get(Calendar.YEAR);
+			int month = rightNow.get(Calendar.MONTH) + 1;
+			min += 2;
+			int rem = min % 5;
+			rem = 5 - rem;
+			min += rem;
+			if (min > 59) {
+				min -= 60;
+				hours++;
+			}
+			 if(min==0)
+				{
+					min+=5;
+				}
+			
+			
+			
+			jswait.loadClick(trackSessionSelector);
+			jswait.loadClick(trackSessionAT);
+			
+			jswait.loadClick("//paper-date-time-input[@class='flex style-scope broadcast-tracking x-scope paper-date-time-input-0']//div[@class='container style-scope paper-date-time-input']//input[@id='input']");
+			
+				Actions builder =new Actions(driver);
+				Thread.sleep(3000);
+			WebElement num = driver.findElement(By.xpath(
+					"(.//*[@id='clockArea']//div//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"])[1]"));
+			Thread.sleep(2000);
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(2000);
+			// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+			WebElement num1 = driver.findElement(By.xpath(
+					"(.//*[@id='clockArea']//div//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"])[1]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num1).click().build().perform();
+			Thread.sleep(1000);
+			if (am_pm == 0)
+					jswait.loadClick("(//*[@id='heading']/iron-selector[2]/div[1])[1]");
+			
+			else
+				Thread.sleep(1000);
+				jswait.loadClick("(//*[@id='heading']/iron-selector[2]/div[2])[1]");
+			Thread.sleep(1000);
+			//num1 = driver.findElement(By.xpath(
+			//		".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
+			//builder.moveToElement(num1).click().build().perform();
+			
+			
+			
+			jswait.loadClick("(.//*[@id='timeDialog']/div/paper-button[2])[1]");
+			
+			jswait.loadClick("//paper-dropdown-menu[@id='dropAtOn']/..//div//label[contains(.,'On/After')]/..//input[@id='input']");
+			jswait.loadClick("//paper-dropdown-menu[@id='dropAtOn']//paper-item[text()='After']");
+			
+//			jswait.loadClick("(.//paper-input-wrapper//div[@class='input-content label-is-floating style-scope paper-input-container']//div[@id='labelAndInputContainer']//input)[2]");
+//			jswait.loadSendKeys("//paper-dropdown-menu/..//paper-input-wrapper//div[@class='input-content label-is-floating style-scope paper-input-container']//div[@id='labelAndInputContainer']//input", "24");
+		driver.findElement(By.xpath("//paper-dropdown-menu/..//paper-input-wrapper//div[@class='input-content label-is-floating style-scope paper-input-container']//div[@id='labelAndInputContainer']//input")).sendKeys("24");
+			jswait.loadClick("//paper-dropdown-menu[@id='dropAtAfterType']//input");
+			jswait.loadClick("//iron-dropdown[@id='dropdown']//paper-item[text()='Hours']");
+		
+		}
+	}
+	
 }
 
 

@@ -119,7 +119,21 @@ String file = "";
         outFile.close(); 
     }
     
-    
+    /**
+     * @author mallikharjuna.ankem
+     * @param parllelRunSheet
+     * @param bcName
+     * @param campaignName
+     * @param camapignCategoryName
+     * @param offerName
+     * @param condition
+     * @param inventory
+     * @param description
+     * @param bcType
+     * @param bcSheet
+     * @throws Exception
+     * @Discription: To store the Data into Excel 
+     */
     public void addDataToParllelSheet(String parllelRunSheet, String bcName, String campaignName,String camapignCategoryName,String offerName,String condition,String inventory,String description, String bcType, String bcSheet) throws Exception {
     	setExcelFile("parallelRunBC", parllelRunSheet);
     	int countrows=sh.getLastRowNum()-sh.getFirstRowNum();
@@ -187,10 +201,10 @@ String file = "";
 	
     /****
      * 
-     * when data available in excel we insert the data dynamically into last row
-     * 
+     * @author mallikharjuna.ankem
      * @param args parllelworkbook: parllelRunBC, sheet: parllelRunBC, status: we are taken from UI and inserted here
      * @throws Exception 
+     * @Discreption: when data available in excel we insert the data dynamically into last row
      */
 	public void insertLastColumnValues(String parllelworkbook, String sheet, String status,String bcname, String searchcolumn,String writeColumn) throws Exception {
 		setExcelFile(parllelworkbook, sheet);
@@ -228,6 +242,14 @@ String file = "";
 
 	}//method
 	
+	/**
+	 * @author mallikharjuna.ankem
+	 * @param workBook
+	 * @param filename
+	 * @return ArrayList
+	 * @throws IOException
+	 * @Description: To read the excel data and Stored into ArrayList
+	 */
 	public ArrayList<ArrayList<String>> readTheDataFromExcel(String workBook,String filename) throws IOException {
 
 		File file = new File("ExcelFiles\\" + workBook + ".xls");

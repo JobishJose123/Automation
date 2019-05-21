@@ -2432,7 +2432,7 @@ System.out.println(editname+"program has edited successfully");
 						   String url=node.concat(":"+port);
 						   System.out.println(url);
 						   
-						   driver.get("http://"+url.stripLeading());
+						 //  driver.get("http://"+url.stripLeading());
 						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='name']")).sendKeys(p.getValue("username"));
 						 Thread.sleep(2000);
 						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='pass']")).sendKeys(p.getValue("vcustpass"));

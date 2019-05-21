@@ -52,39 +52,10 @@ Feature: For broadcast functionality check
 #    Then Add "seedingEmail" offer to Offer Catalogue
 #    Then Add "seedingVoicePush" offer to Offer Catalogue
 
-	#creating campaign category and and campaign for all bc functionality scenarios with this scenario
-#  @CreateCampaign @initBrowser 
-#  Scenario: Verify BC targeting using all types of target conditions with one time BC
-#    Given login
-#    Then navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "CampaignCategory"
-#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-#   Then naigate to "campaignBC" campaign view broadcasts
+	   
    
-   
-#@NDX-7015 @initBrowser 
-#  Scenario: Verify BC targeting using all types of target conditions with one time BC
-#    Given login
-#    Then navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "CampaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts   
-#    Then click create new broadcast button
-#    Then enter details for new broadcast with condition allTargetConditions10 from sheet "one-offBothExclution" with "rechargeSMS"
-#    Then activate bc
-##    Then add bc data to "parallelRunBC" from "one-offBothExclution" with condition "allTargetConditions10"
-#  
-#  @NDX-7019 @initBrowser @closeBrowser
-#  Scenario: Verify partner level and broadcast level exclusion with one time BC
-#    Given login
-#    Then navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "CampaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then click create new broadcast button
-#	Then enter details for new broadcast with condition allTargetConditions20 from sheet "one-offBothExclution" with "rechargeSMS"
-#	Then activate bc
+
+
 	
 	@CreateCampaignforblackout @initBrowser 
   Scenario: Verify BC targeting using all types of target conditions with one time BC
@@ -102,14 +73,7 @@ Feature: For broadcast functionality check
 	@BlckoutOneoffbC @initBrowser 
 	Scenario: create one off bc with blackout always
 	Given login
-    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
-#    Then navigate to offer management
-#    Then Navigate to Offer Catalogue
-#    Then click on 
-#    Then Add "rechargeEmail" offer to Offer Catalogue    
+    Then navigate to precision marketer 
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
@@ -345,7 +309,7 @@ Scenario: verify bc conversion
 #	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
 #    Then activate bc
 #    Then wait until status of "one-offBC" is "Completed"
-    Then provide file for conversion
+#    Then provide file for conversion
 #    Then "Activate" the conversion job name "conversionJobBySelenium"
 #    Then navigate to reports
 #    Then navigate to customer profile
@@ -378,10 +342,36 @@ Scenario: verify bc conversion
     
      
      
+    @CreateCampaignsingleReward @initBrowser 
+  Scenario: Verify BC targeting using all types of target conditions with one time BC
+    Given login
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+   Then naigate to "campaignBC" campaign view broadcasts
      
-     
-     
-     
+     @createBCwithoneruleonereward @initBrowser 
+Scenario: create a bc with one rule one one reward 
+	Given login 
+	Then navigate to precision marketer 
+#	Then navigate to offer management 
+#	Then navigate to offers 
+#	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" 
+#	Then navigate to offer management 
+#	Then Navigate to Offer Catalogue 
+#	Then adding existing offers from sheet "rechargeSMS" Offer Catalogue from sheet "defaultCatalog" 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "CampaignCategory" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then create bc from sheet "one-offBC" with inventory "Unlimited" 
+	Then enter target tab details target condition digitalPersonaGT15 type "create" TG "no limit" CG "no limit" DNC "none" 
+#	 filer criteria : Convert all , Rule-based .. give rewards to : All conversions for a customer, Unique conversion of a customer
+	Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "one-offBC" with "single creative" track session expires "At" filter criteria "Rule-based" give reward to "All conversions for a customer" 
+	Then enter deliver tab with end "never" target render time "realTime" and broadcast expiry as "none" from sheet "one-offBC" 
+	Then save bc 
+    Then add the BC Data to "rewardBcs" from BCsheet "one-offBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "rechargeSMS" condition "digitalPersonaGT15" inventory "Rule-based" with string oneruleonereward
      
      
      
