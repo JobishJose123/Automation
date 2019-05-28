@@ -251,6 +251,9 @@ public class CustomerProfilePage extends Init{
 		@FindBy(xpath="//data-table-column-filter-dialog[@class='style-scope consumer-events x-scope data-table-column-filter-dialog-0']//paper-button[@class='style-scope data-table-column-filter-dialog x-scope paper-button-0'][contains(text(),'Apply')]")
 		private WebElement filterApplyButton;
 		
+		@FindBy(xpath="//data-table-column-filter-dialog[@class='style-scope consumer-events x-scope data-table-column-filter-dialog-0']//paper-button[@class='style-scope data-table-column-filter-dialog x-scope paper-button-0'][contains(text(),'Reset Filters')]")
+		private WebElement filterResetFilterButton;
+		
 		public void clickOnEventTabFilter() throws Exception {
 			jswait.loadClick(eventTabFilter);
 		}
@@ -259,6 +262,10 @@ public class CustomerProfilePage extends Init{
 		}
 		public void filterApplyButton() throws Exception {
 			jswait.loadClick(filterApplyButton);
+		}
+	
+		public void filterResetFilterButton() throws Exception {
+			jswait.loadClick(filterResetFilterButton);
 		}
 	
 	
@@ -563,30 +570,45 @@ public void verifyAcknowledgedEvent(String bcName,String campaignName,String Off
 	 Thread.sleep(2000);
 	 clickOnEventTabFilter();
 	 enterEventDetails(campaignName);
+	 filterResetFilterButton();
+	 Thread.sleep(3000);
+	  
+	 
+	 clickOnEventTabFilter();
+	 enterEventDetails(campaignName);	 
 	 filterApplyButton();
-	 Thread.sleep(2000);
-	List<WebElement> ackEvents = driver.findElements(By.xpath("//data-table-row//data-table-cell[4]//span[contains(.,'Campaign: "+campaignName+"')][@title]"));
+	 Thread.sleep(10000);
+	List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'Acknowledged')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
+	
+	
 	Thread.sleep(1000);
 	System.out.println(ackEvents.size());
 	 int count=1;
+	 System.out.println("print "+ackEvents);
+	 System.out.println("before for loop");
 	 
 	for (WebElement webElement : ackEvents) {
 			if ((webElement.getText()).contains(campaignName)) {
 				System.out.println(webElement.getText());
 				try {
 					//jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Acknowledged'])["+count+"]");
-					Thread.sleep(1000);
+					Thread.sleep(10000);
 					jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Acknowledged']/../..//data-table-cell[4]//span[text()='Campaign: "+campaignName+"'])["+count+"]");
-					Thread.sleep(1000);
+					Thread.sleep(10000);
 					jswait.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'" + OfferName + "')]");
 					boolean booledn = jswait.checkVisibility(
 							"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
 					System.out.println(booledn);
 					if (booledn == true) {
-						Assert.assertTrue(true);
+						//Assert.assertTrue(true);
+						System.out.println("Ack verified");
+						
+						break;
+						
 					}
 					 else {
-						System.out.println(bcName);
+						 
+						System.out.println("Ack verified.. waiting for BC name "+bcName);
 					}
 				} catch (Exception e) {
 					System.out.println("catch block");
@@ -603,11 +625,23 @@ public void verifyAcknowledgedEvent(String bcName,String campaignName,String Off
 
 public void verifyConversionEvent(String bcName,String campaignName,String OfferName) throws Exception {
 	
+	boolean booledn=false;
+	searchEventsDynammically("Last 2 Days");
 	searchEventsDynammically("Last 3 Days");
-	 Thread.sleep(2000);
+	 
+	clickOnEventTabFilter();
+	 enterEventDetails(campaignName);
+	 filterResetFilterButton();
+	 Thread.sleep(3000);
+	
+	
+	Thread.sleep(2000);
 	 clickOnEventTabFilter();
 	 enterEventDetails(campaignName);
 	 filterApplyButton();
+	 
+	 
+	 
 	 Thread.sleep(2000);
 	List<WebElement> ackEvents = driver.findElements(By.xpath("//data-table-row//data-table-cell[4]//span[contains(.,'Campaign: "+campaignName+"')]"));
 	Thread.sleep(1000);
@@ -617,35 +651,203 @@ public void verifyConversionEvent(String bcName,String campaignName,String Offer
 	 for (WebElement webElement : ackEvents) {
 			if ((webElement.getText()).contains(campaignName)) {
 				System.out.println(webElement.getText());
-				try {
-					//jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Acknowledged'])["+count+"]");
-					Thread.sleep(1000);
-					jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Conversion']/../..//data-table-cell[4]//span[text()='Campaign: campaignBC6632'])["+count+"]");
+				
+					
+					jswait.loadClick("(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Conversion']/../..//data-table-cell[4]//span[text()='Campaign: "+campaignName+"'])["+count+"]");
 					Thread.sleep(1000);
 					jswait.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'" + OfferName + "')]");
-					boolean booledn = jswait.checkVisibility(
+					booledn = jswait.checkVisibility(
 							"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
 					System.out.println(booledn);
 					if (booledn == true) {
-						Assert.assertTrue(true);
+						System.out.println("Conversion event verified...");
+						break;
+						//Assert.assertTrue(true);
 					}
 					 else {
 						System.out.println(bcName);
 					}
-				} catch (Exception e) {
-					System.out.println("catch block");
-					Assert.assertTrue("No Ack",false);
-				}
+				
 				Thread.sleep(2000);
 				count++;
 		}
+			
 	}
+	 
+	 System.out.println(booledn+""+count);
 	
 }
+
+
+	public void verifyFullfillementEvent(String bcName, String campaignName, String OfferName, String rewardsRule)
+			throws Exception {
+		Boolean b1, b2 = null, b3, b4;
+		int rewardsCount = 0;
+		searchEventsDynammically("Today");
+		searchEventsDynammically("Last 2 Days");
+
+		clickOnEventTabFilter();
+		enterEventDetails(campaignName);
+		filterResetFilterButton();
+		Thread.sleep(3000);
+
+		Thread.sleep(2000);
+		clickOnEventTabFilter();
+		enterEventDetails(campaignName);
+		filterApplyButton();
+
+		Thread.sleep(4000);
+		List<WebElement> ackEvents = driver.findElements(
+				By.xpath("//data-table-row//data-table-cell[4]//span[contains(.,'Campaign: " + campaignName + "')]"));
+		Thread.sleep(3000);
+		System.out.println(ackEvents.size());
+		if(ackEvents.size()==0) {
+			
+			System.out.println("No Fullfillment event raised");
+			Assert.assertTrue("No Fullfillment event raised",false);
+		}
+		
+		int count = 1;
+
+		for (WebElement webElement : ackEvents) {
+			if ((webElement.getText()).contains(campaignName)) {
+				System.out.println(webElement.getText());
+
+				if (rewardsRule.equals("oneruleonereward")) {
+					Thread.sleep(5000);
+					System.out.println("oneruleonereward.....");
+					jswait.loadClick(
+							"(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Fulfillment Success']/../..//data-table-cell[4]//span[text()='Campaign: "
+									+ campaignName + "'])[" + count + "]");
+
+					Thread.sleep(2000);
+
+					b1 = jswait
+							.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'" + OfferName + "')]");
+					System.out.println(" Offer visibile ... " + b1);
+
+					b3 = jswait.checkVisibility(
+							"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
+					System.out.println("BcName visibile ..." + b3);
+
+					if (count == 1) {
+
+						b2 = jswait.checkVisibility(
+								"//label[contains(.,'Reward Details')]/..//label[contains(.,'+SEL_REWARD+')]");
+						System.out.println("Reward  visibile ... " + b2);
+						rewardsCount++;
+					}
+
+					if (bcName.contains("seeding") || bcName.contains("seed")) {
+
+						if (count == 2) {
+							System.out.println("i am count 2");
+							b2 = jswait.checkVisibility("//label[contains(.,'Reward Details')]/..//label[contains(.,'"
+									+ SEL_REWARD + "')]");
+							System.out.println("Reward  visibile ... " + b2);
+						}//inner if
+					}
+
+				} else if (rewardsRule.equals("onerulemultiplerewards")) {
+
+					System.out.println("onerulemultiplerewards.........");
+
+					jswait.loadClick(
+							"(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Fulfillment Success']/../..//data-table-cell[4]//span[text()='Campaign: "
+									+ campaignName + "'])[" + count + "]");
+
+					Thread.sleep(2000);
+
+					b1 = jswait
+							.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'" + OfferName + "')]");
+					System.out.println(" Offer visibile ... " + b1);
+
+					b3 = jswait.checkVisibility(
+							"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
+					System.out.println("BcName visibile ..." + b3);
+
+					if (count == 1) {
+						System.out.println("i am count 1");
+						b2 = jswait.checkVisibility("//label[contains(.,'Reward Details')]/..//label[contains(.,'"
+								+ SELENIUM_REWARD + "')]");
+						System.out.println("Reward  visibile ... " + b2);
+						
+						if(b2==b1==b3==true) {
+						rewardsCount++;
+						}
+					} else if (count == 2) {
+						System.out.println("i am count 2");
+						b2 = jswait.checkVisibility(
+								"//label[contains(.,'Reward Details')]/..//label[contains(.,'" + SEL_REWARD + "')]");
+						System.out.println("Reward  visibile ... " + b2);
+						
+						if(b2==b1==b3==true) {
+							rewardsCount++;
+							}
+					}
+
+					if (bcName.contains("seeding") || bcName.contains("seed")) {
+                              System.out.println("Seeding bc");
+						if (count == 3) {
+							System.out.println("i am count 3");
+							b2 = jswait.checkVisibility("//label[contains(.,'Reward Details')]/..//label[contains(.,'"
+									+ SEL_REWARD + "')]");
+							System.out.println("Reward  visibile ... " + b2);
+							if(b2==b1==b3==true) {
+								rewardsCount++;
+								}
+						}
+					}
+					
+					System.out.println("before Assert " +rewardsCount);
+					if(!bcName.contains("seeding") || !bcName.contains("seed")) {
+						
+						if(rewardsCount==2) {
+							System.out.println("before Assert inside if loop "+rewardsCount);
+							Assert.assertTrue("multiple rewards verified",true);
+						}
+						
+					}else {
+						if(rewardsCount==3) {
+							System.out.println("before Assert inside else loop"+rewardsCount);
+							Assert.assertTrue("multiple rewards verified",true);
+						}	
+					}
+					
+					
+
+				}//rewards if else
+
+				Thread.sleep(2000);
+				count++;
+				
+			}//campaign if else
+
+		}//for loop
+
+		
+
+	}
+
+
+
+
+
+
  
  public void clickOnAckEventCheckBox() throws InterruptedException {
 	  jswait.loadClick("(//div//paper-checkbox//div[@id='checkboxLabel'][contains(.,'Acknowledged')])[1]");
  }
+ 
+ public void clickOnConversionEventCheckBox() throws InterruptedException {
+	  jswait.loadClick("(//div//paper-checkbox//div[@id='checkboxLabel'][contains(.,'Conversion')])[3]");
+}
+ 
+ public void clickOnFulfillmentSuccess() throws Exception {
+	 
+	 jswait.loadClick("//div//paper-checkbox//div[@id='checkboxLabel'][contains(.,'Fulfillment Success')]");
+ }
+ 
  
  public void addMaxAttributes() throws Exception {
 	   

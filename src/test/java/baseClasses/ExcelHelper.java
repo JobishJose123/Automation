@@ -171,6 +171,9 @@ String file = "";
 			
 			cell=newrow.createCell(9);
 			cell.setCellValue(bcSheet);
+			
+			cell=newrow.createCell(10);
+			cell.setCellValue(condition);
     	}
 
     	FileOutputStream outFile =new FileOutputStream(new File(file));  //Creating new file

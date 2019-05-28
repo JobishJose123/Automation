@@ -237,6 +237,9 @@ public class BroadcastPageObjects extends Init {
 	private WebElement topBcStatusGridForRecurrChild;
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[3]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGridForSeedingChild;
+	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[5]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
+	private WebElement topBcStatusGridForSeedingrecurringChild;
+	
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[1]/vaadin-grid-table-cell[5]/vaadin-grid-cell-content")
 	private WebElement topBcTargetedGrid;
 	@FindBy(xpath = ".//label[contains(.,'Start Date/Time')]")
@@ -695,6 +698,26 @@ public class BroadcastPageObjects extends Init {
 	public String getTopBcStatus() throws InterruptedException {
 		jswait.waitUntil(topBcStatusGrid);
 		String status = topBcStatusGrid.getText();
+		return status;
+	}
+	
+	
+	public String getTopBcStatus(String bcType) throws Exception {
+		
+		String status="";
+		if (bcType.equals("one-off")) {
+			jswait.waitUntil(topBcStatusGrid);
+			 status = topBcStatusGrid.getText();			
+		}else if(bcType.equals("recurring")) {
+			
+			jswait.waitUntil(topBcStatusGridForRecurrChild);
+			 status = topBcStatusGridForRecurrChild.getText();
+			
+		}else if(bcType.equals("seedingRecurring")) {
+			jswait.waitUntil("topBcStatusGridForSeedingrecurringChild");
+			status = topBcStatusGridForSeedingrecurringChild.getText();
+		}
+		
 		return status;
 	}
 
@@ -2903,7 +2926,7 @@ public class BroadcastPageObjects extends Init {
 			status = getTopBcStatusOfSeeding(bcName);
 		} else if (sheetname.contains("TriggerReccurringBC")) {
 			status = getTopBcStatusofTrigger(bcName);
-		} else if (sheetname.contentEquals("recurringBC") || sheetname.contentEquals("recurringBCEdit")|| sheetname.contentEquals("recurringBCForPause") ){
+		} else if (sheetname.contentEquals("recurringBC")||sheetname.contentEquals("recurrBCDaily") || sheetname.contentEquals("recurringBCEdit")|| sheetname.contentEquals("recurringBCForPause") ){
 			status = getTopBcStatusOfRecurring(bcName);
 		}
 
@@ -2919,7 +2942,7 @@ public class BroadcastPageObjects extends Init {
 			System.out.println(bcSheetName);
 			jswait.loadClick("//paper-tab//div[contains(.,'Seedings Broadcasts')]");
 
-		} else if (bcSheetName.contentEquals("recurringBC")) {
+		} else if (bcSheetName.contentEquals("recurringBC")||bcSheetName.contentEquals("recurrBCDaily")) {
 			System.out.println(bcSheetName);
 			jswait.loadClick("//paper-tab//div[contains(.,'Recurring Broadcasts')]");
 		} // elseif end
@@ -3224,6 +3247,7 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 			jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
 			Thread.sleep(2000);
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
+			Thread.sleep(3000);
 			WebElement num = driver.findElement(By.xpath(
 					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
 							+ (hours + 1) + "]"));
@@ -3302,14 +3326,16 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 				jswait.loadClick(weekEndDay);
 		}
 		jswait.loadClick(startBroadcastAtInput);
+		Thread.sleep(4000);
 		WebElement num2 = driver.findElement(By.xpath(
 				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
 		builder.moveToElement(num2).click().build().perform();
 		Thread.sleep(2000);
 		WebElement num3 = driver.findElement(By.xpath(
 				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		builder.moveToElement(num3).click().build().perform();
+		Thread.sleep(3000);
 		if (am_pm == 0)
 			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
 		else

@@ -4502,10 +4502,14 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 
 					edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
 					activateBc();
-
+					
+					
 					broadcastPageObjects.navigate_to_broadcasts(bcSheet);
-					commonObjects.filterBCName(bcSheet, bcName);
+					commonObjects.filterBCName(bcSheet, bcName);			
+					
 					statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
+					
+					
 
 					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
 				} else {
@@ -4729,10 +4733,209 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 	}
 		
 	
+	@Then("^verify the acknowledgement of Bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\"$")
+	public void verify_the_acknowledgement_of_Bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn) throws Throwable {
+	    
+		
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "";
+		for (int i = 0; i < data.size(); i++) {
+		bcName = data.get(i).get(1);
+		campaignCategory = data.get(i).get(4);
+		campaignName = data.get(i).get(5);
+		offerName = data.get(i).get(6);
+		inventoryFromSheet = data.get(i).get(7);
+		bcSheet = data.get(i).get(9);
+		
+		commonObjects.clickOnReports();
+		customerObjects.navigateToCustomerProfile();
+		
+		customerObjects.enterCustomerNumber(msisdn);
+		
+		customerObjects.clickSearchNumberIcon();
+		customerObjects.clickEventsTab();
+		customerObjects.chooseAllEvents();
+		customerObjects.clickApplyButton();
+		customerObjects.chooseAllEvents();
+		customerObjects.clickOnAckEventCheckBox();
+		customerObjects.clickApplyButton();
+		
+		customerObjects.verifyAcknowledgedEvent(bcName,campaignName,offerName);
+		
+		
+
+		
+		
+		
+		}
+		
+	}
+	
+	
+	@Then("^verify the Conversion event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\"$")
+	public void verify_the_Conversion_event_of_bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn) throws Throwable {
+	   
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "";
+		for (int i = 0; i < data.size(); i++) {
+		bcName = data.get(i).get(1);
+		campaignCategory = data.get(i).get(4);
+		campaignName = data.get(i).get(5);
+		offerName = data.get(i).get(6);
+		inventoryFromSheet = data.get(i).get(7);
+		bcSheet = data.get(i).get(9);
+		
+		commonObjects.clickOnReports();
+		customerObjects.navigateToCustomerProfile();
+		
+		customerObjects.enterCustomerNumber(msisdn);
+		customerObjects.clickSearchNumberIcon();
+		System.out.println("verifying Conversion event ... .. .. .... ");
+		customerObjects.clickEventsTab();
+		customerObjects.chooseAllEvents();
+		customerObjects.clickApplyButton();
+		customerObjects.chooseAllEvents();
+		customerObjects.clickOnConversionEventCheckBox();
+		customerObjects.clickApplyButton();
+		Thread.sleep(3000);
+		customerObjects.verifyConversionEvent(bcName,campaignName,offerName);
+		
+		}
+			
+	}
+
+	@Then("^verify the Fulfillment event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\"$")
+	public void verify_the_Fulfillment_event_of_bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn) throws Throwable {
+	   
+		
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet,rewardRule, bcSheet = "";
+		for (int i = 0; i < data.size(); i++) {
+		bcName = data.get(i).get(1);
+		campaignCategory = data.get(i).get(4);
+		campaignName = data.get(i).get(5);
+		offerName = data.get(i).get(6);
+		inventoryFromSheet = data.get(i).get(7);
+		bcSheet = data.get(i).get(9);
+		rewardRule=data.get(i).get(2);
+		commonObjects.clickOnReports();
+		customerObjects.navigateToCustomerProfile();
+		
+		customerObjects.enterCustomerNumber(msisdn);
+		customerObjects.clickSearchNumberIcon();
+		System.out.println("verifying Fulfillment Event ... .. .. .... ");
+		customerObjects.clickEventsTab();
+		customerObjects.chooseAllEvents();
+		customerObjects.clickApplyButton();
+		customerObjects.chooseAllEvents();
+		customerObjects.clickOnFulfillmentSuccess();
+		customerObjects.clickApplyButton();
+		
+		customerObjects.verifyFullfillementEvent(bcName,campaignName,offerName,rewardRule);
+		
+		}
+		
+		
+		
+	}
+
 	
 
+	@Then("^activate and raise the conversion job the broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void activate_and_raise_the_conversion_job_the_broadcast_from_workbook_and_sheet(String workBook, String sheet) throws Throwable {
+		String statusOfBC = "";
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventory, bcType,bcSheet = "";
+		SQLHandler sql = new SQLHandler();
+		for (int i = 0; i < data.size(); i++) {
+			campaignObjects.navigateToLIfeCycleMarketing();
+			bcName = data.get(i).get(1);
+			campaignCategory = data.get(i).get(4);
+			campaignName = data.get(i).get(5);
+			offerName = data.get(i).get(6);
+			inventory = data.get(i).get(7);
+			bcSheet = data.get(i).get(9);
+			bcType=data.get(i).get(8);
+			try {
+
+				campaignObjects.scrollToCampaignCategory(campaignCategory);
+				commonObjects.filterName(campaignName);
+				jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
+						+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+				campaignObjects.clickOptionsViewBroadcasts();
+
+				broadcastPageObjects.navigate_to_broadcasts(bcSheet);
+				commonObjects.filterBCName(bcSheet, bcName);
+				statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
+
+				if (statusOfBC.equals("Planned")) {
+					commonObjects.clickBCOptionsIcon(bcSheet);
+					commonObjects.clickEditOption();
+
+					edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
+					activateBc();
+					Thread.sleep(5000);
+					jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");
+							
+					commonObjects.filterName(bcName);
+					Thread.sleep(5000);
+					statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+					System.out.println("Status of BC "+statusOfBC);
+					commonObjects.toggleAutoRefresh();
+					TimeoutImpl t = new TimeoutImpl();
+					t.startTimer();
+					while (!statusOfBC.contains("Completed") && t.checkTimerMin(25)) {
+						statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+						System.out.println(statusOfBC);
+						Thread.sleep(5000);
+					}
+					
+					System.out.println("Status of BC  "+statusOfBC);
+					
+					Thread.sleep(5000);
+					
+					System.out.println("Providing file for conversion ");
+					provideFileForConversion();
+					
+					int ss = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=41 WHERE DATA_JOB_ID=69394");
+					System.out.println("Job Scehduled... .. ."+ss);
+					System.out.println("Waiting for 10 mins for job completion");
+					
+					Thread.sleep(600000);
+					
+					System.out.println("Removing file from conversion. .. .. ... .");
+					deleteFileForConversion();
+					int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=69394");
+					System.out.println("Deactivate the JOb ... .. ." +ss2);
+					
+					
+					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
+				} else {
+					
+                    System.out.println("else block");
+                    
+                    jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");
+					
+					commonObjects.filterName(bcName);
+					Thread.sleep(5000);
+					statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+					System.out.println("Status of BC "+statusOfBC);
+					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
+				}
+
+			} catch (Exception e) {
+
+				System.out.println("Removing file from conversion. .. .. ... .");
+				deleteFileForConversion();
+				int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=69394");
+				System.out.println("Deactivate the JOb ... .. ." +ss2);
+
+			}
+
+		}
+
 }
-	
+}
 
 
 

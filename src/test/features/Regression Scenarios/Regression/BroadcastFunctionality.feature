@@ -283,43 +283,19 @@ Feature: For broadcast functionality check
 #    Scenario: verify the activated Unlimited BCs
 #    Given login
 #    Then navigate to precision marketer
-#    Then verify the Acknowledgement event from Sheet "parallelRunBC" and inventory "Unlimited"
+#Then verify the Acknowledgement event from Sheet "parallelRunBC" and inventory "Unlimited"
 	
 
 	@verifyBConversion @initBrowser
-Scenario: verify bc conversion 
+Scenario: Activating the bcs 
 	Given login 
-#	Then navigate to configuration management 
-#	Then navigate to campaign categories 
-#	Then create new campaign category from sheet "campaignCategory" 
-#	Then navigate to landing page 
 	Then navigate to precision marketer 
-#	Then navigate to offer management 
-#	Then navigate to offers 
-#	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" 
-#	Then navigate to offer management 
-#	Then Navigate to Offer Catalogue 
-#	Then Create New Offer Catalogue from sheet "defaultCatalog" 
-#	Then Add "rechargeSMS" offer to Offer Catalogue 
-#	Then navigate to life cycle marketing 
-#	Then navigate to campaign category from sheet "campaignCategory" 
-#	Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog" 
-#	Then naigate to "campaignBC" campaign view broadcasts 
-#	Then click create new broadcast button 
-#	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
-#    Then activate bc
-#    Then wait until status of "one-offBC" is "Completed"
-#    Then provide file for conversion
-#    Then "Activate" the conversion job name "conversionJobBySelenium"
-#    Then navigate to reports
-#    Then navigate to customer profile
-#    Then search msisdn "919491750002"
-#    Then click on events tab
-#    Then wait for comversion event
-#    Then remove file for conversion
-#    Then wait for reward in consumer profile
-    Then activate and verify the boadcats from workbook "parallelRunBC" and sheet "parallelRunBC"
+    Then activate and verify the broadcast from workbook "parallelRunBC" and sheet "parallelRunBC"
+
     
+    
+    
+#    ********************** Verifying The INVENTORY    ********************
     
     @NDX-9000 @initBrowser
     Scenario: Verify Black out Rule and frequency limit by creating 4 types of BCs with Black out Always-NEW
@@ -340,40 +316,84 @@ Scenario: verify bc conversion
     Then verify the inventory "Unlimited" after completion of BCs from workbook "parallelRunBC" and sheet "parallelRunBC"
     
     
+#   ********************  -    Creating The Reward BCs   - ***************************** 
      
-     
-    @CreateCampaignsingleReward @initBrowser 
-  Scenario: Verify BC targeting using all types of target conditions with one time BC
+    @CreateCampaignsingleReward @initBrowser
+  Scenario: create campaign bc for reward bcs
     Given login
     Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-   Then naigate to "campaignBC" campaign view broadcasts
-     
-     @createBCwithoneruleonereward @initBrowser 
-Scenario: create a bc with one rule one one reward 
-	Given login 
+    Then naigate to "campaignBC" campaign view broadcasts
+  
+@createRecurringOneRuleOneRewards @initBrowser
+     Scenario: Create a BC with one rule one reward for Unique conversion of a customer give rewards to Rule based
+     Given login 
 	Then navigate to precision marketer 
-#	Then navigate to offer management 
-#	Then navigate to offers 
-#	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" 
-#	Then navigate to offer management 
-#	Then Navigate to Offer Catalogue 
-#	Then adding existing offers from sheet "rechargeSMS" Offer Catalogue from sheet "defaultCatalog" 
+	Then navigate to offer management 
+	Then navigate to offers 
+	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" 
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue 
+	Then adding existing offers from sheet "rechargeSMS" Offer Catalogue from sheet "defaultCatalog" 
 	Then navigate to life cycle marketing 
 	Then navigate to campaign category from sheet "CampaignCategory" 
 	Then naigate to "campaignBC" campaign view broadcasts 
 	Then click create new broadcast button 
-	Then create bc from sheet "one-offBC" with inventory "Unlimited" 
-	Then enter target tab details target condition digitalPersonaGT15 type "create" TG "no limit" CG "no limit" DNC "none" 
+	Then create bc from sheet "recurrBCDaily" with inventory "Unlimited" 
+	Then enter target tab details target condition customerDemographicsGT25 type "Create" TG "no limit" CG "no limit" DNC "none" 
 #	 filer criteria : Convert all , Rule-based .. give rewards to : All conversions for a customer, Unique conversion of a customer
-	Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "one-offBC" with "single creative" track session expires "At" filter criteria "Rule-based" give reward to "All conversions for a customer" 
-	Then enter deliver tab with end "never" target render time "realTime" and broadcast expiry as "none" from sheet "one-offBC" 
+	Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "recurrBCDaily" with "single creative" track session expires "After" filter criteria "Rule-based" give reward to "Unique conversion of a customer" 
+	Then enter deliver tab with end "never" target render time "realTime" and broadcast expiry as "none" from sheet "recurrBCDaily" 
 	Then save bc 
-    Then add the BC Data to "rewardBcs" from BCsheet "one-offBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "rechargeSMS" condition "digitalPersonaGT15" inventory "Rule-based" with string oneruleonereward
+    Then add the BC Data to "rewardBcs" from BCsheet "recurrBCDaily" campaignname "campaignBC" campaign category "CampaignCategory" offer "rechargeSMS" condition "Unique conversion of a customer" inventory "Rule-based" with string oneruleonereward
      
+ @CreateCampaignsingleReward1 @initBrowser
+  Scenario: create campaign bc for reward bcs
+    Given login
+    Then navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then naigate to "campaignBC" campaign view broadcasts
+
+@createRecurringOneRuleMultiRewards @initBrowser
+Scenario: Create a BC with one rule multiple reward for Unique conversion of a customer give rewards to Rule based
+     Given login 
+	Then navigate to precision marketer 
+	Then navigate to offer management 
+	Then navigate to offers 
+	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "onerulemultiplerewards" with creative type "singlecreative" 
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue 
+	Then adding existing offers from sheet "rechargeSMS" Offer Catalogue from sheet "defaultCatalog" 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "CampaignCategory" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then create bc from sheet "recurrBCDaily" with inventory "Unlimited" 
+	Then enter target tab details target condition customerDemographicsGT25 type "Create" TG "no limit" CG "no limit" DNC "none" 
+#	 filer criteria : Convert all , Rule-based .. give rewards to : All conversions for a customer, Unique conversion of a customer
+	Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "recurrBCDaily" with "single creative" track session expires "After" filter criteria "Rule-based" give reward to "Unique conversion of a customer" 
+	Then enter deliver tab with end "never" target render time "realTime" and broadcast expiry as "none" from sheet "recurrBCDaily" 
+	Then save bc 
+    Then add the BC Data to "rewardBcs" from BCsheet "recurrBCDaily" campaignname "campaignBC" campaign category "CampaignCategory" offer "rechargeSMS" condition "Unique conversion of a customer" inventory "Rule-based" with string onerulemultiplerewards
      
-     
+
+
+
+
+
+
+
+@ActivateCreatedBCs @initBrowser
+Scenario: verify bc conversion 
+Given login 
+Then navigate to precision marketer 
+#Then activate and raise the conversion job the broadcast from workbook "parallelRunBC" and sheet "rewardBcs"
+#Then verify the acknowledgement of Bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009"
+#Then verify the Conversion event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009"
+Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009"
 
 

@@ -581,7 +581,7 @@ public void clickActivateOption() throws Throwable {
 			clickTrggerableFilterIcon();
 			enterTriggarableFilterFormname(name);
 			clickTriggarableFilterApplyButton();					
-		}else if(sheetname.contentEquals("recurringBC")||sheetname.contentEquals("recurringBCEdit")||sheetname.contentEquals("recurringBCForAbort")||sheetname.contentEquals("recurringBCForPause")) {
+		}else if(sheetname.contentEquals("recurringBC")||sheetname.contentEquals("recurrBCDaily")||sheetname.contentEquals("recurringBCEdit")||sheetname.contentEquals("recurringBCForAbort")||sheetname.contentEquals("recurringBCForPause")) {
 			clickRecurringFilterIcon();
 			Thread.sleep(2000);
 			enterRecurringFilterFormname(name);
@@ -605,7 +605,7 @@ public void clickActivateOption() throws Throwable {
 			jswait.loadClick(seedingOptionsIcon);			
 		}else if(sheet.contains("TriggerReccurringBC")) {
 			jswait.loadClick(triggerOptionsIcon);
-		}else if(sheet.contentEquals("recurringBC")||sheet.contentEquals("recurringBCEdit")||sheet.contentEquals("recurringBCForAbort")||sheet.contentEquals("recurringBCForPause")) {
+		}else if(sheet.contentEquals("recurringBC")||sheet.contentEquals("recurrBCDaily")||sheet.contentEquals("recurringBCEdit")||sheet.contentEquals("recurringBCForAbort")||sheet.contentEquals("recurringBCForPause")) {
 			jswait.loadClick(recurringOptionsIcon);
 		}
 		

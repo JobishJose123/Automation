@@ -150,7 +150,7 @@ public class SQLHandler extends Init{
 //		sql.init("jdbc:mysql://node1.qaenv06.flytxt.com:31388/neon",p.getValue("dbUsername"),p.getValue("dbPassword"));
 //		int touchpointId = sql.getTouchpointID("apiTP344");
 //		System.out.println(touchpointId);
-	int ss = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=41 WHERE DATA_JOB_ID=44212");
+	int ss = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=69394");
 	System.out.println(ss);
 	
 		
