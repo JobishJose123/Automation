@@ -28,7 +28,7 @@ public class ShellExecuter extends Init{
 //    	password = "qaenv23";
     }
     public void executeScript(String command1) {
-//    	 String command1="cp /root/dk_testing_selenium/location1/source.txt /root/dk_testing_selenium/location2/";
+//   	 String command1="cp /root/dk_testing_selenium/location1/source.txt /root/dk_testing_selenium/location2/";
 		    try{
 		    	
 		    	java.util.Properties config = new java.util.Properties(); 
@@ -69,12 +69,11 @@ public class ShellExecuter extends Init{
 		    }catch(Exception e){
 		    	e.printStackTrace();
 		    }
-    }
-    
+   }
     
     public ArrayList<String> executeScriptInfra(String command1) {
-//   	 String command1="cp /root/dk_testing_selenium/location1/source.txt /root/dk_testing_selenium/location2/";
-   	 ArrayList<String> ActualString = new ArrayList <String>();
+//    	 String command1="cp /root/dk_testing_selenium/location1/source.txt /root/dk_testing_selenium/location2/";
+    	 ArrayList<String> ActualString = new ArrayList <String>();
 		    try{
 		    	
 		    	java.util.Properties config = new java.util.Properties(); 
@@ -131,9 +130,7 @@ public class ShellExecuter extends Init{
 		    	e.printStackTrace();
 		    }
 		  return ActualString;
-   }
-    
-    
+    }
     
     public static void uploadDNDListForDkJob() throws IOException {
     	String csvFileData = "";
@@ -222,60 +219,6 @@ public class ShellExecuter extends Init{
 		 return ageGT18;
     	
     }
-    
-    
-    
-    public ArrayList<String> executeScript1(String command1) {
-//   	 String command1="cp /root/dk_testing_selenium/location1/source.txt /root/dk_testing_selenium/location2/";
-		ArrayList<String> al= new ArrayList<>();   
-    	try{
-		    	
-		    	java.util.Properties config = new java.util.Properties(); 
-		    	config.put("StrictHostKeyChecking", "no");
-		    	JSch jsch = new JSch();
-		    	Session session=jsch.getSession(user, host, 22);
-		    	session.setPassword(password);
-		    	config.put(
-		    		    "PreferredAuthentications", 
-		    		    "publickey,keyboard-interactive,password");
-		    	session.setConfig(config);
-		    	session.connect();
-		    	System.out.println("Connected");
-		    	
-		    	Channel channel=session.openChannel("exec");
-		        ((ChannelExec)channel).setCommand(command1);
-		        channel.setInputStream(null);
-		        ((ChannelExec)channel).setErrStream(System.err);
-		        
-		        InputStream in=channel.getInputStream();
-		        channel.connect();
-		        byte[] tmp=new byte[1024];
-		        while(true){
-		          while(in.available()>0){
-		            int i=in.read(tmp, 0, 1024);
-		            if(i<0)break;
-		            System.out.print(new String(tmp, 0, i));
-		            al.add(new String(tmp, 0, i));
-		          }
-		          if(channel.isClosed()){
-		            System.out.println("exit-status: "+channel.getExitStatus());
-		            break;
-		          }
-		          try{Thread.sleep(1000);}catch(Exception ee){}
-		        }
-		        channel.disconnect();
-		        session.disconnect();
-		        System.out.println("DONE");
-		    }catch(Exception e){
-		    	e.printStackTrace();
-		    }
-    	
-    	System.out.println("list data"+al);
-    	return al;
-   }
-    
-    
-    
 	public static void main(String[] args) throws IOException {
 		
 //		uploadListForDkJob();
@@ -287,8 +230,30 @@ public class ShellExecuter extends Init{
 //		uploadDNDListForDkJob();
 		
 		ShellExecuter se = new ShellExecuter();
-		ArrayList<String> gdh = se.executeScript1("cd /usr/local/flytxt/selenium; cat conversionJob.csv");
-		System.out.println(gdh);
+		ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("InfraTesting_1", "Sheet1");
+		int rows = list.numRows();
+		System.out.println(rows);
+		for(int i=1;i<rows;i++) {
+		
+		String command = (String) list.getCell(i, 0);
+		String toCompare = (String) list.getCell(i, 1);
+		System.out.println("String to compare is "+toCompare);
+		ArrayList<String> List1 = se.executeScriptInfra(command);
+		System.out.println("List is " +List1);
+		boolean status = List1.contains(toCompare);
+		System.out.println(status);
+		list.setExcelFile("InfraTesting_1", "Sheet1");
+		if(status==true) {
+			System.out.println("updated");
+			list.setCell(i, 2, "Passed");
+			System.out.println("updated");
+		}else {
+			list.setCell(i, 2, "Failed");
+		}
+		}
+		//System.out.println(List1);
+		
 	}
 
 }
