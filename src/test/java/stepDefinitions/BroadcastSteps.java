@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -4301,6 +4302,7 @@ public void filter_the_bc_from_sheet_with(String bcfile, String bcsheet, String 
 	eh.setExcelFile(bcfile, bcsheet);
 	String bcName=eh.getCellByColumnName("BC Name");
 	commonObjects.filterBC(bcName,bctype);
+	commonObjects.BCOptionIcon(bctype);
 }
 
 
@@ -4449,7 +4451,7 @@ public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_a
 public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition(String bcDataSheet, String bcSheet, String campaignSheet, String campaignCategorySheet, String offerSheet, String condition) throws Throwable {
 	eh.setExcelFile("bcInputData", bcSheet);
 	String bcName=eh.getCell(1,0).toString();
-	String bcType=eh.getCell(1,7).toString();
+	String bcType=eh.getCell(1,14).toString();
 
 	eh.setExcelFile("offerInputData", offerSheet);
 	String offername=eh.getCell(1,0).toString();
@@ -4533,75 +4535,99 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 
 
 
-	@Then("^edit deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
-	public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
-		Actions builder =new Actions(driver);
-		eM.setExcelFile("bcInputData", bcSheet);
-		String recurrencePattern =eM.getCellByColumnName("Recurrance Pattern");
-		Calendar rightNow = Calendar.getInstance();
-		String mn = "";
-		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
-			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
-		} else
-			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
-		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
-				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
-		String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
-				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
-		int hours = rightNow.get(Calendar.HOUR);
-		int min = rightNow.get(Calendar.MINUTE);
-		int am_pm = rightNow.get(Calendar.AM_PM);
-		int day = rightNow.get(Calendar.DAY_OF_MONTH);
-		int year = rightNow.get(Calendar.YEAR);
-		int month = rightNow.get(Calendar.MONTH) + 1;
-		min += 2;
-		int rem = min % 5;
-		rem = 5 - rem;
-		min += rem;
-		if (min > 59) {
-			min -= 60;
-			hours++;
-		}
-		 if(min==0)
-			{
-				min+=5;
-			}
-			System.out.println("Inside recurring");
-			
-			
-			// if(bc_type.contentEquals("recurring")){
-			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
-			jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
-			jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
-			jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
-			// }
-			Thread.sleep(2000);
-			jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
-			Thread.sleep(2000);
-			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
-			WebElement num = driver.findElement(By.xpath(
-					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
-							+ (hours + 1) + "]"));
-			Thread.sleep(2000);
-			builder.moveToElement(num).click().build().perform();
-			Thread.sleep(2000);
-			// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
-			WebElement num1 = driver.findElement(By.xpath(
-					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
-							+ (min + 1) + "]"));
-			Thread.sleep(1000);
-			builder.moveToElement(num1).click().build().perform();
-			Thread.sleep(1000);
-			if (am_pm == 0)
-				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
-			
-			else
-				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
-			Thread.sleep(1000);
-			num1 = driver.findElement(By.xpath(
-					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
-			builder.moveToElement(num1).click().build().perform();
+
+@Then("^edit deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
+	Actions builder =new Actions(driver);
+	eM.setExcelFile("bcInputData", bcSheet);
+	String recurrencePattern =eM.getCellByColumnName("Recurrance Pattern");
+	Calendar rightNow = Calendar.getInstance();
+	String mn = "";
+	if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+		mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+	} else
+		mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+	String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+	String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
+	int hours = rightNow.get(Calendar.HOUR);
+	int min = rightNow.get(Calendar.MINUTE);
+	int am_pm = rightNow.get(Calendar.AM_PM);
+	int day = rightNow.get(Calendar.DAY_OF_MONTH);
+	int year = rightNow.get(Calendar.YEAR);
+	int month = rightNow.get(Calendar.MONTH) + 1;
+	min += 2;
+	int rem = min % 5;
+	rem = 5 - rem;
+	min += rem;
+	if (min > 59) {
+		min -= 60;
+		hours++;
 	}
+	 if(min==0)
+		{
+			min+=5;
+		}
+	 Thread.sleep(3000);
+	 broadcastPageObjects.clickProceedButton();
+	 Thread.sleep(2000);
+	 broadcastPageObjects.clickProceedButton();
+	 Thread.sleep(2000);
+	 broadcastPageObjects.clickProceedButton();
+	 Thread.sleep(2000);
+		
+		jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+		jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
+		jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+		// }
+		Thread.sleep(2000);
+		jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
+		Thread.sleep(2000);
+		jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
+		Thread.sleep(2000);
+		WebElement num = driver.findElement(By.xpath(
+				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+						+ (hours + 1) + "]"));
+		Thread.sleep(2000);
+		builder.moveToElement(num).click().build().perform();
+		Thread.sleep(2000);
+		// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+		WebElement num1 = driver.findElement(By.xpath(
+				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+						+ (min + 1) + "]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num1).click().build().perform();
+		Thread.sleep(1000);
+		if (am_pm == 0)
+			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
+		
+		else
+			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
+		Thread.sleep(1000);
+		num1 = driver.findElement(By.xpath(
+				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
+		builder.moveToElement(num1).click().build().perform();
+		 Thread.sleep(2000);
+		 Thread.sleep(2000);
+		 jswait.loadClick("(//label[contains(.,'Start broadcasts at')]//following::input)[1]");
+		 Thread.sleep(2000);
+		WebElement num2 = driver.findElement(By.xpath(
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
+		builder.moveToElement(num2).click().build().perform();
+		Thread.sleep(2000);
+		WebElement num3 = driver.findElement(By.xpath(
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num3).click().build().perform();
+		if (am_pm == 0)
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+		else
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+		 Thread.sleep(2000);
+          jswait.loadClick("(//label[contains(.,'Start broadcasts at')]//following::paper-button[contains(.,'OK')])[2]");
+         
+		 }
 
 
 //@Then("^verify the target count from sheet \"([^\"]*)\" also the channel \"([^\"]*)\" creative \"([^\"]*)\" of the bc from workbook \"([^\"]*)\" from sheet \"([^\"]*)\"$")
@@ -4935,6 +4961,111 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 		}
 
 }
+
+	@Then("^verify the target count with condition (.*) from sheet \"([^\"]*)\" also the channel \"([^\"]*)\"$")
+	public void verify_the_target_count_with_condition_SharedcustomerList_from_sheet_also_the_channel(String condition,String targetCountSheet, String offerChannel) throws Exception {
+	   eh.setExcelFile("parallelRunBC", targetCountSheet);
+	   String targetCount=eh.getCellByColumnName(condition);
+	   broadcastPageObjects.verifyViewDetailsOfBc(targetCount,offerChannel);
+	}
+
+	@Then("^verify the dr count from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\" from bc report$")
+	public void verify_the_dr_count_from_sheet_of_the_bc_from_sheet_from_bc_report(String targetCountSheet, String bcSheet) throws Exception {
+	   eh.setExcelFile("bcInputData", bcSheet);
+	   eM.setExcelFile("parallelRunBC", targetCountSheet);
+	   broadcastPageObjects.verifyDRCount(eh.getCellByColumnName("BC Name"),eM.getCellByColumnName("Acknowledgement"));
+	}
+
+	@Then("^verify the ack event for the bc from sheet \"([^\"]*)\" and campaign from sheet \"([^\"]*)\"$")
+	public void verify_the_ack_event_for_the_bc_from_sheet_and_campaign_from_sheet(String bcSheet, String campaignSheet) throws Exception {
+	    eh.setExcelFile("bcInputData", bcSheet);
+	    String bcName=eh.getCellByColumnName("BC Name");
+	    eM.setExcelFile("campaignInputData", campaignSheet);
+	    String campaignName=(String) eM.getCell(1, 0);
+	    broadcastPageObjects.verifyAckEventForBc(bcName,campaignName);
+	}
+	
+	
+	@Then("^view broadcast for \"([^\"]*)\" for bctype \"([^\"]*)\"$")
+	public void view_broadcast_for_for_bctype(String bcToView, String bctype) throws Exception {
+			broadcastPageObjects.viewBCbtn(bcToView,bctype);
+		
+	}
+	@Then("^filter the bc from sheet \"([^\"]*)\" from row \"([^\"]*)\" and column \"([^\"]*)\" and write in sheet \"([^\"]*)\"$")
+	public void filter_the_bc_from_sheet_from_row_and_column_and_write_in_sheet(String bcStorageSheet, int row, int column, String bcSheet) throws Exception {
+		eh.setExcelFile("parallelRunBC", bcStorageSheet);
+		String bcName =(String) eh.getCell(row, column);
+		eM.setExcelFile("bcInputData", bcSheet);
+		eM.setCell("BC Name", bcName);
+		
+	}
+	@Then("^activate broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void activate_broadcast_from_workbook_and_sheet(String workBook, String bcStorageSheet) throws Throwable {
+	ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,bcStorageSheet);
+	String bcName,bcSheet,bctype="";
+	for (int i = 0; i < data.size(); i++) {
+		bcName = data.get(i).get(1);
+		bcSheet =data.get(i).get(9);
+		bctype=data.get(i).get(8); 
+		commonObjects.filterBC(bcName, bctype);
+		commonObjects.BCOptionIcon(bctype);
+		Thread.sleep(2000);
+		commonObjects.clickEditOption();
+	edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
+			activateBc();
+}
+	}
+
+	@Then("^verify the date for child bc from sheet \"([^\"]*)\" with recurrence pattern \"([^\"]*)\"$")
+	public void verify_the_date_for_child_bc_from_sheet_with_recurrence_pattern(String bcSheet, String recurrencePattern) throws Exception {
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName =eh.getCellByColumnName("BC Name");
+		Calendar c= Calendar.getInstance();
+		DateFormat df=new SimpleDateFormat("dd MMM yyyy");
+		if(recurrencePattern.equalsIgnoreCase("daily")) {	
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+		c.add(Calendar.DATE,1);
+		System.out.println(df.format(c.getTime())); 
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+		c.add(Calendar.DATE,1);
+		System.out.println(df.format(c.getTime()));
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+	}
+		else if (recurrencePattern.equalsIgnoreCase("every 2 days")) {
+			Thread.sleep(2000);
+			System.out.println(df.format(c.getTime()));
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+			c.add(Calendar.DATE,2);
+			System.out.println(df.format(c.getTime())); 
+			Thread.sleep(2000);
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+			c.add(Calendar.DATE,2);
+			System.out.println(df.format(c.getTime()));
+			Thread.sleep(2000);
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+		}
+		else if (recurrencePattern.equalsIgnoreCase("every week")) {
+			Thread.sleep(2000);
+			c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY); 
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));   
+			c.add(Calendar.DATE,7);
+			System.out.println(df.format(c.getTime())); 
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+			c.add(Calendar.DATE,7);
+			System.out.println(df.format(c.getTime())); 
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+		}
+		else if (recurrencePattern.equals("special day of the week")) {
+			
+		int dayOfTheMonth=c.get(c.WEEK_OF_MONTH);
+	if(dayOfTheMonth ==5) {
+		
+	}
+		}
+	}
 }
 
 

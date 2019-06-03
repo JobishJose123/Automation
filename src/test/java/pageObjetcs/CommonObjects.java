@@ -1000,7 +1000,7 @@ public void filterBC(String bcname,String bctype) throws Exception{
 Thread.sleep(10000);
 Thread.sleep(10000);
 //Thread.sleep(10000);
-if(bctype.equalsIgnoreCase("onetime")) {
+if(bctype.equalsIgnoreCase("onetime")||bctype.equalsIgnoreCase("one-off")) {
 clickFilterIcon();
 Thread.sleep(2000);
 enterFilterFormname(bcname);
@@ -1010,7 +1010,7 @@ clickFilterIcon();
 enterFilterFormname(bcname);
 clickFilterApplyButton();
 jswait.loadClick(autoRefreshButtononetime);
-}else if(bctype.equalsIgnoreCase("seeding")){
+}else if(bctype.equalsIgnoreCase("seeding")||bctype.equalsIgnoreCase("seedingoneoff")||bctype.equalsIgnoreCase("seedingRecurring")){
 clickSeedingFilterIcon();
 	Thread.sleep(2000);
 	enterSeedingFilterFormname(bcname);
@@ -1047,9 +1047,9 @@ jswait.loadClick(autoRefreshButtonRecurr);
 }
 
 public void BCOptionIcon(String bctype) throws Exception{
-if(bctype.equalsIgnoreCase("onetime")) {
+if(bctype.equalsIgnoreCase("onetime")||bctype.equalsIgnoreCase("one-off")) {
 	jswait.loadClick(optionsIcon);
-}else if(bctype.equalsIgnoreCase("seeding")) {
+}else if(bctype.equalsIgnoreCase("seeding")||bctype.equalsIgnoreCase("seedingoneoff")||bctype.equalsIgnoreCase("seedingRecurring")) {
 	jswait.loadClick(seedingOptionsIcon);			
 }else if(bctype.equalsIgnoreCase("trigger")) {
 	jswait.loadClick(triggerOptionsIcon);
