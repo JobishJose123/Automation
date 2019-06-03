@@ -292,8 +292,11 @@ public class ProgramPage extends Init{
 	@FindBy(xpath=".//paper-item[@value='false' and contains(.,'After')]")
 	private WebElement optionAfter;
 	
-	@FindBy(xpath="//div[@id='contentWrapper']//paper-listbox[@role='listbox']/paper-item[contains(.,'After')]")
+	@FindBy(xpath="//div[@id='items']/vaadin-combo-box-item[contains(.,'After')]")
 	private WebElement optionAfterselect;
+	
+	@FindBy(xpath="//div[@id='items']/vaadin-combo-box-item[contains(.,'At')]")
+	private WebElement optionAtselect;
 	
 	@FindBy(xpath=".//paper-item[@value='true' and contains(.,'At')]")
 	private WebElement optionAt;
@@ -313,6 +316,9 @@ public class ProgramPage extends Init{
 	@FindBy(xpath=".//paper-input-error[contains(.,'The value does not match the specified pattern.')]")
 	private WebElement errorProgrammTitle ;
 
+	@FindBy(xpath="//div[@id='items']/vaadin-combo-box-item[contains(.,'At')]//following::label[contains(.,'Time')][1]//..//input")
+	private WebElement AtTime ;
+	
 	
 	//rules
 	
@@ -323,11 +329,11 @@ private WebElement programrulename ;
 	
 
 	
-@FindBy(xpath="//div[@id='contentWrapper']//paper-listbox[@role='listbox']/paper-item[contains(.,'After')]//following::input[1]")
+@FindBy(xpath="//div[@id='items']/vaadin-combo-box-item[contains(.,'After')]//following::label[1]//..//input")
 private WebElement ruleaftervalue ;
-@FindBy(xpath="//div[@id='contentWrapper']//paper-listbox[@role='listbox']/paper-item[contains(.,'After')]//following::input[2]")
+@FindBy(xpath="//div[@id='items']/vaadin-combo-box-item[contains(.,'After')]//following::label[2]//..//input")
 private WebElement ruleafterinput2 ;
-@FindBy(xpath="//form[@id='deliverySegment']//div[@id='contentWrapper']//paper-listbox[@role='listbox']/paper-item[contains(.,'Days')]")
+@FindBy(xpath="//div[@id='items']/vaadin-combo-box-item[contains(.,'Days')]")
 private WebElement ruledays;
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::input[1]")
 private WebElement rulessenderid ;
@@ -476,6 +482,10 @@ private WebElement rulessenderid2
 		jswait.loadClick(optionAfterselect);
 		}
    
+   public void optionAtselect() throws InterruptedException {
+		jswait.loadClick(optionAtselect);
+		}
+   
    public void clickTrackingSessionField() throws InterruptedException {
 		jswait.loadClick(trackingSessionField);
 		}
@@ -557,6 +567,15 @@ private WebElement rulessenderid2
 	
 		if(touchpointType.contentEquals("sms")){
 			System.out.println("inside sms");
+			clickTrackingSessionField();
+			Thread.sleep(3000);
+			optionAfterselect();
+			Thread.sleep(3000);
+			ruledelivryafterinput();
+			Thread.sleep(3000);
+			ruleafterinput2(); 
+			ruledays();
+			Thread.sleep(2000);
 			rulessenderid();
 			Thread.sleep(2000);
 			addresssprule();
@@ -2138,6 +2157,164 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 			builder.moveToElement(num1).click().build().perform();
 			
 			jswait.loadClick("(//paper-button[contains(.,'OK')])[2]");
+			}
+		
+		
+		
+		   public void Attimeselection() throws java.lang.Exception {
+				Calendar rightNow =Calendar.getInstance();
+		    	String mn = "";
+		    	if(rightNow.get(Calendar.MONTH)+1<9) {
+		    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		    	}
+		    	else 
+		    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+				String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+		    	int hours = rightNow.get(Calendar.HOUR);
+		      	 int min = rightNow.get(Calendar.MINUTE);
+		      	 int am_pm = rightNow.get(Calendar.AM_PM);
+		      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		      	 int year = rightNow.get(Calendar.YEAR);
+		      	 int month = rightNow.get(Calendar.MONTH)+1;
+		      	 min+=2;
+		      	 int rem = min%5;
+		      	 rem = 5-rem;
+		      	 min+=rem;
+		      	 if(min>59){
+		      		 min-=60;
+		      		 hours++;
+		      	 }
+		      	jswait.loadClick(AtTime);
+		      	 Actions builder = new Actions(driver);
+		       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+		    	 Thread.sleep(1000);
+		    	 builder.moveToElement(num1).click().build().perform();
+		    	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+		    	 Thread.sleep(1000);
+		    	 builder.moveToElement(num1).click().build().perform();
+		      	if(am_pm==0)
+		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+		       else
+		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+				
+				
+				}
+		
+		
+		//-/-------------------------------------------------------------------------//
+		 public void createNewProgramRulewithenddate(String name,String listname,String touchpointList, String offerType)throws Exception {
+				eh.setExcelFile("touchpointInputData", touchpointList);
+				System.out.println(touchpointList);
+				String touchpointType = eh.getCellByColumnName("type");
+				clickCreateNewRuleButton();
+				enterruleName();
+				clickSaveRuleButton();
+				Thread.sleep(2000);
+				clickCustomerListField();
+				Thread.sleep(2000);
+				selectCustomerList(listname);
+				Thread.sleep(2000);
+				clickPorogramProceedButton();
+				Thread.sleep(2000);
+				clickProductFieldOption();
+				chooseProduct(name);
+				Thread.sleep(2000);
+				selectoffersinrules();
+				Thread.sleep(2000);
+				
+				
+				//System.out.println("test");
+				
+				if(!offerType.contains("STV")) {
+				clickTrackingSessionField();
+				Thread.sleep(3000);
+				optionAtselect();
+				Thread.sleep(3000);
+				Attimeselection();
+				Thread.sleep(3000);
+				ruleafterinput2(); 
+				ruledays();
+				Thread.sleep(2000);
+				}
+			
+				if(touchpointType.contentEquals("sms")){
+					System.out.println("inside sms");
+					clickTrackingSessionField();
+					Thread.sleep(3000);
+					optionAtselect();
+					Thread.sleep(3000);
+					ruledelivryafterinput();
+					Thread.sleep(3000);
+					ruleafterinput2(); 
+					ruledays();
+					Thread.sleep(2000);
+					rulessenderid();
+					Thread.sleep(2000);
+					addresssprule();
+
+					Thread.sleep(2000);
+					rulerouteid();
+					Thread.sleep(2000);
+					ruleroute();
+					Thread.sleep(2000);
+					
+		   }
+				rulessenderid2();
+				Thread.sleep(2000);
+				addresssprule2();
+				Thread.sleep(2000);
+				rulerouteid2();
+				Thread.sleep(2000);
+				ruleroute2();
+				clickPorogramProceedButton();
+				
+				
+				
+				// same path for both program and rule thats why used this fns here//
+				Thread.sleep(2000);
+				programschstart(); 
+				prmshcselectnow();
+				Thread.sleep(2000);
+				Calendar rightNow =Calendar.getInstance();
+		    	String mn = "";
+		    	if(rightNow.get(Calendar.MONTH)+1<9) {
+		    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		    	}
+		    	else 
+		    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+				String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+		    	int hours = rightNow.get(Calendar.HOUR);
+		      	 int min = rightNow.get(Calendar.MINUTE);
+		      	 int am_pm = rightNow.get(Calendar.AM_PM);
+		      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		      	 int year = rightNow.get(Calendar.YEAR);
+		      	 int month = rightNow.get(Calendar.MONTH)+1;
+		      	 min+=2;
+		      	 int rem = min%5;
+		      	 rem = 5-rem;
+		      	 min+=rem;
+		      	 if(min>59){
+		      		 min-=60;
+		      		 hours++;
+		      	 }
+		      	prmrefreshat();
+		      	 Actions builder = new Actions(driver);
+		       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+		    	 Thread.sleep(1000);
+		    	 builder.moveToElement(num1).click().build().perform();
+		    	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+		    	 Thread.sleep(1000);
+		    	 builder.moveToElement(num1).click().build().perform();
+		      	if(am_pm==0)
+		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+		       else
+		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+		      	clickRefreshAtOkButton();
+				programactivatebtn();
+				programconfirmactivateyes();
+				System.out.println("test");
+			
+				
 			}
 	
 }

@@ -217,6 +217,8 @@ public class CustomerProfilePage extends Init{
 	@FindBy(xpath = "//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[2]")
 	private WebElement Eventdate;
 	
+	@FindBy(xpath = "//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[3]")
+	private WebElement Eventtype;
 	
 	
 	

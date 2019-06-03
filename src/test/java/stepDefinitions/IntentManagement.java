@@ -2106,27 +2106,7 @@ System.out.println(editname+"program has edited successfully");
 			SQLHandler sql = new SQLHandler();
 			return sql.getStringOfQuery("select SEGMENT_OFFER_ID from im_segment_offer where SEGMENT_NAME=\""+ruleName+"\";");
 		}
-		@Then("^get-offer api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
-		public void getOfferApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
-			StringBuilder str = new StringBuilder();
-			str.append("http://");
-			MarathonHelper m = new MarathonHelper();
-			
-			str.append(p.getValue("nginxIp"));
-			str.append(":");
-			str.append("8092");
-			eh.setExcelFile("touchpointInputData", touchpointSheet);
-			str.append("/rest/authkey/"+eh.getCellByColumnName("api touchpoint name")+"/msisdn/"+number+"/offers");
-			System.out.println(str.toString());
-			Request req = new Request();
-			req.getRequest(str.toString(),"");
-			offerRecommended = req.responseString;
-			System.out.println(req.responseString);
-			eh.setExcelFile("ruleInputData", ruleSheet);
-			SQLHandler sql = new SQLHandler();
-			int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
-			Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
-		}
+		
 		
 		@Then("^accept api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
 		public void acceptApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
@@ -2472,55 +2452,72 @@ System.out.println(editname+"program has edited successfully");
 		
 					 }
 				  
-					@Then("^wait for Message Recevied in consumer profile$")
-					public void wait_for_MessageRecevied() throws Throwable {
-						Date now = new Date();
-						Calendar calendar = Calendar.getInstance();
-						int min = calendar.get(Calendar.MINUTE);
-						now.setMinutes(min-2);
-						dateForCompare = now;
-						CustomerProfilePage customerProfilePage = new CustomerProfilePage();
-						customerProfilePage.clickEventTypesCheckBox();
-						customerProfilePage.clickEventTypesCheckBox();
-						customerProfilePage.clickMessageReceivedCheckBoxCheckBox();
-						customerProfilePage.clickSelectEventApplyButton();
-						Thread.sleep(2000);
-						TimeoutImpl t = new TimeoutImpl();
-						t.startTimer();
-						String date = getLastOfferRecommendedEventTime();
-						if(date.equals("noOfferRecommendedEventFound"))
-							date = "05 Sep 2000 04:18 PM";
-						Date timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
-						System.out.println(timeStamp);
-						System.out.println(checkOfferRecommendedEventTime(dateForCompare,timeStamp));
-						while(t.checkTimerMin(15) && !checkOfferRecommendedEventTime(dateForCompare,timeStamp)) {
-							System.out.println("insie while"+dateForCompare+"::"+timeStamp);
-							Thread.sleep(5000);
-//							customerProfilePage.clickEventsTab();
-							customerProfilePage.clickEventTypesCheckBox();
-							customerProfilePage.clickSelectEventApplyButton();
-							Thread.sleep(2000);
-							customerProfilePage.clickEventTypesCheckBox();
-							customerProfilePage.clickMessageReceivedCheckBoxCheckBox();
-							customerProfilePage.clickSelectEventApplyButton();
-							Thread.sleep(2000);
+			
+				  
+					 @Then("^create new rule with enddate from sheet \"([^\"]*)\" and offer \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+						public void createNewProgramRulewithenddate(String sheet1,String offerType,String touchpointList) throws Throwable {
+							Thread.sleep(4000);
 							
-//							date = getLastOfferRecommendedEventTime();
-//							if(date.equals("noOfferRecommendedEventFound"))
-//								date = "05 Sep 2000 04:18 PM";
-//							timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
-//							System.out.println(timeStamp);
-//							System.out.println(getLastOfferRecommendedEventTime());
+					    	ExcelHelper programExcel = new ExcelHelper();
+					    	programExcel.setExcelFile("programInputData", sheet1);
+					    	ExcelHelper offerExcel = new ExcelHelper();
+					    	offerExcel.setExcelFile("offerInputData", offerType);
+					    	
+					 		String name = (String) programExcel.getCell(1,0);
+					 		
+					 		Thread.sleep(4000);
+							//programPage.clickCreateProgramButton();
+					 		System.out.println(touchpointList);
+							programPage.createNewProgramRule(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+							dateForCompare = new Date();
+							System.out.println(dateForCompare);
 							
 						}
-//						date = getLastOfferRecommendedEventTime();
-//						if(date.equals("noOfferRecommendedEventFound"))
-//							date = "05 Sep 2000 04:18 PM";
-//						timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
-//						Assert.assertTrue("offer Recommended event not found", checkOfferRecommendedEventTime(dateForCompare,timeStamp));
-					}
-				  
 				
+				
+					@Then("^get-offer api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
+					public void getOfferApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
+						StringBuilder str = new StringBuilder();
+						str.append("http://");
+						MarathonHelper m = new MarathonHelper();
+						
+						str.append(p.getValue("nginxIp"));
+						str.append(":");
+						str.append("8092");
+						eh.setExcelFile("touchpointInputData", touchpointSheet);
+						str.append("/rest/authkey/"+p.getValue("ApiTouchpointauthkey")+"/msisdn/"+number+"/offers");
+						System.out.println(str.toString());
+						Request req = new Request();
+						req.getRequest(str.toString(),"");
+						
+						offerRecommended = req.responseString;
+						System.out.println("this is the response"+req.responseString);
+						eh.setExcelFile("ruleInputData", ruleSheet);
+						SQLHandler sql = new SQLHandler();
+						int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
+						Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
+					}
+					
+												@Then("^wait for Message Recevied in consumer profile$")
+								public void wait_for_MessageRecevied() throws Throwable {
+									CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+									customerProfilePage.clickEventTypesCheckBox();
+									customerProfilePage.clickEventTypesCheckBox();
+									customerProfilePage.clickMessageReceivedCheckBoxCheckBox();
+									customerProfilePage.clickSelectEventApplyButton();
+									Thread.sleep(2000);
+								
+										
+										if(driver.findElement(By.xpath("//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[3]")).getText().equalsIgnoreCase("Message Received")) {
+											Thread.sleep(2000);
+											System.out.println("inside if");
+											jswait.loadClick("//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[3]");
+										
+										
+									}
+//									
+//									Assert.assertTrue("offer Recommended event not found", checkOfferRecommendedEventTime(dateForCompare,timeStamp));
+								}
 				
 				
 				

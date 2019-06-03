@@ -562,7 +562,7 @@ Feature: Test cases for API
     Then get-offer api-server for "9491750022" with touchpoint "apiTouchpoint_default" and rule "rule"
     Then wait for offer recommended event in consumer profile
 	
-	@NX-3100 @NX-3101
+	@NX-3100 @NX-3101 @NX-apitest
 	 @initBrowser 
   Scenario: API- Verify getoffer for API -3100
     Given login
@@ -580,7 +580,7 @@ Feature: Test cases for API
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then create new offer from sheet "rechargeSMS" with product "default"
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
     Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
@@ -591,9 +591,9 @@ Feature: Test cases for API
     Then navigate to intent management
     Then navigate to programs
     Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpoint_default"
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointUR_default"
     Then choose program from sheet "programdetails"
-    Then create new rule from sheet "fullDetails" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpoint_default"
+    Then create new rule from sheet "programdetails" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointUR_default"
     Then verify rule created from sheet "rule"
     Then wait for "A" status of rule
     Then wait until rule is picked
@@ -601,12 +601,12 @@ Feature: Test cases for API
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then search msisdn "9446506807"
+    Then search msisdn "9491750025"
     Then click on events tab
     Then wait for offer eligible event in consumer profile
-    Then get-offer api-server for "9446506807" with touchpoint "apiTouchpoint_default" and rule "rule"
+    Then get-offer api-server for "9491750025" with touchpoint "apiTouchpoint_default" and rule "rule"
     Then wait for offer recommended event in consumer profile
-    Then accept api-server for "9446506807" with touchpoint "apiTouchpoint_default" and rule "rule"
+    Then accept api-server for "9491750025" with touchpoint "apiTouchpoint_default" and rule "rule"
     Then wait for offer accepted event in consumer profile
     Then pass next scenario based on this step
     
