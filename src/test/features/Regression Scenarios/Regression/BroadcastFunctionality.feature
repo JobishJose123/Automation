@@ -382,15 +382,18 @@ Scenario: Create a BC with one rule multiple reward for Unique conversion of a c
      
 
 
+
+
+
 @ActivateCreatedBCs @initBrowser
 Scenario: verify bc conversion 
 Given login 
 Then navigate to precision marketer 
-#Then activate and raise the conversion job the broadcast from workbook "parallelRunBC" and sheet "rewardBcs"
-#Then verify the acknowledgement of Bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009"
-#Then verify the Conversion event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009"
+Then activate and raise the conversion job the broadcast from workbook "parallelRunBC" and sheet "rewardBcs"
+Then verify the acknowledgement of Bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009"
+Then verify the Conversion event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009"
 Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009"
-
+Then verify the FulfillmentSuccessMessage to verify Creative "Success from Selenium from first rule" message type "Text" and rewardType "onerulemultiplerewards" with MSISDN"9491750009"
     #=====================================================================================================================================#
 @NDX-ActivateBC  @initBrowser
 Scenario: Activate all the bc in the BCStorageSheet

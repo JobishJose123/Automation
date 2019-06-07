@@ -4866,6 +4866,25 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 	}
 
 	
+	@Then("^verify the FulfillmentSuccessMessage to verify Creative \"([^\"]*)\" message type \"([^\"]*)\" and rewardType \"([^\"]*)\" with MSISDN\"([^\"]*)\"$")
+	public void verify_the_FulfillmentSuccessMessage_to_verify_Creative_message_type_and_rewardType_with_MSISDN(String creative, String messageType, String rewardType, String msisdn) throws Throwable {
+		commonObjects.clickOnReports();
+		customerObjects.navigateToCustomerProfile();
+		
+		customerObjects.enterCustomerNumber(msisdn);
+		customerObjects.clickSearchNumberIcon();
+		System.out.println("verifying Fulfillment Success message ... .. .. .... ");
+		
+		customerObjects.clickEventsTab();
+		customerObjects.chooseAllEvents();
+		customerObjects.clickApplyButton();
+		customerObjects.chooseAllEvents();
+		customerObjects.clickOnAckEventCheckBox();
+		customerObjects.clickApplyButton();
+		customerObjects.verifyFulFillmentSuccessMessage(creative,messageType,rewardType);
+		
+	}
+	
 
 	@Then("^activate and raise the conversion job the broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
 	public void activate_and_raise_the_conversion_job_the_broadcast_from_workbook_and_sheet(String workBook, String sheet) throws Throwable {
