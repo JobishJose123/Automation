@@ -90,6 +90,7 @@ public class ShellExecuter extends Init{
 		    	
 		    	Channel channel=session.openChannel("exec");
 		        ((ChannelExec)channel).setCommand(command1);
+		        Thread.sleep(2000);
 		        channel.setInputStream(null);
 		        ((ChannelExec)channel).setErrStream(System.err);
 		        
@@ -98,13 +99,12 @@ public class ShellExecuter extends Init{
 		        byte[] tmp=new byte[1024];
 		        //ArrayList<String> ActualString = new ArrayList <String>();
 		        while(true){
-		          while(in.available()>0){
-		            int i=in.read(tmp, 0, 1024);
-		            if(i<0)break;	
+	          while(in.available()>0){
+	            int i=in.read(tmp, 0, 1024);
+            if(i<0)break;	
 		            String WholeString = new String(tmp, 0, i);
 		            String[] str17 = WholeString.split("\\n");
-		            //ActualString.add(new String(tmp, 0, i));
-		            //System.out.println(ActualString);
+		            //ActualString.add(new String(tmp, 0, i);
 		    		for (String OrignalData : str17) {
 
 		    			ActualString.add(OrignalData.trim());
@@ -219,16 +219,20 @@ public class ShellExecuter extends Init{
 		 return ageGT18;
     	
     }
-	public static void main(String[] args) throws IOException {
-		
+	public static void main(String[] args) throws Exception {
+		verifyInfraDetails("Sheet1");
+	    InfraDetails("SystemBestPractices");
+		verifyThePermission("verifyPermission","-rw-r--r--");
+		verifyNegFlowOfInfraDetails("SystemBestPracticesNegFlow");
+//		verifyInfraDetails("sheet 1");
 //		uploadListForDkJob();
-//		
+		}
 //		String csvFileData = "";
 		
 //		getAgeTargetCount();
 		
 //		uploadDNDListForDkJob();
-		
+		public static void verifyInfraDetails(String sheet) throws Exception {
 		ShellExecuter se = new ShellExecuter();
 		ExcelHelper list = new ExcelHelper();
 		list.setExcelFile("InfraTesting_1", "Sheet1");
@@ -255,5 +259,101 @@ public class ShellExecuter extends Init{
 		//System.out.println(List1);
 		
 	}
+		public static void verifyThePermission(String sheet,String permissionType) throws Exception{
+			ArrayList<String> outputList;
+			ShellExecuter se=new ShellExecuter();
+			ExcelHelper list = new ExcelHelper();
+			list.setExcelFile("InfraTesting_1", sheet);
+			int rows=list.numRows();
+			System.out.println("rows :"+rows);
+			for(int i=1;i<=rows;i++) {
+		    String command = (String) list.getCell(i,0);
+		    System.out.println("commd is :"+command);
+			 outputList = se.executeScriptInfra(command);
+			System.out.println("outputList is: "+outputList);
+			for (String str1 : outputList) {
+				try {
+				System.out.println("str1:"+str1);
+				String test =(String)str1.subSequence(0, 10);
+			   System.out.println("output is " +test);
+			if(test.equalsIgnoreCase(permissionType)||test.equalsIgnoreCase("d"+permissionType)) {
+				System.out.println("updated");
+				list.setCell(i, 1, "Passed");
+			}
+			else
+				System.out.println("else");
+			list.setCell(i, 1, "Failed");
+				}
+			catch(Exception e) {
+				System.out.println("permission failed");
+			}
+			}
+		
+}
+}
+		
+		public static void verifyNegFlowOfInfraDetails(String sheet) throws IOException {
+			ShellExecuter se = new ShellExecuter();
+			ExcelHelper list = new ExcelHelper();
+			list.setExcelFile("InfraTesting_1", sheet);
+			int rows = list.numRows();
+			System.out.println(rows);
+			for(int i=1;i<=rows;i++) {
+			
+			String command = (String) list.getCell(i, 0);
+			String toCompare = (String) list.getCell(i, 1);
+			System.out.println("String to compare is "+toCompare);
+			ArrayList<String> List = se.executeScriptInfra(command);
+			System.out.println("List is " +List);
+			String str=List.toString();
+			String str1=str.replaceAll("\\s","");
+			System.out.println("str1 is:"+str1);
+			boolean status = str1.contains(toCompare);
+			System.out.println(status);
+			list.setExcelFile("InfraTesting_1", sheet);
+			if(status==true) {
+				System.out.println("updated");
+				list.setCell(i, 2, "failed");
+			}else {
+				list.setCell(i, 2, "passed");
+			}
+			}
+		}
+
+		public static void InfraDetails(String sheet) throws IOException {
+			ShellExecuter se = new ShellExecuter();
+			ExcelHelper eh = new ExcelHelper();
+			eh.setExcelFile("InfraTesting_1", sheet);
+			int rows = eh.numRows();
+			System.out.println("no. of rows:"+rows);
+			for(int i=1;i<=rows;i++) {
+			String command = (String) eh.getCell(i, 0);
+			String toCompare = ((String) eh.getCell(i, 1)).replaceAll("\\s+", "");
+			System.out.println("String to compare is: "+toCompare);
+			ArrayList<String> List = se.executeScriptInfra(command);
+			String str1=List.toString().replaceAll("\\s+", "");
+			System.out.println("list is: " +str1);
+	       	boolean status = str1.contains(toCompare);
+			System.out.println(status);
+			eh.setExcelFile("InfraTesting_1", sheet);
+			if(status==true) {
+				System.out.println("updated");
+				eh.setCell(i, 2, "passed");
+			}else {
+				eh.setCell(i, 2, "failed");
+			}
+			}
+			//System.out.println(List1);
+			
+		}
+
+
+
+
+
+
+
+
 
 }
+
