@@ -33,36 +33,52 @@ public class TouchpointPage extends Init{
 	private WebElement ussdTouchpoints;
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'Prioritization Logic')]/../input")
 	private WebElement ussdFormPrioritizationLogicSelector;
+	
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'Prioritization Rule')]/../input")
 	private WebElement ussdFormPrioritizationRuleSelector;
+	
 	@FindBy(xpath="//form[@id='ussdForm']//paper-item[contains(.,'FIFO')]")
 	private WebElement ussdFormPrioritizationRuleFIFO;
+	
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
-	private WebElement ussdFormPrioritizationLogicFIFO;
+	private WebElement ussdFormPrioritizationLogicFIFO
+	;
 	@FindBy(xpath="//form[@id='ussdForm']//paper-item[contains(.,'Hours')]")
 	private WebElement ussdFormTimeInterval1;
+	
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'Time Interval')]/../..//input")
 	private WebElement ussdFormTimeIntervalSelector;
+	
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement ussdFormTouchpointName;
+	
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'Refresh Every')]/../input")
 	private WebElement ussdFormRefreshEvery;
+	
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'Maximum offers')]/../input")
 	private WebElement ussdFormMaximumOffers;
+	
 	@FindBy(xpath=".//*[@id='ussdForm']//paper-button[contains(.,'Save')]")
 	private WebElement ussdFormSaveButton;
+	
 	@FindBy(xpath=".//*[@id='ussdForm']//paper-button[contains(.,'Cancel')]")
 	private WebElement ussdFormCancelButton;
+	
 	@FindBy(xpath=".//*[@id='addUssdModal']")
 	private WebElement ussdFormDialogBox;
+	
 	@FindBy(xpath=".//*[@id='addUssdModal']//h2")
 	private WebElement ussdFormHeading;
+	
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'USSD Application')]/../input")
 	private WebElement ussdFormUssdApplicationSelector;
+	
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'USSD Application')]/../input")
 	private WebElement ussdFormUssdApplicationSelectorInApi;
+	
 	@FindBy(xpath=".//form[@id='ussdForm']//paper-icon-button[@id='clearIcon']")
 	private WebElement ussdFormUssdApplicationClearButton;
+	
 	
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+SELENIUM_USSD_APP+"')]")
 	private WebElement ussdFormUssdApplication1;
@@ -318,6 +334,8 @@ public class TouchpointPage extends Init{
 	private WebElement customerCareFormDialogBox;
 	@FindBy(xpath=".//*[@id='addCustomerForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement customerCareFormTouchpointName;
+	
+
 	
 	@FindBy(xpath="((.//data-table-cell[@class='customercare-touchpoint-grid style-scope']//paper-icon-button[2])//iron-icon[1])[1]")
 	private WebElement editTouchpoint1;
@@ -1600,17 +1618,48 @@ Assert.assertEquals(name,newname);
 			public void customercaretouchpointsclick(String name) throws Exception {
 				Thread.sleep(5000);
 				
-				boolean flag=jswait.checkClickable(".//data-table-cell[contains(@class,'customercare-touchpoint-grid style-scope') and contains(.//span,'"+name+"')]//following::paper-icon-button[2]");
+				boolean flag=jswait.checkClickable("//iron-data-table[@id='customerTable']/div[@id='container']/iron-list[@id='list']//data-table-row//data-table-cell[contains(.,'"+name+"')]//following::paper-icon-button[2]/iron-icon[@id='icon']");
 				if (flag==true){
 					Thread.sleep(2000);
-				jswait.loadClick(".//data-table-cell[contains(@class,'customercare-touchpoint-grid style-scope') and contains(.//span,'"+name+"')]//following::paper-icon-button[2]");}
+				jswait.loadClick("//iron-data-table[@id='customerTable']/div[@id='container']/iron-list[@id='list']//data-table-row//data-table-cell[contains(.,'"+name+"')]//following::paper-icon-button[2]");}
 				
-				else{jswait.scrollIntoView("#customerTable [class='style-scope iron-data-table x-scope iron-list-1']",".//data-table-cell[contains(@class,'customercare-touchpoint-grid style-scope') and contains(.//span,'"+name+"')]//following::paper-icon-button[2]");}
+				else{jswait.scrollIntoView("#customerTable [class='style-scope iron-data-table x-scope iron-list-1']","//iron-data-table[@id='customerTable']/div[@id='container']/iron-list[@id='list']//data-table-row//data-table-cell[contains(.,'"+name+"')]//following::paper-icon-button[2]/iron-icon[@id='icon']");}
 				
 				
 				
 			}
 
+			public void USSDtouchpointsclick(String name) throws Exception {
+				Thread.sleep(5000);
+				
+				boolean flag=jswait.checkClickable("//iron-data-table[@id='ussdTable']/div[@id='container']/iron-list[@id='list']//data-table-row//data-table-cell[contains(.,'"+name+"')]//following::paper-icon-button[2]/iron-icon[@id='icon']");
+				if (flag==true){
+					Thread.sleep(2000);
+				jswait.loadClick("//iron-data-table[@id='ussdTable']/div[@id='container']/iron-list[@id='list']//data-table-row//data-table-cell[contains(.,'"+name+"')]//following::paper-icon-button[1]");}
+				
+				else{jswait.scrollIntoView("#ussdTable [class='style-scope iron-data-table x-scope iron-list-1']","//iron-data-table[@id='ussdTable']/div[@id='container']/iron-list[@id='list']//data-table-row//data-table-cell[contains(.,'"+name+"')]//following::paper-icon-button[2]/iron-icon[@id='icon']");}
+				
+				
+				
+			}
+			
+			public void SMStouchpointsclick(String name) throws Exception {
+				Thread.sleep(5000);
+				
+				boolean flag=jswait.checkClickable("//iron-data-table[@id='smsDataTable']/div[@id='container']/iron-list[@id='list']//data-table-row//data-table-cell[contains(.,'"+name+"')]//following::paper-icon-button[2]/iron-icon[@id='icon']");
+				if (flag==true){
+					Thread.sleep(2000);
+				jswait.loadClick("//iron-data-table[@id='smsDataTable']/div[@id='container']/iron-list[@id='list']//data-table-row//data-table-cell[contains(.,'"+name+"')]//following::paper-icon-button[1]");}
+				
+				else{jswait.scrollIntoView("#smsDataTable [class='style-scope iron-data-table x-scope iron-list-1']","//iron-data-table[@id='smsDataTable']/div[@id='container']/iron-list[@id='list']//data-table-row//data-table-cell[contains(.,'"+name+"')]//following::paper-icon-button[2]/iron-icon[@id='icon']");}
+				
+				
+				
+			}
+			
+			
+			
+			
 			
 			public void customerCareSelectPrioritizationLogicnew(String type) throws InterruptedException {
 				
@@ -1628,10 +1677,53 @@ Assert.assertEquals(name,newname);
 					jswait.loadClick(customerCareFormPrioritizationLogicBESTFITALGORITHM);
 				}
 				Thread.sleep(2000);
-				jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+				jswait.loadClick("(//paper-button[contains(.,'Save')])[1]");
 				
 			
 	}
+			
+	public void USSDSelectPrioritizationLogicnew(String type) throws InterruptedException {
+				
+				if(type.equalsIgnoreCase("FIFO")){
+				
+				jswait.loadClick(ussdFormPrioritizationLogicSelector);
+				jswait.loadClick(ussdFormPrioritizationLogicFIFO);
+				}else if (type.equalsIgnoreCase("LIFO")){
+				
+					jswait.loadClick(ussdFormPrioritizationLogicSelector);
+					jswait.loadClick(customerCareFormPrioritizationLogicLIFO);
+				}else if (type.equalsIgnoreCase("BEST FIT ALGORITHM")){
+				
+					jswait.loadClick(ussdFormPrioritizationLogicSelector);
+					jswait.loadClick(customerCareFormPrioritizationLogicBESTFITALGORITHM);
+				}
+				Thread.sleep(2000);
+				jswait.loadClick("(//paper-button[contains(.,'Save')])[1]");
+				
+			
+	}
+
+	
+	public void SMSSelectPrioritizationLogicnew(String type) throws InterruptedException {
+		
+		if(type.equalsIgnoreCase("FIFO")){
+		
+		jswait.loadClick(smsFormPrioritizationLogicSelector);
+		jswait.loadClick(ussdFormPrioritizationLogicFIFO);
+		}else if (type.equalsIgnoreCase("LIFO")){
+		
+			jswait.loadClick(smsFormPrioritizationLogicSelector);
+			jswait.loadClick(customerCareFormPrioritizationLogicLIFO);
+		}else if (type.equalsIgnoreCase("BEST FIT ALGORITHM")){
+		
+			jswait.loadClick(smsFormPrioritizationLogicSelector);
+			jswait.loadClick(customerCareFormPrioritizationLogicBESTFITALGORITHM);
+		}
+		Thread.sleep(2000);
+		jswait.loadClick("(//paper-button[contains(.,'Save')])[1]");
+		
+	
+}
 
 
 

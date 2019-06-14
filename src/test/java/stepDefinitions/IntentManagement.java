@@ -1879,7 +1879,7 @@ System.out.println(editname+"program has edited successfully");
 		public String getLastOfferEligibleEventTime() {
 			try {
 				jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Eligible Event')]/..//data-table-cell[2]");
-				String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Eligible Event')]/..//data-table-cell[2]")).getText();
+				String latestTime = driver.findElement(By.xpath("(//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Eligible Event')]/..//data-table-cell[2])[1]")).getText();
 				return latestTime;
 			}catch (Exception e) {
 				return "noOfferEligibleEventFound";
@@ -1888,7 +1888,7 @@ System.out.println(editname+"program has edited successfully");
 		public String getLastOfferRecommendedEventTime() {
 			try {
 				jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2]");
-				String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2]")).getText();
+				String latestTime = driver.findElement(By.xpath("(//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2])[1]")).getText();
 				return latestTime;
 			}catch (Exception e) {
 				return "noOfferRecommendedEventFound";
@@ -1897,7 +1897,7 @@ System.out.println(editname+"program has edited successfully");
 		public String getLastOfferAcceptedEventTime() {
 			try {
 				jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Accepted')]/..//data-table-cell[2]");
-				String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Accepted')]/..//data-table-cell[2]")).getText();
+				String latestTime = driver.findElement(By.xpath("(//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Accepted')]/..//data-table-cell[2])[1]")).getText();
 				return latestTime;
 			}catch (Exception e) {
 				return "noOfferAcceptedEventFound";
@@ -1907,7 +1907,7 @@ System.out.println(editname+"program has edited successfully");
 		public String getmessagerecevied() {
 			try {
 				jswait.waitUntil("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2]");
-				String latestTime = driver.findElement(By.xpath("//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2]")).getText();
+				String latestTime = driver.findElement(By.xpath("(//consumer-events//iron-list//data-table-row//data-table-cell[contains(.,'Offer Recommended')]/..//data-table-cell[2])[1]")).getText();
 				return latestTime;
 			}catch (Exception e) {
 				return "noOfferRecommendedEventFound";
@@ -2354,6 +2354,34 @@ System.out.println(editname+"program has edited successfully");
 						 
 					 }
 				
+				  
+				  @Then("^change ussd Prioritization Logic to \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+					 public void changeprioritizationlogicUSSD(String type,String sheet) throws Exception {
+						 Thread.sleep(2000);
+						 ExcelHelper programExcel = new ExcelHelper();
+						    eh.setExcelFile("touchpointInputData",sheet);
+							String name = (String) eh.getCell(1, 0);
+							Thread.sleep(2000);
+							touchpointPage.USSDtouchpointsclick(name);
+						 
+						touchpointPage.USSDSelectPrioritizationLogicnew(type);
+						 
+					 }
+				  @Then("^change SMS Prioritization Logic to \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+					 public void changeprioritizationlogicSMS(String type,String sheet) throws Exception {
+						 Thread.sleep(2000);
+						 ExcelHelper programExcel = new ExcelHelper();
+						    eh.setExcelFile("touchpointInputData",sheet);
+							String name = (String) eh.getCell(1, 0);
+							Thread.sleep(2000);
+							touchpointPage.SMStouchpointsclick(name);
+						 
+						touchpointPage.SMSSelectPrioritizationLogicnew(type);
+						 
+					 }
+				  
+				  
+				  
 				  @Then("^verify create program withstarts and ends page \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
 					public void verify_create_program_page_from_sheetstartsat(String sheet1, String sheet2, String sheet3) throws Throwable {
 						Thread.sleep(4000);
@@ -2468,7 +2496,7 @@ System.out.println(editname+"program has edited successfully");
 					 		Thread.sleep(4000);
 							//programPage.clickCreateProgramButton();
 					 		System.out.println(touchpointList);
-							programPage.createNewProgramRule(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+							programPage.createNewProgramRulewithenddate(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 							dateForCompare = new Date();
 							System.out.println(dateForCompare);
 							
@@ -2518,6 +2546,48 @@ System.out.println(editname+"program has edited successfully");
 //									
 //									Assert.assertTrue("offer Recommended event not found", checkOfferRecommendedEventTime(dateForCompare,timeStamp));
 								}
+												
+												//---------------------------------------
+												@Then("^get-offer USSD for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\" type \"([^\"]*)\" msg \"([^\"]*)\" where cid= \"([^\"]*)\"$")
+												public void getOfferUSSDForNumber(String number,String touchpointSheet,String ruleSheet,String type,String msg,String cid) throws Throwable {
+													StringBuilder str = new StringBuilder();
+													str.append("http://");
+													MarathonHelper m = new MarathonHelper();
+													
+													str.append(p.getValue("nginxIp"));
+													str.append(":");
+													str.append("8092");
+													eh.setExcelFile("touchpointInputData", touchpointSheet);
+													str.append("/ussd/authkey/"+p.getValue("ApiTouchpointauthkey")+"?msisdn="+number+"&sessionId=5599&type="+type+"&msg="+msg+"&cid="+cid+"");
+													System.out.println(str.toString());
+													Request req = new Request();
+													req.getRequest(str.toString(),"");
+													
+													offerRecommended = req.responseString;
+													System.out.println("this is the response"+req.responseString);
+													eh.setExcelFile("ruleInputData", ruleSheet);
+													
+												}
+												
+												@Then("^wait for offer accepted event in consumer profile for program$")
+												public void wait_for_offer_accepted_event_for_pgrm() throws Throwable {
+													CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickOfferAcceptedEventCheckBox();
+													customerProfilePage.clickOfferRecommendedEventCheckBox();
+													customerProfilePage.clickSelectEventApplyButton();
+												Thread.sleep(2000);
+													TimeoutImpl t = new TimeoutImpl();
+													t.startTimer();
+													String date = getLastOfferRecommendedEventTime();
+													String date2=getLastOfferAcceptedEventTime();
+										
+													Date timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+													Date timeStamp2 = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date2);
+													
+													Assert.assertEquals(date,date2);
+												}
 				
 				
 				

@@ -202,6 +202,9 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//paper-item[contains(.,'No End')]")
 	private WebElement prmshcselectnoend ;
 	
+	@FindBy(xpath="(//paper-item[contains(.,'At')])[2]")
+	private WebElement prmshcselectAt;
+	
 	@FindBy(xpath="//form[@id='scheduleForm']//label[text()='Refresh Cycle']/..//*[@id='input']")
 	private WebElement programschrefreshcycle;
 	
@@ -369,8 +372,8 @@ private WebElement rulessenderid2
 	 private WebElement savedSegmentSelectorField;
 	 @FindBy(xpath="//paper-radio-button[contains(.,'Saved Segments')]")
 	 private WebElement savedSegmentRadioButtion;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	@FindBy(xpath="//label[contains(.,'End Date/Time')]//..//input")
+	private WebElement enddateinput;
 //@FindBy(xpath="")
 //private WebElement ;
 //@FindBy(xpath="")
@@ -700,8 +703,8 @@ private WebElement rulessenderid2
    public void addresssprule2() throws InterruptedException {
 	   Thread.sleep(2000);
 		jswait.loadClick(addresssprule2);
-//		 Thread.sleep(2000);
-//			jswait.loadClick(addresssprule2);
+		 Thread.sleep(2000);
+			jswait.loadClick(addresssprule2);
 	
 	}
    
@@ -722,13 +725,16 @@ private WebElement rulessenderid2
 	   }
 	    wait.until(ExpectedConditions.visibilityOf(ruleroute));
 		jswait.loadClick(ruleroute);
-//		Thread.sleep(1000);
-//		jswait.loadClick(ruleroute);
+		Thread.sleep(1000);
+		jswait.loadClick(ruleroute);
 		
 	}
    public void ruleroute2() throws InterruptedException {
 	   Thread.sleep(3000);
 	 jswait.loadClick(ruleroute2);
+//	   Thread.sleep(3000);
+//	 jswait.loadClick(ruleroute2);
+	
 		
 		
 	}
@@ -742,10 +748,8 @@ private WebElement rulessenderid2
    
    public void rulerouteid2() throws InterruptedException {
 	   Thread.sleep(2000);
-//	   jswait.loadClick(ruleroute2);
-//		jswait.loadClick(rulerouteid2);
-		 Thread.sleep(2000);
-			jswait.loadClick(rulerouteid2);
+	   jswait.loadClick(rulerouteid2);
+	
 	}
    
    
@@ -1127,6 +1131,14 @@ private WebElement rulessenderid2
 	public void prmshcselectnoend() throws InterruptedException {
 		jswait.loadClick(prmshcselectnoend);
 	}
+	
+	public void prmshcselectAt() throws InterruptedException {
+		jswait.loadClick(prmshcselectAt);
+		Thread.sleep(2000);
+		jswait.loadClick(enddateinput); 
+		
+		
+	}
 
 	
 	public void programschrefreshcycle() throws InterruptedException {
@@ -1222,19 +1234,22 @@ private WebElement rulessenderid2
 		Thread.sleep(2000);
 		jswait.loadClick(prmrefreshat);
 		Thread.sleep(2000);
-		jswait.loadClick("(//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='hours'])[2]");
+
 		WebElement num = driver.findElement(By.xpath(
-				".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours+1) + "])[4]"));
 		builder.moveToElement(num).click().build().perform();
 		Thread.sleep(2000);
-		// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
-		jswait.loadClick("(//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='minutes'])[2]");
+
 		Thread.sleep(2000);
 		WebElement num1 = driver.findElement(By.xpath(
-				".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[4]"));
 		Thread.sleep(1000);
-		builder.moveToElement(num1).click().build().perform();
-		jswait.loadClick("(//paper-button[contains(.,'OK')])[4]");
+    	 builder.moveToElement(num1).click().build().perform();
+      	if(am_pm==0)
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[4]");
+       else
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[4]");
+		jswait.loadClick("(//paper-button[contains(.,'OK')])[8]");
 		
 		}
 
@@ -2169,11 +2184,12 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 		    	}
 		    	else 
 		    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
-				String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+		    	
+		    	String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)+1);
 		    	int hours = rightNow.get(Calendar.HOUR);
 		      	 int min = rightNow.get(Calendar.MINUTE);
 		      	 int am_pm = rightNow.get(Calendar.AM_PM);
-		      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		      	int day = rightNow.get(Calendar.DAY_OF_MONTH)+1;
 		      	 int year = rightNow.get(Calendar.YEAR);
 		      	 int month = rightNow.get(Calendar.MONTH)+1;
 		      	 min+=2;
@@ -2197,6 +2213,20 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 		       else
 		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
 				
+		      	jswait.loadClick("(//paper-button[contains(.,'OK')][1])[2]");
+		      	Thread.sleep(2000);
+		      	jswait.loadClick("//label[contains(.,'On/After')]//..//input");
+		      	Thread.sleep(2000);
+		      	jswait.loadClick("//label[contains(.,'On/After')]//following::vaadin-combo-box-item[contains(.,'On')]");
+		      	
+		    	Thread.sleep(1000);
+				jswait.loadClick("//label[contains(.,'On/After')]//following::vaadin-combo-box-item[contains(.,'On')]//following::input[1]");
+				Thread.sleep(1000);
+				System.out.println(date);
+				jswait.loadClick("//form[@id='deliverySegment']//div[@class='layout-style style-scope track-expiry']/paper-date-time-input[2]//div[@date='" + date + "']");
+				
+				Thread.sleep(1000);
+				jswait.loadClick("(//paper-button[contains(.,'OK')][1])[3]");
 				
 				}
 		
@@ -2259,6 +2289,11 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 					Thread.sleep(2000);
 					
 		   }
+				clickTrackingSessionField();
+				Thread.sleep(3000);
+				optionAtselect();
+				Thread.sleep(3000);
+				Attimeselection();
 				rulessenderid2();
 				Thread.sleep(2000);
 				addresssprule2();
@@ -2274,6 +2309,10 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 				Thread.sleep(2000);
 				programschstart(); 
 				prmshcselectnow();
+				programschend();
+				prmshcselectAt();
+				programenddate();
+				
 				Thread.sleep(2000);
 				Calendar rightNow =Calendar.getInstance();
 		    	String mn = "";
@@ -2297,19 +2336,19 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 		      		 min-=60;
 		      		 hours++;
 		      	 }
-		      	prmrefreshat();
-		      	 Actions builder = new Actions(driver);
-		       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
-		    	 Thread.sleep(1000);
-		    	 builder.moveToElement(num1).click().build().perform();
-		    	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
-		    	 Thread.sleep(1000);
-		    	 builder.moveToElement(num1).click().build().perform();
-		      	if(am_pm==0)
-		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
-		       else
-		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
-		      	clickRefreshAtOkButton();
+		      	newprmrefreshat();
+//		      	 Actions builder = new Actions(driver);
+//		       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+//		    	 Thread.sleep(1000);
+//		    	 builder.moveToElement(num1).click().build().perform();
+//		    	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+//		    	 Thread.sleep(1000);
+//		    	 builder.moveToElement(num1).click().build().perform();
+//		      	if(am_pm==0)
+//		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");s
+//		       else
+//		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+//		      	clickRefreshAtOkButton();
 				programactivatebtn();
 				programconfirmactivateyes();
 				System.out.println("test");
@@ -2317,4 +2356,21 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 				
 			}
 	
+		 
+		 
+		 public void programenddate() throws java.lang.Exception {
+			 Thread.sleep(2000);
+				Calendar rightNow =Calendar.getInstance();
+		    	String mn = "";
+		    	if(rightNow.get(Calendar.MONTH)+1<9) {
+		    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		    	}
+		    	else 
+		    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+				String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)+1);
+				jswait.loadClick("//label[contains(.,'End Date/Time')]//following::div[@id='months'][1]//div[@date='" + date + "']");
+				Thread.sleep(2000);
+				jswait.loadClick("//label[contains(.,'End Date/Time')]//following::paper-button[contains(.,'OK')][1]");
+				
+				}
 }
