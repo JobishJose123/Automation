@@ -4477,7 +4477,8 @@ public void the_conversion_job_name(String statusTypeOfJob, String jobName) thro
 public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String workBook, String sheet) throws Throwable {
 		String statusOfBC = "";
 		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,sheet);
-		String bcName, campaignCategory, campaignName, offerName, inventory, bcSheet = "";
+		String bcName, campaignCategory, campaignName, offerName, inventory,bcSheet = "",bcType;
+		
 		for (int i = 0; i < data.size(); i++) {
 			campaignObjects.navigateToLIfeCycleMarketing();
 			bcName = data.get(i).get(1);
@@ -4486,6 +4487,8 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 			offerName = data.get(i).get(6);
 			inventory = data.get(i).get(7);
 			bcSheet = data.get(i).get(9);
+			bcType= data.get(i).get(8);
+			
 			try {
 
 				campaignObjects.scrollToCampaignCategory(campaignCategory);
@@ -4503,6 +4506,7 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 					commonObjects.clickEditOption();
 
 					edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
+									
 					activateBc();
 					
 					
@@ -4672,7 +4676,7 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 		int count=0;
 		boolean boolean1;
 		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
-		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "";
+		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "",bcLimit;
 		for (int i = 0; i < data.size(); i++) {
 			
 			
@@ -4682,7 +4686,7 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 			offerName = data.get(i).get(6);
 			inventoryFromSheet = data.get(i).get(7);
 			bcSheet = data.get(i).get(9);
-			
+			bcLimit=data.get(i).get(2);
 			try {
 					
 				if(inventory.equals(inventoryFromSheet)&& inventory.equals("BlackoutAlways")) {
@@ -4719,11 +4723,13 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 					 broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
 					 
 					 
-					if(bcName.contains("seeding"))
+					if(bcName.contains("seeding")){
 						 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,0);
-					 else
+					}else if(bcLimit.contains("defineLimitFixed")){
+						boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",10,10,10);
+					}else {
 						 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,770);
-					 
+					}
 					 if(boolean1==true)
 							eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
 						else
@@ -4830,9 +4836,8 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 			
 	}
 
-	@Then("^verify the Fulfillment event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\"$")
-	public void verify_the_Fulfillment_event_of_bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn) throws Throwable {
-	   
+	@Then("^verify the Fulfillment event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with rewardType \"([^\"]*)\" and MSISDN\"([^\"]*)\"$")
+	public void verify_the_Fulfillment_event_of_bcs_from_workbook_and_sheet_with_rewardType_and_MSISDN(String workbook, String sheet, String rewardstype, String msisdn) throws Throwable {
 		
 		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
 		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet,rewardRule, bcSheet = "";
@@ -4857,7 +4862,16 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 		customerObjects.clickOnFulfillmentSuccess();
 		customerObjects.clickApplyButton();
 		
-		customerObjects.verifyFullfillementEvent(bcName,campaignName,offerName,rewardRule);
+		if(rewardRule.equals(rewardstype)) {
+			
+			customerObjects.verifyFullfillementEvent(bcName,campaignName,offerName,rewardstype);
+		}else {
+			
+			System.out.println("Reward ttype not match....");
+		}
+		
+		
+		
 		
 		}
 		
@@ -4902,7 +4916,7 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 			bcSheet = data.get(i).get(9);
 			bcType=data.get(i).get(8);
 			try {
-
+                 System.out.println("try block");
 				campaignObjects.scrollToCampaignCategory(campaignCategory);
 				commonObjects.filterName(campaignName);
 				jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
@@ -4924,6 +4938,9 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 							
 					commonObjects.filterName(bcName);
 					Thread.sleep(5000);
+					commonObjects.toggleAutoRefresh();
+					Thread.sleep(3000);
+					commonObjects.toggleAutoRefresh();
 					statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
 					System.out.println("Status of BC "+statusOfBC);
 					commonObjects.toggleAutoRefresh();
@@ -4966,10 +4983,42 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 					statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
 					System.out.println("Status of BC "+statusOfBC);
 					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
+					
+					if (!statusOfBC.equals("completed")) {
+						
+						commonObjects.toggleAutoRefresh();
+						TimeoutImpl t = new TimeoutImpl();
+						t.startTimer();
+						while (!statusOfBC.contains("Completed") && t.checkTimerMin(25)) {
+							statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+							System.out.println(statusOfBC);
+							Thread.sleep(5000);
+						}
+						
+						System.out.println("Status of BC  "+statusOfBC);
+					}//if
+					
+                    Thread.sleep(5000);
+					
+					System.out.println("Providing file for conversion ");
+					provideFileForConversion();
+					
+					int ss = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=41 WHERE DATA_JOB_ID=69394");
+					System.out.println("Job Scehduled... .. ."+ss);
+					System.out.println("Waiting for 10 mins for job completion");
+					
+					Thread.sleep(600000);
+					
+					System.out.println("Removing file from conversion. .. .. ... .");
+					deleteFileForConversion();
+					int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=69394");
+					System.out.println("Deactivate the JOb ... .. ." +ss2);
+					
+					
 				}
 
 			} catch (Exception e) {
-
+                System.out.println("Catch block");
 				System.out.println("Removing file from conversion. .. .. ... .");
 				deleteFileForConversion();
 				int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=69394");

@@ -219,6 +219,7 @@ public class ShellExecuter extends Init{
 		 return ageGT18;
     	
     }
+  
 	public static void main(String[] args) throws Exception {
 		verifyInfraDetails("Sheet1");
 	    InfraDetails("SystemBestPractices");
@@ -227,15 +228,11 @@ public class ShellExecuter extends Init{
 //		verifyInfraDetails("sheet 1");
 //		uploadListForDkJob();
 		}
-//		String csvFileData = "";
-		
-//		getAgeTargetCount();
-		
-//		uploadDNDListForDkJob();
+
 		public static void verifyInfraDetails(String sheet) throws Exception {
 		ShellExecuter se = new ShellExecuter();
 		ExcelHelper list = new ExcelHelper();
-		list.setExcelFile("InfraTesting_1", "Sheet1");
+		list.setExcelFile("InfraTesting_1", sheet);
 		int rows = list.numRows();
 		System.out.println(rows);
 		for(int i=1;i<rows;i++) {
@@ -247,7 +244,7 @@ public class ShellExecuter extends Init{
 		System.out.println("List is " +List1);
 		boolean status = List1.contains(toCompare);
 		System.out.println(status);
-		list.setExcelFile("InfraTesting_1", "Sheet1");
+		list.setExcelFile("InfraTesting_1", sheet);
 		if(status==true) {
 			System.out.println("updated");
 			list.setCell(i, 2, "Passed");

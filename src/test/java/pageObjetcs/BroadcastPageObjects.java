@@ -400,7 +400,7 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement selectTargetGroup ;
 	 @FindBy(xpath="//div[@id='radioContainer']//following::div[contains(.,'No Limit')][@id='radioLabel']")
 	private WebElement noLimitTGRadiobtn;
-	 @FindBy(xpath="(//div[@class='buttons style-scope cvm-settings']//paper-button[contains(.,'Save')])[2]")
+		 @FindBy(xpath="(//div[@class='buttons style-scope cvm-settings']//paper-button[contains(.,'Save')])[2]")
 	 private WebElement TGSavebtn ;
 	 @FindBy(xpath="(//div[@class='buttons style-scope cvm-settings']//paper-button[contains(.,'Save')])[1]")
 	 private WebElement CGSavebtn ;
@@ -3134,6 +3134,9 @@ public class BroadcastPageObjects extends Init {
 			jswait.loadClick(noLimitTGRadiobtn);
 		}
 		else if(TG.equalsIgnoreCase("defineLimitFixed")){
+			
+			jswait.loadClick(defineLimit);
+			jswait.loadSendKeys(enterLimitField, "10");
 			
 		}
 		else if(TG.equalsIgnoreCase("defineLimitsDynamic")) {
