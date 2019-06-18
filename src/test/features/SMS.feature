@@ -149,39 +149,39 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
   Then navigate to sms
    Then change SMS Prioritization Logic to "FIFO" from sheet "smsTouchpoint"
     Then navigate to programs
-#    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-#    Then choose program from sheet "SMSprogram"
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then wait until rule is picked 
-#    Then navigate to landing page
-#  Then navigate to precision marketer
-#    Then navigate to reports
-#    Then navigate to customer profile
-#    Then search msisdn "9491750022"
-#    Then click on events tab   
-##   Then verify offer "Balance Top ups"
-#    Then navigate to landing page
-#    Then navigate to intent management
-#    Then navigate to programs
-#    Then choose program from sheet "SMSprogram"
-#    Then wait for 2 minutes
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then wait until rule is picked    
-#   Then navigate to landing page
-#  Then navigate to precision marketer
-#    Then navigate to reports
-#    Then navigate to customer profile
-#    Then search msisdn "9491750022"
-#    Then click on events tab   
-#    Then navigate to landing page
-#    Then navigate to intent management
-#    
-#    Then navigate to programs
-#    Then choose program from sheet "SMSprogram"
-#   Then wait for 2 minutes
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then wait until rule is picked 
-# Then navigate to landing page
+    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then choose program from sheet "SMSprogram"
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked 
+    Then navigate to landing page
+  Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab   
+   Then verify offer "Balance Top ups"
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then choose program from sheet "SMSprogram"
+    Then wait for 2 minutes
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked    
+   Then navigate to landing page
+  Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab   
+    Then navigate to landing page
+    Then navigate to intent management
+    
+    Then navigate to programs
+    Then choose program from sheet "SMSprogram"
+   Then wait for 2 minutes
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked 
+ Then navigate to landing page
      
      
      
