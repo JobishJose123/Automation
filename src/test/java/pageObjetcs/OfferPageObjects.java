@@ -26,6 +26,7 @@ import baseClasses.RandomNameGenerator;
 import pageObjetcs.Admin.OfferAttributesPage;
 
 public class OfferPageObjects extends Init {
+	private static final Exception Exception = null;
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	CommonObjects commonObjects = new CommonObjects();
@@ -227,13 +228,13 @@ public class OfferPageObjects extends Init {
 //Track Tab in Offer Creation	
 	 @FindBy(xpath="//paper-button[text()='Add Rule']")
 	 private WebElement addRuleButton;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Rule Name')]/../input")
+	 @FindBy(xpath="(//label[contains(.,'Rule Name')]//..//input)[2]")
 	 private WebElement addTrackingRuleRuleName;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Priority')]/../input")
+	 @FindBy(xpath="(//label[contains(.,'Priority')]/../input)[2]")
 	 private WebElement addTrackingRulePrioritySelector;
 	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'2')]")
 	 private WebElement addTrackingRulePrioritySelect2;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[contains(.,'Add')]")
+	 @FindBy(xpath="(//label[contains(.,'Priority')])[2]//following::paper-button[contains(.,'Add')][1]")
 	 private WebElement addTrackingRuleAddConditionButton;
 	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../input")
 	 private WebElement  addTrackingRuleSecondConditionParameterSelector;
@@ -700,7 +701,7 @@ public class OfferPageObjects extends Init {
 		}
 	 public void selectPriority(String text) throws InterruptedException {
 			jswait.loadClick(addTrackingRulePrioritySelector);
-			jswait.loadClick("//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'"+text+"')]");
+			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'"+text+"')])[3]");
 		}
 	 public void clickAddTrackingRuleAddConditionButton() throws InterruptedException {
 			jswait.loadClick(addTrackingRuleAddConditionButton);
@@ -776,12 +777,43 @@ public class OfferPageObjects extends Init {
 			createTrackRuleCondition();
 			createSecondTrackRuleCondition();
 	 }
-	 public void createFirstDefaultTrackingRuleCondition() throws Exception {
-		 	clickAddRuleButton();
-		 	enterDetailsFirstDefaultTrackingRuleCondition("firstRule");
-			clickaddTrackingRuleSaveButton();
-			checkRuleCreation("firstRule");
-	 }
+	 public void createFirstDefaultTrackingRuleCondition(ExcelHelper eh ) throws Exception {
+			try {
+				Exception e = null;
+//				eh.setExcelFile("offerInputData", "usagerecharge");
+				if (!eh.getCell(1, 20).toString().contains("usage")) {
+					
+					throw e;
+				}
+				else {
+					 clickAddRuleButton();
+					enterRuleName("first rule");
+					selectPriority("2");
+					 jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+					 Thread.sleep(1000);
+					jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+					Thread.sleep(2000);
+					jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+					Thread.sleep(2000);
+					jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+					Thread.sleep(2000);
+					jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+					Thread.sleep(2000);
+					jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+					
+					jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+					
+						
+				} } catch(Exception e) {
+						System.out.println("inside catch");
+					 clickAddRuleButton();
+					 	enterDetailsFirstDefaultTrackingRuleCondition("firstRule");
+						clickaddTrackingRuleSaveButton();
+						checkRuleCreation("firstRule");
+				}
+			}
+		
+	 
 	 public void createFirstDefaultTrackingRuleCondition(String name) throws Exception {
 		 	clickAddRuleButton();
 		 	enterDetailsFirstDefaultTrackingRuleCondition(name);
@@ -1587,7 +1619,7 @@ public class OfferPageObjects extends Init {
 		// ******************Track tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
 			enterTrackTabDetails(eh);
-			createFirstDefaultTrackingRuleCondition();
+			createFirstDefaultTrackingRuleCondition(eh);
 		}
 		clickProceedButton();
 
@@ -1600,6 +1632,16 @@ public class OfferPageObjects extends Init {
 					//clickRewardTypeAny();
 					//clickrewardTypeSampleFlowSelector();
 					clickrewardTypesel_reward();
+				}
+				else if(eh.getCell(1, 20).toString().contains("usage")) {
+					
+					jswait.loadClick("//paper-card[@id='rewardDetails']//paper-button[contains(.,'Add')]");
+					
+				jswait.loadSendKeys("//label[contains(.,'Reward Type')]/..//input", "sel_reward");
+				Thread.sleep(2000);
+					jswait.loadClick("//vaadin-combo-box-item[contains(.,'sel_reward')]");
+					enterSuccessMessage("Success from Selenium");
+					enterFailureMessage("Failure from Selenium");
 				}else if(eh.getCell(1, 2).toString().contains("Recharge")) {
 					clickRewardFirstRuleAdButton();
 					clickRewardTypeInputField();
@@ -1675,7 +1717,7 @@ public class OfferPageObjects extends Init {
 
 		// ******************Track tab*****************:
 		enterTrackTabDetails(eh);
-		createFirstDefaultTrackingRuleCondition();
+		createFirstDefaultTrackingRuleCondition(eh);
 		clickProceedButton();
 
 		// ******************Rewards tab*****************:
@@ -1696,7 +1738,15 @@ public class OfferPageObjects extends Init {
 	
 
 	public void enterTrackTabDetails(ExcelHelper eh) throws InterruptedException {
-		if (!eh.getCell(1, 2).toString().contains("Informational")) {
+		try {
+		if (eh.getCell(1, 20).toString().contains("usage")) {
+			clickTrackSourceSelector();
+			selectTrackSource(TRACK_SOURCE2);
+			
+			
+						
+		} }catch(Exception e) {
+				
 			clickTrackSourceSelector();
 			selectTrackSource(TRACK_SOURCE);
 		}
@@ -2406,7 +2456,7 @@ public class OfferPageObjects extends Init {
 		// ******************Track tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
 			enterTrackTabDetails(eh);
-			createFirstDefaultTrackingRuleCondition();
+			createFirstDefaultTrackingRuleCondition(eh);
 			getFirstRuleName();
 			createSecondDefaultTrackingRuleCondition();
 		}
@@ -2744,9 +2794,9 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 			enterTrackTabDetails(eh);
 			if (rewardType.equals("oneruleonereward") || rewardType.equals("onerulemultiplerewards")
 					|| rewardType.equals("firstrulefirstreward")) {
-				createFirstDefaultTrackingRuleCondition();
+				createFirstDefaultTrackingRuleCondition(eh);
 			} else if (rewardType.equals("multiplerulesmultiplerewards")) {
-				createFirstDefaultTrackingRuleCondition();
+				createFirstDefaultTrackingRuleCondition(eh);
 				createSecondDefaultTrackingRuleCondition();
 			} else if (rewardType.equals("default")) {
 				System.out.println("No rules are created , only deafult rule available");

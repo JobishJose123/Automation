@@ -740,8 +740,8 @@ private WebElement rulessenderid2
 	}
    public void rulessenderid2() throws InterruptedException {
 	   Thread.sleep(4000);
-	   //wait.until(ExpectedConditions.visibilityOf(rulessenderid2)).click();
-//		jswait.loadClick(rulessenderid2);
+	   wait.until(ExpectedConditions.visibilityOf(rulessenderid2)).click();
+		jswait.loadClick(rulessenderid2);
 		Thread.sleep(2000);
 		jswait.loadClick(rulessenderid2);
 	}

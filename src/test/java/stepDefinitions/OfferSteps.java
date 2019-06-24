@@ -645,7 +645,7 @@ public class OfferSteps extends Init {
 	public void verifyAddingRuleToTrackingSource() throws Throwable {
 		proceedToTrackTab();
 		offerPageObjects.enterTrackTabDetails(eh);
-		offerPageObjects.createFirstDefaultTrackingRuleCondition();
+		offerPageObjects.createFirstDefaultTrackingRuleCondition(eh);
 		offerPageObjects.clickAddRuleButton();
 	}
 	@Then("^verify validation of rule name$")
@@ -680,7 +680,7 @@ public class OfferSteps extends Init {
 	}
 	@Then("^verify adding multiple tracking rule$")
 	public void verifyAddingMultipleTrackingRule() throws Throwable {
-		offerPageObjects.createFirstDefaultTrackingRuleCondition();
+		offerPageObjects.createFirstDefaultTrackingRuleCondition(eh);
 		offerPageObjects.createSecondDefaultTrackingRuleCondition();
 	}
 	@Then("^verify adding multiple rules with same priority$")
@@ -700,7 +700,7 @@ public class OfferSteps extends Init {
 	public void verifyEditingTrackingRule() throws Throwable {
 		proceedToTrackTab();
 		offerPageObjects.enterTrackTabDetails(eh);
-		offerPageObjects.createFirstDefaultTrackingRuleCondition();
+		offerPageObjects.createFirstDefaultTrackingRuleCondition(eh);
 		Thread.sleep(3000);
 		offerPageObjects.clickEditRule();
 		offerPageObjects.enterEditRuleName("EditedRule");

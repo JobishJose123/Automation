@@ -157,8 +157,8 @@ Feature: For IntentManagement Regression.
 		Then verify rule Copy from sheet "rule" with product sheet "fullDetails" and product class sheet "TestProductClass"
 		
 		
-		@initBrowser @programruleeditreg
-    @NDX-5755, @NDX-5752,@NDX-6319,@NDX-6317,@NDX-6073	
+		@initBrowser @programruleeditreg @NDX-5755
+     @NDX-5752,@NDX-6319,@NDX-6317,@NDX-6073	
       Scenario Outline: Verify program rule edit <Condition>
     Given login
     Then navigate to landing page

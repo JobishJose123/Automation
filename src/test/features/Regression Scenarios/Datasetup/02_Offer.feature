@@ -6,15 +6,15 @@ Feature: Test suite on Offer creation
   Create all types of offers
 
        
- @NDX-5165 @initBrowser @closeBrowser
+ @NDX-5165 @initBrowser  @testusage
   Scenario: Verify the Create offer using WAP Push Channel and Recharge offer Type 
     Given login
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then verify recharge offer from sheet "rechargeWAP"
-    Then save "offerInputData" data to spreadsheet from "rechargeWAP" with string recharge wap offer with fullDetails product
+    Then create new offer from sheet "usagerecharge" with product "fullDetails"
+#    Then verify recharge offer from sheet "rechargeWAP"
+#    Then save "offerInputData" data to spreadsheet from "rechargeWAP" with string recharge wap offer with fullDetails product
    
   @NDX-5164 @initBrowser @closeBrowser
   Scenario: Verify the Create offer using SMS Channel and STV Type

@@ -39,6 +39,8 @@ public class IntentManagement extends Init{
 	TouchpointPage touchpointPage = new TouchpointPage();
 	ProgramPage programPage = new ProgramPage();
 	BroadcastPageObjects broadcastPageObjects=new BroadcastPageObjects();
+	BroadcastSteps BroadcastSteps=new BroadcastSteps();
+	
 	@Then("^navigate to touchpoints")
 	public void navigateToTouchpoints() throws InterruptedException {
 		intentManagementPage.navigateToTouchpoints();
@@ -2590,6 +2592,29 @@ System.out.println(editname+"program has edited successfully");
 													Assert.assertEquals(date,date2);
 												}
 				
+												
+												@Then("^recharge conversion job for program$")
+												public void recharge_conversion_for_pgrm() throws Throwable {
+													
+													SQLHandler sql = new SQLHandler();
+													System.out.println("Providing file for conversion ");
+													BroadcastSteps.provideFileForConversion();
+													
+													int ss = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=41 WHERE DATA_JOB_ID=69394");
+													System.out.println("Job Scehduled... .. ."+ss);
+													System.out.println("Waiting for 10 mins for job completion");
+													
+													Thread.sleep(600000);
+													
+													System.out.println("Removing file from conversion. .. .. ... .");
+													BroadcastSteps.deleteFileForConversion();
+													int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=69394");
+													System.out.println("Deactivate the JOb ... .. ." +ss2);
+												}
+				
+												
+												
+												
 				
 				
 }
