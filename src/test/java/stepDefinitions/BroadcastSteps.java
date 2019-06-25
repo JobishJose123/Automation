@@ -5043,16 +5043,6 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 	   eM.setExcelFile("parallelRunBC", targetCountSheet);
 	   broadcastPageObjects.verifyDRCount(eh.getCellByColumnName("BC Name"),eM.getCellByColumnName("Acknowledgement"));
 	}
-
-	@Then("^verify the ack event for the bc from sheet \"([^\"]*)\" and campaign from sheet \"([^\"]*)\"$")
-	public void verify_the_ack_event_for_the_bc_from_sheet_and_campaign_from_sheet(String bcSheet, String campaignSheet) throws Exception {
-	    eh.setExcelFile("bcInputData", bcSheet);
-	    String bcName=eh.getCellByColumnName("BC Name");
-	    eM.setExcelFile("campaignInputData", campaignSheet);
-	    String campaignName=(String) eM.getCell(1, 0);
-	    broadcastPageObjects.verifyAckEventForBc(bcName,campaignName);
-	}
-	
 	
 	@Then("^view broadcast for \"([^\"]*)\" for bctype \"([^\"]*)\"$")
 	public void view_broadcast_for_for_bctype(String bcToView, String bctype) throws Exception {
@@ -5133,6 +5123,19 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 		
 	}
 		}
+	}
+	@Then("^verify the condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
+	public void verify_the_condition_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
+      eh.setExcelFile("bcInputData", bcSheet);
+      String bcName =eh.getCellByColumnName("BC Name");
+      eM.setExcelFile("campaignInputData", campaignSheet);
+      String camapignName=(String) eM.getCell(1, 0);
+      broadcastPageObjects.verifyEventOfTheBC(event,bcName,camapignName);
+     
+	}
+	@Then("^verify the dynamic tag \"([^\"]*)\"$")
+	public void verify_dynamic_tag (String dynamicTag) throws Exception{
+		  broadcastPageObjects.verifyDynamicTag(dynamicTag);
 	}
 }
 
