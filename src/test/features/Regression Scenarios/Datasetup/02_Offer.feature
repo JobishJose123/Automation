@@ -16,7 +16,7 @@ Feature: Test suite on Offer creation
 #    Then verify recharge offer from sheet "rechargeWAP"
 #    Then save "offerInputData" data to spreadsheet from "rechargeWAP" with string recharge wap offer with fullDetails product
    
-  @NDX-5164 @initBrowser @closeBrowser
+  @NDX-5164 @initBrowser 
   Scenario: Verify the Create offer using SMS Channel and STV Type
     Given login
     When navigate to precision marketer
@@ -26,7 +26,7 @@ Feature: Test suite on Offer creation
     Then verify "STVWAP" offer in grid
     Then save "offerInputData" data to spreadsheet from "STVWAP" with string stv wap offer with fullDetails product
   
-   @rechargeSMS @initBrowser @closeBrowser
+   @rechargeSMS @initBrowser 
    Scenario: Email Channel -->Verify the Create offer using STVSMS 
      Given login
      Then navigate to precision marketer

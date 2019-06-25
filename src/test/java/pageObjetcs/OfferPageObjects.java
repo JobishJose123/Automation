@@ -183,9 +183,9 @@ public class OfferPageObjects extends Init {
 	private WebElement addProductFirstCheckbox;
 	@FindBy(xpath = "//paper-card[@id='rewardDetails']//paper-button[contains(text(),'Add')]")
 	private WebElement rewardAddButton;
-	@FindBy(xpath = "//label[contains(text(),'Response on success')]/..//textarea")
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[1]")
 	private WebElement successMessage;
-	@FindBy(xpath = "//label[contains(text(),'Response on Failure')]/..//textarea")
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[2]")
 	private WebElement failureMessage;
 	@FindBy(xpath = "//span[contains(.,'Preview Email')]")
 	private WebElement previewEmailButton;
@@ -1626,15 +1626,16 @@ public class OfferPageObjects extends Init {
 		// ******************Rewards tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
 			
-		
-				if (eh.getCell(1, 2).toString().contains("Seeding")) {
-					clickRewardTypeInputField();
-					//clickRewardTypeAny();
-					//clickrewardTypeSampleFlowSelector();
-					clickrewardTypesel_reward();
-				}
-				else if(eh.getCell(1, 20).toString().contains("usage")) {
-					
+						
+				try {
+					Exception e = null;
+//					eh.setExcelFile("offerInputData", "usagerecharge");
+					if (!eh.getCell(1, 20).toString().contains("usage")) {
+						
+						throw e;
+					}
+					else {
+						
 					jswait.loadClick("//paper-card[@id='rewardDetails']//paper-button[contains(.,'Add')]");
 					
 				jswait.loadSendKeys("//label[contains(.,'Reward Type')]/..//input", "sel_reward");
@@ -1642,10 +1643,18 @@ public class OfferPageObjects extends Init {
 					jswait.loadClick("//vaadin-combo-box-item[contains(.,'sel_reward')]");
 					enterSuccessMessage("Success from Selenium");
 					enterFailureMessage("Failure from Selenium");
-				}else if(eh.getCell(1, 2).toString().contains("Recharge")) {
+				}}catch(Exception e) {
+					if (eh.getCell(1, 2).toString().contains("Seeding")) {
+						clickRewardTypeInputField();
+						//clickRewardTypeAny();
+						//clickrewardTypeSampleFlowSelector();
+						clickrewardTypesel_reward();
+					}
+					else if(eh.getCell(1, 2).toString().contains("Recharge")) {
 					clickRewardFirstRuleAdButton();
 					clickRewardTypeInputField();
-					//clickrewardTypeSampleFlowSelector();
+//					clickrewardTypeSampleFlowSelector();
+					clickrewardTypesel_reward();
 					clickrewardTypesel_reward();
 					
 					enterSuccessMessage("Success from Selenium");
@@ -1658,7 +1667,7 @@ public class OfferPageObjects extends Init {
 					enterSuccessMessage("Success from Selenium");
 					enterFailureMessage("Failure from Selenium");
 				}
-		}
+		}}
 
 	}
 	public void verifyCancelInSendTrial(String sheet, String productSheet) throws Throwable {
