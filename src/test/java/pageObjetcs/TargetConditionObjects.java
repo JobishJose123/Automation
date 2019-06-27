@@ -978,6 +978,19 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(conditionIsSubscribed);
 				jswait.loadClick(targetConditionSave);
 				
+			}else if(event.contains("ageTargetGroup10")) {
+				String str=event;
+				String value=str.substring(14, str.length());
+				clickBasicTargetConditionWithAgeEdit();
+				clickManualAndButton();				
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadSendKeys(CustomerInsightFieldSelector,"Target");
+				jswait.loadClick(seleniumTargetGroup);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIs);
+				jswait.loadSendKeys(isGreaterThanValue,value);
+				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[2])[2]");
 			}
 			
 			else {
@@ -1177,5 +1190,10 @@ public class TargetConditionObjects extends Init {
 			jswait.loadSendKeys(isGreaterThanValue,"18");
 			}
 	 
+	 public void selectTwoConditionsWithTargetGroup() {
+		 
+		 
+		 
+	 }
 			
 }

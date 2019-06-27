@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import baseClasses.SQLHandler;
-
+import static org.junit.Assert.assertTrue;
 import org.apache.commons.collections4.bag.CollectionBag;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -4671,79 +4671,96 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 		
 //}
 	
-	@Then("^verify the inventory \"([^\"]*)\" after completion of BCs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
-	public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet(String inventory, String workbook, String sheet) throws Throwable {
-		int count=0;
-		boolean boolean1;
-		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
-		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "",bcLimit;
-		for (int i = 0; i < data.size(); i++) {
-			
-			
-			bcName = data.get(i).get(1);
-			campaignCategory = data.get(i).get(4);
-			campaignName = data.get(i).get(5);
-			offerName = data.get(i).get(6);
-			inventoryFromSheet = data.get(i).get(7);
-			bcSheet = data.get(i).get(9);
-			bcLimit=data.get(i).get(2);
-			try {
-					
-				if(inventory.equals(inventoryFromSheet)&& inventory.equals("BlackoutAlways")) {
-					broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
-					boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Blackout Snooze",770,0,0);
-					if(boolean1==true)
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-					else
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+@Then("^verify the inventory \"([^\"]*)\" after completion of BCs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet(String inventory, String workbook, String sheet) throws Throwable {
+	int count=0;
+	boolean boolean1;
+	ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
+	String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "",bcLimit;
+	for (int i = 0; i < data.size(); i++) {
+		
+		
+		bcName = data.get(i).get(1);
+		campaignCategory = data.get(i).get(4);
+		campaignName = data.get(i).get(5);
+		offerName = data.get(i).get(6);
+		inventoryFromSheet = data.get(i).get(7);
+		bcSheet = data.get(i).get(9);
+		bcLimit=data.get(i).get(2);
+		try {
 				
-				 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("OneperDay")) {
-					 broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
-						
-						 if(count==0) {
-							 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,770);
-					 ++count;
-					 System.out.println(bcName+" one per day 1st bc");
-					 if(boolean1==true)
-							eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-						else
-							eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");	
-					 }else if(count>=1) {
-						 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",0,0,0);	
-						 System.out.println(bcName+" one per day 2nd bc");
-					if(boolean1==true)
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-					else
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
-					 }
-					 
-						 
-				 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("Unlimited")) {
-					 
-					 broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
-					 
-					 
-					if(bcName.contains("seeding")){
-						 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,0);
-					}else if(bcLimit.contains("defineLimitFixed")){
-						boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",10,10,10);
-					}else {
+			if(inventory.equals(inventoryFromSheet)&& inventory.equals("BlackoutAlways")) {
+				broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
+				boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Blackout Snooze",770,0,0);
+				if(boolean1==true)
+					eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+				else
+					eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+			
+			 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("OneperDay")) {
+				 broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
+					
+					 if(count==0) {
 						 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,770);
-					}
-					 if(boolean1==true)
-							eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-						else
-							eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+				 ++count;
+				 System.out.println(bcName+" one per day 1st bc");
+				 if(boolean1==true)
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+					else
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");	
+				 }else if(count>=1) {
+					 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",0,0,0);	
+					 System.out.println(bcName+" one per day 2nd bc");
+				if(boolean1==true)
+					eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+				else
+					eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
 				 }
+				 
+					 
+			 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("Unlimited")) {
+				 
+				 broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
+				 
+				 
+				if(bcName.contains("seeding")&&!bcLimit.contains("defineLimitFixed")){
+					System.out.println("verify seeding bc count...");
+					 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,0);
+				}else if(bcLimit.contains("defineLimitFixed")){
 					
-				
-				
-				
-			}catch (Exception e) {
-				
-			}
-			
+					try {
+					int bcLimitSize=bcLimit.trim().length();
+					String limitCount=bcLimit.substring(16,bcLimitSize);
+					int limit=Integer.parseInt(limitCount);
+					if(!bcName.contains("seeding")) {
+						System.out.println("verify non seeding bc limit...");
+					boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",limit,limit,limit);
+					}else {
+						System.out.println("verify seeding bc limit...");
+						boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",limit,limit,0);
+						//boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",0,limit,limit);
+					}
+					}catch (Exception e) {
+						boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",10,10,10);
+					}
+				}else {
+					System.out.println("verify non seeding bc count...");
+					 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,770);
+				}
+				 if(boolean1==true) {
+					 
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
+						Assert.assertTrue(true);
+				 }else {
+						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
+						Assert.assertTrue(false);
+				 }
+			 }
+			 }catch (Exception e) {
+			System.out.println("count mismatch...");
 		}
+		}
+	
 	}
 
 
@@ -5137,6 +5154,128 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 	public void verify_dynamic_tag (String dynamicTag) throws Exception{
 		  broadcastPageObjects.verifyDynamicTag(dynamicTag);
 	}
+	
+	@Then("^Verify calculate option for BCs from workbook \"([^\"]*)\" in sheet \"([^\"]*)\" with BC \"([^\"]*)\"$")
+	public void verify_calculate_option_for_BCs_from_workbook_in_sheet_with_BC(String workbook, String sheet,
+			String bcsheet) throws Throwable {
+		String statusOfBC;
+		eh.setExcelFile("parallelRunBC", "TargetCountOfBCs");
+
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook, sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, rewardRule, condition,
+				bcSheet = "";
+		for (int i = 0; i < data.size(); i++) {
+			bcName = data.get(i).get(1);
+			campaignCategory = data.get(i).get(4);
+			campaignName = data.get(i).get(5);
+			offerName = data.get(i).get(6);
+			inventoryFromSheet = data.get(i).get(7);
+			bcSheet = data.get(i).get(9);
+			rewardRule = data.get(i).get(2);
+			condition = data.get(i).get(10);
+			String count = eh.getCell(1, condition);
+
+			if (bcSheet.contains(bcsheet)) {
+				broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory, campaignName, bcName);
+				broadcastPageObjects.navigate_to_broadcasts(bcSheet);
+				commonObjects.filterBCName(bcSheet, bcName);
+				statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
+				commonObjects.clickBCOptionsIcon(bcSheet);
+				commonObjects.clickEditOption();
+				Thread.sleep(3000);
+				broadcastPageObjects.clickProceedButton();
+				Thread.sleep(5000);
+
+				boolean targetCountvisible = broadcastPageObjects.checkTargetCountVisible();
+				if (targetCountvisible == true) {
+					String count1 = driver.findElement(By.xpath(
+							"//paper-button[@class='statsPopup style-scope stats-calculate x-scope paper-button-0'][contains(.,'Target Count')]"))
+							.getText();
+					System.out.println(count1);
+
+//					boolean hhg = jswait.checkVisibility("//paper-button[@class='statsPopup style-scope stats-calculate x-scope paper-button-0'][contains(.,'"+ count + "')]");
+//					System.out.println(hhg+" count visible");
+
+					jswait.loadClick(
+							"//paper-button[@class='statsPopup style-scope stats-calculate x-scope paper-button-0'][contains(.,'Target Count')]");
+
+					Assert.assertTrue("After click on target count Btn count not showing or wrong count showing ",
+							jswait.checkVisibility(
+									"//label[contains(text(),'Target Count')]/..//label[contains(text(),'" + count
+											+ "')]"));
+
+					broadcastPageObjects.calculatedCountsCloseBtn();
+					Thread.sleep(2000);
+					Assert.assertTrue("count not  diplayed", jswait.checkVisibility(
+							"//paper-button[@class='statsPopup style-scope stats-calculate x-scope paper-button-0'][contains(.,'"
+									+ count + "')]"));
+					Thread.sleep(1000);
+					if (!condition.contains("segment")) {
+						Assert.assertTrue("count not displayed inside top of condition", jswait.checkVisibility(
+								"//div[@class='count-box style-scope condition-form'][contains(.,'" + count + "')]"));
+						Thread.sleep(1000);
+//					Assert.assertTrue("coount not displayed in top of target condition", jswait.checkVisibility("//div[@class='count-box style-scope target-form'][contains(.,'"+count+"')]"));
+						System.out.println("calculate Btn verified.....");
+					} else {
+						System.out.println("calculate Btn verified.....");
+					}
+				} else {
+					try {
+						System.out.println("Calculate Btn visible.. .. and click on Calculate Btn");
+						broadcastPageObjects.calculate_CG_TG();
+						// broadcastPageObjects.Verify_targetcountbc();
+					} catch (Exception e) {
+						System.out.println("calculating.........");
+					}
+					String valueCalculating = broadcastPageObjects.getCalculatingString();
+					if (valueCalculating.equals("Calculating")) {
+
+						TimeoutImpl t = new TimeoutImpl();
+						t.startTimer();
+						while (valueCalculating.contains("Calculating") && t.checkTimerMin(35)) {
+							valueCalculating = broadcastPageObjects.getCalculatingString();
+							System.out.println(valueCalculating);
+							Thread.sleep(5000);
+						} // while
+
+						System.out.println("Status of calculate  " + valueCalculating);
+						String count1 = driver.findElement(By.xpath(
+								"//paper-button[@class='statsPopup style-scope stats-calculate x-scope paper-button-0'][contains(.,'"
+										+ count + "')]\")"))
+								.getText();
+						System.out.println(count1);
+
+						jswait.loadClick(
+								"//paper-button[@class='statsPopup style-scope stats-calculate x-scope paper-button-0'][contains(.,'Target Count')]");
+
+						Assert.assertTrue("After click on target count Btn count not showing or wrong count showing ",
+								jswait.checkVisibility(
+										"//label[contains(text(),'Target Count')]/..//label[contains(text(),'" + count
+												+ "')]"));
+
+						broadcastPageObjects.calculatedCountsCloseBtn();
+						Thread.sleep(2000);
+						Assert.assertTrue("count not  diplayed", jswait.checkVisibility(
+								"//paper-button[@class='statsPopup style-scope stats-calculate x-scope paper-button-0'][contains(.,'"
+										+ count + "')]"));
+						Thread.sleep(1000);
+						if (!condition.contains("segment")) {
+							Assert.assertTrue("count not displayed inside top of condition",
+									jswait.checkVisibility(
+											"//div[@class='count-box style-scope condition-form'][contains(.,'" + count
+													+ "')]"));
+							Thread.sleep(1000);
+//						Assert.assertTrue("coount not displayed in top of target condition", jswait.checkVisibility("//div[@class='count-box style-scope target-form'][contains(.,'"+count+"')]"));
+							System.out.println("calculate Btn verified.....");
+						} else {
+							System.out.println("calculate Btn verified.....");
+						}//else block if - else
+					} // Internal if
+				} // if-else
+			} // main if
+		} // for
+
+	}// method
 }
 
 

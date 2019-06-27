@@ -25,7 +25,7 @@ Feature: Test suite for Broadcast Editing for NEW
  
 
   
-  @NDX-5874 @initBrowser @closeBrowser
+  @NDX-5874 @NDX-9921 @initBrowser @closeBrowser
   Scenario: Verify one-off BC and edit the Delivery details , Verify the BC after edit Start and End Time of One-Off Bc NEW
     Given login
     When navigate to precision marketer
@@ -173,7 +173,7 @@ Feature: Test suite for Broadcast Editing for NEW
 #    ************************ Trigger OneOFF BC**************
    
     
-     @NDX-6254 @initBrowser @closeBrowser
+     @NDX-6254 @NDX-9923 @initBrowser @closeBrowser
   Scenario: Verify Trigger one-off BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
@@ -318,7 +318,7 @@ Feature: Test suite for Broadcast Editing for NEW
  #    ************************ Seeding OneOFF BC**************   
     
     
-     @NDX-6092 @initBrowser @closeBrowser
+     @NDX-6092 @NDX-9925 @initBrowser @closeBrowser
   Scenario: Verify seeding one-off BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
@@ -473,7 +473,7 @@ Feature: Test suite for Broadcast Editing for NEW
 	
         
     
-     @NDX-6036  @initBrowser @closeBrowser
+     @NDX-6036 @NDX-9927 @initBrowser @closeBrowser
   Scenario: Verify seeding Triggerable BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
@@ -633,7 +633,7 @@ Feature: Test suite for Broadcast Editing for NEW
     
     
     
-     @NDX-6200   @initBrowser @closeBrowser
+     @NDX-6200  @NDX-9926 @initBrowser @closeBrowser
   Scenario: Verify seeding Recurring BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
@@ -788,7 +788,7 @@ Feature: Test suite for Broadcast Editing for NEW
     
     
     
-     @NDX-6146 @initBrowser @closeBrowser
+     @NDX-6146 @NDX-9928 @initBrowser @closeBrowser
   Scenario: Verify seeding Triggerable Recurring BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
@@ -943,7 +943,7 @@ Feature: Test suite for Broadcast Editing for NEW
   
    #    ************************ Trigger Recurring BC**************   
     
-    @NDX-6308 @initBrowser @closeBrowser
+    @NDX-6308 @NDX-9924 @initBrowser @closeBrowser
   Scenario: Verify  Trigger Recurring BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer
@@ -1101,7 +1101,7 @@ Feature: Test suite for Broadcast Editing for NEW
     
     
     
-   @NDX-5982   @initBrowser @closeBrowser
+   @NDX-5982 @NDX-9922  @initBrowser @closeBrowser
   Scenario: Verify Recurring BC and edit the Delivery details NEW
     Given login
     When navigate to precision marketer

@@ -25,7 +25,34 @@ Feature: For broadcast functionality check
     Given login
     Then navigate to precision marketer
     Then verify the inventory "Unlimited" after completion of BCs from workbook "parallelRunBC" and sheet "parallelRunBC"
-    
+   
+ 
+ #    ************Verify Bc limits***************************************************
+   @NDX-9977 @initBrowser
+   Scenario: Verify the limit recipints option for the BCs
+   Given login
+   Then navigate to precision marketer
+   Then verify the inventory "Unlimited" after completion of BCs from workbook "parallelRunBC" and sheet "parallelRunBC"
+
+
+
+#*********************** Verify Calculate Option ******************************
+
+@NDX-9969 @initBrowser @closeBrowser
+Scenario Outline: Verify the calculate option for the BCs <BcSheet>
+Given login 
+Then navigate to precision marketer 
+Then Verify calculate option for BCs from workbook "parallelRunBC" in sheet "CalculateOptionForBC" with BC "<BcSheet>"
+Examples:
+|BcSheet|
+|recurringBC|
+|one-offBC|
+|TriggerOneoff|
+|TriggerReccurringBC|
+|seedingoneoff|
+|seedingTriggerableBC|
+|seedingRecurringBC|
+|seedingTriggerableRecurringBC|
     
 
 #**************/\********************* Verify reward bc`s***********/\**************

@@ -23,7 +23,7 @@ public class ShellExecuter extends Init{
     	host =p.getValue("env");
 //    	host = "192.168.150.207";
 //    	user=p.getValue("rootUser");
-    	user = "root";
+    	user = p.getValue("rootUser");
     	password=p.getValue("rootPassword");
 //    	password = "qaenv23";
     }
@@ -221,12 +221,13 @@ public class ShellExecuter extends Init{
     }
   
 	public static void main(String[] args) throws Exception {
-		verifyInfraDetails("Sheet1");
-	    InfraDetails("SystemBestPractices");
-		verifyThePermission("verifyPermission","-rw-r--r--");
-		verifyNegFlowOfInfraDetails("SystemBestPracticesNegFlow");
+//		verifyInfraDetails("Sheet1");
+//	    InfraDetails("SystemBestPractices");
+//		verifyThePermission("verifyPermission","-rw-r--r--");
+//		verifyNegFlowOfInfraDetails("SystemBestPracticesNegFlow");
 //		verifyInfraDetails("sheet 1");
 //		uploadListForDkJob();
+		verifyInfraDetails("pkg_Available2");
 		}
 
 		public static void verifyInfraDetails(String sheet) throws Exception {
@@ -247,10 +248,10 @@ public class ShellExecuter extends Init{
 		list.setExcelFile("InfraTesting_1", sheet);
 		if(status==true) {
 			System.out.println("updated");
-			list.setCell(i, 2, "Passed");
+			list.setCell(i, 2, "PKG_Installed");
 			System.out.println("updated");
 		}else {
-			list.setCell(i, 2, "Failed");
+			list.setCell(i, 2, "PKG_Not Available");
 		}
 		}
 		//System.out.println(List1);

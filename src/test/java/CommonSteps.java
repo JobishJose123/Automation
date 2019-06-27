@@ -257,6 +257,12 @@ public class CommonSteps extends Init {
 		Thread.sleep(milliSeconds);
 	}
 	
+	@Then("^wait for (\\d+) milliseconds$")
+	public void waitForTimeInMilliSeconds(int milliSeconds) throws InterruptedException {
+		//int milliSeconds = minutes * 60 * 1000;
+		Thread.sleep(milliSeconds);
+	}
+	
 	@Given("^login with the user from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
     public void loginuser(String sheet, String fileName) throws Exception {
 		excelHelper.setExcelFile(fileName,sheet);

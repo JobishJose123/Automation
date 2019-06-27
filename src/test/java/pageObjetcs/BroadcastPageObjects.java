@@ -499,7 +499,12 @@ public class BroadcastPageObjects extends Init {
 		private WebElement seedingRecurrChildOptionIcon;
 		@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[2]")
 		private WebElement seedingOneOffOptionIcon;
-
+		@FindBy(xpath="//div[@class='headingDiv layout horizontal justified style-scope stats-calculate']//iron-icon[@id='icon']")
+		private WebElement calculatedCountsCloseBtn;
+		
+		public void calculatedCountsCloseBtn() throws InterruptedException {
+			jswait.loadClick(calculatedCountsCloseBtn);
+		}
 	public void backToOffers() throws InterruptedException {
 		jswait.loadClick(backToOffers);
 	}
@@ -1037,12 +1042,36 @@ public class BroadcastPageObjects extends Init {
 		}
 		clickProceedButton();
 	}
+public boolean checkCalculateBtnDisplayed() {
+		
+		boolean checkCalculateBtnDisplayed = jswait.checkVisibility(calculateLimit);
+		return checkCalculateBtnDisplayed;
+	}
+	
+	public String getCalculatingString() throws InterruptedException, UnsupportedFlavorException, IOException {
+		
+		String value=driver.findElement(By.xpath(".//label[text()='Calculating']")).getText();
+		return value;
+	}
+	
+	public boolean checkTargetCountVisible() {
+		
+		boolean value=jswait.checkVisibility(
+				"//paper-button[@class='statsPopup style-scope stats-calculate x-scope paper-button-0'][contains(.,'Target Count')]");
+	return value;
+	}
 
 	public void calculate_CG_TG() throws InterruptedException {
 
 		jswait.loadClick(calculateLimit);
 		Thread.sleep(2000);
-		;
+		try {
+			jswait.checkVisibility("//paper-dialog[@id='calculateConfirm']//paper-button[contains(.,'Yes')]");
+			jswait.loadClick("//paper-dialog[@id='calculateConfirm']//paper-button[contains(.,'Yes')]");
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		Thread.sleep(2000);
 		assertTrue(calculateText.isDisplayed());
 		Thread.sleep(2000);
 
@@ -2957,7 +2986,7 @@ public class BroadcastPageObjects extends Init {
 	}
 
 	public void navigate_to_broadcasts(String bcSheetName) throws Exception {
-		if (bcSheetName.contains("one-offBC")) {
+		if (bcSheetName.contains("one-offBC")||bcSheetName.contains("TriggerOneoff")) {
 			System.out.println(bcSheetName);
 			jswait.loadClick("//paper-tab//div[contains(.,'One-time Broadcasts')]");
 
@@ -2968,9 +2997,14 @@ public class BroadcastPageObjects extends Init {
 		} else if (bcSheetName.contentEquals("recurringBC")||bcSheetName.contentEquals("recurrBCDaily")) {
 			System.out.println(bcSheetName);
 			jswait.loadClick("//paper-tab//div[contains(.,'Recurring Broadcasts')]");
-		} // elseif end
+		} else if(bcSheetName.contains("TriggerReccurringBC")) {
+			System.out.println(bcSheetName);
+			jswait.loadClick("//paper-tab//div[contains(.,'Triggerable Broadcasts')]");
+		}// elseif end
 
 	}
+
+	
 	public void pauseBC(String bctype) throws Exception {
 		  
 		  commonObjects.BCOptionIcon(bctype);
@@ -3137,8 +3171,18 @@ public class BroadcastPageObjects extends Init {
 		}
 		else if(TG.equalsIgnoreCase("defineLimitFixed")){
 			
-			jswait.loadClick(defineLimit);
-			jswait.loadSendKeys(enterLimitField, "10");
+			try {
+				int size = TG.length();
+				String targetGroup = TG.substring(16, size);
+//				int result = Integer.parseInt(targetGroup);
+				System.out.println(targetGroup);
+
+				jswait.loadClick(defineLimit);
+				jswait.loadSendKeys(enterLimitField, targetGroup);
+			} catch (Exception e) {
+				jswait.loadClick(defineLimit);
+				jswait.loadSendKeys(enterLimitField, "10");
+			}
 			
 		}
 		else if(TG.equalsIgnoreCase("defineLimitsDynamic")) {
