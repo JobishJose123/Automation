@@ -213,6 +213,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement graphicalTargetCanvas;
 	 @FindBy(xpath="//paper-button[@condition='AND']")
 		 private WebElement manualAndCondition;
+	 @FindBy(xpath="(//paper-button[@condition='AND'])[2]")
+	 private WebElement manualAndCondition2;
 	 @FindBy(xpath="//paper-button[@condition='OR']")
 	 private WebElement manualOrCondition;
 		 @FindBy(xpath="//label[contains(.,'Condition Type')]/../input")
@@ -257,6 +259,22 @@ public class TargetConditionObjects extends Init {
 			private WebElement addOneMoreValue;
 			@FindBy(xpath="//paper-icon-button[@icon='icons:add']")
 			private WebElement add;
+			@FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+SELENIUM_SHARED_EVENT+"')]")
+			private WebElement eventCustomerDrivenSharedEvent;
+			  		@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'Age_q11')]")
+					private WebElement CustomerInsightFieldAgeNV;
+					@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'Date_q11')]")
+					private WebElement CustomerInsightFieldDateNV;
+					@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'Last Name_q11')]")
+					private WebElement CustomerInsightFieldLastNameNV;
+					@FindBy(xpath="//paper-item[contains(.,'field is not set')]")
+				 private WebElement conditionFieldIsNotSet;
+				 @FindBy(xpath="(//label[contains(.,'Date Part')]//following::input)[1]")
+				 private WebElement selectDatePart ;
+				 @FindBy(xpath="//paper-item[contains(.,'DATE')]")
+				 private WebElement selectDate;
+				 @FindBy(xpath="(.//*[@id='conditionCard']/paper-button[2])[3]")
+				 private WebElement targetConditionSave3;
 		 
 		// @FindBy(xpath="")
 		// private WebElement ;
@@ -437,7 +455,7 @@ public class TargetConditionObjects extends Init {
 			else if(event.contentEquals("customerList")){
 				jswait.loadClick(targetConditionTypeSelector);
 				jswait.loadClick(targetConditionTypeCustomerList);
-				jswait.loadSendKeys(CustomerListFieldSelector,BASE_LIST);
+				jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_LIST_SUB);
 				jswait.loadClick(CustomerListSelection);
 				jswait.loadClick(conditionSelector);
 				jswait.loadClick(conditionIsSubscribed);
@@ -460,6 +478,49 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(conditionSelector);
 				jswait.loadClick(conditionIsGreaterThan);
 				jswait.loadSendKeys(isGreaterThanValue,"25");
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("profilefieldNV")) {
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(CustomerInsightFieldAgeNV);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionFieldIsNotSet);
+//				jswait.loadClick(conditionIsGreaterThan);
+//				jswait.loadSendKeys(isGreaterThanValue,"6");
+				jswait.loadClick(targetConditionSave);
+				clickManualAndButton();
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(CustomerInsightFieldDateNV);
+				jswait.loadClick(selectDatePart);
+				jswait.loadClick(selectDate);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionFieldIsNotSet);
+			    jswait.loadClick(targetConditionSave2);
+				jswait.loadClick(manualAndCondition2);
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadSendKeys(CustomerInsightFieldSelector, "Last Name_q11");
+				jswait.loadClick(CustomerInsightFieldLastNameNV);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionFieldIsNotSet);
+				jswait.loadClick(targetConditionSave3);
+				
+				
+			}
+			else if(event.contains("sharedEventOtherPartner")) {
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerDrivenEvents);
+				jswait.loadSendKeys(EventFieldSelector,SELENIUM_SHARED_EVENT);
+				jswait.loadClick(eventCustomerDrivenSharedEvent);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
 				jswait.loadClick(targetConditionSave);
 			}
 			else if(event.contentEquals("IsAnyOf")) {

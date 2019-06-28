@@ -5276,6 +5276,14 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		} // for
 
 	}// method
+	@Then("^verify the ack count with target condition (.*) from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" of bctype \"([^\"]*)\"$")
+	public void verify_the_ack_count_with_target_condition_Acknowlegment_from_sheet_for_bc_from_sheet_of_bctype(String targetCondition, String targetCountSheet, String bcSheet, String bctype) throws Exception {
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName=eh.getCellByColumnName("BC Name");
+		eM.setExcelFile("paralleRunbc", targetCountSheet);
+		String targetCount=eM.getCellByColumnName(targetCondition);
+		broadcastPageObjects.verifyBCAckCountFromGrid(bcName,targetCount,bctype);
+}
 }
 
 

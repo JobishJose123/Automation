@@ -237,7 +237,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement topBcStatusGridForRecurrChild;
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[3]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGridForSeedingChild;
-	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[5]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
+	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[6]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGridForSeedingrecurringChild;
 	
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[1]/vaadin-grid-table-cell[5]/vaadin-grid-cell-content")
@@ -501,6 +501,20 @@ public class BroadcastPageObjects extends Init {
 		private WebElement seedingOneOffOptionIcon;
 		@FindBy(xpath="//div[@class='headingDiv layout horizontal justified style-scope stats-calculate']//iron-icon[@id='icon']")
 		private WebElement calculatedCountsCloseBtn;
+		@FindBy(xpath="//div[contains(.,'Confirmed Delivery')][@id='checkboxLabel']")
+		private WebElement drCheckBox ;
+		@FindBy(xpath="(//div[contains(.,'Conversion')][@id='checkboxLabel'])[1]")
+		private WebElement conversionCheckBox ;
+		@FindBy(xpath="//div[contains(.,'Fulfillment Success')][@id='checkboxLabel']")
+		private WebElement fulfillmentCheckBox;
+		@FindBy(xpath="//iron-icon[@title='Apply']")
+		private WebElement applyEventFilter;
+		
+		
+		
+		
+		
+		
 		
 		public void calculatedCountsCloseBtn() throws InterruptedException {
 			jswait.loadClick(calculatedCountsCloseBtn);
@@ -3210,9 +3224,11 @@ public boolean checkCalculateBtnDisplayed() {
 			targetConditionObjects.clickTargetConditionDeletet();
 			}
 			
-			if (condition.contains("segmentAgeGT40")) {
-				jswait.loadClick(savedSegmentRadioButtion);
-				jswait.loadClick(savedSegmentSelectorField);
+		if (condition.contains("segmentAgeGT40")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			Thread.sleep(1000);
+			jswait.loadClick(savedSegmentSelectorField);
+			Thread.sleep(1000);  
 				jswait.loadClick("//paper-item[contains(.,'segmentAgeGT40')]");
 			} else if (condition.equals("SegmentForMoreThanTenConditions")) {
 				jswait.loadClick(savedSegmentRadioButtion);
@@ -3625,11 +3641,11 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	}
 	
 	public void selectTrackSession(String trackExpires) throws InterruptedException {
-		if(trackExpires.equals("After")) {
-		jswait.loadClick(trackSessionSelector);
-		jswait.loadClick(trackSessionAfter);
-		jswait.loadSendKeys(trackSession2Days, "5");
-		}else if(trackExpires.equals("At")) {
+	if(trackExpires.equalsIgnoreCase("After")) {
+	jswait.loadClick(trackSessionSelector);
+	jswait.loadClick(trackSessionAfter);
+	jswait.loadSendKeys(trackSession2Days, "5");
+	}else if(trackExpires.equalsIgnoreCase("At")) {
 			
 			Calendar rightNow = Calendar.getInstance();
 			String mn = "";
@@ -3733,8 +3749,12 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		Thread.sleep(3000);
 		jswait.loadClick(selectColumn);
 		Thread.sleep(2000);
-			jswait.loadClick(selectColumnDelivered);
-		jswait.loadClick(nextbtn);
+		String checkbox =driver.findElement(By.xpath("//label[contains(.,'Delivery Information')]//following::paper-checkbox[3]")).getAttribute("aria-checked");
+		if(checkbox.equalsIgnoreCase("false"))
+		jswait.loadClick(selectColumnDelivered);
+		else 
+	   System.out.println("delivered checkbox is already true");
+	   jswait.loadClick(nextbtn);
 		Thread.sleep(2000);
 		jswait.loadClick(savebtn);
 		jswait.loadClick(refreshReport);
@@ -3802,11 +3822,13 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		 CustomerProfilePage.enterEventDetails(campaignName);
 		 CustomerProfilePage.filterResetFilterButton();
 		 Thread.sleep(3000);
-		  
-		 
-		 CustomerProfilePage.clickOnEventTabFilter();
+		  CustomerProfilePage.clickOnEventTabFilter();
 		 CustomerProfilePage.enterEventDetails(campaignName);	 
 		 CustomerProfilePage.filterApplyButton();
+		 jswait.loadClick(drCheckBox);
+		 jswait.loadClick(conversionCheckBox);
+		 jswait.loadClick(fulfillmentCheckBox);
+		 jswait.loadClick(applyEventFilter);
 		 Thread.sleep(10000);
 		 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
 			
@@ -3846,6 +3868,17 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	} 
 	public void verifyDynamicTag(String dynamicTag) throws Exception{
 		Assert.assertTrue(jswait.checkVisibility("(//label[contains(.,'Creative')]//following::label[contains(.,'"+dynamicTag+"')])[1]"));
+	}
+	public void verifyBCAckCountFromGrid(String bcName,String targetCount,String bctype) throws Exception{
+		Thread.sleep(2000);
+		if(bctype.equalsIgnoreCase("onetime")) 
+			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+		if(bctype.equalsIgnoreCase("recurring"))
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[3]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+		if(bctype.equalsIgnoreCase("seedingonetime"))
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[2]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
+        if(bctype.equalsIgnoreCase("seedingRecurring"))
+	       Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[6]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
 	}
 	
 }

@@ -110,11 +110,12 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
 Then wait until status of "one-offBC" is "Completed"
+Then verify the ack count with target condition profilefieldNV from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
 Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition profilefieldNV from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count from sheet "targetConditionCount" of the bc from sheet "one-offBC" from bc report
+Then verify the dr count with condition profilefieldNV from sheet "targetConditionCount" of the bc from sheet "one-offBC" from bc report
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750022"
@@ -133,11 +134,12 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
 Then wait until status of "one-offBC" is "Completed"
+Then verify the ack count with target condition customerList from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
 Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition customerList from sheet "targetConditionCount" also the channel "WAP"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
@@ -152,11 +154,12 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
 Then wait until status of "onetime" is "Completed"
-Then view broadcast for "recurringchildbc" for bctype "onetime"
+Then verify the ack count with target condition usageMetric from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
+Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition usageMetric from sheet "targetConditionCount" also the channel "Email"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
@@ -169,11 +172,12 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then wait until status of "one-offBC" is "Completed"
+Then verify the ack count with target condition sharedMetricOtherPartner from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
 Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition sharedMetricOtherPartner from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750500"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 Then verify the dynamic tag "FlyTXT 286"
@@ -193,12 +197,13 @@ Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "onetime"
 Then verify the date for child bc from sheet "recurrBCDaily" with recurrence pattern "DAILY"
 Then wait until status of recurring child bc from sheet "recurrBCDaily" is "Completed" 
+Then verify the ack count with target condition segmentAgeGT40 from sheet "targetConditionCount" for bc from sheet "recurrBCDaily" of bctype "recurring"
 Then view broadcast for "recurringchildbc" for bctype "onetime"
 Then verify the target count with condition segmentAgeGT40 from sheet "targetConditionCount" also the channel "SMS"
-Then verify the dr count from sheet "targetConditionCount" of the bc from sheet "recurrBCDaily" from bc report
+Then verify the dr count with condition segmentAgeGT40 from sheet "targetConditionCount" of the bc from sheet "recurrBCDaily" from bc report
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
 Then verify the condition Confirmed Delivery event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
@@ -253,6 +258,7 @@ Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurringBC" for bctype "onetime"
 Then verify the date for child bc from sheet "recurringBC" with recurrence pattern "EVERY 2 DAYS"
 Then wait until status of recurring child bc from sheet "recurringBC" is "Completed" 
+Then verify the ack count with target condition SharedcustomerList from sheet "targetConditionCount" for bc from sheet "recurrBCDaily" of bctype "recurring"
 Then view broadcast for "recurringchildbc" for bctype "onetime"
 Then verify the target count with condition SharedcustomerList from sheet "targetConditionCount" also the channel "SMS"
 
@@ -265,13 +271,14 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then wait until status of "seedingoneoff" is "Completed"
-Then view broadcast for "onetime" for bctype "onetime"
+Then verify the ack count with target condition sharedEventOtherPartner from sheet "targetConditionCount" for bc from sheet "seedingoneoff" of bctype "seedingonetime"
+Then view broadcast for "seedingonetime" for bctype "onetime"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count from sheet "targetConditionCount" of the bc from sheet "seedingoneoff" from bc report
+Then verify the dr count with condition sharedEventOtherPartner from sheet "targetConditionCount" of the bc from sheet "seedingoneoff" from bc report
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 Then verify the condition Confirmed Delivery event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
@@ -286,16 +293,17 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
 Then wait until status of "one-offBC" is "Completed"
+Then verify the ack count with target condition customerDrivenEvent from sheet "targetConditionCount" for bc from sheet "seedingoneoff" of bctype "seedingonetime"
 Then view broadcast for "seedingonetime" for bctype "onetime"
 Then verify the target count with condition customerDrivenEvent from sheet "targetConditionCount" also the channel "WAP"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 @NDX-7037 @NDX-8654 @initBrowser
-Scenario: Verify the ack ,channel email and target condition: customerDrivenEventNotOccurred of recurringbc
+Scenario: Verify the ack ,channel email and target condition: customerDrivenEventNotOccurred 
 Then filter the bc from sheet "BCDataStorage" from row "7" and column "1" and write in sheet "seedingoneoff"
 Given login 
 Then navigate to precision marketer
@@ -304,11 +312,12 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "seedingoneoff" for bctype "onetime"
 Then wait until status of "one-offBC" is "Completed"
+Then verify the ack count with target condition customerDrivenEventNotOccurred from sheet "targetConditionCount" for bc from sheet "seedingoneoff" of bctype "seedingonetime"
 Then view broadcast for "seedingonetime" for bctype "onetime"
 Then verify the target count with condition customerDrivenEventNotOccurred from sheet "targetConditionCount" also the channel "Email"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
    
@@ -324,10 +333,10 @@ Then filter the bc from file "bcInputData" of sheet "seedingoneoff" for bctype "
 Then wait until status of "seedingoneoff" is "Completed"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
-Then verify the dynamic tag "FlyTXT 286"
+Then verify the dynamic tag "selenium6"
 
 
 @NDX-8606 @NDX-8623 @NDX-8801 @NDX-7042 @initBrowser
@@ -340,14 +349,15 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "seedingRecurringBC" for bctype "onetime"
 Then wait until status of "seedingRecurringBC" from file "bcInputData" is "Completed" for bctype "seeding" 
+Then verify the ack count with target condition Acknowledgement from sheet "targetConditionCount" for bc from sheet "seedingRecurringBC" of bctype "seedingRecurring"
 Then view broadcast for "seedingRecurring" for bctype "onetime"
 Then verify the target count with condition Acknowledgement from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count from sheet "targetConditionCount" of the bc from sheet "seedingRecurringBC" from bc report
+Then verify the dr count with condition drCount from sheet "targetConditionCount" of the bc from sheet "seedingRecurringBC" from bc report
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
 Then verify the condition Confirmed Delivery event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
@@ -366,7 +376,7 @@ Then view broadcast for "seedingRecurring" for bctype "onetime"
 Then verify the target count with condition Acknowledgement from sheet "targetConditionCount" also the channel "WAP"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
      
@@ -395,7 +405,7 @@ Then filter the bc from file "bcInputData" of sheet "seedingRecurringBC" for bct
 Then wait until status of "seedingRecurringBC" from file "bcInputData" is "Completed" for bctype "seeding" 
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750022"
+Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 Then verify the dynamic tag "FlyTXT 286"
