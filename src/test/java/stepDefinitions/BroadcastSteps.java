@@ -5284,6 +5284,18 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		String targetCount=eM.getCellByColumnName(targetCondition);
 		broadcastPageObjects.verifyBCAckCountFromGrid(bcName,targetCount,bctype);
 }
+	@Then("^verify the dr count with condition (.*) from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\" from bc report$")
+	public void verify_the_dr_count_with_condition_from_sheet_of_the_bc_from_sheet_from_bc_report(String targetCondition, String targetCountSheet, String bcSheet) throws Throwable {
+eh.setExcelFile("parallelRunBc", targetCountSheet);
+String targetCount=eh.getCellByColumnName(targetCondition);
+eM.setExcelFile("bcInputData", bcSheet);
+String  bcName=eM.getCellByColumnName("BC Name");
+broadcastPageObjects.verifyDRCount(bcName,targetCount);
+
+	
+	
+	
+	}
 }
 
 
