@@ -31,23 +31,23 @@ Feature: Test cases for USSD
 #    Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
-    Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+#    Then click create program button
+#    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
     Then choose program from sheet "programdetails"
-   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+#   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
 #    Then verify rule created from sheet "rule"
 #    Then wait for "A" status of rule
 #    Then wait until rule is picked
-#    Then get-offer USSD for "9491750025" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123"
-#    Then get-offer USSD for "9491750025" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"
-#    Then get-offer USSD for "9491750025" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to reports
-#    Then navigate to customer profile
-#    Then search msisdn "9491750025"
-#    Then click on events tab
-#    Then wait for offer accepted event in consumer profile for program 
+    Then get-offer USSD for "9491750025" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123"
+    Then get-offer USSD for "9491750025" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"
+    Then get-offer USSD for "9491750025" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750025"
+    Then click on events tab
+    Then wait for offer accepted event in consumer profile for program 
   
   
   @NX-3126 @initBrowser 
@@ -622,15 +622,15 @@ Feature: Test cases for USSD
   Scenario: Verify create a customer care program full flow
     Given login
     Then navigate to intent management
-#    Then navigate to touchpoints
+    Then navigate to touchpoints
 #    Then navigate to ussd
 #    Then change ussd Prioritization Logic to "LIFO" from sheet "ussdTouchpoint"
     Then navigate to programs
-#   Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+  Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
     Then choose program from sheet "programdetails"
-#   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
-#    Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
-#    Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
-#    Then wait until rule is picked
+   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+    Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+    Then wait until rule is picked
     Then get-offer USSD for "9491750025" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123" 
     

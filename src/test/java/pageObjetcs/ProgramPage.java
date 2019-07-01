@@ -570,14 +570,14 @@ private WebElement rulessenderid2
 	
 		if(touchpointType.contentEquals("sms")){
 			System.out.println("inside sms");
-			clickTrackingSessionField();
-			Thread.sleep(3000);
-			optionAfterselect();
-			Thread.sleep(3000);
-			ruledelivryafterinput();
-			Thread.sleep(3000);
-			ruleafterinput2(); 
-			ruledays();
+//			clickTrackingSessionField();
+//			Thread.sleep(3000);
+//			optionAfterselect();
+//			Thread.sleep(3000);
+//			ruledelivryafterinput();
+//			Thread.sleep(3000);
+//			ruleafterinput2(); 
+//			ruledays();
 			Thread.sleep(2000);
 			rulessenderid();
 			Thread.sleep(2000);
@@ -703,8 +703,8 @@ private WebElement rulessenderid2
    public void addresssprule2() throws InterruptedException {
 	   Thread.sleep(2000);
 		jswait.loadClick(addresssprule2);
-		 Thread.sleep(2000);
-			jswait.loadClick(addresssprule2);
+//		 Thread.sleep(2000);
+//			jswait.loadClick(addresssprule2);
 	
 	}
    
@@ -726,7 +726,7 @@ private WebElement rulessenderid2
 	    wait.until(ExpectedConditions.visibilityOf(ruleroute));
 		jswait.loadClick(ruleroute);
 		Thread.sleep(1000);
-		jswait.loadClick(ruleroute);
+//		jswait.loadClick(ruleroute);
 		
 	}
    public void ruleroute2() throws InterruptedException {
@@ -743,7 +743,7 @@ private WebElement rulessenderid2
 	   wait.until(ExpectedConditions.visibilityOf(rulessenderid2)).click();
 		jswait.loadClick(rulessenderid2);
 		Thread.sleep(2000);
-		jswait.loadClick(rulessenderid2);
+//		jswait.loadClick(rulessenderid2);
 	}
    
    public void rulerouteid2() throws InterruptedException {
@@ -1190,13 +1190,13 @@ private WebElement rulessenderid2
 		Thread.sleep(2000);
 		jswait.loadClick(prmrefreshat);
 		Thread.sleep(2000);
-		jswait.loadClick("//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='hours']");
+		jswait.loadClick("(/html//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='hours'])[2]");
 		WebElement num = driver.findElement(By.xpath(
 				".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
 		builder.moveToElement(num).click().build().perform();
 		Thread.sleep(2000);
 		// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
-		jswait.loadClick("//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='minutes']");
+		jswait.loadClick("(//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='minutes'])[2]");
 		Thread.sleep(2000);
 		WebElement num1 = driver.findElement(By.xpath(
 				".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
@@ -1299,7 +1299,52 @@ private WebElement rulessenderid2
 		jswait.loadClick("(//paper-button[contains(.,'OK')])[4]");
 		
 		}
+	public void newprmrefreshatpgm2() throws InterruptedException {
+		
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		Actions builder = new Actions(driver);
+		Thread.sleep(2000);
+		jswait.loadClick(prmrefreshat);
+		Thread.sleep(2000);
 
+		WebElement num = driver.findElement(By.xpath(
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours+1) + "])[2]"));
+		builder.moveToElement(num).click().build().perform();
+		Thread.sleep(2000);
+
+		Thread.sleep(2000);
+		WebElement num1 = driver.findElement(By.xpath(
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[2]"));
+		Thread.sleep(1000);
+    	 builder.moveToElement(num1).click().build().perform();
+      	if(am_pm==0)
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[4]");
+       else
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[4]");
+		jswait.loadClick("(//paper-button[contains(.,'OK')])[8]");
+		
+		}
 	
 	
 	
@@ -2309,21 +2354,21 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 				Thread.sleep(3000);
 				Attimeselection();
 				Thread.sleep(3000);
-				ruleafterinput2(); 
-				ruledays();
+//				ruleafterinput2(); 
+//				ruledays();
 				Thread.sleep(2000);
 				}
 			
 				if(touchpointType.contentEquals("sms")){
 					System.out.println("inside sms");
-					clickTrackingSessionField();
-					Thread.sleep(3000);
-					optionAtselect();
-					Thread.sleep(3000);
-					ruledelivryafterinput();
-					Thread.sleep(3000);
-					ruleafterinput2(); 
-					ruledays();
+//					clickTrackingSessionField();
+//					Thread.sleep(3000);
+//					optionAtselect();
+//					Thread.sleep(3000);
+//					ruledelivryafterinput();
+//					Thread.sleep(3000);
+//					ruleafterinput2(); 
+//					ruledays();
 					Thread.sleep(2000);
 					rulessenderid();
 					Thread.sleep(2000);
@@ -2336,11 +2381,11 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 					Thread.sleep(2000);
 					
 		   }
-				clickTrackingSessionField();
-				Thread.sleep(3000);
-				optionAtselect();
-				Thread.sleep(3000);
-				Attimeselection();
+//				clickTrackingSessionField();
+//				Thread.sleep(3000);
+//				optionAtselect();
+//				Thread.sleep(3000);
+//				Attimeselection();
 				rulessenderid2();
 				Thread.sleep(2000);
 				addresssprule2();
@@ -2383,7 +2428,10 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 		      		 min-=60;
 		      		 hours++;
 		      	 }
-		      	newprmrefreshat();
+		      	if(offerType.contains("Recharge")) {
+		      	newprmrefreshatpgm2();}else {
+		      		newprmrefreshatpgm();
+		      	}
 //		      	 Actions builder = new Actions(driver);
 //		       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
 //		    	 Thread.sleep(1000);

@@ -1654,7 +1654,7 @@ public class OfferPageObjects extends Init {
 					clickRewardFirstRuleAdButton();
 					clickRewardTypeInputField();
 //					clickrewardTypeSampleFlowSelector();
-					clickrewardTypesel_reward();
+//					clickrewardTypesel_reward();
 					clickrewardTypesel_reward();
 					
 					enterSuccessMessage("Success from Selenium");
