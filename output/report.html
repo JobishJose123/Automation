@@ -48,7 +48,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Mar 14, 2019 07:50:48 PM</span>
+                    <span class='label suite-start-time blue darken-3'>Jul 3, 2019 03:58:01 PM</span>
 				</a>
 			</li>
 			<li>
@@ -75,6 +75,7 @@
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
 						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+						<li status='skip'><a href='#!'>Skip <i class='material-icons cyan-text'>redo</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -87,8 +88,8 @@
 					<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@NDX-CampaignRegressionCases</a></li>
-					<li><a href='#'>@NDX-campaignRecurringEdit</a></li>
+					<li><a href='#'>@NX-API_Test_Cases</a></li>
+					<li><a href='#'>@NX-ussd</a></li>
 					<li><a href='#'>@initBrowser</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
@@ -167,10 +168,10 @@
 					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='85.714%'><span class='strong'>6</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='55%'><span class='strong'>11</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='14.286%'>1</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='5%'>1</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='40%'>8</span> others
 				</div>
 			</div>
 		</div>
@@ -186,20 +187,20 @@
 				
 				<li class='test displayed active has-leaf fail' status='fail' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>Campaign Regression Cases</span>
-						<span class='test-time'>Mar 14, 2019 07:50:49 PM</span>
+						<span class='test-name'>Test cases for USSD</span>
+						<span class='test-time'>Jul 3, 2019 03:58:01 PM</span>
 						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
 <div class='scenario node' test-id='2' status='fail'>
 	<div class='category-list'>
-		<span class='category label white-text'>@NDX-campaignRecurringEdit</span>
+		<span class='category label white-text'>@NX-ussd</span>
 		<span class='category label white-text'>@initBrowser</span>
 	</div>
-	<span class='duration right label'>0h 2m 23s+996ms</span>
+	<span class='duration right label'>0h 11m 25s+757ms</span>
 	<div class='desc'>
 		<b>Scenario</b>
-		<span class="desc-text">Verify Editing campaign recurruence and shedule</span>
+		<span class="desc-text">API- Verify Offer Eligible event for USSD</span>
 	</div>
 	<ul class='steps'>
 		<li test-id='3' class='node given pass' status='pass'>
@@ -210,11 +211,11 @@
 				<div class='pre'>passed</div>
 			
 		</li>
-		<li test-id='4' class='node when pass' status='pass'>
+		<li test-id='4' class='node then pass' status='pass'>
 			
-			<b>When</b>
+			<b>Then</b>
 			
-			<span class="bdd-step-name">When navigate to precision marketer</span>
+			<span class="bdd-step-name">Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -222,7 +223,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to life cycle marketing</span>
+			<span class="bdd-step-name">Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -230,7 +231,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then navigate to campaign category from sheet "campaignCategory"</span>
+			<span class="bdd-step-name">Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -238,7 +239,7 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then click on Campaign edit button from sheet "campaignBC"</span>
+			<span class="bdd-step-name">Then get-offer USSD for "9491750029" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
@@ -246,28 +247,77 @@
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then edit the campaign recurrece from sheet "campaignBC"</span>
+			<span class="bdd-step-name">Then get-offer USSD for "9491750029" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "2" where cid= "123"</span>
 				<div class='pre'>passed</div>
 			
 		</li>
-		<li test-id='9' class='node then fail' status='fail'>
+		<li test-id='9' class='node then pass' status='pass'>
 			
 			<b>Then</b>
 			
-			<span class="bdd-step-name">Then click on Campaign view button from sheet "campaignBC"</span>
-				<div class='pre'><textarea>org.openqa.selenium.WebDriverException: unknown error: Element <iron-icon id="icon" class="style-scope paper-icon-button x-scope iron-icon-1" alt="menu">...</iron-icon> is not clickable at point (1338, 408). Other element would receive the click: <vaadin-grid-table-outer-scroller id="outerscroller" class="style-scope vaadin-grid-table">...</vaadin-grid-table-outer-scroller>
-  (Session info: chrome=72.0.3626.119)
-  (Driver info: chromedriver=2.37.544315 (730aa6a5fdba159ac9f4c1e8cbc59bf1b5ce12b7),platform=Windows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)
+			<span class="bdd-step-name">Then get-offer USSD for "9491750029" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='10' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then recharge conversion job for program</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='11' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then navigate to landing page</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='12' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then navigate to precision marketer</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='13' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then navigate to reports</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='14' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then navigate to customer profile</span>
+				<div class='pre'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //div[contains(text(),'Customer Profile')]/..' (tried for 8 second(s) with 500 MILLISECONDS interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:82)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:231)
+	at baseClasses.JSWaiter.clickElement(JSWaiter.java:33)
+	at baseClasses.JSWaiter.loadClick(JSWaiter.java:96)
+	at pageObjetcs.CustomerProfilePage.navigateToCustomerProfile(CustomerProfilePage.java:341)
+	at CommonSteps.navigateToCustomerProfile(CommonSteps.java:149)
+	at ✽.Then navigate to customer profile(USSD.feature:51)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//div[contains(text(),'Customer Profile')]/.."}
+  (Session info: chrome=75.0.3770.100)
+  (Driver info: chromedriver=2.37.544315 (730aa6a5fdba159ac9f4c1e8cbc59bf1b5ce12b7),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
 Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
-System info: host: 'FLY-LP703', ip: '192.168.19.73', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_161'
+System info: host: 'FLY-DT241', ip: '192.168.128.41', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '11.0.2'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\RAHUL~1.CHA\AppDat...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 72.0.3626.119, webStorageEnabled: true}
-Session ID: 99de0391883cc4c815e870646b9e8f15
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\SYAM~1.KRI\AppData...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 75.0.3770.100, webStorageEnabled: true}
+Session ID: 187f3eb1a7646f137c419c20ba8ba142
+*** Element info: {Using=xpath, value=//div[contains(text(),'Customer Profile')]/..}
+	at jdk.internal.reflect.GeneratedConstructorAccessor55.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
 	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
 	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
 	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
@@ -276,19 +326,129 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:83)
-	at sun.reflect.GeneratedMethodAccessor14.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
-	at com.sun.proxy.$Proxy22.click(Unknown Source)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:371)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:473)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:361)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at com.sun.proxy.$Proxy24.isDisplayed(Unknown Source)
+	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:315)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:44)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:301)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:298)
+	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:686)
+	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:682)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:208)
 	at baseClasses.JSWaiter.clickElement(JSWaiter.java:33)
 	at baseClasses.JSWaiter.loadClick(JSWaiter.java:96)
-	at pageObjetcs.CommonObjects.clickOptionsIcon(CommonObjects.java:419)
-	at stepDefinitions.CampaignManagement.clickCampaignViewOption(CampaignManagement.java:1343)
-	at ✽.Then click on Campaign view button from sheet "campaignBC"(Regression Scenarios/Regression/CampaignRegressionCases.feature:37)
-</textarea></div>
+	at pageObjetcs.CustomerProfilePage.navigateToCustomerProfile(CustomerProfilePage.java:341)
+	at CommonSteps.navigateToCustomerProfile(CommonSteps.java:149)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at cucumber.runtime.Utils$1.call(Utils.java:40)
+	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
+	at cucumber.runtime.Utils.invoke(Utils.java:34)
+	at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)
+	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
+	at cucumber.runtime.ExtendedRuntime.runStep(ExtendedRuntime.java:319)
+	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
+	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
+	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedExecutionUnitRunner.run(ExtendedExecutionUnitRunner.java:32)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedFeatureRunner.runChild(ExtendedFeatureRunner.java:99)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedFeatureRunner.runChild(ExtendedFeatureRunner.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:70)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedCucumber.runChild(ExtendedCucumber.java:108)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedCucumber.runChild(ExtendedCucumber.java:32)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedCucumber.run(ExtendedCucumber.java:148)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209)
+</pre></div>
+			
+		</li>
+		<li test-id='15' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then search msisdn "9491750028"</span>
+				<div class='pre'>skipped</div>
+			
+		</li>
+		<li test-id='16' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then click on events tab</span>
+				<div class='pre'>skipped</div>
+			
+		</li>
+		<li test-id='17' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then wait for offer accepted event in consumer profile for program</span>
+				<div class='pre'>skipped</div>
+			
+		</li>
+		<li test-id='18' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then navigate to reports</span>
+				<div class='pre'>skipped</div>
+			
+		</li>
+		<li test-id='19' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then navigate to customer profile</span>
+				<div class='pre'>skipped</div>
+			
+		</li>
+		<li test-id='20' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then search msisdn "9491750029"</span>
+				<div class='pre'>skipped</div>
+			
+		</li>
+		<li test-id='21' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then click on events tab</span>
+				<div class='pre'>skipped</div>
+			
+		</li>
+		<li test-id='22' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then wait for offer accepted event in consumer profile for program</span>
+				<div class='pre'>skipped</div>
 			
 		</li>
 	</ul>
@@ -347,7 +507,7 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 				
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NDX-CampaignRegressionCases</span>
+						<span class='category-name'>@NX-API_Test_Cases</span>
 						<span class='category-status right'>
 							<span class='label fail'>1</span>
 						</span>
@@ -370,8 +530,8 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 								</thead>
 								<tbody>
 									<tr>
-										<td>Mar 14, 2019 07:50:49 PM</td>
-										<td class='linked' test-id='1'>Campaign Regression Cases</td>
+										<td>Jul 3, 2019 03:58:01 PM</td>
+										<td class='linked' test-id='1'>Test cases for USSD</td>
 										<td><span class='test-status fail'>fail</span></td>
 									</tr>
 								</tbody>
@@ -381,7 +541,7 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 				</li>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NDX-campaignRecurringEdit</span>
+						<span class='category-name'>@NX-ussd</span>
 						<span class='category-status right'>
 							<span class='label fail'>1</span>
 						</span>
@@ -404,8 +564,8 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 								</thead>
 								<tbody>
 									<tr>
-										<td>Mar 14, 2019 07:50:49 PM</td>
-										<td class='linked' test-id='2'>Campaign Regression Cases.Verify Editing campaign recurruence and shedule</td>
+										<td>Jul 3, 2019 03:58:01 PM</td>
+										<td class='linked' test-id='2'>Test cases for USSD.API- Verify Offer Eligible event for USSD</td>
 										<td><span class='test-status fail'>fail</span></td>
 									</tr>
 								</tbody>
@@ -438,8 +598,8 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 								</thead>
 								<tbody>
 									<tr>
-										<td>Mar 14, 2019 07:50:49 PM</td>
-										<td class='linked' test-id='2'>Campaign Regression Cases.Verify Editing campaign recurruence and shedule</td>
+										<td>Jul 3, 2019 03:58:01 PM</td>
+										<td class='linked' test-id='2'>Test cases for USSD.API- Verify Offer Eligible event for USSD</td>
 										<td><span class='test-status fail'>fail</span></td>
 									</tr>
 								</tbody>
@@ -486,7 +646,7 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 
                         <li class='exception displayed active'>
                             <div class='exception-heading'>
-                                <span class='exception-name'>org.openqa.selenium.WebDriverException</span>
+                                <span class='exception-name'>org.openqa.selenium.TimeoutException</span>
                                 <span class='exception-count right'><span class='label red lighten-1 white-text'>1</span></span>
                             </div>
                             <div class='exception-content hide'>
@@ -501,21 +661,30 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
                                         </thead>
                                         <tbody>
                                                     <tr>
-                                                        <td>Mar 14, 2019 07:52:28 PM</td>
-                                                        <td class='linked' test-id='9'>Campaign Regression Cases.Verify Editing campaign recurruence and shedule.Then click on Campaign view button from sheet "campaignBC"</td>
-                                                        <td><pre><textarea>org.openqa.selenium.WebDriverException: unknown error: Element <iron-icon id="icon" class="style-scope paper-icon-button x-scope iron-icon-1" alt="menu">...</iron-icon> is not clickable at point (1338, 408). Other element would receive the click: <vaadin-grid-table-outer-scroller id="outerscroller" class="style-scope vaadin-grid-table">...</vaadin-grid-table-outer-scroller>
-  (Session info: chrome=72.0.3626.119)
-  (Driver info: chromedriver=2.37.544315 (730aa6a5fdba159ac9f4c1e8cbc59bf1b5ce12b7),platform=Windows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)
+                                                        <td>Jul 3, 2019 04:08:47 PM</td>
+                                                        <td class='linked' test-id='14'>Test cases for USSD.API- Verify Offer Eligible event for USSD.Then navigate to customer profile</td>
+                                                        <td><pre><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //div[contains(text(),'Customer Profile')]/..' (tried for 8 second(s) with 500 MILLISECONDS interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:82)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:231)
+	at baseClasses.JSWaiter.clickElement(JSWaiter.java:33)
+	at baseClasses.JSWaiter.loadClick(JSWaiter.java:96)
+	at pageObjetcs.CustomerProfilePage.navigateToCustomerProfile(CustomerProfilePage.java:341)
+	at CommonSteps.navigateToCustomerProfile(CommonSteps.java:149)
+	at ✽.Then navigate to customer profile(USSD.feature:51)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//div[contains(text(),'Customer Profile')]/.."}
+  (Session info: chrome=75.0.3770.100)
+  (Driver info: chromedriver=2.37.544315 (730aa6a5fdba159ac9f4c1e8cbc59bf1b5ce12b7),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
 Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
-System info: host: 'FLY-LP703', ip: '192.168.19.73', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_161'
+System info: host: 'FLY-DT241', ip: '192.168.128.41', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '11.0.2'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\RAHUL~1.CHA\AppDat...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 72.0.3626.119, webStorageEnabled: true}
-Session ID: 99de0391883cc4c815e870646b9e8f15
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.37.544315 (730aa6a5fdba15..., userDataDir: C:\Users\SYAM~1.KRI\AppData...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 75.0.3770.100, webStorageEnabled: true}
+Session ID: 187f3eb1a7646f137c419c20ba8ba142
+*** Element info: {Using=xpath, value=//div[contains(text(),'Customer Profile')]/..}
+	at jdk.internal.reflect.GeneratedConstructorAccessor55.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
 	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
 	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
 	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
@@ -524,19 +693,65 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:83)
-	at sun.reflect.GeneratedMethodAccessor14.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
-	at com.sun.proxy.$Proxy22.click(Unknown Source)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:371)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:473)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:361)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at com.sun.proxy.$Proxy24.isDisplayed(Unknown Source)
+	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:315)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:44)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:301)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:298)
+	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:686)
+	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:682)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:208)
 	at baseClasses.JSWaiter.clickElement(JSWaiter.java:33)
 	at baseClasses.JSWaiter.loadClick(JSWaiter.java:96)
-	at pageObjetcs.CommonObjects.clickOptionsIcon(CommonObjects.java:419)
-	at stepDefinitions.CampaignManagement.clickCampaignViewOption(CampaignManagement.java:1343)
-	at ✽.Then click on Campaign view button from sheet "campaignBC"(Regression Scenarios/Regression/CampaignRegressionCases.feature:37)
-</textarea></pre></td>
+	at pageObjetcs.CustomerProfilePage.navigateToCustomerProfile(CustomerProfilePage.java:341)
+	at CommonSteps.navigateToCustomerProfile(CommonSteps.java:149)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at cucumber.runtime.Utils$1.call(Utils.java:40)
+	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
+	at cucumber.runtime.Utils.invoke(Utils.java:34)
+	at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)
+	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
+	at cucumber.runtime.ExtendedRuntime.runStep(ExtendedRuntime.java:319)
+	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
+	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
+	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedExecutionUnitRunner.run(ExtendedExecutionUnitRunner.java:32)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedFeatureRunner.runChild(ExtendedFeatureRunner.java:99)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedFeatureRunner.runChild(ExtendedFeatureRunner.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:70)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedCucumber.runChild(ExtendedCucumber.java:108)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedCucumber.runChild(ExtendedCucumber.java:32)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at com.github.mkolisnyk.cucumber.runner.ExtendedCucumber.run(ExtendedCucumber.java:148)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209)
+</pre></pre></td>
                                                     </tr>
                                         </tbody>
                                     </table>
@@ -574,25 +789,25 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>7</div>
+					<div class='panel-lead'>20</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Mar 14, 2019 07:50:48 PM</div>
+					<div class='panel-lead'>Jul 3, 2019 03:58:01 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Mar 14, 2019 07:53:13 PM</div>
+			 		<div class='panel-lead'>Jul 3, 2019 04:09:27 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>144,831ms</div>
+					<div class='panel-lead'>686,803ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -607,13 +822,13 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 							<th>Others</th>
 						</tr>
 						<tr>
-							<td>@NDX-CampaignRegressionCases</td>
+							<td>@NX-API_Test_Cases</td>
 							<td>0</td>
 							<td>1</td>
 							<td>0</td>
 						</tr>
 						<tr>
-							<td>@NDX-campaignRecurringEdit</td>
+							<td>@NX-ussd</td>
 							<td>0</td>
 							<td>1</td>
 							<td>0</td>
@@ -654,14 +869,14 @@ Session ID: 99de0391883cc4c815e870646b9e8f15
 				infoChild: 0,
 				exceptionsChild: 1,
 				
-				passGrandChild: 6,
+				passGrandChild: 11,
 				failGrandChild: 1,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,
 				warningGrandChild: 0,
-				skipGrandChild: 0,
+				skipGrandChild: 8,
 				infoGrandChild: 0,
-				exceptionsGrandChild: 1,
+				exceptionsGrandChild: 9,
 			};
 		</script>
 		

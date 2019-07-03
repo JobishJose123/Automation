@@ -43,8 +43,7 @@ import cucumber.api.java.en.Then;
 @CucumberOptions(
         features = { "src/test/features"},
 		glue = {"classpath:"},
-		tags = {"  \r\n" + 
-				"@createprogramrulereg"},
+		tags = {"@NX-ussd"},
 		plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:output/report.html",
         "html:target/81", "json:target/81/cucumber.json",

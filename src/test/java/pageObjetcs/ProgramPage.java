@@ -1532,7 +1532,7 @@ public void touchpointpgmdeletecheck() throws Exception{
 			Thread.sleep(3000);
 			jswait.loadSendKeys(programofferclick, offer);
 			Thread.sleep(4000);
-//			jswait.loadSendKeys(programofferclick, offer);
+			jswait.loadSendKeys(programofferclick, offer);
 			Thread.sleep(3000);
 			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
 	}

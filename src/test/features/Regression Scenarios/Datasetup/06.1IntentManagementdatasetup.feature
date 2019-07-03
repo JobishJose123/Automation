@@ -44,24 +44,24 @@ Feature: For IntentManagement datasetup.
 #    Then Add "rechargeSMS" offer to Offer Catalogue
 #   Then navigate to landing page
     Then navigate to intent management
-#    Then navigate to programs
-#    Then click create program button
+    Then navigate to programs
+    Then click create program button
 #   Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
 #    Then choose program from sheet "SMSprogram"
 #      Then create new rule with enddate from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 #      Then create new rule with enddate from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
 
-    Then navigate to programs
-    Then verify create program page "APIprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR"
-    Then choose program from sheet "APIprogram"
-    Then create new rule with enddate from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
-     Then create new rule with enddate from sheet "APIprogram" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointGR"
-    Then navigate to programs
-    Then verify create program page "USSDprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
-    Then choose program from sheet "USSDprogram"
-    Then create new rule with enddate from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
-    Then create new rule with enddate from sheet "USSDprogram" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
-    Then navigate to programs
+#    Then navigate to programs
+#    Then verify create program page "APIprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR"
+#    Then choose program from sheet "APIprogram"
+#    Then create new rule with enddate from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
+#     Then create new rule with enddate from sheet "APIprogram" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointGR"
+#    Then navigate to programs
+#    Then verify create program page "USSDprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+#    Then choose program from sheet "USSDprogram"
+#    Then create new rule with enddate from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+#    Then create new rule with enddate from sheet "USSDprogram" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
+#    Then navigate to programs
     Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
     Then choose program from sheet "CCprogram"
     Then create new rule with enddate from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"

@@ -292,6 +292,6 @@ Feature: For IntentManagement Regression.
       | SavedSegments |
       | Create        |
 
-    
+ 
     
     
