@@ -127,11 +127,13 @@ public class TargetConditionObjects extends Init {
 	private WebElement CustomerInsightFieldGroupId;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::label[contains(.,'List')]/../..//input")
 	private WebElement CustomerListFieldSelector;
-	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+BASE_LIST+"')]")
+	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+SELENIUM_LIST_SUB+"')]")
 	private WebElement CustomerListSelection;
+	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+SELENIUM_SHARED_List+"')]")
+	private WebElement SharedCustomerListSelection;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+SELENIUM_DISCOVERED_CLUSTERS_LIST+"')]")
 	private WebElement discoveredClustersListSelection;
-	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD_UNIQUE+"')]")
+	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldAgeUnique;
 	@FindBy(xpath="//label[contains(.,'Field')]/../..//input/following::paper-item[contains(.,'"+SITE_ID_PROFILE_FIELD+"')]")
 	private WebElement CustomerInsightFieldSite;
@@ -806,14 +808,14 @@ public class TargetConditionObjects extends Init {
 			jswait.loadClick(metricMaxOfMonthsSelect);
 			jswait.loadClick(metricMaxOfMonthThisMonth);
 			jswait.loadClick(metricMaxOfMonthLastMonth);
-			jswait.loadClick(metricMaxOfMonthLast2Month);
-			jswait.loadClick(metricMaxOfMonthLast3Month);
-			jswait.loadClick(metricMaxOfMonthLast4Month);
-			jswait.loadClick(metricMaxOfMonthLast5Month);
-			jswait.loadClick(metricMaxOfMonthLast6Month);
-			jswait.loadClick(metricMaxOfMonthLast7Month);
-			jswait.loadClick(metricMaxOfMonthLast8Month);
-			jswait.loadClick(metricMaxOfMonthLast9Month);
+//			jswait.loadClick(metricMaxOfMonthLast2Month);
+//			jswait.loadClick(metricMaxOfMonthLast3Month);
+//			jswait.loadClick(metricMaxOfMonthLast4Month);
+//			jswait.loadClick(metricMaxOfMonthLast5Month);
+//			jswait.loadClick(metricMaxOfMonthLast6Month);
+//			jswait.loadClick(metricMaxOfMonthLast7Month);
+//			jswait.loadClick(metricMaxOfMonthLast8Month);
+//			jswait.loadClick(metricMaxOfMonthLast9Month);
 			
 			jswait.loadClick(metricConditionField);
 			jswait.loadClick(conditionIsGreaterThan);
@@ -1034,7 +1036,7 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(targetConditionTypeSelector);
 				jswait.loadClick(targetConditionTypeCustomerList);
 				jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_SHARED_List);
-				jswait.loadClick(CustomerListSelection);
+				jswait.loadClick(SharedCustomerListSelection);
 				jswait.loadClick(conditionSelector);
 				jswait.loadClick(conditionIsSubscribed);
 				jswait.loadClick(targetConditionSave);

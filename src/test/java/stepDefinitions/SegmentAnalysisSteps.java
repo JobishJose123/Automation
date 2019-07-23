@@ -312,7 +312,7 @@ public class SegmentAnalysisSteps extends Init {
 			TimeoutImpl t = new TimeoutImpl();
 			t.startTimer();
 		    String currSegmentAnalysisJobStatus= segmentObjects.getSegmentAnalysisJobStatus();
-			while(!SegmentAnalysisJobstatus.contentEquals(currSegmentAnalysisJobStatus)&& t.checkTimerMin(20)) {
+			while(!SegmentAnalysisJobstatus.contentEquals(currSegmentAnalysisJobStatus)&& t.checkTimerMin(30)) {
 			Thread.sleep(2000);
 			currSegmentAnalysisJobStatus= segmentObjects.getSegmentAnalysisJobStatus();
 		
@@ -395,7 +395,7 @@ public class SegmentAnalysisSteps extends Init {
 	}
 	
 	
-	@Then("^filter the Segment Analysis Copy  for status check from sheet \"([^\"]*)\"$")                                      // filter a job
+	@Then("^filter the Segment Analysis Copy for status check from sheet \"([^\"]*)\"$")                                      // filter a job
 	public void filter_the_Segment_Analysis_Copy_for_status_check_from_sheet(String SegmentAnalysisSheet) throws Exception{
 	 eh.setExcelFile("SegmentAnalysis", SegmentAnalysisSheet);//set excel file
 	 String jobname = eh.getCellByColumnName("Segment_Analysis").toString();

@@ -457,6 +457,7 @@ public class CampaignManagement extends Init{
 	    {
 	    	eM.setExcelFile("campaignInputData", sheet);
 	    	String name = eM.getCell(1, 0).toString();
+	    	System.out.println(name);
 	    	commonObjects.filterName(name);
 	    	
 //	    	Thread.sleep(30000);//NX-8537 bug wait

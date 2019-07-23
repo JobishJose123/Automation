@@ -1213,7 +1213,7 @@ public void clustertabledetailsandsave() throws Exception {
 	  
 public void TargetCount() throws Exception {
 
-	Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope analysis-list'][contains(.,'1,019')]"));
+	Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope analysis-list'][contains(.,'1,020')]"));
 }
 
   public void editCrossTab() throws Exception{

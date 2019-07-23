@@ -235,7 +235,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement topBcStatusGrid;
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[3]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGridForRecurrChild;
-	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[3]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
+	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[2]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGridForSeedingChild;
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[6]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGridForSeedingrecurringChild;
@@ -457,10 +457,6 @@ public class BroadcastPageObjects extends Init {
 	private WebElement recurrencePatternWeeks;
 	@FindBy(xpath = "(//label[contains(.,'Start broadcasts at')]//following::input)[1]")
 	private WebElement startBroadcastAtInput;
-	@FindBy(xpath = "//div[@id='checkboxLabel'][contains(.,'Sunday')]")
-	private WebElement sunday;
-	@FindBy(xpath = "//div[@id='checkboxLabel'][contains(.,'Thursday')]")
-	private WebElement thursday;
 	@FindBy(xpath = "//div[contains(.,'Broadcast Expiry')][@id='checkboxLabel']")
 	private WebElement broadcastExpiryCheckbox;
 	@FindBy(xpath = "(//label[contains(.,'Expires')]//following::input)[1]")
@@ -498,7 +494,7 @@ public class BroadcastPageObjects extends Init {
 		@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[5]")
 		private WebElement seedingRecurrChildOptionIcon;
 		@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[2]")
-		private WebElement seedingOneOffOptionIcon;
+		private WebElement RecurringChildOptionIconAt;
 		@FindBy(xpath="//div[@class='headingDiv layout horizontal justified style-scope stats-calculate']//iron-icon[@id='icon']")
 		private WebElement calculatedCountsCloseBtn;
 		@FindBy(xpath="//div[contains(.,'Confirmed Delivery')][@id='checkboxLabel']")
@@ -3052,12 +3048,12 @@ public boolean checkCalculateBtnDisplayed() {
 			jswait.waitUntil(topBcStatusGrid);
 			status = topBcStatusGrid.getText();
 		} else if (bctype.contains("seeding")) {
-			status = topBcStatusGridForSeedingrecurringChild.getText();
+			status = topBcStatusGridForSeedingChild.getText();
 			
            		} else if (bctype.contains("trigger")) {      
 			status = getTopBcStatusofTrigger(bcName);
 		} else if (bctype.contentEquals("recurring") ){
-			status = getTopBcStatusOfRecurring(bcName);
+			status = topBcStatusGridForRecurrChild.getText();
 		
 		}
 
@@ -3175,9 +3171,9 @@ public boolean checkCalculateBtnDisplayed() {
 	
 	public void enterTargetTabDetails(String condition,String targetType,String TG,String CG,String DNC) throws Exception{
 		selectBaseList(SELENIUM_LIST);
-		Thread.sleep(2000);
-		jswait.loadClick("//div[@id='radioContainer']//following::div[contains(.,'"+targetType+"')]");
-		Thread.sleep(1000);
+		Thread.sleep(10000);
+		jswait.loadClick("(//div[@id='radioContainer']//following::div[contains(.,'"+targetType+"')])[1]");
+		Thread.sleep(10000);
 		jswait.loadClick(selectTargetGroup);
 		
 		if(TG.equalsIgnoreCase("no limit")) {
@@ -3219,35 +3215,30 @@ public boolean checkCalculateBtnDisplayed() {
 		jswait.loadClick(CGSavebtn);
 		selectDNCList(DNC);
 		TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
-		if(targetType.equalsIgnoreCase("create")){ {
+		if(targetType.equalsIgnoreCase("create")){
 			commonObjects.clickOptionsIcon();
 			targetConditionObjects.clickTargetConditionDeletet();
+			targetConditionObjects.clickBasicTargetCondition(condition);
 			}
-			
-		if (condition.contains("segmentAgeGT40")) {
+		else if(targetType.equalsIgnoreCase("saved segments")) {
 			jswait.loadClick(savedSegmentRadioButtion);
-			Thread.sleep(1000);
-			jswait.loadClick(savedSegmentSelectorField);
-			Thread.sleep(1000);  
-				jswait.loadClick("//paper-item[contains(.,'segmentAgeGT40')]");
+		Thread.sleep(1000);
+		jswait.loadClick(savedSegmentSelectorField);
+		Thread.sleep(1000);  
+		{
+			if (condition.contains("segmentAgeGT40")) {
+					jswait.loadClick("//paper-item[contains(.,'segmentAgeGT40')]");
 			} else if (condition.equals("SegmentForMoreThanTenConditions")) {
-				jswait.loadClick(savedSegmentRadioButtion);
-				jswait.loadClick(savedSegmentSelectorField);
 				jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditions')]");
 			} else if (condition.equals("SegmentForMoreThanTenConditionsOR")) {
-				jswait.loadClick(savedSegmentRadioButtion);
-				jswait.loadClick(savedSegmentSelectorField);
 				jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditionsOR')]");
+	
+				} else if (condition.equals("SegmentAnalysis")) {
+					jswait.loadClick("(//paper-item[contains(.,'" + condition + "')])[1]");
+				}
+		}
+	}
 
-			} else if (condition.equals("SegmentAnalysis")) {
-				jswait.loadClick(savedSegmentRadioButtion);
-				jswait.loadClick(savedSegmentSelectorField);
-
-				jswait.loadClick("(//paper-item[contains(.,'" + condition + "')])[1]");
-			} else {
-				targetConditionObjects.clickBasicTargetCondition(condition);
-			}}
-			
 			else {
 				System.out.println("none selected as target condition");
 			}
@@ -3399,8 +3390,12 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 			jswait.loadClick(recurrencePatternWeeks);
 			Thread.sleep(2000);
 			jswait.loadSendKeys(recurrenceInput,"1");
+			Calendar c =Calendar.getInstance();
+			SimpleDateFormat df=new SimpleDateFormat("EEEE");
+			String today=df.format(c.getTime());
+			System.out.println("today's day is :"+today);
 			Thread.sleep(1000);
-			jswait.loadClick(sunday);
+			jswait.loadClick("//div[@id='checkboxLabel'][contains(.,'"+today+"')]");
 		
 			
 		}
@@ -3490,7 +3485,7 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 		builder.moveToElement(num6).click().build().perform();
 		Thread.sleep(2000);
 		WebElement num7 = driver.findElement(By.xpath(
-				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min - 2) + "])[2]"));
 		Thread.sleep(1000);
 		builder.moveToElement(num7).click().build().perform();
 		if (am_pm == 0)
@@ -3524,8 +3519,12 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 				Thread.sleep(2000);
 				jswait.loadSendKeys(recurrenceInput,"1");
 				Thread.sleep(1000);
-				jswait.loadClick(sunday);
-				jswait.loadClick(thursday);
+				Calendar c =Calendar.getInstance();
+				SimpleDateFormat df=new SimpleDateFormat("EEEE");
+				String today=df.format(c.getTime());
+				System.out.println("today's day is :"+today);
+				Thread.sleep(1000);
+				jswait.loadClick("//div[@id='checkboxLabel'][contains(.,'"+today+"')]");
 				
 			}
 			else if (recurrencePattern.equalsIgnoreCase("months")) {
@@ -3724,7 +3723,7 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	}
 	public void verifyViewDetailsOfBc(String targetCount,String offerChannel) throws Exception{
 		jswait.loadClick(ViewTargetDetails);
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 		Assert.assertTrue(jswait.checkVisibility("(//p[contains(.,'Target Count')]//following::p[contains(.,'"+targetCount+"')])[1]"));
 		Thread.sleep(2000);
 		jswait.loadClick(ViewTargetDetails);
@@ -3735,9 +3734,11 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	}
 	
 	public void viewBCbtn(String bcToView, String bctype) throws Exception{
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 	if(bcToView.equalsIgnoreCase("recurringchildbc"))
 	jswait.loadClick(recurringChildOptionIcon);
+	if(bcToView.equalsIgnoreCase("recurringchildWithEndAt"))
+		jswait.loadClick(RecurringChildOptionIconAt);
 	if(bcToView.equalsIgnoreCase("seedingRecurring"))
 	jswait.loadClick(seedingRecurrChildOptionIcon);
     if(bcToView.equalsIgnoreCase("onetime")||bcToView.equalsIgnoreCase("seedingonetime"))          
@@ -3817,7 +3818,7 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	public void verifyEventOfTheBC(String event,String bcName,String campaignName) throws Exception{
 		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
 		CustomerProfilePage.searchEventsDynammically("Last 3 Days");
-		 Thread.sleep(2000);
+		 Thread.sleep(4000);
 		 CustomerProfilePage.clickOnEventTabFilter();
 		 CustomerProfilePage.enterEventDetails(campaignName);
 		 CustomerProfilePage.filterResetFilterButton();
@@ -3873,7 +3874,9 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		Thread.sleep(2000);
 		if(bctype.equalsIgnoreCase("onetime")) 
 			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
-		if(bctype.equalsIgnoreCase("recurring"))
+		if(bctype.equalsIgnoreCase("recurringWithEndAt"))
+			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+			if(bctype.equalsIgnoreCase("recurring"))
 			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[3]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
 		if(bctype.equalsIgnoreCase("seedingonetime"))
 			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[2]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));

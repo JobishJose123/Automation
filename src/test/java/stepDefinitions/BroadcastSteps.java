@@ -4316,7 +4316,7 @@ public void pause_bc_for_other_than_oneoff_from_sheet(String bctype) throws Thro
 public void wait_until_status_of_from_file_is_for_bctype(String bcsheet, String bcfile, String status, String bctype) throws Throwable {
 	eh.setExcelFile(bcfile, bcsheet);
     String bcName=eh.getCellByColumnName("BC Name");
-    commonObjects.filterBC(bcName,bctype);
+//    commonObjects.filterBC(bcName,bctype);
 	String statusOfBc = broadcastPageObjects.getTopBcStatus(bcsheet,bcName,bctype);
 	TimeoutImpl t = new TimeoutImpl();
 	t.startTimer();
@@ -5104,10 +5104,10 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		System.out.println(df.format(c.getTime())); 
 		Thread.sleep(2000);
 		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
-		c.add(Calendar.DATE,1);
-		System.out.println(df.format(c.getTime()));
-		Thread.sleep(2000);
-		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+//		c.add(Calendar.DATE,1);
+//		System.out.println(df.format(c.getTime()));
+//		Thread.sleep(2000);
+//		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
 	}
 		else if (recurrencePattern.equalsIgnoreCase("every 2 days")) {
 			Thread.sleep(2000);
@@ -5124,7 +5124,6 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		}
 		else if (recurrencePattern.equalsIgnoreCase("every week")) {
 			Thread.sleep(2000);
-			c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY); 
 			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));   
 			c.add(Calendar.DATE,7);
 			System.out.println(df.format(c.getTime())); 
@@ -5280,7 +5279,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	public void verify_the_ack_count_with_target_condition_Acknowlegment_from_sheet_for_bc_from_sheet_of_bctype(String targetCondition, String targetCountSheet, String bcSheet, String bctype) throws Exception {
 		eh.setExcelFile("bcInputData", bcSheet);
 		String bcName=eh.getCellByColumnName("BC Name");
-		eM.setExcelFile("paralleRunbc", targetCountSheet);
+		eM.setExcelFile("parallelRunBC", targetCountSheet);
 		String targetCount=eM.getCellByColumnName(targetCondition);
 		broadcastPageObjects.verifyBCAckCountFromGrid(bcName,targetCount,bctype);
 }

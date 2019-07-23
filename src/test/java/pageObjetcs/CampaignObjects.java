@@ -2260,6 +2260,7 @@ public void selectBothUserForBCApproval() throws Exception{
 	jswait.loadClick(addCategoryDropdown);
 	Thread.sleep(2000);
 	wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='contentWrapper']/div/paper-menu/div/paper-item[contains(.,'"+campaignname+"')]"))).click();
+	Thread.sleep(2000);
 	jswait.loadClick(addCategorySave);
 	Thread.sleep(2000);
 	jswait.loadClick(approvalRuleSave);
