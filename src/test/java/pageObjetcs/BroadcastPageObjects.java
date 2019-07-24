@@ -331,7 +331,6 @@ public class BroadcastPageObjects extends Init {
 	private WebElement sendTimeData;
 	@FindBy(xpath = ".//p[contains(.,'04 Sep 2018 03:21 PM GMT+05:30')]")
 	private WebElement sendTimeText;
-
 	@FindBy(xpath = "//paper-radio-button[contains(.,'No Control Group')]")
 	private WebElement noControlGroupRadioButton;
 	@FindBy(xpath = ".//h4[contains(.,'Target Details')]")
@@ -360,7 +359,9 @@ public class BroadcastPageObjects extends Init {
 	
 	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'At')]")
 	private WebElement expiresAtoption;
-	@FindBy(xpath = "//form[@id='bcExpiryForm']//paper-item[contains(.,'After')]")
+//	@FindBy(xpath = "//form[@id='bcExpiryForm']//paper-item[contains(.,'After')]")
+//	private WebElement expiresAfteroption;
+	@FindBy(xpath = ".//vaadin-combo-box-item[contains(text(),'After')]")
 	private WebElement expiresAfteroption;
 	@FindBy(xpath = ".//form[@id='bcExpiryForm']//label[contains(.,'Expires')]//following::iron-icon[5]")
 	private WebElement expirestimezone;
@@ -573,7 +574,8 @@ public class BroadcastPageObjects extends Init {
 
 	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
 	public void bcnotificationrecipient() throws InterruptedException {
-		jswait.loadSendKeys(bcnotificationrecipient, "selenium");
+		//jswait.loadSendKeys(bcnotificationrecipient, "selenium");
+		jswait.loadSendKeys(bcnotificationrecipient, "Selenium");
 
 		wait.until(ExpectedConditions.visibilityOf(bcnotificationrecipient)).sendKeys(Keys.SPACE, Keys.BACK_SPACE);
 		Thread.sleep(2000);
@@ -2310,6 +2312,8 @@ public boolean checkCalculateBtnDisplayed() {
 		Thread.sleep(2000);
 		jswait.loadClick(expirestime);
 		Thread.sleep(2000);
+		jswait.loadSendKeys(expirestime, "After");
+		Thread.sleep(2000);
 		jswait.loadClick(expiresAfteroption);
 		Thread.sleep(2000);
 		jswait.loadSendKeys(bcExpireAfterHours, Expires);
@@ -3179,7 +3183,7 @@ public boolean checkCalculateBtnDisplayed() {
 		if(TG.equalsIgnoreCase("no limit")) {
 			jswait.loadClick(noLimitTGRadiobtn);
 		}
-		else if(TG.equalsIgnoreCase("defineLimitFixed")){
+		else if(TG.contains("defineLimitFixed")){
 			
 			try {
 				int size = TG.length();
