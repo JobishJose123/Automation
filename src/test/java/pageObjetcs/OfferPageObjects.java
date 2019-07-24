@@ -2800,7 +2800,9 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 
 		// ******************Track tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
-			enterTrackTabDetails(eh);
+			//enterTrackTabDetails(eh);
+			clickTrackSourceSelector();
+			selectTrackSource(TRACK_SOURCE);
 			if (rewardType.equals("oneruleonereward") || rewardType.equals("onerulemultiplerewards")
 					|| rewardType.equals("firstrulefirstreward")) {
 				createFirstDefaultTrackingRuleCondition(eh);

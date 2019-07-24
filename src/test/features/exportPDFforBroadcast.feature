@@ -1,51 +1,53 @@
 #Author: mallikharjuna.ankem@flytxt.com
 #Keywords Summary : checking postive flow of bc creation
-@NX-PDFcheck
+@NX-BCPDFcheck
 Feature: Test cases related to Broadcast Management PDF
 
-  @NX-6501 @initBrowser
-  Scenario: Verify export to pdf option is available in drop down for one-off broadcast - newly created NX-6501
-    Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then save bc
-    Then wait until status of "one-offBC" is "Planned"
-    Then Exporting the pdf from broacastpage
-    Then verify pdf generated for broadcast from sheet "one-offBC"
-
-  @NX-6509
-  Scenario: Verify export to pdf option is available in broadcast(one-off) in broadcast Summary -newly created NX-6509
-    Then wait until status of "one-offBC" is "Planned"
-    Then view bc from sheet "one-offBC"
-    Then verify pdf generated for broadcast from sheet "one-offBC" in broadcast Summary
+#  @NX-6501 @initBrowser
+#  Scenario: Verify export to pdf option is available in drop down for one-off broadcast - newly created NX-6501
+#    Given login
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then create new offer from sheet "SeedingSMS" with product "fullDetails"
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then Add "SeedingSMS" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#    Then save bc
+#    Then wait until status of "one-offBC" is "Planned"
+#    Then Exporting the pdf from broacastpage
+#    Then verify pdf generated for broadcast from sheet "one-offBC"
+#
+#  @NX-6509
+#  Scenario: Verify export to pdf option is available in broadcast(one-off) in broadcast Summary -newly created NX-6509
+#    Then wait until status of "one-offBC" is "Planned"
+#    Then view bc from sheet "one-offBC"
+#    Then verify pdf generated for broadcast from sheet "one-offBC" in broadcast Summary
 
   @NX-7822 @initBrowser
   Scenario: Verify whether a footer has been added to the PDF for Broadcast to reflect the time of download NX-7822
@@ -158,22 +160,22 @@ Feature: Test cases related to Broadcast Management PDF
   @NX-6558 @initBrowser
   Scenario: Verify multiple creative with different language selection is displayed correctly in generated pdf for one-off bc for new data NX-6558
     Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+     Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
     Then click on create new ofer button
@@ -183,7 +185,7 @@ Feature: Test cases related to Broadcast Management PDF
     Then Create New Offer Catalogue from sheet "defaultCatalog"
     Then Add "rechargeWAP" offer to Offer Catalogue
     Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
+   Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
@@ -276,25 +278,25 @@ Feature: Test cases related to Broadcast Management PDF
     Then activate bc
     Then verify bc created from sheet "one-offBC"
 
-  @NX-6700 @initBrowser
-  Scenario: Verify user has the export pdf privileges as per the security group roles-6700
-    Given login
-    Then navigate to configuration management
-    Then navigate to system administration
-    Then click on security group
-    Then edit security group "Super Administrator"
-    Then expand "Applications" in edit security group
-    Then deselect option "Export Broadcast list"
-    Then deselect option "Export Broadcast Summary as PDF"
-    Then click save on edit security group
-    Then click username on topbar
-    Then logout
-    Given login
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then save bc
-    Then Verify after edit the security groups export PDF option in BC page and View from sheet "one-offBC"
+#  @NX-6700 @initBrowser
+#  Scenario: Verify user has the export pdf privileges as per the security group roles-6700
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to system administration
+#    Then click on security group
+#    Then edit security group "Super Administrator"
+#    Then expand "Applications" in edit security group
+#    Then deselect option "Export Broadcast list"
+#    Then deselect option "Export Broadcast Summary as PDF"
+#    Then click save on edit security group
+#    Then click username on topbar
+#    Then logout
+#    Given login
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#    Then save bc
+#    Then Verify after edit the security groups export PDF option in BC page and View from sheet "one-offBC"

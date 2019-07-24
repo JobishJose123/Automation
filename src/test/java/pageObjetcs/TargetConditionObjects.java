@@ -1041,7 +1041,7 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(conditionIsSubscribed);
 				jswait.loadClick(targetConditionSave);
 				
-			}else if(event.contains("ageTargetGroup10")) {
+			}else if(event.contains("ageTargetGroup")) {
 				String str=event;
 				String value=str.substring(14, str.length());
 				clickBasicTargetConditionWithAgeEdit();

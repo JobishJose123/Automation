@@ -338,12 +338,12 @@ Verify BC after edit with new Saved segment TriggerOneoff BC
     Then save bc
     Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerOneoffEdit"
     Then verify the BC expiry in BC View After hours "2"
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then navigate to "One-time" broadcasts
-    Then click on delete from workbook "bcInputDataForEdit" and sheet "one-offBCEdit"
-    Then click on toggleAutoRefresh
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "campaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then navigate to "One-time" broadcasts
+#    Then click on delete from workbook "bcInputDataForEdit" and sheet "one-offBCEdit"
+#    Then click on toggleAutoRefresh
      #    ************************ Seeding OneOFF BC**************   
     
     
@@ -1395,7 +1395,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then verify Acknowledged event from BC Sheet "one-offBC" and "campaignBC" offer "rechargeSMS"
     
     @NDX-6804 @initBrowser
-    Scenario: Verify the ACK in cosnumebr profile > Check for 1  number with BC name after copy Seeding BC NEW
+    Scenario: Verify the ACK in cosnumebr profile > Check for 1  number with BC name after copy Trigger BC NEW
    Given login
     When navigate to precision marketer
     Then navigate to life cycle marketing

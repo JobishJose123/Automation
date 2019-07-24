@@ -1,6 +1,6 @@
 #Author: mallikharjuna.ankem@flytxt.com
 #Keywords Summary : checking postive flow of bc creation
-@NX-PDFcheck 
+@NX-campaignPDFcheck 
 Feature: Test cases related to Campaign Management PDF
 
 @NX-6951 @initBrowser
@@ -24,8 +24,9 @@ Feature: Test cases related to Campaign Management PDF
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then click on create new ofer button
+#    Then click on create new ofer button
     Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+Then create new offer from sheet "rechargeWAP" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
     Then navigate to offer management
     Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
@@ -39,8 +40,7 @@ Feature: Test cases related to Campaign Management PDF
     
     @NX-9289 
     Scenario: Verify Export as PDF download is working in campaign page NX-9289
-      
-    Then check previous step and pass this
+          Then check previous step and pass this
     Then pass next scenario based on this step
     
     @NX-6941
@@ -48,7 +48,7 @@ Feature: Test cases related to Campaign Management PDF
      Then check previous step and pass this
     Then pass next scenario based on this step
     @NX-6943
-     Scenario:Verify whether schedule and Recurrence time zone is displayed correctly in generated pdf NX-6943
+     Scenario: Verify whether schedule and Recurrence time zone is displayed correctly in generated pdf NX-6943
     Then check previous step and pass this
     
     

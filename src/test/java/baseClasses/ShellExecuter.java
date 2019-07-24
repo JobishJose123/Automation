@@ -227,9 +227,20 @@ public class ShellExecuter extends Init{
 //		verifyNegFlowOfInfraDetails("SystemBestPracticesNegFlow");
 //		verifyInfraDetails("sheet 1");
 //		uploadListForDkJob();
-		verifyInfraDetails("pkg_Available2");
+//		verifyInfraDetails("pkg_Available2");
+		ShellExecuter se= new ShellExecuter();
+		try {
+		se.executeScript("cd /usr/local/flytxt/selenium/conversion; echo 'csvFileData' >conversionJob.csv");
+		
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		}
 
+	
+	
+	
+	
 		public static void verifyInfraDetails(String sheet) throws Exception {
 		ShellExecuter se = new ShellExecuter();
 		ExcelHelper list = new ExcelHelper();

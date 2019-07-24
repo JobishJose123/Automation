@@ -3,7 +3,12 @@
 @NX-BroadcastFunctionality
 Feature: For broadcast functionality check
 
-    
+    @activateInventoryBCs @initBrowser @closeBrowser 
+	Scenario: Activating the bcs 
+	Given login 
+	Then navigate to precision marketer 
+	Then activate and verify the broadcast from workbook "parallelRunBC" and sheet "parallelRunBC" 
+	Then wait for 4000 milliseconds 
     
     
 #    ********************** Verifying The INVENTORY    ********************

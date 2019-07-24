@@ -4,89 +4,89 @@ Copy and Editing all types of Braodcast Migration
 
 #  we should pass the target condition which is used to create the bc for verification
 # *******************one off bc***************
-  
-    @NDX-7356  @initBrowser @closeBrowser
-  Scenario: Verify after copy the BC all details oneOff new
-      Given login
-    When navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then navigate to "One-time" broadcasts
-    Then click on BC Copy button from workbook "bcInputData" sheet "one-offBC"
-    Then Save the copied BC from workbook "bcInputData" and sheet "one-offBC" 
-    Then save bc
-    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
-    Then Verify the Copied Bc in view page workbook "bcInputData" sheet "one-offBC" with "rechargeSMS" condition digitalPersonaGT15
-   
-   @NDX-5929 @initBrowser @closeBrowser
-   Scenario: Verify the Delivery Details BC after copy & edit Start and End Time of One-Off Bc new
-   Given login
-    When navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then navigate to "One-time" broadcasts
-    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
-    Then edit the Delevery tab details from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
-    Then save bc
-    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
-    Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+#  
+#    @NDX-7356 @NDX-10035 @initBrowser @closeBrowser
+#  Scenario: Verify after copy the BC all details oneOff new
+#      Given login
+#    When navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "campaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then navigate to "One-time" broadcasts
+#    Then click on BC Copy button from workbook "bcInputData" sheet "one-offBC"
+#    Then Save the copied BC from workbook "bcInputData" and sheet "one-offBC" 
+#    Then save bc
+#    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+#    Then Verify the Copied Bc in view page workbook "bcInputData" sheet "one-offBC" with "rechargeSMS" condition digitalPersonaGT15
+#   
+#   @NDX-5929 @NDX-10043 @initBrowser @closeBrowser
+#   Scenario: Verify the Delivery Details BC after copy & edit Start and End Time of One-Off Bc new
+#   Given login
+#    When navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "campaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then navigate to "One-time" broadcasts
+#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
+#    Then edit the Delevery tab details from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
+#    Then save bc
+#    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+#    Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
        
    
-     @NDX-5879 @initBrowser @closeBrowser
-   Scenario: Verify the BC after copy & edit the basic detais of BC -NEW
-    Given login
-    When navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then navigate to "One-time" broadcasts
-    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
-    Then editing the BC from sheet "one-offBCEdit" basic details With edit data from sheet "one-offBCEdit"
-    Then save bc
-    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
-    Then verify the basic details from Broadcast View and data sheet "one-offBCEdit"
+#     @NDX-5879 @initBrowser @closeBrowser
+#   Scenario: Verify the BC after copy & edit the basic detais of BC -NEW
+#    Given login
+#    When navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "campaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then navigate to "One-time" broadcasts
+#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
+#    Then editing the BC from sheet "one-offBCEdit" basic details With edit data from sheet "one-offBCEdit"
+#    Then save bc
+#    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+#    Then verify the basic details from Broadcast View and data sheet "one-offBCEdit"
     
    
-    @NDX-5927 @initBrowser @closeBrowser
-  Scenario: Verify BC after copy & edit with offer in offer selection page
-    Given login
-    When navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then navigate to "One-time" broadcasts
-    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
-    Then edit the offer for BC from workbook "bcInputDataForEdit" sheet "one-offBCEdit" with offer "rechargeWAP"
-    Then save bc
-    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
-    Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "one-offBCEdit" with offer "rechargeWAP"
-
-
-  @NDX-5891 @NDX-5923 @initBrowser @closeBrowser
-  Scenario Outline: Verify one-off BC and edit the targetSelection <Condition>
-#                    Verify BC after edit with new Saved segment One-Off BC
-    Given login
-    When navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then navigate to "One-time" broadcasts
-    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
-    Then edit the targetSelection <Condition> for BC
-    Then save bc
-    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
-    Then verify the BC targetSelection <Condition> in BC View
-
-    Examples: 
-      | Condition     |
-      | None          |
-      | Create        |
-      | SavedSegments |
-      | None          |
-      | SavedSegments |
-      | Create        |
+#    @NDX-5927 @initBrowser @closeBrowser
+#  Scenario: Verify BC after copy & edit with offer in offer selection page
+#    Given login
+#    When navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "campaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then navigate to "One-time" broadcasts
+#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
+#    Then edit the offer for BC from workbook "bcInputDataForEdit" sheet "one-offBCEdit" with offer "rechargeWAP"
+#    Then save bc
+#    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+#    Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "one-offBCEdit" with offer "rechargeWAP"
+#
+#
+#  @NDX-5891 @NDX-5923 @initBrowser @closeBrowser
+#  Scenario Outline: Verify one-off BC and edit the targetSelection <Condition>
+##                    Verify BC after edit with new Saved segment One-Off BC
+#    Given login
+#    When navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "campaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then navigate to "One-time" broadcasts
+#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
+#    Then edit the targetSelection <Condition> for BC
+#    Then save bc
+#    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+#    Then verify the BC targetSelection <Condition> in BC View
+#
+#    Examples: 
+#      | Condition     |
+#      | None          |
+#      | Create        |
+#      | SavedSegments |
+#      | None          |
+#      | SavedSegments |
+#      | Create        |
 
  
   @NDX-5925 @NDX-5893 @initBrowser @closeBrowser
@@ -106,10 +106,10 @@ Copy and Editing all types of Braodcast Migration
 
     Examples: 
       | Condition |
-	| customerWasSentTheTrialMessage |
-	| customerList                   |
-	| SharedcustomerList             |
-	| customerDrivenEvent            |
+#	| customerWasSentTheTrialMessage |
+#	| customerList                   |
+#	| SharedcustomerList             |
+#	| customerDrivenEvent            |
 	| usageMetric                    |
 	| sharedMetricOtherPartner  |
 	| customerDrivenEventNotOccurred  |
@@ -164,7 +164,7 @@ Copy and Editing all types of Braodcast Migration
        
 #    ************************ Trigger OneOFF BC************** 
     
-    @NDX-7358  @initBrowser @closeBrowser
+    @NDX-7358 @NDX-10037 @initBrowser @closeBrowser
   Scenario: Verify after copy the BC all details TriggerOneoff -new 
     Given login
     When navigate to precision marketer
@@ -178,7 +178,7 @@ Copy and Editing all types of Braodcast Migration
     Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerOneoffEdit"
     Then Verify the Copied Bc in view page workbook "bcInputData" sheet "TriggerOneoff" with "rechargeSMS" condition digitalPersonaGT15   
    
-   @NDX-6745 @initBrowser @closeBrowser
+   @NDX-6745 @NDX-10045 @initBrowser @closeBrowser
    Scenario: Verify the BC Delivery after copy & edit  Start and End Time of TriggerOneoff -NEW
    Given login
     When navigate to precision marketer
@@ -327,7 +327,7 @@ Verify BC after edit with new Saved segment TriggerOneoff BC
     
     
     
-     @NDX-7363 @initBrowser @closeBrowser
+     @NDX-7363 @NDX-10036 @initBrowser @closeBrowser
   Scenario: Verify after copy the BC all details Seeding one-off new
   
     Given login
@@ -343,7 +343,7 @@ Verify BC after edit with new Saved segment TriggerOneoff BC
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingoneoffEdit"
     Then Verify the Copied Bc in view page workbook "bcInputData" sheet "seedingoneoff" with "SeedingSMS" condition digitalPersonaGT15   
    
-   @NDX-6583 @initBrowser @closeBrowser
+   @NDX-6583 @NDX-10044 @initBrowser @closeBrowser
    Scenario: Verify the BC Delivery details after copy & edit  Start and End Time of Seeding one-off bc-NEW
    Given login
     When navigate to precision marketer
@@ -493,7 +493,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     
     #    ************************ Seeding Triggerable BC**************
        
-    @NDX-7362 @initBrowser @closeBrowser
+    @NDX-7362 @NDX-10038 @initBrowser @closeBrowser
   Scenario: Verify after copy the BC all details seedingTriggerableBC new
   
     Given login
@@ -509,7 +509,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingTriggerableBCEdit"
     Then Verify the Copied Bc in view page workbook "bcInputData" sheet "seedingTriggerableBC" with "SeedingSMS" condition digitalPersonaGT15   
    
-   @NDX-6529 @initBrowser @closeBrowser
+   @NDX-6529 @NDX-10046 @initBrowser @closeBrowser
    Scenario: Verify the BC Delivery details after copy & edit  Start and End Time of seedingTriggerableBC-new
    Given login
     When navigate to precision marketer
@@ -661,7 +661,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     #************************ Seeding Recurring BC**************  
     
     
-       @NDX-7359  @initBrowser @closeBrowser
+       @NDX-7359 @NDX-10040 @initBrowser @closeBrowser
   Scenario: Verify after copy the BC all details SeedingrecurringBC new
       Given login
     When navigate to precision marketer
@@ -676,7 +676,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingRecurringBCEdit"
     Then Verify the Copied Bc in view page workbook "bcInputData" sheet "seedingRecurringBC" with "SeedingSMS" condition digitalPersonaGT15   
    
-   @NDX-6691 @initBrowser @closeBrowser
+   @NDX-6691 @NDX-10048 @initBrowser @closeBrowser
    Scenario: Verify the BC after copy & edit Start and End Time of SeedingrecurringBC new
    Given login
     When navigate to precision marketer
@@ -826,7 +826,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     
     
     
-        @NDX-7360  @initBrowser @closeBrowser
+        @NDX-7360 @NDX-10042 @initBrowser @closeBrowser
   Scenario: Verify after copy the BC all details seedingTriggerableRecurringBC new
   
     Given login
@@ -842,7 +842,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingTriggerableRecurringBCEd"
     Then Verify the Copied Bc in view page workbook "bcInputData" sheet "seedingTriggerableRecurringBC" with "SeedingSMS" condition digitalPersonaGT15   
    
-   @NDX-6637 @initBrowser @closeBrowser
+   @NDX-6637 @NDX-10050 @initBrowser @closeBrowser
    Scenario: Verify the BC after copy & edit Start and End Time of seedingTriggerableRecurringBC new
    Given login
     When navigate to precision marketer
@@ -908,10 +908,10 @@ Then navigate to "Seedings Broadcasts" broadcasts
 
     Examples: 
       | Condition     |
-      | None          |
-      | Create        |
-      | SavedSegments |
-      | None          |
+#      | None          |
+#      | Create        |
+#      | SavedSegments |
+#      | None          |
       | SavedSegments |
       | Create        |
 
@@ -995,7 +995,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     #    ************************ Trigger Recurring BC**************  
     
     
-     @NDX-7357  @initBrowser @closeBrowser
+     @NDX-7357 @NDX-10041 @initBrowser @closeBrowser
   Scenario: Verify after copy the BC all details TriggerReccurringBC new
   
     Given login
@@ -1011,7 +1011,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
     Then Verify the Copied Bc in view page workbook "bcInputData" sheet "TriggerReccurringBC" with "rechargeSMS" condition digitalPersonaGT15   
    
-   @NDX-6799 @initBrowser @closeBrowser
+   @NDX-6799 @NDX-10049 @initBrowser @closeBrowser
    Scenario: Verify the BC after copy & edit Start and End Time of TriggerReccurringBC new
    Given login
     When navigate to precision marketer
@@ -1167,7 +1167,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     
     
     
-     @NDX-7361  @initBrowser @closeBrowser
+     @NDX-7361 @NDX-10039 @initBrowser @closeBrowser
   Scenario: Verify after copy the BC all details recurringBC new
   
     Given login
@@ -1183,7 +1183,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
     Then Verify the Copied Bc in view page workbook "bcInputData" sheet "recurringBC" with "rechargeSMS" condition digitalPersonaGT15   
    
-   @NDX-6475 @initBrowser @closeBrowser
+   @NDX-6475 @NDX-10047 @initBrowser @closeBrowser
    Scenario: Verify the BC Delivery details after copy & edit Start and End Time of recurringBC new
    Given login
     When navigate to precision marketer

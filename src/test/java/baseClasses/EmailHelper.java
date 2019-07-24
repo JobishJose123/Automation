@@ -47,6 +47,7 @@ public class EmailHelper {
 			for (int i = 0, n = messages.length; i < n; i++) {
 
 				Message message = messages[i];
+				//System.out.println(message.getSubject());
 				if ((message.getFrom()[0].toString()).equals(fromaddress)
 						&& (message.getSubject().toString())
 								.contains(subject)) {

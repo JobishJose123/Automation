@@ -68,7 +68,8 @@ public class ExportPdfForCampaignSteps extends Init{
 		public void verify_the_campaign_Schedule_time_and_Recurrence_time_for_exported_PDF_from_sheet_with_end_type_Recurring_Frequency(String sheet, String endType, String recurringFrequency) throws Throwable {	    		
 		DateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm");
 		Date date=new Date();
-		String currentSystemDate=simpleDateFormat.format(date);		
+		String currentSystemDate=simpleDateFormat.format(date);	
+		System.out.println(currentSystemDate);
 		
 		broadcastPageObjects.exportBroadcastAsPDF();
 
@@ -90,7 +91,7 @@ public class ExportPdfForCampaignSteps extends Init{
 		// System.out.println(bcID);
 		String path = "C:\\Users\\" + systemUserName + "\\Downloads\\campaign_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
 		System.out.println(path);		
-		
+		System.out.println("going to pdf reader");
 		pdfReader.verifyCampaignPDFMoreThanTenConditions(path, endType, currentSystemDate, recurringFrequency);
 			    
     	Thread.sleep(2000);

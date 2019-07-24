@@ -307,10 +307,10 @@ Feature: Test suite for Broadcast Editing for NEW
     Then navigate to campaign category from sheet "campaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then navigate to "One-time" broadcasts
-    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "one-offBCEdit"
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerOneoffEdit"
     Then edit the offer for BC expiry After hours "2"
     Then save bc
-    Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerOneoffEdit"
     Then verify the BC expiry in BC View After hours "2"
     
     
@@ -1315,16 +1315,16 @@ Then wait until status of "one-offBC" is "Completed"
     @NDX-7945  @initBrowser 
   Scenario: Verify BC Notification for one-off Bc new
   
-    Given login
-    When navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
-    Then verify create BC Notification
-    Then activate bc
-   Then wait until status of "one-offBC" is "Completed"
+#    Given login
+#    When navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "campaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
+#    Then verify create BC Notification
+#    Then activate bc
+#   Then wait until status of "one-offBC" is "Completed"
     Then verify the BC notification in mail "Rendering" from workbook "bcInputData" and sheet "one-offBC"
      Then verify the BC notification in mail "Delivering" from workbook "bcInputData" and sheet "one-offBC" 
     Then verify the BC notification in mail "Completed" from workbook "bcInputData" and sheet "one-offBC"
