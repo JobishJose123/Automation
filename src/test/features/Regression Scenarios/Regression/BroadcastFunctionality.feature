@@ -180,7 +180,7 @@ Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
-Then verify the dynamic tag "selenium6"
+Then verify the dynamic tag "25.0"
 
 @NDX-8576 @NDX-8616  @NDX-8627 @NDX-7040 @NDX-9015 @NDX-8961 @NDX-8799 @NDX-8805 @NDX-9970 @NDX-10015 @NDX-9797 @NDX-9795 @initBrowser
 Scenario: Verify the ack ,channel SMS,multiple creative ,dr count,CG count of a recurrence pattern DAILY of recurringbc and Target condition: segmentAgeGT40
@@ -211,7 +211,7 @@ Then verify the condition Acknowlegedment event for the bc from sheet "recurrBCD
 Then verify the condition Confirmed Delivery event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
 
 
-@NDX-7048 @NDX-8964 @NDX-8811 @NDX-9800 @@NDX-9796  @initBrowser
+@NDX-7048 @NDX-8964 @NDX-8811 @NDX-9800 @NDX-9796  @initBrowser
 Scenario: Verify the channel WAP and recurrence pattern EVERY WEEK 
 Given login
 Then navigate to precision marketer
@@ -266,9 +266,15 @@ Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurringBC" for bctype "onetime"
 Then verify the date for child bc from sheet "recurringBC" with recurrence pattern "EVERY 2 DAYS"
 Then wait until status of recurring child bc from sheet "recurringBC" is "Completed" 
-Then verify the ack count with target condition SharedcustomerList from sheet "targetConditionCount" for bc from sheet "recurrBCDaily" of bctype "recurring"
+Then verify the ack count with target condition SharedcustomerList from sheet "targetConditionCount" for bc from sheet "recurringBC" of bctype "recurring"
 Then view broadcast for "recurringchildbc" for bctype "onetime"
 Then verify the target count with condition SharedcustomerList from sheet "targetConditionCount" also the channel "SMS"
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750005"
+Then click on events tab
+Then verify the condition Acknowlegedment event for the bc from sheet "recurringBC" for the campaign from sheet "campaignBC"
+Then verify the dynamic tag "selenium6"
 
 @NDX-8578 @NDX-8617 @NDX-7041 @NDX-8803 @NDX-8744 @NDX-10017 @initBrowser
 Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: sharedEventOtherPartner of a seeding one-timebc     

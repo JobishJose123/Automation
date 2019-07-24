@@ -3737,11 +3737,11 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		Thread.sleep(3000);
 	if(bcToView.equalsIgnoreCase("recurringchildbc"))
 	jswait.loadClick(recurringChildOptionIcon);
-	if(bcToView.equalsIgnoreCase("recurringchildWithEndAt"))
+	if(bcToView.equalsIgnoreCase("recurringchildWithEndAt")||bcToView.equalsIgnoreCase("seedingonetime"))
 		jswait.loadClick(RecurringChildOptionIconAt);
 	if(bcToView.equalsIgnoreCase("seedingRecurring"))
 	jswait.loadClick(seedingRecurrChildOptionIcon);
-    if(bcToView.equalsIgnoreCase("onetime")||bcToView.equalsIgnoreCase("seedingonetime"))          
+    if(bcToView.equalsIgnoreCase("onetime"))          
     commonObjects.BCOptionIcon(bctype);
 	jswait.loadClick(BcViewbtn);
 	}
@@ -3877,11 +3877,11 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		if(bctype.equalsIgnoreCase("recurringWithEndAt"))
 			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
 			if(bctype.equalsIgnoreCase("recurring"))
-			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[3]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
 		if(bctype.equalsIgnoreCase("seedingonetime"))
-			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[2]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
+			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
         if(bctype.equalsIgnoreCase("seedingRecurring"))
-	       Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[6]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
+	       Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
 	}
 	
 }
