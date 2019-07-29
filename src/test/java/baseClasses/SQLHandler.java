@@ -12,10 +12,10 @@ import java.util.Enumeration;
 
 public class SQLHandler extends Init{
 	
-		    private Statement statement = null;
-		    private PreparedStatement preparedStatement = null;
-		    private ResultSet resultSet = null;
-		    private Connection conn = null;
+		    public Statement statement = null;
+		    public PreparedStatement preparedStatement = null;
+		    public ResultSet resultSet = null;
+		    public Connection conn = null;
 		    String JDBC_DRIVER = "";  
 		     String DB_URL = "";
 		     String USER = "";
@@ -37,7 +37,7 @@ public class SQLHandler extends Init{
 		    }
 		    
 		    
-        private void writeResultSet(ResultSet resultSet) throws SQLException {
+        public void writeResultSet(ResultSet resultSet) throws SQLException {
         	
         	 
              // Result set get the result of the SQL query
@@ -77,6 +77,17 @@ public class SQLHandler extends Init{
         }
         public int getTouchpointID(String touchpointName) throws SQLException {
             resultSet = statement.executeQuery("select touchpoint_id from im_touchpoint where NAME='"+touchpointName+"';");
+            resultSet.next();
+            if(resultSet.isLast()) {
+            	return resultSet.getInt(1);
+            }
+            else {
+            	return -1;
+            }
+        }
+        
+        public int getprogramID(String programName) throws SQLException {
+            resultSet = statement.executeQuery("select PROGRAM_ID from im_program where PROGRAM_NAME='"+programName+"';");
             resultSet.next();
             if(resultSet.isLast()) {
             	return resultSet.getInt(1);

@@ -132,6 +132,28 @@ public class Request extends Init{
         HttpResponse response = httpClient.execute(request);
         System.out.println(response.getStatusLine().getStatusCode());
         System.out.println(response.toString());
+       
+        ;
+        
+	}
+	
+	public void multiplepostRequestwithsession(String urlStr, String jobPayload,String id) throws Exception {
+		
+		
+		StringEntity entity = new StringEntity(jobPayload,
+                ContentType.APPLICATION_JSON);
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost request = new HttpPost(urlStr);
+        request.setHeader("Content-type", "application/json");
+        request.setHeader("Cookie","NEONDXSESSIONID="+id);
+       
+        request.setEntity(entity);
+        HttpResponse response = httpClient.execute(request);
+        System.out.println(response.getStatusLine().getStatusCode());
+        System.out.println(response.toString());
+       
+        ;
+        
 	}
 	public void postRequestWithCookie(String urlStr, String jobPayload,String cookie) throws ClientProtocolException, IOException {
 		StringEntity entity = new StringEntity(jobPayload,
@@ -215,7 +237,7 @@ public class Request extends Init{
 	public String getsessionid(String env) throws Exception{
 		Request req = new Request();
 //		req.postRequest(urlStr, jobPayload);
-	req.postRequest_payload("http://"+env+"/neon-ws/login", "username=flyops%40flytxt.com&password=flytxt&remember-me=false");
+	req.postRequest_payload("http://"+env+"/neon-ws/login", "username=flyops%40flytxt.com&password=Password1!&remember-me=false");
 		System.out.println(req.responseString);
 		List<String> cookies = req.getCookies();
 		System.out.println(cookies.get(0));
