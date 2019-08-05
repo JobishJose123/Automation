@@ -396,10 +396,10 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then create bc from sheet "<one-offBC>" with inventory "Unlimited"
-Then enter target tab details target condition <profilefieldNV> type "<Create>" TG "<no limit>" CG "<fixedPercentage>" DNC "<none>"
-Then enter choose offer tab from sheet "<rechargeSMS>" for bc from sheet "<one-offBC>" with "<multiple creative>" track session expires "<after>" filter criteria "convertAll" give reward to "allConversions"
-Then enter deliver tab with end "<none>" target render time "realTime" and broadcast expiry as "<At>" from sheet "one-offBC"
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited"
+Then enter target tab details target condition "<targetCondition>" type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
+Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
 Then save bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
   
