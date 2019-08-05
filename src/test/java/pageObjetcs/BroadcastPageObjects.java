@@ -14,10 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
-
+import org.apache.poi.ss.usermodel.Row;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -26,6 +25,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import com.google.common.collect.Table.Cell;
 
 import baseClasses.CalenderUtility;
 import baseClasses.EmailHandlergmail;
@@ -37,6 +38,7 @@ import baseClasses.PdfReader;
 import baseClasses.SQLHandler;
 import baseClasses.TimeoutImpl;
 import stepDefinitions.BroadcastSteps;
+import org.apache.poi.ss.usermodel.Sheet;
 
 public class BroadcastPageObjects extends Init {
 	public BroadcastPageObjects() {
@@ -507,7 +509,8 @@ public class BroadcastPageObjects extends Init {
 		@FindBy(xpath="//iron-icon[@title='Apply']")
 		private WebElement applyEventFilter;
 		
-		
+		@FindBy(xpath="//label[contains(.,'Triggers')]//following::input[1]")
+		private WebElement triggerInput;
 		
 		
 		
@@ -3836,8 +3839,6 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		 jswait.loadClick(applyEventFilter);
 		 Thread.sleep(10000);
 		 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
-			
-			
 			Thread.sleep(1000);
 			System.out.println(ackEvents.size());
 			 int count=1;
@@ -3848,7 +3849,7 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 					if ((webElement.getText()).contains(campaignName)) {
 						System.out.println(webElement.getText());
 						try {
-							jswait.loadClick("(//iron-icon[@class='deselect consumer-events style-scope x-scope iron-icon-0'])[count]");
+							jswait.loadClick("(//iron-icon[@class='deselect consumer-events style-scope x-scope iron-icon-0'])["+count+"]");
 							Thread.sleep(1000);
 							boolean booln = jswait.checkVisibility(
 									"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
@@ -3887,6 +3888,49 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
         if(bctype.equalsIgnoreCase("seedingRecurring"))
 	       Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
 	}
+	
+	public void createBCWithTrigger(String triggerName) throws Exception{
+		jswait.loadSendKeys(triggerInput,triggerName);
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-item[contains(.,'"+triggerName+"')]");
+	}
+	
+	
+	public void addBcToSheet(String bcName,String bcType,String bcStorageSheet,int row) throws Exception{
+		eh.setExcelFile("parallelRunBC", bcStorageSheet);
+//		Sheet sheet=null;
+//		Cell cell;
+//		int countrows=sheet.getLastRowNum()-sheet.getFirstRowNum();
+//		 Row row1 = sheet.getRow(row);
+//		 if(row1.getLastCellNum()==-1) {
+	    eh.setCell(row, 0, bcName);
+  	    eh.setCell(row, 1, bcType);
+//	}
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

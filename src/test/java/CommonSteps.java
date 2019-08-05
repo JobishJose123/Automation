@@ -35,6 +35,8 @@ public class CommonSteps extends Init {
 	ExcelHelper excelHelper = new ExcelHelper();
 	public ExcelHelper eM = new ExcelHelper(); 
 	LoginPageObjects loginpageobjects=new LoginPageObjects();
+	ExcelHelper eh=new ExcelHelper();
+	ExcelHelper eh1=new ExcelHelper();
 	public CommonSteps() {
 		PageFactory.initElements(driver, this);
 	}
@@ -123,6 +125,10 @@ public class CommonSteps extends Init {
 		 catch (Exception e) {
 			 System.out.println("Robob x popup off....");
 		 }
+//		 jswait.loadClick("//div[@id='labelAndInputContainer']//following::label//following::input");
+//		 Thread.sleep(3000);
+//		 jswait.loadClick("//vaadin-combo-box-item[contains(.,'CIM_SOAK')]");
+//		 jswait.loadClick("//paper-button[contains(.,'Yes')]");
     }
 	@Then("^logout")
 	public void logout() throws InterruptedException {
@@ -467,6 +473,65 @@ public class CommonSteps extends Init {
 		Thread.sleep(2000);
 		commonObjetcs.saveDetailsofseedingoneoff();
 	}
+	@Then("^navigate to streaming attributes$")
+	public void navigate_to_streaming_attributes() throws Throwable {
+		commonObjetcs.navigateToStreamingAttr();
+	}
+
+	@Then("^create new streaming attribute from sheet \"([^\"]*)\"$")
+	public void create_new_streaming_attribute_from_sheet(String streamingAttrSheet) throws Throwable {
+		eh.setExcelFile("streamingAttribute", streamingAttrSheet);
+		String attrName=(String) eh.getCell(1, 0);
+	    attrName=RandomNameGenerator.getRandomName(attrName);
+	    eh.setCell(1, 0, attrName);
+		String description=(String)eh.getCell(1, 1);
+		String value1=(String) eh.getCell(1, 2);
+		String value2=(String)eh.getCell(1,3);
+		commonObjetcs.createStreamingAttr(attrName,description,value1,value2);
+	}
+	
+	@Then("^verify streaming attribute from sheet \"([^\"]*)\" is created$")
+	public void verify_streaming_attribute_from_sheet_is_created(String streamingAttrSheet) throws Throwable {
+		eh.setExcelFile("streamingAttribute", streamingAttrSheet);
+		String attrName=(String) eh.getCell(1, 0);
+		commonObjetcs.verifyStreamingAttrCreation(attrName);
+	}
+	@Then("^select triggers in configuration$")
+	public void select_triggers_in_configuration() throws Exception{
+		commonObjetcs.navigateToTrigger();
+	}
+	@Then("^create new trigger from sheet \"([^\"]*)\" and streaming attribute from sheet \"([^\"]*)\"$")
+	public void create_new_trigger_from_sheet_and_streaming_attribute_from_sheet(String triggerSheet, String streamingAttrSheet) throws Throwable {
+		eh.setExcelFile("streamingAttribute", triggerSheet);
+		eh1.setExcelFile("streamingAttribute", streamingAttrSheet);
+		String attrName=(String) eh1.getCell(1, 0);
+		String value1=(String) eh1.getCell(1, 2);
+		String value2=(String)eh1.getCell(1,3);
+		String triggerDesp=(String)eh.getCell(1,1);
+		String triggerName=(String)eh.getCell(1,0);
+		triggerName = RandomNameGenerator.getRandomName(triggerName);
+		eh.setCell(1, 0, triggerName);
+		commonObjetcs.createTrigger(triggerName,triggerDesp,attrName,value1,value2);
+	}
+	   
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -264,52 +264,53 @@ public class BroadcastSteps extends Init {
 			}
 			
 			
-		
-		try {
-			eM.setExcelFile("bcInputData", sheet);
-			if ((String) eM.getCell(1, 6) == "later") {
-				day++;
-			}
-		} catch (Exception e) {
-			System.out.println("edit days");
-			eh.setExcelFile("bcInputDataForEdit", sheet);
-			if ((String) eh.getCell(1, 6) == "later") {
-				day++;
-			} else if ((eh.getCell(1, 6).toString()).contains("After2Days")) {
-				day = rightNow.get(Calendar.DAY_OF_MONTH) + 2;
-				// day=day+2;
-				System.out.println("Days" + day);
-				date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-" + String.format("%02d", day);
-				System.out.println(date);
-			}
-		}
-		// we are getting the broadcast start date and stored in sheet , row 1 column 11
-		String Start_Date="";
-		if(sheet.contains("Edit")||sheet.contains("seedingTriggerableRecurringBCEd")){
-			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
-			if(am_pm==0) {
-			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
-			}else {
-				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
-			}
-			eh.setExcelFile("bcInputDataForEdit", sheet);
-			eh.setCell(1, 11, Start_Date);
-		}else {
-			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
-			if(am_pm==0) {
-			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
-			}else {
-				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
-			}
-			eM.setExcelFile("bcInputData", sheet);
-			eM.setCell(1, 11, Start_Date);
-			
-		}
-		
+//		
+//		try {
+//			eM.setExcelFile("bcInputData", sheet);
+//			if ((String) eM.getCell(1, 6) == "later") {
+//				day++;
+//			}
+//		} catch (Exception e) {
+//			System.out.println("edit days");
+//			eh.setExcelFile("bcInputDataForEdit", sheet);
+//			if ((String) eh.getCell(1, 6) == "later") {
+//				day++;
+//			} else if ((eh.getCell(1, 6).toString()).contains("After2Days")) {
+//				day = rightNow.get(Calendar.DAY_OF_MONTH) + 2;
+//				// day=day+2;
+//				System.out.println("Days" + day);
+//				date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-" + String.format("%02d", day);
+//				System.out.println(date);
+//			}
+//		}
+//		// we are getting the broadcast start date and stored in sheet , row 1 column 11
+//		String Start_Date="";
+//		if(sheet.contains("Edit")||sheet.contains("seedingTriggerableRecurringBCEd")){
+//			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+//			if(am_pm==0) {
+//			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
+//			}else {
+//				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+//			}
+//			eh.setExcelFile("bcInputDataForEdit", sheet);
+//			eh.setCell(1, 11, Start_Date);
+//		}else {
+//			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+//			if(am_pm==0) {
+//			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
+//			}else {
+//				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+//			}
+//			eM.setExcelFile("bcInputData", sheet);
+//			eM.setCell(1, 11, Start_Date);
+//			
+//		}
+//		
 		
 		Actions builder = new Actions(driver);
 		if (bc_type.contentEquals("one-off") || bc_type.contentEquals("seedingTriggerable")
 				|| bc_type.contentEquals("one-offInformational")) {
+			System.out.println("bc type is one-time selected");
 			Thread.sleep(1000);
 			broadcastPageObjects.clickOneOffRadioButton();
 			// jswait.loadClick(".//div[@id='radioLabel' and
@@ -4414,7 +4415,7 @@ public void abort_bc_for_bctype(String bctype) throws Exception {
 	}
 //==========================================================================================================================================//
 @Then("^create bc from sheet \"([^\"]*)\" with inventory \"([^\"]*)\"$")
-public void create_bc_from_sheet_with_inventory(String bcSheet, String inventory) throws Throwable {
+public void create_bc_from_sheet_with_inventory(String bcSheet, String inventory) throws Exception {
 	eM.setExcelFile("bcInputData", bcSheet);
 	String bcName = (String) eM.getCell(1, 0);
 	bcName = RandomNameGenerator.getRandomName(bcName);
@@ -4429,7 +4430,7 @@ public void enter_target_tab_details_target_condition_type_TG_CG_DNC(String cond
 }
 
 @Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with \"([^\"]*)\" track session expires \"([^\"]*)\" filter criteria \"([^\"]*)\" give reward to \"([^\"]*)\"$")
-public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_track_session_expires_filter_criteria_give_reward_to(String offerSheet, String bcSheet, String creative, String trackExpires, String filterCriteria, String giveRewardsTo) throws Throwable {
+public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_track_session_expires_filter_criteria_give_reward_to(String offerSheet, String bcSheet, String creative, String trackExpires, String filterCriteria, String giveRewardsTo) throws Exception {
 	eM.setExcelFile("bcInputData", bcSheet);
 	String bc_type = (String) eM.getCell(1, 7);
 	broadcastPageObjects.selectOffer(offerSheet,bc_type,creative,trackExpires,filterCriteria,giveRewardsTo);
@@ -4440,15 +4441,17 @@ public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_track_session_ex
 public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
 	eM.setExcelFile("bcInputData", bcSheet);
 	String bc_type = (String) eM.getCell(1, 7);
+	System.out.println("bc_type is :"+bc_type);
 	if(bc_type.equalsIgnoreCase("recurring")) {
 		broadcastPageObjects.recurringBCDeliverTabDetails(endType,targetRenderTime,bcExpiry,bcSheet);
 	}
 	else {
+		System.out.println("inside non recurring bc s");
 	enterDeliveryTabDetails(bc_type,bcSheet);
 }
 }
 @Then("^add the BC Data to \"([^\"]*)\" from BCsheet \"([^\"]*)\" campaignname \"([^\"]*)\" campaign category \"([^\"]*)\" offer \"([^\"]*)\" condition \"([^\"]*)\"$")
-public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition(String bcDataSheet, String bcSheet, String campaignSheet, String campaignCategorySheet, String offerSheet, String condition) throws Throwable {
+public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition(String bcDataSheet, String bcSheet, String campaignSheet, String campaignCategorySheet, String offerSheet, String condition) throws Exception {
 	eh.setExcelFile("bcInputData", bcSheet);
 	String bcName=eh.getCell(1,0).toString();
 	String bcType=eh.getCell(1,14).toString();
@@ -5285,19 +5288,90 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 }
 	@Then("^verify the dr count with condition (.*) from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\" from bc report$")
 	public void verify_the_dr_count_with_condition_from_sheet_of_the_bc_from_sheet_from_bc_report(String targetCondition, String targetCountSheet, String bcSheet) throws Throwable {
-eh.setExcelFile("parallelRunBc", targetCountSheet);
-String targetCount=eh.getCellByColumnName(targetCondition);
-eM.setExcelFile("bcInputData", bcSheet);
-String  bcName=eM.getCellByColumnName("BC Name");
-broadcastPageObjects.verifyDRCount(bcName,targetCount);
-
-	
-	
-	
-	}
+    eh.setExcelFile("parallelRunBc", targetCountSheet);
+    String targetCount=eh.getCellByColumnName(targetCondition);
+    eM.setExcelFile("bcInputData", bcSheet);
+    String  bcName=eM.getCellByColumnName("BC Name");
+    broadcastPageObjects.verifyDRCount(bcName,targetCount);
 }
-
-
+	@Then("^create bc from sheet \"([^\"]*)\" with inventory \"([^\"]*)\" and trigger from sheet \"([^\"]*)\"$")
+	public void create_bc_from_sheet_(String bcSheet,String inventory, String trigger) throws Exception {
+	   eh.setExcelFile("StreamingAttribute", trigger);
+	   String triggerName=(String)eh.getCell(1, 0);
+	   System.out.println("===================="+triggerName+"====================");
+	   broadcastPageObjects.createBCWithTrigger(triggerName);
+	   create_bc_from_sheet_with_inventory(bcSheet,inventory);
+	   
+	}
+	@Then("^add bc from sheet \"([^\"]*)\" to column \"([^\"]*)\" of bc data sheet \"([^\"]*)\"$")
+	public void add_bc_from_sheet_to_column_of_bc_data_sheet(String bcSheet, int column, String bcStorageSheet) throws Throwable {
+         eM.setExcelFile("bcInputData", bcSheet);
+         String bcName=eM.getCellByColumnName("BC Name");
+         System.out.println("=========="+bcName+"=============");
+         String bcType=(String)eM.getCell(1, 7);
+         System.out.println("=========="+bcType+"=============");
+         broadcastPageObjects.addBcToSheet(bcName,bcType,bcStorageSheet,column);
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}//class
 
 
 

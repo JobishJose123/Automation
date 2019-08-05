@@ -22,6 +22,7 @@ import baseClasses.ExcelHelper;
 import baseClasses.GoogleSpreadsheetImpl;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import junit.framework.Assert;
 
 public class CommonObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
@@ -262,13 +263,128 @@ public class CommonObjects extends Init {
 		 private WebElement autoRefreshButtonRecurr;
 		@FindBy(xpath="(//div[@id='toggleButton'])[4]")
 		 private WebElement autoRefreshButtonSeeding;
+		@FindBy(xpath="(//hexagon-content//following::div[contains(.,'Streaming Attributes')])[1]")
+		private WebElement streamigAttr;
+		@FindBy(xpath="//paper-button[contains(.,'Create')]")
+		private WebElement streamingAttrCreatebtn;
+		@FindBy(xpath="//label[contains(.,'Name')]//following::input[1]")
+		private WebElement streamingAttrName ;
+		@FindBy(xpath="//label[contains(.,'Description')]//following::textarea")
+		private WebElement streamingAttrDesp ;
+		@FindBy(xpath="//label[contains(.,'Source')]//following::input[1]")
+		private WebElement streamingAttrSourceInput;
+		@FindBy(xpath="//label[contains(.,'Data Type')]//following::input[1]")
+		private WebElement streamingAttrDataTypeInput ;
+		@FindBy(xpath="//label[contains(.,'Label for Value 1')]//following::input[1]")
+		private WebElement streamingAttrValue1 ;
+		@FindBy(xpath="//label[contains(.,'Label for Value 2')]//following::input[1]")
+		private WebElement streamingAttrValue2;
+		@FindBy(xpath="//paper-item[contains(.,'Data Connector')]")
+		private WebElement sourceDataConnector;
+		@FindBy(xpath="//paper-item[contains(.,'DOUBLE')]")
+		private WebElement dataTypeDouble;
+		@FindBy(xpath="//paper-button[contains(.,'Save')]")
+		private WebElement streamingAttrSave;
 		
-//		@FindBy(xpath="")
-//		private WebElement ;
-//		@FindBy(xpath="")
-//		private WebElement ;
-//		@FindBy(xpath="")
-//		private WebElement ;
+		@FindBy(xpath="//p[contains(text(),'Trigger Management')]/../..")
+		private WebElement trigger;
+		@FindBy(xpath="//paper-button[contains(.,'Create New Trigger')]")
+		private WebElement createNewTriggerbtn ;
+		@FindBy(xpath="(//h3[contains(.,'Create New Trigger')]//following::label[contains(.,'Name')]//following::input)[1]")
+		private WebElement triggerNameInput;
+		@FindBy(xpath="//label[contains(.,'Description')]//following::textarea")
+		private WebElement triggerDespInput;
+		@FindBy(xpath="//div[contains(.,'Streaming Attribute')][@id='radioLabel']")
+		private WebElement streamingAttrRadiobtn;
+		
+		@FindBy(xpath="//label[contains(.,'Select Streaming Attribute')]//following::input[1]")
+		private WebElement streamingAttrSelectInput;
+		@FindBy(xpath="//label[contains(.,'Variable')]//following::input[1]")
+		private WebElement streamingAttrVariable;
+		
+	   @FindBy(xpath="//label[contains(.,'Trigger Condition')]//following::input[1]")
+		private WebElement triggerConditionInput ;
+	   
+		@FindBy(xpath="//label[contains(.,'Value')]//following::input[1]")
+		private WebElement valueInput;
+		
+		@FindBy(xpath="//label[contains(.,'Value')]//following::iron-icon[@id='icon'][1]")
+		private WebElement addStreaminAttrValue ;
+		
+		@FindBy(xpath="(//label[contains(.,'Variable')]//following::input[1])[2]")
+		private WebElement streamingAttrVariable2;
+		
+	   @FindBy(xpath="(//label[contains(.,'Trigger Condition')]//following::input[1])[2]")
+		private WebElement triggerConditionInput2;
+	   
+		@FindBy(xpath="(//label[contains(.,'Value')]//following::input[1])[2]")
+		private WebElement valueInput2;
+		
+		   @FindBy(xpath="(//paper-button[contains(.,'Save')])[1]")
+			private WebElement triggerSavebtn;
+		
+			@FindBy(xpath="(//vaadin-combo-box-item[contains(.,'equal to')])[1]")
+			private WebElement equalTo;
+			@FindBy(xpath="(//vaadin-combo-box-item[contains(.,'greater than or equal to')])[2]")
+			private WebElement greaterThanOrEqualTo;
+		
+//		   @FindBy(xpath="")
+//			private WebElement ;
+		
+//			@FindBy(xpath="")
+//			private WebElement ;
+		
+//		   @FindBy(xpath="")
+//			private WebElement ;
+		
+//			@FindBy(xpath="")
+//			private WebElement ;
+		
+//		   @FindBy(xpath="")
+//			private WebElement ;
+		
+//			@FindBy(xpath="")
+//			private WebElement ;
+		
+//		   @FindBy(xpath="")
+//			private WebElement ;
+		
+//			@FindBy(xpath="")
+//			private WebElement ;
+		
+//		   @FindBy(xpath="")
+//			private WebElement ;
+		
+//			@FindBy(xpath="")
+//			private WebElement ;
+		
+//		   @FindBy(xpath="")
+//			private WebElement ;
+		
+//			@FindBy(xpath="")
+//			private WebElement ;
+//		   @FindBy(xpath="")
+//			private WebElement ;
+//			@FindBy(xpath="")
+//			private WebElement ;
+//		   @FindBy(xpath="")
+//			private WebElement ;
+//			@FindBy(xpath="")
+//			private WebElement ;
+//		   @FindBy(xpath="")
+//			private WebElement ;
+//			@FindBy(xpath="")
+//			private WebElement ;
+//		   @FindBy(xpath="")
+//			private WebElement ;
+//			@FindBy(xpath="")
+//			private WebElement ;
+//		   @FindBy(xpath="")
+//			private WebElement ;
+//			@FindBy(xpath="")
+//			private WebElement ;
+		
+		
 		
 		
 public void clickOnReports() throws Exception {
@@ -546,6 +662,7 @@ public void clickActivateOption() throws Throwable {
 		Thread.sleep(2000);
 		clickFilterResetButton();
 		clickFilterIcon();
+		Thread.sleep(2000);
 		enterFilterFormname(name);
 		clickFilterApplyButton();
 	}
@@ -1069,6 +1186,76 @@ public void filterTemplate(String campaignTemplateName) throws Exception{
 	
 	clickFilterApplyButton2();
 }
+public void navigateToStreamingAttr() throws Exception{
+	jswait.loadClick(streamigAttr);
+}
+public void createStreamingAttr(String attrName,String description,String value1,String value2) throws Exception{
+	jswait.loadClick(streamingAttrCreatebtn);
+	jswait.loadSendKeys(streamingAttrName, attrName);
+	jswait.loadSendKeys(streamingAttrDesp,description);
+	jswait.loadClick(streamingAttrSourceInput);
+	jswait.loadClick(sourceDataConnector);
+	jswait.loadClick(streamingAttrDataTypeInput);
+	jswait.loadClick(dataTypeDouble);
+	jswait.loadSendKeys(streamingAttrValue1, value1);
+	jswait.loadSendKeys(streamingAttrValue2,value2);
+	jswait.loadClick(streamingAttrSave);
+}
+
+
+public void verifyStreamingAttrCreation(String attrName) throws Exception{
+	Assert.assertTrue(jswait.checkVisibility("//span[contains(.,'"+attrName+"')]"));
+}
+
+public void navigateToTrigger() throws Exception{
+	Thread.sleep(2000);
+	jswait.loadClick(trigger);
+}
+
+public void createTrigger(String triggerName,String triggerDesp,String attrName,String value1, String value2) throws Exception{
+	jswait.loadClick(createNewTriggerbtn);
+	Thread.sleep(2000);
+	jswait.loadSendKeys(triggerNameInput,triggerName);
+	jswait.loadSendKeys(triggerDespInput, triggerDesp);
+	jswait.loadClick(streamingAttrRadiobtn);
+	Thread.sleep(2000);
+	jswait.loadSendKeys(streamingAttrSelectInput,attrName);
+	Thread.sleep(2000);
+	jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+attrName+"')]");
+	jswait.loadSendKeys(streamingAttrVariable, value1);
+	jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+value1+"')]");
+	jswait.loadClick(triggerConditionInput);
+	jswait.loadClick(equalTo);
+	jswait.loadSendKeys(valueInput, "10");
+	Thread.sleep(2000);
+//	jswait.loadClick(addStreaminAttrValue);
+//	Thread.sleep(2000);
+//	jswait.loadSendKeys(streamingAttrVariable2, value2);
+//	jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+value2+"')]");
+//	jswait.loadClick(triggerConditionInput2);
+//	Thread.sleep(2000);
+//	jswait.loadClick(greaterThanOrEqualTo);
+//	jswait.loadSendKeys(valueInput2, "25");
+//	Thread.sleep(2000);
+	jswait.loadClick(triggerSavebtn);
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

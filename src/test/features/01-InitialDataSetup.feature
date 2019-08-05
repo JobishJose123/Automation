@@ -1,6 +1,6 @@
 #Author: joel.jose@flytxt.com
 #Keywords Summary : feature file to setup initial data
-@InitialDataSetup
+@NDX-InitialDataSetup
 Feature: data setup
 
 @NX-createCustomerCareTouchPoint
@@ -197,7 +197,7 @@ Then check and add profile fields
     Then check previous step and pass this
     
     
-    @NX-createUssdTouchpoint @initBrowser
+    @NX-createUssdTouchpoint @initBrowser @closeBrowser
   Scenario: create ussd touchpoint
     Given login
     Then navigate to intent management
@@ -233,6 +233,22 @@ Then check and add profile fields
     Then navigate to configuration
     Then navigate to saved segments
     Then create saved segment with condition "segmentAgeGT40"
+    
+    
+    @NDX-createTrigger @initBrowser
+    Scenario: create streaming attribute and trigger
+    Given login
+    Then navigate to data foundation
+    Then navigate to streaming attributes
+    Then create new streaming attribute from sheet "streamingAttr"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to configuration
+    Then select triggers in configuration
+    Then create new trigger from sheet "trigger" and streaming attribute from sheet "streamingAttr"
+    
+    
+    
     
     @NX-createDefaultData 
 @initBrowser 
