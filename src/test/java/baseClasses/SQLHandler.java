@@ -152,6 +152,11 @@ public class SQLHandler extends Init{
     		
         }
         
+        
+        public void statementClose() throws SQLException {
+        	statement.close();
+        }
+        
 	public static void main(String[] args) throws Exception {
 		
 //		PropHandler p = new PropHandler();

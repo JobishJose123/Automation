@@ -120,7 +120,7 @@ String file = "";
     }
     
     /**
-     * @author mallikharjuna.ankem
+     * 
      * @param parllelRunSheet
      * @param bcName
      * @param campaignName
@@ -135,6 +135,9 @@ String file = "";
      * @Discription: To store the Data into Excel 
      */
     public void addDataToParllelSheet(String parllelRunSheet, String bcName, String campaignName,String camapignCategoryName,String offerName,String condition,String inventory,String description, String bcType, String bcSheet) throws Exception {
+    	setExcelFile("bcInputData",bcSheet);
+    	String startdate=sh.getRow(1).getCell(11).toString();
+    	
     	setExcelFile("parallelRunBC", parllelRunSheet);
     	int countrows=sh.getLastRowNum()-sh.getFirstRowNum();
     	Row newrow=sh.createRow(countrows+1);
@@ -152,7 +155,8 @@ String file = "";
 			
 			CalenderUtility cu = new CalenderUtility();
 			cell=newrow.createCell(3);
-			cell.setCellValue(cu.getCurrentDate("dd MMM YYYY hh:mm aaa z"));
+//			cell.setCellValue(cu.getCurrentDate("dd MMM YYYY hh:mm aaa z"));
+			cell.setCellValue(startdate);
 			
 			cell=newrow.createCell(4);
 			cell.setCellValue(camapignCategoryName);

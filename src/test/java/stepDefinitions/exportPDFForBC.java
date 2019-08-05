@@ -2,6 +2,7 @@ package stepDefinitions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,6 +39,8 @@ public class exportPDFForBC extends Init{
 	CommonObjects commonObjects = new CommonObjects();
 	CalenderUtility calenderUtility=new CalenderUtility();
 	BroadcastSteps broadcastSteps=new BroadcastSteps();
+	public ExcelHelper eh = new ExcelHelper();
+	CampaignObjects campaignObjects = new CampaignObjects();
 	public exportPDFForBC() {
 		PageFactory.initElements(driver, this);
 	}
@@ -280,6 +283,7 @@ public class exportPDFForBC extends Init{
 		
 	}
  
+	
 		
 	
 	@Then("^Verify after edit the security groups export PDF option in BC page and View from sheet \"([^\"]*)\"$")
@@ -288,7 +292,75 @@ public class exportPDFForBC extends Init{
 		
 	}
 
+	@Then("^verify pdf generated for broadcast from BCsheet \"([^\"]*)\" workbook and \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void verify_pdf_generated_for_broadcast_from_BCsheet_workbook_and_and_sheet(String BCSheet, String workbook, String sheet) throws Throwable {
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventory, bcType,bcSheet = "",Description,bcStratDate;
+		SQLHandler sql = new SQLHandler();
+		String statusOfBC=null;
+		for (int i = 0; i < data.size(); i++) {
+			
+			bcName = data.get(i).get(1);
+			campaignCategory = data.get(i).get(4);
+			campaignName = data.get(i).get(5);
+			offerName = data.get(i).get(6);
+			inventory = data.get(i).get(7);
+			bcSheet = data.get(i).get(9);
+			bcType=data.get(i).get(8);
+			Description=data.get(i).get(2);
+			bcStratDate=data.get(i).get(3).substring(0, 20);
+			
+			if(bcSheet.contains(BCSheet)) {
+			campaignObjects.navigateToLIfeCycleMarketing();
+			campaignObjects.scrollToCampaignCategory(campaignCategory);
+			commonObjects.filterName(campaignName);
+			jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
+					+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+			campaignObjects.clickOptionsViewBroadcasts();
+
+			broadcastPageObjects.navigate_to_broadcasts(bcSheet);
+			commonObjects.filterBCName(bcSheet, bcName);
+			statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
+			System.out.println(statusOfBC);
+			
+			commonObjects.clickBCOptionsIcon(bcSheet);
+			broadcastPageObjects.clickExportBroadcastOption();
+			
+			
+			String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='"
+					+ bcName + "';";
+			String newBCNameWithOutSpace = bcName.replaceAll("[^a-zA-Z0-9-]", "_");
+			String systemUserName = System.getProperty("user.name");
+			System.out.println(systemUserName);
+			SQLHandler sql1 = new SQLHandler();
+			int bcID = sql1.getStringOfQuery(query);
+			System.out.println(bcID);
+			String path = "C:\\Users\\" + systemUserName + "\\Downloads\\BC_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
+			System.out.println(path);
+			Thread.sleep(6000);
+			pdfReader.verifyBroadcastPDF(path, bcName, statusOfBC,campaignName,inventory,SELENIUM_LIST,offerName,Description,bcStratDate);
+			Thread.sleep(2000);
+			System.out.println("Verified PDF  ");
+			
+			//Renaming the pdf
+			Thread.sleep(4000);
+			pdfReader.renameAndDeletePDF(bcName, statusOfBC);
+			Thread.sleep(2000);
+			commonObjects.clickOnToggleRefreshICon(bcSheet);
+			Thread.sleep(2000);
+			commonObjects.clickBCOptionsIcon(bcSheet);
+			broadcastPageObjects.clickBroadcastViewOption();
+			jswait.loadClick(driver.findElement(By.xpath("//paper-icon-button[@id='exportBtn']")));
+			Thread.sleep(6000);
+			pdfReader.verifyBroadcastPDF(path, bcName, statusOfBC,campaignName,inventory,SELENIUM_LIST,offerName,Description,bcStratDate);
+			Thread.sleep(2000);
+			System.out.println("Verified PDF in view page ");
+			
+			
+			}
+		}
+	}
+
 	
 	
-	
-}
+}//class

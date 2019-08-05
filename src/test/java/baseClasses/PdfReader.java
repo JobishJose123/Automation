@@ -154,7 +154,7 @@ public class PdfReader {
 		System.out.println("reading text from pdf");
 		// to store the pdf data into string
 		readTextFromPdf = pdfTextStripper.getText(document);
-		//System.out.println(readTextFromPdf);
+		System.out.println(readTextFromPdf);
 
 		String[] str17 = readTextFromPdf.split("\\n");
 		String expectedBCName = str17[1];
@@ -203,6 +203,104 @@ public class PdfReader {
 		System.out.println("PDF Document closed");
 
 	}
+public void verifyBroadcastPDF(String path,String bcName,String bcstatus,String campaign,String inventory,String list,String offerName,String creativeMessage,String bcStratDate) throws Exception {
+
+		
+		loadPDFFile(path);
+
+		PDFTextStripper pdfTextStripper = new PDFTextStripper();
+		System.out.println("reading text from pdf");
+		// to store the pdf data into string
+		readTextFromPdf = pdfTextStripper.getText(document);
+		//System.out.println(readTextFromPdf);
+
+		String[] str17 = readTextFromPdf.split("\\n");
+//		String expectedBCName = str17[1];
+//		String expetedStatus = str17[10];
+//		expectedBCName = expectedBCName.trim();
+//		expetedStatus = expetedStatus.trim();
+
+		List<String> al = new ArrayList<String>();
+
+		for (String pdfData : str17) {
+
+			al.add(pdfData.trim());
+		}
+
+		int getindex = al.indexOf("Target Details");
+		int getindex1 = al.indexOf("Limit Recipients No Limit");
+		List<String> subList = al.subList(getindex + 1, getindex1);
+		
+
+		int indexofOfferDetails = al.indexOf("Offer Details");
+		int indoexofOfferAttributes = al.indexOf("Offer Attributes");
+		List<String> subListOffer = al.subList(indexofOfferDetails + 1, indoexofOfferAttributes);
+		
+
+		int indexofCreativeDetails = al.indexOf("Creative Details");
+		int indexofTrackingRulesRewards = al.indexOf("Tracking Rules &Rewards");
+		List<String> subListCreative = al.subList(indexofCreativeDetails + 1, indexofTrackingRulesRewards);
+		
+		int indexofDeliveryDetails=al.indexOf("Delivery Details");
+		int sizeofPDF=al.size();
+		List<String> subListDeliveryDetails = al.subList(indexofDeliveryDetails + 1, sizeofPDF);
+		
+
+		String expectedBCName = al.get(1);
+		String expectedStatus = al.get(10);
+		String expectedcampaign = al.get(6);
+		String expectedInvntory = al.get(8);
+		String expectedList = subList.get(0);
+		String expectedOffer = subListOffer.get(0);
+		String expectedMessage = subListCreative.get(2);
+       
+
+		String actualstatus = "Status " + bcstatus;
+		String actualBCName = "Broadcast :  " + bcName;
+		String actaulCampaign = "Campaign " + campaign;
+		String actaualInventory = "Inventory " + inventory;
+		String actualList = "Registration List " + list;
+		String actualOffer = "Offer Name " + offerName;
+		String actaulMessage = "Message " + creativeMessage;
+		
+
+		Assert.assertEquals(actualBCName, expectedBCName);
+		Assert.assertEquals(expectedcampaign, actaulCampaign);
+		Assert.assertEquals(actaualInventory, expectedInvntory);
+		Assert.assertEquals(actualstatus, expectedStatus);
+		Assert.assertEquals(expectedList, actualList);
+		Assert.assertEquals(expectedOffer, actualOffer);
+		Assert.assertEquals(expectedMessage, actaulMessage);
+		
+		System.out.println("Selenium list  .. " + subList);
+		System.out.println("offer sublist  .. " + subListOffer);
+		System.out.println("Selenium list  .. " + subListCreative);
+		System.out.println("offer sublist  .. " + subListDeliveryDetails);
+		
+		if(bcName.contains("oneOffBC")||bcName.contains("seedingoneOffBC")) {
+			String expectedStartTime=subListDeliveryDetails.get(2);
+			System.out.println(expectedStartTime);
+			System.out.println(bcStratDate);
+			Assert.assertTrue("Oneoff or seeding oneoff BC start date time.. check in this function ", expectedStartTime.contains(bcStratDate));
+			
+		}else if(bcName.contains("TriggerOneoff")||bcName.contains("seedTrigBC")) {
+			String expectedStartTime=subListDeliveryDetails.get(1);
+			System.out.println("Trig one off, seed trig bc "+expectedStartTime);
+			System.out.println("Trig one off, seed trig bc "+bcStratDate);
+			Assert.assertTrue("TriggerOneoff or seedTrigBC oneoff BC start date time.. check in this function ", expectedStartTime.contains(bcStratDate));
+		}else {
+			String expectedStartTime=subListDeliveryDetails.get(2);
+			String actaulStartTime="Start Date "+bcStratDate;
+			System.out.println("recuriing bc  "+expectedStartTime);
+			System.out.println("recuriing bc, seed trig bc "+actaulStartTime);
+			Assert.assertEquals(expectedStartTime,actaulStartTime);
+		}
+		document.close();
+
+		System.out.println("PDF Document closed");
+
+	}
+
 
 	public void verifyBroadcastName(String bcName,String path) throws Exception, IOException, FileNotFoundException {
 			

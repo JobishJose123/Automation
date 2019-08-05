@@ -202,7 +202,7 @@ Feature: Test suite on Offer creation
 #      * 
 #Creative: singlecreative(it selects the one creative and language English )
 # multiplecreative (we can create 2 creatives with 2 languages )
-#      */
+#     Usage Metric,A_track_Sel  */
      
      @NDX-OneRuleOneReward @initBrowser 
      Scenario: Create a onerule one reward recharge sms offer
@@ -210,9 +210,9 @@ Feature: Test suite on Offer creation
      Then navigate to precision marketer
      Then navigate to offer management
      Then navigate to offers
-     Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
-     Then verify "SeedingSMS" offer in grid
-     
+#     Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
+#     Then verify "SeedingSMS" offer in grid
+     Then create new offer from sheet "rechargeEmail" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 #     Examples:
 #     |sheet||rewards|
 #     |rechargeSMS||default|

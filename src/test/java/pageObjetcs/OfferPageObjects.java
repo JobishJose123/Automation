@@ -462,9 +462,9 @@ public class OfferPageObjects extends Init {
 		@FindBy(xpath="//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")
 		private WebElement selectFirstRuleSecondReward;
 		
-		@FindBy(xpath="//rewards-container[2]//label[contains(text(),'Response on success')]/..//textarea")
+		@FindBy(xpath="//rewards-container[2]//label[contains(text(),'Default Success')]/..//textarea")
 		private WebElement FirstRuleSuccessMessage;
-		@FindBy(xpath="//rewards-container[2]//label[contains(text(),'Response on Failure')]/..//textarea")
+		@FindBy(xpath="//rewards-container[2]//label[contains(text(),'Default Failure')]/..//textarea")
 		private WebElement FirstRuleFailureMessage;
 		
 		@FindBy(xpath="//rewards-container[3]//label[contains(text(),'Response on success')]/..//textarea")
@@ -813,6 +813,45 @@ public class OfferPageObjects extends Init {
 				}
 			}
 		
+	 public void createFirstTrackingRuleForMetric() throws Exception {
+		 
+		 clickAddRuleButton();
+			enterRuleName("first rule");
+			selectPriority("2");
+			 jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+			 Thread.sleep(1000);
+			jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+			Thread.sleep(2000);
+			jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+			Thread.sleep(2000);
+			jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+			Thread.sleep(2000);
+			jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+			
+			jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+	 }
+	 
+ public void createSecondTrackingRuleForMetric() throws Exception {
+		 
+		 clickAddRuleButton();
+			enterRuleName("Second rule");
+			selectPriority("3");
+			 jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+			 Thread.sleep(1000);
+			jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+			Thread.sleep(2000);
+			jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+			Thread.sleep(2000);
+			jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+			Thread.sleep(2000);
+			jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+			Thread.sleep(2000);
+			jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+			
+			jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+	 }
 	 
 	 public void createFirstDefaultTrackingRuleCondition(String name) throws Exception {
 		 	clickAddRuleButton();
@@ -1819,14 +1858,16 @@ public class OfferPageObjects extends Init {
 		else if (eh.getCell(1, 3).toString().contains("Facebook"))
 			enterfacebookCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		else if (eh.getCell(1, 3).toString().contains("Email")) {
-			 
+			 System.out.println("email1");
 			 if(testMode!="NULL") {verifySetAsDefaultCheckboxinCreativeTab();	
 			 verifyEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 			   selectCreativeLanguageEnglish();
 			   enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 			 }
-			 else
+			 else {
+				 System.out.println("email2");
 				 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			 }
 		}
 		
 			
@@ -2865,9 +2906,175 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 	}
 		
 		
-		}
+		
 	
 
+public void createOffer(String sheet, String productSheet, String rewardType, String creativeType,String tracksource) throws Throwable {
+
+String testMode="";
+	clickCreateNewOfferButton();
+
+	ExcelHelper prodcutFile = new ExcelHelper();
+	prodcutFile.setExcelFile("productInputData", productSheet);
+	eh.setExcelFile("offerInputData", sheet);
+	String offerType=eh.getCell(1, 2).toString();
+	String offerChannel=eh.getCell(1, 3).toString();
+	
+	if(!offerChannel.equals("Email")) {
+		testMode = "test";
 		
+	}else {
+		testMode="NULL";
+	}
+	
+	// ******************Details tab******************:
+	enterDetailsTabFields(sheet);
+	clickProceedButton();
+	// ******************Products tab*****************:
+	Thread.sleep(3000);
+	enterProductTabFields(productSheet);
+	clickProceedButton();
+
+	// ******************Creative tab*****************:
+	if (creativeType.equals("singlecreative")) {
+		enterCreativeTabDetails(eh, testMode);
+		clickProceedButton();
+		Thread.sleep(3000);
+	} else if (creativeType.equals("multiplecreative")) {
+
+		enterCreativeTabDetails(eh, testMode);
+		jswait.loadClick(addCreativeButton);
+		enterSecondCreativeTabDetails(eh);
+		clickProceedButton();
+		Thread.sleep(3000);
+
+	} else {
+		System.out.println("No creative created");
+	}
+
+	// ******************Track tab*****************:
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+			// enterTrackTabDetails(eh);
+			clickTrackSourceSelector();
+			selectTrackSource(tracksource);
+			if (tracksource.equals("A_track_Sel")) {
+				if (rewardType.equals("oneruleonereward") || rewardType.equals("onerulemultiplerewards")
+						|| rewardType.equals("firstrulefirstreward")) {
+					createFirstDefaultTrackingRuleCondition(eh);
+				} else if (rewardType.equals("multiplerulesmultiplerewards")) {
+					createFirstDefaultTrackingRuleCondition(eh);
+					createSecondDefaultTrackingRuleCondition();
+				} else if (rewardType.equals("default")) {
+					System.out.println("No rules are created , only deafult rule available");
+				} else {
+					Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
+				} // inner if else
+			} else if (tracksource.equals("Usage Metric")) {
+
+				if (rewardType.equals("oneruleonereward") || rewardType.equals("onerulemultiplerewards")
+						|| rewardType.equals("firstrulefirstreward")) {
+					createFirstTrackingRuleForMetric();
+				} else if (rewardType.equals("multiplerulesmultiplerewards")) {
+					createFirstTrackingRuleForMetric();
+					createSecondTrackingRuleForMetric();
+				} else if (rewardType.equals("default")) {
+					System.out.println("No rules are created , only deafult rule available");
+				} else {
+					Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
+				}
+			}
+
+		} // track tab if
+
+		clickProceedButton();
+
+	// ******************Rewards tab*****************:
+	
+	if(tracksource.equals("A_track_Sel")) {
+	if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+
+		if (rewardType.equals("oneruleonereward")) {
+			createDefaultRuleFirstReward(creativeType);
+			createFirstRuleFirstReward(creativeType);
+			selectSeedingReward(offerType);
+			
+		} else if (rewardType.equals("onerulemultiplerewards")) {
+			createDefaultRuleFirstReward(creativeType);
+			clickRewardDefaultRuleAdButton();
+			clickDefaultSecondRewardTypeInputField();
+			clickdefaultRuleSecondReward();
+			createFirstRuleFirstReward(creativeType);
+			clickRewardFirstRuleAdButton();
+			clickFirstRuleSecondRewardInputField();
+			selectFirstRuleSecondReward();
+			selectSeedingReward(offerType);
+			
+
+		} else if (rewardType.equals("multiplerulesmultiplerewards")) {
+			createDefaultRuleFirstReward(creativeType);
+			createFirstRuleFirstReward(creativeType);
+			createSecondRuleFirstReward(creativeType);
+			selectSeedingReward(offerType);
+			
+		} else if (rewardType.equals("default")) {
+			createDefaultRuleFirstReward(creativeType);
+		selectSeedingReward(offerType);
+		
+		} else if (rewardType.equals("firstrulefirstreward")) {
+			createFirstRuleFirstReward(creativeType);
+			selectSeedingReward(offerType);
+	
+		} else {
+			System.out.println("No Rule for selecting the Rewards");
+			Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
+		}
+
+	}//if
+
+	clickSaveOfferButton();
+	
+	}else if(tracksource.equals("Usage Metric")) { 
+		
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+
+			if (rewardType.equals("oneruleonereward")) {
+				createDefaultRuleFirstReward(creativeType);
+				selectSeedingReward(offerType);
+				
+			} else if (rewardType.equals("onerulemultiplerewards")) {
+				createDefaultRuleFirstReward(creativeType);
+				clickRewardDefaultRuleAdButton();
+				clickDefaultSecondRewardTypeInputField();
+				clickdefaultRuleSecondReward();
+
+				selectSeedingReward(offerType);
+				
+
+			} else if (rewardType.equals("multiplerulesmultiplerewards")) {
+				createDefaultRuleFirstReward(creativeType);
+				createFirstRuleFirstReward(creativeType);
+				selectSeedingReward(offerType);
+				
+			} else if (rewardType.equals("default")) {
+				createDefaultRuleFirstReward(creativeType);
+			selectSeedingReward(offerType);
+			
+			} else if (rewardType.equals("firstrulefirstreward")) {
+				createDefaultRuleFirstReward(creativeType);
+				selectSeedingReward(offerType);
+		
+			} else {
+				System.out.println("No Rule for selecting the Rewards");
+				Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
+			}
+
+		}//if
+
+		clickSaveOfferButton();
+		
+	}
+
+}//method
+	}//class
 	
 

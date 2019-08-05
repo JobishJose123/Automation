@@ -1242,11 +1242,18 @@ public void createTrigger(String triggerName,String triggerDesp,String attrName,
 }
 
 
+public void clickOnToggleRefreshICon(String sheet) throws Exception {
+if(sheet.contains("one-offBC")||sheet.contains("TriggerOneoff")) {
+jswait.loadClick(autoRefreshButtononetime);
+}else if(sheet.contains("seeding")) {
+jswait.loadClick(autoRefreshButtonSeeding);			
+}else if(sheet.contains("TriggerReccurringBC")) {
+jswait.loadClick(autoRefreshButtonTrigger);
+}else if(sheet.contentEquals("recurringBC")||sheet.contentEquals("recurrBCDaily")||sheet.contentEquals("recurringBCEdit")||sheet.contentEquals("recurringBCForAbort")||sheet.contentEquals("recurringBCForPause")) {
+jswait.loadClick(autoRefreshButtonRecurr);
+}
 
-
-
-
-
+}
 
 
 

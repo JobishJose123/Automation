@@ -54,6 +54,10 @@ public class OfferSteps extends Init {
 
 	}
 
+	@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\" rewards \"([^\"]*)\" with creative type \"([^\"]*)\" and track Source \"([^\"]*)\"$")
+	public void create_new_offer_from_sheet_with_product_rewards_with_creative_type_and_track_Source(String offerSheet, String productSheet, String rewardType, String creativeType, String trackSource) throws Throwable {
+		offerPageObjects.createOffer(offerSheet, productSheet,rewardType,creativeType,trackSource);
+	}
 
 	
 	@Then("^create new offer with Multiple creatives from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
