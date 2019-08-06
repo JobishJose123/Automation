@@ -28,6 +28,35 @@ public class apiautomation extends Init {
 	r.postRequestwithsession("http://"+p.getValue("env")+"/neon-ws/saveSegmentRule", jobPayload);
 
 	}
+	
+	public  void createproductclass(String jobPayload) throws Exception {
+		
+
+	r.postRequestwithsession("http://"+p.getValue("env")+"/neon-ws/productClasses", jobPayload);
+
+	}
+	
+	public  void createCCtouchpoints(String jobPayload) throws Exception {
+		
+
+		r.postRequestwithsession("http://"+p.getValue("env")+"/neon-ws/customerCareTouchpoints", jobPayload);
+
+		}
+public  void createsmstouchpoints(String jobPayload) throws Exception {
+		
+
+		r.postRequestwithsession("http://"+p.getValue("env")+"/neon-ws/smsTouchpoints", jobPayload);
+
+		}
+public  void createAPItouchpoints(String jobPayload) throws Exception {
+	
+
+	r.postRequestwithsession("http://"+p.getValue("env")+"/neon-ws/apiTouchpoints", jobPayload);
+
+	}
+
+
+	
 	public void copyFileToPath(String source,String destination) throws IOException {
 		ShellExecuter se = new ShellExecuter();
 		String command = "cp "+source+" "+destination;
