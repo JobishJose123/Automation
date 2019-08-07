@@ -91,7 +91,7 @@ String file = "";
     }
     public int numRows()
     {
-    	return sh.getPhysicalNumberOfRows();
+    	return sh.getLastRowNum();
     }
     public int numCols()
     {

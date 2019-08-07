@@ -382,9 +382,10 @@ Feature: Test suite for Broadcast creation
 
 
 
-#=============================================================================================================================================#
-@NDX-CreateOneTimeBC1 @initBrowser
-Scenario Outline:Create broadcast to verify bc functionality
+#============================================CREATION OF BC FOR VERFICATION OF BC FUNCTIONALITY=========================================================================================#
+
+@NDX-CreateBCForFunctionality @initBrowser
+Scenario Outline:Create broadcast to verify bc functionality(trigger not included)
 Given login
 Then navigate to configuration management
 Then navigate to partners
@@ -397,10 +398,10 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then create bc from sheet "<bcSheet>" with inventory "Unlimited"
-Then enter target tab details target condition "<targetCondition>" type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
+Then enter target tab details target condition <targetCondition> type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
 Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
-Then save bc
+Then activate bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
   
 Examples:
@@ -431,16 +432,18 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger from sheet "trigger"
-Then enter target tab details target condition "<targetCondition>" type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
+Then enter target tab details target condition <targetCondition> type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
 Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
-Then save bc
+Then activate bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
+Then provide file for trigger
 
 Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|
-|TriggerOneoff|rechargeSMS|customerWasSentTheMessage|Create|no limit|fixedPercentage|none|single creative|never|none|17|
-|TriggerOneoff|seedingWAP|targetall|None|no limit|no limit|none|multiple creative|never|none|18|
-|TriggerOneoff|rechEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|19|
-|TriggerReccurringBC|seedingWAP|targetall|None|no limit|no limit|none|single creative|never|none|20|
+|TriggerOneoff|rechargeSMS|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|never|none|17|
+|TriggerOneoff|seedingWAPoffer|targetall|None|no limit|no limit|none|multiple creative|never|none|18|
+|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|19|
+|TriggerReccurringBC|seedingWAPoffer|targetall|None|no limit|no limit|none|single creative|never|none|20|
 |TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|21|
+|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|22|

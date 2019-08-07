@@ -3220,11 +3220,13 @@ public boolean checkCalculateBtnDisplayed() {
 			
 		}
 		jswait.loadClick(CGSavebtn);
-		selectDNCList(DNC);
+//		selectDNCList(DNC);
 		TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 		if(targetType.equalsIgnoreCase("create")){
 			commonObjects.clickOptionsIcon();
 			targetConditionObjects.clickTargetConditionDeletet();
+			Thread.sleep(2000);
+			System.out.println("selected condition is "+condition);
 			targetConditionObjects.clickBasicTargetCondition(condition);
 			}
 		else if(targetType.equalsIgnoreCase("saved segments")) {
@@ -3909,7 +3911,11 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	
 	}
 	
-	
+	public void verifyCGCount(String targetCount) throws Exception{
+		jswait.loadClick(ViewTargetDetails);
+		Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("//p[contains(.,'Control Group Exclusion Count')]//following::p[contains(.,'"+targetCount+"')][1]"))));
+		
+	}
 	
 	
 	

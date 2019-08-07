@@ -305,7 +305,7 @@ public class BroadcastSteps extends Init {
 //			eM.setCell(1, 11, Start_Date);
 //			
 //		}
-//		
+		
 		
 		Actions builder = new Actions(driver);
 		if (bc_type.contentEquals("one-off") || bc_type.contentEquals("seedingTriggerable")
@@ -5312,24 +5312,37 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
          System.out.println("=========="+bcType+"=============");
          broadcastPageObjects.addBcToSheet(bcName,bcType,bcStorageSheet,column);
          
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
+ }
+	@Then("^provide file for trigger$")
+	public void provide_file_for_trigger() throws Exception{
+	String csvFileData = "";
+	File conversionCSV = new File("ExcelFiles\\" + "trigger.csv");
+	BufferedReader br = null;
+	String temp = "";
+	int initial = 1;
+	br = new BufferedReader(new FileReader(conversionCSV.getCanonicalPath()));
+	while ((temp = br.readLine()) != null) {
+		if (initial == 0) {
+			csvFileData += "\n";
+		}
+		initial = 0;
+		csvFileData += temp;
+	}
+	System.out.println(csvFileData);
+	System.out.println("test");
+	br.close();
+	ShellExecuter se = new ShellExecuter();
+	se.executeScript("cd /usr/local/flytxt/seleniumTrigger; echo '" + csvFileData + "' >trigger.csv");
 }
 	
 	
+	@Then("^verify the cg exclusion from sheet \"([^\"]*)\"$")
+	public void verify_the_cg_exclusion_from_sheet(String targetCountSheet) throws Exception {
+		eh.setExcelFile("parallelRunBC", targetCountSheet);
+		   String targetCount=eh.getCellByColumnName("cg count");
+		   broadcastPageObjects.verifyCGCount(targetCount);
 	
-	
-	
-	
-	
+	}
 	
 	
 	
