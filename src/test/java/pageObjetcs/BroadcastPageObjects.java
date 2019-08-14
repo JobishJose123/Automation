@@ -3063,6 +3063,9 @@ public boolean checkCalculateBtnDisplayed() {
 			status = topBcStatusGridForRecurrChild.getText();
 		
 		}
+		else if (bctype.equalsIgnoreCase("seedingRecurr")) {
+			status=topBcStatusGridForSeedingrecurringChild.getText();
+		}
 
 		return status;
 		
@@ -3460,11 +3463,11 @@ else if (creative.equalsIgnoreCase("singleCreative")){
 		jswait.loadClick(expiresAt);
 		jswait.loadClick(expiresTimeInput);
 		WebElement num4 = driver.findElement(By.xpath(
-				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 2) +"])[3]"));
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[3]"));
 		builder.moveToElement(num4).click().build().perform();
 		Thread.sleep(2000);
 		WebElement num5 = driver.findElement(By.xpath(
-				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[3]"));
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 10) + "])[3]"));
 		Thread.sleep(1000);
 		builder.moveToElement(num5).click().build().perform();
 		if (am_pm == 0)
@@ -3918,7 +3921,57 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	}
 	
 	
-	
+	public void verifyDynamicTagOfTheBC(String event, String bcName,String campaignName,String dynamicTag) throws Exception{
+		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
+		CustomerProfilePage.searchEventsDynammically("Last 3 Days");
+		 Thread.sleep(4000);
+		 CustomerProfilePage.clickOnEventTabFilter();
+		 CustomerProfilePage.enterEventDetails(campaignName);
+		 CustomerProfilePage.filterResetFilterButton();
+		 Thread.sleep(3000);
+		  CustomerProfilePage.clickOnEventTabFilter();
+		 CustomerProfilePage.enterEventDetails(campaignName);	 
+		 CustomerProfilePage.filterApplyButton();
+		 jswait.loadClick(drCheckBox);
+		 jswait.loadClick(conversionCheckBox);
+		 jswait.loadClick(fulfillmentCheckBox);
+		 jswait.loadClick(applyEventFilter);
+		 Thread.sleep(10000);
+		 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
+			Thread.sleep(1000);
+			System.out.println(ackEvents.size());
+			 int count=1;
+			 System.out.println("print "+ackEvents);
+			 System.out.println("before for loop");
+			 
+			for (WebElement webElement : ackEvents) {
+					if ((webElement.getText()).contains(campaignName)) {
+						System.out.println(webElement.getText());
+						try {
+							jswait.loadClick("(//iron-icon[@class='deselect consumer-events style-scope x-scope iron-icon-0'])["+count+"]");
+							Thread.sleep(1000);
+							boolean booln = jswait.checkVisibility(
+									"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
+							Assert.assertTrue(jswait.checkVisibility("(//label[contains(.,'Creative')]//following::label[contains(.,'"+dynamicTag+"')])[1]"));
+							System.out.println(booln);
+							if (booln == true) {
+								System.out.println("Ack verified");
+								break;
+								
+							}
+							 else {
+								 
+								System.out.println("Ack verified.. waiting for BC name "+bcName);
+							}
+						} catch (Exception e) {
+							System.out.println("catch block");
+							Assert.assertTrue(false,"No Ack Event Raised");
+						}
+						Thread.sleep(2000);
+						count++;
+				}
+			}
+	}
 	
 	
 	

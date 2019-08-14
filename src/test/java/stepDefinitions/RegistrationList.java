@@ -36,6 +36,7 @@ public class RegistrationList extends Init{
 	RegistrationListPage registrationListPage = new RegistrationListPage();
 	LandingPageObjects landingPageObjects = new LandingPageObjects();
 	ExcelHelper list = new ExcelHelper();
+	CommonObjects commonObjects =new CommonObjects();
 	JSWaiter jswait = new JSWaiter();
 	String msisdn = "";
 	BufferedWriter bw = null;
@@ -1270,6 +1271,63 @@ public class RegistrationList extends Init{
 		}
 										
 	}
+	@Then("^create new frequency rule \"([^\"]*)\"$")
+	public void create_new_frequency_rule(String frequency) throws Throwable {
+		registrationListPage.createFrequency(frequency);
+	}
+
+	@Then("^create new blackout rule \"([^\"]*)\"$")
+	public void create_new_blackout_rule(String blackout) throws Throwable {
+		registrationListPage.createBlackout(blackout);
+	}
+
+	@Then("^create new inventory \"([^\"]*)\" with  frequency \"([^\"]*)\" and blackout \"([^\"]*)\"$")
+	public void create_new_inventory_with_frequency_and_blackout(String inventory, String frequency, String blackout) throws Throwable {
+		registrationListPage.createInventory(inventory,frequency,blackout);
+	}
+	@Then("^filter the job \"([^\"]*)\" and activate it$")
+	public void filter_job(String jobName) throws Exception{
+		commonObjects.filterName(jobName);
+		registrationListPage.filterDkJobName(jobName);
+	}
+	
+	@Then("^create new reward \"(.*)\"$")
+	public void create_new_reawrd(String rewardName) throws Exception{
+		registrationListPage.createReward(rewardName);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

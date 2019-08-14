@@ -235,8 +235,8 @@ Then check and add profile fields
     Then create saved segment with condition "segmentAgeGT40"
     
     
-    @NDX-createTrigger @initBrowser
-    Scenario: create streaming attribute and trigger
+    @NDX-createTriggerWithDKJob @initBrowser
+    Scenario: create streaming attribute and trigger and dk job for trigger
     Given login
     Then navigate to data foundation
     Then navigate to streaming attributes
@@ -245,12 +245,49 @@ Then check and add profile fields
     Then navigate to precision marketer
     Then navigate to configuration
     Then select triggers in configuration
-    Then create new trigger from sheet "trigger" and streaming attribute from sheet "streamingAttr"
+    Then create new trigger with streaming attribute from sheet "streamingAttr"
+    Then create a dk job "Sel_TriggerJob" with streaming attribute "streamingAttr"
+    Then navigate to landing page
+    Then navigate to data foundation
+    Then click Data Fusion Engine
+    Then filter the job "Sel_TriggerJob" and activate it
+    
+    @NDX-CreateInventory @initBrowser
+    Scenario Outline: create inventory
+    Given login
+    Then navigate to configuration management
+    Then create new frequency rule "<frequency>"
+    Then navigate to admin
+    Then create new blackout rule "<blackout>"
+    Then navigate to admin
+    Then create new inventory "<inventory>" with  frequency "<frequency>" and blackout "<blackout>"
+    
+    Examples: 
+    |frequency|blackout|inventory|
+    |default|default|default|
+    |default|default|unlimited|
+    |onePerDay|dafault|onePerDay|
+    |dafault|specificTime|specificTime|
+    
+    @NDX-CreateReward @initBrowser
+    Scenario Outline: create reward
+    Given login
+    Then navigate to configuration management
+    Then create new reward "<reward>"
+    
+    
+    Examples: 
+    |reward|
+    |selenium_reward|
+    |sel_reward|
     
     
     
     
-    @NX-createDefaultData 
+    
+    
+    
+@NX-createDefaultData 
 @initBrowser 
 Scenario: Create default data that is used everywhere
 Given login

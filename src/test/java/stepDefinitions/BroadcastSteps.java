@@ -5345,12 +5345,19 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	}
 	
 	
+	@Then("^verify the condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\" and offer from sheet \"([^\"]*)\"$")
+	public void verify_the_condition_Acknowleged_event_for_the_bc_from_sheet_for_the_campaign_from_sheet_and_offer_from_sheet(String event,String bcSheet, String campaignSheet, String offerSheet) throws Throwable {
+		 eh.setExcelFile("bcInputData", bcSheet);
+	      String bcName =eh.getCellByColumnName("BC Name");
+	      eM.setExcelFile("campaignInputData", campaignSheet);
+	      String camapignName=(String) eM.getCell(1, 0);
+	      eh.setExcelFile("OfferInputData", offerSheet);
+	      String dynamicTag=(String)eh.getCell(1, 20);
+	      broadcastPageObjects.verifyDynamicTagOfTheBC(event,bcName,camapignName,dynamicTag);
 	
 	
 	
-	
-	
-	
+	}
 	
 	
 	

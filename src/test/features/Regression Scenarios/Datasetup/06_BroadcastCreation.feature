@@ -437,7 +437,6 @@ Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet
 Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
 Then activate bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
-Then provide file for trigger
 
 Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|
@@ -447,3 +446,10 @@ Examples:
 |TriggerReccurringBC|seedingWAPoffer|targetall|None|no limit|no limit|none|single creative|never|none|20|
 |TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|21|
 |TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|22|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|single creative|At|At|23|
+
+
+# after running @NDX-TriggerBC run @NDX-fileForTriggerBC
+@NDX-fileForTriggerBC 
+Scenario: upload file for trigger bc
+Then provide file for trigger

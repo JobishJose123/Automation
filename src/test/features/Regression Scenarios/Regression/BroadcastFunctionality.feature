@@ -167,7 +167,7 @@ Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
-Then verify the dynamic tag "Enjoy the offer with 25 extar TT"
+
 
 @NDX-9006 @NDX-8730 @NDX-10016 @initBrowser
 Scenario: Verify the ack ,dynamic tag and Target condition: sharedMetricOtherPartner of a one-timebc
@@ -186,7 +186,7 @@ Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
-Then verify the dynamic tag "25.0"
+Then verify the condition Acknowleged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC" and offer from sheet "rechargeSMS_Dynamic"
 
 @NDX-8576 @NDX-8616  @NDX-8627 @NDX-7040 @NDX-9015 @NDX-8961 @NDX-8799 @NDX-8805 @NDX-9970 @NDX-10015 @NDX-9797 @NDX-9795 @initBrowser
 Scenario: Verify the ack ,channel SMS,multiple creative ,dr count,CG count of a recurrence pattern DAILY of recurringbc and Target condition: segmentAgeGT40
@@ -280,7 +280,8 @@ Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "recurringBC" for the campaign from sheet "campaignBC"
-Then verify the dynamic tag "Enjoy the offer with 25 extar TT"
+Then verify the condition Acknowleged event for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC" and offer from sheet "rechargeSMS_Dynamic"
+
 
 @NDX-8578 @NDX-8617 @NDX-7041 @NDX-8803 @NDX-8744 @NDX-10017 @initBrowser
 Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: sharedEventOtherPartner of a seeding one-timebc     
@@ -356,7 +357,8 @@ Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
-Then verify the dynamic tag "selenium6"
+Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC" and offer from sheet "SeedingSMS_Dynamic"
+
 
 
 @NDX-8606 @NDX-8623 @NDX-8801 @NDX-7042 @initBrowser
@@ -428,7 +430,8 @@ Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
-Then verify the dynamic tag "FlyTXT 286"
+Then verify the condition Acknowleged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC" and offer from sheet "SeedingSMS_Dynamic"
+
 
 
 @NDX-10923 @NDX-10949 @NDX-10927  @initBrowser
@@ -546,10 +549,12 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "TriggerReccurringBC" for bctype "trigger"
-Then wait until status of "TriggerReccurringBC" from file "bcInputData" is "Delivering" for bctype "trigger"
+Then wait until status of "TriggerReccurringBC" from file "bcInputData" is "Delivering" for bctype "seedingRecurr"
 Then wait for 1 minutes
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
-Then verify the condition Acknowleged event for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC"
+Then verify the condition Acknowleged event for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC" and offer from sheet "rechargeSMS_Dynamic"
+
+

@@ -114,7 +114,7 @@ public class CommonSteps extends Init {
 	
 	@Given("^login$")
     public void loginuser() throws Exception {
-
+        
 		 driver.get("https://"+p.getValue("env"));
 		 loginPage.login(p.getValue("username"), p.getValue("password"));
 		 
@@ -125,10 +125,7 @@ public class CommonSteps extends Init {
 		 catch (Exception e) {
 			 System.out.println("Robob x popup off....");
 		 }
-//		 jswait.loadClick("//div[@id='labelAndInputContainer']//following::label//following::input");
-//		 Thread.sleep(3000);
-//		 jswait.loadClick("//vaadin-combo-box-item[contains(.,'CIM_SOAK')]");
-//		 jswait.loadClick("//paper-button[contains(.,'Yes')]");
+
     }
 	@Then("^logout")
 	public void logout() throws InterruptedException {
@@ -500,20 +497,18 @@ public class CommonSteps extends Init {
 	public void select_triggers_in_configuration() throws Exception{
 		commonObjetcs.navigateToTrigger();
 	}
-	@Then("^create new trigger from sheet \"([^\"]*)\" and streaming attribute from sheet \"([^\"]*)\"$")
-	public void create_new_trigger_from_sheet_and_streaming_attribute_from_sheet(String triggerSheet, String streamingAttrSheet) throws Throwable {
-		eh.setExcelFile("streamingAttribute", triggerSheet);
+	@Then("^create new trigger with streaming attribute from sheet \"([^\"]*)\"$")
+	public void create_new_trigger_from_sheet_and_streaming_attribute_from_sheet(String streamingAttrSheet) throws Throwable {
 		eh1.setExcelFile("streamingAttribute", streamingAttrSheet);
 		String attrName=(String) eh1.getCell(1, 0);
 		String value1=(String) eh1.getCell(1, 2);
 		String value2=(String)eh1.getCell(1,3);
-		String triggerDesp=(String)eh.getCell(1,1);
-		String triggerName=(String)eh.getCell(1,0);
-		triggerName = RandomNameGenerator.getRandomName(triggerName);
-		eh.setCell(1, 0, triggerName);
-		commonObjetcs.createTrigger(triggerName,triggerDesp,attrName,value1,value2);
+		commonObjetcs.createTrigger(attrName,value1,value2);
 	}
-	   
+	@Then("^navigate to admin$")
+	public void navigate_to_admin() throws Throwable {
+		commonObjetcs.navigateToAdmin();
+	}
 	
 	
 	

@@ -328,8 +328,8 @@ public class CommonObjects extends Init {
 			@FindBy(xpath="(//vaadin-combo-box-item[contains(.,'greater than or equal to')])[2]")
 			private WebElement greaterThanOrEqualTo;
 		
-//		   @FindBy(xpath="")
-//			private WebElement ;
+		   @FindBy(xpath="(//label[contains(.,'Admin')])[1]")
+		   private WebElement admin;
 		
 //			@FindBy(xpath="")
 //			private WebElement ;
@@ -1212,11 +1212,11 @@ public void navigateToTrigger() throws Exception{
 	jswait.loadClick(trigger);
 }
 
-public void createTrigger(String triggerName,String triggerDesp,String attrName,String value1, String value2) throws Exception{
+public void createTrigger(String attrName,String value1, String value2) throws Exception{
 	jswait.loadClick(createNewTriggerbtn);
 	Thread.sleep(2000);
-	jswait.loadSendKeys(triggerNameInput,triggerName);
-	jswait.loadSendKeys(triggerDespInput, triggerDesp);
+	jswait.loadSendKeys(triggerNameInput,TRIGGER);
+	jswait.loadSendKeys(triggerDespInput, "trigger by selenium");
 	jswait.loadClick(streamingAttrRadiobtn);
 	Thread.sleep(2000);
 	jswait.loadSendKeys(streamingAttrSelectInput,attrName);
@@ -1255,7 +1255,9 @@ jswait.loadClick(autoRefreshButtonRecurr);
 
 }
 
-
+public void navigateToAdmin() throws Exception{
+	jswait.loadClick(admin);
+}
 
 
 
