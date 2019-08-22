@@ -20,7 +20,7 @@ Feature: positive flow of im program creation
     Then verify sms touchpoint creation form
 
 
-  @NX-431 @initBrowser @closeBrowser
+  @NX-431 @initBrowser 
   Scenario: Verify new Trigger touchpoint creation  NX-431
     Given login
     Then navigate to intent management

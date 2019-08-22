@@ -151,6 +151,9 @@ public class ProgramPage extends Init{
 	private WebElement addTouchpointChannelSelectApi;
 	@FindBy(xpath="//paper-item[text()='USSD']")
 	private WebElement addTouchpointChannelSelectUssd;
+	@FindBy(xpath="//paper-item[text()='Trigger']")
+	private WebElement addTouchpointChannelSelectTrigger;
+	
 	
 	@FindBy(xpath="//form[@id='addTouchpointForm']//label[text()='Response Channel']/../../../../../../..//paper-item[text()='SMS']")
 	private WebElement addTouchpointResponseChannelSelectSMS;
@@ -637,9 +640,9 @@ private WebElement rulessenderid2
     	 Thread.sleep(1000);
     	 builder.moveToElement(num1).click().build().perform();
       	if(am_pm==0)
-      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
        else
-      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
       	clickRefreshAtOkButton();
 		programactivatebtn();
 		programconfirmactivateyes();
@@ -926,6 +929,10 @@ private WebElement rulessenderid2
 		jswait.loadClick(addTouchpointChannel);
 		jswait.loadClick(addTouchpointChannelSelectUssd);
 	}
+	public void addTouchPointSelecttriggerChannel() throws InterruptedException {
+		jswait.loadClick(addTouchpointChannel);
+		jswait.loadClick(addTouchpointChannelSelectTrigger);
+	}
 	public void addTouchPointEnterKeywordAliase() throws InterruptedException {
 		jswait.loadSendKeys(addTouchpointKeywordAliases, "SampleKey");
 	}
@@ -1020,6 +1027,12 @@ private WebElement rulessenderid2
 		else if(type.contentEquals("ussd")) {
 			addTouchPointSelectUssdChannel();
 			//addTouchPointEnterKeywordAliase();
+			Thread.sleep(2000);
+			addTouchPointSelectSmsTouchpointFromSheet(sheet);
+			addTouchPointSelectUssdResponseChannel();
+			jswait.loadClick(addTouchpointSaveButton);
+		}else if(type.contentEquals("trigger")) {
+			addTouchPointSelecttriggerChannel();
 			Thread.sleep(2000);
 			addTouchPointSelectSmsTouchpointFromSheet(sheet);
 			addTouchPointSelectUssdResponseChannel();

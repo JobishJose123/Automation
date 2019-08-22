@@ -54,6 +54,21 @@ public  void createAPItouchpoints(String jobPayload) throws Exception {
 	r.postRequestwithsession("http://"+p.getValue("env")+"/neon-ws/apiTouchpoints", jobPayload);
 
 	}
+public  void createussdtouchpoints(String jobPayload) throws Exception {
+	
+	r.postRequestwithsession("http://"+p.getValue("env")+"/neon-ws/ussdTouchpoints", jobPayload);
+
+	}
+
+
+public  void createproduct(String jobPayload) throws Exception {
+	
+	r.postRequestwithsession("http://"+p.getValue("env")+"/neon-ws/products", jobPayload);
+
+	}
+
+
+
 
 
 	

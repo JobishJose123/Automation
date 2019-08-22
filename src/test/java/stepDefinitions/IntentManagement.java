@@ -1469,7 +1469,7 @@ System.out.println(editname+"program has edited successfully");
 		 		Thread.sleep(4000);
 				//programPage.clickCreateProgramButton();
 		 		System.out.println(touchpointList);
-				programPage.createNewProgramRule(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+				programPage.createNewProgramRulewithenddate(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 				dateForCompare = new Date();
 				System.out.println(dateForCompare);
 				

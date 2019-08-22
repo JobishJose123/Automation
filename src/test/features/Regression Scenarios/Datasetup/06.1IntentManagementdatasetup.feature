@@ -62,11 +62,15 @@ Feature: For IntentManagement datasetup.
 #    Then create new rule with enddate from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
 #    Then create new rule with enddate from sheet "USSDprogram" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
 #    Then navigate to programs
-    Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
-    Then choose program from sheet "CCprogram"
-    Then create new rule with enddate from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
-    Then create new rule with enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
-
+#    Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
+#    Then choose program from sheet "CCprogram"
+#    Then create new rule with enddate from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+#    Then create new rule with enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
+#    Then navigate to programs
+    Then verify create program page "triggerrprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "triggerTouchpoint"
+     Then choose program from sheet "triggerrprogram"
+#     Then create new rule with enddate from sheet "triggerrprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+Then create new rule with enddate from sheet "triggerrprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
    
   
    @createprogramdeletedatasetup

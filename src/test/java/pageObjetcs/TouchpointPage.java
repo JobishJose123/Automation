@@ -377,7 +377,7 @@ public class TouchpointPage extends Init{
 	private WebElement selectTrigger;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Touchpoint Name')]/../input")
 	private WebElement triggerTouchpointName;
-	@FindBy(xpath="//vaadin-combo-box-item[contains(..,'Trigger')][2]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'TRIGGER')]")
 	private WebElement triggerFormTriggerSelect;
 	@FindBy(xpath="//form[@id='triggerForm']//label[contains(.,'Prioritization Logic')]/../input")
 	private WebElement triggerFormProritizationLogicSelector;
@@ -402,7 +402,7 @@ public class TouchpointPage extends Init{
 	private WebElement triggerFormPrioritizationRuleLIFO;
 	@FindBy(xpath="//form[@id='triggerForm']//vaadin-combo-box-item[contains(.,'FIFO')]")
 	private WebElement triggerFormProritizationLogicFIFO;
-	@FindBy(xpath="//form[@id='triggerForm']//paper-item[contains(.,'Hours')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Hours')]")
 	private WebElement triggerFormTimeInterval1;
 	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'Hours')]")
 	private WebElement custTriggerFormTimeInterval;
@@ -418,7 +418,7 @@ public class TouchpointPage extends Init{
 	private WebElement triggerFormMaximumOffers;
 	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Maximum offers')]/../input")
 	private WebElement custTriggerFormMaximumOffers;
-	@FindBy(xpath="(.//paper-button[contains(.,'Save')])[3]")
+	@FindBy(xpath="//paper-button[contains(.,'Save')]")
 	private WebElement triggerFormSaveButton;
 	@FindBy(xpath="(//paper-button[contains(.,'Cancel')])[3]")
 	private WebElement triggerFormCancelButton;
@@ -853,7 +853,9 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	}
 	public void selectTrigger() throws InterruptedException {
 		jswait.loadClick(selectTrigger);
-		jswait.loadClick(triggerFormTriggerSelect);
+		jswait.loadSendKeys(selectTrigger, TRIGGER);
+		
+		jswait.loadClick("//vaadin-combo-box-item[normalize-space(text())='"+TRIGGER+"']");
 	}
 	public void triggerClickSave() throws InterruptedException {
 		jswait.loadClick(triggerFormSaveButton);

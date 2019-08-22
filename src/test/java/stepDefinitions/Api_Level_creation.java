@@ -463,6 +463,85 @@ String job33="{\"name\":\""+rulename+"\",\"programId\":"+pgmid+",\"targetDetails
 		
          }
 	
+		
+	@Then("^create ussd touchpoint with hit with name \"([^\"]*)\"  intervalUnit \"([^\"]*)\" intervalvalue \"([^\"]*)\" maxofferlimit \"([^\"]*)\" orderrule \"([^\"]*)\" ussdapplicationname \"([^\"]*)\"$")
+	public void USSDtouchpointcreationwithoutoffer(String name,String intervalUnit,String intervalvalue,String maxofferlimit,String orderRule,String ussdApplicationName) throws Exception {
+		SQLHandler SQLHandler=new SQLHandler();
+		apiautomation apiautomation=new apiautomation();
+		int orderidnum;
+		String segmentationLogic=null;
+		
+		if(orderRule.equalsIgnoreCase("LIFO")) { 
+	orderidnum=1;
+	segmentationLogic="RULE_BASED";
+}else if(orderRule.equalsIgnoreCase("FIFO")) {
+	orderidnum=2;
+	segmentationLogic="RULE_BASED";
+}else if(orderRule.equalsIgnoreCase("BEST FIT ALGORITHM")) {
+	orderidnum=3;
+	segmentationLogic="MACHINE_LEARNED";
+}else {orderidnum=4;}
+		 
+		
+		String env="https://"+p.getValue("env")+"/neon-ws/ussdApplications/4";
+		
+		 
+		 
+         String job="{\"intervalUnit\":\""+intervalUnit+"\",\"intervalValue\":\""+intervalvalue+"\",\"name\":\""+name+"\",\"minOfferLimit\":0,\"offerLimit\":\""+maxofferlimit+"\",\"orderRule\":"+orderidnum+",\"segmentationLogic\":\""+segmentationLogic+"\",\"trigger\":null,\"defaultProgramId\":null,\"defaultOffers\":{\"offerList\":[],\"routingDetails\":{\"responseMessageMobileAddressId\":\"\",\"responseMessageRouteId\":\"\"}},\"ussdApplicationName\":\""+ussdApplicationName+"\",\"ussdApplication\":\""+env+"\"}";
+         
+         System.out.println("job is "+job);
+ 		
+ 		apiautomation.createussdtouchpoints(job);
+        
+		
+         }
+	
+	
+	
+	@Then("^create product with API hit with name \"([^\"]*)\"  description \"([^\"]*)\" in product class \"([^\"]*)\"$")
+	public void Apiautomationproductcreation(String productName,String desc,String productclass) throws Exception {
+		SQLHandler SQLHandler=new SQLHandler();
+		apiautomation apiautomation=new apiautomation();
+		
+		int pdtclassid=SQLHandler.getStringOfQuery("select id from om_product_class where name=\""+productclass+"\";");
+		
+		
+		
+		
+         String job="{\"configuration\":\"{}\",\"name\":\""+productName+"\",\"description\":\""+desc+"\",\"productClass\":\"productClasses/"+pdtclassid+"\",\"activated\":true}";
+         
+         System.out.println("job is "+job);
+ 		
+ 		apiautomation.createproduct(job);
+         
+         
+		
+         }
+	@Then("^create offer with API hit with name \"([^\"]*)\"  description \"([^\"]*)\" in product class \"([^\"]*)\"$")
+	public void Apiautomationoffercreation(String offerName,String offertype,String offerchannel,String desc,String creativetitle) throws Exception {
+		SQLHandler SQLHandler=new SQLHandler();
+		apiautomation apiautomation=new apiautomation();
+		
+//		int pdtclassid=SQLHandler.getStringOfQuery("select id from om_product_class where name=\""+productclass+"\";");
+		
+		
+		
+		
+         String job="{\"channel\":\""+offerchannel+"\",\"description\":\""+desc+"\",\"name\":\""+offerName+"\",\"offerType\":\""+offertype+"\",\"creativeList\":[{\"isDefault\":true,\"characterSet\":1,\"languageId\":1,\"detail\":{\"type\":\""+offerchannel+"\",\"title\":\""+creativetitle+"\",\"details\":\"details\",\"subject\":\"\",\"url\":\"\",\"reference\":\"\",\"optional1\":\"\",\"optional2\":\"\",\"optional3\":\"\",\"optional4\":\"\",\"variableMap\":[]},\"reminderDetail\":null,\"variableList\":[],\"variableIds\":[]}],\"offerTrackSourceList\":[{\"trackingRuleList\":[{\"name\":\"DEFAULT\",\"priority\":1,\"noConditionRule\":true,\"responseMessageList\":[{\"languageId\":1,\"characterSetId\":1,\"successMsg\":\"success\",\"failureMsg\":\"failture\"}],\"trackRuleRewardList\":[{\"rewardTypeId\":3,\"rewardParameterList\":[{\"rewardTypeParameter\":\"https://192.168.160.157/neon-ws/rewardTypeParameters/2\",\"value\":\"sel_Reward_param\"}]}]}],\"trackSourceName\":\"A_track_Sel\",\"trackSourceId\":10,\"isDefault\":true}],\"seedingRewardList\":[{}],\"mandatoryList\":[{\"name\":\"category\",\"type\":\"SINGLESELECT\",\"label\":\"Category\",\"isMandatory\":true,\"isSystem\":true,\"attributeOptionsList\":[{\"name\":\"Balance Top ups\",\"label\":\"Balance Top ups\"},{\"name\":\"Combo Vouchers\",\"label\":\"Combo Vouchers\"},{\"name\":\"Recharge offer\",\"label\":\"Recharge offer\"},{\"name\":\"Special Vouchers\",\"label\":\"Special Vouchers\"}],\"partnerId\":1,\"offerCount\":1315,\"typeId\":3,\"attribute\":{\"id\":1,\"name\":\"category\",\"label\":\"Category\",\"typeId\":3,\"attributeOptionsList\":[{\"name\":\"Balance Top ups\",\"label\":\"Balance Top ups\"},{\"name\":\"Combo Vouchers\",\"label\":\"Combo Vouchers\"},{\"name\":\"Recharge offer\",\"label\":\"Recharge offer\"},{\"name\":\"Special Vouchers\",\"label\":\"Special Vouchers\"}]},\"value\":\"Recharge offer\"}],\"offerAttributeList\":[{\"attributeId\":1,\"value\":\"Recharge offer\"}],\"products\":[\"/products/1167\"]}";
+         
+         
+         String job2="{\"channel\":\""+offerchannel+"\",\"description\":\""+desc+"\",\"name\":\""+offerName+"\",\"offerType\":\""+offertype+"\",\"creativeList\":[{\"isDefault\":true,\"characterSet\":1,\"languageId\":1,\"detail\":{\"type\":\""+offerchannel+"\",\"title\":\""+creativetitle+"\",\"details\":\"\",\"subject\":\"\",\"url\":\"test url"
+         		+ "\",\"reference\":\"\",\"optional1\":\"\",\"optional2\":\"\",\"optional3\":\"\",\"optional4\":\"\",\"variableMap\":[]},\"reminderDetail\":null,\"variableList\":[],\"variableIds\":[]}],\"offerTrackSourceList\":[{\"trackingRuleList\":[{\"name\":\"DEFAULT\",\"priority\":1,\"noConditionRule\":true,\"responseMessageList\":[{\"languageId\":1,\"characterSetId\":1,\"successMsg\":\"default success\",\"failureMsg\":\"default failure\"}],\"trackRuleRewardList\":[{\"rewardTypeId\":3,\"rewardParameterList\":[{\"rewardTypeParameter\":\"https://192.168.160.157/neon-ws/rewardTypeParameters/2\",\"value\":\"sel_Reward_param\"}]}]}],\"trackSourceName\":\"A_track_Sel\",\"trackSourceId\":10,\"isDefault\":true}],\"seedingRewardList\":[{}],\"mandatoryList\":[{\"name\":\"category\",\"type\":\"SINGLESELECT\",\"label\":\"Category\",\"isMandatory\":true,\"isSystem\":true,\"attributeOptionsList\":[{\"name\":\"Balance Top ups\",\"label\":\"Balance Top ups\"},{\"name\":\"Combo Vouchers\",\"label\":\"Combo Vouchers\"},{\"name\":\"Recharge offer\",\"label\":\"Recharge offer\"},{\"name\":\"Special Vouchers\",\"label\":\"Special Vouchers\"}],\"partnerId\":1,\"offerCount\":1320,\"typeId\":3,\"attribute\":{\"id\":1,\"name\":\"category\",\"label\":\"Category\",\"typeId\":3,\"attributeOptionsList\":[{\"name\":\"Balance Top ups\",\"label\":\"Balance Top ups\"},{\"name\":\"Combo Vouchers\",\"label\":\"Combo Vouchers\"},{\"name\":\"Recharge offer\",\"label\":\"Recharge offer\"},{\"name\":\"Special Vouchers\",\"label\":\"Special Vouchers\"}]},\"value\":\"Recharge offer\"}],\"offerAttributeList\":[{\"attributeId\":1,\"value\":\"Recharge offer\"}],\"products\":[\"/products/1040\"]}";
+         
+         System.out.println("job is "+job);
+ 		
+ 		apiautomation.createproduct(job);
+         
+      
+ 		
+ 		
+		
+         }
 	
 	
 	
@@ -485,21 +564,7 @@ String job33="{\"name\":\""+rulename+"\",\"programId\":"+pgmid+",\"targetDetails
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
