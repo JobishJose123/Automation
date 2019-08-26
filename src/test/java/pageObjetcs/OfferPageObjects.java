@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -115,6 +116,8 @@ public class OfferPageObjects extends Init {
 	private WebElement secondWapCreativeUrl;
 	@FindBy(xpath = "//label[contains(.,'Details')]/..//textarea")
 	private WebElement smsCreativeDetails;
+
+	
 	@FindBy(xpath = "//creative-wrapper//define-creative[2]//label[contains(.,'Details')]/..//textarea")
 	private WebElement secondSmsCreativeDetails;
 	@FindBy(xpath = "//label[contains(.,'Offer Type')]/../..//input")
@@ -667,7 +670,7 @@ public class OfferPageObjects extends Init {
 			selectAddVariableFieldName();
 			selectAddVariableFormatNoFormat();
 			enterAddVariableLimit("100");
-			enterAddVariableDefault("10");
+			enterAddVariableDefault("no name");
 			clickAddNewVariableSaveButton();
 		}
 	 
@@ -780,7 +783,6 @@ public class OfferPageObjects extends Init {
 	 public void createFirstDefaultTrackingRuleCondition(ExcelHelper eh ) throws Exception {
 			try {
 				Exception e = null;
-//				eh.setExcelFile("offerInputData", "usagerecharge");
 				if (!eh.getCell(1, 20).toString().contains("usage")) {
 					
 					throw e;
@@ -1562,7 +1564,6 @@ public class OfferPageObjects extends Init {
 		prodcutFile.setExcelFile("productInputData", productSheet);
 		String productToAdd = (String) prodcutFile.getCell(1,0);
 		clickOfferAddButton();
-		Thread.sleep(15000);
 			commonObjects.filterName(productToAdd);
 			Thread.sleep(3000);
 			jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
@@ -1786,19 +1787,18 @@ public class OfferPageObjects extends Init {
 	
 
 	public void enterTrackTabDetails(ExcelHelper eh) throws InterruptedException {
-		try {
-		if (eh.getCell(1, 20).toString().contains("usage")) {
-			clickTrackSourceSelector();
-			selectTrackSource(TRACK_SOURCE2);
-			
-			
-						
-		} }catch(Exception e) {
-				
+//		try {
+//		if (eh.getCell(1, 20).toString().contains("usage")) {
+//			clickTrackSourceSelector();
+//			selectTrackSource(TRACK_SOURCE2);
+//			
+//			
+//						
+//		} }catch(Exception e) {
 			clickTrackSourceSelector();
 			selectTrackSource(TRACK_SOURCE);
 		}
-	}
+//	}
 	
 	public void enterCreativeTabDetails(ExcelHelper eh) throws Throwable {
 		selectCreativeLanguageEnglish();
@@ -1817,15 +1817,18 @@ public class OfferPageObjects extends Init {
 		}
 		}
 	private void enterDynamic() throws InterruptedException {
-		   // TODO Auto-generated method stub
-		   jswait.loadClick(mapVariablecreativeIcon);
+		Thread.sleep(5000);
+		smsCreativeDetails.sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+		Thread.sleep(2000);
+		 jswait.loadClick(mapVariablecreativeIcon);
 		   //clickMapVariableCancelButton();
 		   //jswait.loadClick(emailMapVariable);
 		   MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
 		   try{
 			   clickMapVariableFirstVariable();
 		   }catch(Exception e) {
-			   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
+			   System.out.println("catch");
+			   createSecondVariable(AGE_DYNAMIC_VARIABLE);
 		   }
 		   clickMapVariableOkButton();
 		
@@ -1875,13 +1878,15 @@ public class OfferPageObjects extends Init {
 
 	public void enterSecondCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {
 		selectSecodnCreativeLanguageSpanish();
+		String title= "عرض مكافأة";
+		String details="عرض مكافأة";
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
-			enterSecondWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			enterSecondWapCreative(title,details );
 		}
 		if (eh.getCell(1, 3).toString().contains("SMS"))
-			enterSecondSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			enterSecondSmsCreative(title,details );
 		if (eh.getCell(1, 3).toString().contains("Voice"))
-			enterSecondVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			enterSecondVoiceCreative(title,details);
 
 	}
 
@@ -2936,11 +2941,11 @@ String testMode="";
 	clickProceedButton();
 
 	// ******************Creative tab*****************:
-	if (creativeType.equals("singlecreative")) {
+	if (creativeType.equals("single creative")) {
 		enterCreativeTabDetails(eh, testMode);
 		clickProceedButton();
 		Thread.sleep(3000);
-	} else if (creativeType.equals("multiplecreative")) {
+	} else if (creativeType.equals("multiple creative")) {
 
 		enterCreativeTabDetails(eh, testMode);
 		jswait.loadClick(addCreativeButton);

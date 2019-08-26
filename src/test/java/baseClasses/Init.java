@@ -71,7 +71,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	public final String SELENIUM_USSD_APP = "USSD";
 	public final String BASE_LIST4 = "CG20_1M_List";
 	public final String LANGUAGE1 = "English";
-	public final String LANGUAGE2 = "Portuguese";
+	public final String LANGUAGE2 = "Arabic";
 	public final String SENDER_SMPP = "Address-SMPP";
 	public final String ROUTE_SMPP = "SMPP Robi outbound";
 	public final String SENDER_EMAIL = "Email Route";

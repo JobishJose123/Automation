@@ -484,6 +484,8 @@ public class BroadcastPageObjects extends Init {
 		private WebElement selectColumn;
 		@FindBy(xpath="//label[contains(.,'Delivery Information')]//following::div[@id='checkboxLabel'][contains(.,'Delivered')]")
 		private WebElement selectColumnDelivered;
+		@FindBy(xpath="//paper-checkbox[@id='overall_cg']")
+		private WebElement selectCg;
 		@FindBy(xpath="//paper-button[contains(.,'Next')]")
 		private WebElement nextbtn;
 		@FindBy(xpath="//paper-button[contains(.,'Save')]")
@@ -3762,11 +3764,16 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		Thread.sleep(3000);
 		jswait.loadClick(selectColumn);
 		Thread.sleep(2000);
-		String checkbox =driver.findElement(By.xpath("//label[contains(.,'Delivery Information')]//following::paper-checkbox[3]")).getAttribute("aria-checked");
-		if(checkbox.equalsIgnoreCase("false"))
+		String checkboxOfDr =driver.findElement(By.xpath("//paper-checkbox[@id='delivered_count']")).getAttribute("aria-checked");
+		String checkboxOfCg=driver.findElement(By.xpath("//paper-checkbox[@id='overall_cg']")).getAttribute("aria-checked");
+		if(checkboxOfDr.equalsIgnoreCase("false"))
 		jswait.loadClick(selectColumnDelivered);
 		else 
 	   System.out.println("delivered checkbox is already true");
+		if(checkboxOfCg.equalsIgnoreCase("false"))
+			jswait.loadClick(selectCg);
+		else
+			System.out.println("cg checkbox is already true");
 	   jswait.loadClick(nextbtn);
 		Thread.sleep(2000);
 		jswait.loadClick(savebtn);
@@ -3774,28 +3781,17 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		Thread.sleep(3000);
 		ReportPageObjects ReportPageObject=new ReportPageObjects();
 		ReportPageObject.filterbroadcast(bcName);
+		Assert.assertTrue(jswait.checkVisibility("(//span[contains(.,'"+targetCount+"')])[3]"));
 		Assert.assertTrue(jswait.checkVisibility("(//span[contains(.,'"+targetCount+"')])[2]"));
+		Assert.assertTrue(jswait.checkVisibility("(//span[contains(.,'101')])"));
 		}
 	
 	public void expirybcWithAt() throws Exception{
 		Actions builder =new Actions(driver);
-		String recurrencePattern =eM.getCellByColumnName("Recurrance Pattern");
 		Calendar rightNow = Calendar.getInstance();
-		String mn = "";
-		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
-			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
-		} else
-			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
-		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
-				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
-		String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
-				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
 		int hours = rightNow.get(Calendar.HOUR);
 		int min = rightNow.get(Calendar.MINUTE);
 		int am_pm = rightNow.get(Calendar.AM_PM);
-		int day = rightNow.get(Calendar.DAY_OF_MONTH);
-		int year = rightNow.get(Calendar.YEAR);
-		int month = rightNow.get(Calendar.MONTH) + 1;
 		min += 2;
 		int rem = min % 5;
 		rem = 5 - rem;

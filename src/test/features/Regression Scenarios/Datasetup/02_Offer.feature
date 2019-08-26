@@ -210,10 +210,8 @@ Feature: Test suite on Offer creation
      Then navigate to precision marketer
      Then navigate to offer management
      Then navigate to offers
-#     Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
-#     Then verify "SeedingSMS" offer in grid
      Then create new offer from sheet "rechargeEmail" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
-#     Examples:
+#     Examples
 #     |sheet||rewards|
 #     |rechargeSMS||default|
 #     |rechargeSMS||oneruleonereward|
@@ -231,6 +229,6 @@ Feature: Test suite on Offer creation
      
 #     Then save "offerInputData" data to spreadsheet from "onerulemultiplerewards" with string recharge sms offer with fullDetails product
      
-     
+
      
      

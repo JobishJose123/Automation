@@ -5294,12 +5294,10 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
     String  bcName=eM.getCellByColumnName("BC Name");
     broadcastPageObjects.verifyDRCount(bcName,targetCount);
 }
-	@Then("^create bc from sheet \"([^\"]*)\" with inventory \"([^\"]*)\" and trigger from sheet \"([^\"]*)\"$")
-	public void create_bc_from_sheet_(String bcSheet,String inventory, String trigger) throws Exception {
-	   eh.setExcelFile("StreamingAttribute", trigger);
-	   String triggerName=(String)eh.getCell(1, 0);
-	   System.out.println("===================="+triggerName+"====================");
-	   broadcastPageObjects.createBCWithTrigger(triggerName);
+	@Then("^create trigger bc from sheet \"([^\"]*)\" with inventory \"([^\"]*)\"$")
+	public void create_bc_from_sheet_(String bcSheet,String inventory) throws Exception {
+	   System.out.println("===================="+TRIGGER+"====================");
+	   broadcastPageObjects.createBCWithTrigger(TRIGGER);
 	   create_bc_from_sheet_with_inventory(bcSheet,inventory);
 	   
 	}
@@ -5359,7 +5357,10 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	
 	}
 	
-	
+	@Then("^verify the message is not delivered after expiry$")
+	public void verify_message_not_send_after_expiry() throws Exception{
+		
+	}
 	
 	
 	
