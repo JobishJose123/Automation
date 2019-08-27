@@ -37,7 +37,7 @@ Feature: Test suite on Offer creation
      Then save "offerInputData" data to spreadsheet from "rechargeSMS" with string recharge sms offer with fullDetails product
       
    @NDX-5397
-   @initBrowser @closeBrowser
+   @initBrowser 
    Scenario: Verify cerating SMS channel,Recharge Type offer with Dynamic tag
      Given login
  		When navigate to precision marketer

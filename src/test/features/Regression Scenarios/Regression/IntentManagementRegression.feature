@@ -9,27 +9,27 @@ Feature: For IntentManagement Regression.
   @initBrowser
   Scenario: Verify create a program
     Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to products
-#    Then navigate to product class "TestProductClass"
-#    Then click create new product button
-#    Then create product with attributes from sheet "fullDetails"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then click on create new ofer button
-#    Then create new offer from sheet "STVSMS" with product "fullDetails"
-#    Then navigate to offer management
-#    Then Navigate to Offer Catalogue
-#    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "STVSMS" offer to Offer Catalogue
-#   Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "STVSMS" with product "fullDetails"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "STVSMS" offer to Offer Catalogue
+   Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
     Then click create program button

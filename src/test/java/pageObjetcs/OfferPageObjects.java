@@ -1786,19 +1786,17 @@ public class OfferPageObjects extends Init {
 	
 	
 
-	public void enterTrackTabDetails(ExcelHelper eh) throws InterruptedException {
-//		try {
-//		if (eh.getCell(1, 20).toString().contains("usage")) {
-//			clickTrackSourceSelector();
-//			selectTrackSource(TRACK_SOURCE2);
-//			
-//			
-//						
-//		} }catch(Exception e) {
+	public void enterTrackTabDetails(ExcelHelper eh) throws Exception {
+		
+		if (eh.getCell(1, 20).toString().contains("usage")) {
+			clickTrackSourceSelector();
+			selectTrackSource(TRACK_SOURCE2);
+						
+		}else { 
 			clickTrackSourceSelector();
 			selectTrackSource(TRACK_SOURCE);
 		}
-//	}
+	}
 	
 	public void enterCreativeTabDetails(ExcelHelper eh) throws Throwable {
 		selectCreativeLanguageEnglish();
