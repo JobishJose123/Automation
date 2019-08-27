@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -1787,16 +1789,24 @@ public class OfferPageObjects extends Init {
 	
 
 	public void enterTrackTabDetails(ExcelHelper eh) throws Exception {
+		try {
+			Exception e = null;
+	
+			if (!eh.getCell(1, 20).toString().contains("usage")) {
+				
+				throw e;
+			}
+			else {clickTrackSourceSelector();
+			selectTrackSource(TRACK_SOURCE2);}
 		
-		if (eh.getCell(1, 20).toString().contains("usage")) {
+		
+		}catch(Exception e) {
 			clickTrackSourceSelector();
-			selectTrackSource(TRACK_SOURCE2);
-						
-		}else { 
-			clickTrackSourceSelector();
-			selectTrackSource(TRACK_SOURCE);
-		}
-	}
+			selectTrackSource(TRACK_SOURCE);}
+		
+			}
+		
+	
 	
 	public void enterCreativeTabDetails(ExcelHelper eh) throws Throwable {
 		selectCreativeLanguageEnglish();
