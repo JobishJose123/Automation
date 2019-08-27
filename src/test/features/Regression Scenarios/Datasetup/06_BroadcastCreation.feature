@@ -383,7 +383,7 @@ Feature: Test suite for Broadcast creation
 
 
 #============================================CREATION OF BC FOR VERFICATION OF BC FUNCTIONALITY=========================================================================================#
-@NDX-CreateProductForBCFunctionality  @initBrowser 
+@NDX-CreateOfferForBCFunctionality  @initBrowser 
 Scenario Outline: create offer
 Given login
 Then navigate to precision marketer
@@ -468,6 +468,7 @@ Examples:
 
 
 # after running @NDX-TriggerBC run @NDX-fileForTriggerBC
-@NDX-fileForTriggerBC 
+@NDX-fileForTriggerBC  @initBrowser
 Scenario: upload file for trigger bc
-Then provide file for trigger
+Given login
+Then provide file for trigger with csv file "trigger1.csv"

@@ -5328,10 +5328,10 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
          broadcastPageObjects.addBcToSheet(bcName,bcType,bcStorageSheet,column);
          
  }
-	@Then("^provide file for trigger$")
-	public void provide_file_for_trigger() throws Exception{
+	@Then("^provide file for trigger with csv file \"([^\"]*)\"$")
+	public void provide_file_for_trigger_with_csv_file(String csvFile) throws Throwable {
 	String csvFileData = "";
-	File conversionCSV = new File("ExcelFiles\\" + "trigger.csv");
+	File conversionCSV = new File("ExcelFiles\\" + csvFile);
 	BufferedReader br = null;
 	String temp = "";
 	int initial = 1;
@@ -5347,8 +5347,8 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	System.out.println("test");
 	br.close();
 	ShellExecuter se = new ShellExecuter();
-	se.executeScript("cd /usr/local/flytxt/seleniumTrigger; echo '" + csvFileData + "' >trigger.csv");
-}
+	se.executeScript("cd /usr/local/flytxt/seleniumTrigger; echo '" + csvFileData + "' >"+csvFile+"");
+	}
 	
 	
 	@Then("^verify the cg exclusion from sheet \"([^\"]*)\"$")

@@ -3271,11 +3271,11 @@ public boolean checkCalculateBtnDisplayed() {
 		offerExcel.setExcelFile("offerInputData", offerSheet);
 		String offerName = offerExcel.getCellByColumnName("Offer Name");
 		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
-if(creative.equalsIgnoreCase("multipleCreative")) {
+if(creative.equalsIgnoreCase("multiple creative")) {
 	jswait.loadClick(selectLanguage);
 	jswait.loadClick(selectPortuguese);
 }
-else if (creative.equalsIgnoreCase("singleCreative")){
+else if (creative.equalsIgnoreCase("single creative")){
 	System.out.println("single creative");
 	
 }
