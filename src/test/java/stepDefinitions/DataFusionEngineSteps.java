@@ -28,6 +28,10 @@ import pageObjetcs.LoginPageObjects;
 import pageObjetcs.OfferPageObjects;
 import pageObjetcs.TargetConditionObjects;
 import pageObjetcs.WorkApprovalObjects;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import pageObjetcs.LegacyClass;
 
 public class DataFusionEngineSteps extends Init {
 	
@@ -505,6 +509,39 @@ public class DataFusionEngineSteps extends Init {
 		
 		System.out.println(job);
 		DK.createDKJob(job);
+	}
+	
+	@Then("^Navigate to Reports$")
+	public void navigate_to_Reports() throws Throwable {
+	   DataFusionEngineObjects.ClickDFEReport();
+	}
+
+	@Then("^click on Data Health Check$")
+	public void click_on_Data_Health_Check() throws Throwable {
+	    DataFusionEngineObjects.clickOnDataHealthCheck();
+	    Thread.sleep(5000);
+	}
+
+	@Then("^click on Show All$")
+	public void click_on_Show_All() throws Throwable {
+		
+	}
+
+	@Then("^click on Export Button$")
+	public void click_on_Export_Button() throws Throwable {
+		Thread.sleep(5000);
+		DataFusionEngineObjects.clickOnexport();
+		
+	}
+
+	@Then("^Store the Data into Workbook \"([^\"]*)\" and Sheet \"([^\"]*)\"$")
+	public void store_the_Data_into_Workbook_and_Sheet(String workbook, String sheet) throws Throwable {
+		ExcelHelper eh = new ExcelHelper();
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Clipboard clipboard = toolkit.getSystemClipboard();
+		String result = (String) clipboard.getData(DataFlavor.stringFlavor);
+		System.out.println(result);
+		eh.insertDynamicData(workbook,sheet,result);
 	}
 	
 

@@ -25,7 +25,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import org.openqa.selenium.chrome.ChromeDriver;
+import baseClasses.ShellExecuter;
 import com.google.common.collect.Table.Cell;
 
 import baseClasses.CalenderUtility;
@@ -747,24 +751,26 @@ public class BroadcastPageObjects extends Init {
 	}
 	
 	
-	public String getTopBcStatus(String bcType) throws Exception {
+public String getTopBcStatus(String bcType) throws Exception {
 		
 		String status="";
-		if (bcType.equals("one-off")) {
+		if (bcType.equals("one-off")||bcType.equals("seedingoneoff")||bcType.equals("TriggerOneoff")||bcType.equals("seedingTriggerable")) {
 			jswait.waitUntil(topBcStatusGrid);
 			 status = topBcStatusGrid.getText();			
-		}else if(bcType.equals("recurring")) {
+		}else if(bcType.equals("recurring")||bcType.equals("TriggerReccurringBC")) {
 			
 			jswait.waitUntil(topBcStatusGridForRecurrChild);
 			 status = topBcStatusGridForRecurrChild.getText();
 			
-		}else if(bcType.equals("seedingRecurring")) {
-			jswait.waitUntil("topBcStatusGridForSeedingrecurringChild");
+		}else if(bcType.equals("seedingRecurring")||bcType.equals("seedingTriggerableRecurringBC")) {
+			
+			jswait.waitUntil(topBcStatusGridForSeedingrecurringChild);
 			status = topBcStatusGridForSeedingrecurringChild.getText();
 		}
 		
 		return status;
 	}
+	
 
 	public String getTopBcTargeted() throws InterruptedException {
 		jswait.waitUntil(topBcTargetedGrid);
@@ -1026,8 +1032,7 @@ public class BroadcastPageObjects extends Init {
 	public void createBCAndSelectDNCListForPartnerLevelCG(String name, String bc_type, String baseList, String offer)
 			throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
-				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(1000);
@@ -1498,7 +1503,7 @@ public boolean checkCalculateBtnDisplayed() {
 		ExcelHelper offerExcel = new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offer);
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1519,7 +1524,7 @@ public boolean checkCalculateBtnDisplayed() {
 		ExcelHelper offerExcel = new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offer);
 		enterBroadcastBasicDetails(name, inventory);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1605,7 +1610,7 @@ public boolean checkCalculateBtnDisplayed() {
 	public void createBCAndConfigurCG_TG(String name, String bc_type, String baseList, String offer)
 			throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1641,7 +1646,7 @@ public boolean checkCalculateBtnDisplayed() {
 	public void createBCAndCalculateCG_TG(String name, String bc_type, String baseList, String offer)
 			throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1677,7 +1682,7 @@ public boolean checkCalculateBtnDisplayed() {
 	public void createBCAndSelectDNCList(String name, String bc_type, String baseList, String offer)
 			throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1714,7 +1719,7 @@ public boolean checkCalculateBtnDisplayed() {
 	public void createBCAndSelectDNCListForSeedingBC(String name, String bc_type, String baseList, String offer)
 			throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1782,7 +1787,7 @@ public boolean checkCalculateBtnDisplayed() {
 	public void createBCAndSelectDNCList_AndConfigureCG_TG(String name, String bc_type, String baseList, String offer)
 			throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1865,7 +1870,7 @@ public boolean checkCalculateBtnDisplayed() {
 	public void createBCAndVerifyStartBroadcastAtOption(String name, String bc_type, String baseList, String offer)
 			throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1902,7 +1907,7 @@ public boolean checkCalculateBtnDisplayed() {
 	public void createBCWithoutTargetCondition(String name, String bc_type, String baseList, String offer)
 			throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -1953,7 +1958,7 @@ public boolean checkCalculateBtnDisplayed() {
 	public void createBCWith1MSubscribersAndConfigurCG_TG(String name, String bc_type, String baseList, String offer)
 			throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -2134,7 +2139,7 @@ public boolean checkCalculateBtnDisplayed() {
 	public void createBCWith1MSubscribersAndConfigurPartnerLevelCG(String name, String bc_type, String baseList,
 			String offer) throws InterruptedException {
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -2603,7 +2608,7 @@ public boolean checkCalculateBtnDisplayed() {
 		ExcelHelper offerExcel = new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offer);
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -3087,7 +3092,7 @@ public boolean checkCalculateBtnDisplayed() {
 		ExcelHelper offerExcel = new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offer);
 		enterBroadcastBasicDetails(name, inventory);
-		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
+		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
@@ -3971,6 +3976,31 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	
 	
 	
+	public void provideFileForConversion(String path, String fileName) throws Throwable {
+		String csvFileData = "";
+		File conversionCSV = new File("ExcelFiles\\" + fileName);
+		BufferedReader br = null;
+		String temp = "";
+		int initial = 1;
+		br = new BufferedReader(new FileReader(conversionCSV.getCanonicalPath()));
+		while ((temp = br.readLine()) != null) {
+			if (initial == 0) {
+				csvFileData += "\n";
+			}
+			initial = 0;
+			csvFileData += temp;
+		}
+		System.out.println(csvFileData);
+		System.out.println("test");
+		br.close();
+		ShellExecuter se = new ShellExecuter();
+		se.executeScript("cd "+path+"; echo '" + csvFileData + "' >"+fileName+"");
+	}
+	
+		public void deleteFileForConversion(String path, String filename) throws Throwable {
+		ShellExecuter se = new ShellExecuter();
+		se.executeScript("cd "+path+"; rm "+filename+" -f");
+	}
 	
 	
 	

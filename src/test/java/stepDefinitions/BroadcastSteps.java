@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 //import com.google.common.collect.Collections2;
 import com.itextpdf.text.log.SysoCounter;
-
+import pageObjetcs.LegacyClass;
 import baseClasses.CalenderUtility;
 import baseClasses.EmailHelper;
 import baseClasses.ExcelHelper;
@@ -264,52 +264,52 @@ public class BroadcastSteps extends Init {
 			}
 			
 			
-//		
-//		try {
-//			eM.setExcelFile("bcInputData", sheet);
-//			if ((String) eM.getCell(1, 6) == "later") {
-//				day++;
-//			}
-//		} catch (Exception e) {
-//			System.out.println("edit days");
-//			eh.setExcelFile("bcInputDataForEdit", sheet);
-//			if ((String) eh.getCell(1, 6) == "later") {
-//				day++;
-//			} else if ((eh.getCell(1, 6).toString()).contains("After2Days")) {
-//				day = rightNow.get(Calendar.DAY_OF_MONTH) + 2;
-//				// day=day+2;
-//				System.out.println("Days" + day);
-//				date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-" + String.format("%02d", day);
-//				System.out.println(date);
-//			}
-//		}
-//		// we are getting the broadcast start date and stored in sheet , row 1 column 11
-//		String Start_Date="";
-//		if(sheet.contains("Edit")||sheet.contains("seedingTriggerableRecurringBCEd")){
-//			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
-//			if(am_pm==0) {
-//			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
-//			}else {
-//				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
-//			}
-//			eh.setExcelFile("bcInputDataForEdit", sheet);
-//			eh.setCell(1, 11, Start_Date);
-//		}else {
-//			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
-//			if(am_pm==0) {
-//			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
-//			}else {
-//				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
-//			}
-//			eM.setExcelFile("bcInputData", sheet);
-//			eM.setCell(1, 11, Start_Date);
-//			
-//		}
+		
+		try {
+			eM.setExcelFile("bcInputData", sheet);
+			if ((String) eM.getCell(1, 6) == "later") {
+				day++;
+			}
+		} catch (Exception e) {
+			System.out.println("edit days");
+			eh.setExcelFile("bcInputDataForEdit", sheet);
+			if ((String) eh.getCell(1, 6) == "later") {
+				day++;
+			} else if ((eh.getCell(1, 6).toString()).contains("After2Days")) {
+				day = rightNow.get(Calendar.DAY_OF_MONTH) + 2;
+				// day=day+2;
+				System.out.println("Days" + day);
+				date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-" + String.format("%02d", day);
+				System.out.println(date);
+			}
+		}
+		// we are getting the broadcast start date and stored in sheet , row 1 column 11
+		String Start_Date="";
+		if(sheet.contains("Edit")||sheet.contains("seedingTriggerableRecurringBCEd")){
+			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+			if(am_pm==0) {
+			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
+			}else {
+				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+			}
+			eh.setExcelFile("bcInputDataForEdit", sheet);
+			eh.setCell(1, 11, Start_Date);
+		}else {
+			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+			if(am_pm==0) {
+			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
+			}else {
+				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+			}
+			eM.setExcelFile("bcInputData", sheet);
+			eM.setCell(1, 11, Start_Date);
+			
+		}
 		
 		
 		Actions builder = new Actions(driver);
 		if (bc_type.contentEquals("one-off") || bc_type.contentEquals("seedingTriggerable")
-				|| bc_type.contentEquals("one-offInformational")) {
+				|| bc_type.contentEquals("one-offInformational") || bc_type.contentEquals("TriggerOneoff")|| bc_type.contentEquals("seedingoneoff")) {
 			System.out.println("bc type is one-time selected");
 			Thread.sleep(1000);
 			broadcastPageObjects.clickOneOffRadioButton();
@@ -349,7 +349,7 @@ public class BroadcastSteps extends Init {
 
 			jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
 			Thread.sleep(2000);
-			if (bc_type.contentEquals("one-off")) {
+			if (bc_type.contentEquals("one-off")||bc_type.contentEquals("seedingoneoff")) {
 				jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
 				Thread.sleep(1000);
 				jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='" + date + "']");
@@ -535,7 +535,7 @@ public class BroadcastSteps extends Init {
 		}
 
 		else if (bc_type.contentEquals("recurring") || bc_type.contentEquals("seedingRecurring")
-				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+				|| bc_type.contentEquals("seedingTriggerableRecurringBC")||bc_type.contentEquals("TriggerReccurringBC")) {
 			Thread.sleep(2000);
 			System.out.println("Inside recurring");
 			
@@ -855,7 +855,6 @@ public class BroadcastSteps extends Init {
 			Thread.sleep(2000);
 			jswait.loadSendKeys("//label[contains(.,'Budget Amount')]//following::input[1]", "50");
 		}
-
 	}
 
 	@Then("^verify selected campaign category name$")
@@ -4785,8 +4784,8 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	}
 		
 	
-	@Then("^verify the acknowledgement of Bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\"$")
-	public void verify_the_acknowledgement_of_Bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn) throws Throwable {
+	@Then("^verify the acknowledgement of Bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\" with bc \"([^\"]*)\"$")
+	public void verify_the_acknowledgement_of_Bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn,String bcSheetName) throws Throwable {
 	    
 		
 		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
@@ -4799,6 +4798,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		inventoryFromSheet = data.get(i).get(7);
 		bcSheet = data.get(i).get(9);
 		
+		if(bcSheet.equals(bcSheetName)) {
 		commonObjects.clickOnReports();
 		customerObjects.navigateToCustomerProfile();
 		
@@ -4812,9 +4812,11 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		customerObjects.clickOnAckEventCheckBox();
 		customerObjects.clickApplyButton();
 		
+		
+		
 		customerObjects.verifyAcknowledgedEvent(bcName,campaignName,offerName);
 		
-		
+		}
 
 		
 		
@@ -4824,8 +4826,8 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	}
 	
 	
-	@Then("^verify the Conversion event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\"$")
-	public void verify_the_Conversion_event_of_bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn) throws Throwable {
+	@Then("^verify the Conversion event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\" with bc \"([^\"]*)\"$")
+	public void verify_the_Conversion_event_of_bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn,String bcSheetName) throws Throwable {
 	   
 		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
 		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "";
@@ -4856,11 +4858,11 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 			
 	}
 
-	@Then("^verify the Fulfillment event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with rewardType \"([^\"]*)\" and MSISDN\"([^\"]*)\"$")
-	public void verify_the_Fulfillment_event_of_bcs_from_workbook_and_sheet_with_rewardType_and_MSISDN(String workbook, String sheet, String rewardstype, String msisdn) throws Throwable {
+	@Then("^verify the Fulfillment event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with rewardType \"([^\"]*)\" and MSISDN\"([^\"]*)\" with bctype \"([^\"]*)\"$")
+	public void verify_the_Fulfillment_event_of_bcs_from_workbook_and_sheet_with_rewardType_and_MSISDN(String workbook, String sheet, String rewardstype, String msisdn,String bctype) throws Throwable {
 		
 		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
-		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet,rewardRule, bcSheet = "";
+		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet,rewardRule,bcType, bcSheet = "";
 		for (int i = 0; i < data.size(); i++) {
 		bcName = data.get(i).get(1);
 		campaignCategory = data.get(i).get(4);
@@ -4869,6 +4871,8 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		inventoryFromSheet = data.get(i).get(7);
 		bcSheet = data.get(i).get(9);
 		rewardRule=data.get(i).get(2);
+		bcType=data.get(i).get(8);
+		if(rewardRule.equals(rewardstype)&&bcType.equals(bctype)) {
 		commonObjects.clickOnReports();
 		customerObjects.navigateToCustomerProfile();
 		
@@ -4882,7 +4886,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		customerObjects.clickOnFulfillmentSuccess();
 		customerObjects.clickApplyButton();
 		
-		if(rewardRule.equals(rewardstype)) {
+		
 			
 			customerObjects.verifyFullfillementEvent(bcName,campaignName,offerName,rewardstype);
 		}else {
@@ -4899,7 +4903,6 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		
 	}
 
-	
 	@Then("^verify the FulfillmentSuccessMessage to verify Creative \"([^\"]*)\" message type \"([^\"]*)\" and rewardType \"([^\"]*)\" with MSISDN\"([^\"]*)\"$")
 	public void verify_the_FulfillmentSuccessMessage_to_verify_Creative_message_type_and_rewardType_with_MSISDN(String creative, String messageType, String rewardType, String msisdn) throws Throwable {
 		commonObjects.clickOnReports();
@@ -4920,8 +4923,10 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	}
 	
 
-	@Then("^activate and raise the conversion job the broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
-	public void activate_and_raise_the_conversion_job_the_broadcast_from_workbook_and_sheet(String workBook, String sheet) throws Throwable {
+	@Then("^activate and raise the conversion job the broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" and bcSheetName \"([^\"]*)\"$")
+	public void activate_and_raise_the_conversion_job_the_broadcast_from_workbook_and_sheet(String workBook, String sheet,String bcSheetName) throws Throwable {
+		LegacyClass lg=new LegacyClass();
+		
 		String statusOfBC = "";
 		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,sheet);
 		String bcName, campaignCategory, campaignName, offerName, inventory, bcType,bcSheet = "";
@@ -4935,6 +4940,8 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 			inventory = data.get(i).get(7);
 			bcSheet = data.get(i).get(9);
 			bcType=data.get(i).get(8);
+			
+			if(bcSheet.equals(bcSheetName)) {
 			try {
                  System.out.println("try block");
 				campaignObjects.scrollToCampaignCategory(campaignCategory);
@@ -4950,12 +4957,10 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 				if (statusOfBC.equals("Planned")) {
 					commonObjects.clickBCOptionsIcon(bcSheet);
 					commonObjects.clickEditOption();
-
 					edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
 					activateBc();
 					Thread.sleep(5000);
-					jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");
-							
+					jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");		
 					commonObjects.filterName(bcName);
 					Thread.sleep(5000);
 					commonObjects.toggleAutoRefresh();
@@ -4964,52 +4969,65 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 					statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
 					System.out.println("Status of BC "+statusOfBC);
 					commonObjects.toggleAutoRefresh();
+					
+					if(bcSheet.contains("Trigger")) {
+						TimeoutImpl t = new TimeoutImpl();
+						t.startTimer();
+						while (!statusOfBC.contains("Delivering") && t.checkTimerMin(55)) {
+							statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+							System.out.println(statusOfBC);
+							Thread.sleep(5000);
+						}
+						System.out.println("Status of BC "+statusOfBC);
+						if(statusOfBC.equals("Delivering")) {
+						broadcastPageObjects.provideFileForConversion("/ftp-live/selenium/seleniumTrigger","TriggerData.csv");
+						System.out.println("Trigger input data provided ");
+						}// if status of bc
+					}//if trigger
+					
 					TimeoutImpl t = new TimeoutImpl();
 					t.startTimer();
-					while (!statusOfBC.contains("Completed") && t.checkTimerMin(25)) {
+					while (!statusOfBC.contains("Completed") && t.checkTimerMin(75)) {
 						statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
 						System.out.println(statusOfBC);
 						Thread.sleep(5000);
 					}
-					
 					System.out.println("Status of BC  "+statusOfBC);
-					
 					Thread.sleep(5000);
+					Assert.assertTrue("BC not completed ",statusOfBC.equals("Completed"));
 					
+					
+					
+					if(statusOfBC.equals("Completed")) {
 					System.out.println("Providing file for conversion ");
-					provideFileForConversion();
-					
-					int ss = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=41 WHERE DATA_JOB_ID=69394");
-					System.out.println("Job Scehduled... .. ."+ss);
-					System.out.println("Waiting for 10 mins for job completion");
-					
-					Thread.sleep(600000);
-					
+					//provideFileForConversion();
+					broadcastPageObjects.provideFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
+					lg.legacyTest();
 					System.out.println("Removing file from conversion. .. .. ... .");
-					deleteFileForConversion();
-					int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=69394");
+					//deleteFileForConversion();
+					broadcastPageObjects.deleteFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
+					int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
 					System.out.println("Deactivate the JOb ... .. ." +ss2);
 					
-					
+					}
 					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
 				} else {
-					
                     System.out.println("else block");
-                    
                     jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");
-					
 					commonObjects.filterName(bcName);
 					Thread.sleep(5000);
 					statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
 					System.out.println("Status of BC "+statusOfBC);
 					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
 					
+					
+					
+					
 					if (!statusOfBC.equals("completed")) {
-						
 						commonObjects.toggleAutoRefresh();
 						TimeoutImpl t = new TimeoutImpl();
 						t.startTimer();
-						while (!statusOfBC.contains("Completed") && t.checkTimerMin(25)) {
+						while (!statusOfBC.contains("Completed") && t.checkTimerMin(75)) {
 							statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
 							System.out.println(statusOfBC);
 							Thread.sleep(5000);
@@ -5019,34 +5037,33 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 					}//if
 					
                     Thread.sleep(5000);
-					
+                    
+					if(statusOfBC.equals("Completed")) {
 					System.out.println("Providing file for conversion ");
-					provideFileForConversion();
-					
-					int ss = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=41 WHERE DATA_JOB_ID=69394");
-					System.out.println("Job Scehduled... .. ."+ss);
-					System.out.println("Waiting for 10 mins for job completion");
-					
-					Thread.sleep(600000);
-					
+					//provideFileForConversion();
+					broadcastPageObjects.provideFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
+					lg.legacyTest();			
 					System.out.println("Removing file from conversion. .. .. ... .");
-					deleteFileForConversion();
-					int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=69394");
+					//deleteFileForConversion();
+					broadcastPageObjects.deleteFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
+					int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
 					System.out.println("Deactivate the JOb ... .. ." +ss2);
 					
-					
+					}//if
 				}
 
 			} catch (Exception e) {
                 System.out.println("Catch block");
 				System.out.println("Removing file from conversion. .. .. ... .");
-				deleteFileForConversion();
-				int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=69394");
+				//deleteFileForConversion();
+				broadcastPageObjects.deleteFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
+				int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
 				System.out.println("Deactivate the JOb ... .. ." +ss2);
+			}//catch
+			}// after for loop if 
 
-			}
-
-		}
+		}//for
+		
 
 }
 

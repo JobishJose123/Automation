@@ -45,9 +45,12 @@ public class DataFusionEngine extends Init {
 	private WebElement DataFusionEnginebutton;
 	@FindBy(xpath="//html//div[@id='mainContainer']//*/div//paper-button[contains(.,'Add File connection')]")
 	private WebElement AddJobbutton;
-	
-	
-	
+	@FindBy(xpath="//paper-scroll-header-panel[@id='flytxt-menu-style']/*//label[.='Reports']")
+	private WebElement reports;
+	@FindBy(xpath="//div[contains(text(),'Data Health Check')]")
+	private WebElement dataHealthCheck;
+	@FindBy(xpath="//paper-button[contains(.,'Export')]")
+	private WebElement export;
 	///html//div[@id='mainContainer']//*/div/paper-button[contains(.,'Add Job')]
 	
 	
@@ -151,6 +154,17 @@ public class DataFusionEngine extends Init {
 	private WebElement greaterthanjob;
 	
 	
+	public void ClickDFEReport() throws InterruptedException{
+		jswait.loadClick(reports);		
+	}
+	
+	public void clickOnDataHealthCheck() throws InterruptedException{
+		jswait.loadClick(dataHealthCheck);		
+	}
+	
+	public void clickOnexport() throws InterruptedException{
+		jswait.loadClick(export);		
+	}
 	
 	
 	

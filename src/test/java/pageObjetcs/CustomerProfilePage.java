@@ -589,6 +589,10 @@ public void verifyAcknowledgedEvent(String bcName,String campaignName,String Off
 	 System.out.println("print "+ackEvents);
 	 System.out.println("before for loop");
 	 
+	 if(ackEvents.size()==0) {
+		 Assert.assertTrue("ACK event not raised ",false);
+	 }
+	 
 	for (WebElement webElement : ackEvents) {
 			if ((webElement.getText()).contains(campaignName)) {
 				System.out.println(webElement.getText());
@@ -602,7 +606,7 @@ public void verifyAcknowledgedEvent(String bcName,String campaignName,String Off
 							"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
 					System.out.println(booledn);
 					if (booledn == true) {
-						//Assert.assertTrue(true);
+						Assert.assertTrue(true);
 						System.out.println("Ack verified");
 						
 						break;
@@ -700,7 +704,7 @@ public void verifyFullfillementEvent(String bcName, String campaignName, String 
 
 	Thread.sleep(4000);
 	List<WebElement> ackEvents = driver.findElements(
-			By.xpath("//data-table-row//data-table-cell[4]//span[contains(.,'Campaign: " + campaignName + "')]"));
+			By.xpath("//data-table-row//data-table-cell[3]//span[contains(.,'Fulfillment Success')]/../..//data-table-cell[4]//span[contains(.,'Campaign: "+campaignName+"')]"));
 	Thread.sleep(3000);
 	System.out.println(ackEvents.size());
 	if (ackEvents.size() == 0) {
@@ -718,9 +722,23 @@ public void verifyFullfillementEvent(String bcName, String campaignName, String 
 		Thread.sleep(5000);
 		System.out.println("oneruleonereward.....");
 		for (WebElement webElement : ackEvents) {
+			
+
+			if (bcName.contains("seeding") || bcName.contains("seed")) {
+			if(count>2) {
+				break;
+			}
+			}else {
+				if(count>1) {
+					break;
+				}
+			}
+			
 			jswait.loadClick(
 					"(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Fulfillment Success']/../..//data-table-cell[4]//span[text()='Campaign: "
 							+ campaignName + "'])[" + count + "]");
+			
+			
 
 			Thread.sleep(2000);
 
@@ -733,7 +751,7 @@ public void verifyFullfillementEvent(String bcName, String campaignName, String 
 			if (count == 1) {
 
 				b2 = jswait.checkVisibility(
-						"//label[contains(.,'Reward Details')]/..//label[contains(.,'+SEL_REWARD+')]");
+						"//label[contains(.,'Reward Details')]/..//label[contains(.,'"+SEL_REWARD+"')]");
 				System.out.println("Reward  visibile ... " + b2);
 				if (b1 == b2 == b3 == true)
 					rewardsCount++;
@@ -774,6 +792,16 @@ public void verifyFullfillementEvent(String bcName, String campaignName, String 
 		System.out.println("onerulemultiplerewards.........");
 
 		for (WebElement webElement : ackEvents) {
+			
+			if (bcName.contains("seeding") || bcName.contains("seed")) {
+			if(count>3) {
+				break;
+			}
+			}else {
+				if(count>2) {
+					break;
+				}
+			}
 			jswait.loadClick(
 					"(//div[@val='event']//iron-list[@id='list']//data-table-row//data-table-cell[3]//span[text()='Fulfillment Success']/../..//data-table-cell[4]//span[text()='Campaign: "
 							+ campaignName + "'])[" + count + "]");

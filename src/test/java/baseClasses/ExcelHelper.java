@@ -285,6 +285,32 @@ String file = "";
 		
 	}
 	
+	 public void insertDynamicData(String Workbook, String sheet, String result) throws Exception {
+	    	
+	    	
+	    	
+	    	setExcelFile(Workbook, sheet);
+	    	int countrows=sh.getLastRowNum()-sh.getFirstRowNum();
+	    	Row newrow=sh.createRow(countrows+1);
+	    	int colnumber=numCols();
+	    	Cell cell;
+	    	if(newrow.getLastCellNum()==-1) {
+	    	cell=newrow.createCell(0);
+	    	cell.setCellValue(result);
+	    	
+	    	CalenderUtility cu = new CalenderUtility();
+			cell=newrow.createCell(2);
+			cell.setCellValue(cu.getCurrentDate("dd MMM YYYY hh:mm aaa z"));
+	    	
+	    	}
+	    	FileOutputStream outFile =new FileOutputStream(new File(file));  //Creating new file
+	        workbook.write(outFile);   //printing the data in the new file
+	        outFile.close();
+	        Thread.sleep(1000);
+	    }
+
+
+	
     
     
     public static void main(String args[]) {

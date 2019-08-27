@@ -368,3 +368,13 @@ Scenario: DK --> Verify the functioality of Test block with a Date value inside 
   Scenario: DK --> Verify that the lookup operation doesnt work when lookup file is not there in the specified location.
     Then check previous step and pass this
     Then pass next scenario based on this step
+    
+    @Export786 @initBrowser @closeBrowser
+Scenario: verify export DFE
+Given login
+Then navigate to data foundation
+Then Navigate to Reports
+And click on Data Health Check
+#And click on Show All
+Then click on Export Button
+Then Store the Data into Workbook "parallelRunBC" and Sheet "DFEMetricexport"

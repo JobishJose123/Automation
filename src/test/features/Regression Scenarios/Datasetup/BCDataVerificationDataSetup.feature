@@ -347,16 +347,16 @@ Scenario: Verify BC targeting using all types of target conditions with one time
 	Then create new campaign category from sheet "CampaignCategory" 
 	Then navigate to landing page 
 		
-		@CreateConversionAndFulfilmentBCs @initBrowser @closeBrowswer 
+		@CreateConversionAndFulfilmentBCs @initBrowser @closeBrowser 
 Scenario Outline: Create all type of bcs with <bcSheet> with <offerSheet> and <condition>, <rewardTypeRule> 
 	Given login 
 	Then navigate to precision marketer 
-	Then navigate to offer management 
-	Then navigate to offers 
-	Then create new offer from sheet "<offerSheet>" with product "fullDetails" rewards "<rewardTypeRule>" with creative type "<creative>" 
-	Then navigate to offer management 
-	Then Navigate to Offer Catalogue 
-	Then adding existing offers from sheet "<offerSheet>" Offer Catalogue from sheet "defaultCatalog" 
+#	Then navigate to offer management 
+#	Then navigate to offers 
+#	Then create new offer from sheet "<offerSheet>" with product "fullDetails" rewards "<rewardTypeRule>" with creative type "<creative>" 
+#	Then navigate to offer management 
+#	Then Navigate to Offer Catalogue 
+#	Then adding existing offers from sheet "<offerSheet>" Offer Catalogue from sheet "defaultCatalog" 
 	Then navigate to life cycle marketing 
 	Then navigate to campaign category from sheet "<campaignCategory>" 
 	Then create new campaign from sheet "<campaignBC>" with catalog "defaultCatalog" 
@@ -369,19 +369,22 @@ Scenario Outline: Create all type of bcs with <bcSheet> with <offerSheet> and <c
 	
 	Examples: 
 		|SavedSheet|bcSheet|campaignBC|campaignCategory|offerSheet|condition|creative|rewardTypeRule|
-		|rewardBcs|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|onerulemultiplerewards|
-		|rewardBcs|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|onerulemultiplerewards|
-		#    |rewardBcs|TriggerOneoff|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup30|singlecreative|onerulemultiplerewards|
-		#    |rewardBcs|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|onerulemultiplerewards|
+#		|rewardBcs|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|onerulemultiplerewards|
+#		|rewardBcs|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|onerulemultiplerewards|
+#		|rewardBcs|TriggerOneoff|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup30|singlecreative|onerulemultiplerewards|
+#		|rewardBcs|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|onerulemultiplerewards|
 #		|rewardBcs|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup50|singlecreative|onerulemultiplerewards|
-		#    |rewardBcs|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|onerulemultiplerewards|
+#		|rewardBcs|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|onerulemultiplerewards|
 #		|rewardBcs|seedingRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup70|singlecreative|onerulemultiplerewards|
-		#    |rewardBcs|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|onerulemultiplerewards|
-#		|rewardBcs|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup30|singlecreative|oneruleonereward|
-#		|rewardBcs|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|oneruleonereward|
-#		|rewardBcs|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|oneruleonereward|
-#		|rewardBcs|seedingRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|oneruleonereward|
-		
+#		|rewardBcs|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|onerulemultiplerewards|
+		|rewardBcs|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|oneruleonereward|
+		|rewardBcs|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|oneruleonereward|
+		|rewardBcs|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup50|singlecreative|oneruleonereward|
+		|rewardBcs|seedingRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup70|singlecreative|oneruleonereward|
+		|rewardBcs|TriggerOneoff|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup30|singlecreative|oneruleonereward|
+		|rewardBcs|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|oneruleonereward|
+		|rewardBcs|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|oneruleonereward|
+		|rewardBcs|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|oneruleonereward|
 #********************************* Create bcs for export as PDF***********
 
 @NDX-CreateCampaignForBCExportaspdf @initBrowser @closeBrowser

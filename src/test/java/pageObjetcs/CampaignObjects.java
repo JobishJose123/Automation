@@ -1102,6 +1102,7 @@ public void enterCampaignDeailsForCompareTargetConditions() throws Throwable {
     		 min-=60;
     		 hours++;
     	 }
+    	 
     	 Actions builder = new Actions(driver);
     	 WebElement num = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
          builder.moveToElement(num).click().build().perform();
