@@ -242,7 +242,7 @@ Then activate broadcast from workbook "parallelRunBC" and sheet "BCDataStorage"
 
 @NDX-8573 @NDX-8603 @NDX-8624 @NDX-8797 @NDX-7039 @NDX-1000  @initBrowser 
 Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: profilefieldNV of a one-timebc
-Then filter the bc from sheet "BCDataStorage" from row "1" and column "1" and write in sheet "one-offBC"
+Then filter the bc from sheet "BCDataStorage" from row "1" and column "0" and write in sheet "one-offBC"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -266,7 +266,7 @@ Then verify the condition Confirmed Delivery event for the bc from sheet "one-of
 
 @NDX-8659 @NDX-8776 @NDX-7047 @NDX-10013 @initBrowser
 Scenario: Verify the ack ,channel WAP,multiple creative Target condition: customerList of a one-timebc
-Then filter the bc from sheet "BCDataStorage" from row "2" and column "1" and write in sheet "one-offBC"
+Then filter the bc from sheet "BCDataStorage" from row "2" and column "0" and write in sheet "one-offBC"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -286,7 +286,7 @@ Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC
 
 @NDX-8633 @NDX-7035 @NDX-10010  @initBrowser 
 Scenario: Verify the ack ,channel email Target condition: usageMetric of a one-timebc
-Then filter the bc from sheet "BCDataStorage" from row "3" and column "1" and write in sheet "one-offBC"
+Then filter the bc from sheet "BCDataStorage" from row "3" and column "0" and write in sheet "one-offBC"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -306,7 +306,7 @@ Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC
 
 @NDX-9006 @NDX-8730 @NDX-10016 @initBrowser
 Scenario: Verify the ack ,dynamic tag and Target condition: sharedMetricOtherPartner of a one-timebc
-Then filter the bc from sheet "BCDataStorage" from row "4" and column "1" and write in sheet "one-offBC"
+Then filter the bc from sheet "BCDataStorage" from row "4" and column "0" and write in sheet "one-offBC"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -420,7 +420,7 @@ Then verify the condition Acknowleged event for the bc from sheet "TriggerReccur
 
 @NDX-8578 @NDX-8617 @NDX-7041 @NDX-8803 @NDX-8744 @NDX-10017 @initBrowser
 Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: sharedEventOtherPartner of a seeding one-timebc     
-Then filter the bc from sheet "BCDataStorage" from row "5" and column "1" and write in sheet "seedingoneoff"
+Then filter the bc from sheet "BCDataStorage" from row "5" and column "0" and write in sheet "seedingoneoff"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -441,7 +441,7 @@ Then verify the condition Confirmed Delivery event for the bc from sheet "one-of
 
 @NDX-7049 @NDX-8795 @NDX-8644 @NDX-10011  @initBrowser
 Scenario: Verify the ack ,channel WAP,multiple creative and target condition: customerDrivenEvent of seedingoneoff bc
-Then filter the bc from sheet "BCDataStorage" from row "6" and column "1" and write in sheet "seedingoneoff"
+Then filter the bc from sheet "BCDataStorage" from row "6" and column "0" and write in sheet "seedingoneoff"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -460,7 +460,7 @@ Then verify the condition Acknowleged event for the bc from sheet "one-offBC" fo
 
 @NDX-7037 @NDX-8654 @NDX-10014 @initBrowser
 Scenario: Verify the ack ,channel email and target condition: customerDrivenEventNotOccurred 
-Then filter the bc from sheet "BCDataStorage" from row "7" and column "1" and write in sheet "seedingoneoff"
+Then filter the bc from sheet "BCDataStorage" from row "7" and column "0" and write in sheet "seedingoneoff"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -479,7 +479,7 @@ Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff
    
 @NDX-9012 @initBrowser   
 Scenario: Verify the ack ,dynamic tag 
-Then filter the bc from sheet "BCDataStorage" from row "8" and column "1" and write in sheet "seedingoneoff"
+Then filter the bc from sheet "BCDataStorage" from row "8" and column "0" and write in sheet "seedingoneoff"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -498,7 +498,7 @@ Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff
 
 @NDX-8606 @NDX-8623 @NDX-8801 @NDX-7042 @initBrowser
 Scenario: Verify the ack ,channel SMS,dr count,CG count of seeding recurringbc
-Then filter the bc from sheet "BCDataStorage" from row "9" and column "1" and write in sheet "seedingRecurringBC"
+Then filter the bc from sheet "BCDataStorage" from row "9" and column "0" and write in sheet "seedingRecurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -521,7 +521,7 @@ Then verify the condition Confirmed Delivery event for the bc from sheet "one-of
 
 @NDX-7050 @NDX-8788 @initBrowser
 Scenario: Verify the channek WAP,dynamic tag usage for a seeding Recurring bc
-Then filter the bc from sheet "BCDataStorage" from row "10" and column "1" and write in sheet "seedingRecurringBC"
+Then filter the bc from sheet "BCDataStorage" from row "10" and column "0" and write in sheet "seedingRecurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -539,7 +539,7 @@ Then verify the condition Acknowleged event for the bc from sheet "seedingRecurr
      
 @NDX-7038 @initBrowser
 Scenario: Verify the channel email for the seeding recurring bc
-Then filter the bc from sheet "BCDataStorage" from row "11" and column "1" and write in sheet "seedingRecurringBC"
+Then filter the bc from sheet "BCDataStorage" from row "11" and column "0" and write in sheet "seedingRecurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -552,7 +552,7 @@ Then verify the target count with condition Acknowledgement from sheet "targetCo
 
 @NDX-9010 @initBrowser
 Scenario: Verify the dynamic tag usage for a seeding recurring bc
-Then filter the bc from sheet "BCDataStorage" from row "12" and column "1" and write in sheet "seedingRecurringBC"
+Then filter the bc from sheet "BCDataStorage" from row "12" and column "0" and write in sheet "seedingRecurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -571,7 +571,7 @@ Then verify the condition Acknowleged event for the bc from sheet "seedingRecurr
 
 @NDX-10923 @NDX-10949 @NDX-10927  @initBrowser
 Scenario: Verify the channel SMS,partner level cg for a trigger one off bc
-Then filter the bc from sheet "BCDataStorage" from row "17" and column "1" and write in sheet "TriggerOneoff"
+Then filter the bc from sheet "BCDataStorage" from row "17" and column "0" and write in sheet "TriggerOneoff"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -596,7 +596,7 @@ Then verify the condition Confirmed Delivery event for the bc from sheet "Trigge
 
 @NDX-10939 @NDX-10936 @NDX-10925 @initBrowser
 Scenario: Verify the channel WAP,bc level cg exclusion,multiple creative  for a trigger seeding onetime bc
-Then filter the bc from sheet "BCDataStorage" from row "18" and column "1" and write in sheet "TriggerOneoff"
+Then filter the bc from sheet "BCDataStorage" from row "18" and column "0" and write in sheet "TriggerOneoff"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -618,7 +618,7 @@ Then verify the condition Acknowleged event for the bc from sheet "TriggerOneoff
 
 @NDX-10937 @initBrowser
 Scenario: Verify channel email for trigger one off bc
-Then filter the bc from sheet "BCDataStorage" from row "19" and column "1" and write in sheet "TriggerOneoff"
+Then filter the bc from sheet "BCDataStorage" from row "19" and column "0" and write in sheet "TriggerOneoff"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -638,7 +638,7 @@ Then verify the condition Acknowleged event for the bc from sheet "TriggerOneoff
 
 @NDX-10944 @initBrowser
 Scenario: Verify channel WAP for seeding trigger recurring bc
-Then filter the bc from sheet "BCDataStorage" from row "20" and column "1" and write in sheet "TriggerReccurringBC"
+Then filter the bc from sheet "BCDataStorage" from row "20" and column "0" and write in sheet "TriggerReccurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -656,7 +656,7 @@ Then verify the condition Acknowleged event for the bc from sheet "TriggerReccur
 
 @NDX-10945 @NDX-10947 @NDX-10971 @initBrowser
 Scenario: Verify channel sms ,multiple creative of a seeding trigger recurring bc
-Then filter the bc from sheet "BCDataStorage" from row "21" and column "1" and write in sheet "TriggerReccurringBC"
+Then filter the bc from sheet "BCDataStorage" from row "21" and column "0" and write in sheet "TriggerReccurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -677,7 +677,7 @@ Then verify the condition Confirmed Delivery event for the bc from sheet "Trigge
 
 @NDX-10941  @initBrowser
 Scenario: Verify dynamic tag for a seeding trigger recurring bc
-Then filter the bc from sheet "BCDataStorage" from row "22" and column "1" and write in sheet "TriggerReccurringBC"
+Then filter the bc from sheet "BCDataStorage" from row "22" and column "0" and write in sheet "TriggerReccurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing

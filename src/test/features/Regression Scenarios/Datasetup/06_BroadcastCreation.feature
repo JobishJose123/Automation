@@ -392,17 +392,17 @@ Then navigate to offers
 Then create new offer from sheet "<offerName>" with product "fullDetails" rewards "oneruleonereward" with creative type "<creativeType>" and track Source "A_track_Sel"
 Examples:
 |offerName|creativeType|
-|rechargeSMS|multiple creative|
-|rechargeWAP|single creative|
-|rechargeEmail|single creative|
-|rechargeSMS_Dynamic|single creative|
-|SeedingSMS|multiple creative|
-|seedingWAPoffer|single creative|
-|seedingEmail|single creative|
-|SeedingSMS_Dynamic|single creative|
+|rechargeSMS|multiplecreative|
+#|rechargeWAP|singlecreative|
+#|rechargeEmail|singlecreative|
+#|rechargeSMS_Dynamic|singlecreative|
+#|SeedingSMS|multiplecreative|
+#|seedingWAPoffer|singlecreative|
+#|seedingEmail|singlecreative|
+#|SeedingSMS_Dynamic|singlecreative|
      
 
-@NDX-CreateBCForFunctionality @initBrowser
+@NDX-CreateBCForFunctionality @initBrowser   @closeBrowser
 Scenario Outline:Create broadcast to verify bc functionality(trigger not included)
 Given login
 Then navigate to configuration management
@@ -441,7 +441,7 @@ Examples:
 |seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|15|
 |seedingRecurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|16|
 
-@NDX-TriggerBC  @initBrowser
+@NDX-TriggerBC  @initBrowser @closeBrowser
 Scenario Outline: Create all type of trigger bc to verify trigger bc functionality
 Given login
 Then navigate to precision marketer
@@ -458,7 +458,7 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStora
 
 Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|
-|TriggerOneoff|rechargeSMS|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|never|none|17|
+|TriggerOneoff|rechargeSMS|segmentAgeGT40|Saved Segments|no limit|fixedPercentage|none|single creative|never|none|17|
 |TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|18|
 |TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|19|
 |TriggerReccurringBC|seedingWAPoffer|targetall|None|no limit|no limit|none|single creative|never|none|20|
@@ -468,7 +468,7 @@ Examples:
 
 
 # after running @NDX-TriggerBC run @NDX-fileForTriggerBC
-@NDX-fileForTriggerBC  @initBrowser
+@NDX-fileForTriggerBC  @initBrowser @closeBrowser
 Scenario: upload file for trigger bc
 Given login
 Then provide file for trigger with csv file "trigger1.csv"

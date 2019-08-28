@@ -5319,13 +5319,13 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	   
 	}
 	@Then("^add bc from sheet \"([^\"]*)\" to column \"([^\"]*)\" of bc data sheet \"([^\"]*)\"$")
-	public void add_bc_from_sheet_to_column_of_bc_data_sheet(String bcSheet, int column, String bcStorageSheet) throws Throwable {
+	public void add_bc_from_sheet_to_column_of_bc_data_sheet(String bcSheet, int row, String bcStorageSheet) throws Throwable {
          eM.setExcelFile("bcInputData", bcSheet);
          String bcName=eM.getCellByColumnName("BC Name");
          System.out.println("=========="+bcName+"=============");
          String bcType=(String)eM.getCell(1, 7);
          System.out.println("=========="+bcType+"=============");
-         broadcastPageObjects.addBcToSheet(bcName,bcType,bcStorageSheet,column);
+         broadcastPageObjects.addBcToSheet(bcName,bcType,bcStorageSheet,row);
          
  }
 	@Then("^provide file for trigger with csv file \"([^\"]*)\"$")

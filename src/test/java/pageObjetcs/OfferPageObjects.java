@@ -2949,11 +2949,11 @@ String testMode="";
 	clickProceedButton();
 
 	// ******************Creative tab*****************:
-	if (creativeType.equals("single creative")) {
+	if (creativeType.equalsIgnoreCase("singlecreative")) {
 		enterCreativeTabDetails(eh, testMode);
 		clickProceedButton();
 		Thread.sleep(3000);
-	} else if (creativeType.equals("multiple creative")) {
+	} else if (creativeType.equalsIgnoreCase("multiplecreative")) {
 
 		enterCreativeTabDetails(eh, testMode);
 		jswait.loadClick(addCreativeButton);

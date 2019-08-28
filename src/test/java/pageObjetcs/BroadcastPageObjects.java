@@ -401,7 +401,7 @@ public class BroadcastPageObjects extends Init {
 	
 	 @FindBy(xpath="//label[@id='label']//following::input[@placeholder='Select a Language']")
 	 private WebElement selectLanguage;
-	 @FindBy(xpath="//vaadin-combo-box-overlay[contains(.,'Portuguese (Brazil)')]")
+	 @FindBy(xpath="//vaadin-combo-box-overlay[contains(.,'Arabic')]")
 	 private WebElement selectPortuguese ;
 	 @FindBy(xpath="//paper-button[contains(.,'Target Group')]")
 	 private WebElement selectTargetGroup ;
@@ -3904,14 +3904,9 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	
 	public void addBcToSheet(String bcName,String bcType,String bcStorageSheet,int row) throws Exception{
 		eh.setExcelFile("parallelRunBC", bcStorageSheet);
-//		Sheet sheet=null;
-//		Cell cell;
-//		int countrows=sheet.getLastRowNum()-sheet.getFirstRowNum();
-//		 Row row1 = sheet.getRow(row);
-//		 if(row1.getLastCellNum()==-1) {
 	    eh.setCell(row, 0, bcName);
   	    eh.setCell(row, 1, bcType);
-//	}
+
 	
 	}
 	
