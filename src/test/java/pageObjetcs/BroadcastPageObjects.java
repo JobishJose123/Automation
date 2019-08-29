@@ -1304,12 +1304,27 @@ public boolean checkCalculateBtnDisplayed() {
 	public void selectTrackSession() throws InterruptedException {
 		jswait.loadClick(trackSessionSelector);
 		jswait.loadClick(trackSessionAfter);
-		jswait.loadSendKeys(trackSession2Days, "5");
+		jswait.loadSendKeys(trackSession2Days, "2");
 	}
-
+	public void selectTrackSource(String trackSource) throws InterruptedException {
+		
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+trackSource+"')]");
+	}
 	public void selectTrackingSource() throws InterruptedException {
-		jswait.loadSendKeys(trackingSourceSelector, "track");
-		jswait.loadClick(trackingSourceTrack);
+//		jswait.loadSendKeys(trackingSourceSelector, "track");
+//		jswait.loadClick(trackingSourceTrack);
+		try {
+			try {
+				jswait.loadSendKeys(trackingSourceSelector, "track");
+				jswait.loadClick(trackingSourceTrack);
+			}catch (Exception e) {
+				jswait.loadSendKeys(trackingSourceSelector, "Usage");
+				selectTrackSource("Usage Metric");
+			}
+		}catch (Exception e) {
+			jswait.loadSendKeys(trackingSourceSelector, "Global Response");
+			selectTrackSource("Global Response App");
+		}
 	}
 
 	// --------------------------------------------------------------//
