@@ -1335,7 +1335,7 @@ Then wait until status of "one-offBC" is "Completed"
 #=============================================verify the BCs abort and pause   ========================================= 
 
 
- @NDX-5775 @9963
+ @NDX-5775 @NDX-9963
  @initBrowser @closeBrowser
  Scenario Outline: Verify pausing of a One-time and trigger onetime Broadcast new
  Then filter the bc from sheet "BCForPauseAbort" from row "<row>" and column "0" and write in sheet "<bcSheet>"
@@ -1356,7 +1356,7 @@ Examples:
 |one-offBCForPause|1|
 |TriggerOneoff|5|
  
-@NDX-8005  @9956
+@NDX-8005  @NDX-9956
 @initBrowser @closeBrowser
 Scenario Outline: Verify pausing of a Recurring and trigger recurring Broadcast new
 Then filter the bc from sheet "BCForPauseAbort" from row "<row>" and column "0" and write in sheet "<bcSheet>"
@@ -1382,7 +1382,7 @@ Examples:
 |TriggerReccurringBC|8|
 
 
-@NDX-8016 @9960
+@NDX-8016 @NDX-9960
  @initBrowser @closeBrowser
 Scenario Outline: Verify pausing of a seedingRecurring and trigger seeding recurring Broadcast new
 Then filter the bc from sheet "BCForPauseAbort" from row "<row>" and column "0" and write in sheet "<bcSheet>"
@@ -1407,7 +1407,7 @@ Examples:
 |seedingRecurringBCForPause|3|
 |TriggerReccurringBC|7|
 
-@NDX-8015 @9959
+@NDX-8015 @NDX-9959
 @initBrowser @closeBrowser
 Scenario Outline: Verify pausing of a seedingoneoff and trigger seeding onetime Broadcast new
 Then filter the bc from sheet "BCForPauseAbort" from row "<row>" and column "0" and write in sheet "<bcSheet>"
@@ -1434,7 +1434,7 @@ Examples:
 
 
 
-@NDX-8060  @9963
+@NDX-8060  @NDX-9963
 @initBrowser @closeBrowser
 Scenario Outline: Verify abort of a One-time and trigger onetime Broadcast new
 Then filter the bc from sheet "BCForPauseAbort" from row "<row>" and column "0" and write in sheet "<bcSheet>"
@@ -1455,7 +1455,7 @@ Examples:
 |one-offBCForAbort|9|
 |TriggerOneoff|13|
  
-@NDX-8062 @9964
+@NDX-8062 @NDX-9964
 @initBrowser @closeBrowser
 Scenario Outline: Verify abort of a Recurring and trigger recurring Broadcast new
 Then filter the bc from sheet "BCForPauseAbort" from row "<row>" and column "0" and write in sheet "<bcSheet>"
@@ -1480,7 +1480,7 @@ Examples:
 |recurringBCForAbort|10|
 |TriggerReccurringBC|16|
 
-@NDX-8064 @9968 @initBrowser @closeBrowser
+@NDX-8064 @NDX-9968 @initBrowser @closeBrowser
 Scenario Outline: Verify abort of a seedingRecurring and trigger seeding recurring Broadcast new
 Then filter the bc from sheet "BCForPauseAbort" from row "<row>" and column "0" and write in sheet "<bcSheet>"
 Given login
@@ -1507,7 +1507,7 @@ Examples:
 |TriggerReccurringBC|15|
 
 
-@NDX-8066 @9967 @initBrowser @closeBrowser
+@NDX-8066 @NDX-9967 @initBrowser @closeBrowser
 Scenario Outline: Verify abort of a seedingoneoff and trigger seeding onetime Broadcast new
 Then filter the bc from sheet "BCForPauseAbort" from row "<row>" and column "0" and write in sheet "<bcSheet>"
 Given login

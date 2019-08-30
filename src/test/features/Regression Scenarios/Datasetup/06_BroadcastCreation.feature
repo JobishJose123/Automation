@@ -393,13 +393,13 @@ Then create new offer from sheet "<offerName>" with product "fullDetails" reward
 Examples:
 |offerName|creativeType|
 |rechargeSMS|multiplecreative|
-#|rechargeWAP|singlecreative|
-#|rechargeEmail|singlecreative|
-#|rechargeSMS_Dynamic|singlecreative|
-#|SeedingSMS|multiplecreative|
-#|seedingWAPoffer|singlecreative|
-#|seedingEmail|singlecreative|
-#|SeedingSMS_Dynamic|singlecreative|
+|rechargeWAP|singlecreative|
+|rechargeEmail|singlecreative|
+|rechargeSMS_Dynamic|singlecreative|
+|SeedingSMS|multiplecreative|
+|seedingWAPoffer|singlecreative|
+|seedingEmail|singlecreative|
+|SeedingSMS_Dynamic|singlecreative|
      
 
 @NDX-CreateBCForFunctionality @initBrowser   @closeBrowser

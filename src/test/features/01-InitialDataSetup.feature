@@ -281,11 +281,38 @@ Then check and add profile fields
     |selenium_reward|
     |sel_reward|
     
+    @ProfileUploadThroughDK  @initBrowser
+    Scenario: Upload profile field data through dk
+    Given login 
+    Then create a dk job "selProfileUpload" to upload the profile fields
+    Then navigate to landing page
+    Then navigate to data foundation
+    Then click Data Fusion Engine
+    Then filter the job "selProfileUpload" and activate it
+    Then provide file for trigger with csv file "selenium_list_profile.csv"
+    
+    @MetricEventUploadThroughDK  @initBrowser
+    Scenario: Upload metric and event through dk
+    Given login 
+    Then create a dk job "selMetricEventUpload" to upload the metric and event fields
+    Then navigate to landing page
+    Then navigate to data foundation
+    Then click Data Fusion Engine
+    Then filter the job "selMetricUpload" and activate it
+    Then provide file for trigger with csv file "selenium_list _metric_event.csv"
     
     
-    
-    
-    
+   #  make sure that selenium_list_date.csv have the nearest date
+   @DateUploadThroughDK  @initBrowser
+    Scenario: Upload date field through dk
+    Given login 
+    Then create a dk job "selDateUpload" to upload the date fields
+    Then navigate to landing page
+    Then navigate to data foundation
+    Then click Data Fusion Engine
+    Then filter the job "selDateUpload" and activate it
+    Then provide file for trigger with csv file "selenium_list_date.csv"
+ 
     
 @NX-createDefaultData 
 @initBrowser 
@@ -314,7 +341,7 @@ Then navigate to configuration management
     Then click on create new ofer button
     Then create new offer from sheet "defaultseedingWAPoffer" with product "default"
     Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
+	Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "default"
     Then Add "defaultrechargeWAP" offer to Offer Catalogue
     Then Add "defaultseedingWAPoffer" offer to Offer Catalogue
