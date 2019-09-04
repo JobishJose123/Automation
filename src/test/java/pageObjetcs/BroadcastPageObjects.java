@@ -402,7 +402,7 @@ public class BroadcastPageObjects extends Init {
 	 @FindBy(xpath="//label[@id='label']//following::input[@placeholder='Select a Language']")
 	 private WebElement selectLanguage;
 	 @FindBy(xpath="//vaadin-combo-box-overlay[contains(.,'Arabic')]")
-	 private WebElement selectPortuguese ;
+	 private WebElement selectArabic ;
 	 @FindBy(xpath="//paper-button[contains(.,'Target Group')]")
 	 private WebElement selectTargetGroup ;
 	 @FindBy(xpath="//div[@id='radioContainer']//following::div[contains(.,'No Limit')][@id='radioLabel']")
@@ -3177,7 +3177,7 @@ public boolean checkCalculateBtnDisplayed() {
 		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
 		if (SecondCreative.equalsIgnoreCase("extra Bonus Offer")) {
 			jswait.loadClick(selectLanguage);
-			jswait.loadClick(selectPortuguese);
+			jswait.loadClick(selectArabic);
 		}
 		else{
 			System.out.println("default language selected");
@@ -3286,12 +3286,12 @@ public boolean checkCalculateBtnDisplayed() {
 		offerExcel.setExcelFile("offerInputData", offerSheet);
 		String offerName = offerExcel.getCellByColumnName("Offer Name");
 		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
-if(creative.equalsIgnoreCase("multiple creative")) {
+if(creative.equalsIgnoreCase("multiplecreative")) {
 	jswait.loadClick(selectLanguage);
-	jswait.loadClick(selectPortuguese);
+	jswait.loadClick(selectArabic);
 }
-else if (creative.equalsIgnoreCase("single creative")){
-	System.out.println("single creative");
+else if (creative.equalsIgnoreCase("singlecreative")){
+	System.out.println("singlecreative");
 	
 }
 		if (!bc_type.contains("Informational")) {

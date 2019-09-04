@@ -240,7 +240,7 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then activate broadcast from workbook "parallelRunBC" and sheet "BCDataStorage"
 
 
-@NDX-8573 @NDX-8603 @NDX-8624 @NDX-8797 @NDX-7039 @NDX-1000  @initBrowser 
+@NDX-8574 @NDX-8609  @NDX-8625 @NDX-8797 @NDX-7039 @NDX-1000  @initBrowser 
 Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: profilefieldNV of a one-timebc
 Then filter the bc from sheet "BCDataStorage" from row "1" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -323,7 +323,7 @@ Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 Then verify the condition Acknowleged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC" and offer from sheet "rechargeSMS_Dynamic"
 
-@NDX-8576 @NDX-8616  @NDX-8627 @NDX-7040 @NDX-9015 @NDX-8961 @NDX-8799 @NDX-8805 @NDX-9970 @NDX-10015 @NDX-9797 @NDX-9795 @initBrowser
+@NDX-8576 @NDX-8616  @NDX-8627 @NDX-7040 @NDX-9015 @NDX-8961 @NDX-8799 @NDX-8805 @NDX-9970 @NDX-10015  @initBrowser
 Scenario: Verify the ack ,channel SMS,multiple creative ,dr count,CG count of a recurrence pattern DAILY of recurringbc and Target condition: segmentAgeGT40
 Given login
 Then navigate to precision marketer
@@ -567,8 +567,6 @@ Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 Then verify the condition Acknowleged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC" and offer from sheet "SeedingSMS_Dynamic"
 
-
-
 @NDX-10923 @NDX-10949 @NDX-10927  @initBrowser
 Scenario: Verify the channel SMS,partner level cg for a trigger one off bc
 Then filter the bc from sheet "BCDataStorage" from row "17" and column "0" and write in sheet "TriggerOneoff"
@@ -692,4 +690,14 @@ Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC" and offer from sheet "rechargeSMS_Dynamic"
 
-
+@NDX-9795 @initBrowser
+Scenario: Verify the broadcast expiry for trigger recurring bc
+Then filter the bc from sheet "BCDataStorage" from row "23" and column "0" and write in sheet "TriggerReccurringBC"
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "TriggerReccurringBC" for bctype "onetime"
+Then wait until status of "TriggerReccurringBC" from file "bcInputData" is "Delivery Expired" for bctype "seeding"
+Then verify the ack is not send fot the bc from sheet "TriggerReccurringBC" after the bc expiry 

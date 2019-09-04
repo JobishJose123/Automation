@@ -383,7 +383,9 @@ Feature: Test suite for Broadcast creation
 
 
 #============================================CREATION OF BC FOR VERFICATION OF BC FUNCTIONALITY=========================================================================================#
-@NDX-CreateOfferForBCFunctionality  @initBrowser 
+
+
+@NDX-CreateOfferForBCFunctionality  @initBrowser @closeBrowser
 Scenario Outline: create offer
 Given login
 Then navigate to precision marketer
@@ -410,6 +412,7 @@ Then navigate to partners
 Then edit a partner
 Then navigate to control group settings page
 Then change partner control group settings
+Then navigate to landing page
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
@@ -459,16 +462,21 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStora
 Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|
 |TriggerOneoff|rechargeSMS|segmentAgeGT40|Saved Segments|no limit|fixedPercentage|none|single creative|never|none|17|
-|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|18|
-|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|19|
-|TriggerReccurringBC|seedingWAPoffer|targetall|None|no limit|no limit|none|single creative|never|none|20|
-|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|21|
-|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|22|
-|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|single creative|At|At|23|
+|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiplecreative|never|none|18|
+|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|singlecreative|never|none|19|
+|TriggerReccurringBC|seedingWAPoffer|targetall|None|no limit|no limit|none|singlecreative|never|none|20|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiplecreative|never|none|21|
+|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|singlecreative|none|none|22|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|singlecreative|At|At|23|
 
-
-# after running @NDX-TriggerBC run @NDX-fileForTriggerBC
+#after running @NDX-TriggerBC run @NDX-fileForTriggerBC
 @NDX-fileForTriggerBC  @initBrowser @closeBrowser
 Scenario: upload file for trigger bc
 Given login
 Then provide file for trigger with csv file "trigger1.csv"
+
+
+
+
+
+

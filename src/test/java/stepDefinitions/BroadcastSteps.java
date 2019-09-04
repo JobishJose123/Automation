@@ -5379,7 +5379,18 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		
 	}
 	
-	
+	@Then("^verify the ack is not send fot the bc from sheet \"([^\"]*)\" after the bc expiry$")
+	public void verify_the_ack_is_not_send_fot_the_bc_from_sheet_after_the_bc_expiry(String bcSheet) throws Exception {
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName=eh.getCellByColumnName("BC Name");
+		String count=driver.findElement(By.xpath("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[2]//following::vaadin-grid-cell-content[7]")).getText();
+		System.out.println("current count is :  "+count);
+		int millisec=1*60*1000;
+		Thread.sleep(millisec);
+		String countAfter1min=driver.findElement(By.xpath("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[2]//following::vaadin-grid-cell-content[7]")).getText();
+		Assert.assertTrue(count.equals(countAfter1min));
+		
+	}
 	
 	
 	
