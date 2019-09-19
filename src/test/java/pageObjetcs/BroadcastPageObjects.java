@@ -3190,7 +3190,7 @@ public boolean checkCalculateBtnDisplayed() {
 	
 	
 	
-	public void enterBasicDetailsOfBC(String bcName,String inventory) throws Exception{
+	public void enterBasicDetailsOfBC(String bcName,String inventory,String trigger) throws Exception{
 		jswait.loadSendKeys(broadcastName, bcName);
 		jswait.loadSendKeys(broadcastPurpose, "verify complete flow of bc");
 		jswait.loadClick(labelSelector);
@@ -3198,6 +3198,13 @@ public boolean checkCalculateBtnDisplayed() {
 		jswait.loadSendKeys(inventorySelector, inventory);
 		jswait.loadClick("//vaadin-combo-box-item[contains(.,'" + inventory + "')]");
 		jswait.loadClick(proceedButton);
+		if(trigger.contains("trigger")) {
+			jswait.loadSendKeys(triggerInput,TRIGGER);
+			Thread.sleep(2000);
+			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
+		}
+		else
+			System.out.println("no trigger selected");
 		
 	}
 	
@@ -3780,7 +3787,7 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	jswait.loadClick(BcViewbtn);
 	}
 	
-	public void verifyDRCount(String bcName,String targetCount) throws Exception{
+	public void verifyCountFromBCReport(String bcName,String targetCount) throws Exception{
 		Thread.sleep(3000);
 		jswait.loadClick(selectColumn);
 		Thread.sleep(2000);
@@ -3909,13 +3916,6 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
         if(bctype.equalsIgnoreCase("seedingRecurring"))
 	       Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
 	}
-	
-	public void createBCWithTrigger(String triggerName) throws Exception{
-		jswait.loadSendKeys(triggerInput,triggerName);
-		Thread.sleep(2000);
-		jswait.loadClick("//paper-item[contains(.,'"+triggerName+"')]");
-	}
-	
 	
 	public void addBcToSheet(String bcName,String bcType,String bcStorageSheet,int row) throws Exception{
 		eh.setExcelFile("parallelRunBC", bcStorageSheet);

@@ -149,45 +149,41 @@ public class CLV_Max_DashboardSteps extends Init {
 	@Then("^change partner control group settings$")
     public void changePartnerControlGroupSettings() throws Throwable
     { 
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		 if(min==0)
+			{
+				min+=5;
+			}      		 
+     	adminPageObjects.changePartnerControlGroupSettings();
 		
-		
-		Calendar rightNow =Calendar.getInstance();
-    	String mn = "";
-    	if(rightNow.get(Calendar.MONTH)+1<9) {
-    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
-    	}
-    	else 
-    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
-		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
-//    	int hours = rightNow.get(Calendar.HOUR);
-//      	 int min = rightNow.get(Calendar.MINUTE);
-//      	 int am_pm = rightNow.get(Calendar.AM_PM);
-//      	 //int day = rightNow.get(Calendar.DAY_OF_MONTH);
-//      	 int year = rightNow.get(Calendar.YEAR);
-//      	 int month = rightNow.get(Calendar.MONTH)+1;
-//      	 min+=2;
-//      	 int rem = min%5;
-//      	 rem = 5-rem;
-//      	 min+=rem;
-//      	 if(min>59){
-//      		 min-=60;
-//      		 hours++;
-//      		 
-//      	 }
-      	
-      		 
-      	 
-		
-		adminPageObjects.changePartnerControlGroupSettings();
-		
-		Thread.sleep(1000);
+		 Thread.sleep(1000);
 		 jswait.loadClick("//label[@class='leftstylectrl start-time style-scope control-group-settings']//following::input[1]");
-		Thread.sleep(1000);
-//		int day = rightNow.get(Calendar.DAY_OF_MONTH);
-//		day++;
+		 Thread.sleep(1000);
 		 jswait.loadClick("(//div[@date='"+date+"'])[3]");
-		 
-		Thread.sleep(1000);
+		 Thread.sleep(1000);
 		 jswait.loadClick("(.//paper-button[contains(.,'OK')])[5]");
 		Thread.sleep(1000);
 //		 jswait.loadClick(".//paper-date-time-input[1]//paper-input[2]//input");

@@ -315,54 +315,39 @@ public class CommonObjects extends Init {
 		private WebElement streamingAttrVariable2;
 		
 	   @FindBy(xpath="(//label[contains(.,'Trigger Condition')]//following::input[1])[2]")
-		private WebElement triggerConditionInput2;
-	   
-		@FindBy(xpath="(//label[contains(.,'Value')]//following::input[1])[2]")
-		private WebElement valueInput2;
-		
-		   @FindBy(xpath="(//paper-button[contains(.,'Save')])[1]")
-			private WebElement triggerSavebtn;
-		
-			@FindBy(xpath="(//vaadin-combo-box-item[contains(.,'equal to')])[1]")
-			private WebElement equalTo;
-			@FindBy(xpath="(//vaadin-combo-box-item[contains(.,'greater than or equal to')])[2]")
-			private WebElement greaterThanOrEqualTo;
-		
-		   @FindBy(xpath="(//label[contains(.,'Admin')])[1]")
-		   private WebElement admin;
-		
-//			@FindBy(xpath="")
-//			private WebElement ;
-		
-//		   @FindBy(xpath="")
-//			private WebElement ;
-		
-//			@FindBy(xpath="")
-//			private WebElement ;
-		
-//		   @FindBy(xpath="")
-//			private WebElement ;
-		
-//			@FindBy(xpath="")
-//			private WebElement ;
-		
-//		   @FindBy(xpath="")
-//			private WebElement ;
-		
-//			@FindBy(xpath="")
-//			private WebElement ;
-		
-//		   @FindBy(xpath="")
-//			private WebElement ;
-		
-//			@FindBy(xpath="")
-//			private WebElement ;
-		
-//		   @FindBy(xpath="")
-//			private WebElement ;
-		
-//			@FindBy(xpath="")
-//			private WebElement ;
+	   private WebElement triggerConditionInput2;
+	   @FindBy(xpath="(//label[contains(.,'Value')]//following::input[1])[2]")
+	   private WebElement valueInput2;
+	   @FindBy(xpath="(//paper-button[contains(.,'Save')])[1]")
+	   private WebElement triggerSavebtn;
+	   @FindBy(xpath="(//vaadin-combo-box-item[contains(.,'equal to')])[1]")
+	   private WebElement equalTo;
+	   @FindBy(xpath="(//vaadin-combo-box-item[contains(.,'greater than or equal to')])[2]")
+	   private WebElement greaterThanOrEqualTo;
+	   @FindBy(xpath="(//label[contains(.,'Admin')])[1]")
+	   private WebElement admin;
+	   @FindBy(xpath="//label[contains(.,'Fulfillment Configuration')]")
+	   private WebElement fulfillmentConfig;
+	   @FindBy(xpath="//div[contains(.,'Tracking Data Sources')][@class='subHeading admin-tracking style-scope fulfilment-configuration']")
+       private WebElement trackingDataSource ;
+	   @FindBy(xpath="//paper-button[contains(.,'Create New Tracking Data Source')]")
+       private WebElement trackingSourcebtn;
+	   @FindBy(xpath="(//h3[contains(.,'Create Tracking Data Source')]//following::label[contains(.,'Name')]//following::input[1])[1]")
+       private WebElement trackingSourceNameInput ;
+	   @FindBy(xpath="(//h3[contains(.,'Create Tracking Data Source')]//following::label[contains(.,'Type')]//following::input)[1]")
+       private WebElement trackingSourceTypeInput;
+	   @FindBy(xpath="//paper-item[contains(.,'Conversion And Response')][@value='BOTH']")
+       private WebElement conversionAndResponse ;
+       @FindBy(xpath="//label[contains(.,'Column Name')]//following::input[1]")
+	   private WebElement fieldAmount;
+	   @FindBy(xpath="//label[contains(.,'Data Type')]//following::input[1]")
+	   private WebElement selectDataType;
+		@FindBy(xpath="//paper-item[contains(.,'Number')]")
+		private WebElement numberAsDataType ;
+		@FindBy(xpath="//paper-icon-button[@icon='last-page']")
+		private WebElement selectAllPartner;
+		@FindBy(xpath="//paper-button[contains(.,'Save')]")
+        private WebElement saveTrackingSource;
 //		   @FindBy(xpath="")
 //			private WebElement ;
 //			@FindBy(xpath="")
@@ -1259,10 +1244,30 @@ public void navigateToAdmin() throws Exception{
 	jswait.loadClick(admin);
 }
 
+public void navigateToFulfillmentConfig() throws Exception{
+	jswait.loadClick(fulfillmentConfig);
+}
 
-
-
-
+public void navigateToTrackingDataSource() throws Exception{
+	jswait.loadClick(trackingDataSource);
+}
+public void createNewTrackSource(String trackSourceName) throws Exception{
+	Thread.sleep(2000);
+	jswait.loadClick(trackingSourcebtn);
+	jswait.loadSendKeys(trackingSourceNameInput, trackSourceName);
+	Thread.sleep(2000);
+	jswait.loadClick(trackingSourceTypeInput);
+	jswait.loadClick(conversionAndResponse);
+	jswait.loadSendKeys(fieldAmount,"amount");
+	jswait.loadClick(selectDataType);
+	Thread.sleep(2000);
+	jswait.loadClick(numberAsDataType);
+	jswait.loadClick(selectAllPartner);
+	Thread.sleep(2000);
+	jswait.loadClick(saveTrackingSource);
+	
+	
+}
 
 
 

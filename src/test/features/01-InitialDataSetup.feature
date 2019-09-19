@@ -224,8 +224,7 @@ Then check and add profile fields
     Then create customer care touchpoint from sheet "CCTouchpoint"
     Then check customer care touchpoint in grid "CCTouchpoint"
     
-    
-      @precondition-Predefinied_targets @initBrowser
+     @precondition-Predefinied_targets @initBrowser
   Scenario: create saved segment as precondition
     Given login
     Then navigate to landing page
@@ -233,7 +232,6 @@ Then check and add profile fields
     Then navigate to configuration
     Then navigate to saved segments
     Then create saved segment with condition "segmentAgeGT40"
-    
     
     @NDX-createTriggerWithDKJob @initBrowser
     Scenario: create streaming attribute and trigger and dk job for trigger
@@ -251,6 +249,14 @@ Then check and add profile fields
     Then navigate to data foundation
     Then click Data Fusion Engine
     Then filter the job "Sel_TriggerJob" and activate it
+    
+     @NDX-CreateNewTrackSource @initBrowser
+    Scenario: create the track source
+    Given login
+    Then navigate to data foundation
+    Then navigate to fulfillment configuration
+    Then navigate to tracking data sources
+    Then create new tracking source with name "A_track_Sel"
     
     @NDX-CreateInventory @initBrowser
     Scenario Outline: create inventory
