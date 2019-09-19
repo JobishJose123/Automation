@@ -343,14 +343,14 @@ private WebElement ruleafterinput2 ;
 private WebElement ruledays;
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::input[1]")
 private WebElement rulessenderid ;
-@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
+@FindBy(xpath="(//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'Address-SMPP')])[2]")
 private WebElement addresssprule;
 @FindBy(xpath="(//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')])")
 private WebElement addresssprule2;
 
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which this broadcast can be sent')]//following::input[1]")
 private WebElement rulerouteid;
-@FindBy(xpath="//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
+@FindBy(xpath="(//label[contains(.,'Route over which this broadcast can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])[2]")
 private WebElement ruleroute;
 @FindBy(xpath="(//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])")
 private WebElement ruleroute2;
@@ -459,7 +459,7 @@ private WebElement rulessenderid2
 	
 	public void verifyRuleCreatedFromSheet(String name) throws java.lang.Exception {
 		Thread.sleep(3000);
-		jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");
+                                                                                                         
 	}
 	
 	
@@ -701,12 +701,14 @@ private WebElement rulessenderid2
    public void addresssprule() throws InterruptedException {
 	   Thread.sleep(2000);
 		jswait.loadClick(addresssprule);
+		Thread.sleep(2000);
+//		jswait.loadClick(addresssprule);
 	
 	}
    public void addresssprule2() throws InterruptedException {
 	   Thread.sleep(2000);
 		jswait.loadClick(addresssprule2);
-//		 Thread.sleep(2000);
+		 Thread.sleep(2000);
 //			jswait.loadClick(addresssprule2);
 	
 	}
@@ -720,13 +722,13 @@ private WebElement rulessenderid2
    
    public void ruleroute() throws InterruptedException {
 	   Thread.sleep(2000);
-	
-	   while(ruleroute.isDisplayed()==false) {
-	   
-		   rulerouteid.sendKeys(Keys.DOWN);
-		   
-	   }
-	    wait.until(ExpectedConditions.visibilityOf(ruleroute));
+//	
+//	   while(ruleroute.isDisplayed()==false) {
+//	   
+//		   rulerouteid.sendKeys(Keys.DOWN);
+//		   
+//	   }
+//	    wait.until(ExpectedConditions.visibilityOf(ruleroute));
 		jswait.loadClick(ruleroute);
 		Thread.sleep(1000);
 //		jswait.loadClick(ruleroute);
@@ -2284,7 +2286,7 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 		   public void Attimeselection() throws java.lang.Exception {
 				Calendar rightNow =Calendar.getInstance();
 		    	String mn = "";
-		    	if(rightNow.get(Calendar.MONTH)+1<9) {
+		    	if(rightNow.get(Calendar.MONTH)+1<=9) {
 		    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
 		    	}
 		    	else 
@@ -2359,56 +2361,10 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 				
 				
 				//System.out.println("test");
-				
-				if(!offerType.contains("STV")) {
-				clickTrackingSessionField();
-				Thread.sleep(3000);
-				optionAtselect();
-				Thread.sleep(3000);
-				Attimeselection();
-				Thread.sleep(3000);
-//				ruleafterinput2(); 
-//				ruledays();
-				Thread.sleep(2000);
-				}
-			
-				if(touchpointType.contentEquals("sms")){
-					System.out.println("inside sms");
-//					clickTrackingSessionField();
-//					Thread.sleep(3000);
-//					optionAtselect();
-//					Thread.sleep(3000);
-//					ruledelivryafterinput();
-//					Thread.sleep(3000);
-//					ruleafterinput2(); 
-//					ruledays();
-					Thread.sleep(2000);
-					rulessenderid();
-					Thread.sleep(2000);
-					addresssprule();
+				deliverytabselection(offerType,touchpointType);
 
-					Thread.sleep(2000);
-					rulerouteid();
-					Thread.sleep(2000);
-					ruleroute();
-					Thread.sleep(2000);
-					
-		   }
-//				clickTrackingSessionField();
-//				Thread.sleep(3000);
-//				optionAtselect();
-//				Thread.sleep(3000);
-//				Attimeselection();
-				rulessenderid2();
-				Thread.sleep(2000);
-				addresssprule2();
-				Thread.sleep(2000);
-				rulerouteid2();
-				Thread.sleep(2000);
-				ruleroute2();
-				clickPorogramProceedButton();
-				
-				
+			
+//			
 				
 				// same path for both program and rule thats why used this fns here//
 				Thread.sleep(2000);
@@ -2465,12 +2421,67 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 			}
 	
 		 
+		 public void deliverytabselection(String offerType,String touch) throws Exception {
+			 
+			 if(!offerType.contains("STV")) {
+				 System.out.println("inside stv");
+					clickTrackingSessionField();
+					Thread.sleep(3000);
+					optionAtselect();
+					Thread.sleep(3000);
+					Attimeselection();
+					Thread.sleep(3000);
+					rulessenderid2();
+					Thread.sleep(2000);
+					addresssprule2();
+					Thread.sleep(2000);
+					rulerouteid2();
+					Thread.sleep(2000);
+					ruleroute2();
+					Thread.sleep(2000);
+					clickPorogramProceedButton();
+					}else {
+						System.out.println("inside stv else");
+//					
+						rulessenderid2();
+						Thread.sleep(2000);
+						addresssprule2();
+						Thread.sleep(2000);
+						rulerouteid2();
+						Thread.sleep(2000);
+						ruleroute2();
+						clickPorogramProceedButton();
+						
+					}
+					if(touch.contentEquals("sms")||touch.contentEquals("trigger")){
+						System.out.println("inside sms");
+
+						Thread.sleep(2000);
+						rulessenderid();
+						Thread.sleep(2000);
+						addresssprule();
+
+						Thread.sleep(2000);
+						rulerouteid();
+						Thread.sleep(2000);
+						ruleroute();
+						Thread.sleep(2000);
+						clickPorogramProceedButton();
+			   }
+				
+			 
+		 } 
+		 
+		 
+		 
+		 
+		 
 		 
 		 public void programenddate() throws java.lang.Exception {
 			 Thread.sleep(2000);
 				Calendar rightNow =Calendar.getInstance();
 		    	String mn = "";
-		    	if(rightNow.get(Calendar.MONTH)+1<9) {
+		    	if(rightNow.get(Calendar.MONTH)+1<=9) {
 		    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
 		    	}
 		    	else 

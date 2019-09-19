@@ -2557,7 +2557,7 @@ System.out.println(editname+"program has edited successfully");
 													str.append("http://");
 													MarathonHelper m = new MarathonHelper();
 													
-													str.append(p.getValue("nginxIp"));
+													str.append(p.getValue("nginxIp"));  
 													str.append(":");
 													str.append("8092");
 													eh.setExcelFile("touchpointInputData", touchpointSheet);

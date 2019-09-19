@@ -567,28 +567,28 @@ Feature: Test cases for API
 	 @initBrowser 
   Scenario: API- Verify getoffer for API -3100
     Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeSMS" offer to Offer Catalogue
-    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeSMS" offer to Offer Catalogue
+#    Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
     Then click create program button
@@ -611,6 +611,42 @@ Feature: Test cases for API
     Then wait for offer accepted event in consumer profile
     Then pass next scenario based on this step
     
+    
+    @NDX-9882
+	 @initBrowser 
+  Scenario: API- Verify getoffer for API -3100
+    Given login
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#
+#    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeSMS" offer to Offer Catalogue
+#    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+#    Then click create program button
+#    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointUR_default"
+    Then choose program from sheet "programdetails"
+    Then create new rule from sheet "programdetails" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointUR_default"
+    Then verify rule created from sheet "rule"
+    Then wait for "A" status of rule
+    Then wait until rule is picked
   @NX-3108
   Scenario: API- Verify that consumer is able to pull recharge offers(Application Type = General && Event For Tracking = Accepted Event) 3108
     Then check previous step and pass this
