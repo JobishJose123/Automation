@@ -401,14 +401,13 @@ Examples:
 |SeedingSMS|multiplecreative|
 |seedingWAPoffer|singlecreative|
 |seedingEmail|singlecreative|
-|SeedingSMS_Dynamic|singlecreative|
-     
+
 
 @NDX-CreateBCForFunctionality @initBrowser   @closeBrowser
 Scenario Outline:Create broadcast to verify bc functionality(trigger not included)
 Given login
 Then navigate to configuration management
-Then navigate to partners
+Then navigate to partners       
 Then edit a partner
 Then navigate to control group settings page
 Then change partner control group settings
@@ -418,14 +417,13 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then create bc from sheet "<bcSheet>" with inventory "Unlimited"
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "none"
 Then enter target tab details target condition <targetCondition> type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
 Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
 Then activate bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
-  
-Examples:
+ Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|                  
 |one-offBC|rechargeSMS|profilefieldNV|Create|no limit|fixedPercentage|none|multiple creative|none|At|1|
 |one-offBC|rechargeWAP|customerList|Create|no limit|no limit|none|single creative|none|none|2|
@@ -444,6 +442,7 @@ Examples:
 |seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|15|
 |seedingRecurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|16|
 
+
 @NDX-TriggerBC  @initBrowser @closeBrowser
 Scenario Outline: Create all type of trigger bc to verify trigger bc functionality
 Given login
@@ -452,13 +451,12 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then create trigger bc from sheet "<bcSheet>" with inventory "Unlimited"
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "trigger"
 Then enter target tab details target condition <targetCondition> type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
 Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
 Then activate bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
-
 Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|
 |TriggerOneoff|rechargeSMS|segmentAgeGT40|Saved Segments|no limit|fixedPercentage|none|single creative|never|none|17|
@@ -476,7 +474,41 @@ Given login
 Then provide file for trigger with csv file "trigger1.csv"
 
 
+@NDX-CreateUsageBasedOffer @initBrowser
+Scenario Outline:create bc with usage based offer for verification of cg 
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to offers
+Then create new offer from sheet "<offerName>" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "<TrackSource>"
+Examples:
+|offerName|trackSource|
+|rechargeSMS|Usage Metric|
+|SeedingSMS|Usage Metric|
 
 
-
+@NDX-CreateBCWithUsageBasedOffer @initBrowser
+Scenario Outline:create bc with usage based offer for verification of cg 
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "<trigger>"
+Then enter target tab details target condition targetall type "none" TG "no limit" CG "fixedPercentage" DNC "none"
+Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "never" target render time "realTime" and broadcast expiry as "none" from sheet "<bcSheet>"
+Then activate bc
+Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
+Examples:
+|bcSheet|trigger|offerName|i|
+|one-offBC|none|rechargeSMS|24|
+|recurrBCDaily|none|rechargeSMS|25|
+|seedingoneoff|none|SeedingSMS|26|
+|seedingRecurringBC|none|SeedingSMS|27|
+|TriggerOneoff|trigger|rechargeSMS|28|
+|TriggerOneoff|trigger|SeedingSMS|29|
+|TriggerReccurringBC|trigger|rechargeSMS|30|
+|TriggerReccurringBC|trigger|SeedingSMS|31|
 

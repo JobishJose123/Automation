@@ -255,7 +255,7 @@ Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition profilefieldNV from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition profilefieldNV from sheet "targetConditionCount" of the bc from sheet "one-offBC" from bc report
+Then verify the count with condition profilefieldNV from sheet "targetConditionCount" of the bc from sheet "one-offBC" from bc report
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750000"
@@ -343,7 +343,7 @@ Then view broadcast for "RecurringChildOptionIconAt" for bctype "onetime"
 Then verify the target count with condition segmentAgeGT40 from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition segmentAgeGT40 from sheet "targetConditionCount" of the bc from sheet "recurrBCDaily" from bc report
+Then verify the count with condition segmentAgeGT40 from sheet "targetConditionCount" of the bc from sheet "recurrBCDaily" from bc report
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750017"
@@ -431,7 +431,7 @@ Then verify the ack count with target condition sharedEventOtherPartner from she
 Then view broadcast for "seedingonetime" for bctype "onetime"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition sharedEventOtherPartner from sheet "targetConditionCount" of the bc from sheet "seedingoneoff" from bc report
+Then verify the count with condition sharedEventOtherPartner from sheet "targetConditionCount" of the bc from sheet "seedingoneoff" from bc report
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
@@ -511,7 +511,7 @@ Then view broadcast for "seedingRecurring" for bctype "onetime"
 Then verify the target count with condition Acknowledgement from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition drCount from sheet "targetConditionCount" of the bc from sheet "seedingRecurringBC" from bc report
+Then verify the count with condition drCount from sheet "targetConditionCount" of the bc from sheet "seedingRecurringBC" from bc report
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
@@ -583,7 +583,7 @@ Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition segmentAgeGT40 from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition segmentAgeGT40 from sheet "targetConditionCount" of the bc from sheet "TriggerOneoff" from bc report 
+Then verify the count with condition segmentAgeGT40 from sheet "targetConditionCount" of the bc from sheet "TriggerOneoff" from bc report 
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
@@ -665,7 +665,7 @@ Then wait until status of "TriggerReccurringBC" from file "bcInputData" is "Deli
 Then wait for 1 minutes
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition targetall from sheet "targetConditionCount" of the bc from sheet "TriggerOneoff" from bc report 
+Then verify the count with condition targetall from sheet "targetConditionCount" of the bc from sheet "TriggerOneoff" from bc report 
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
@@ -700,4 +700,45 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "TriggerReccurringBC" for bctype "onetime"
 Then wait until status of "TriggerReccurringBC" from file "bcInputData" is "Delivery Expired" for bctype "seeding"
-Then verify the ack is not send fot the bc from sheet "TriggerReccurringBC" after the bc expiry 
+Then verify the ack is not send for the bc from sheet "TriggerReccurringBC" after the bc expiry 
+
+@NDX-11750 @NDX-11751 @NDX-11752 @NDX-11753 @NDX-11754 @NDX-11755 @NDX-11756 @NDX-11757 @initBrowser
+Scenario Outline: verify the partner level and broadcast level cg exclusion for all type of bc with usage based offer
+Then filter the bc from sheet "BCDataStorage" from row "<row>" and column "0" and write in sheet "<bcSheet>"
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "<bcSheet>" for bctype "onetime"
+Then wait for 1 minutes
+Then wait until status of "<bcSheet>" from file "bcInputData" is "<bcStatus>" for bctype "<bcType>"
+Then view broadcast for "<viewBC>" for bctype "onetime"
+Then verify the cg exclusion from sheet "targetConditionCount"
+Then navigate to reports
+Then navigate to broadcast reports
+Then verify the count with condition targetall from sheet "targetConditionCount" of the bc from sheet "<bcSheet>" from bc report 
+Examples: 
+|row|bcSheet|bcStatus|bcType|viewBC|
+|24|one-offBC|Completed|onetime|onetime|
+|25|seedingoneoff|Completed|seeding|seedingonetime|
+|26|recurrBCDaily|Completed|recurring|recurringchildbc|
+|27|seedingRecurringBC|Completed|seedingRecurr|seedingRecurring|
+|28|TriggerOneoff|Delivering|onetime|onetime|
+|29|TriggerOneoff|Delivering|seeding|seedingonetime|
+|30|TriggerReccurringBC|Delivering|recurring|recurringchildbc|
+|31|TriggerReccurringBC|Delivering|seedingRecurr|seedingRecurring|
+
+
+
+
+
+
+
+
+
+
+
+
+
+

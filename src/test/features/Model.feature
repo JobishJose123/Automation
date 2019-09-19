@@ -8,16 +8,17 @@ Scenario Outline: Verify Model Creation for MODELS <MODEL_TYPE>
 Given login
 Then navigate to InsightWorkbench
 Then click on <MODEL_TYPE>
-Then click on CreateNewModelButton
-Then EnterThe ModelName "modelData"
-Then Enter model input from file <INPUT> with <MODEL_TYPE> and "modelData"
+Then click on create new model button
+Then enter the model name "modelData"
+Then enter model input from file <INPUT> with <MODEL_TYPE> and "modelData"
 Then click on Inputs
-Then create a Dataframe "D2" with discription "dataframe created by Selenium"
+Then create a Dataframe "selenium dataframe" with discription "dataframe created by Selenium"
 Then add a customer base list
 Then wait until dataframeStatus is changed to "Dataframe Status: complete"
-Then click on Close and run the paragraph
+Then click on close and run the paragraph
 Then wait until status is changed to "FINISHED"
-Then Verify model output from file <OUTPUT>
+Then verify model output from file <OUTPUT>
+
 
 Examples:
 |MODEL_TYPE|INPUT|OUTPUT|

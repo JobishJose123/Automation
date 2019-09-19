@@ -510,7 +510,21 @@ public class CommonSteps extends Init {
 		commonObjetcs.navigateToAdmin();
 	}
 	
-	
+	@Then("^navigate to fulfillment configuration$")
+	public void navigate_to_fulfillment_configuration() throws Throwable {
+		commonObjetcs.navigateToFulfillmentConfig();
+	}
+
+	@Then("^navigate to tracking data sources$")
+	public void navigate_to_tracking_data_sources() throws Throwable {
+		commonObjetcs.navigateToTrackingDataSource();
+	}
+
+	@Then("^create new tracking source with name \"([^\"]*)\"$")
+	public void create_new_tracking_sorce_with_name(String trackSourceName) throws Throwable {
+		commonObjetcs.createNewTrackSource(trackSourceName);
+	    
+	}
 	
 	
 	

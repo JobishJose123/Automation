@@ -4413,14 +4413,14 @@ public void abort_bc_for_bctype(String bctype) throws Exception {
 		
 	}
 //==========================================================================================================================================//
-@Then("^create bc from sheet \"([^\"]*)\" with inventory \"([^\"]*)\"$")
-public void create_bc_from_sheet_with_inventory(String bcSheet, String inventory) throws Exception {
+	@Then("^create bc from sheet \"([^\"]*)\" with inventory \"([^\"]*)\" and trigger \"([^\"]*)\"$")
+	public void create_bc_from_sheet_with_inventory_and_trigger(String bcSheet, String inventory, String trigger) throws Exception {
 	eM.setExcelFile("bcInputData", bcSheet);
 	String bcName = (String) eM.getCell(1, 0);
 	bcName = RandomNameGenerator.getRandomName(bcName);
 	eM.setCell(1, 0, bcName);
 	String bc_type = (String) eM.getCell(1, 7);
-	broadcastPageObjects.enterBasicDetailsOfBC(bcName,inventory);
+	broadcastPageObjects.enterBasicDetailsOfBC(bcName,inventory,trigger);
 }
 
 @Then("^enter target tab details target condition (.*) type \"([^\"]*)\" TG \"([^\"]*)\" CG \"([^\"]*)\" DNC \"([^\"]*)\"$")
@@ -5074,12 +5074,12 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	   broadcastPageObjects.verifyViewDetailsOfBc(targetCount,offerChannel);
 	}
 
-	@Then("^verify the dr count from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\" from bc report$")
-	public void verify_the_dr_count_from_sheet_of_the_bc_from_sheet_from_bc_report(String targetCountSheet, String bcSheet) throws Exception {
-	   eh.setExcelFile("bcInputData", bcSheet);
-	   eM.setExcelFile("parallelRunBC", targetCountSheet);
-	   broadcastPageObjects.verifyDRCount(eh.getCellByColumnName("BC Name"),eM.getCellByColumnName("Acknowledgement"));
-	}
+//	@Then("^verify the dr count from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\" from bc report$")
+//	public void verify_the_dr_count_from_sheet_of_the_bc_from_sheet_from_bc_report(String targetCountSheet, String bcSheet) throws Exception {
+//	   eh.setExcelFile("bcInputData", bcSheet);
+//	   eM.setExcelFile("parallelRunBC", targetCountSheet);
+//	   broadcastPageObjects.verifyDRCount(eh.getCellByColumnName("BC Name"),eM.getCellByColumnName("Acknowledgement"));
+//	}
 	
 	@Then("^view broadcast for \"([^\"]*)\" for bctype \"([^\"]*)\"$")
 	public void view_broadcast_for_for_bctype(String bcToView, String bctype) throws Exception {
@@ -5303,21 +5303,15 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		String targetCount=eM.getCellByColumnName(targetCondition);
 		broadcastPageObjects.verifyBCAckCountFromGrid(bcName,targetCount,bctype);
 }
-	@Then("^verify the dr count with condition (.*) from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\" from bc report$")
-	public void verify_the_dr_count_with_condition_from_sheet_of_the_bc_from_sheet_from_bc_report(String targetCondition, String targetCountSheet, String bcSheet) throws Throwable {
+	@Then("^verify the count with condition (.*) from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\" from bc report$")
+	public void verify_the_count_with_condition_from_sheet_of_the_bc_from_sheet_from_bc_report(String targetCondition, String targetCountSheet, String bcSheet) throws Throwable {
     eh.setExcelFile("parallelRunBc", targetCountSheet);
     String targetCount=eh.getCellByColumnName(targetCondition);
     eM.setExcelFile("bcInputData", bcSheet);
     String  bcName=eM.getCellByColumnName("BC Name");
-    broadcastPageObjects.verifyDRCount(bcName,targetCount);
+    broadcastPageObjects.verifyCountFromBCReport(bcName,targetCount);
 }
-	@Then("^create trigger bc from sheet \"([^\"]*)\" with inventory \"([^\"]*)\"$")
-	public void create_bc_from_sheet_(String bcSheet,String inventory) throws Exception {
-	   System.out.println("===================="+TRIGGER+"====================");
-	   broadcastPageObjects.createBCWithTrigger(TRIGGER);
-	   create_bc_from_sheet_with_inventory(bcSheet,inventory);
-	   
-	}
+	
 	@Then("^add bc from sheet \"([^\"]*)\" to column \"([^\"]*)\" of bc data sheet \"([^\"]*)\"$")
 	public void add_bc_from_sheet_to_column_of_bc_data_sheet(String bcSheet, int row, String bcStorageSheet) throws Throwable {
          eM.setExcelFile("bcInputData", bcSheet);
@@ -5379,8 +5373,8 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		
 	}
 	
-	@Then("^verify the ack is not send fot the bc from sheet \"([^\"]*)\" after the bc expiry$")
-	public void verify_the_ack_is_not_send_fot_the_bc_from_sheet_after_the_bc_expiry(String bcSheet) throws Exception {
+	@Then("^verify the ack is not send for the bc from sheet \"([^\"]*)\" after the bc expiry$")
+	public void verify_the_ack_is_not_send_for_the_bc_from_sheet_after_the_bc_expiry(String bcSheet) throws Exception {
 		eh.setExcelFile("bcInputData", bcSheet);
 		String bcName=eh.getCellByColumnName("BC Name");
 		String count=driver.findElement(By.xpath("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[2]//following::vaadin-grid-cell-content[7]")).getText();
