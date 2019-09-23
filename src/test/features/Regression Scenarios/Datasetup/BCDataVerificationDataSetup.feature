@@ -426,14 +426,14 @@ Scenario Outline: Create all type of bcs with <bcSheet> with <offerSheet> and <c
 	
 	Examples: 
 		|SavedSheet|bcSheet|campaignBC|campaignCategory|offerSheet|condition|creative|rewardTypeRule|
-		|rewardBcs|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|oneruleonereward|
-		|rewardBcs|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|oneruleonereward|
-		|rewardBcs|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup50|singlecreative|oneruleonereward|
-		|rewardBcs|seedingRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup70|singlecreative|oneruleonereward|
-		|rewardBcs|TriggerOneoff|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup30|singlecreative|oneruleonereward|
-		|rewardBcs|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|oneruleonereward|
-		|rewardBcs|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|oneruleonereward|
-		|rewardBcs|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|oneruleonereward|
+		|UsageBasedConversion|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|oneruleonereward|
+		|UsageBasedConversion|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|oneruleonereward|
+		|UsageBasedConversion|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup50|singlecreative|oneruleonereward|
+		|UsageBasedConversion|seedingRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup70|singlecreative|oneruleonereward|
+		|UsageBasedConversion|TriggerOneoff|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup30|singlecreative|oneruleonereward|
+		|UsageBasedConversion|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|oneruleonereward|
+		|UsageBasedConversion|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|oneruleonereward|
+		|UsageBasedConversion|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|oneruleonereward|
 		
 		
 		

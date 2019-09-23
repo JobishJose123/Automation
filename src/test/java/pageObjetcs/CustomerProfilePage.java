@@ -887,12 +887,15 @@ public void verifyFulFillmentSuccessMessage(String Creative,String messageType,S
 	Thread.sleep(3000);
 	System.out.println(ackEvents.size());
 	int count=1;
-	
+	if(ackEvents.size()==0) {
+		Assert.assertTrue("No Response event raised", false);
+	}
 	if (rewardType.equalsIgnoreCase("oneruleonereward")) {
 	for (WebElement webElement : ackEvents) {
 		
-		jswait.loadClick("(//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'Acknowledged')]/../..//data-table-cell[4]//span[text()=''])["+count+"]");
-	if(count==1)
+		//jswait.loadClick("(//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'Acknowledged')]/../..//data-table-cell[4]//span[text()=''])["+count+"]");
+	jswait.loadClick("(//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[4]//span[text()='']/../..//data-table-cell[3]//span[contains(.,'Acknowledged')])["+count+"]");
+		if(count==1)
 		assertTrue(jswait.checkVisibility("//label[contains(.,'Creative')]/..//label[contains(.,'"+Creative+"')]"));	
 	System.out.println("1st creative message verified");
 	count++;

@@ -4932,7 +4932,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		String bcName, campaignCategory, campaignName, offerName, inventory, bcType,bcSheet = "";
 		SQLHandler sql = new SQLHandler();
 		for (int i = 0; i < data.size(); i++) {
-			campaignObjects.navigateToLIfeCycleMarketing();
+			
 			bcName = data.get(i).get(1);
 			campaignCategory = data.get(i).get(4);
 			campaignName = data.get(i).get(5);
@@ -4944,6 +4944,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 			if(bcSheet.equals(bcSheetName)) {
 			try {
                  System.out.println("try block");
+                 campaignObjects.navigateToLIfeCycleMarketing();
 				campaignObjects.scrollToCampaignCategory(campaignCategory);
 				commonObjects.filterName(campaignName);
 				jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
@@ -4973,14 +4974,14 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 					if(bcSheet.contains("Trigger")) {
 						TimeoutImpl t = new TimeoutImpl();
 						t.startTimer();
-						while (!statusOfBC.contains("Delivering") && t.checkTimerMin(55)) {
+						while (!statusOfBC.contains("Delivering") && t.checkTimerMin(120)) {
 							statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
 							System.out.println(statusOfBC);
 							Thread.sleep(5000);
 						}
 						System.out.println("Status of BC "+statusOfBC);
 						if(statusOfBC.equals("Delivering")) {
-						broadcastPageObjects.provideFileForConversion("/ftp-live/selenium/seleniumTrigger","TriggerData.csv");
+						broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/seleniumTrigger","TriggerData.csv");
 						System.out.println("Trigger input data provided ");
 						}// if status of bc
 					}//if trigger
@@ -4997,18 +4998,37 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 					Assert.assertTrue("BC not completed ",statusOfBC.equals("Completed"));
 					
 					
-					
-					if(statusOfBC.equals("Completed")) {
-					System.out.println("Providing file for conversion ");
-					//provideFileForConversion();
-					broadcastPageObjects.provideFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
-					lg.legacyTest();
-					System.out.println("Removing file from conversion. .. .. ... .");
-					//deleteFileForConversion();
-					broadcastPageObjects.deleteFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
-					int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
-					System.out.println("Deactivate the JOb ... .. ." +ss2);
-					
+						if (statusOfBC.equals("Completed")) {
+							if (sheet.equals("rewardBcs")) {
+								System.out.println("RechargeBasedConversion");
+								System.out.println("Providing file for conversion ");
+								// provideFileForConversion();
+								broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium",
+										"conversion.csv");
+								lg.legacyTest();
+								System.out.println("Removing file from conversion. .. .. ... .");
+								// deleteFileForConversion();
+								broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
+										"conversion.csv");
+								int deactivateConversionJob = sql
+										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
+								System.out.println("Deactivate the JOb ... .. ." + deactivateConversionJob);
+							} else if (sheet.equals("UsageBasedConversion")) {
+								System.out.println("UsageBasedConversion");
+								System.out.println("Providing file for conversion ");
+								// provideFileForConversion();
+								broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium",
+										"conversion.csv");
+								lg.UsageConversionJob();
+								System.out.println("Removing file from conversion. .. .. ... .");
+								// deleteFileForConversion();
+								broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
+										"conversion.csv");
+								int deactivateUsageConversionJob = sql
+										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
+								System.out.println("Deactivate the JOb ... .. ." + deactivateUsageConversionJob);
+							}
+
 					}
 					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
 				} else {
@@ -5021,13 +5041,11 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
 					
 					
-					
-					
 					if (!statusOfBC.equals("completed")) {
 						commonObjects.toggleAutoRefresh();
 						TimeoutImpl t = new TimeoutImpl();
 						t.startTimer();
-						while (!statusOfBC.contains("Completed") && t.checkTimerMin(75)) {
+						while (!statusOfBC.contains("Completed") && t.checkTimerMin(150)) {
 							statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
 							System.out.println(statusOfBC);
 							Thread.sleep(5000);
@@ -5039,16 +5057,29 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
                     Thread.sleep(5000);
                     
 					if(statusOfBC.equals("Completed")) {
+						if(sheet.equals("rewardBcs")) {
+							System.out.println("RechargeBasedConversion");
 					System.out.println("Providing file for conversion ");
 					//provideFileForConversion();
-					broadcastPageObjects.provideFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
+					broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
 					lg.legacyTest();			
 					System.out.println("Removing file from conversion. .. .. ... .");
 					//deleteFileForConversion();
-					broadcastPageObjects.deleteFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
-					int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
-					System.out.println("Deactivate the JOb ... .. ." +ss2);
-					
+					broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
+					int deactivateConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
+					System.out.println("Deactivate the JOb ... .. ." +deactivateConversionJob);
+						}else if(sheet.equals("UsageBasedConversion")){
+						System.out.println("UsageBasedConversion");
+						System.out.println("Providing file for conversion ");
+						//provideFileForConversion();
+						broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
+						lg.UsageConversionJob();
+						System.out.println("Removing file from conversion. .. .. ... .");
+						//deleteFileForConversion();
+						broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
+						int deactivateUsageConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
+						System.out.println("Deactivate the JOb ... .. ." +deactivateUsageConversionJob);
+					}
 					}//if
 				}
 
@@ -5056,9 +5087,11 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
                 System.out.println("Catch block");
 				System.out.println("Removing file from conversion. .. .. ... .");
 				//deleteFileForConversion();
-				broadcastPageObjects.deleteFileForConversion("/ftp-live/selenium/conversion","conversion.csv");
-				int ss2 = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
-				System.out.println("Deactivate the JOb ... .. ." +ss2);
+				broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
+				int deactivateConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
+				System.out.println("Deactivate the JOb ... .. ." +deactivateConversionJob);
+				int deactivateUsageConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
+				System.out.println("Deactivate the JOb ... .. ." +deactivateUsageConversionJob);
 			}//catch
 			}// after for loop if 
 
@@ -5066,7 +5099,6 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		
 
 }
-
 	@Then("^verify the target count with condition (.*) from sheet \"([^\"]*)\" also the channel \"([^\"]*)\"$")
 	public void verify_the_target_count_with_condition_SharedcustomerList_from_sheet_also_the_channel(String condition,String targetCountSheet, String offerChannel) throws Exception {
 	   eh.setExcelFile("parallelRunBC", targetCountSheet);

@@ -129,32 +129,146 @@ Then verify pdf generated for broadcast from BCsheet "seedingTriggerableRecurrin
 
 	#**************/\********************* Verify reward bc`s***********/\**************
 	
-@ActivateCreatedRewardbcsMig @initBrowser 
-Scenario: Activate the reward bcs and raise the conversion job 
-	Given login 
-	Then navigate to precision marketer 
-	Then activate and raise the conversion job the broadcast from workbook "parallelRunBC" and sheet "rewardBcs" 
-	
-@VerifyAckEventBcsMIG @initBrowser 
-Scenario: Verify Ack event for activated reward bcs 
-	Then verify the acknowledgement of Bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009" 
-	
-@verifyConversionEventMIG @NDX-9804 @NDX-9805 @initBrowser 
-Scenario: Verify the Conversion event for activated reard bcs 
-	Then verify the Conversion event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with MSISDN"9491750009" 
-	
-@NDX-9804 @initBrowser 
-Scenario:
-Verify fulfillemnt event for reward bcs for one rule one reward and unique conversion with rule based 
-	Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "oneruleonereward" and MSISDN"9491750009" 
-	Then verify the FulfillmentSuccessMessage to verify Creative "Success from Selenium from first rule" message type "Text" and rewardType "oneruleonereward" with MSISDN"9491750009" 
-	
-@NDX-10242 @NDX-10241 @initBrowser 
-Scenario:
-Verify fulfillemnt event for reward bcs for one rule one multiple rewards and unique conversion with rule based 
-	Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "onerulemultiplerewards" and MSISDN"9491750009" 
-	Then verify the FulfillmentSuccessMessage to verify Creative "Success from Selenium from first rule" message type "Text" and rewardType "onerulemultiplerewards" with MSISDN"9491750009" 
-	
+@ActivateCreatedRewardbcs_MIG @initBrowser
+Scenario Outline: Activate the reward bcs and raise the conversion job_MIG
+Given login 
+Then navigate to precision marketer 
+Then activate and raise the conversion job the broadcast from workbook "<storedWB>" and sheet "<storedSheet>" and bcSheetName "<bcsheet>"
+
+Examples:
+|storedWB|storedSheet|bcsheet|
+#|parallelRunBC|rewardBcs|recurringBC|
+#|parallelRunBC|rewardBcs|one-offBC|
+#|parallelRunBC|rewardBcs|seedingoneoff|
+#|parallelRunBC|rewardBcs|seedingRecurringBC|
+#|parallelRunBC|rewardBcs|TriggerOneoff|
+#|parallelRunBC|rewardBcs|TriggerReccurringBC|
+#|parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|
+#|parallelRunBC|rewardBcs|seedingTriggerable|
+|parallelRunBC|UsageBasedConversion|one-offBC|
+|parallelRunBC|UsageBasedConversion|seedingoneoff|
+|parallelRunBC|UsageBasedConversion|recurringBC|
+|parallelRunBC|UsageBasedConversion|seedingRecurringBC|
+|parallelRunBC|UsageBasedConversion|TriggerOneoff|
+|parallelRunBC|UsageBasedConversion|TriggerReccurringBC|
+|parallelRunBC|UsageBasedConversion|seedingTriggerableRecurringBC|
+|parallelRunBC|UsageBasedConversion|seedingTriggerable|
+
+
+
+
+@VerifyAckEventBcs_MIG @initBrowser @closeBrowser
+Scenario Outline: Verify Ack event for activated reward bcs _ MIG
+Given login 
+Then navigate to precision marketer 
+Then verify the acknowledgement of Bcs from workbook "<storedWB>" and sheet "<storedSheet>" with MSISDN"<MSISDN>" with bc "<bcsheet>"
+Examples:
+|storedWB|storedSheet|bcsheet|MSISDN|
+|parallelRunBC|rewardBcs|recurringBC|919491750103|
+|parallelRunBC|rewardBcs|one-offBC|919491750152|
+|parallelRunBC|rewardBcs|seedingoneoff|919491750252|
+|parallelRunBC|rewardBcs|seedingRecurringBC|919491750365|
+|parallelRunBC|rewardBcs|TriggerOneoff|919491750103|
+|parallelRunBC|rewardBcs|TriggerReccurringBC|919491750103|
+|parallelRunBC|rewardBcs|seedingTriggerable|919491750103|
+|parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|919491750103|
+|parallelRunBC|UsageBasedConversion|one-offBC|919491750054|
+|parallelRunBC|UsageBasedConversion|seedingoneoff|919491750245|
+|parallelRunBC|UsageBasedConversion|recurringBC|9491750045|
+|parallelRunBC|UsageBasedConversion|seedingRecurringBC|9491750345|
+|parallelRunBC|UsageBasedConversion|TriggerOneoff|9491750128|
+|parallelRunBC|UsageBasedConversion|TriggerReccurringBC|9491750168|
+|parallelRunBC|UsageBasedConversion|seedingTriggerableRecurringBC|9491750358|
+|parallelRunBC|UsageBasedConversion|seedingTriggerable|9491750258|
+
+@verifyRechargeBasedConversionEvent_MIG @NDX-9811 @NDX-9810 @NDX-9809 @NDX-9808 @NDX-9807 @NDX-9806 @NDX-9805 @NDX-9804 @initBrowser @closeBrowser
+Scenario Outline: Verify the Conversion event for recharge based conversion activated reward bcs_MIG
+Given login 
+Then navigate to precision marketer 
+Then verify the Conversion event of bcs from workbook "<storedWB>" and sheet "<storedSheet>" with MSISDN"<MSISDN>" with bc "<bcsheet>"
+Examples:
+|storedWB|storedSheet|bcsheet|MSISDN|
+|parallelRunBC|rewardBcs|recurringBC|919491750103|
+|parallelRunBC|rewardBcs|one-offBC|919491750152|
+|parallelRunBC|rewardBcs|seedingoneoff|919491750353|
+|parallelRunBC|rewardBcs|seedingRecurringBC|919491750103|
+|parallelRunBC|rewardBcs|TriggerOneoff|919491750103|
+|parallelRunBC|rewardBcs|TriggerReccurringBC|919491750103|
+|parallelRunBC|rewardBcs|seedingTriggerable|919491750103|
+|parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|919491750103|
+
+
+@verifyUsageBasedConversionEvent_MIG @NDX-9819 @NDX-9818 @NDX-9817 @NDX-9816 @NDX-9815 @NDX-9814 @NDX-9813 @NDX-9812 @initBrowser @closeBrowser
+Scenario Outline: Verify the Conversion event for Usage based conversion activated reward bcs_MIG
+Given login 
+Then navigate to precision marketer 
+Then verify the Conversion event of bcs from workbook "<storedWB>" and sheet "<storedSheet>" with MSISDN"<MSISDN>" with bc "<bcsheet>"
+Examples:
+|storedWB|storedSheet|bcsheet|MSISDN|
+|parallelRunBC|rewardBcs|recurringBC|919491750103|
+|parallelRunBC|rewardBcs|one-offBC|919491750152|
+|parallelRunBC|rewardBcs|seedingoneoff|919491750353|
+|parallelRunBC|rewardBcs|seedingRecurringBC|919491750103|
+|parallelRunBC|rewardBcs|TriggerOneoff|919491750103|
+|parallelRunBC|rewardBcs|TriggerReccurringBC|919491750103|
+|parallelRunBC|rewardBcs|seedingTriggerable|919491750103|
+|parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|919491750103|
+
+
+ @NDX-10241 @initBrowser
+Scenario: Verify fulfillment sucess is happening for one-off BCs(migration)
+Given login 
+Then navigate to precision marketer 
+Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "oneruleonereward" and MSISDN"919491750155" with bctype "one-off"
+#Then verify the FulfillmentSuccessMessage to verify Creative "Success from Selenium from first rule" message type "Text" and rewardType "oneruleonereward" with MSISDN"9491750009"
+ 
+ @NDX-10245 @initBrowser
+Scenario: Verify fulfillment sucess is happening for seeding one off BCs(migration)
+Given login 
+Then navigate to precision marketer 
+Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "oneruleonereward" and MSISDN"919491750256" with bctype "seedingoneoff"
+
+ @NDX-10242 @initBrowser
+Scenario: Verify fulfillment sucess is happening for recurring  BCs(migration)
+Given login 
+Then navigate to precision marketer 
+Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "oneruleonereward" and MSISDN"919491750155" with bctype "recurring"
+#
+
+ @NDX-10246 @initBrowser
+Scenario: Verify fulfillment sucess is happening for seeding recurring BCs(migration)
+Given login 
+Then navigate to precision marketer 
+Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "oneruleonereward" and MSISDN"919491750365" with bctype "seedingRecurring"
+#
+
+ @NDX-10244 @initBrowser
+Scenario: Verify fulfillment sucess is happening for trigger recur BCs(migration)
+Given login 
+Then navigate to precision marketer 
+Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "oneruleonereward" and MSISDN"919491750155" with bctype "TriggerReccurringBC"
+#
+
+ @NDX-10247	@initBrowser
+Scenario: Verify fulfillment sucess is happening for Seeding trigger one off BCs(migration)
+Given login 
+Then navigate to precision marketer 
+Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "oneruleonereward" and MSISDN"919491750155" with bctype "seedingTriggerable"
+#
+
+ @NDX-10243 @initBrowser
+Scenario: Verify fulfillment sucess is happening for trigger-one-off BCs(migration)
+Given login 
+Then navigate to precision marketer 
+Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "oneruleonereward" and MSISDN"919491750155" with bctype "TriggerOneoff"
+#
+
+ @NDX-10248 @initBrowser
+Scenario: Verify fulfillment sucess is happening for seeding trigger recurring BCs(migration)
+Given login 
+Then navigate to precision marketer 
+Then verify the Fulfillment event of bcs from workbook "parallelRunBC" and sheet "rewardBcs" with rewardType "oneruleonereward" and MSISDN"919491750155" with bctype "seedingTriggerableRecurringBC"
+#
 	
 #	======================================bc functionality verification=================================================#
 @NDX-ActivateBC  @initBrowser
