@@ -302,7 +302,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement bcnotificationbeforeRendertime;
 	@FindBy(xpath = "//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::paper-listbox//paper-item[2]")
 	private WebElement bcnotificationbeforerendertime1min;
-	@FindBy(xpath = "//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'selenium user')]")
+	@FindBy(xpath = "//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'Selenium user')]")
 	private WebElement bcnotificationrecipientclick;
 	@FindBy(xpath = "//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'System Administrator')]")
 	private WebElement bcnotificationrecipientclick2;
@@ -1478,7 +1478,7 @@ public boolean checkCalculateBtnDisplayed() {
 		offerExcel.setExcelFile("offerInputData", offer);
 		enterBroadcastBasicDetails(name, INVENTORY_UNLIMITED);
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")
-				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
+				|| bc_type.contentEquals("seedingTriggerableRecurringBC")||bc_type.contentEquals("TriggerReccurringBC")) {
 			System.out.println("inside triggerable");
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(1000);
@@ -1673,10 +1673,21 @@ public boolean checkCalculateBtnDisplayed() {
 		}
 		clickProceedButton();
 		selectBaseList(baseList);
+		jswait.loadClick(selectControlGroup);
+		jswait.loadClick(fixedPercentageOfTargetBase);
+		jswait.loadSendKeys(fixedPercentNumber, "10");
+		jswait.loadClick(CGSavebtn);
 		calculate_CG_TG();
+		
 
 		clickProceedButton();
 		selectOffer(offer);
+		try {
+			selectALanguage();
+		}catch (Exception e) {
+			System.out.println("language already selected");
+		}
+		
 		if (!bc_type.contains("Informational")) {
 			selectTrackSession();
 			selectTrackingSource();
@@ -1709,11 +1720,18 @@ public boolean checkCalculateBtnDisplayed() {
 		}
 		clickProceedButton();
 		selectBaseList(baseList);
-		selectDNCList();
+		//selectDNCList();
+		selectDNCList("both");
 		calculate_CG_TG();
 
 		clickProceedButton();
 		selectOffer(offer);
+		try {
+			selectALanguage();
+		}catch (Exception e) {
+			System.out.println("language already selected");
+		}
+		
 		if (!bc_type.contains("Informational")) {
 			selectTrackSession();
 			selectTrackingSource();

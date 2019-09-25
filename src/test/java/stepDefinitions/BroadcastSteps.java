@@ -1070,7 +1070,8 @@ public class BroadcastSteps extends Init {
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
 			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		} else
-			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			//mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
 		int hours = rightNow.get(Calendar.HOUR);
@@ -1375,7 +1376,8 @@ public class BroadcastSteps extends Init {
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
 			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		} else
-			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+//			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
 		int hours = rightNow.get(Calendar.HOUR);
@@ -1397,157 +1399,161 @@ public class BroadcastSteps extends Init {
 		}
 		Actions builder = new Actions(driver);
 		broadcastPageObjects.createBCAndCalculateCG_TG(name, bc_type, BASE_LIST, offerExcel.getCell(1, 0).toString());
+		
+		enterDeliveryTabDetails(bc_type, sheet);
 
 //		 jswait.loadClick(".//label[contains(.,'Target Conditions')]/../paper-radio-group/paper-radio-button[1]/div[1]");
 //		Thread.sleep(1500);
+		
+		
 
-		if (bc_type.contentEquals("one-off")) {
-			Thread.sleep(1000);
-			broadcastPageObjects.clickOneOffRadioButton();
-//		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
-			Thread.sleep(1000);
-			jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
-			Thread.sleep(1000);
-			jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='" + date + "']");
-			Thread.sleep(1000);
-			jswait.loadClick(
-					".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
-			Thread.sleep(1000);
-			jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
-
-			Thread.sleep(2000);
-			jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
-			WebElement num = driver.findElement(By.xpath(
-					".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
-			builder.moveToElement(num).click().build().perform();
-			Thread.sleep(2000);
-//      jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
-			WebElement num1 = driver.findElement(By.xpath(
-					".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
-			Thread.sleep(1000);
-			builder.moveToElement(num1).click().build().perform();
-//	  jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
-//	    num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][41]"));
-//	    builder.moveToElement(num1).click().build().perform();
-//	    Thread.sleep(2000);     
-			if (am_pm == 0)
-				jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
-			else
-				jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
-
-			jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
-			Thread.sleep(2000);
-
-			jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
-			Thread.sleep(1000);
-			jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='" + date + "']");
-			Thread.sleep(1000);
-			jswait.loadClick(
-					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2]");
-			Thread.sleep(3000);
-			jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[2]//paper-input[2]//input");
-			Thread.sleep(2000);
-			num = driver.findElement(By.xpath(
-					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
-							+ (hours + 1) + "]"));
-			builder.moveToElement(num).click().build().perform();
-			Thread.sleep(1000);
-//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
-			WebElement num2 = driver.findElement(By.xpath(
-					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["
-							+ (min + 1) + "]"));
-			builder.moveToElement(num2).click().build().perform();
-			Thread.sleep(1000);
-//   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
-//  num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][21]"));
-//  builder.moveToElement(num1).click().build().perform();
-//  Thread.sleep(1000);
-			if (am_pm == 0) {
-				num1 = driver.findElement(By.xpath(
-						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
-				builder.moveToElement(num1).click().build().perform();
-
-			} else {
-				num1 = driver.findElement(By.xpath(
-						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[2]"));
-				builder.moveToElement(num1).click().build().perform();
-			}
-
-			num1 = driver.findElement(By.xpath(
-					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='timeDialog']/div/paper-button[2]"));
-			builder.moveToElement(num1).click().build().perform();
-			Thread.sleep(1000);
-		} else if (bc_type.contentEquals("recurring") || bc_type.contentEquals("seedingRecurring")
-				|| bc_type.contentEquals("seedingTriggerable")) {
-			Thread.sleep(2000);
-			if (bc_type.contentEquals("recurring")) {
-				jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
-//			 jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
-//			 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='"+date+"']");
-//			 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
-//			 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
-			}
-			Thread.sleep(2000);
-			jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
-			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
-			WebElement num = driver.findElement(By.xpath(
-					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
-							+ (hours + 1) + "]"));
-			builder.moveToElement(num).click().build().perform();
-			Thread.sleep(2000);
-//		      jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
-			WebElement num1 = driver.findElement(By.xpath(
-					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
-							+ (min + 1) + "]"));
-			Thread.sleep(1000);
-			builder.moveToElement(num1).click().build().perform();
-			Thread.sleep(1000);
-			if (am_pm == 0)
-				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
-			else
-				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
-			Thread.sleep(1000);
-			num1 = driver.findElement(By.xpath(
-					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
-			builder.moveToElement(num1).click().build().perform();
-//			 Thread.sleep(1000);
-//			  jswait.loadClick("//form[@id='deliverDetailForm']//paper-input-container//label[contains(.,'Time Zone')]/..//input");
-			Thread.sleep(1000);
-			jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
-			Thread.sleep(1000);
-			jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
-			Thread.sleep(1000);
-			jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
-			Thread.sleep(1000);
-			jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Days')]");
-			Thread.sleep(1000);
-			jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input", "1");
-			Thread.sleep(1000);
-			jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
-			Thread.sleep(2000);
-			jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
-			num = driver.findElement(By.xpath(
-					"//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
-							+ (hours + 1) + "]"));
-			builder.moveToElement(num).click().build().perform();
-			Thread.sleep(2000);
-//		      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
-			num1 = driver.findElement(By.xpath(
-					"//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
-							+ (min + 1) + "]"));
-			Thread.sleep(1000);
-			builder.moveToElement(num1).click().build().perform();
-
-			Thread.sleep(1000);
-			if (am_pm == 0)
-				jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[1]");
-			else
-				jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[2]");
-			Thread.sleep(2000);
-			jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='timeDialog']/div/paper-button[2]");
-			Thread.sleep(2000);
-			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
-		}
+//		if (bc_type.contentEquals("one-off")) {
+//			Thread.sleep(1000);
+//			broadcastPageObjects.clickOneOffRadioButton();
+////		 jswait.loadClick(".//div[@id='radioLabel' and contains(.,'One-off')]/../div[1]");
+//			Thread.sleep(1000);
+//			jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
+//			Thread.sleep(1000);
+//			jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='" + date + "']");
+//			Thread.sleep(1000);
+//			jswait.loadClick(
+//					".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+//			Thread.sleep(1000);
+//			jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
+//
+//			Thread.sleep(2000);
+//			jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
+//			WebElement num = driver.findElement(By.xpath(
+//					".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
+//			builder.moveToElement(num).click().build().perform();
+//			Thread.sleep(2000);
+////      jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
+//			WebElement num1 = driver.findElement(By.xpath(
+//					".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
+//			Thread.sleep(1000);
+//			builder.moveToElement(num1).click().build().perform();
+////	  jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
+////	    num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][41]"));
+////	    builder.moveToElement(num1).click().build().perform();
+////	    Thread.sleep(2000);     
+//			if (am_pm == 0)
+//				jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+//			else
+//				jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+//
+//			jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
+//			Thread.sleep(2000);
+//
+//			jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
+//			Thread.sleep(1000);
+//			jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='" + date + "']");
+//			Thread.sleep(1000);
+//			jswait.loadClick(
+//					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2]");
+//			Thread.sleep(3000);
+//			jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[2]//paper-input[2]//input");
+//			Thread.sleep(2000);
+//			num = driver.findElement(By.xpath(
+//					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+//							+ (hours + 1) + "]"));
+//			builder.moveToElement(num).click().build().perform();
+//			Thread.sleep(1000);
+////   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
+//			WebElement num2 = driver.findElement(By.xpath(
+//					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["
+//							+ (min + 1) + "]"));
+//			builder.moveToElement(num2).click().build().perform();
+//			Thread.sleep(1000);
+////   jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
+////  num1 = driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector'][21]"));
+////  builder.moveToElement(num1).click().build().perform();
+////  Thread.sleep(1000);
+//			if (am_pm == 0) {
+//				num1 = driver.findElement(By.xpath(
+//						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
+//				builder.moveToElement(num1).click().build().perform();
+//
+//			} else {
+//				num1 = driver.findElement(By.xpath(
+//						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[2]"));
+//				builder.moveToElement(num1).click().build().perform();
+//			}
+//
+//			num1 = driver.findElement(By.xpath(
+//					".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='timeDialog']/div/paper-button[2]"));
+//			builder.moveToElement(num1).click().build().perform();
+//			Thread.sleep(1000);
+//		} else if (bc_type.contentEquals("recurring") || bc_type.contentEquals("seedingRecurring")
+//				|| bc_type.contentEquals("seedingTriggerable")) {
+//			Thread.sleep(2000);
+//			if (bc_type.contentEquals("recurring")) {
+//				jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
+////			 jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+////			 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='"+date+"']");
+////			 jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+////			 jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
+//			}
+//			Thread.sleep(2000);
+//			jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
+//			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
+//			WebElement num = driver.findElement(By.xpath(
+//					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+//							+ (hours + 1) + "]"));
+//			builder.moveToElement(num).click().build().perform();
+//			Thread.sleep(2000);
+////		      jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+//			WebElement num1 = driver.findElement(By.xpath(
+//					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+//							+ (min + 1) + "]"));
+//			Thread.sleep(1000);
+//			builder.moveToElement(num1).click().build().perform();
+//			Thread.sleep(1000);
+//			if (am_pm == 0)
+//				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
+//			else
+//				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
+//			Thread.sleep(1000);
+//			num1 = driver.findElement(By.xpath(
+//					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
+//			builder.moveToElement(num1).click().build().perform();
+////			 Thread.sleep(1000);
+////			  jswait.loadClick("//form[@id='deliverDetailForm']//paper-input-container//label[contains(.,'Time Zone')]/..//input");
+//			Thread.sleep(1000);
+//			jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
+//			Thread.sleep(1000);
+//			jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
+//			Thread.sleep(1000);
+//			jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
+//			Thread.sleep(1000);
+//			jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Days')]");
+//			Thread.sleep(1000);
+//			jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input", "1");
+//			Thread.sleep(1000);
+//			jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+//			Thread.sleep(2000);
+//			jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
+//			num = driver.findElement(By.xpath(
+//					"//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+//							+ (hours + 1) + "]"));
+//			builder.moveToElement(num).click().build().perform();
+//			Thread.sleep(2000);
+////		      jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
+//			num1 = driver.findElement(By.xpath(
+//					"//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+//							+ (min + 1) + "]"));
+//			Thread.sleep(1000);
+//			builder.moveToElement(num1).click().build().perform();
+//
+//			Thread.sleep(1000);
+//			if (am_pm == 0)
+//				jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[1]");
+//			else
+//				jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[2]/div[2]");
+//			Thread.sleep(2000);
+//			jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='timeDialog']/div/paper-button[2]");
+//			Thread.sleep(2000);
+//			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
+//		}
 	}
 
 	@Then("^verify active option for bc$")
@@ -1946,7 +1952,8 @@ public class BroadcastSteps extends Init {
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
 			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		} else
-			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+			//mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
 		int hours = rightNow.get(Calendar.HOUR);
@@ -2041,7 +2048,8 @@ public class BroadcastSteps extends Init {
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
 			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		} else
-			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+			//mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
 		int hours = rightNow.get(Calendar.HOUR);
@@ -2090,7 +2098,8 @@ public class BroadcastSteps extends Init {
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
 			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		} else
-			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			//mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
 		int hours = rightNow.get(Calendar.HOUR);
@@ -2140,7 +2149,8 @@ public class BroadcastSteps extends Init {
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
 			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		} else
-			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			//mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
 		int hours = rightNow.get(Calendar.HOUR);
@@ -2190,7 +2200,8 @@ public class BroadcastSteps extends Init {
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
 			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		} else
-			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			//mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
 		int hours = rightNow.get(Calendar.HOUR);
@@ -2757,7 +2768,7 @@ public class BroadcastSteps extends Init {
 		String statusOfBc = broadcastPageObjects.getTopBcStatus();
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
-		while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(20)) {
+		while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(130)) {
 			statusOfBc = broadcastPageObjects.getTopBcStatus();
 			System.out.println(statusOfBc);
 			Thread.sleep(3000);
