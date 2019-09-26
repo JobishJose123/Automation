@@ -1469,12 +1469,30 @@ System.out.println(editname+"program has edited successfully");
 		 		Thread.sleep(4000);
 				//programPage.clickCreateProgramButton();
 		 		System.out.println(touchpointList);
-				programPage.createNewProgramRulewithenddate(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+				programPage.createNewProgramRulewithenddate(name,"selenium_list",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 				dateForCompare = new Date();
 				System.out.println(dateForCompare);
 				
 			}
-	
+		 @Then("^create new rule from sheet \"([^\"]*)\" and offer \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\" with list \"([^\"]*)\"$")
+			public void CreateNewRuleWithFromSheetwithcglist(String sheet1,String offerType,String touchpointList,String list) throws Throwable {
+				Thread.sleep(4000);
+				
+		    	ExcelHelper programExcel = new ExcelHelper();
+		    	programExcel.setExcelFile("programInputData", sheet1);
+		    	ExcelHelper offerExcel = new ExcelHelper();
+		    	offerExcel.setExcelFile("offerInputData", offerType);
+		    	
+		 		String name = (String) programExcel.getCell(1,0);
+		 		
+		 		Thread.sleep(4000);
+				//programPage.clickCreateProgramButton();
+		 		System.out.println(touchpointList);
+				programPage.createNewProgramRulewithenddate(name,list,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+				dateForCompare = new Date();
+				System.out.println(dateForCompare);
+				
+			}
 	
 		
 		@Then("^verify Schedule tab \"([^\"]*)\"$")
@@ -2499,7 +2517,7 @@ System.out.println(editname+"program has edited successfully");
 					 		Thread.sleep(4000);
 							//programPage.clickCreateProgramButton();
 					 		System.out.println(touchpointList);
-							programPage.createNewProgramRulewithenddate(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+							programPage.createNewProgramRulewithenddate(name,SELENIUM_LIST,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 							dateForCompare = new Date();
 							System.out.println(dateForCompare);
 							

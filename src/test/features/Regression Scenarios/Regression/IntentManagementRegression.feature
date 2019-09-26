@@ -301,7 +301,22 @@ Feature: For IntentManagement Regression.
       | SavedSegments |
       | Create        |
       
-      
+          @NDX-createTriggerWithDKJob2 @initBrowser
+    Scenario: create streaming attribute and trigger and dk job for trigger
+    Given login
+#    Then navigate to data foundation
+#    Then navigate to streaming attributes
+#    Then create new streaming attribute from sheet "streamingAttr"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to configuration
+#    Then select triggers in configuration
+#    Then create new trigger "selTrigger2" with streaming attribute from sheet "streamingAttr"
+    Then create a dk job "Sel_TriggerJob2" with input location "/usr/local/flytxt/seleniumTriggerForIM" streaming attribute "streamingAttr" 
+    Then navigate to landing page
+    Then navigate to data foundation
+    Then click Data Fusion Engine
+    Then filter the job "Sel_TriggerJob2" and activate it
       	
      
      @NDX-9982
@@ -334,8 +349,8 @@ Feature: For IntentManagement Regression.
 #   Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
-#    Then click create program button
-#    Then verify create program page "triggerrprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "triggerTouchpoint"
+    Then click create program button
+    Then verify create program page "triggerrprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "triggerTouchpoint"
      Then choose program from sheet "triggerrprogram"
     Then create new rule from sheet "triggerrprogram" and offer "STVSMS" and touchpoint from sheet "triggerTouchpoint"
     Then wait until rule is picked
@@ -345,7 +360,7 @@ Feature: For IntentManagement Regression.
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then search msisdn "919491750265"
+    Then search msisdn "919491750282"
     Then click on events tab
     Then wait for offer eligible event in consumer profile 
     
@@ -354,7 +369,51 @@ Feature: For IntentManagement Regression.
     
     
        	 @createprogramwithusagemetric
-   @initBrowser
+   @initBrowser @NDX-9855
+  Scenario: Verify create a program
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+ 
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+   Then navigate to landing page
+     Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "triggerrprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "triggerTouchpoint"
+     Then choose program from sheet "triggerrprogram"
+    Then create new rule from sheet "triggerrprogram" and offer "rechargeSMS" and touchpoint from sheet "triggerTouchpoint"
+    Then wait until rule is picked
+    Then provide file for trigger with csv file "trigger2.csv"
+    Then wait for 6 minutes
+     Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "919491750282"
+    Then click on events tab
+    Then wait for offer eligible event in consumer profile 
+    
+    
+   @createprogramwithusagemetric
+   @initBrowser @NDX-10399
   Scenario: Verify create a program
     Given login
 #    Then navigate to configuration management
@@ -373,27 +432,40 @@ Feature: For IntentManagement Regression.
 #    Then navigate to offers
 #    Then click on create new ofer button
 # 
-#    Then create new offer from sheet "STVSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
+#    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 #    Then navigate to offer management
 #    Then Navigate to Offer Catalogue
 #    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "STVSMS" offer to Offer Catalogue
+#    Then Add "rechargeSMS" offer to Offer Catalogue
 #   Then navigate to landing page
-    Then navigate to intent management
+     Then navigate to intent management
     Then navigate to programs
-   Then click create program button
-   Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-     Then choose program from sheet "SMSprogram"
-    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-       Then navigate to programs
-    Then click create program button
-    Then verify create program page "triggerrprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "triggerTouchpoint"
-     Then choose program from sheet "triggerrprogram"
-    Then create new rule from sheet "triggerrprogram" and offer "STVSMS" and touchpoint from sheet "triggerTouchpoint"
-    Then navigate to programs
-    Then click create program button
-    Then verify create program page "APIprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR"
-    Then choose program from sheet "APIprogram"
-    Then create new rule from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
+#   Then click create program button
+#   Then verify create program page "triggerrprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "triggerTouchpoint"
+    Then choose program from sheet "triggerrprogram"
+    Then create new rule from sheet "triggerrprogram" and offer "rechargeSMS" and touchpoint from sheet "triggerTouchpoint" with list "Selenium list sub_q11"
+    Then wait until rule is picked
+    Then provide file for trigger with csv file "trigger2.csv"
+    Then wait for 3 minutes
+     Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "919491750282"
+    Then click on events tab
+    Then wait for offer eligible event in consumer profile 
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 

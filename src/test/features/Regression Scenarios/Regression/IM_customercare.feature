@@ -291,4 +291,87 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
       
 #      Then verify offer "Balance Top ups"
       Then Customercare offer accept 
+      
+      
+      
+      
+      
+         @initBrowser @NX-cctouchpointusage @NDX-9866
+  Scenario: Verify create a customer care program full flow
+    Given login
+#        Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#
+#    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeSMS" offer to Offer Catalogue
+      Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to customer care
+    Then change Customercare Prioritization Logic to "FIFO" from sheet "CCTouchpoint"
+    Then navigate to programs
+    Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
+    Then choose program from sheet "CCprogram"
+    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+
+    Then wait until rule is picked 
+    Then logout
+    Then login with selenium user
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer support
+    Then search msisdn "919491750000"
+#    Then verify offer "Balance Top ups"
+    Then logout
+    Then login
+    Then navigate to intent management
+    Then navigate to programs
+    Then choose program from sheet "CCprogram"
+    Then wait for 2 minutes
+    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+    Then wait until rule is picked    
+    Then logout
+    Then login with selenium user
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer support
+    Then search msisdn "919491750000"
+#    Then verify offer "Balance Top ups"
+    Then logout
+    Then login
+    Then navigate to intent management
+    
+    Then navigate to programs
+    Then choose program from sheet "CCprogram"
+   Then wait for 2 minutes
+    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+    Then wait until rule is picked 
+    Then logout
+    Then login with selenium user
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer support
+#   Then wait for 3 minutes
+    Then search msisdn "919491750000"
+#    Then verify offer "Balance Top"
+#    Then wait for 3 minutes
+#    Then enter msisdn again for refresh "919491750000"
+      
+#      Then verify offer "Balance Top ups"
+      Then Customercare offer accept 
     
