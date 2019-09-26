@@ -156,8 +156,11 @@ public class BroadcastPageObjects extends Init {
 	private WebElement CGConfigure;
 	@FindBy(xpath = ".//paper-dialog[@id='changeLRSettings']//div[contains(.,'Define Limit')]")
 	private WebElement defineLimit;
-	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]//following::input[2]")
+//	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//div[contains(.,'Fixed percentage of Target Base')]//following::input[2]")
+//	private WebElement enterLimitField;
+	@FindBy(xpath = ".//paper-radio-group//paper-input-wrapper[@class='define-limit-style style-scope cvm-settings']//input[@id='input']")
 	private WebElement enterLimitField;
+	
 	@FindBy(xpath = ".//paper-dialog[@id='changeLRSettings']//paper-button[contains(.,'Save')]")
 	private WebElement defineLimitSave;
 	@FindBy(xpath = ".//paper-dialog[@id='changeSettings']//paper-button[contains(.,'Save')]")
@@ -788,25 +791,25 @@ public String getTopBcStatus(String bcType) throws Exception {
 
 	public String getBcTargtedCount(String bcName) throws Exception {
 		jswait.waitUntil(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'" + bcName
-				+ "')]/../vaadin-grid-table-cell[5]/vaadin-grid-cell-content");
-		String status = driver.findElement(By.xpath(".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[1][contains(.,'"
-				+ bcName + "')]/../vaadin-grid-table-cell[5]/vaadin-grid-cell-content")).getText();
-		return status;
-	}
-
-	public String getBcSentCount(String bcName) throws Exception {
-		jswait.waitUntil(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'" + bcName
 				+ "')]/../vaadin-grid-table-cell[6]/vaadin-grid-cell-content");
 		String status = driver.findElement(By.xpath(".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[1][contains(.,'"
 				+ bcName + "')]/../vaadin-grid-table-cell[6]/vaadin-grid-cell-content")).getText();
 		return status;
 	}
 
-	public String getBcAcknowledgedCount(String bcName) throws Exception {
+	public String getBcSentCount(String bcName) throws Exception {
 		jswait.waitUntil(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'" + bcName
 				+ "')]/../vaadin-grid-table-cell[7]/vaadin-grid-cell-content");
 		String status = driver.findElement(By.xpath(".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[1][contains(.,'"
 				+ bcName + "')]/../vaadin-grid-table-cell[7]/vaadin-grid-cell-content")).getText();
+		return status;
+	}
+
+	public String getBcAcknowledgedCount(String bcName) throws Exception {
+		jswait.waitUntil(".//vaadin-grid-table-row/vaadin-grid-table-cell[1][contains(.,'" + bcName
+				+ "')]/../vaadin-grid-table-cell[8]/vaadin-grid-cell-content");
+		String status = driver.findElement(By.xpath(".//vaadin-grid-table-row[1]/vaadin-grid-table-cell[1][contains(.,'"
+				+ bcName + "')]/../vaadin-grid-table-cell[8]/vaadin-grid-cell-content")).getText();
 		return status;
 	}
 
@@ -851,9 +854,6 @@ public String getTopBcStatus(String bcType) throws Exception {
 		clickAbortBroadcastOption();
 		clickAbortYesButton();
 		Thread.sleep(3000);
-		commonObjects.clickOptionsIcon();
-		clickAbortBroadcastOption();
-		clickAbortYesButton();
 		verifyStatusOfBCAfterAbortion();
 
 	}
@@ -941,6 +941,7 @@ public String getTopBcStatus(String bcType) throws Exception {
 		assertTrue(offerDetailsBC.isDisplayed());
 		assertTrue(deliveryDetailsBC.isDisplayed());
 		jswait.loadClick(basicDetailsBC);
+		Thread.sleep(2000);
 		assertTrue(driver.findElement(By.xpath(".//p[contains(.,'" + name + "')]")).isDisplayed());
 
 	}
@@ -1020,6 +1021,7 @@ public String getTopBcStatus(String bcType) throws Exception {
 		jswait.loadClick(defineLimitSave);
 		jswait.loadClick(CGConfigure);
 		jswait.loadClick(defineCGSize);
+		jswait.loadSendKeys(fixedPercentNumber, "10");
 		jswait.loadClick(defineCGLimitSave);
 		jswait.loadClick(calculateLimit);
 		Thread.sleep(4000);
@@ -1764,12 +1766,17 @@ public boolean checkCalculateBtnDisplayed() {
 		}
 		clickProceedButton();
 		selectBaseList(baseList);
-		selectDNCList();
+		selectDNCList("both");
 		verifyTG_And_CG_Configure_Options();
 		// calculate_CG_TG();
 
 		clickProceedButton();
 		selectOffer(offer);
+		try {
+			selectALanguage();
+		}catch (Exception e) {
+			System.out.println("language already selected");
+		}
 		if (bc_type.contentEquals("facebook")) {
 			selectTrackSession();
 			selectTrackingSource();
@@ -2008,6 +2015,12 @@ public boolean checkCalculateBtnDisplayed() {
 
 		clickProceedButton();
 		selectOffer(offer);
+		try {
+			selectALanguage();
+		}catch (Exception e) {
+			System.out.println("language already selected");
+		}
+		
 		System.out.println(bc_type);
 		if (bc_type.contentEquals("facebook")) {
 			selectTrackSession();
@@ -2077,7 +2090,6 @@ public boolean checkCalculateBtnDisplayed() {
 		jswait.loadClick(defineCGLimitSave);
 		jswait.loadClick(calculateLimit);
 		Thread.sleep(4000);
-		;
 		assertTrue(calculateText.isDisplayed());
 		Thread.sleep(2000);
 

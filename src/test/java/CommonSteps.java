@@ -283,6 +283,12 @@ public class CommonSteps extends Init {
 		 //driver.get("http://"+p.getValue("env"));
 		 loginPage.login(p.getValue("env"), p.getValue("env"));
 		 //jswait.loadClick(loginButton);
+		 try{
+			 jswait.loadClick("//body[@class='fullbleed layout vertical']");
+		 }
+		 catch (Exception e) {
+			 System.out.println("Robob x popup off....");
+		 }
 			
 		 
     }
@@ -291,7 +297,12 @@ public class CommonSteps extends Init {
 		 driver.get("http://"+p.getValue("env"));
 		 loginPage.login(p.getValue("seleniumUser"), p.getValue("seleniumPassword"));
 			
-		 
+		 try{
+			 jswait.loadClick("//body[@class='fullbleed layout vertical']");
+		 }
+		 catch (Exception e) {
+			 System.out.println("Robob x popup off....");
+		 }
     }
 	
 	@Then("^login to next environment$")
