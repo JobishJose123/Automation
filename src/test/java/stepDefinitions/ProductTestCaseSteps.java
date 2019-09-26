@@ -782,11 +782,7 @@ public class ProductTestCaseSteps extends Init{
 		productPage.editTheProduct();
 			}
 
-	@Then("^verify the edited changes are reflected$")
-	public void verify_the_edited_changes_are_reflected() throws Exception {
-		
-	    
-	}
+	
 	@Then("^delete the product$")
 	public void delete_the_product() throws Exception {
 		productPage.deleteProduct();

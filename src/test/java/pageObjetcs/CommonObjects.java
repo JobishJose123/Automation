@@ -1197,10 +1197,10 @@ public void navigateToTrigger() throws Exception{
 	jswait.loadClick(trigger);
 }
 
-public void createTrigger(String attrName,String value1, String value2) throws Exception{
+public void createTrigger(String attrName,String value1, String value2,String triggerName) throws Exception{
 	jswait.loadClick(createNewTriggerbtn);
 	Thread.sleep(2000);
-	jswait.loadSendKeys(triggerNameInput,TRIGGER);
+	jswait.loadSendKeys(triggerNameInput,triggerName);
 	jswait.loadSendKeys(triggerDespInput, "trigger by selenium");
 	jswait.loadClick(streamingAttrRadiobtn);
 	Thread.sleep(2000);

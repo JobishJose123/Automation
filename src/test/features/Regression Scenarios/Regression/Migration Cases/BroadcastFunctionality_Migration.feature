@@ -625,14 +625,13 @@ Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition segmentAgeGT40 from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition segmentAgeGT40 from sheet "targetConditionCount" of the bc from sheet "TriggerOneoff" from bc report 
+Then verify the count with condition segmentAgeGT40 from sheet "targetConditionCount" of the bc from sheet "TriggerOneoff" from bc report 
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowleged event for the bc from sheet "TriggerOneoff" for the campaign from sheet "campaignBC"
 Then verify the condition Confirmed Delivery event for the bc from sheet "TriggerOneoff" for the campaign from sheet "campaignBC"
-
 
 @NDX-10940 @NDX-10935 @NDX-10926 @initBrowser
 Scenario: Verify the channel WAP,bc level cg exclusion,multiple creative  for a trigger seeding onetime bc

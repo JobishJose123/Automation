@@ -2,6 +2,7 @@ package pageObjetcs;
 
 import static org.junit.Assert.assertTrue;
 
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -11,6 +12,7 @@ import javax.validation.constraints.AssertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,142 +34,155 @@ public class ModelPageObjects extends Init {
 	}
 	@FindBy(xpath="//div[text()='Insight Workbench']/../..")
 	private WebElement InsightWorkbench;
-//
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Affinity')]")
-//	private WebElement name;
-
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Behavioral Profiling')]")
-//	private WebElement Behavioral_Profiling;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Classification')]")
-//	private WebElement Classification;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Clustering')]")
-//	private WebElement Clustering;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Forecasting')]")
-//    private WebElement Forecasting;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Location')]")
-//	private WebElement Location;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'My Model')]")
-//	private WebElement My_Model;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'NBA & NBO')]")
-//	private WebElement NBA_NBO;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Pre-processing Techniques')]")
-//	private WebElement Pre_processing_Techniques;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Propensity')]")
-//	private WebElement Propensity;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Text Analysis')]")
-//	private WebElement Text_Analysis;	
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Validation Techniques')]")
-//	private WebElement Validation_Techniques;
-//	
-//	@FindBy(xpath="//div[@class='categoryName style-scope zeppelin-notebooks'][contains(.,'Visualization')]")
-//	private WebElement Visualization;
-	
-
-	@FindBy(xpath="//paper-button[contains(.,'Create new model')]")
+    @FindBy(xpath="//paper-button[contains(.,'Create new model')]")
 	private WebElement CreateNewModelButton;
-
-	@FindBy(xpath="//*[@id='scrollable']//input[@placeholder='Model Name']")
+    @FindBy(xpath="//*[@id='scrollable']//input[@placeholder='Model Name']")
 	private WebElement ModelName;
-
-
-	@FindBy(xpath="//paper-button[contains(.,'Save')]")
+    @FindBy(xpath="//paper-button[contains(.,'Save')]")
 	private WebElement Save;
-
-	@FindBy(xpath="//paper-button[contains(.,'Inputs')]")
+    @FindBy(xpath="//paper-button[contains(.,'Inputs')]")
 	private WebElement Inputs;
-	
 	@FindBy(xpath="(//input[@class='style-scope paper-input'][@id='input'])[1]")
 	private WebElement InputName;
-	
 	@FindBy(xpath="(//textarea[@id='textarea'])[1]")
 	private WebElement Description;
-	
 	@FindBy(xpath="//paper-button[contains(.,'Next')]")
 	private WebElement Next;
-	
 	@FindBy(xpath="(//input[@type='text'][@id='input'])[1]")
 	private WebElement ActiveCustomerBase;
-	
 	@FindBy(xpath="//span[@class='item-name style-scope expand-collapse'][contains(.,'Customer Profile Info')]")
 	private WebElement CustomerProfileInfo;
-	
 	@FindBy(xpath="//span[@class='item-name style-scope expand-collapse'][contains(.,'Customer Demographics')]")
 	private WebElement CustomerDemographics;
-	
 	@FindBy(xpath="//span[contains(.,'"+AGE_PROFILE_FIELD+"')]//following::paper-checkbox[1]")
 	private WebElement Attribute1;
-	
 	@FindBy(xpath="//span[contains(.,'"+DEMOGRAPHICS_FIELD+"')]//following::paper-checkbox[1]")
 	private WebElement Attribute2;
-	
 	@FindBy(xpath="//span[contains(.,'"+SELENIUM_DATE+"')]//following::paper-checkbox[1]")
 	private WebElement Attribute3;
-	
 	@FindBy(xpath="//paper-button[contains(.,'Save & Extract')]")
 	private WebElement SaveExtract;
-	
 	@FindBy(xpath="//paper-icon-button[@icon='refresh']")
-
 	private WebElement refresh;
-	
-	
 	@FindBy(xpath="(//paper-icon-button[@class='icon-btn style-scope dataframe-box x-scope paper-icon-button-0'])[1]")
 	private WebElement edit;
-	
 	@FindBy(xpath="(//paper-button[contains(.,'Save')])[3]")
 	private WebElement savedata;
-	
 	@FindBy(xpath="//p[@class='dt-collect style-scope dataframe-box']")
 	private WebElement DataFrameCurrStatus;
-	
 	@FindBy(xpath="//paper-button[contains(.,'Close')]")
 	private WebElement Close;
-
-	@FindBy(xpath="//div[contains(@src,'paragraph/paragraph.html')]//textarea")
+    @FindBy(xpath="//div[contains(@src,'paragraph/paragraph.html')]//textarea")
 	private WebElement inputdata;
-
-	@FindBy(xpath="//i[@class='icon-control-play']")
-
-	private WebElement RunAllProgram;
-	
-	
+    @FindBy(xpath="//i[@class='icon-control-play']")
+    private WebElement RunAllProgram;
 	@FindBy(xpath="//button[contains(.,'OK')]")
-
-	private WebElement OK;
-	
-	
+    private WebElement OK;
 	@FindBy(xpath="(//span[@class='ng-binding'])[3]")
-
-	private WebElement status;
-
-	@FindBy(xpath="//div[@class='text plainTextContent']")
-
-	private WebElement output;
-	
+    private WebElement status;
+    @FindBy(xpath="//div[@class='text plainTextContent']")
+    private WebElement output;
 	@FindBy(xpath="//paper-tab[@class='style-scope zeppelin-notebooks x-scope paper-tab-0'][@val='templates']")
 	private WebElement Templates;
-	
 	@FindBy(xpath="//paper-button[contains(.,'Use Template')]")
 	private WebElement UseTemplate;
-	
-	
 	@FindBy(xpath="//i[@class='icon-control-play']/..")
 	private WebElement RunAllProgramTemplate;
-	
-	
-//	
 	@FindBy(xpath="(//paper-button[contains(.,'Add')])[1]")
 	private WebElement Addbtn;
+	@FindBy(xpath="(//paper-item[contains(.,'Edit')])[1]")
+	private WebElement editModelOpt; 
+	@FindBy(xpath="//paper-icon-button[@title='Edit']")
+	private WebElement editDataframeOpt; 
+	@FindBy(xpath="//paper-button[contains(.,'Reconfigure')]")
+	private WebElement reconfigure; 
+	@FindBy(xpath="//paper-button[contains(.,'Back')]")
+	private WebElement backOpt; 
+	@FindBy(xpath="(//div[@class='content style-scope confirm-list-grid']//following::paper-icon-button[@icon='editor:border-color'])[1]")
+	private WebElement kpiEditOpt; 
+	@FindBy(xpath="//label[contains(.,'KPI Name')]//following::input[1]")
+	private WebElement inputNameOfKpi; 
+	@FindBy(xpath="//paper-button[contains(.,'Update KPI')]")
+	private WebElement updateKpiBtn; 
+	@FindBy(xpath="//paper-icon-button[@title='Delete']")
+	private WebElement deleteDataframeOpt; 
+	@FindBy(xpath="//span[contains(.,'Are you sure you want to delete this Dataframe?')]//following::paper-button[contains(.,'Yes')][1]")
+	private WebElement deleteDataframeYes; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+//	@FindBy(xpath="")
+//	private WebElement; 
+	
 
 
 
@@ -220,16 +235,18 @@ public class ModelPageObjects extends Init {
 	public void navigatetoInputs()throws Exception{
 		Thread.sleep(2000);
 		jswait.loadClick(Inputs);
-		jswait.loadClick(Addbtn);
 	
 }
 	public void DataframeCreation(String Dataframe,String des)throws Exception{
+		jswait.loadClick(Addbtn);
 		jswait.loadSendKeys(InputName,Dataframe);
 		jswait.loadSendKeys(Description, des);
 		jswait.loadClick(Next);
 	}
 	
 	public void addList(String baseList) throws Exception{
+//		jswait.loadClick(Addbtn);
+		Thread.sleep(2000);
 		jswait.loadClick(ActiveCustomerBase);
 		jswait.loadSendKeys(ActiveCustomerBase,baseList);
 		Thread.sleep(3000);
@@ -280,19 +297,140 @@ public class ModelPageObjects extends Init {
 	}	
 	
 	
-	                     //-------------------------------------------------------------------------------------------------------------------//
-	
-	
-	public void clickTemplates() throws Exception{
-		jswait.loadClick(Templates);
+	public void filterIWBJob(String modelName,String modelType) throws Exception{
+		navigatetoModelType(modelType);
+		jswait.loadClick("//span[contains(.,'"+modelName+"')]//following::paper-icon-button[1]");
+		jswait.loadClick(editModelOpt);
+		
 	}
 	
-	public void clickUseTemplates() throws Exception{
-		jswait.loadClick(UseTemplate);
-		Thread.sleep(3000);
-		jswait.loadClick(RunAllProgramTemplate);
-		jswait.loadClick(OK);
+	public void editDataframe() throws Exception{
+		Thread.sleep(2000);
+        jswait.loadClick(editDataframeOpt);
+        jswait.loadClick(kpiEditOpt);
+        jswait.loadSendKeys(inputNameOfKpi,"edited");
+        Thread.sleep(2000);
+        String editedKpiInput=driver.findElement(By.xpath("//label[contains(.,'KPI Name')]//following::input[1]")).getText();
+        Thread.sleep(2000);
+        jswait.loadClick(updateKpiBtn);
+        Thread.sleep(2000);
+        String editedkpiVerify=driver.findElement(By.xpath("(//vaadin-grid-cell-content[contains(.,'1')])[1]//following::vaadin-grid-cell-content[1]")).getText();
+        Thread.sleep(2000);
+        Assert.assertTrue(editedKpiInput.equals(editedkpiVerify));
+        jswait.loadClick(reconfigure);
+        Thread.sleep(2000);
+        jswait.loadClick(backOpt);
+        jswait.loadClick(backOpt);
+        jswait.loadSendKeys(InputName, "edited");
+        jswait.loadSendKeys(Description,"edited");
+        Thread.sleep(2000);
+        jswait.loadClick(Next);
+        jswait.loadClick(Next);
+        jswait.loadClick(Next);
+        Thread.sleep(2000);
+        jswait.loadClick(SaveExtract);
+        Thread.sleep(2000);
+        jswait.loadClick(Close);
+        
+	}
 	
-}
+	public void verifyEditedDataframe() throws Exception{
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("//div[contains(.,'edited')][@class='name-box style-scope dataframe-box']"))));
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("//div[contains(.,'edited')][@class='desc-box style-scope dataframe-box']"))));
+		
+	}
+	
+	public void deleteDataframe() throws Exception{
+		jswait.loadClick(deleteDataframeOpt);
+		jswait.loadClick(deleteDataframeYes);
+	}
+	
+	public void verifyDeletionOfDataframe() throws Exception{
+		Assert.assertFalse(jswait.checkVisibility(driver.findElement(By.xpath("//div[@class='inpt-box style-scope dataframe-box']"))));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	                     //-------------------------------------------------------------------------------------------------------------------//
+	
+//	
+//	public void clickTemplates() throws Exception{
+//		jswait.loadClick(Templates);
+//	}
+//	
+//	public void clickUseTemplates() throws Exception{
+//		jswait.loadClick(UseTemplate);
+//		Thread.sleep(3000);
+//		jswait.loadClick(RunAllProgramTemplate);
+//		jswait.loadClick(OK);
+//	}
 	
 }

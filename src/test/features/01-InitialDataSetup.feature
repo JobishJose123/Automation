@@ -243,12 +243,12 @@ Then check and add profile fields
     Then navigate to precision marketer
     Then navigate to configuration
     Then select triggers in configuration
-    Then create new trigger with streaming attribute from sheet "streamingAttr"
-    Then create a dk job "Sel_TriggerJob" with streaming attribute "streamingAttr"
+    Then create new trigger "selTrigger1" with streaming attribute from sheet "streamingAttr"
+    Then create a dk job "Sel_TriggerJob1" with streaming attribute "streamingAttr"
     Then navigate to landing page
     Then navigate to data foundation
     Then click Data Fusion Engine
-    Then filter the job "Sel_TriggerJob" and activate it
+    Then filter the job "Sel_TriggerJob1" and activate it
     
      @NDX-CreateNewTrackSource @initBrowser
     Scenario: create the track source
@@ -267,7 +267,6 @@ Then check and add profile fields
     Then create new blackout rule "<blackout>"
     Then navigate to admin
     Then create new inventory "<inventory>" with  frequency "<frequency>" and blackout "<blackout>"
-    
     Examples: 
     |frequency|blackout|inventory|
     |default|default|default|
@@ -280,14 +279,12 @@ Then check and add profile fields
     Given login
     Then navigate to configuration management
     Then create new reward "<reward>"
-    
-    
-    Examples: 
+     Examples: 
     |reward|
     |selenium_reward|
     |sel_reward|
     
-    @ProfileUploadThroughDK  @initBrowser
+    @ProfileUploadThroughDK @NDX-10317  @initBrowser
     Scenario: Upload profile field data through dk
     Given login 
     Then create a dk job "selProfileUpload" to upload the profile fields
@@ -297,14 +294,14 @@ Then check and add profile fields
     Then filter the job "selProfileUpload" and activate it
     Then provide file for trigger with csv file "selenium_list_profile.csv"
     
-    @MetricEventUploadThroughDK  @initBrowser
+    @MetricEventUploadThroughDK  @NDX-10316 @NDX-10318 @initBrowser
     Scenario: Upload metric and event through dk
     Given login 
     Then create a dk job "selMetricEventUpload" to upload the metric and event fields
     Then navigate to landing page
     Then navigate to data foundation
     Then click Data Fusion Engine
-    Then filter the job "selMetricUpload" and activate it
+    Then filter the job "selMetricEventUpload" and activate it
     Then provide file for trigger with csv file "selenium_list _metric_event.csv"
     
     

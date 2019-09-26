@@ -497,13 +497,13 @@ public class CommonSteps extends Init {
 	public void select_triggers_in_configuration() throws Exception{
 		commonObjetcs.navigateToTrigger();
 	}
-	@Then("^create new trigger with streaming attribute from sheet \"([^\"]*)\"$")
-	public void create_new_trigger_from_sheet_and_streaming_attribute_from_sheet(String streamingAttrSheet) throws Throwable {
+	@Then("^create new trigger \"([^\"]*)\" with streaming attribute from sheet \"([^\"]*)\"$")
+	public void create_new_trigger_from_sheet_and_streaming_attribute_from_sheet(String triggerNme,String streamingAttrSheet) throws Throwable {
 		eh1.setExcelFile("streamingAttribute", streamingAttrSheet);
 		String attrName=(String) eh1.getCell(1, 0);
 		String value1=(String) eh1.getCell(1, 2);
 		String value2=(String)eh1.getCell(1,3);
-		commonObjetcs.createTrigger(attrName,value1,value2);
+		commonObjetcs.createTrigger(attrName,value1,value2,triggerNme);
 	}
 	@Then("^navigate to admin$")
 	public void navigate_to_admin() throws Throwable {

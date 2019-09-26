@@ -1,6 +1,18 @@
 package stepDefinitions;
 
+
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+
 import javax.validation.constraints.AssertTrue;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
@@ -119,20 +131,69 @@ public class ModelSteps extends Init{
 	   modelPage.outputdata(data);
 	 }
 	 
+	   @Then("^filter the iwb job from sheet \"([^\"]*)\" with model type \"([^\"]*)\"$")
+	   public void filter_the_iwb_job_from_sheet_with_model_type(String modelStorageSheet, String modelType) throws Throwable {
+		  
+//	      modelPage.filterIWBJob(modelName,modelType);
+	   }
+
+	   @Then("^edit the job$")
+	   public void edit_the_job() throws Throwable {
+	        modelPage.editDataframe();
+	   }
+
+	   @Then("^verify the edited changes are reflected$")
+	   public void verify_the_edited_changes_are_reflected() throws Throwable {
+		   modelPage.verifyEditedDataframe();
+	   }
 	 
-	 
-	  
+
+@Then("^add the model name from sheet \"([^\"]*)\" and \"([^\"]*)\"  to sheet \"([^\"]*)\"$")
+public void add_the_model_name_from_sheet_and_to_sheet(String modelNameSheet, String modelType, String modelStorageSheet) throws Throwable {
+	eh.setExcelFile("Model", modelNameSheet);
+	String modelName=eh.getCellByColumnName("Model_Name");
+	eh.iwbModelDataDetails(modelName,modelType,modelStorageSheet);
+}
+
+@Then("^delete the dataframe$")
+public void delete_the_dataframe() throws Throwable {
+   modelPage.deleteDataframe();
+}
+
+@Then("^verify the dataframe gets deleted$")
+public void verify_the_dataframe_gets_deleted() throws Throwable {
+	 modelPage.verifyDeletionOfDataframe();
+}
+@Then("^activate the model$")
+public void activate_the_model() throws Throwable {
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 	  
 	                        //----------------------------------------------------------------------------------------------------------------//
 	
-  
-	  @Then("^click on Templates$")
-	 public void click_on_Templates() throws Exception{
-		 modelPage.clickTemplates();
-	 }
-	 @Then("^click on UseTemplate$")
-	 public void click_on_Use_Template() throws Exception{
-		 modelPage.clickUseTemplates();
-	 }
+//  
+//	  @Then("^click on Templates$")
+//	 public void click_on_Templates() throws Exception{
+//		 modelPage.clickTemplates();
+//	 }
+//	 @Then("^click on UseTemplate$")
+//	 public void click_on_Use_Template() throws Exception{
+//		 modelPage.clickUseTemplates();
+//	 }
 	 
-}
+

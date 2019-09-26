@@ -3082,7 +3082,7 @@ String testMode="";
 			}
 
 		}//if
-
+Thread.sleep(3000);
 		clickSaveOfferButton();
 		
 	}
