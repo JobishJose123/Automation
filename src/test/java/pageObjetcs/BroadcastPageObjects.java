@@ -3215,14 +3215,16 @@ public boolean checkCalculateBtnDisplayed() {
 		jswait.loadClick(labelCrossell);
 		jswait.loadSendKeys(inventorySelector, inventory);
 		jswait.loadClick("//vaadin-combo-box-item[contains(.,'" + inventory + "')]");
-		jswait.loadClick(proceedButton);
-		if(trigger.contains("trigger")) {
-			jswait.loadSendKeys(triggerInput,TRIGGER);
-			Thread.sleep(2000);
-			jswait.loadClick("//paper-item[contains(.,'"+TRIGGER+"')]");
-		}
-		else
+		
+		if(trigger.contains("none")) {
 			System.out.println("no trigger selected");
+		}
+		else {
+		jswait.loadSendKeys(triggerInput,trigger);
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-item[contains(.,'"+trigger+"')]");
+		}
+		jswait.loadClick(proceedButton);
 		
 	}
 	

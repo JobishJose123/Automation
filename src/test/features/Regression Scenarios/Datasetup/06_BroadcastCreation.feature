@@ -443,6 +443,24 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStora
 |seedingRecurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|16|
 
 
+
+@NDX-createTriggerWithDKJob @initBrowser
+Scenario: create streaming attribute and trigger and dk job for trigger
+Given login
+Then navigate to data foundation
+Then navigate to streaming attributes
+Then create new streaming attribute from sheet "streamingAttr"
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to configuration
+Then select triggers in configuration
+Then create new trigger "selTrigger1" with streaming attribute from sheet "streamingAttr"
+Then create a dk job "Sel_TriggerJob1" with streaming attribute "streamingAttr"
+Then navigate to landing page
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then filter the job "Sel_TriggerJob1" and activate it
+
 @NDX-TriggerBC  @initBrowser @closeBrowser
 Scenario Outline: Create all type of trigger bc to verify trigger bc functionality
 Given login

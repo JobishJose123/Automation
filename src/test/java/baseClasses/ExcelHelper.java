@@ -309,17 +309,34 @@ String file = "";
 	        Thread.sleep(1000);
 	    }
 
-
+	 public void iwbModelDataDetails(String modelName,String modelType,String modelStorageSheet) throws Exception{
+		 setExcelFile("Model",modelStorageSheet);
+		 int countrows=sh.getLastRowNum()-sh.getFirstRowNum();
+	    	Row newrow=sh.createRow(countrows+1);
+	    	Cell cell;
+	    	if(newrow.getLastCellNum()==-1) {
+	    		
+	            cell=newrow.createCell(0); 
+				cell.setCellValue(modelType);
+				
+				cell=newrow.createCell(1);
+				cell.setCellValue(modelName);
+	 }
+	    	FileOutputStream outFile =new FileOutputStream(new File(file));  //Creating new file
+	        workbook.write(outFile);   //printing the data in the new file
+	        outFile.close();
+	        Thread.sleep(1000);
+	 }
 	
     
     
-    public static void main(String args[]) {
-    	
-    	ExcelHelper eh = new ExcelHelper();
-    	eh.setExcelFile("touchpointInputData", "apiTouchpointUR");
- 		String name = (String) eh.getCell(1, 0);
-	  System.out.println(name);//+eh.getCellByColumnName("Application Type")+eh.getCellByColumnName("Event For Tracking")+eh.getCellByColumnName("Refresh  Every")+eh.getCellByColumnName("Time Interval")+eh.getCellByColumnName("Prioritization Logic")+eh.getCellByColumnName("Maximum Offers"));
-	  
-	  
-    }
+//    public static void main(String args[]) {
+//    	
+//    	ExcelHelper eh = new ExcelHelper();
+//    	eh.setExcelFile("touchpointInputData", "apiTouchpointUR");
+// 		String name = (String) eh.getCell(1, 0);
+//	  System.out.println(name);//+eh.getCellByColumnName("Application Type")+eh.getCellByColumnName("Event For Tracking")+eh.getCellByColumnName("Refresh  Every")+eh.getCellByColumnName("Time Interval")+eh.getCellByColumnName("Prioritization Logic")+eh.getCellByColumnName("Maximum Offers"));
+//	  
+//	  
+//    }
 }

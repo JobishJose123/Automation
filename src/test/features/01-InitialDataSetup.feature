@@ -233,23 +233,6 @@ Then check and add profile fields
     Then navigate to saved segments
     Then create saved segment with condition "segmentAgeGT40"
     
-    @NDX-createTriggerWithDKJob @initBrowser
-    Scenario: create streaming attribute and trigger and dk job for trigger
-    Given login
-    Then navigate to data foundation
-    Then navigate to streaming attributes
-    Then create new streaming attribute from sheet "streamingAttr"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then select triggers in configuration
-    Then create new trigger "selTrigger1" with streaming attribute from sheet "streamingAttr"
-    Then create a dk job "Sel_TriggerJob1" with streaming attribute "streamingAttr"
-    Then navigate to landing page
-    Then navigate to data foundation
-    Then click Data Fusion Engine
-    Then filter the job "Sel_TriggerJob1" and activate it
-    
      @NDX-CreateNewTrackSource @initBrowser
     Scenario: create the track source
     Given login
