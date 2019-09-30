@@ -191,6 +191,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement eventOfferRecommended;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer Care Usage')]")
 	private WebElement eventOfferCustomerCareUsage;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer Enquiry')]")
+	private WebElement offerEnquiry;
 	@FindBy(xpath="//paper-item[contains(.,'is not')]")
 	private WebElement conditionIsNot;
 	@FindBy(xpath="//paper-item[contains(.,'is less than')]")
@@ -641,6 +643,16 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(targetConditionTypeSystemEvents);
 				jswait.loadSendKeys(EventFieldSelector,"Customer Care Usage");
 				jswait.loadClick(eventOfferCustomerCareUsage);
+				jswait.loadClick(eventDateAndTimeSelector);
+				jswait.loadClick(allEventsBefore);
+				jswait.loadClick(selectFieldSelector);
+				jswait.loadClick(nowSelect);
+				jswait.loadClick(targetConditionSave);
+			}else if(event.contentEquals("offerEnquiry")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeSystemEvents);
+				jswait.loadSendKeys(EventFieldSelector,"Offer Enquiry");
+				jswait.loadClick(offerEnquiry);
 				jswait.loadClick(eventDateAndTimeSelector);
 				jswait.loadClick(allEventsBefore);
 				jswait.loadClick(selectFieldSelector);

@@ -228,6 +228,7 @@ public class BroadcastSteps extends Init {
 			for (int i = 1; i < days.length; i++)
 				xpathBUlder.append(" and contains(.,'" + days[i] + "')");
 			xpathBUlder.append("]");
+			System.out.println(xpathBUlder.toString());
 			jswait.waitUntil(xpathBUlder.toString());
 			jswait.waitUntil("//*[@id='longPattern']/p[2][contains(.,'Recur every')]");
 			jswait.waitUntil("//*[@id='longPattern']/p[2][contains(.,'month')]");
@@ -607,7 +608,7 @@ public class BroadcastSteps extends Init {
 							eM.getCellByColumnName("Recur every months"));
 					Thread.sleep(1000);
 
-					if (eM.getCellByColumnName("Recur on").contentEquals("5th weekend day")) {
+					if (eM.getCellByColumnName("Recur on").contentEquals("5th Weekend Day")) {
 						System.out.println("Selecting the recurrence pattren in 5th weekend day");
 						jswait.loadClick("//div[@id='radioLabel'][contains(.,'Select special day')]/..");
 						jswait.loadClick("//label[contains(.,'Order of the Day')]/..//input");
@@ -688,7 +689,7 @@ public class BroadcastSteps extends Init {
 							eM.getCellByColumnName("Recur every months"));
 					Thread.sleep(1000);
 
-					if (eh.getCellByColumnName("Recur on").contentEquals("5th weekend day")) {
+					if (eh.getCellByColumnName("Recur on").contentEquals("5th Weekend Day")) {
 						System.out.println("Selecting the recurrence pattren in 5th weekend day");
 						jswait.loadClick("//div[@id='radioLabel'][contains(.,'Select special day')]/..");
 						jswait.loadClick("//label[contains(.,'Order of the Day')]/..//input");
@@ -2431,7 +2432,11 @@ enterDeliveryTabDetails(bc_type, sheet);
 			Assert.assertTrue("condition not displayed", jswait.checkVisibility("//profile-field[contains(.,'30')]"));
 		} else if(event.contains("analyticalScoresGT45")) {
 			Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope profile-field'][contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]"));
-	}
+	}else if(event.contains("offerEnquiry")) {
+		Assert.assertTrue(jswait.checkVisibility("//b[contains(.,'Offer Enquiry')]"));
+}else if(event.contains("customerLocationInsightsGT5")) {
+	Assert.assertTrue(jswait.checkVisibility("//b[contains(.,'Location_q11')]"));
+}
 		else {
 			Assert.assertTrue("condition not handled in if else", false);
 		}

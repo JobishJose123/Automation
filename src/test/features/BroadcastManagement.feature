@@ -198,7 +198,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
-#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then navigate to broadcast target condition
@@ -274,7 +274,7 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
-Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS" 
+Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWAP" 
 Then verify create BC Notification 
 Then activate bc 
 Then wait until status of "one-offBC" is "Completed" 
@@ -1814,9 +1814,8 @@ Then verify delivery details from "recurringMonthBC"
     Then verify targeted count for partner level CG
     
    
-        @NX-9088 @initBrowser
-        @NX-7833
-    Scenario: Verify IM events for all type of BC's  -9088
+        @NX-9088 @initBrowser @closeBrowser
+          Scenario: Verify IM events for all type of BC's  -9088
     Given login
     Then navigate to precision marketer
      Then navigate to life cycle marketing
@@ -1863,10 +1862,10 @@ Then verify delivery details from "recurringMonthBC"
     Then navigate to campaign category from sheet "CampaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition IMEventsCustomerCareUsage from sheet "one-offBC" with "rechargeWAP"
+    Then enter details for new broadcast with condition offerEnquiry from sheet "one-offBC" with "rechargeWAP"
     Then save bc
     Then view broadcast from sheet "one-offBC"
-    Then check target condition "IMEventsCustomerCareUsage"
+    Then check target condition "offerEnquiry"
     
     @NX-5170 
      @initBrowser @closeBrowser
@@ -1932,49 +1931,58 @@ Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-6326
     Then wait for 1 minutes
     Then wait until status of child bc of "recurringMonthSpecialBC" is "Render Scheduled"
     
-     @NX-6206 @initBrowser @closeBrowser
+     @NX-6206 @initBrowser 
 Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
-    Given login
-    Then navigate to precision marketer
-		Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "campaignCategory"
-		Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
-    Then activate bc
-    Then navigate to "Recurring" broadcasts
-    Then click edit option for bc from sheet "recurringMonthBC"
-    Then enter edit recurrance pattern of "recurringMonthBC" with "recurringMonthSpecialBC"
-    Then activate bc
-    Then navigate to "Recurring" broadcasts
-		Then view broadcast from sheet "recurringMonthBC"
-		Then verify delivery details from "recurringMonthSpecialBC"
+    Given login 
+	Then navigate to precision marketer 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "campaignCategory" 
+	Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP" 
+	Then save bc 
+	Then navigate to "Recurring" broadcasts 
+	Then click edit option for bc from sheet "recurringMonthBC" 
+	Then enter edit recurrance pattern of "recurringMonthBC" with "recurringMonthSpecialBC" 
+	Then activate bc 
+	Then navigate to "Recurring" broadcasts 
+	Then view broadcast from sheet "recurringMonthBC" 
+	Then verify delivery details from "recurringMonthSpecialBC" 
 		
-		@NX-6350 @initBrowser @closeBrowser
+		@NX-6350 @initBrowser 
 		Scenario: Verify whether it is possible to edit Type of day's field for activated BCs NX-6350
-    Given login
-    Then navigate to precision marketer
-		Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
-    Then activate bc
-    Then navigate to "Recurring" broadcasts
-    Then click copy option for bc from sheet "recurringMonthBC"
-    Then enter edit recurrance pattern of "recurringMonthBC" with "recurringMonthSpecialBC"
-    Then activate bc
-    Then navigate to "Recurring" broadcasts
-		Then view broadcast from sheet "recurringMonthBC"
-		Then verify delivery details from "recurringMonthSpecialBC"
+    Given login 
+	Then navigate to precision marketer 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "campaignCategory" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP" 
+	Then save bc 
+	Then navigate to "Recurring" broadcasts 
+	Then click copy option for bc from sheet "recurringMonthBC" 
+	Then enter edit recurrance pattern of "recurringMonthBC" with "recurringMonthSpecialBC" 
+	Then activate bc 
+	Then navigate to "Recurring" broadcasts 
+	Then view broadcast from sheet "recurringMonthBC" 
+	Then verify delivery details from "recurringMonthSpecialBC" 
 		
 		 @NX-8840 @initBrowser @closeBrowser
     Scenario: Verify IM events for all type of BC's  -8840
     Given login
     Then navigate to precision marketer
-     Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeEmail" offer to Offer Catalogue
+         Then navigate to life cycle marketing
+        Then navigate to campaign category from sheet "CampaignCategory"
+         Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     Then enter details for new broadcast with condition customerLocationInsightsGT5 from sheet "one-offBC" with "rechargeEmail"
@@ -1988,6 +1996,7 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then navigate to precision marketer
      Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     Then enter details for new broadcast with condition customerDeviceInfo from sheet "one-offBC" with "rechargeEmail"
@@ -2048,48 +2057,48 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast with condition "digitalPersonaGT25" from sheet "one-offBC" with "rechargeWap"
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
     Then activate bc
     Then wait until status of "one-offBC" is "Completed"
-    Then verify targeted and sent count of "one-offBC" with condition "digitalPersonaGT25"
+    Then verify targeted and sent count of "one-offBC" with condition digitalPersonaGT15
     
       
     @NX-2350   
     @initBrowser 
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Call to Action Buttons.
  Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
     Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeEmail" offer to Offer Catalogue
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeEmail" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"	
    	Then activate bc
-    Then verify bc created from sheet "one-offBC"
+#    Then verify bc created from sheet "one-offBC"
     Then wait until status of "one-offBC" is "Completed"
     Then verify email from sheet "one-offBC"
     Then pass next scenario based on this step

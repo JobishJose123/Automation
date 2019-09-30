@@ -119,6 +119,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	public final String INVENTORY_ONEPERDAY="sel_one_per_day";
 	public final String INVENTORY_BLACKOUTALWAYS="selenium_blackout_always";
 	public static int programoffer=1;
+	public final String globalResonseKeywords="selenium app";
 }
 //public class Init {
 //public static WebDriver driver;

@@ -502,10 +502,10 @@ public class OfferPageObjects extends Init {
 		 private WebElement rewardDefaultRuleAdButton;
 		 
 	 
-//	 @FindBy(xpath="")
-//	 private WebElement ;
-//	 @FindBy(xpath="")
-//	 private WebElement ;
+	 @FindBy(xpath="//paper-input-container[@class='style-scope paper-input x-scope paper-input-container-4']//div[@class='input-content style-scope paper-input-container']//input[@id='input']")
+	 private WebElement globalResponsceTrackBy;
+	 @FindBy(xpath="//div[@class='rules layout vertical style-scope source-track-rule']//paper-item[contains(.,'"+globalResonseKeywords+"')]")
+	 private WebElement globalResponseKeyword;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -2995,6 +2995,10 @@ String testMode="";
 				} else {
 					Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
 				}
+			}else if(tracksource.equals("Global Response App")) {
+				
+				jswait.loadClick(globalResponsceTrackBy);
+				jswait.loadClick(globalResponseKeyword);
 			}
 
 		} // track tab if
