@@ -210,7 +210,7 @@ Feature: Test suite on Offer creation
      Then navigate to precision marketer
      Then navigate to offer management
      Then navigate to offers
-     Then create new offer from sheet "rechargeEmail" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
+     Then create new offer from sheet "rechargeEmail" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
 #     Examples
 #     |sheet||rewards|
 #     |rechargeSMS||default|

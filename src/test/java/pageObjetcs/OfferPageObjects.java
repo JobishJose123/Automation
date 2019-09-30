@@ -502,7 +502,7 @@ public class OfferPageObjects extends Init {
 		 private WebElement rewardDefaultRuleAdButton;
 		 
 	 
-	 @FindBy(xpath="//paper-input-container[@class='style-scope paper-input x-scope paper-input-container-4']//div[@class='input-content style-scope paper-input-container']//input[@id='input']")
+	 @FindBy(xpath="//div[@class='label-and-input-container style-scope paper-input-container']//label[contains(.,'Track By')]//following::input[@id='input'][1]")
 	 private WebElement globalResponsceTrackBy;
 	 @FindBy(xpath="//div[@class='rules layout vertical style-scope source-track-rule']//paper-item[contains(.,'"+globalResonseKeywords+"')]")
 	 private WebElement globalResponseKeyword;
@@ -2998,6 +2998,7 @@ String testMode="";
 			}else if(tracksource.equals("Global Response App")) {
 				
 				jswait.loadClick(globalResponsceTrackBy);
+				
 				jswait.loadClick(globalResponseKeyword);
 			}
 
@@ -3089,6 +3090,13 @@ String testMode="";
 Thread.sleep(3000);
 		clickSaveOfferButton();
 		
+	}else if(tracksource.equals("Global Response App")) {
+		
+	 
+			createDefaultRuleFirstReward(creativeType);
+		selectSeedingReward(offerType);
+	
+	 clickSaveOfferButton();
 	}
 
 }//method
