@@ -819,6 +819,12 @@ public String getGridColumnNumber(String columnXpath, String matchKey) {
 		return "couldnt fint header__"+matchKey;
 }
 
+public void clearTextField(WebElement element) throws InterruptedException {
+	Thread.sleep(1000);
+	element.clear();
+	 
+}
+
 }
 		
 	

@@ -367,15 +367,21 @@ public class OfferPageObjects extends Init {
 	 private WebElement SecondsendTrialSMSRoute;
 	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	 private WebElement SelectTrialSMSID;
-	 @FindBy(xpath=".//*[@id='trialEmailForm']/vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
+//	 @FindBy(xpath=".//*[@id='trialEmailForm']/vaadin-combo-box-item[contains(.,'"+SENDER_EMAIL+"')]")
+//	 private WebElement SelectTrialEmailID;
+	 @FindBy(xpath="//vaadin-combo-box-item[contains(text(),'"+SENDER_EMAIL+"')]")
 	 private WebElement SelectTrialEmailID;
+	 
+	
+	 
+	 
 	 //@FindBy(xpath="//wizard-tab[@id='check']//creative-wrapper/define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']//vaadin-combo-box[@label='Sender ID: Trial message would appear from this ID']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	 @FindBy(xpath="//define-creative[2]//*[@id='sendTrialDialogNumber']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	 private WebElement SecondSelectTrialSMSID;
 	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
 	 private WebElement SelectTrialSMSRoute;
 	 //@FindBy(xpath=".//*[@id='trialEmailForm']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
-	 @FindBy(xpath=".//*[@id='trialEmailForm']//vaadin-combo-box-item[contains(.,'SMPP Robi outbound')]")
+	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+ROUTE_EMAIL+"')]")
 	 //@FindBy(xpath="//form[@id='trialEmailForm']//vaadin-combo-box[@label='Route over which this broadcast can be sent']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']/div/vaadin-combo-box-item[2]")
 	 private WebElement SelectTrialEmailRoute;
 	 @FindBy(xpath="//creative-wrapper/define-creative[2]//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
@@ -394,7 +400,7 @@ public class OfferPageObjects extends Init {
 	 private WebElement sendTrialEmailPageClose;
 	 @FindBy(xpath="//define-creative[2]//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
 	 private WebElement SecondsendTrialPageClose;
-	 @FindBy(xpath="/html//paper-toast[@id='toast']/span[contains(.,'Unable to process your request. Please try again')]")
+	 @FindBy(xpath="/html//paper-toast[@id='toast']/span[contains(.,'Invalid format. Please check the customer number entered.')]")
 	 private WebElement sendTrialInavlidNumPopup;
 	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-button[contains(.,'Add')]")
 	 private WebElement sendTrialAddButton;
@@ -576,6 +582,7 @@ public class OfferPageObjects extends Init {
 			checkOfefrAttributesValidation();
 		}
 	 
+	 
 	 public void clickSetAsDefaultSecondTrack() throws InterruptedException {
 			jswait.loadClick(setAsDefaultSecondTrack);
 		}
@@ -588,6 +595,9 @@ public class OfferPageObjects extends Init {
 	 public void clickAddOfferAttributeButton() throws InterruptedException {
 			jswait.loadClick(addOfferAttributeButton);
 		}
+	 public void clearCreative() throws InterruptedException {
+		 jswait.clearTextField(CreativeTitle);
+	 }
 	 
 //  Creative Tab in Offer Creation	functions
 	 public void clickAddNewVariableButton() throws InterruptedException {
@@ -706,7 +716,15 @@ public class OfferPageObjects extends Init {
 		}
 	 public void selectPriority(String text) throws InterruptedException {
 			jswait.loadClick(addTrackingRulePrioritySelector);
-			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'"+text+"')])[3]");
+			int value=Integer.valueOf(text);
+			System.out.println(value);
+			if(value<=5) {
+				System.out.println(value);
+				jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'"+text+"')])[3]");
+			}else {
+				jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'"+text+"')])[2]");
+			}
+			
 		}
 	 public void clickAddTrackingRuleAddConditionButton() throws InterruptedException {
 			jswait.loadClick(addTrackingRuleAddConditionButton);
@@ -1309,13 +1327,17 @@ public class OfferPageObjects extends Init {
 //	}
 //	
 	public void enterReward() throws InterruptedException {
-		jswait.loadSendKeys(rewardTypeInputField, "Selenium_reward");
+		jswait.loadSendKeys(rewardTypeInputField, SELENIUM_REWARD);
 	}
 
 	public void clickRewardTypeAny() throws InterruptedException {
 		jswait.loadClick(rewardTypeAnySelector);
 	}
 	
+	public void selectReward(String reward) throws InterruptedException {
+		
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+reward+"')]");
+	}
 	
 	
 	public void clickrewardTypesel_reward() throws InterruptedException {
@@ -1781,7 +1803,7 @@ public class OfferPageObjects extends Init {
 	}
 	public void verifyRewardTypeField() throws InterruptedException {
 		Thread.sleep(2000);
-		assertTrue(driver.findElement(By.xpath(".//vaadin-combo-box-item[contains(.,'Selenium_reward')]")).isDisplayed());
+		assertTrue(driver.findElement(By.xpath(".//vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")).isDisplayed());
 	}
 	
 	
@@ -1992,6 +2014,7 @@ public class OfferPageObjects extends Init {
 
 	public void validateNameField() throws Throwable {
 		enterOfferName("iuryt ytey uyei yeuy uys ttsghksio");
+		System.out.println(commonObjects.getTextFormTextField(offerName).length());
 		Assert.assertTrue(commonObjects.getTextFormTextField(offerName).length() == 30, "wrong size of name field");
 	}
 
@@ -2095,19 +2118,19 @@ public class OfferPageObjects extends Init {
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
+		System.out.println("entr creative details");
 		enterCreativeTabDetails(eh);
 		
 	
 		clickSendTrialButton();
-		//if(eh.getCellByColumnName("Channel").contains("Email")) {
-                           //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
-                           //jswait.loadSendKeys("1234567890");
-		//}
-		//else {
-          //                 jswait.loadClick(sendTrialfield);
-          //                 jswait.loadSendKeys(sendTrialfield, number);                                                 
-                           
-		//}
+		if(eh.getCellByColumnName("Channel").contains("Email")) {
+            //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
+            //jswait.loadSendKeys("1234567890");
+}
+else {
+            jswait.loadClick(sendTrialfield);
+            jswait.loadSendKeys(sendTrialfield, number);
+}
 		jswait.loadClick(sendTrialSMSSender);
 		jswait.loadClick(SelectTrialSMSID);
 		jswait.loadClick(sendTrialSMSRoute);
@@ -2159,7 +2182,7 @@ public class OfferPageObjects extends Init {
 		Thread.sleep(3000);
 		String gettext;
 		gettext = sendTrialInavlidNumPopup.getText();
-	    Assert.assertTrue(gettext.contentEquals("Unable to process your request. Please try again"), "Invalid popup message");
+	    Assert.assertTrue(gettext.contentEquals("Invalid format. Please check the customer number entered."), "Invalid popup message");
 	    //System.out.println("message is , " +gettext);
 	    Thread.sleep(3000);
 		jswait.loadClick(sendTrialPageClose);
@@ -2184,7 +2207,7 @@ public class OfferPageObjects extends Init {
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
-//		enterCreativeTabDetails(eh);
+		enterCreativeTabDetails(eh);
 	//	
 	//
 //		clickSendTrialButton();
@@ -2204,7 +2227,7 @@ public class OfferPageObjects extends Init {
 //		sendTrialPageFill();
 		jswait.loadClick(sendTrialCreativeAddButton);
 		//Thread.sleep(3000);
-//		enterSecondCreativeTabDetails(eh);
+		enterSecondCreativeTabDetails(eh);
 		//SecondsendTrialButton
 		jswait.loadClick(SecondsendTrialButton);
 		//jswait.loadClick(sendTrialPageClose);
@@ -2212,9 +2235,6 @@ public class OfferPageObjects extends Init {
 	    jswait.loadSendKeys(secondsendTrialfield, "919446506807");
 	    //sendTrialPageFill();
 	    jswait.loadClick(SecondsendTrialSMSSender);
-//	    Actions action = new Actions(driver);
-//	    Thread.sleep(5000);
-//	    action.moveToElement(SecondSelectTrialSMSID).click().build().perform();
 //	    jswait.loadSendKeys(SecondsendTrialSMSSender,SENDER_SMPP);
 		jswait.loadClick(SelectTrialSMSID);
 		jswait.loadClick(SecondsendTrialSMSRoute);
@@ -2316,12 +2336,13 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(sendTrialEmailfield);
         jswait.loadSendKeys(sendTrialEmailfield, number);                                                 
 		jswait.loadClick(sendTrialEmailSender);
-		jswait.loadClick(SelectTrialSMSID);
+		jswait.loadSendKeys(sendTrialEmailSender,SENDER_EMAIL);
+		jswait.loadClick(SelectTrialEmailID);
 		jswait.loadClick(sendTrialEmailRoute);
 		//jswait.loadSendKeys(sendTrialEmailRoute, "SMPP Robi outbound");
-		jswait.loadSendKeys(sendTrialEmailRoute, "Email Route new");
-		//jswait.loadClick(SelectTrialEmailRoute);
-		jswait.loadClick(sendTrialwindow);
+		jswait.loadSendKeys(sendTrialEmailRoute, ROUTE_EMAIL);
+		jswait.loadClick(SelectTrialEmailRoute);
+//		jswait.loadClick(sendTrialwindow);
 		jswait.loadClick(sendTrialEmailSendButton);
 		Thread.sleep(3000);
 		jswait.loadClick(sendTrialEmailPageClose);

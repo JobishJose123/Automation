@@ -17,7 +17,7 @@ Feature: Test suite on Offer creation
     Then create new offer from sheet "rechargeSMS" with product "singleProductPage"
     Then verify "rechargeSMS" offer in grid
 
-  @NX-1351 @initBrowser @closeBrowser
+  @NX-1351 @initBrowser 
   Scenario: Create offer:Track: Verify creating offers with Voice Push channel NX-1351
     Given login
     Then navigate to precision marketer
@@ -47,11 +47,11 @@ Feature: Test suite on Offer creation
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-895 @initBrowser @closeBrowser
+  @NX-895 @closeBrowser
   Scenario: Create offer: Creative: Verify the proceed button. NX-895
     Then check previous step and pass this
 
-  @NX-1353 @initBrowser @closeBrowser
+  @NX-1353 @initBrowser 
   Scenario: Create offer:Track: Verify creating offers with Wap Push channel NX-1353
     Given login
     When navigate to precision marketer
@@ -61,7 +61,7 @@ Feature: Test suite on Offer creation
     Then verify "rechargeWAP" offer in grid
     Then pass next scenario based on this step
 
-  @NX-896
+  @NX-896 @closeBrowser
   Scenario: Create offer: Track : Verify selecting source for tracking rule. NX-896
     Then check previous step and pass this
 
@@ -472,6 +472,7 @@ Feature: Test suite on Offer creation
   @NX-957
   Scenario: Create offer: Creative: Verify the newly added dynamic variable in a select variable option. NX-957
     Then check previous step and pass this
+    Then pass next scenario based on this step
     
     @NX-947
   Scenario: Create offer: Creative: Verify the label message after selecting the variables. NX-947
@@ -580,7 +581,7 @@ Feature: Test suite on Offer creation
   Scenario: Verify deleting reward type
     Then delete created reward type
     
-    @NX-7307 @initBrowser  @closeBrowser
+    @NX-7307 @initBrowser @closeBrowser
     Scenario: Verify whether Reward attributes have searchable drop downs NX-7307
     Given login
     Then navigate to precision marketer
@@ -606,6 +607,11 @@ Feature: Test suite on Offer creation
     Given login
     Then navigate to precision marketer
     Then navigate to offer management
+    Then navigate to products
+    Then navigate to prepaid telecom
+    Then click create new product button
+    Then create single product from sheet "singleProductPage"
+    Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
     Then navigate to offer management 
@@ -620,75 +626,19 @@ Feature: Test suite on Offer creation
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-2330
- 
+  @NX-2330 
   Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
     Then check previous step and pass this
     Then pass next scenario based on this step
     
-    @NX-2414
+    @NX-2414 @closeBrowser
      Scenario: Email Channel -->Verify the change button as per the design document
     Then check previous step and pass this
     #Then pass next scenario based on this step
-    
-    @NX-2419 @initBrowser
-  Scenario: Email Channel -->Verify the Create offer using Email as a channel. NX-2419 
-    Given login
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
-    Then pass next scenario based on this step
-
- @NX-2403 
-    Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
-	  Then edit offer from sheet "rechargeEmail"
-	  
-    @NX-2421
-  Scenario: Email Channel -->Verify the Duplicate options of the offers using Email as a channel. NX-2421
-    Then duplicate offer from sheet "rechargeEmail"
   
-	  @NX-2422
-  Scenario: Email Channel -->Verify the Verify the "Delete" option from the Options icon using Email as a channel. NX-2422
-	   Then delete offer from sheet "rechargeEmail"
-	   
-	   
-	   
-	   
-	  @NX-2411 @initBrowser
-  Scenario: Email Channel -->Verify the Duplicate options of the offers  NX-2411
-    Given login
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
-    Then duplicate offer from sheet "rechargeEmail"
-	   
-	   
-	   
-	   @NX-2406
-	   @initBrowser
-	     Scenario: Email Channel -->Verify the Verify the Delete option NX-2406
-	     Given login
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
-    Then delete offer from sheet "rechargeEmail"
     
     
-    
-     @NX-2425
- @initBrowser
-  Scenario: Create offer: Creative: Verify deleting the added dynamic variable NX-946
-    Given login
-    When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then verify delete added variable
-    
-    
-      @NX-1348 @NX-1352 @initBrowser
+      @NX-1348 @NX-1352 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating Recharge offers 
     Given login
     Then navigate to precision marketer
@@ -698,7 +648,7 @@ Feature: Test suite on Offer creation
     Then verify recharge offer from sheet "rechargeWAP"
    
 
-    @NX-6176 @initBrowser
+    @NX-6176 @initBrowser @closeBrowser
   Scenario: Create offer:Track: Verify creating STV offers 
     Given login
     When navigate to precision marketer
@@ -709,7 +659,7 @@ Feature: Test suite on Offer creation
     
     
     @NX-2409
-     @initBrowser
+     @initBrowser @closeBrowser
   Scenario: Email Channel -->Verify the Map Variable and used variables icons
     Given login
     When navigate to precision marketer
@@ -744,7 +694,7 @@ Feature: Test suite on Offer creation
     Then click on apply button
     Then verify trial message event
     
-    @NX-5284 @initBrowser @closeBrowser
+    @NX-5284 @initBrowser 
      Scenario: STC--> Verify send trial creative for both valid and invalid msisdn
     Given login
     When navigate to precision marketer
@@ -965,6 +915,66 @@ Feature: Test suite on Offer creation
     
     
     
+     @NX-2419 @initBrowser
+  Scenario: Email Channel -->Verify the Create offer using Email as a channel. NX-2419 
+    Given login
+    Then navigate to precision marketer
+     Then navigate to offer management
+    Then navigate to products
+    Then navigate to prepaid telecom
+    Then click create new product button
+    Then create single product from sheet "singleProductPage"
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
+    Then pass next scenario based on this step
+
+ @NX-2403 
+    Scenario: Email Channel --> Verify the Subject Field in Creative Tab while Creating Email based Offers. NX-2330
+	  Then edit offer from sheet "rechargeEmail"
+	  
+    @NX-2421
+  Scenario: Email Channel -->Verify the Duplicate options of the offers using Email as a channel. NX-2421
+    Then duplicate offer from sheet "rechargeEmail"
+  
+	  @NX-2422
+  Scenario: Email Channel -->Verify the Verify the "Delete" option from the Options icon using Email as a channel. NX-2422
+	   Then delete offer from sheet "rechargeEmail"
+	   
+	   
+	   
+	   
+	  @NX-2411 @initBrowser
+  Scenario: Email Channel -->Verify the Duplicate options of the offers  NX-2411
+    Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
+    Then duplicate offer from sheet "rechargeEmail"
+	   
+	   
+	   
+	   @NX-2406
+	   @initBrowser
+	     Scenario: Email Channel -->Verify the Verify the Delete option NX-2406
+	     Given login
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeEmail" with product "singleProductPage"
+    Then delete offer from sheet "rechargeEmail"
+    
+      
+   
+     @NX-2425
+ @initBrowser
+  Scenario: Create offer: Creative: Verify deleting the added dynamic variable NX-946
+    Given login
+    When navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then verify delete added variable
     
     
     

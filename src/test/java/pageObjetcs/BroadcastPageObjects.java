@@ -1045,7 +1045,7 @@ public String getTopBcStatus(String bcType) throws Exception {
 		}
 		clickProceedButton();
 		selectBaseList(baseList);
-		selectDNCList();
+		selectDNCList("both");
 		calculate_CG_TG();
 
 		clickProceedButton();

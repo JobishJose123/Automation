@@ -103,7 +103,12 @@ public class OfferSteps extends Init {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(.,'Channel Type')]//following::label[contains(.,'" + eh.getCellByColumnName("Grid Channel") + "')]")));
 		}catch(Exception e) {
 			System.err.println("Grid label Column not found in Excel. Checking channel name in Grid");
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(.,'Channel Type')]//following::label[contains(.,'" + eh.getCell(1, 3).toString() + "')]")));
+			if(!eh.getCell(1, 3).toString().equalsIgnoreCase("WAP Push")) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(.,'Channel Type')]//following::label[contains(.,'" + eh.getCell(1, 3).toString() + "')]")));
+			}else {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(.,'Channel Type')]//following::label[contains(.,'WAP')]")));
+			}
+			
 		}
 		
 		
@@ -447,6 +452,7 @@ public class OfferSteps extends Init {
 		offerPageObjects.clickRewardAddButton();
 		offerPageObjects.clickRewardTypeInputField();
 		offerPageObjects.enterReward();
+		offerPageObjects.selectReward(SELENIUM_REWARD);
 		offerPageObjects.enterSuccessMessage(
 				"More the 500 chars Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mi lacus. Maecenas tempus, urna vel efficitur porttitor, nisi mauris rutrum risus, sed sollicitudin ligula urna a turpis. Nullam sit amet elit posuere, semper ligula ut, euismod felis. Duis vel tellus sed magna facilisis eleifend vitae in leo. Aenean odio quam, aliquet egestas massa vel, aliquam scelerisque mi. Donec scelerisque a odio in consectetur. Nulla in nisi quis felis faucibus pellentesque. Vivamus euismod orci ac nullam. after");
 		//offerPageObjects.verifyRewardSucessMessage();
@@ -787,13 +793,14 @@ public class OfferSteps extends Init {
 		offerPageObjects.clickAddNewVariableSaveButton();
 		offerPageObjects.MapVariableFilterName("sel_var1");
 		jswait.waitUntil("//data-table-cell[contains(.,'66545675456456654645')]");
+		offerPageObjects.clickMapVariableOkButton();
 	}
 	@Then("^verify deleting added variable$")
 	public void verifyDeletingDynamicVariables() throws Throwable {
 		offerPageObjects.clickAddVariableDeleteButton();
-		offerPageObjects.MapVariableFilterName("sel_var2");
+		offerPageObjects.MapVariableFilterName("sel_var1");
 		offerPageObjects.clickAddVariableDeleteButton();
-		offerPageObjects.MapVariableFilterName("sel_var2");
+		offerPageObjects.MapVariableFilterName("sel_var1");
 		try {
 			offerPageObjects.clickAddVariableDeleteButton();
 			Assert.assertTrue(false, "variable exists after deletion");
@@ -846,9 +853,9 @@ public class OfferSteps extends Init {
 	Assert.assertTrue(responseBox.size() == 2, "response message box should be shown for each creative");
 	driver.findElement(By.xpath("//h4[contains(.,'Add fulfillment response in "+LANGUAGE1+"')]"));
 	driver.findElement(By.xpath("//h4[contains(.,'Add fulfillment response in "+LANGUAGE2+"')]"));
-	List<WebElement> responseMessages = driver.findElements(By.xpath("//label[contains(.,'Response on success')]"));
+	List<WebElement> responseMessages = driver.findElements(By.xpath("//label[contains(.,'Default Success')]"));
 	Assert.assertTrue(responseMessages.size() == 2, "response message success should be shown for each creative");
-	responseMessages = driver.findElements(By.xpath("//label[contains(.,'Response on Failure')]"));
+	responseMessages = driver.findElements(By.xpath("//label[contains(.,'Default Failure')]"));
 	Assert.assertTrue(responseMessages.size() == 2, "response message Failure should be shown for each creative");
 	}
 	@Then("^verify set as default checkbox with multiple track sources$")
