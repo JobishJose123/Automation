@@ -281,7 +281,7 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then activate broadcast from workbook "parallelRunBC" and sheet "BCDataStorage"
 
 
-@NDX-8573 @NDX-8603 @NDX-8624 @NDX-8798 @NDX-10092 @NDX-10143 @NDX-10094  @initBrowser 
+@NDX-8574 @NDX-8609 @NDX-8625 @NDX-8797 @NDX-10092 @NDX-10143 @NDX-10094  @initBrowser 
 Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: profilefieldNV of a one-timebc
 Then filter the bc from sheet "BCDataStorage" from row "1" and column "0" and write in sheet "one-offBC"
 Given login 

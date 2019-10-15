@@ -116,6 +116,7 @@ public class CommonSteps extends Init {
     public void loginuser() throws Exception {
         
 		 driver.get("https://"+p.getValue("env"));
+		 Thread.sleep(2000);
 		 loginPage.login(p.getValue("username"), p.getValue("password"));
 		 
 		 //handle robox
@@ -537,7 +538,10 @@ public class CommonSteps extends Init {
 	    
 	}
 	
-	
+	@Then("^navigate back$")
+	public void navigate_back() throws Exception{
+		driver.navigate().back();
+	}
 	
 	
 	

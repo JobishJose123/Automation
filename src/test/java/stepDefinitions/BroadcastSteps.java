@@ -4492,10 +4492,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
       broadcastPageObjects.verifyEventOfTheBC(event,bcName,camapignName);
      
 	}
-	@Then("^verify the dynamic tag \"([^\"]*)\"$")
-	public void verify_dynamic_tag (String dynamicTag) throws Exception{
-		  broadcastPageObjects.verifyDynamicTag(dynamicTag);
-	}
+	
 	
 	@Then("^Verify calculate option for BCs from workbook \"([^\"]*)\" in sheet \"([^\"]*)\" with BC \"([^\"]*)\"$")
 	public void verify_calculate_option_for_BCs_from_workbook_in_sheet_with_BC(String workbook, String sheet,
@@ -4626,13 +4623,15 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		String targetCount=eM.getCellByColumnName(targetCondition);
 		broadcastPageObjects.verifyBCAckCountFromGrid(bcName,targetCount,bctype);
 }
-	@Then("^verify the count with condition (.*) from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\" from bc report$")
-	public void verify_the_count_with_condition_from_sheet_of_the_bc_from_sheet_from_bc_report(String targetCondition, String targetCountSheet, String bcSheet) throws Throwable {
+	@Then("^from bc report verify condition (.*) and cg \"([^\"]*)\" count from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\"$")
+	public void from_bc_report_verify_count_from_sheet_of_the_bc_from_sheet(String targetCondition,String cgRequired, String targetCountSheet, String bcSheet) throws Exception {
     eh.setExcelFile("parallelRunBc", targetCountSheet);
     String targetCount=eh.getCellByColumnName(targetCondition);
+    String OverallcgCount=eh.getCellByColumnName("OverallCg");
+    String bcLevelcgCount=eh.getCellByColumnName("bcLevelCg");
     eM.setExcelFile("bcInputData", bcSheet);
     String  bcName=eM.getCellByColumnName("BC Name");
-    broadcastPageObjects.verifyCountFromBCReport(bcName,targetCount);
+    broadcastPageObjects.verifyCountFromBCReport(bcName,targetCount,targetCountSheet,OverallcgCount,cgRequired,bcLevelcgCount);
 }
 	
 	@Then("^add bc from sheet \"([^\"]*)\" to column \"([^\"]*)\" of bc data sheet \"([^\"]*)\"$")
@@ -4645,8 +4644,8 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
          broadcastPageObjects.addBcToSheet(bcName,bcType,bcStorageSheet,row);
          
  }
-	@Then("^provide file for trigger with csv file \"([^\"]*)\"$")
-	public void provide_file_for_trigger_with_csv_file(String csvFile) throws Throwable {
+	@Then("^provide file in location \"([^\"]*)\" for trigger with csv file \"([^\"]*)\"$")
+	public void provide_file_in_location_for_trigger_with_csv_file(String location, String csvFile) throws Throwable {
 	String csvFileData = "";
 	File conversionCSV = new File("ExcelFiles\\" + csvFile);
 	BufferedReader br = null;
@@ -4660,35 +4659,30 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		initial = 0;
 		csvFileData += temp;
 	}
-	System.out.println(csvFileData);
+//	System.out.println(csvFileData);
 	System.out.println("test");
 	br.close();
 	ShellExecuter se = new ShellExecuter();
-	se.executeScript("cd /usr/local/flytxt/seleniumTrigger; echo '" + csvFileData + "' >"+csvFile+"");
+	se.executeScript("cd "+location+"; echo '" + csvFileData + "' >"+csvFile+"");
 	}
 	
 	
 	@Then("^verify the cg exclusion from sheet \"([^\"]*)\"$")
 	public void verify_the_cg_exclusion_from_sheet(String targetCountSheet) throws Exception {
 		eh.setExcelFile("parallelRunBC", targetCountSheet);
-		   String targetCount=eh.getCellByColumnName("cg count");
+		   String targetCount=eh.getCellByColumnName("OverallCg");
 		   broadcastPageObjects.verifyCGCount(targetCount);
 	
 	}
 	
 	
-	@Then("^verify the condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\" and offer from sheet \"([^\"]*)\"$")
-	public void verify_the_condition_Acknowleged_event_for_the_bc_from_sheet_for_the_campaign_from_sheet_and_offer_from_sheet(String event,String bcSheet, String campaignSheet, String offerSheet) throws Throwable {
+	@Then("^verify multiple creative \"([^\"]*)\" for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
+	public void verify_the_multiple_creative_(String dynamicTag,String bcSheet, String campaignSheet)throws Throwable {
 		 eh.setExcelFile("bcInputData", bcSheet);
 	      String bcName =eh.getCellByColumnName("BC Name");
 	      eM.setExcelFile("campaignInputData", campaignSheet);
-	      String camapignName=(String) eM.getCell(1, 0);
-	      eh.setExcelFile("OfferInputData", offerSheet);
-	      String dynamicTag=(String)eh.getCell(1, 20);
-	      broadcastPageObjects.verifyDynamicTagOfTheBC(event,bcName,camapignName,dynamicTag);
-	
-	
-	
+	      String campaignName=(String) eM.getCell(1, 0);
+	      broadcastPageObjects.verifyDynamicTagOfTheBC(dynamicTag,bcName,campaignName);
 	}
 	
 	@Then("^verify the message is not delivered after expiry$")
@@ -4709,7 +4703,18 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		
 	}
 	
+	@Then("^raise the conversion job$")	
+public void _raise_conversion_job() throws Exception{
+	LegacyClass legacy=new LegacyClass();
+	legacy.legacyTest();
 	
+}
+@Then("^verify the seeding and trigger option for the bc from sheet \"([^\"]*)\" for \"([^\"]*)\" bc$")
+public void verify_the_seeding_and_trigger_option_for_the_bc_from_sheet_for_bc(String bcSheet, String bctype) throws Throwable {	
+	 eM.setExcelFile("bcInputData", bcSheet);
+	    String  bcName=eM.getCellByColumnName("BC Name");
+	    broadcastPageObjects.verifyIsSeedingInReport(bcName,bctype);
+}
 	
 	
 	

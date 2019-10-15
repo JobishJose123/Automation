@@ -127,7 +127,7 @@ public class TargetConditionObjects extends Init {
 	private WebElement CustomerInsightFieldGroupId;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::label[contains(.,'List')]/../..//input")
 	private WebElement CustomerListFieldSelector;
-	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+SELENIUM_LIST_SUB+"')]")
+	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+SEL_LIST+"')]")
 	private WebElement CustomerListSelection;
 	@FindBy(xpath="//label[contains(.,'Condition Type')]/../..//input/following::paper-item[contains(.,'"+SELENIUM_SHARED_List+"')]")
 	private WebElement SharedCustomerListSelection;
@@ -459,7 +459,7 @@ public class TargetConditionObjects extends Init {
 			else if(event.contentEquals("customerList")){
 				jswait.loadClick(targetConditionTypeSelector);
 				jswait.loadClick(targetConditionTypeCustomerList);
-				jswait.loadSendKeys(CustomerListFieldSelector,SELENIUM_LIST_SUB);
+				jswait.loadSendKeys(CustomerListFieldSelector,SEL_LIST);
 				jswait.loadClick(CustomerListSelection);
 				jswait.loadClick(conditionSelector);
 				jswait.loadClick(conditionIsSubscribed);
@@ -491,13 +491,11 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(CustomerInsightFieldAgeNV);
 				jswait.loadClick(conditionSelector);
 				jswait.loadClick(conditionFieldIsNotSet);
-//				jswait.loadClick(conditionIsGreaterThan);
-//				jswait.loadSendKeys(isGreaterThanValue,"6");
 				jswait.loadClick(targetConditionSave);
 				clickManualAndButton();
 				jswait.loadClick(targetConditionTypeSelector);
 				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
-				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadSendKeys(CustomerInsightFieldSelector,"Date_q11");
 				jswait.loadClick(CustomerInsightFieldDateNV);
 				jswait.loadClick(selectDatePart);
 				jswait.loadClick(selectDate);
@@ -513,9 +511,7 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(conditionSelector);
 				jswait.loadClick(conditionFieldIsNotSet);
 				jswait.loadClick(targetConditionSave3);
-				
-				
-			}
+				}
 			else if(event.contains("sharedEventOtherPartner")) {
 				jswait.loadClick(targetConditionTypeSelector);
 				jswait.loadClick(targetConditionTypeCustomerDrivenEvents);

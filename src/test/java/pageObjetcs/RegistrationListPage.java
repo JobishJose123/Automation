@@ -1,5 +1,6 @@
 package pageObjetcs;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -341,7 +342,12 @@ public class RegistrationListPage extends Init{
 	public void filterDkJobName(String jobName) throws Exception{
 		commonObjects.clickOptionsIcon();
 		commonObjects.clickEditOption();
+		String activate=driver.findElement(By.xpath("//paper-toggle-button")).getAttribute("aria-pressed");
+		System.out.println("the dk job is : "+activate);
+		if(activate.equalsIgnoreCase("false"))
 		jswait.loadClick(activeTogglebtn);
+		else
+			System.out.println("toggle button is already active");
          jswait.loadClick(saveDK);
 		
 		

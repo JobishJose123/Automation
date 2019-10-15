@@ -404,7 +404,7 @@ public class BroadcastPageObjects extends Init {
 	
 	 @FindBy(xpath="//label[@id='label']//following::input[@placeholder='Select a Language']")
 	 private WebElement selectLanguage;
-	 @FindBy(xpath="//vaadin-combo-box-overlay[contains(.,'Arabic')]")
+	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'Arabic')]")
 	 private WebElement selectArabic ;
 	 @FindBy(xpath="//paper-button[contains(.,'Target Group')]")
 	 private WebElement selectTargetGroup ;
@@ -504,12 +504,14 @@ public class BroadcastPageObjects extends Init {
 		@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[3]")
 		private WebElement recurringChildOptionIcon;
 		@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[5]")
-		private WebElement seedingRecurrChildOptionIcon;
+		private WebElement seedingRecurrRewardingChildOptionIcon;
+		@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[6]")
+		private WebElement seedingRecurrMessagingChildOptionIcon;
 		@FindBy(xpath = "(//*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..)[2]")
 		private WebElement RecurringChildOptionIconAt;
 		@FindBy(xpath="//div[@class='headingDiv layout horizontal justified style-scope stats-calculate']//iron-icon[@id='icon']")
 		private WebElement calculatedCountsCloseBtn;
-		@FindBy(xpath="//div[contains(.,'Confirmed Delivery')][@id='checkboxLabel']")
+		@FindBy(xpath="//div[contains(.,'Confirmed Delivery')][@id='checkboxLabel']/..")
 		private WebElement drCheckBox ;
 		@FindBy(xpath="(//div[contains(.,'Conversion')][@id='checkboxLabel'])[1]")
 		private WebElement conversionCheckBox ;
@@ -520,6 +522,24 @@ public class BroadcastPageObjects extends Init {
 		
 		@FindBy(xpath="//label[contains(.,'Triggers')]//following::input[1]")
 		private WebElement triggerInput;
+		@FindBy(xpath="//paper-checkbox[@id='broadcast_cg']")
+	    private WebElement selectBCCg;
+	    @FindBy(xpath="//div[contains(.,'Control Group Participation')][@id='checkboxLabel']/..")
+		private WebElement  controlGroupParticipation;
+		@FindBy(xpath="//div[contains(.,'Is Seeding')][@id='checkboxLabel']")
+		private WebElement isSeedingCheckBox;
+		@FindBy(xpath="//div[contains(.,'Is Triggered')][@id='checkboxLabel']")
+		private WebElement isTriggeredCheckBox;
+		@FindBy(xpath="//div[@id='checkboxLabel'][contains(.,'Control Group Participation')]/..")
+		private WebElement cgParticipationEvent;
+		@FindBy(xpath="//div[@id='checkboxLabel'][contains(.,'Control Group Conversion')]/..")
+		private WebElement cgConversionEvent;
+		@FindBy(xpath="//iron-icon[@title='Save']")
+		private WebElement saveBCReport;
+		@FindBy(xpath="(//h2[contains(.,'Save Filter')]//following::paper-button[contains(.,'Save')])[1]")
+		private WebElement saveBCReportPaperbtn;
+		@FindBy(xpath="//div[contains(.,'Select Event Types')][@id='checkboxLabel']")
+		private WebElement selectAllEventCheckBox;
 		
 		
 		
@@ -3284,7 +3304,7 @@ public boolean checkCalculateBtnDisplayed() {
 			
 		}
 		jswait.loadClick(CGSavebtn);
-//		selectDNCList(DNC);
+		selectDNCList(DNC);
 		TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 		if(targetType.equalsIgnoreCase("create")){
 			commonObjects.clickOptionsIcon();
@@ -3325,14 +3345,15 @@ public boolean checkCalculateBtnDisplayed() {
 		offerExcel.setExcelFile("offerInputData", offerSheet);
 		String offerName = offerExcel.getCellByColumnName("Offer Name");
 		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
-if(creative.equalsIgnoreCase("multiplecreative")) {
-	jswait.loadClick(selectLanguage);
-	jswait.loadClick(selectArabic);
-}
-else if (creative.equalsIgnoreCase("singlecreative")){
-	System.out.println("singlecreative");
-	
-}
+		if(creative.equalsIgnoreCase("multiple creative")) {
+			jswait.loadClick(selectLanguage);
+			Thread.sleep(2000);
+			jswait.loadClick(selectArabic);
+		}
+		else if (creative.equalsIgnoreCase("single creative")){
+			System.out.println("singlecreative");
+			
+		}
 		if (!bc_type.contains("Informational")) {
 			selectTrackSession(trackExpires);
 			selectTrackingSource();
@@ -3808,79 +3829,73 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	
 	public void viewBCbtn(String bcToView, String bctype) throws Exception{
 		Thread.sleep(3000);
-	if(bcToView.equalsIgnoreCase("recurringchildbc"))
+	if(bcToView.equalsIgnoreCase("recurringchildbc")) {
+		System.out.println("++++++++++++++++++++ to view is the recurring child bc thatis third column");
 	jswait.loadClick(recurringChildOptionIcon);
-	if(bcToView.equalsIgnoreCase("recurringchildWithEndAt")||bcToView.equalsIgnoreCase("seedingonetime"))
+	}
+	if(bcToView.equalsIgnoreCase("RecurringChildAt")||bcToView.equalsIgnoreCase("seedingonetime-messaging")) {
+		System.out.println("++++++++++++++++++ bc to view is the second column ++++++++++++++++++++");
 		jswait.loadClick(RecurringChildOptionIconAt);
-	if(bcToView.equalsIgnoreCase("seedingRecurring"))
-	jswait.loadClick(seedingRecurrChildOptionIcon);
-    if(bcToView.equalsIgnoreCase("onetime"))          
-    commonObjects.BCOptionIcon(bctype);
+	}
+	else if(bcToView.equalsIgnoreCase("seedingRecurring-Rewarding")) {
+	jswait.loadClick(seedingRecurrRewardingChildOptionIcon);
+	}
+	else if(bcToView.equalsIgnoreCase("seedingRecurring-Messaging")) {
+	jswait.loadClick(seedingRecurrMessagingChildOptionIcon);
+	}
+	else if(bcToView.equalsIgnoreCase("onetime")||bcToView.equalsIgnoreCase("seedingonetime-rewarding")) {   
+    	System.out.println("+++++++++++++   the bc to view is the first column  ++++++++++++++++++++++++");
+        commonObjects.BCOptionIcon(bctype);
+    }
 	jswait.loadClick(BcViewbtn);
 	}
 	
-	public void verifyCountFromBCReport(String bcName,String targetCount) throws Exception{
+	public void verifyCountFromBCReport(String bcName,String targetCount,String targetCountSheet,String cgCount,String cgRequired,String bcLevelCg) throws Exception{
 		Thread.sleep(3000);
 		jswait.loadClick(selectColumn);
 		Thread.sleep(2000);
 		String checkboxOfDr =driver.findElement(By.xpath("//paper-checkbox[@id='delivered_count']")).getAttribute("aria-checked");
-		String checkboxOfCg=driver.findElement(By.xpath("//paper-checkbox[@id='overall_cg']")).getAttribute("aria-checked");
-		if(checkboxOfDr.equalsIgnoreCase("false"))
+		String checkboxOfOverallCg=driver.findElement(By.xpath("//paper-checkbox[@id='overall_cg']")).getAttribute("aria-checked");
+		String checkBoxOfBCLevelCg=driver.findElement(By.xpath("//paper-checkbox[@id='broadcast_cg']")).getAttribute("aria-checked");
+		if(checkboxOfDr.equalsIgnoreCase("false")) {
 		jswait.loadClick(selectColumnDelivered);
-		else 
-	   System.out.println("delivered checkbox is already true");
-		if(checkboxOfCg.equalsIgnoreCase("false"))
-			jswait.loadClick(selectCg);
-		else
-			System.out.println("cg checkbox is already true");
+		Thread.sleep(2000);
+		if(checkboxOfOverallCg.equalsIgnoreCase("false")) {
+		jswait.loadClick(selectCg);
+		Thread.sleep(2000);
+		}
+		if(checkBoxOfBCLevelCg.equalsIgnoreCase("false")) {
+		jswait.loadClick(selectBCCg);
+		}
+		}
+		else {
+			System.out.println("overall and bc cg checkbox is already true");
+			System.out.println("delivered checkbox is already true");
+		}
 	   jswait.loadClick(nextbtn);
 		Thread.sleep(2000);
 		jswait.loadClick(savebtn);
+		jswait.loadClick(saveBCReport);
+		jswait.loadClick(saveBCReportPaperbtn);
 		jswait.loadClick(refreshReport);
 		Thread.sleep(3000);
 		ReportPageObjects ReportPageObject=new ReportPageObjects();
 		ReportPageObject.filterbroadcast(bcName);
 		Assert.assertTrue(jswait.checkVisibility("(//span[contains(.,'"+targetCount+"')])[3]"));
 		Assert.assertTrue(jswait.checkVisibility("(//span[contains(.,'"+targetCount+"')])[2]"));
-		Assert.assertTrue(jswait.checkVisibility("(//span[contains(.,'101')])"));
+		if(cgRequired.equalsIgnoreCase("if required")) {
+		if(targetCountSheet.equalsIgnoreCase("targetConditionCount")) {
+		Assert.assertTrue(jswait.checkVisibility("(//span[contains(.,'"+cgCount+"')])"));
+		Assert .assertTrue(jswait.checkVisibility("(//span[contains(.,'"+bcLevelCg+"')])"));
+		}
+		else if(targetCountSheet.equalsIgnoreCase("targetCountWithTrigger"))
+				Assert.assertTrue(jswait.checkVisibility("(//span[contains(.,'"+cgCount+"')])"));
+		        Assert .assertTrue(jswait.checkVisibility("(//span[contains(.,'"+bcLevelCg+"')])"));
+		}
+		else {
+			System.out.println("cg count need not to be verified");
 		}
 	
-	public void expirybcWithAt() throws Exception{
-		Actions builder =new Actions(driver);
-		Calendar rightNow = Calendar.getInstance();
-		int hours = rightNow.get(Calendar.HOUR);
-		int min = rightNow.get(Calendar.MINUTE);
-		int am_pm = rightNow.get(Calendar.AM_PM);
-		min += 2;
-		int rem = min % 5;
-		rem = 5 - rem;
-		min += rem;
-		if (min > 59) {
-			min -= 60;
-			hours++;
-		}
-		 if(min==0)
-			{
-				min+=5;
-			}
-		jswait.loadClick(broadcastExpiryCheckbox);
-		jswait.loadClick(expiresInput);
-		jswait.loadClick(expiresAt);
-		jswait.loadClick(expiresTimeInputAt);
-		WebElement num4 = driver.findElement(By.xpath(
-				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[3]"));
-		builder.moveToElement(num4).click().build().perform();
-		Thread.sleep(2000);
-		WebElement num5 = driver.findElement(By.xpath(
-				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 10) + "])[3]"));
-		Thread.sleep(1000);
-		builder.moveToElement(num5).click().build().perform();
-		if (am_pm == 0)
-			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
-		else
-			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
-
-		jswait.loadClick(expiryTimeOkbtn);
 	}
 	public void verifyEventOfTheBC(String event,String bcName,String campaignName) throws Exception{
 		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
@@ -3932,22 +3947,34 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 				}
 			}
 	} 
-	public void verifyDynamicTag(String dynamicTag) throws Exception{
-		Assert.assertTrue(jswait.checkVisibility("(//label[contains(.,'Creative')]//following::label[contains(.,'"+dynamicTag+"')])[1]"));
-	}
+	     
+	
 	public void verifyBCAckCountFromGrid(String bcName,String targetCount,String bctype) throws Exception{
-		Thread.sleep(2000);
-		if(bctype.equalsIgnoreCase("onetime")) 
-			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
-		if(bctype.equalsIgnoreCase("recurringWithEndAt"))
-			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
-			if(bctype.equalsIgnoreCase("recurring"))
-			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
-		if(bctype.equalsIgnoreCase("seedingonetime"))
+		System.out.println("==============================="+targetCount+"========================");
+			Thread.sleep(3000);
+			switch(bctype) {
+			case "onetime" :
+				System.out.println("+++++++++++++++++++++++inside case 1 of switch case+++++++++++++++++++");
+				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+				break;
+			case "recurringWithEndAt":
+				System.out.println("+++++++++++++++++++++++inside case 2 of switch case+++++++++++++++++++");
+				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+				break;
+			case "recurring" :
+				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+				break;
+			case "seedingonetime":
+				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"_OneOff_RewardingBC')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][1]"));
+			    Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"_OneOff_RewardingBC')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
+			    Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"_OneOff_MessagingBC')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][1]"));
+			    Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"_OneOff_MessagingBC')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
+			    break;
+			case "seedingRecurring"	:
 			Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
-        if(bctype.equalsIgnoreCase("seedingRecurring"))
-	       Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
-	}
+				
+			}	
+		}
 	
 	public void addBcToSheet(String bcName,String bcType,String bcStorageSheet,int row) throws Exception{
 		eh.setExcelFile("parallelRunBC", bcStorageSheet);
@@ -3964,56 +3991,57 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	}
 	
 	
-	public void verifyDynamicTagOfTheBC(String event, String bcName,String campaignName,String dynamicTag) throws Exception{
+	public void verifyDynamicTagOfTheBC(String dynamicTag,String bcName,String campaignName) throws Exception{
+		driver.navigate().refresh();
 		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
-		CustomerProfilePage.searchEventsDynammically("Last 3 Days");
-		 Thread.sleep(4000);
+		 CustomerProfilePage.searchEventsDynammically("Last 7 Days");
+		jswait.loadClick(selectAllEventCheckBox);
+       jswait.loadClick(selectAllEventCheckBox);
+       jswait.loadClick("//div[contains(.,'Acknowledged')][@id='checkboxLabel']"); 
+       Thread.sleep(3000);
+		 jswait.loadClick(applyEventFilter);
+		 Thread.sleep(3000);
 		 CustomerProfilePage.clickOnEventTabFilter();
 		 CustomerProfilePage.enterEventDetails(campaignName);
-		 CustomerProfilePage.filterResetFilterButton();
-		 Thread.sleep(3000);
-		  CustomerProfilePage.clickOnEventTabFilter();
-		 CustomerProfilePage.enterEventDetails(campaignName);	 
 		 CustomerProfilePage.filterApplyButton();
-		 jswait.loadClick(drCheckBox);
-		 jswait.loadClick(conversionCheckBox);
-		 jswait.loadClick(fulfillmentCheckBox);
-		 jswait.loadClick(applyEventFilter);
-		 Thread.sleep(10000);
-		 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
+		 Thread.sleep(3000);
+		 List<WebElement> Events = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'Acknowledged')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
 			Thread.sleep(1000);
-			System.out.println(ackEvents.size());
+			System.out.println(Events.size());
 			 int count=1;
-			 System.out.println("print "+ackEvents);
+			 System.out.println("print "+Events);
 			 System.out.println("before for loop");
+			 if(Events.size()==0) {
+				 Assert.assertTrue(false);
+			 }
 			 
-			for (WebElement webElement : ackEvents) {
+			for (WebElement webElement : Events) {
 					if ((webElement.getText()).contains(campaignName)) {
 						System.out.println(webElement.getText());
 						try {
 							jswait.loadClick("(//iron-icon[@class='deselect consumer-events style-scope x-scope iron-icon-0'])["+count+"]");
 							Thread.sleep(1000);
-							boolean booln = jswait.checkVisibility(
-									"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
-							Assert.assertTrue(jswait.checkVisibility("(//label[contains(.,'Creative')]//following::label[contains(.,'"+dynamicTag+"')])[1]"));
+							boolean booln = jswait.checkVisibility("//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
+							Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'Creative')]//following::label[contains(.,'"+dynamicTag+"')]"));
 							System.out.println(booln);
 							if (booln == true) {
-								System.out.println("Ack verified");
+								System.out.println("dynamic tag verified");
 								break;
 								
 							}
 							 else {
 								 
-								System.out.println("Ack verified.. waiting for BC name "+bcName);
+								System.out.println(".. waiting for BC name "+bcName);
 							}
 						} catch (Exception e) {
 							System.out.println("catch block");
-							Assert.assertTrue(false,"No Ack Event Raised");
+							Assert.assertTrue(false,"No dynamic tag");
 						}
 						Thread.sleep(2000);
 						count++;
 				}
 			}
+	
 	}
 	
 	
@@ -4043,6 +4071,42 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		ShellExecuter se = new ShellExecuter();
 		se.executeScript("cd "+path+"; rm "+filename+" -f");
 	}
+		public void verifyIsSeedingInReport(String bcName,String bcType) throws Exception{
+			Thread.sleep(3000);
+			jswait.loadClick(selectColumn);
+			Thread.sleep(2000);
+			String checkboxOfIsSeeding = driver.findElement(By.xpath("//paper-checkbox[@id='seeding']")).getAttribute("toggles aria-checked");
+			String checkboxIsTriggered = driver.findElement(By.xpath("//paper-checkbox[@id='triggered']")).getAttribute("toggles aria-checked");
+			if(checkboxOfIsSeeding.equalsIgnoreCase("false")&&checkboxIsTriggered.equalsIgnoreCase("false")) {
+			jswait.loadClick(isSeedingCheckBox);
+			jswait.loadClick(isTriggeredCheckBox);
+			}
+			else {
+				System.out.println("is seeding and triggered checkbox is already true");
+				}
+		   jswait.loadClick(nextbtn);
+			Thread.sleep(2000);
+			jswait.loadClick(savebtn);
+			jswait.loadClick(refreshReport);
+			Thread.sleep(3000);
+			ReportPageObjects ReportPageObject=new ReportPageObjects();
+			String bcNameRewarding=bcName+"_RewardingBC";
+			String bcNameMessaging=bcName+"_MessagingBC";
+			ReportPageObject.filterbroadcast(bcName);
+			if(bcType.equalsIgnoreCase("seeding")) {
+			Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("//span[contains(.,'"+bcNameRewarding+"')]//following::span[contains(.,'Yes')]"))));
+			Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("//span[contains(.,'"+bcNameRewarding+"')]//following::span[contains(.,'No')]"))));
+			Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("(//span[contains(.,'"+bcNameMessaging+"')]//following::span[contains(.,'Yes')])[1]"))));
+			Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("(//span[contains(.,'"+bcNameMessaging+"')]//following::span[contains(.,'Yes')])[2]"))));
+			}
+			else if(bcType.equalsIgnoreCase("trigger")) {
+				Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("(//span[contains(.,'"+bcNameRewarding+"')]//following::span[contains(.,'Yes')])[1]"))));
+				Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("(//span[contains(.,'"+bcNameRewarding+"')]//following::span[contains(.,'Yes')])[2]"))));
+				Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("(//span[contains(.,'"+bcNameMessaging+"')]//following::span[contains(.,'Yes')])[1]"))));
+				Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("(//span[contains(.,'"+bcNameMessaging+"')]//following::span[contains(.,'Yes')])[2]"))));	
+			}
+			else
+				System.out.println("no verification in bc report given");
 	
 	
 	
@@ -4057,7 +4121,7 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	
 	
 	
-	
+		}	
 	
 }
 

@@ -395,23 +395,17 @@ Then create new offer from sheet "<offerName>" with product "fullDetails" reward
 Examples:
 |offerName|creativeType|
 |rechargeSMS|multiplecreative|
-#|rechargeWAP|singlecreative|
-#|rechargeEmail|singlecreative|
-#|rechargeSMS_Dynamic|singlecreative|
+|rechargeWAP|singlecreative|
+|rechargeEmail|singlecreative|
+|rechargeSMS_Dynamic|singlecreative|
 |SeedingSMS|multiplecreative|
-#|seedingWAPoffer|singlecreative|
-#|seedingEmail|singlecreative|
+|seedingWAPoffer|singlecreative|
+|seedingEmail|singlecreative|
 
 
 @NDX-CreateBCForFunctionality @initBrowser   @closeBrowser
 Scenario Outline:Create broadcast to verify bc functionality(trigger not included)
 Given login
-Then navigate to configuration management
-Then navigate to partners       
-Then edit a partner
-Then navigate to control group settings page
-Then change partner control group settings
-Then navigate to landing page
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
@@ -425,23 +419,25 @@ Then activate bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
  Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|                  
-|one-offBC|rechargeSMS|profilefieldNV|Create|no limit|fixedPercentage|none|multiple creative|none|At|1|
+|one-offBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|At|1|
 |one-offBC|rechargeWAP|customerList|Create|no limit|no limit|none|single creative|none|none|2|
 |one-offBC|rechargeEmail|usageMetric|Create|no limit|no limit|none|single creative|none|none|3|
 |one-offBC|rechargeSMS_Dynamic|sharedMetricOtherPartner|Create|no limit|no limit|none|single creative|none|none|4|
-|recurrBCDaily|rechargeSMS|segmentAgeGT40|Saved Segments|no limit|fixedPercentage|none|multiple creative|At|none|5|
-|recurrBCWeekly|rechargeWAP|targetall|None|no limit|no limit|none|single creative|none|none|6|
+#
+|recurrBCDaily|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|At|none|5|
+|recurrBCWeekly|rechargeWAP|profilefieldNV|None|no limit|no limit|none|single creative|none|none|6|
 |recurringMonthSpecialBC|rechargeEmail|targetall|None|no limit|no limit|none|single creative|none|none|7|
 |recurringBC|rechargeSMS_Dynamic|SharedcustomerList|Create|no limit|no limit|none|single creative|none|none|8|
-|seedingoneoff|SeedingSMS|sharedEventOtherPartner|Create|no limit|fixedPercentage|none|multiple creative|none|none|9|
+#
+|seedingoneoff|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|9|
 |seedingoneoff|seedingWAPoffer|customerDrivenEvent|Create|no limit|no limit|none|single creative|none|none|10|
 |seedingoneoff|seedingEmail|customerDrivenEventNotOccurred|Create|no limit|no limit|none|single creative|none|none|11|
 |seedingoneoff|SeedingSMS_Dynamic|targetall|Create|no limit|no limit|none|single creative|none|none|12|
+#
 |seedingRecurringBC|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|13|
-|seedingRecurringBC|seedingWAPoffer|targetall|None|no limit|no limit|none|single creative|none|none|14|
+|seedingRecurringBC|seedingWAPoffer|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|none|none|14|
 |seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|15|
 |seedingRecurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|16|
-
 
 
 @NDX-createTriggerWithDKJob @initBrowser
@@ -455,7 +451,7 @@ Then navigate to precision marketer
 Then navigate to configuration
 Then select triggers in configuration
 Then create new trigger "selTrigger1" with streaming attribute from sheet "streamingAttr"
-Then create a dk job "Sel_TriggerJob1" with streaming attribute "streamingAttr"
+Then create a dk job "Sel_TriggerJob1" with input location "/usr/local/flytxt/seleniumTrigger" streaming attribute "streamingAttr" 
 Then navigate to landing page
 Then navigate to data foundation
 Then click Data Fusion Engine
@@ -477,19 +473,19 @@ Then activate bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
 Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|
-|TriggerOneoff|rechargeSMS|segmentAgeGT40|Saved Segments|no limit|fixedPercentage|none|single creative|never|none|17|
+|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|17|
 |TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiplecreative|never|none|18|
-#|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|singlecreative|never|none|19|
-#|TriggerReccurringBC|seedingWAPoffer|targetall|None|no limit|no limit|none|singlecreative|never|none|20|
-#|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiplecreative|never|none|21|
-#|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|singlecreative|none|none|22|
-#|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|singlecreative|At|At|23|
+|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|singlecreative|never|none|19|
+|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|singlecreative|never|none|20|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiplecreative|never|none|21|
+|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|singlecreative|none|none|22|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|singlecreative|At|At|23|
 
 #after running @NDX-TriggerBC run @NDX-fileForTriggerBC
 @NDX-fileForTriggerBC  @initBrowser @closeBrowser
 Scenario: upload file for trigger bc
-Given login
-Then provide file for trigger with csv file "trigger1.csv"
+#Given login
+Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "trigger1.csv"
 
 
 @NDX-CreateUsageBasedOffer @initBrowser
@@ -504,14 +500,13 @@ Examples:
 |rechargeSMS|Usage Metric|
 |SeedingSMS|Usage Metric|
 
-
 @NDX-usageMetricUploadForUsageBasedOffer  @initBrowser
 Scenario: upload the usage metric 
 Given login 
 Then navigate to data foundation
 Then click Data Fusion Engine
 Then filter the job "selMetricEventUpload" and activate it
-Then provide file for trigger with csv file "sel_uasge_metric.csv"
+Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "sel_uasge_metric.csv"
 
 
 @NDX-CreateBCWithUsageBasedOffer @initBrowser
