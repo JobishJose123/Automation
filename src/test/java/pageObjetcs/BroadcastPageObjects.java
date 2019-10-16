@@ -2519,7 +2519,7 @@ public boolean checkCalculateBtnDisplayed() {
 		String bcNamefromSheet = eM.getCell(1, 0).toString();
 		// to provide broadcast name and Broadcast Status
 		// String statusOFbroadcast = statusOfBC.getText();
-		String statusOFbroadcast = getTopBcStatus();
+		String statusOFbroadcast = getTopBcStatus(sheet,bcNamefromSheet);
 
 		String query = "select APPLICATION_INSTANCE_ID from app_instance where APPLICATION_INSTANCE_NAME='"
 				+ bcNamefromSheet + "';";

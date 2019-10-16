@@ -96,7 +96,7 @@ public class OfferPageObjects extends Init {
 //	@FindBy(xpath = ".//rewards-container//paper-button[contains(.,'Add')]")
 //	private WebElement rewardAddButton;
 	
-	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'Selenium_reward')]")
+	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")
 	private WebElement rewardTypeAnySelector;
 	
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'sample_flow')]")

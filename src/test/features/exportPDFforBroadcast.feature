@@ -57,7 +57,7 @@ Feature: Test cases related to Broadcast Management PDF
     Then navigate to campaign category from sheet "campaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "SeedingSMS"
+    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
     Then save bc
     Then Exporting the pdf from broacastpage
     Then Verify the exported BC time from sheet "one-offBC"
@@ -146,16 +146,16 @@ Feature: Test cases related to Broadcast Management PDF
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "SeedingSMS"
+    Then enter details for new broadcast from sheet "seedingoneoff" with "SeedingSMS"
     Then save bc
-    Then click on Seeding BC tab in BC page and filter the BC name from sheet "one-offBC"
+    Then click on Seeding BC tab in BC page and filter the BC name from sheet "seedingoneoff"
     Then Exporting the pdf from broacastpage
-    Then verify pdf generated for broadcast from sheet "one-offBC"
+    Then verify pdf generated for broadcast from sheet "seedingoneoff"
 
   @NX-6515
   Scenario: Verify export to pdf option is available and working for broadcast(Seeding) in broadcast Summary -newly created
-    Then view bc from sheet "one-offBC"
-    Then verify pdf generated for broadcast from sheet "one-offBC" in broadcast Summary
+    Then view bc from sheet "seedingoneoff"
+    Then verify pdf generated for broadcast from sheet "seedingoneoff" in broadcast Summary
 
   @NX-6558 @initBrowser
   Scenario: Verify multiple creative with different language selection is displayed correctly in generated pdf for one-off bc for new data NX-6558
@@ -202,7 +202,7 @@ Feature: Test cases related to Broadcast Management PDF
     Then check previous step and pass this
     Then pass next scenario based on this step
 
-  @NX-6531 @initBrowser
+  @NX-6531 @closeBrowser
   Scenario: Verify that 'No Do Not Contact lists are excluded' message is displayed in pdf generated when all Exclude Do-Not-Contact List is given.  NX-6531
     Then check previous step and pass this
 

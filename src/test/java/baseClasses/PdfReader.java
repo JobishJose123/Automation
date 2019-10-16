@@ -512,7 +512,11 @@ public void verifyExportedCampaignDateAndTime(String path, String afterClickOnEx
 	System.out.println(addingMinutes);
 	
 	//Assert.assertEquals((getTimeAfterExportPDF.equals(exportedTimeFromPDF)||getTimeAfterExportPDF.after(exportedTimeFromPDF)),exportedTimeFromPDF.before(addingMinutes));
-	Assert.assertTrue(exportedTimeFromFooter.before(addingMinutes)&&(exportedTimeFromFooter.after(getTimeAfterExportPDF)||exportedTimeFromFooter.equals(getTimeAfterExportPDF)));		
+	System.out.println(exportedTimeFromFooter+" before "+addingMinutes);
+	Assert.assertTrue(exportedTimeFromFooter.before(addingMinutes));
+	System.out.println(getTimeAfterExportPDF+" after "+exportedTimeFromFooter);
+	Assert.assertTrue(getTimeAfterExportPDF.after(exportedTimeFromFooter));
+	//Assert.assertTrue(exportedTimeFromFooter.before(addingMinutes)&&(exportedTimeFromFooter.after(getTimeAfterExportPDF)||exportedTimeFromFooter.equals(getTimeAfterExportPDF)));		
 	System.out.println("Verified campaign PDF Footer");
 	
 }
