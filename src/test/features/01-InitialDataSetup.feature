@@ -233,6 +233,8 @@ Then check and add profile fields
     Then navigate to saved segments
     Then create saved segment with condition "segmentAgeGT40"
     
+
+    
      @NDX-CreateNewTrackSource @initBrowser
     Scenario: create the track source
     Given login

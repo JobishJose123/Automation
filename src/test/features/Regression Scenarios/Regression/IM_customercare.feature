@@ -22,8 +22,8 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
 Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint" with taget condition <Condition>
     Then navigate to rules after edit
  Then wait until rule is picked
-#    Then verify rule created from sheet "rule"
-#    Then wait for "A" status of rule
+    Then verify rule created from sheet "rule"
+   Then wait for "A" status of rule
     Then logout
     Then login with selenium user
     Then navigate to precision marketer

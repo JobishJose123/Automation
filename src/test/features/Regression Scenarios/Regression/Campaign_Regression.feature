@@ -5,7 +5,7 @@
 Feature: Campaign Regression Cases
 
 
-  @NDX-5511, @NDX-5518, @NDX-5527, @NDX-5528, @NDX-8011 
+  @NDX-5511, @NDX-5518, @NDX-5527, @NDX-5528, @NDX-8011 @ndkcamptest 
   @initBrowser 
   Scenario Outline: Verify Editing campaign with target condition <Condition>
     Given login

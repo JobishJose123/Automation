@@ -107,7 +107,7 @@ Feature: Test cases for USSD
     Then click create program button
     Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
     Then choose program from sheet "programdetails"
-   Then create new rule with enddate from sheet "programdetails" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
+   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
     Then verify rule created from sheet "rule"
     Then wait until rule is picked
        Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123"

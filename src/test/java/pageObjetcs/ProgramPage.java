@@ -343,14 +343,14 @@ private WebElement ruleafterinput2 ;
 private WebElement ruledays;
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::input[1]")
 private WebElement rulessenderid ;
-@FindBy(xpath="(//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'Address-SMPP')])[2]")
+@FindBy(xpath="(//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'Address-SMPP')])[1]")
 private WebElement addresssprule;
 @FindBy(xpath="(//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')])")
 private WebElement addresssprule2;
 
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which this broadcast can be sent')]//following::input[1]")
 private WebElement rulerouteid;
-@FindBy(xpath="(//label[contains(.,'Route over which this broadcast can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])[2]")
+@FindBy(xpath="(//label[contains(.,'Route over which this broadcast can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])[1]")
 private WebElement ruleroute;
 @FindBy(xpath="(//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])")
 private WebElement ruleroute2;
@@ -673,7 +673,7 @@ private WebElement rulessenderid2
 			
 		Thread.sleep(1000);
 //		eh.setExcelFile("listname",listname);
-		String list = SELENIUM_LIST;
+		String list = listname;
 		jswait.loadSendKeys(customerListField, list);
 		Thread.sleep(3000);
 		jswait.loadClick("//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+list+"')]");
@@ -756,26 +756,6 @@ private WebElement rulessenderid2
 	   jswait.loadClick(rulerouteid2);
 	
 	}
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
    
    
    
@@ -2292,7 +2272,7 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 		    	else 
 		    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
 		    	
-		    	String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)+1);
+		    	String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
 		    	int hours = rightNow.get(Calendar.HOUR);
 		      	 int min = rightNow.get(Calendar.MINUTE);
 		      	 int am_pm = rightNow.get(Calendar.AM_PM);
@@ -2422,7 +2402,21 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 	
 		 
 		 public void deliverytabselection(String offerType,String touch) throws Exception {
-			 
+				if(touch.contentEquals("sms")||touch.contentEquals("trigger")){
+					System.out.println("inside sms");
+
+					Thread.sleep(2000);
+					rulessenderid();
+					Thread.sleep(2000);
+					addresssprule();
+
+					Thread.sleep(2000);
+					rulerouteid();
+					Thread.sleep(2000);
+					ruleroute();
+					Thread.sleep(2000);
+					
+		   }
 			 if(!offerType.contains("STV")) {
 				 System.out.println("inside stv");
 					clickTrackingSessionField();
@@ -2453,21 +2447,7 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 						clickPorogramProceedButton();
 						
 					}
-					if(touch.contentEquals("sms")||touch.contentEquals("trigger")){
-						System.out.println("inside sms");
-
-						Thread.sleep(2000);
-						rulessenderid();
-						Thread.sleep(2000);
-						addresssprule();
-
-						Thread.sleep(2000);
-						rulerouteid();
-						Thread.sleep(2000);
-						ruleroute();
-						Thread.sleep(2000);
-						clickPorogramProceedButton();
-			   }
+			
 				
 			 
 		 } 
