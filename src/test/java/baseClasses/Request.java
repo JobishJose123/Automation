@@ -92,8 +92,8 @@ public class Request extends Init{
 		setEncodedAuthorisation(authkey);
 		setGetProperties();
 		int responseCode = con.getResponseCode();
-//		System.out.println("\nSending 'GET' request to URL : " + url);
-//		System.out.println("Response Code : " + responseCode);
+		System.out.println("\nSending 'GET' request to URL : " + url);
+		System.out.println("Response Code : " + responseCode);
 		getResponseString();
 		return responseCode;	
 	}
@@ -237,7 +237,7 @@ public class Request extends Init{
 	public String getsessionid(String env) throws Exception{
 		Request req = new Request();
 //		req.postRequest(urlStr, jobPayload);
-	req.postRequest_payload("http://"+env+"/neon-ws/login", "username=flyops%40flytxt.com&password=Password1!&remember-me=false");
+	req.postRequest_payload("http://"+env+"/neon-ws/login", "username=flyops%40flytxt.com&password=flytxt&remember-me=false");
 		System.out.println(req.responseString);
 		List<String> cookies = req.getCookies();
 		System.out.println(cookies.get(0));

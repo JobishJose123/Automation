@@ -70,15 +70,15 @@ Then verify add facebook account option
     @initBrowser 
 Scenario: Verify creating one off BC with offer having facebook as the channel.
     Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
     When navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "rechargeimageFacebook" with product "fullDetails"
-    Then verify "rechargeimageFacebook" offer in grid
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then create new offer from sheet "rechargeimageFacebook" with product "fullDetails"
+#    Then verify "rechargeimageFacebook" offer in grid
     Then navigate to life cycle marketing
 	 
 	  Then navigate to offer management

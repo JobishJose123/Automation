@@ -589,24 +589,24 @@ Feature: Test cases for API
 #    Then Create New Offer Catalogue from sheet "defaultCatalog"
 #    Then Add "rechargeSMS" offer to Offer Catalogue
 #    Then navigate to landing page
-    Then navigate to intent management
-    Then navigate to programs
-    Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointUR_default"
-    Then choose program from sheet "programdetails"
-    Then create new rule from sheet "programdetails" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointUR_default"
-    Then verify rule created from sheet "rule"
-    Then wait for "A" status of rule
-    Then wait until rule is picked
-    Then navigate to landing page
+#    Then navigate to intent management
+#    Then navigate to programs
+#    Then click create program button
+#    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointUR_default"
+#    Then choose program from sheet "programdetails"
+#    Then create new rule from sheet "programdetails" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointUR_default"
+#    Then verify rule created from sheet "rule"
+#    Then wait for "A" status of rule
+#    Then wait until rule is picked
+#    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
     Then search msisdn "9491750025"
     Then click on events tab
-    Then wait for offer eligible event in consumer profile
+#    Then wait for offer eligible event in consumer profile
     Then get-offer api-server for "9491750025" with touchpoint "apiTouchpoint_default" and rule "rule"
-    Then wait for offer recommended event in consumer profile
+#    Then wait for offer recommended event in consumer profile
     Then accept api-server for "9491750025" with touchpoint "apiTouchpoint_default" and rule "rule"
     Then wait for offer accepted event in consumer profile
     Then pass next scenario based on this step
@@ -647,8 +647,8 @@ Feature: Test cases for API
     Then verify rule created from sheet "rule"
     Then wait for "A" status of rule
     Then wait until rule is picked
-#     Then filter the job "selMetricEventUpload" and activate it
-#    Then provide file for trigger with csv file "selenium_list _metric_event.csv"
+     Then filter the job "selMetricEventUpload" and activate it
+    Then provide file for trigger with csv file "selenium_list _metric_event.csv"
      Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to reports

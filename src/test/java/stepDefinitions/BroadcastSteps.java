@@ -4659,7 +4659,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 		initial = 0;
 		csvFileData += temp;
 	}
-//	System.out.println(csvFileData);
+	System.out.println(csvFileData);
 	System.out.println("test");
 	br.close();
 	ShellExecuter se = new ShellExecuter();

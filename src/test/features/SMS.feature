@@ -230,7 +230,7 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
 
 
 
-@NX-SMSoffer @initBrowser @NDX-9864
+@NX-SMSoffer @initBrowser @NDX-9884
   Scenario: SMS- Verify Message recevied for SMS 
     Given login
 #        Then navigate to configuration management
@@ -264,8 +264,10 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
 #    Then choose program from sheet "SMSprogram"
 #    Then create new rule from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
     Then verify rule created from sheet "rule"
-#    Then wait for "A" status of rule
+   Then wait for "A" status of rule
     Then wait until rule is picked
+
+    Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "sel_uasge_metric.csv"
 	Then login to the vcust
 	Then hit with vcust SMS with number "9491750022" with destination adrs "1011"
 	Then navigate to the neon again

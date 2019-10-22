@@ -2544,7 +2544,7 @@ System.out.println(editname+"program has edited successfully");
 						eh.setExcelFile("ruleInputData", ruleSheet);
 						SQLHandler sql = new SQLHandler();
 						int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
-						Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
+//						Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
 					}
 					
 												@Then("^wait for Message Recevied in consumer profile$")
