@@ -24,9 +24,8 @@ Feature: Test cases related to Campaign Management PDF
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-#    Then click on create new ofer button
     Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-Then create new offer from sheet "rechargeWAP" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
+    Then create new offer from sheet "rechargeWAP" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
     Then navigate to offer management
     Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"

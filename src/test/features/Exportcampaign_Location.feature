@@ -1,6 +1,5 @@
 #Author: sreeraj.rajan@flytxt.com
 #Keywords Summary : export campaign location related test cases
-
 @NX-ExportCampaign_Location
 Feature: Test cases related to export campaign location
 
@@ -37,15 +36,15 @@ Feature: Test cases related to export campaign location
   @NX-6863 @initBrowser 
   Scenario: create new campaign from template and edit the same
     Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then navigate to templates tab
-    Then create new template from sheet "template"
+   Then create new template from sheet "template"
     Then click on use template button from sheet "template" of file "campaignTemplateInputData"
     Then create new campaign use template from sheet "campaignBC" with catalog "defaultCatalog"
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"

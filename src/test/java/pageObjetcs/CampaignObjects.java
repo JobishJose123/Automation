@@ -409,7 +409,12 @@ public class CampaignObjects extends Init{
 	}
 	
 	public void clickCampaignTemplateTab() throws InterruptedException {
+		try {
 		jswait.loadClick(campaignTemplatesTab);
+		}catch (Exception e) {
+		jswait.loadClick("//paper-tab/div[contains(.,'Campaign Opportunities')]/..");
+			
+		}
 		
 	}
 	public void clickCreateCampaignTemplateButton() throws InterruptedException {
@@ -1028,8 +1033,8 @@ public void enterCampaignDeailsForCompareTargetConditions() throws Throwable {
 		jswait.scrollIntoView("//campaign-category-chart", "//div[text()='"+name+"']");
 	}
 	public void createCampaignTemplate(String name) throws InterruptedException {
-		jswait.loadClick("//paper-tab//div[contains(.,'Campaign Opportunities')]");
-		clickCreateCampaignTemplateButton();
+		//jswait.loadClick("//paper-tab//div[contains(.,'Campaign Opportunities')]");
+//		clickCreateCampaignTemplateButton();
 		enterCampaignTemplateName(name);
 		enterCampaignDescription("Desc for Template");
 		clickProceedButton();

@@ -157,13 +157,15 @@ public class CatalogPageObjects extends Init{
 		jswait.loadClick(catalogSaveButton);
 	}
 	public void selectFilterFormOfferType(String type) throws InterruptedException {
+		jswait.loadClick(filterFormOfferType);
 		jswait.loadSendKeys(filterFormOfferType, type);
-		clickFilterFormOfferTypeDropdownIcon();
+		//clickFilterFormOfferTypeDropdownIcon();
 		jswait.loadClick("//paper-item[contains(.,'"+type+"')]");
 	}
 	public void selectFilterFormOfferChannel(String channel) throws InterruptedException {
 		jswait.loadSendKeys(filterFormOfferChannel, channel);
-		clickFilterFormOfferChannelDropdownIcon();
+		//clickFilterFormOfferChannelDropdownIcon();
+		Thread.sleep(2000);
 		jswait.loadClick("//paper-item[contains(.,'"+channel+"')]");
 	}
 	public void clickCancelCatalogButton() throws InterruptedException {
@@ -222,7 +224,7 @@ public class CatalogPageObjects extends Init{
 		
 		clickDeleteOfferOption();
 		Thread.sleep(2000);
-		assertFalse("Offer removed successfully", offerList.isDisplayed());
+		assertFalse("Offer not removed successfully", offerList.isDisplayed());
 		
 	}
   public void verifyHeaders() throws Throwable {

@@ -13,14 +13,14 @@ Then activate and raise the conversion job the broadcast from workbook "<storedW
 
 Examples:
 |storedWB|storedSheet|bcsheet|
-#|parallelRunBC|rewardBcs|recurringBC|
-#|parallelRunBC|rewardBcs|one-offBC|
-#|parallelRunBC|rewardBcs|seedingoneoff|
-#|parallelRunBC|rewardBcs|seedingRecurringBC|
-#|parallelRunBC|rewardBcs|TriggerOneoff|
-#|parallelRunBC|rewardBcs|TriggerReccurringBC|
-#|parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|
-#|parallelRunBC|rewardBcs|seedingTriggerable|
+|parallelRunBC|rewardBcs|recurringBC|
+|parallelRunBC|rewardBcs|one-offBC|
+|parallelRunBC|rewardBcs|seedingoneoff|
+|parallelRunBC|rewardBcs|seedingRecurringBC|
+|parallelRunBC|rewardBcs|TriggerOneoff|
+|parallelRunBC|rewardBcs|TriggerReccurringBC|
+|parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|
+|parallelRunBC|rewardBcs|seedingTriggerable|
 |parallelRunBC|UsageBasedConversion|one-offBC|
 |parallelRunBC|UsageBasedConversion|seedingoneoff|
 |parallelRunBC|UsageBasedConversion|recurringBC|
@@ -40,14 +40,14 @@ Then navigate to precision marketer
 Then verify the acknowledgement of Bcs from workbook "<storedWB>" and sheet "<storedSheet>" with MSISDN"<MSISDN>" with bc "<bcsheet>"
 Examples:
 |storedWB|storedSheet|bcsheet|MSISDN|
-#|parallelRunBC|rewardBcs|recurringBC|919491750103|
-#|parallelRunBC|rewardBcs|one-offBC|919491750152|
-#|parallelRunBC|rewardBcs|seedingoneoff|919491750252|
-#|parallelRunBC|rewardBcs|seedingRecurringBC|919491750365|
-#|parallelRunBC|rewardBcs|TriggerOneoff|919491750103|
-#|parallelRunBC|rewardBcs|TriggerReccurringBC|919491750103|
-#|parallelRunBC|rewardBcs|seedingTriggerable|919491750103|
-#|parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|919491750103|
+|parallelRunBC|rewardBcs|recurringBC|919491750103|
+|parallelRunBC|rewardBcs|one-offBC|919491750152|
+|parallelRunBC|rewardBcs|seedingoneoff|919491750252|
+|parallelRunBC|rewardBcs|seedingRecurringBC|919491750365|
+|parallelRunBC|rewardBcs|TriggerOneoff|919491750103|
+|parallelRunBC|rewardBcs|TriggerReccurringBC|919491750103|
+|parallelRunBC|rewardBcs|seedingTriggerable|919491750103|
+|parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|919491750103|
 |parallelRunBC|UsageBasedConversion|one-offBC|919491750054|
 |parallelRunBC|UsageBasedConversion|seedingoneoff|919491750245|
 |parallelRunBC|UsageBasedConversion|recurringBC|9491750045|
@@ -81,14 +81,14 @@ Then navigate to precision marketer
 Then verify the Conversion event of bcs from workbook "<storedWB>" and sheet "<storedSheet>" with MSISDN"<MSISDN>" with bc "<bcsheet>"
 Examples:
 |storedWB|storedSheet|bcsheet|MSISDN|
-|parallelRunBC|rewardBcs|recurringBC|919491750103|
-|parallelRunBC|rewardBcs|one-offBC|919491750152|
-|parallelRunBC|rewardBcs|seedingoneoff|919491750353|
-|parallelRunBC|rewardBcs|seedingRecurringBC|919491750103|
-|parallelRunBC|rewardBcs|TriggerOneoff|919491750103|
-|parallelRunBC|rewardBcs|TriggerReccurringBC|919491750103|
-|parallelRunBC|rewardBcs|seedingTriggerable|919491750103|
-|parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|919491750103|
+|parallelRunBC|UsageBasedConversion|recurringBC|919491750103|
+|parallelRunBC|UsageBasedConversion|one-offBC|919491750152|
+|parallelRunBC|UsageBasedConversion|seedingoneoff|919491750353|
+|parallelRunBC|UsageBasedConversion|seedingRecurringBC|919491750103|
+|parallelRunBC|UsageBasedConversion|TriggerOneoff|919491750103|
+|parallelRunBC|UsageBasedConversion|TriggerReccurringBC|919491750103|
+|parallelRunBC|UsageBasedConversion|seedingTriggerable|919491750103|
+|parallelRunBC|UsageBasedConversion|seedingTriggerableRecurringBC|919491750103|
 
 
 

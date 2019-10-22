@@ -265,7 +265,7 @@ Scenario: Create a bc with Broadcast limit 100
 	Then navigate to campaign category from sheet "CampaignCategory" 
 	Then naigate to "campaignBC" campaign view broadcasts 
 	Then click create new broadcast button 
-	Then create bc from sheet "recurrBCDaily" with inventory "Unlimited" 
+	Then create bc from sheet "recurrBCDaily" with inventory "Unlimited" and trigger "none"
 	Then enter target tab details target condition customerDemographicsGT25 type "Create" TG "defineLimitFixed100" CG "no limit" DNC "none" 
 	#	 filer criteria : Convert all , Rule-based .. give rewards to : All conversions for a customer, Unique conversion of a customer
 	Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "recurrBCDaily" with "single creative" track session expires "After" filter criteria "Rule-based" give reward to "Unique conversion of a customer" 
@@ -282,7 +282,7 @@ Scenario: Create a bc with Broadcast limit 200
 	Then navigate to campaign category from sheet "CampaignCategory" 
 	Then naigate to "campaignBC" campaign view broadcasts 
 	Then click create new broadcast button 
-	Then create bc from sheet "seedingoneoff" with inventory "Unlimited" 
+	Then create bc from sheet "seedingoneoff" with inventory "Unlimited" and trigger "none"
 	Then enter target tab details target condition customerDemographicsGT25 type "Create" TG "defineLimitFixed200" CG "no limit" DNC "none" 
 	#	 filer criteria : Convert all , Rule-based .. give rewards to : All conversions for a customer, Unique conversion of a customer
 	Then enter choose offer tab from sheet "SeedingSMS" for bc from sheet "seedingoneoff" with "single creative" track session expires "After" filter criteria "Rule-based" give reward to "Unique conversion of a customer" 

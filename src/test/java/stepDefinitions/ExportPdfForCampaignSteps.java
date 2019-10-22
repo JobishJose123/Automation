@@ -92,6 +92,7 @@ public class ExportPdfForCampaignSteps extends Init{
 		String path = "C:\\Users\\" + systemUserName + "\\Downloads\\campaign_" + newBCNameWithOutSpace + "_" + bcID + ".pdf";
 		System.out.println(path);		
 		System.out.println("going to pdf reader");
+		Thread.sleep(3000);
 		pdfReader.verifyCampaignPDFMoreThanTenConditions(path, endType, currentSystemDate, recurringFrequency);
 			    
     	Thread.sleep(2000);

@@ -23,6 +23,15 @@ Scenario: Verify Creating Offer Catalogue NX-1125
   Then Navigate to Offer Catalogue
   Then Delete Created Offer Catalogue "defaultCatalog"
   
+
+@initBrowser @closeBrowser @NX-1146
+Scenario: Verify Canceling Selected Offer 
+  Given login
+	When navigate to precision marketer
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue
+  Then Create New Offer Catalogue from sheet "defaultCatalog"
+  Then Cancel Selected Offer
 	
 @initBrowser @closeBrowser @NX-1126
 Scenario: Verify Canceling Offer Catalogue 
@@ -33,19 +42,9 @@ Then Navigate to Offer Catalogue
 Then Cancel the New offer Catalogue
 
 
-@initBrowser @closeBrowser @NX-1146
-Scenario: Verify Canceling Selected Offer 
-  Given login
-	When navigate to precision marketer
-	Then navigate to offer management 
-	Then Navigate to Offer Catalogue
-  Then Create New Offer Catalogue from sheet "defaultCatalog"
-  Then Cancel Selected Offer
-
-  
  
 @initBrowser @closeBrowser @NX-1145  
-Scenario: Verify Adding Selected Offers
+Scenario: Verify Adding Selected Offers0
 Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
@@ -66,7 +65,7 @@ Given login
   
   
  
- @initBrowser @closeBrowser @NX-1138
+ @initBrowser  @NX-1138
  Scenario: Search Offers Using Combination of fields
   Given login
 	When navigate to precision marketer
@@ -115,7 +114,7 @@ Given login
   Then Delete Offer "rechargeSMS" from Catalogue
   
   
-  @initBrowser @closeBrowser @NX-5985
+  @initBrowser @closeBrowser  @NX-5985
 Scenario: Verify displaying offers in Offer catalog when more than 50 offers are added 
 Given login
 	When navigate to precision marketer
@@ -214,7 +213,6 @@ Scenario: Verify the selected offers for the catalog.
 
 	@initBrowser @closeBrowser @NX-1149
   Scenario: Verify searching the offers using invalid information
-
   Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
@@ -225,8 +223,7 @@ Scenario: Verify the selected offers for the catalog.
 
     @initBrowser @closeBrowser @NX-1158
   Scenario: Verify the details of the expanded offers
-
-  Given login
+Given login
 	When navigate to precision marketer
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue
