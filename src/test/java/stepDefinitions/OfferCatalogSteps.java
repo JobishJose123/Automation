@@ -290,11 +290,12 @@ public class OfferCatalogSteps extends Init{
 	   {
 		   eM.setExcelFile("offerCatalogInputData", sheet);
 		   commonObjects.filterName(eM.getCell(1, 0).toString());
-		   String offerCount = catalogPageObjects.getOfferCountFromGrid();
-		   System.out.println(offerCount);
 		   Thread.sleep(3000);
+		   String offerCount = catalogPageObjects.getOfferCountFromGrid();
+		   System.out.println("count from UI - "+offerCount);
+		   
 		   int count= Integer.parseInt(offerCount);
-		   System.out.println(count);
+		   System.out.println("Integer count "+count);
 		   Assert.assertTrue(count>30, "added offers less than 30");
 	   }
 	   @Then("^Verify Help Of Offer Catalogue$")
