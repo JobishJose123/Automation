@@ -1324,25 +1324,70 @@ private WebElement rulessenderid2
 		Thread.sleep(2000);
 
 		WebElement num = driver.findElement(By.xpath(
-				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours+1) + "])[2]"));
+				"(//*[@class='number style-scope paper-clock-selector'][" + (hours+1) + "])[1]"));
 		builder.moveToElement(num).click().build().perform();
 		Thread.sleep(2000);
 
 		Thread.sleep(2000);
 		WebElement num1 = driver.findElement(By.xpath(
-				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[2]"));
+				"(.//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[1]"));
 		Thread.sleep(1000);
     	 builder.moveToElement(num1).click().build().perform();
       	if(am_pm==0)
-      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[4]");
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[1]");
        else
-      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[4]");
-		jswait.loadClick("(//paper-button[contains(.,'OK')])[8]");
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[1]");
+		jswait.loadClick("(//paper-button[contains(.,'OK')])[2]");
 		
 		}
 	
 	
-	
+	public void newprmrefreshatrule2() throws InterruptedException {
+		
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		Actions builder = new Actions(driver);
+		Thread.sleep(2000);
+		jswait.loadClick(prmrefreshat);
+		Thread.sleep(2000);
+
+		WebElement num = driver.findElement(By.xpath(
+				"(//*[@class='number style-scope paper-clock-selector'][" + (hours+1) + "])[5]"));
+		builder.moveToElement(num).click().build().perform();
+		Thread.sleep(2000);
+
+		Thread.sleep(2000);
+		WebElement num1 = driver.findElement(By.xpath(
+				"(.//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[5]"));
+		Thread.sleep(1000);
+    	 builder.moveToElement(num1).click().build().perform();
+      	if(am_pm==0)
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[3]");
+       else
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[3]");
+		jswait.loadClick("(//paper-button[contains(.,'OK')])[6]");
+		
+		}
 	public void pgmtimeokbtn() throws InterruptedException {
 		jswait.loadClick(pgmtimeokbtn);
 		}
@@ -2351,8 +2396,10 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 				programschstart(); 
 				prmshcselectnow();
 				programschend();
-				prmshcselectAt();
-				programenddate();
+				prmshcselectnoend();
+				
+//				prmshcselectAt();
+//				programenddate();
 				
 				Thread.sleep(2000);
 				Calendar rightNow =Calendar.getInstance();
@@ -2378,7 +2425,7 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 		      		 hours++;
 		      	 }
 		      	if(offerType.contains("Recharge")) {
-		      	newprmrefreshatpgm2();}else {
+		      		newprmrefreshatrule2();}else {
 		      		newprmrefreshatpgm();
 		      	}
 //		      	 Actions builder = new Actions(driver);

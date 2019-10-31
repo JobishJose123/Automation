@@ -243,7 +243,8 @@ public class CustomerProfilePage extends Init{
 	private WebElement offerRecommendedEventCheckBox;
 	@FindBy(xpath="//div[text()='Message Received']/..")
 	private WebElement MessageReceivedCheckBox;
-	
+	@FindBy(xpath="//div[text()='Fulfillment Success']/..")
+	private WebElement FulfillmentSuccessCheckBox;
 	
 	// in consumer profile filter option 
 		@FindBy(xpath="(//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..)[2]")
@@ -1390,4 +1391,19 @@ public void clickOfferAcceptedEventCheckBox() throws InterruptedException {
 	jswait.loadClick(customerSupport);
 }
 
+	
+	
+	public void clickFulfillmentSuccessCheckBox() throws InterruptedException {
+		jswait.loadClick(FulfillmentSuccessCheckBox);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

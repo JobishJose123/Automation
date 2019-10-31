@@ -18,31 +18,31 @@ Feature: For IntentManagement datasetup.
 #    Then click create new product button
 #    Then create product with attributes from sheet "fullDetails"
 #    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then click on create new ofer button
-#    Then create new offer from sheet "STVSMS" with product "fullDetails"
-#    Then click on create new ofer button
-#    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-#    Then navigate to offer management
-#    Then Navigate to Offer Catalogue
-#    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "STVSMS" offer to Offer Catalogue
-#    Then Add "rechargeSMS" offer to Offer Catalogue
-#  Then navigate to offer management
-#    Then navigate to offers
-#    Then click on create new ofer button
-#    Then create new offer from sheet "STVSMS" with product "fullDetails"
-#    Then click on create new ofer button
-#    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-#    Then navigate to offer management
-#    Then Navigate to Offer Catalogue
-#	Then filter the Offer Catalog from sheet "defaultCatalog"
-#	Then click view offers of "defaultCatalog" in options
-#    Then Add "STVSMS" offer to Offer Catalogue
-#    Then Add "rechargeSMS" offer to Offer Catalogue
-#   Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "STVSMS" with product "fullDetails"
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "STVSMS" offer to Offer Catalogue
+    Then Add "rechargeSMS" offer to Offer Catalogue
+  Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "STVSMS" with product "fullDetails"
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+	Then filter the Offer Catalog from sheet "defaultCatalog"
+	Then click view offers of "defaultCatalog" in options
+    Then Add "STVSMS" offer to Offer Catalogue
+    Then Add "rechargeSMS" offer to Offer Catalogue
+   Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
     Then click create program button

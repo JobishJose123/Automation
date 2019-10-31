@@ -602,12 +602,12 @@ Feature: Test cases for API
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer profile
-    Then search msisdn "9491750025"
+    Then search msisdn "9491750351"
     Then click on events tab
 #    Then wait for offer eligible event in consumer profile
-    Then get-offer api-server for "9491750025" with touchpoint "apiTouchpoint_default" and rule "rule"
-#    Then wait for offer recommended event in consumer profile
-    Then accept api-server for "9491750025" with touchpoint "apiTouchpoint_default" and rule "rule"
+    Then get-offer api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
+    Then wait for offer recommended event for API in consumer profile
+    Then accept api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
     Then wait for offer accepted event in consumer profile
     Then pass next scenario based on this step
     
@@ -656,7 +656,7 @@ Feature: Test cases for API
     Then search msisdn "919491750258"
     Then click on events tab
  
-       Then wait for offer eligible event in consumer profile
+    Then wait for offer eligible event in consumer profile
     Then get-offer api-server for "919491750258" with touchpoint "apiTouchpoint_default" and rule "rule"
     Then wait for offer recommended event in consumer profile
     Then accept api-server for "919491750258" with touchpoint "apiTouchpoint_default" and rule "rule"

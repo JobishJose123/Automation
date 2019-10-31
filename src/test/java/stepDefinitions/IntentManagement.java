@@ -1147,15 +1147,16 @@ System.out.println(editname+"program has edited successfully");
 		programPage.programschstart();
 		programPage.prmshcselectnow();
 		programPage.programschend();
-		programPage.prmshcselectAt();
-		programPage.programenddate();
+		programPage.prmshcselectnoend();
+//		programPage.prmshcselectAt();
+//		programPage.programenddate();
 		programPage.programschrefreshcycle();
 		programPage.prmshcselectdays();
 		Thread.sleep(2000);
 		programPage.prmeverylabel();
 		programPage.prmrecycleinputclick();
 		programPage.prmrecycleinput();
-		programPage.newprmrefreshatpgm();
+		programPage.newprmrefreshatpgm2();
 		
 		programPage.programschserveon(); 
 		programPage.prmshcserveonalldays();
@@ -2453,40 +2454,58 @@ System.out.println(editname+"program has edited successfully");
 						 Thread.sleep(2000);
 					
 						    String port;
-						   port= MarathonHelper.getContainerPort("192.168.150.253","neon/infra/vcust");
-						   String node=MarathonHelper.getContainerNode("192.168.150.253","neon/infra/vcust");
+						   port= MarathonHelper.getContainerPort(p.getValue("marathonip"),"neon/infra/vcust");
+						   String node=MarathonHelper.getContainerNode(p.getValue("marathonip"),"neon/infra/vcust");
 						   System.out.println("node is "+node);
 						   
-						   System.out.println(port);
-						   String url=node.concat(":"+port);
-						   System.out.println(url);
+						   System.out.println("port is "+port);
+						   String url=node.concat(".flytxt.com:"+port);
+						   System.out.println("url is"+url);
 						   
-						 //  driver.get("http://"+url.stripLeading());
+						   //driver.get("http://"+url);
+						   driver.get("http://node4.soakqa.flytxt.com:8999");
+						   Thread.sleep(2000);
+						   
 						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='name']")).sendKeys(p.getValue("username"));
 						 Thread.sleep(2000);
 						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='pass']")).sendKeys(p.getValue("vcustpass"));
 						 Thread.sleep(2000);
 						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='submit']")).click();
 						
+						 driver.findElement(By.xpath("//a[contains(.,'Inject')]")).click();
+						    
+					 }
+				  
+				  
+				
+				
+				  @Then("^navigate back to vcust$")
+					 public void logoutvcust() throws Exception {
+						 Thread.sleep(2000);
+						  driver.get("http://node4.soakqa.flytxt.com:8999");
+						   Thread.sleep(2000);
+						   driver.findElement(By.xpath("//a[contains(.,'Inject')]")).click();
 						
 						    
 					 }
+				  
+				  
 				
-				  @Then("^hit with vcust SMS with number \"([^\"]*)\" with destination adrs \"([^\"]*)\"$")
-					 public void getvcustmessage(String number,String desadd) throws Exception {
+				  @Then("^hit with vcust SMS with number \"([^\"]*)\" with keyword \"([^\"]*)\"$")
+					 public void getvcustmessage(String number,String keyword) throws Exception {
 						 Thread.sleep(2000);
 						 jswait.loadClick("//a[@href='inject_mo.htm']");	
 						 
 						 Thread.sleep(2000);
 						 driver.findElement(By.xpath("//textarea[@name='short_message']")).clear();
-						 jswait.loadSendKeys("//textarea[@name='short_message']","This is test sms");
+						 jswait.loadSendKeys("//textarea[@name='short_message']",keyword);
 				
 						 Thread.sleep(2000);
 						 driver.findElement(By.xpath("//input[@name='source_addr']")).clear();
 						 jswait.loadSendKeys("//input[@name='source_addr']",number);
 						 Thread.sleep(2000);
 						 driver.findElement(By.xpath("//input[@name='destination_addr']")).clear();
-						 jswait.loadSendKeys("//input[@name='destination_addr']",desadd);
+						 jswait.loadSendKeys("//input[@name='destination_addr']","1011");
 						 Thread.sleep(2000);
 						 jswait.loadClick("//input[@name='submit']");
 					
@@ -2497,8 +2516,14 @@ System.out.println(editname+"program has edited successfully");
 				  @Then("^navigate to the neon again$")
 					 public void navigateback() throws Exception {
 						 Thread.sleep(2000);
+						 
 						 driver.get("http://"+p.getValue("env"));
-		
+						 try{
+							 jswait.loadClick("//body[@class='fullbleed layout vertical']");
+						 }
+						 catch (Exception e) {
+							 System.out.println("Robob x popup off....");
+						 }
 					 }
 				  
 			
@@ -2630,9 +2655,66 @@ System.out.println(editname+"program has edited successfully");
 													System.out.println("Deactivate the JOb ... .. ." +ss2);
 												}
 				
+												@Then("^wait for Fulfillment Success in consumer profile with offer \"([^\"]*)\"$")
+												public void wait_for_fulfillment(String offerType) throws Throwable {
+													
+													ExcelHelper ruleExcel = new ExcelHelper();
+											    	ruleExcel.setExcelFile("ruleInputData", "rule");
+											    	ExcelHelper offerExcel = new ExcelHelper();
+											    	offerExcel.setExcelFile("offerInputData", offerType);
+													
+													CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickFulfillmentSuccessCheckBox();
+													customerProfilePage.clickSelectEventApplyButton();
+													Thread.sleep(2000);
+													String rulename = (String) ruleExcel.getCell(1, 0);
+													
+													String offer = (String) offerExcel.getCell(1, 0);
+														
+														if(driver.findElement(By.xpath("//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[3]")).getText().equalsIgnoreCase("Fulfillment Success")) {
+															Thread.sleep(2000);
+															System.out.println("inside if");
+															Thread.sleep(10000);
+															jswait.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'" + offer + "')]");
+															boolean booledn = jswait.checkVisibility(
+																	"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + rulename + "')]");
+														
+														
+													}
+//													
+//													Assert.assertTrue("offer Recommended event not found", checkOfferRecommendedEventTime(dateForCompare,timeStamp));
+												}
 												
-												
-												
+												@Then("^wait for offer recommended event for API in consumer profile$")
+												public void wait_for_Recommended_event_for_api() throws Throwable {
+													Date now = new Date();
+													Calendar calendar = Calendar.getInstance();
+													int min = calendar.get(Calendar.MINUTE);
+													now.setMinutes(min-2);
+													dateForCompare = now;
+													CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickOfferRecommendedEventCheckBox();
+													customerProfilePage.clickSelectEventApplyButton();
+													Thread.sleep(2000);
+													
+													ExcelHelper ruleExcel = new ExcelHelper();
+											    	ruleExcel.setExcelFile("ruleInputData", "rule");
+											    	
+											    	
+													if(driver.findElement(By.xpath("(//iron-data-table[@id='table']//iron-list[@id='list']//data-table-row//span[contains(.,'Offer Recommended')])[1]")).getText().equalsIgnoreCase("Offer Recommended")){
+														Thread.sleep(2000);
+														System.out.println("inside if");
+														Thread.sleep(10000);
+														jswait.checkVisibility("//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div[@id='items']/div[2]/data-table-row//data-table-row-detail/events-expander//div[@title='defaultapiTPUR']");
+														
+													
+													
+												}
+												}
 				
 				
 }

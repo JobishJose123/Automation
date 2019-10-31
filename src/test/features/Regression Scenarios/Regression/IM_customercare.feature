@@ -387,9 +387,9 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
 #    Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
 #    Then choose program from sheet "CCprogram"
 #    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
-    Then wait until rule is picked 
+#    Then wait until rule is picked 
     Then login to the vcust
-    Then hit with vcust SMS with number "9491750022" with destination adrs "seleniumkeyword"
+    Then hit with vcust SMS with number "9491750350" with keyword "seleniumkeyword"
     
     
     

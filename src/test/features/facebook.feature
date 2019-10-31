@@ -79,12 +79,12 @@ Scenario: Verify creating one off BC with offer having facebook as the channel.
 #    Then navigate to offers
 #    Then create new offer from sheet "rechargeimageFacebook" with product "fullDetails"
 #    Then verify "rechargeimageFacebook" offer in grid
-    Then navigate to life cycle marketing
-	 
-	  Then navigate to offer management
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeimageFacebook" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#	 
+#	  Then navigate to offer management
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeimageFacebook" offer to Offer Catalogue
 
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "campaignCategory"

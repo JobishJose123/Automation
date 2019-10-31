@@ -56,8 +56,8 @@ public class MarathonHelper {
 	JSONStr = JSONStr.substring(runIndexbeg, JSONStr.length()-1);
 	int runIndexend = JSONStr.indexOf(".flytxt.com");
 	String node = JSONStr.substring(8, runIndexend);
-	System.out.println(node);
-	node = parseEnv(node);
+	System.out.println("node is "+node);
+//	node = parseEnv(node);
 	return node;
 	}
 	
