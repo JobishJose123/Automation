@@ -1213,15 +1213,6 @@ public void createTrigger(String attrName,String value1, String value2,String tr
 	jswait.loadClick(equalTo);
 	jswait.loadSendKeys(valueInput, "10");
 	Thread.sleep(2000);
-//	jswait.loadClick(addStreaminAttrValue);
-//	Thread.sleep(2000);
-//	jswait.loadSendKeys(streamingAttrVariable2, value2);
-//	jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+value2+"')]");
-//	jswait.loadClick(triggerConditionInput2);
-//	Thread.sleep(2000);
-//	jswait.loadClick(greaterThanOrEqualTo);
-//	jswait.loadSendKeys(valueInput2, "25");
-//	Thread.sleep(2000);
 	jswait.loadClick(triggerSavebtn);
 	
 }

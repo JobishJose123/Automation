@@ -3450,9 +3450,6 @@ public boolean checkCalculateBtnDisplayed() {
 			num1 = driver.findElement(By.xpath(
 					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
 			builder.moveToElement(num1).click().build().perform();
-			// Thread.sleep(1000);
-			// jswait.loadClick("//form[@id='deliverDetailForm']//paper-input-container//label[contains(.,'Time
-			// Zone')]/..//input");
 			Thread.sleep(2000);
 			jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
 			Thread.sleep(1000);
@@ -3737,7 +3734,7 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	if(trackExpires.equalsIgnoreCase("After")) {
 	jswait.loadClick(trackSessionSelector);
 	jswait.loadClick(trackSessionAfter);
-	jswait.loadSendKeys(trackSession2Days, "5");
+	jswait.loadSendKeys(trackSession2Days, "3");
 	}else if(trackExpires.equalsIgnoreCase("At")) {
 			
 			Calendar rightNow = Calendar.getInstance();
@@ -3898,9 +3895,15 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	
 	}
 	public void verifyEventOfTheBC(String event,String bcName,String campaignName) throws Exception{
+		System.out.println("========"+event+" :is the event tht need to be verified");
 		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
 		CustomerProfilePage.searchEventsDynammically("Last 3 Days");
 		 Thread.sleep(4000);
+		jswait.loadClick(selectAllEventCheckBox);
+		jswait.loadClick(selectAllEventCheckBox);
+		jswait.loadClick("(//div[contains(.,'"+event+"')][@id='checkboxLabel'])[1]");
+		Thread.sleep(2000);
+		 jswait.loadClick(applyEventFilter);
 		 CustomerProfilePage.clickOnEventTabFilter();
 		 CustomerProfilePage.enterEventDetails(campaignName);
 		 CustomerProfilePage.filterResetFilterButton();
@@ -3908,10 +3911,6 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		  CustomerProfilePage.clickOnEventTabFilter();
 		 CustomerProfilePage.enterEventDetails(campaignName);	 
 		 CustomerProfilePage.filterApplyButton();
-		 jswait.loadClick(drCheckBox);
-		 jswait.loadClick(conversionCheckBox);
-		 jswait.loadClick(fulfillmentCheckBox);
-		 jswait.loadClick(applyEventFilter);
 		 Thread.sleep(10000);
 		 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
 			Thread.sleep(1000);
@@ -3930,17 +3929,17 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 									"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
 							System.out.println(booln);
 							if (booln == true) {
-								System.out.println("Ack verified");
+								System.out.println(event+"  verified");
 								break;
 								
 							}
 							 else {
 								 
-								System.out.println("Ack verified.. waiting for BC name "+bcName);
+								System.out.println(event+"verified.. waiting for BC name "+bcName);
 							}
 						} catch (Exception e) {
 							System.out.println("catch block");
-							Assert.assertTrue(false,"No Ack Event Raised");
+							Assert.assertTrue(false,"No"+event+" Event Raised");
 						}
 						Thread.sleep(2000);
 						count++;
@@ -3992,9 +3991,8 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	
 	
 	public void verifyDynamicTagOfTheBC(String dynamicTag,String bcName,String campaignName) throws Exception{
-		driver.navigate().refresh();
 		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
-		 CustomerProfilePage.searchEventsDynammically("Last 7 Days");
+		 CustomerProfilePage.searchEventsDynammically("Last 3 Days");
 		jswait.loadClick(selectAllEventCheckBox);
        jswait.loadClick(selectAllEventCheckBox);
        jswait.loadClick("//div[contains(.,'Acknowledged')][@id='checkboxLabel']"); 

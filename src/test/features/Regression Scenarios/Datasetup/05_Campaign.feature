@@ -3,7 +3,7 @@
 @NDX-createcampaignFeature
 Feature: campaign for data setup
 
-@NDX-5495, @NDX-5494
+@NDX-5495 @NDX-5494
   @NDX-createcampaign
    @initBrowser @closeBrowser
   Scenario: Verify creating campaign for data setup
@@ -14,7 +14,7 @@ Feature: campaign for data setup
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with catalog from campaignBc with defautCatalog
 
-@NDX-8010, @NDX-356
+@NDX-8010 @NDX-356
 @NDX-createrecurringcampaign
    @initBrowser @closeBrowser
   Scenario: Verify creating a recurring campaign for data setup

@@ -444,7 +444,7 @@ public class AdminPageObjects extends Init{
 	 
 	 public void changeCGPercentage() throws Exception {
 		   
-		 jswait.loadSendKeys(cgPercentage, "20");
+		 jswait.loadSendKeys(cgPercentage, "100");
 		
 	   }
 	 

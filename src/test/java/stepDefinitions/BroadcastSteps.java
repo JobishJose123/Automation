@@ -4716,7 +4716,15 @@ public void verify_the_seeding_and_trigger_option_for_the_bc_from_sheet_for_bc(S
 	    broadcastPageObjects.verifyIsSeedingInReport(bcName,bctype);
 }
 	
-	
+@Then("^\"([^\"]*)\" bc$")
+public void bc(String bcSaveOrActivate) throws Throwable {
+	switch(bcSaveOrActivate) {
+	case "activate":
+		activateBc();
+	case "save":
+		save_bc();
+	}
+}
 	
 	
 	

@@ -385,6 +385,15 @@ Feature: Test suite for Broadcast creation
 #============================================CREATION OF BC FOR VERFICATION OF BC FUNCTIONALITY=========================================================================================#
 
 
+@NDX-PartnerCGSetting @initBrowser
+Scenario: provide the list for partner cg
+Given login
+Then navigate to configuration management
+Then navigate to partners
+Then edit a partner
+Then navigate to control group settings page
+Then change partner control group settings
+
 @NDX-CreateOfferForBCFunctionality  @initBrowser 
 Scenario Outline: create offer
 Given login
@@ -403,8 +412,8 @@ Examples:
 |seedingEmail|singlecreative|
 
 
-@NDX-CreateBCForFunctionality @initBrowser   @closeBrowser
-Scenario Outline:Create broadcast to verify bc functionality(trigger not included)
+@NDX-CreateBCForFunctionality @initBrowser   
+Scenario Outline:Create broadcast to verify bc functionality(except trigger)
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -415,42 +424,42 @@ Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "no
 Then enter target tab details target condition <targetCondition> type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
 Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
-Then activate bc
+Then "<state>" bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
  Examples:
-|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|                  
-|one-offBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|At|1|
-|one-offBC|rechargeWAP|customerList|Create|no limit|no limit|none|single creative|none|none|2|
-|one-offBC|rechargeEmail|usageMetric|Create|no limit|no limit|none|single creative|none|none|3|
-|one-offBC|rechargeSMS_Dynamic|sharedMetricOtherPartner|Create|no limit|no limit|none|single creative|none|none|4|
+|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|state|                  
+|one-offBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|At|1|save|
+|one-offBC|rechargeWAP|customerList|Create|no limit|no limit|none|single creative|none|none|2|activate|
+|one-offBC|rechargeEmail|usageMetric|Create|no limit|no limit|none|single creative|none|none|3|activate|
+|one-offBC|rechargeSMS_Dynamic|sharedMetricOtherPartner|Create|no limit|no limit|none|single creative|none|none|4|activate|
 #
-|recurrBCDaily|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|At|none|5|
-|recurrBCWeekly|rechargeWAP|profilefieldNV|None|no limit|no limit|none|single creative|none|none|6|
-|recurringMonthSpecialBC|rechargeEmail|targetall|None|no limit|no limit|none|single creative|none|none|7|
-|recurringBC|rechargeSMS_Dynamic|SharedcustomerList|Create|no limit|no limit|none|single creative|none|none|8|
+|recurrBCDaily|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|At|none|5|save|
+|recurrBCWeekly|rechargeWAP|profilefieldNV|None|no limit|no limit|none|single creative|none|none|6|activate|
+|recurringMonthSpecialBC|rechargeEmail|targetall|None|no limit|no limit|none|single creative|none|none|7|activate|
+|recurringBC|rechargeSMS_Dynamic|SharedcustomerList|Create|no limit|no limit|none|single creative|none|none|8|activate|
 #
-|seedingoneoff|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|9|
-|seedingoneoff|seedingWAPoffer|customerDrivenEvent|Create|no limit|no limit|none|single creative|none|none|10|
-|seedingoneoff|seedingEmail|customerDrivenEventNotOccurred|Create|no limit|no limit|none|single creative|none|none|11|
-|seedingoneoff|SeedingSMS_Dynamic|targetall|Create|no limit|no limit|none|single creative|none|none|12|
+|seedingoneoff|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|9|activate|
+|seedingoneoff|seedingWAPoffer|customerDrivenEvent|Create|no limit|no limit|none|single creative|none|none|10|activate|
+|seedingoneoff|seedingEmail|customerDrivenEventNotOccurred|Create|no limit|no limit|none|single creative|none|none|11|activate|
+|seedingoneoff|SeedingSMS_Dynamic|targetall|Create|no limit|no limit|none|single creative|none|none|12|activate|
 #
-|seedingRecurringBC|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|13|
-|seedingRecurringBC|seedingWAPoffer|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|none|none|14|
-|seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|15|
-|seedingRecurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|16|
+|seedingRecurringBC|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|13|activate|
+|seedingRecurringBC|seedingWAPoffer|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|none|none|14|activate|
+|seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|15|activate|
+|seedingRecurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|16|activate|
 
 
 @NDX-createTriggerWithDKJob @initBrowser
 Scenario: create streaming attribute and trigger and dk job for trigger
 Given login
-#Then navigate to data foundation
-#Then navigate to streaming attributes
-#Then create new streaming attribute from sheet "streamingAttr"
-#Then navigate to landing page
-#Then navigate to precision marketer
-#Then navigate to configuration
-#Then select triggers in configuration
-#Then create new trigger "selTrigger1" with streaming attribute from sheet "streamingAttr"
+Then navigate to data foundation
+Then navigate to streaming attributes
+Then create new streaming attribute from sheet "streamingAttr"
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to configuration
+Then select triggers in configuration
+Then create new trigger "selTrigger1" with streaming attribute from sheet "streamingAttr"
 Then create a dk job "Sel_TriggerJob1" with input location "/usr/local/flytxt/seleniumTrigger" streaming attribute "streamingAttr" 
 Then navigate to landing page
 Then navigate to data foundation
@@ -469,22 +478,21 @@ Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "se
 Then enter target tab details target condition <targetCondition> type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
 Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
-Then activate bc
+Then "<state>" bc
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
 Examples:
-|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|
-|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|17|
-|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiplecreative|never|none|18|
-|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|singlecreative|never|none|19|
-|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|singlecreative|never|none|20|
-|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiplecreative|never|none|21|
-|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|singlecreative|none|none|22|
-|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|singlecreative|At|At|23|
+|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|state|
+|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|17|save|
+|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|18|activate|
+|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|19|activate|
+|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|never|none|20|save|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|21|activate|
+|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|22|save|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|single creative|At|At|23|activate|
 
 #after running @NDX-TriggerBC run @NDX-fileForTriggerBC
 @NDX-fileForTriggerBC  @initBrowser @closeBrowser
 Scenario: upload file for trigger bc
-#Given login
 Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "trigger1.csv"
 
 
@@ -534,7 +542,6 @@ Examples:
 |TriggerOneoff|trigger|SeedingSMS|29|
 |TriggerReccurringBC|trigger|rechargeSMS|30|
 |TriggerReccurringBC|trigger|SeedingSMS|31|
-
 
 
 

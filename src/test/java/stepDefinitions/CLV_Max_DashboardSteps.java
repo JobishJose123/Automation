@@ -157,15 +157,10 @@ public class CLV_Max_DashboardSteps extends Init {
 			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
-		String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
-				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
 		int hours = rightNow.get(Calendar.HOUR);
 		int min = rightNow.get(Calendar.MINUTE);
 		int am_pm = rightNow.get(Calendar.AM_PM);
-		int day = rightNow.get(Calendar.DAY_OF_MONTH);
-		int year = rightNow.get(Calendar.YEAR);
-		int month = rightNow.get(Calendar.MONTH) + 1;
-		min += 2;
+		min += 1;
 		int rem = min % 5;
 		rem = 5 - rem;
 		min += rem;
@@ -175,7 +170,7 @@ public class CLV_Max_DashboardSteps extends Init {
 		}
 		 if(min==0)
 			{
-				min+=5;
+				min+=1;
 			}      		 
      	adminPageObjects.changePartnerControlGroupSettings();
 		
@@ -186,7 +181,26 @@ public class CLV_Max_DashboardSteps extends Init {
 		 Thread.sleep(1000);
 		 jswait.loadClick("(.//paper-button[contains(.,'OK')])[5]");
 		Thread.sleep(1000);
-//		 jswait.loadClick(".//paper-date-time-input[1]//paper-input[2]//input");
+		 jswait.loadClick("//label[contains(.,'Start Time :')]//following::input[2]");
+			Thread.sleep(2000);
+			WebElement num = driver.findElement(By.xpath(
+					"(//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[3]"));
+			Thread.sleep(2000);
+			Actions builder=new Actions(driver);
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(2000);
+			WebElement num1 = driver.findElement(By.xpath(
+					"(//*[@id='numbers']//*[@class='style-scope paper-clock-selector'][contains(.,'"+min+"')])[3]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num1).click().build().perform();
+			Thread.sleep(1000);
+			if (am_pm == 0)
+				jswait.loadClick("(//*[@id='heading']/iron-selector[2]/div[1])[3]");
+			
+			else
+				jswait.loadClick("(//*[@id='heading']/iron-selector[2]/div[2])[3]");
+			Thread.sleep(1000);
+			jswait.loadClick("(//paper-button[contains(.,'OK')])[6]");
 		adminPageObjects.CGSave();
     }
 	
