@@ -1378,7 +1378,7 @@ private WebElement rulessenderid2
 
 		Thread.sleep(2000);
 		WebElement num1 = driver.findElement(By.xpath(
-				"(.//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[5]"));
+				"(.//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[3]"));
 		Thread.sleep(1000);
     	 builder.moveToElement(num1).click().build().perform();
       	if(am_pm==0)
