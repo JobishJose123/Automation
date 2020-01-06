@@ -2,7 +2,7 @@
 #Keywords Summary :
 @NX-BroadcastFunctionality
 Feature: For broadcast functionality check
-
+ditio#
 #**************/\********************* Verify reward bc`s***********/\**************
 
 @ActivateCreatedRewardbcs @initBrowser @closeBrowser
@@ -236,7 +236,7 @@ Scenario: Verify Export as PDF for migrated triggerable one off BC
 Given login 
 Then navigate to precision marketer 
 Then verify pdf generated for broadcast from BCsheet "TriggerOneoff" workbook and "parallelRunBC" and sheet "exportAsPDF"
-
+#
 @NDX-9948 @initBrowser 
 Scenario: Verify export as pdf option for trigger recurring Bc
 Given login 
@@ -374,7 +374,7 @@ Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "919491750240"
 Then click on events tab
-Then verify the condition Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+Then verify the conn Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 Then click on events tab
 Then verify multiple creative "63.0" for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
@@ -671,7 +671,7 @@ Then filter the bc from file "bcInputData" of sheet "seedingRecurringBC" for bct
 Then wait until status of "seedingRecurringBC" from file "bcInputData" is "Completed" for bctype "seeding" 
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750005"
+Then search msisdn "9491750800"
 Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 Then click on events tab

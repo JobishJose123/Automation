@@ -3,74 +3,74 @@
 @NX-approvelworkflow
 Feature: approval workflow
 
-  @NX-6319 @initBrowser @closeBrowser
-  Scenario: Verify by creating new Approval Rule
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-
-  @NX-6320 @initBrowser @closeBrowser
-  Scenario: Verify by editing the rules displaying in Approval Rules
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then editApprovalRuleDetailsFromSheet "approvalRule"
-
-  @NX-6321 @initBrowser @closeBrowser
-  Scenario: Verify by deleting new Approval Rule
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then create new approval rule from sheet "approvalRule"
-    Then deleteApprovalRuleDetailsFromSheet "approvalRule"
-    Then pass next scenario based on this step
-    
-     @NX-6322 @initBrowser 
-  Scenario: Verify whether warning message get displayed before deletion of rule
-  Then check previous step and pass this
-  Then deleteApprovalRulecheckFromSheet "approvalRule"
- # confirmation Yes is clicked in previous scenario. will throw exception if no confirmation 
-    
-  @NX-6324 @initBrowser @closeBrowser
-  Scenario: Verify editing and deleting default rule
-    Given login
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to configuration
-    Then click approval rules option
-    Then default ApprovalRule edit and delete
+#  @NX-6319 @initBrowser @closeBrowser
+#  Scenario: Verify by creating new Approval Rule
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to configuration
+#    Then click approval rules option
+#    Then create new approval rule from sheet "approvalRule"
+#
+#  @NX-6320 @initBrowser @closeBrowser
+#  Scenario: Verify by editing the rules displaying in Approval Rules
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to configuration
+#    Then click approval rules option
+#    Then create new approval rule from sheet "approvalRule"
+#    Then editApprovalRuleDetailsFromSheet "approvalRule"
+#
+#  @NX-6321 @initBrowser @closeBrowser
+#  Scenario: Verify by deleting new Approval Rule
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to configuration
+#    Then click approval rules option
+#    Then create new approval rule from sheet "approvalRule"
+#    Then deleteApprovalRuleDetailsFromSheet "approvalRule"
+#    Then pass next scenario based on this step
+#    
+#     @NX-6322 @initBrowser 
+#  Scenario: Verify whether warning message get displayed before deletion of rule
+#  Then check previous step and pass this
+#  Then deleteApprovalRulecheckFromSheet "approvalRule"
+# # confirmation Yes is clicked in previous scenario. will throw exception if no confirmation 
+#    
+#  @NX-6324 @initBrowser @closeBrowser
+#  Scenario: Verify editing and deleting default rule
+#    Given login
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to configuration
+#    Then click approval rules option
+#    Then default ApprovalRule edit and delete
 
   @NX-6333 @initBrowser 
   Scenario: Verify selecting the Approval Required for Campaign and BC activation checkbox

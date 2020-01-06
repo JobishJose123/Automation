@@ -282,7 +282,7 @@ Then activate broadcast from workbook "parallelRunBC" and sheet "BCDataStorage"
 
 
 @NDX-8574 @NDX-8609 @NDX-8625 @NDX-8797 @NDX-10092 @NDX-10143 @NDX-10094  @initBrowser 
-Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: profilefieldNV of a one-timebc
+Scenario: Verify the ack ,channel SMS,dr count,CG count
 Then filter the bc from sheet "BCDataStorage" from row "1" and column "0" and write in sheet "one-offBC"
 Given login 
 Then navigate to precision marketer
@@ -290,19 +290,40 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
+Then wait for 2 minutes
+Then click on BC edit button from workbook "bcInputData" sheet "one-offBC"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
+Then activate bc
 Then wait until status of "one-offBC" is "Completed"
-Then verify the ack count with target condition profilefieldNV from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
+Then wait for 2 minutes
+Then verify the ack count with target condition Ack from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
 Then view broadcast for "onetime" for bctype "onetime"
-Then verify the target count with condition profilefieldNV from sheet "targetConditionCount" also the channel "SMS"
+Then verify the target count with condition Ack from sheet "targetConditionCount" also the channel "SMS"
+Then verify the cg exclusion from sheet "targetConditionCount"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition profilefieldNV from sheet "targetConditionCount" of the bc from sheet "one-offBC" from bc report
+Then from bc report verify condition Ack and cg "if required" count from sheet "targetConditionCount" of the bc from sheet "one-offBC" 
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750000"
+Then search msisdn "9491750800"
 Then click on events tab
-Then verify the condition Acknowleged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+Then verify the condition Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+Then refresh
+Then click on events tab
+Then verify multiple creative "عرض مكافأة" for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 Then verify the condition Confirmed Delivery event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750005"
+Then click on events tab
+Then verify the condition Control Group Participation event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
+Then raise the conversion job
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750005"
+Then click on events tab
+Then verify the condition Control Group Conversion event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
 @NDX-8660 @NDX-8777 @NDX-10147 @NDX-10091  @initBrowser
@@ -320,9 +341,9 @@ Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition customerList from sheet "targetConditionCount" also the channel "WAP"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750005"
+Then search msisdn "919491750041"
 Then click on events tab
-Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+Then verify the condition Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
 @NDX-8634 @NDX-10144 @NDX-10096 @initBrowser 
@@ -362,7 +383,7 @@ Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
-Then verify the condition Acknowleged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC" and offer from sheet "rechargeSMS_Dynamic"
+
 
 @NDX-8575 @NDX-8614 @NDX-8962 @NDX-8800 @NDX-8806 @NDX-10103 @NDX-10149 @NDX-10108 @NDX-10100 @initBrowser
 Scenario: Verify the ack ,channel SMS,multiple creative ,dr count,CG count of a recurrence pattern DAILY of recurringbc and Target condition: segmentAgeGT40
@@ -379,18 +400,34 @@ Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "onetime"
 Then verify the date for child bc from sheet "recurrBCDaily" with recurrence pattern "DAILY"
 Then wait until status of "recurrBCDaily" from file "bcInputData" is "Completed" for bctype "seeding"
-Then verify the ack count with target condition segmentAgeGT40 from sheet "targetConditionCount" for bc from sheet "recurrBCDaily" of bctype "recurringWithEndAt"
-Then view broadcast for "RecurringChildOptionIconAt" for bctype "onetime"
-Then verify the target count with condition segmentAgeGT40 from sheet "targetConditionCount" also the channel "SMS"
+Then verify the ack count with target condition Ack from sheet "targetConditionCount" for bc from sheet "recurrBCDaily" of bctype "recurringWithEndAt"
+Then view broadcast for "RecurringChildAt" for bctype "onetime"
+Then verify the target count with condition Ack from sheet "targetConditionCount" also the channel "SMS"
+Then verify the cg exclusion from sheet "targetConditionCount"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition segmentAgeGT40 from sheet "targetConditionCount" of the bc from sheet "recurrBCDaily" from bc report
+Then from bc report verify condition Ack and cg "if required" count from sheet "targetConditionCount" of the bc from sheet "recurrBCDaily" 
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750017"
+Then search msisdn "9491750800"
 Then click on events tab
-Then verify the condition Acknowlegedment event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
+Then verify the condition Acknowledged event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
+Then refresh 
+Then click on events tab
+Then verify multiple creative "عرض مكافأة" for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
 Then verify the condition Confirmed Delivery event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750005"
+Then click on events tab
+Then verify the condition Control Group Participation event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
+Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
+Then raise the conversion job
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750005"
+Then click on events tab
+Then verify the condition Control Group Conversion event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
 
 
 @NDX-8965 @NDX-8812 @NDX-10106 @initBrowser
@@ -453,36 +490,57 @@ Then view broadcast for "recurringchildbc" for bctype "onetime"
 Then verify the target count with condition SharedcustomerList from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750005"
+Then search msisdn "9491750800"
 Then click on events tab
-Then verify the condition Acknowlegedment event for the bc from sheet "recurringBC" for the campaign from sheet "campaignBC"
-Then verify the condition Acknowleged event for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC" and offer from sheet "rechargeSMS_Dynamic"
+Then verify the condition Acknowledged event for the bc from sheet "recurringBC" for the campaign from sheet "campaignBC"
+Then click on events tab
+Then verify multiple creative "25" for the bc from sheet "recurringBC" for the campaign from sheet "campaignBC"
 
 
 @NDX-8604 @NDX-8620 @NDX-8804 @NDX-8745 @NDX-10151 @initBrowser
-Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: sharedEventOtherPartner of a seeding one-timebc     
-Then filter the bc from sheet "BCDataStorage" from row "5" and column "0" and write in sheet "seedingoneoff"
+Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: customerDrivenEvent of a seeding one-timebc     
+Then filter the bc from sheet "BCDataStorage" from row "9" and column "0" and write in sheet "seedingoneoff"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
-Then wait until status of "seedingoneoff" is "Completed"
-Then verify the ack count with target condition sharedEventOtherPartner from sheet "targetConditionCount" for bc from sheet "seedingoneoff" of bctype "seedingonetime"
-Then view broadcast for "seedingonetime" for bctype "onetime"
+Then filter the bc from file "bcInputData" of sheet "seedingoneoff" for bctype "onetime"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "seedingoneoff"
+Then wait until status of "seedingoneoff" from file "bcInputData" is "Completed" for bctype "seeding"
+Then verify the ack count with target condition Ack from sheet "targetConditionCount" for bc from sheet "seedingoneoff" of bctype "seedingonetime"
+Then view broadcast for "seedingonetime-rewarding" for bctype "onetime"
+Then verify the target count with condition Ack from sheet "targetConditionCount" also the channel "SMS"
+Then verify the cg exclusion from sheet "targetConditionCount"
+Then navigate back
+Then filter the bc from file "bcInputData" of sheet "seedingoneoff" for bctype "onetime"
+Then view broadcast for "seedingonetime-messaging" for bctype "onetime"
+Then verify the cg exclusion from sheet "targetConditionCount"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition sharedEventOtherPartner from sheet "targetConditionCount" of the bc from sheet "seedingoneoff" from bc report
+Then from bc report verify condition Ack and cg "if required" count from sheet "targetConditionCount" of the bc from sheet "seedingoneoff" 
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750800"
+Then click on events tab
+Then verify the condition Acknowledged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
+Then click on events tab
+Then verify the condition Confirmed Delivery event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
-Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
-Then verify the condition Confirmed Delivery event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+Then verify the condition Control Group Participation event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
+Then raise the conversion job
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750005"
+Then click on events tab
+Then verify the condition Control Group Conversion event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
 
-@NDX-8794 @NDX-8643 @NDX-10145@initBrowser
+@NDX-7049 @NDX-8795 @NDX-8644 @NDX-10011   @initBrowser @closeBrowser
 Scenario: Verify the ack ,channel WAP,multiple creative and target condition: customerDrivenEvent of seedingoneoff bc
-Then filter the bc from sheet "BCDataStorage" from row "6" and column "0" and write in sheet "seedingoneoff"
+Then filter the bc from sheet "BCDataStorage" from row "10" and column "0" and write in sheet "seedingoneoff"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -501,7 +559,7 @@ Then verify the condition Acknowleged event for the bc from sheet "one-offBC" fo
 
 @NDX-8653 @NDX-10148@initBrowser
 Scenario: Verify the ack ,channel email and target condition: customerDrivenEventNotOccurred 
-Then filter the bc from sheet "BCDataStorage" from row "7" and column "0" and write in sheet "seedingoneoff"
+Then filter the bc from sheet "BCDataStorage" from row "11" and column "0" and write in sheet "seedingoneoff"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -520,80 +578,95 @@ Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff
    
 @NDX-9013 @initBrowser   
 Scenario: Verify the ack ,dynamic tag 
-Then filter the bc from sheet "BCDataStorage" from row "8" and column "0" and write in sheet "seedingoneoff"
+Then filter the bc from sheet "BCDataStorage" from row "12" and column "0" and write in sheet "seedingoneoff"
 Given login 
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
-Then filter the bc from file "bcInputData" of sheet "seedingoneoff" for bctype "onetime"
 Then wait until status of "seedingoneoff" is "Completed"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750005"
+Then search msisdn "9491750800"
 Then click on events tab
-Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
-Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC" and offer from sheet "SeedingSMS_Dynamic"
+Then verify the condition Acknowledged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
+Then click on events tab
+Then verify multiple creative "56.0" for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
 
 
 
 @NDX-8605 @NDX-8623 @NDX-8801 @NDX-7042 @NDX-10083 @initBrowser
 Scenario: Verify the ack ,channel SMS,dr count,CG count of seeding recurringbc
-Then filter the bc from sheet "BCDataStorage" from row "9" and column "0" and write in sheet "seedingRecurringBC"
+Then filter the bc from sheet "BCDataStorage" from row "13" and column "0" and write in sheet "seedingRecurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "seedingRecurringBC" for bctype "onetime"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "seedingRecurringBC"
 Then wait until status of "seedingRecurringBC" from file "bcInputData" is "Completed" for bctype "seeding" 
 Then verify the ack count with target condition Acknowledgement from sheet "targetConditionCount" for bc from sheet "seedingRecurringBC" of bctype "seedingRecurring"
-Then view broadcast for "seedingRecurring" for bctype "onetime"
+Then view broadcast for "seedingRecurring-Rewarding" for bctype "onetime"
 Then verify the target count with condition Acknowledgement from sheet "targetConditionCount" also the channel "SMS"
+Then navigate back
+Then filter the bc from file "bcInputData" of sheet "seedingRecurringBC" for bctype "onetime"
+Then view broadcast for "seedingRecurring-Messaging" for bctype "onetime"
+Then verify the cg exclusion from sheet "targetConditionCount"
 Then navigate to reports
 Then navigate to broadcast reports
-Then verify the dr count with condition drCount from sheet "targetConditionCount" of the bc from sheet "seedingRecurringBC" from bc report
+Then from bc report verify condition drCount and cg "true" count from sheet "targetConditionCount" of the bc from sheet "seedingRecurringBC"
 Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750800"
+Then click on events tab
+Then verify the condition Acknowledged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
+Then verify the condition Confirmed Delivery event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
+Then verify the condition Control Group Participation event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
+Then raise the conversion job
 Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
-Then verify the condition Acknowleged event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
-Then verify the condition Confirmed Delivery event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+Then verify the condition Control Group Conversion event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 
-@NDX-7050 @NDX-8792 @initBrowser
-Scenario: Verify the channek WAP,dynamic tag usage for a seeding Recurring bc
-Then filter the bc from sheet "BCDataStorage" from row "10" and column "0" and write in sheet "seedingRecurringBC"
+@NDX-8792 @initBrowser
+Scenario: Verify the channek WAP, for a seeding Recurring bc
+Then filter the bc from sheet "BCDataStorage" from row "14" and column "0" and write in sheet "seedingRecurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "seedingRecurringBC" for bctype "onetime"
-Then wait until status of "seedingRecurringBC" from file "bcInputData" is "Completed" for bctype "seeding" 
+Then wait until status of "seedingRecurringBC" from file "bcInputData" is "Completed" for bctype "seedingRecurr" 
 Then view broadcast for "seedingRecurring" for bctype "onetime"
 Then verify the target count with condition Acknowledgement from sheet "targetConditionCount" also the channel "WAP"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750005"
+Then search msisdn "9491750800"
 Then click on events tab
-Then verify the condition Acknowleged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
+Then verify the condition Acknowledged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
      
-@initBrowser
+@NDX-9790 @initBrowser
 Scenario: Verify the channel email for the seeding recurring bc
-Then filter the bc from sheet "BCDataStorage" from row "11" and column "0" and write in sheet "seedingRecurringBC"
+Then filter the bc from sheet "BCDataStorage" from row "15" and column "0" and write in sheet "seedingRecurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "seedingRecurringBC" for bctype "onetime"
-Then wait until status of "seedingRecurringBC" from file "bcInputData" is "Completed" for bctype "seeding" 
+Then wait until status of "seedingRecurringBC" from file "bcInputData" is "Completed" for bctype "seedingRecurr" 
 Then view broadcast for "seedingRecurring" for bctype "onetime"
-Then verify the target count with condition Acknowledgement from sheet "targetConditionCount" also the channel "WAP"
+Then verify the target count with condition Acknowledgement from sheet "targetConditionCount" also the channel "email"
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750800"
+Then click on events tab
+Then verify the condition Acknowledged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 
 @NDX-9011 @initBrowser
 Scenario: Verify the dynamic tag usage for a seeding recurring bc
-Then filter the bc from sheet "BCDataStorage" from row "12" and column "0" and write in sheet "seedingRecurringBC"
 Given login
 Then navigate to precision marketer
 Then navigate to life cycle marketing
@@ -605,8 +678,9 @@ Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
-Then verify the condition Acknowleged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
-Then verify the condition Acknowleged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC" and offer from sheet "SeedingSMS_Dynamic"
+Then verify the condition Acknowledged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
+Then click on events tab
+Then verify multiple creative "21" for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 
 
 @NDX-10924 @NDX-10950 @NDX-10928  @initBrowser

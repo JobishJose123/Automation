@@ -153,7 +153,10 @@ public class workApprovalflow extends Init {
 
 	@Then("^verify campaign status waiting for approval from sheet \"([^\"]*)\" of file \"([^\"]*)\"$")
 	public void isWaitingForApprovalStatusDisplayed(String sheet, String fileName) throws Throwable {
-		eM.setExcelFile(fileName, sheet);		
+		eM.setExcelFile(fileName, sheet);	
+		String campaignName=(String) eM.getCell(1, 0);
+		System.out.println("campaignName is :++++++++++++++++"  +campaignName);
+		Thread.holdsLock(2000);
 		approvalPageObjects.isWaitingForApprovalStatusDisplayed((String) eM.getCell(1, 0));
 	}
 	

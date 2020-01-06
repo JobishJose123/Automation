@@ -845,6 +845,7 @@ Thread.sleep(5000);
 	
 	public void isWaitingForApprovalStatusDisplayed(String campaignName) throws InterruptedException
 	{
+		Thread.sleep(3000);
 		WebElement approvalStatus = driver.findElement(By.xpath("//vaadin-grid-table-cell[contains(., '"+campaignName+"')]/../..//vaadin-grid-table-cell[3]//div[contains(@class, 'hexagon-content')]//span[contains(., 'W')]"));
 		Assert.assertTrue(approvalStatus.isDisplayed());
 	}

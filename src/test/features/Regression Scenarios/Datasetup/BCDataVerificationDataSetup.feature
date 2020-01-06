@@ -635,18 +635,19 @@ Scenario Outline: Verify Creating the recurringBC to verify the functioning of P
 	Then naigate to "campaignBC" campaign view broadcasts 
 	Then click create new broadcast button 
 	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "<bcSheet>" with "<offerSheet>" 
+	Then wait for 4000 milliseconds
 	Then save bc 
 	Then wait for 4000 milliseconds 
 	Then add bc from sheet "<bcSheet>" to column "<row>" of bc data sheet "BCForPauseAbort"
 	
 	Examples:
 	|bcSheet|offerSheet|row|
-	|one-offBCForPause|rechargeSMS|1|
-	|recurringBCForPause|rechargeSMS|2|
-	|seedingRecurringBCForPause|SeedingWAPOffer|3|
-	|seedingoneoffForPause|seedingWAPoffer|4|
-	|TriggerOneoff|rechargeSMS|5|
-	|TriggerOneoff|SeedingSMS|6|
+##	|one-offBCForPause|rechargeSMS|1|
+#	|recurringBCForPause|rechargeSMS|2|
+#	|seedingRecurringBCForPause|SeedingWAPOffer|3|
+#	|seedingoneoffForPause|seedingWAPoffer|4|
+#	|TriggerOneoff|rechargeSMS|5|
+	|TriggerOneoff|seedingWAPoffer|6|
 	|TriggerReccurringBC|seedingWAPoffer|7|
 	|TriggerReccurringBC|rechargeSMS|8|
 	|one-offBCForAbort|rechargeWAP|9|
@@ -654,7 +655,7 @@ Scenario Outline: Verify Creating the recurringBC to verify the functioning of P
 	|seedingRecurringBCForAbort|seedingWAPoffer|11|
 	|seedingoneoffForAbort|seedingWAPoffer|12|
 	|TriggerOneoff|rechargeSMS|13|
-	|TriggerOneoff|SeedingSMS|14|
+	|TriggerOneoff|seedingWAPoffer|14|
 	|TriggerReccurringBC|seedingWAPoffer|15|
 	|TriggerReccurringBC|rechargeSMS|16|
 	
