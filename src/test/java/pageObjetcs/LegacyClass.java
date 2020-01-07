@@ -1,12 +1,12 @@
 package pageObjetcs;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import baseClasses.Init;
 
 public class LegacyClass extends Init {
@@ -50,12 +51,17 @@ public class LegacyClass extends Init {
 
 	public static void main(String[] args) throws Exception {
 		LegacyClass lg = new LegacyClass();
-		lg.legacytest200();
+		//lg.multipleTabs();
 	}
 
+	
+	
+	
 	public void legacytest200() throws Exception {
 		loginIntoLegacy();
+		Thread.sleep(4000);
 		clickOnMobileMarketingDB();
+		Thread.sleep(4000);
 		clickOnMobileMarketingDbRecurring();
 		Thread.sleep(4000);
 		clickOnNewDataJob();
@@ -236,6 +242,7 @@ public class LegacyClass extends Init {
 		action.moveToElement(driver.findElement(By.xpath("//div//ul//li//span[contains(.,'Deactivate')]"))).click()
 				.build().perform();
 		Thread.sleep(2000);
+		System.out.println("job deactivated");
 		action.click(driver.findElement(By.xpath("//table//tbody//tr[2]//td[2]//em//button[contains(.,'Yes')]")))
 				.click().build().perform();
 		Thread.sleep(2000);

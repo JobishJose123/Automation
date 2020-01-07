@@ -29,7 +29,7 @@ public class CustomerProfilePage extends Init{
 	private WebElement customerProfile;
 	@FindBy(xpath=".//*[@id='crumbs']/flytxt-breadcrumb[3]/paper-button[contains(text(),'Reports')]/../../flytxt-breadcrumb[4]/paper-button[contains(text(),'Customer Profile')]")
 	private WebElement customerProfileBreadcrumb;	
-	@FindBy(xpath="//label[contains(text(),'Customer Number')]/../input")
+	@FindBy(xpath="//label[contains(text(),'Customer Identifier')]/../input")
 	private WebElement customerNumberInput;
 	@FindBy(xpath="//paper-button[contains(.,'Search')]")
 	private WebElement customerProfileSearchButton;
@@ -654,6 +654,10 @@ public void verifyConversionEvent(String bcName,String campaignName,String Offer
 	Thread.sleep(1000);
 	System.out.println(ackEvents.size());
 	 int count=1;
+	 
+	 if(ackEvents.size()==0) {
+		 Assert.assertTrue("ACK event not raised ",false);
+	 }
 	 
 	 for (WebElement webElement : ackEvents) {
 			if ((webElement.getText()).contains(campaignName)) {

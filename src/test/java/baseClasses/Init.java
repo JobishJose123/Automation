@@ -121,6 +121,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	public final String INVENTORY_BLACKOUTALWAYS="selenium_blackout_always";
 	public static int programoffer=1;
 	public final String globalResonseKeywords="selenium app";
+	public final String globalResonseKeywordforbc="selenium_app_for_bc";
 }
 //public class Init {
 //public static WebDriver driver;

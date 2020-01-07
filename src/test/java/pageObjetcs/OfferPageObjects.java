@@ -512,6 +512,9 @@ public class OfferPageObjects extends Init {
 	 private WebElement globalResponsceTrackBy;
 	 @FindBy(xpath="//div[@class='rules layout vertical style-scope source-track-rule']//paper-item[contains(.,'"+globalResonseKeywords+"')]")
 	 private WebElement globalResponseKeyword;
+	 @FindBy(xpath="//div[@class='rules layout vertical style-scope source-track-rule']//paper-item[contains(.,'"+globalResonseKeywordforbc+"')]")
+	 private WebElement globalResponseKeywordforbc;
+	 
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -3020,7 +3023,7 @@ String testMode="";
 				
 				jswait.loadClick(globalResponsceTrackBy);
 				
-				jswait.loadClick(globalResponseKeyword);
+				jswait.loadClick(globalResponseKeywordforbc);
 			}
 
 		} // track tab if

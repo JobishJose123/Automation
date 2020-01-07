@@ -20,7 +20,7 @@ Examples:
 |parallelRunBC|rewardBcs|TriggerOneoff|
 |parallelRunBC|rewardBcs|TriggerReccurringBC|
 |parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|
-|parallelRunBC|rewardBcs|seedingTriggerable|
+|parallelRunBC|rewardBcs|seedingTriggerableBC|
 |parallelRunBC|UsageBasedConversion|one-offBC|
 |parallelRunBC|UsageBasedConversion|seedingoneoff|
 |parallelRunBC|UsageBasedConversion|recurringBC|
@@ -28,7 +28,7 @@ Examples:
 |parallelRunBC|UsageBasedConversion|TriggerOneoff|
 |parallelRunBC|UsageBasedConversion|TriggerReccurringBC|
 |parallelRunBC|UsageBasedConversion|seedingTriggerableRecurringBC|
-|parallelRunBC|UsageBasedConversion|seedingTriggerable|
+|parallelRunBC|UsageBasedConversion|seedingTriggerableBC|
 
 
 
@@ -40,13 +40,13 @@ Then navigate to precision marketer
 Then verify the acknowledgement of Bcs from workbook "<storedWB>" and sheet "<storedSheet>" with MSISDN"<MSISDN>" with bc "<bcsheet>"
 Examples:
 |storedWB|storedSheet|bcsheet|MSISDN|
-|parallelRunBC|rewardBcs|recurringBC|919491750103|
-|parallelRunBC|rewardBcs|one-offBC|919491750152|
-|parallelRunBC|rewardBcs|seedingoneoff|919491750252|
-|parallelRunBC|rewardBcs|seedingRecurringBC|919491750365|
+|parallelRunBC|rewardBcs|recurringBC|919491750049|
+|parallelRunBC|rewardBcs|one-offBC|919491750057|
+|parallelRunBC|rewardBcs|seedingoneoff|919491750225|
+|parallelRunBC|rewardBcs|seedingRecurringBC|919491750325|
 |parallelRunBC|rewardBcs|TriggerOneoff|919491750103|
 |parallelRunBC|rewardBcs|TriggerReccurringBC|919491750103|
-|parallelRunBC|rewardBcs|seedingTriggerable|919491750103|
+|parallelRunBC|rewardBcs|seedingTriggerableBC|919491750103|
 |parallelRunBC|rewardBcs|seedingTriggerableRecurringBC|919491750103|
 |parallelRunBC|UsageBasedConversion|one-offBC|919491750054|
 |parallelRunBC|UsageBasedConversion|seedingoneoff|919491750245|
@@ -55,7 +55,7 @@ Examples:
 |parallelRunBC|UsageBasedConversion|TriggerOneoff|9491750128|
 |parallelRunBC|UsageBasedConversion|TriggerReccurringBC|9491750168|
 |parallelRunBC|UsageBasedConversion|seedingTriggerableRecurringBC|9491750358|
-|parallelRunBC|UsageBasedConversion|seedingTriggerable|9491750258|
+|parallelRunBC|UsageBasedConversion|seedingTriggerableBC|9491750258|
 
 @verifyConversionEvent @NDX-9834 @NDX-9833 @NDX-9832 @NDX-9831 @NDX-9830 @NDX-9829 @NDX-9828 @NDX-9835 @initBrowser @closeBrowser
 Scenario Outline: Verify the Conversion event for recharge based conversion activated reward bcs
@@ -160,6 +160,73 @@ Examples:
 |MSISDN|
 |919491750419|
 
+@ActivateCreatedKeywordbased @initBrowser 
+Scenario Outline: Activate the reward bcs and raise the conversion job
+Given login 
+Then navigate to precision marketer 
+Then activate and raise the conversion job the broadcast from workbook "<storedWB>" and sheet "<storedSheet>" and bcSheetName "<bcsheet>"
+Then login to the vcust
+Then hit with vcust SMS with number "<MSISDN>" with keyword "seleniumkeywordforbc"
+Examples:
+|storedWB|storedSheet|bcsheet|MSISDN|
+|parallelRunBC|keywordbasedconversion|recurringBC|919491750027|
+|parallelRunBC|keywordbasedconversion|one-offBC|919491750054|
+|parallelRunBC|keywordbasedconversion|seedingoneoff|919491750221|
+|parallelRunBC|keywordbasedconversion|seedingRecurringBC|919491750327|
+|parallelRunBC|keywordbasedconversion|TriggerOneoff|919491750128|
+|parallelRunBC|keywordbasedconversion|TriggerReccurringBC|919491750154|
+|parallelRunBC|keywordbasedconversion|seedingTriggerableBC|919491750272|
+|parallelRunBC|keywordbasedconversion|seedingTriggerableRecurringBC|919491750354|
+
+@verifyACKForKeywordBasedBC @initBrowser 
+Scenario Outline: To Verify keyword based bc ack
+Given login 
+Then navigate to precision marketer
+Then verify the acknowledgement of Bcs from workbook "<storedWB>" and sheet "<storedSheet>" with MSISDN"<MSISDN>" with bc "<bcsheet>"
+Examples:
+|storedWB|storedSheet|bcsheet|MSISDN|
+|parallelRunBC|keywordbasedconversion|recurringBC|919491750027|
+|parallelRunBC|keywordbasedconversion|one-offBC|919491750054|
+|parallelRunBC|keywordbasedconversion|seedingoneoff|919491750221|
+|parallelRunBC|keywordbasedconversion|seedingRecurringBC|919491750327|
+|parallelRunBC|keywordbasedconversion|TriggerOneoff|919491750128|
+|parallelRunBC|keywordbasedconversion|TriggerReccurringBC|919491750154|
+|parallelRunBC|keywordbasedconversion|seedingTriggerableBC|919491750272|
+|parallelRunBC|keywordbasedconversion|seedingTriggerableRecurringBC|919491750354|
+
+
+
+@verifyKeyWordBasedConversionEvent @NDX-9851,@NDX-9850,@NDX-9849,@NDX-9848,@NDX-9847,@NDX-9846,@NDX-9845,@NDX-9844 @initBrowser @closeBrowser
+Scenario Outline: Verify the Conversion event for Usage based conversion activated reward bcs
+Given login 
+Then navigate to precision marketer 
+Then verify the Conversion event of bcs from workbook "<storedWB>" and sheet "<storedSheet>" with MSISDN"<MSISDN>" with bc "<bcsheet>"
+Examples:
+|storedWB|storedSheet|bcsheet|MSISDN|
+|parallelRunBC|keywordbasedconversion|recurringBC|919491750027|
+|parallelRunBC|keywordbasedconversion|one-offBC|919491750054|
+|parallelRunBC|keywordbasedconversion|seedingoneoff|919491750221|
+|parallelRunBC|keywordbasedconversion|seedingRecurringBC|919491750327|
+|parallelRunBC|keywordbasedconversion|TriggerOneoff|919491750128|
+|parallelRunBC|keywordbasedconversion|TriggerReccurringBC|919491750154|
+|parallelRunBC|keywordbasedconversion|seedingTriggerableBC|919491750272|
+|parallelRunBC|keywordbasedconversion|seedingTriggerableRecurringBC|919491750354|
+
+@VerifyKeyWordFulfillment @initBrowser
+Scenario Outline: Verify fulfillment sucess is happening for Seeding trigger one off BCs
+Given login 
+Then navigate to precision marketer 
+Then verify the Fulfillment event of bcs from workbook "<storedWB>" and sheet "<storedSheet>" with rewardType "oneruleonereward" and MSISDN"<MSISDN>" with bctype "<bctype>"
+Examples:
+|storedWB|storedSheet|bctype|MSISDN|
+|parallelRunBC|keywordbasedconversion|recurringBC|919491750027|
+|parallelRunBC|keywordbasedconversion|one-offBC|919491750054|
+|parallelRunBC|keywordbasedconversion|seedingoneoff|919491750221|
+|parallelRunBC|keywordbasedconversion|seedingRecurringBC|919491750327|
+|parallelRunBC|keywordbasedconversion|TriggerOneoff|919491750128|
+|parallelRunBC|keywordbasedconversion|TriggerReccurringBC|919491750154|
+|parallelRunBC|keywordbasedconversion|seedingTriggerableBC|919491750272|
+|parallelRunBC|keywordbasedconversion|seedingTriggerableRecurringBC|919491750354|
 
     @activateInventoryBCs @initBrowser @closeBrowser 
 	Scenario: Activating the bcs 

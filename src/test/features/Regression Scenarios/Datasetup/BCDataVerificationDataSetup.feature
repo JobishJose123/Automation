@@ -46,12 +46,11 @@ Scenario: Create offers with all channels for creating BC
 	Then navigate to precision marketer 
 	Then navigate to offer management 
 	Then navigate to offers 
-#	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" 
-#	Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" 
 	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then create new offer from sheet "rechargeWAP" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then create new offer from sheet "rechargeEmail" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
+	Then create new offer from sheet "seedingWAPoffer" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then navigate to offer management
 	Then Navigate to Offer Catalogue 
 	Then Create New Offer Catalogue from sheet "defaultCatalog" 
@@ -59,6 +58,7 @@ Scenario: Create offers with all channels for creating BC
 	Then Add "SeedingSMS" offer to Offer Catalogue
 	Then Add "rechargeWAP" offer to Offer Catalogue 
 	Then Add "rechargeEmail" offer to Offer Catalogue
+	Then Add "seedingWAPoffer" offer to Offer Catalogue	
 	Then wait for 4000 milliseconds 
 	
 	
@@ -434,6 +434,114 @@ Scenario Outline: Create all type of bcs with <bcSheet> with <offerSheet> and <c
 		|UsageBasedConversion|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|oneruleonereward|
 		|UsageBasedConversion|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|oneruleonereward|
 		|UsageBasedConversion|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|oneruleonereward|
+		
+@NDX-CreateCampaigncategoryBCCG @initBrowser @closeBrowser
+Scenario: Verify BC targeting using all types of target conditions with one time BC 
+	Given login 
+	Then navigate to configuration management 
+	Then naviagte to product classes 
+	Then create product class and number attribute from "TestProductClass" 
+	Then navigate to landing page
+	Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+	Then navigate to landing page 
+	Then navigate to configuration management 
+	Then navigate to campaign categories 
+	Then create new campaign category from sheet "CampaignCategory" 
+	Then navigate to landing page
+	Then navigate to precision marketer
+	Then navigate to offer management
+	Then Navigate to Offer Catalogue 
+	Then Create New Offer Catalogue from sheet "defaultCatalog"
+		Then wait for 4000 milliseconds 
+		
+		@CreateUsageConversionAndFulfilmentBCCG @initBrowser @closeBrowser 
+Scenario Outline: Create all type of bcs with <bcSheet> with <offerSheet> and <condition>, <rewardTypeRule> 
+	Given login 
+	Then navigate to precision marketer 
+	Then navigate to offer management 
+	Then navigate to offers 
+	Then create new offer from sheet "<offerSheet>" with product "fullDetails" rewards "<rewardTypeRule>" with creative type "singlecreative" and track Source "Usage Metric" 
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue 
+	Then adding existing offers from sheet "<offerSheet>" Offer Catalogue from sheet "defaultCatalog"
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "<campaignCategory>" 
+	Then create new campaign from sheet "<campaignBC>" with catalog "defaultCatalog" 
+	Then naigate to "<campaignBC>" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "<Trigger>" 
+	Then enter target tab details target condition <condition> type "Create" TG "no limit" CG "fixedPercentage" DNC "none" 
+	Then enter choose offer tab from sheet "<offerSheet>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "Rule-based" give reward to "Unique conversion of a customer" 
+	Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "none" from sheet "<bcSheet>" 
+	Then save bc 
+	Then add the BC Data to "<SavedSheet>" from BCsheet "<bcSheet>" campaignname "<campaignBC>" campaign category "<campaignCategory>" offer "<offerSheet>" condition "<condition>" inventory "<creative>" with string <rewardTypeRule> 
+	Then wait for 4000 milliseconds 
+	
+	Examples: 
+		|SavedSheet|bcSheet|campaignBC|campaignCategory|offerSheet|condition|creative|rewardTypeRule|Trigger|
+		|UsageBasedConversion|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|oneruleonereward|none|
+		|UsageBasedConversion|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|oneruleonereward|none|
+		|UsageBasedConversion|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|analyticalScoresGT45|singlecreative|oneruleonereward|none|
+		|UsageBasedConversion|seedingRecurringBC|campaignBC|CampaignCategory|SeedingSMS|digitalPersonaGT15|singlecreative|oneruleonereward|none|
+		|UsageBasedConversion|TriggerOneoff|campaignBC|CampaignCategory|rechargeSMS|analyticalScoresGT45|singlecreative|oneruleonereward|SeleniumTrigger|
+		|UsageBasedConversion|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|analyticalScoresGT45|singlecreative|oneruleonereward|SeleniumTrigger|
+		|UsageBasedConversion|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|analyticalScoresGT45|singlecreative|oneruleonereward|SeleniumTrigger|
+		|UsageBasedConversion|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|digitalPersonaGT15|singlecreative|oneruleonereward|SeleniumTrigger|
+		
+		
+	@NDX-CreateCampaigncategoryBC4 @initBrowser @closeBrowser
+Scenario: Verify BC targeting using all types of target conditions with one time BC Keywordbased
+	Given login 
+	Then navigate to configuration management 
+	Then naviagte to product classes 
+	Then create product class and number attribute from "TestProductClass" 
+	Then navigate to landing page 
+	Then navigate to configuration management 
+	Then navigate to campaign categories 
+	Then create new campaign category from sheet "CampaignCategory" 
+	Then navigate to landing page
+	Then navigate to precision marketer
+	Then navigate to offer management
+	Then Navigate to Offer Catalogue 
+	Then Create New Offer Catalogue from sheet "defaultCatalog"	
+		
+		@NDX-CreateBCforkeywordbaseconversion @initBrowser @closeBrowser 
+Scenario Outline: Verify Creating the <bcSheet> Keywordbased
+
+	Given login 
+	When navigate to precision marketer 
+	Then navigate to offer management 
+	Then navigate to offers 
+	Then create new offer from sheet "<offerSheet>" with product "fullDetails" rewards "<rewardTypeRule>" with creative type "singlecreative" and track Source "Global Response App"
+	Then navigate to offer management 
+	Then Navigate to Offer Catalogue 
+	Then adding existing offers from sheet "<offerSheet>" Offer Catalogue from sheet "defaultCatalog" 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "<campaignCategory>" 
+	Then create new campaign from sheet "<campaignBC>" with catalog "defaultCatalog" 
+	Then naigate to "<campaignBC>" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then enter details for new broadcast with condition <condition> from sheet "<bcSheet>" with "<offerSheet>" 
+	Then save bc 
+	Then add the BC Data to "<SavedSheet>" from BCsheet "<bcSheet>" campaignname "<campaignBC>" campaign category "<campaignCategory>" offer "<offerSheet>" condition "<condition>" inventory "<inventory>" with string <descripton> 
+	Then wait for 4000 milliseconds 
+	
+	
+	Examples: 
+		|SavedSheet|bcSheet|campaignBC|campaignCategory|offerSheet|condition|inventory|descripton|
+		|keywordbasedconversion|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|oneruleonereward|
+		|keywordbasedconversion|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|oneruleonereward|
+		|keywordbasedconversion|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup50|singlecreative|oneruleonereward|
+		|keywordbasedconversion|seedingRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup70|singlecreative|oneruleonereward|
+		|keywordbasedconversion|TriggerOneoff|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup30|singlecreative|oneruleonereward|
+		|keywordbasedconversion|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|oneruleonereward|
+		|keywordbasedconversion|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|oneruleonereward|
+		|keywordbasedconversion|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|oneruleonereward|
 		
 		
 		

@@ -50,16 +50,16 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then verify validations of bc details tab
 
-@NX-518 
-@initBrowser @closeBrowser
-Scenario: Create BC-Details tab: Verify the proceed button without adding the mandatory fields
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then verify mandatory fields in details tab
+#@NX-518 
+#@initBrowser @closeBrowser
+#Scenario: Create BC-Details tab: Verify the proceed button without adding the mandatory fields
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then verify mandatory fields in details tab
 
 @NX-528 
 @initBrowser @closeBrowser
@@ -1193,31 +1193,31 @@ Then verify delivery details from "recurringMonthBC"
     
     @NX-652 @initBrowser @closeBrowser
     Scenario: Create BC: Deliver tab: Verify "Starts broadcast at" option-652
-#    Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to configuration management
-#    Then navigate to campaign categories
-#    Then create new campaign category from sheet "CampaignCategory"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to products
-#    Then navigate to product class "TestProductClass"
-#    Then click create new product button
-#    Then create product with attributes from sheet "fullDetails"
-#    Then navigate to landing page
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then click on create new ofer button
-#    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-#    Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-#    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "seedingWAPoffer" offer to Offer Catalogue
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "seedingWAPoffer" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
     Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
@@ -2067,38 +2067,38 @@ Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
     @initBrowser 
 Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Call to Action Buttons.
  Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to configuration management
-#    Then navigate to campaign categories
-#    Then create new campaign category from sheet "CampaignCategory"
-#    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to configuration management
+    Then navigate to campaign categories
+    Then create new campaign category from sheet "CampaignCategory"
+    Then navigate to landing page
     Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to products
-#    Then navigate to product class "TestProductClass"
-#    Then click create new product button
-#    Then create product with attributes from sheet "fullDetails"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then click on create new ofer button
-#    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
-#    Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-#    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "rechargeEmail" offer to Offer Catalogue
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+    Then navigate to offer management 
+	  Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeEmail" offer to Offer Catalogue
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "CampaignCategory"
-#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then naigate to "campaignBC" campaign view broadcasts
     Then click create new broadcast button
     Then enter details for new broadcast from sheet "one-offBC" with "rechargeEmail"	
    	Then activate bc
-#    Then verify bc created from sheet "one-offBC"
+    Then verify bc created from sheet "one-offBC"
     Then wait until status of "one-offBC" is "Completed"
     Then verify email from sheet "one-offBC"
     Then pass next scenario based on this step

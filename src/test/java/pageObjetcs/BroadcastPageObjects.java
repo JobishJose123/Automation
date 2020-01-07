@@ -214,7 +214,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement trackSessionInput;
 	@FindBy(xpath = ".//label[contains(.,'Tracking Source')]/../input")
 	private WebElement trackingSourceSelector;
-	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'track')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'A_track_Sel')]")
 	private WebElement trackingSourceTrack;
 	@FindBy(xpath = "//label[contains(.,'Triggers')]/following::paper-item[2]")
 	private WebElement triggerSelect1;
@@ -2863,7 +2863,7 @@ public boolean checkCalculateBtnDisplayed() {
 			Assert.assertTrue(jswait.checkVisibility(
 					"//p[contains(.,'Recurrence Pattern')]/..//p//a[contains(.,'Recur every')]/..//a[contains(.,'"
 							+ rucurrence + "')]"));
-		} else if (bcType.contains("one-off") || bcType.contains("seedingTriggerable"))// ||bcType.contains("Triggerone-offBC")
+		}  else if (bcType.contains("one-off") || bcType.contains("seedingTriggerable") ||bcType.contains("TriggerOneoff")||bcType.contains("TriggerReccurringBC"))
 		{
 			Assert.assertTrue(
 					jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'" + Start_Date + "')]"));
