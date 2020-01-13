@@ -1505,9 +1505,11 @@ public class BroadcastSteps extends Init {
 
 	@Then("^save bc$")
 	public void save_bc() throws Throwable {
+		Thread.sleep(3000);
 		broadcastPageObjects.clickCreateButton();
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		broadcastPageObjects.clickSaveButton();
+		Thread.sleep(3000);
 	}
 
 	@Then("^navigate to \"([^\"]*)\" broadcasts$")
@@ -4764,7 +4766,15 @@ public void bc(String bcSaveOrActivate) throws Throwable {
 }
 	
 	
-	
+@Then("^click on BC edit button from workbook \"([^\"]*)\" sheet \"([^\"]*)\" and bctype \"([^\"]*)\"$")
+public void click_on_BC_edit_button_from_workbook_sheet_and_bctype(String workbook, String sheet, String bctype) throws Throwable {
+eh.setExcelFile(workbook, sheet);
+String name = eh.getCell(1, 0).toString();
+commonObjects.filterBC(name,bctype);
+commonObjects.BCOptionIcon(bctype);
+commonObjects.clickEditOption();  
+
+}	
 	
 	
 	

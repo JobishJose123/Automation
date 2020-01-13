@@ -214,7 +214,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement trackSessionInput;
 	@FindBy(xpath = ".//label[contains(.,'Tracking Source')]/../input")
 	private WebElement trackingSourceSelector;
-	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'A_track_Sel')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'"+TRACK_SOURCE+"')]")
 	private WebElement trackingSourceTrack;
 	@FindBy(xpath = "//label[contains(.,'Triggers')]/following::paper-item[2]")
 	private WebElement triggerSelect1;
@@ -399,7 +399,7 @@ public class BroadcastPageObjects extends Init {
 	 private WebElement autoRefreshButtonRecurr;
 	@FindBy(xpath="(//div[@id='toggleButton'])[4]")
 	 private WebElement autoRefreshButtonSeeding;
-	 @FindBy(xpath="//span[contains(.,'Do you want to abort all related broadcasts')]//following::paper-button[contains(.,'Yes')]")
+	 @FindBy(xpath="(//span[contains(.,'Do you want to abort all related broadcasts')]//following::paper-button[contains(.,'Yes')])[2]")
 	 private WebElement AbortYes ;
 	
 	 @FindBy(xpath="//label[@id='label']//following::input[@placeholder='Select a Language']")
@@ -1564,7 +1564,7 @@ public boolean checkCalculateBtnDisplayed() {
 		if (bc_type.contentEquals("triggerable") || bc_type.contentEquals("seedingTriggerable")||bc_type.contains("Trigger")
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")) {
 			System.out.println("inside triggerable");
-			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+//			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(1000);
 			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
@@ -3123,15 +3123,15 @@ public boolean checkCalculateBtnDisplayed() {
 
 	public String getTopBcStatus(String sheetname, String bcName,String bctype) throws Exception {
 		String status = "";
-		if (bctype.contains("onetime") ) {
+		if (bctype.equalsIgnoreCase("onetime") ) {
 			jswait.waitUntil(topBcStatusGrid);
 			status = topBcStatusGrid.getText();
-		} else if (bctype.contains("seeding")) {
+		} else if (bctype.equalsIgnoreCase("seeding")) {
 			status = topBcStatusGridForSeedingChild.getText();
 			
            		} else if (bctype.contains("trigger")) {      
 			status = getTopBcStatusofTrigger(bcName);
-		} else if (bctype.contentEquals("recurring") ){
+		} else if (bctype.equalsIgnoreCase("recurring") ){
 			status = topBcStatusGridForRecurrChild.getText();
 		
 		}

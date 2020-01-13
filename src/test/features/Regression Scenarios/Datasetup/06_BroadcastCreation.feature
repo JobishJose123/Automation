@@ -424,30 +424,30 @@ Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "no
 Then enter target tab details target condition <targetCondition> type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
 Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
-Then "<state>" bc
+Then "<status>" bc
 Then wait for 4000 milliseconds 
-Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
+Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataSheet>"
  Examples:
-|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|state|                  
-|one-offBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|At|1|save|
-|one-offBC|rechargeWAP|customerList|Create|no limit|no limit|none|single creative|none|none|2|activate|
-|one-offBC|rechargeEmail|usageMetric|Create|no limit|no limit|none|single creative|none|none|3|activate|
-|one-offBC|rechargeSMS_Dynamic|sharedMetricOtherPartner|Create|no limit|no limit|none|single creative|none|none|4|activate|
+|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|status|BCDataSheet|                  
+|one-offBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|At|1|save|ConversionBC|
+|one-offBC|rechargeWAP|customerList|Create|no limit|no limit|none|single creative|none|none|1|activate|BCDataStorage|
+|one-offBC|rechargeEmail|usageMetric|Create|no limit|no limit|none|single creative|none|none|2|activate|BCDataStorage|
+|one-offBC|rechargeSMS_Dynamic|sharedMetricOtherPartner|Create|no limit|no limit|none|single creative|none|none|3|activate|BCDataStorage|
 #
-|recurrBCDaily|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|At|none|5|save|
-|recurrBCWeekly|rechargeWAP|profilefieldNV|Create|no limit|no limit|none|single creative|none|none|6|activate|
-|recurringMonthSpecialBC|rechargeEmail|targetall|None|no limit|no limit|none|single creative|none|none|7|activate|
-|recurringBC|rechargeSMS_Dynamic|SharedcustomerList|Create|no limit|no limit|none|single creative|none|none|8|activate|
+|recurrBCDaily|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|At|none|2|save|ConversionBC|
+|recurrBCWeekly|rechargeWAP|profilefieldNV|Create|no limit|no limit|none|single creative|none|none|4|activate|BCDataStorage|
+|recurringMonthSpecialBC|rechargeEmail|targetall|None|no limit|no limit|none|single creative|none|none|5|activate|BCDataStorage|
+|recurringBC|rechargeSMS_Dynamic|SharedcustomerList|Create|no limit|no limit|none|single creative|none|none|6|activate|BCDataStorage|
 #
-|seedingoneoff|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|9|save|
-|seedingoneoff|seedingWAPoffer|customerDrivenEvent|Create|no limit|no limit|none|single creative|none|none|10|activate|
-|seedingoneoff|seedingEmail|customerDrivenEventNotOccurred|Create|no limit|no limit|none|single creative|none|none|11|activate|
-|seedingoneoff|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|12|activate|
+|seedingoneoff|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|3|save|ConversionBC|
+|seedingoneoff|seedingWAPoffer|customerDrivenEvent|Create|no limit|no limit|none|single creative|none|none|7|activate|BCDataStorage|
+|seedingoneoff|seedingEmail|customerDrivenEventNotOccurred|Create|no limit|no limit|none|single creative|none|none|8|activate|BCDataStorage|
+|seedingoneoff|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|9|activate|BCDataStorage|
 #
-|seedingRecurringBC|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|13|save|
-|seedingRecurringBC|seedingWAPoffer|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|none|none|14|activate|
-|seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|15|activate|
-|seedingRecurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|16|activate|
+|seedingRecurringBC|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|4|save|ConversionBC|
+|seedingRecurringBC|seedingWAPoffer|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|none|none|10|activate|BCDataStorage|
+|seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|11|activate|BCDataStorage|
+|seedingRecurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|12|activate|BCDataStorage|
 
 
 @NDX-createTriggerWithDKJob @initBrowser
@@ -479,20 +479,20 @@ Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "se
 Then enter target tab details target condition <targetCondition> type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
 Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
-Then save bc
+Then "<status>" bc
 Then wait for 4000 milliseconds 
-Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
+Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataSheet>"
 Then wait for 4000 milliseconds 
 
 Examples:
-|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|state|
-#|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|17|save|
-#|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|18|activate|
-|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|19|activate|
-|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|never|none|20|save|
-#|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|21|activate|
-|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|22|save|
-|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|single creative|At|At|23|activate|
+|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|status|BCDataSheet|
+|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|5|save|ConversionBC|
+|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|13|activate|BCDataStorage|
+|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|14|activate|BCDataStorage|
+|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|never|none|6|save|ConversionBC|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|15|activate|BCDataStorage|
+|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|7|save|ConversionBC|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|single creative|At|At|16|activate|BCDataStorage|
 
 #after running @NDX-TriggerBC run @NDX-fileForTriggerBC
 @NDX-fileForTriggerBC  @initBrowser @closeBrowser
@@ -500,52 +500,9 @@ Scenario: upload file for trigger bc
 Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "trigger1.csv"
 
 
-@NDX-CreateUsageBasedOffer @initBrowser
-Scenario Outline:create bc with usage based offer for verification of cg 
-Given login
-Then navigate to precision marketer
-Then navigate to offer management
-Then navigate to offers
-Then create new offer from sheet "<offerName>" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "<trackSource>"
-Examples:
-|offerName|trackSource|
-|rechargeSMS|Usage Metric|
-|SeedingSMS|Usage Metric|
-
-@NDX-usageMetricUploadForUsageBasedOffer  @initBrowser
-Scenario: upload the usage metric 
-Given login 
-Then navigate to data foundation
-Then click Data Fusion Engine
-Then filter the job "selMetricEventUpload" and activate it
-Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "sel_uasge_metric.csv"
 
 
-@NDX-CreateBCWithUsageBasedOffer @initBrowser
-Scenario Outline:create bc with usage based offer for verification of cg 
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "<trigger>"
-Then enter target tab details target condition targetall type "None" TG "no limit" CG "fixedPercentage" DNC "none"
-Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
-Then enter deliver tab with end "never" target render time "realTime" and broadcast expiry as "none" from sheet "<bcSheet>"
-Then activate bc
-Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
 
-Examples:
-|bcSheet|trigger|offerName|i|
-|one-offBC|none|rechargeSMS|24|
-|recurrBCDaily|none|rechargeSMS|25|
-|seedingoneoff|none|SeedingSMS|26|
-|seedingRecurringBC|none|SeedingSMS|27|
-|TriggerOneoff|trigger|rechargeSMS|28|
-|TriggerOneoff|trigger|SeedingSMS|29|
-|TriggerReccurringBC|trigger|rechargeSMS|30|
-|TriggerReccurringBC|trigger|SeedingSMS|31|
 
 
 
