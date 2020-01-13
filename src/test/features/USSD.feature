@@ -9,17 +9,17 @@ Feature: Test cases for USSD
     @NX-ussd @initBrowser
   Scenario: API- Verify Offer Eligible event for USSD
     Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to products
-#    Then navigate to product class "TestProductClass"
-#    Then click create new product button
-#    Then create product with attributes from sheet "fullDetails"
-#    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
@@ -31,8 +31,8 @@ Feature: Test cases for USSD
     Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
-#    Then click create program button
-#    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
     Then choose program from sheet "programdetails"
    Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
     Then verify rule created from sheet "rule"
@@ -61,7 +61,7 @@ Feature: Test cases for USSD
  
     
     
-          @initBrowser @NX-USSDfifo 
+          @initBrowser @NDX-10132 @NX-USSDfifo  
   Scenario: Verify create a customer care program full flow
     Given login
     Then navigate to intent management
@@ -77,7 +77,7 @@ Feature: Test cases for USSD
     Then wait until rule is picked
     Then get-offer USSD for "9491750027" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123" 
     
-             @initBrowser @NDX-9863	
+             @initBrowser @NDX-9989 @NDX-9863	
   Scenario: Verify create a customer care program full flow
         Given login
 #        Then navigate to configuration management
@@ -95,19 +95,19 @@ Feature: Test cases for USSD
 #    Then navigate to offer management
 #    Then navigate to offers
 #    Then click on create new ofer button
-  Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
-
+#  Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
+#
 #    Then navigate to offer management
 #    Then Navigate to Offer Catalogue
 #    Then Create New Offer Catalogue from sheet "defaultCatalog"
 #    Then Add "rechargeSMS" offer to Offer Catalogue
 #    Then navigate to landing page
-    Then navigate to intent management
-    Then navigate to programs
-    Then click create program button
-    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
-    Then choose program from sheet "programdetails"
-   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+#    Then navigate to intent management
+#    Then navigate to programs
+#    Then click create program button
+#    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+#    Then choose program from sheet "programdetails"
+#   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
     Then verify rule created from sheet "rule"
     Then wait until rule is picked
        Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123"
@@ -115,7 +115,7 @@ Feature: Test cases for USSD
     Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"
     
                 @initBrowser @NDX-9883	
-  Scenario: Verify create a customer care program full flow
+  Scenario: Verify create a ussd program full flow
         Given login
         Then navigate to configuration management
     Then naviagte to product classes
@@ -151,3 +151,135 @@ Feature: Test cases for USSD
        Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123"
     Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"
     Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"
+    
+    
+              @initBrowser @NDX-9859 @NDX-9880	
+  Scenario: Verify fulfillment processing for STV offer with USSD touch point
+        Given login
+#        Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#
+#   Then create new offer from sheet "STVSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "STVSMS" offer to Offer Catalogue
+#    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+#    Then click create program button
+#    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+    Then choose program from sheet "programdetails"
+   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+    Then verify rule created from sheet "rule"
+    Then wait until rule is picked
+   
+       Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "123"
+    Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"
+    Then get-offer USSD for "9491750028" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "123"
+    
+    
+      @initBrowser @NDX-9854 
+  Scenario: Verify fulfillment processing for recharge offer with USSD touch point.
+        Given login
+        Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+   Then create new offer from sheet "STVSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "STVSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+    Then choose program from sheet "programdetails"
+   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+    Then verify rule created from sheet "rule"
+    Then wait until rule is picked
+    Then get-offer USSD for "9491750351" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "12345"
+    Then get-offer USSD for "9491750351" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "12345"
+    Then get-offer USSD for "9491750351" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "12345"
+     Then raise the conversion job
+     Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750351"
+    Then click on events tab
+    Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    @initBrowser @NDX-ussdkeyword	
+  Scenario: Verify create a customer care program full flow
+        Given login
+        Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+
+   Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "ussdTouchpoint"
+ Then choose program from sheet "programdetails"
+   Then create new rule with enddate from sheet "programdetails" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
+    Then verify rule created from sheet "rule"
+    Then wait until rule is picked
+     Then get-offer USSD for "9491750354" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "12345"
+    Then get-offer USSD for "94917503534" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "12345"
+    Then get-offer USSD for "9491750354" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "12345"
+    
+        Then login to the vcust
+#    Then navigate back to vcust
+    Then hit with vcust SMS with number "9491750353" with keyword "seleniumkeyword"

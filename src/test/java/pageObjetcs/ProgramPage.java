@@ -1278,20 +1278,20 @@ private WebElement rulessenderid2
 		Thread.sleep(2000);
 
 		WebElement num = driver.findElement(By.xpath(
-				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours+1) + "])[2]"));
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours+1) + "])[1]"));
 		builder.moveToElement(num).click().build().perform();
 		Thread.sleep(2000);
 
 		Thread.sleep(2000);
 		WebElement num1 = driver.findElement(By.xpath(
-				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[2]"));
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[1]"));
 		Thread.sleep(1000);
     	 builder.moveToElement(num1).click().build().perform();
       	if(am_pm==0)
-      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[1]");
        else
-      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
-		jswait.loadClick("(//paper-button[contains(.,'OK')])[4]");
+      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[1]");
+		jswait.loadClick("(//paper-button[contains(.,'OK')])[2]");
 		
 		}
 	public void newprmrefreshatpgm2() throws InterruptedException {
@@ -2260,7 +2260,23 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 			}
 			
 			}
-	 
+	   public void selectoffersinrulestimeout() throws java.lang.Exception {
+		   int i=programoffer;
+		   Thread.sleep(2000);
+			if(jswait.checkVisibility("//paper-button[contains(.,'Select Offer')]")) {			
+			jswait.loadClick("//paper-button[contains(.,'Select Offer')]");
+			Thread.sleep(2000);
+			jswait.loadClick("(//h4[contains(.,'Offer')][1])["+i+"]");
+			Thread.sleep(2000);
+			
+			jswait.loadClick("//paper-button[contains(.,'Done')]");
+			programoffer++;
+			
+			}else{
+				//clickPorogramProceedButton();
+			}
+			
+			}
 	   
 		public void prmstartsat() throws InterruptedException {
 			

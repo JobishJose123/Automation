@@ -1116,6 +1116,49 @@ Then wait until Segment Analysis job status is changed to "C"
     Then enter details for new broadcast from sheet with clusters "one-offBC" with "rechargeWAP"
     Then activate bc
     Then verify bc created from sheet "one-offBC"
+    
+    @initBrowser @NX-smstestLIFO @NDX-10131 @NDX-10125
+  Scenario: Verify create a sms program full flow
+    Given login
+      Then navigate to intent management
+    Then navigate to touchpoints
+  Then navigate to sms
+   Then change SMS Prioritization Logic to "FIFO" from sheet "smsTouchpoint"
+    Then navigate to programs
+    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then choose program from sheet "SMSprogram"
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked 
+    Then navigate to landing page
+  Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab   
+   Then verify offer "Balance Top ups"
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then choose program from sheet "SMSprogram"
+    Then wait for 2 minutes
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked    
+   Then navigate to landing page
+  Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab   
+    Then navigate to landing page
+    Then navigate to intent management
+    
+    Then navigate to programs
+    Then choose program from sheet "SMSprogram"
+   Then wait for 2 minutes
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked 
+ Then navigate to landing page
+     
 
   @NX-8376 @initBrowser
   Scenario: Check the cluster option is only available once model is activated in PM.

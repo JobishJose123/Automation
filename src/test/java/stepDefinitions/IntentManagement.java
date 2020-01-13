@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import baseClasses.ExcelHelper;
@@ -1470,7 +1472,7 @@ System.out.println(editname+"program has edited successfully");
 		 		Thread.sleep(4000);
 				//programPage.clickCreateProgramButton();
 		 		System.out.println(touchpointList);
-				programPage.createNewProgramRulewithenddate(name,"selenium_list",touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+				programPage.createNewProgramRulewithenddate(name,SELENIUM_LIST_IM,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 				dateForCompare = new Date();
 				System.out.println(dateForCompare);
 				
@@ -2228,7 +2230,7 @@ System.out.println(editname+"program has edited successfully");
 		 		Thread.sleep(4000);
 				//programPage.clickCreateProgramButton();
 		 		System.out.println(touchpointList);
-				programPage.editProgramRule(name,"listName",touchpointList,offerExcel.getCellByColumnName("Offer Type"),condition);
+				programPage.editProgramRule(name,SELENIUM_LIST,touchpointList,offerExcel.getCellByColumnName("Offer Type"),condition);
 				dateForCompare = new Date();
 				System.out.println(dateForCompare);
 				
@@ -2453,17 +2455,17 @@ System.out.println(editname+"program has edited successfully");
 					 public void getvcustportid() throws Exception {
 						 Thread.sleep(2000);
 					
-						    String port;
-						   port= MarathonHelper.getContainerPort(p.getValue("marathonip"),"neon/infra/vcust");
-						   String node=MarathonHelper.getContainerNode(p.getValue("marathonip"),"neon/infra/vcust");
-						   System.out.println("node is "+node);
-						   
-						   System.out.println("port is "+port);
-						   String url=node.concat(".flytxt.com:"+port);
-						   System.out.println("url is"+url);
-						   
-						   //driver.get("http://"+url);
-						   driver.get("http://node4.soakqa.flytxt.com:8999");
+//						    String port;
+//						   port= MarathonHelper.getContainerPort(p.getValue("marathonip"),"neon/infra/vcust");
+//						   String node=MarathonHelper.getContainerNode(p.getValue("marathonip"),"neon/infra/vcust");
+//						   System.out.println("node is "+node);
+////						   
+//						   System.out.println("port is "+port);
+//						   String url=node.concat(".flytxt.com:"+port);
+//						   System.out.println("url is"+url);
+//						   
+//						   driver.get("http://"+url);
+						   driver.get("https://vcust.infra.neon");
 						   Thread.sleep(2000);
 						   
 						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='name']")).sendKeys(p.getValue("username"));
@@ -2542,7 +2544,7 @@ System.out.println(editname+"program has edited successfully");
 					 		Thread.sleep(4000);
 							//programPage.clickCreateProgramButton();
 					 		System.out.println(touchpointList);
-							programPage.createNewProgramRulewithenddate(name,SELENIUM_LIST,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+							programPage.createNewProgramRulewithenddate(name,SELENIUM_LIST_IM,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 							dateForCompare = new Date();
 							System.out.println(dateForCompare);
 							
@@ -2716,6 +2718,77 @@ System.out.println(editname+"program has edited successfully");
 												}
 												}
 				
+												@Then("^verify the program condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
+												public void verify_the_condition_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
+											      eh.setExcelFile("bcInputData", bcSheet);
+											      String bcName =eh.getCellByColumnName("BC Name");
+											      
+											      
+											     
+											      //touchpointPage.verifyEventOfTheprogram(event,bcName,camapignName);
+											     
+												}
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
 				
 }
 

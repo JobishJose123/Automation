@@ -95,7 +95,7 @@ public class MarathonHelper {
 	
 	public String getJson(String env,String container) throws IOException {
 		Request r = new Request();
-		r.getRequest("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA=="); 
+		r.getRequest("https://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA=="); 
 		String JSONStr = r.responseString;
 		return JSONStr;
 	}

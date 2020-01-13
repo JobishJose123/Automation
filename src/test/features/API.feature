@@ -606,33 +606,80 @@ Feature: Test cases for API
     Then click on events tab
     Then wait for offer eligible event in consumer profile
     Then get-offer api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
-#    Then wait for offer recommended event for API in consumer profile
+    Then wait for offer recommended event for API in consumer profile
     Then accept api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
     Then wait for offer accepted event in consumer profile
     Then pass next scenario based on this step
     
     
-    @NDX-9882
-	 @initBrowser 
-  Scenario: API- Verify getoffer for API -3100
+    @initBrowser @NDX-9990
+  Scenario: Verify the request processing through API touchpoint
     Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeSMS" offer to Offer Catalogue
+#    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+#    Then click create program button
+#    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointUR_default"
+    Then choose program from sheet "programdetails"
+    Then create new rule from sheet "programdetails" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointUR_default"
+    Then verify rule created from sheet "rule"
+    Then wait for "A" status of rule
+    Then wait until rule is picked
     Then navigate to landing page
     Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750351"
+    Then click on events tab
+    Then wait for offer eligible event in consumer profile
+    Then get-offer api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
+    Then wait for offer recommended event for API in consumer profile
+    Then accept api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
+    Then wait for offer accepted event in consumer profile
+    Then pass next scenario based on this step
+    
+    @NDX-9882 @NDX-9862
+	 @initBrowser 
+  Scenario: Verify usage based conversion for API touchpoint
+    Given login
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
-    Then click on create new ofer button
+#    Then click on create new ofer button
 
-    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
+#    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
     Then navigate to offer management
     Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
@@ -669,26 +716,26 @@ Feature: Test cases for API
     
     
     
-     @NX-apitestkeyword
+     @NX-apitestkeyword @NDX-9867
 	 @initBrowser 
-  Scenario: API- Verify getoffer for API -3100
+  Scenario: Verify keyword based conversion for API touchpoint
     Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to products
-#    Then navigate to product class "TestProductClass"
-#    Then click create new product button
-#    Then create product with attributes from sheet "fullDetails"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#   Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
-#    Then navigate to landing page
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+   Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
+    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to offer management
     Then Navigate to Offer Catalogue
@@ -710,11 +757,68 @@ Feature: Test cases for API
     Then navigate to customer profile
     Then search msisdn "9491750351"
     Then click on events tab
-    Then wait for offer eligible event in consumer profile
+#    Then wait for offer eligible event in consumer profile
     Then get-offer api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
-    Then wait for offer recommended event for API in consumer profile
+#    Then wait for offer recommended event for API in consumer profile
     Then accept api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
-    Then wait for offer accepted event in consumer profile
+#    Then wait for offer accepted event in consumer profile
     Then login to the vcust
     Then navigate back to vcust
     Then hit with vcust SMS with number "9491750351" with keyword "seleniumkeyword"
+    
+         @NX-apitestkeyword @NDX-9856
+	 @initBrowser 
+  Scenario: Verify fulfillment processing for recharge offer with API touch point.
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+   Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "programdetails" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointUR_default"
+    Then choose program from sheet "programdetails"
+    Then create new rule from sheet "programdetails" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointUR_default"
+    Then verify rule created from sheet "rule"
+    Then wait for "A" status of rule
+    Then wait until rule is picked
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750351"
+    Then click on events tab
+#    Then wait for offer eligible event in consumer profile
+    Then get-offer api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
+#    Then wait for offer recommended event for API in consumer profile
+    Then accept api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
+#    Then wait for offer accepted event in consumer profile
+    Then login to the vcust
+    Then navigate back to vcust
+    Then hit with vcust SMS with number "9491750351" with keyword "seleniumkeyword"
+    Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750351"
+    Then click on events tab
+    Then wait for Fulfillment Success in consumer profile with offer "STVSMS"

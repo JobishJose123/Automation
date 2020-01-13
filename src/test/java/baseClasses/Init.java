@@ -77,6 +77,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	public final String SENDER_EMAIL = "Email Route";
 	public final String ROUTE_EMAIL = "Email outbound";
 	public final String SELENIUM_LIST = "selenium_list";
+	public final String SELENIUM_LIST_IM = "Selenium_IM_list";
 	public final String SELENIUM_DND_LIST = "selenium_list_DND";
 	public final String SELENIUM_DISCOVERED_CLUSTERS_LIST = "Discovered Clusters_q11";
 	public final String SELENIUM_CUSTOMER_DRIVEN_EVENT = "Selenium event_q11";

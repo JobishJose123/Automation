@@ -1,12 +1,12 @@
 #Author: your.email@your.domain.com
 #Keywords Summary :
-@NX-API_Test_Cases
+@NX-sms_Test_Cases
 Feature: Test cases for SMS
   I want to use this template for my feature file
   
   
      
-    @NX-SMSoffer @initBrowser
+    @NX-SMSoffer11 @initBrowser
   Scenario: SMS- Verify Message recevied for SMS 
     Given login
     Then navigate to configuration management
@@ -27,12 +27,10 @@ Feature: Test cases for SMS
     Then navigate to offer management
     Then Navigate to Offer Catalogue
     Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then Add "STVSMS" offer to Offer Catalogue
     Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
-    Then click create program button
-	Then navigate to programs
     Then click create program button
     Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
     Then choose program from sheet "SMSprogram"
@@ -41,7 +39,7 @@ Feature: Test cases for SMS
     Then wait for "A" status of rule
     Then wait until rule is picked
 	Then login to the vcust
-	Then hit with vcust SMS with number "9491750022" with keyword "1011"
+	Then hit with vcust SMS with number "9491750353" with keyword "1011"
 	Then navigate to the neon again
 	Then navigate to precision marketer
     Then navigate to reports
@@ -107,41 +105,50 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
   Then navigate to sms
    Then change SMS Prioritization Logic to "LIFO" from sheet "smsTouchpoint"
     Then navigate to programs
-#    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-#    Then choose program from sheet "SMSprogram"
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then wait until rule is picked 
-#    Then navigate to landing page
-#  Then navigate to precision marketer
-#    Then navigate to reports
-#    Then navigate to customer profile
-#    Then search msisdn "9491750022"
-#    Then click on events tab   
-##   Then verify offer "Balance Top ups"
-#    Then navigate to landing page
-#    Then navigate to intent management
-#    Then navigate to programs
-#    Then choose program from sheet "SMSprogram"
-#    Then wait for 2 minutes
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then wait until rule is picked    
-#   Then navigate to landing page
-#  Then navigate to precision marketer
-#    Then navigate to reports
-#    Then navigate to customer profile
-#    Then search msisdn "9491750022"
-#    Then click on events tab   
-#    Then navigate to landing page
-#    Then navigate to intent management
-#    
-#    Then navigate to programs
-#    Then choose program from sheet "SMSprogram"
-#   Then wait for 2 minutes
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then wait until rule is picked 
-# Then navigate to landing page
-
-      @initBrowser @NX-ccsmstestLIFO 
+    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then choose program from sheet "SMSprogram"
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked 
+    Then navigate to landing page
+  Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab   
+#   Then verify offer "Balance Top ups"
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then choose program from sheet "SMSprogram"
+    Then wait for 2 minutes
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked    
+   Then navigate to landing page
+  Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab   
+    Then navigate to landing page
+    Then navigate to intent management
+    
+    Then navigate to programs
+    Then choose program from sheet "SMSprogram"
+   Then wait for 2 minutes
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked 
+ Then navigate to landing page
+	Then login to the vcust
+	Then hit with vcust SMS with number "9491750353" with keyword "1011"
+	Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab
+    Then wait for Message Recevied in consumer profile
+    
+      @initBrowser @NX-smstestLIFO
   Scenario: Verify create a customer care program full flow
     Given login
       Then navigate to intent management
@@ -182,10 +189,19 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
     Then wait until rule is picked 
  Then navigate to landing page
+    	Then login to the vcust
+	Then hit with vcust SMS with number "9491750353" with keyword "1011"
+	Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab
+    Then wait for Message Recevied in consumer profile
      
      
      
-      @initBrowser @NX-ccsmstestLIFO 
+      @initBrowser @NX-smstestLIFO 
    Scenario: Verify create a customer care program full flow
     Given login
       Then navigate to intent management
@@ -193,76 +209,85 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
   Then navigate to sms
    Then change SMS Prioritization Logic to "BEST FIT ALGORITHM" from sheet "smsTouchpoint"
     Then navigate to programs
-#    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-#    Then choose program from sheet "SMSprogram"
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then wait until rule is picked 
-#    Then navigate to landing page
-#  Then navigate to precision marketer
-#    Then navigate to reports
-#    Then navigate to customer profile
-#    Then search msisdn "9491750022"
-#    Then click on events tab   
-##   Then verify offer "Balance Top ups"
-#    Then navigate to landing page
-#    Then navigate to intent management
-#    Then navigate to programs
-#    Then choose program from sheet "SMSprogram"
-#    Then wait for 2 minutes
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then wait until rule is picked    
-#   Then navigate to landing page
-#  Then navigate to precision marketer
-#    Then navigate to reports
-#    Then navigate to customer profile
-#    Then search msisdn "9491750022"
-#    Then click on events tab   
-#    Then navigate to landing page
-#    Then navigate to intent management
-#    
-#    Then navigate to programs
-#    Then choose program from sheet "SMSprogram"
-#   Then wait for 2 minutes
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then wait until rule is picked 
-# Then navigate to landing page
+    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then choose program from sheet "SMSprogram"
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked 
+    Then navigate to landing page
+  Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab   
+#   Then verify offer "Balance Top ups"
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then choose program from sheet "SMSprogram"
+    Then wait for 2 minutes
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked    
+   Then navigate to landing page
+  Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab   
+    Then navigate to landing page
+    Then navigate to intent management
+    
+    Then navigate to programs
+    Then choose program from sheet "SMSprogram"
+   Then wait for 2 minutes
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then wait until rule is picked 
+ Then navigate to landing page
+	Then login to the vcust
+	Then hit with vcust SMS with number "9491750353" with keyword "1011"
+	Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750022"
+    Then click on events tab
+    Then wait for Message Recevied in consumer profile
+    
 
 
 
-
-@NX-SMSoffer @initBrowser @NDX-9884
-  Scenario: SMS- Verify Message recevied for SMS 
+ @initBrowser @NDX-9884 @NDX-9864
+  Scenario: verify usage based conversion for SMS touchpoint
     Given login
-#        Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to products
-#    Then navigate to product class "TestProductClass"
-#    Then click create new product button
-#    Then create product with attributes from sheet "fullDetails"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then click on create new ofer button
-#
-#    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
-#    Then navigate to offer management
-#    Then Navigate to Offer Catalogue
-#    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "rechargeSMS" offer to Offer Catalogue
-#    Then navigate to landing page
-#    Then navigate to intent management
-#    Then navigate to programs
-#    Then click create program button
-#	Then navigate to programs
-#    Then click create program button
-#    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-#    Then choose program from sheet "SMSprogram"
-#    Then create new rule from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+        Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then click on create new ofer button
+
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+	Then navigate to programs
+    Then click create program button
+    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then choose program from sheet "SMSprogram"
+    Then create new rule from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
     Then verify rule created from sheet "rule"
    Then wait for "A" status of rule
     Then wait until rule is picked
@@ -280,42 +305,42 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
     
     
     
-      @NX-SMSkeyword    @initBrowser
-  Scenario: SMS- Verify Message recevied for SMS 
+      @NX-SMSkeyword    @initBrowser @NDX-9869
+  Scenario: Verify keyword based conversion for SMS touchpoint
     Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to products
-#    Then navigate to product class "TestProductClass"
-#    Then click create new product button
-#    Then create product with attributes from sheet "fullDetails"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
-#    Then navigate to offer management
-#    Then Navigate to Offer Catalogue
-#    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "rechargeSMS" offer to Offer Catalogue
-#    Then navigate to landing page
-#    Then navigate to intent management
-#    Then navigate to programs
-#    Then click create program button
-#	Then navigate to programs
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+	Then navigate to programs
 #    Then click create program button
 #    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-#    Then choose program from sheet "SMSprogram"
-#    Then create new rule from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then verify rule created from sheet "rule"
-#    Then wait for "A" status of rule
-#    Then wait until rule is picked
+    Then choose program from sheet "SMSprogram"
+    Then create new rule from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+    Then verify rule created from sheet "rule"
+    Then wait for "A" status of rule
+    Then wait until rule is picked
 	Then navigate back to vcust
-#	Then login to the vcust
+	Then login to the vcust
     Then hit with vcust SMS with number "9491750351" with keyword "smsTP1245"
    
     
@@ -335,4 +360,117 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
     Then search msisdn "9491750351"
     Then click on events tab
     Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
+    
+         @initBrowser @NDX-9853
+  Scenario: Verify keyword based conversion for SMS touchpoint
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "rechargeSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+	Then navigate to programs
+#    Then click create program button
+#    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then choose program from sheet "SMSprogram"
+    Then create new rule from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+    Then verify rule created from sheet "rule"
+    Then wait for "A" status of rule
+    Then wait until rule is picked
+	Then navigate back to vcust
+	Then login to the vcust
+    Then hit with vcust SMS with number "9491750351" with keyword "smsTP1245"
+   
+    
+	Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750351"
+    Then click on events tab
+    
+    Then navigate back to vcust
+    Then hit with vcust SMS with number "9491750351" with keyword "seleniumkeyword"
+    Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750351"
+    Then click on events tab
+    Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
+    
+         @initBrowser @NDX-9869 @NDX-9858
+  Scenario: Verify keyword based conversion for SMS touchpoint
+    Given login
+    Then navigate to configuration management
+    Then naviagte to product classes
+    Then create product class and number attribute from "TestProductClass"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to products
+    Then navigate to product class "TestProductClass"
+    Then click create new product button
+    Then create product with attributes from sheet "fullDetails"
+    Then navigate to landing page
+    Then navigate to precision marketer
+    Then navigate to offer management
+    Then navigate to offers
+    Then create new offer from sheet "STVSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
+    Then navigate to offer management
+    Then Navigate to Offer Catalogue
+    Then Create New Offer Catalogue from sheet "defaultCatalog"
+    Then Add "STVSMS" offer to Offer Catalogue
+    Then navigate to landing page
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+	Then navigate to programs
+    Then click create program button
+    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
+    Then choose program from sheet "SMSprogram"
+    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then verify rule created from sheet "rule"
+    Then wait for "A" status of rule
+    Then wait until rule is picked
+	Then navigate back to vcust
+	Then login to the vcust
+    Then hit with vcust SMS with number "9491750351" with keyword "smsTP1245"
+   
+    
+	Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750351"
+    Then click on events tab
+    
+    Then navigate back to vcust
+    Then hit with vcust SMS with number "9491750351" with keyword "seleniumkeyword"
+    Then raise the conversion job
+    Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9491750351"
+    Then click on events tab
+    Then wait for Fulfillment Success in consumer profile with offer "STVSMS"
   

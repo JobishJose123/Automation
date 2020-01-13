@@ -54,9 +54,9 @@ public class DataFusionEngine extends Init {
 	///html//div[@id='mainContainer']//*/div/paper-button[contains(.,'Add Job')]
 	
 	
-	@FindBy(xpath = "//data-table-cell[contains(.,'File')]//following::iron-icon[1]")
+	@FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'File')]//following::iron-icon[1]")
 	private WebElement DFEfileoptions;
-	@FindBy(xpath = "(//data-table-cell[contains(.,'File')]//following::paper-item[contains(.,' View all connections')])[1]")
+	@FindBy(xpath = "(//vaadin-grid-cell-content[contains(.,'File')]//following::paper-item[contains(.,' View all connections')])[1]")
 	private WebElement Viewallconnectionsfile;
 	
 	@FindBy(xpath = "//*[@id=\"router\"]/app-route[17]/ndx-connectors/paper-card[contains(.,'Data Connector')]")
@@ -202,7 +202,7 @@ public class DataFusionEngine extends Init {
 	}
 	public void SelectHostname() throws InterruptedException{
 		jswait.loadClick(selectDataProcessor);
-		jswait.loadClick("//div[@id='items']//vaadin-combo-box-item[2]");
+		jswait.loadClick("//div[@id='items']//vaadin-combo-box-item[1]");
 	}
 	public void JobSave(String output) throws Exception{
 		jswait.loadClick(logiceditor);

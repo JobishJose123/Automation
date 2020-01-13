@@ -1,12 +1,5 @@
 package pageObjetcs;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -14,6 +7,11 @@ import java.util.List;
 import java.util.Random;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
@@ -443,6 +441,12 @@ public class TouchpointPage extends Init{
 	private WebElement triggereditclick ;
 //	@FindBy(xpath="")
 //	private WebElement ;
+
+	@FindBy(xpath="//iron-icon[@title='Apply']")
+	private WebElement applyEventFilter;
+	
+	@FindBy(xpath="//div[contains(.,'Select Event Types')][@id='checkboxLabel']")
+	private WebElement selectAllEventCheckBox;
 
 public void clickUssdEditTouchpoint(String name) throws InterruptedException {
 		
@@ -1727,7 +1731,49 @@ Assert.assertEquals(name,newname);
 	
 }
 
-
+	public void verifyEventOfTheprogram(String event,String bcName,String campaignName) throws Exception{
+		
+		System.out.println("========"+event+" :is the event tht need to be verified");
+		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
+		CustomerProfilePage.searchEventsDynammically("Last 3 Days");
+		 Thread.sleep(4000);
+		jswait.loadClick(selectAllEventCheckBox);
+		jswait.loadClick(selectAllEventCheckBox);
+		jswait.loadClick("(//div[contains(.,'"+event+"')][@id='checkboxLabel'])[1]");
+		Thread.sleep(2000);
+		 jswait.loadClick(applyEventFilter);
+	
+		 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]"));
+			Thread.sleep(1000);
+			System.out.println(ackEvents.size());
+			 int count=1;
+			 System.out.println("print "+ackEvents);
+			 System.out.println("before for loop");
+			 
+			for (WebElement webElement : ackEvents) {
+					if ((webElement.getText()).contains(campaignName)) {
+						System.out.println(webElement.getText());
+						try { 
+							jswait.loadClick("(//iron-icon[@class='deselect consumer-events style-scope x-scope iron-icon-0'])["+count+"]");
+							Thread.sleep(1000);
+							boolean booln = jswait.checkVisibility(
+									"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
+							System.out.println(booln);
+							if (booln == true) {
+								System.out.println(event+"  verified");
+								break;
+								
+							}
+							 
+						} catch (Exception e) {
+							System.out.println("catch block");
+//							Assert.assertTrue(false,"No"+event+" Event Raised");
+						}
+						Thread.sleep(2000);
+						count++;
+				}
+			}
+	} 				
 
 
 

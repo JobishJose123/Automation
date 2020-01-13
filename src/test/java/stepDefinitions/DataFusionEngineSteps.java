@@ -83,8 +83,8 @@ public class DataFusionEngineSteps extends Init {
 		String fileoutput = (String) eh.getCell(1, 4);
 		String regex = (String) eh.getCell(1, 5);
 		DataFusionEngineObjects.Jobname(JobName);
-		//DataFusionEngineObjects.Selctconenctor();
-		//DataFusionEngineObjects.Hostname();
+//		DataFusionEngineObjects.Selctconenctor();
+//		DataFusionEngineObjects.Hostname();
 		DataFusionEngineObjects.SelectHostname();
 		DataFusionEngineObjects.FileInput(fileinput);
 		DataFusionEngineObjects.FileOutput(fileoutput);
@@ -410,9 +410,9 @@ public class DataFusionEngineSteps extends Init {
 		commonObjects.clickOptionsIcon();
 		DataFusionEngineObjects.clickEditOption();
 		Thread.sleep(2000);
-//		PropHandler.setPropertyFile("Datafusion.properties");
-//		
-//		String xpath=PropHandler.getValue(keyword);
+		PropHandler.setPropertyFile("Datafusion.properties");
+		
+		String xpath=PropHandler.getValue(keyword);
 //		String xpath=".//*[@id='router']/app-route[2]/platform-job/dk-ui/dk-workflow/iron-pages/test-model/section/div/div/div/table/tbody/tr[1]/td/span[contains(.,'Exception_input')]";
 		DataFusionEngineObjects.dfejobverification(filename,keyword);
 	}
