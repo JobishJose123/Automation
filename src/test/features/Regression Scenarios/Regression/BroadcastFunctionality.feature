@@ -346,7 +346,7 @@ Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then activate broadcast from workbook "parallelRunBC" and sheet "BCDataStorage"
 
-@NDX-8573 @NDX-8603 @NDX-8798 @NDX-12014 @NDX-12030 @NDX-12035 @NDX-8776 @initBrowser  @closeBrowser
+@NDX-8797 @NDX-12014 @NDX-12030 @NDX-12035 @NDX-8776 @NDX-9794 @initBrowser  @closeBrowser
 Scenario: Verify the ack ,channel SMS,dr count,CG count
 Then filter the bc from sheet "ConversionBC" from row "1" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -391,7 +391,7 @@ Then click on events tab
 Then verify the condition Control Group Conversion event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-8659 @NDX-7047 @NDX-10013 @initBrowser @closeBrowser
+@NDX-7047 @NDX-10013 @initBrowser @closeBrowser
 Scenario: Verify the ack ,channel WAP Target condition: customerList of a one-timebc
 Then filter the bc from sheet "BCDataStorage" from row "1" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -411,7 +411,7 @@ Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-8633 @NDX-7035 @NDX-10010  @initBrowser @closeBrowser
+@NDX-7035 @NDX-10010 @NDX-9790 @initBrowser @closeBrowser
 Scenario: Verify the ack ,channel email Target condition: usageMetric of a one-timebc
 Then filter the bc from sheet "BCDataStorage" from row "2" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -431,7 +431,7 @@ Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-9006 @NDX-8730 @NDX-10016 @initBrowser
+@NDX-9006 @NDX-10016 @NDX-9793 @initBrowser
 Scenario: Verify the ack, dynamic tag and Target condition: sharedMetricOtherPartner of a one-timebc
 Then filter the bc from sheet "BCDataStorage" from row "3" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -451,7 +451,7 @@ Then verify the condition Acknowledged event for the bc from sheet "one-offBC" f
 Then click on events tab
 Then verify multiple creative "63.0" for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
-@NDX-8576 @NDX-8616  @NDX-8627 @NDX-7040 @NDX-9015 @NDX-8961 @NDX-8799 @NDX-8805 @NDX-9970 @NDX-10015  @NDX-12015 @NDX-12036  @initBrowser
+@NDX-8627 @NDX-7040 @NDX-8961 @NDX-8799 @NDX-8805 @NDX-9970  @NDX-12015 @NDX-12036  @initBrowser
 Scenario: Verify the ack ,channel SMS,multiple creative ,dr count,CG count of a recurrence pattern DAILY of recurringbc 
 Then filter the bc from sheet "ConversionBC" from row "2" and column "0" and write in sheet "recurrBCDaily"
 Given login
@@ -497,7 +497,7 @@ Then click on events tab
 Then verify the condition Control Group Conversion event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
 
 
-@NDX-7048 @NDX-8964 @NDX-8811 @NDX-9800 @NDX-9796 @NDX-8624 @initBrowser @closeBrowser
+@NDX-7048 @NDX-8964 @NDX-9800 @NDX-8624 @initBrowser @closeBrowser
 Scenario: Verify the channel WAP and recurrence pattern EVERY WEEK with target condition profilefieldNV
 Then filter the bc from sheet "BCDataStorage" from row "4" and column "0" and write in sheet "recurrBCWeekly"
 Given login
@@ -565,7 +565,7 @@ Then verify the condition Acknowledged event for the bc from sheet "recurringBC"
 Then click on events tab
 Then verify multiple creative "25" for the bc from sheet "recurringBC" for the campaign from sheet "campaignBC"
 
-@NDX-8578 @NDX-8617 @NDX-7041 @NDX-8803 @NDX-8744 @NDX-10017 @NDX-12016 @NDX-12032 @initBrowser
+@NDX-7041 @NDX-8803 @NDX-10017 @NDX-12016 @NDX-12032 @initBrowser
 Scenario: Verify the ack ,channel SMS,dr count,CG count and Target condition: customerDrivenEvent of a seeding one-timebc     
 Then filter the bc from sheet "ConversionBC" from row "3" and column "0" and write in sheet "seedingoneoff"
 Given login 
@@ -606,7 +606,7 @@ Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Control Group Conversion event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
 
-@NDX-7049 @NDX-8795 @NDX-8644 @NDX-10011   @initBrowser @closeBrowser
+@NDX-7049 @NDX-8795 @NDX-10011   @initBrowser @closeBrowser
 Scenario: Verify the ack ,channel WAP,multiple creative and target condition: customerDrivenEvent of seedingoneoff bc
 Then filter the bc from sheet "BCDataStorage" from row "7" and column "0" and write in sheet "seedingoneoff"
 Given login 
@@ -627,7 +627,7 @@ Then verify the condition Acknowledged event for the bc from sheet "seedingoneof
 Then click on events tab
 Then verify multiple creative "عرض مكافأة" for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
 
-@NDX-7037 @NDX-8654 @NDX-10014 @NDX-12049 @initBrowser @closeBrowser
+@NDX-7037 @NDX-10014 @NDX-12049 @initBrowser @closeBrowser
 Scenario: Verify the ack ,channel email and target condition: customerDrivenEventNotOccurred 
 Then filter the bc from sheet "BCDataStorage" from row "8" and column "0" and write in sheet "seedingoneoff"
 Given login 
@@ -668,8 +668,7 @@ Then click on events tab
 Then verify multiple creative "21" for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
 
 
-
-@NDX-8606 @NDX-8623 @NDX-8801 @NDX-7042 @NDX-12017 @initBrowser @closeBrowser
+@NDX-8801 @NDX-7042 @NDX-12017 @initBrowser @closeBrowser
 Scenario: Verify the ack ,channel SMS,dr count,CG count of seeding recurringbc
 Then filter the bc from sheet "ConversionBC" from row "4" and column "0" and write in sheet "seedingRecurringBC"
 Given login
@@ -704,7 +703,7 @@ Then click on events tab
 Then verify the condition Control Group Conversion event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-7050 @NDX-8788 @initBrowser @closeBrowser
+@NDX-7050 @NDX-8788 @NDX-10015 @initBrowser @closeBrowser
 Scenario: Verify the channek WAP,dynamic tag usage for a seeding Recurring bc and target condition :segmentAgeGT40
 Then filter the bc from sheet "BCDataStorage" from row "10" and column "0" and write in sheet "seedingRecurringBC"
 Given login
@@ -758,7 +757,7 @@ Then verify the condition Acknowledged event for the bc from sheet "seedingRecur
 Then click on events tab
 Then verify multiple creative "21" for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
 
-@NDX-10923 @NDX-10949 @NDX-10927 @NDX-12048 @NDX-12020 @NDX-12033 @initBrowser @closeBrowser
+@NDX-10949 @NDX-10927 @NDX-12048 @NDX-12020 @NDX-12033 @initBrowser @closeBrowser
 Scenario: Verify the channel SMS,partner level cg for a trigger one off bc
 Then filter the bc from sheet "ConversionBC" from row "5" and column "0" and write in sheet "TriggerOneoff"
 Given login
@@ -829,7 +828,7 @@ Then click on events tab
 Then verify multiple creative "عرض مكافأة" for the bc from sheet "TriggerOneoff" for the campaign from sheet "campaignBC"
 
 
-@NDX-10937 @NDX-10248 @initBrowser @closeBrowser
+@NDX-10937  @initBrowser @closeBrowser
 Scenario: Verify channel email for trigger one off bc
 Then filter the bc from sheet "BCDataStorage" from row "14" and column "0" and write in sheet "TriggerOneoff"
 Given login

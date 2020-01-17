@@ -387,7 +387,7 @@ Feature: Test suite for Broadcast creation
 
 @NDX-PartnerCGSetting @initBrowser
 Scenario: provide the list for partner cg
-Given login
+Given login 
 Then navigate to configuration management
 Then navigate to partners
 Then edit a partner
@@ -400,7 +400,7 @@ Given login
 Then navigate to precision marketer
 Then navigate to offer management
 Then navigate to offers
-Then create new offer from sheet "<offerName>" with product "fullDetails" rewards "oneruleonereward" with creative type "<creativeType>" and track Source "A_track_Sel"
+Then create new offer from sheet "<offerName>" with product "fullDetails" rewards "oneruleonereward" with creative type "<creativeType>" 
 Examples:
 |offerName|creativeType|
 |rechargeSMS|multiplecreative|

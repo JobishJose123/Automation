@@ -483,16 +483,16 @@ public class OfferPageObjects extends Init {
 		@FindBy(xpath="//rewards-container[3]//label[contains(text(),'Response on Failure')]/..//textarea")
 		private WebElement secondRuleFailureMessage;
 		
-		@FindBy(xpath="//rewards-container[1]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on success')]/..//textarea")
+		@FindBy(xpath="//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[1]")
 		private WebElement defaultSecondCreativeSuccessMessage;
 		
-		@FindBy(xpath="//rewards-container[1]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on Failure')]/..//textarea")
+		@FindBy(xpath="//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[2]")
 		private WebElement defaultSecondCreativeFailureMessage;
 		
-		@FindBy(xpath="//rewards-container[2]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on success')]/..//textarea")
+		@FindBy(xpath="//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[5]")
 		private WebElement firstRuleSecondCreativeSuccessMessage;
 		
-		@FindBy(xpath="//rewards-container[2]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on Failure')]/..//textarea")
+		@FindBy(xpath="//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[6]")
 		private WebElement firstRuleSecondCreativeFailureMessage;
 		
 		@FindBy(xpath="//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on success')]/..//textarea")
@@ -1502,7 +1502,7 @@ public class OfferPageObjects extends Init {
 	  
 	   jswait.loadClick(emailProfileField);
 	   jswait.loadClick("//preview-email//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
-	   jswait.loadSendKeys(emailCreativeSubject, "Subject of Email Offer &$^%#@!+*(&)");
+	   jswait.loadSendKeys(emailCreativeSubject,"email offer by selenium");
 	   
 	   File indexZip = new File("EmailZipFile\\index.zip");
 	   emailSelectResourceButton.sendKeys(indexZip.getAbsolutePath());
@@ -2670,6 +2670,7 @@ public void deleteReward() throws Exception{
 		public void filterForVerification(String offerName) throws Exception{
 			jswait.loadClick(cancelbtn);
 			commonObjects.filterName(offerName);
+			
 		}
 		
 		public void clickRewardDefaultRuleAdButton() throws InterruptedException {
@@ -2860,7 +2861,14 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
-		if (creativeType.equals("singlecreative")) {
+		if(eh.getCell(1, 3).toString().contains("Email")) {
+				 System.out.println("email1");
+				   selectCreativeLanguageEnglish();
+				   enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+				   clickProceedButton();
+				 }
+
+		else if (creativeType.equals("singlecreative")) {
 			enterCreativeTabDetails(eh, testMode);
 			clickProceedButton();
 			Thread.sleep(3000);
@@ -2937,12 +2945,13 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 			}
 
 		}
+		
 
 		clickSaveOfferButton();
 
 	}
 		
-		
+	
 		
 	
 
@@ -3032,11 +3041,12 @@ String testMode="";
 
 	// ******************Rewards tab*****************:
 	
-	if(tracksource.equals("A_track_Sel")) {
+	if(tracksource.equalsIgnoreCase("A_track_Sel")) {
 	if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
 
 		if (rewardType.equals("oneruleonereward")) {
 			createDefaultRuleFirstReward(creativeType);
+			System.out.println("++++++++++++++++next to add first rule reward++++++++++++++++++");
 			createFirstRuleFirstReward(creativeType);
 			selectSeedingReward(offerType);
 			
