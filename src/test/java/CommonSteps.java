@@ -542,6 +542,11 @@ public class CommonSteps extends Init {
 	public void navigate_back() throws Exception{
 		driver.navigate().back();
 	}
+	@Then("^navigate to blackout rules$")
+	public void navigate_to_blackout_rules() throws Throwable {
+		commonObjetcs.blackoutRulesCreate();
+	}
+
 	
 	
 	

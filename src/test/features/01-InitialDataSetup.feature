@@ -258,6 +258,7 @@ Then check and add profile fields
     |default|default|unlimited|
     |onePerDay|dafault|onePerDay|
     |dafault|specificTime|specificTime|
+    |default|blackout_manual|inventory_manual|
     
     @NDX-CreateReward @initBrowser
     Scenario Outline: create reward

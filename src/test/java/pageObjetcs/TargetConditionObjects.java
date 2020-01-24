@@ -173,6 +173,8 @@ public class TargetConditionObjects extends Init {
 	private WebElement customerLocationInsightCondition;
 	@FindBy(xpath="//paper-item[contains(.,'is subscribed')]")
 	private WebElement conditionIsSubscribed;
+	@FindBy(xpath="//paper-item[contains(.,'is not subscribed')]")
+	private WebElement conditionIsNotSubscribed;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer accepted')]")
 	private WebElement eventOfferAccepted;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+SELENIUM_CUSTOMER_DRIVEN_EVENT+"')]")
@@ -463,6 +465,15 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(CustomerListSelection);
 				jswait.loadClick(conditionSelector);
 				jswait.loadClick(conditionIsSubscribed);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("customerListNotSubscribed")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerList);
+				jswait.loadSendKeys(CustomerListFieldSelector,SEL_LIST);
+				jswait.loadClick(CustomerListSelection);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsNotSubscribed);
 				jswait.loadClick(targetConditionSave);
 			}
 			else if(event.contentEquals("discoveredClusters200")){

@@ -928,10 +928,11 @@ public class BroadcastSteps extends Init {
 
 	@Then("^activate bc$")
 	public void activateBc() throws Throwable {
+		Thread.sleep(3000);
 		broadcastPageObjects.clickCreateButton();
 		broadcastPageObjects.clickActivateButton();
 		broadcastPageObjects.clickActivateConfirmYes();
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 	}
 
 	@Then("^verify bc created from sheet \"([^\"]*)\"$")
@@ -3837,37 +3838,37 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 
 @Then("^edit deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
 public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
-	Actions builder =new Actions(driver);
-	eM.setExcelFile("bcInputData", bcSheet);
-	String recurrencePattern =eM.getCellByColumnName("Recurrance Pattern");
-	Calendar rightNow = Calendar.getInstance();
-	String mn = "";
-	if (rightNow.get(Calendar.MONTH) + 1 < 9) {
-		mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
-	} else
-		mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
-	String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
-			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
-	String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
-			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
-	int hours = rightNow.get(Calendar.HOUR);
-	int min = rightNow.get(Calendar.MINUTE);
-	int am_pm = rightNow.get(Calendar.AM_PM);
-	int day = rightNow.get(Calendar.DAY_OF_MONTH);
-	int year = rightNow.get(Calendar.YEAR);
-	int month = rightNow.get(Calendar.MONTH) + 1;
-	min += 2;
-	int rem = min % 5;
-	rem = 5 - rem;
-	min += rem;
-	if (min > 59) {
-		min -= 60;
-		hours++;
-	}
-	 if(min==0)
-		{
-			min+=5;
-		}
+//	Actions builder =new Actions(driver);
+//	eM.setExcelFile("bcInputData", bcSheet);
+//	String recurrencePattern =eM.getCellByColumnName("Recurrance Pattern");
+//	Calendar rightNow = Calendar.getInstance();
+//	String mn = "";
+//	if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+//		mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+//	} else
+//		mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+//	String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+//			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+//	String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+//			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
+//	int hours = rightNow.get(Calendar.HOUR);
+//	int min = rightNow.get(Calendar.MINUTE);
+//	int am_pm = rightNow.get(Calendar.AM_PM);
+//	int day = rightNow.get(Calendar.DAY_OF_MONTH);
+//	int year = rightNow.get(Calendar.YEAR);
+//	int month = rightNow.get(Calendar.MONTH) + 1;
+//	min += 2;
+//	int rem = min % 5;
+//	rem = 5 - rem;
+//	min += rem;
+//	if (min > 59) {
+//		min -= 60;
+//		hours++;
+//	}
+//	 if(min==0)
+//		{
+//			min+=5;
+//		}
 	 Thread.sleep(3000);
 	 broadcastPageObjects.clickProceedButton();
 	 Thread.sleep(2000);
@@ -3875,56 +3876,56 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 	 Thread.sleep(2000);
 	 broadcastPageObjects.clickProceedButton();
 	 Thread.sleep(2000);
-		
-		jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
-		jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
-		jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
-		// }
-		Thread.sleep(2000);
-		jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
-		Thread.sleep(2000);
-		jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
-		Thread.sleep(2000);
-		WebElement num = driver.findElement(By.xpath(
-				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
-						+ (hours + 1) + "]"));
-		Thread.sleep(2000);
-		builder.moveToElement(num).click().build().perform();
-		Thread.sleep(2000);
-		// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
-		WebElement num1 = driver.findElement(By.xpath(
-				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
-						+ (min + 1) + "]"));
-		Thread.sleep(1000);
-		builder.moveToElement(num1).click().build().perform();
-		Thread.sleep(1000);
-		if (am_pm == 0)
-			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
-		
-		else
-			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
-		Thread.sleep(1000);
-		num1 = driver.findElement(By.xpath(
-				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
-		builder.moveToElement(num1).click().build().perform();
-		 Thread.sleep(2000);
-		 Thread.sleep(2000);
-		 jswait.loadClick("(//label[contains(.,'Start broadcasts at')]//following::input)[1]");
-		 Thread.sleep(2000);
-		WebElement num2 = driver.findElement(By.xpath(
-				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
-		builder.moveToElement(num2).click().build().perform();
-		Thread.sleep(2000);
-		WebElement num3 = driver.findElement(By.xpath(
-				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
-		Thread.sleep(1000);
-		builder.moveToElement(num3).click().build().perform();
-		if (am_pm == 0)
-			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
-		else
-			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
-		 Thread.sleep(2000);
-          jswait.loadClick("(//label[contains(.,'Start broadcasts at')]//following::paper-button[contains(.,'OK')])[2]");
+	 enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet( endType,  targetRenderTime,  bcExpiry,  bcSheet);
+//		jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+//		jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
+//		jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+//		// }
+//		Thread.sleep(2000);
+//		jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
+//		Thread.sleep(2000);
+//		jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
+//		Thread.sleep(2000);
+//		WebElement num = driver.findElement(By.xpath(
+//				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+//						+ (hours + 1) + "]"));
+//		Thread.sleep(2000);
+//		builder.moveToElement(num).click().build().perform();
+//		Thread.sleep(2000);
+//		// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+//		WebElement num1 = driver.findElement(By.xpath(
+//				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+//						+ (min + 1) + "]"));
+//		Thread.sleep(1000);
+//		builder.moveToElement(num1).click().build().perform();
+//		Thread.sleep(1000);
+//		if (am_pm == 0)
+//			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
+//		
+//		else
+//			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
+//		Thread.sleep(1000);
+//		num1 = driver.findElement(By.xpath(
+//				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
+//		builder.moveToElement(num1).click().build().perform();
+//		 Thread.sleep(2000);
+//		 Thread.sleep(2000);
+//		 jswait.loadClick("(//label[contains(.,'Start broadcasts at')]//following::input)[1]");
+//		 Thread.sleep(2000);
+//		WebElement num2 = driver.findElement(By.xpath(
+//				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
+//		builder.moveToElement(num2).click().build().perform();
+//		Thread.sleep(2000);
+//		WebElement num3 = driver.findElement(By.xpath(
+//				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
+//		Thread.sleep(1000);
+//		builder.moveToElement(num3).click().build().perform();
+//		if (am_pm == 0)
+//			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+//		else
+//			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+//		 Thread.sleep(2000);
+//          jswait.loadClick("(//label[contains(.,'Start broadcasts at')]//following::paper-button[contains(.,'OK')])[2]");
          
 		 }
 
@@ -4436,12 +4437,6 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	   broadcastPageObjects.verifyViewDetailsOfBc(targetCount,offerChannel);
 	}
 
-//	@Then("^verify the dr count from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\" from bc report$")
-//	public void verify_the_dr_count_from_sheet_of_the_bc_from_sheet_from_bc_report(String targetCountSheet, String bcSheet) throws Exception {
-//	   eh.setExcelFile("bcInputData", bcSheet);
-//	   eM.setExcelFile("parallelRunBC", targetCountSheet);
-//	   broadcastPageObjects.verifyDRCount(eh.getCellByColumnName("BC Name"),eM.getCellByColumnName("Acknowledgement"));
-//	}
 	
 	@Then("^view broadcast for \"([^\"]*)\" for bctype \"([^\"]*)\"$")
 	public void view_broadcast_for_for_bctype(String bcToView, String bctype) throws Exception {
@@ -4757,12 +4752,14 @@ public void verify_the_seeding_and_trigger_option_for_the_bc_from_sheet_for_bc(S
 	
 @Then("^\"([^\"]*)\" bc$")
 public void bc(String bcSaveOrActivate) throws Throwable {
-	switch(bcSaveOrActivate) {
-	case "activate":
+    if(bcSaveOrActivate.equalsIgnoreCase("activate"))
 		activateBc();
-	case "save":
+    else if
+		(bcSaveOrActivate.equalsIgnoreCase("save"))
 		save_bc();
-	}
+    else
+    	System.out.println("no activate save button is selected");
+	
 }
 	
 	
@@ -4776,8 +4773,14 @@ commonObjects.clickEditOption();
 
 }	
 	
+@Then("^create the blackout period for the blackout rule and save$")
+public void create_the_blackout_period_for_the_blackout_rule_and_save() throws Throwable {
+	broadcastPageObjects.AddBlackoutPeriods();
 	
 	
+	
+	
+}
 	
 	
 	

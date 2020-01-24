@@ -245,7 +245,8 @@ public class RegistrationListPage extends Init{
 		enterRegistrationListDescription(desc);
 		selectRegistrationListTypeDND();
 		SelectAllPartners();
-	}public void enterMandatoryDNDRegistratonListDetails(String name,String desc) throws InterruptedException {
+	}
+	public void enterMandatoryDNDRegistratonListDetails(String name,String desc) throws InterruptedException {
 		enterRegistrationListName(name);
 		enterRegistrationListDescription(desc);
 		selectRegistrationListTypeDNDMandatory();
@@ -275,6 +276,10 @@ public class RegistrationListPage extends Init{
 		jswait.loadSendKeys(blackoutInput,"selenium_blackout");
 		jswait.loadClick(blackoutSavebtn);
 		}
+		if(blackout.equalsIgnoreCase("blackout_manual")) {
+			jswait.loadSendKeys(blackoutInput,"blackout_manual");
+			jswait.loadClick(blackoutSavebtn);
+			}
 		if(blackout.equalsIgnoreCase("specificTime")) {
 			jswait.loadSendKeys(blackoutInput,"selenium_blackout_always");
 			jswait.loadClick(blackoutSavebtn);
@@ -311,34 +316,45 @@ public class RegistrationListPage extends Init{
 		jswait.loadSendKeys(inventoryPriorityInput, "1");
 		jswait.loadSendKeys(sendingPriorityInput, "1");
 		jswait.loadClick(selectAllPartnerForInventory);
-	
-		
-		if(inventory.equalsIgnoreCase("default")||inventory.equalsIgnoreCase("unlimited")) {
-			if(inventory.equalsIgnoreCase("default"))
+			switch (inventory) {
+			case "default":
 			jswait.loadSendKeys(inventoryNameinput,"Unlimited");
-			else
+			jswait.loadClick(frequencyRuleInput);
+			jswait.loadClick(defaultFrequencySelect);
+			jswait.loadClick(blackoutRuleInput);
+			jswait.loadClick(defaultBlackoutSelect);
+			jswait.loadClick(saveInventorybtn);
+			case "unlimited":
 			jswait.loadSendKeys(inventoryNameinput,"sel_unlimited");
 			jswait.loadClick(frequencyRuleInput);
 			jswait.loadClick(defaultFrequencySelect);
 			jswait.loadClick(blackoutRuleInput);
 			jswait.loadClick(defaultBlackoutSelect);
-		}
-		if(inventory.equalsIgnoreCase("onePerDay")) {
+			jswait.loadClick(saveInventorybtn);
+			case "inventory_manual":
+		    jswait.loadSendKeys(inventoryNameinput,"inventory_manual");	
+			jswait.loadClick(frequencyRuleInput);
+			jswait.loadClick(defaultFrequencySelect);
+			jswait.loadClick(blackoutRuleInput);
+			jswait.loadClick(defaultBlackoutSelect);
+			jswait.loadClick(saveInventorybtn);
+			case "onePerDay":
 			jswait.loadSendKeys(inventoryNameinput,"sel_one_per_day");
 			jswait.loadClick(frequencyRuleInput);
 			jswait.loadClick(onePerDaytFrequencySelect);
 			jswait.loadClick(blackoutRuleInput);
 			jswait.loadClick(defaultBlackoutSelect);
-		}
-		if(inventory.equalsIgnoreCase("specificTime")) {
+			jswait.loadClick(saveInventorybtn);
+			case "specificTime" :
 			jswait.loadSendKeys(inventoryNameinput,"selenium_blackout_always");
 			jswait.loadClick(frequencyRuleInput);
 			jswait.loadClick(defaultFrequencySelect);
 			jswait.loadClick(blackoutRuleInput);
 			jswait.loadClick(blackoutAlwaysSelect);
+			jswait.loadClick(saveInventorybtn);
 		}
-		jswait.loadClick(saveInventorybtn);
 	}
+	
 	public void filterDkJobName(String jobName) throws Exception{
 		commonObjects.clickOptionsIcon();
 		commonObjects.clickEditOption();

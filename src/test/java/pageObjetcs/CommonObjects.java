@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -348,8 +349,8 @@ public class CommonObjects extends Init {
 		private WebElement selectAllPartner;
 		@FindBy(xpath="//paper-button[contains(.,'Save')]")
         private WebElement saveTrackingSource;
-//		   @FindBy(xpath="")
-//			private WebElement ;
+		   @FindBy(xpath="//div[contains(.,'Blackout Rules')][@class='subHeading admin-blackoutRule style-scope admin-panel']")
+			private WebElement blackoutRules;
 //			@FindBy(xpath="")
 //			private WebElement ;
 //		   @FindBy(xpath="")
@@ -1258,6 +1259,9 @@ public void createNewTrackSource(String trackSourceName) throws Exception{
 	jswait.loadClick(saveTrackingSource);
 	
 	
+}
+public void blackoutRulesCreate() throws Exception{
+	jswait.loadClick(blackoutRules);
 }
 
 

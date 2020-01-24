@@ -19,6 +19,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -540,6 +541,65 @@ public class BroadcastPageObjects extends Init {
 		private WebElement saveBCReportPaperbtn;
 		@FindBy(xpath="//div[contains(.,'Select Event Types')][@id='checkboxLabel']")
 		private WebElement selectAllEventCheckBox;
+		@FindBy(xpath="//span[contains(.,'blackout_manual')]")
+		private WebElement blackoutRule;
+		@FindBy(xpath="//paper-button[contains(.,'Add New Blackout Period')]")
+		private WebElement addBlackoutPeriodbtn;
+		@FindBy(xpath="//label[contains(.,'Start Day')]//following::input[1]")
+		private WebElement blackoutstartDayInput;
+		@FindBy(xpath="//label[contains(.,'End Day')]//following::input[1]")
+		private WebElement  blackoutendDayInput;
+		@FindBy(xpath="//label[contains(.,'End Action')]//following::input[1]")
+		private WebElement blackoutendActionInput;
+		@FindBy(xpath="//paper-item[contains(.,'Resume Manually')]")
+		private WebElement blackoutresumeManually;
+		@FindBy(xpath="//label[contains(.,'Start Time')]//following::input[1]")
+		private WebElement startTimeInput;
+		@FindBy(xpath="//label[contains(.,'End Time')]//following::input[1]")
+		private WebElement blackoutendTimeInput;
+		@FindBy(xpath="//label[contains(.,'Expiry Day')]//following::input[1]")
+		private WebElement blackoutexpiryDayInput; 
+		@FindBy(xpath="//label[contains(.,'Expiry Time')]//following::input[1]")
+		private WebElement blackoutexpiryTimeInput;
+		@FindBy(xpath="//h3[contains(.,'Create New Blackout Period')]//following::paper-button[contains(.,'Save')]")
+		private WebElement saveBlackoutPeriod;
+		@FindBy(xpath="//div[@id='radioLabel'][contains(.,'Broadcast Schedule')]")
+		private WebElement bcScheduleRadiobtn;
+		@FindBy(xpath="(//h4[contains(.,'Target Render Time')]//following::label[contains(.,'Start broadcasts')]//following::input[1])[1]")
+		private WebElement startBroadcastInput;
+		@FindBy(xpath="(//h4[contains(.,'Target Render Time')]//following::label[contains(.,'Start broadcasts')]//following::input[1])[2]")
+		private WebElement startBcAtInput; 
+		@FindBy(xpath="//h4[contains(.,'Target Render Time')]//following::paper-item[contains(.,'At')]")
+		private WebElement renderTimeAt;
+		@FindBy(xpath="(//h4[contains(.,'Target Render Time')]//following::paper-button[contains(.,'OK')])[2]")
+		private WebElement TargetRenderTimeOKbtn;
+		@FindBy(xpath="(//paper-button[contains(.,'OK')])[1]")
+		private WebElement startTimeOKbtn;
+		@FindBy(xpath="(//paper-button[contains(.,'OK')])[2]")
+		private WebElement endTimeOKbtn;
+		@FindBy(xpath="(//paper-button[contains(.,'OK')])[3]")
+		private WebElement blackoutExpiryOKbtn;
+//		@FindBy(xpath="")
+//		private WebElement 
+//		@FindBy(xpath="")
+//		private WebElement 
+//		@FindBy(xpath="")
+//		private WebElement 
+//		@FindBy(xpath="")
+//		private WebElement 
+//		@FindBy(xpath="")
+//		private WebElement 
+//		@FindBy(xpath="")
+//		private WebElement 
+//		@FindBy(xpath="")
+//		private WebElement 
+//		@FindBy(xpath="")
+//		private WebElement 
+//		@FindBy(xpath="")
+//		private WebElement 
+//		@FindBy(xpath="")
+//		private WebElement 
+		
 		
 		
 		
@@ -3386,6 +3446,7 @@ public boolean checkCalculateBtnDisplayed() {
 		Actions builder =new Actions(driver);
 		eM.setExcelFile("bcInputData", bcSheet);
 		String recurrencePattern =eM.getCellByColumnName("Recurrance Pattern");
+		System.out.println(recurrencePattern);
 		Calendar rightNow = Calendar.getInstance();
 		String mn = "";
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
@@ -3455,7 +3516,7 @@ public boolean checkCalculateBtnDisplayed() {
 			Thread.sleep(1000);
 			jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
 			Thread.sleep(1000);
-		 if(endType.equalsIgnoreCase("never")) {
+		 if(endType.equalsIgnoreCase("none")) {
 				System.out.println("end type :"+endType);
 				jswait.loadClick(neverRadiobtn);
 		if(recurrencePattern.equalsIgnoreCase("daily")) {
@@ -3528,6 +3589,25 @@ public boolean checkCalculateBtnDisplayed() {
 		
 	}
 	else if(targetRenderTime.equalsIgnoreCase("broadcast schedule")) {
+		jswait.loadClick(bcScheduleRadiobtn);
+		jswait.loadClick(startBroadcastInput);
+		jswait.loadClick(renderTimeAt);
+		jswait.loadClick(startBcAtInput);
+		Thread.sleep(4000);
+		WebElement num4 = driver.findElement(By.xpath(
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[3]"));
+		builder.moveToElement(num4).click().build().perform();
+		Thread.sleep(2000);
+		WebElement num5 = driver.findElement(By.xpath(
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min) + "])[3]"));
+		Thread.sleep(3000);
+		builder.moveToElement(num5).click().build().perform();
+		Thread.sleep(3000);
+		if (am_pm == 0)
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[3]");
+		else
+			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[3]");
+          jswait.loadClick(TargetRenderTimeOKbtn);
 		
 	}
 	if(bcExpiry.equalsIgnoreCase("after")) {
@@ -3657,6 +3737,25 @@ jswait.loadClick(startBroadcastOkbtn);
 		}
 		else if(targetRenderTime.equalsIgnoreCase("broadcast schedule")) {
 			
+			jswait.loadClick(bcScheduleRadiobtn);
+			jswait.loadClick(startBroadcastInput);
+			jswait.loadClick(renderTimeAt);
+			jswait.loadClick(startBcAtInput);
+			Thread.sleep(4000);
+			WebElement num4 = driver.findElement(By.xpath(
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[4]"));
+			builder.moveToElement(num4).click().build().perform();
+			Thread.sleep(2000);
+			WebElement num5 = driver.findElement(By.xpath(
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min) + "])[4]"));
+			Thread.sleep(3000);
+			builder.moveToElement(num5).click().build().perform();
+			Thread.sleep(3000);
+			if (am_pm == 0)
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[4]");
+			else
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[4]");
+	          jswait.loadClick(TargetRenderTimeOKbtn);
 		}
 		if(bcExpiry.equalsIgnoreCase("after")) {
 			jswait.loadClick(broadcastExpiryCheckbox);
@@ -3984,7 +4083,9 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	}
 	
 	public void verifyCGCount(String targetCount) throws Exception{
+		Thread.sleep(3000);
 		jswait.loadClick(ViewTargetDetails);
+		Thread.sleep(3000);
 		Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("//p[contains(.,'Control Group Exclusion Count')]//following::p[contains(.,'"+targetCount+"')][1]"))));
 		
 	}
@@ -4106,20 +4207,178 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 			else
 				System.out.println("no verification in bc report given");
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		}	
+}	
+		
+		public void AddBlackoutPeriods() throws Exception{
+			SimpleDateFormat df=new SimpleDateFormat("EEEE");
+			Actions builder =new Actions(driver);
+		Calendar rightNow = Calendar.getInstance();
+			int hours = rightNow.get(Calendar.HOUR);
+			int min = rightNow.get(Calendar.MINUTE);
+			int am_pm = rightNow.get(Calendar.AM_PM);
+//	        min +=2;
+			int rem = min % 5;
+			rem = 5 - rem;
+			min += rem;
+			if (min > 59) {
+				min -= 60;
+				hours++;
+			}
+			 if(min==0)
+				{
+					min+=5;
+				}
+			 System.out.println("value of min :::::::::::::"+min);
+			jswait.loadClick(blackoutRule);
+			jswait.loadClick(addBlackoutPeriodbtn);
+			Thread.sleep(2000);
+			jswait.loadClick(blackoutstartDayInput);
+			System.out.println(df.format(rightNow.getTime()));
+			jswait.loadClick("(//paper-item[contains(.,'"+df.format(rightNow.getTime())+"')])[1]");
+			jswait.loadClick(blackoutendDayInput);
+			jswait.loadClick("(//paper-item[contains(.,'"+df.format(rightNow.getTime())+"')])[2]");
+			Thread.sleep(2000);
+            jswait.loadClick(startTimeInput);
+            Thread.sleep(2000);
+    		WebElement num = driver.findElement(By.xpath(
+					"(.//*[@id='blackoutPeriodForm']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"])[1]"));
+			Thread.sleep(2000);
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(2000);
+			WebElement num1 = driver.findElement(By.xpath(
+					"(.//*[@id='blackoutPeriodForm']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+ (min+1) + "])[1]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num1).click().build().perform();
+			Thread.sleep(1000);
+			if (am_pm == 0)
+				jswait.loadClick("(//*[@id='blackoutPeriodForm']//*[@id='heading']/iron-selector[2]/div[1])[1]");
+			
+			else
+				jswait.loadClick("(//*[@id='blackoutPeriodForm']//*[@id='heading']/iron-selector[2]/div[2])[1]");
+			Thread.sleep(1000);
+			jswait.loadClick(startTimeOKbtn);
+			Thread.sleep(1000);
+			jswait.loadClick(blackoutendTimeInput);
+			 Thread.sleep(2000);
+			 int min1 = rightNow.get(Calendar.MINUTE);
+				int am_pm1 = rightNow.get(Calendar.AM_PM);
+		        min1 +=5;
+				int rem1 = min1 % 5;
+				rem1 = 5 - rem1;
+				min1 += rem1;
+				if (min1 > 59) {
+					min1 -= 60;
+					hours++;
+				}
+				 if(min1==0)
+					{
+						min1+=5;
+					}
+				 System.out.println("value of min1 :::::::::::::"+min1);
+			WebElement num2 = driver.findElement(By.xpath(
+					"(.//*[@id='blackoutPeriodForm']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"])[2]"));
+			Thread.sleep(2000);
+			builder.moveToElement(num2).click().build().perform();
+			Thread.sleep(2000);
+			WebElement num3 = driver.findElement(By.xpath(
+					"(.//*[@id='blackoutPeriodForm']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+ (min1+1) + "])[2]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num3).click().build().perform();
+			Thread.sleep(1000);
+			if (am_pm1 == 0)
+				jswait.loadClick("(//*[@id='blackoutPeriodForm']//*[@id='heading']/iron-selector[2]/div[1])[2]");
+			
+			else
+				jswait.loadClick("(//*[@id='blackoutPeriodForm']//*[@id='heading']/iron-selector[2]/div[2])[2]");
+			Thread.sleep(1000);
+			jswait.loadClick(endTimeOKbtn);
+			jswait.loadClick(blackoutendActionInput);
+			jswait.loadClick(blackoutresumeManually);
+			jswait.loadClick(blackoutexpiryDayInput);
+			jswait.loadClick("(//paper-item[contains(.,'"+df.format(rightNow.getTime())+"')])[3]");
+			 Thread.sleep(2000);
+			jswait.loadClick(blackoutexpiryTimeInput);
+			int min2 = rightNow.get(Calendar.MINUTE);
+			int am_pm2 = rightNow.get(Calendar.AM_PM);
+	        min2 +=10;
+			int rem2 = min2 % 5;
+			rem2 = 5 - rem2;
+			min2 += rem2;
+			if (min2 > 59) {
+				min2 -= 60;
+				hours++;
+			}
+			 if(min2==0)
+				{
+					min2+=5;
+				}
+			 System.out.println("value of min2 :::::::::::::"+min2);
+			 Thread.sleep(2000);
+			WebElement num4 = driver.findElement(By.xpath(
+					"(.//*[@id='blackoutPeriodForm']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours+1) + "])[3]"));
+			Thread.sleep(2000);
+			builder.moveToElement(num4).click().build().perform();
+			Thread.sleep(2000);
+			WebElement num5 = driver.findElement(By.xpath(
+					"(.//*[@id='blackoutPeriodForm']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+ (min2+1) + "])[3]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num5).click().build().perform();
+			Thread.sleep(1000);
+			if (am_pm2 == 0)
+				jswait.loadClick("(//*[@id='blackoutPeriodForm']//*[@id='heading']/iron-selector[2]/div[1])[3]");
+			
+			else
+				jswait.loadClick("(//*[@id='blackoutPeriodForm']//*[@id='heading']/iron-selector[2]/div[2])[3]");
+			Thread.sleep(1000);
+			jswait.loadClick(blackoutExpiryOKbtn);
+			Thread.sleep(2000);
+			jswait.loadClick(saveBlackoutPeriod);
+			
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 }
 
