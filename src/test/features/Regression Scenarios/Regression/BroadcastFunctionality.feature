@@ -355,11 +355,11 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
-#Then click on BC edit button from workbook "bcInputData" sheet "one-offBC"
-#Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
-#Then activate bc
+Then click on BC edit button from workbook "bcInputData" sheet "one-offBC"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
+Then activate bc
 Then wait until status of "one-offBC" is "Completed"
-#Then wait for 1 minutes
+Then wait for 1 minutes
 Then verify the ack count with target condition Ack from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
 Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition Ack from sheet "targetConditionCount" also the channel "SMS"
@@ -961,8 +961,9 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then navigate to "Recurring Broadcasts" broadcasts
 Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "recurring"
 Then click on BC edit button from workbook "bcInputData" sheet "recurrBCDaily"
-Then edit deliver tab with end "never" target render time "Broadcasr Schedule" and broadcast expiry as "none" from sheet "recurrBCDaily"
+Then edit deliver tab with end "never" target render time "Real Time" and broadcast expiry as "none" from sheet "recurrBCDaily"
 Then activate bc
+Then wait until status of "recurrBCDaily" from file "bcInputData" is "Targeting" for bctype "recurring"
 Then navigate to landing page
 Then navigate to configuration management
 Then navigate to blackout rules
@@ -977,6 +978,38 @@ Then wait until status of "recurrBCDaily" from file "bcInputData" is "Blackout S
 Then wait until status of "recurrBCDaily" from file "bcInputData" is "Blackout Pause" for bctype "recurring"
 Then wait until status of "recurrBCDaily" from file "bcInputData" is "Blackout Expired" for bctype "recurring" 
 
+
+@NDX-9803 @NDX-9802  @initBrowser
+Scenario Outline: Verify bc with blackout manual
+Then filter the bc from sheet "ConversionBC" from row "<i>" and column "0" and write in sheet "recurrBCDaily" 
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then navigate to "Recurring Broadcasts" broadcasts
+Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "recurring"
+Then click on BC edit button from workbook "bcInputData" sheet "recurrBCDaily"
+Then edit deliver tab with end "never" target render time "<renderTimeSchedule>" and broadcast expiry as "none" from sheet "recurrBCDaily"
+Then activate bc
+Then wait until status of "recurrBCDaily" from file "bcInputData" is "Targeting" for bctype "recurring"
+Then navigate to landing page
+Then navigate to configuration management
+Then navigate to blackout rules
+Then create the blackout period for the blackout rule and save
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "onetime"
+Then wait until status of "recurrBCDaily" from file "bcInputData" is "Delivery Scheduled" for bctype "recurring"
+
+Examples:
+|renderTimeSchedule|i|
+|real time|8|
+|broadcast schedule at|9|
+|broadcast schedule before|10|
 
   
 

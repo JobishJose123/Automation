@@ -579,10 +579,10 @@ public class BroadcastPageObjects extends Init {
 		private WebElement endTimeOKbtn;
 		@FindBy(xpath="(//paper-button[contains(.,'OK')])[3]")
 		private WebElement blackoutExpiryOKbtn;
-//		@FindBy(xpath="")
-//		private WebElement 
-//		@FindBy(xpath="")
-//		private WebElement 
+		@FindBy(xpath="//h4[contains(.,'Target Render Time')]//following::paper-item[contains(.,'Before')]")
+		private WebElement renderTimeBefore;
+		@FindBy(xpath="//label[contains(.,'Hours')]//following::input[1]")
+		private WebElement broadcastRenderBeforeInput;
 //		@FindBy(xpath="")
 //		private WebElement 
 //		@FindBy(xpath="")
@@ -3476,12 +3476,15 @@ public boolean checkCalculateBtnDisplayed() {
 				min+=5;
 			}
 			System.out.println("Inside recurring");
+			System.out.println("+++++++++++++++++++"+hours+"++++++++++++++++++++++++++++++++");
 			
-			
-			// if(bc_type.contentEquals("recurring")){
 			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
 			jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
-			jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
+			if(targetRenderTime.equalsIgnoreCase("broadcast schedule at")||targetRenderTime.equalsIgnoreCase("broadcast schedule before")){
+			jswait.loadClick(".//*[@id='months']//div[@date='" + date2 + "']");
+			}
+			else
+				jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");	
 			jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
 			// }
 			Thread.sleep(2000);
@@ -3489,6 +3492,7 @@ public boolean checkCalculateBtnDisplayed() {
 			Thread.sleep(2000);
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
 			Thread.sleep(3000);
+			if(targetRenderTime.equalsIgnoreCase("real time")){
 			WebElement num = driver.findElement(By.xpath(
 					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
 							+ (hours + 1) + "]"));
@@ -3516,6 +3520,7 @@ public boolean checkCalculateBtnDisplayed() {
 			Thread.sleep(1000);
 			jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
 			Thread.sleep(1000);
+			 }
 		 if(endType.equalsIgnoreCase("none")) {
 				System.out.println("end type :"+endType);
 				jswait.loadClick(neverRadiobtn);
@@ -3586,9 +3591,9 @@ public boolean checkCalculateBtnDisplayed() {
 		
 	
 	if(targetRenderTime.equalsIgnoreCase("real time")) {
-		
+		System.out.println("render schedule is real time");
 	}
-	else if(targetRenderTime.equalsIgnoreCase("broadcast schedule")) {
+	else if(targetRenderTime.equalsIgnoreCase("broadcast schedule at")) {
 		jswait.loadClick(bcScheduleRadiobtn);
 		jswait.loadClick(startBroadcastInput);
 		jswait.loadClick(renderTimeAt);
@@ -3599,7 +3604,7 @@ public boolean checkCalculateBtnDisplayed() {
 		builder.moveToElement(num4).click().build().perform();
 		Thread.sleep(2000);
 		WebElement num5 = driver.findElement(By.xpath(
-				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min) + "])[3]"));
+				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[3]"));
 		Thread.sleep(3000);
 		builder.moveToElement(num5).click().build().perform();
 		Thread.sleep(3000);
@@ -3609,6 +3614,12 @@ public boolean checkCalculateBtnDisplayed() {
 			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[3]");
           jswait.loadClick(TargetRenderTimeOKbtn);
 		
+	}
+	else if(targetRenderTime.equalsIgnoreCase("broadcast schedule before")) {
+		jswait.loadClick(bcScheduleRadiobtn);
+		jswait.loadClick(startBroadcastInput);
+		jswait.loadClick(renderTimeBefore);
+		jswait.loadSendKeys(broadcastRenderBeforeInput, "48");
 	}
 	if(bcExpiry.equalsIgnoreCase("after")) {
 		jswait.loadClick(broadcastExpiryCheckbox);
@@ -3731,31 +3742,36 @@ public boolean checkCalculateBtnDisplayed() {
 				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[3]");
 jswait.loadClick(startBroadcastOkbtn);
 			}
-		
 		if(targetRenderTime.equalsIgnoreCase("real time")) {
-			
+			System.out.println("render schedule is real time");
 		}
-		else if(targetRenderTime.equalsIgnoreCase("broadcast schedule")) {
-			
+		else if(targetRenderTime.equalsIgnoreCase("broadcast schedule at")) {
 			jswait.loadClick(bcScheduleRadiobtn);
 			jswait.loadClick(startBroadcastInput);
 			jswait.loadClick(renderTimeAt);
 			jswait.loadClick(startBcAtInput);
 			Thread.sleep(4000);
 			WebElement num4 = driver.findElement(By.xpath(
-					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[4]"));
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[3]"));
 			builder.moveToElement(num4).click().build().perform();
 			Thread.sleep(2000);
 			WebElement num5 = driver.findElement(By.xpath(
-					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min) + "])[4]"));
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[3]"));
 			Thread.sleep(3000);
 			builder.moveToElement(num5).click().build().perform();
 			Thread.sleep(3000);
 			if (am_pm == 0)
-				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[4]");
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[3]");
 			else
-				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[4]");
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[3]");
 	          jswait.loadClick(TargetRenderTimeOKbtn);
+			
+		}
+		else if(targetRenderTime.equalsIgnoreCase("broadcast schedule before")) {
+			jswait.loadClick(bcScheduleRadiobtn);
+			jswait.loadClick(startBroadcastInput);
+			jswait.loadClick(renderTimeBefore);
+			jswait.loadSendKeys(broadcastRenderBeforeInput, "48");
 		}
 		if(bcExpiry.equalsIgnoreCase("after")) {
 			jswait.loadClick(broadcastExpiryCheckbox);

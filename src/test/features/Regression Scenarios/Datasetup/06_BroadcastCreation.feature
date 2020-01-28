@@ -393,6 +393,7 @@ Then navigate to partners
 Then edit a partner
 Then navigate to control group settings page
 Then change partner control group settings
+Then wait for 2 minutes
 
 @NDX-CreateOfferForBCFunctionality  @initBrowser 
 Scenario Outline: create offer
@@ -410,6 +411,7 @@ Examples:
 |SeedingSMS|multiplecreative|
 |seedingWAPoffer|singlecreative|
 |seedingEmail|singlecreative|
+|SeedingSMS_Dynamic|singlecreative|
 
 
 @NDX-CreateBCForFunctionality @initBrowser   
@@ -447,7 +449,7 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataShee
 |seedingRecurringBC|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|4|save|ConversionBC|
 |seedingRecurringBC|seedingWAPoffer|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|none|none|10|activate|BCDataStorage|
 |seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|11|activate|BCDataStorage|
-|seedingRecurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|12|activate|BCDataStorage|
+|seedingRecurringBC|SeedingSMS_Dynamic|customerListNotSubscribed|None|no limit|no limit|none|single creative|none|none|12|activate|BCDataStorage|
 
 
 @NDX-createTriggerWithDKJob @initBrowser
@@ -501,7 +503,26 @@ Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger wi
 
 
 
-
+@BCWithBlackoutManualRenderTimeBeforeAt @initBrowser @closeBrowser
+Scenario Outline: create  recurring bc with blackout manual 
+Given login 
+Then navigate to precision marketer 
+Then navigate to life cycle marketing 
+Then navigate to campaign category from sheet "CampaignCategory" 
+Then naigate to "campaignBC" campaign view broadcasts 
+Then click create new broadcast button
+Then create bc from sheet "recurrBCDaily" with inventory "inventory_manual" and trigger "none"
+Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "none"
+Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "recurrBCDaily" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "none" target render time "<broadcastRenderTime>" and broadcast expiry as "none" from sheet "recurrBCDaily"
+Then save bc 
+Then add bc from sheet "recurrBCDaily" to column "<i>" of bc data sheet "ConversionBC"
+Then wait for 4000 milliseconds 
+Examples:
+#|broadcastRenderTime|i|
+#|real time|8|
+|broadcast schedule at|9|
+|broadcast schedule before|10|
 
 
 
