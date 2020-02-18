@@ -21,6 +21,7 @@ import java.util.ListIterator;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.maven.model.IssueManagement;
 import org.junit.runners.JUnit4;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -35,14 +36,19 @@ import cucumber.api.java.Before;
 import cucumber.runtime.ScenarioImpl;
 import gherkin.formatter.model.Feature;
 import gherkin.formatter.model.Result;
+import net.rcarz.jiraclient.BasicCredentials;
+import net.rcarz.jiraclient.Issue;
+import net.rcarz.jiraclient.JiraClient;
+
 //import reportDB.ExtractTags;
 	public class Hooks extends Init{
+	
 	
 		@Before("@initBrowser")
 		public static void beforeSuite() throws InterruptedException, MalformedURLException, FileNotFoundException {
 			Init.init();
 		}
-		//After to take screenshot
+		
 		@After
 		public void getscreenshot(Scenario scenario) throws Exception 
 	    {
@@ -55,16 +61,45 @@ import gherkin.formatter.model.Result;
 			tagStr = tagStr.trim();
 			String[] tags = tagStr.split(",");
 			List<String> NXtag = new ArrayList<String>();
+			
 			int i = 0 ;
 			while(i<tags.length) {
 				tags[i] = tags[i].trim();
 				if(tags[i].matches("@NX-[0-9]+") || tags[i].matches("@NDX-[0-9]+"))
 				{
 					NXtag.add(tags[i]);
-//				    break;
-				}
+//				    break;			
+	}
 				i++;
+			
 			}
+			
+//	uncomment the following IF LOOP at the time of regression suite running		
+//to update the testcase status in jira (Field being update :Automated Execution Status)	
+//			 
+//			for(int j=0;j<=NXtag.size();j++) {
+//				String str=(NXtag.get(j)).toString();
+//				str.trim();
+//			    String str1= str.substring(1);
+//				str1=str1.trim();
+//				System.out.println(str1);
+//                BasicCredentials creds=new BasicCredentials(p.getValue("jiraUsername"),p.getValue("jiraPassword"));
+//			    JiraClient jira=new JiraClient("https://flytxt.atlassian.net/", creds);
+//				jira.getProject("NDX");
+//				Issue issue=jira.getIssue(str1);
+//				System.out.println(issue.getSummary());
+//				System.out.println(issue.getField("customfield_11221"));
+//				if(scenario.getStatus().contentEquals("passed")) {
+//				issue.update().field("customfield_11221", "6.2 Passed").execute();
+//				}
+//				else {
+//					issue.update().field("customfield_11221", "6.2 Failed").execute();	
+//				}
+//				String status=issue.getField("customfield_11221").toString();
+//				System.out.println("status of testcase :::::::::::::"+status);
+//	
+//			}
+			
 			i = 0 ;
 			String feature = "";
 			while(i<tags.length) {
@@ -76,8 +111,8 @@ import gherkin.formatter.model.Result;
 				}
 				i++;
 			}
-			
 			String error = logError(scenario).toString();
+			
 //			.replace("\n", "<LINEBREAK>");
 //			error = error.replace(",", "<COMMA>");
 //			error = error.replace("\t", "<TAB>");
@@ -146,11 +181,12 @@ import gherkin.formatter.model.Result;
 			}
 			
 	    }
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 		private static String logError(Scenario scenario) {
 			   java.lang.reflect.Field field = FieldUtils.getField(((ScenarioImpl) scenario).getClass(), "stepResults", true);
 			   field.setAccessible(true);
 			   try {
-			       ArrayList<Result> results = (ArrayList<Result>) field.get(scenario);
+				ArrayList<Result> results = (ArrayList<Result>) field.get(scenario);
 			       for (Result result : results) {
 			           if (result.getError() != null)
 			               return result.getError()+result.getErrorMessage().toString();

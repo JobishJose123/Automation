@@ -226,6 +226,20 @@ Scenario: Activating the bcs
 	Then navigate to precision marketer 
 	Then activate and verify the broadcast from workbook "parallelRunBC" and sheet "parallelRunBC" 
 	Then wait for 4000 milliseconds 
+	
+	#    ********************** Verifying The INVENTORY ********************
+    
+    @NDX-9972 @initBrowser
+    Scenario: Verify Black out Rule and frequency limit by creating 4 types of BCs with Black out Always-NEW
+    Given login
+    Then navigate to precision marketer
+    Then verify the inventory "BlackoutAlways" after completion of BCs from workbook "parallelRunBC" and sheet "parallelRunBC"
+    
+     @NDX-10089 @initBrowser
+    Scenario: Verify OneperDay and frequency limit by creating 4 types of BCs with OneperDay-NEW
+    Given login
+    Then navigate to precision marketer
+    Then verify the inventory "OneperDay" after completion of BCs from workbook "parallelRunBC" and sheet "parallelRunBC"
 
 # Verify calculate Option for Migration BCs*******************
 
@@ -343,7 +357,16 @@ Then verify pdf generated for broadcast from BCsheet "seedingTriggerableRecurrin
 
 
 	
-#	======================================bc functionality verification=================================================#
+#======================================================BC FUNCTIONALITY VERIFICATION FOR 8 TYPE OF BC==============================================================#
+#included
+#bc level and partner level cg exclusion and control group participation event persistent
+#acknowledged,confirmed delivery and control group conversion event persist
+#dynamic tag and multiple creative versification
+#target condition and ack count verification in grid and bc report
+#render time schedule with before and after
+#resume manually 
+
+
 @NDX-ActivateBC  @initBrowser
 Scenario: Activate all the bc in the BCStorageSheet
 Given login 
@@ -354,7 +377,7 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then activate broadcast from workbook "parallelRunBC" and sheet "BCDataStorage"
 
 
-@NDX-8798 @NDX-10092 @NDX-10143 @NDX-10094 @NDX-12022  @initBrowser 
+@NDX-8798 @NDX-10092 @NDX-10094 @NDX-12022 @NDX-10091  @initBrowser 
 Scenario: Verify the ack ,channel SMS,dr count,CG count
 Then filter the bc from sheet "ConversionBC" from row "1" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -399,7 +422,7 @@ Then click on events tab
 Then verify the condition Control Group Conversion event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-8777 @NDX-10147 @NDX-10091  @initBrowser
+@NDX-8777 @NDX-10147  @initBrowser
 Scenario: Verify the ack ,channel WAP,multiple creative Target condition: customerList of a one-timebc
 Then filter the bc from sheet "BCDataStorage" from row "1" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -419,7 +442,7 @@ Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-10144 @NDX-10096 @initBrowser 
+@NDX-10144 @NDX-10096  @initBrowser 
 Scenario: Verify the ack ,channel email Target condition: usageMetric of a one-timebc
 Then filter the bc from sheet "BCDataStorage" from row "2" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -439,7 +462,7 @@ Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-9007 @NDX-10150 @NDX-10099 @initBrowser
+@NDX-10150 @NDX-10099 @initBrowser
 Scenario: Verify the ack ,dynamic tag and Target condition: sharedMetricOtherPartner of a one-timebc
 Then filter the bc from sheet "BCDataStorage" from row "3" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -458,7 +481,7 @@ Then click on events tab
 Then verify the condition Acknowlegedment event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-8962 @NDX-8800 @NDX-10103 @NDX-10149  @NDX-10100 @NDX-12023 @initBrowser
+@NDX-8962 @NDX-8800 @NDX-10103 @NDX-10100 @NDX-12023 @initBrowser
 Scenario: Verify the ack ,channel SMS,multiple creative ,dr count,CG count of a recurrence pattern DAILY of recurringbc 
 Then filter the bc from sheet "ConversionBC" from row "2" and column "0" and write in sheet "recurrBCDaily"
 Given login
@@ -504,7 +527,7 @@ Then click on events tab
 Then verify the condition Control Group Conversion event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
 
 
-@NDX-8965 @NDX-8625 @NDX-10106 @initBrowser
+@NDX-8965 @NDX-8625 @NDX-10106 @NDX-10107 @NDX-10143 @initBrowser
 Scenario: Verify the channel WAP and recurrence pattern EVERY WEEK 
 Then filter the bc from sheet "BCDataStorage" from row "4" and column "0" and write in sheet "recurrBCWeekly"
 Given login
@@ -512,11 +535,6 @@ Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
-#Then navigate to "Recurring Broadcasts" broadcasts
-#Then filter the bc from file "bcInputData" of sheet "recurrBCWeekly" for bctype "recurring"
-#Then click on BC edit button from workbook "bcInputData" sheet "recurrBCWeekly"
-#Then edit deliver tab with end "At" target render time "realTime" and broadcast expiry as "after" from sheet "recurrBCWeekly"
-#Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurrBCWeekly" for bctype "onetime" 
 Then verify the date for child bc from sheet "recurrBCWeekly" with recurrence pattern "EVERY WEEK"
 Then wait until status of "recurrBCWeekly" from file "bcInputData" is "Completed" for bctype "recurring"
@@ -537,11 +555,6 @@ Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
-#Then navigate to "Recurring Broadcasts" broadcasts
-#Then filter the bc from file "bcInputData" of sheet "recurringMonthSpecialBC" for bctype "recurring"
-#Then click on BC edit button from workbook "bcInputData" sheet "recurringMonthSpecialBC"
-#Then edit deliver tab with end "At" target render time "realTime" and broadcast expiry as "after" from sheet "recurringMonthSpecialBC"
-#Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurringMonthSpecialBC" for bctype "onetime" 
 Then verify the date for child bc from sheet "recurringMonthSpecialBC" with recurrence pattern "SPECIAL DAY OF THE WEEK"
 Then view broadcast for "recurringchildbc" for bctype "onetime"
@@ -555,11 +568,6 @@ Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
-#Then navigate to "Recurring Broadcasts" broadcasts
-#Then filter the bc from file "bcInputData" of sheet "recurringBC" for bctype "recurring"
-#Then click on BC edit button from workbook "bcInputData" sheet "recurringBC"
-#Then edit deliver tab with end "At" target render time "realTime" and broadcast expiry as "after" from sheet "recurringBC"
-#Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurringBC" for bctype "onetime"
 Then verify the date for child bc from sheet "recurringBC" with recurrence pattern "EVERY 2 DAYS"
 Then wait until status of recurring child bc from sheet "recurringBC" is "Completed" 
@@ -730,7 +738,7 @@ Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
      
-@NDX-10096 @initBrowser
+@NDX-10096   @initBrowser
 Scenario: Verify the channel email for the seeding recurring bc
 Then filter the bc from sheet "BCDataStorage" from row "11" and column "0" and write in sheet "seedingRecurringBC"
 Given login
@@ -748,7 +756,7 @@ Then search msisdn "9491750800"
 Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 
-@NDX-9011 @initBrowser
+@NDX-9011 @NDX-10146 @initBrowser
 Scenario: Verify the dynamic tag usage for a seeding recurring bc
 Then filter the bc from sheet "BCDataStorage" from row "12" and column "0" and write in sheet "seedingRecurringBC"
 Given login
@@ -767,7 +775,7 @@ Then click on events tab
 Then verify multiple creative "21" for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-10924 @NDX-10950 @NDX-10928 @NDX-10926 @NDX-12024  @initBrowser
+@NDX-10924 @NDX-10950 @NDX-10928 @NDX-12024  @initBrowser
 Scenario: Verify the channel SMS,partner level cg for a trigger one off bc
 Then filter the bc from sheet "ConversionBC" from row "5" and column "0" and write in sheet "TriggerOneoff"
 Given login
@@ -894,7 +902,7 @@ Then search msisdn "9491750042"
 Then click on events tab
 Then verify the condition Control Group Conversion event for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC"
 
-@NDX-10946 @NDX-10948 @NDX-10972 @NDX-10086 @initBrowser
+@NDX-10946 @NDX-10948 @NDX-10086 @initBrowser
 Scenario: Verify channel sms ,multiple creative of a seeding trigger recurring bc
 Then filter the bc from sheet "BCDataStorage" from row "15" and column "0" and write in sheet "TriggerReccurringBC"
 Given login
@@ -916,7 +924,7 @@ Then click on events tab
 Then verify multiple creative "عرض مكافأة" for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC"
 Then verify the condition Confirmed Delivery event for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC"
 
-@NDX-10942 @NDX-10084 @NDX-12042 @NDX-12025 @initBrowser
+@NDX-10942  @NDX-12042 @NDX-12025 @initBrowser
 Scenario: Verify dynamic tag for trigger recurring bc
 Then filter the bc from sheet "ConversionBC" from row "7" and column "0" and write in sheet "TriggerReccurringBC"
 Given login
@@ -960,29 +968,73 @@ Then filter the bc from file "bcInputData" of sheet "TriggerReccurringBC" for bc
 Then wait until status of "TriggerReccurringBC" from file "bcInputData" is "Delivery Expired" for bctype "seeding"
 Then verify the ack is not send for the bc from sheet "TriggerReccurringBC" after the bc expiry 
 
-#@NDX-11750 @NDX-11751 @NDX-11752 @NDX-11753 @NDX-11754 @NDX-11755 @NDX-11756 @NDX-11757 @initBrowser
-#Scenario Outline: verify the partner level and broadcast level cg exclusion for all type of bc with usage based offer
-#Then filter the bc from sheet "BCDataStorage" from row "<row>" and column "0" and write in sheet "<bcSheet>"
-#Given login
-#Then navigate to precision marketer
-#Then navigate to life cycle marketing
-#Then navigate to campaign category from sheet "campaignCategory"
-#Then naigate to "campaignBC" campaign view broadcasts
-#Then filter the bc from file "bcInputData" of sheet "<bcSheet>" for bctype "onetime"
-#Then wait for 1 minutes
-#Then wait until status of "<bcSheet>" from file "bcInputData" is "<bcStatus>" for bctype "<bcType>"
-#Then view broadcast for "<viewBC>" for bctype "onetime"
-#Then verify the cg exclusion from sheet "targetConditionCount"
-#Then navigate to reports
-#Then navigate to broadcast reports
-#Then verify the count with condition targetall from sheet "targetConditionCount" of the bc from sheet "<bcSheet>" from bc report 
-#Examples: 
-#|row|bcSheet|bcStatus|bcType|viewBC|
-#|24|one-offBC|Completed|onetime|onetime|
-#|25|seedingoneoff|Completed|seeding|seedingonetime|
-#|26|recurrBCDaily|Completed|recurring|recurringchildbc|
-#|27|seedingRecurringBC|Completed|seedingRecurr|seedingRecurring|
-#|28|TriggerOneoff|Delivering|onetime|onetime|
-#|29|TriggerOneoff|Delivering|seeding|seedingonetime|
-#|30|TriggerReccurringBC|Delivering|recurring|recurringchildbc|
-#|31|TriggerReccurringBC|Delivering|seedingRecurr|seedingRecurring|
+@NDX-10088 @initBrowser
+Scenario: Verify bc with blackout manual
+Then filter the bc from sheet "ConversionBC" from row "8" and column "0" and write in sheet "recurrBCDaily" 
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then navigate to "Recurring Broadcasts" broadcasts
+Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "recurring"
+Then click on BC edit button from workbook "bcInputData" sheet "recurrBCDaily"
+Then edit deliver tab with end "none" target render time "Real Time" and broadcast expiry as "none" from sheet "recurrBCDaily"
+Then activate bc
+Then wait for 1 minutes
+Then navigate to landing page
+Then navigate to configuration management
+Then navigate to blackout rules
+Then create the blackout period for the blackout rule and save
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "onetime"
+Then wait until status of "recurrBCDaily" from file "bcInputData" is "Blackout Suspended" for bctype "recurring"
+Then wait until status of "recurrBCDaily" from file "bcInputData" is "Blackout Pause" for bctype "recurring"
+Then wait until status of "recurrBCDaily" from file "bcInputData" is "Blackout Expired" for bctype "recurring" 
+
+
+@NDX-10108 @NDX-10109  @initBrowser
+Scenario Outline: Verify bc with blackout manual
+Then filter the bc from sheet "ConversionBC" from row "<i>" and column "0" and write in sheet "recurrBCDaily" 
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then navigate to "Recurring Broadcasts" broadcasts
+Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "recurring"
+Then click on BC edit button from workbook "bcInputData" sheet "recurrBCDaily"
+Then edit deliver tab with end "never" target render time "<renderTimeSchedule>" and broadcast expiry as "none" from sheet "recurrBCDaily"
+Then activate bc
+Then wait for 4000 milliseconds  
+Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "onetime"
+Then wait until status of "recurrBCDaily" from file "bcInputData" is "Targeting" for bctype "recurring"
+Then wait until status of "recurrBCDaily" from file "bcInputData" is "Delivery Scheduled" for bctype "recurring"
+
+Examples:
+|renderTimeSchedule|i|
+|broadcast schedule at|9|
+|broadcast schedule before|10|
+
+@NDX-10090 @initBrowser
+Scenario Outline: verify DNC(optional ,mandatory) of the BCs
+Then filter the bc from sheet "BCDataStorage" from row "<i>" and column "0" and write in sheet "<bcSheet>" 
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "<bcSheet>" for bctype "onetime"
+Then wait until status of "<bcSheet>" from file "bcInputData" is "Completed" for bctype "<bcType>" 
+Then verify the ack count with target condition DNCExclusion from sheet "<targetConditionSheet>" for bc from sheet "one-offBC" of bctype "<countGrid>"
+
+Examples:
+|bcSheet|bcType|countGrid|i|targetConditionSheet|
+|recurrBCDaily|recurring|recurring|17|targetConditionCount|
+|TriggerReccurringBC|seedingRecurr|seedingRecurring|18|targetCountWithTrigger|
+
+

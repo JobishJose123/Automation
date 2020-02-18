@@ -248,6 +248,12 @@
         <artifactId>selenium-java</artifactId>
         <version>3.4.0</version>
     </dependency>
+<!-- https://mvnrepository.com/artifact/net.rcarz/jira-client -->
+<dependency>
+    <groupId>net.rcarz</groupId>
+    <artifactId>jira-client</artifactId>
+    <version>0.5</version>
+</dependency>
 
   </dependencies>
 <build>

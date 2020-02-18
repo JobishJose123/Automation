@@ -2774,8 +2774,8 @@ enterDeliveryTabDetails(bc_type, sheet);
 	@Then("^enter details for new broadcast from sheet with clusters \"([^\"]*)\" with \"([^\"]*)\"$")
 	public void create_new_broadcastwithclusters(String sheet, String offer) throws Throwable {
 		Thread.sleep(3000);
-		ExcelHelper list = new ExcelHelper();
-		list.setExcelFile("registrationListInputData", "Sheet1");
+//		ExcelHelper list = new ExcelHelper();
+//		list.setExcelFile("registrationListInputData", "Sheet1");
 		eM.setExcelFile("bcInputData", sheet);
 //	String baseList = list.getCell(1, 2).toString();
 		ExcelHelper offerExcel = new ExcelHelper();
@@ -3838,37 +3838,6 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 
 @Then("^edit deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
 public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
-//	Actions builder =new Actions(driver);
-//	eM.setExcelFile("bcInputData", bcSheet);
-//	String recurrencePattern =eM.getCellByColumnName("Recurrance Pattern");
-//	Calendar rightNow = Calendar.getInstance();
-//	String mn = "";
-//	if (rightNow.get(Calendar.MONTH) + 1 < 9) {
-//		mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
-//	} else
-//		mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
-//	String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
-//			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
-//	String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
-//			+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
-//	int hours = rightNow.get(Calendar.HOUR);
-//	int min = rightNow.get(Calendar.MINUTE);
-//	int am_pm = rightNow.get(Calendar.AM_PM);
-//	int day = rightNow.get(Calendar.DAY_OF_MONTH);
-//	int year = rightNow.get(Calendar.YEAR);
-//	int month = rightNow.get(Calendar.MONTH) + 1;
-//	min += 2;
-//	int rem = min % 5;
-//	rem = 5 - rem;
-//	min += rem;
-//	if (min > 59) {
-//		min -= 60;
-//		hours++;
-//	}
-//	 if(min==0)
-//		{
-//			min+=5;
-//		}
 	 Thread.sleep(3000);
 	 broadcastPageObjects.clickProceedButton();
 	 Thread.sleep(2000);
@@ -3877,95 +3846,10 @@ public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as
 	 broadcastPageObjects.clickProceedButton();
 	 Thread.sleep(2000);
 	 enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet( endType,  targetRenderTime,  bcExpiry,  bcSheet);
-//		jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
-//		jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
-//		jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
-//		// }
-//		Thread.sleep(2000);
-//		jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
-//		Thread.sleep(2000);
-//		jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
-//		Thread.sleep(2000);
-//		WebElement num = driver.findElement(By.xpath(
-//				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
-//						+ (hours + 1) + "]"));
-//		Thread.sleep(2000);
-//		builder.moveToElement(num).click().build().perform();
-//		Thread.sleep(2000);
-//		// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
-//		WebElement num1 = driver.findElement(By.xpath(
-//				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
-//						+ (min + 1) + "]"));
-//		Thread.sleep(1000);
-//		builder.moveToElement(num1).click().build().perform();
-//		Thread.sleep(1000);
-//		if (am_pm == 0)
-//			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
-//		
-//		else
-//			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
-//		Thread.sleep(1000);
-//		num1 = driver.findElement(By.xpath(
-//				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
-//		builder.moveToElement(num1).click().build().perform();
-//		 Thread.sleep(2000);
-//		 Thread.sleep(2000);
-//		 jswait.loadClick("(//label[contains(.,'Start broadcasts at')]//following::input)[1]");
-//		 Thread.sleep(2000);
-//		WebElement num2 = driver.findElement(By.xpath(
-//				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
-//		builder.moveToElement(num2).click().build().perform();
-//		Thread.sleep(2000);
-//		WebElement num3 = driver.findElement(By.xpath(
-//				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
-//		Thread.sleep(1000);
-//		builder.moveToElement(num3).click().build().perform();
-//		if (am_pm == 0)
-//			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
-//		else
-//			jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
-//		 Thread.sleep(2000);
-//          jswait.loadClick("(//label[contains(.,'Start broadcasts at')]//following::paper-button[contains(.,'OK')])[2]");
          
 		 }
 
 
-//@Then("^verify the target count from sheet \"([^\"]*)\" also the channel \"([^\"]*)\" creative \"([^\"]*)\" of the bc from workbook \"([^\"]*)\" from sheet \"([^\"]*)\"$")
-//public void verify_the_target_count_from_sheet_also_the_channel_creative_of_the_bc_from_sheet(String countSheet, String channel, String creative, String parallelRunBC, String bcStorageSheet) throws Throwable {
-//	int count=0;
-//	boolean boolean1;
-//	ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(parallelRunBC,bcStorageSheet);
-//	String bcName, campaignCategory, campaignName, offerName, channelFromSheet, bcSheet = "";
-//	for (int i = 0; i < data.size(); i++) {
-//		
-//		campaignObjects.navigateToLIfeCycleMarketing();
-//		bcName = data.get(i).get(1);
-//		campaignCategory = data.get(i).get(4);
-//		campaignName = data.get(i).get(5);
-//		offerName = data.get(i).get(6);
-//		channelFromSheet= data.get(i).get(7);
-//		bcSheet = data.get(i).get(9);
-//		try {
-//
-//			campaignObjects.scrollToCampaignCategory(campaignCategory);
-//			commonObjects.filterName(campaignName);
-//			jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
-//					+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
-//			campaignObjects.clickOptionsViewBroadcasts();
-//			if(channel.equals(channelFromSheet)) {
-//				boolean1=jswait.checkVisibility("//p[contains(.,'Channel Type')]//following::p[contains(.,'"+channel+"')]");
-//			
-//			if(boolean1==true)
-//				eh.insertLastColumnValues("parallelRunBC", bcStorageSheet,"Pass", bcName, "Name","StatusOfTestcase");
-//			else
-//				eh.insertLastColumnValues("parallelRunBC", bcStorageSheet,"Fail", bcName, "Name","StatusOfTestcase");
-//		
-//		}else if()
-//		catch(Exception e) {
-//			
-		
-		
-//}
 	
 @Then("^verify the inventory \"([^\"]*)\" after completion of BCs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
 public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet(String inventory, String workbook, String sheet) throws Throwable {
@@ -4456,9 +4340,9 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,bcStorageSheet);
 	String bcName,bcSheet,bctype="";
 	for (int i = 0; i < data.size(); i++) {
-		bcName = data.get(i).get(1);
-		bcSheet =data.get(i).get(9);
-		bctype=data.get(i).get(8); 
+		bcName = data.get(i).get(0);
+		bctype=data.get(i).get(1); 
+		bcSheet =data.get(i).get(2);
 		commonObjects.filterBC(bcName, bctype);
 		commonObjects.BCOptionIcon(bctype);
 		Thread.sleep(2000);
@@ -4675,7 +4559,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
          System.out.println("=========="+bcName+"=============");
          String bcType=(String)eM.getCell(1, 7);
          System.out.println("=========="+bcType+"=============");
-         broadcastPageObjects.addBcToSheet(bcName,bcType,bcStorageSheet,row);
+         broadcastPageObjects.addBcToSheet(bcSheet,bcName,bcType,bcStorageSheet,row);
          
  }
 	@Then("^provide file in location \"([^\"]*)\" for trigger with csv file \"([^\"]*)\"$")
@@ -4782,10 +4666,26 @@ public void create_the_blackout_period_for_the_blackout_rule_and_save() throws T
 	
 }
 	
+@Then("^verify offer from sheet \"([^\"]*)\" is displayed$")
+public void verify_offer_from_sheet_is_displayed(String offerSheet) throws Throwable {	
+	eh.setExcelFile("OfferInputData", offerSheet);
+	String offerName=eh.getCellByColumnName("Offer Name");
+	broadcastPageObjects.verifyofferDetailsInViewPage(offerName);
+}
+
+@Then("^verify copied offer from sheet \"([^\"]*)\" is displayed$")
+public void verify_copied_offer_from_sheet_is_displayed(String offerSheet) throws Throwable {	
+	eh.setExcelFile("OfferInputData", offerSheet);
+	String offerName=eh.getCellByColumnName("Offer Name");
+	broadcastPageObjects.verifycopiedofferDetailsInViewPage(offerName);
+}
+@Then("^enter choose offer tab with copied offer from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with \"([^\"]*)\" track session expires \"([^\"]*)\" filter criteria \"([^\"]*)\" give reward to \"([^\"]*)\"$")
+public void enter_choose_offer_tab_for_copied_offer_from_sheet_for_bc_from_sheet_track_session_expires_filter_criteria_give_reward_to(String offerSheet, String bcSheet, String creative, String trackExpires, String filterCriteria, String giveRewardsTo) throws Exception {
+	eM.setExcelFile("bcInputData", bcSheet);
+	String bc_type = (String) eM.getCell(1, 7);
+	broadcastPageObjects.selectCopiedOffer(offerSheet,bc_type,creative,trackExpires,filterCriteria,giveRewardsTo);	
 	
-	
-	
-	
+}
 	
 	
 	

@@ -906,433 +906,433 @@ Feature: Test suite for Broadcast Editing for NEW
 ##  | IMEventsOfferAccepted          |
 ##  | IMEventsCustomerCareUsage      |
 ##  | customerDeviceInfo             |
-#
-#
-#   @NDX-6106 @initBrowser @closeBrowser
-#  Scenario: Verify seeding Triggerable Recurring BC and edit the target list details NEW
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Seedings Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
-#    Then edit the target List in taget tab from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
-#    Then save bc
-#    Then navigate to "Seedings Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingTriggerableRecurringBCEd"
-#    Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
-#    
-#  @NDX-6148 @initBrowser @closeBrowser
-#  Scenario: Verify the seeding Triggerable Recurring BC after edit Broadcast expiry NEW
-#    Given login
-#  When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#   Then navigate to "Seedings Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
-#    Then edit the offer for BC expiry After hours "2"
-#    Then save bc
-#    Then navigate to "Seedings Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingTriggerableRecurringBCEd"
-#    Then verify the BC expiry in BC View After hours "2"
-#    
-#  
-#  
-#  
-#   #    ************************ Trigger Recurring BC**************   
-#    
-#    @NDX-6308 @NDX-9924 @initBrowser @closeBrowser
-#  Scenario: Verify  Trigger Recurring BC and edit the Delivery details NEW
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputData" sheet "TriggerReccurringBC"
-#    Then edit the Delevery tab details from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
-#    Then save bc
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputData" in sheet "TriggerReccurringBC"
-#    Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit" 
-#    
-#     
-#    @NDX-6258 @initBrowser @closeBrowser
-#  Scenario: Verify Creating and editing the basic details of Trigger Recurring BC NEW
-#  Given login 
-#	When navigate to precision marketer 
-#	Then navigate to life cycle marketing 
-#	Then navigate to campaign category from sheet "campaignCategory" 
-#	Then naigate to "campaignBC" campaign view broadcasts 
-#	Then navigate to "Triggerable Broadcasts" broadcasts
-#	Then click on BC edit button from workbook "bcInputData" sheet "TriggerReccurringBC" 
-#	Then editing the BC from sheet "TriggerReccurringBC" basic details With edit data from sheet "TriggerReccurringBCEdit" 
-#	Then save bc 
-#	Then navigate to "Triggerable Broadcasts" broadcasts
-#	Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit" 
-#	Then verify the basic details from Broadcast View and data sheet "TriggerReccurringBCEdit"
-#    
-#    @NDX-6306 @initBrowser 
-#  Scenario: Verify Trigger Recurring BC edit the offer details NEW
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
-#    Then edit the offer for BC from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit" with offer "rechargeWAP"
-#    Then save bc
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
-#    Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit" with offer "rechargeWAP"
-#
-#
-#  @NDX-6270 @NDX-6302 @initBrowser @closeBrowser
-#  Scenario Outline: Verify Trigger Recurring BC and edit the targetSelection <Condition> NEW
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
-#    Then edit the targetSelection <Condition> for BC
-#    Then save bc
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
-#    Then verify the BC targetSelection <Condition> in BC View
-#
-#    Examples: 
-#      | Condition     |
-#      | None          |
-#      | Create        |
-#      | SavedSegments |
-#      | None          |
-#      | SavedSegments |
-#      | Create        |
-#
-# 
-#  @NDX-6260 @initBrowser @closeBrowser
-#  Scenario Outline: Verify Trigger Recurring BC edit with given <Condition> NEW
-##    NDX-6261,NDX-6262,NDX-6263,NDX-6272,NDX-6280,NDX-6284,NDX-6288,NDX-6300,NDX-6304,NDX-6410,NDX-6412
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
-#    Then edit the broadcast with taget condition <Condition>
-#    Then save bc
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
-#    Then verify the target conditions from Broadcast View and condition <Condition>
-#
-#    Examples: 
-#      | Condition |
-#	| customerWasSentTheTrialMessage |
-#	| customerList                   |
-#	| SharedcustomerList             |
-#	| customerDrivenEvent            |
-#	| usageMetric                    |
-#	| sharedMetricOtherPartner  |
-#	| customerDrivenEventNotOccurred  |
-#	| customerWasSentTheTrialMessageNOtOccurred |
-#	| conditionForANDOperation |
-#	| conditionForOROperation |
-#	| segmentAgeGT40                 |
-# 
-## | revenueMetric                  |
-# #  | digitalPersonaGT15             |
-##  | customerDemographicsGT25       |
-##  | learnedBehaviourGT35           |
-##  | analyticalScoresGT45           |
-##  | digitalEngagementGT235         |
-##  | customerLocationInsightsGT5    |
-##  | discoveredClusters200          |
-##  | eventCounts                    |
-##  | IMEventsOfferAccepted          |
-##  | IMEventsCustomerCareUsage      |
-##  | customerDeviceInfo             |
-#
-#
-#   @NDX-6268 @initBrowser @closeBrowser
-#  Scenario: Verify Trigger Recurring BC and edit the target list details NEW
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
-#    Then edit the target List in taget tab from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
-#    Then save bc
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
-#    Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
-#    
-#  @NDX-6310  @initBrowser @closeBrowser
-#  Scenario: Verify the Trigger Recurring BC after edit Broadcast expiry NEW
-#    Given login
-#  When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#   Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
-#    Then edit the offer for BC expiry After hours "2"
-#    Then save bc
-#    Then navigate to "Triggerable Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
-#    Then verify the BC expiry in BC View After hours "2"
-#    
-#  
-#  
-#  
-#  
-#  
-#  #    ************************ Recurring BC**************   
-#    
-#    
-#    
-#    
-#    
-#    
-#   @NDX-5982 @NDX-9922  @initBrowser @closeBrowser
-#  Scenario: Verify Recurring BC and edit the Delivery details NEW
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputData" sheet "recurringBC"
-#    Then edit the Delevery tab details from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
-#    Then save bc
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputData" in sheet "recurringBC"
-#    Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
-#      
-#      
-#      @NDX-5932 @initBrowser
-#  Scenario: Verify Creating and editing the basic details of Recurring BC NEW
-#  Given login 
-#	When navigate to precision marketer 
-#	Then navigate to life cycle marketing 
-#	Then navigate to campaign category from sheet "campaignCategory" 
-#	Then naigate to "campaignBC" campaign view broadcasts 
-#	Then navigate to "Recurring Broadcasts" broadcasts
-#	Then click on BC edit button from workbook "bcInputData" sheet "recurringBC" 
-#	Then editing the BC from sheet "recurringBC" basic details With edit data from sheet "recurringBCEdit" 
-#	Then save bc 
-#	Then navigate to "Recurring Broadcasts" broadcasts
-#	Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit" 
-#	Then verify the basic details from Broadcast View and data sheet "recurringBCEdit"
-#	
-#      
-#      
-#        
-#     @NDX-5980  @initBrowser 
-#  Scenario: Verify Recurring BC edit the offer details NEW
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
-#    Then edit the offer for BC from workbook "bcInputDataForEdit" sheet "recurringBCEdit" with offer "rechargeWAP"
-#    Then save bc
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
-#    Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "recurringBCEdit" with offer "rechargeWAP"
-#
-#
-#  @NDX-5944 @NDX-5976 @initBrowser @closeBrowser
-#  Scenario Outline: Verify Recurring BC and edit the targetSelection <Condition> NEW
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
-#    Then edit the targetSelection <Condition> for BC
-#    Then save bc
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
-#    Then verify the BC targetSelection <Condition> in BC View
-#
-#    Examples: 
-#      | Condition     |
-#      | None          |
-#      | Create        |
-#      | SavedSegments |
-#      | None          |
-#      | SavedSegments |
-#      | Create        |
-#
-# 
-# @NDX-5934 @initBrowser @closeBrowser
-#  Scenario Outline: Verify Recurring BC edit with given <Condition> NEW
-#    #   NDX-5935,NDX-5936,NDX-5937,NDX-5946,NDX-5954,NDX-5958,NDX-5962,NDX-5974,NDX-5978,NDX-6386,NDX-6388
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
-#    Then edit the broadcast with taget condition <Condition>
-#    Then save bc
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
-#    Then verify the target conditions from Broadcast View and condition <Condition>
-#
-#    Examples: 
-#      | Condition |
-#	| customerWasSentTheTrialMessage |
-#	| customerList                   |
-#	| SharedcustomerList             |
-#	| customerDrivenEvent            |
-#	| usageMetric                    |
-#	| sharedMetricOtherPartner  |
-#	| customerDrivenEventNotOccurred  |
-#	| customerWasSentTheTrialMessageNOtOccurred |
-#	| conditionForANDOperation |
-#	| conditionForOROperation |
-#	| segmentAgeGT40                 |
-# 
-## | revenueMetric                  |
-# #  | digitalPersonaGT15             |
-##  | customerDemographicsGT25       |
-##  | learnedBehaviourGT35           |
-##  | analyticalScoresGT45           |
-##  | digitalEngagementGT235         |
-##  | customerLocationInsightsGT5    |
-##  | discoveredClusters200          |
-##  | eventCounts                    |
-##  | IMEventsOfferAccepted          |
-##  | IMEventsCustomerCareUsage      |
-##  | customerDeviceInfo             |
-#
-#
-#  @NDX-5942 @initBrowser @closeBrowser
-#  Scenario: Verify Recurring BC and edit the target list details NEW
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
-#    Then edit the target List in taget tab from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
-#    Then save bc
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
-#    Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
-#    
-# @NDX-5984 @initBrowser @closeBrowser
-#  Scenario: Verify the  Recurring BC after edit Broadcast expiry NEW
-#    Given login
-#  When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#   Then navigate to "Recurring Broadcasts" broadcasts
-#    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
-#    Then edit the offer for BC expiry After hours "2"
-#    Then save bc
-#    Then navigate to "Recurring Broadcasts" broadcasts
-#    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
-#    Then verify the BC expiry in BC View After hours "2"
-#    
-#  
-#  
-##  *********** Verify Child BC dates *************
-#  
-#
-#  
-#  @NDX-6416 @initBrowser 
-#Scenario: Verify Recurring Bc child BCs Dates 
-#	Given login 
-#	When navigate to precision marketer 
-#	Then navigate to life cycle marketing 
-#	Then navigate to campaign category from sheet "campaignCategory" 
-#	Then naigate to "campaignBC" campaign view broadcasts 
-#	Then click create new broadcast button 
-#	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "recurringBC" with "rechargeSMS" 
-#	Then activate bc
-#	Then navigate to "Recurring Broadcasts" broadcasts
-#	Then navigate to "One-time" broadcasts
-#	Then verify the Child BC count and recurring dates from workbook "bcInputData" in sheet "recurringBC"
-#    
-#    @NDX-6414 @initBrowser 
-#Scenario: Verify Triggerable Recurring Bc child BCs Dates 
-#	Given login 
-#	When navigate to precision marketer 
-#	Then navigate to life cycle marketing 
-#	Then navigate to campaign category from sheet "campaignCategory" 
-#	Then naigate to "campaignBC" campaign view broadcasts 
-#	Then click create new broadcast button 
-#	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "TriggerReccurringBC" with "rechargeSMS" 
-#	Then activate bc
-#	Then navigate to "Triggerable" broadcasts
-#	Then navigate to "One-time" broadcasts
-#	Then verify the Child BC count and recurring dates from workbook "bcInputData" in sheet "TriggerReccurringBC"
-#  
-#  @NDX-6420 @NDX-6418 @initBrowser 
-#  Scenario: Verify Seeding Recurring Bc child BCs Dates 
-#	Given login 
-#	When navigate to precision marketer 
-#	Then navigate to life cycle marketing 
-#	Then navigate to campaign category from sheet "campaignCategory" 
-#	Then naigate to "campaignBC" campaign view broadcasts 
-#	Then click create new broadcast button 
-#	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "seedingTriggerableRecurringBC" with "SeedingSMS" 
-#	Then activate bc
-#	Then navigate to "One-time" broadcasts
-#	Then verify the Child BC count and recurring dates from workbook "bcInputData" in sheet "seedingTriggerableRecurringBC"
-#  
-#  @NDX-7128 @initBrowser
-#Scenario: Verify the BC gets Completed with target condition as 
-#Given login
-#Then navigate to precision marketer
-#Then navigate to life cycle marketing
-#Then navigate to campaign category from sheet "campaignCategory"
-#Then naigate to "campaignBC" campaign view broadcasts
-#Then click create new broadcast button
-#Then enter details for new broadcast with condition IsAnyOf from sheet "one-offBC" with "rechargeWAP"
-#Then activate bc
-#Then wait until status of "one-offBC" is "Targeting"
-#Then click on toggleAutoRefresh
-#Then wait until status of "one-offBC" is "Completed"
-#  
-#    
-#    @NDX-7945  @initBrowser 
-#  Scenario: Verify BC Notification for one-off Bc new
-#  
-#    Given login
-#    When navigate to precision marketer
-#    Then navigate to life cycle marketing
-#    Then navigate to campaign category from sheet "campaignCategory"
-#    Then naigate to "campaignBC" campaign view broadcasts
-#    Then click create new broadcast button
-#    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
-#    Then verify create BC Notification
-#    Then activate bc
-#   Then wait until status of "one-offBC" is "Completed"
-#    Then verify the BC notification in mail "Rendering" from workbook "bcInputData" and sheet "one-offBC"
-#     Then verify the BC notification in mail "Delivering" from workbook "bcInputData" and sheet "one-offBC" 
-#    Then verify the BC notification in mail "Completed" from workbook "bcInputData" and sheet "one-offBC"
+
+
+   @NDX-6106 @initBrowser @closeBrowser
+  Scenario: Verify seeding Triggerable Recurring BC and edit the target list details NEW
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Seedings Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
+    Then edit the target List in taget tab from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
+    Then save bc
+    Then navigate to "Seedings Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingTriggerableRecurringBCEd"
+    Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
+    
+  @NDX-6148 @initBrowser @closeBrowser
+  Scenario: Verify the seeding Triggerable Recurring BC after edit Broadcast expiry NEW
+    Given login
+  When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+   Then navigate to "Seedings Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "seedingTriggerableRecurringBCEd"
+    Then edit the offer for BC expiry After hours "2"
+    Then save bc
+    Then navigate to "Seedings Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingTriggerableRecurringBCEd"
+    Then verify the BC expiry in BC View After hours "2"
+    
+  
+  
+  
+   #    ************************ Trigger Recurring BC**************   
+    
+    @NDX-6308 @NDX-9924 @initBrowser @closeBrowser
+  Scenario: Verify  Trigger Recurring BC and edit the Delivery details NEW
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputData" sheet "TriggerReccurringBC"
+    Then edit the Delevery tab details from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
+    Then save bc
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputData" in sheet "TriggerReccurringBC"
+    Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit" 
+    
+     
+    @NDX-6258 @initBrowser @closeBrowser
+  Scenario: Verify Creating and editing the basic details of Trigger Recurring BC NEW
+  Given login 
+	When navigate to precision marketer 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "campaignCategory" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then navigate to "Triggerable Broadcasts" broadcasts
+	Then click on BC edit button from workbook "bcInputData" sheet "TriggerReccurringBC" 
+	Then editing the BC from sheet "TriggerReccurringBC" basic details With edit data from sheet "TriggerReccurringBCEdit" 
+	Then save bc 
+	Then navigate to "Triggerable Broadcasts" broadcasts
+	Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit" 
+	Then verify the basic details from Broadcast View and data sheet "TriggerReccurringBCEdit"
+    
+    @NDX-6306 @initBrowser 
+  Scenario: Verify Trigger Recurring BC edit the offer details NEW
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
+    Then edit the offer for BC from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit" with offer "rechargeWAP"
+    Then save bc
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
+    Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit" with offer "rechargeWAP"
+
+
+  @NDX-6270 @NDX-6302 @initBrowser @closeBrowser
+  Scenario Outline: Verify Trigger Recurring BC and edit the targetSelection <Condition> NEW
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
+    Then edit the targetSelection <Condition> for BC
+    Then save bc
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
+    Then verify the BC targetSelection <Condition> in BC View
+
+    Examples: 
+      | Condition     |
+      | None          |
+      | Create        |
+      | SavedSegments |
+      | None          |
+      | SavedSegments |
+      | Create        |
+
+ 
+  @NDX-6260 @initBrowser @closeBrowser
+  Scenario Outline: Verify Trigger Recurring BC edit with given <Condition> NEW
+#    NDX-6261,NDX-6262,NDX-6263,NDX-6272,NDX-6280,NDX-6284,NDX-6288,NDX-6300,NDX-6304,NDX-6410,NDX-6412
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
+    Then edit the broadcast with taget condition <Condition>
+    Then save bc
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
+    Then verify the target conditions from Broadcast View and condition <Condition>
+
+    Examples: 
+      | Condition |
+	| customerWasSentTheTrialMessage |
+	| customerList                   |
+	| SharedcustomerList             |
+	| customerDrivenEvent            |
+	| usageMetric                    |
+	| sharedMetricOtherPartner  |
+	| customerDrivenEventNotOccurred  |
+	| customerWasSentTheTrialMessageNOtOccurred |
+	| conditionForANDOperation |
+	| conditionForOROperation |
+	| segmentAgeGT40                 |
+ 
+# | revenueMetric                  |
+ #  | digitalPersonaGT15             |
+#  | customerDemographicsGT25       |
+#  | learnedBehaviourGT35           |
+#  | analyticalScoresGT45           |
+#  | digitalEngagementGT235         |
+#  | customerLocationInsightsGT5    |
+#  | discoveredClusters200          |
+#  | eventCounts                    |
+#  | IMEventsOfferAccepted          |
+#  | IMEventsCustomerCareUsage      |
+#  | customerDeviceInfo             |
+
+
+   @NDX-6268 @initBrowser @closeBrowser
+  Scenario: Verify Trigger Recurring BC and edit the target list details NEW
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
+    Then edit the target List in taget tab from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
+    Then save bc
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
+    Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
+    
+  @NDX-6310  @initBrowser @closeBrowser
+  Scenario: Verify the Trigger Recurring BC after edit Broadcast expiry NEW
+    Given login
+  When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+   Then navigate to "Triggerable Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "TriggerReccurringBCEdit"
+    Then edit the offer for BC expiry After hours "2"
+    Then save bc
+    Then navigate to "Triggerable Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "TriggerReccurringBCEdit"
+    Then verify the BC expiry in BC View After hours "2"
+    
+  
+  
+  
+  
+  
+  #    ************************ Recurring BC**************   
+    
+    
+    
+    
+    
+    
+   @NDX-5982 @NDX-9922  @initBrowser @closeBrowser
+  Scenario: Verify Recurring BC and edit the Delivery details NEW
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputData" sheet "recurringBC"
+    Then edit the Delevery tab details from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
+    Then save bc
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputData" in sheet "recurringBC"
+    Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
+      
+      
+      @NDX-5932 @initBrowser
+  Scenario: Verify Creating and editing the basic details of Recurring BC NEW
+  Given login 
+	When navigate to precision marketer 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "campaignCategory" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then navigate to "Recurring Broadcasts" broadcasts
+	Then click on BC edit button from workbook "bcInputData" sheet "recurringBC" 
+	Then editing the BC from sheet "recurringBC" basic details With edit data from sheet "recurringBCEdit" 
+	Then save bc 
+	Then navigate to "Recurring Broadcasts" broadcasts
+	Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit" 
+	Then verify the basic details from Broadcast View and data sheet "recurringBCEdit"
+	
+      
+      
+        
+     @NDX-5980  @initBrowser 
+  Scenario: Verify Recurring BC edit the offer details NEW
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
+    Then edit the offer for BC from workbook "bcInputDataForEdit" sheet "recurringBCEdit" with offer "rechargeWAP"
+    Then save bc
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
+    Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "recurringBCEdit" with offer "rechargeWAP"
+
+
+  @NDX-5944 @NDX-5976 @initBrowser @closeBrowser
+  Scenario Outline: Verify Recurring BC and edit the targetSelection <Condition> NEW
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
+    Then edit the targetSelection <Condition> for BC
+    Then save bc
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
+    Then verify the BC targetSelection <Condition> in BC View
+
+    Examples: 
+      | Condition     |
+      | None          |
+      | Create        |
+      | SavedSegments |
+      | None          |
+      | SavedSegments |
+      | Create        |
+
+ 
+ @NDX-5934 @initBrowser @closeBrowser
+  Scenario Outline: Verify Recurring BC edit with given <Condition> NEW
+    #   NDX-5935,NDX-5936,NDX-5937,NDX-5946,NDX-5954,NDX-5958,NDX-5962,NDX-5974,NDX-5978,NDX-6386,NDX-6388
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
+    Then edit the broadcast with taget condition <Condition>
+    Then save bc
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
+    Then verify the target conditions from Broadcast View and condition <Condition>
+
+    Examples: 
+      | Condition |
+	| customerWasSentTheTrialMessage |
+	| customerList                   |
+	| SharedcustomerList             |
+	| customerDrivenEvent            |
+	| usageMetric                    |
+	| sharedMetricOtherPartner  |
+	| customerDrivenEventNotOccurred  |
+	| customerWasSentTheTrialMessageNOtOccurred |
+	| conditionForANDOperation |
+	| conditionForOROperation |
+	| segmentAgeGT40                 |
+ 
+# | revenueMetric                  |
+ #  | digitalPersonaGT15             |
+#  | customerDemographicsGT25       |
+#  | learnedBehaviourGT35           |
+#  | analyticalScoresGT45           |
+#  | digitalEngagementGT235         |
+#  | customerLocationInsightsGT5    |
+#  | discoveredClusters200          |
+#  | eventCounts                    |
+#  | IMEventsOfferAccepted          |
+#  | IMEventsCustomerCareUsage      |
+#  | customerDeviceInfo             |
+
+
+  @NDX-5942 @initBrowser @closeBrowser
+  Scenario: Verify Recurring BC and edit the target list details NEW
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
+    Then edit the target List in taget tab from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
+    Then save bc
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
+    Then verify the BC taget List in BC View from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
+    
+ @NDX-5984 @initBrowser @closeBrowser
+  Scenario: Verify the  Recurring BC after edit Broadcast expiry NEW
+    Given login
+  When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+   Then navigate to "Recurring Broadcasts" broadcasts
+    Then click on BC edit button from workbook "bcInputDataForEdit" sheet "recurringBCEdit"
+    Then edit the offer for BC expiry After hours "2"
+    Then save bc
+    Then navigate to "Recurring Broadcasts" broadcasts
+    Then view the bc from workbook "bcInputDataForEdit" in sheet "recurringBCEdit"
+    Then verify the BC expiry in BC View After hours "2"
+    
+  
+  
+#  *********** Verify Child BC dates *************
+  
+
+  
+  @NDX-6416 @initBrowser 
+Scenario: Verify Recurring Bc child BCs Dates 
+	Given login 
+	When navigate to precision marketer 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "campaignCategory" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "recurringBC" with "rechargeSMS" 
+	Then activate bc
+	Then navigate to "Recurring Broadcasts" broadcasts
+	Then navigate to "One-time" broadcasts
+	Then verify the Child BC count and recurring dates from workbook "bcInputData" in sheet "recurringBC"
+    
+    @NDX-6414 @initBrowser 
+Scenario: Verify Triggerable Recurring Bc child BCs Dates 
+	Given login 
+	When navigate to precision marketer 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "campaignCategory" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "TriggerReccurringBC" with "rechargeSMS" 
+	Then activate bc
+	Then navigate to "Triggerable" broadcasts
+	Then navigate to "One-time" broadcasts
+	Then verify the Child BC count and recurring dates from workbook "bcInputData" in sheet "TriggerReccurringBC"
+  
+  @NDX-6420 @NDX-6418 @initBrowser 
+  Scenario: Verify Seeding Recurring Bc child BCs Dates 
+	Given login 
+	When navigate to precision marketer 
+	Then navigate to life cycle marketing 
+	Then navigate to campaign category from sheet "campaignCategory" 
+	Then naigate to "campaignBC" campaign view broadcasts 
+	Then click create new broadcast button 
+	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "seedingTriggerableRecurringBC" with "SeedingSMS" 
+	Then activate bc
+	Then navigate to "One-time" broadcasts
+	Then verify the Child BC count and recurring dates from workbook "bcInputData" in sheet "seedingTriggerableRecurringBC"
+  
+  @NDX-7128 @initBrowser
+Scenario: Verify the BC gets Completed with target condition having IsAnyOf 
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast with condition IsAnyOf from sheet "one-offBC" with "rechargeWAP"
+Then activate bc
+Then wait until status of "one-offBC" is "Targeting"
+Then click on toggleAutoRefresh
+Then wait until status of "one-offBC" is "Completed"
+  
+    
+    @NDX-7945  @initBrowser 
+  Scenario: Verify BC Notification for one-off Bc new
+  
+    Given login
+    When navigate to precision marketer
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "campaignCategory"
+    Then naigate to "campaignBC" campaign view broadcasts
+    Then click create new broadcast button
+    Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeSMS"
+    Then verify create BC Notification
+    Then activate bc
+   Then wait until status of "one-offBC" is "Completed"
+    Then verify the BC notification in mail "Rendering" from workbook "bcInputData" and sheet "one-offBC"
+     Then verify the BC notification in mail "Delivering" from workbook "bcInputData" and sheet "one-offBC" 
+    Then verify the BC notification in mail "Completed" from workbook "bcInputData" and sheet "one-offBC"
     
 
 
 
-#=============================================verify the BCs abort and pause   ========================================= 
+#=============================================verify the BCs abort and pause for 8 types of bc ========================================= 
 
 
  @NDX-9955 @NDX-9953
@@ -1354,7 +1354,7 @@ Then wait until status of "<bcSheet>" from file "bcInputData" is "Paused" for bc
 
 Examples:
 |bcSheet|row|
-|one-offBCForPause|1|
+|one-offBC|1|
 |TriggerOneoff|5|
  
  
@@ -1381,7 +1381,7 @@ Then wait until status of recurring child bc from sheet "<bcSheet>" is "Paused"
 
 Examples:
 |bcSheet|row|broadcastTab|bcType|
-|recurringBCForPause|2|Recurring Broadcasts|recurring|
+|recurringBC|2|Recurring Broadcasts|recurring|
 |TriggerReccurringBC|8|Triggerable Broadcasts|trigger|
 
 
@@ -1407,7 +1407,7 @@ Then wait until status of "<bcSheet>" from file "bcInputData" is "Paused" for bc
 
 Examples:
 |bcSheet|row|
-|seedingRecurringBCForPause|3|
+|seedingRecurringBC|3|
 |TriggerReccurringBC|7|
 
 @NDX-9957 @NDX-9959
@@ -1432,7 +1432,7 @@ Then wait until status of "<bcSheet>" from file "bcInputData" is "Paused" for bc
 
 Examples:
 |bcSheet|row|
-|seedingoneoffForPause|4|
+|seedingoneoff|4|
 |TriggerOneoff|6|
 
 @NDX-9961  @NDX-9963
@@ -1453,7 +1453,7 @@ Then wait until status of "<bcSheet>" from file "bcInputData" is "Aborted" for b
 
 Examples:
 |bcSheet|row|bctype|
-|one-offBCForAbort|9|onetime|
+|one-offBC|9|onetime|
 |TriggerOneoff|13|onetime|
  
 @NDX-9962 @NDX-9964
@@ -1478,7 +1478,7 @@ Then wait until status of recurring child bc from sheet "<bcSheet>" is "Aborted"
 
 Examples:
 |bcSheet|row|broadcastTab|bcType|
-|recurringBCForAbort|10|Recurring Broadcasts|recurring|
+|recurringBC|10|Recurring Broadcasts|recurring|
 |TriggerReccurringBC|16|Triggerable Broadcasts|trigger|
 
 @NDX-9966  @NDX-9968 @initBrowser @closeBrowser
@@ -1504,7 +1504,7 @@ Then wait until status of child bc of "<bcSheet>" is "Aborted"
 
 Examples:
 |bcSheet|row|bcType|
-|seedingRecurringBCForAbort|11|seeding|
+|seedingRecurringBC|11|seeding|
 |TriggerReccurringBC|15|seeding|
 
 
@@ -1530,7 +1530,7 @@ Then wait until status of child bc of "<bcSheet>" is "Aborted"
 
 Examples:
 |bcSheet|row|
-|seedingoneoffForAbort|12|
+|seedingoneoff|12|
 |TriggerOneoff|14|
  
  

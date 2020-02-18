@@ -1,12 +1,11 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer creation for regression data setup
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
-
 @Offer_datasetupMigration
 Feature: Test suite for offer verification with migration test cases
  
  
-@NDX-5174
+@NDX-5174 @NDX-10019
  @initBrowser @closeBrowser 
   Scenario: Edit Product details from a MIGRATED offer and verify that the edited product details are mapped correctly in offer
     Given login
@@ -20,6 +19,19 @@ Feature: Test suite for offer verification with migration test cases
     Then filter offer from sheet "usageBasedWAP"
     Then edit offer
     Then navigate to offer from sheet "usageBasedWAP" and verify product name from "singleProductPage"
+    Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory" 
+   Then naigate to "campaignBC" campaign view broadcasts 
+   Then click create new broadcast button
+  Then create bc from sheet "one-offBC" with inventory "Unlimited" and trigger "none"
+  Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "none"
+  Then enter choose offer tab from sheet "usageBasedWAP" for bc from sheet "one-offBC" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+  Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "one-offBC"
+  Then activate bc 
+  Then wait for 4000 milliseconds
+Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
+  Then view broadcast for "onetime" for bctype "onetime"
+  Then verify offer from sheet "usageBasedWAP" is displayed
     
 @NDX-5399
  @initBrowser @closeBrowser
@@ -81,7 +93,7 @@ Feature: Test suite for offer verification with migration test cases
     Then verify the condition reward added in the detail tab for the offer from sheet "usageBasedWAP" with product "singleProductPage" 
     
     
-    @NDX-5603 @initBrowser @closeBrowser
+    @NDX-5603 @NDX-10020 @initBrowser @closeBrowser
     Scenario: Verify Copy/Duplicating a MIGRATED offer  
      Given login
      Then navigate to precision marketer
@@ -89,7 +101,27 @@ Feature: Test suite for offer verification with migration test cases
      Then navigate to offers
      Then verify "rechargeSMS" offer in grid
      Then Duplicate/copy offer from sheet "rechargeSMS"
-     
+     Then navigate to offer management
+     Then Navigate to Offer Catalogue
+     Then navigate to Offer Catalog page
+    Then filter the Offer Catalog from sheet "defaultCatalog"
+    Then view the details of the offer
+    Then add copied offer to the catalog from sheet "rechargeSMS"
+     Then navigate to life cycle marketing
+    Then navigate to campaign category from sheet "CampaignCategory" 
+   Then naigate to "campaignBC" campaign view broadcasts 
+   Then click create new broadcast button
+  Then create bc from sheet "one-offBC" with inventory "Unlimited" and trigger "none"
+  Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "none"
+  Then enter choose offer tab with copied offer from sheet "rechargeSMS" for bc from sheet "one-offBC" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+  Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "one-offBC"
+  Then activate bc 
+  Then wait for 4000 milliseconds
+ Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
+  Then view broadcast for "onetime" for bctype "onetime"
+  Then verify copied offer from sheet "rechargeSMS" is displayed
+  
+ 
      @NDX-7605 @initBrowser @closeBrowser
      Scenario: Edit Product details from a Duplicated/copied offer and verify that the edited product details are mapped correctly in MIGRATED offer 
     Given login

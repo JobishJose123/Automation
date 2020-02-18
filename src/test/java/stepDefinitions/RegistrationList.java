@@ -1281,7 +1281,7 @@ public class RegistrationList extends Init{
 		registrationListPage.createBlackout(blackout);
 	}
 
-	@Then("^create new inventory \"([^\"]*)\" with  frequency \"([^\"]*)\" and blackout \"([^\"]*)\"$")
+	@Then("^create new inventory \"([^\"]*)\"$")
 	public void create_new_inventory_with_frequency_and_blackout(String inventory, String frequency, String blackout) throws Throwable {
 		registrationListPage.createInventory(inventory,frequency,blackout);
 	}

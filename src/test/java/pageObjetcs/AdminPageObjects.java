@@ -157,8 +157,8 @@ public class AdminPageObjects extends Init{
 	private WebElement CGsave;
 	@FindBy(xpath="//paper-icon-button[@id='clear']")
 	private WebElement CGclose;
-	
-	
+	@FindBy(xpath="(//label[contains(.,'Partner Control Group ')]//following::div[@id='radioLabel'][contains(.,'On')])[1]")
+	private WebElement partnerCgOnRdiobtn;
 	
 	
 	public void clickPartnerOption() throws InterruptedException{
@@ -449,7 +449,7 @@ public class AdminPageObjects extends Init{
 	   }
 	 
 	 public void changePartnerControlGroupSettings() throws Exception {
-		   
+		jswait.loadClick(partnerCgOnRdiobtn); 
 		 selectBaseList(SELENIUM_LIST_SUB);
 		 changeCGPercentage();
 		
@@ -459,7 +459,7 @@ public class AdminPageObjects extends Init{
 			
 		   // jswait.loadSendKeys(baseListSelector, baseList);
 			Thread.sleep(3000);
-			driver.findElement(By.xpath("//form[@id='form']//vaadin-combo-box[@label='Base List']/paper-input-container[@id='inputContainer']//div[@id='labelAndInputContainer']/paper-icon-button[@id='clearIcon']/iron-icon[@id='icon']")).click();
+//			driver.findElement(By.xpath("//form[@id='form']//vaadin-combo-box[@label='Base List']/paper-input-container[@id='inputContainer']//div[@id='labelAndInputContainer']/paper-icon-button[@id='clearIcon']/iron-icon[@id='icon']")).click();
 			
 			 jswait.loadSendKeys(baseListSelector, baseList);
 				Thread.sleep(5000);

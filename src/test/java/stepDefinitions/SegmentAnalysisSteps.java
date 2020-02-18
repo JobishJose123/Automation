@@ -84,7 +84,7 @@ public class SegmentAnalysisSteps extends Init {
 	
 	@Then("^click on cluster option$")
 	public void clickClusterOption() throws InterruptedException {
-		
+		CommonObjects.clickOptionsIcon();
 		segmentObjects.clickClustersOption();	
 	}
 	
@@ -283,11 +283,17 @@ public class SegmentAnalysisSteps extends Init {
 		 eh.setExcelFile("SegmentAnalysis", AnalysisName);//set excel file
 		 String name = eh.getCellByColumnName("Segment_Analysis");//get sheet name
 		 name = RandomNameGenerator.getRandomName(name);//append new random name
-		 segmentObjects.SegmentName(name,"none"); //pass new name to SegmentName()
 		 eh.setCell("Segment_Analysis",name);
+		 segmentObjects.SegmentName(name,"none"); //pass new name to SegmentName()
+		
 		 
 	}
+	@Then("^save iaj job$")
+		public void saveAnalysis() throws Exception{
+		segmentObjects.saveIajJob();
+		}
 	
+
 	@Then("^create SegmentAnalysis from sheet \"([^\"]*)\" with condition \"([^\"]*)\"$")
 	public void create_Segment_Analysis_from_sheet_with_condition(String AnalysisName,String condition) throws Exception{
 		 eh.setExcelFile("SegmentAnalysis", AnalysisName);//set excel file
@@ -425,6 +431,7 @@ public class SegmentAnalysisSteps extends Init {
 		 String SegmentJobname = eh.getCellByColumnName("Segment_Analysis").toString();
 		segmentObjects.deleteSegmentAnalysisjob(SegmentJobname);
 	}
+	
 	@Then("^find the Target count$")
 	public void find_the_target_count() throws Exception{
 		segmentObjects.TargetCount() ;
@@ -435,10 +442,25 @@ public class SegmentAnalysisSteps extends Init {
 		
 	    
 	}
+	@Then("^save the cluster as discovered cluster$")
+	public void save_the_cluster_as() throws Throwable {
+		segmentObjects.saveClusterAsDiscoveredCluster(SELENIUM_DISCOVERED_CLUSTERS_LIST);
+	}
+
+	@Then("^close the cluster details$")
+	public void close_the_cluster_details() throws Throwable {
+		segmentObjects.closeCluster();
+	}
+
+	@Then("^verify the list in discovered cluster$")
+	public void verify_the_list_in_discovered_cluster() throws Exception {
+		segmentObjects.verifyClusterInDiscoveredCluster(SELENIUM_DISCOVERED_CLUSTERS_LIST);
+	}
 	
-	
-	
-	
+	@Then("^change targetlist$")
+	public void changetargetList() throws Exception{
+		segmentObjects.changeTargetList();
+	}
 	}
 	
 	

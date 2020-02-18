@@ -505,17 +505,26 @@ public class OfferCatalogSteps extends Init{
 	   catalogPageObjects.detailsOfOffer();
 	   }
 	   @Then("^add offer to the catlog from sheet \"([^\"]*)\" and verify$")
-	   public void add_offer_to_the_catlog_from_sheet_and_verify(String addOffer) throws Throwable {
+	   public void add_offer_to_the_catlog_from_sheet_and_verify(String offerSheet) throws Throwable {
 		  catalogPageObjects.clickCatalogAddOffers();
-	      eh.setExcelFile("offerInputData",addOffer);
-	      String addOffer2 = eh.getCellByColumnName("Offer Name").toString();
-	      commonObjects.filterName(addOffer2);
-	      catalogPageObjects.addOfferToCatalog(addOffer2);
+	      eh.setExcelFile("offerInputData",offerSheet);
+	      String OfferName = eh.getCellByColumnName("Offer Name").toString();
+	      commonObjects.filterName(OfferName);
+	      catalogPageObjects.addOfferToCatalog(OfferName);
 	   }
 	   @Then("^delete the Offer from sheet \"([^\"]*)\" and verify$")
 	   public void delete_the_Offer_from_sheet_and_verify(String offerToDelete) throws Throwable {
 		   catalogPageObjects.deleteOffer(offerToDelete);
 	   }
-
-
+	   @Then("^add copied offer to the catalog from sheet \"([^\"]*)\"$")
+	   public void add_copied_offer_to_the_catalog_from_sheet(String offerSheet) throws Throwable {
+		   catalogPageObjects.clickCatalogAddOffers();
+		      eh.setExcelFile("offerInputData",offerSheet);
+		      String OfferName = (eh.getCellByColumnName("Offer Name").toString())+"_Copy";
+		      commonObjects.filterName(OfferName);
+		      catalogPageObjects.addOfferToCatalog(OfferName);
+		      
+		      
+		      
+}
 }

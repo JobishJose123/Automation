@@ -3,52 +3,52 @@
 @NX-BroadcastManagement
 Feature: Test cases related to Broadcast Management
 
-@NX-505 
-@initBrowser 
-Scenario: Create BC-Details tab: Verify Create New BC lands in the details tab.
-Given login
-Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
-#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then check if create new bc lands in details tab
+#@NX-505 
+#@initBrowser 
+#Scenario: Create BC-Details tab: Verify Create New BC lands in the details tab.
+#Given login
+#Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative"
+##    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then check if create new bc lands in details tab
 
-@NX-517 
-@initBrowser @closeBrowser
-Scenario: Create BC-Details tab: Verify the text box validations for the BC details tab
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then verify validations of bc details tab
+#@NX-517 
+#@initBrowser @closeBrowser
+#Scenario: Create BC-Details tab: Verify the text box validations for the BC details tab
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then verify validations of bc details tab
 
 #@NX-518 
 #@initBrowser @closeBrowser
@@ -61,16 +61,16 @@ Then verify validations of bc details tab
 #Then click create new broadcast button
 #Then verify mandatory fields in details tab
 
-@NX-528 
-@initBrowser @closeBrowser
-Scenario: Create BC-Details tab: Verify proceeding to the next tab.
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then verify proceeding to target tab
+#@NX-528 
+#@initBrowser @closeBrowser
+#Scenario: Create BC-Details tab: Verify proceeding to the next tab.
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then verify proceeding to target tab
 
 @NX-529
 @initBrowser @closeBrowser
@@ -116,52 +116,52 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then verify proceed button without adding target condition
 
-@NX-588
-@initBrowser @closeBrowser
-Scenario: Create BC: Choose Offers: Verify creating new offer by clicking on the Create New Offer button
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then check create new offer in bc creation
+#@NX-588
+#@initBrowser @closeBrowser
+#Scenario: Create BC: Choose Offers: Verify creating new offer by clicking on the Create New Offer button
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then check create new offer in bc creation
 
 
 ##check in env 23
-@NX-611
-@initBrowser @closeBrowser
-Scenario: Create BC: Choose Offers: Verify the choose offer window after selecting an offer.
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then verify choose offer window after selecting offer
+#@NX-611
+#@initBrowser @closeBrowser
+#Scenario: Create BC: Choose Offers: Verify the choose offer window after selecting an offer.
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then verify choose offer window after selecting offer
 
-@NX-613
-@initBrowser @closeBrowser
-Scenario: Create BC: Choose Offers: Verify selecting the channel and sender input
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then verify selecting channel and sender
+#@NX-613
+#@initBrowser @closeBrowser
+#Scenario: Create BC: Choose Offers: Verify selecting the channel and sender input
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then verify selecting channel and sender
 
 
-@NX-630
-@initBrowser @closeBrowser
-Scenario: Create BC: Choose Offers:Verify navigation to the delivery tab without adding channel and Sender details
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then verify navigating to delivery tab without selecting channel and sender
+#@NX-630
+#@initBrowser @closeBrowser
+#Scenario: Create BC: Choose Offers:Verify navigation to the delivery tab without adding channel and Sender details
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then verify navigating to delivery tab without selecting channel and sender
 
 
 
@@ -204,57 +204,57 @@ Then click create new broadcast button
 Then navigate to broadcast target condition
 Then verify adding target condition with and condition
 
-@NX-2050 
-@initBrowser
-Scenario: Create New Broadcast: Verify the Creation and Activation of One Off Broadcast
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-Then activate bc
+#@NX-2050 
+#@initBrowser
+#Scenario: Create New Broadcast: Verify the Creation and Activation of One Off Broadcast
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#Then activate bc
 
 
-@NX-7612 
-@initBrowser 
-Scenario: To Verify the selected Broadcast can be viewed-7612
-    Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
-    Then pass next scenario based on this step
+#@NX-7612 
+#@initBrowser 
+#Scenario: To Verify the selected Broadcast can be viewed-7612
+#    Given login
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then verify bc created from sheet "one-offBC"
+#    Then pass next scenario based on this step
 
   @NX-649
   Scenario: Create BC: Deliver tab: Verify select Recurrence pattern days  NX-649
@@ -304,49 +304,49 @@ Then naigate to "campaignBC" campaign view broadcasts
 Then click create new broadcast button
 Then verify broadcast schedle range details
 
-@NX-1234
-@initBrowser
-Scenario: Broadcast grid: Verify the breadcrum for broadcast listing screen.
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then verify view braodcast breadcrumb
+#@NX-1234
+#@initBrowser
+#Scenario: Broadcast grid: Verify the breadcrum for broadcast listing screen.
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then verify view braodcast breadcrumb
+#
+#@NX-1238
+#Scenario: Broadcast grid: Verify the label displaying the selected campaign name
+#Given verify selected campaign name
+#
+#
+#@NX-1239
+#@closeBrowser
+#Scenario: Broadcast grid: Verify the label displaying the selected campaign category name
+#Given verify selected campaign category name
 
-@NX-1238
-Scenario: Broadcast grid: Verify the label displaying the selected campaign name
-Given verify selected campaign name
+#@NX-1247
+#@initBrowser @closeBrowser
+#Scenario: Broadcast grid: Verify create new broadcast button.
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then verify create new broadcast button
 
-
-@NX-1239
-@closeBrowser
-Scenario: Broadcast grid: Verify the label displaying the selected campaign category name
-Given verify selected campaign category name
-
-@NX-1247
-@initBrowser @closeBrowser
-Scenario: Broadcast grid: Verify create new broadcast button.
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then verify create new broadcast button
-
-@NX-1269
-@initBrowser
-Scenario: Broadcast grid: Verify the options available for the BC
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-Then activate bc
-Then verify options icon of bc
+#@NX-1269
+#@initBrowser
+#Scenario: Broadcast grid: Verify the options available for the BC
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#Then activate bc
+#Then verify options icon of bc
 
 #@NX-1273
 #Scenario: Broadcast grid: Verify the Pause option of the BC
@@ -464,152 +464,152 @@ Then navigate to campaign categories
 Then check delete campaign category with linked campaigns from sheet "campaignCategory"
 
 
-@NX-7596
-@initBrowser 
-Scenario: Verify creation of triggerable BC - Regression NX-7596
-Given login
-Then navigate to precision marketer
- Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "TriggerReccurringBC" with "rechargeWAP"
-Then activate bc
-Then navigate to "Triggerable" broadcasts
-Then check if "Triggerable" bc status is "Active" from sheet "TriggerReccurringBC"
+#@NX-7596
+#@initBrowser 
+#Scenario: Verify creation of triggerable BC - Regression NX-7596
+#Given login
+#Then navigate to precision marketer
+# Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "TriggerReccurringBC" with "rechargeWAP"
+#Then activate bc
+#Then navigate to "Triggerable" broadcasts
+#Then check if "Triggerable" bc status is "Active" from sheet "TriggerReccurringBC"
 
-@NX-7597
-@initBrowser  @closeBrowser
-Scenario: Verify creation of seeding recurring BC NX-7597
-Given login
-Then navigate to precision marketer
- Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "seedingWAPoffer" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "seedingRecurringBC" with "seedingWAPoffer"
-Then activate bc
-Then navigate to "Seeding" broadcasts
-Then check if "Seeding" bc status is "Active" from sheet "seedingRecurringBC"
+#@NX-7597
+#@initBrowser  @closeBrowser
+#Scenario: Verify creation of seeding recurring BC NX-7597
+#Given login
+#Then navigate to precision marketer
+# Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "seedingWAPoffer" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "seedingRecurringBC" with "seedingWAPoffer"
+#Then activate bc
+#Then navigate to "Seeding" broadcasts
+#Then check if "Seeding" bc status is "Active" from sheet "seedingRecurringBC"
 
-@NX-7598
-@initBrowser 
-Scenario: Verify creation of seeding triggerable BC NX-7598
-Given login
-Then navigate to precision marketer
- Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "seedingWAPoffer" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "seedingTriggerableBC" with "seedingWAPoffer"
-Then activate bc
-Then navigate to "Seeding" broadcasts
-Then check if "Seeding" bc status is "Active" from sheet "seedingTriggerableBC"
+#@NX-7598
+#@initBrowser 
+#Scenario: Verify creation of seeding triggerable BC NX-7598
+#Given login
+#Then navigate to precision marketer
+# Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "seedingWAPoffer" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "seedingTriggerableBC" with "seedingWAPoffer"
+#Then activate bc
+#Then navigate to "Seeding" broadcasts
+#Then check if "Seeding" bc status is "Active" from sheet "seedingTriggerableBC"
 
-@NX-1417
-@initBrowser 
-Scenario: BC grid: Verify copy option for the parent BC NX-1417
-Given login
-Then navigate to precision marketer
- Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-Then activate bc
-Then verify copy bc from sheet "one-offBC"
-Then view broadcast from sheet "one-offBC"
+#@NX-1417
+#@initBrowser 
+#Scenario: BC grid: Verify copy option for the parent BC NX-1417
+#Given login
+#Then navigate to precision marketer
+# Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#Then activate bc
+#Then verify copy bc from sheet "one-offBC"
+#Then view broadcast from sheet "one-offBC"
 
 ##----------------------------------------------------------------------------------------------------------------------------------------##
 
 
-@NX-7364 
-@initBrowser 
-Scenario: Create New Broadcast: verify create BC Notification
- Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-		Then verify create BC Notification
-		Then activate bc
-    Then verify bc created from sheet "one-offBC"
-    Then wait until status of "one-offBC" is "Completed"
-    Then verify the BC notification in mail "Rendering" from workbook "bcInputData" and sheet "one-offBC" 
-Then verify the BC notification in mail "Delivering" from workbook "bcInputData" and sheet "one-offBC" 
-Then verify the BC notification in mail "Completed" from workbook "bcInputData" and sheet "one-offBC"
-#    Then verify email notifications from sheet "one-offBC"
-    Then pass next scenario based on this step
-    @NX-7593      
-Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Forms.
-    Then check previous step and pass this
-    Then pass next scenario based on this step
-    @NX-7350     @closeBrowser    
-Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Links.
-    Then check previous step and pass this
-    Then pass next scenario based on this step
+#@NX-7364 
+#@initBrowser 
+#Scenario: Create New Broadcast: verify create BC Notification
+# Given login
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#		Then verify create BC Notification
+#		Then activate bc
+#    Then verify bc created from sheet "one-offBC"
+#    Then wait until status of "one-offBC" is "Completed"
+#    Then verify the BC notification in mail "Rendering" from workbook "bcInputData" and sheet "one-offBC" 
+#Then verify the BC notification in mail "Delivering" from workbook "bcInputData" and sheet "one-offBC" 
+#Then verify the BC notification in mail "Completed" from workbook "bcInputData" and sheet "one-offBC"
+##    Then verify email notifications from sheet "one-offBC"
+#    Then pass next scenario based on this step
+#    @NX-7593      
+#Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Answer Forms.
+#    Then check previous step and pass this
+#    Then pass next scenario based on this step
+#    @NX-7350     @closeBrowser    
+#Scenario: Email Channel --> Verify the preview, delivery and presentation of Emails containing Links.
+#    Then check previous step and pass this
+#    Then pass next scenario based on this step
 
 
 
@@ -631,21 +631,21 @@ Scenario: Email Channel --> Verify the preview, delivery and presentation of Ema
 #####################################RUN
 
 #########################recurring bc
-@NX-recurring 
-@initBrowser 
-Scenario: save recurring broadcast and activate
-Given login
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
-Then save bc
-Then navigate to "Recurring" broadcasts
-Then activate saved "Recurring" bc from sheet "recurringBC"
-Then navigate to "Recurring" broadcasts
-Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
+#@NX-recurring 
+#@initBrowser 
+#Scenario: save recurring broadcast and activate
+#Given login
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "recurringBC" with "rechargeWAP"
+#Then save bc
+#Then navigate to "Recurring" broadcasts
+#Then activate saved "Recurring" bc from sheet "recurringBC"
+#Then navigate to "Recurring" broadcasts
+#Then check if "Recurring" bc status is "Active" from sheet "recurringBC"
 
 @NX-561
 @initBrowser
@@ -926,9 +926,9 @@ Then navigate to "Recurring" broadcasts
 Then view broadcast from sheet "recurringMonthBC"
 Then verify delivery details from "recurringMonthBC"
     
-    @NX-3399 @initBrowser @closeBrowser
-    Scenario: Calculate Target - Creating One-Off BC with DNC exclusion-3399
-    Given login
+#    @NX-3399 @initBrowser @closeBrowser
+#    Scenario: Calculate Target - Creating One-Off BC with DNC exclusion-3399
+#    Given login
 #    Then navigate to configuration management
 #    Then naviagte to product classes
 #    Then create product class and number attribute from "TestProductClass"
@@ -944,7 +944,7 @@ Then verify delivery details from "recurringMonthBC"
 #    Then click create new product button
 #    Then create product with attributes from sheet "fullDetails"
 #    Then navigate to landing page
-    Then navigate to precision marketer
+#    Then navigate to precision marketer
 #    Then navigate to offer management
 #    Then navigate to offers
 #    Then click on create new ofer button
@@ -953,14 +953,14 @@ Then verify delivery details from "recurringMonthBC"
 #	  Then Navigate to Offer Catalogue
 #    Then Create New Offer Catalogue from sheet "defaultCatalog"
 #    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast and select any DNC exclusion list from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast and select any DNC exclusion list from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then verify bc created from sheet "one-offBC"
     
     
     @NX-1275 @initBrowser @closeBrowser
@@ -1004,63 +1004,25 @@ Then verify delivery details from "recurringMonthBC"
    
     
     
-    @NX-7586 @initBrowser 
-    Scenario: Verify broadcast view for all type of one off BCs-7586
-    Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to configuration management
-#    Then navigate to campaign categories
-#    Then create new campaign category from sheet "CampaignCategory"
-#    Then navigate to landing page
-   Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-   Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then view bc from sheet "one-offBC" 
-    
-    
-    
-    @NX-7587 @initBrowser @closeBrowser
-    Scenario: Verify Abort option for all type of one off BCs-7587
-    Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to configuration management
-#    Then navigate to campaign categories
-#    Then create new campaign category from sheet "CampaignCategory"
-#    Then navigate to landing page
-#    Then navigate to precision marketer
+#    @NX-7586 @initBrowser 
+#    Scenario: Verify broadcast view for all type of one off BCs-7586
+#    Given login
+##    Then navigate to configuration management
+##    Then naviagte to product classes
+##    Then create product class and number attribute from "TestProductClass"
+##    Then navigate to landing page
+##    Then navigate to configuration management
+##    Then navigate to campaign categories
+##    Then create new campaign category from sheet "CampaignCategory"
+##    Then navigate to landing page
+#   Then navigate to precision marketer
 #    Then navigate to offer management
 #    Then navigate to products
 #    Then navigate to product class "TestProductClass"
 #    Then click create new product button
 #    Then create product with attributes from sheet "fullDetails"
 #    Then navigate to landing page
-    Then navigate to precision marketer
+#    Then navigate to precision marketer
 #    Then navigate to offer management
 #    Then navigate to offers
 #    Then click on create new ofer button
@@ -1069,49 +1031,87 @@ Then verify delivery details from "recurringMonthBC"
 #	  Then Navigate to Offer Catalogue
 #    Then Create New Offer Catalogue from sheet "defaultCatalog"
 #    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then abort bc 
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#   Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then view bc from sheet "one-offBC" 
+    
+    
+    
+#    @NX-7587 @initBrowser @closeBrowser
+#    Scenario: Verify Abort option for all type of one off BCs-7587
+#    Given login
+##    Then navigate to configuration management
+##    Then naviagte to product classes
+##    Then create product class and number attribute from "TestProductClass"
+##    Then navigate to landing page
+##    Then navigate to configuration management
+##    Then navigate to campaign categories
+##    Then create new campaign category from sheet "CampaignCategory"
+##    Then navigate to landing page
+##    Then navigate to precision marketer
+##    Then navigate to offer management
+##    Then navigate to products
+##    Then navigate to product class "TestProductClass"
+##    Then click create new product button
+##    Then create product with attributes from sheet "fullDetails"
+##    Then navigate to landing page
+#    Then navigate to precision marketer
+##    Then navigate to offer management
+##    Then navigate to offers
+##    Then click on create new ofer button
+##    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+##    Then navigate to offer management 
+##	  Then Navigate to Offer Catalogue
+##    Then Create New Offer Catalogue from sheet "defaultCatalog"
+##    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then abort bc 
      
-    @NX-6290
-@initBrowser  @closeBrowser
-Scenario: Verify copy of the planned broadcast which has monthly recurrence NX-6290
-Given login
-Then navigate to precision marketer
- Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
-Then save bc
-Then navigate to "Recurring" broadcasts
-Then verify copy bc from sheet "recurringMonthBC"
-Then navigate to "Recurring" broadcasts
-Then view broadcast from sheet "recurringMonthBC"
-Then verify delivery details from "recurringMonthBC"
+#    @NX-6290
+#@initBrowser  @closeBrowser
+#Scenario: Verify copy of the planned broadcast which has monthly recurrence NX-6290
+#Given login
+#Then navigate to precision marketer
+# Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP"
+#Then save bc
+#Then navigate to "Recurring" broadcasts
+#Then verify copy bc from sheet "recurringMonthBC"
+#Then navigate to "Recurring" broadcasts
+#Then view broadcast from sheet "recurringMonthBC"
+#Then verify delivery details from "recurringMonthBC"
 
-@NX-7449
-   @initBrowser @closeBrowser
-   Scenario: Check whether configuration is available to set permision to edit BCs
-   Given login
-   Then navigate to configuration management
-   Then navigate to partners
-   Then navigate to partners Edit page
-   
+#@NX-7449
+#   @initBrowser @closeBrowser
+#   Scenario: Check whether configuration is available to set permision to edit BCs
+#   Given login
+#   Then navigate to configuration management
+#   Then navigate to partners
+#   Then navigate to partners Edit page
+#   
    
    
    @NX-3679 @initBrowser 
@@ -1153,88 +1153,47 @@ Then verify delivery details from "recurringMonthBC"
     
     
     
-    @NX-3416 @initBrowser 
-    Scenario: Calculate Targets - Creating seeding BC with DNC exclusion, Target Group and Control Group-3416
-    Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
+#    @NX-3416 @initBrowser 
+#    Scenario: Calculate Targets - Creating seeding BC with DNC exclusion, Target Group and Control Group-3416
+#    Given login
+##    Then navigate to configuration management
+##    Then naviagte to product classes
+##    Then create product class and number attribute from "TestProductClass"
+##    Then navigate to landing page
+##    Then navigate to configuration management
+##    Then navigate to campaign categories
+##    Then create new campaign category from sheet "CampaignCategory"
+##    Then navigate to landing page
+#   Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
 #    Then navigate to landing page
-#    Then navigate to configuration management
-#    Then navigate to campaign categories
-#    Then create new campaign category from sheet "CampaignCategory"
-#    Then navigate to landing page
-   Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "seedingWAPoffer" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
- Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast with DNC exclusion and calculate TG and CG from sheet "seedingRecurringBC" with "seedingWAPoffer"
-    Then activate bc
-    Then verify bc created from sheet "seedingRecurringBC"
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "seedingWAPoffer" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+# Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast with DNC exclusion and calculate TG and CG from sheet "seedingRecurringBC" with "seedingWAPoffer"
+#    Then activate bc
+#    Then verify bc created from sheet "seedingRecurringBC"
     
      
     
-    @NX-652 @initBrowser @closeBrowser
-    Scenario: Create BC: Deliver tab: Verify "Starts broadcast at" option-652
-    Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "seedingWAPoffer" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast and verify starts broadcast at option from sheet "seedingRecurringBC" with "seedingWAPoffer"
-    Then activate bc
-    Then navigate to Seeding Bc tab
-    Then verify bc created from sheet "seedingRecurringBC"
-    
-    
-    
-    
-    
-    @NX-3556 @initBrowser @closeBrowser
-    Scenario: Calculate Targets - Calculate Drill down-3556
-    Given login
+#    @NX-652 @initBrowser @closeBrowser
+#    Scenario: Create BC: Deliver tab: Verify "Starts broadcast at" option-652
+#    Given login
 #    Then navigate to configuration management
 #    Then naviagte to product classes
 #    Then create product class and number attribute from "TestProductClass"
@@ -1250,30 +1209,32 @@ Then verify delivery details from "recurringMonthBC"
 #    Then click create new product button
 #    Then create product with attributes from sheet "fullDetails"
 #    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast and calculate TG and CG from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "seedingWAPoffer" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "seedingWAPoffer" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast and verify starts broadcast at option from sheet "seedingRecurringBC" with "seedingWAPoffer"
+#    Then activate bc
+#    Then navigate to Seeding Bc tab
+#    Then verify bc created from sheet "seedingRecurringBC"
     
     
     
     
-    @NX-3412 @initBrowser 
-    Scenario: Calculate Targets - Creating One-Off BC with DNC exclusion, Target Group and Control Group-3412
-    Given login
+    
+#    @NX-3556 @initBrowser @closeBrowser
+#    Scenario: Calculate Targets - Calculate Drill down-3556
+#    Given login
 #    Then navigate to configuration management
 #    Then naviagte to product classes
 #    Then create product class and number attribute from "TestProductClass"
@@ -1289,7 +1250,7 @@ Then verify delivery details from "recurringMonthBC"
 #    Then click create new product button
 #    Then create product with attributes from sheet "fullDetails"
 #    Then navigate to landing page
-    Then navigate to precision marketer
+#    Then navigate to precision marketer
 #    Then navigate to offer management
 #    Then navigate to offers
 #    Then click on create new ofer button
@@ -1298,22 +1259,61 @@ Then verify delivery details from "recurringMonthBC"
 #	  Then Navigate to Offer Catalogue
 #    Then Create New Offer Catalogue from sheet "defaultCatalog"
 #    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast with DNC exclusion and calculate TG and CG from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast and calculate TG and CG from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then verify bc created from sheet "one-offBC"
+    
+    
+    
+    
+#    @NX-3412 @initBrowser 
+#    Scenario: Calculate Targets - Creating One-Off BC with DNC exclusion, Target Group and Control Group-3412
+#    Given login
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast with DNC exclusion and calculate TG and CG from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then verify bc created from sheet "one-offBC"
     
     
     
     
     
-     @NX-7590 @initBrowser 
-    Scenario: Verify Copy option for all type of one off BCs-7590
-    Given login
+#     @NX-7590 @initBrowser 
+#    Scenario: Verify Copy option for all type of one off BCs-7590
+#    Given login
     #Then navigate to configuration management
     #Then naviagte to product classes
     #Then create product class and number attribute from "TestProductClass"
@@ -1329,7 +1329,7 @@ Then verify delivery details from "recurringMonthBC"
     #Then click create new product button
     #Then create product with attributes from sheet "fullDetails"
     #Then navigate to landing page
-    Then navigate to precision marketer
+#    Then navigate to precision marketer
     #Then navigate to offer management
     #Then navigate to offers
     #Then click on create new ofer button
@@ -1338,23 +1338,66 @@ Then verify delivery details from "recurringMonthBC"
 #	  Then Navigate to Offer Catalogue
     #Then Create New Offer Catalogue from sheet "defaultCatalog"
     #Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    #Then copy bc 
-    Then copy and create new broadcast from sheet "one-offBC"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    #Then copy bc 
+#    Then copy and create new broadcast from sheet "one-offBC"
+#    Then activate bc
+#    Then verify bc created from sheet "one-offBC"
     
       
     
-    @NX-7589 @initBrowser @closeBrowser
-    Scenario: Verify Pause option for all type of  one off BCs-7589
-    Given login
+#    @NX-7589 @initBrowser @closeBrowser
+#    Scenario: Verify Pause option for all type of  one off BCs-7589
+#    Given login
+##    Then navigate to configuration management
+##    Then naviagte to product classes
+##    Then create product class and number attribute from "TestProductClass"
+##    Then navigate to landing page
+##    Then navigate to configuration management
+##    Then navigate to campaign categories
+##    Then create new campaign category from sheet "CampaignCategory"
+##    Then navigate to landing page
+##    Then navigate to precision marketer
+##    Then navigate to offer management
+##    Then navigate to products
+##    Then navigate to product class "TestProductClass"
+##    Then click create new product button
+##    Then create product with attributes from sheet "fullDetails"
+##    Then navigate to landing page
+#    Then navigate to precision marketer
+##    Then navigate to offer management
+##    Then navigate to offers
+##    Then click on create new ofer button
+##    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+##    Then navigate to offer management 
+##	  Then Navigate to Offer Catalogue
+##    Then Create New Offer Catalogue from sheet "defaultCatalog"
+##    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast without target condition from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#   Then wait until status of "one-offBC" is "Delivering"
+#    Then pause bc 
+    
+#    @NX-7460
+#   @initBrowser   @closeBrowser
+#   Scenario: Check whether creator can edit the BC
+#   Given login
+#   Then navigate to configuration management
+#   Then navigate to partners
+#   Then Save BC Settings as selected users
+#    ##For One off BC
+#    Then navigate to landing page
 #    Then navigate to configuration management
 #    Then naviagte to product classes
 #    Then create product class and number attribute from "TestProductClass"
@@ -1370,67 +1413,24 @@ Then verify delivery details from "recurringMonthBC"
 #    Then click create new product button
 #    Then create product with attributes from sheet "fullDetails"
 #    Then navigate to landing page
-    Then navigate to precision marketer
+#    Then navigate to precision marketer
 #    Then navigate to offer management
 #    Then navigate to offers
 #    Then click on create new ofer button
 #    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
 #    Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
+#    Then Navigate to Offer Catalogue
 #    Then Create New Offer Catalogue from sheet "defaultCatalog"
 #    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast without target condition from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-   Then wait until status of "one-offBC" is "Delivering"
-    Then pause bc 
-    
-    @NX-7460
-   @initBrowser   @closeBrowser
-   Scenario: Check whether creator can edit the BC
-   Given login
-   Then navigate to configuration management
-   Then navigate to partners
-   Then Save BC Settings as selected users
-    ##For One off BC
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then save bc
-    Then Search BC and Edit from "one-offBC"
-    Then save bc
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#    Then save bc
+#    Then Search BC and Edit from "one-offBC"
+#    Then save bc
     
     @NX-7464
    @initBrowser   
@@ -1549,42 +1549,42 @@ Then verify delivery details from "recurringMonthBC"
    
    
    
-   @NX-4866 @initBrowser @closeBrowser
-    Scenario: Verify BC level CG by targeting 10 Million subscribers -4866
-    Given login
-#    Then navigate to configuration management
-#    Then naviagte to product classes
-#    Then create product class and number attribute from "TestProductClass"
-#    Then navigate to landing page
-#    Then navigate to configuration management
-#    Then navigate to campaign categories
-#    Then create new campaign category from sheet "CampaignCategory"
-#    Then navigate to landing page
-    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to products
-#    Then navigate to product class "TestProductClass"
-#    Then click create new product button
-#    Then create product with attributes from sheet "fullDetails"
-#    Then navigate to landing page
+#   @NX-4866 @initBrowser @closeBrowser
+#    Scenario: Verify BC level CG by targeting 10 Million subscribers -4866
+#    Given login
+##    Then navigate to configuration management
+##    Then naviagte to product classes
+##    Then create product class and number attribute from "TestProductClass"
+##    Then navigate to landing page
+##    Then navigate to configuration management
+##    Then navigate to campaign categories
+##    Then create new campaign category from sheet "CampaignCategory"
+##    Then navigate to landing page
 #    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then click on create new ofer button
-#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-#    Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-#    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast with 1M subscribers and configure TG and CG from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
-     Then wait until status of "one-offBC" is "Delivering"
+##    Then navigate to offer management
+##    Then navigate to products
+##    Then navigate to product class "TestProductClass"
+##    Then click create new product button
+##    Then create product with attributes from sheet "fullDetails"
+##    Then navigate to landing page
+##    Then navigate to precision marketer
+##    Then navigate to offer management
+##    Then navigate to offers
+##    Then click on create new ofer button
+##    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+##    Then navigate to offer management 
+##	  Then Navigate to Offer Catalogue
+##    Then Create New Offer Catalogue from sheet "defaultCatalog"
+##    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast with 1M subscribers and configure TG and CG from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then verify bc created from sheet "one-offBC"
+#     Then wait until status of "one-offBC" is "Delivering"
 #    Then verify delivering status for bc
 #    Then verify targeted count
    
@@ -1691,93 +1691,48 @@ Then verify delivery details from "recurringMonthBC"
     Then naigate to "campaignBC" campaign view broadcasts
     Then Search BC and check for permissions from "one-offBC"   
     
-    @NX-8862 @initBrowser
-    Scenario: Verify BC targeting with Customer Profile Info category-8862
-    Given login
-    Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to products
-    #Then navigate to product class "TestProductClass"
-    #Then click create new product button
-    #Then create product with attributes from sheet "fullDetails"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
-    #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeWap" with product "fullDetails"
-    #Then navigate to offer management 
-#	  Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeWap" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-		Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
-    Then activate bc
-    Then wait until status of "one-offBC" is "Completed"
-    Then verify targeted and sent count of "one-offBC" with condition digitalPersonaGT15
+#    @NX-8862 @initBrowser
+#    Scenario: Verify BC targeting with Customer Profile Info category-8862
+#    Given login
+#    Then navigate to precision marketer
+#    #Then navigate to offer management
+#    #Then navigate to products
+#    #Then navigate to product class "TestProductClass"
+#    #Then click create new product button
+#    #Then create product with attributes from sheet "fullDetails"
+#    #Then navigate to landing page
+#    #Then navigate to precision marketer
+#    #Then navigate to offer management
+#    #Then navigate to offers
+#    #Then click on create new ofer button
+#    #Then create new offer from sheet "rechargeWap" with product "fullDetails"
+#    #Then navigate to offer management 
+##	  Then Navigate to Offer Catalogue
+#    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    #Then Add "rechargeWap" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#		Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWap"
+#    Then activate bc
+#    Then wait until status of "one-offBC" is "Completed"
+#    Then verify targeted and sent count of "one-offBC" with condition digitalPersonaGT15
     
     
     
     
     
-     @NX-3568 @initBrowser @closeBrowser
-    Scenario: Calculate Targets - Verifying partner level control group count  -3568
-    Given login
-    Then navigate to configuration management
-    Then navigate to partners
-    Then edit a partner
-    Then navigate to control group settings page
-    Then change partner control group settings
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast and select any DNC exclusion list for partner level CG from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
-    Then wait until status of "one-offBC" is "Delivering"
-    Then verify targeted count for partner level CG 
-    
-    
-    @NX-4868 @initBrowser @closeBrowser
-    Scenario: Verify BC with Partner level CG targeting 10 Million subscribers  -4868
-    Given login
-    Then navigate to configuration management
-    Then navigate to partners
-    Then edit a partner
-    Then navigate to control group settings page
-    Then change partner control group settings
-    Then navigate to landing page
+#     @NX-3568 @initBrowser @closeBrowser
+#    Scenario: Calculate Targets - Verifying partner level control group count  -3568
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to partners
+#    Then edit a partner
+#    Then navigate to control group settings page
+#    Then change partner control group settings
+#    Then navigate to landing page
 #    Then navigate to configuration management
 #    Then naviagte to product classes
 #    Then create product class and number attribute from "TestProductClass"
@@ -1793,25 +1748,70 @@ Then verify delivery details from "recurringMonthBC"
 #    Then click create new product button
 #    Then create product with attributes from sheet "fullDetails"
 #    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast with 1M subscribers and configure partner level CG from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
-    Then verify delivering status for bc
-    Then verify targeted count for partner level CG
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast and select any DNC exclusion list for partner level CG from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then verify bc created from sheet "one-offBC"
+#    Then wait until status of "one-offBC" is "Delivering"
+#    Then verify targeted count for partner level CG 
+    
+    
+#    @NX-4868 @initBrowser @closeBrowser
+#    Scenario: Verify BC with Partner level CG targeting 10 Million subscribers  -4868
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to partners
+#    Then edit a partner
+#    Then navigate to control group settings page
+#    Then change partner control group settings
+#    Then navigate to landing page
+##    Then navigate to configuration management
+##    Then naviagte to product classes
+##    Then create product class and number attribute from "TestProductClass"
+##    Then navigate to landing page
+##    Then navigate to configuration management
+##    Then navigate to campaign categories
+##    Then create new campaign category from sheet "CampaignCategory"
+##    Then navigate to landing page
+##    Then navigate to precision marketer
+##    Then navigate to offer management
+##    Then navigate to products
+##    Then navigate to product class "TestProductClass"
+##    Then click create new product button
+##    Then create product with attributes from sheet "fullDetails"
+##    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#	  Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast with 1M subscribers and configure partner level CG from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then verify bc created from sheet "one-offBC"
+#    Then verify delivering status for bc
+#    Then verify targeted count for partner level CG
     
    
         @NX-9088 @initBrowser @closeBrowser
@@ -1918,37 +1918,37 @@ Then verify delivery details from "recurringMonthBC"
   Scenario: Verify whether week settings option is displayed under partner settings NX-6340
     Then check previous step and pass this
     
-    @NX-6326 @initBrowser 
-Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-6326
-    Given login
-    Then navigate to precision marketer
-		Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "campaignCategory"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "recurringMonthSpecialBC" with "rechargeWAP"
-    Then activate bc
-    Then wait for 1 minutes
-    Then wait until status of child bc of "recurringMonthSpecialBC" is "Render Scheduled"
+#    @NX-6326 @initBrowser 
+#Scenario: Verify the BCs in Delivering state when the parent bc is pause NX-6326
+#    Given login
+#    Then navigate to precision marketer
+#		Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "campaignCategory"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "recurringMonthSpecialBC" with "rechargeWAP"
+#    Then activate bc
+#    Then wait for 1 minutes
+#    Then wait until status of child bc of "recurringMonthSpecialBC" is "Render Scheduled"
     
-     @NX-6206 @initBrowser 
-Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
-    Given login 
-	Then navigate to precision marketer 
-	Then navigate to life cycle marketing 
-	Then navigate to campaign category from sheet "campaignCategory" 
-	Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog" 
-	Then naigate to "campaignBC" campaign view broadcasts 
-	Then click create new broadcast button 
-	Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP" 
-	Then save bc 
-	Then navigate to "Recurring" broadcasts 
-	Then click edit option for bc from sheet "recurringMonthBC" 
-	Then enter edit recurrance pattern of "recurringMonthBC" with "recurringMonthSpecialBC" 
-	Then activate bc 
-	Then navigate to "Recurring" broadcasts 
-	Then view broadcast from sheet "recurringMonthBC" 
-	Then verify delivery details from "recurringMonthSpecialBC" 
+#     @NX-6206 @initBrowser 
+#Scenario: verify whether it is possible to edit the Recurrence pattern NX-6206
+#    Given login 
+#	Then navigate to precision marketer 
+#	Then navigate to life cycle marketing 
+#	Then navigate to campaign category from sheet "campaignCategory" 
+#	Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog" 
+#	Then naigate to "campaignBC" campaign view broadcasts 
+#	Then click create new broadcast button 
+#	Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeWAP" 
+#	Then save bc 
+#	Then navigate to "Recurring" broadcasts 
+#	Then click edit option for bc from sheet "recurringMonthBC" 
+#	Then enter edit recurrance pattern of "recurringMonthBC" with "recurringMonthSpecialBC" 
+#	Then activate bc 
+#	Then navigate to "Recurring" broadcasts 
+#	Then view broadcast from sheet "recurringMonthBC" 
+#	Then verify delivery details from "recurringMonthSpecialBC" 
 		
 		@NX-6350 @initBrowser 
 		Scenario: Verify whether it is possible to edit Type of day's field for activated BCs NX-6350
@@ -2134,71 +2134,71 @@ Scenario: Verify attached images of different format in Email
     
     
     
-    @NX-2416
-    @initBrowser  
-Scenario: Verify creation of triggerable BC - Regression NX-7596
-Given login
+#    @NX-2416
+#    @initBrowser  
+#Scenario: Verify creation of triggerable BC - Regression NX-7596
+#Given login
+##Then navigate to precision marketer
+# #Then navigate to offer management
+#    #Then navigate to offers
+#    #Then click on create new ofer button
+#    #Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+#    #Then navigate to offer management 
+##	  Then Navigate to Offer Catalogue
+#    #Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    #Then Add "rechargeEmail" offer to Offer Catalogue
+#     #Then navigate to landing page
+#    #Then navigate to configuration management
+#    #Then navigate to campaign categories
+#    #Then create new campaign category from sheet "CampaignCategory"
+#    #Then navigate to landing page
+#    #Then navigate to precision marketer
+##Then navigate to life cycle marketing
+#    #Then navigate to campaign category from sheet "CampaignCategory"
+##Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+##Then naigate to "campaignBC" campaign view broadcasts
+##Then click create new broadcast button
+##Then enter details for new broadcast from sheet "triggerableBC" with "rechargeEmail"
+##Then activate bc
+##Then navigate to "Triggerable" broadcasts
+##Then check if "Triggerable" bc status is "Active" from sheet "triggerableBC"
+#Then navigate to landing page
+#Then navigate to data foundation
+#Then Create a Streaming attribute
+
+
+
+#@NX-2415
+#@initBrowser
+#Scenario: Email Channel -->Verify the recurring BC using EMAIL channel.
+#Given login
 #Then navigate to precision marketer
- #Then navigate to offer management
-    #Then navigate to offers
-    #Then click on create new ofer button
-    #Then create new offer from sheet "rechargeEmail" with product "fullDetails"
-    #Then navigate to offer management 
+# Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
+#    Then navigate to offer management 
 #	  Then Navigate to Offer Catalogue
-    #Then Create New Offer Catalogue from sheet "defaultCatalog"
-    #Then Add "rechargeEmail" offer to Offer Catalogue
-     #Then navigate to landing page
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
-    #Then navigate to precision marketer
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeEmail" offer to Offer Catalogue
+#     Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
 #Then navigate to life cycle marketing
-    #Then navigate to campaign category from sheet "CampaignCategory"
+#    Then navigate to campaign category from sheet "CampaignCategory"
 #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 #Then naigate to "campaignBC" campaign view broadcasts
 #Then click create new broadcast button
-#Then enter details for new broadcast from sheet "triggerableBC" with "rechargeEmail"
+#Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeEmail"
 #Then activate bc
-#Then navigate to "Triggerable" broadcasts
-#Then check if "Triggerable" bc status is "Active" from sheet "triggerableBC"
-Then navigate to landing page
-Then navigate to data foundation
-Then Create a Streaming attribute
-
-
-
-@NX-2415
-@initBrowser
-Scenario: Email Channel -->Verify the recurring BC using EMAIL channel.
-Given login
-Then navigate to precision marketer
- Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeEmail" with product "fullDetails"
-    Then navigate to offer management 
-	  Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeEmail" offer to Offer Catalogue
-     Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-Then naigate to "campaignBC" campaign view broadcasts
-Then click create new broadcast button
-Then enter details for new broadcast from sheet "recurringMonthBC" with "rechargeEmail"
-Then activate bc
-Then navigate to "One-time" broadcasts
-Then navigate to "Recurring" broadcasts
-Then wait until status of "Recurring" is "Completed"
-
- Then verify email from sheet "Recurring"
+#Then navigate to "One-time" broadcasts
+#Then navigate to "Recurring" broadcasts
+#Then wait until status of "Recurring" is "Completed"
+#
+# Then verify email from sheet "Recurring"
 
 
 
@@ -2480,17 +2480,17 @@ Then wait until status of "Recurring" is "Completed"
     
     
     
-      @NX-9260 @initBrowser 
-    Scenario: Verify control group conversion for one off seeding BC
-    Given login
-    #Then navigate to configuration management
-    #Then naviagte to product classes
-    #Then create product class and number attribute from "TestProductClass"
-    #Then navigate to landing page
-    #Then navigate to configuration management
-    #Then navigate to campaign categories
-    #Then create new campaign category from sheet "CampaignCategory"
-    #Then navigate to landing page
+#      @NX-9260 @initBrowser 
+#    Scenario: Verify control group conversion for one off seeding BC
+#    Given login
+#    #Then navigate to configuration management
+#    #Then naviagte to product classes
+#    #Then create product class and number attribute from "TestProductClass"
+#    #Then navigate to landing page
+#    #Then navigate to configuration management
+#    #Then navigate to campaign categories
+#    #Then create new campaign category from sheet "CampaignCategory"
+#    #Then navigate to landing page
     Then navigate to precision marketer
     #Then navigate to offer management
     #Then navigate to products
@@ -2507,24 +2507,24 @@ Then wait until status of "Recurring" is "Completed"
 #	  Then Navigate to Offer Catalogue
     #Then Create New Offer Catalogue from sheet "defaultCatalog"
     #Then Add "seedingWAPoffer" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    #Then click create new broadcast button
-    #Then enter details for new broadcast and configure TG and CG from sheet "one-offBC" with "seedingWAPoffer"
-    #Then validate bc
-    #Then navigate to Seeding Bc tab
-    Then verify active option for bc
-    Then verify bc created from sheet "one-offBC"
-    Then provide file for conversion
-    Then navigate to reports
-    Then navigate to customer profile
-    Then search msisdn "912255225505"
-    Then click on events tab
-    Then wait for comversion event
-    Then remove file for conversion
-    Then wait for reward in consumer profile
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    #Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    #Then click create new broadcast button
+#    #Then enter details for new broadcast and configure TG and CG from sheet "one-offBC" with "seedingWAPoffer"
+#    #Then validate bc
+#    #Then navigate to Seeding Bc tab
+#    Then verify active option for bc
+#    Then verify bc created from sheet "one-offBC"
+#    Then provide file for conversion
+#    Then navigate to reports
+#    Then navigate to customer profile
+#    Then search msisdn "912255225505"
+#    Then click on events tab
+#    Then wait for comversion event
+#    Then remove file for conversion
+#    Then wait for reward in consumer profile
     
     
     

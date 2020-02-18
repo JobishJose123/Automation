@@ -3440,7 +3440,46 @@ public boolean checkCalculateBtnDisplayed() {
 		}
 		clickProceedButton();
 	}
-	
+	public void selectCopiedOffer(String offerSheet, String bc_type,String creative,String trackExpires,String filterCriteria,String giverRewardsTo) throws Exception{
+		ExcelHelper offerExcel=new ExcelHelper();
+		offerExcel.setExcelFile("offerInputData", offerSheet);
+		String offerName = (offerExcel.getCellByColumnName("Offer Name"))+"_Copy";
+		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
+		if(creative.equalsIgnoreCase("multiple creative")) {
+			jswait.loadClick(selectLanguage);
+			Thread.sleep(2000);
+			jswait.loadClick(selectArabic);
+		}
+		else if (creative.equalsIgnoreCase("single creative")){
+			System.out.println("singlecreative");
+			
+		}
+		if (!bc_type.contains("Informational")) {
+			selectTrackSession(trackExpires);
+			selectTrackingSource();
+//			selectFiletrCriteria(filterCriteria);
+//			selectGiveRewardsTo(giverRewardsTo);
+			
+			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
+				selectSenderAndRouteEmail();
+			} else if (offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
+				selectSenderAndRouteFacebook();
+			} else
+				selectSenderAndRoute();
+
+		} else {
+			jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+			Thread.sleep(2000);
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			Thread.sleep(1000);
+			jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+			Thread.sleep(2000);
+
+			jswait.loadClick(routeBroadcastSmppRobioutbound);
+
+		}
+		clickProceedButton();
+	}
 	
 	public void recurringBCDeliverTabDetails(String endType,String targetRenderTime,String bcExpiry,String bcSheet)  throws Exception{
 		Actions builder =new Actions(driver);
@@ -3457,6 +3496,8 @@ public boolean checkCalculateBtnDisplayed() {
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
 		String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
+		String date1= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+1);
 		int hours = rightNow.get(Calendar.HOUR);
 		int min = rightNow.get(Calendar.MINUTE);
 		int am_pm = rightNow.get(Calendar.AM_PM);
@@ -3480,8 +3521,8 @@ public boolean checkCalculateBtnDisplayed() {
 			
 			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
 			jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
-			if(targetRenderTime.equalsIgnoreCase("broadcast schedule at")||targetRenderTime.equalsIgnoreCase("broadcast schedule before")){
-			jswait.loadClick(".//*[@id='months']//div[@date='" + date2 + "']");
+			if(targetRenderTime.equalsIgnoreCase("broadcast schedule before")){
+			jswait.loadClick(".//*[@id='months']//div[@date='" + date1 + "']");
 			}
 			else
 				jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");	
@@ -3492,14 +3533,22 @@ public boolean checkCalculateBtnDisplayed() {
 			Thread.sleep(2000);
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
 			Thread.sleep(3000);
-			if(targetRenderTime.equalsIgnoreCase("real time")){
+			if(targetRenderTime.equalsIgnoreCase("broadcast schedule at")){
 			WebElement num = driver.findElement(By.xpath(
 					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
-							+ (hours + 1) + "]"));
+							+ (hours + 2) + "]"));
 			Thread.sleep(2000);
 			builder.moveToElement(num).click().build().perform();
 			Thread.sleep(2000);
-			// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
+			}
+			else {
+				WebElement num = driver.findElement(By.xpath(
+						".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+								+ (hours + 1) + "]"));
+				Thread.sleep(2000);
+				builder.moveToElement(num).click().build().perform();
+				Thread.sleep(2000);
+			}
 			WebElement num1 = driver.findElement(By.xpath(
 					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
 							+ (min + 1) + "]"));
@@ -3520,7 +3569,6 @@ public boolean checkCalculateBtnDisplayed() {
 			Thread.sleep(1000);
 			jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
 			Thread.sleep(1000);
-			 }
 		 if(endType.equalsIgnoreCase("none")) {
 				System.out.println("end type :"+endType);
 				jswait.loadClick(neverRadiobtn);
@@ -3574,10 +3622,19 @@ public boolean checkCalculateBtnDisplayed() {
 		}
 		jswait.loadClick(startBroadcastAtInput);
 		Thread.sleep(4000);
+		if(targetRenderTime.equalsIgnoreCase("broadcast schedule at")) {
 		WebElement num2 = driver.findElement(By.xpath(
-				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
+				"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 2) +"])[2]"));
 		builder.moveToElement(num2).click().build().perform();
 		Thread.sleep(2000);
+		}
+		else {
+			System.out.println("+++++++++++++++++++++++inside satrt broadcast at time+++++++++++++++++++++");
+			WebElement num2 = driver.findElement(By.xpath(
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
+			builder.moveToElement(num2).click().build().perform();
+			Thread.sleep(2000);
+		}
 		WebElement num3 = driver.findElement(By.xpath(
 				"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
 		Thread.sleep(3000);
@@ -3619,7 +3676,7 @@ public boolean checkCalculateBtnDisplayed() {
 		jswait.loadClick(bcScheduleRadiobtn);
 		jswait.loadClick(startBroadcastInput);
 		jswait.loadClick(renderTimeBefore);
-		jswait.loadSendKeys(broadcastRenderBeforeInput, "48");
+		jswait.loadSendKeys(broadcastRenderBeforeInput, "24");
 	}
 	if(bcExpiry.equalsIgnoreCase("after")) {
 		jswait.loadClick(broadcastExpiryCheckbox);
@@ -4069,14 +4126,14 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 			switch(bctype) {
 			case "onetime" :
 				System.out.println("+++++++++++++++++++++++inside case 1 of switch case+++++++++++++++++++");
-				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
 				break;
 			case "recurringWithEndAt":
 				System.out.println("+++++++++++++++++++++++inside case 2 of switch case+++++++++++++++++++");
-				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
 				break;
 			case "recurring" :
-				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][3]"));
+				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][2]"));
 				break;
 			case "seedingonetime":
 				Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-cell-content[contains(.,'"+bcName+"_OneOff_RewardingBC')]//following::vaadin-grid-cell-content[contains(.,'"+targetCount+"')][1]"));
@@ -4090,10 +4147,11 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 			}	
 		}
 	
-	public void addBcToSheet(String bcName,String bcType,String bcStorageSheet,int row) throws Exception{
+	public void addBcToSheet(String bcSheet,String bcName,String bcType,String bcStorageSheet,int row) throws Exception{
 		eh.setExcelFile("parallelRunBC", bcStorageSheet);
 	    eh.setCell(row, 0, bcName);
   	    eh.setCell(row, 1, bcType);
+  	    eh.setCell(row ,2, bcSheet);
 
 	
 	}
@@ -4352,7 +4410,19 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 			
 	}
 		
-		
+		public void verifyofferDetailsInViewPage(String offerName) throws Exception {
+			jswait.loadClick(ViewOfferDetails);
+			Thread.sleep(2000);
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Offer Name')]//following::p[contains(.,'"+offerName+"')]"));
+			
+		}
+		public void verifycopiedofferDetailsInViewPage(String offerName) throws Exception {
+			jswait.loadClick(ViewOfferDetails);
+			Thread.sleep(2000);
+			offerName=offerName+"_Copy";
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Offer Name')]//following::p[contains(.,'"+offerName+"')]"));
+			
+		}
 		
 		
 		

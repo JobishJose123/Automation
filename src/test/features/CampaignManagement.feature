@@ -5,137 +5,137 @@ Feature: campaign management
 
   #########################recurring bc
   
-  @NX-12191 @initBrowser
-    Scenario: Campaign grid: Verify the label of targeted subscribers-1219
-    Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
-    Then navigate to offer management 
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "rechargeWAP" offer to Offer Catalogue
-    Then navigate to life cycle marketing
-    Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then naigate to "campaignBC" campaign view broadcasts
-    Then click create new broadcast button
-    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
-    Then activate bc
-    Then verify bc created from sheet "one-offBC"
-    Then wait until status of "one-offBC" is "Targeting"
-		Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-    Then click on campaign  to verify expanding the campaign row from sheet "campaignBC"
-    Then verify targeted customers label and count
-    
-  @NX-9213 @initBrowser
-  Scenario: create a campaign
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then verify campaign created from sheet "campaignBC"
+#  @NX-12191 @initBrowser
+#    Scenario: Campaign grid: Verify the label of targeted subscribers-1219
+#    Given login
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#    Then create new offer from sheet "rechargeWAP" with product "fullDetails"
+#    Then navigate to offer management 
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "rechargeWAP" offer to Offer Catalogue
+#    Then navigate to life cycle marketing
+#    Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then naigate to "campaignBC" campaign view broadcasts
+#    Then click create new broadcast button
+#    Then enter details for new broadcast from sheet "one-offBC" with "rechargeWAP"
+#    Then activate bc
+#    Then verify bc created from sheet "one-offBC"
+#    Then wait until status of "one-offBC" is "Targeting"
+#		Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+#    Then click on campaign  to verify expanding the campaign row from sheet "campaignBC"
+#    Then verify targeted customers label and count
+#    
+#  @NX-9213 @initBrowser
+#  Scenario: create a campaign
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then verify campaign created from sheet "campaignBC"
     
     @NX-1560 @initBrowser 
   Scenario: Create Campaign: Verify adding the campaign with duplicate name- 1560
     Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
     Then navigate to precision marketer
     Then navigate to life cycle marketing
 		Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
     Then create duplicate campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
-    @NX-1506 @initBrowser 
-  Scenario: Create new campaign template :- Verify the name and created by of the Campaign template- 1506
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-    Then navigate to templates tab
-    Then create new template from sheet "template"
-    Then verify template created from sheet "template"
+#    @NX-1506 @initBrowser 
+#  Scenario: Create new campaign template :- Verify the name and created by of the Campaign template- 1506
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+#    Then navigate to templates tab
+#    Then create new template from sheet "template"
+#    Then verify template created from sheet "template"
     
     
-     @NX-1508 @initBrowser
-    Scenario: CLV Max: Create new campaign template :- Verify the Use template functionality of the Campaign template- 1508
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-    Then navigate to templates tab
-    Then create new template from sheet "template"
+#     @NX-1508 @initBrowser
+#    Scenario: CLV Max: Create new campaign template :- Verify the Use template functionality of the Campaign template- 1508
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+#    Then navigate to templates tab
+#    Then create new template from sheet "template"
     #Then verify template created from sheet "template"
     #Then click on use template button
     #Then create new campaign use template from sheet "campaignBC" with catalog "defaultCatalog"
     
-    @NX-1510 @initBrowser
-    Scenario: Campaign Template: Verify editing the created campaign templates- 1510
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-    Then navigate to templates tab
-    Then create new template from sheet "template"
-    Then verify template created from sheet "template"
-    Then edit campaign template from sheet "template"
-    Then verify template edited from sheet "template"
+#    @NX-1510 @initBrowser
+#    Scenario: Campaign Template: Verify editing the created campaign templates- 1510
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+#    Then navigate to templates tab
+#    Then create new template from sheet "template"
+#    Then verify template created from sheet "template"
+#    Then edit campaign template from sheet "template"
+#    Then verify template edited from sheet "template"
     
     
     
-    @NX-1505 @initBrowser
-    Scenario: Campaign Template: Verify the Add AND option for the condition added- 1505
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-    Then navigate to templates tab
-    Then create new template from sheet with add AND option "template"
-    Then verify template created from sheet "template"
+#    @NX-1505 @initBrowser
+#    Scenario: Campaign Template: Verify the Add AND option for the condition added- 1505
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+#    Then navigate to templates tab
+#    Then create new template from sheet with add AND option "template"
+#    Then verify template created from sheet "template"
     
     
     @NX-1500 @initBrowser
@@ -201,23 +201,23 @@ Feature: campaign management
     Then edit campaign from sheet "campaignBC" with catalog "defaultCatalog"
     
     
-    @NX-1198 @initBrowser
-    Scenario: Campaign grid: Verify the filter option for the campaign-1198
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then verify campaign created from sheet "campaignBC"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then verify campaign created from sheet "campaignBC"
-    Then verify filter for campaign from sheet "campaignBC"
-    Then verify campaign created from sheet "campaignBC"
-    
+#    @NX-1198 @initBrowser
+#    Scenario: Campaign grid: Verify the filter option for the campaign-1198
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then verify campaign created from sheet "campaignBC"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then verify campaign created from sheet "campaignBC"
+#    Then verify filter for campaign from sheet "campaignBC"
+#    Then verify campaign created from sheet "campaignBC"
+#    
     
     @NX-1194 @initBrowser
     Scenario: Campaign grid: Verify expanding the campaign row-1194
@@ -381,19 +381,19 @@ Feature: campaign management
     
     
     
-    @NX-1211 @initBrowser
-    Scenario: Campaign grid: Verify the pause option for the campaign-1211
-    Given login
-    Then navigate to configuration management
-    Then navigate to campaign categories
-    Then create new campaign category from sheet "CampaignCategory"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to life cycle marketing
-		Then navigate to campaign category from sheet "CampaignCategory"
-    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-    Then verify campaign created from sheet "campaignBC"
-    Then verify pause for campaign
+#    @NX-1211 @initBrowser
+#    Scenario: Campaign grid: Verify the pause option for the campaign-1211
+#    Given login
+#    Then navigate to configuration management
+#    Then navigate to campaign categories
+#    Then create new campaign category from sheet "CampaignCategory"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to life cycle marketing
+#		Then navigate to campaign category from sheet "CampaignCategory"
+#    Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+#    Then verify campaign created from sheet "campaignBC"
+#    Then verify pause for campaign
     
     @NX-1212 @initBrowser
     Scenario: Campaign grid: Verify the resume option for the campaign-1212

@@ -51,6 +51,7 @@ public static StringBuilder stringBuilderForCsvReport;
 	public static Date dateForCompare = new Date();
 	public static int forExcelSpreadsheet = -1;
 	public final String INVENTORY_ONE_PER_DAY = "sel_one_per_day";
+	public final String INVENTORY_MANUAL_BLACKOUT="inventory_manual";
 	public final String BASE_LIST = "selenium_list";
 	public final String BASE_LIST_FOR_USE_TEMPLATE = "target_list";
 	public final String BASE_LISTNack = "selenium_list NACK";

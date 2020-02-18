@@ -10,8 +10,9 @@ Then navigate to intent management
 Then navigate to analytics
 Then navigate to explore segments
 Then create SegmentAnalysis from sheet "SegmentAnalysisName"
+Then save iaj job
 Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisName"
-Then wait until Segment Analysis job status is changed to "completed"
+Then wait until Segment Analysis job status is changed to "C"
 
 
 @NDX-5640 @initBrowser @closeBrowser
@@ -26,7 +27,7 @@ Then save the Micro Segment
 
 
 
-@NDX-5646 @NDX-5645    @initBrowser @closeBrowser
+@NDX-5646   @initBrowser @closeBrowser
 Scenario: Create Cross-Tab for a for a job which is in completed status
 Given login
 Then navigate to intent management
@@ -37,7 +38,7 @@ Then Create Cross-Tab
 
 
 
-@NDX-5694    @initBrowser @closeBrowser
+@NDX-5694   @NDX-10216 @initBrowser @closeBrowser
 Scenario: Create Cluster for a for a job which is in completed status
 Given login
 Then navigate to intent management
@@ -53,15 +54,16 @@ Then click save cluster button
 Then wait until status of cluster is complete
 
 
-@NDX-5542 @initBrowser @closeBrowser
+@CreateIAJJob @initBrowser @closeBrowser
 Scenario: Verify Segment Analysis Creation
 Given login
 Then navigate to intent management
 Then navigate to analytics
 Then navigate to explore segments
 Then create SegmentAnalysis from sheet "SegmentAnalysisCopy"
+Then save iaj job
 Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisCopy"
-Then wait until Segment Analysis job status is changed to "completed"
+Then wait until Segment Analysis job status is changed to "C"
 
 
 @NDX-5639 @initBrowser @closeBrowser
@@ -75,7 +77,7 @@ Then Create Micro Segment
 Then save the Micro Segment 
 
 
-@NDX-5646    @initBrowser @closeBrowser
+@CreateCrossTab    @initBrowser @closeBrowser
 Scenario: Create Cross-Tab for a for a job which is in completed status
 Given login
 Then navigate to intent management
@@ -85,7 +87,7 @@ Then filter the Segment Analysis job from sheet "SegmentAnalysisCopy"
 Then Create Cross-Tab
 
 
-@NDX-5694   @initBrowser @closeBrowser
+@CreateCluster   @initBrowser @closeBrowser
 Scenario: Create Cluster for a for a job which is in completed status
 Given login
 Then navigate to intent management
@@ -106,9 +108,10 @@ Given login
 Then navigate to intent management
 Then navigate to analytics
 Then navigate to explore segments
-#Then create SegmentAnalysis from sheet "SegmentAnalysisJobToDelete"
+Then create SegmentAnalysis from sheet "SegmentAnalysisJobToDelete"
+Then save iaj job
 Then filter the Segment Analysis job for status check from sheet "SegmentAnalysisJobToDelete"
-Then wait until Segment Analysis job status is changed to "completed"
+Then wait until Segment Analysis job status is changed to "C"
 
 
     

@@ -16,13 +16,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjetcs.CommonObjects;
 
-import com.google.api.services.gmail.Gmail.Users;
+//import com.google.api.services.gmail.Gmail.Users;
 import com.itextpdf.text.log.SysoCounter;
 
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.TimeoutImpl;
+import cucumber.api.java.gl.E;
 
 public class SegmentAnalysisObjects extends Init {
 	CommonObjects commonObjects = new CommonObjects();
@@ -441,6 +442,75 @@ private WebElement savedSegmentSelectorField;
 	@FindBy(xpath="//paper-button[@class='saveBtn style-scope saved-segment-option x-scope paper-button-0'][contains(.,'Save')]")
 	private WebElement SaveMicroSegmentNameToSavedSegment;
 	
+	
+	@FindBy(xpath="//div[contains(.,'Test_View1/Test_View2')][@class='clusterName style-scope cluster-model']")
+	private WebElement clusterName ;
+	@FindBy(xpath="(//paper-icon-button[@id='detailsButton'])[2]")
+	private WebElement viewClusterDetailbtn;
+	@FindBy(xpath="//paper-button[contains(.,'Save Cluster')]")
+	private WebElement saveClusterbtn;
+	@FindBy(xpath="//label[contains(.,'Cluster Name')]//following::input[1]")
+	private WebElement clusterNameName;
+	@FindBy(xpath="//paper-button[contains(.,'Save')]")
+	private WebElement saveAsDiscoveredClusterbtn ;
+	@FindBy(xpath="//paper-button[contains(.,'Close')]")
+	private WebElement closeClusterbtn;
+	@FindBy(xpath="(//paper-icon-button[@id='clearIcon'])[1]")
+	private WebElement clearTargetList;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+//	@FindBy(xpath="")
+//	private WebElement ;
+	
+	
 	public void navigateToAnalytics() throws InterruptedException {
 		jswait.loadClick(analytics);
 	}
@@ -534,7 +604,7 @@ private WebElement savedSegmentSelectorField;
 		jswait.loadClick(KpiAttributetypeclick);
 		Thread.sleep(2000);
 		jswait.loadSendKeys(kpitype, AGE_PROFILE_FIELD);
-		
+		flag++;
 		if(flag==1) {
 			jswait.loadSendKeys(kpitype, BALANCE_PROFILE_FIELD);
 			Thread.sleep(2000);
@@ -971,7 +1041,6 @@ public void clustertabledetailsandsave() throws Exception {
 	   Thread.sleep(2000);
 	String status = driver.findElement(By.xpath("//span[@class='style-scope analysis-list']")).getText();
 	System.out.println(status);
-//	   return SegmentAnalysisJobstatus.getText();
 	return status;
 	   
    }
@@ -999,11 +1068,17 @@ public void clustertabledetailsandsave() throws Exception {
 
 	Thread.sleep(2000);
 	
+   }
+	
+	
+	public void saveIajJob() throws Exception{
 	jswait.loadClick(Topproccedbtn);
 	Thread.sleep(2000);
 	jswait.loadSendKeys(SaveAnalysisDescinput,"test");
 						
 	Thread.sleep(2000);
+	jswait.loadClick(SaveAnalysisSetPermission);
+	Thread.sleep(1000);
 	jswait.loadSendKeys(SaveAnalysisSetPermission,"selenium.flytxt@gmail.com");
 	Thread.sleep(3000);
 	jswait.loadSendKeys(SaveAnalysisSetPermission,"selenium.flytxt@gmail.com");
@@ -1014,6 +1089,7 @@ public void clustertabledetailsandsave() throws Exception {
 	jswait.loadClick(SaveAnalysisBtn);
 	Thread.sleep(2000);
    }
+   
    
    public void editSegmentAnalysis() throws Exception{
 	   commonObjects.clickOptionsIcon();
@@ -1213,7 +1289,7 @@ public void clustertabledetailsandsave() throws Exception {
 	  
 public void TargetCount() throws Exception {
 
-	Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope analysis-list'][contains(.,'1,020')]"));
+	Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope analysis-list'][contains(.,'1,019')]"));
 }
 
   public void editCrossTab() throws Exception{
@@ -1228,7 +1304,37 @@ public void TargetCount() throws Exception {
 	  jswait.loadClick(SaveMicroSegmentNameToSavedSegment);
 	  
   }
-
+public void saveClusterAsDiscoveredCluster(String discoveredCluster) throws Exception{
+	jswait.loadClick(clusterName);
+	jswait.loadClick(viewClusterDetailbtn);
+	jswait.loadClick(saveClusterbtn);
+	jswait.loadSendKeys(clusterNameName, discoveredCluster);
+	jswait.loadClick(saveAsDiscoveredClusterbtn);
+}
+	public void closeCluster() throws Exception{
+		jswait.loadClick(closeClusterbtn);
+		jswait.loadClick(closeClusterbtn);
+	}
+	public void verifyClusterInDiscoveredCluster(String clusterName) throws Exception{
+		assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("//span[contains(.,'"+clusterName+"')]"))));
+	}
+	
+	public void changeTargetList() throws Exception {
+		jswait.loadClick(clearTargetList);
+		jswait.loadSendKeys(createSegmentAnalysisListinput, SEL_LIST);
+		Thread.sleep(2000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+SEL_LIST+"')]");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
 	
 	  }
 

@@ -12,6 +12,31 @@ Then navigate to explore segments
 Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
 Then find the Target count
 
+
+@NDX-10209 @NDX-10208 @initBrowser
+Scenario: Verify running a broadcast using the discovered cluster list from SAJ created 
+Given login
+Then navigate to intent management
+Then navigate to analytics
+Then navigate to explore segments
+Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+Then click on cluster option
+Then save the cluster as discovered cluster  
+Then close the cluster details
+Then navigate to landing page
+Then navigate to data foundation
+Then navigate to discovered clusters
+Then wait for 2 minutes
+Then verify the list in discovered cluster
+Then navigate to landing page 
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast from sheet with clusters "one-offBC" with "rechargeSMS"
+
+
 @NDX-5546  @initBrowser  @closeBrowser
 Scenario: Edit target condition of a Segment Analysis job(Regression) which
 is in Completed status
@@ -116,6 +141,19 @@ Then navigate to analytics
 Then navigate to explore segments
 Then filter the Segment Analysis job from sheet "SegmentAnalysisCopy"
 Then Copy the SegmentAnalysisJob
+Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnalysisCopy"
+Then wait until Segment Analysis job status is changed to "C"
+
+@NDX-10196
+@initBrowser
+Scenario:  Copy a segment analysis job and change the target list and verify
+Given login
+Then navigate to intent management
+Then navigate to analytics
+Then navigate to explore segments
+Then edit the Segment Analysis job Copy from sheet "SegmentAnalysisCopy"
+Then change targetlist 
+Then save iaj job
 Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnalysisCopy"
 Then wait until Segment Analysis job status is changed to "C"
 

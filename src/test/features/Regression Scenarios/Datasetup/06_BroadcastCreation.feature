@@ -6,7 +6,7 @@ Feature: Test suite for Broadcast creation
   Create all types of Braodcast
   
 
-  
+ 
 #  @NDX-oneOffBcForDataSetup @NDX-4887
 #  @initBrowser @closeBrowser
 #  Scenario Outline: Verify Creating one-off BC with given <Condition>
@@ -382,8 +382,9 @@ Feature: Test suite for Broadcast creation
 
 
 
-#============================================CREATION OF BC FOR VERFICATION OF BC FUNCTIONALITY=========================================================================================#
+#=====================================================================================================================================#
 
+# verification part included in BroadcastFunctionality_Regression(REGRESSION CASES).feature,BroadcastFunctionality_Migration.feature(MIGRATION CASES)
 
 @NDX-PartnerCGSetting @initBrowser
 Scenario: provide the list for partner cg
@@ -395,7 +396,7 @@ Then navigate to control group settings page
 Then change partner control group settings
 Then wait for 2 minutes
 
-@NDX-CreateOfferForBCFunctionality  @initBrowser 
+@NDX-CreateOfferForBCFunctionality  @initBrowser @closeBrowser
 Scenario Outline: create offer
 Given login
 Then navigate to precision marketer
@@ -412,6 +413,33 @@ Examples:
 |seedingWAPoffer|singlecreative|
 |seedingEmail|singlecreative|
 |SeedingSMS_Dynamic|singlecreative|
+
+@CreateOfferCatalog @initBrowser @closeBrowser
+Scenario: Verify Creating Offer Catalogue 
+Given login
+When navigate to precision marketer
+Then navigate to offer management
+Then Navigate to Offer Catalogue
+Then Create New Offer Catalogue from sheet "defaultCatalog"
+Then Add "rechargeSMS" offer to Offer Catalogue
+Then Add "SeedingSMS" offer to Offer Catalogue
+Then Add "rechargeWAP" offer to Offer Catalogue
+Then Add "seedingWAPoffer" offer to Offer Catalogue
+Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue
+Then Add "seedingEmail" offer to Offer Catalogue
+Then Add "rechargeEmail" offer to Offer Catalogue
+Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue
+Then navigate to landing page
+Then navigate to configuration management
+Then navigate to campaign categories
+Then create new campaign category from sheet "campaignCategory"
+When navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+
+
+#/////////////////////////// CREATION OF BC FOR FUNCTIONALITY VERIFICATION ///////////////////////////////////
 
 
 @NDX-CreateBCForFunctionality @initBrowser   
@@ -469,7 +497,12 @@ Then navigate to data foundation
 Then click Data Fusion Engine
 Then filter the job "Sel_TriggerJob1" and activate it
 
-@NDX-TriggerBC  @initBrowser 
+
+
+#////////////////////////  CREATION OF TRIGGER BC FOR FUNCTIONALITY VERIFICATION /////////////////////////////////////////*
+  
+
+@NDX-TriggerBC  @initBrowser @closeBrowser
 Scenario Outline: Create all type of trigger bc to verify trigger bc functionality
 Given login
 Then navigate to precision marketer
@@ -488,20 +521,14 @@ Then wait for 4000 milliseconds
 
 Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|status|BCDataSheet|
-|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|5|save|ConversionBC|
-|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|13|activate|BCDataStorage|
-|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|14|activate|BCDataStorage|
-|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|never|none|6|save|ConversionBC|
-|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|15|activate|BCDataStorage|
+#|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|5|save|ConversionBC|
+#|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|13|activate|BCDataStorage|
+#|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|14|activate|BCDataStorage|
+#|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|never|none|6|save|ConversionBC|
+#|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|15|activate|BCDataStorage|
 |TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|7|save|ConversionBC|
 |TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|single creative|At|At|16|activate|BCDataStorage|
-
-#after running @NDX-TriggerBC run @NDX-fileForTriggerBC
-@NDX-fileForTriggerBC  @initBrowser @closeBrowser
-Scenario: upload file for trigger bc
-Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "trigger1.csv"
-
-
+#//////////////////////////////BC CREATION FOR BLACKOUT MANUAL AND RENDER SCHEDULE BEFORE AND AT//////////////////////// 
 
 @BCWithBlackoutManualRenderTimeBeforeAt @initBrowser @closeBrowser
 Scenario Outline: create  recurring bc with blackout manual 
@@ -511,7 +538,7 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "CampaignCategory" 
 Then naigate to "campaignBC" campaign view broadcasts 
 Then click create new broadcast button
-Then create bc from sheet "recurrBCDaily" with inventory "inventory_manual" and trigger "none"
+Then create bc from sheet "recurrBCDaily" with inventory "<inventory>" and trigger "none"
 Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "none"
 Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "recurrBCDaily" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "none" target render time "<broadcastRenderTime>" and broadcast expiry as "none" from sheet "recurrBCDaily"
@@ -519,16 +546,39 @@ Then save bc
 Then add bc from sheet "recurrBCDaily" to column "<i>" of bc data sheet "ConversionBC"
 Then wait for 4000 milliseconds 
 Examples:
-#|broadcastRenderTime|i|
-#|real time|8|
-|broadcast schedule at|9|
-|broadcast schedule before|10|
+|broadcastRenderTime|i|inventory|
+|real time|8|inventory_manual|
+|broadcast schedule at|9|Unlimited|
+|broadcast schedule before|10|Unlimited|
+
+#////////////////////////DNC EXCLUSION MANDATORY ,OPEIONAL BC CREATION///////////////////////////////
+
+@DNCExclusionBC @initBrowser @closeBrowser
+Scenario Outline: create BC to verify DNC (optional,mandatory)
+Given login 
+Then navigate to precision marketer 
+Then navigate to life cycle marketing 
+Then navigate to campaign category from sheet "CampaignCategory" 
+Then naigate to "campaignBC" campaign view broadcasts 
+Then click create new broadcast button
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "none"
+Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "both"
+Then enter choose offer tab from sheet "<offerSheet>" for bc from sheet "<bcSheet>" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "one-offBC"
+Then activate bc 
+Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "BCDataStorage"
+Then wait for 4000 milliseconds 
+
+Examples:
+|bcSheet|offerSheet|i|
+|recurrBCDaily|rechargeSMS|17|
+|TriggerReccurringBC|SeedingSMS|18|
 
 
-
-
-
-
+#after running @NDX-TriggerBC and @DNCExclusionBC
+@NDX-fileForTriggerBC  @initBrowser @closeBrowser
+Scenario: upload file for trigger bc
+Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "trigger1.csv"
 
 
 
