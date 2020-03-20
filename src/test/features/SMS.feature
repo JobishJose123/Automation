@@ -390,11 +390,11 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
 	Then navigate to programs
 #    Then click create program button
 #    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    Then choose program from sheet "SMSprogram"
-    Then create new rule from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
-    Then verify rule created from sheet "rule"
-    Then wait for "A" status of rule
-    Then wait until rule is picked
+#    Then choose program from sheet "SMSprogram"
+#    Then create new rule from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+#    Then verify rule created from sheet "rule"
+#    Then wait for "A" status of rule
+#    Then wait until rule is picked
 	Then navigate back to vcust
 	Then login to the vcust
     Then hit with vcust SMS with number "9491750351" with keyword "smsTP1245"
@@ -415,62 +415,8 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
     Then navigate to customer profile
     Then search msisdn "9491750351"
     Then click on events tab
+    Then wait for conversion in consumer profile with offer "rechargeSMS"
     Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
     
-         @initBrowser @NDX-9869 @NDX-9858
-  Scenario: Verify keyword based conversion for SMS touchpoint
-    Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then create new offer from sheet "STVSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
-    Then navigate to offer management
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "STVSMS" offer to Offer Catalogue
-    Then navigate to landing page
-    Then navigate to intent management
-    Then navigate to programs
-    Then click create program button
-	Then navigate to programs
-    Then click create program button
-    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    Then choose program from sheet "SMSprogram"
-    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-    Then verify rule created from sheet "rule"
-    Then wait for "A" status of rule
-    Then wait until rule is picked
-	Then navigate back to vcust
-	Then login to the vcust
-    Then hit with vcust SMS with number "9491750351" with keyword "smsTP1245"
-   
-    
-	Then navigate to the neon again
-	Then navigate to precision marketer
-    Then navigate to reports
-    Then navigate to customer profile
-    Then search msisdn "9491750351"
-    Then click on events tab
-    
-    Then navigate back to vcust
-    Then hit with vcust SMS with number "9491750351" with keyword "seleniumkeyword"
-    Then raise the conversion job
-    Then navigate to the neon again
-	Then navigate to precision marketer
-    Then navigate to reports
-    Then navigate to customer profile
-    Then search msisdn "9491750351"
-    Then click on events tab
-    Then wait for Fulfillment Success in consumer profile with offer "STVSMS"
+     
   

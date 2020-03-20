@@ -6,10 +6,10 @@ Scenario: Verify partner creation
 Given login 
 Then navigate to configuration management 
 Then click on partners
-Then right click 'System GLobal' partner and select Add Subpartner
-Then create a partner from sheet "partner" with partner type "other"
-Then  click on Save
-Then verify the partner creation
+#Then right click 'System GLobal' partner and select Add Subpartner
+#Then create a partner from sheet "partner" with partner type "other"
+#Then  click on Save
+#Then verify the partner creation
 
 @NDX
 @initBrowser 

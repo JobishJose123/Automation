@@ -12,18 +12,18 @@ Feature: For IntentManagement customer care Regression.
     Then choose program from sheet "CCprogram"
     Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
     Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint" with taget condition <Condition>
-        Then navigate to rules after edit
-     Then wait until rule is picked
+    Then navigate to rules after edit
+    Then wait until rule is picked
     Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
-Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint" with taget condition <Condition>
+	Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint" with taget condition <Condition>
     Then navigate to rules after edit
- Then wait until rule is picked
-   Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
-Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint" with taget condition <Condition>
+ 	Then wait until rule is picked
+    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+	Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint" with taget condition <Condition>
     Then navigate to rules after edit
- Then wait until rule is picked
+ 	Then wait until rule is picked
     Then verify rule created from sheet "rule"
-   Then wait for "A" status of rule
+    Then wait for "A" status of rule
     Then logout
     Then login with selenium user
     Then navigate to precision marketer
@@ -33,7 +33,7 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
     Then verify offer "BalanceTop"
     Then wait for 5 minutes
     Then enter msisdn again for refresh "919491750000"
-   Then verify offer "Recharge offer"   
+    Then verify offer "Recharge offer"   
   
       Examples: 
       | Condition |
@@ -136,7 +136,7 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer support
-    Then search msisdn "919491750000"
+    Then search msisdn "919592850004"
 #    Then verify offer "Balance Top ups"
     Then logout
     Then login
@@ -151,7 +151,7 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
     Then navigate to precision marketer
     Then navigate to reports
     Then navigate to customer support
-    Then search msisdn "919491750000"
+    Then search msisdn "919592850004"
 #    Then verify offer "Balance Top ups"
     Then logout
     Then login
@@ -168,7 +168,7 @@ Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from shee
     Then navigate to reports
     Then navigate to customer support
 #   Then wait for 3 minutes
-    Then search msisdn "919491750000"
+    Then search msisdn "919592850004"
 #    Then verify offer "Balance Top"
 #    Then wait for 3 minutes
 #    Then enter msisdn again for refresh "919491750000"

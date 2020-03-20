@@ -129,35 +129,35 @@ Then navigate to landing page
 #    Then create new reward type
 #    Then navigate to landing page
     
-#     @NX-createDefaultApiTouchpoint @initBrowser
-#  Scenario: create api touchpoint GA
-#    Given login
-#    Then navigate to intent management
-#    Then navigate to touchpoints
-#    Then navigate to api
-#    Then create api touchpoint from sheet "apiTouchpoint_default"
-#    Then check api touchpoint in grid "apiTouchpoint_default"
-#    Then add touchpoint "apiTouchpoint_default" to api_auth_policy
+     @NX-createDefaultApiTouchpoint @initBrowser
+  Scenario: create api touchpoint GA
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to api
+    Then create api touchpoint from sheet "apiTouchpoint_default"
+    Then check api touchpoint in grid "apiTouchpoint_default"
+    Then add touchpoint "apiTouchpoint_default" to api_auth_policy
 #    
-#    @NX-createDefaultApiTouchpointUR @initBrowser
-#  Scenario: create api touchpoint UR
-#    Given login
-#    Then navigate to intent management
-#    Then navigate to touchpoints
-#    Then navigate to api
-#    Then create api touchpoint from sheet "apiTouchpointUR_default"
-#    Then check api touchpoint in grid "apiTouchpointUR_default"
-#    Then add touchpoint "apiTouchpointUR_default" to api_auth_policy
+    @NX-createDefaultApiTouchpointUR @initBrowser
+  Scenario: create api touchpoint UR
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to api
+    Then create api touchpoint from sheet "apiTouchpointUR_default"
+    Then check api touchpoint in grid "apiTouchpointUR_default"
+    Then add touchpoint "apiTouchpointUR_default" to api_auth_policy
 #    
-#     @NX-createDefaultApiTouchpointGR @initBrowser
-#  Scenario: create api touchpoint GR
-#    Given login
-#    Then navigate to intent management
-#    Then navigate to touchpoints
-#    Then navigate to api
-#    Then create api touchpoint from sheet "apiTouchpointGR_default"
-#    Then check api touchpoint in grid "apiTouchpointGR_default"
-#    Then add touchpoint "apiTouchpointGR_default" to api_auth_policy
+     @NX-createDefaultApiTouchpointGR @initBrowser
+  Scenario: create api touchpoint GR
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to api
+    Then create api touchpoint from sheet "apiTouchpointGR_default"
+    Then check api touchpoint in grid "apiTouchpointGR_default"
+    Then add touchpoint "apiTouchpointGR_default" to api_auth_policy
 #    
 #    
 #    @NX-createDefaultApiTouchpointUA @initBrowser
@@ -206,23 +206,23 @@ Then navigate to landing page
 #    Then create ussd touchpoint from sheet "ussdTouchpoint"
 #    Then check ussd touchpoint in grid "ussdTouchpoint"
 #    
-#      @NX-430 @NX-2053 @initBrowser @closeBrowser
-#  Scenario: Verify new SMS touchpoint creation 430
-#    Given login
-#    Then navigate to intent management
-#    Then navigate to touchpoints
-#    Then navigate to sms
-#    Then create sms touchpoint from sheet "smsTouchpoint"
-#    Then check sms touchpoint in grid "smsTouchpoint"
+      @NX-430 @NX-2053 @initBrowser @closeBrowser
+  Scenario: Verify new SMS touchpoint creation 430
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to sms
+    Then create sms touchpoint from sheet "smsTouchpoint"
+    Then check sms touchpoint in grid "smsTouchpoint"
 #    
-#     @NX-433 @NX-4063 @initBrowser @closeBrowser
-#  Scenario: Verify new Customer Care touchpoint creation
-#    Given login
-#    Then navigate to intent management
-#    Then navigate to touchpoints
-#    Then navigate to customer care
-#    Then create customer care touchpoint from sheet "CCTouchpoint"
-#    Then check customer care touchpoint in grid "CCTouchpoint"
+     @NX-433 @NX-4063 @initBrowser @closeBrowser
+  Scenario: Verify new Customer Care touchpoint creation
+    Given login
+    Then navigate to intent management
+    Then navigate to touchpoints
+    Then navigate to customer care
+    Then create customer care touchpoint from sheet "CCTouchpoint"
+    Then check customer care touchpoint in grid "CCTouchpoint"
     
      @precondition-Predefinied_targets @initBrowser
   Scenario: create saved segment as precondition

@@ -5,7 +5,7 @@
 Feature: Product class and Product creation
 
 @NX-1222
-@initBrowser  @closeBrowser
+@initBrowser  
 Scenario: Products Grid: Create Prodcut from Productclass other than prepaid telecom 
 Given login
 Then navigate to configuration management

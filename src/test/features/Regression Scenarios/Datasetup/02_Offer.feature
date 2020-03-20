@@ -13,8 +13,8 @@ Feature: Test suite on Offer creation
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "usagerecharge" with product "fullDetails"
-#    Then verify recharge offer from sheet "rechargeWAP"
-#    Then save "offerInputData" data to spreadsheet from "rechargeWAP" with string recharge wap offer with fullDetails product
+    Then verify recharge offer from sheet "rechargeWAP"
+    Then save "offerInputData" data to spreadsheet from "rechargeWAP" with string recharge wap offer with fullDetails product
    
   @NDX-5164 @initBrowser 
   Scenario: Verify the Create offer using SMS Channel and STV Type

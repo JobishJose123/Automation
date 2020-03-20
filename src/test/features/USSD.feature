@@ -243,8 +243,8 @@ Feature: Test cases for USSD
  
  
  
-    @initBrowser @NDX-ussdkeyword	
-  Scenario: Verify create a customer care program full flow
+    @initBrowser @NDX-9868	
+  Scenario: Verify keyword based conversion for USSD touchpoint
         Given login
         Then navigate to configuration management
     Then naviagte to product classes

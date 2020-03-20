@@ -255,6 +255,67 @@ public class Request extends Init{
 		List<String> cookies = con.getHeaderFields().get("Set-Cookie");
 		return cookies;
 	}
+	
+	
+	public String postRequeststring(String urlStr, String jobPayload) throws ClientProtocolException, IOException {
+		StringEntity entity = new StringEntity(jobPayload,
+                ContentType.APPLICATION_JSON);
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost request = new HttpPost(urlStr);
+        request.setHeader("Content-type", "application/json");
+        request.setEntity(entity);
+        HttpResponse response = httpClient.execute(request);
+        System.out.println(response.getStatusLine().getStatusCode());
+        
+        int test =response.getStatusLine().getStatusCode();
+     
+        String res=test+response.toString();
+		return res ;
+	}
+	
+	public String getRequeststring(String urlStr,String authkey) throws IOException{	
+		setUrl(urlStr);
+		setEncodedAuthorisation(authkey);
+		setGetProperties();
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'GET' request to URL : " + url);
+		System.out.println("Response Code : " + responseCode);
+		getResponseString();
+		String resp=getResponseString();
+		System.out.println(resp);
+		String message=con.getResponseMessage();
+		System.out.println(message);
+		return resp;	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		Request r = new Request();
 		//putJson to NEon

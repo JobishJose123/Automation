@@ -35,13 +35,13 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'Prioritization Rule')]/../input")
 	private WebElement ussdFormPrioritizationRuleSelector;
 	
-	@FindBy(xpath="//form[@id='ussdForm']//paper-item[contains(.,'FIFO')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'FIFO')]")
 	private WebElement ussdFormPrioritizationRuleFIFO;
 	
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
 	private WebElement ussdFormPrioritizationLogicFIFO
 	;
-	@FindBy(xpath="//form[@id='ussdForm']//paper-item[contains(.,'Hours')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Hours')]")
 	private WebElement ussdFormTimeInterval1;
 	
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'Time Interval')]/../..//input")
@@ -56,7 +56,7 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath="//form[@id='ussdForm']//label[contains(.,'Maximum offers')]/../input")
 	private WebElement ussdFormMaximumOffers;
 	
-	@FindBy(xpath=".//*[@id='ussdForm']//paper-button[contains(.,'Save')]")
+	@FindBy(xpath="//paper-button[contains(.,'Save')]")
 	private WebElement ussdFormSaveButton;
 	
 	@FindBy(xpath=".//*[@id='ussdForm']//paper-button[contains(.,'Cancel')]")
@@ -142,17 +142,17 @@ public class TouchpointPage extends Init{
 	private WebElement apiFormPrioritizationLogicSelector;
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Prioritization Rule')]/../input")
 	private WebElement apiFormPrioritizationRuleSelector;
-	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'FIFO')]")
+	@FindBy(xpath="//form[@id='apiForm']//vaadin-combo-box-item[contains(.,'FIFO')]")
 	private WebElement apiFormPrioritizationRuleFIFO;
-	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'LIFO')]")
+	@FindBy(xpath="//form[@id='apiForm']//vaadin-combo-box-item[contains(.,'LIFO')]")
 	private WebElement apiFormPrioritizationRuleLIFO;
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'FIFO')]")
 	private WebElement apiFormPrioritizationLogicFIFO;
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'LIFO')]")
 	private WebElement apiFormPrioritizationLogicLIFO;
-	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'Hours')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Hours')]")
 	private WebElement apiFormTimeIntervalHours;
-	@FindBy(xpath="//form[@id='apiForm']//paper-item[contains(.,'Days')]")
+	@FindBy(xpath="//form[@id='apiForm']//vaadin-combo-box-item[contains(.,'Days')]")
 	private WebElement apiFormTimeIntervalDays;
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Time Interval')]/../..//input")
 	private WebElement apiFormTimeIntervalSelector;
@@ -166,9 +166,9 @@ public class TouchpointPage extends Init{
 	private WebElement apiFormRefreshEvery;
 	@FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Maximum offers')]/../input")
 	private WebElement apiFormMaximumOffers;
-	@FindBy(xpath=".//*[@id='apiForm']//paper-button[contains(.,'Save')]")
+	@FindBy(xpath="//paper-button[contains(.,'Save')]")
 	private WebElement apiFormSaveButton;
-	@FindBy(xpath=".//*[@id='apiForm']//paper-button[contains(.,'Cancel')]")
+	@FindBy(xpath="//paper-button[contains(.,'Cancel')]")
 	private WebElement apiFormCancelButton;
 	@FindBy(xpath=".//*[@id='addApiModal']")
 	private WebElement apiFormDialogBox;
@@ -250,7 +250,7 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormShortCode2;
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
 	private WebElement smsFormPrioritizationLogicFIFO;
-	@FindBy(xpath="//form[@id='smsForm']//paper-item[contains(.,'Hours')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Hours')]")
 	private WebElement smsFormTimeInterval1;
 	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Time Interval')]/../..//input")
 	private WebElement smsFormTimeIntervalSelector;
@@ -260,9 +260,9 @@ public class TouchpointPage extends Init{
 	private WebElement smsFormRefreshEvery;
 	@FindBy(xpath="//form[@id='smsForm']//label[contains(.,'Maximum offers')]/../input")
 	private WebElement smsFormMaximumOffers;
-	@FindBy(xpath=".//*[@id='smsForm']//paper-button[contains(.,'Save')]")
+	@FindBy(xpath="//paper-button[contains(.,'Save')]")
 	private WebElement smsFormSaveButton;
-	@FindBy(xpath=".//*[@id='smsForm']//paper-button[contains(.,'Cancel')]")
+	@FindBy(xpath="//paper-button[contains(.,'Cancel')]")
 	private WebElement smsFormCancelButton;
 	@FindBy(xpath=".//*[@id='addSmsModal']")
 	private WebElement smsFormDialogBox;
@@ -322,7 +322,7 @@ public class TouchpointPage extends Init{
 	private WebElement customerCareFormPrioritizationLogicLIFO;
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
 	private WebElement customerCareFormPrioritizationLogicBESTFITALGORITHM;
-	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'Hours')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Hours')]")
 	private WebElement customerCareFormTimeInterval1;
 	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Time Interval')]/../..//input")
 	private WebElement customerCareFormTimeIntervalSelector;

@@ -1,15 +1,16 @@
  package stepDefinitions;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
+import org.apache.http.HttpResponse;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import baseClasses.ExcelHelper;
@@ -2139,6 +2140,7 @@ System.out.println(editname+"program has edited successfully");
 					"{ \"id\":\"104\", \"type\":\"POST\", \"value\":\"");
 			eh.setExcelFile("ruleInputData", ruleSheet);
 			int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
+			System.out.println(ruleId);
 			postBody.append(ruleId);
 			postBody.append("\", \"date\":\"");
 			Date now = new Date();
@@ -2157,9 +2159,11 @@ System.out.println(editname+"program has edited successfully");
 			str.append(":");
 			str.append("8092");
 			eh.setExcelFile("touchpointInputData", touchpointSheet);
-			str.append("/rest/authkey/"+eh.getCellByColumnName("api touchpoint name")+"/msisdn/"+number+"/kpi/events");
+			str.append("/rest/authkey/"+"selenium"+"/msisdn/"+number+"/kpi/events");
 			System.out.println(str.toString());
 			Request req = new Request();
+			
+//		        System.out.println(response.getStatusLine().getStatusCode();
 			req.postRequest(str.toString(), postBody.toString());
 			System.out.println(req.responseString);
 		}
@@ -2689,8 +2693,55 @@ System.out.println(editname+"program has edited successfully");
 //													Assert.assertTrue("offer Recommended event not found", checkOfferRecommendedEventTime(dateForCompare,timeStamp));
 												}
 												
+//												@Then("^wait for offer recommended event for API in consumer profile$")
+//												public void wait_for_Recommended_event_for_api() throws Throwable {
+//													Date now = new Date();
+//													Calendar calendar = Calendar.getInstance();
+//													int min = calendar.get(Calendar.MINUTE);
+//													now.setMinutes(min-2);
+//													dateForCompare = now;
+//												CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+//													customerProfilePage.clickEventTypesCheckBox();
+//													customerProfilePage.clickEventTypesCheckBox();
+//													customerProfilePage.clickOfferRecommendedEventCheckBox();
+//													customerProfilePage.clickSelectEventApplyButton();
+//													Thread.sleep(2000);
+//													
+//													ExcelHelper ruleExcel = new ExcelHelper();
+//											    	ruleExcel.setExcelFile("ruleInputData", "rule");
+//											    	
+//											    	
+//													if(driver.findElement(By.xpath("(//iron-data-table[@id='table']//iron-list[@id='list']//data-table-row//span[contains(.,'Offer Recommended')])[1]")).getText().equalsIgnoreCase("Offer Recommended")){
+//														Thread.sleep(2000);
+//														System.out.println("inside if");
+//														Thread.sleep(10000);
+//														jswait.checkVisibility("//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div[@id='items']/div[2]/data-table-row//data-table-row-detail/events-expander//div[@title='defaultapiTPUR']");
+//														
+//													
+//													
+//												}
+//												}
+				
+												
+												
+												
+												
+												@Then("^verify the program condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
+												public void verify_the_condition_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
+											      eh.setExcelFile("bcInputData", bcSheet);
+											      String bcName =eh.getCellByColumnName("BC Name");
+											      
+											      
+											     
+											      //touchpointPage.verifyEventOfTheprogram(event,bcName,camapignName);
+											     
+												}
+												
+												
+												
+												
 												@Then("^wait for offer recommended event for API in consumer profile$")
-												public void wait_for_Recommended_event_for_api() throws Throwable {
+												public void wait_for_conversion() throws Throwable {
 													Date now = new Date();
 													Calendar calendar = Calendar.getInstance();
 													int min = calendar.get(Calendar.MINUTE);
@@ -2717,39 +2768,152 @@ System.out.println(editname+"program has edited successfully");
 													
 												}
 												}
-				
-												@Then("^verify the program condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
-												public void verify_the_condition_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
-											      eh.setExcelFile("bcInputData", bcSheet);
-											      String bcName =eh.getCellByColumnName("BC Name");
-											      
-											      
-											     
-											      //touchpointPage.verifyEventOfTheprogram(event,bcName,camapignName);
-											     
+												
+												
+												@Then("^wait for conversion in consumer profile with offer \"([^\"]*)\"$")
+												public void wait_for_conversion(String offerType) throws Throwable {
+													
+													ExcelHelper ruleExcel = new ExcelHelper();
+											    	ruleExcel.setExcelFile("ruleInputData", "rule");
+											    	ExcelHelper offerExcel = new ExcelHelper();
+											    	offerExcel.setExcelFile("offerInputData", offerType);
+													
+													CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickFulfillmentSuccessCheckBox();
+													customerProfilePage.clickSelectEventApplyButton();
+													Thread.sleep(2000);
+													String rulename = (String) ruleExcel.getCell(1, 0);
+													
+													String offer = (String) offerExcel.getCell(1, 0);
+														
+														if(driver.findElement(By.xpath("//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[3]")).getText().equalsIgnoreCase("Conversion")) {
+															Thread.sleep(2000);
+															System.out.println("inside if");
+															Thread.sleep(10000);
+															jswait.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'" + offer + "')]");
+															boolean booledn = jswait.checkVisibility(
+																	"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + rulename + "')]");
+														
+														
+													}
+//													
+//													Assert.assertTrue("offer Recommended event not found", checkOfferRecommendedEventTime(dateForCompare,timeStamp));
 												}
 												
 												
 												
 												
+												@Then("^wait for Acknowledgement in consumer profile with offer \"([^\"]*)\"$")
+												public void wait_for_ack(String offerType) throws Throwable {
+													
+													ExcelHelper ruleExcel = new ExcelHelper();
+											    	ruleExcel.setExcelFile("ruleInputData", "rule");
+											    	ExcelHelper offerExcel = new ExcelHelper();
+											    	offerExcel.setExcelFile("offerInputData", offerType);
+													
+													CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickEventTypesCheckBox();
+													customerProfilePage.clickFulfillmentSuccessCheckBox();
+													customerProfilePage.clickSelectEventApplyButton();
+													Thread.sleep(2000);
+													String rulename = (String) ruleExcel.getCell(1, 0);
+													
+													String offer = (String) offerExcel.getCell(1, 0);
+														
+														if(driver.findElement(By.xpath("//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[3]")).getText().equalsIgnoreCase("Acknowledged")) {
+															Thread.sleep(2000);
+															System.out.println("inside if");
+															Thread.sleep(10000);
+															jswait.checkVisibility("//label[contains(.,'Offer')]/..//label[contains(.,'" + offer + "')]");
+															boolean booledn = jswait.checkVisibility(
+																	"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + rulename + "')]");
+														
+														
+													}
+//													
+//													Assert.assertTrue("offer Recommended event not found", checkOfferRecommendedEventTime(dateForCompare,timeStamp));
+												}
+												
+												
+												  @Then("^verify rule view after edit in IM from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
+													 public void verifyRuleviewaftereditFromSheetim(String sheet,String sheet2) throws Exception {
+														 Thread.sleep(2000);
+														 ExcelHelper programExcel = new ExcelHelper();
+														    eh.setExcelFile("ruleInputData",sheet);
+															String name = (String) eh.getCell(1, 0);
+															programExcel.setExcelFile("productInputData", sheet2);
+															
+															String product=(String) programExcel.getCell(1, 0);
+														    programPage.verifyRuleviewaftereditFromSheetIM(name,product);
+														 
+														 
+													 }												
+												  @Then("^verify accept api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
+													public void verifyacceptApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
+														StringBuilder postBody = new StringBuilder();
+														postBody.append("{\"event\":[\r\n" + 
+																"{ \"id\":\"104\", \"type\":\"POST\", \"value\":\"");
+														eh.setExcelFile("ruleInputData", ruleSheet);
+														int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
+														System.out.println(ruleId);
+														postBody.append(ruleId);
+														postBody.append("\", \"date\":\"");
+														Date now = new Date();
+														Calendar calendar = Calendar.getInstance();
+														int min = calendar.get(Calendar.MINUTE);
+														now.setMinutes(min+2);
+														String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+														postBody.append(timeStamp);
+														postBody.append(" +0530\" }");
+														postBody.append("]}");
+														System.out.println(postBody.toString());
+														StringBuilder str = new StringBuilder();
+														str.append("http://");
+														MarathonHelper m = new MarathonHelper();
+														str.append(p.getValue("nginxIp"));
+														str.append(":");
+														str.append("8092");
+														eh.setExcelFile("touchpointInputData", touchpointSheet);
+														str.append("/rest/authkey/"+"selenium"+"/msisdn/"+number+"/kpi/events");
+														System.out.println(str.toString());
+														Request req = new Request();
+														String resp=req.postRequeststring(str.toString(), postBody.toString());
+														
+														String code=resp.substring(0, 3);
+														System.out.println(code);
+														assertEquals("406",code);
+													}
 												
 												
 												
 												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
+												  @Then("^verify get-offer api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
+													public void verifygetOfferApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
+														StringBuilder str = new StringBuilder();
+														str.append("http://");
+														MarathonHelper m = new MarathonHelper();
+														
+														str.append(p.getValue("nginxIp"));
+														str.append(":");
+														str.append("8092");
+														eh.setExcelFile("touchpointInputData", touchpointSheet);
+														str.append("/rest/authkey/"+p.getValue("ApiTouchpointauthkey")+"/msisdn/"+number+"/offers");
+														System.out.println(str.toString());
+														Request req = new Request();
+														String resp=req.getRequeststring(str.toString(),"");
+														System.out.println("response is "+resp);
+														offerRecommended = req.responseString;
+														System.out.println("this is the response"+req.responseString);
+														eh.setExcelFile("ruleInputData", ruleSheet);
+														SQLHandler sql = new SQLHandler();
+														int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
+//														Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
+														
+												  
+												  }
 												
 												
 												

@@ -422,4 +422,21 @@ public class GenericProductDefinitionSteps extends Init{
 		jswait.loadClick(".//*[@id='createNew']//paper-button[contains(.,'Save')]");
 		
 	}
+	
+	@Then("^create product class and number attribute from \"([^\"]*)\" with \"([^\"]*)\"$")
+	public void create_product_class_and_number_attribute_from(String sheet,String att) throws Throwable {
+		eh.setExcelFile("productClassInputData",sheet);
+		Random rn = new Random();
+		int  n = rn.nextInt(5000) + 1;
+		String name = (String) eh.getCell(1, 0);
+		name =  name.replaceAll("[0-9]", "")+n;
+		eh.setCell(1, 0, name);
+		productClassesPageObjects.createProductClass(name, (String) eh.getCell(1, 1));
+		Thread.sleep(2000);
+		filterWorkaround(name);
+		commonObjects.clickOptionsIcon();
+		productClassesPageObjects.clickAttributes();
+		productClassesPageObjects.addNumberAttributes2(att);
+	}
+	
 }

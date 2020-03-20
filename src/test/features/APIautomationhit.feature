@@ -9,7 +9,7 @@ Feature: Title of your feature
 Scenario: Verify program and rule creation with API hit.
 Given login
 
-Then create Program with API hit with name "new customer care program with rule"  offer cataloge "SeleniumCatalog3735" and touchpoint channel type "Customer Care" and touchpointname "new babshyam3712"
+Then create Program with API hit with name "new customer care program with rule"  offer cataloge "SeleniumCatalog4379" and touchpoint channel type "Customer Care" and touchpointname "cc_touchpoints"
 Then create Program with API hit with name "test program"  offer cataloge "SeleniumCatalog3735" and touchpoint channel type "API" and touchpointname "defaultapiTPGR"
 Then create Program with API hit with name "new SMS program with rule"  offer cataloge "SeleniumCatalog3735" and touchpoint channel type "SMS" and touchpointname "1011-smsTP1245"
 

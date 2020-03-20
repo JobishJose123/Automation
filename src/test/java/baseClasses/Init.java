@@ -18,6 +18,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Given;
 import pageObjetcs.LoginPageObjects;
+import java.io.File;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 public class Init {
 public static WebDriver driver;
@@ -31,6 +36,9 @@ public static StringBuilder stringBuilderForCsvReport;
 	System.out.println("Initializing Browser.....");
 	System.setProperty("webdriver.chrome.driver", "browser_files\\chromedriver2.37.exe");
 	driver =  new ChromeDriver();
+//	  File file = new File("C:/Program Files/phantomjs-2.1.1-windows/phantomjs-2.1.1-windows/bin/phantomjs.exe");				
+//      System.setProperty("phantomjs.binary.path", file.getAbsolutePath());		
+//        driver = new PhantomJSDriver();
 	driver.manage().window().maximize();
 	
 	try {

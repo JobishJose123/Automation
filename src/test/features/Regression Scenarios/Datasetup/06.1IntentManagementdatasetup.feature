@@ -3,7 +3,7 @@
   @createintentmanagementdatasetup
 Feature: For IntentManagement datasetup.
 	
-	  @NDX-7144 @NDX-7141 @NDX-7140 @NDX-7137 @NDX-7136 @NDX-7133, @NDX-7132, @NDX-7125, @NDX-5711, @testimpgm,
+	 @testimpgm @NDX-7144 @NDX-7141 @NDX-7140 @NDX-7137 @NDX-7136 @NDX-7133, @NDX-7132, @NDX-7125, @NDX-5711, 
   @initBrowser  
   Scenario: Verify create a program
     Given login
@@ -19,17 +19,7 @@ Feature: For IntentManagement datasetup.
 #    Then create product with attributes from sheet "fullDetails"
 #    Then navigate to landing page
 #    Then navigate to precision marketer
-#    Then navigate to offer management
-#    Then navigate to offers
-#    Then click on create new ofer button
-#    Then create new offer from sheet "STVSMS" with product "fullDetails"
-#    Then click on create new ofer button
-#    Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-#    Then navigate to offer management
-#    Then Navigate to Offer Catalogue
-#    Then Create New Offer Catalogue from sheet "defaultCatalog"
-#    Then Add "STVSMS" offer to Offer Catalogue
-#    Then Add "rechargeSMS" offer to Offer Catalogue
+#
 #  Then navigate to offer management
 #    Then navigate to offers
 #    Then click on create new ofer button
@@ -47,9 +37,9 @@ Feature: For IntentManagement datasetup.
     Then navigate to programs
 #    Then click create program button
 #  Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-#    Then choose program from sheet "SMSprogram"
-##      Then create new rule with enddate from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#    Then create new rule with enddate from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+    Then choose program from sheet "SMSprogram"
+      Then create new rule with enddate from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
+    Then create new rule with enddate from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
 
 #    Then navigate to programs
 #    Then verify create program page "APIprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "apiTouchpointGR"

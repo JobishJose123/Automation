@@ -21,9 +21,9 @@ public class PartnerObjects extends Init {
 				
 	private WebElement partners;
 			
-	public void clickonpartners() throws InterruptedException
+	public void clickonpartners() throws Exception
 	 {  
-		
+		System.out.println("test");
 	 jswait.loadClick(partners);
 		 
 	 }
