@@ -1438,7 +1438,7 @@ public class OfferPageObjects extends Init {
 
 	public void selectOfferCategory(String offerCategory) throws InterruptedException {
 		clickOfferCategory();
-		jswait.loadClick("//paper-item[contains(.,'"+offerCategory+"')]");
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+offerCategory+"')]");
 	}
 
 	public void enterSuccessMessage(String s) throws InterruptedException {
