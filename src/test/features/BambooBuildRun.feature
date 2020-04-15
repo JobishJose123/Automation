@@ -33,15 +33,15 @@ Then Navigate to Offer Catalogue
 Then Create New Offer Catalogue from sheet "defaultCatalog"
 Then Add "rechargeSMS" offer to Offer Catalogue
 Then Add "STVSMS" offer to Offer Catalogue
-#Then navigate to landing page
-#Then navigate to configuration management
-#Then navigate to campaign categories
-#Then create new campaign category from sheet "campaignCategory"
-#Then navigate to landing page
-#When navigate to precision marketer
-#Then navigate to life cycle marketing
-#Then navigate to campaign category from sheet "campaignCategory"
-#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then navigate to landing page
+Then navigate to configuration management
+Then navigate to campaign categories
+Then create new campaign category from sheet "campaignCategory"
+Then navigate to landing page
+When navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 
 @Test3 @initBrowser
 Scenario: one-off bc creation full flow
