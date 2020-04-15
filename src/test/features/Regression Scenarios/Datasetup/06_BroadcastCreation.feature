@@ -521,13 +521,15 @@ Then wait for 4000 milliseconds
 
 Examples:
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|status|BCDataSheet|
-#|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|5|save|ConversionBC|
-#|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|13|activate|BCDataStorage|
-#|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|14|activate|BCDataStorage|
-#|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|never|none|6|save|ConversionBC|
-#|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|15|activate|BCDataStorage|
+|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|5|save|ConversionBC|
+|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|13|activate|BCDataStorage|
+|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|14|activate|BCDataStorage|
+|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|never|none|6|save|ConversionBC|
+|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|15|activate|BCDataStorage|
 |TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|7|save|ConversionBC|
 |TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|single creative|At|At|16|activate|BCDataStorage|
+
+
 #//////////////////////////////BC CREATION FOR BLACKOUT MANUAL AND RENDER SCHEDULE BEFORE AND AT//////////////////////// 
 
 @BCWithBlackoutManualRenderTimeBeforeAt @initBrowser @closeBrowser

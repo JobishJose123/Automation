@@ -16,11 +16,7 @@ Then navigate to products
 Then navigate to product class "TestProductClass"
 Then click create new product button
 Then enter the name and description from sheet "fullDetails"
-
-
-@Test2 @initBrowser
-Scenario: offer and offer catalog creation
-Given login
+Then navigate to landing page
 Then navigate to precision marketer
 Then navigate to offer management
 Then navigate to offers
@@ -42,10 +38,7 @@ When navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
-
-@Test3 @initBrowser
-Scenario: one-off bc creation full flow
-Given login
+Then navigate to landing page
 Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
@@ -67,11 +60,7 @@ Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to customer care
 Then create customer care touchpoint from sheet "CCTouchpoint"
-
- 
-@Test5  @initBrowser
-Scenario: customer care touchpoint program creation full flow
-Given login
+Then navigate to landing page
 Then navigate to intent management
 Then navigate to programs
 Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
