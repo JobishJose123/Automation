@@ -116,16 +116,16 @@ public class CommonSteps extends Init {
     public void loginuser() throws Exception {
         
 		 driver.get("http://"+p.getValue("env"));
-		 Thread.sleep(10000);
+		 Thread.sleep(2000);
 		 loginPage.login(p.getValue("username"), p.getValue("password"));
 		 
 		 //handle robox
-		 try{
-			 jswait.loadClick("//body[@class='fullbleed layout vertical']");
-		 }
-		 catch (Exception e) {
-			 System.out.println("Robob x popup off....");
-		 }
+//		 try{
+//			 jswait.loadClick("//body[@class='fullbleed layout vertical']");
+//		 }
+//		 catch (Exception e) {
+//			 System.out.println("Robob x popup off....");
+//		 }
 
     }
 	@Then("^logout")

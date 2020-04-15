@@ -36,9 +36,6 @@ public static StringBuilder stringBuilderForCsvReport;
 	System.out.println("Initializing Browser.....");
 	System.setProperty("webdriver.chrome.driver", "browser_files\\chromedriver2.37.exe");
 	driver =  new ChromeDriver();
-//	  File file = new File("C:/Program Files/phantomjs-2.1.1-windows/phantomjs-2.1.1-windows/bin/phantomjs.exe");				
-//      System.setProperty("phantomjs.binary.path", file.getAbsolutePath());		
-//        driver = new PhantomJSDriver();
 	driver.manage().window().maximize();
 	
 	try {
