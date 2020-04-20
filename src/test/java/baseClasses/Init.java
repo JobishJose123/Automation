@@ -34,7 +34,7 @@ public static PrintWriter printWriterForCsvReport;
 public static StringBuilder stringBuilderForCsvReport; 
 	public static void init() throws InterruptedException, FileNotFoundException{
 	System.out.println("Initializing Browser.....");
-	System.setProperty("webdriver.chrome.driver", "browser_files\\chromedriverLinux.exe");
+	System.setProperty("webdriver.chrome.driver", "browser_files\\chromedriver2.37.exe");
 	driver =  new ChromeDriver();
 	driver.manage().window().maximize();
 	

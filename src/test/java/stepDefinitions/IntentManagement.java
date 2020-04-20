@@ -2838,19 +2838,19 @@ System.out.println(editname+"program has edited successfully");
 												}
 												
 												
-												  @Then("^verify rule view after edit in IM from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
-													 public void verifyRuleviewaftereditFromSheetim(String sheet,String sheet2) throws Exception {
-														 Thread.sleep(2000);
-														 ExcelHelper programExcel = new ExcelHelper();
-														    eh.setExcelFile("ruleInputData",sheet);
-															String name = (String) eh.getCell(1, 0);
-															programExcel.setExcelFile("productInputData", sheet2);
-															
-															String product=(String) programExcel.getCell(1, 0);
-														    programPage.verifyRuleviewaftereditFromSheetIM(name,product);
+//												  @Then("^verify rule view after edit in IM from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
+//													 public void verifyRuleviewaftereditFromSheetim(String sheet,String sheet2) throws Exception {
+//														 Thread.sleep(2000);
+//														 ExcelHelper programExcel = new ExcelHelper();
+//														    eh.setExcelFile("ruleInputData",sheet);
+//															String name = (String) eh.getCell(1, 0);
+//															programExcel.setExcelFile("productInputData", sheet2);
+//															
+//															String product=(String) programExcel.getCell(1, 0);
+//														    
 														 
 														 
-													 }												
+							//						 }												
 												  @Then("^verify accept api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
 													public void verifyacceptApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
 														StringBuilder postBody = new StringBuilder();
