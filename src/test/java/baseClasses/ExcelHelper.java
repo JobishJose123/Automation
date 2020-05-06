@@ -27,8 +27,8 @@ String file = "";
     public void setExcelFile(String filename, String sheet)
     {
 		try {
-			workbook = new HSSFWorkbook(new FileInputStream(new File("ExcelFiles\\"+filename+".xls")));
-			file = "ExcelFiles\\"+filename+".xls";
+			workbook = new HSSFWorkbook(new FileInputStream(new File("var/atlassian/application-data/bamboo/xml-data/build-dir/SA-CT4-JOB1/ExcelFiles/"+filename+".xls")));
+			file = "var/atlassian/application-data/bamboo/xml-data/build-dir/SA-CT4-JOB1/ExcelFiles/"+filename+".xls";
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
