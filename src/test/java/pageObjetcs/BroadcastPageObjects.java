@@ -583,6 +583,8 @@ public class BroadcastPageObjects extends Init {
 		private WebElement renderTimeBefore;
 		@FindBy(xpath="//label[contains(.,'Hours')]//following::input[1]")
 		private WebElement broadcastRenderBeforeInput;
+		@FindBy(xpath = "//label[contains(.,'Email Profile Field')]/../input")
+		private WebElement emailProfileField;
 //		@FindBy(xpath="")
 //		private WebElement 
 //		@FindBy(xpath="")
@@ -1445,25 +1447,70 @@ public boolean checkCalculateBtnDisplayed() {
 	// ----------------------------------------------------------------//
 
 	public void selectSenderAndRoute() throws InterruptedException {
-
 		jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
-		jswait.loadClick(senderIdBroadcastAdressSmpp);
-		jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
-		jswait.loadClick(routeBroadcastSmppRobioutbound);
-		jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_SMPP);
-		// jswait.loadClick(senderIdFulfillmentSelector);
-		// Thread.sleep(4000);
-		jswait.loadClick(senderIdFulfillmentAdressSmpp);
-		// wait.until(ExpectedConditions.elementToBeClickable(senderIdFulfillmentAdressSmpp)).click();
-		jswait.loadSendKeys(routeFulfillment, ROUTE_SMPP);
 		Thread.sleep(2000);
-		jswait.loadClick(routeFulfillmentSmppRobioutbound);
+		jswait.loadClick(senderIdBroadcastAdressSmpp);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+//		jswait.loadClick(routeBroadcast);
+		Thread.sleep(5000);
+		System.out.println("broadcast route select");
+	    jswait.loadClick("//label[contains(.,'Route over which this broadcast can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]");
+		Thread.sleep(2000);
+		jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_SMPP);
+		Thread.sleep(2000);
+		jswait.loadClick(senderIdFulfillmentAdressSmpp);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(routeFulfillment,ROUTE_SMPP);
+		System.out.println("fulfillment route select");
+		Thread.sleep(5000);
+		jswait.loadClick(".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]");
 	}
+	
+//
+//		jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+//		Thread.sleep(2000);
+//		jswait.loadClick(senderIdBroadcastAdressSmpp);
+//		Thread.sleep(2000);
+//		jswait.loadSendKeys(routeBroadcast,"sel_outbound");
+//		System.out.println("trying to click the outbound route rule1");
+//		Thread.sleep(10000);
+//		try {
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//vaadin-combo-box-item[contains(.,'sel_outbound')]"))).click();
+//		}
+//		catch(Exception e) {
+//			System.out.println("inside catch of route outbound");
+//			try{
+//			jswait.loadClick("(//label[contains(.,'Route over which this broadcast can be sent')]//following::paper-icon-button[@id='clearIcon'])[1]");
+//			Thread.sleep(2000);
+//			jswait.loadSendKeys(routeBroadcast,"sel_outbound");
+//			Thread.sleep(2000);
+//			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//vaadin-combo-box-item[contains(.,'sel_outbound')]"))).click();
+//			}
+//			catch(Exception e1) {
+//				System.out.println("inside catch of catch route outbound");
+//				jswait.loadSendKeys(routeBroadcast,"sel_outbound");
+//				Thread.sleep(2000);
+//				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//vaadin-combo-box-item[contains(.,'sel_outbound')]"))).click();
+//			}
+//		}
+//		Thread.sleep(2000);
+//		jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_SMPP);
+//		Thread.sleep(2000);
+//		jswait.loadClick(senderIdFulfillmentAdressSmpp);
+//		jswait.loadSendKeys(routeFulfillment, "sel_outbound");
+//		Thread.sleep(5000);
+//		System.out.println("trying to click the outbound route rule2");
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//label[contains(.,'Sender ID: Fulfillment')]//following::vaadin-combo-box-item[contains(.,'sel_outbound')]"))).click();
+//		 Thread.sleep(10000);
+//	}
 
 	public void selectSenderAndRouteEmail() throws InterruptedException {
 		jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_EMAIL);
 		jswait.loadClick(senderIdBroadcastEmail);
 		jswait.loadSendKeys(routeBroadcast, ROUTE_EMAIL);
+//		jswait.loadClick(emailProfileField);
+//		jswait.loadClick("//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
 		jswait.loadClick(routeBroadcastEmail);
 		jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_EMAIL);
 		// jswait.loadClick(senderIdFulfillmentSelector);
@@ -1946,8 +1993,7 @@ public boolean checkCalculateBtnDisplayed() {
 		enterBroadcastName("efwefwefwefwefwefwefwefwefwefw");
 		int count = commonObjects.getTextFormTextField(broadcastName).length();
 		System.out.println(count);
-		Assert.assertTrue(commonObjects.getTextFormTextField(broadcastName).length() == 30,
-				"Error in character limit of name field");
+		Assert.assertTrue(commonObjects.getTextFormTextField(broadcastName).length() == 30);
 	}
 
 	public void checkDetailsTabHeaderColor() throws Exception {
@@ -1966,8 +2012,7 @@ public boolean checkCalculateBtnDisplayed() {
 				"aaaaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasaefwefwefwefwefwefwefwefwefwefwefwefwefwefwefwasasasdsd");
 		int count = commonObjects.getTextFormTextField(broadcastPurpose).length();
 		System.out.println(count);
-		Assert.assertTrue(commonObjects.getTextFormTextField(broadcastPurpose).length() == 500,
-				"Error in character limit of purpose field");
+		Assert.assertTrue(commonObjects.getTextFormTextField(broadcastPurpose).length() == 500);
 	}
 
 	public void verifySelectionFields() throws InterruptedException, UnsupportedFlavorException, IOException {
@@ -1980,7 +2025,7 @@ public boolean checkCalculateBtnDisplayed() {
 		List<WebElement> tags = driver.findElements(By.xpath("//paper-tags[@id='paperTags']/div"));
 		int tagssize = tags.size();
 		System.out.println(tagssize);
-		Assert.assertTrue(tags.size() == 2, "error in multi select field");
+		Assert.assertTrue(tags.size() == 2);
 	}
 
 	public void clickValidateButton() throws InterruptedException {
@@ -2929,7 +2974,7 @@ public boolean checkCalculateBtnDisplayed() {
 					jswait.checkVisibility("//p[contains(.,'Send Time')]/..//p[contains(.,'" + Start_Date + "')]"));
 
 		} else {
-			Assert.assertTrue(false, "Delevery date miss match");
+			Assert.assertTrue(false);
 		}
 
 	}
@@ -3038,7 +3083,7 @@ public boolean checkCalculateBtnDisplayed() {
 					"//profile-field[contains(.,'Customer Profile Info')]/..//profile-field//b[contains(.,'Target Group_q11')]"));
 
 		} else {
-			Assert.assertTrue(false, "NO target condition selected ");
+			Assert.assertTrue(false);
 		}
 	}
 
@@ -3517,8 +3562,7 @@ public boolean checkCalculateBtnDisplayed() {
 				min+=5;
 			}
 			System.out.println("Inside recurring");
-			System.out.println("+++++++++++++++++++"+hours+"++++++++++++++++++++++++++++++++");
-			
+			Thread.sleep(5000);
 			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
 			jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
 			if(targetRenderTime.equalsIgnoreCase("broadcast schedule before")){
@@ -4068,8 +4112,9 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 	}
 	public void verifyEventOfTheBC(String event,String bcName,String campaignName) throws Exception{
 		System.out.println("========"+event+" :is the event tht need to be verified");
+		System.out.println(bcName);
 		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
-		CustomerProfilePage.searchEventsDynammically("Last 3 Days");
+		CustomerProfilePage.searchEventsDynammically("Last 2 Days");
 		 Thread.sleep(4000);
 		jswait.loadClick(selectAllEventCheckBox);
 		jswait.loadClick(selectAllEventCheckBox);
@@ -4087,38 +4132,37 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
 			Thread.sleep(1000);
 			System.out.println(ackEvents.size());
-			 int count=1;
 			 System.out.println("print "+ackEvents);
 			 System.out.println("before for loop");
 			 
-			for (WebElement webElement : ackEvents) {
-					if ((webElement.getText()).contains(campaignName)) {
-						System.out.println(webElement.getText());
+			for (int i=1;i<=ackEvents.size()+1;i++) {
+				
 						try {
-							jswait.loadClick("(//iron-icon[@class='deselect consumer-events style-scope x-scope iron-icon-0'])["+count+"]");
+							Thread.sleep(2000);
+							jswait.loadClick("(//iron-icon[@icon='app-icons:arrow-right'])["+i+"]");
 							Thread.sleep(1000);
+							
 							boolean booln = jswait.checkVisibility(
 									"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
 							System.out.println(booln);
+						
 							if (booln == true) {
 								System.out.println(event+"  verified");
 								break;
-								
 							}
-							 else {
-								 
-								System.out.println(event+"verified.. waiting for BC name "+bcName);
-							}
-						} catch (Exception e) {
-							System.out.println("catch block");
-							Assert.assertTrue(false,"No"+event+" Event Raised");
-						}
-						Thread.sleep(2000);
-						count++;
-				}
+						
+							else {
+						System.out.println("inside else loop and value of i is ::::::::"+i);
+				
 			}
+						}
+							catch(Exception e) {
+								Assert.assertTrue(false,"event not persisted");
+							}
+			}
+		
 	} 
-	     
+//	}    
 	
 	public void verifyBCAckCountFromGrid(String bcName,String targetCount,String bctype) throws Exception{
 		System.out.println("==============================="+targetCount+"========================");
@@ -4151,7 +4195,7 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		eh.setExcelFile("parallelRunBC", bcStorageSheet);
 	    eh.setCell(row, 0, bcName);
   	    eh.setCell(row, 1, bcType);
-  	    eh.setCell(row ,2, bcSheet);
+//  	    eh.setCell(row ,2, bcSheet);
 
 	
 	}
@@ -4208,7 +4252,7 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 							}
 						} catch (Exception e) {
 							System.out.println("catch block");
-							Assert.assertTrue(false,"No dynamic tag");
+							Assert.assertTrue(false);
 						}
 						Thread.sleep(2000);
 						count++;
@@ -4423,12 +4467,123 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'Offer Name')]//following::p[contains(.,'"+offerName+"')]"));
 			
 		}
+		public void addBambooRunBcToSheet(String bcSheet,String bcName,String bcType,String bcStorageSheet,int row) throws Exception{
+			eh.setExcelFile("BambooBuildDetails", bcStorageSheet);
+		    eh.setCell(row, 0, bcName);
+	  	    eh.setCell(row, 1, bcType);
+	  	    eh.setCell(row ,2, bcSheet);
+
+		
+		}
+		
+		public void verifyEventOfTheRecurringSeedingBC(String event,String bcName,String campaignName) throws Exception{
+			bcName=bcName+"_MessagingBC";
+			System.out.println(bcName);
+			System.out.println("========"+event+" :is the event tht need to be verified");
+			CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
+			CustomerProfilePage.searchEventsDynammically("Last 3 Days");
+			 Thread.sleep(4000);
+			jswait.loadClick(selectAllEventCheckBox);
+			jswait.loadClick(selectAllEventCheckBox);
+			jswait.loadClick("(//div[contains(.,'"+event+"')][@id='checkboxLabel'])[1]");
+			Thread.sleep(2000);
+			 jswait.loadClick(applyEventFilter);
+			 CustomerProfilePage.clickOnEventTabFilter();
+			 CustomerProfilePage.enterEventDetails(campaignName);
+			 CustomerProfilePage.filterResetFilterButton();
+			 Thread.sleep(3000);
+			  CustomerProfilePage.clickOnEventTabFilter();
+			 CustomerProfilePage.enterEventDetails(campaignName);	 
+			 CustomerProfilePage.filterApplyButton();
+			 Thread.sleep(10000);
+			 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
+				Thread.sleep(1000);
+				System.out.println(ackEvents.size());
+				 int count=1;
+//				 System.out.println("print "+ackEvents);
+				 System.out.println("before for loop");
+				 for (int i=1;i<=ackEvents.size()+1;i++) {
+						try {
+							jswait.loadClick("(//iron-icon[@icon='app-icons:arrow-right'])["+i+"]");
+							Thread.sleep(1000);
+							
+							boolean booln = jswait.checkVisibility(
+									"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
+							System.out.println(booln);
+						
+							if (booln == true) {
+								System.out.println(event+"  verified");
+								break;
+							}
+						
+							else {
+						System.out.println("inside else loop and value of i is ::::::::"+i);
+				
+			}
+						}
+							catch(Exception e) {
+								Assert.assertTrue(false,"event not persisted");
+							}
+			}
+		
+	}
+				
 		
 		
 		
 		
+		public void verifyEventOfTheOneTimeSeedingBC(String event,String bcName,String campaignName) throws Exception{
+			
+			bcName=bcName+"_OneOff_MessagingBC";
+			System.out.println("========"+event+" :is the event tht need to be verified");
+			CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
+			CustomerProfilePage.searchEventsDynammically("Last 3 Days");
+			 Thread.sleep(4000);
+			jswait.loadClick(selectAllEventCheckBox);
+			jswait.loadClick(selectAllEventCheckBox);
+			jswait.loadClick("(//div[contains(.,'"+event+"')][@id='checkboxLabel'])[1]");
+			Thread.sleep(2000);
+			 jswait.loadClick(applyEventFilter);
+			 CustomerProfilePage.clickOnEventTabFilter();
+			 CustomerProfilePage.enterEventDetails(campaignName);
+			 CustomerProfilePage.filterResetFilterButton();
+			 Thread.sleep(3000);
+			  CustomerProfilePage.clickOnEventTabFilter();
+			 CustomerProfilePage.enterEventDetails(campaignName);	 
+			 CustomerProfilePage.filterApplyButton();
+			 Thread.sleep(10000);
+			 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]/../..//data-table-cell[4]//span[contains(.,'"+campaignName+"')]"));
+				Thread.sleep(1000);
+				System.out.println(ackEvents.size());
+				 int count=1;
+				 System.out.println("print "+ackEvents);
+				 System.out.println("before for loop");
+				 
+				 for (int i=1;i<=ackEvents.size()+1;i++) {
+						try {
+							jswait.loadClick("(//iron-icon[@icon='app-icons:arrow-right'])["+i+"]");
+							Thread.sleep(1000);
+							
+							boolean booln = jswait.checkVisibility(
+									"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + bcName + "')]");
+							System.out.println(booln);
+						
+							if (booln == true) {
+								System.out.println(event+"  verified");
+								break;
+							}
+						
+							else {
+						System.out.println("inside else loop and value of i is ::::::::"+i);
+				
+			}
+						}
+							catch(Exception e) {
+								Assert.assertTrue(false,"event not persisted");
+							}
+			}
 		
-		
+	}
 		
 		
 		

@@ -103,10 +103,16 @@ public class ModelSteps extends Init{
 	 
 	 
 	 
-	 @Then("^click on close and run the paragraph$")
-	 public void click_on_Close() throws Exception{
-		 modelPage.clickClose();
-	 }
+	 @Then("^click on close$")
+    public void click_on_Close() throws Exception{
+	 modelPage.clickClose();
+	  modelPage.clickClose();
+	}
+
+@Then("^run the paragraph$")
+ public void RunPara () throws Exception{
+modelPage.runParagraph();
+}
 	 
 
 

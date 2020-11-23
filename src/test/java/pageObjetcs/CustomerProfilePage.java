@@ -257,6 +257,24 @@ public class CustomerProfilePage extends Init{
 		@FindBy(xpath="//data-table-column-filter-dialog[@class='style-scope consumer-events x-scope data-table-column-filter-dialog-0']//paper-button[@class='style-scope data-table-column-filter-dialog x-scope paper-button-0'][contains(text(),'Reset Filters')]")
 		private WebElement filterResetFilterButton;
 		
+		@FindBy(xpath="//paper-button[contains(.,'Create')]")
+		private WebElement createProfileBtn;
+		
+		@FindBy(xpath="//h3[contains(.,'Create Customer Profile Info')]//following::label[contains(.,'Name')]//following::input[1]")
+		private WebElement nameInput;
+		@FindBy(xpath="//h3[contains(.,'Create Customer Profile Info')]//following::textarea")
+		private WebElement descpText;
+		@FindBy(xpath="//h3[contains(.,'Create Customer Profile Info')]//following::label[contains(.,'Name')]//following::input[2]")
+		private WebElement contextSelect;
+		@FindBy(xpath="//paper-item[contains(.,'Normal')]")
+		private WebElement normalContext;
+		@FindBy(xpath="(//h3[contains(.,'Create Customer Profile Info')]//following::label[contains(.,'Type')]//following::input)[2]")
+		private WebElement typeInput;
+		@FindBy(xpath="//paper-item[@value='INTEGER']")
+		private WebElement numberFormat;
+		@FindBy(xpath="//paper-button[contains(.,'Save')]")
+		private WebElement saveAgebtn;
+		
 		public void clickOnEventTabFilter() throws Exception {
 			jswait.loadClick(eventTabFilter);
 		}
@@ -1401,8 +1419,21 @@ public void clickOfferAcceptedEventCheckBox() throws InterruptedException {
 		jswait.loadClick(FulfillmentSuccessCheckBox);
 	}
 	
-	
-	
+	public void createProfileWithNumberFormat() throws Exception{
+		jswait.loadClick(createProfileBtn);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(nameInput, "age");
+		jswait.loadSendKeys(descpText, "age by selenium");
+		jswait.loadClick(contextSelect);
+		jswait.loadClick(normalContext);
+		jswait.loadClick(typeInput);
+		jswait.loadClick(numberFormat);
+		jswait.loadClick(saveAgebtn);
+	}
+	  public void verifyProfileAge() throws Exception{
+		  Thread.sleep(2000);
+		  Assert.assertTrue(jswait.checkVisibility(driver.findElement(By.xpath("//data-table-row[@id='item2']//span[contains(.,'age')]"))));
+	  }
 	
 	
 	

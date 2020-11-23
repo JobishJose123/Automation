@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -178,7 +179,7 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//paper-button[contains(.,'Create New Rule')]")
 	private WebElement createNewRuleButton;
 	
-	@FindBy(xpath="//paper-button[contains(.,'Save')]")
+	@FindBy(xpath="(//paper-button[contains(.,'Save')])[1]")
 	private WebElement saveRuleButton;
 	
 	@FindBy(xpath="//form[@id='scheduleForm']//label[text()='Start Date']/..//*[@id='input']")
@@ -301,7 +302,7 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//div[@id='items']/vaadin-combo-box-item[contains(.,'After')]")
 	private WebElement optionAfterselect;
 	
-	@FindBy(xpath="//div[@id='items']/vaadin-combo-box-item[contains(.,'At')]")
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'At')]")
 	private WebElement optionAtselect;
 	
 	@FindBy(xpath=".//paper-item[@value='true' and contains(.,'At')]")
@@ -343,16 +344,16 @@ private WebElement ruleafterinput2 ;
 private WebElement ruledays;
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::input[1]")
 private WebElement rulessenderid ;
-@FindBy(xpath="(//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'Address-SMPP')])[1]")
+@FindBy(xpath="(//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'Address-SMPP')])[1]")
 private WebElement addresssprule;
-@FindBy(xpath="(//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')])")
+@FindBy(xpath="(//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]//following::vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')])[1]")
 private WebElement addresssprule2;
 
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which this broadcast can be sent')]//following::input[1]")
 private WebElement rulerouteid;
 @FindBy(xpath="(//label[contains(.,'Route over which this broadcast can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])[1]")
 private WebElement ruleroute;
-@FindBy(xpath="(//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])")
+@FindBy(xpath="(//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')])[1]")
 private WebElement ruleroute2;
 @FindBy(xpath="//form[@id='deliverySegment']//label[contains(.,'Route over which Fulfillment success or failure confirmation message can be sent')]//following::input[1]")
 private WebElement rulerouteid2;
@@ -364,7 +365,7 @@ private WebElement rulessenderid2
 ;
 	
 	
-	@FindBy(xpath="//hexagon-content//span")
+	@FindBy(xpath="(//hexagon-content//span)[1]")
 	private WebElement topRuleStatus;
 	@FindBy(xpath="//paper-button[contains(.,'Accept')]")
 	private WebElement customerCareOfferAccept;
@@ -377,6 +378,24 @@ private WebElement rulessenderid2
 	 private WebElement savedSegmentRadioButtion;
 	@FindBy(xpath="//label[contains(.,'End Date/Time')]//..//input")
 	private WebElement enddateinput;
+@FindBy(xpath="(//vaadin-combo-box-item[contains(.,'Selenium_IM_list')])[1]")
+private WebElement rulelist;
+@FindBy(xpath="//label[contains(.,'Acceptance timeout (in hours)')]//..//input")
+private WebElement accepttime;
+@FindBy(xpath="//label[contains(.,'Conversion timeout (in hours)')]//..//input")
+private WebElement conversiontime;
+@FindBy(xpath="//div[contains(.,'Select Event Types')][@id='checkboxLabel']")
+private WebElement selectAllEventCheckBox;
+
+
+@FindBy(xpath="//iron-icon[@title='Apply']")
+private WebElement applyEventFilter;
+@FindBy(xpath="//div[@id='topBar']//paper-icon-button[@icon='icons:create']")
+private WebElement editRuleName;
+@FindBy(xpath="(//input)[1]")
+private WebElement InputRuleName;
+@FindBy(xpath="//paper-icon-button[@title='Save']//iron-icon[@id='icon']")
+private WebElement saveRuleName;
 //@FindBy(xpath="")
 //private WebElement ;
 //@FindBy(xpath="")
@@ -393,6 +412,93 @@ private WebElement rulessenderid2
 //private WebElement ;
 //@FindBy(xpath="")
 //private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+//@FindBy(xpath="")
+//private WebElement ;
+
 
 //===========================================================================================================================================================================//
 //                                                                         PROGRAM PAGE FUNCTIONS
@@ -459,7 +565,7 @@ private WebElement rulessenderid2
 	
 	public void verifyRuleCreatedFromSheet(String name) throws java.lang.Exception {
 		Thread.sleep(3000);
-                                                                                                         
+		jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");                                                                                            
 	}
 	
 	
@@ -497,9 +603,18 @@ private WebElement rulessenderid2
 		}
    public void chooseProduct(String name) throws InterruptedException {
 	   Thread.sleep(7000);
-		Actions act = new Actions(driver);
+	   eh.setExcelFile("productInputData","fullDetails");
+	   String productName = (String) eh.getCell(1, 0);
+	   try {
+	   jswait.loadSendKeys("//label[contains(.,'Product')]//following::input[1]", productName);
+	   Thread.sleep(2000);
+	   jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+productName+"')]");
+	   }
+	   catch(Exception e) {
 		
-				act.moveToElement(driver.findElement(By.xpath("(.//vaadin-combo-box-item[@class='style-scope vaadin-combo-box-overlay'][1])[2]//..//vaadin-combo-box-item[1]"))).click().build().perform();
+        Actions act = new Actions(driver);
+        act.moveToElement(driver.findElement(By.xpath("(.//vaadin-combo-box-item[@class='style-scope vaadin-combo-box-overlay'][1])[2]//..//vaadin-combo-box-item[contains(.,'"+productName+"')]"))).click().build().perform();
+	   }
 		//act.moveToElement(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'singleProd477')]"))).click().build().perform();
 		//act.moveToElement(driver.findElement(By.xpath("//vaadin-combo-box-item[contains(.,'"+name+"')]"))).click().build().perform();
 //		act.moveToElement(product).click().build().perform();
@@ -536,12 +651,12 @@ private WebElement rulessenderid2
 	}
    
    //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-///
-   public void createNewProgramRule(String name,String listname,String touchpointList, String offerType)throws Exception {
+   public void createNewProgramRule(String sheet,String name,String listname,String touchpointList, String offerType)throws Exception {
 		eh.setExcelFile("touchpointInputData", touchpointList);
 		System.out.println(touchpointList);
 		String touchpointType = eh.getCellByColumnName("type");
 		clickCreateNewRuleButton();
-		enterruleName();
+		enterruleName(sheet);
 		clickSaveRuleButton();
 		Thread.sleep(2000);
 		clickCustomerListField();
@@ -553,7 +668,7 @@ private WebElement rulessenderid2
 		clickProductFieldOption();
 		chooseProduct(name);
 		Thread.sleep(2000);
-		selectoffersinrules();
+		selectoffersinrules(offerType);
 		Thread.sleep(2000);
 		
 		
@@ -654,9 +769,9 @@ private WebElement rulessenderid2
    
    
    
-   public void enterruleName()throws InterruptedException, IOException {
+   public void enterruleName(String sheet)throws InterruptedException, IOException {
 	   ExcelHelper programExcel = new ExcelHelper();
-   	   eh.setExcelFile("ruleInputData", "rule");
+   	   eh.setExcelFile("ruleInputData",sheet);
 	   Random rn = new Random();
 		int  n = rn.nextInt(5000) + 1;
 		String name = (String) eh.getCell(1, 0);
@@ -675,10 +790,18 @@ private WebElement rulessenderid2
 //		eh.setExcelFile("listname",listname);
 		String list = listname;
 		jswait.loadSendKeys(customerListField, list);
-		Thread.sleep(3000);
-		jswait.loadClick("//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+list+"')]");
-//		driver.findElement(By.xpath("//vaadin-combo-box-overlay[@id='overlay']//vaadin-combo-box-item[contains(.,'"+list+"')]")).click();
 		
+		Thread.sleep(2000);
+		jswait.loadSendKeys(customerListField, list);
+		Thread.sleep(2000);
+		wait.until(ExpectedConditions.visibilityOf(customerListField)).sendKeys(Keys.ARROW_DOWN);
+		wait.until(ExpectedConditions.visibilityOf(customerListField)).sendKeys(Keys.ENTER);
+//		jswait.loadClick(rulelist);	
+		
+		
+//		
+	
+	
 	}
    
    public void ruledelivryafterinput() throws InterruptedException {
@@ -699,18 +822,26 @@ private WebElement rulessenderid2
 	}
    
    public void addresssprule() throws InterruptedException {
+	   try {
+		   Thread.sleep(3000);
 	   Thread.sleep(2000);
-		jswait.loadClick(addresssprule);
+		jswait.loadClick(addresssprule);}
+	   catch(Exception e) {
 		Thread.sleep(2000);
-//		jswait.loadClick(addresssprule);
-	
+		jswait.loadClick(addresssprule);
+	   }
 	}
    public void addresssprule2() throws InterruptedException {
-	   Thread.sleep(2000);
-		jswait.loadClick(addresssprule2);
-		 Thread.sleep(2000);
-//			jswait.loadClick(addresssprule2);
-	
+	   
+	   try {
+		   Thread.sleep(3000);
+		jswait.loadClick(addresssprule2);}
+		catch(Exception e) {
+			System.out.println("inside addspr2");
+			rulessenderid2();
+			Thread.sleep(2000);
+			jswait.loadClick(addresssprule2);
+		}
 	}
    
    public void rulerouteid() throws InterruptedException {
@@ -735,25 +866,28 @@ private WebElement rulessenderid2
 		
 	}
    public void ruleroute2() throws InterruptedException {
+	   try {
+	   Thread.sleep(3000);
+	 jswait.loadClick(ruleroute2);}
+	   catch(Exception e) {
 	   Thread.sleep(3000);
 	 jswait.loadClick(ruleroute2);
-//	   Thread.sleep(3000);
-//	 jswait.loadClick(ruleroute2);
-	
+	   }
 		
 		
 	}
    public void rulessenderid2() throws InterruptedException {
 	   Thread.sleep(4000);
-	   wait.until(ExpectedConditions.visibilityOf(rulessenderid2)).click();
-		jswait.loadClick(rulessenderid2);
+	   ;
+		jswait.loadSendKeys(rulessenderid2,SENDER_SMPP);
 		Thread.sleep(2000);
 //		jswait.loadClick(rulessenderid2);
 	}
    
    public void rulerouteid2() throws InterruptedException {
 	   Thread.sleep(2000);
-	   jswait.loadClick(rulerouteid2);
+	   jswait.loadSendKeys(rulerouteid2,ROUTE_SMPP);
+	   
 	
 	}
    
@@ -1185,13 +1319,13 @@ private WebElement rulessenderid2
 		Thread.sleep(2000);
 		jswait.loadClick(prmrefreshat);
 		Thread.sleep(2000);
-		jswait.loadClick("(/html//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='hours'])[2]");
+//		jswait.loadClick("(/html//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='hours'])[2]");
 		WebElement num = driver.findElement(By.xpath(
 				".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
 		builder.moveToElement(num).click().build().perform();
 		Thread.sleep(2000);
 		// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
-		jswait.loadClick("(//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='minutes'])[2]");
+//		jswait.loadClick("(//paper-time-picker[@id='timePicker']/div[@id='timePicker']//paper-input[@name='minutes'])[2]");
 		Thread.sleep(2000);
 		WebElement num1 = driver.findElement(By.xpath(
 				".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
@@ -1561,22 +1695,25 @@ public void touchpointpgmdeletecheck() throws Exception{
 	public void selectOfferCatalogfromsheet(String sheet2) throws InterruptedException {
 		
 		eh.setExcelFile("offerCatalogInputData",sheet2);
-		String offer = (String) eh.getCell(1,0);
+		String offerCatalog = (String) eh.getCell(1,0);
 		Thread.sleep(3000);
-		jswait.loadSendKeys(programofferclick, offer);
-		System.out.println("Offer: "+offer);
-			Thread.sleep(3000);
-			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
-			Thread.sleep(3000);
-			jswait.loadClick("//label[contains(.,'Offer Catalog')]//..//paper-icon-button[@id='clearIcon']");
-			Thread.sleep(3000);
-			jswait.loadSendKeys(programofferclick, offer);
+		try {
+		jswait.loadSendKeys(programofferclick, offerCatalog);
+		System.out.println("Offer: "+offerCatalog);
+			Thread.sleep(1000);
+		jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offerCatalog+"')]");
+		Thread.sleep(2000);
+		System.out.println("xpath of catalog selected");
+		}
+		catch (Exception e) {
+			System.out.println("inside catch");
 			Thread.sleep(4000);
-			jswait.loadSendKeys(programofferclick, offer);
+		jswait.loadSendKeys(programofferclick, offerCatalog);
 			Thread.sleep(3000);
-			jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+offer+"')]");
+			jswait.loadClick("(//vaadin-combo-box-item[contains(.,'"+offerCatalog+"')])[2]");
+			}
 	}
-
+	
 	
 	public void programrefreshcyclecheck() throws Exception {
 		Thread.sleep(5000);
@@ -1757,37 +1894,36 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 			Assert.assertEquals("Days",Refreshcycle);
 			}
 	 
-	 public void verifyRuleviewFromSheet(String name,String product) throws java.lang.Exception {
+	 public void verifyRuleviewFromSheet(String ruleName,String productName,String offerName,String tpName) throws java.lang.Exception {
 			Thread.sleep(3000);
-			jswait.waitUntil("//data-table-cell[contains(.,'"+name+"')]");
+			Assert.assertTrue(jswait.checkVisibility("//h3[contains(.,'"+ruleName+"')]"));
 			Thread.sleep(2000);
-			System.out.println(name);
-//			commonObjects.clickOptionsIcon();
-//			commonObjects.filterName(name);
 			Thread.sleep(2000);
 			commonObjects.clickOptionsIcon();
 			jswait.loadClick("//paper-item[contains(.,'View')]");
 			Thread.sleep(2000);
 			jswait.loadClick("//h4[contains(.,'Target Details')]//following::iron-icon[2]");
 			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'selenium_list')]");
+			jswait.checkVisibility("//p[contains(.,'"+SELENIUM_LIST_IM+"')]");
 			Thread.sleep(2000);
 			jswait.loadClick("//h4[contains(.,'Offer Details')]//following::iron-icon[2]");
 			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'"+product+"')]");
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'"+productName+"')]"));
 			Thread.sleep(2000);
-			jswait.loadClick("//h4[contains(.,'Delivery Details')]//following::iron-icon[2]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
-			Thread.sleep(2000);
-			jswait.loadClick("//h4[contains(.,'Schedule Details')]//following::iron-icon[2]");
-			Thread.sleep(2000);
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'"+tpName+"')]"));
+			Assert.assertTrue(jswait.checkVisibility("//p[contains(.,'"+offerName+"')]"));
+//			jswait.loadClick("//h4[contains(.,'Delivery Details')]//following::iron-icon[2]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
+//			Thread.sleep(2000);
+//			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
+//			Thread.sleep(2000);
+//			jswait.loadClick("//h4[contains(.,'Schedule Details')]//following::iron-icon[2]");
+//			Thread.sleep(2000);
 			
 			
 		}
@@ -1810,14 +1946,15 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 		 eh.setExcelFile("ruleInputData",sheet);
 		 ExcelHelper pdt = new ExcelHelper();
 		 ExcelHelper pdtclass = new ExcelHelper();
-		 
+		 ExcelHelper rulesave = new ExcelHelper();
 		 pdtclass.setExcelFile("productClassInputData", sheet3);
-		 
-		 pdt.setExcelFile("productInputData", sheet2);
+		 rulesave.setExcelFile("ruleInputData", sheet3);
+		 pdt.setExcelFile("productInputData", "rulecopy");
 			String name = eh.getCell(1, 0).toString();	
 			String productname = pdt.getCell(1, 0).toString();
 			String productclass = pdtclass.getCell(1, 0).toString();
-		 
+			String rname=name+"_copy";
+			rulesave.setCell(1, 0, rname);
 		 Thread.sleep(2000);
 			commonObjects.clickOptionsIcon();
 			Thread.sleep(2000);
@@ -1854,133 +1991,14 @@ public void editProgramDetailsWithDeactivatedProduct(String name, String sheet)t
 	 
 	 //------------------------------//===
 	 
-	   public void editProgramRule(String name,String listname,String touchpointList, String offerType,String condition)throws Exception {
-			eh.setExcelFile("touchpointInputData", touchpointList);
-			System.out.println(touchpointList);
-			String touchpointType = eh.getCellByColumnName("type");
-			commonObjects.clickOptionsIcon();
-			jswait.loadClick("(//paper-item[contains(.,'Edit')])[1]");
-			Thread.sleep(2000);
-			jswait.loadClick("(//h4[@class='style-scope create-rule']//following::iron-icon[1])[1]");
-			Thread.sleep(2000);
-			
-			jswait.loadSendKeys("//h4[contains(.,'"+name+"')]//following::label[@class='style-scope paper-input'][1]//..//input", "Edited"+name);
-			Thread.sleep(2000);
-			jswait.loadClick("//paper-icon-button[@title=\"Save\"]//iron-icon");
-			
-			//clickSaveRuleButton();
-			Thread.sleep(2000);
-			clickCustomerListField();
-			Thread.sleep(2000);
-			selectCustomerList(listname);
-			Thread.sleep(2000);
+	   public void editProgramRule(String condition)throws Exception {
 			jswait.loadClick("//paper-radio-button[contains(.,'Create')]");
 			editingTheprogramruleTargetConditionDetails(condition);
 			verifyTheprogramTargetConditionDetails(condition); 
 			clickPorogramProceedButton();
-			Thread.sleep(2000);
-			clickProductFieldOption();
-			chooseProduct(name);
-			Thread.sleep(2000);
 			clickPorogramProceedButton();
-			//System.out.println("test");
-			
-			if(!offerType.contains("STV")) {
-			clickTrackingSessionField();
-			Thread.sleep(3000);
-			optionAfterselect();
-			Thread.sleep(3000);
-			ruledelivryafterinput();
-			Thread.sleep(3000);
-			ruleafterinput2(); 
-			ruledays();
-			Thread.sleep(2000);
-		}
-			if(touchpointType.contentEquals("sms")){
-				System.out.println("inside sms");
-				jswait.loadClick("//label[(contains(.,'Sender ID: Broadcast message would appear from this ID'))]//following::paper-icon-button[@id='clearIcon'][1]");
-				rulessenderid();
-				Thread.sleep(2000);
-				addresssprule();
-jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be sent'))]//following::paper-icon-button[@id='clearIcon'][1]");
-				Thread.sleep(2000);
-				rulerouteid();
-				Thread.sleep(2000);
-				ruleroute();
-				Thread.sleep(2000);
-				
-	   }
-			
-			Thread.sleep(2000);
-			jswait.loadClick("//label[(contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID'))]//following::paper-icon-button[@id='clearIcon'][1]");
-						rulessenderid2();
-			
-			Thread.sleep(2000);
-			addresssprule2();
-			Thread.sleep(2000);
-			jswait.loadClick("//label[(contains(.,'Route over which Fulfillment success or failure confirmation message can be sent'))]//following::paper-icon-button[@id='clearIcon'][1]");
-			rulerouteid2();
-			Thread.sleep(2000);
-			ruleroute2();
 			clickPorogramProceedButton();
-			
-			
-			// same path for both program and rule thats why used this fns here//
-			Thread.sleep(2000);
-//			programschstart(); 
-//			prmshcselectnow();
-			Thread.sleep(2000);
-			Calendar rightNow =Calendar.getInstance();
-	    	String mn = "";
-	    	if(rightNow.get(Calendar.MONTH)+1<9) {
-	    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
-	    	}
-	    	else 
-	    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
-			String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
-	    	int hours = rightNow.get(Calendar.HOUR);
-	      	 int min = rightNow.get(Calendar.MINUTE);
-	      	 int am_pm = rightNow.get(Calendar.AM_PM);
-	      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
-	      	 int year = rightNow.get(Calendar.YEAR);
-	      	 int month = rightNow.get(Calendar.MONTH)+1;
-	      	 min+=2;
-	      	 int rem = min%5;
-	      	 rem = 5-rem;
-	      	 min+=rem;
-	      	 if(min>59){
-	      		 min-=60;
-	      		 hours++;
-	      	 }
-	      	prmrefreshat();
-	      	 Actions builder = new Actions(driver);
-	       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
-	    	 Thread.sleep(1000);
-	    	 builder.moveToElement(num1).click().build().perform();
-	    	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
-	    	 Thread.sleep(1000);
-	    	 builder.moveToElement(num1).click().build().perform();
-	      	if(am_pm==0)
-	      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
-	       else
-	      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
-	      	clickRefreshAtOkButton();
-//			programactivatebtn();
-//			programconfirmactivateyes();
-	      	jswait.loadClick("//paper-button[contains(.,'Save')][2]");
-	      	Thread.sleep(2000);
-	      	jswait.loadClick("(//paper-button[contains(.,'Yes')][1])[1]");
-	      	
-	      	if(jswait.checkVisibility("//span[contains(.,'Changes have been saved and will be active on the next refresh cycle.  If all intended changes are done, click Close else click Continue.')]")==true) {
-	      		Thread.sleep(2000);
-	      		jswait.loadClick("//paper-button[contains(.,'Close')]");
-	      	} 
-			System.out.println("test");
-			Thread.sleep(2000);
-			commonObjects.clickOptionsIcon();
-			jswait.loadClick("//paper-item[contains(.,'View')]");
-			
-			
+			clickPorogramProceedButton();
 			
 		}
 	   public void selectSavedSegmentSelectorField(String condition) throws Exception {
@@ -2060,70 +2078,60 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 			
 		}
 	   
-	   public void verifyRuleviewaftereditFromSheet(String name,String product) throws java.lang.Exception {
-			Thread.sleep(3000);
-			//jswait.waitUntil("//h3[contains(.,'Editedautorule2794')]");
-			Thread.sleep(2000);
-			System.out.println(name);
-//			commonObjects.clickOptionsIcon();
-//			commonObjects.filterName(name);
-			Thread.sleep(2000);
-//			commonObjects.clickOptionsIcon();
-			//jswait.loadClick("//paper-item[contains(.,'View')]");
-			Thread.sleep(2000);
-			System.out.println("inside rules view");
-			jswait.loadClick("//h4[contains(.,'Target Details')]//following::iron-icon[2]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'selenium_list')]");
-			Thread.sleep(2000);
-			//----------------------
-			
-			
+//	   public void verifyRuleviewaftereditFromSheet(String name,String product) throws java.lang.Exception {
+//			System.out.println("inside rules view");
+//			jswait.loadClick("//h4[contains(.,'Target Details')]//following::iron-icon[2]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Age_q11')]//..//field-simple[contains(.,'is greater than')]//span[contains(.,'24')]");
+//			jswait.checkVisibility("//p[contains(.,'selenium_list')]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Boolean_q11')]//..//field-simple[contains(.,'')]//span[contains(.,'Yes')]");
+//			//----------------------
+//			
+//			
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Age_q11')]//..//field-simple[contains(.,'is greater than')]//span[contains(.,'24')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Boolean_q11')]//..//field-simple[contains(.,'')]//span[contains(.,'Yes')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Languages_q11')]//..//field-list[contains(.,'matches any of')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//usage-metric[contains(.,'Usage Metrics')]//b[contains(.,'Selenium Usage Metric_q11')]//..//..//field-simple[contains(.,'is greater than')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//usage-metric[contains(.,'Usage Metrics')]//b[contains(.,'Selenium_Metric Shared_q11')]//..//..//field-simple[contains(.,'is greater than')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//fixed-segment[contains(.,' is subscribed')]//b[contains(.,'selenium_list_shared')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//paper-card[contains(.,'All events before')]//target-event[contains(.,'This event has not occured.')]//b[contains(.,'Customer was sent the trial message')]//..//span[contains(.,'And')]//..//b[contains(.,'Recency:')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//div[contains(.,'All events before')]//b[contains(.,'Customer was eligible for Offer')]//..//span[contains(.,'And')]//..//b[contains(.,'Entirely during the time period:')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//paper-card[contains(.,'All events before')]//target-event[contains(.,'This event occured.')]//..//b[contains(.,'Selenium event_q11')]//..//span[contains(.,'And')]//..//field-date-part-date[contains(.,'now (target time')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//fixed-segment[contains(.,' is subscribed')]//b[contains(.,'selenium_list_target')]");
+////			Thread.sleep(2000);
+////			jswait.checkVisibility("//profile-field[contains(.,'Customer Profile Info')]//..//b[contains(.,'Target Group_q11')]//..//field-simple[contains(.,'is')]//..//span[contains(.,'10')]");
+////			Thread.sleep(2000);
+//			
+//			
+//			
+//			jswait.loadClick("//h4[contains(.,'Offer Details')]//following::iron-icon[2]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//div[contains(.,'Customer Profile Info')]//b[contains(.,'Languages_q11')]//..//field-list[contains(.,'matches any of')]");
+//			jswait.checkVisibility("//p[contains(.,'"+product+"')]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//usage-metric[contains(.,'Usage Metrics')]//b[contains(.,'Selenium Usage Metric_q11')]//..//..//field-simple[contains(.,'is greater than')]");
+//			jswait.loadClick("//h4[contains(.,'Delivery Details')]//following::iron-icon[2]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//usage-metric[contains(.,'Usage Metrics')]//b[contains(.,'Selenium_Metric Shared_q11')]//..//..//field-simple[contains(.,'is greater than')]");
+//			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//fixed-segment[contains(.,' is subscribed')]//b[contains(.,'selenium_list_shared')]");
+//			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//paper-card[contains(.,'All events before')]//target-event[contains(.,'This event has not occured.')]//b[contains(.,'Customer was sent the trial message')]//..//span[contains(.,'And')]//..//b[contains(.,'Recency:')]");
+//			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//div[contains(.,'All events before')]//b[contains(.,'Customer was eligible for Offer')]//..//span[contains(.,'And')]//..//b[contains(.,'Entirely during the time period:')]");
+//			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//paper-card[contains(.,'All events before')]//target-event[contains(.,'This event occured.')]//..//b[contains(.,'Selenium event_q11')]//..//span[contains(.,'And')]//..//field-date-part-date[contains(.,'now (target time')]");
+//			jswait.loadClick("//h4[contains(.,'Schedule Details')]//following::iron-icon[2]");
 //			Thread.sleep(2000);
-//			jswait.checkVisibility("//fixed-segment[contains(.,' is subscribed')]//b[contains(.,'selenium_list_target')]");
-//			Thread.sleep(2000);
-//			jswait.checkVisibility("//profile-field[contains(.,'Customer Profile Info')]//..//b[contains(.,'Target Group_q11')]//..//field-simple[contains(.,'is')]//..//span[contains(.,'10')]");
-//			Thread.sleep(2000);
-			
-			
-			
-			jswait.loadClick("//h4[contains(.,'Offer Details')]//following::iron-icon[2]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'"+product+"')]");
-			Thread.sleep(2000);
-			jswait.loadClick("//h4[contains(.,'Delivery Details')]//following::iron-icon[2]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'Address-SMPP')]");
-			Thread.sleep(2000);
-			jswait.checkVisibility("//p[contains(.,'SMPP Robi outbound')]");
-			Thread.sleep(2000);
-			jswait.loadClick("//h4[contains(.,'Schedule Details')]//following::iron-icon[2]");
-			Thread.sleep(2000);
-			
-			
-		}
+//			
+//			
+//		}
 	   public void verifyTheprogramTargetConditionDetails(String segmentCondition) throws InterruptedException {
 			
 			Thread.sleep(2000);
@@ -2243,7 +2251,38 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 			
 			}
 	   
-	   public void selectoffersinrules() throws java.lang.Exception {
+	   public void selectoffersinrules(String offer) throws java.lang.Exception {
+		   int i=programoffer;
+		   Thread.sleep(2000);
+//		   ExcelHelper offerExcel = new ExcelHelper();
+//		   offerExcel.setExcelFile("offerInputData", type);
+//		  String offer=(String) offerExcel.getCell(1,0);
+			if(jswait.checkVisibility("//paper-button[contains(.,'Select Offer')]")) {			
+			jswait.loadClick("//paper-button[contains(.,'Select Offer')]");
+			Thread.sleep(2000);
+			try {
+			jswait.loadClick("//h4[contains(.,'"+offer+"')]");}
+			catch(Exception e) {
+			jswait.loadClick("(//h4[contains(.,'Offers')])[1]");}
+			Thread.sleep(2000);
+			
+			jswait.loadClick("//paper-button[contains(.,'Done')]");
+			programoffer++;
+			Thread.sleep(2000);
+			jswait.loadClick("//div[contains(.,'Recommendation Limit')]/paper-icon-button[@role='button']/iron-icon[@id='icon']");
+			wait.until(ExpectedConditions.visibilityOf(accepttime)).sendKeys(Keys.BACK_SPACE);
+			wait.until(ExpectedConditions.visibilityOf(accepttime)).sendKeys(Keys.BACK_SPACE);
+			wait.until(ExpectedConditions.visibilityOf(conversiontime)).sendKeys("56");
+			Thread.sleep(2000);
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			clickPorogramProceedButton();
+			}else{
+				clickPorogramProceedButton();
+			}
+			
+			}
+	   
+	   public void selectoffersinrulesnew() throws java.lang.Exception {
 		   int i=programoffer;
 		   Thread.sleep(2000);
 			if(jswait.checkVisibility("//paper-button[contains(.,'Select Offer')]")) {			
@@ -2380,12 +2419,156 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 		
 		
 		//-/-------------------------------------------------------------------------//
-		 public void createNewProgramRulewithenddate(String name,String listname,String touchpointList, String offerType)throws Exception {
+		 public void createNewProgramRulewithenddate(String sheetname,String offer,String name,String listname,String touchpointList, String offerType)throws Exception {
 				eh.setExcelFile("touchpointInputData", touchpointList);
 				System.out.println(touchpointList);
 				String touchpointType = eh.getCellByColumnName("type");
 				clickCreateNewRuleButton();
-				enterruleName();
+				enterruleName(sheetname);
+				clickSaveRuleButton();
+				Thread.sleep(2000);
+				eh.setExcelFile("ruleInputData",sheetname);
+				String ruleName=eh.getCell(1, 0).toString();
+				jswait.loadClick(editRuleName);
+				jswait.loadSendKeys(InputRuleName,ruleName);
+				Thread.sleep(2000);
+				jswait.loadClick(saveRuleName);
+				clickCustomerListField();
+				Thread.sleep(2000);
+				selectCustomerList(listname);
+				Thread.sleep(2000);
+				clickPorogramProceedButton();
+				Thread.sleep(2000);
+				clickProductFieldOption();
+				chooseProduct(name);
+				Thread.sleep(2000);
+				selectoffersinrules(offer);
+				Thread.sleep(2000);
+				clickPorogramProceedButton();	
+				deliverytabselection(offerType,touchpointType);
+				Thread.sleep(2000);
+				programschstart(); 
+				prmshcselectnow();
+				programschend();
+				prmshcselectnoend();				
+//				prmshcselectAt();
+//				programenddate();				
+				Thread.sleep(2000);
+				Calendar rightNow =Calendar.getInstance();
+		    	String mn = "";
+		    	if(rightNow.get(Calendar.MONTH)+1<9) {
+		    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		    	}
+		    	else 
+		    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+				String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+		    	int hours = rightNow.get(Calendar.HOUR);
+		      	 int min = rightNow.get(Calendar.MINUTE);
+		      	 int am_pm = rightNow.get(Calendar.AM_PM);
+		      	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		      	 int year = rightNow.get(Calendar.YEAR);
+		      	 int month = rightNow.get(Calendar.MONTH)+1;
+		      	 min+=2;
+		      	 int rem = min%5;
+		      	 rem = 5-rem;
+		      	 min+=rem;
+		      	 if(min>59){
+		      		 min-=60;
+		      		 hours++;
+		      	 }
+		      	 
+		      	newprmrefreshatpgm();
+//		      	if(offerType.contains("Recharge")) {
+//		      		newprmrefreshatrule2();}else {
+//		      		newprmrefreshatpgm();
+//		      	}
+//		      	 Actions builder = new Actions(driver);
+//		       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+//		    	 Thread.sleep(1000);
+//		    	 builder.moveToElement(num1).click().build().perform();
+//		    	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+//		    	 Thread.sleep(1000);
+//		    	 builder.moveToElement(num1).click().build().perform();
+//		      	if(am_pm==0)
+//		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");s
+//		       else
+//		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+//		      	clickRefreshAtOkButton();
+				System.out.println("test");
+			
+				
+			}
+	
+		 
+		 public void deliverytabselection(String offerType,String touch) throws Exception {
+				if(touch.contentEquals("sms")||touch.contentEquals("trigger")){
+					System.out.println("inside sms");
+
+					Thread.sleep(2000);
+					rulessenderid();
+					Thread.sleep(2000);
+					addresssprule();
+
+					Thread.sleep(2000);
+					rulerouteid();
+					Thread.sleep(2000);
+					ruleroute();
+					Thread.sleep(2000);
+//					clickTrackingSessionField();
+//					Thread.sleep(3000);
+//					optionAfterselect();
+//					Thread.sleep(3000);
+//					ruledelivryafterinput();
+//					Thread.sleep(3000);
+					
+		   }
+			 if(!offerType.contains("STV")) {
+				 
+				 System.out.println("inside non stv");
+					clickTrackingSessionField();
+					Thread.sleep(3000);
+					optionAfterselect();
+					Thread.sleep(3000);
+					ruledelivryafterinput();
+					Thread.sleep(3000);
+					ruleafterinput2(); 
+					ruledays();
+					rulessenderid2();
+					Thread.sleep(2000);
+					addresssprule2();
+					Thread.sleep(2000);
+					rulerouteid2();
+					Thread.sleep(2000);
+					ruleroute2();
+					Thread.sleep(2000);
+					clickPorogramProceedButton();
+					}else {
+						System.out.println("inside stv else");
+
+					
+						rulessenderid2();
+						Thread.sleep(2000);
+						addresssprule2();
+						Thread.sleep(2000);
+						rulerouteid2();
+						Thread.sleep(2000);
+						ruleroute2();
+						clickPorogramProceedButton();
+						
+					}
+			
+				
+			 
+		 } 
+		 
+		 
+		 
+		 public void createNewProgramRule(String sheetname,String offer,String name,String listname,String touchpointList, String offerType)throws Exception {
+				eh.setExcelFile("touchpointInputData", touchpointList);
+				System.out.println(touchpointList);
+				String touchpointType = eh.getCellByColumnName("type");
+				clickCreateNewRuleButton();
+				enterruleName(sheetname);
 				clickSaveRuleButton();
 				Thread.sleep(2000);
 				clickCustomerListField();
@@ -2397,11 +2580,9 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 				clickProductFieldOption();
 				chooseProduct(name);
 				Thread.sleep(2000);
-				selectoffersinrules();
+				selectoffersinrules(offer);
 				Thread.sleep(2000);
-				
-				
-				//System.out.println("test");
+				clickPorogramProceedButton();
 				deliverytabselection(offerType,touchpointType);
 
 			
@@ -2414,8 +2595,7 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 				programschend();
 				prmshcselectnoend();
 				
-//				prmshcselectAt();
-//				programenddate();
+			
 				
 				Thread.sleep(2000);
 				Calendar rightNow =Calendar.getInstance();
@@ -2440,10 +2620,12 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 		      		 min-=60;
 		      		 hours++;
 		      	 }
-		      	if(offerType.contains("Recharge")) {
-		      		newprmrefreshatrule2();}else {
-		      		newprmrefreshatpgm();
-		      	}
+		      	 
+		      	newprmrefreshatpgm();
+//		      	if(offerType.contains("Recharge")) {
+//		      		newprmrefreshatrule2();}else {
+//		      		newprmrefreshatpgm();
+//		      	}
 //		      	 Actions builder = new Actions(driver);
 //		       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
 //		    	 Thread.sleep(1000);
@@ -2462,59 +2644,6 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 			
 				
 			}
-	
-		 
-		 public void deliverytabselection(String offerType,String touch) throws Exception {
-				if(touch.contentEquals("sms")||touch.contentEquals("trigger")){
-					System.out.println("inside sms");
-
-					Thread.sleep(2000);
-					rulessenderid();
-					Thread.sleep(2000);
-					addresssprule();
-
-					Thread.sleep(2000);
-					rulerouteid();
-					Thread.sleep(2000);
-					ruleroute();
-					Thread.sleep(2000);
-					
-		   }
-			 if(!offerType.contains("STV")) {
-				 System.out.println("inside stv");
-					clickTrackingSessionField();
-					Thread.sleep(3000);
-					optionAtselect();
-					Thread.sleep(3000);
-					Attimeselection();
-					Thread.sleep(3000);
-					rulessenderid2();
-					Thread.sleep(2000);
-					addresssprule2();
-					Thread.sleep(2000);
-					rulerouteid2();
-					Thread.sleep(2000);
-					ruleroute2();
-					Thread.sleep(2000);
-					clickPorogramProceedButton();
-					}else {
-						System.out.println("inside stv else");
-//					
-						rulessenderid2();
-						Thread.sleep(2000);
-						addresssprule2();
-						Thread.sleep(2000);
-						rulerouteid2();
-						Thread.sleep(2000);
-						ruleroute2();
-						clickPorogramProceedButton();
-						
-					}
-			
-				
-			 
-		 } 
-		 
 		 
 		 
 		 
@@ -2535,4 +2664,326 @@ jswait.loadClick("//label[(contains(.,'Route over which this broadcast can be se
 				jswait.loadClick("//label[contains(.,'End Date/Time')]//following::paper-button[contains(.,'OK')][1]");
 				
 				}
+		 public void verifyIMEventInCustomerProfile(String event,String offerName,String tpName,String RuleName)	throws Exception{
+				System.out.println("========"+event+" :is the event tht need to be verified");
+				CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
+				CustomerProfilePage.searchEventsDynammically("Today");
+				 Thread.sleep(4000);
+				jswait.loadClick(selectAllEventCheckBox);
+				jswait.loadClick(selectAllEventCheckBox);
+				jswait.loadClick("(//div[contains(.,'"+event+"')][@id='checkboxLabel'])[1]");
+				Thread.sleep(2000);
+				 jswait.loadClick(applyEventFilter);
+				 Thread.sleep(10000);
+				 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]"));
+					Thread.sleep(1000);;
+					 System.out.println("before for loop");
+					 for (int i=1;i<=ackEvents.size()+1;i++) {
+							try {
+								jswait.loadClick("(//iron-icon[@icon='app-icons:arrow-right'])["+i+"]");
+								Thread.sleep(1000);
+								if(event.equalsIgnoreCase("Conversion")||event.equalsIgnoreCase("Fulfillment Success")||event.equalsIgnoreCase("Acknowledged")){
+									boolean booln = jswait.checkVisibility(
+											"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + RuleName + "')]");
+									System.out.println(booln);
+								if (booln == true) {
+									System.out.println(event+"  verified");
+									break;
+								}
+								}
+			                  else if(event.equalsIgnoreCase("Offer Recommended")||event.equalsIgnoreCase("Offer Accepted")) {
+									boolean booln = jswait.checkVisibility(
+											"//label[contains(.,'Source')]/..//label[contains(.,'" +tpName+ "')]");
+									System.out.println(booln);
+								if (booln == true) {
+									System.out.println(event+"  verified");
+									break;
+								}
+			                  }
+								else if(event.equalsIgnoreCase("Offer Eligible Event")) {
+									boolean booln = jswait.checkVisibility(
+											"//label[contains(.,'Offer')]/..//label[contains(.,'" +offerName+ "')]");
+									System.out.println(booln);
+								if (booln == true) {
+									System.out.println(event+"  verified");
+									break;
+								}
+								}
+								
+									
+							}
+								catch(Exception e) {
+									Assert.assertTrue("event not persisted",false);
+								}
+				}
+
+					 
+					 }	 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 public void editNewProgramRulewithoutenddate(String sheetname,String offer,String name,String listname,String touchpointList, String offerType)throws Exception {
+				eh.setExcelFile("touchpointInputData", touchpointList);
+				System.out.println(touchpointList);
+				String touchpointType = eh.getCellByColumnName("type");
+				commonObjects.clickOptionsIcon();
+				jswait.loadClick("(//paper-item[contains(.,'Edit')])[1]");
+				Thread.sleep(2000);
+				clickPorogramProceedButton();
+				Thread.sleep(2000);
+				Thread.sleep(2000);
+				clickPorogramProceedButton();
+				clickPorogramProceedButton();
+				clickPorogramProceedButton();
+				Thread.sleep(2000);
+				programschstart(); 
+				prmshcselectnow();
+				programschend();
+				prmshcselectnoend();
+		      	newprmrefreshatpgm();
+//		      	if(offerType.contains("Recharge")) {
+//		      		newprmrefreshatrule2();}else {
+//		      		newprmrefreshatpgm();
+//		      	}
+//		      	 Actions builder = new Actions(driver);
+//		       	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+//		    	 Thread.sleep(1000);
+//		    	 builder.moveToElement(num1).click().build().perform();
+//		    	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+//		    	 Thread.sleep(1000);
+//		    	 builder.moveToElement(num1).click().build().perform();
+//		      	if(am_pm==0)
+//		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");s
+//		       else
+//		      	  jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+//		      	clickRefreshAtOkButton();
+				System.out.println("test");
+			
+				
+			}
+
+		 
+		 public void verifyIMEventInCustomerProfiletimeout(String event,String offerName,String tpName,String RuleName)	throws Exception{
+				System.out.println("========"+event+" :is the event tht need to be verified");
+				CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
+				CustomerProfilePage.searchEventsDynammically("Today");
+				 Thread.sleep(4000);
+				jswait.loadClick(selectAllEventCheckBox);
+				jswait.loadClick(selectAllEventCheckBox);
+				jswait.loadClick("(//div[contains(.,'"+event+"')][@id='checkboxLabel'])[1]");
+				Thread.sleep(2000);
+				 jswait.loadClick(applyEventFilter);
+				 Thread.sleep(10000);
+				 List<WebElement> ackEvents = driver.findElements(By.xpath("//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row//data-table-cell[3]//span[contains(.,'"+event+"')]"));
+					Thread.sleep(1000);;
+					 System.out.println("before for loop");
+					 for (int i=1;i<=ackEvents.size()+1;i++) {
+							try {
+								jswait.loadClick("(//iron-icon[@icon='app-icons:arrow-right'])["+i+"]");
+								Thread.sleep(1000);
+								if(event.equalsIgnoreCase("Conversion")||event.equalsIgnoreCase("Fulfillment Success")){
+									boolean booln = jswait.checkVisibility(
+											"//label[contains(.,'Broadcast')]/..//label[contains(.,'" + RuleName + "')]");
+									System.out.println(booln);
+								if (booln == false) {
+									System.out.println(event+"  verified");
+									break;
+								}
+								}
+			                  else if(event.equalsIgnoreCase("Offer Recommended")||event.equalsIgnoreCase("Offer Accepted")) {
+									boolean booln = jswait.checkVisibility(
+											"//label[contains(.,'Source')]/..//label[contains(.,'" +tpName+ "')]");
+									System.out.println(booln);
+								if (booln == false) {
+									System.out.println(event+"  verified");
+									break;
+								}
+			                  }
+								else if(event.equalsIgnoreCase("Offer Eligible Event")) {
+									boolean booln = jswait.checkVisibility(
+											"//label[contains(.,'Offer')]/..//label[contains(.,'" +offerName+ "')]");
+									System.out.println(booln);
+								if (booln == false) {
+									System.out.println(event+"  verified");
+									break;
+								}
+								}
+								
+									
+							}
+								catch(Exception e) {
+									Assert.assertTrue("event persisted",false);
+								}
+				}
+
+					 
+					 }
+		 
+public void editIMRule(String ruleName ,String listName,String productSheet,String offerType,String tpSheet)throws Exception{
+	Thread.sleep(3000);
+	jswait.loadClick(editRuleName);
+	jswait.loadClick(InputRuleName);
+	jswait.loadClick(saveRuleName);
+	Thread.sleep(2000);
+	clickCustomerListField();
+	Thread.sleep(2000);
+	selectCustomerList(listName);
+	Thread.sleep(2000);
+	clickPorogramProceedButton();
+	Thread.sleep(2000);
+	clickProductFieldOption();
+	chooseProduct(productSheet);
+	Thread.sleep(2000);
+	selectoffersinrules(offerType);
+	Thread.sleep(2000);
+	if(!offerType.contains("STV")) {
+	clickTrackingSessionField();
+	Thread.sleep(3000);
+	optionAfterselect();
+	Thread.sleep(3000);
+	ruledelivryafterinput();
+	Thread.sleep(3000);
+	ruleafterinput2(); 
+	ruledays();
+	Thread.sleep(2000);
+	}
+	if(tpSheet.contentEquals("sms")){
+		System.out.println("inside sms");
+		Thread.sleep(2000);
+		rulessenderid();
+		Thread.sleep(2000);
+		addresssprule();
+		Thread.sleep(2000);
+		rulerouteid();
+		Thread.sleep(2000);
+		ruleroute();
+		Thread.sleep(2000);		
 }
+	rulessenderid2();
+	Thread.sleep(2000);
+	addresssprule2();
+	Thread.sleep(2000);
+	rulerouteid2();
+	Thread.sleep(2000);
+	ruleroute2();
+	clickPorogramProceedButton();
+	Thread.sleep(2000);
+	programschstart(); 
+	prmshcselectnow();
+	Thread.sleep(2000);
+	Calendar rightNow =Calendar.getInstance();
+	String mn = "";
+	if(rightNow.get(Calendar.MONTH)+1<9) {
+		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+	}
+	else 
+		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+	String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH));
+	int hours = rightNow.get(Calendar.HOUR);
+  	 int min = rightNow.get(Calendar.MINUTE);
+  	 int am_pm = rightNow.get(Calendar.AM_PM);
+  	 int day = rightNow.get(Calendar.DAY_OF_MONTH);
+  	 int year = rightNow.get(Calendar.YEAR);
+  	 int month = rightNow.get(Calendar.MONTH)+1;
+  	 min+=2;
+  	 int rem = min%5;
+  	 rem = 5-rem;
+  	 min+=rem;
+  	 if(min>59){
+  		 min-=60;
+  		 hours++;
+  	 }
+  	prmrefreshat();
+  	 Actions builder = new Actions(driver);
+   	WebElement num1 = driver.findElement(By.xpath(".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+(hours+1)+"]"));
+	 Thread.sleep(1000);
+	 builder.moveToElement(num1).click().build().perform();
+	 num1 = driver.findElement(By.xpath(".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["+(min+1)+"]"));
+	 Thread.sleep(1000);
+	 builder.moveToElement(num1).click().build().perform();
+  	if(am_pm==0)
+  	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+   else
+  	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+  	clickRefreshAtOkButton();
+	programactivatebtn();
+	programconfirmactivateyes();
+}
+
+public void copyRule(String ruleName) throws Exception{
+clickPorogramProceedButton();
+clickPorogramProceedButton();
+clickPorogramProceedButton();
+clickPorogramProceedButton();
+clickSaveRuleButton();
+confirmProgramEditSave();
+Thread.sleep(2000);
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+}
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+

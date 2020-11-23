@@ -483,8 +483,17 @@ public class ConsumerProfileSteps extends Init{
 		
 		}
 	}
-
+	@Then("^create a field age$")
+	public void create_a_field_age() throws Throwable {
+		customerObjects.createProfileWithNumberFormat();
 	
+	}
+	@Then("^verify profile age is create$")
+	public void verify_profile_age_is_create() throws Throwable {
+		commonObjects.clickFilterIcon();
+		commonObjects.filterName("age");
+		customerObjects.verifyProfileAge();
+		
+	}
 	
-   
 }

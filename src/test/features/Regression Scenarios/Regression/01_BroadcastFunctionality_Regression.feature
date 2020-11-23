@@ -10,7 +10,7 @@ Scenario Outline: Activate the reward bcs and raise the conversion job
 Given login 
 Then navigate to precision marketer 
 Then activate and raise the conversion job the broadcast from workbook "<storedWB>" and sheet "<storedSheet>" and bcSheetName "<bcsheet>"
-
+#
 Examples:
 |storedWB|storedSheet|bcsheet|
 |parallelRunBC|rewardBcs|recurringBC|
@@ -344,14 +344,14 @@ Then verify pdf generated for broadcast from BCsheet "seedingTriggerableRecurrin
 #render time schedule with before and after
 #resume manually 
 
-@NDX-ActivateBCRegression  @initBrowser
-Scenario: Activate all the bc in the BCStorageSheet
-Given login 
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then activate broadcast from workbook "parallelRunBC" and sheet "ConversionBC"
+#@NDX-ActivateBCRegression  @initBrowser
+#Scenario: Activate all the bc in the BCStorageSheet
+#Given login 
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then activate broadcast from workbook "parallelRunBC" and sheet "BCDataStorage"
 
 @NDX-8797 @NDX-12014 @NDX-12030 @NDX-12035 @NDX-8776 @NDX-9794 @NDX-9788 @initBrowser  @closeBrowser
 Scenario: Verify the ack ,channel SMS,dr count,CG count
@@ -362,11 +362,11 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
-Then click on BC edit button from workbook "bcInputData" sheet "one-offBC"
-Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
-Then activate bc
-Then wait until status of "one-offBC" is "Completed"
-Then wait for 1 minutes
+#Then click on BC edit button from workbook "bcInputData" sheet "one-offBC"
+#Then edit the Delevery tab details from workbook "bcInputData" sheet "one-offBC"
+#Then activate bc
+#Then wait until status of "one-offBC" is "Completed"
+#Then wait for 1 minutes
 Then verify the ack count with target condition Ack from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
 Then view broadcast for "onetime" for bctype "onetime"
 Then verify the target count with condition Ack from sheet "targetConditionCount" also the channel "SMS"
@@ -389,7 +389,7 @@ Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Control Group Participation event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
-Then raise the conversion job
+#Then raise the conversion job
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
@@ -397,24 +397,24 @@ Then click on events tab
 Then verify the condition Control Group Conversion event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
-@NDX-7047 @NDX-10013 @initBrowser @closeBrowser
-Scenario: Verify the ack ,channel WAP Target condition: customerList of a one-timebc
-Then filter the bc from sheet "BCDataStorage" from row "1" and column "0" and write in sheet "one-offBC"
-Given login 
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
-Then wait until status of "one-offBC" is "Completed"
-Then verify the ack count with target condition customerList from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
-Then view broadcast for "onetime" for bctype "onetime"
-Then verify the target count with condition customerList from sheet "targetConditionCount" also the channel "WAP"
-Then navigate to reports
-Then navigate to customer profile
-Then search msisdn "919491750042"
-Then click on events tab
-Then verify the condition Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+#@NDX-7047 @NDX-10013 @initBrowser @closeBrowser
+#Scenario: Verify the ack ,channel WAP Target condition: customerList of a one-timebc
+#Then filter the bc from sheet "BCDataStorage" from row "1" and column "0" and write in sheet "one-offBC"
+#Given login 
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
+#Then wait until status of "one-offBC" is "Completed"
+#Then verify the ack count with target condition customerList from sheet "targetConditionCount" for bc from sheet "one-offBC" of bctype "onetime"
+#Then view broadcast for "onetime" for bctype "onetime"
+#Then verify the target count with condition customerList from sheet "targetConditionCount" also the channel "WAP"
+#Then navigate to reports
+#Then navigate to customer profile
+#Then search msisdn "919491750042"
+#Then click on events tab
+#Then verify the condition Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 
 @NDX-7035 @NDX-10010 @NDX-9790 @initBrowser @closeBrowser
@@ -455,7 +455,7 @@ Then search msisdn "919491750240"
 Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 Then click on events tab
-Then verify multiple creative "63.0" for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
+Then verify multiple creative "41" for the bc from sheet "one-offBC" for the campaign from sheet "campaignBC"
 
 @NDX-8627 @NDX-7040 @NDX-8961 @NDX-8799 @NDX-8805 @NDX-9970  @NDX-9797 @NDX-12015 @NDX-12036  @initBrowser
 Scenario: Verify the ack ,channel SMS,multiple creative ,dr count,CG count of a recurrence pattern DAILY of recurringbc 
@@ -495,7 +495,7 @@ Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Control Group Participation event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
 Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
-Then raise the conversion job
+#Then raise the conversion job
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
@@ -517,7 +517,7 @@ Then click on BC edit button from workbook "bcInputData" sheet "recurrBCWeekly"
 Then edit deliver tab with end "At" target render time "realTime" and broadcast expiry as "after" from sheet "recurrBCDaily"
 Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurrBCWeekly" for bctype "onetime" 
-Then verify the date for child bc from sheet "recurrBCWeekly" with recurrence pattern "EVERY WEEK"
+#Then verify the date for child bc from sheet "recurrBCWeekly" with recurrence pattern "EVERY WEEK"
 Then wait until status of "recurrBCWeekly" from file "bcInputData" is "Completed" for bctype "recurring"
 Then view broadcast for "recurringchildbc" for bctype "onetime"
 Then verify the target count with condition profilefieldNV from sheet "targetConditionCount" also the channel "WAP"
@@ -540,7 +540,7 @@ Then click on BC edit button from workbook "bcInputData" sheet "recurringMonthSp
 Then edit deliver tab with end "At" target render time "realTime" and broadcast expiry as "after" from sheet "recurringMonthSpecialBC"
 Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurringMonthSpecialBC" for bctype "onetime" 
-Then verify the date for child bc from sheet "recurringMonthSpecialBC" with recurrence pattern "SPECIAL DAY OF THE WEEK"
+#Then verify the date for child bc from sheet "recurringMonthSpecialBC" with recurrence pattern "SPECIAL DAY OF THE WEEK"
 Then view broadcast for "recurringchildbc" for bctype "onetime"
 Then verify the target count with condition Ack from sheet "targetConditionCount" also the channel "Email"
 
@@ -558,7 +558,7 @@ Then click on BC edit button from workbook "bcInputData" sheet "recurringBC"
 Then edit deliver tab with end "At" target render time "realTime" and broadcast expiry as "after" from sheet "recurringBC"
 Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurringBC" for bctype "onetime"
-Then verify the date for child bc from sheet "recurringBC" with recurrence pattern "EVERY 2 DAYS"
+#Then verify the date for child bc from sheet "recurringBC" with recurrence pattern "EVERY 2 DAYS"
 Then wait until status of recurring child bc from sheet "recurringBC" is "Completed" 
 Then verify the ack count with target condition SharedcustomerList from sheet "targetConditionCount" for bc from sheet "recurringBC" of bctype "recurring"
 Then view broadcast for "recurringchildbc" for bctype "onetime"
@@ -605,7 +605,7 @@ Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
 Then verify the condition Control Group Participation event for the bc from sheet "seedingoneoff" for the campaign from sheet "campaignBC"
-Then raise the conversion job
+Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750005"
@@ -702,7 +702,7 @@ Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 Then verify the condition Confirmed Delivery event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
 Then verify the condition Control Group Participation event for the bc from sheet "seedingRecurringBC" for the campaign from sheet "campaignBC"
-Then raise the conversion job
+Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
 Then navigate to customer profile
 Then search msisdn "9491750005"
 Then click on events tab
@@ -794,7 +794,7 @@ Then navigate to customer profile
 Then search msisdn "919491750042"
 Then click on events tab
 Then verify the condition Control Group Participation event for the bc from sheet "TriggerOneoff" for the campaign from sheet "campaignBC"
-Then raise the conversion job
+Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "919491750042"
@@ -882,7 +882,7 @@ Then navigate to customer profile
 Then search msisdn "9491750042"
 Then click on events tab
 Then verify the condition Control Group Participation event for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC"
-Then raise the conversion job
+Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750042"
@@ -935,8 +935,7 @@ Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750042"
 Then click on events tab
-Then verify the condition Control Group Participation event for the bc from sheet "TriggerReccurringBC" for the campaign from sheet "campaignBC"
-Then raise the conversion job
+Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
 Then navigate to reports
 Then navigate to customer profile
 Then search msisdn "9491750042"

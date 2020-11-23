@@ -527,4 +527,64 @@ public class OfferCatalogSteps extends Init{
 		      
 		      
 }
+	   
+	   @Then("^Add offer to Offer Catalogue$")
+	   public void add_offer_to_Offer_Catalogue() throws Throwable {
+		   try {
+		   for(int row=1;row<=8;row++){
+		   eM.setExcelFile("BambooBuildDetails","offerData");
+		   String offername=(String) eM.getCell(row, 0);
+		 	 catalogPageObjects.clickCatalogAddOffers();
+		 	 commonObjects.filterName(offername);
+		 	 jswait.loadClick("//data-table-cell[contains(.,'"+offername+"')]");
+		 	Thread.sleep(2000);
+		 	 catalogPageObjects.clickAddToCatalogButton();
+		   }
+		   }
+		   catch(Exception e) {
+			   System.out.println("all 8 offers not added to the catalog");
+		   }
+	   
+	   
+	   }
+	   
+	   
+	   
+	   @Then("^Add offer to Offer CatalogueIM$")
+	   public void add_offer_to_Offer_CatalogueIM() throws Throwable {
+		   try {
+		   for(int row=1;row<=6;row++){
+		   eM.setExcelFile("BambooBuildDetails","offerData");
+		   String offername=(String) eM.getCell(row, 0);
+		 	 catalogPageObjects.clickCatalogAddOffers();
+		 	 commonObjects.filterName(offername);
+		 	 jswait.loadClick("//data-table-cell[contains(.,'"+offername+"')]");
+		 	 Thread.sleep(2000);
+		 	 catalogPageObjects.clickAddToCatalogButton();
+		   }
+		   }
+		   catch(Exception e) {
+			   System.out.println("all offers required are not added");
+		   }
+//		   for(int row=9;row<=12;row++){
+//			   eM.setExcelFile("BambooBuildDetails","offerData");
+//			   String offername=(String) eM.getCell(row, 0);
+//			 	 catalogPageObjects.clickCatalogAddOffers();
+//			 	 commonObjects.filterName(offername);
+//			 	 jswait.loadClick("//data-table-cell[contains(.,'"+offername+"')]");
+//			 	 catalogPageObjects.clickAddToCatalogButton();
+//			   }
+//		   }
+//		   catch(Exception e) {
+//			   System.out.println("all 8 offers not added to the catalog");
+//		   }
+	   }
+		   @Then("^view offer in the catalog \"([^\"]*)\"$")
+		   public void viewOfferClick(String offerCatalogSheet) throws Throwable {  
+			   eh.setExcelFile("offerCatalogInputData", offerCatalogSheet);
+			   String offerCatalogName=eh.getCell(1, 0).toString();
+			   commonObjects.filterName(offerCatalogName);
+				  commonObjects.clickOptionsIcon();	
+             jswait.loadClick("(//data-table-cell[contains(.,'"+offerCatalogName+"')]//following::paper-item[contains(.,'View Offers')])[1]");
+		   }
 }

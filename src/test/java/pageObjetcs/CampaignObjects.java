@@ -2352,4 +2352,9 @@ public void verifyCampaignTemplateTaregetCondition(String segmentCondition) thro
 				jswait.checkVisibility("//usage-metric//b[contains(.,'" + SELENIUM_REVENUE_METRIC + "')]"));
 }
 }
+public void addCampaignDetails(String campaignName, String storageSheet, int row) throws Exception {
+ System.out.println("row of the table  "+row);
+        eM.setExcelFile("BambooBuildDetails", storageSheet);	
+    eM.setCell(row, 0, campaignName);
+}
 }

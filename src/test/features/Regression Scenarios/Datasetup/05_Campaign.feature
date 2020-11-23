@@ -4,7 +4,7 @@
 Feature: campaign for data setup
 
 @NDX-5495 @NDX-5494
-  @NDX-createcampaign
+  @NDX-createcampaign11
    @initBrowser @closeBrowser
   Scenario: Verify creating campaign for data setup
     Given login
@@ -23,7 +23,7 @@ Feature: campaign for data setup
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "campaignCategory"
     Then create new recurring campaign from sheet "recurringcampaign" with catalog "defaultCatalog"
-    Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with catalog from campaignBc with defautCatalog
+#    Then save "campaignInputData" data to spreadsheet from "campaignBC" with string campaign with catalog from campaignBc with defautCatalog
       
 @NDX-createCampaignToVerifyPause
 @initBrowser @closeBrowser
@@ -33,7 +33,7 @@ When navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then create new campaign from sheet "CampaignForPause" with catalog "defaultCatalog"
-Then save "campaignInputData" data to spreadsheet from "CampaignForPause" with string campaign with catalog from campaignBc with defautCatalog
+#Then save "campaignInputData" data to spreadsheet from "CampaignForPause" with string campaign with catalog from campaignBc with defautCatalog
       
       
 @NDX-createCampaignToVerifyAbort @initBrowser @closeBrowser
@@ -43,7 +43,7 @@ When navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then create new campaign from sheet "CampaignForAbort" with catalog "defaultCatalog"
-Then save "campaignInputData" data to spreadsheet from "CampaignForAbort" with string campaign with catalog from campaignBc with defautCatalog
+#Then save "campaignInputData" data to spreadsheet from "CampaignForAbort" with string campaign with catalog from campaignBc with defautCatalog
     
     
 @NDX-createCampaignToVerifyShowHistory 

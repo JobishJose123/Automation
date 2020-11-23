@@ -38,9 +38,9 @@ public class TouchpointPage extends Init{
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'FIFO')]")
 	private WebElement ussdFormPrioritizationRuleFIFO;
 	
-	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
-	private WebElement ussdFormPrioritizationLogicFIFO
-	;
+//	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'FIFO')]")
+//	private WebElement ussdFormPrioritizationLogicFIFO;
+	
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Hours')]")
 	private WebElement ussdFormTimeInterval1;
 	
@@ -314,14 +314,14 @@ public class TouchpointPage extends Init{
 	private WebElement customerCareFormPrioritizationLogicSelector;
 	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Prioritization Rule')]/../input")
 	private WebElement customerCareFormPrioritizationRuleSelector;
-	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'FIFO')]")
-	private WebElement customerCareFormPrioritizationRuleFIFO;
-	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
-	private WebElement customerCareFormPrioritizationLogicFIFO;
-	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'LIFO')]")
-	private WebElement customerCareFormPrioritizationLogicLIFO;
-	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
-	private WebElement customerCareFormPrioritizationLogicBESTFITALGORITHM;
+//	@FindBy(xpath="//form[@id='addCustomerForm']//paper-item[contains(.,'FIFO')]")
+//	private WebElement customerCareFormPrioritizationRuleFIFO;
+//	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[2]")
+//	private WebElement customerCareFormPrioritizationLogicFIFO;
+//	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'LIFO')]")
+//	private WebElement customerCareFormPrioritizationLogicLIFO;
+//	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[1]")
+//	private WebElement customerCareFormPrioritizationLogicBESTFITALGORITHM;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Hours')]")
 	private WebElement customerCareFormTimeInterval1;
 	@FindBy(xpath="//form[@id='addCustomerForm']//label[contains(.,'Time Interval')]/../..//input")
@@ -583,10 +583,10 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	public void smsEnterKeyword(String name) throws InterruptedException {
 		jswait.loadSendKeys(smsFormKeywordInput, name);
 	}
-	public void smsSelectPrioritizationLogic() throws InterruptedException {
+	public void smsSelectPrioritizationLogic(String prioLogic) throws InterruptedException {
 		jswait.loadClick(smsFormPrioritizationLogicSelector);
 		Thread.sleep(2000);
-		jswait.loadClick(smsFormPrioritizationLogicFIFO);
+		jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+prioLogic+"')]");
 	}
 	public void smsSelectPrioritizationRule() throws InterruptedException {
 		jswait.loadClick(smsFormPrioritizationRuleSelector);
@@ -608,9 +608,9 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	public void smsEnterMaximumOffers(String name) throws InterruptedException {
 		jswait.loadSendKeys(smsFormMaximumOffers, name);
 	}
-	public void enterSmsTouchpointDetails(String keyword) throws InterruptedException, IOException {
-		smsEnterKeyword(keyword);
-		smsSelectPrioritizationLogic();
+	public void enterSmsTouchpointDetails(String sheet,String prioLogic,String smsKeyword) throws InterruptedException, IOException {
+		smsEnterKeyword(smsKeyword);
+		smsSelectPrioritizationLogic(prioLogic);
 		smsSelectShortCode();
 		eh.setExcelFile("touchpointInputData", "smsTouchpoint");
  		String name = smsTouchpointName.getText();
@@ -621,13 +621,14 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 		smsSelectTimeInterval();
 		smsEnterMaximumOffers("5");
 	}
+//	====================================================================================================
 	
 	public void editSmsTouchpointDetails(String keyword) throws InterruptedException, IOException {
 		smsEnterKeyword(keyword);
 		eh.setExcelFile("touchpointInputData", "smsTouchpoint");
  		String name = smsTouchpointName.getText();
  		eh.setCell(1, 0, name);
-		smsSelectPrioritizationLogic();
+		smsSelectPrioritizationLogic("FIFO");
 //		smsSelectPrioritizationRule();
 		smsEnterRefreshEvery("3");
 		smsSelectTimeInterval();
@@ -639,7 +640,7 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	public void editSmsTouchpointDetailsshortcode(String keyword) throws InterruptedException {
 		smsEnterKeyword(keyword);
 		smsSelectnewShortCode();
-		smsSelectPrioritizationLogic();
+		smsSelectPrioritizationLogic("FIFO");
 //		smsSelectPrioritizationRulelifo();
 		smsEnterRefreshEvery("8");
 		smsSelectTimeInterval();
@@ -648,13 +649,13 @@ public void verifyEditButtonForTriggerTouchpoint() throws InterruptedException {
 	}
 	public void custedittouchpointcheck(String name) throws Exception {
 		
-		//String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited apiTouch')]");
+		String newname=jswait.getTextFormElement("(.//data-table-cell[@class='api-touchpoint-grid style-scope'])[1][contains(.,'edited apiTouch')]");
 		Thread.sleep(2000);
 		assertTrue(driver.findElement(By.xpath(".//span[contains(.,'"+name+"')]")).isDisplayed());
 //		System.out.println(newname);
-//       Assert.assertEquals(name,newname);
-//		System.out.println("edit success");
-//		
+       Assert.assertEquals(name,newname);
+		System.out.println("edit success");
+		
 		
 		
 	}
@@ -769,9 +770,9 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	
 }
 
-	public void createSmsTouchpoint(String keyword) throws InterruptedException, IOException {
+	public void createSmsTouchpoint(String sheet,String prioLogic,String smsKeyword) throws InterruptedException, IOException {
 		clickCreateNewTouchpoint();
-		enterSmsTouchpointDetails(keyword);
+		enterSmsTouchpointDetails(sheet,prioLogic,smsKeyword);
 		smsClickSave();
 		Thread.sleep(3000);
 	}
@@ -810,13 +811,13 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	jswait.loadClick(smsdeleteyes);
 	}
 	
-	
+//	==================================================================================================
 	public void editsmsTouchpointDetailsvalidation(String keyword) throws InterruptedException {
 		System.out.println("inside sms validation");
 		System.out.println(keyword);
 		smsEnterKeyword(keyword);
 //		smsSelectShortCode();
-		smsSelectPrioritizationLogic();
+		smsSelectPrioritizationLogic("FIFO");
 //		smsSelectPrioritizationRule();
 		smsEnterRefreshEvery("3");
 		smsSelectTimeInterval();
@@ -834,7 +835,7 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		navigateToSms();
 		clickCreateNewTouchpoint();
 		System.out.println(keyword);
-		enterSmsTouchpointDetails(keyword);
+		enterSmsTouchpointDetails(keyword,"FIFO","sms");
 		smsClickSave();
 		
 		boolean flag=jswait.checkVisible(smsvalidation);
@@ -846,7 +847,7 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	
 	
 	
-	
+//	=====================================================================================
 	
 	
 	
@@ -855,11 +856,11 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	public void triggerEnterTouchpointName(String name) throws InterruptedException {
 		jswait.loadSendKeys(triggerTouchpointName, name);
 	}
-	public void selectTrigger() throws InterruptedException {
+	public void selectTrigger(String trigger) throws InterruptedException {
 		jswait.loadClick(selectTrigger);
-		jswait.loadSendKeys(selectTrigger, TRIGGER);
+		jswait.loadSendKeys(selectTrigger, trigger);
 		
-		jswait.loadClick("//vaadin-combo-box-item[normalize-space(text())='"+TRIGGER+"']");
+		jswait.loadClick("//vaadin-combo-box-item[normalize-space(text())='"+trigger+"']");
 	}
 	public void triggerClickSave() throws InterruptedException {
 		jswait.loadClick(triggerFormSaveButton);
@@ -867,10 +868,10 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	public void triggerClickCancel() throws InterruptedException {
 		jswait.loadClick(triggerFormCancelButton);
 	}
-	public void triggerSelectPrioritizationLogic() throws InterruptedException {
+	public void triggerSelectPrioritizationLogic(String prioLogic) throws InterruptedException {
 		jswait.loadClick(triggerFormProritizationLogicSelector);
 		Thread.sleep(2000);
-		jswait.loadClick(smsFormPrioritizationLogicFIFO);
+		jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+prioLogic+"')]");
 	}
 	
 	public void custTriggerSelectPrioritizationLogic() throws InterruptedException {
@@ -911,11 +912,10 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	public void custTriggerEnterMaximumOffers(String name) throws InterruptedException {
 		jswait.loadSendKeys(custTriggerFormMaximumOffers, name);
 	}
-	public void enterTriggerTouchpointDetails(String name) throws InterruptedException {
+	public void enterTriggerTouchpointDetails(String name, String prioLogic, String trigger) throws InterruptedException {
 		triggerEnterTouchpointName(name);
-		
-		triggerSelectPrioritizationLogic();
-		selectTrigger();
+        triggerSelectPrioritizationLogic(prioLogic);
+		selectTrigger(trigger);
 		jswait.loadClick("//label[contains(.,'Inventory')]//following::paper-icon-button[2]");
 		Thread.sleep(2000);
 		jswait.loadSendKeys("//label[contains(.,'Inventory')]//..//input", "Unlimited");
@@ -927,17 +927,17 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	}
 	public void editTriggerTouchpointDetails(String name) throws InterruptedException {
 		triggerEnterTouchpointName(name);
-		triggerSelectPrioritizationLogic();
-		selectTrigger();
+		triggerSelectPrioritizationLogic("FIFO");
+		selectTrigger(TRIGGER);
 //		triggerFormPrioritizationRuleLIFO();
 		triggerEnterRefreshEvery("2");
 		triggerSelectTimeInterval();
 //		triggerEnterMaximumOffers("2");
 		triggerClickSave();
 	}
-	public void createTriggerTouchpoint(String keyword) throws InterruptedException {
+	public void createTriggerTouchpoint(String name,String prioLogic, String trigger) throws InterruptedException {
 		clickCreateNewTouchpoint();
-		enterTriggerTouchpointDetails(keyword);
+		enterTriggerTouchpointDetails(name,prioLogic,trigger);
 		
 		triggerClickSave();
 	}
@@ -948,13 +948,13 @@ public void deleteUSSDTouchpoint() throws Throwable {
 		jswait.checkVisible(triggerFieldValidation);
 	}
 	//customer care functions
-	public void customerCareSelectPrioritizationLogic() throws InterruptedException {
+	public void customerCareSelectPrioritizationLogic(String prioLogic) throws InterruptedException {
 		jswait.loadClick(customerCareFormPrioritizationLogicSelector);
-		jswait.loadClick(customerCareFormPrioritizationLogicFIFO);
+		jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+prioLogic+"')]");
 	}
-	public void customerCareSelectPrioritizationRule() throws InterruptedException {
+	public void customerCareSelectPrioritizationRule(String prioLogic) throws InterruptedException {
 		jswait.loadClick(customerCareFormPrioritizationRuleSelector);
-		jswait.loadClick(customerCareFormPrioritizationRuleFIFO);
+		jswait.loadClick("//form[@id='addCustomerForm']//paper-item[contains(.,'"+prioLogic+"')]");
 	}
 	public void customerCareEnterRefreshEvery(String name) throws InterruptedException {
 		jswait.loadSendKeys(customerCareFormRefreshEvery, name);
@@ -966,17 +966,17 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	public void customerCareEnterMaximumOffers(String name) throws InterruptedException {
 		jswait.loadSendKeys(customerCareFormMaximumOffers, name);
 	}
-	public void enterCustomerCareTouchpointDetails(String keyword) throws InterruptedException {
+	public void enterCustomerCareTouchpointDetails(String keyword,String prioLogic) throws InterruptedException {
 		customerCareEnterTouchpointName(keyword);
-		customerCareSelectPrioritizationLogic();
-//		customerCareSelectPrioritizationRule();
+		customerCareSelectPrioritizationLogic(prioLogic);
+//		customerCareSelectPrioritizationRule(prioLogic);
 		customerCareEnterRefreshEvery("3");
 		customerCareSelectTimeInterval();
 		customerCareEnterMaximumOffers("5");
 	}
-	public void createCustomerCareTouchpoint(String keyword) throws InterruptedException {
+	public void createCustomerCareTouchpoint(String keyword,String prioLogic) throws InterruptedException {
 		clickCreateNewTouchpoint();
-		enterCustomerCareTouchpointDetails(keyword);
+		enterCustomerCareTouchpointDetails(keyword,prioLogic);
 		customerCareClickSave();
 	}
 	public void customerCareEnterTouchpointName(String name) throws InterruptedException {
@@ -1256,9 +1256,10 @@ Assert.assertEquals(name,newname);
 			public void ussdClickCancel() throws InterruptedException {
 				jswait.loadClick(ussdFormCancelButton);
 			}
-			public void ussdSelectPrioritizationLogic() throws InterruptedException {
+			public void ussdSelectPrioritizationLogic(String prioLogic) throws InterruptedException {
 				jswait.loadClick(ussdFormPrioritizationLogicSelector);
-				jswait.loadClick(ussdFormPrioritizationLogicFIFO);
+				jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+prioLogic+"')]");
+				
 			}
 			public void ussdSelectPrioritizationRule() throws InterruptedException {
 				jswait.loadClick(ussdFormPrioritizationRuleSelector);
@@ -1274,10 +1275,10 @@ Assert.assertEquals(name,newname);
 				jswait.loadClick(ussdFormTimeIntervalSelector);
 				jswait.loadClick(ussdFormTimeInterval1);
 			}
-			public void ussdSelectUssdApplication() throws InterruptedException {
-				jswait.loadSendKeys(ussdFormUssdApplicationSelector,SELENIUM_USSD_APP);
+			public void ussdSelectUssdApplication(String ussdApp) throws InterruptedException {
+				jswait.loadSendKeys(ussdFormUssdApplicationSelector,ussdApp);
 				Thread.sleep(2000);
-				jswait.loadClick(ussdFormUssdApplication1);
+				jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+ussdApp+"')]");
 				
 			}
 			public void ussdSelectUssdApplicationInApi() throws InterruptedException {
@@ -1300,10 +1301,10 @@ Assert.assertEquals(name,newname);
 			public void ussdClearMaximumOffers() throws InterruptedException {
 				ussdFormMaximumOffers.clear();
 			}
-			public void enterUssdTouchpointDetails(String keyword) throws InterruptedException {
+			public void enterUssdTouchpointDetails(String keyword,String prioLogic,String ussdApp) throws InterruptedException {
 				ussdEnterTouchpointName(keyword);
-				ussdSelectPrioritizationLogic();
-				ussdSelectUssdApplication();
+				ussdSelectPrioritizationLogic(prioLogic);
+				ussdSelectUssdApplication(ussdApp);
 
 //				ussdSelectPrioritizationRule();
 				ussdEnterRefreshEvery("3");
@@ -1311,26 +1312,26 @@ Assert.assertEquals(name,newname);
 				ussdEnterMaximumOffers("5");
 			}
 			
-			public void editUssdTouchpointWithoutFillingMandatoryFields() throws InterruptedException {
-				ussdClearTouchpointName();
-				ussdClearUssdApplication();
-				ussdSelectPrioritizationLogic();
-//				ussdSelectPrioritizationRule();
-				ussdClearRefreshEvery();
-				ussdSelectTimeInterval();
-				ussdClearMaximumOffers();
-			}
-			public void createUssdTouchpoint(String keyword) throws InterruptedException {
+//			public void editUssdTouchpointWithoutFillingMandatoryFields() throws InterruptedException {
+//				ussdClearTouchpointName();
+//				ussdClearUssdApplication();
+//				ussdSelectPrioritizationLogic();
+////				ussdSelectPrioritizationRule();
+//				ussdClearRefreshEvery();
+//				ussdSelectTimeInterval();
+//				ussdClearMaximumOffers();
+//			}
+			public void createUssdTouchpoint(String keyword,String prioLogic,String ussdApp) throws InterruptedException {
 				clickCreateNewTouchpoint();
-				enterUssdTouchpointDetails(keyword);
+				enterUssdTouchpointDetails(keyword,prioLogic,ussdApp);
 				ussdClickSave();
 			}
 			
-			public void editUSSDTouchpointWithoutFillingMandatoryFields() throws InterruptedException {
-				clickUssdEditTouchpoint();
-				editUssdTouchpointWithoutFillingMandatoryFields();
-				ussdClickSave();
-			}
+//			public void editUSSDTouchpointWithoutFillingMandatoryFields() throws InterruptedException {
+//				clickUssdEditTouchpoint();
+//				editUssdTouchpointWithoutFillingMandatoryFields();
+//				ussdClickSave();
+//			}
 			public void createUssdTouchpointWithoutMandatoryFields() throws InterruptedException {
 				clickCreateNewTouchpoint();
 				ussdClickSave();
@@ -1533,11 +1534,11 @@ Assert.assertEquals(name,newname);
 				triggerEnterTouchpointName("mandatory");
 				triggerClickSave();
 				
-				triggerSelectPrioritizationLogic();
+				triggerSelectPrioritizationLogic("FIFO");
 //				triggerClickSave();
 //				triggerSelectPrioritizationRule();
 				triggerClickSave();
-				selectTrigger();
+				selectTrigger(TRIGGER);
 				triggerClickSave();
 				triggerEnterRefreshEvery("3");
 				triggerClickSave();
@@ -1667,69 +1668,68 @@ Assert.assertEquals(name,newname);
 			
 			
 			
-			public void customerCareSelectPrioritizationLogicnew(String type) throws InterruptedException {
-				
-				if(type.equalsIgnoreCase("FIFO")){
-				
-				jswait.loadClick(customerCareFormPrioritizationLogicSelector);
-				jswait.loadClick(customerCareFormPrioritizationLogicFIFO);
-				}else if (type.equalsIgnoreCase("LIFO")){
-				
-					jswait.loadClick(customerCareFormPrioritizationLogicSelector);
-					jswait.loadClick(customerCareFormPrioritizationLogicLIFO);
-				}else if (type.equalsIgnoreCase("BEST FIT ALGORITHM")){
-				
-					jswait.loadClick(customerCareFormPrioritizationLogicSelector);
-					jswait.loadClick(customerCareFormPrioritizationLogicBESTFITALGORITHM);
-				}
-				Thread.sleep(2000);
-				jswait.loadClick("(//paper-button[contains(.,'Save')])[1]");
-				
+//			public void customerCareSelectPrioritizationLogicnew(String type) throws InterruptedException {
+//				
+//				if(type.equalsIgnoreCase("FIFO")){
+//				
+//				jswait.loadClick(customerCareFormPrioritizationLogicSelector);
+//				jswait.loadClick(customerCareFormPrioritizationLogicFIFO);
+//				}else if (type.equalsIgnoreCase("LIFO")){
+//				
+//					jswait.loadClick(customerCareFormPrioritizationLogicSelector);
+//					jswait.loadClick(customerCareFormPrioritizationLogicLIFO);
+//				}else if (type.equalsIgnoreCase("BEST FIT ALGORITHM")){
+//				
+//					jswait.loadClick(customerCareFormPrioritizationLogicSelector);
+//					jswait.loadClick(customerCareFormPrioritizationLogicBESTFITALGORITHM);
+//				}
+//				Thread.sleep(2000);
+//				jswait.loadClick("(//paper-button[contains(.,'Save')])[1]");
+//				
+//			
+//	}
 			
-	}
-			
-	public void USSDSelectPrioritizationLogicnew(String type) throws InterruptedException {
-				
-				if(type.equalsIgnoreCase("FIFO")){
-				
-				jswait.loadClick(ussdFormPrioritizationLogicSelector);
-				jswait.loadClick(ussdFormPrioritizationLogicFIFO);
-				}else if (type.equalsIgnoreCase("LIFO")){
-				
-					jswait.loadClick(ussdFormPrioritizationLogicSelector);
-					jswait.loadClick(customerCareFormPrioritizationLogicLIFO);
-				}else if (type.equalsIgnoreCase("BEST FIT ALGORITHM")){
-				
-					jswait.loadClick(ussdFormPrioritizationLogicSelector);
-					jswait.loadClick(customerCareFormPrioritizationLogicBESTFITALGORITHM);
-				}
-				Thread.sleep(2000);
-				jswait.loadClick("(//paper-button[contains(.,'Save')])[1]");
-				
-			
-	}
+//	public void USSDSelectPrioritizationLogicnew(String type) throws InterruptedException {
+//				
+//				if(type.equalsIgnoreCase("FIFO")){
+//				
+//				jswait.loadClick(ussdFormPrioritizationLogicSelector);
+//				jswait.loadClick(ussdFormPrioritizationLogicFIFO);
+//				}else if (type.equalsIgnoreCase("LIFO")){
+//				
+//					jswait.loadClick(ussdFormPrioritizationLogicSelector);
+//					jswait.loadClick(smsFormPrioritizationRuleLIFO);
+//				}else if (type.equalsIgnoreCase("BEST FIT ALGORITHM")){
+//				
+//					jswait.loadClick(ussdFormPrioritizationLogicSelector);
+//					jswait.loadClick(ussdFormPrioritizationRuleSelector);
+//				}
+//				Thread.sleep(2000);
+//				jswait.loadClick("(//paper-button[contains(.,'Save')])[1]");
+//				
+//			
+//}				
 
-	
-	public void SMSSelectPrioritizationLogicnew(String type) throws InterruptedException {
-		
-		if(type.equalsIgnoreCase("FIFO")){
-		
-		jswait.loadClick(smsFormPrioritizationLogicSelector);
-		jswait.loadClick(ussdFormPrioritizationLogicFIFO);
-		}else if (type.equalsIgnoreCase("LIFO")){
-		
-			jswait.loadClick(smsFormPrioritizationLogicSelector);
-			jswait.loadClick(customerCareFormPrioritizationLogicLIFO);
-		}else if (type.equalsIgnoreCase("BEST FIT ALGORITHM")){
-		
-			jswait.loadClick(smsFormPrioritizationLogicSelector);
-			jswait.loadClick(customerCareFormPrioritizationLogicBESTFITALGORITHM);
-		}
-		Thread.sleep(2000);
-		jswait.loadClick("(//paper-button[contains(.,'Save')])[1]");
-		
-	
-}
+//public void SMSSelectPrioritizationLogicnew(String type) throws InterruptedException {
+//		
+//		if(type.equalsIgnoreCase("FIFO")){
+//		
+//		jswait.loadClick(smsFormPrioritizationLogicSelector);
+//		jswait.loadClick(ussdFormPrioritizationLogicFIFO);
+//		}else if (type.equalsIgnoreCase("LIFO")){
+//		
+//			jswait.loadClick(smsFormPrioritizationLogicSelector);
+//			jswait.loadClick(customerCareFormPrioritizationLogicLIFO);
+//		}else if (type.equalsIgnoreCase("BEST FIT ALGORITHM")){
+//		
+//			jswait.loadClick(smsFormPrioritizationLogicSelector);
+//			jswait.loadClick(customerCareFormPrioritizationLogicBESTFITALGORITHM);
+//		}
+//		Thread.sleep(2000);
+//		jswait.loadClick("(//paper-button[contains(.,'Save')])[1]");
+//		
+//	
+//}
 
 	public void verifyEventOfTheprogram(String event,String bcName,String campaignName) throws Exception{
 		

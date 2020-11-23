@@ -29,7 +29,7 @@ import baseClasses.RandomNameGenerator;
 import pageObjetcs.Admin.OfferAttributesPage;
 
 public class OfferPageObjects extends Init {
-	private static final Exception Exception = null;
+//	private static final Exception Exception = null;
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	CommonObjects commonObjects = new CommonObjects();
@@ -371,11 +371,9 @@ public class OfferPageObjects extends Init {
 //	 private WebElement SelectTrialEmailID;
 	 @FindBy(xpath="//vaadin-combo-box-item[contains(text(),'"+SENDER_EMAIL+"')]")
 	 private WebElement SelectTrialEmailID;
-	 
-	
-	 
-	 
-	 //@FindBy(xpath="//wizard-tab[@id='check']//creative-wrapper/define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']//vaadin-combo-box[@label='Sender ID: Trial message would appear from this ID']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
+     @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is any of')]")
+     private WebElement addTrackingRuleConditionConditionSelectisAnyOf;
+     //@FindBy(xpath="//wizard-tab[@id='check']//creative-wrapper/define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']//vaadin-combo-box[@label='Sender ID: Trial message would appear from this ID']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	 @FindBy(xpath="//define-creative[2]//*[@id='sendTrialDialogNumber']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
 	 private WebElement SecondSelectTrialSMSID;
 	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
@@ -514,6 +512,38 @@ public class OfferPageObjects extends Init {
 	 private WebElement globalResponseKeyword;
 	 @FindBy(xpath="//div[@class='rules layout vertical style-scope source-track-rule']//paper-item[contains(.,'"+globalResonseKeywordforbc+"')]")
 	 private WebElement globalResponseKeywordforbc;
+	 @FindBy(xpath="//paper-radio-button[@name='carousel']")
+	 private WebElement carouselRadioBtn;
+	 @FindBy(xpath="//div[@id='item-0']")
+	  private WebElement firstCarousel;
+	 @FindBy(xpath="//paper-radio-button[@name='image']")
+	 private WebElement imageRadioBtn;
+	 @FindBy(xpath="//input[@id='file']")
+	  private WebElement selectImage;
+	 @FindBy(xpath="//label[contains(.,'Headline')]//following::input[1]")
+	 private WebElement headlineInput;
+	 @FindBy(xpath="//label[contains(.,'Headline')]//following::input[2]")
+	 private WebElement carouselDespInput;
+	 @FindBy(xpath="//label[contains(.,'Headline')]//following::input[3]")
+	 private WebElement carouselURL;
+	 @FindBy(xpath="//label[contains(.,'Primary Text')]//following::input[1]")
+	  private WebElement carouselPrimaryText;
+	 @FindBy(xpath="//label[contains(.,'See More URL')]//following::input[1]")
+	 private WebElement carouselSeeMoreURL;
+	  @FindBy(xpath="//label[contains(.,'See More Display Link')]//following::input[1]")
+	 private WebElement carouselMoreLink;
+	  @FindBy(xpath="//label[contains(.,'Call To Action')]//following::input[1]")
+	 private WebElement carouselCallAction;
+	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'Send Message')]")
+	 private WebElement sendMessage;
+	 @FindBy(xpath="//div[@id='radioLabel'][contains(.,'Video / Slideshow')]")
+	 private WebElement carouselVideo;
+	 @FindBy(xpath="//label[contains(.,'Configure Reminder')]//following::label[contains(.,'Title')]//following::input[1]")
+	 private WebElement reminderTitleInput ;
+	 @FindBy(xpath="//label[contains(.,'Configure Reminder')]//following::label[contains(.,'Details')]//following::textarea[1]")
+	 private WebElement reminderDetailsInput;
+	 @FindBy(xpath="//div[contains(.,'Configure Reminder')][@id='checkboxLabel']")
+	  private WebElement reminderCheckbox;
 	 
 //	 @FindBy(xpath="")
 //	 private WebElement ;
@@ -711,6 +741,10 @@ public class OfferPageObjects extends Init {
 	 public void clickEditRuleSaveButton() throws InterruptedException {
 			jswait.loadClick(editTrackingRuleSaveButton);
 		}
+	 public void selectAddTrackingRuleConditionConditionAnyOf() throws InterruptedException {
+	jswait.loadClick(addTrackingRuleConditionConditionSelector);
+	jswait.loadClick(addTrackingRuleConditionConditionSelectisAnyOf);
+		             }
 	 public void enterRuleName(String text) throws InterruptedException {
 			jswait.loadSendKeys(addTrackingRuleRuleName,text);
 		}
@@ -747,6 +781,10 @@ public class OfferPageObjects extends Init {
 			jswait.loadClick(addTrackingRuleSecondConditionParameterSelector);
 			jswait.loadClick(addTrackingRuleSecondConditionParameterSelectAge);
 		}
+	 public void checkRuleCreationWithTrackValue(String ruleName,String trackRuleValue) throws Exception {
+	 jswait.waitUntil("//span[text()='"+ruleName+"']");
+	jswait.waitUntil("//span[contains(.,'amount is any of "+trackRuleValue+"')]");
+	 }
 	 public void selectAddTrackingRuleSecondConditionConditionGreaterThan() throws InterruptedException {
 			jswait.loadClick(addTrackingRuleSecondConditionConditionSelector);
 			jswait.loadClick(addTrackingRuleSecondConditionConditionSelectisGreaterThan);
@@ -1712,10 +1750,16 @@ public class OfferPageObjects extends Init {
 					enterFailureMessage("Failure from Selenium");
 				}}catch(Exception e) {
 					if (eh.getCell(1, 2).toString().contains("Seeding")) {
-						clickRewardTypeInputField();
-						//clickRewardTypeAny();
+						clickRewardFirstRuleAdButton();	
+						clickRewardTypeInputField();	
 						//clickrewardTypeSampleFlowSelector();
+						//clickrewardTypesel_reward();
 						clickrewardTypesel_reward();
+						 enterSuccessMessage("Success from Selenium");
+						enterFailureMessage("Failure from Selenium");
+						Thread.sleep(2000);
+						jswait.loadSendKeys("//h3[contains(.,'Reward for Seeding')]//following::input[1]", SEL_REWARD);
+						jswait.loadClick("(//vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')])[2]");
 					}
 					else if(eh.getCell(1, 2).toString().contains("Recharge")) {
 					clickRewardFirstRuleAdButton();
@@ -1835,7 +1879,13 @@ public class OfferPageObjects extends Init {
 	
 	public void enterCreativeTabDetails(ExcelHelper eh) throws Throwable {
 		selectCreativeLanguageEnglish();
-		if (((String) eh.getCell(1, 3)).contains("WAP")) {
+		if (eh.getCell(1, 3).toString().contains("SMS") && eh.getCell(1, 13).toString().contains("yes") ) {
+		enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+		jswait.loadClick(reminderCheckbox);
+		jswait.loadSendKeys(reminderTitleInput, "reminder title by selenium");
+		jswait.loadSendKeys(reminderDetailsInput, "reminder detail by selenium");	
+			                }
+		else if (((String) eh.getCell(1, 3)).contains("WAP")) {
 			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		}
 		else if (eh.getCell(1, 3).toString().contains("SMS"))
@@ -2412,7 +2462,32 @@ else {
 		   Thread.sleep(50000);
 		
 	}
-	   
+	else if(type.equalsIgnoreCase("carouselImage")||type.equalsIgnoreCase("carouselVideo")) {
+		jswait.loadClick(carouselRadioBtn);
+		for(int i=1;i<=3;i++) {
+		jswait.loadClick(firstCarousel);
+		 switch(type) {
+		 case "carouselImage":
+		jswait.loadClick(imageRadioBtn);
+		jswait.loadClick(selectImage);
+		File image=new File("facebookinput\\Hydrangeas.jpg");
+		selectImage.sendKeys(image.getAbsolutePath());	
+		case "carouselVideo":
+		jswait.loadClick(carouselVideo);
+		jswait.loadClick(selectImage);
+		image=new File("facebookinput\\welcome.mp4");
+		selectImage.sendKeys(image.getAbsolutePath());
+		}
+		jswait.loadSendKeys(headlineInput,"carousel by selenium");
+		jswait.loadSendKeys(carouselDespInput,"");
+		jswait.loadSendKeys(carouselURL,"");
+		jswait.loadSendKeys(carouselPrimaryText,"");
+		jswait.loadSendKeys(carouselSeeMoreURL,"");
+		jswait.loadSendKeys( carouselMoreLink,"");
+		jswait.loadClick(carouselCallAction);
+		jswait.loadClick(sendMessage);
+		}
+		} 
    }
 	public void EditCreative(String sheet) throws Throwable {
 		Thread.sleep(1000);
@@ -3134,6 +3209,192 @@ Thread.sleep(3000);
 	}
 
 }//method
-	}//class
+
+
+
+public void addOfferDetails(String offerName, String storageSheet, int row) throws Exception {
+System.out.println("row of the table  "+row);
+eh.setExcelFile("BambooBuildDetails", storageSheet);
+System.out.println("data storage sheet :"+storageSheet);
+System.out.println("offer name that need to be stored : "+offerName);
+eh.setCell(row, 0, offerName);
+}
+public void createOfferWithTrackingRuleValue(String sheet, String productSheet,String testMode,String ruleValue) throws Throwable{
+clickCreateNewOfferButton();
+enterOfferDetailsFromSheetWithTrackSourceValue(sheet, productSheet, testMode, ruleValue);
+ clickSaveOfferButton();
+	
+}
+	
+public void enterOfferDetailsFromSheetWithTrackSourceValue(String sheet, String productSheet, String testMode, String ruleValue) throws Throwable{
+Thread.sleep(4000);
+WebDriverWait wait = new WebDriverWait(driver, 10);
+Actions actions = new Actions(driver);
+ExcelHelper prodcutFile = new ExcelHelper();
+ prodcutFile.setExcelFile("productInputData", productSheet);
+eh.setExcelFile("offerInputData", sheet);
+// ******************Details tab******************:
+ enterDetailsTabFields(sheet);
+ clickProceedButton();
+// ******************Products tab*****************:
+ Thread.sleep(3000);
+enterProductTabFields(productSheet);
+// ******************Creative tab*****************:
+
+enterCreativeTabDetails(eh,testMode);
+
+clickProceedButton();
+
+Thread.sleep(3000);
+
+
+        // ******************Track tab*****************:
+
+if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+
+        enterTrackTabDetails(eh);
+
+        clickAddRuleButton();
+
+         enterDetailsFirstDefaultTrackingRuleCondition("firstRule",ruleValue);
+
+        clickaddTrackingRuleSaveButton();
+
+        checkRuleCreationWithTrackValue("firstRule",ruleValue);
+
+}
+
+
+
+clickProceedButton();
+
+
+        // ******************Rewards tab*****************:
+	
+    if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+	
+            
+	
+                                    
+	
+                    try {
+	
+                            Exception e = null;
+	
+//                                eh.setExcelFile("offerInputData", "usagerecharge");
+	
+                            if (!eh.getCell(1, 20).toString().contains("usage")) {
+	
+                                    
+	
+                                    throw e;
+	
+                            }
+	
+                            else {
+	
+                                    
+	
+                            jswait.loadClick("//paper-card[@id='rewardDetails']//paper-button[contains(.,'Add')]");
+	
+                            
+	
+                    jswait.loadSendKeys("//label[contains(.,'Reward Type')]/..//input", "sel_reward");
+	
+                    Thread.sleep(2000);
+	
+                            jswait.loadClick("//vaadin-combo-box-item[contains(.,'sel_reward')]");
+	
+                            enterSuccessMessage("Success from Selenium");
+	
+                            enterFailureMessage("Failure from Selenium");
+	
+                    }}catch(Exception e) {
+	
+                            if (eh.getCell(1, 2).toString().contains("Seeding")) {
+	
+                                    clickRewardFirstRuleAdButton();
+	
+                                    clickRewardTypeInputField();
+	
+//                                        clickrewardTypeSampleFlowSelector();
+	
+//                                        clickrewardTypesel_reward();
+	
+                                    clickrewardTypesel_reward();
+	
+                                    
+	
+                                    enterSuccessMessage("Success from Selenium");
+	
+                                    enterFailureMessage("Failure from Selenium");
+	
+                                    Thread.sleep(2000);
+	
+                                    jswait.loadSendKeys("//h3[contains(.,'Reward for Seeding')]//following::input[1]", SEL_REWARD);
+	
+                                    jswait.loadClick("(//vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')])[2]");
+	
+                            }
+	
+                            else if(eh.getCell(1, 2).toString().contains("Recharge")) {
+	
+                            clickRewardFirstRuleAdButton();
+	
+                            clickRewardTypeInputField();
+	
+//                                clickrewardTypeSampleFlowSelector();
+	
+//                                clickrewardTypesel_reward();
+	
+                            clickrewardTypesel_reward();
+	
+                            
+	
+                            enterSuccessMessage("Success from Selenium");
+	
+                            enterFailureMessage("Failure from Selenium");
+	
+                    }else {
+	
+                            clickRewardFirstRuleAdButton();
+	
+                            clickRewardTypeInputField();
+	
+                            //clickRewardTypeAny();
+	
+                            clickrewardTypesel_reward();
+	
+                            enterSuccessMessage("Success from Selenium");
+	
+                            enterFailureMessage("Failure from Selenium");
+	
+                    }
+	
+}
+	
+        }	
+}
+	
+public void enterDetailsFirstDefaultTrackingRuleCondition(String name,String TrackRuleValue) throws InterruptedException {
+
+ enterRuleName(name);
+
+        selectPriority("2");
+
+        clickAddTrackingRuleAddConditionButton();
+
+        System.out.println("??????????????");
+
+        selectAddTrackingRuleConditionParameterAge();
+
+        selectAddTrackingRuleConditionConditionAnyOf();
+
+        enterAddTrackingRuleConditionConditionValue(TrackRuleValue);
+
+}
+
+
+}//class
 	
 

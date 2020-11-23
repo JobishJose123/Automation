@@ -9,35 +9,37 @@ Feature: For IntentManagement Regression.
   @initBrowser
   Scenario: Verify create a program
     Given login
-    Then navigate to configuration management
-    Then naviagte to product classes
-    Then create product class and number attribute from "TestProductClass"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to products
-    Then navigate to product class "TestProductClass"
-    Then click create new product button
-    Then create product with attributes from sheet "fullDetails"
-    Then navigate to landing page
-    Then navigate to precision marketer
-    Then navigate to offer management
-    Then navigate to offers
-    Then click on create new ofer button
-
-    Then create new offer from sheet "STVSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
-    Then navigate to offer management
-    Then Navigate to Offer Catalogue
-    Then Create New Offer Catalogue from sheet "defaultCatalog"
-    Then Add "STVSMS" offer to Offer Catalogue
-   Then navigate to landing page
+#    Then navigate to configuration management
+#    Then naviagte to product classes
+#    Then create product class and number attribute from "TestProductClass"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to products
+#    Then navigate to product class "TestProductClass"
+#    Then click create new product button
+#    Then create product with attributes from sheet "fullDetails"
+#    Then navigate to landing page
+#    Then navigate to precision marketer
+#    Then navigate to offer management
+#    Then navigate to offers
+#    Then click on create new ofer button
+#
+#    Then create new offer from sheet "STVSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
+#    Then navigate to offer management
+#    Then Navigate to Offer Catalogue
+#    Then Create New Offer Catalogue from sheet "defaultCatalog"
+#    Then Add "STVSMS" offer to Offer Catalogue
+#   Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
 #    Then click create program button
 #    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-#     Then choose program from sheet "SMSprogram"
-#    Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-#       Then navigate to programs
+     Then choose program from sheet "SMSprogram"
+    Then create new rule from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
+      Then add program data regression from sheet "SMSprogram"
+      Then filter program and rule created from sheet "SMSprogram"
+ 	Then navigate to programs
 #    Then click create program button
 #    Then verify create program page "triggerrprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "triggerTouchpoint"
 #     Then choose program from sheet "triggerrprogram"
@@ -79,7 +81,7 @@ Feature: For IntentManagement Regression.
     Then choose program from sheet "CCprogram"
     Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
     Then verify rule created from sheet "rule"
-    Then navigate to programs
+    
 
    @createprogrameditreg
   @NDX-7337,@NDX-7336,@NDX-7335,@NDX-5725,@NDX-7328,@NDX-7327,@NDX-7326,@NDX-5722,@NDX-7321,@NDX-7320,@NDX-7319,@NDX-5716,@NDX-5719 @NDX-7315 @NDX-7314 @NDX-7313
@@ -90,6 +92,7 @@ Feature: For IntentManagement Regression.
     Then navigate to intent management
    
    Then navigate to programs
+   Then filter program and rule created from sheet "SMSprogram"
     Then choose program from sheet "SMSprogram" for edit
     Then verify edit program page "SMSprogram" and offer catalog sheet "stvoffer" and touchpoint from sheet "smsTouchpointedit"
     Then choose program from sheet "SMSprogram" after edited
@@ -148,7 +151,7 @@ Feature: For IntentManagement Regression.
     Then navigate to programs
     Then click create program button
     Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    Then choose program from sheet "SMSprogram"
+    Then choose program from sheet "SMSprogram" after edited
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
     Then wait for 5 minutes
     Then verify rule deactivate
@@ -161,7 +164,7 @@ Feature: For IntentManagement Regression.
     Then navigate to intent management
     Then navigate to programs
    
-    Then choose program from sheet "SMSprogram"
+    Then choose program from sheet "SMSprogram" after edited
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 		Then verify rule Copy from sheet "rule" with product sheet "fullDetails" and product class sheet "TestProductClass"
 		
@@ -174,7 +177,7 @@ Feature: For IntentManagement Regression.
     Then navigate to intent management
     Then navigate to programs
    
-    Then choose program from sheet "SMSprogram"
+    Then choose program from sheet "SMSprogram" after edited
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
     Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint" with taget condition <Condition>
     Then verify rule view after edit from sheet "rule" and product "fullDetails"
@@ -194,7 +197,7 @@ Feature: For IntentManagement Regression.
     Then navigate to intent management
     Then navigate to programs
    
-    Then choose program from sheet "SMSprogram"
+    Then choose program from sheet "SMSprogram" after edited
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
     Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint" with taget condition <Condition>
     Then verify rule view after edit from sheet "rule" and product "fullDetails"
@@ -213,7 +216,7 @@ Feature: For IntentManagement Regression.
     Then navigate to intent management
     Then navigate to programs
    
-    Then choose program from sheet "SMSprogram"
+    Then choose program from sheet "SMSprogram" after edited
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
     Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint" with taget condition <Condition>
     Then verify rule view after edit from sheet "rule" and product "fullDetails"
@@ -254,13 +257,11 @@ Feature: For IntentManagement Regression.
     Then navigate to landing page
     Then navigate to intent management
     Then navigate to programs
-    Then click create program button
-    Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    Then choose program from sheet "SMSprogram"
+    Then choose program from sheet "SMSprogram" after edited
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 		Then verify rule Copy from sheet "rule" with product sheet "fullDetails" and product class sheet "TestProductClass"
-		   Then navigate to programs
-		 Then choose program from sheet "SMSprogram"
+	 Then navigate to programs
+		 Then choose program from sheet "SMSprogram" after edited
       Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint" with taget condition <Condition>
     Then verify rule view after edit from sheet "rule" and product "fullDetails"
     
@@ -288,7 +289,7 @@ Feature: For IntentManagement Regression.
     Then navigate to programs
     Then click create program button
     Then verify create program page "SMSprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "smsTouchpoint"
-    Then choose program from sheet "SMSprogram"
+    Then choose program from sheet "SMSprogram" after edited
     Then create new rule from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
     Then edit the targetSelection <Condition> for programrule
     Then verify rule target selection <Condition> after edit from sheet "rule" and product "fullDetails"
@@ -652,8 +653,8 @@ Feature: For IntentManagement Regression.
     Then wait for offer recommended event for API in consumer profile
     Then accept api-server for "9491750351" with touchpoint "apiTouchpoint_default" and rule "rule"
     Then wait for offer accepted event in consumer profile
-    Then wait for conversion in consumer profile with offer "rechargeSMS"
-    Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
+    Then wait for conversion in consumer profile with offer "STVSMS"
+    Then wait for Fulfillment Success in consumer profile with offer "STVSMS"
  	Then pass next scenario based on this step
  
 
@@ -740,7 +741,30 @@ Scenario: Verify fulfillment processing for recharge offer with API touch point.
  
  
 #=============================================================================U S S D==========================================================================================#
+ @NDX-9854 @initBrowser
+  Scenario: Verify create a USSD program
+Given login
+ Then filter the offer from sheet "offerData" from row "16" and column "0" and write in sheet "rechargeSMS"
 
+    Then navigate to intent management
+    Then navigate to programs
+    Then click create program button
+    Then verify create program page "USSDprogram" and offer catalog sheet "IMcatalog" and touchpoint from sheet "ussdTouchpoint"
+   Then choose program from sheet "USSDprogram"
+   Then create new rule with enddate from sheet "USSDprogram" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
+    Then wait until rule is picked
+    Then get-offer USSD for "9745081119" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "12345"
+    Then get-offer USSD for "9745081119" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "12345"
+    Then get-offer USSD for "9745081119" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "12345"
+     Then provide file in location "/usr/local/flytxt/selenium/seleniumIM/" for trigger with csv file "conversionIM.csv"
+    Then navigate to the neon again
+	Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9745081119"
+    Then click on events tab
+    Then wait for conversion in consumer profile with offer "rechargeSMS"
+     Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
 
 
 

@@ -1186,7 +1186,35 @@ public class OfferSteps extends Init {
 		String offerName= eh.getCellByColumnName("Offer Name");
 		offerPageObjects.filterForVerification(offerName);
 }
-	
+	@Then ("^add offer from sheet \"([^\"]*)\" to sheet \"([^\"]*)\" and row \"([^\"]*)\"$")
+	public void add_offer_deatils(String offerSheet,String storageSheet,int row) throws Exception{
+	eh.setExcelFile("offerInputData", offerSheet);
+	String offerName= eh.getCellByColumnName("Offer Name");
+	offerPageObjects.addOfferDetails(offerName,storageSheet,row);
+	}
+
+@Then ("filter the offer from sheet \"([^\"]*)\" from row \"([^\"]*)\" and column \"([^\"]*)\" and write in sheet \"([^\"]*)\"$")
+public void filter_the_offer (String offerStorageSheet,int row,int column,String offerSheet) throws Exception{
+	eh.setExcelFile("BambooBuildDetails", offerStorageSheet);
+	String offer=(String) eh.getCell(row, column);
+	eh.setExcelFile("offerInputData", offerSheet);
+	eh.setCell("Offer Name", offer);
+}
+
+@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\" and tracking rule value \"([^\"]*)\"$")
+public void create_new_Offer_with_different_tracking_rule(String sheet, String productSheet, String ruleValue) throws Throwable {
+	offerPageObjects.createOfferWithTrackingRuleValue(sheet, productSheet,"NULL",ruleValue);
+	}
+
+
+
+@Then ("filter the IM offer from sheet \"([^\"]*)\" from row \"([^\"]*)\" and column \"([^\"]*)\" and write in sheet \"([^\"]*)\"$")
+public void filter_the_IM_offer (String offerStorageSheet,int row,int column,String offerSheet) throws Exception{
+	eh.setExcelFile("imofferdata", offerStorageSheet);
+	String offer=(String) eh.getCell(row, column);
+	eh.setExcelFile("offerInputData", offerSheet);
+	eh.setCell("Offer Name", offer);
+}	
 }
 
 

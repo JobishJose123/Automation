@@ -265,6 +265,15 @@ public class ProductClassesPageObjects extends Init{
 		clickAddAttributeSave();
 		
 	}
+    public void addNumberAttributes2(String att) throws InterruptedException, IOException {
+clickAddAttribute();
+enterNumAttributeName();
+enterAttributeLabel("NUM");
+selectType("NUMBER");
+enterDefaultValue(att);
+Thread.sleep(2000);
+clickAddAttributeSave();
+}
 	public void verifyDefaultValField() throws InterruptedException, IOException {
 		//first attribute
 		clickAddAttribute();

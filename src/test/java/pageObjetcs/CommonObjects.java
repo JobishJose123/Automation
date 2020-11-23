@@ -5,12 +5,9 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Calendar;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -18,12 +15,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import baseClasses.CalenderUtility;
+
 import baseClasses.ExcelHelper;
-import baseClasses.GoogleSpreadsheetImpl;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
-import junit.framework.Assert;
+
 
 public class CommonObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
@@ -282,6 +278,8 @@ public class CommonObjects extends Init {
 		private WebElement streamingAttrValue2;
 		@FindBy(xpath="//paper-item[contains(.,'Data Connector')]")
 		private WebElement sourceDataConnector;
+		@FindBy(xpath="//paper-item[contains(.,'API')]")
+		private WebElement sourceAPIConnector;
 		@FindBy(xpath="//paper-item[contains(.,'DOUBLE')]")
 		private WebElement dataTypeDouble;
 		@FindBy(xpath="//paper-button[contains(.,'Save')]")
@@ -351,20 +349,20 @@ public class CommonObjects extends Init {
         private WebElement saveTrackingSource;
 		   @FindBy(xpath="//div[contains(.,'Blackout Rules')][@class='subHeading admin-blackoutRule style-scope admin-panel']")
 			private WebElement blackoutRules;
-//			@FindBy(xpath="")
-//			private WebElement ;
-//		   @FindBy(xpath="")
-//			private WebElement ;
-//			@FindBy(xpath="")
-//			private WebElement ;
-//		   @FindBy(xpath="")
-//			private WebElement ;
-//			@FindBy(xpath="")
-//			private WebElement ;
-//		   @FindBy(xpath="")
-//			private WebElement ;
-//			@FindBy(xpath="")
-//			private WebElement ;
+			@FindBy(xpath="//iron-image[@id='digital-plus']")
+			private WebElement digitalPlus;
+		   @FindBy(xpath="//label[contains(.,'Route')]//following::iron-icon[1]")
+			private WebElement routeInput;
+			@FindBy(xpath="//label[contains(.,'Field Name')]//following::input[1]")
+			private WebElement fieldNameInput;
+		   @FindBy(xpath="//label[contains(.,'Field Type')]//following::input[1]")
+			private WebElement fieldTypeInput;
+			@FindBy(xpath="//vaadin-combo-box-item[contains(.,'NUMBER'')]")
+			private WebElement fieldTypeNumber;
+		   @FindBy(xpath="//label[contains(.,'Is Mandatory')]//following::input[1]")
+			private WebElement isMandatory;
+			@FindBy(xpath="//vaadin-combo-box-item[contains(.,'YES')]")
+			private WebElement isMandatoryYES;
 //		   @FindBy(xpath="")
 //			private WebElement ;
 //			@FindBy(xpath="")
@@ -1047,56 +1045,56 @@ public void savedetailsofdatasetup() throws Exception {
 		}
 
 
-public void speadSheetTestFunction(String excelFile, String bcSheet, String key,String speadSheetID, String speadSheetName) throws Exception {
-	System.out.println("Inside Test Function"+bcSheet+":::::"+key); 
-	GoogleSpreadsheetImpl sqs = new GoogleSpreadsheetImpl();
-	eh.setExcelFile(excelFile, bcSheet);
-	sqs.initializeService();
+//public void speadSheetTestFunction(String excelFile, String bcSheet, String key,String speadSheetID, String speadSheetName) throws Exception {
+//	System.out.println("Inside Test Function"+bcSheet+":::::"+key); 
+//	GoogleSpreadsheetImpl sqs = new GoogleSpreadsheetImpl();
+//	eh.setExcelFile(excelFile, bcSheet);
+//	sqs.initializeService();
 	
-	sqs.setSpreadsheet(speadSheetID,speadSheetName);
-	int lastRow = Integer.parseInt(sqs.getCell(0, 4))-1;
-	forExcelSpreadsheet = lastRow;
-	if(forExcelSpreadsheet == -1) {
-		forExcelSpreadsheet = sqs.getLastUsedRow();
-	}
-	int row = forExcelSpreadsheet++;
-//	System.out.println(row);
-	if(excelFile.contentEquals("bcInputData")) {
-		sqs.setCell(row, 0, "Broadcast");
-		sqs.setCell(row, 1, eh.getCellByColumnName("BC Name"));
-	}
-	else if(excelFile.contentEquals("offerInputData")) {
-		sqs.setCell(row, 0, "Offer");
-		sqs.setCell(row, 1, eh.getCell(1,0).toString());
-	}
-	else if(excelFile.contentEquals("productInputData")) {
-		sqs.setCell(row, 0, "Product");
-		sqs.setCell(row, 1, eh.getCell(1,0).toString());
-	}
-	else if(excelFile.contentEquals("productClassInputData")) {
-		sqs.setCell(row, 0, "Product Class");
-		sqs.setCell(row, 1, eh.getCell(1,0).toString());
-	}
-	else if(excelFile.contentEquals("offerCatalogInputData")) {
-		sqs.setCell(row, 0, "Offer Catalog");
-		sqs.setCell(row, 1, eh.getCell(1,0).toString());
-	}
-	else if(excelFile.contentEquals("campaignCategoryInputData")) {
-		sqs.setCell(row, 0, "Campaign Category");
-		sqs.setCell(row, 1, eh.getCell(1,0).toString());
-	}
-	else if(excelFile.contentEquals("campaignInputData")) {
-		sqs.setCell(row, 0, "Campaign");
-		sqs.setCell(row, 1, eh.getCell(1,0).toString());
-	}
-	else {
-		Exception e = new Exception("Excel file not adde to else if");
-		throw e;
-	}
-	sqs.setCell(row, 2, key);
-	CalenderUtility cu = new CalenderUtility();
-	sqs.setCell(row, 3, cu.getCurrentDate("dd MMM YYYY hh:mm aaa z"));
-}
+//	sqs.setSpreadsheet(speadSheetID,speadSheetName);
+//	int lastRow = Integer.parseInt(sqs.getCell(0, 4))-1;
+//	forExcelSpreadsheet = lastRow;
+//	if(forExcelSpreadsheet == -1) {
+//		forExcelSpreadsheet = sqs.getLastUsedRow();
+//	}
+//	int row = forExcelSpreadsheet++;
+////	System.out.println(row);
+//	if(excelFile.contentEquals("bcInputData")) {
+//		sqs.setCell(row, 0, "Broadcast");
+//		sqs.setCell(row, 1, eh.getCellByColumnName("BC Name"));
+//	}
+//	else if(excelFile.contentEquals("offerInputData")) {
+//		sqs.setCell(row, 0, "Offer");
+//		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+//	}
+//	else if(excelFile.contentEquals("productInputData")) {
+//		sqs.setCell(row, 0, "Product");
+//		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+//	}
+//	else if(excelFile.contentEquals("productClassInputData")) {
+//		sqs.setCell(row, 0, "Product Class");
+//		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+//	}
+//	else if(excelFile.contentEquals("offerCatalogInputData")) {
+//		sqs.setCell(row, 0, "Offer Catalog");
+//		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+//	}
+//	else if(excelFile.contentEquals("campaignCategoryInputData")) {
+//		sqs.setCell(row, 0, "Campaign Category");
+//		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+//	}
+//	else if(excelFile.contentEquals("campaignInputData")) {
+//		sqs.setCell(row, 0, "Campaign");
+//		sqs.setCell(row, 1, eh.getCell(1,0).toString());
+//	}
+//	else {
+//		Exception e = new Exception("Excel file not adde to else if");
+//		throw e;
+//	}
+//	sqs.setCell(row, 2, key);
+//	CalenderUtility cu = new CalenderUtility();
+//	sqs.setCell(row, 3, cu.getCurrentDate("dd MMM YYYY hh:mm aaa z"));
+//}
 	
 
 public void filterBC(String bcname,String bctype) throws Exception{
@@ -1189,6 +1187,23 @@ public void createStreamingAttr(String attrName,String description,String value1
 }
 
 
+public void createStreamingAttr(String attrName,String description,String value1,String value2,String route) throws Exception{
+	jswait.loadClick(streamingAttrCreatebtn);
+	jswait.loadSendKeys(streamingAttrName, attrName);
+	jswait.loadSendKeys(streamingAttrDesp,description);
+	jswait.loadClick(streamingAttrSourceInput);
+	jswait.loadClick(sourceAPIConnector);
+	jswait.loadClick(routeInput);
+	jswait.loadClick("//paper-item[contains(.,'"+route+"']");
+	jswait.loadSendKeys(fieldNameInput,value1 );
+	jswait.loadClick(fieldTypeInput);
+	jswait.loadClick(fieldTypeNumber);
+	jswait.loadClick(isMandatory);
+	jswait.loadClick(isMandatoryYES);
+	jswait.loadClick(streamingAttrSave);
+}
+
+
 public void verifyStreamingAttrCreation(String attrName) throws Exception{
 	Assert.assertTrue(jswait.checkVisibility("//span[contains(.,'"+attrName+"')]"));
 }
@@ -1264,7 +1279,9 @@ public void blackoutRulesCreate() throws Exception{
 	jswait.loadClick(blackoutRules);
 }
 
-
+public void DigitalPlusModules() throws Exception{
+	jswait.loadClick(digitalPlus);
+}
 
 }
 

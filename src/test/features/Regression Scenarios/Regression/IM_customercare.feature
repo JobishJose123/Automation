@@ -8,7 +8,7 @@ Feature: For IntentManagement customer care Regression.
     Given login
     Then navigate to intent management
     Then navigate to programs
-    Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
+#    Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
     Then choose program from sheet "CCprogram"
     Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
     Then edit new rule from sheet "rule" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint" with taget condition <Condition>
@@ -78,7 +78,7 @@ Feature: For IntentManagement customer care Regression.
     Then navigate to programs
     Then choose program from sheet "CCprogram"
 #    Then wait for 2 minutes
-    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
+    Then create new rule from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
     Then wait until rule is picked    
     Then logout
     Then login with selenium user
@@ -109,7 +109,14 @@ Feature: For IntentManagement customer care Regression.
       
 #     Then verify offer "Special Vouchers"
       Then Customercare offer accept 
-    
+         Then navigate to landing page
+     Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9745081107"
+    Then click on events tab
+    Then wait for conversion in consumer profile with offer "rechargeSMS"
+     Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
           @initBrowser @NX-cctouchpointflowchnage
   Scenario: Verify changing Prioritization Logic customer care program
     Given login
@@ -137,7 +144,7 @@ Feature: For IntentManagement customer care Regression.
     Then navigate to reports
     Then navigate to customer support
     Then search msisdn "919592850004"
-#    Then verify offer "Balance Top ups"
+    Then verify offer "Balance Top ups"
     Then logout
     Then login
     Then navigate to intent management
@@ -175,7 +182,14 @@ Feature: For IntentManagement customer care Regression.
       
 #      Then verify offer "Balance Top ups"
       Then Customercare offer accept 
-    
+         Then navigate to landing page
+     Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9745081107"
+    Then click on events tab
+    Then wait for conversion in consumer profile with offer "rechargeSMS"
+     Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
               @initBrowser @NX-cctouchpointBESTFITALGORITHM @NDX-8141
   Scenario: Verify create a customer care program full flow
     Given login
@@ -233,7 +247,14 @@ Feature: For IntentManagement customer care Regression.
       
 #      Then verify offer "Balance Top ups"
       Then Customercare offer accept 
-      
+           Then navigate to landing page
+     Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9745081107"
+    Then click on events tab
+    Then wait for conversion in consumer profile with offer "rechargeSMS"
+     Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
                 @initBrowser @NX-cctouchpointcustom @NDX-8141
   Scenario: Verify create a customer care program full flow
     Given login
@@ -291,7 +312,14 @@ Feature: For IntentManagement customer care Regression.
       
 #      Then verify offer "Balance Top ups"
       Then Customercare offer accept 
-      
+           Then navigate to landing page
+     Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9745081107"
+    Then click on events tab
+    Then wait for conversion in consumer profile with offer "rechargeSMS"
+     Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
       
       
       
@@ -374,7 +402,14 @@ Feature: For IntentManagement customer care Regression.
       
 #      Then verify offer "Balance Top ups"
       Then Customercare offer accept 
-    
+      Then navigate to landing page
+     Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9745081107"
+    Then click on events tab
+    Then wait for conversion in consumer profile with offer "rechargeSMS"
+     Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
   
   @initBrowser @NDX-9871
    Scenario: Verify create a customer care program with keyword
@@ -387,10 +422,24 @@ Feature: For IntentManagement customer care Regression.
 #    Then verify create program page "CCprogram" and offer catalog sheet "defaultCatalog" and touchpoint from sheet "CCTouchpoint"
 #    Then choose program from sheet "CCprogram"
 #    Then create new rule from sheet "CCprogram" and offer "STVSMS" and touchpoint from sheet "CCTouchpoint"
-#    Then wait until rule is picked 
+#    Then wait until rule is picked
+#	Then navigate to landing page 
+      Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer support
+    Then search msisdn "9745081109"
+	Then Customercare offer accept
     Then login to the vcust
     Then hit with vcust SMS with number "9491750350" with keyword "seleniumkeyword"
-    
+    Then login
+    Then navigate to precision marketer
+    Then navigate to reports
+    Then navigate to customer profile
+    Then search msisdn "9745081107"
+    Then click on events tab
+    Then wait for conversion in consumer profile with offer "rechargeSMS"
+     Then wait for Fulfillment Success in consumer profile with offer "rechargeSMS"
+  
     
     
     

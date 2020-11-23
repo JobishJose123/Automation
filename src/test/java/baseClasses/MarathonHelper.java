@@ -1,13 +1,16 @@
 package baseClasses;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Random;
+import java.net.URLConnection;
+import java.security.NoSuchAlgorithmException;
 
-import org.apache.commons.codec.binary.Base64;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 
 public class MarathonHelper {
 	
@@ -25,10 +28,32 @@ public class MarathonHelper {
 	 */
 
 	//////////////////////SCALE CONTAINER///////////////////////////////////////
-	public void scaleContainer(String env,String container,String instance) throws IOException, InterruptedException {
+	public void scaleContainer(String env,String container,String instance) throws Exception {
 		Request r = new Request();
+		TrustManager[] trustAllCerts = new TrustManager[]{
+				new X509TrustManager() {
+				    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+				        return null;
+				    }
+				    public void checkClientTrusted(
+				        java.security.cert.X509Certificate[] certs, String authType) {
+				    }
+				    public void checkServerTrusted(
+				        java.security.cert.X509Certificate[] certs, String authType) {
+				    }
+				}};
+
+        SSLContext sc = SSLContext.getInstance("SSL");
+        sc.init(null, trustAllCerts, new java.security.SecureRandom());
+        HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        HostnameVerifier allHostsValid = new HostnameVerifier() {
+            public boolean verify(String hostname, SSLSession session) { return true; }
+        };
+        HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+        URL url = new URL("https://"+env+":8095/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness");
+        URLConnection con = url.openConnection();
 		String data = "{\"instances\":"+instance+"}";
-		r.putRequest("http://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA==", data);  //Container path .Base64 format 
+		r.putRequest("http://"+env+":8095/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA==", data);  //Container path .Base64 format 
 		while(getContainerStatus(env,container)!=Integer.parseInt(instance)){
 			Thread.sleep(3000);
 			System.out.println("waiting for scaling");
@@ -37,7 +62,7 @@ public class MarathonHelper {
 	}
 	
 	////////////////////////GET MARATHON CONTAINER STATUS///////////////////////////////////////
-	public int getContainerStatus(String env,String container) throws IOException {
+	public int getContainerStatus(String env,String container) throws Exception {
 		String JSONStr = getJson(env, container);
 		 System.out.println(JSONStr);
 		int runIndexbeg = JSONStr.indexOf("tasksRunning");
@@ -49,7 +74,7 @@ public class MarathonHelper {
 	}
 	
 	////////////////////////GET MARATHON CONTAINER NODE///////////////////////////////////////
-	public String getContainerNode(String env,String container) throws IOException {
+	public String getContainerNode(String env,String container) throws Exception {
 	String JSONStr = getJson(env, container);
 	System.out.println(JSONStr);
 	int runIndexbeg = JSONStr.indexOf("\"host\"");
@@ -81,7 +106,7 @@ public class MarathonHelper {
 	}
 	
 	////////////////////////GET MARATHON CONTAINER port///////////////////////////////////////
-	public String getContainerPort(String env,String container) throws IOException {
+	public  String getContainerPort(String env,String container) throws Exception {
 	String JSONStr = getJson(env, container);
 	System.out.println(JSONStr);
 	int runIndexbeg = JSONStr.indexOf("\"TASK_RUNNING\",\"ports\":[");
@@ -93,23 +118,40 @@ public class MarathonHelper {
 	return port;
 	}
 	
-	public String getJson(String env,String container) throws IOException {
+	public String getJson(String env,String container) throws IOException, Exception {
 		Request r = new Request();
-		r.getRequest("https://"+env+":8080/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA=="); 
+		TrustManager[] trustAllCerts = new TrustManager[]{
+				new X509TrustManager() {
+				    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+				        return null;
+				    }
+				    public void checkClientTrusted(
+				        java.security.cert.X509Certificate[] certs, String authType) {
+				    }
+				    public void checkServerTrusted(
+				        java.security.cert.X509Certificate[] certs, String authType) {
+				    }
+				}};
+
+        SSLContext sc = SSLContext.getInstance("SSL");
+        sc.init(null, trustAllCerts, new java.security.SecureRandom());
+        HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        HostnameVerifier allHostsValid = new HostnameVerifier() {
+            public boolean verify(String hostname, SSLSession session) { return true; }
+        };
+        HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+        URL url = new URL("https://"+env+":8095/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness");
+        URLConnection con = url.openConnection();
+		r.getRequest("https://"+env+":8095/v2/apps//"+container+"?embed=app.taskStats&embed=app.readiness", "Zmx5dXNlcjpmbHlwYXNzV09SRA=="); 
 		String JSONStr = r.responseString;
 		return JSONStr;
 	}
 	
 	
-	public static void main(String args[]) throws IOException, InterruptedException {
+	public static void main(String args[]) throws Exception {
 		  
 		  MarathonHelper m = new MarathonHelper();
 		  PropHandler p = new PropHandler();
-		  p.setPropertyFile("config.properties");
-		  m.scaleContainer(p.getValue("env"), p.getValue("api-server"),"1");
-//		  System.out.println(m.getContainerStatus("192.168.150.207", "neon/apps/platform/api-server"));
-//		  System.out.println(m.getContainerNode(p.getValue("env"), p.getValue("api-server")));
-//		  m.scaleContainer("192.168.150.27", "neon/apps/dk/tp-ws","0");
-//		  System.out.println(m.getContainerPort(p.getValue("env"), p.getValue("api-server")));
+          
 		 }
 }

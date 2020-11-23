@@ -1,28 +1,15 @@
 package baseClasses;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
 
-import cucumber.api.java.en.Given;
-import pageObjetcs.LoginPageObjects;
-import java.io.File;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 public class Init {
 public static WebDriver driver;
@@ -32,11 +19,17 @@ public static Logger log;
 public static File fileForCsvReport; 
 public static PrintWriter printWriterForCsvReport; 
 public static StringBuilder stringBuilderForCsvReport; 
-	public static void init() throws InterruptedException, FileNotFoundException{
+	public static void init() throws InterruptedException{
 	System.out.println("Initializing Browser.....");
+//	System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver81");
 	System.setProperty("webdriver.chrome.driver", "browser_files\\chromedriver2.37.exe");
-	driver =  new ChromeDriver();
+	System.out.println("++++++++ building the automation project +++++++++");
+	driver=new ChromeDriver();
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	driver.manage().window().maximize();
+	
+
+	Thread.sleep(5000);
 	
 	try {
 		System.out.println(System.getProperty("log"));
@@ -44,10 +37,6 @@ public static StringBuilder stringBuilderForCsvReport;
 	}catch(Exception e) {
 		System.out.println("Could not create log file");
 	}
-//	String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-//	fileForCsvReport = new File("Run_"+timeStamp+".csv");
-//	printWriterForCsvReport= new PrintWriter(fileForCsvReport);
-//	stringBuilderForCsvReport= new StringBuilder();
 	}
 	public static void initPropFile() {
 		p.setPropertyFile("config.properties");	
@@ -74,12 +63,12 @@ public static StringBuilder stringBuilderForCsvReport;
 	public final String BASE_LIST3 = "1M_List";
 	public String SEND_TIME = "";
 	public final String SMS_SHORT_CODE = "1011";
-	public final String SELENIUM_USSD_APP = "USSD";
+	public final String SELENIUM_USSD_APP = "USSDselenium";
 	public final String BASE_LIST4 = "CG20_1M_List";
 	public final String LANGUAGE1 = "English";
 	public final String LANGUAGE2 = "Arabic";
-	public final String SENDER_SMPP = "Address-SMPP";
-	public final String ROUTE_SMPP = "SMPP Robi outbound";
+	public final String SENDER_SMPP = "Address4Demo";
+	public final String ROUTE_SMPP = "OutboundRoute4Demo";
 	public final String SENDER_EMAIL = "Email Route";
 	public final String ROUTE_EMAIL = "Email outbound";
 	public final String SELENIUM_LIST = "selenium_list";

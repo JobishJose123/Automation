@@ -52,7 +52,11 @@ import pageObjetcs.dkpageobjects;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import org.apache.poi.hssf.usermodel.HSSFRow;
+
+
+
 public class BroadcastSteps extends Init {
+
 
 	JSWaiter jswait = new JSWaiter();
 
@@ -312,13 +316,13 @@ public class BroadcastSteps extends Init {
 		if (bc_type.contentEquals("one-off") || bc_type.contentEquals("seedingTriggerable")
 				|| bc_type.contentEquals("one-offInformational") || bc_type.contentEquals("TriggerOneoff")|| bc_type.contentEquals("seedingoneoff")) {
 			System.out.println("bc type is one-time selected");
-			Thread.sleep(1000);
+			Thread.sleep(5000);
 			broadcastPageObjects.clickOneOffRadioButton();
-			// jswait.loadClick(".//div[@id='radioLabel' and
-			// contains(.,'One-off')]/../div[1]");
 			Thread.sleep(1000);
 			jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
 			Thread.sleep(1000);
+//			jswait.loadClick("(//iron-icon[@icon='date-picker:chevron-left'])[1]");
+				Thread.sleep(1000);
 			jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='" + date + "']");
 			Thread.sleep(1000);
 			jswait.loadClick(
@@ -332,17 +336,10 @@ public class BroadcastSteps extends Init {
 					".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
 			builder.moveToElement(num).click().build().perform();
 			Thread.sleep(2000);
-			// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
 			WebElement num1 = driver.findElement(By.xpath(
 					".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
 			Thread.sleep(1000);
 			builder.moveToElement(num1).click().build().perform();
-			// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
-			// num1 =
-			// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
-			// style-scope paper-clock-selector'][41]"));
-			// builder.moveToElement(num1).click().build().perform();
-			// Thread.sleep(2000);
 			if (am_pm == 0)
 				jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
 			else
@@ -352,6 +349,8 @@ public class BroadcastSteps extends Init {
 			Thread.sleep(2000);
 			if (bc_type.contentEquals("one-off")||bc_type.contentEquals("seedingoneoff")) {
 				jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
+				Thread.sleep(1000);
+//				jswait.loadClick("(//iron-icon[@icon='date-picker:chevron-left'])[2]");
 				Thread.sleep(1000);
 				jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//div[@date='" + date + "']");
 				Thread.sleep(1000);
@@ -371,12 +370,6 @@ public class BroadcastSteps extends Init {
 								+ (min + 1) + "]"));
 				builder.moveToElement(num2).click().build().perform();
 				Thread.sleep(1000);
-				// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
-				// num1 =
-				// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
-				// style-scope paper-clock-selector'][21]"));
-				// builder.moveToElement(num1).click().build().perform();
-				// Thread.sleep(1000);
 				if (am_pm == 0) {
 					num1 = driver.findElement(By.xpath(
 							".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
@@ -407,18 +400,11 @@ public class BroadcastSteps extends Init {
 								+ (hours + 1) + "]"));
 				builder.moveToElement(num).click().build().perform();
 				Thread.sleep(1000);
-				// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[3]");
 				WebElement num2 = driver.findElement(By.xpath(
 						".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='minuteClock']//*[@id='numbers']//*[@class='number style-scope paper-clock-selector']["
 								+ (min + 1) + "]"));
 				builder.moveToElement(num2).click().build().perform();
 				Thread.sleep(1000);
-				// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
-				// num1 =
-				// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
-				// style-scope paper-clock-selector'][21]"));
-				// builder.moveToElement(num1).click().build().perform();
-				// Thread.sleep(1000);
 				if (am_pm == 0) {
 					num1 = driver.findElement(By.xpath(
 							".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
@@ -439,8 +425,6 @@ public class BroadcastSteps extends Init {
 		} else if (bc_type.contentEquals("one-off") || bc_type.contentEquals("facebook")) {
 			Thread.sleep(1000);
 			broadcastPageObjects.clickOneOffRadioButton();
-			// jswait.loadClick(".//div[@id='radioLabel' and
-			// contains(.,'One-off')]/../div[1]");
 			Thread.sleep(1000);
 			jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
 			Thread.sleep(1000);
@@ -457,17 +441,10 @@ public class BroadcastSteps extends Init {
 					".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
 			builder.moveToElement(num).click().build().perform();
 			Thread.sleep(2000);
-			// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[3]");
 			WebElement num1 = driver.findElement(By.xpath(
 					".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
 			Thread.sleep(1000);
 			builder.moveToElement(num1).click().build().perform();
-			// jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[5]");
-			// num1 =
-			// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
-			// style-scope paper-clock-selector'][41]"));
-			// builder.moveToElement(num1).click().build().perform();
-			// Thread.sleep(2000);
 			if (am_pm == 0)
 				jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
 			else
@@ -496,12 +473,6 @@ public class BroadcastSteps extends Init {
 								+ (min + 1) + "]"));
 				builder.moveToElement(num2).click().build().perform();
 				Thread.sleep(1000);
-				// jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[1]/div[5]");
-				// num1 =
-				// driver.findElement(By.xpath(".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='secondClock']//*[@id='numbers']//*[@class='number
-				// style-scope paper-clock-selector'][21]"));
-				// builder.moveToElement(num1).click().build().perform();
-				// Thread.sleep(1000);
 				if (am_pm == 0) {
 					num1 = driver.findElement(By.xpath(
 							".//*[@id='one-off-form']/div/paper-date-time-input[2]//*[@id='heading']/iron-selector[2]/div[1]"));
@@ -539,9 +510,6 @@ public class BroadcastSteps extends Init {
 				|| bc_type.contentEquals("seedingTriggerableRecurringBC")||bc_type.contentEquals("TriggerReccurringBC")) {
 			Thread.sleep(2000);
 			System.out.println("Inside recurring");
-			
-			
-			// if(bc_type.contentEquals("recurring")){
 			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
 			jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
 			jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
@@ -555,7 +523,6 @@ public class BroadcastSteps extends Init {
 							+ (hours + 1) + "]"));
 			builder.moveToElement(num).click().build().perform();
 			Thread.sleep(2000);
-			// jswait.loadClick("//*[@id='heading']/iron-selector[1]/div[3]");
 			WebElement num1 = driver.findElement(By.xpath(
 					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
 							+ (min + 1) + "]"));
@@ -571,9 +538,6 @@ public class BroadcastSteps extends Init {
 			num1 = driver.findElement(By.xpath(
 					".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
 			builder.moveToElement(num1).click().build().perform();
-			// Thread.sleep(1000);
-			// jswait.loadClick("//form[@id='deliverDetailForm']//paper-input-container//label[contains(.,'Time
-			// Zone')]/..//input");
 			Thread.sleep(1000);
 			jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
 			Thread.sleep(1000);
@@ -581,9 +545,6 @@ public class BroadcastSteps extends Init {
 			Thread.sleep(1000);
 			try {
 				if (eM.getCellByColumnName("Recurrance Pattern").contains("days")) {
-					// to get the recurence time and stored into bcinputdata wb and recurring bc sheets in column 11, row 1 
-//					String bcRecurTime=hours+":"+min;
-//					eM.setCell(1, 11, bcRecurTime);
 					
 					String recurringDays=(eM.getCellByColumnName("Recurrance Pattern").toString()).substring(0);
 					
@@ -636,7 +597,7 @@ public class BroadcastSteps extends Init {
 								+ (hours + 1) + "]"));
 				builder.moveToElement(num).click().build().perform();
 				Thread.sleep(2000);
-				// jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[3]");
+
 				num1 = driver.findElement(By.xpath(
 						"//*[@id='deliver-card']/../paper-card[2]//*[@id='timePicker']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
 								+ (min + 1) + "]"));
@@ -3378,7 +3339,7 @@ public void verify_the_BC_notification_in_mail_from_workbook_and_sheet(String st
 	String subjectOfEmail="";
 	
 	if(status.contentEquals("Rendering")) {
-	fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";// you pass your from address- swapna.p@flytxt.com
+	fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";// you pass your from address
 	subjectOfEmail= "Broadcast Rendering Notification - "+bcName;//BCNotification is BC name
 	}else if(status.contentEquals("Delivering")) {
 		 fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";
@@ -3447,14 +3408,14 @@ public void enter_details_for_new_broadcast_with_condition_digitalPersonaGT_from
 
 
 
-@Then("^save \"([^\"]*)\" migration data to spreadsheet from \"([^\"]*)\" with string (.*)$")
-public void save_migration_data_to_spreadsheet_from_with_string_one_off_bc_blackout_with_condition_Condition(String workbook, String bcsheet, String key) throws Throwable {
-String speadSheetID="1JZx7woJSspCYbBdhujwtjCq-TmS778rC68NfLPRJH84";
-String speadSheetName="Migration";
-
-commonObjects.speadSheetTestFunction(workbook, bcsheet, key, speadSheetID, speadSheetName);
-
-}
+//@Then("^save \"([^\"]*)\" migration data to spreadsheet from \"([^\"]*)\" with string (.*)$")
+//public void save_migration_data_to_spreadsheet_from_with_string_one_off_bc_blackout_with_condition_Condition(String workbook, String bcsheet, String key) throws Throwable {
+//String speadSheetID="1JZx7woJSspCYbBdhujwtjCq-TmS778rC68NfLPRJH84";
+//String speadSheetName="Migration";
+//
+//commonObjects.speadSheetTestFunction(workbook, bcsheet, key, speadSheetID, speadSheetName);
+//
+//}
 
 @Then("^add the BC Data to \"([^\"]*)\" from BCsheet \"([^\"]*)\" campaignname \"([^\"]*)\" campaign category \"([^\"]*)\" offer \"([^\"]*)\" condition \"([^\"]*)\" inventory \"([^\"]*)\" with string (.*)$")
 public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition_inventory_with_string(String parllelRunSheet, String bcSheet, String campaignSheet, String campaignCategory, String offerSheet, String condition, String inventory, String description) throws Throwable {
@@ -3614,7 +3575,7 @@ public void wait_until_status_of_from_file_is_for_bctype(String bcsheet, String 
 	String statusOfBc = broadcastPageObjects.getTopBcStatus(bcsheet,bcName,bctype);
 	TimeoutImpl t = new TimeoutImpl();
 	t.startTimer();
-	while (!statusOfBc.contains(status) && t.checkTimerMin(20)) {
+	while (!statusOfBc.contains(status) && t.checkTimerMin(6)) {
 		statusOfBc = broadcastPageObjects.getTopBcStatus(bcsheet,bcName,bctype);
 		System.out.println(statusOfBc);
 		Thread.sleep(3000);
@@ -4160,7 +4121,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 						}
 						System.out.println("Status of BC "+statusOfBC);
 						if(statusOfBC.equals("Delivering")) {
-						broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/seleniumTrigger","TriggerData.csv");
+						broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium/seleniumTrigger","TriggerData.csv");
 						System.out.println("Trigger input data provided ");
 						Thread.sleep(480000);
 						System.out.println("Inside Trigger waiting for count updation.......");
@@ -4169,13 +4130,13 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 								System.out.println("RechargeBasedConversion");
 								System.out.println("Providing file for conversion ");
 								// provideFileForConversion();
-								broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium",
+								broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium/seleniumConversion",
 										"conversion.csv");
-								lg.legacyTest();
+//								lg.legacyTest();
 								System.out.println("Removing file from conversion. .. .. ... .");
 								// deleteFileForConversion();
-								broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
-										"conversion.csv");
+//								broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
+//										"conversion.csv");
 //								int deactivateConversionJob = sql
 //										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
 //								System.out.println("Deactivate the JOb ... .. ." + deactivateConversionJob);
@@ -4183,13 +4144,13 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 								System.out.println("UsageBasedConversion");
 								System.out.println("Providing file for conversion ");
 								// provideFileForConversion();
-								broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium",
+								broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium/seleniumMetric",
 										"conversion.csv");
-								lg.UsageConversionJob();
-								System.out.println("Removing file from conversion. .. .. ... .");
-								// deleteFileForConversion();
-								broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
-										"conversion.csv");
+//								lg.UsageConversionJob();
+//								System.out.println("Removing file from conversion. .. .. ... .");
+//								// deleteFileForConversion();
+//								broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
+//										"conversion.csv");
 //								int deactivateUsageConversionJob = sql
 //										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
 //								System.out.println("Deactivate the JOb ... .. ." + deactivateUsageConversionJob);
@@ -4411,6 +4372,25 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
      
 	}
 	
+	@Then("^verify the condition (.*) event for the recurring seeding bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
+	public void verify_the_condition_event_for_the_seeding_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
+      eh.setExcelFile("bcInputData", bcSheet);
+      String bcName =eh.getCellByColumnName("BC Name");
+      eM.setExcelFile("campaignInputData", campaignSheet);
+      String camapignName=(String) eM.getCell(1, 0);
+      broadcastPageObjects.verifyEventOfTheRecurringSeedingBC(event,bcName,camapignName);
+     
+	}
+	
+	@Then("^verify the condition (.*) event for the onetime seeding bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
+	public void verify_the_condition_event_for_the_onetime_seeding_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
+      eh.setExcelFile("bcInputData", bcSheet);
+      String bcName =eh.getCellByColumnName("BC Name");
+      eM.setExcelFile("campaignInputData", campaignSheet);
+      String camapignName=(String) eM.getCell(1, 0);
+      broadcastPageObjects.verifyEventOfTheOneTimeSeedingBC(event,bcName,camapignName);
+     
+	}
 	
 	@Then("^Verify calculate option for BCs from workbook \"([^\"]*)\" in sheet \"([^\"]*)\" with BC \"([^\"]*)\"$")
 	public void verify_calculate_option_for_BCs_from_workbook_in_sheet_with_BC(String workbook, String sheet,
@@ -4565,7 +4545,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	@Then("^provide file in location \"([^\"]*)\" for trigger with csv file \"([^\"]*)\"$")
 	public void provide_file_in_location_for_trigger_with_csv_file(String location, String csvFile) throws Throwable {
 	String csvFileData = "";
-	File conversionCSV = new File("ExcelFiles\\" + csvFile);
+	File conversionCSV = new File("ExcelFiles//"+csvFile);
 	BufferedReader br = null;
 	String temp = "";
 	int initial = 1;
@@ -4687,11 +4667,24 @@ public void enter_choose_offer_tab_for_copied_offer_from_sheet_for_bc_from_sheet
 	
 }
 	
+@Then ("add bc from sheet \"([^\"]*)\" to row \"([^\"]*)\" of bamboo data storage sheet \"([^\"]*)\"$")	
+public void add_bc(String bcsheet,int row,String bcStorageSheet) throws Exception{
+	  eM.setExcelFile("bcInputData", bcsheet);
+      String bcName=eM.getCellByColumnName("BC Name");
+      System.out.println("=========="+bcName+"=============");
+      String bcType=(String)eM.getCell(1, 7);
+      System.out.println("=========="+bcType+"=============");
+      broadcastPageObjects.addBambooRunBcToSheet(bcsheet,bcName,bcType,bcStorageSheet,row);
+}
 	
+@Then("^filter the bc from sheet \"([^\"]*)\" from row \"([^\"]*)\" and column \"([^\"]*)\" and add data in sheet \"([^\"]*)\"$")
+public void filter_the_bc_from_sheet_and_add_data_in_sheet(String bcStorageSheet, int row, int column, String bcSheet) throws Exception {
+	eh.setExcelFile("BambooBuildDetails", bcStorageSheet);
+	String bcName =(String) eh.getCell(row, column);
+	eM.setExcelFile("bcInputData", bcSheet);
+	eM.setCell("BC Name", bcName);
 	
-	
-	
-	
+}                          
 	
 	
 	
@@ -4704,3 +4697,5 @@ public void enter_choose_offer_tab_for_copied_offer_from_sheet_for_bc_from_sheet
 
 
 
+
+	

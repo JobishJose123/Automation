@@ -77,28 +77,28 @@ import net.rcarz.jiraclient.JiraClient;
 //	uncomment the following IF LOOP at the time of regression suite running		
 //to update the testcase status in jira (Field being update :Automated Execution Status)	
 //			 
-			for(int j=0;j<=NXtag.size();j++) {
-				String str=(NXtag.get(j)).toString();
-				str.trim();
-			    String str1= str.substring(1);
-				str1=str1.trim();
-				System.out.println(str1);
-                BasicCredentials creds=new BasicCredentials(p.getValue("jiraUsername"),p.getValue("jiraPassword"));
-			    JiraClient jira=new JiraClient("https://flytxt.atlassian.net/", creds);
-				jira.getProject("NDX");
-				Issue issue=jira.getIssue(str1);
-				System.out.println(issue.getSummary());
-				System.out.println(issue.getField("customfield_11221"));
-				if(scenario.getStatus().contentEquals("passed")) {
-				issue.update().field("customfield_11221", "NCS Passed").execute();
-				}
-				else {
-					issue.update().field("customfield_11221", "NCS Failed").execute();	
-				}
-				String status=issue.getField("customfield_11221").toString();
-				System.out.println("status of testcase :::::::::::::"+status);
-	
-			}
+//			for(int j=0;j<=NXtag.size();j++) {
+//				String str=(NXtag.get(j)).toString();
+//				str.trim();
+//			    String str1= str.substring(1);
+//				str1=str1.trim();
+//				System.out.println(str1);
+//                BasicCredentials creds=new BasicCredentials(p.getValue("jiraUsername"),p.getValue("jiraPassword"));
+//			    JiraClient jira=new JiraClient("https://flytxt.atlassian.net/", creds);
+//				jira.getProject("NDX");
+//				Issue issue=jira.getIssue(str1);
+//				System.out.println(issue.getSummary());
+//				System.out.println(issue.getField("customfield_11221"));
+//				if(scenario.getStatus().contentEquals("passed")) {
+//				issue.update().field("customfield_11221", "NCS Passed").execute();
+//				}
+//				else {
+//					issue.update().field("customfield_11221", "NCS Failed").execute();	
+//				}
+//				String status=issue.getField("customfield_11221").toString();
+//				System.out.println("status of testcase :::::::::::::"+status);
+//	
+//			}
 			
 			i = 0 ;
 			String feature = "";

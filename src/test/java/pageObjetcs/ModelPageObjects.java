@@ -271,6 +271,10 @@ public class ModelPageObjects extends Init {
 	
 	public void clickClose() throws Exception{
 		jswait.loadClick(Close);
+		
+		
+	}   
+	public void runParagraph() throws Exception{
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(0);//switch frame
 		 jswait.loadClick(RunAllProgram);

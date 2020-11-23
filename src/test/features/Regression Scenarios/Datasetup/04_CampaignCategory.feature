@@ -12,7 +12,7 @@ Given login
 Then navigate to configuration management
 Then navigate to campaign categories
 Then create new campaign category from sheet "campaignCategory"
-Then save "campaignCategoryInputData" data to spreadsheet from "campaignCategory" with string campaign category from CampaignCategory
+#Then save "campaignCategoryInputData" data to spreadsheet from "campaignCategory" with string campaign category from CampaignCategory
 
 
   

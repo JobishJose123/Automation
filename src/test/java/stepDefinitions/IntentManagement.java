@@ -30,6 +30,8 @@ import pageObjetcs.ProgramPage;
 import pageObjetcs.TargetConditionObjects;
 import pageObjetcs.TouchpointPage;
 
+
+
 public class IntentManagement extends Init{
 	RandomNameGenerator RandomNameGenerator=new RandomNameGenerator();
 	CommonObjects commonObjects = new CommonObjects();
@@ -66,8 +68,9 @@ public class IntentManagement extends Init{
 	public void clickCreateNewTouchpoint() throws InterruptedException {
 		touchpointPage.clickCreateNewTouchpoint();
 	}
-	@Then("^create trigger touchpoint from sheet \"([^\"]*)\"$")
-	public void createTriggerTouchpoint(String sheet) throws InterruptedException, IOException {
+
+@Then("^create trigger touchpoint from sheet \"([^\"]*)\" with logic \"([^\"]*)\" and trigger \"([^\"]*)\"$")
+public void create_trigger_touchpoint_from_sheet_with_logic_and_trigger(String sheet, String prioLogic, String trigger) throws Throwable {
 		eh.setExcelFile("touchpointInputData", sheet);
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
@@ -78,7 +81,7 @@ public class IntentManagement extends Init{
  		else {
  		    name = name.replaceAll("[0-9]", "")+n;
  		}
-		touchpointPage.createTriggerTouchpoint(name);
+		touchpointPage.createTriggerTouchpoint(name,prioLogic,trigger);
 		eh.setCell(1, 0, name);
 	}
 	@Then("^check touchpoint landing page$")
@@ -100,25 +103,25 @@ public class IntentManagement extends Init{
 		touchpointPage.customerCareClickSave();
 		touchpointPage.customerCareClickCancel();
 	}
-	@Then("^create sms touchpoint from sheet \"([^\"]*)\"$")
-	public void createSmsTouchpoint(String sheet) throws Throwable{
+	@Then("^create sms touchpoint from sheet \"([^\"]*)\" with logic \"([^\"]*)\" and keyword \"([^\"]*)\"$")
+	public void createSmsTouchpoint(String sheet,String prioLogic,String smsKeyword) throws Throwable{
 		navigateToSms(); 
 		eh.setExcelFile("touchpointInputData", sheet);
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
  		String name = (String) eh.getCell(1, 0);
  		name =  "smsTP"+n;
-		touchpointPage.createSmsTouchpoint(name);
+		touchpointPage.createSmsTouchpoint(name,prioLogic,smsKeyword);
 		eh.setCell(1, 0, name);
 	}
-	@Then("^verify sms touchpoint creation form$")
-	public void verify_sms_tp_creation_form() throws Throwable {
-		String heading = touchpointPage.getSmsFormHeading();
-	    if(heading.contains("Create New SMS Touchpoint")) {
-	    	touchpointPage.enterSmsTouchpointDetails("formTest");
-	    	touchpointPage.smsClickSave();
-	    }
-	}
+//	@Then("^verify sms touchpoint creation form$")
+//	public void verify_sms_tp_creation_form() throws Throwable {
+//		String heading = touchpointPage.getSmsFormHeading();
+//	    if(heading.contains("Create New SMS Touchpoint")) {
+//	    	touchpointPage.enterSmsTouchpointDetails("formTest");
+//	    	touchpointPage.smsClickSave();
+//	    }
+//	}
 	@Then("^check sms touchpoint in grid \"([^\"]*)\"$")
 	public void checkSmsTouchpoint(String sheet) throws Throwable{
 		Thread.sleep(6000);
@@ -147,15 +150,15 @@ public class IntentManagement extends Init{
 	}*/
 	
 
-	@Then("^create customer care touchpoint from sheet \"([^\"]*)\"$")
-	public void create_customer_care_touchpoint(String sheet) throws Throwable {
+	@Then("^create customer care touchpoint from sheet \"([^\"]*)\" with logic \"([^\"]*)\"$")
+	public void create_customer_care_touchpoint(String sheet,String prioLogic) throws Throwable {
 		eh.setExcelFile("touchpointInputData", sheet);
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
  		String name = (String) eh.getCell(1, 0);
  		name =  name.replaceAll("[0-9]", "")+n;
  		eh.setCell(1, 0, name);
-		touchpointPage.createCustomerCareTouchpoint(name);
+		touchpointPage.createCustomerCareTouchpoint(name,prioLogic);
 	}
 
 	@Then("^check customer care touchpoint in grid \"([^\"]*)\"$")
@@ -175,8 +178,8 @@ public class IntentManagement extends Init{
 	public void navigate_to_smartphone() throws Throwable {
 		touchpointPage.navigateTosmartphone();
 	}
-	@Then("^create api touchpoint from sheet \"([^\"]*)\"$")
-	public void create_api_touchpoint(String sheet) throws Throwable {
+	@Then("^create api touchpoint from sheet \"([^\"]*)\" and logic \"([^\"]*)\"$")
+	public void create_api_touchpoint(String sheet,String Priologic) throws Throwable {
 		eh.setExcelFile("touchpointInputData", sheet);
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
@@ -187,7 +190,7 @@ public class IntentManagement extends Init{
  		else {
  		    name = name.replaceAll("[0-9]", "")+n;
  		}	
-	  touchpointPage.createApiTouchpoint(name,eh.getCellByColumnName("Application Type"),eh.getCellByColumnName("Event For Tracking"),eh.getCellByColumnName("Refresh  Every"),eh.getCellByColumnName("Time Interval"),eh.getCellByColumnName("Prioritization Logic"),eh.getCellByColumnName("Maximum Offers"));
+	  touchpointPage.createApiTouchpoint(name,eh.getCellByColumnName("Application Type"),eh.getCellByColumnName("Event For Tracking"),eh.getCellByColumnName("Refresh  Every"),eh.getCellByColumnName("Time Interval"),Priologic,eh.getCellByColumnName("Maximum Offers"));
 	  eh.setCell(1, 0, name);
 	}
 
@@ -204,22 +207,22 @@ public class IntentManagement extends Init{
 		touchpointPage.navigateToUssd();
 	}
 
-	@Then("^create ussd touchpoint from sheet \"([^\"]*)\"$")
-	public void create_ussd_touchpoint(String sheet) throws Throwable {
+	@Then("^create ussd touchpoint from sheet \"([^\"]*)\" with logic \"([^\"]*)\" and application \"([^\"]*)\"$")
+	public void create_ussd_touchpoint(String sheet,String prioLogic,String ussdApp) throws Throwable {
 		eh.setExcelFile("touchpointInputData", sheet);
 		Random rn = new Random();
  		int  n = rn.nextInt(5000) + 1;
  		String name = (String) eh.getCell(1, 0);
  		name =  name.replaceAll("[0-9]", "")+n;
  		eh.setCell(1, 0, name);
-	  touchpointPage.createUssdTouchpoint(name);
+	  touchpointPage.createUssdTouchpoint(name,prioLogic,ussdApp);
 	}
 	
-	@Then("^edit ussd touch point without filling mandatory fileds$")
-	public void editUSSDTouchpointWithoutFillingMandatoryFields() throws Throwable {
-		
-	  touchpointPage.editUSSDTouchpointWithoutFillingMandatoryFields();
-	}
+//	@Then("^edit ussd touch point without filling mandatory fileds$")
+//	public void editUSSDTouchpointWithoutFillingMandatoryFields() throws Throwable {
+//		
+//	  touchpointPage.editUSSDTouchpointWithoutFillingMandatoryFields();
+//	}
 
 	
 	@Then("^create new touch point without filling mandatory fields$")
@@ -330,7 +333,7 @@ public class IntentManagement extends Init{
 	@Then("^verify cancel button of trigger touchpoint$")
 	public void verifyCancelButtonTriggerTouchpoint() throws Throwable {
 		touchpointPage.clickCreateNewTouchpoint();
-		touchpointPage.enterTriggerTouchpointDetails("CheckCancel");
+		touchpointPage.enterTriggerTouchpointDetails("CheckCancel","FIFO",TRIGGER);
 		touchpointPage.triggerClickCancel();
 		Exception touchpointSavedAfterCancel = new Exception("touchpoint saved after clicking cancel");
 		try{
@@ -342,7 +345,7 @@ public class IntentManagement extends Init{
 	}
 	@Then("^verify delete trigger touchpoint$")
 	public void verify_delete_trigger_touchpoint() throws Throwable {
-		touchpointPage.createTriggerTouchpoint("DeleteCheck");
+		touchpointPage.createTriggerTouchpoint("DeleteCheck","FIFO",TRIGGER);
 		touchpointPage.deleteTriggerTouchpoint("DeleteCheck");
 		Thread.sleep(3000);
 	}
@@ -993,6 +996,18 @@ System.out.println(editname+"program has edited successfully");
 	
 		}
 	
+	
+	 @Then("^verify rule created from sheet \"([^\"]*)\"$")
+	 public void verifyRuleCreatedFromSheet(String sheet) throws Exception {
+		 Thread.sleep(2000);
+		    eh.setExcelFile("ruleInputData",sheet);
+			String name = (String) eh.getCell(1, 0);
+		    programPage.verifyRuleCreatedFromSheet(name);
+		 
+		 
+	 }
+	
+	
 	@Then("^verify create program page timezone option \"([^\"]*)\"$")
 	public void verify_create_program_page_timezone_option(String sheet) throws Throwable {
 		Thread.sleep(4000);
@@ -1127,12 +1142,7 @@ System.out.println(editname+"program has edited successfully");
 	public void verify_create_program_page_from_sheet(String sheet1, String sheet2, String sheet3) throws Throwable {
 		Thread.sleep(4000);
     	ExcelHelper programExcel = new ExcelHelper();
-//    	ExcelHelper programExcel2 = new ExcelHelper();
-    	
     	programExcel.setExcelFile("programInputData", sheet1);
-    	
-//    	programExcel2.setExcelFile("programInputDataedit", sheet1);
-    	
     	Random rn = new Random();
     	int  n = rn.nextInt(5000) + 1;
  		String name = (String) programExcel.getCell(1, 0);
@@ -1159,7 +1169,7 @@ System.out.println(editname+"program has edited successfully");
 		programPage.prmeverylabel();
 		programPage.prmrecycleinputclick();
 		programPage.prmrecycleinput();
-		programPage.newprmrefreshatpgm2();
+		programPage.newprmrefreshatpgm();
 		
 		programPage.programschserveon(); 
 		programPage.prmshcserveonalldays();
@@ -1210,53 +1220,44 @@ System.out.println(editname+"program has edited successfully");
 		System.out.println("program has created successfully");
 	}
 	
-	 @Then("^choose program from sheet \"([^\"]*)\" for edit$")
+	 @Then("^filter im program from sheet \"([^\"]*)\"$")
 	 public void chooseProgramFromSheetFromSheet(String sheet) throws InterruptedException {
-		 
-		    eh.setExcelFile("programInputData",sheet);
+            eh.setExcelFile("programInputData",sheet);
 			String name = (String) eh.getCell(1, 0);
 		    filterWorkaround(name);
 		    commonObjects.clickOptionsIcon();
-		    programPage.clickEditProgramButton();
 		 
 		 
 	 }
-	 @Then("^choose program from sheet \"([^\"]*)\" after edited$")
+	 @Then("^filter program from sheet \"([^\"]*)\" after edited$")
 	 public void chooseProgramFromSheetFromSheetafteredited(String sheet) throws InterruptedException {
 		 
-		    eh.setExcelFile("programInputDataedit",sheet);
-			String name = (String) eh.getCell(1, 0);
+		    eh.setExcelFile("programInputData",sheet);
+			String name = ((String) eh.getCell(1, 0))+"_edited";
 		    filterWorkaround(name);
 		    commonObjects.clickOptionsIcon();
-		    programPage.clickEditProgramButton();
 		 
 		 
 	 }
 	 
 	  
 	   
-	   @Then("^verify edit program page \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+	   @Then("^edit program page \"([^\"]*)\" and offer catalog sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
 	public void verify_edit_program_page_from_sheet(String sheet1, String sheet2, String sheet3) throws Throwable {
 		Thread.sleep(4000);
+		programPage.clickEditProgramButton();
     	ExcelHelper programExcel = new ExcelHelper();
-    	programExcel.setExcelFile("programInputDataedit", sheet1);
-    
- 		String name = (String) programExcel.getCell(1,0);
-
- 		RandomNameGenerator.getRandomName(name);
- 		programExcel.setCell(1,0,name);
+    	programExcel.setExcelFile("programInputData", sheet1);
+        String name = (String) programExcel.getCell(1,0);
+        name=name+"_Edited";
  		Thread.sleep(4000);
  		System.out.println(name);
- 		
-
-		programPage.enterProgramDetailsfromSheet(name,sheet2);
-		
-		commonObjects.clickOptionsIcon();
+        programPage.enterProgramDetailsfromSheet(name,sheet2);
+        commonObjects.clickOptionsIcon();
 		jswait.loadClick("//paper-item[contains(.,'Delete')]");
 		programPage.clickCreateProgramAddTouchpointButton();
 		programPage.addTouchPointToProgramFromSheet(sheet3);
 		programPage.clickPorogramProceedButton();
-		
 		programPage.programschend();
 		programPage.prmshcselectnoend();
 		programPage.programschrefreshcycle();
@@ -1376,16 +1377,7 @@ System.out.println(editname+"program has edited successfully");
 		 
 	 }
 	 
-	 @Then("^verify rule created from sheet \"([^\"]*)\"$")
-	 public void verifyRuleCreatedFromSheet(String sheet) throws Exception {
-		 Thread.sleep(2000);
-		    eh.setExcelFile("ruleInputData",sheet);
-			String name = (String) eh.getCell(1, 0);
-		    programPage.verifyRuleCreatedFromSheet(name);
-		 
-		 
-	 }
-	    
+
 	
 		@Then("^verify create program page refreshcycle option \"([^\"]*)\"$")
 		public void verify_create_program_page_refreshoption(String sheet) throws Throwable {
@@ -1469,11 +1461,11 @@ System.out.println(editname+"program has edited successfully");
 		    	offerExcel.setExcelFile("offerInputData", offerType);
 		    	
 		 		String name = (String) programExcel.getCell(1,0);
-		 		
+		 		String offer= (String) offerExcel.getCell(1,0);
 		 		Thread.sleep(4000);
 				//programPage.clickCreateProgramButton();
 		 		System.out.println(touchpointList);
-				programPage.createNewProgramRulewithenddate(name,SELENIUM_LIST_IM,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+				programPage.createNewProgramRule(sheet1,offer,name,SELENIUM_LIST_IM,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 				dateForCompare = new Date();
 				System.out.println(dateForCompare);
 				
@@ -1488,11 +1480,11 @@ System.out.println(editname+"program has edited successfully");
 		    	offerExcel.setExcelFile("offerInputData", offerType);
 		    	
 		 		String name = (String) programExcel.getCell(1,0);
-		 		
+		 		String offer = (String) offerExcel.getCell(1,0);
 		 		Thread.sleep(4000);
 				//programPage.clickCreateProgramButton();
 		 		System.out.println(touchpointList);
-				programPage.createNewProgramRulewithenddate(name,list,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+				programPage.createNewProgramRulewithenddate(sheet1,offer,name,list,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 				dateForCompare = new Date();
 				System.out.println(dateForCompare);
 				
@@ -2175,238 +2167,187 @@ System.out.println(editname+"program has edited successfully");
 			public void verify_edited_program_page_from_sheet(String sheet1, String sheet2, String sheet3) throws Throwable {
 				Thread.sleep(4000);
 		    	ExcelHelper programExcel = new ExcelHelper();
-		    	programExcel.setExcelFile("programInputDataedit", sheet1);
-		    
-		 		String name = (String) programExcel.getCell(1,0);
+		    	programExcel.setExcelFile("programInputData", sheet1);
+		 		String name = ((String) programExcel.getCell(1,0))+"_Edited";
 		 		Thread.sleep(4000);
 		 		System.out.println(name);
-				programPage.compareProgramDetailsfromSheet(name,sheet2);
-				programPage.verifyTouchPointToProgramFromSheet(sheet3);
-				
-				System.out.println("program has verified successfully");
+//				programPage.compareProgramDetailsfromSheet(name,sheet2);
+//				programPage.verifyTouchPointToProgramFromSheet(sheet3);
+		 		Assert.assertTrue(jswait.checkVisibility("//span[contains(.,'"+name+"')]"));
+                System.out.println("program has verified successfully");
 			
 			}
 		   
 		   
 		   @Then("^verify rule view from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
 			 public void verifyRuleviewFromSheet(String sheet,String sheet2) throws Exception {
-				 Thread.sleep(2000);
-				 ExcelHelper programExcel = new ExcelHelper();
-				    eh.setExcelFile("ruleInputData",sheet);
-					String name = (String) eh.getCell(1, 0);
-					programExcel.setExcelFile("productInputData", sheet2);
-					
-					String product=(String) programExcel.getCell(1, 0);
-				    programPage.verifyRuleviewFromSheet(name,product);
+//				 Thread.sleep(2000);
+//				 ExcelHelper programExcel = new ExcelHelper();
+//				    eh.setExcelFile("ruleInputData",sheet);
+//					String name = (String) eh.getCell(1, 0);
+//					programExcel.setExcelFile("productInputData", sheet2);
+//					
+//					String product=(String) programExcel.getCell(1, 0);
+//				    programPage.(name,product);
 				 
 				 
 			 }
 		   
-		   @Then("^verify rule deactivate$")
-			 public void verifyRuledeactivate() throws Exception {
-				 Thread.sleep(2000);
-				
-				    programPage.verifyRuledeactivate();
-				 
-				 
-			 }
+@Then("^verify rule deactivate$")
+public void verifyRuledeactivate() throws Exception {
+Thread.sleep(2000);
+programPage.verifyRuledeactivate();
+}
 		   
-		   @Then("^verify rule Copy from sheet \"([^\"]*)\" with product sheet \"([^\"]*)\" and product class sheet \"([^\"]*)\"$")
-			 public void verifyRulecopy(String sheet,String sheet2,String sheet3) throws Exception {
-				 Thread.sleep(2000);
-				
-				    programPage.verifyRulecopy(sheet,sheet2,sheet3);
-				 
-				 
-			 }
+@Then("^verify copied rule from sheet \"([^\"]*)\" and product from sheet \"([^\"]*)\" and offer from sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+public void ruleCopyVerification(String ruleSheet, String productSheet, String offerSheet, String tpSheet) throws Throwable {
+Thread.sleep(2000);
+eh.setExcelFile("ruleInputData", ruleSheet);
+String ruleName=(eh.getCell(1, 0).toString())+"_copy";
+eh.setExcelFile("productInputData", productSheet);
+String productName=eh.getCell(1, 0).toString();
+eh.setExcelFile("offerInputData", offerSheet);
+String offerName=eh.getCellByColumnName("Offer Name");
+eh.setExcelFile("touchpointInputData", offerSheet);
+String tpName=eh.getCell(1, 0).toString();
+programPage.verifyRuleviewFromSheet(ruleName, productName,offerName,tpName);
+
+}
+		   
+@Then("^copy the existing rule from sheet \"([^\"]*)\" and save$")
+public void copy_the_existing_rule_from_sheet_and_save(String ruleSheet) throws Throwable {
+Thread.sleep(5000);
+eh.setExcelFile("ruleInputData", ruleSheet);
+String ruleName=eh.getCellByColumnName("Rule Name");
+programPage.copyRule(ruleName);
+ }
 		   
 		   
-		   @Then("^edit new rule from sheet \"([^\"]*)\" and offer \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\" with taget condition (.*)$")
-			public void editRuleWithFromSheet(String sheet1,String offerType,String touchpointList,String condition) throws Throwable {
-				Thread.sleep(4000);
-				
-		    	ExcelHelper programExcel = new ExcelHelper();
-		    	programExcel.setExcelFile("ruleInputData", sheet1);
-		    	ExcelHelper offerExcel = new ExcelHelper();
-		    	offerExcel.setExcelFile("offerInputData", offerType);
-		    	
-		 		String name = (String) programExcel.getCell(1, 0);
-		 		Thread.sleep(4000);
-				//programPage.clickCreateProgramButton();
-		 		System.out.println(touchpointList);
-				programPage.editProgramRule(name,SELENIUM_LIST,touchpointList,offerExcel.getCellByColumnName("Offer Type"),condition);
-				dateForCompare = new Date();
-				System.out.println(dateForCompare);
-				
+@Then("^edit new rule from sheet \"([^\"]*)\" with taget condition (.*)$")
+public void editRuleWithFromSheet(String sheet1,String offerType,String touchpointList,String condition) throws Throwable {
+programPage.editProgramRule(condition);		
 			}
 		   
-			@Then("^edit the programrule with taget condition (.*)$")
-			public void edit_the_program_with_taget_condition(String condition) throws Throwable {
-				System.out.println(condition);
-				Thread.sleep(3000);
-				
-				Thread.sleep(3000);
-				programPage.editingTheprogramruleTargetConditionDetails(condition);
-				
-			}
+@Then("^edit the programrule with taget condition (.*)$")
+public void edit_the_program_with_taget_condition(String condition) throws Throwable {
+System.out.println(condition);
+Thread.sleep(3000);
+programPage.editingTheprogramruleTargetConditionDetails(condition);
+}
 		   
 			
-			  @Then("^verify rule view after edit from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
-				 public void verifyRuleviewaftereditFromSheet(String sheet,String sheet2) throws Exception {
-					 Thread.sleep(2000);
-					 ExcelHelper programExcel = new ExcelHelper();
-					    eh.setExcelFile("ruleInputData",sheet);
-						String name = (String) eh.getCell(1, 0);
-						programExcel.setExcelFile("productInputData", sheet2);
-						
-						String product=(String) programExcel.getCell(1, 0);
-					    programPage.verifyRuleviewaftereditFromSheet(name,product);
-					 
-					 
-				 }
-				@Then("^edit the targetSelection (.*) for programrule$")
-				public void edit_the_targetSelection_None_for_BC(String targetSelection) throws Throwable {
-					Thread.sleep(3000);
-					commonObjects.clickOptionsIcon();
-					jswait.loadClick("(//paper-item[contains(.,'Edit')])[1]");
-					
-					Thread.sleep(2000);
-					if (targetSelection.contains("None")) {
-						broadcastPageObjects.clickTargetConditionNoneOption();
-
-					} else if (targetSelection.contains("Create")) {
-
-						broadcastPageObjects.clickcreateTargetCondition();
-						Thread.sleep(2000);
-						jswait.loadClick("//paper-button[contains(.,'Create Condition')]");
-						TargetConditionObjects.clickBasicTargetConditionWithAge();
-
-					} else if (targetSelection.contains("SavedSegments")) {
-						broadcastPageObjects.clickOnSavedSegments();
-						broadcastPageObjects.selectSavedSegmentSelectorField("SegmentForMoreThanTenConditions");
-					}
-					
-					
-					Thread.sleep(2000);
+ @Then("^verify target condition (.*)$")
+public void verifyRuleviewaftereditFromSheet(String condition) throws Exception {
+programPage.verifyTheprogramTargetConditionDetails(condition);
+ }
+ 
+@Then("^edit the targetSelection (.*) for programrule$")
+public void edit_the_targetSelection_None_for_BC(String targetSelection) throws Throwable {
+Thread.sleep(3000);
+commonObjects.clickOptionsIcon();
+jswait.loadClick("(//paper-item[contains(.,'Edit')])[1]");
+Thread.sleep(2000);
+if (targetSelection.contains("None")) {
+broadcastPageObjects.clickTargetConditionNoneOption();
+} else if (targetSelection.contains("Create")) {
+broadcastPageObjects.clickcreateTargetCondition();
+Thread.sleep(2000);
+jswait.loadClick("//paper-button[contains(.,'Create Condition')]");
+TargetConditionObjects.clickBasicTargetConditionWithAge();
+} else if (targetSelection.contains("SavedSegments")) {
+broadcastPageObjects.clickOnSavedSegments();
+broadcastPageObjects.selectSavedSegmentSelectorField("SegmentForMoreThanTenConditions");
+}
+Thread.sleep(2000);
 //					broadcastPageObjects.clickProceedButton();
 //					Thread.sleep(2000);
 //					broadcastPageObjects.clickProceedButton();
 //					Thread.sleep(2000);
 //					broadcastPageObjects.clickProceedButton();
-					
-					jswait.loadClick("//paper-button[contains(.,'Save')]");
-			      	Thread.sleep(2000);
-			      	jswait.loadClick("(//paper-button[contains(.,'Yes')][1])[1]");
-			      	
-			      	if(jswait.checkVisibility("//span[contains(.,'Changes have been saved and will be active on the next refresh cycle.  If all intended changes are done, click Close else click Continue.')]")==true) {
-			      		Thread.sleep(2000);
-			      		jswait.loadClick("//paper-button[contains(.,'Close')]");
-			      	} 
-			       	
-				}
+jswait.loadClick("//paper-button[contains(.,'Save')]");
+Thread.sleep(2000);
+jswait.loadClick("(//paper-button[contains(.,'Yes')][1])[1]");
+if(jswait.checkVisibility("//span[contains(.,'Changes have been saved and will be active on the next refresh cycle.  If all intended changes are done, click Close else click Continue.')]")==true) {
+Thread.sleep(2000);
+jswait.loadClick("//paper-button[contains(.,'Close')]");
+} 
+}
 				
+@Then("^verify rule target selection (.*) after edit from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
+public void verifyRuletargetselectionaftereditFromSheet(String condition,String sheet,String sheet2) throws Exception {
+Thread.sleep(2000);
+ExcelHelper programExcel = new ExcelHelper();
+eh.setExcelFile("ruleInputData",sheet);
+String name = (String) eh.getCell(1, 0);
+programExcel.setExcelFile("productInputData", sheet2);
+String product=(String) programExcel.getCell(1, 0);
+programPage.verifyRuletargetselectionaftereditFromSheet(name,product,condition);
+}
+
+@Then("^navigate to rules$")
+ public void navigatetorules() throws Exception {
+Thread.sleep(2000);
+programPage.navigatetorules();
+}
 				
-				  @Then("^verify rule target selection (.*) after edit from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
-					 public void verifyRuletargetselectionaftereditFromSheet(String condition,String sheet,String sheet2) throws Exception {
-						 Thread.sleep(2000);
-						 ExcelHelper programExcel = new ExcelHelper();
-						    eh.setExcelFile("ruleInputData",sheet);
-							String name = (String) eh.getCell(1, 0);
-							programExcel.setExcelFile("productInputData", sheet2);
-							
-							String product=(String) programExcel.getCell(1, 0);
-						    programPage.verifyRuletargetselectionaftereditFromSheet(name,product,condition);
-						 
-						 
-					 }
-				  @Then("^navigate to rules$")
-					 public void navigatetorules() throws Exception {
-						 Thread.sleep(2000);
-					
-						    programPage.navigatetorules();
-						 
-						 
-					 }
+@Then("^verify offer \"([^\"]*)\"$")
+public void verify_The_offer_in_CS(String offertype) throws Exception {
+String offer;
+Thread.sleep(2000);
+offer=jswait.getTextFormElement("//data-table-row/div[@class='cells style-scope data-table-row']/data-table-cell[@class='customer-assessment style-scope']/span[contains(.,'"+offertype+"')]");
+System.out.println(offer);
+Assert.assertEquals(offer,offertype);
+}
 				
-			
-				  @Then("^verify offer \"([^\"]*)\"$")
-					 public void verify_The_offer_in_CS(String offertype) throws Exception {
-					  String offer;
-						 Thread.sleep(2000);
-						 
-						 offer=jswait.getTextFormElement("//data-table-row/div[@class='cells style-scope data-table-row']/data-table-cell[@class='customer-assessment style-scope']/span[contains(.,'"+offertype+"')]");
-						 System.out.println(offer);
-						 Assert.assertEquals(offer,offertype);
-						 
-					 }
+@Then("^enter msisdn again for refresh \"([^\"]*)\"$")
+public void msisdnrefresh(String num) throws Exception {
+ String key=num;
+Thread.sleep(2000);
+jswait.loadClick("//paper-icon-button[@icon=\"icons:create\"]");
+Thread.sleep(2000);
+jswait.loadSendKeys("//label[contains(text(),'Customer Number')]/../input", key);
+}
 				
-				  @Then("^enter msisdn again for refresh \"([^\"]*)\"$")
-					 public void msisdnrefresh(String num) throws Exception {
-					  String key=num;
-						 Thread.sleep(2000);
-					
-						jswait.loadClick("//paper-icon-button[@icon=\"icons:create\"]");
-						Thread.sleep(2000);
-						jswait.loadSendKeys("//label[contains(text(),'Customer Number')]/../input", key);
-						 
-						 
-					 }
+				 
 				
-				  @Then("^Customercare offer accept$")
-					 public void customercareofferaccept() throws Exception {
-						 Thread.sleep(2000);
-						 jswait.loadClick("//paper-button[contains(.,'Accept')]");
-						 Thread.sleep(2000);
-						 jswait.loadClick("(//paper-button[contains(.,'Yes')])[1]");
-						 Thread.sleep(2000);
-						 
-						 jswait.loadClick("//div[@class='tab-content style-scope paper-tab'][contains(.,'History')]");
-						 Thread.sleep(4000);
-						 driver.navigate().refresh();
-						 String status=jswait.getTextFormElement("//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div/data-table-row/div/data-table-cell[9]");
-						 System.out.println(status);
-						 Thread.sleep(2000);
-							Assert.assertEquals("Accepted, No Reward",status);
-					 }
-				
-				  @Then("^change Customercare Prioritization Logic to \"([^\"]*)\" from sheet \"([^\"]*)\"$")
-					 public void changeprioritizationlogic(String type,String sheet) throws Exception {
-						 Thread.sleep(2000);
-						 ExcelHelper programExcel = new ExcelHelper();
-						    eh.setExcelFile("touchpointInputData",sheet);
-							String name = (String) eh.getCell(1, 0);
-							Thread.sleep(2000);
-							touchpointPage.customercaretouchpointsclick(name);
-						 
-						touchpointPage.customerCareSelectPrioritizationLogicnew(type);
-						 
-					 }
+//				  @Then("^change Customercare Prioritization Logic to \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+//					 public void changeprioritizationlogic(String type,String sheet) throws Exception {
+//						 Thread.sleep(2000);
+//						 ExcelHelper programExcel = new ExcelHelper();
+//						    eh.setExcelFile("touchpointInputData",sheet);
+//							String name = (String) eh.getCell(1, 0);
+//							Thread.sleep(2000);
+//							touchpointPage.customercaretouchpointsclick(name);
+//						 
+//						touchpointPage.customerCareSelectPrioritizationLogicnew(type);
+//						 
+//					 }
 				
 				  
-				  @Then("^change ussd Prioritization Logic to \"([^\"]*)\" from sheet \"([^\"]*)\"$")
-					 public void changeprioritizationlogicUSSD(String type,String sheet) throws Exception {
-						 Thread.sleep(2000);
-						 ExcelHelper programExcel = new ExcelHelper();
-						    eh.setExcelFile("touchpointInputData",sheet);
-							String name = (String) eh.getCell(1, 0);
-							Thread.sleep(2000);
-							touchpointPage.USSDtouchpointsclick(name);
-						 
-						touchpointPage.USSDSelectPrioritizationLogicnew(type);
-						 
-					 }
-				  @Then("^change SMS Prioritization Logic to \"([^\"]*)\" from sheet \"([^\"]*)\"$")
-					 public void changeprioritizationlogicSMS(String type,String sheet) throws Exception {
-						 Thread.sleep(2000);
-						 ExcelHelper programExcel = new ExcelHelper();
-						    eh.setExcelFile("touchpointInputData",sheet);
-							String name = (String) eh.getCell(1, 0);
-							Thread.sleep(2000);
-							touchpointPage.SMStouchpointsclick(name);
-						 
-						touchpointPage.SMSSelectPrioritizationLogicnew(type);
-						 
-					 }
+//				  @Then("^change ussd Prioritization Logic to \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+//					 public void changeprioritizationlogicUSSD(String type,String sheet) throws Exception {
+//						 Thread.sleep(2000);
+//						 ExcelHelper programExcel = new ExcelHelper();
+//						    eh.setExcelFile("touchpointInputData",sheet);
+//							String name = (String) eh.getCell(1, 0);
+//							Thread.sleep(2000);
+//							touchpointPage.USSDtouchpointsclick(name);
+//						 
+//						touchpointPage.USSDSelectPrioritizationLogicnew(type);
+//						 
+//					 }
+//				  @Then("^change SMS Prioritization Logic to \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+//					 public void changeprioritizationlogicSMS(String type,String sheet) throws Exception {
+//						 Thread.sleep(2000);
+//						 ExcelHelper programExcel = new ExcelHelper();
+//						    eh.setExcelFile("touchpointInputData",sheet);
+//							String name = (String) eh.getCell(1, 0);
+//							Thread.sleep(2000);
+//							touchpointPage.SMStouchpointsclick(name);
+//						 
+//						touchpointPage.SMSSelectPrioritizationLogicnew(type);
+//						 
+//					 }
 				  
 				  
 				  
@@ -2459,26 +2400,35 @@ System.out.println(editname+"program has edited successfully");
 					 public void getvcustportid() throws Exception {
 						 Thread.sleep(2000);
 					
-//						    String port;
-//						   port= MarathonHelper.getContainerPort(p.getValue("marathonip"),"neon/infra/vcust");
-//						   String node=MarathonHelper.getContainerNode(p.getValue("marathonip"),"neon/infra/vcust");
-//						   System.out.println("node is "+node);
-////						   
-//						   System.out.println("port is "+port);
-//						   String url=node.concat(".flytxt.com:"+port);
-//						   System.out.println("url is"+url);
-//						   
-//						   driver.get("http://"+url);
-						   driver.get("https://vcust.infra.neon");
-						   Thread.sleep(2000);
+					    String port;
+						   port= MarathonHelper.getContainerPort(p.getValue("marathonip"),"neon/infra/vcust");
+						   String node=MarathonHelper.getContainerNode(p.getValue("marathonip"),"neon/infra/vcust");
+						   System.out.println("node is "+node);
 						   
+						   System.out.println("port is "+port);
+						   String url=node.concat(".flytxt.com:"+port);
+						   System.out.println("url is"+url);
+						   
+						   driver.get("http://"+url);
+						   driver.navigate().refresh();
+						   Thread.sleep(4000);
+						   System.out.println("inside vcust");
+						   System.out.println(driver.getCurrentUrl());
+						   int min=2*60000;
+						   Thread.sleep(min);
+					   try{
+		
 						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='name']")).sendKeys(p.getValue("username"));
 						 Thread.sleep(2000);
 						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='pass']")).sendKeys(p.getValue("vcustpass"));
 						 Thread.sleep(2000);
 						 driver.findElement(By.xpath("/html/body/table//form[@action='/login']/table//input[@name='submit']")).click();
-						
-						 driver.findElement(By.xpath("//a[contains(.,'Inject')]")).click();
+						   }
+						   catch(Exception e){
+							   Thread.sleep(2000);
+							   jswait.loadClickTry("//table[@id='logo']//td[@class='menu']/table/tbody/tr/td[4]/a[@href='inject_mo.htm']");
+						   }
+						 
 						    
 					 }
 				  
@@ -2519,6 +2469,36 @@ System.out.println(editname+"program has edited successfully");
 						
 						    
 					 }
+				  
+				  
+				  
+				  
+				  @Then("^edit new rule without enddate from sheet \"([^\"]*)\" and offer \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+					public void editNewProgramRulewithoutenddate(String sheet1,String offerType,String touchpointList) throws Throwable {
+						Thread.sleep(4000);
+						
+				    	ExcelHelper programExcel = new ExcelHelper();
+				    	programExcel.setExcelFile("programInputData", sheet1);
+				    	ExcelHelper offerExcel = new ExcelHelper();
+				    	offerExcel.setExcelFile("offerInputData", offerType);
+				    	
+				 		String name = (String) programExcel.getCell(1,0);
+				 		String offer= (String) offerExcel.getCell(1,0);
+				 		Thread.sleep(4000);
+						//programPage.clickCreateProgramButton();
+				 		System.out.println(touchpointList);
+						programPage.editNewProgramRulewithoutenddate(sheet1,offer,name,SELENIUM_LIST_IM,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+						dateForCompare = new Date();
+						System.out.println(dateForCompare);
+						
+					}
+				  
+				  
+				  
+				  
+				  
+				  
+				  
 				  @Then("^navigate to the neon again$")
 					 public void navigateback() throws Exception {
 						 Thread.sleep(2000);
@@ -2544,11 +2524,30 @@ System.out.println(editname+"program has edited successfully");
 					    	offerExcel.setExcelFile("offerInputData", offerType);
 					    	
 					 		String name = (String) programExcel.getCell(1,0);
-					 		
+					 		String offer= (String) offerExcel.getCell(1,0);
 					 		Thread.sleep(4000);
 							//programPage.clickCreateProgramButton();
 					 		System.out.println(touchpointList);
-							programPage.createNewProgramRulewithenddate(name,SELENIUM_LIST_IM,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+							programPage.createNewProgramRulewithenddate(sheet1,offer,name,SELENIUM_LIST_IM,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+							dateForCompare = new Date();
+							System.out.println(dateForCompare);
+							
+						}
+					 @Then("^create new rule without enddate from sheet \"([^\"]*)\" and offer \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+						public void createNewProgramRulewithoutenddate(String sheet1,String offerType,String touchpointList) throws Throwable {
+							Thread.sleep(4000);
+							
+					    	ExcelHelper programExcel = new ExcelHelper();
+					    	programExcel.setExcelFile("programInputData", sheet1);
+					    	ExcelHelper offerExcel = new ExcelHelper();
+					    	offerExcel.setExcelFile("offerInputData", offerType);
+					    	
+					 		String name = (String) programExcel.getCell(1,0);
+					 		String offer= (String) offerExcel.getCell(1,0);
+					 		Thread.sleep(4000);
+							//programPage.clickCreateProgramButton();
+					 		System.out.println(touchpointList);
+							programPage.createNewProgramRule(sheet1,offer,name,SELENIUM_LIST_IM,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
 							dateForCompare = new Date();
 							System.out.println(dateForCompare);
 							
@@ -2610,7 +2609,7 @@ System.out.println(editname+"program has edited successfully");
 													str.append(":");
 													str.append("8092");
 													eh.setExcelFile("touchpointInputData", touchpointSheet);
-													str.append("/ussd/authkey/"+p.getValue("ApiTouchpointauthkey")+"?msisdn="+number+"&sessionId=5599&type="+type+"&msg="+msg+"&cid="+cid+"");
+													str.append("/ussd/authkey/"+p.getValue("ussdTouchpointauthkey")+"?msisdn="+number+"&sessionId=5599&type="+type+"&msg="+msg+"&cid="+cid+"");
 													System.out.println(str.toString());
 													Request req = new Request();
 													req.getRequest(str.toString(),"");
@@ -2722,20 +2721,12 @@ System.out.println(editname+"program has edited successfully");
 //												}
 //												}
 				
-												
-												
-												
-												
-												@Then("^verify the program condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
-												public void verify_the_condition_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
-											      eh.setExcelFile("bcInputData", bcSheet);
-											      String bcName =eh.getCellByColumnName("BC Name");
-											      
-											      
-											     
-											      //touchpointPage.verifyEventOfTheprogram(event,bcName,camapignName);
-											     
-												}
+@Then("^verify the program condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
+public void verify_the_condition_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
+eh.setExcelFile("bcInputData", bcSheet);
+String bcName =eh.getCellByColumnName("BC Name");
+//touchpointPage.verifyEventOfTheprogram(event,bcName,camapignName);
+}
 												
 												
 												
@@ -2781,7 +2772,7 @@ System.out.println(editname+"program has edited successfully");
 													CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 													customerProfilePage.clickEventTypesCheckBox();
 													customerProfilePage.clickEventTypesCheckBox();
-													customerProfilePage.clickFulfillmentSuccessCheckBox();
+													customerProfilePage.clickConversionEventCheckBox();
 													customerProfilePage.clickSelectEventApplyButton();
 													Thread.sleep(2000);
 													String rulename = (String) ruleExcel.getCell(1, 0);
@@ -2838,121 +2829,342 @@ System.out.println(editname+"program has edited successfully");
 												}
 												
 												
-//												  @Then("^verify rule view after edit in IM from sheet \"([^\"]*)\" and product \"([^\"]*)\"$")
-//													 public void verifyRuleviewaftereditFromSheetim(String sheet,String sheet2) throws Exception {
-//														 Thread.sleep(2000);
-//														 ExcelHelper programExcel = new ExcelHelper();
-//														    eh.setExcelFile("ruleInputData",sheet);
-//															String name = (String) eh.getCell(1, 0);
-//															programExcel.setExcelFile("productInputData", sheet2);
-//															
-//															String product=(String) programExcel.getCell(1, 0);
-//														    
-														 
-														 
-							//						 }												
-												  @Then("^verify accept api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
-													public void verifyacceptApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
-														StringBuilder postBody = new StringBuilder();
-														postBody.append("{\"event\":[\r\n" + 
-																"{ \"id\":\"104\", \"type\":\"POST\", \"value\":\"");
-														eh.setExcelFile("ruleInputData", ruleSheet);
-														int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
-														System.out.println(ruleId);
-														postBody.append(ruleId);
-														postBody.append("\", \"date\":\"");
-														Date now = new Date();
-														Calendar calendar = Calendar.getInstance();
-														int min = calendar.get(Calendar.MINUTE);
-														now.setMinutes(min+2);
-														String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);
-														postBody.append(timeStamp);
-														postBody.append(" +0530\" }");
-														postBody.append("]}");
-														System.out.println(postBody.toString());
-														StringBuilder str = new StringBuilder();
-														str.append("http://");
-														MarathonHelper m = new MarathonHelper();
-														str.append(p.getValue("nginxIp"));
-														str.append(":");
-														str.append("8092");
-														eh.setExcelFile("touchpointInputData", touchpointSheet);
-														str.append("/rest/authkey/"+"selenium"+"/msisdn/"+number+"/kpi/events");
-														System.out.println(str.toString());
-														Request req = new Request();
-														String resp=req.postRequeststring(str.toString(), postBody.toString());
-														
-														String code=resp.substring(0, 3);
-														System.out.println(code);
-														assertEquals("406",code);
-													}
-												
-												
-												
-												
-												  @Then("^verify get-offer api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
-													public void verifygetOfferApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
-														StringBuilder str = new StringBuilder();
-														str.append("http://");
-														MarathonHelper m = new MarathonHelper();
-														
-														str.append(p.getValue("nginxIp"));
-														str.append(":");
-														str.append("8092");
-														eh.setExcelFile("touchpointInputData", touchpointSheet);
-														str.append("/rest/authkey/"+p.getValue("ApiTouchpointauthkey")+"/msisdn/"+number+"/offers");
-														System.out.println(str.toString());
-														Request req = new Request();
-														String resp=req.getRequeststring(str.toString(),"");
-														System.out.println("response is "+resp);
-														offerRecommended = req.responseString;
-														System.out.println("this is the response"+req.responseString);
-														eh.setExcelFile("ruleInputData", ruleSheet);
-														SQLHandler sql = new SQLHandler();
-														int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
-//														Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
-														
 												  
-												  }
+																								
+@Then("^verify accept api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
+public void verifyacceptApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
+StringBuilder postBody = new StringBuilder();
+postBody.append("{\"event\":[\r\n" + 
+"{ \"id\":\"104\", \"type\":\"POST\", \"value\":\"");
+eh.setExcelFile("ruleInputData", ruleSheet);
+int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
+System.out.println(ruleId);
+postBody.append(ruleId);
+postBody.append("\", \"date\":\"");
+Date now = new Date();
+Calendar calendar = Calendar.getInstance();
+int min = calendar.get(Calendar.MINUTE);
+//now.setMinutes(min+2);
+String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+postBody.append(timeStamp);
+postBody.append(" +0530\" }");
+postBody.append("]}");
+System.out.println(postBody.toString());
+StringBuilder str = new StringBuilder();
+str.append("http://");
+str.append(p.getValue("nginxIp"));
+str.append(":");
+str.append("8092");
+eh.setExcelFile("touchpointInputData", touchpointSheet);
+str.append("/rest/authkey/"+"selenium"+"/msisdn/"+number+"/kpi/events");
+System.out.println(str.toString());
+Request req = new Request();
+String resp=req.postRequeststring(str.toString(), postBody.toString());
+String code=resp.substring(0, 3);
+}
 												
 												
 												
 												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-				
+@Then("^verify get-offer api-server for \"([^\"]*)\" with touchpoint \"([^\"]*)\" and rule \"([^\"]*)\"$")
+public void verifygetOfferApiServerForNumber(String number,String touchpointSheet,String ruleSheet) throws Throwable {
+StringBuilder str = new StringBuilder();
+str.append("http://");
+str.append(p.getValue("nginxIp"));
+str.append(":");
+str.append("8092");
+eh.setExcelFile("touchpointInputData", touchpointSheet);
+str.append("/rest/authkey/"+p.getValue("ApiTouchpointauthkey")+"/msisdn/"+number+"/offers");
+System.out.println(str.toString());
+Request req = new Request();
+String resp=req.getRequeststring(str.toString(),"");
+System.out.println("response is "+resp);
+offerRecommended = req.responseString;
+System.out.println("this is the response"+req.responseString);
+eh.setExcelFile("ruleInputData", ruleSheet);
+SQLHandler sql = new SQLHandler();
+int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
+//Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
 }
 
+@Then("^add program data from sheet \"([^\"]*)\" and offer \"([^\"]*)\" to row \"([^\"]*)\"$")
+public void addProgramNRuleDataFromSheet(String sheet,String offertype,int row) throws InterruptedException, Exception {
+ExcelHelper programExcel = new ExcelHelper();
+ExcelHelper ruleExcel = new ExcelHelper();
+ExcelHelper offerExcel = new ExcelHelper();
+eh.setExcelFile("programInputData",sheet);
+programExcel.setExcelFile("IMdata",sheet);
+offerExcel.setExcelFile("offerInputData",offertype);
+ruleExcel.setExcelFile("ruleInputData", sheet);
+String programname = (String) eh.getCell(1,0);
+String rulename = (String) ruleExcel.getCell(1,0);
+String offername = (String) offerExcel.getCell(1,0);
+programExcel.setCell(row, 0, programname);
+programExcel.setCell(row, 3, offername);
+if(offertype.equalsIgnoreCase("rechargeSMS")) {
+programExcel.setCell(row, 2, rulename);}
+else if(offertype.equalsIgnoreCase("STVSMS")) {
+programExcel.setCell(row, 1, rulename);
+}	
+}
+													 
+@Then("^add program data functionality from sheet \"([^\"]*)\" and offer \"([^\"]*)\"$")
+public void addProgramFromSheetfn(String sheet,String offertype) throws InterruptedException, Exception {
+ExcelHelper programExcel = new ExcelHelper();
+ExcelHelper ruleExcel = new ExcelHelper();
+ExcelHelper offerExcel = new ExcelHelper();
+eh.setExcelFile("programInputData",sheet);
+programExcel.setExcelFile("IMdatafunctionality",sheet);
+offerExcel.setExcelFile("offerInputData",offertype);
+ruleExcel.setExcelFile("ruleInputData", sheet);
+String programname = (String) eh.getCell(1,0);
+String rulename = (String) ruleExcel.getCell(1,0);
+String offername = (String) offerExcel.getCell(1,0);
+programExcel.setCell(1, 0, programname);
+if(offertype.equalsIgnoreCase("rechargeSMS")) {
+programExcel.setCell(1, 2, rulename);
+}
+else if(offertype.equalsIgnoreCase("rechargegobal")) {
+programExcel.setCell(1, 3, rulename);
+} else if(offertype.equalsIgnoreCase("usageBasedSMS")) {
+programExcel.setCell(1, 4, rulename);
+}else if(offertype.equalsIgnoreCase("STVSMS")) {
+programExcel.setCell(1, 1, rulename);
+}
+programExcel.setCell(1, 5, offername);
+}
+											
+@Then("^filter program and rule created from sheet \"([^\"]*)\" and offer \"([^\"]*)\" of excelfile \"([^\"]*)\"$")
+public void filterRuleCreatedFromSheet(String sheet,String offertype,String imExcel) throws Exception {
+ExcelHelper programExcel = new ExcelHelper();
+ExcelHelper ruleExcel = new ExcelHelper();
+ExcelHelper offerExcel = new ExcelHelper();
+offerExcel.setExcelFile("offerInputData",offertype);
+eh.setExcelFile("programInputData",sheet);
+programExcel.setExcelFile(imExcel,sheet);
+ruleExcel.setExcelFile("ruleInputData", sheet);
+String rulename = null;
+String programname = (String) programExcel.getCell(1,0);
+if(offertype.equalsIgnoreCase("rechargeSMS")) {
+rulename = (String) programExcel.getCell(1,2);}
+else if(offertype.equalsIgnoreCase("rechargegobal")) {
+rulename = (String) programExcel.getCell(1,3);
+																
+} else if(offertype.equalsIgnoreCase("usageBasedSMS")) {
+rulename = (String) programExcel.getCell(1,4);
+}else if(offertype.equalsIgnoreCase("STVSMS")) {
+rulename = (String) programExcel.getCell(1,1);
+}
+eh.setCell(1, 0, programname);
+ruleExcel.setCell(1, 0, rulename);
+}
+													 
+													 
+//@Then("^edit new rule from sheet \"([^\"]*)\" and offer \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+//public void editNewRuleWithFromSheet(String sheet1,String offerType,String touchpointList) throws Throwable {
+//Thread.sleep(4000);
+//ExcelHelper programExcel = new ExcelHelper();
+//programExcel.setExcelFile("programInputData", sheet1);
+//ExcelHelper offerExcel = new ExcelHelper();
+//offerExcel.setExcelFile("offerInputData", offerType);
+//String name = (String) programExcel.getCell(1,0);
+//String offer= (String) offerExcel.getCell(1,0);
+//Thread.sleep(4000);
+////programPage.clickCreateProgramButton();
+//System.out.println(touchpointList);
+//programPage.createNewProgramRule(sheet1,offer,name,SELENIUM_LIST_IM,touchpointList,offerExcel.getCellByColumnName("Offer Type"));
+//
+//}								
+												
+
+@Then("^verify condition (.*) is persisted with offer from sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\" and rule from sheet \"([^\"]*)\"$")
+public void verify_condition_is_persisted_with_offer_from_sheet_and_touchpoint_from_sheet_and_rule_from_sheet(String event,String offerSheet, String tpSheet, String ruleSheet) throws Throwable {												
+eh.setExcelFile("offerInputData", offerSheet);	
+String offerName=eh.getCellByColumnName("Offer Name");
+eh.setExcelFile("touchpointInputData", tpSheet);
+String tpName=(String) eh.getCell(1, 0);
+eh.setExcelFile("ruleInputData",ruleSheet);
+String RuleName=(String) eh.getCell(1, 0);
+programPage.verifyIMEventInCustomerProfile(event,offerName,tpName,RuleName);											
+													 												
+}
+																							
+@Then("^Customercare offer accept$")
+public void customercareofferaccept() throws Exception {
+Thread.sleep(2000);
+jswait.loadClick("//paper-button[contains(.,'Accept')]");
+Thread.sleep(2000);
+jswait.loadClick("(//paper-button[contains(.,'Yes')])[1]");
+Thread.sleep(2000);
+driver.navigate().refresh();
+Thread.sleep(4000);
+jswait.loadClick("//div[@class='tab-content style-scope paper-tab'][contains(.,'History')]");
+String status=jswait.getTextFormElement("(//span[@title='Accepted']//following::data-table-cell[2])[1]");
+System.out.println(status);
+Thread.sleep(2000);
+Assert.assertEquals("Accepted, Not Converted",status);
+}			
+													 
+//@Then("^add program data regression from sheet \"([^\"]*)\"$")
+//public void addProgramFromSheet(String sheet) throws InterruptedException, Exception {
+//ExcelHelper programExcel = new ExcelHelper();
+//ExcelHelper ruleExcel = new ExcelHelper();
+//eh.setExcelFile("programInputData",sheet);
+//programExcel.setExcelFile("programandruledata",sheet);
+//ruleExcel.setExcelFile("ruleInputData", sheet);
+//String programname = (String) eh.getCell(1,0);
+//String rulename = (String) ruleExcel.getCell(1,0);
+//programExcel.setCell(1, 0, programname);
+//programExcel.setCell(1, 1, rulename);
+// }
+
+											
+//@Then("^add product data to im from sheet \"([^\"]*)\"$")
+//public void addProductFromSheet(String sheet) throws InterruptedException, Exception {
+//ExcelHelper programExcel = new ExcelHelper();
+//eh.setExcelFile("productInputData",sheet);
+//programExcel.setExcelFile("productInputData","improduct");
+//String productname = (String) eh.getCell(1,0);
+//programExcel.setCell(1, 0, productname);
+//																
+//}
+														
+												
+@Then("^verify timeout condition (.*) is persisted with offer from sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\" and rule from sheet \"([^\"]*)\"$")
+public void verify_timeout_condition_is_persisted_with_offer_from_sheet_and_touchpoint_from_sheet_and_rule_from_sheet(String event,String offerSheet, String tpSheet, String ruleSheet) throws Throwable {												
+eh.setExcelFile("offerInputData", offerSheet);	
+String offerName=eh.getCellByColumnName("Offer Name");
+eh.setExcelFile("touchpointInputData", tpSheet);
+String tpName=(String) eh.getCell(1, 0);
+eh.setExcelFile("ruleInputData",ruleSheet);
+String RuleName=(String) eh.getCell(1, 0);
+programPage.verifyIMEventInCustomerProfiletimeout(event,offerName,tpName,RuleName);											
+}
+												
+												
+												
+												
+												
+												
+//#####################################
+														 
+@Then("^\"([^\"]*)\" of im program or rule$")
+public void imOptionView(String optionsAvailable) throws Throwable {
+commonObjects.clickOptionsIcon();
+switch(optionsAvailable) {
+case "view rule":
+jswait.loadClick("(//iron-icon[@icon='icons:visibility'])[1]/..)");
+case "delete rule" :
+
+case "edit rule" :
+	jswait.loadClick("(//iron-icon[@icon='icons:create'])[1]/..)");
+
+}	
+}
+@Then("^filter rule from sheet \"([^\"]*)\"$")
+public void filter_rule_from_sheet(String ruleSheet) throws Throwable {
+	eh.setExcelFile("ruleInputData", ruleSheet);
+	String ruleName=(eh.getCell(1, 0).toString());
+	Thread.sleep(10000);
+//	jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']");
+commonObjects.enterFilterFormname(ruleName);
+//Thread.sleep(2000);
+//commonObjects.clickFilterResetButton();
+//commonObjects.clickFilterIcon();
+//Thread.sleep(2000);
+//commonObjects.enterFilterFormname(ruleName);
+commonObjects.clickFilterApplyButton();
+}
+
+
+@Then("^edit the rule from sheet \"([^\"]*)\" and product from sheet \"([^\"]*)\" and offer from sheet \"([^\"]*)\"  and touchpoint from sheet \"([^\"]*)\"$")
+public void edit_the_rule_from_sheet_and_product_from_sheet_and_offer_from_sheet(String ruleSheet, String productSheet, String offerSheet,String tpSheet) throws Throwable {
+	eh.setExcelFile("ruleInputData", ruleSheet);
+	String ruleName=(eh.getCell(1, 0).toString())+"_edited";
+	eh.setExcelFile("offerInputData", offerSheet);
+	String offerType=eh.getCellByColumnName("Offer Type");
+	programPage.editIMRule(ruleName,SELENIUM_LIST_IM,productSheet,offerType,tpSheet);
+
+}
+
+
+@Then("^verify the edited changes of the rule from sheet \"([^\"]*)\" and product from sheet \"([^\"]*)\" and offer from sheet \"([^\"]*)\" and touchpoint from sheet \"([^\"]*)\"$")
+public void verifyEditedChangesInRule(String ruleSheet, String productSheet, String offerSheet,String tpSheet) throws Throwable {
+eh.setExcelFile("ruleInputData", ruleSheet);
+String ruleName=(eh.getCell(1, 0).toString())+"_edited";
+eh.setExcelFile("productInputData", productSheet);
+String productName=eh.getCell(1, 0).toString();
+eh.setExcelFile("offerInputData", offerSheet);
+String offerName=eh.getCellByColumnName("Offer Name");
+eh.setExcelFile("touchpointInputData", offerSheet);
+String tpName=eh.getCell(1, 0).toString();
+programPage.verifyRuleviewFromSheet(ruleName, productName,offerName,tpName);
+
+}
+
+@Then("^\"([^\"]*)\" rule$")
+public void rule(String saveActivate) throws Throwable {
+if(saveActivate.equalsIgnoreCase("save")) {
+	   jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+	   programPage.confirmProgramEditSave();
+   }
+   
+   else {
+	   programPage.programactivatebtn();
+	   programPage.programconfirmactivateyes();
+   }
+	   
+   
+}
+
+@Then("^filter condition (.*) rule from sheet \"([^\"]*)\"$")
+public void filter_condition_edited_rule_from_sheet(String condition,String ruleSheet) throws Throwable {
+	eh.setExcelFile("ruleInputData", ruleSheet);
+	String ruleName=(eh.getCell(1, 0).toString());
+	switch (condition) {
+	case "edited" :
+		ruleName=ruleName+"_edited";
+		
+	case "copy" :
+		ruleName=ruleName+"_Copy";
+	}
+    commonObjects.clickFilterIcon();
+    filterWorkaround(ruleName);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

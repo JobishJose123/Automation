@@ -1463,5 +1463,19 @@ public void edit_the_campaign_template_with_target_condition(String condition) t
 public void verify_campaign_template_edited_(String condition) throws Exception{
 	campaignObjects.verifyCampaignTemplateTaregetCondition(condition);
 }
+@Then("^add campaign from sheet \"([^\"]*)\" to sheet \"([^\"]*)\" and row \"([^\"]*)\"$")
+public void add_campaign_from_sheet_to_sheet_and_row(String campaignSheet, String campaignStorageSheet, int row) throws Throwable {
+	eM.setExcelFile("campaignInputData", campaignSheet);
+	String CampaignName= eM.getCellByColumnName("Campaign Name");
+	campaignObjects.addCampaignDetails(CampaignName,campaignStorageSheet,row);
+}
+
+@Then("^filter the campaign from sheet \"([^\"]*)\" from row \"([^\"]*)\" and column \"([^\"]*)\" and write in sheet \"([^\"]*)\"$")
+public void filter_the_campaign_from_sheet_from_row_and_column_and_write_in_sheet(String campaignStorageSheet, int row, int col, String campaignSheet) throws Throwable {
+	eM.setExcelFile("BambooBuildDetails", campaignStorageSheet);
+	String campaignName=(String) eM.getCell(row, col);
+	eM.setExcelFile("campaignInputData", campaignSheet);
+	eM.setCell("Campaign Name", campaignName);
+}
 }
 

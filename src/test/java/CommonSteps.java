@@ -1,14 +1,9 @@
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.security.GeneralSecurityException;
-
-import org.openqa.selenium.By;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-
 import baseClasses.CalenderUtility;
 import baseClasses.ExcelHelper;
 import baseClasses.GoogleSpreadsheetImpl;
@@ -23,7 +18,7 @@ import pageObjetcs.CustomerProfilePage;
 import pageObjetcs.LandingPageObjects;
 import pageObjetcs.LoginPageObjects;
 import pageObjetcs.RegistrationListPage;
-import stepDefinitions.LoginPageSteps;
+
 
 public class CommonSteps extends Init {
 	JSWaiter jswait = new JSWaiter();
@@ -114,18 +109,17 @@ public class CommonSteps extends Init {
 	
 	@Given("^login$")
     public void loginuser() throws Exception {
-        
-		 driver.get("http://"+p.getValue("env"));
-		 Thread.sleep(2000);
-		 loginPage.login(p.getValue("username"), p.getValue("password"));
-		 
-		 //handle robox
-//		 try{
-//			 jswait.loadClick("//body[@class='fullbleed layout vertical']");
-//		 }
-//		 catch (Exception e) {
-//			 System.out.println("Robob x popup off....");
-//		 }
+     driver.get("http://"+p.getValue("env"));
+	 Thread.sleep(10000);
+     loginPage.login(p.getValue("username"), p.getValue("password"));
+	 Thread.sleep(5000);
+	 try {
+		 driver.switchTo().alert().dismiss();
+	 }
+	 catch(Exception e) {
+		 System.out.println("robox popup not found");
+	 }
+	
 
     }
 	@Then("^logout")
@@ -250,7 +244,7 @@ public class CommonSteps extends Init {
 	@Then("^check previous step and pass this$")
 	public void checkPrevousScenarioAndPassScenario() throws Exception
 	{
-		Assert.assertTrue(passScenario==1, "Previous condition failed, so this scenario fails");
+		Assert.assertTrue("Previous condition failed, so this scenario fails", passScenario==1);
 		passScenario = 0;
 	}
 	@Then("^navigate to offers")
@@ -499,6 +493,22 @@ public class CommonSteps extends Init {
 		commonObjetcs.createStreamingAttr(attrName,description,value1,value2);
 	}
 	
+	@Then("^create a streaming attribute from sheet \"([^\"]*)\" with route \"([^\"]*)\"$")
+	public void create_a_streaming_attribute_from_sheet_with_route(String streamAttrSheet, String route) throws Throwable {
+		ExcelHelper eh= new ExcelHelper();
+		eh.setExcelFile("streamingAttribute", streamAttrSheet);
+		String streamAttrName=(String) eh.getCell(1, 0);
+		streamAttrName=RandomNameGenerator.getRandomName(streamAttrName);
+		eh.setCell(1, 0,"streamAttrName");
+		String description=(String)eh.getCell(1, 1);
+		String value1=(String) eh.getCell(1, 2);
+		String value2=(String)eh.getCell(1,3);
+		commonObjetcs.createStreamingAttr(streamAttrName,description,value1,value2,route);
+		
+		
+	}
+	
+	
 	@Then("^verify streaming attribute from sheet \"([^\"]*)\" is created$")
 	public void verify_streaming_attribute_from_sheet_is_created(String streamingAttrSheet) throws Throwable {
 		eh.setExcelFile("streamingAttribute", streamingAttrSheet);
@@ -548,7 +558,10 @@ public class CommonSteps extends Init {
 	}
 
 	
-	
+	@Then("^navigate to digital plus modules$")
+	public void navigate_to_digital_plus() throws Exception{
+		commonObjetcs.DigitalPlusModules();
+	}
 	
 	
 	

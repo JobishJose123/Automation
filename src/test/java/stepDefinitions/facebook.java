@@ -2,6 +2,8 @@ package stepDefinitions;
 
 import static org.testng.Assert.assertEquals;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -38,46 +40,41 @@ public class facebook extends Init{
 	
 	@Then("^verify add facebook account option$")
 	public void verifyaddFacebookaccount() throws Exception {
-		boolean flag;
-		try {
-			
-	 flag=jswait.checkClickable(addFacebookaccount);
-	
+		boolean flag=false;
+		String currenturl=driver.getCurrentUrl();
+		currenturl=currenturl.replaceFirst("http", "https");
+		driver.get(currenturl);
+		Thread.sleep(10000);
+	flag=jswait.checkClickable(addFacebookaccount);
 	Exception facebook=new Exception("The account is already added");
-		}catch(Exception facebook) {
-	if(flag=true) {
+     if(flag==true) {
 		addFacebookaccount.click();
 		System.out.println("element is clickable");
 	}else {
 		System.out.println("element is not clickable");
 		 throw facebook;
-	}}
-	// Store the current window handle
+	}
+     
+ 
 	String winHandleBefore = driver.getWindowHandle();
-
-	// Perform the click operation that opens new window
-
-	// Switch to new window opened
+       System.out.println(winHandleBefore);
 	for(String winHandle : driver.getWindowHandles()){
 	    driver.switchTo().window(winHandle);
-	}
-
-	// Perform the actions on new window
-String title=driver.getTitle().toString();
-System.out.println(title);
+	    System.out.println(winHandle);
+	  driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+       String title=driver.getTitle().toString();
+       System.out.println(title);
 
 if(title.equals("Facebook")) {
 	System.out.println("passed");
+	driver.close();
+
 }else {
 	System.out.println("failed");
 }
-	// Close the new window, if that window no more required
-	driver.close();
 
-	// Switch back to original browser (first window)
+	}
 	driver.switchTo().window(winHandleBefore);
-
-	// Continue with original browser (first window)
 		
 	}
 	

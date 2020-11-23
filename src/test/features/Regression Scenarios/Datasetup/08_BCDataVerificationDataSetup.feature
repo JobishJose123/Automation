@@ -1,4 +1,4 @@
-#Author: mallikharjuna.ankem@flytxt.com
+ #Author: mallikharjuna.ankem@flytxt.com
 #Keywords Summary :
 #Feature: List of scenarios.
 #Scenario: Business rule through list of steps with arguments.
@@ -20,24 +20,24 @@
 Feature: Data set up for edit and copy BCs 
 
 ###Create Product class, campaign category, product
-@NDX-CreateProductCCBC @initBrowser @closeBrowser
-Scenario: Verify BC targeting using all types of target conditions with one time BC 
-	Given login 
-	Then navigate to configuration management 
-	Then naviagte to product classes 
-	Then create product class and number attribute from "TestProductClass" 
-	Then navigate to landing page 
-	Then navigate to configuration management 
-	Then navigate to campaign categories 
-	Then create new campaign category from sheet "CampaignCategory" 
-	Then navigate to landing page 
-	Then navigate to precision marketer 
-	Then navigate to offer management 
-	Then navigate to products 
-	Then navigate to product class "TestProductClass" 
-	Then click create new product button 
-	Then create product with attributes from sheet "fullDetails" 
-	Then wait for 4000 milliseconds 
+#@NDX-CreateProductCCBC @initBrowser @closeBrowser
+#Scenario: Verify BC targeting using all types of target conditions with one time BC 
+#	Given login 
+#	Then navigate to configuration management 
+#	Then naviagte to product classes 
+#	Then create product class and number attribute from "TestProductClass" 
+#	Then navigate to landing page 
+#	Then navigate to configuration management 
+#	Then navigate to campaign categories 
+#	Then create new campaign category from sheet "CampaignCategory" 
+#	Then navigate to landing page 
+#	Then navigate to precision marketer 
+#	Then navigate to offer management 
+#	Then navigate to products 
+#	Then navigate to product class "TestProductClass" 
+#	Then click create new product button 
+#	Then create product with attributes from sheet "fullDetails" 
+#	Then wait for 4000 milliseconds 
 	
 	##Create offers wil all channels for verifying BC with all channel and add to a catalog
 @NDX-CreateAllOffersForBC9 @initBrowser @closeBrowser
@@ -49,7 +49,7 @@ Scenario: Create offers with all channels for creating BC
 	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then create new offer from sheet "rechargeWAP" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
-	Then create new offer from sheet "rechargeEmail" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
+#	Then create new offer from sheet "rechargeEmail" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then create new offer from sheet "seedingWAPoffer" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then navigate to offer management
 	Then Navigate to Offer Catalogue 
@@ -57,7 +57,7 @@ Scenario: Create offers with all channels for creating BC
 	Then Add "rechargeSMS" offer to Offer Catalogue 
 	Then Add "SeedingSMS" offer to Offer Catalogue
 	Then Add "rechargeWAP" offer to Offer Catalogue 
-	Then Add "rechargeEmail" offer to Offer Catalogue
+#	Then Add "rechargeEmail" offer to Offer Catalogue
 	Then Add "seedingWAPoffer" offer to Offer Catalogue	
 	Then wait for 4000 milliseconds 
 	
@@ -88,6 +88,7 @@ Scenario: create one off bc with blackout always
 	Then save bc 
 	Then add the BC Data to "parallelRunBC" from BCsheet "one-offBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "rechargeSMS" condition "digitalPersonaGT15" inventory "BlackoutAlways" with string  oneoff  bc BlackoutAlways with condition: digitalPersonaGT15 
 	Then wait for 4000 milliseconds 
+	
 @BlckoutSeedOneoffbC @initBrowser @closeBrowser
 Scenario: create Seeding one off bc with blackout always 
 	Given login 
@@ -99,7 +100,8 @@ Scenario: create Seeding one off bc with blackout always
 	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "seedingoneoff" with "SeedingSMS" and inventory "BlackoutAlways" 
 	Then save bc 
 	Then add the BC Data to "parallelRunBC" from BCsheet "seedingoneoff" campaignname "campaignBC" campaign category "CampaignCategory" offer "SeedingSMS" condition "digitalPersonaGT15" inventory "BlackoutAlways" with string Seeding one off bc BlackoutAlways with condition: digitalPersonaGT15 
-	Then wait for 4000 milliseconds 
+	Then wait for 4000 milliseconds
+	 
 @BlckoutrecurringbC @initBrowser @closeBrowser
 Scenario: create recurring bc with blackout always 
 	Given login 
@@ -112,6 +114,8 @@ Scenario: create recurring bc with blackout always
 	Then save bc 
 	Then add the BC Data to "parallelRunBC" from BCsheet "recurringBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "rechargeSMS" condition "digitalPersonaGT15" inventory "BlackoutAlways" with string  recurring bc BlackoutAlways with condition: digitalPersonaGT15 
 	Then wait for 4000 milliseconds 
+	
+	
 @BlckoutSeedrecurringbC @initBrowser @closeBrowser
 Scenario: create Seeding recurring bc with blackout always 
 	Given login 
@@ -124,6 +128,7 @@ Scenario: create Seeding recurring bc with blackout always
 	Then save bc 
 	Then add the BC Data to "parallelRunBC" from BCsheet "seedingRecurringBC" campaignname "campaignBC" campaign category "CampaignCategory" offer "SeedingSMS" condition "digitalPersonaGT15" inventory "BlackoutAlways" with string recurring bc BlackoutAlways with condition: digitalPersonaGT15 
 	Then wait for 4000 milliseconds 
+	
 	#	***************OneperDay inventory *****************
 	
 @CreateCampaignoneperday @initBrowser @closeBrowser
@@ -135,6 +140,7 @@ Scenario: Verify BC targeting using all types of target conditions with one time
 	Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog" 
 	Then naigate to "campaignBC" campaign view broadcasts 
 	Then wait for 4000 milliseconds 
+	
 @OneperDayOneoffbC @initBrowser @closeBrowser
 Scenario: create one off bc with OneperDay 
 	Given login 
@@ -369,14 +375,14 @@ Scenario Outline: Create all type of bcs with <bcSheet> with <offerSheet> and <c
 	
 	Examples: 
 		|SavedSheet|bcSheet|campaignBC|campaignCategory|offerSheet|condition|creative|rewardTypeRule|
-#		|rewardBcs|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|onerulemultiplerewards|
-#		|rewardBcs|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|onerulemultiplerewards|
-#		|rewardBcs|TriggerOneoff|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup30|singlecreative|onerulemultiplerewards|
-#		|rewardBcs|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|onerulemultiplerewards|
-#		|rewardBcs|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup50|singlecreative|onerulemultiplerewards|
-#		|rewardBcs|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|onerulemultiplerewards|
-#		|rewardBcs|seedingRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup70|singlecreative|onerulemultiplerewards|
-#		|rewardBcs|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|onerulemultiplerewards|
+		|rewardBcs|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|onerulemultiplerewards|
+		|rewardBcs|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|onerulemultiplerewards|
+		|rewardBcs|TriggerOneoff|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup30|singlecreative|onerulemultiplerewards|
+		|rewardBcs|TriggerReccurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup40|singlecreative|onerulemultiplerewards|
+		|rewardBcs|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup50|singlecreative|onerulemultiplerewards|
+		|rewardBcs|seedingTriggerableBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup60|singlecreative|onerulemultiplerewards|
+		|rewardBcs|seedingRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup70|singlecreative|onerulemultiplerewards|
+		|rewardBcs|seedingTriggerableRecurringBC|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup80|singlecreative|onerulemultiplerewards|
 		|rewardBcs|recurringBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup10|singlecreative|oneruleonereward|
 		|rewardBcs|one-offBC|campaignBC|CampaignCategory|rechargeSMS|ageTargetGroup20|singlecreative|oneruleonereward|
 		|rewardBcs|seedingoneoff|campaignBC|CampaignCategory|SeedingSMS|ageTargetGroup50|singlecreative|oneruleonereward|
@@ -716,21 +722,7 @@ Scenario: Verify Creating the recurringBC
 	
 	
 #	=================================CREATION OF BC FOR PAUSE AND ABORT===============================================#
-	
-	
-@NDX-CreateOneoffBCForPause @initBrowser @closeBrowser 
-Scenario: Verify Creating the oneoff Bc to verify the functioning of Pause 
 
-	Given login 
-	When navigate to precision marketer 
-	Then navigate to life cycle marketing 
-	Then navigate to campaign category from sheet "campaignCategory" 
-	Then naigate to "campaignBC" campaign view broadcasts 
-	Then click create new broadcast button 
-	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBCForPause" with "rechargeSMS" 
-	Then save bc 
-	Then wait for 4000 milliseconds 
-	
 	
 	
 @NDX-CreateBCsForPauseAndAbort @initBrowser @closeBrowser 
@@ -740,8 +732,9 @@ Scenario Outline: Verify Creating the recurringBC to verify the functioning of P
 	When navigate to precision marketer 
 	Then navigate to life cycle marketing 
 	Then navigate to campaign category from sheet "campaignCategory" 
-	Then naigate to "campaignBC" campaign view broadcasts 
-	Then click create new broadcast button 
+	Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog" 
+	Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
 	Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "<bcSheet>" with "<offerSheet>" 
 	Then wait for 4000 milliseconds
 	Then save bc 
@@ -750,11 +743,11 @@ Scenario Outline: Verify Creating the recurringBC to verify the functioning of P
 	
 	Examples:
 	|bcSheet|offerSheet|row|
-##	|one-offBCForPause|rechargeSMS|1|
-#	|recurringBCForPause|rechargeSMS|2|
-#	|seedingRecurringBCForPause|SeedingWAPOffer|3|
-#	|seedingoneoffForPause|seedingWAPoffer|4|
-#	|TriggerOneoff|rechargeSMS|5|
+	|one-offBCForPause|rechargeSMS|1|
+	|recurringBCForPause|rechargeSMS|2|
+	|seedingRecurringBCForPause|SeedingWAPOffer|3|
+	|seedingoneoffForPause|seedingWAPoffer|4|
+	|TriggerOneoff|rechargeSMS|5|
 	|TriggerOneoff|seedingWAPoffer|6|
 	|TriggerReccurringBC|seedingWAPoffer|7|
 	|TriggerReccurringBC|rechargeSMS|8|
