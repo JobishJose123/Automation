@@ -3,92 +3,92 @@
 @IMFunctRegression
 Feature: IM functionality regression
 
-#@NDX-9991 @initBrowser  
-#Scenario: Verify the request processing through CC touchpoint
-#Given login
-#Then filter program and rule created from sheet "CCprogram" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
-#Then navigate to intent management
-#Then navigate to programs
-#Then choose program from sheet "CCprogram"
-#Then filter rule from sheet "CCprogram"
-#Then edit new rule without enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
-#Then wait until rule is picked
-#Then navigate to landing page
-#Then navigate to precision marketer
-#Then navigate to reports
-#Then navigate to customer support
-#Then search msisdn "9745081112"
-#Then Customercare offer accept
+@NDX-9991 @initBrowser  
+Scenario: Verify the request processing through CC touchpoint
+Given login
+Then filter program and rule created from sheet "CCprogram" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "CCprogram"
+Then filter rule from sheet "CCprogram"
+Then edit new rule without enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
+Then wait until rule is picked
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer support
+Then search msisdn "9745081112"
+Then Customercare offer accept
 
-#@NDX-9876 @initBrowser
-#Scenario: Verify recharge based conversion for customer care touchpoint
-#Given login
-##Then provide file in location "/usr/local/flytxt/selenium/seleniumConversion/" for trigger with csv file "conversionIM.csv"
-#Then navigate to precision marketer
-#Then navigate to reports
-#Then navigate to customer profile
-#Then search msisdn "9745081112"
-#Then click on events tab
-#Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
-#Then verify condition Conversion is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
-#     
-#@NDX-9852 @closeBrowser
-#Scenario: Verify fulfillment processing for recharge offer with customer care touch point.
-#Then verify condition Fulfillment Success is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
+@NDX-9876 @initBrowser
+Scenario: Verify recharge based conversion for customer care touchpoint
+Given login
+Then provide file in location "/usr/local/flytxt/selenium/seleniumConversion/" for trigger with csv file "conversionIM.csv"
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9745081112"
+Then click on events tab
+Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
+Then verify condition Conversion is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
+     
+@NDX-9852 @closeBrowser
+Scenario: Verify fulfillment processing for recharge offer with customer care touch point.
+Then verify condition Fulfillment Success is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
 
 
-#@NDX-9990 @initBrowser @closeBrowser 
-#Scenario: Verify the request processing through API touchpoint
-#Given login
-#Then filter program and rule created from sheet "APIprogram" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
-#Then navigate to intent management
-#Then navigate to programs
-#Then choose program from sheet "APIprogram"
-#Then filter rule from sheet "APIprogram"
-#Then edit new rule without enddate from sheet "APIprogram" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointGR"
-#Then "activate" rule
-#Then filter rule from sheet "APIprogram"
-#Then wait until rule is picked
+@NDX-9990 @initBrowser @closeBrowser 
+Scenario: Verify the request processing through API touchpoint
+Given login
+Then filter program and rule created from sheet "APIprogram" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "APIprogram"
+Then filter rule from sheet "APIprogram"
+Then edit new rule without enddate from sheet "APIprogram" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointGR"
+Then "activate" rule
+Then filter rule from sheet "APIprogram"
+Then wait until rule is picked
 
-#@apihit @initBrowser @closeBrowser 
-#Scenario: api touchpoint hit
-#Given login
-#Then get-offer api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
-#Then verify accept api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
-#Then navigate to precision marketer
-#Then navigate to reports
-#Then navigate to customer profile
-#Then search msisdn "9745081104"
-#Then click on events tab
-#Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
+@apihit @initBrowser @closeBrowser 
+Scenario: api touchpoint hit
+Given login
+Then get-offer api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
+Then verify accept api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9745081104"
+Then click on events tab
+Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
     
 @NDX-9878 @initBrowser 
 Scenario: Verify the conversion of STV offer with API touch point.
 Given login
 Then provide file in location "/usr/local/flytxt/selenium/seleniumConversion/" for trigger with csv file "conversionIM.csv"
-#Then navigate to precision marketer
-#Then navigate to reports
-#Then navigate to customer profile
-#Then search msisdn "9745081104"
-#Then click on events tab
-#Then verify condition Conversion is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9745081104"
+Then click on events tab
+Then verify condition Conversion is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
     
-#@NDX-9856 @closeBrowser
-#Scenario: Verify fulfillment processing for recharge offer with API touch point.
-#Then verify condition Fulfillment Success is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
-#    
-#    
-#@NDX-9989 @initBrowser @closeBrowser
-#Scenario: Verfiy the request processing through USSD
-#Then filter program and rule created from sheet "USSDprogram" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
-#Given login
-#Then navigate to intent management
-#Then navigate to programs
-#Then choose program from sheet "USSDprogram"
-#Then filter rule from sheet "USSDprogram"
-#Then edit new rule without enddate from sheet "USSDprogram" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
-#Then wait until rule is picked
-#Then "activate" rule
+@NDX-9856 @closeBrowser
+Scenario: Verify fulfillment processing for recharge offer with API touch point.
+Then verify condition Fulfillment Success is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
+    
+    
+@NDX-9989 @initBrowser @closeBrowser
+Scenario: Verfiy the request processing through USSD
+Then filter program and rule created from sheet "USSDprogram" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "USSDprogram"
+Then filter rule from sheet "USSDprogram"
+Then edit new rule without enddate from sheet "USSDprogram" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
+Then wait until rule is picked
+Then "activate" rule
 
     
 @USSDHIT @initBrowser @closeBrowser
@@ -716,6 +716,57 @@ Then verify condition Conversion is persisted with offer from sheet "usageBasedS
 @NDX-9853 @closeBrowser
 Scenario: fulfilment for sms
 Then verify condition Fulfillment Success is persisted with offer from sheet "usageBasedSMS" and touchpoint from sheet "triggerTouchpoint" and rule from sheet "triggerrprogram"
+
+################################## falcon ##############
+@NDX-test  @initBrowser
+Scenario: verify the real time and recharge track service
+Given login
+Then filter program and rule from sheet "programRuleDetails" row "1" and add to sheet "triggerrprogram"
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "triggerrprogram"
+Then filter rule from sheet "triggerrprogram"
+Then edit new rule without enddate from sheet "triggerrprogram" and offer "rechargeSMS" and touchpoint from sheet "rteTrigger_tp"
+Then wait until rule is picked
+Then wait for 1 minutes
+Then post the api call for msisdn "919745081170" with streaming attribute from sheet "rteService"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      
 ############################################ PRIORITIZATION OF OFFER (LIFO) VERIFICATION ################################### 
 #

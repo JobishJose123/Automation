@@ -7,13 +7,12 @@ Feature: Product class and Product creation
 @NX-1222 @initBrowser  
 Scenario: Products Grid: Create Prodcut from Productclass other than prepaid telecom 
 Given login
-#Then navigate to configuration management
-#Then naviagte to product classes
-#Then create product class and number attribute from "TestProductClass"
+Then navigate to configuration management
+Then naviagte to product classes
+Then create product class and number attribute from "TestProductClass"
 #Then save "productClassInputData" data to spreadsheet from "TestProductClass" with string product class with testProductClass
-#Then navigate to landing page
+Then navigate to landing page
 Then navigate to precision marketer
-Then wait for 1 minutes
 Then navigate to offer management
 Then navigate to products
 Then navigate to product class "TestProductClass"
@@ -45,7 +44,6 @@ Then create product class without any attributes from "TestProductClass"
 #Then save "productClassInputData" data to spreadsheet from "TestProductClass" with string product class with testProductClass
 Then navigate to landing page
 Then navigate to precision marketer
-Then wait for 1 minutes
 Then navigate to offer management
 Then navigate to products
 Then navigate to product class "TestProductClass"

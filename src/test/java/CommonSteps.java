@@ -109,7 +109,7 @@ public class CommonSteps extends Init {
 	
 	@Given("^login$")
     public void loginuser() throws Exception {
-     driver.get("http://"+p.getValue("env"));
+     driver.get("https://"+p.getValue("env"));
 	 Thread.sleep(10000);
      loginPage.login(p.getValue("username"), p.getValue("password"));
 	 Thread.sleep(5000);
@@ -563,17 +563,60 @@ public class CommonSteps extends Init {
 		commonObjetcs.DigitalPlusModules();
 	}
 	
+	@Then("^navigate to connectors$")
+	public void navigate_to_connectors() throws Throwable {
+		commonObjetcs.navigateToConnector();
+	}
+
+	@Then("^navigate to channel connector$")
+	public void navigate_to_channel_connector() throws Throwable {
+		commonObjetcs.navigatetToChannelConnector();
+	}
+
+	@Then("^navigate to http api connector$")
+	public void navigate_to_http_api_connector() throws Throwable {
+		commonObjetcs.navigatetToHttpConnector();
+	}
+
+	@Then("^click create new connector$")
+	public void click_create_new_connector() throws Throwable {
+		commonObjetcs.createNewConnector();
+	}
 	
 	
+	@Given("^login to webhook with username \"([^\"]*)\" and password \"([^\"]*)\"$")
+	public void login_to_webhook_with_username_and_password(String username, String password) throws Throwable {
+	 driver.get("https://webhook.site/control-panel");
+	 commonObjetcs.loginToWebhook(username,password);
+	}
+
+	@Then("^navigate to control panel$")
+	public void navigate_to_control_panel() throws Throwable {
+		commonObjetcs.webhookControlPanel();
+	}
+
+	@Then("^create new url from sheet \"([^\"]*)\"$")
+	public void create_new_url_from_sheet(String httpSheet) throws Throwable {
+           eh.setExcelFile("DigitalPlus", httpSheet);
+          String response= eh.getCellByColumnName("response");
+		commonObjetcs.createNewUrlInWebhook(response,httpSheet);
+	}
+
+	@Then("^copy the generated url to sheet \"([^\"]*)\"$")
+	public void copy_the_generated_url_to_sheet(String httpSheet) throws Throwable {
+		commonObjetcs.copyGeneratedUrl(httpSheet);
+         
+	}
+	
+	@Then("^create new http connector from sheet \"([^\"]*)\"$")
+	public void create_new_http_connector_from_sheet(String httpSheet) throws Throwable {
+	         eh.setExcelFile("DigitalPlus", httpSheet);
+	         String httpConnectorName=(String) eh.getCell(1,0);
+	         String  webhookUrl=eh.getCellByColumnName("url");
+	         commonObjetcs.createHttpConnector(httpSheet,httpConnectorName,webhookUrl);
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	}
 	
 	
 	

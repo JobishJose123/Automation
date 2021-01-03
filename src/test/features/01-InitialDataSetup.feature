@@ -226,6 +226,13 @@ Given login
 Then navigate to data foundation
 Then navigate to streaming attributes
 Then create a streaming attribute from sheet "rteService" with route "Real Time RTE Service"
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to configuration
+Then select triggers in configuration
+Then create new trigger "sel_rteTrigger" with streaming attribute from sheet "rteService"
+
+
 
 @NDX-realTimeReacharge @initBrowser
 Scenario: create a streaming attribute with real time rte

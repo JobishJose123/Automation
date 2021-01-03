@@ -3133,12 +3133,67 @@ public void filter_condition_edited_rule_from_sheet(String condition,String rule
 }
 
 
+@Then("^add program and rule from sheet \"([^\"]*)\" to column \"([^\"]*)\" of sheet \"([^\"]*)\"$")
+public void add_program_from_sheet_and_rule_from_sheet_to_column_of_sheet(String programRuleSheet, int row, String imDataSheet) throws Throwable {
+	eh.setExcelFile("ruleInputData", programRuleSheet);
+	String ruleName=(eh.getCell(1, 0).toString());
+	eh.setExcelFile("programInputData", programRuleSheet);
+	String ProgramName=(eh.getCell(1, 0).toString());
+	eh.setExcelFile("IMdatafunctionality", imDataSheet);
+	eh.setCell(row, 0, ProgramName);
+	eh.setCell(row, 1, ruleName);
+	
+}
 
 
+@Then("^filter program and rule from sheet \"([^\"]*)\" row \"([^\"]*)\" and add to sheet \"([^\"]*)\"$")
+public void filter_program_and_rule_from_sheet_row_and_add_to_sheet(String IMStorageSheet, int row, String programRuleSheet) throws Throwable {
+       eh.setExcelFile("IMdatafunctionality", IMStorageSheet);
+       String programName=(String) eh.getCell(row, 0);
+       String RuleName=(String) eh.getCell(row, 1);
+       eh.setExcelFile("programInputData", programRuleSheet);
+       eh.setCell(1, 0, programName);
+       eh.setExcelFile("ruleInputData", programRuleSheet);
+       eh.setCell(1, 0, RuleName);
 
 
+}
 
 
+@Then("^post the api call for msisdn \"([^\"]*)\" with streaming attribute from sheet \"([^\"]*)\"$")
+public void post_the_api_call_for_msisdn_with_streaming_attribute_from_sheet(String msisdn, String streamAttrSheet) throws Throwable {
+	eh.setExcelFile("streamingAttribute", streamAttrSheet);
+	String streamName=(String) eh.getCell(1, 0);
+	SQLHandler sql = new SQLHandler();
+	int streamID=sql.getStringOfQuery("select attriibute_id from ne_events where attribute_name like '"+streamName+"'");
+	StringBuilder postBody = new StringBuilder();
+	postBody.append("{\"event\":[\r\n" + 
+	"{ \"id\"");
+	postBody.append(streamID);
+	postBody.append("\",\"value\":10\"");
+	postBody.append("\", \"date\":\"");
+	Date now = new Date();
+	Calendar calendar = Calendar.getInstance();
+	int min = calendar.get(Calendar.MINUTE);
+	//now.setMinutes(min+2);
+	String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+	postBody.append(timeStamp);
+	postBody.append(" +0530\" }");
+	postBody.append("]}");
+	System.out.println(postBody.toString());
+	StringBuilder str = new StringBuilder();
+	str.append("http://");
+	str.append(p.getValue("nginxIp"));
+	str.append(":");
+	str.append("8092");
+	str.append("/rest/authkey/"+"selenium"+"/msisdn/"+msisdn+"/kpi/events");
+	System.out.println(str.toString());
+	Request req = new Request();
+	String resp=req.postRequeststring(str.toString(), postBody.toString());
+	
+
+
+}
 
 
 

@@ -282,8 +282,8 @@ public class TargetConditionObjects extends Init {
 				 @FindBy(xpath="(.//*[@id='conditionCard']/paper-button[2])[3]")
 				 private WebElement targetConditionSave3;
 		 
-		// @FindBy(xpath="")
-		// private WebElement ;
+		 @FindBy(xpath="//paper-item[contains(.,'Customer Address')]")
+		 private WebElement customerAddress;
 		// @FindBy(xpath="")
 		// private WebElement ;
 		// @FindBy(xpath="")
@@ -1073,6 +1073,15 @@ public class TargetConditionObjects extends Init {
 				jswait.loadClick(conditionIs);
 				jswait.loadSendKeys(isGreaterThanValue,value);
 				jswait.loadClick("(.//*[@id='conditionCard']/paper-button[2])[2]");
+			}
+			else if(event.equalsIgnoreCase("customerAddressPM")) {
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerProfileInfo);
+				jswait.loadClick(CustomerInsightFieldSelector);
+				jswait.loadClick(customerAddress);
+				jswait.loadClick(conditionIs);
+				jswait.loadSendKeys(isGreaterThanValue, "919491750750");
+				jswait.loadClick(targetConditionSave);
 			}
 			
 			else {

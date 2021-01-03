@@ -10,30 +10,30 @@ Feature: IM functionality migration
 Scenario: Verify recharge based conversion for migrated customer care touchpoint
 Given login
 Then filter program and rule created from sheet "CCprogram" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
-#Then navigate to intent management
-#Then navigate to programs
-#Then choose program from sheet "CCprogram"
-#Then filter rule from sheet "CCprogram"
-#Then edit new rule without enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
-#Then wait until rule is picked
-#Then navigate to landing page
-#Then navigate to precision marketer
-#Then navigate to reports
-#Then navigate to customer support
-#Then search msisdn "9745081112"
-#Then Customercare offer accept
-#
-#@NDX-cc @initBrowser
-#Scenario: conversion CC
-#Given login
-#Then provide file in location "/usr/local/flytxt/selenium/seleniumConversion/" for trigger with csv file "conversionIM.csv"
-#Then navigate to precision marketer
-#Then navigate to reports
-#Then navigate to customer profile
-#Then search msisdn "9745081112"
-#Then click on events tab
-#Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
-#Then verify condition Conversion is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "CCprogram"
+Then filter rule from sheet "CCprogram"
+Then edit new rule without enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
+Then wait until rule is picked
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer support
+Then search msisdn "9745081112"
+Then Customercare offer accept
+
+@NDX-cc @initBrowser
+Scenario: conversion CC
+Given login
+Then provide file in location "/usr/local/flytxt/selenium/seleniumConversion/" for trigger with csv file "conversionIM.csv"
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9745081112"
+Then click on events tab
+Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
+Then verify condition Conversion is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
 #
 #@NDX-10001 @closeBrowser
 #Scenario: Fulfillment of CC program
@@ -53,17 +53,17 @@ Then filter program and rule created from sheet "CCprogram" and offer "rechargeS
 #
 #
 #
-#@apihit @initBrowser @closeBrowser
-#Scenario: api touchpoint hit
-#Given login
-#Then navigate to precision marketer
-#Then navigate to reports
-#Then navigate to customer profile
-#Then search msisdn "9745081104"
-#Then click on events tab
-#Then get-offer api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
-#Then verify accept api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
-#Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
+@apihit @initBrowser @closeBrowser
+Scenario: api touchpoint hit
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9745081104"
+Then click on events tab
+Then get-offer api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
+Then verify accept api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
+Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
 #
 #@NDX-9867  @initBrowser
 #Scenario: conversion API program

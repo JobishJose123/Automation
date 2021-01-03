@@ -2008,7 +2008,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 		String statusOfBc = broadcastPageObjects.getTopBcStatus();
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
-		while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(130)) {
+		while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(20)) {
 			statusOfBc = broadcastPageObjects.getTopBcStatus();
 			System.out.println(statusOfBc);
 			Thread.sleep(3000);
@@ -3275,9 +3275,9 @@ enterDeliveryTabDetails(bc_type, sheet);
 		Thread.sleep(2000);
 		System.out.println("Delivery tab details entering ...");
 		broadcastPageObjects.editTheDeleveryTabDetails(workbook,sheet);
-		//broadcastPageObjects.clickCreateButton();
-		//Thread.sleep(2000);
-		//broadcastPageObjects.clickSaveButton();
+//		broadcastPageObjects.clickCreateButton();
+//		Thread.sleep(2000);
+//		broadcastPageObjects.clickSaveButton();
 	}
 
 	@Then("^Verify the Copied Bc in view page workbook \"([^\"]*)\" sheet \"([^\"]*)\" with \"([^\"]*)\" condition (.*)$")
@@ -3349,7 +3349,7 @@ public void verify_the_BC_notification_in_mail_from_workbook_and_sheet(String st
 		subjectOfEmail="Broadcast Finished - "+bcName;
 	}
 	
-	Date emailRecivedDate = emailHelper.getMailRecivedDate(fromAddrForBCNotification, subjectOfEmail);
+	Date emailRecivedDate = EmailHelper.getMailRecivedDate(fromAddrForBCNotification, subjectOfEmail);
 	System.out.println("email recived Date"+emailRecivedDate);
 	String bcStartDate=(eh.getCell(1, 11).toString()).substring(0, 20);
 	bcStartDate=bcStartDate.trim();
@@ -3674,7 +3674,7 @@ public void abort_bc_for_bctype(String bctype) throws Exception {
 	String bcName = (String) eM.getCell(1, 0);
 	bcName = RandomNameGenerator.getRandomName(bcName);
 	eM.setCell(1, 0, bcName);
-	String bc_type = (String) eM.getCell(1, 7);
+//	String bc_type = (String) eM.getCell(1, 7);
 	broadcastPageObjects.enterBasicDetailsOfBC(bcName,inventory,trigger);
 }
 
@@ -3703,6 +3703,12 @@ public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_a
 		System.out.println("inside non recurring bc s");
 	enterDeliveryTabDetails(bc_type,bcSheet);
 }
+}
+@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with connector from sheet \"([^\"]*)\"$")
+public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_with_connector_from_sheet(String offerSheet, String bcSheet, String connectorSheet) throws Throwable {
+	eM.setExcelFile("bcInputData", bcSheet);
+	String bc_type = (String) eM.getCell(1, 7);
+	broadcastPageObjects.selectOffer(offerSheet,bc_type,connectorSheet);
 }
 @Then("^add the BC Data to \"([^\"]*)\" from BCsheet \"([^\"]*)\" campaignname \"([^\"]*)\" campaign category \"([^\"]*)\" offer \"([^\"]*)\" condition \"([^\"]*)\"$")
 public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition(String bcDataSheet, String bcSheet, String campaignSheet, String campaignCategorySheet, String offerSheet, String condition) throws Exception {
@@ -3849,7 +3855,8 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
 					else
 						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");	
-				 }else if(count>=1) {
+				 }
+					 else if(count>=1) {
 					 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",0,0,0);	
 					 System.out.println(bcName+" one per day 2nd bc");
 				if(boolean1==true)
@@ -4125,7 +4132,7 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 						System.out.println("Trigger input data provided ");
 						Thread.sleep(480000);
 						System.out.println("Inside Trigger waiting for count updation.......");
-						Thread.sleep(480000);
+//						Thread.sleep(480000);
 							if (sheet.equals("rewardBcs")) {
 								System.out.println("RechargeBasedConversion");
 								System.out.println("Providing file for conversion ");
@@ -4207,7 +4214,8 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 						}
 					}
 					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
-				} else {
+				} 
+				else {
                     System.out.println("else block");
                     jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");
 					commonObjects.filterName(bcName);
@@ -4241,33 +4249,34 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 					lg.legacyTest();			
 					System.out.println("Removing file from conversion. .. .. ... .");
 					//deleteFileForConversion();
-					broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
-//					int deactivateConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
-//					System.out.println("Deactivate the JOb ... .. ." +deactivateConversionJob);
-						}else if(sheet.equals("UsageBasedConversion")){
-						System.out.println("UsageBasedConversion");
-						System.out.println("Providing file for conversion ");
-						//provideFileForConversion();
-						broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
-						lg.UsageConversionJob();
-						System.out.println("Removing file from conversion. .. .. ... .");
-						//deleteFileForConversion();
-						broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
+//					broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
+////					int deactivateConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
+////					System.out.println("Deactivate the JOb ... .. ." +deactivateConversionJob);
+//						}else if(sheet.equals("UsageBasedConversion")){
+//						System.out.println("UsageBasedConversion");
+//						System.out.println("Providing file for conversion ");
+//						//provideFileForConversion();
+//						broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
+//						lg.UsageConversionJob();
+//						System.out.println("Removing file from conversion. .. .. ... .");
+//						//deleteFileForConversion();
+//						broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
 //						int deactivateUsageConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
 //						System.out.println("Deactivate the JOb ... .. ." +deactivateUsageConversionJob);
 					}
 					}//if
 				}
 
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
                 System.out.println("Catch block");
-				System.out.println("Removing file from conversion. .. .. ... .");
-				//deleteFileForConversion();
-				broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
-				int deactivateConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
-				System.out.println("Deactivate the JOb ... .. ." +deactivateConversionJob);
-				int deactivateUsageConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
-				System.out.println("Deactivate the JOb ... .. ." +deactivateUsageConversionJob);
+//				System.out.println("Removing file from conversion. .. .. ... .");
+//				//deleteFileForConversion();
+//				broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
+//				int deactivateConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
+//				System.out.println("Deactivate the JOb ... .. ." +deactivateConversionJob);
+//				int deactivateUsageConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
+//				System.out.println("Deactivate the JOb ... .. ." +deactivateUsageConversionJob);
 			}//catch
 			}// after for loop if 
 
@@ -4640,10 +4649,6 @@ commonObjects.clickEditOption();
 @Then("^create the blackout period for the blackout rule and save$")
 public void create_the_blackout_period_for_the_blackout_rule_and_save() throws Throwable {
 	broadcastPageObjects.AddBlackoutPeriods();
-	
-	
-	
-	
 }
 	
 @Then("^verify offer from sheet \"([^\"]*)\" is displayed$")
@@ -4685,12 +4690,17 @@ public void filter_the_bc_from_sheet_and_add_data_in_sheet(String bcStorageSheet
 	eM.setCell("BC Name", bcName);
 	
 }                          
+@Then("^configure feedback for bc from sheet \"([^\"]*)\" and bctype \"([^\"]*)\"$")
+public void configure_feedback_for_bc_from_sheet_and_bctype(String bcSheet, String bcType) throws Throwable {	
+	broadcastPageObjects.configureFeedbackBC(bcSheet,bcType);
 	
 	
-	
-	
-	
-	
+}
+
+@Then("^click \"([^\"]*)\" for \"([^\"]*)\" for bctype \"([^\"]*)\"$")
+public void click_for_for_bctype(String optionToClick, String bcToView, String bcType) throws Throwable {
+	broadcastPageObjects.BCOptionToClick(optionToClick,  bcToView,  bcType);
+}
 	
 	
 }//class

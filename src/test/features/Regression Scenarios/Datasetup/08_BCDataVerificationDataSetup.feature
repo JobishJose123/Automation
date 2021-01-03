@@ -19,25 +19,25 @@
 @BCVerificationDataSetup 
 Feature: Data set up for edit and copy BCs 
 
-###Create Product class, campaign category, product
-#@NDX-CreateProductCCBC @initBrowser @closeBrowser
-#Scenario: Verify BC targeting using all types of target conditions with one time BC 
-#	Given login 
-#	Then navigate to configuration management 
-#	Then naviagte to product classes 
-#	Then create product class and number attribute from "TestProductClass" 
-#	Then navigate to landing page 
-#	Then navigate to configuration management 
-#	Then navigate to campaign categories 
-#	Then create new campaign category from sheet "CampaignCategory" 
-#	Then navigate to landing page 
-#	Then navigate to precision marketer 
-#	Then navigate to offer management 
-#	Then navigate to products 
-#	Then navigate to product class "TestProductClass" 
-#	Then click create new product button 
-#	Then create product with attributes from sheet "fullDetails" 
-#	Then wait for 4000 milliseconds 
+##Create Product class, campaign category, product
+@NDX-CreateProductCCBC @initBrowser @closeBrowser
+Scenario: Verify BC targeting using all types of target conditions with one time BC 
+	Given login 
+	Then navigate to configuration management 
+	Then naviagte to product classes 
+	Then create product class and number attribute from "TestProductClass" 
+	Then navigate to landing page 
+	Then navigate to configuration management 
+	Then navigate to campaign categories 
+	Then create new campaign category from sheet "CampaignCategory" 
+	Then navigate to landing page 
+	Then navigate to precision marketer 
+	Then navigate to offer management 
+	Then navigate to products 
+	Then navigate to product class "TestProductClass" 
+	Then click create new product button 
+	Then create product with attributes from sheet "fullDetails" 
+	Then wait for 4000 milliseconds 
 	
 	##Create offers wil all channels for verifying BC with all channel and add to a catalog
 @NDX-CreateAllOffersForBC9 @initBrowser @closeBrowser
@@ -49,7 +49,7 @@ Scenario: Create offers with all channels for creating BC
 	Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then create new offer from sheet "SeedingSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then create new offer from sheet "rechargeWAP" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
-#	Then create new offer from sheet "rechargeEmail" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
+	Then create new offer from sheet "rechargeEmail" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then create new offer from sheet "seedingWAPoffer" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 	Then navigate to offer management
 	Then Navigate to Offer Catalogue 
@@ -57,7 +57,7 @@ Scenario: Create offers with all channels for creating BC
 	Then Add "rechargeSMS" offer to Offer Catalogue 
 	Then Add "SeedingSMS" offer to Offer Catalogue
 	Then Add "rechargeWAP" offer to Offer Catalogue 
-#	Then Add "rechargeEmail" offer to Offer Catalogue
+	Then Add "rechargeEmail" offer to Offer Catalogue
 	Then Add "seedingWAPoffer" offer to Offer Catalogue	
 	Then wait for 4000 milliseconds 
 	

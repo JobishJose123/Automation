@@ -1200,6 +1200,7 @@ public void clustertabledetailsandsave() throws Exception {
 	   Thread.sleep(2000);
 	   jswait.loadSendKeys(KpiName,"KPI5");
 	   jswait.loadClick(KpiConfrimbtn);
+	   Assert.assertTrue(driver.findElement(By.xpath("//vaadin-grid-cell-content[contains(.,'KPI5')]")).isDisplayed());
 	   jswait.loadClick(Topproccedbtn);
 		jswait.loadClick(SaveAnalysisBtn);		
    }

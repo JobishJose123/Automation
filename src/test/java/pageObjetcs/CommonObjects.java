@@ -190,7 +190,144 @@ public class CommonObjects extends Init {
 	 
 	 @FindBy(xpath=".//paper-button[contains(.,'Save')]")
 		private WebElement customerLocationInsighSaveButton;
-	
+	 
+//	 ================================ digital plus =============================
+	 @FindBy(xpath="//label[contains(.,'Connectors')]")
+		private WebElement connectors;
+	 @FindBy(xpath="//div[contains(.,'Channel Connector')][@class='subHeading admin-tracking style-scope ndx-connectors']")
+		private WebElement channelConnector;
+	 @FindBy(xpath="//iron-icon[@id='sym2']")
+		private WebElement httpConnector ;
+	 @FindBy(xpath="//paper-button[contains(text(),'Create New Connector')]")
+		private WebElement createNewConnector;
+	 @FindBy(xpath="//a[contains(@href,'new')]")
+		private WebElement WebhookNewURL;
+	 @FindBy(xpath="//button[@type='button'][@ga-event-action='click-editurl']")
+		private WebElement createnewUrl;
+	 @FindBy(xpath="//label[contains(.,'Content Type')][@for='default_content_type']//following::input[1]")
+		private WebElement contentTypeInput;
+	 @FindBy(xpath="//label[contains(.,'Content ')][@for='default_content']//following::textarea[1]")
+		private WebElement contentresponseInput;
+	 @FindBy(xpath="//button[contains(.,'Create')][@ga-event-category='Request']")
+		private WebElement createUrlbtn;
+	 @FindBy(xpath="//code[contains(.,'https://webhook.site/')]")
+		private WebElement url ;
+	 @FindBy(xpath="//label[contains(.,'Name')]//following::input[1]")
+		private WebElement httpNameInput;
+	 @FindBy(xpath="//label[contains(.,'Name')]//following::textarea[1]")
+		private WebElement httpdescpInput;
+	 @FindBy(xpath="//label[contains(.,'URL')]//following::input[1]")
+		private WebElement urlInput;
+	 @FindBy(xpath="//paper-button[contains(.,'Proceed')]")
+		private WebElement Proceedbtn;
+	 @FindBy(xpath="//paper-textarea[@id='connectorData']")
+		private WebElement requestDataInput;
+	 @FindBy(xpath="//label[contains(.,'Result XPATH')]//following::input[1]")
+		private WebElement successXpath ;
+	 @FindBy(xpath="//label[contains(.,'Result XPATH')]//following::input[2]")
+		private WebElement successString;
+	 @FindBy(xpath="//label[contains(.,'Result XPATH')]//following::input[3]")
+		private WebElement resultCodeXpath;
+	 @FindBy(xpath="//label[contains(.,'Result XPATH')]//following::input[4]")
+		private WebElement descpXpath;
+	 @FindBy(xpath="(//paper-button[contains(.,'Save')])[3]")
+		private WebElement ConnectorSavebtn;
+	 @FindBy(xpath="(//label[contains(.,'Response Regex')])[1]//following::input[1]")
+		private WebElement responseRegexInput;
+	 @FindBy(xpath="//label[contains(.,'Response Regex Test')]//following::input[1]")
+		private WebElement responseRegexTestInput;
+	 @FindBy(xpath="//label[contains(.,'Response Regex Position')]//following::input[1]")
+		private WebElement responseRegexPositionInput;
+	 @FindBy(xpath="//div[contains(.,'JSON')][@id='radioLabel']")
+		private WebElement jsonRadiobtn;
+	 @FindBy(xpath="//div[contains(.,'Query String')][@id='radioLabel']")
+		private WebElement queryStringRadiobtn;
+     @FindBy(xpath="//p[contains(.,'Request Data')]//following::input[1]")
+		private WebElement queryStringNameInput;
+	 @FindBy(xpath="//p[contains(.,'Request Data')]//following::textarea[1]")
+		private WebElement queryStringValueInput;
+	 @FindBy(xpath="//p[contains(.,'Request Data')]//following::textarea[2]")
+		private WebElement queryStringValueInput1;
+	   @FindBy(xpath="//p[contains(.,'Request Data')]//following::input[2]")
+			private WebElement queryStringNameInput1;
+	 @FindBy(xpath="//p[contains(.,'Request Data')]//following::paper-icon-button[@title='Configure Dynamic Variables']")
+		private WebElement httpDynamicVariable;
+	 @FindBy(xpath="//p[contains(.,'Request Data')]//following::paper-icon-button[@title='Configure Dynamic Variables'][2]")
+		private WebElement httpDynamicVariable1;
+	 @FindBy(xpath="//h3[contains(.,'Add Parameter ')]//following::input[1]")
+		private WebElement parameterNameInput;
+	 @FindBy(xpath="//label[contains(.,'Parameter')]//following::input[1]")
+		private WebElement  parameterInput;
+	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'Customer Address')]")
+		private WebElement customerAddressParameter ;
+	 @FindBy(xpath="//paper-button[contains(.,'OK')]")
+		private WebElement ParameterOKBtn;
+	 @FindBy(xpath="//input[@id='email']")
+		private WebElement webhookEmail;
+	 @FindBy(xpath="//input[@id='password']")
+		private WebElement webhookPassword;
+	 @FindBy(xpath="//button[@type='submit']")
+		private WebElement webhookLoginbtn;
+	 @FindBy(xpath="(//a[@href='/control-panel'])[1]")
+		private WebElement controlPanelbtn;
+	 @FindBy(xpath="//p[contains(.,'Request Data')]//following::paper-icon-button[@title='Add Header']")
+		private WebElement addRequestHeader;
+	 @FindBy(xpath="//p[contains(.,'Request Data')]//following::textarea")
+		private WebElement jsonRequestDataInput;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
+//	 @FindBy(xpath="")
+//		private WebElement ;
 	//==============================License Generator UI=======================================// 
 		@FindBy(xpath=".//*[@id='username']")
 		private WebElement liceneseGeneratorUsernameinput;
@@ -357,7 +494,7 @@ public class CommonObjects extends Init {
 			private WebElement fieldNameInput;
 		   @FindBy(xpath="//label[contains(.,'Field Type')]//following::input[1]")
 			private WebElement fieldTypeInput;
-			@FindBy(xpath="//vaadin-combo-box-item[contains(.,'NUMBER'')]")
+			@FindBy(xpath="//vaadin-combo-box-item[contains(.,'NUMBER')]")
 			private WebElement fieldTypeNumber;
 		   @FindBy(xpath="//label[contains(.,'Is Mandatory')]//following::input[1]")
 			private WebElement isMandatory;
@@ -1194,7 +1331,8 @@ public void createStreamingAttr(String attrName,String description,String value1
 	jswait.loadClick(streamingAttrSourceInput);
 	jswait.loadClick(sourceAPIConnector);
 	jswait.loadClick(routeInput);
-	jswait.loadClick("//paper-item[contains(.,'"+route+"']");
+	jswait.loadClick("//paper-item[contains(.,'"+route+"')]");
+	jswait.loadClick(fieldNameInput);
 	jswait.loadSendKeys(fieldNameInput,value1 );
 	jswait.loadClick(fieldTypeInput);
 	jswait.loadClick(fieldTypeNumber);
@@ -1283,6 +1421,116 @@ public void DigitalPlusModules() throws Exception{
 	jswait.loadClick(digitalPlus);
 }
 
+public void navigateToConnector() throws Exception {
+jswait.loadClick(connectors);
+}
+
+public void navigatetToChannelConnector() throws Exception {
+	jswait.loadClick(channelConnector);
+}
+
+public void navigatetToHttpConnector() throws Exception {
+	jswait.loadClick(httpConnector);
+}
+
+public void createNewConnector() throws Exception {
+	jswait.loadClick(createNewConnector);
+}
+public void createNewUrlInWebhook(String response,String httpSheet) throws Exception {
+	jswait.loadClick(WebhookNewURL);
+	 jswait.loadClick(createnewUrl);
+	 if(httpSheet.equalsIgnoreCase("httpXML")) {
+	 jswait.loadSendKeys(contentTypeInput, "text/xml");
+	 jswait.loadSendKeys(contentresponseInput, response);
+	 }
+	 else if(httpSheet.equalsIgnoreCase("httpJson")) {
+		 jswait.loadSendKeys(contentTypeInput, "text/json");
+		 jswait.loadSendKeys(contentresponseInput, response);
+	 }
+	 else if(httpSheet.equalsIgnoreCase("httpQueryString")) {
+		 jswait.loadSendKeys(contentTypeInput, "text/query string");
+		 jswait.loadSendKeys(contentresponseInput, response); 
+	 }
+	 jswait.loadClick(createUrlbtn);
+}
+
+public void loginToWebhook(String username,String password) throws Exception{
+	webhookEmail.sendKeys(username);
+	webhookPassword.sendKeys(password);
+	webhookLoginbtn.click();
+}
+
+public void webhookControlPanel() throws Exception{
+	jswait.loadClick(controlPanelbtn);
+}
+public void copyGeneratedUrl(String httpSheet) throws Exception{
+	String urlGenerated=url.getText();
+	eh.setExcelFile("DigitalPlus", httpSheet);
+	eh.setCell("url", urlGenerated);
+}
+
+
+public void createHttpConnector(String httpSheet,String httpConnectorName,String webhookUrl) throws InterruptedException {
+	jswait.loadSendKeys(httpNameInput, httpConnectorName);
+	jswait.loadSendKeys(httpdescpInput, "http connector by selenium");
+	jswait.loadSendKeys(urlInput, webhookUrl);
+	if(httpSheet.equalsIgnoreCase("httpXML")) {
+	jswait.loadClick(Proceedbtn);
+	Thread.sleep(3000);
+	requestDataInput.sendKeys("<xml>Success ");
+	jswait.loadClick(httpDynamicVariable);
+	jswait.loadSendKeys(parameterNameInput,"msisdn");
+	jswait.loadSendKeys(parameterInput,"Customer Address");
+	jswait.loadClick(customerAddressParameter) ;
+	jswait.loadClick(ParameterOKBtn);
+	requestDataInput.sendKeys("</xml>");
+	jswait.loadClick(Proceedbtn);
+	Thread.sleep(3000);
+	jswait.loadSendKeys(successXpath, "//response");
+	jswait.loadSendKeys(successString, "Success from selenium");
+	jswait.loadSendKeys(resultCodeXpath, "//responseCode");
+	jswait.loadSendKeys(descpXpath, "//responseDescp");
+	
+	}
+	else if(httpSheet.equalsIgnoreCase("httpJson")) {
+		jswait.loadClick(jsonRadiobtn);
+		jswait.loadClick(Proceedbtn);
+		eh.setExcelFile("DigitalPlus", httpSheet);
+		jswait.loadSendKeys(jsonRequestDataInput,eh.getCell(1, "request data"));
+		jswait.loadClick(httpDynamicVariable);
+		jswait.loadSendKeys(parameterNameInput,"msisdn");
+		jswait.loadSendKeys(parameterInput,"Customer Address");
+		jswait.loadClick(customerAddressParameter) ;
+		jswait.loadClick(ParameterOKBtn);
+		jsonRequestDataInput.sendKeys("\"}");
+		jswait.loadClick(Proceedbtn);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(responseRegexInput, "*");
+		jswait.loadSendKeys(responseRegexTestInput,"*");
+		jswait.loadSendKeys(responseRegexPositionInput, "0");
+		
+	}
+	else if(httpSheet.equalsIgnoreCase("httpQueryString")) {
+		jswait.loadClick(queryStringRadiobtn);
+		jswait.loadClick(Proceedbtn);
+		jswait.loadSendKeys(queryStringNameInput, "Name");
+		jswait.loadSendKeys(queryStringValueInput,httpConnectorName );
+		jswait.loadClick(addRequestHeader);
+		jswait.loadSendKeys(queryStringNameInput1, "msisdn");
+		jswait.loadClick(queryStringValueInput1);
+		jswait.loadClick(httpDynamicVariable1);
+		jswait.loadSendKeys(parameterNameInput,"msisdn");
+		jswait.loadSendKeys(parameterInput,"Customer Address");
+		jswait.loadClick(customerAddressParameter) ;
+		jswait.loadClick(ParameterOKBtn);
+		jswait.loadClick(Proceedbtn);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(responseRegexInput, "*");
+		jswait.loadSendKeys(responseRegexTestInput,"*");
+		jswait.loadSendKeys(responseRegexPositionInput, "0");
+	}
+	jswait.loadClick(ConnectorSavebtn);
+}
 }
 
 

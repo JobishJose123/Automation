@@ -22,6 +22,7 @@ import baseClasses.TextFileUtil;
 import baseClasses.TimeoutImpl;
 import cucumber.api.java.en.Then;
 import junit.framework.Assert;
+import pageObjetcs.CommonObjects;
 import pageObjetcs.ModelPageObjects;
 
 public class ModelSteps extends Init{
@@ -29,6 +30,7 @@ public class ModelSteps extends Init{
 	public ExcelHelper eh = new ExcelHelper(); 
 	 ModelPageObjects  modelPage = new  ModelPageObjects();
 	 TextFileUtil textFile=new TextFileUtil();
+	 CommonObjects commonObjects=new CommonObjects();
 	 
 	 @Then("^navigate to InsightWorkbench$")
 	 public void navigate_to_InsightWorkbench() throws Exception {
@@ -139,8 +141,9 @@ modelPage.runParagraph();
 	 
 	   @Then("^filter the iwb job from sheet \"([^\"]*)\" with model type \"([^\"]*)\"$")
 	   public void filter_the_iwb_job_from_sheet_with_model_type(String modelStorageSheet, String modelType) throws Throwable {
-		  
-//	      modelPage.filterIWBJob(modelName,modelType);
+		   eh.setExcelFile("Model", modelStorageSheet);
+		   String modelName=eh.getCellByColumnName(modelType);
+      modelPage.filterIWBJob(modelName,modelType);
 	   }
 
 	   @Then("^edit the job$")
@@ -155,10 +158,12 @@ modelPage.runParagraph();
 	 
 
 @Then("^add the model name from sheet \"([^\"]*)\" and \"([^\"]*)\"  to sheet \"([^\"]*)\"$")
-public void add_the_model_name_from_sheet_and_to_sheet(String modelNameSheet, String modelType, String modelStorageSheet) throws Throwable {
-	eh.setExcelFile("Model", modelNameSheet);
+public void add_the_model_name_from_sheet_and_to_sheet(String modelSheet, String modelType, String modelStorageSheet) throws Throwable {
+	eh.setExcelFile("Model", modelSheet);
 	String modelName=eh.getCellByColumnName("Model_Name");
-	eh.iwbModelDataDetails(modelName,modelType,modelStorageSheet);
+	eh.setExcelFile("Model", modelStorageSheet);
+	eh.setCell(modelType, modelName);
+//	eh.iwbModelDataDetails(modelName,modelType,modelStorageSheet);
 }
 
 @Then("^delete the dataframe$")
@@ -172,6 +177,10 @@ public void verify_the_dataframe_gets_deleted() throws Throwable {
 }
 @Then("^activate the model$")
 public void activate_the_model() throws Throwable {
+	commonObjects.clickOptionsIcon();
+	commonObjects.clickEditOption();
+	modelPage.activateModel();
+
 
 
 }

@@ -127,7 +127,7 @@ Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to trigger
-Then create trigger touchpoint from sheet "triggerTouchpoint" with logic "FIFO" and trigger "SeleniumTrigger"  
+Then create trigger touchpoint from sheet "triggerTouchpoint" with logic "LIFO" and trigger "SeleniumTrigger"  
 Then check trigger touchpoint in grid "triggerTouchpoint"
 
 
@@ -139,6 +139,15 @@ Then navigate to touchpoints
 Then navigate to trigger
 Then create trigger touchpoint from sheet "triggerTouchpoint_default" with logic "FIFO" and trigger "selTrigger1"  
 Then check trigger touchpoint in grid "triggerTouchpoint_default"
+
+@NX-realTimeRTE @initBrowser @closeBrowser
+Scenario: Verify new Trigger touchpoint creation  
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to trigger
+Then create trigger touchpoint from sheet "rteTrigger_tp" with logic "LIFO" and trigger "sel_rteTrigger"  
+Then check trigger touchpoint in grid "rteTrigger_tp"
 
 
 ############################ PROGRAM AND RULE CREATION FOR UI VERIFICATION ######################################
@@ -226,7 +235,22 @@ Then verify create program page "programruledeactivate" and offer catalog sheet 
 Then choose program from sheet "programruledeactivate"
 Then create new rule from sheet "programruledeactivate" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 Then "save" rule
-    
+ 
+############################# falcon #################################
+
+@NDX-realTime&rechargeTrackingService
+@initBrowser  @closeBrowser
+Scenario: Verify create a program and rule 
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then click create program button
+Then verify create program page "triggerrprogram" and offer catalog sheet "IMcatalog" and touchpoint from sheet "rteTrigger_tp"
+Then choose program from sheet "triggerrprogram"
+Then create new rule with enddate from sheet "triggerrprogram" and offer "rechargeSMS" and touchpoint from sheet "rteTrigger_tp"
+Then "save" rule
+Then add program and rule from sheet "triggerrprogram" to column "1" of sheet "programRuleDetails"
+   
     
     
 ################################   RULE CREATION FOR PRIORITIZATION LOGIC   ####################################################

@@ -585,22 +585,22 @@ public class BroadcastPageObjects extends Init {
 		private WebElement broadcastRenderBeforeInput;
 		@FindBy(xpath = "//label[contains(.,'Email Profile Field')]/../input")
 		private WebElement emailProfileField;
-//		@FindBy(xpath="")
-//		private WebElement 
-//		@FindBy(xpath="")
-//		private WebElement 
-//		@FindBy(xpath="")
-//		private WebElement 
-//		@FindBy(xpath="")
-//		private WebElement 
-//		@FindBy(xpath="")
-//		private WebElement 
-//		@FindBy(xpath="")
-//		private WebElement 
-//		@FindBy(xpath="")
-//		private WebElement 
-//		@FindBy(xpath="")
-//		private WebElement 
+		@FindBy(xpath="//label[contains(.,'Feedback Name')]//following::input[1]")
+		private WebElement feedbackNameInput;
+		@FindBy(xpath="//label[contains(.,'Feedback Name')]//following::input[2]")
+		private WebElement feedbackDescpInput;
+		@FindBy(xpath="//label[contains(.,'Channel')]//following::input[1]")
+		private WebElement channelInput;
+		@FindBy(xpath="//paper-item[contains(.,'SMS')]")
+		private WebElement channelSMS;
+		@FindBy(xpath="//label[contains(.,'Language')]//following::input[1]")
+		private WebElement feedbackCreativeLanguage;
+		@FindBy(xpath="//paper-item[contains(.,'English')]")
+		private WebElement feedbackLangEng;
+		@FindBy(xpath="//label[contains(.,'Title')]//following::input[1]")
+		private WebElement feedbackTitleInput;
+		@FindBy(xpath="//label[contains(.,'Title')]//following::textarea")
+		private WebElement feedbackDetailsInput;
 		
 		
 		
@@ -1540,7 +1540,7 @@ public boolean checkCalculateBtnDisplayed() {
 		
 		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
 		
-	}
+	} 
 
 	public void selectFirstOffer() throws InterruptedException {
 		jswait.loadClick(firstOfferCheckBox);
@@ -3485,6 +3485,27 @@ public boolean checkCalculateBtnDisplayed() {
 		}
 		clickProceedButton();
 	}
+	public void selectOffer(String offerSheet,String bc_type,String connectorSheet) throws Exception{
+		ExcelHelper offerExcel=new ExcelHelper();
+		offerExcel.setExcelFile("offerInputData", offerSheet);
+		String offerName = offerExcel.getCellByColumnName("Offer Name");
+		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
+		eh.setExcelFile("DigitalPlus", connectorSheet);
+		String connector=(String) eh.getCell(1, 0);
+		jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_SMPP);
+		jswait.loadClick(senderIdBroadcastAdressSmpp);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(routeBroadcast, ROUTE_SMPP);
+	    jswait.loadClick("//label[contains(.,'Route over which this broadcast can be sent')]//following::vaadin-combo-box-item[contains(.,'"+connector+"')]");
+		Thread.sleep(2000);
+		jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_SMPP);
+		jswait.loadClick(senderIdFulfillmentAdressSmpp);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(routeFulfillment,ROUTE_SMPP);
+		jswait.loadClick(".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'"+connector+"')]");
+		clickProceedButton();
+	}
+	
 	public void selectCopiedOffer(String offerSheet, String bc_type,String creative,String trackExpires,String filterCriteria,String giverRewardsTo) throws Exception{
 		ExcelHelper offerExcel=new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offerSheet);
@@ -4585,10 +4606,41 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		
 	}
 		
+	public void BCOptionToClick(String optionToClick, String bcToView, String bctype) throws Exception {
+		if(bcToView.equalsIgnoreCase("recurringchildbc")) {
+			System.out.println("++++++++++++++++++++ to view is the recurring child bc thatis third column");
+		jswait.loadClick(recurringChildOptionIcon);
+		}
+		else if(bcToView.equalsIgnoreCase("RecurringChildAt")||bcToView.equalsIgnoreCase("seedingonetime-messaging")) {
+			System.out.println("++++++++++++++++++ bc to view is the second column ++++++++++++++++++++");
+			jswait.loadClick(RecurringChildOptionIconAt);
+		}
+		else if(bcToView.equalsIgnoreCase("seedingRecurring-Rewarding")) {
+		jswait.loadClick(seedingRecurrRewardingChildOptionIcon);
+		}
+		else if(bcToView.equalsIgnoreCase("seedingRecurring-Messaging")) {
+		jswait.loadClick(seedingRecurrMessagingChildOptionIcon);
+		}
+		else if(bcToView.equalsIgnoreCase("onetime")||bcToView.equalsIgnoreCase("seedingonetime-rewarding")) {   
+	    	System.out.println("+++++++++++++   the bc to view is the first column  ++++++++++++++++++++++++");
+	        commonObjects.BCOptionIcon(bctype);
+	    }
+		jswait.loadClick("//paper-item[contains(.,'"+optionToClick+"')]");
+	
+}	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+	public void configureFeedbackBC(String bcSheet,String bcType)	throws Exception{
+		jswait.loadSendKeys(feedbackNameInput, "selenium_feedback");
+		jswait.loadSendKeys(feedbackDescpInput, "bc feedback by selenium");
+		jswait.loadClick(channelInput);
+		jswait.loadClick(channelSMS);
+		clickProceedButton();
+		jswait.loadClick(feedbackCreativeLanguage);
+		jswait.loadClick(feedbackLangEng);
+	    jswait.loadSendKeys(feedbackTitleInput,"selenium_title");
+		jswait.loadSendKeys(feedbackDetailsInput,"selenium_details");
 		
-		
-		
-		
+	}
+}		
 		
 		
 		
@@ -4621,7 +4673,7 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		
 		
 	
-}
+
 
 
 

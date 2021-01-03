@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.util.Calendar;
 
 import javax.validation.constraints.AssertTrue;
 
@@ -108,8 +109,8 @@ public class ModelPageObjects extends Init {
 	private WebElement deleteDataframeOpt; 
 	@FindBy(xpath="//span[contains(.,'Are you sure you want to delete this Dataframe?')]//following::paper-button[contains(.,'Yes')][1]")
 	private WebElement deleteDataframeYes; 
-//	@FindBy(xpath="")
-//	private WebElement; 
+	@FindBy(xpath="//paper-button[contains(.,'Activate')]")
+	private WebElement activatebtn; 
 //	@FindBy(xpath="")
 //	private WebElement; 
 //	@FindBy(xpath="")
@@ -355,7 +356,68 @@ public class ModelPageObjects extends Init {
 		Assert.assertFalse(jswait.checkVisibility(driver.findElement(By.xpath("//div[@class='inpt-box style-scope dataframe-box']"))));
 	}
 	
-	
+	public void activateModel() throws Exception{
+		jswait.loadClick(activatebtn);
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		Actions builder = new Actions(driver);
+		Thread.sleep(1000);
+		jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
+		Thread.sleep(1000);
+		Thread.sleep(1000);
+		jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='" + date + "']");
+		Thread.sleep(1000);
+		jswait.loadClick(
+				".//*[@id='one-off-form']/div/paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+		Thread.sleep(1000);
+		jswait.loadClick(".//*[@id='one-off-form']//paper-date-time-input[1]//paper-input[2]//input");
+
+		Thread.sleep(2000);
+		jswait.loadClick(".//*[@id='heading']/iron-selector[1]/div[1]");
+		WebElement num = driver.findElement(By.xpath(
+				".//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours + 1) + "]"));
+		builder.moveToElement(num).click().build().perform();
+		Thread.sleep(2000);
+		WebElement num1 = driver.findElement(By.xpath(
+				".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num1).click().build().perform();
+		if (am_pm == 0)
+			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
+		else
+			jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[2]");
+
+		jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
+		Thread.sleep(2000);
+		Thread.sleep(1000);
+		jswait.loadClick("//label[contains(.,'Recurrence Pattern')]/..//input");
+		Thread.sleep(1000);
+		jswait.loadClick("//paper-item[contains(.,'Days')]");
+		Thread.sleep(1000);
+		jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input", "1");
+		Thread.sleep(1000);
+
+	}
 	
 	
 	

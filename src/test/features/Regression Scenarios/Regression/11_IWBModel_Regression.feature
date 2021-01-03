@@ -25,6 +25,5 @@ Then verify the dataframe gets deleted
 Scenario: verify running a new model as per schedule
 Given login
 Then navigate to InsightWorkbench
-Then click on "Affinity"
-Then filter the iwb job from sheet "IWBModelNamesWithPython" with model type "Behavioral Profiling"
+Then filter the iwb job from sheet "IWBModelNamesWithPython" with model type "Affinity"
 Then activate the model

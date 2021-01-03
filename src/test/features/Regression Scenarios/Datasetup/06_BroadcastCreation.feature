@@ -5,7 +5,7 @@ Feature: Test suite for Broadcast creation
 
 #######verification part included in BroadcastFunctionality_Regression(REGRESSION CASES).feature,BroadcastFunctionality_Migration.feature(MIGRATION CASES)
 
-@NDX-PartnerCGSetting @initBrowser
+@NDX-PartnerCGSetting @initBrowser @closeBrowser
 Scenario: provide the list for partner cg
 Given login 
 Then navigate to configuration management
@@ -15,11 +15,10 @@ Then navigate to control group settings page
 Then change partner control group settings
 Then wait for 2 minutes
 
-@NDX-CreateOfferForBCFunctionality  @initBrowser 
+@NDX-CreateOfferForBCFunctionality  @initBrowser  @closeBrowser
 Scenario Outline: create offer
 Given login
 Then navigate to precision marketer
-Then wait for 1 minutes
 Then navigate to offer management
 Then navigate to offers
 Then create new offer from sheet "<offerName>" with product "fullDetails" rewards "oneruleonereward" with creative type "<creativeType>" 
@@ -68,7 +67,7 @@ Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
 ########/////////////////////////// CREATION OF BC FOR FUNCTIONALITY VERIFICATION ///////////////////////////////////
 
 
-@NDX-CreateBCForFunctionality @initBrowser   
+@NDX-CreateBCForFunctionality @initBrowser   @closeBrowser 
 Scenario Outline:Create broadcast to verify bc functionality(except trigger)
 Given login
 Then navigate to precision marketer
@@ -107,22 +106,22 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataShee
 |seedingRecurringBC|SeedingSMS_Dynamic|customerListNotSubscribed|None|no limit|no limit|none|single creative|none|none|12|activate|BCDataStorage|
 
 
-#@NDX-createTriggerWithDKJob @initBrowser
-#Scenario: create streaming attribute and trigger and dk job for trigger
-#Given login
-#Then navigate to data foundation
-#Then navigate to streaming attributes
-#Then create new streaming attribute from sheet "streamingAttr"
-#Then navigate to landing page
-#Then navigate to precision marketer
-#Then navigate to configuration
-#Then select triggers in configuration
-#Then create new trigger "selTrigger1" with streaming attribute from sheet "streamingAttr"
-#Then create a dk job "Sel_TriggerJob1" with input location "/usr/local/flytxt/seleniumTrigger" streaming attribute "streamingAttr" 
-#Then navigate to landing page
-#Then navigate to data foundation
-#Then click Data Fusion Engine
-#Then filter the job "Sel_TriggerJob1" and activate it
+@NDX-createTriggerWithDKJob @initBrowser @closeBrowser
+Scenario: create streaming attribute and trigger and dk job for trigger
+Given login
+Then navigate to data foundation
+Then navigate to streaming attributes
+Then create new streaming attribute from sheet "streamingAttr"
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to configuration
+Then select triggers in configuration
+Then create new trigger "selTrigger1" with streaming attribute from sheet "streamingAttr"
+Then create a dk job "Sel_TriggerJob1" with input location "/usr/local/flytxt/seleniumTrigger" streaming attribute "streamingAttr" 
+Then navigate to landing page
+Then navigate to data foundation
+Then click Data Fusion Engine
+Then filter the job "Sel_TriggerJob1" and activate it
 
 
 
@@ -213,11 +212,10 @@ Scenario: upload file for trigger bc
 Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "trigger1.csv"
 
 
+##///////////////////////  REMINDER BC   ////////////////
 
-
-########///////////////////  REMINDER BROADCAST ///////////
-@ReminderBC @initBrowser @closeBrowser
-Scenario: create  recurring bc with offer with configured reminder 
+@NDX-ReminderBC @initBrowser @closeBrowser
+Scenario: create recurring bc with offer having reminder configured
 Given login 
 Then navigate to precision marketer 
 Then wait for 1 minutes
@@ -228,11 +226,103 @@ Then click create new broadcast button
 Then create bc from sheet "recurrBCDaily" with inventory "Unlimited" and trigger "none"
 Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "none"
 Then enter choose offer tab from sheet "ReminderOffer" for bc from sheet "recurrBCDaily" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
-Then enter deliver tab with end "none" target render time "<broadcastRenderTime>" and broadcast expiry as "none" from sheet "recurrBCDaily"
+Then enter deliver tab with end "none" target render time "none" and broadcast expiry as "none" from sheet "recurrBCDaily"
 Then save bc 
-Then add bc from sheet "recurrBCDaily" to column "<i>" of bc data sheet "ConversionBC"
+Then add bc from sheet "recurrBCDaily" to column "11" of bc data sheet "ConversionBC"
 Then wait for 4000 milliseconds 
 
+## ////////////////////////// NOTIFICATION AND FEEDBACK BC /////////////////////
+
+@NDX-NotificationBC  @initBrowser @closeBrowser
+Scenario: Create New Broadcast: verify create BC Notification
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "one-offBC" with "rechargeWAP" 
+Then verify create BC Notification 
+Then save bc 
+Then add bc from sheet "one-offBC" to column "12" of bc data sheet "ConversionBC"
+Then wait for 4000 milliseconds 
+
+@NDX-FeedbackBC @initBrowser @closeBrowser
+Scenario: create recurring bc to verify feedback option
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then enter details for new broadcast with condition digitalPersonaGT15 from sheet "recurrBCDaily" with "rechargeWAP" 
+Then save bc 
+Then add bc from sheet "recurrBCDaily" to column "13" of bc data sheet "ConversionBC"
+Then wait for 4000 milliseconds 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#/////////////////////////////////   FACEBOOK BC ////////////////////////////////////////
+
+@NDX-CreatefacebookOffer  @initBrowser 
+Scenario Outline: create offer
+Given login
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to offers
+Then create new offer from sheet "<offerSheet>" with product "fullDetails"
+Then navigate to offer management 
+Then Navigate to Offer Catalogue 
+Then adding existing offers from sheet "<offerSheet>" Offer Catalogue from sheet "defaultCatalog"
+Examples:
+|offerSheet|
+|rechargeimageFacebook|
+|rechargevideoFacebook|
+|carouselimageFacebook|
+|carouselvideoFacebook|
+
+
+@CreateBCWithFacebookOffers @initBrowser @closeBrowser
+Scenario Outline: create BC with facebook offers
+Given login 
+Then navigate to precision marketer 
+Then wait for 1 minutes
+Then navigate to life cycle marketing 
+Then navigate to campaign category from sheet "CampaignCategory" 
+Then naigate to "campaignBC" campaign view broadcasts 
+Then click create new broadcast button
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "none"
+Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "both"
+Then enter choose offer tab from sheet "<offerSheet>" for bc from sheet "<bcSheet>" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "one-offBC"
+Then save bc 
+Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "facebookBC"
+Then wait for 4000 milliseconds 
+Examples:
+|bcSheet|offerSheet|i|
+|recurringBC|rechargeimageFacebook|1|
+|recurringBC|rechargevideoFacebook|2|
+|recurringBC|carouselimageFacebook|3|
+|recurringBC|carouselvideoFacebook|4|
 
 
 #=====================================================================================================================================#
