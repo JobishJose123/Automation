@@ -12,9 +12,9 @@ import javax.mail.Store;
 
 public class EmailHelper {
 
-	public static Date getMailRecivedDate(String fromaddress, String subject)
-
-	{
+	public static Date getMailRecivedDate(String fromaddress, String subject){
+	
+	
 		String host = "imap.gmail.com";// change accordingly
 		String mailStoreType = "imap";
 		String username = "selenium.flytxt@gmail.com";// change accordingly
@@ -30,17 +30,18 @@ public class EmailHelper {
 			properties.put("mail.imap.starttls.enable", "true");
 			Session emailSession = Session.getDefaultInstance(properties);
 
-			// create the POP3 store object and connect with the pop server
+		
 			Store store = emailSession.getStore("imaps");
 
 			store.connect(host, username, mailpassword);
+			System.out.println("connected");
 
-			// create the folder object and open it
+		
 			Folder emailFolder = store.getFolder("INBOX");
 
 			emailFolder.open(Folder.READ_ONLY);
 
-			// retrieve the messages from the folder in an array and print it
+		
 			Message[] messages = emailFolder.getMessages();
 			System.out.println("messages.length---" + messages.length);
 
@@ -78,20 +79,20 @@ public class EmailHelper {
 		return mailRecivedDate;
 	}
 
-	public static void main(String[] args) {
-
-		String host = "imap.gmail.com";// change accordingly
-		String mailStoreType = "imap";
-		String username = "selenium.flytxt@gmail.com";// change accordingly
-		String password = "Flytxt.4";// change accordingly
-
-		String fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";// you pass your from address- swapna.p@flytxt.com
-		String subjectBCRendering= "Broadcast Rendering Notification - oneOffBC8902";//BCNotification is BC name
+//	public static void main(String[] args) {
+//
+//		String host = "imap.gmail.com";// change accordingly
+//		String mailStoreType = "imap";
+//		String username = "selenium.flytxt@gmail.com";// change accordingly
+//		String password = "Flytxt.4";// change accordingly
+//
+//		String fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";// you pass your from address- swapna.p@flytxt.com
+//		String subjectBCRendering= "Broadcast Rendering Notification - oneOffBC8902";//BCNotification is BC name
 		//String subjectForWorkFlow="	Approval is requested for campaign campaignnew9778";//campaignnew9778 is campagin name 
 		
 		//Date fggs = check(username, password,fromAddrForBCNotification, subjectBCRendering);
 		//System.out.println("Date is :"+fggs);
 
-	}
+//	}
 	
 }
