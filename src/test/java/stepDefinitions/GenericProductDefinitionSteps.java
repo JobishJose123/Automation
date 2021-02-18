@@ -438,5 +438,40 @@ public class GenericProductDefinitionSteps extends Init{
 //		productClassesPageObjects.clickAttributes();
 //		productClassesPageObjects.addNumberAttributes2(att);
 //	}
+	@Then("^navigate to Email Settings$")
+	public void navigate_to_Email_Settings() throws Throwable {
+		adminPageObjects.emailSettings();
+	}
+
+	@Then("^select the \"([^\"]*)\" email option$")
+	public void select_the_email_option(String inputoption) throws Throwable {
+		adminPageObjects.typeofEmailIntegration(inputoption);
+	}
+
+	@Then("^fill from name as \"([^\"]*)\"\\.$")
+	public void fill_from_name_as(String fname) throws Throwable {
+	   adminPageObjects.fromName(fname);
+	}
+
+	@Then("^select the sender route as \"([^\"]*)\"$")
+	public void select_the_sender_route_as(String eroute) throws Throwable {
+		adminPageObjects.senderRoute(eroute);
+	}
+
+	@Then("^save the settings$")
+	public void save_the_settings() throws Throwable {
+		adminPageObjects.saveEmail();
+	}
+	
+	@Then("^fill the from Email Address as \"([^\"]*)\" and Mandrill API key as \"([^\"]*)\"$")
+	public void fill_the_from_Email_Address_as_and_Mandrill_API_key_as(String fromemail, String apikey) throws Throwable {
+		adminPageObjects.mandrilldetails(fromemail,apikey);
+	}
+	
+	
+	
+	
+	
+	
 	
 }

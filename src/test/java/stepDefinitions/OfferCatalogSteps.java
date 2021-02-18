@@ -48,6 +48,14 @@ public class OfferCatalogSteps extends Init{
 	 	   Thread.sleep(3000);
 	 	   }
 	   
+	   @Then("^filter the offer catalogue from sheet \"([^\"]*)\" and navigate to view offers$")
+	   public void filter_the_offer_catalogue_from_sheet_and_navigate_to_view_offers(String sheet) throws Throwable {
+		   eM.setExcelFile("offerCatalogInputData", sheet);
+		   String name1 = eM.getCell(1, 0).toString();
+		   catalogPageObjects.searchCatalogue(name1);
+		   
+	   }
+	   
 	   @Then("^Add \"([^\"]*)\" offer to Offer Catalogue$")
 	    public void addOffertoCatalogueForProduct(String sheet) throws Throwable
 	    {

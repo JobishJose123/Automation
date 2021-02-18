@@ -602,7 +602,11 @@ public class BroadcastPageObjects extends Init {
 		@FindBy(xpath="//label[contains(.,'Title')]//following::textarea")
 		private WebElement feedbackDetailsInput;
 		
+		@FindBy(xpath="//label[contains(.,'Email Profile Field')]/../input")
+		private WebElement emailprofilebcclick;
 		
+		@FindBy(xpath="//paper-item[contains(.,'Email_q11')]")
+		private WebElement emailprofileselectclick;
 		
 		
 		
@@ -1505,9 +1509,21 @@ public boolean checkCalculateBtnDisplayed() {
 //		 Thread.sleep(10000);
 //	}
 
-	public void selectSenderAndRouteEmail() throws InterruptedException {
-		jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_EMAIL);
-		jswait.loadClick(senderIdBroadcastEmail);
+	public void selectSenderAndRouteEmail(String offersheet) throws InterruptedException {
+		if(offersheet.equals("Option3Email")) {
+			jswait.loadClick(emailprofilebcclick);
+			jswait.loadClick(emailprofileselectclick);
+			jswait.loadSendKeys(senderIdFulfillmentSelector, SENDER_EMAIL);
+			jswait.loadClick(senderIdFulfillmentEmail);
+			jswait.loadSendKeys(routeFulfillment, ROUTE_EMAIL);
+			Thread.sleep(2000);
+			jswait.loadClick(routeFulfillmentEmail);
+		}else {
+		
+//		jswait.loadSendKeys(senderIdBroadcastSelector, SENDER_EMAIL);
+//		jswait.loadClick(senderIdBroadcastEmail);
+		jswait.loadClick(emailprofilebcclick);
+		jswait.loadClick(emailprofileselectclick);
 		jswait.loadSendKeys(routeBroadcast, ROUTE_EMAIL);
 //		jswait.loadClick(emailProfileField);
 //		jswait.loadClick("//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
@@ -1520,6 +1536,7 @@ public boolean checkCalculateBtnDisplayed() {
 		jswait.loadSendKeys(routeFulfillment, ROUTE_EMAIL);
 		Thread.sleep(2000);
 		jswait.loadClick(routeFulfillmentEmail);
+		}
 	}
 
 	public void enterBroadcastBasicDetails(String name, String inventory) throws InterruptedException {
@@ -1627,7 +1644,7 @@ public boolean checkCalculateBtnDisplayed() {
 			selectTrackSession();
 			selectTrackingSource();
 			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
-				selectSenderAndRouteEmail();
+				selectSenderAndRouteEmail(name);
 			} else
 				selectSenderAndRoute();
 		} else {
@@ -1719,7 +1736,7 @@ public boolean checkCalculateBtnDisplayed() {
 			selectTrackSession();
 			selectTrackingSource();
 			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
-				selectSenderAndRouteEmail();
+				selectSenderAndRouteEmail(name);
 			} else if (offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
 				selectSenderAndRouteFacebook();
 			} else
@@ -2817,7 +2834,7 @@ public boolean checkCalculateBtnDisplayed() {
 			selectTrackSession();
 			selectTrackingSource();
 			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
-				selectSenderAndRouteEmail();
+				selectSenderAndRouteEmail(name);
 			} else
 				selectSenderAndRoute();
 		} else {
@@ -3309,7 +3326,7 @@ public boolean checkCalculateBtnDisplayed() {
 			selectTrackSession();
 			selectTrackingSource();
 			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
-				selectSenderAndRouteEmail();
+				selectSenderAndRouteEmail(name);
 			} else if (offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
 				selectSenderAndRouteFacebook();
 			} else
@@ -3462,11 +3479,11 @@ public boolean checkCalculateBtnDisplayed() {
 		if (!bc_type.contains("Informational")) {
 			selectTrackSession(trackExpires);
 			selectTrackingSource();
-//			selectFiletrCriteria(filterCriteria);
+//		    selectFiletrCriteria(filterCriteria);
 //			selectGiveRewardsTo(giverRewardsTo);
 			
 			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
-				selectSenderAndRouteEmail();
+				selectSenderAndRouteEmail(offerSheet);
 			} else if (offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
 				selectSenderAndRouteFacebook();
 			} else
@@ -3527,7 +3544,7 @@ public boolean checkCalculateBtnDisplayed() {
 //			selectGiveRewardsTo(giverRewardsTo);
 			
 			if (offerExcel.getCellByColumnName("Channel").contains("Email")) {
-				selectSenderAndRouteEmail();
+				selectSenderAndRouteEmail(offerSheet);
 			} else if (offerExcel.getCellByColumnName("Channel").contains("Facebook")) {
 				selectSenderAndRouteFacebook();
 			} else

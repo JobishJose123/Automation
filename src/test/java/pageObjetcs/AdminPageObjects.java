@@ -1,7 +1,7 @@
 package pageObjetcs;
 
 import static org.junit.Assert.assertTrue;
-
+import org.openqa.selenium.support.ui.Select;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -159,6 +159,92 @@ public class AdminPageObjects extends Init{
 	private WebElement CGclose;
 	@FindBy(xpath="(//label[contains(.,'Partner Control Group ')]//following::div[@id='radioLabel'][contains(.,'On')])[1]")
 	private WebElement partnerCgOnRdiobtn;
+	
+	@FindBy(xpath="//paper-item[contains(.,'Email Settings')]")
+	private WebElement emailSettings;
+	
+	@FindBy(xpath="//paper-radio-button[contains(@class,'radio-button-style style-scope email-settings x-scope paper-radio-button-1')]")
+	private List <WebElement> BasicEmailradiobutton;
+	
+	@FindBy(xpath="//label[contains(.,'From Name')]//following::input[1]")
+	private WebElement FromName;
+	
+	@FindBy(xpath="//label[contains(.,'Sender Route')]//following::input[1]")
+	private WebElement Senderroute;
+	
+	@FindBy(xpath="//paper-tags-dropdown[@label-accessor='routeName']//paper-icon-button[@icon='icons:close']")
+	private WebElement existingrouteremove;
+	
+	@FindBy(xpath="//paper-tags-dropdown[@label-accessor='routeName']//paper-item")
+	private List <WebElement> matchingemailroute;
+	
+	@FindBy(xpath="//h3[contains(.,'Variables used:')]")
+	private WebElement variableclick;
+	
+	@FindBy(xpath="//paper-button[@class='saveBtn style-scope email-settings x-scope paper-button-0']")
+	private WebElement savebutton;
+	
+	@FindBy(xpath="//label[contains(.,'From Email Address')]//following::input[1]")
+	private WebElement fromEmailadd;
+	
+	@FindBy(xpath="//label[contains(.,'Mandrill API Key')]//following::input[1]")
+	private WebElement mandrillapikey;
+	
+	@FindBy(xpath="//paper-item[contains(.,'Email route')]")
+	private WebElement Emailroute;
+	
+	public void senderRoute(String route) throws InterruptedException{
+	 try {
+			while(existingrouteremove.isDisplayed())
+		{
+		
+		jswait.loadClick(existingrouteremove);
+		}}
+	catch(Exception e) {
+		System.out.println("All routes are removed");}
+	jswait.pasteText(Senderroute, route);
+	jswait.waitForLoadMask();
+	for(WebElement eachRoute:matchingemailroute)
+		if(eachRoute.getText().equals(route)) {
+			jswait.loadClick(eachRoute);
+			break;
+		}
+	
+	
+	}
+	
+	public void saveEmail() throws InterruptedException {
+		jswait.loadClick(variableclick);
+		jswait.loadClick(savebutton);
+		
+	}
+	
+	public void mandrilldetails(String fromemail,String apikey) throws InterruptedException {
+		jswait.loadSendKeys(fromEmailadd, fromemail);
+		jswait.loadSendKeys(mandrillapikey, apikey);
+	}
+	
+	public void fromName(String fname) throws InterruptedException{
+		jswait.loadSendKeys(FromName, fname);
+	}
+	
+	
+	public void typeofEmailIntegration(String inputoption) throws InterruptedException{
+		for(WebElement Emailoption:BasicEmailradiobutton)
+		{
+		if(Emailoption.getAttribute("name").equals(inputoption)) {
+			if(Emailoption.getAttribute("checked") !=null) {
+			System.out.println(inputoption +" email selected by default");
+			}
+		else {
+			jswait.loadClick(Emailoption);}
+	break;
+		}
+		}}
+	
+	public void emailSettings() throws InterruptedException{
+		jswait.loadClick(emailSettings);
+	}
 	
 	
 	public void clickPartnerOption() throws InterruptedException{

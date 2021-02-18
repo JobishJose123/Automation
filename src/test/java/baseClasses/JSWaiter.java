@@ -824,6 +824,15 @@ public void clearTextField(WebElement element) throws InterruptedException {
 	element.clear();
 	 
 }
+public void pasteText(WebElement element,String stringPaste) {
+	StringSelection stringSelection = new StringSelection(stringPaste);
+	Toolkit toolkit = Toolkit.getDefaultToolkit();
+	Clipboard clipboard = toolkit.getSystemClipboard();
+	clipboard.setContents(stringSelection, null);
+	element.sendKeys(Keys.CONTROL, "v");
+}
+
+
 
 }
 		

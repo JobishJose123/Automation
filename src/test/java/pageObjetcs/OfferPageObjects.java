@@ -42,6 +42,19 @@ public class OfferPageObjects extends Init {
 	}
 
 	
+	@FindBy(xpath = "//div[@id='templateDiv-REGULAR-OFFER']/span[1]")
+	private WebElement selecttemplatemandrill;
+	
+	@FindBy(xpath = "//preview-email/form[2]/div[2]/email-template-tile/paper-dialog[2]/div/paper-button[2]")
+	private WebElement yesornomandrilltemplate;
+	@FindBy(xpath = "//email-template-tile[@tile-style='REGULAR']/paper-dialog[1]/div[2]/paper-button[2]")
+	private WebElement finalselectmandrilltemplate;
+	
+	@FindBy(xpath = "//*[@id=\"syncDiv-OFFER\"]/div[2]/iron-icon[@title='Click to Sync']")
+	private WebElement synctemplate;
+	
+	@FindBy(xpath = "//preview-email/form[2]/div[1]/paper-input/paper-input-container/div[2]/div/input")
+	private WebElement mandrillfilter;
 	
 	@FindBy(xpath = "//span[contains(.,'Select')]/../input")
 	private WebElement emailSelectResourceButton;
@@ -320,7 +333,8 @@ public class OfferPageObjects extends Init {
 	 private WebElement addVariableSaveButton;
 	 @FindBy(xpath="//define-creative[@id='define-creative-0']//paper-button[contains(text(),'Cancel')]")
 	 private WebElement addVariableCancelButton;
-	 @FindBy(xpath="//variable-dialog/paper-dialog//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
+     //@FindBy(xpath="//variable-dialog/paper-dialog//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
+	 @FindBy(xpath="//data-table-column-filter-dialog[@grid-selector='#grid']//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
 	 private WebElement mapVariableFilterButton;
 	 @FindBy(xpath="//iron-data-table[@id='variablesList']//data-table-row/div[1]/data-table-cell[6]/paper-icon-button[@role='button']")
 	 private WebElement addVariableDeleteButton;
@@ -1538,8 +1552,8 @@ public class OfferPageObjects extends Init {
 	
    public void enterEmailCreative(String profile,String subject ) throws InterruptedException, UnsupportedFlavorException, IOException {
 	  
-	   jswait.loadClick(emailProfileField);
-	   jswait.loadClick("//preview-email//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
+	  // jswait.loadClick(emailProfileField);
+	 // jswait.loadClick("//preview-email//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
 	   jswait.loadSendKeys(emailCreativeSubject,"email offer by selenium");
 	   
 	   File indexZip = new File("EmailZipFile\\index.zip");
@@ -1717,10 +1731,15 @@ public class OfferPageObjects extends Init {
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
+		if(sheet.equals("Option3Email"))
+		{
+			mandrillCreative();
+		}else {
 		enterCreativeTabDetails(eh,testMode);
+		}
 		clickProceedButton();
 		Thread.sleep(3000);
-
+		
 		// ******************Track tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
 			enterTrackTabDetails(eh);
@@ -1922,6 +1941,20 @@ public class OfferPageObjects extends Init {
 		enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		}
 			
+	}
+	
+	
+	public void mandrillCreative() throws Throwable{
+		selectCreativeLanguageEnglish();
+		jswait.loadSendKeys(emailCreativeSubject,"email offer by selenium");
+		jswait.loadClick(synctemplate);
+		Thread.sleep(10000);
+		jswait.loadSendKeys(mandrillfilter, "SRS_Events_NCS");
+		jswait.loadClick(selecttemplatemandrill);
+		jswait.loadClick(finalselectmandrilltemplate);
+		jswait.loadClick(yesornomandrilltemplate);
+		Thread.sleep(5000);
+		
 	}
 	public void enterCreativeTabDetails(ExcelHelper eh,String testMode) throws Throwable {
 		selectCreativeLanguageEnglish();

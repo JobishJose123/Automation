@@ -30,6 +30,15 @@ public class CatalogPageObjects extends Init{
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
 	
 	
+	@FindBy(xpath="//paper-icon-button[@icon='filter-list']")
+	private WebElement clickfilterbutton;
+	
+	@FindBy(xpath="//div[1]/data-table-row/div[1]/data-table-cell[4]/paper-menu-button/iron-dropdown/div/div/paper-menu/div/paper-item[3]")
+	private WebElement clickviewofferincatalogue;
+	
+	@FindBy(xpath="//iron-data-table[@id='catalogueGrid']/div/iron-list/div/div[1]/data-table-row/div[1]/data-table-cell[4]/paper-menu-button/div/paper-icon-button/iron-icon")
+	private WebElement clickfirstoffercatalogue;
+	
 	@FindBy(xpath="//paper-button[text()='Create New Catalog']")
 	private WebElement createNewCatalogButton;
 	@FindBy(xpath="//div[2]/paper-input[1]/paper-input-container/div[2]/div/input")
@@ -182,6 +191,14 @@ public class CatalogPageObjects extends Init{
 		clickCreateCatalogButton();
 		enterCatalogDetails(name);
 		clickSaveCatalogButton();
+	}
+	
+	public void searchCatalogue(String name1) throws InterruptedException
+	{
+		commonObjects.filterName(name1);
+		jswait.loadClick(clickfirstoffercatalogue);
+		jswait.loadClick(clickviewofferincatalogue);
+		Thread.sleep(2000);
 	}
 	public int addedOffersCount() throws InterruptedException {
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//catalogue-offer-listing/iron-data-table//iron-list//data-table-row")));
