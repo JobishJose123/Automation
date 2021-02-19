@@ -231,7 +231,7 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = "//label[contains(.,'Details')]/following::*[@d='M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z']//../../../..")
 	private WebElement mapVariablecreativeIcon;
 	
-	@FindBy(xpath = "//iron-data-table[@id='variablesList']//iron-list//data-table-row")
+	@FindBy(xpath = "//paper-dialog-scrollable/div/div/variables-grid/iron-data-table/div/iron-list/div/div[1]/data-table-row/div[1]/data-table-cell[1]")
 	private WebElement mapVariableFirstVariable;
 	@FindBy(xpath = "//paper-button[text()='OK']")
 	private WebElement mapVariableOkButton;
@@ -667,8 +667,8 @@ public class OfferPageObjects extends Init {
 		}
 	 public void MapVariableFilterName(String name) throws InterruptedException {
 			jswait.loadClick(mapVariableFilterButton);
-			jswait.loadSendKeys("//iron-data-table[@id='variablesList']//paper-dialog[@id='filterDialog']//label[contains(text(),'Name')]/..//input",name);
-			jswait.loadClick("//iron-data-table[@id='variablesList']//paper-dialog[@id='filterDialog']//paper-button[contains(text(),'Apply')]");
+			jswait.loadSendKeys("//variables-grid/iron-data-table/div/div[2]/data-table-column-filter-dialog/paper-dialog/paper-dialog-scrollable/div/form/paper-input[1]/paper-input-container/div[2]/div/input",name);
+			jswait.loadClick("//paper-dialog-scrollable/div/div/variables-grid/iron-data-table/div/div[2]/data-table-column-filter-dialog/paper-dialog/div/paper-button[3]");
 		}
 	 public void clickAddNewVariableEditButton() throws InterruptedException {
 			jswait.loadClick(addVariableEditButton);
