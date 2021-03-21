@@ -73,6 +73,8 @@ public class LandingPageObjects extends Init{
 	public void navigateToInsightsWorkbench() throws InterruptedException {
 		jswait.loadClick(insightsWorkbench);
 	}
+	
+	
 	public void navigateToConfigurationManagement() throws InterruptedException {
 		jswait.loadClick(configurationManagement);
 	}

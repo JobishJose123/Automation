@@ -6,10 +6,12 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.TimeoutImpl;
 
 
 public class CommonObjects extends Init {
@@ -31,6 +34,20 @@ public class CommonObjects extends Init {
 	public CommonObjects() {
 		PageFactory.initElements(driver, this);
 	}
+	@FindBy(xpath = "(//input[@id='input'])[1]")
+	private WebElement clickdomaintxt;
+	@FindBy(xpath = "//paper-button[contains(.,'Save')]")
+	private WebElement clicksavefordomain;
+	@FindBy(xpath = "//paper-button[contains(.,'Edit')]")
+	private WebElement Editdomainvalues;
+	@FindBy(xpath = "//iron-image[@id='digital-plus']")
+	private WebElement Digitalplusclick;
+	@FindBy(xpath = "//iron-icon[@id='tag-manager']")
+	private WebElement Tagmanagerclick;
+	@FindBy(xpath = "//paper-button[@id='generate-key-button']")
+	private WebElement Generateaccountkey;
+	@FindBy(xpath = "//label[@id='key']")
+	private WebElement AccountkeyTag;
 
 	@FindBy(xpath = "//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
 	private WebElement filterIcon;
@@ -1531,6 +1548,56 @@ public void createHttpConnector(String httpSheet,String httpConnectorName,String
 	}
 	jswait.loadClick(ConnectorSavebtn);
 }
+public void clickDigitalPlusModule() throws InterruptedException {
+	jswait.loadClick(Digitalplusclick);
+}
+public void clickTagManagerConfigurations() throws InterruptedException {
+	jswait.loadClick(Tagmanagerclick);
+}
+public void generateAccountkey() throws InterruptedException {
+
+	//jswait.loadClick(Generateaccountkey);
+	boolean accntkey = driver.findElements(By.xpath("//paper-button[@id='generate-key-button']")).size() > 0;
+	
+	if(accntkey==true) {
+	jswait.loadClick(Generateaccountkey);
+	}else if(accntkey==false) {
+	
+	
+		System.out.println("Account key exist");
+	}
+//	Thread.sleep(5000);
+//	TimeoutImpl t = new TimeoutImpl();
+//	t.startTimer();
+	
+	
+	
+}
+
+//public String getTagbuttontext() throws InterruptedException {
+//	String status = driver.findElement(By.xpath("//paper-button[@id='generate-key-button']")).getText();
+//	System.out.println(status);
+//	return status;
+//}
+public void randonclicklogin() throws InterruptedException {
+	jswait.loadClick("(//img[@src=\"https://192.168.160.142/images/robo-x-top-pane.svg\"])[1]");
+}
+
+public void accountKeyCopy(String tagsheet) throws Exception {
+	String txttagid = driver.findElement(By.xpath("//label[@id='key']")).getText();
+	System.out.println(txttagid);
+	eh.setExcelFile("tagManager", tagsheet);
+	 eh.setCell(1, 0, txttagid);
+	   // eh.setCell(4, 1, txttagid);
+	
+}
+public void configureDomainVariables(String name) throws InterruptedException {
+	jswait.loadClick(Editdomainvalues);
+	jswait.loadSendKeys(clickdomaintxt, name);
+	jswait.loadClick(clicksavefordomain);
+}
+
+
 }
 
 

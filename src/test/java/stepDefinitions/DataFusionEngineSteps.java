@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Random;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -55,6 +57,17 @@ public class DataFusionEngineSteps extends Init {
 
 	public DataFusionEngineSteps() {
 		PageFactory.initElements(driver, this);
+	}
+	@Then("^navigate to connector => data connector => view connection in Digital plus tags$")
+	public void navigate_to_connector_data_connector_view_connection_in_Digital_plus_tags() throws Throwable {
+		DataFusionEngineObjects.ClickDFEbutton();
+		Thread.sleep(3000);
+		DataFusionEngineObjects.Dataconnector();
+		Thread.sleep(2000);
+		DataFusionEngineObjects.ClickDFEtTagJob();
+		Thread.sleep(2000);
+		DataFusionEngineObjects.ClickDFetagsjobviewconnections();
+		
 	}
 	
 	@Then("^click Data Fusion Engine$")
@@ -207,7 +220,19 @@ public class DataFusionEngineSteps extends Init {
 //		r.postRequest("http://"+p.getValue("env")+"/dk-new/jobs", job);
 	}
 	
-	
+	@Then("^create tagmanager job from sheet \"([^\"]*)\"$")
+	public void create_tagmanager_job_from_sheet(String tagsheet) throws Throwable {
+		eh.setExcelFile("tagManager", tagsheet);
+		Random rn = new Random();
+		int n = rn.nextInt(5000) + 1;
+		String jobname = (String) eh.getCell(1, 0);
+		jobname = jobname.replaceAll("[0-9]", "") + n;
+		eh.setCell(1, 0, jobname);
+		System.out.println(jobname);
+		String job =  "{\"extConName\":\"tagmanager\",\"jobType\":1,\"additionalConfig\":\"{\\\"tagCategory\\\":\\\".*\\\",\\\"fieldNames\\\":\\\"customerKey,tagCategory\\\"}\",\"fieldValues\":[{\"value\":\"customerKey\",\"key\":\"customerKey\"},{\"value\":\"tagCategory\",\"key\":\"tagCategory\"}],\"extConProps\":\"sink.connector.input.topic.name=digitalPlusTags\\nsink.isolation.level=nullValue\\nsink.processor.concurrency=1\",\"name\":\""+jobname+"\",\"hostName\":\"flystream\",\"active\":true,\"dkSchema\":\"<xml xmlns=\\\"http://www.w3.org/1999/xhtml\\\">\\n  <block type=\\\"flytxt\\\" id=\\\"u0m~iVrRcWYMEM2B2{rJ\\\" deletable=\\\"false\\\" x=\\\"-176\\\" y=\\\"82\\\">\\n    <field name=\\\"containsHeader\\\">FALSE</field>\\n    <field name=\\\"skipException\\\">FALSE</field>\\n    <field name=\\\"startBlackout\\\">0</field>\\n    <field name=\\\"endBlackout\\\">0</field>\\n    <field name=\\\"operation\\\">Hdfs</field>\\n    <field name=\\\"archiveCheck\\\">TRUE</field>\\n    <field name=\\\"batchOutputPath\\\">/tmp/hdfs</field>\\n    <field name=\\\"key\\\">customerKey</field>\\n    <value name=\\\"lineName\\\">\\n      <block type=\\\"lists_create_with_extract\\\" id=\\\"p(?^da/A)56,z#lCK3#/\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_extract=\\\"1\\\"></mutation>\\n        <value name=\\\"ADD0\\\">\\n          <block type=\\\"delimiter\\\" id=\\\"OM7_jxxQ-Luq/l[;eM=0\\\" deletable=\\\"false\\\" movable=\\\"false\\\" editable=\\\"false\\\">\\n            <mutation items=\\\"1\\\"></mutation>\\n            <field name=\\\"delim\\\">,</field>\\n            <value name=\\\"next_marker_0\\\">\\n              <block type=\\\"ext_variables\\\" id=\\\"*,Pqc2j`;3rP~t]$;n+|\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n                <mutation tp_date_id=\\\"\\\"></mutation>\\n                <field name=\\\"NAME\\\">0</field>\\n                <field name=\\\"operation\\\">string</field>\\n                <field name=\\\"VAR\\\">customerKey</field>\\n                <field name=\\\"tp_date_id\\\"></field>\\n              </block>\\n            </value>\\n            <value name=\\\"next_marker_1\\\">\\n              <block type=\\\"ext_variables\\\" id=\\\"cIF1Tn5NAG^(H2zDC4qk\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n                <mutation tp_date_id=\\\"\\\"></mutation>\\n                <field name=\\\"NAME\\\">1</field>\\n                <field name=\\\"operation\\\">string</field>\\n                <field name=\\\"VAR\\\">tagCategory</field>\\n                <field name=\\\"tp_date_id\\\"></field>\\n              </block>\\n            </value>\\n          </block>\\n        </value>\\n      </block>\\n    </value>\\n    <value name=\\\"store_stream\\\">\\n      <block type=\\\"lists_create_with_stream\\\" id=\\\"t$zhGi(*AKu,-o`GImaM\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_stream=\\\"0\\\"></mutation>\\n      </block>\\n    </value>\\n    <value name=\\\"store_batch\\\">\\n      <block type=\\\"lists_create_with_batch\\\" id=\\\"klsocCP6=vQzfSf]]X?}\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_batch=\\\"0\\\"></mutation>\\n      </block>\\n    </value>\\n    <value name=\\\"store_neon\\\">\\n      <block type=\\\"lists_create_with_neon\\\" id=\\\"Nmjp!i!~0J_x-Y.+~1Ia\\\" deletable=\\\"false\\\" movable=\\\"false\\\">\\n        <mutation lists_create_with_neon=\\\"1\\\"></mutation>\\n        <value name=\\\"ADD0\\\">\\n          <block type=\\\"NEON_Profile\\\" id=\\\"J=kE0)/)#;@e,U$2#yPe\\\">\\n            <mutation profile_partner=\\\"6869\\\" profile_partner_name=\\\"Email_q11 [String]\\\" partner=\\\"1\\\"></mutation>\\n            <field name=\\\"partner\\\">1</field>\\n            <field name=\\\"value\\\">6869</field>\\n            <field name=\\\"opType\\\">1</field>\\n            <field name=\\\"date\\\">pickedTime</field>\\n            <field name=\\\"key\\\">tagCategory</field>\\n          </block>\\n        </value>\\n      </block>\\n    </value>\\n  </block>\\n</xml>\",\"schema\":\"{\\\"name\\\":\\\"TestScript1615958403596\\\",\\\"inputFolder\\\":\\\"TestScript1615958403596\\\",\\\"outputfolder\\\":\\\"TestScript1615958403596\\\",\\\"regex\\\":\\\"TestScript1615958403596\\\",\\\"init\\\":\\\"mcustomerKey = mf.createMarker(null,0, 0);\\\\n\\\\nmtagCategory = mf.createMarker(null,0, 0);\\\\n\\\\nbyte [] NBqdumtagCategory_Profile_entityId_b = (\\\\\\\"17\\\\\\\").getBytes();\\\\n\\\\nNBqdumtagCategory_Profile_entityId= mf.createMarker(NBqdumtagCategory_Profile_entityId_b,0,NBqdumtagCategory_Profile_entityId_b.length);\\\\n\\\\nbyte [] NBqdumtagCategory_Profile_name_b = (\\\\\\\"6869\\\\\\\").getBytes();\\\\n\\\\nNBqdumtagCategory_Profile_name= mf.createMarker(NBqdumtagCategory_Profile_name_b,0,NBqdumtagCategory_Profile_name_b.length);\\\\n\\\\nbyte [] NBqdumtagCategory_Profile_opType_b = (\\\\\\\"1\\\\\\\").getBytes();\\\\n\\\\nNBqdumtagCategory_Profile_opType= mf.createMarker(NBqdumtagCategory_Profile_opType_b,0,NBqdumtagCategory_Profile_opType_b.length);\\\\n\\\",\\\"absProcessor\\\":\\\"private Marker mcustomerKey = mnull;\\\\n\\\\nprivate Marker mtagCategory = mnull;\\\\n\\\\nprivate Router r_token_44 =  new Router(new int[]{0,1});\\\\nprivate byte[] token_44= \\\\\\\",\\\\\\\".getBytes();\\\\n\\\\nprivate Marker NBqdumtagCategory_Profile_entityId = mnull;\\\\n\\\\nprivate Marker NBqdumtagCategory_Profile_name = mnull;\\\\n\\\\nprivate Marker NBqdumtagCategory_Profile_opType = mnull;\\\\n\\\\nprivate Store neonStore = new NeonStore(\\\\\\\"/Files/Global/Ostrich_Uploader/\\\\\\\",\\\\\\\"%(className)\\\\\\\");\\\\n\\\",\\\"extract\\\":\\\"line.splitAndGetMarkers(token_44,r_token_44,mf,mcustomerKey,mtagCategory);\\\\n\\\",\\\"transformation\\\":\\\"\\\",\\\"store\\\":\\\"neonStore.save(data, fileName.toString(),mcustomerKey,NBqdumtagCategory_Profile_entityId,NBqdumtagCategory_Profile_name,NBqdumtagCategory_Profile_opType,mtagCategory, mpickedTime);\\\\n\\\",\\\"type\\\":\\\"single\\\",\\\"skipline\\\":false,\\\"done\\\":\\\"sb.append(neonStore.done()).append(\\\\\\\",\\\\\\\");\\\\n\\\",\\\"setStore\\\":\\\"neonStore.set(fileNameStr);\\\\n neonStore.setJobId(jobId);\\\\n\\\",\\\"skipheader\\\":\\\"false\\\",\\\"fileName\\\":\\\"test\\\"}\"}";
+		System.out.println(job);
+		DK.createDKJob(job);
+	}
 	@Then("^create dk jobs for checking filename Extraction from sheet \"([^\"]*)\"$")
 	public void createDKJobfilenameExtraction(String sheet) throws Exception {
 //		r.getRequest("http://"+p.getValue("env")+"/dk-new/jobs?projection=jobView&page=0&size=50&name=selenium_list", "dcdcdc");
@@ -234,7 +259,19 @@ public class DataFusionEngineSteps extends Init {
 //		r.postRequest("http://"+p.getValue("env")+"/dk-new/jobs", job);
 	}
 	
-
+	@Then("^check the DK job creation from sheet \"([^\"]*)\" with data \"([^\"]*)\" with key \"([^\"]*)\" with filename \"([^\"]*)\"$")
+	public void check_the_DK_job_creation_from_sheet_with_data_with_key_with_filename(String tagsheet, String data, String keyword, String filename) throws Throwable {
+     Thread.sleep(2000);
+		
+		eh.setExcelFile("tagManager", tagsheet);
+	
+		String JobName = (String) eh.getCell(1, 0);
+		commonObjects.filterName(JobName);
+		commonObjects.clickOptionsIcon();
+		DataFusionEngineObjects.clickEditOption();
+		Thread.sleep(2000);
+		DataFusionEngineObjects.dfejobverificationold(filename,data,keyword);
+	}
 	
 	@Then("^open DK Job from sheet and verify job Operations of sheet \"([^\"]*)\" and file \"([^\"]*)\" with data \"([^\"]*)\" with key \"([^\"]*)\"$")
 	public void Verifydfejoboperations(String sheet,String filename,String data,String keyword) throws Exception {

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 import baseClasses.ExcelHelper;
@@ -57,6 +58,27 @@ public class ConsumerProfileSteps extends Init{
 		}
 		customerProfilePage.searchMsisdn(msisdn);
 	}
+	@Then("^verify the data successfully uploaded$")
+	public void verify_the_data_successfully_uploaded() throws Throwable {
+		Thread.sleep(5000);
+		String tagcategory = "http://flytxttags.epizy.com";
+		String msisdn = "919846130328";
+		if(msisdn.length()<10) {
+			msisdn = getMsisdn();
+			
+		jswait.waitUntil("//data-table-cell/span[contains(.,'Email_q11')]//following::data-table-cell[2]/span");
+		String txttagid = driver.findElement(By.xpath("//data-table-cell/span[contains(.,'Email_q11')]")).getText();
+		System.out.println(txttagid);
+		if(tagcategory.equalsIgnoreCase(txttagid))
+		{
+			System.out.println("uploaded successfully");
+		}
+		}
+		//String txttagid = driver.findElement(By.xpath("//data-table-cell[contains(.,'Email_q11')]//following::data-table-cell[2]")).getText();
+		//System.out.println(txttagid);
+		//System.out.println(tagcategory);
+	}
+	
 	@Then("^verify customer info page of \"([^\"]*)\"$")
 	public void verifyCustomerProfiile(String msisdn) throws Exception {
 		if(msisdn.length()<=10) {

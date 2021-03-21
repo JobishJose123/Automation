@@ -53,11 +53,14 @@ public class DataFusionEngine extends Init {
 	private WebElement export;
 	///html//div[@id='mainContainer']//*/div/paper-button[contains(.,'Add Job')]
 	
-	
+	@FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'Digital Plus Tags')]//following::iron-icon[1]")
+	private WebElement DFEdigitalplustags;
 	@FindBy(xpath = "//vaadin-grid-cell-content[contains(.,'File')]//following::iron-icon[1]")
 	private WebElement DFEfileoptions;
 	@FindBy(xpath = "(//vaadin-grid-cell-content[contains(.,'File')]//following::paper-item[contains(.,' View all connections')])[1]")
 	private WebElement Viewallconnectionsfile;
+	@FindBy(xpath = "(//vaadin-grid-cell-content[contains(.,'Digital Plus Tags')]//following::paper-item[contains(.,' View all connections')])[1]")
+	private WebElement Viewallconnectionstagsjob;
 	
 	@FindBy(xpath = "//*[@id=\"router\"]/app-route[17]/ndx-connectors/paper-card[contains(.,'Data Connector')]")
 	private WebElement Dataconnector;
@@ -166,7 +169,9 @@ public class DataFusionEngine extends Init {
 		jswait.loadClick(export);		
 	}
 	
-	
+	public void ClickDFEtTagJob() throws InterruptedException{
+		jswait.loadClick(DFEdigitalplustags);		
+	}
 	
 	public void ClickDFEfileoptions() throws InterruptedException{
 		jswait.loadClick(DFEfileoptions);		
@@ -174,6 +179,9 @@ public class DataFusionEngine extends Init {
 	
 	public void ClickDFefileviewconnections() throws InterruptedException{
 		jswait.loadClick(Viewallconnectionsfile);		
+	}
+	public void ClickDFetagsjobviewconnections() throws InterruptedException{
+		jswait.loadClick(Viewallconnectionstagsjob);	
 	}
 	
 	public void Dataconnector() throws InterruptedException{
@@ -334,7 +342,7 @@ public class DataFusionEngine extends Init {
 	
 	public void dfejobverificationold(String filename,String data,String keyword) throws Exception{
 		jswait.loadClick(logiceditor);
-		
+		Thread.sleep(2000);	
 		jswait.loadClick(simulate);
 		
 		File NormalInput = new File("DKInputfile\\"+filename);

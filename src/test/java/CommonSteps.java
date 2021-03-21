@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -35,13 +36,16 @@ public class CommonSteps extends Init {
 	public CommonSteps() {
 		PageFactory.initElements(driver, this);
 	}
-	
+	@FindBy(xpath="//label[contains(text(),'System Administration')]")
+	private WebElement SystemAdministration;
 	@FindBy(xpath="//label[contains(text(),'Offer Management')]")
 	private WebElement offerManagement;
 	@FindBy(xpath="//label[text()='Reports']/..")
 	private WebElement reports;
 	@FindBy(xpath="//*[@id='sym1']")
 	private WebElement products;
+	@FindBy(xpath="//div[contains(text(),'IP Access Control')]")
+    private WebElement IPAccesscontrol;
 	
 	@FindBy(xpath="//*[@id='loginButton']")
     private WebElement loginButton;
@@ -107,6 +111,27 @@ public class CommonSteps extends Init {
     	sqs.setCell(row, 3, cu.getCurrentDate("dd MMM YYYY hh:mm aaa z"));
 	}
 	
+	@Given("^login to tag manager implemented website$")
+	public void login_to_tag_manager_implemented_website() throws Throwable {
+		driver.get("http://flytxttags.epizy.com/");
+		Thread.sleep(2000);
+	}
+	
+	@Then("^trigger the website configured in google tag manager$")
+	public void trigger_the_website_configured_in_google_tag_manager() throws Throwable {
+		driver.navigate().refresh();
+	}
+	@Then("^navigate to System Administration$")
+	public void navigate_to_System_Administration() throws Throwable {
+		jswait.loadClick(SystemAdministration);
+	}
+	@Then("^navigate to IP Access Control$")
+	public void navigate_to_IP_Access_Control() throws Throwable {
+		jswait.loadClick(IPAccesscontrol);
+	}
+	
+	
+	
 	@Given("^login$")
     public void loginuser() throws Exception {
      driver.get("https://"+p.getValue("env"));
@@ -114,7 +139,9 @@ public class CommonSteps extends Init {
      loginPage.login(p.getValue("username"), p.getValue("password"));
 	 Thread.sleep(5000);
 	 try {
-		 driver.switchTo().alert().dismiss();
+		 driver.navigate().refresh();
+		 Thread.sleep(5000);
+		// driver.switchTo().alert().dismiss();
 	 }
 	 catch(Exception e) {
 		 System.out.println("robox popup not found");
@@ -618,7 +645,34 @@ public class CommonSteps extends Init {
 	
 	}
 	
+	@Then("^navigate to digital plus module$")
+	public void navigate_to_digital_plus_module() throws Throwable {
+		commonObjetcs.clickDigitalPlusModule();
+	}
 	
+	@Then("^navigate to tag manager$")
+	public void navigate_to_tag_manager() throws Throwable {
+		commonObjetcs.clickTagManagerConfigurations();
+	}
+	@Then("^Generate the Account key$")
+	public void generate_the_Account_key() throws Throwable {
+		commonObjetcs.generateAccountkey();
+	}
+	@Then("^click random$")
+	public void click_random() throws Throwable {
+		commonObjetcs.randonclicklogin();
+	}
 	
+	@Then("^copy the Account key to sheet \"([^\"]*)\"$")
+	public void copy_the_Account_key_to_sheet(String tagsheet) throws Throwable {
+		commonObjetcs.accountKeyCopy(tagsheet);
+	}
+	@Then("^configure application domains from sheet \"([^\"]*)\"$")
+	public void configure_application_domains_from_sheet(String sheetname) throws Throwable {
+		eh.setExcelFile("tagManager", sheetname);
+		String name = eh.getCellByColumnName("Domain_name");
+		System.out.println(name);
+		commonObjetcs.configureDomainVariables(name);
+	}
 	
 }

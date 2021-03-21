@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Random;
 
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,6 +23,7 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.PropHandler;
+import baseClasses.Request;
 import baseClasses.SQLHandler;
 import baseClasses.apiautomation;
 import cucumber.api.java.en.Then;
@@ -201,6 +203,32 @@ String job33="{\"name\":\""+rulename+"\",\"programId\":"+pgmid+",\"targetDetails
 			 apiautomation.createprogramrule(job33);
 		
 	}
+	}
+	
+	@Then("^copy default tagmanager authkey and verify input hit api server for \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+	public void copy_default_tagmanager_authkey_and_verify_input_hit_api_server_for_from_sheet(String msisdn, String tagsheet) throws Throwable {
+		String tagauthkey = driver.findElement(By.xpath("//vaadin-grid-cell-content[contains(.,'default_tag_manager_auth_key')]//following::vaadin-grid-cell-content[2]")).getText();
+		System.out.println(tagauthkey);
+		eh.setExcelFile("tagManager", tagsheet);
+		String tagaccountkey = eh.getCellByColumnName("TagManager Account key");
+		System.out.println(tagaccountkey);
+		StringBuilder postBody = new StringBuilder();
+		postBody.append("{\r\n"
+				+ "  \"MessageId\": \"333338\",\r\n"
+				+ "  \"Message\": \"{\\\"customerKey\\\":"+msisdn+",\\\"tagCategory\\\":\\\"Credit Card\\\",\\\"additionalFields\\\":{\\\"Card Type\\\":\\\"Credit\\\",\\\"Card Value\\\":\\\"1000\\\"},\\\"accountKey\\\":"+tagaccountkey+",\\\"gtmTagId\\\":11,\\\"gtmEventId\\\":42}\"\r\n"
+				+ "}");
+		System.out.println(postBody.toString());
+		StringBuilder str = new StringBuilder();
+		str.append("http://");
+		str.append(p.getValue("nginxIp"));
+		str.append(":");
+		str.append("8092");
+		str.append("/rest/authkey/"+tagauthkey+"/digitalPlusTags");
+		System.out.println(str.toString());
+		Request req = new Request();
+		String resp=req.postRequeststring(str.toString(), postBody.toString());
+		
+		
 	}
 	
 	

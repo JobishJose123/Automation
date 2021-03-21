@@ -356,6 +356,7 @@ public class CustomerProfilePage extends Init{
 		enterValueForMsisdn(msisdn);
 		clickSearchButton();
 	}
+	
 	public void navigateToCustomerProfile() throws InterruptedException {
 		jswait.loadClick(customerProfile);
 	}
