@@ -188,7 +188,3 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataShee
 |Emailoption3|Option3Email|usageMetric|Create|no limit|no limit|none|single creative|none|none|2|activate|BCDataStorage|
 
 
-  
-
-  
-

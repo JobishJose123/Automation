@@ -41,6 +41,9 @@ public class ReportPageObjects extends Init{
 	@FindBy(xpath="(//paper-icon-button[@title='Remove'])[2]")
     private WebElement DeleteFilter;
 	
+	@FindBy(xpath="//paper-button[contains(.,'Add')]")
+	  private WebElement BIAdd;
+	
 	@FindBy(xpath="//iron-icon[@icon='icons:filter-list']")
   private WebElement setFilter;
 	
@@ -49,6 +52,13 @@ public class ReportPageObjects extends Init{
 	
 	@FindBy(xpath="(//paper-item[contains(.,'Program')])[1]")
   private WebElement program;
+	
+	@FindBy(xpath="(//paper-item[contains(.,'Program Rule')])[1]")
+	  private WebElement programrule;
+	
+	@FindBy(xpath="(//paper-item[contains(.,'Offer')])[1]")
+	  private WebElement offerfilter;
+	
 	
 	@FindBy(xpath="(//paper-item[contains(.,'Broadcast')])[1]")
 	  private WebElement broadcast;
@@ -146,6 +156,22 @@ private WebElement customerProfile;
 		
 		
 	}
+	public void biAckVerification(String ack) throws Exception{
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content/span[contains(.,'"+ack+"')])[1]"));
+	}
+	public void biofferelligibleVerification(String offerelligible) throws Exception{
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content/span[contains(.,'"+offerelligible+"')])[1]"));
+	}
+	public void biofferackVerification(String offerack) throws Exception{
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content/span[contains(.,'"+offerack+"')])[9]"));
+	}
+	public void biAckevents(String eventack) throws Exception{
+		Thread.sleep(2000);
+		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content/span[contains(.,'"+eventack+"')])[3]"));
+	}
 	
 	public void ackConversionFulfillment(String ack,String conversion,String fulfillment) throws Exception{
 		Thread.sleep(2000);
@@ -158,6 +184,40 @@ private WebElement customerProfile;
 		System.out.println(offerRecommendedValue);
 		Assert.assertTrue(jswait.checkVisibility("//div[contains(.,'Impressions')][@class='number-title style-scope broadcast-report-carousel']//following::div[@title='"+offerRecommendedValue+"']"));
 		
+	}
+	
+	public void FilterBiinbound(String rulename) throws InterruptedException{
+		jswait.loadClick(setFilter);
+		jswait.loadClick(BIAdd);
+		jswait.loadClick(inputColumn);
+		jswait.loadClick(programrule);
+		jswait.loadClick(setCondition);
+		jswait.loadClick(contains);
+		jswait.loadSendKeys(programNameInput,rulename);
+		jswait.loadClick(saveFilter);
+	}
+
+	public void FilterBioffers(String offername) throws InterruptedException{
+		jswait.loadClick(setFilter);
+		jswait.loadClick(BIAdd);
+		jswait.loadClick(inputColumn);
+		jswait.loadClick(offerfilter);
+		jswait.loadClick(setCondition);
+		jswait.loadClick(contains);
+		jswait.loadSendKeys(programNameInput,offername);
+		jswait.loadClick(saveFilter);
+	}
+	
+	
+	public void FilterBifunction(String bcName) throws InterruptedException{
+		jswait.loadClick(setFilter);
+		jswait.loadClick(BIAdd);
+		jswait.loadClick(inputColumn);
+		jswait.loadClick(broadcast);
+		jswait.loadClick(setCondition);
+		jswait.loadClick(contains);
+		jswait.loadSendKeys(programNameInput,bcName);
+		jswait.loadClick(saveFilter);
 	}
 	
 	

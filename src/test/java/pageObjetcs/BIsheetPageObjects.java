@@ -37,7 +37,7 @@ public class BIsheetPageObjects extends Init{
 	}
 	@FindBy(xpath="//div[@id='toggleButton']")
 	private WebElement AutoRefreshbtn;
-	@FindBy(xpath="//*[@id='sym' and @icon='app-primary:reportDesigner']")
+	@FindBy(xpath="//*[@id='journey-icon' and @icon='app-primary:reportDesigner']")
 	private WebElement clickBI;
 	
 	@FindBy(xpath="//paper-button[contains(.,'Create New Worksheet')]")
@@ -227,10 +227,24 @@ public class BIsheetPageObjects extends Init{
 		Thread.sleep(3000);
 		jswait.loadSendKeys(BIname, name);
 		jswait.loadSendKeys(BIdescription, description);
+		if(timerange.equals("between_yesterday_and_tomorrow"))
+		{
+			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
 		if(timerange.equals("Yesterday"))
 				{
 			timerange="1";
-				}else if(timerange.equals("Last_week")) {
+				}else if(timerange.equals("Last_week")) {//paper-item[contains(.,'is between')]
 					timerange="2";
 				}else if(timerange.equals("Last_month")) {
 					timerange="3";
@@ -240,6 +254,7 @@ public class BIsheetPageObjects extends Init{
 					timerange="5";
 				}
 		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
 		DateColumnSelection();
 		programSelection();
 		programRuleSelection();
@@ -277,6 +292,20 @@ public class BIsheetPageObjects extends Init{
 		Thread.sleep(3000);
 		jswait.loadSendKeys(BIname, name);
 		jswait.loadSendKeys(BIdescription, description);
+		if(timerange.equals("between_yesterday_and_tomorrow"))
+		{
+			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
 		if(timerange.equals("Yesterday"))
 				{
 			timerange="1";
@@ -290,6 +319,7 @@ public class BIsheetPageObjects extends Init{
 					timerange="5";
 				}
 		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
 		DateColumnSelection();
 //		columnSelectionSecond();
 //		eventsAckMessage();
@@ -316,6 +346,20 @@ public class BIsheetPageObjects extends Init{
 		Thread.sleep(3000);
 		jswait.loadSendKeys(BIname, name);
 		jswait.loadSendKeys(BIdescription, description);
+		if(timerange.equals("between_yesterday_and_tomorrow"))
+		{
+			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
 		if(timerange.equals("Yesterday"))
 				{
 			timerange="1";
@@ -329,6 +373,7 @@ public class BIsheetPageObjects extends Init{
 					timerange="5";
 				}
 		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
 		DateColumnSelection();
 		ProductSelection();
 		ProductClassSelection();
@@ -368,6 +413,20 @@ public class BIsheetPageObjects extends Init{
 		Thread.sleep(3000);
 		jswait.loadSendKeys(BIname, name);
 		jswait.loadSendKeys(BIdescription, description);
+		if(timerange.equals("between_yesterday_and_tomorrow"))
+		{
+			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
 		if(timerange.equals("Yesterday"))
 				{
 			timerange="1";
@@ -381,6 +440,7 @@ public class BIsheetPageObjects extends Init{
 					timerange="5";
 				}
 		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
 		DateColumnSelection();
 		campaignCategoryNameSelection();
 		campaignNameSelection();
@@ -395,6 +455,8 @@ public class BIsheetPageObjects extends Init{
 		
 		
 	}
+	
+	
 	
 	public void saveBISheet() throws InterruptedException{
 		scheduleAndShare();
@@ -843,7 +905,7 @@ public class BIsheetPageObjects extends Init{
 		//jswait.loadClick(DaterefferenceBC);
 		Thread.sleep(2000);
 		//jswait.loadClick(randomClickontopcalculation);
-		jswait.loadSendKeys(refferenceColumn, "Campaign Category Name");
+		jswait.loadSendKeys(refferenceColumn, "Broadcast Name");
 		jswait.loadClick(referencecoloumndropdown);
 		//jswait.loadClick(referenceColmnBCName);
 		jswait.loadClick(clicksavebutton);
@@ -857,7 +919,7 @@ public class BIsheetPageObjects extends Init{
 		//jswait.loadClick(DaterefferenceBC);
 		Thread.sleep(2000);
 		//jswait.loadClick(randomClickontopcalculation);
-		jswait.loadSendKeys(refferenceColumn, "Total Offers presented");
+		jswait.loadSendKeys(refferenceColumn, "Total offers elligible");
 		jswait.loadClick(referencecoloumndropdown);
 		//jswait.loadClick(referenceColmnBCName);
 		jswait.loadClick(clicksavebutton);

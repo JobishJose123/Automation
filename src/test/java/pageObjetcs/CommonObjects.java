@@ -805,6 +805,14 @@ public void clickActivateOption() throws Throwable {
 		clickFilterApplyButton();
 	}
 	
+	public void deactivateBI(String name) throws InterruptedException {
+		Thread.sleep(2000);
+		jswait.loadClick("(//paper-icon-button[@icon='icons:more-vert']/iron-icon[@id='icon'])[1]");
+		jswait.loadClick("//paper-item[contains(.,'Deactivate')]");
+		jswait.loadClick("//paper-button[contains(.,'Yes')]");
+		Thread.sleep(2000);
+	}
+	
 	public void filterBCName(String sheetname, String name) throws InterruptedException {
 		Thread.sleep(10000);
 		Thread.sleep(10000);
