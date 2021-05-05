@@ -20,7 +20,7 @@ Scenario: Verify Creating Offer Catalogue
   Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue
   Then Add "rechargeVoicePush" offer to Offer Catalogue
   Then Add "rechargeEmail" offer to Offer Catalogue
-  Then Add "STVSMS" offer to Offer Catalogue
+  #Then Add "STVSMS" offer to Offer Catalogue
   Then save "offerCatalogInputData" data to spreadsheet from "defaultCatalog" with string offer catalog 
   
  

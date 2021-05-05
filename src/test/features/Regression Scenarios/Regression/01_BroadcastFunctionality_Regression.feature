@@ -1048,7 +1048,7 @@ Examples:
 |recurringBC|4|
 
 
-@NX-2052 @initBrowser @closeBrowser
+@NX-2052 @initBrowser 
 Scenario: verify bc notification
 Then filter the bc from sheet "ConversionBC" from row "12" and column "0" and write in sheet "one-offBC"
 Given login 
@@ -1067,6 +1067,52 @@ Then verify the BC notification in mail "Delivering" from workbook "bcInputData"
 Then verify the BC notification in mail "Completed" from workbook "bcInputData" and sheet "one-offBC"
 
 
+@NX-Bcnotificationsms @initBrowser 
+Scenario: verify bc notification
+Then filter the bc from sheet "ConversionBC" from row "12" and column "0" and write in sheet "one-offBC"
+Given login 
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "one-offBC" for bctype "onetime"
+Then wait until status of "one-offBC" is "Completed"
+Then wait for 1 minutes
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "919846130328"
+Then click on events tab
+#Then verify the condition "Acknowledged" event for the bc notification "Rendering" from file "bcInputData" of sheet "one-offBC"
+Then verify the condition "Acknowledged" event for the bc notification "started" from file "bcInputData" of sheet "one-offBC"
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "919846130328"
+Then click on events tab
+Then verify the condition "Acknowledged" event for the bc notification "completed" from file "bcInputData" of sheet "one-offBC"
+
+@NX-Bcnotificationsms @initBrowser 
+Scenario: verify bc notification
+Then filter the bc from sheet "ConversionBC" from row "12" and column "0" and write in sheet "one-offBC"
+Given login 
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "Emailnotification" for bctype "onetime"
+Then wait until status of "Emailnotification" is "Completed"
+Then wait for 1 minutes
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "919846130328"
+Then click on events tab
+#Then verify the condition "Acknowledged" event for the bc notification "Rendering" from file "bcInputData" of sheet "one-offBC"
+Then verify the condition "Acknowledged" event for the bc notification "started" from file "bcInputData" of sheet "Emailnotification"
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "919846130328"
+Then click on events tab
+Then verify the condition "Acknowledged" event for the bc notification "completed" from file "bcInputData" of sheet "Emailnotification"
+
 @NDX-feedbackBC @initBrowser @closeBrowser
 Scenario: verify feedback for recurring bc
 Then filter the bc from sheet "ConversionBC" from row "13" and column "0" and write in sheet "recurrBCDaily"
@@ -1083,11 +1129,43 @@ Then activate bc
 Then filter the bc from file "bcInputData" of sheet "recurrBCDaily" for bctype "onetime"
 Then click "Configure Feedback" for "recurringchildbc" for bctype "onetime" 
 Then configure feedback for bc from sheet "recurrBCDaily" and bctype "recurring"
-Then wait until status of "recurrBCDaily" from file "bcInputData" is "Completed" for bctype "recurring"
+Then wait until status of "recurrBCDaily" from file "bcInputData" is "completed" for bctype "recurring"
 
+#############Latch verification##################
 
+@NDX-latchTriggerBCverification  @initBrowser
+Scenario: Verify the activation and status of latch trigger bc
+Then filter the bc from sheet "ConversionBC" from row "6" and column "0" and write in sheet "latchbc"
+Given login
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "latchbc" for bctype "onetime"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "latchbc"
+Then wait until status of "latchbc" from file "bcInputData" is "Delivering" for bctype "onetime"
 
+################Start the latch simulator then run the following cases################
+@NDX-latcheventverification  @initBrowser
+Scenario: Verify the event verification of latch 
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "919995335682"
+Then click on events tab
+Then verify the "Network Latch" event
 
+@NDX-latchTriggereventverificartion  @initBrowser
+Scenario: Verify the event verification of latch trigger bc
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "919995335682"
+Then click on events tab
+Then verify the condition Acknowledged event for the bc from sheet "latchbc" for the campaign from sheet "campaignBC"
+Then verify the condition Confirmed Delivery event for the bc from sheet "latchbc" for the campaign from sheet "campaignBC"
 
 
 

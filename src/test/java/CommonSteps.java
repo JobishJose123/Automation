@@ -526,7 +526,7 @@ public class CommonSteps extends Init {
 		eh.setExcelFile("streamingAttribute", streamAttrSheet);
 		String streamAttrName=(String) eh.getCell(1, 0);
 		streamAttrName=RandomNameGenerator.getRandomName(streamAttrName);
-		eh.setCell(1, 0,"streamAttrName");
+		eh.setCell(1, 0,streamAttrName);
 		String description=(String)eh.getCell(1, 1);
 		String value1=(String) eh.getCell(1, 2);
 		String value2=(String)eh.getCell(1,3);

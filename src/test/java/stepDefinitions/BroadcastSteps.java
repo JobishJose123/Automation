@@ -2008,7 +2008,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 		String statusOfBc = broadcastPageObjects.getTopBcStatus();
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
-		while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(20)) {
+		while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(50)) {
 			statusOfBc = broadcastPageObjects.getTopBcStatus();
 			System.out.println(statusOfBc);
 			Thread.sleep(3000);
@@ -3704,6 +3704,28 @@ public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_a
 	enterDeliveryTabDetails(bc_type,bcSheet);
 }
 }
+@Then("^enter deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
+public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet_with(String endType, String targetRenderTime, String bcExpiry, String bcSheet, String notification) throws Throwable {
+	eM.setExcelFile("bcInputData", bcSheet);
+	String bc_type = (String) eM.getCell(1, 7);
+	System.out.println("bc_type is :"+bc_type);
+	if(notification.equals("notification")) {
+		broadcastPageObjects.bcNotifications();
+		broadcastPageObjects.bcNotificationsadd();
+		broadcastPageObjects.addNotificationuser();
+		broadcastPageObjects.bcNotificationsok();
+	}else {
+		System.out.println("no notification configured");
+	}
+	if(bc_type.equalsIgnoreCase("recurring")) {
+		broadcastPageObjects.recurringBCDeliverTabDetails(endType,targetRenderTime,bcExpiry,bcSheet);
+	}
+	else {
+		System.out.println("inside non recurring bc s");
+	enterDeliveryTabDetails(bc_type,bcSheet);
+}
+}
+
 @Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with connector from sheet \"([^\"]*)\"$")
 public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_with_connector_from_sheet(String offerSheet, String bcSheet, String connectorSheet) throws Throwable {
 	eM.setExcelFile("bcInputData", bcSheet);
@@ -4371,6 +4393,14 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 	}
 		}
 	}
+	
+	@Then("^verify the \"([^\"]*)\" event$")
+	public void verify_the_event(String event) throws Throwable {
+		broadcastPageObjects.verifyEventNetworklatch(event);
+	}
+	
+	
+	
 	@Then("^verify the condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
 	public void verify_the_condition_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
       eh.setExcelFile("bcInputData", bcSheet);
@@ -4380,6 +4410,14 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
       broadcastPageObjects.verifyEventOfTheBC(event,bcName,camapignName);
      
 	}
+	
+
+	@Then("^verify the condition \"([^\"]*)\" event for the bc notification \"([^\"]*)\" from file \"([^\"]*)\" of sheet \"([^\"]*)\"$")
+	public void verify_the_condition_event_for_the_bc_notification_from_file_of_sheet(String event, String status, String file, String sheet) throws Throwable {
+	eh.setExcelFile(file, sheet);
+    String bcName =eh.getCellByColumnName("BC Name");
+    broadcastPageObjects.verifyEventNotification(event,bcName,status);
+}
 	
 	@Then("^verify the condition (.*) event for the recurring seeding bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
 	public void verify_the_condition_event_for_the_seeding_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {

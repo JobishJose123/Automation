@@ -6,7 +6,7 @@ Feature: Test suite on Offer creation
   Create all types of offers
 
        
- @NDX-5165 @initBrowser  @testusage
+ @NDX-5165 @initBrowser  @testusage 
   Scenario: Verify the Create offer using WAP Push Channel and Recharge offer Type 
     Given login
     Then navigate to precision marketer
@@ -16,7 +16,7 @@ Feature: Test suite on Offer creation
     Then verify recharge offer from sheet "rechargeWAP"
 #    Then save "offerInputData" data to spreadsheet from "rechargeWAP" with string recharge wap offer with fullDetails product
    
-  @NDX-5164 @initBrowser 
+  @NDX-5164 @initBrowser @closeBrowser
   Scenario: Verify the Create offer using SMS Channel and STV Type
     Given login
     When navigate to precision marketer
@@ -26,7 +26,7 @@ Feature: Test suite on Offer creation
     Then verify "STVWAP" offer in grid
 #    Then save "offerInputData" data to spreadsheet from "STVWAP" with string stv wap offer with fullDetails product
   
-   @rechargeSMS @initBrowser 
+   @rechargeSMS @initBrowser @closeBrowser
    Scenario: Email Channel -->Verify the Create offer using STVSMS 
      Given login
      Then navigate to precision marketer
@@ -136,7 +136,7 @@ Feature: Test suite on Offer creation
 # 		Then save "offerInputData" data to spreadsheet from "usageBasedWAP" with string usageBasedWAP offer with fullDetails product
  		
  		@NDX-usageBasedSMS
-   @initBrowser @closeBrowser
+   @initBrowser 
    Scenario: usageBasedSMS offer
      Given login
  		When navigate to precision marketer

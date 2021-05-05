@@ -51,6 +51,27 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataShee
 |bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|status|BCDataSheet|                  
 |Emailoption1|Option1Email|usageMetric|Create|no limit|no limit|none|single creative|none|none|2|activate|BCDataStorage|
 
+  @NDX-CreateEmailbcnotification @initBrowser  
+Scenario Outline:Create Email broadcast to verify bc notification
+Given login
+Then navigate to precision marketer
+Then wait for 1 minutes
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "none"
+Then enter target tab details target condition <targetCondition> type "<targetType>" TG "<targetCount>" CG "<cgCount>" DNC "<DNCType>"
+Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>" with "<creative>" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>" with "notification"
+Then "<status>" bc
+Then wait for 4000 milliseconds 
+Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataSheet>" 
+ Examples:
+|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|status|BCDataSheet|                  
+|Emailnotification|Option1Email|usageMetric|Create|no limit|no limit|none|single creative|none|none|2|activate|BCDataStorage|
+
+
 
 
 @ndx-withtracking   @initBrowser
@@ -82,7 +103,7 @@ Scenario: rechargeEmail offer
   
   
   @NDX-CreateEmailbcoption2 @initBrowser  
-Scenario Outline:Create Email broadcast to verify bc functionality option1
+Scenario Outline:Create Email broadcast to verify bc functionality option2
 Given login
 Then navigate to precision marketer
 Then wait for 1 minutes
@@ -168,7 +189,7 @@ Scenario: rechargeEmail offer
 
 
 @NDX-CreateEmailbcoption3 @initBrowser  
-Scenario Outline:Create Email broadcast to verify bc functionality option1
+Scenario Outline:Create Email broadcast to verify bc functionality option3
 Given login
 Then navigate to precision marketer
 Then wait for 1 minutes

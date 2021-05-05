@@ -233,7 +233,7 @@ Then wait for 4000 milliseconds
 
 ## ////////////////////////// NOTIFICATION AND FEEDBACK BC /////////////////////
 
-@NDX-NotificationBC  @initBrowser @closeBrowser
+@NDX-NotificationBC  @initBrowser 
 Scenario: Create New Broadcast: verify create BC Notification
 Given login
 Then navigate to precision marketer

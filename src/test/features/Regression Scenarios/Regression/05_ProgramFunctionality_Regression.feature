@@ -717,7 +717,7 @@ Then verify condition Conversion is persisted with offer from sheet "usageBasedS
 Scenario: fulfilment for sms
 Then verify condition Fulfillment Success is persisted with offer from sheet "usageBasedSMS" and touchpoint from sheet "triggerTouchpoint" and rule from sheet "triggerrprogram"
 
-################################## falcon ##############
+
 @NDX-test  @initBrowser
 Scenario: verify the real time and recharge track service
 Given login
@@ -730,6 +730,45 @@ Then edit new rule without enddate from sheet "triggerrprogram" and offer "recha
 Then wait until rule is picked
 Then wait for 1 minutes
 Then post the api call for msisdn "919745081170" with streaming attribute from sheet "rteService"
+
+################################## latch ###################
+@NDX-latchIMverification  @initBrowser
+Scenario: verify the latch trigger
+Given login
+Then filter program and rule from sheet "programRuleDetails" row "1" and add to sheet "latchtrigger"
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "latchtrigger"
+Then filter rule from sheet "latchtrigger"
+Then edit new rule without enddate from sheet "latchtrigger" and offer "rechargeSMS" and touchpoint from sheet "triggertouchpointlatch"
+Then wait until rule is picked
+Then wait for 1 minutes
+
+
+
+#////////////////////////start latch simulator//////////latch simulator must be installed and run it manually//////
+
+@NDX-latcheventverificationIM  @initBrowser
+Scenario: Verify the event verification of latch 
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "919995335682"
+Then click on events tab
+Then verify the "Network Latch" event
+
+@NDX-latchIMeventverification  @initBrowser
+Scenario: verify the IM latch trigger event
+Given login
+Scenario: Verify the event verification of latch 
+Given login
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "919995335682"
+Then click on events tab
+Then verify condition Acknowledged is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "triggertouchpointlatch" and rule from sheet "latchtrigger"
 
 
 

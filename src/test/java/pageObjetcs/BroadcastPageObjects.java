@@ -306,7 +306,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement bcnotificationbeforeRendertime;
 	@FindBy(xpath = "//form[@id='bcNotificationForm']//label[contains(.,'Before Rendering')]//following::paper-listbox//paper-item[2]")
 	private WebElement bcnotificationbeforerendertime1min;
-	@FindBy(xpath = "//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'Selenium user')]")
+	@FindBy(xpath = "//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'Selenium  user')]")
 	private WebElement bcnotificationrecipientclick;
 	@FindBy(xpath = "//*[@id='bcNotificationForm']//vaadin-combo-box//following::vaadin-combo-box-item[contains(.,'System Administrator')]")
 	private WebElement bcnotificationrecipientclick2;
@@ -2390,8 +2390,8 @@ public boolean checkCalculateBtnDisplayed() {
 		bcnotificationrecipientclick();
 		Thread.sleep(2000);
 
-		bcnotificationbeforesendingtime();
-		bcnotificationbeforesendingtime1min();
+		//bcnotificationbeforesendingtime();
+		//bcnotificationbeforesendingtime1min();
 		bcnotificationbeforeRendertime();
 		bcnotificationbeforerendertime1min();
 
@@ -4148,6 +4148,95 @@ public boolean verifyCountsinGrid(String bcName,String statusOffBc,int targetCou
 		}
 	
 	}
+	public void verifyEventNotification(String event,String bcName,String status) throws Exception{
+		System.out.println("========"+event+" :is the event tht need to be verified");
+		System.out.println(bcName);
+		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
+		CustomerProfilePage.searchEventsDynammically("Last 2 Days");
+		 Thread.sleep(4000);
+		 jswait.loadClick(selectAllEventCheckBox);
+			jswait.loadClick(selectAllEventCheckBox);
+			jswait.loadClick("(//div[contains(.,'"+event+"')][@id='checkboxLabel'])[1]");
+			Thread.sleep(2000);
+			 jswait.loadClick(applyEventFilter);
+			 Thread.sleep(2000);
+			 List<WebElement> ackEvents = driver.findElements(By.xpath("//span[contains(.,'Acknowledged')]"));
+				Thread.sleep(1000);
+				System.out.println(ackEvents.size());
+				 System.out.println("print "+ackEvents);
+				 System.out.println("before for loop");
+				 if(status.equals("Rendering"))
+				 {
+					 for (int i=1;i<=2;i++) {
+							
+							try {
+								Thread.sleep(2000);
+								jswait.loadClick("(//iron-icon[@icon='app-icons:arrow-right'])["+i+"]");
+								Thread.sleep(1000);
+								
+								boolean booln = jswait.checkVisibility(
+										"//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row[contains(.,'The broadcast "+bcName+" will start rendering now')]");
+								System.out.println(booln);
+							
+								if (booln == true) {
+									System.out.println(event+"  verified");
+									break;
+								}
+							
+								else {
+							System.out.println("inside else loop and value of i is ::::::::"+i);
+					
+				}
+							}
+								catch(Exception e) {
+									Assert.assertTrue(false,"event not persisted");
+								}
+				} 
+				 }else {
+					 for (int i=1;i<=2;i++) {
+							
+							try {
+								Thread.sleep(2000);
+								jswait.loadClick("(//iron-icon[@icon='app-icons:arrow-right'])["+i+"]");
+								Thread.sleep(1000);
+								
+								boolean booln = jswait.checkVisibility(
+										"//iron-data-table//iron-list//div[@class='item style-scope iron-data-table']//data-table-row[contains(.,'The broadcast "+bcName+" has now "+status+")]");
+								System.out.println(booln);
+							
+								if (booln == true) {
+									System.out.println(event+"  verified");
+									break;
+								}
+							
+								else {
+							System.out.println("inside else loop and value of i is ::::::::"+i);
+					
+				}
+							}
+								catch(Exception e) {
+									Assert.assertTrue(false,"event not persisted");
+								}
+				}}
+				 
+			 
+	}
+	
+	public void verifyEventNetworklatch(String event) throws Exception{
+		System.out.println("========"+event+" :is the event tht need to be verified");
+		CustomerProfilePage CustomerProfilePage= new CustomerProfilePage();
+		CustomerProfilePage.searchEventsDynammically("Last 2 Days");
+		 Thread.sleep(4000);
+		jswait.loadClick(selectAllEventCheckBox);
+		jswait.loadClick(selectAllEventCheckBox);
+		jswait.loadClick("(//div[contains(.,'"+event+"')][@id='checkboxLabel'])[1]");
+		Thread.sleep(2000);
+		 jswait.loadClick(applyEventFilter);
+		 Thread.sleep(3000);
+		 Assert.assertTrue(jswait.checkVisibility("//span[contains(.,'"+event+"')]"));
+		 
+	}
+	
 	public void verifyEventOfTheBC(String event,String bcName,String campaignName) throws Exception{
 		System.out.println("========"+event+" :is the event tht need to be verified");
 		System.out.println(bcName);

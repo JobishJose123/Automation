@@ -37,8 +37,11 @@ public class BIsheetPageObjects extends Init{
 	}
 	@FindBy(xpath="//div[@id='toggleButton']")
 	private WebElement AutoRefreshbtn;
-	@FindBy(xpath="//*[@id='journey-icon' and @icon='app-primary:reportDesigner']")
+	@FindBy(xpath="//*[@id='sym' and @icon='app-primary:reportDesigner']")
 	private WebElement clickBI;
+	
+	@FindBy(xpath="//*[@id='journey-icon' and @icon='app-primary:reportDesigner']")
+	private WebElement clickBI2;
 	
 	@FindBy(xpath="//paper-button[contains(.,'Create New Worksheet')]")
 	private WebElement clickcreatenewworksheet;
