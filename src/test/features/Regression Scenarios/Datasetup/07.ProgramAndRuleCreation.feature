@@ -38,7 +38,7 @@ Then Add "usageBasedSMS" offer to Offer Catalogue
 Then navigate to offer management
 Then Navigate to Offer Catalogue
 Then Create New Offer Catalogue from sheet "defaultCatalog"
-Then Add "STVSMS" offer to Offer Catalogue
+#Then Add "STVSMS" offer to Offer Catalogue
 Then Add "rechargeSMS" offer to Offer Catalogue
 
 ################################## TOUCHPOINT CREATION FOR UI AND FUNCTIONALITY VERIFICATION ###########################
@@ -82,6 +82,37 @@ Then navigate to api
 Then create api touchpoint from sheet "apiTouchpointGR" and logic "FIFO"
 Then check api touchpoint in grid "apiTouchpointGR"
 #Then add touchpoint "apiTouchpointGR" to api_auth_policy
+
+
+@NX-createApiTouchpointBestfit @initBrowser @closeBrowser
+Scenario: create api touchpoint GA
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to api
+Then create api touchpoint from sheet "apiTouchpointBestfit" and logic "BEST FIT ALGORITHM"
+Then check api touchpoint in grid "apiTouchpointBestfit"
+##Then add touchpoint "apiTouchpoint_default" to api_auth_policy
+
+#Custom AC logic
+@createcustomlogic @initBrowser  
+Scenario: create a custom logic
+Given login
+Then navigate to intent management
+Then navigate to configuration
+Then navigate to Offer Prioritization Logic
+Then create new custom logic "Custom AC logic"
+
+@NX-createApiTouchpointcustomlogic @initBrowser @closeBrowser
+Scenario: create api touchpoint GA
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to api
+Then create api touchpoint from sheet "apiTPCustomlogic" and logic "Custom AC logic"
+Then check api touchpoint in grid "apiTPCustomlogic"
+##Then add touchpoint "apiTouchpoint_default" to api_auth_policy
+
 
 ##need to create ussd application in legacy first
 @NX-435 @initBrowser @closeBrowser
@@ -273,11 +304,13 @@ Then add program data from sheet "<programRuleSheet>" and offer "STVSMS" to row 
 		
 Examples:
 |programRuleSheet|tp|
-|SMSprogram|smsTouchpoint_default|
-|APIprogram|apiTouchpoint_default|
-|USSDprogram|ussdTouchpoint_default|
-|CCprogram|CCTouchpoint_default|
-|triggerrprogram|triggerTouchpoint_default|
+#|SMSprogram|smsTouchpoint_default|
+#|APIprogram|apiTouchpoint_default|
+|APIprogramBestfit|apiTouchpointBestfit|
+|APIprogramCustomLogic|apiTPCustomlogic|
+#|USSDprogram|ussdTouchpoint_default|
+#|CCprogram|CCTouchpoint_default|
+#|triggerrprogram|triggerTouchpoint_default|
 
 
 

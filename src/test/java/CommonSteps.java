@@ -14,6 +14,7 @@ import baseClasses.RandomNameGenerator;
 import baseClasses.SQLHandler;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import pageObjetcs.CampaignObjects;
 import pageObjetcs.CommonObjects;
 import pageObjetcs.CustomerProfilePage;
 import pageObjetcs.LandingPageObjects;
@@ -25,6 +26,7 @@ public class CommonSteps extends Init {
 	JSWaiter jswait = new JSWaiter();
 	LoginPageObjects loginPage = new LoginPageObjects();
 	LandingPageObjects landingPage = new LandingPageObjects();
+	CampaignObjects campaignObjects = new CampaignObjects();
 	CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 	CommonObjects commonObjetcs = new CommonObjects();
 	RegistrationListPage registrationListPage = new RegistrationListPage();
@@ -240,7 +242,8 @@ public class CommonSteps extends Init {
 	}
 	@Then("^navigate to offer management$")
     public void offerManagement() throws InterruptedException {
-		jswait.loadClick(offerManagement);
+//		jswait.loadClick(offerManagement);
+		campaignObjects.offerManagement();
 	}
 	@Then("^wait for some time")
 	public void waitForSomeTime() throws InterruptedException {

@@ -41,6 +41,16 @@ public class workApprovalflow extends Init {
 		approvalPageObjects.navigateToConfiguration();
 		Thread.sleep(3000);
 	}
+	
+	@Then("^navigate to Offer Prioritization Logic$")
+	public void navigate_to_Offer_Prioritization_Logic() throws Throwable {
+		approvalPageObjects.navigateToOfferLogic();
+	}
+	
+	@Then("^create new custom logic \"([^\"]*)\"$")
+	public void create_new_custom_logic(String arg1) throws Throwable {
+		approvalPageObjects.creatNewlogic(arg1);
+	}
 
 	@Then("^click approval rules option$")
 	public void clickApprovalRulesOption() throws InterruptedException {

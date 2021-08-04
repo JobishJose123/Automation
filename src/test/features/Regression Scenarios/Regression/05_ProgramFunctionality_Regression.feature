@@ -36,6 +36,57 @@ Then verify condition Conversion is persisted with offer from sheet "rechargeSMS
 Scenario: Verify fulfillment processing for recharge offer with customer care touch point.
 Then verify condition Fulfillment Success is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
 
+@NDX-Bestfit @initBrowser  
+Scenario: Verify the request processing through API touchpoint
+Given login
+#Then filter program and rule created from sheet "APIprogramBestfit" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "APIprogramBestfit"
+Then filter rule from sheet "APIprogramBestfit"
+Then edit new rule without enddate from sheet "APIprogramBestfit" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointBestfit"
+Then "activate" rule
+Then filter rule from sheet "APIprogramBestfit"
+Then wait until rule is picked
+
+@apibestfithit @initBrowser @closeBrowser 
+Scenario: api touchpoint hit
+Given login
+Then get-offer api-server for "9745081104" with touchpoint "apiTouchpointBestfit" and rule "APIprogramBestfit"
+Then verify accept api-server for "9745081104" with touchpoint "apiTouchpointBestfit" and rule "APIprogramBestfit"
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9745081104"
+Then click on events tab
+Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointBestfit" and rule from sheet "APIprogramBestfit"
+
+@NDX-CustomLogicP&R @initBrowser  
+Scenario: Verify the request processing through API touchpoint
+Given login
+#Then filter program and rule created from sheet "APIprogramBestfit" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
+Then navigate to intent management
+Then navigate to programs
+Then choose program from sheet "APIprogramCustomLogic"
+Then filter rule from sheet "APIprogramCustomLogic"
+Then edit new rule without enddate from sheet "APIprogramCustomLogic" and offer "rechargeSMS" and touchpoint from sheet "apiTPCustomlogic"
+Then "activate" rule
+Then filter rule from sheet "APIprogramCustomLogic"
+Then wait until rule is picked
+
+@apicustomlogichit @initBrowser @closeBrowser 
+Scenario: api touchpoint hit
+Given login
+Then get-offer api-server for "9745081104" with touchpoint "apiTPCustomlogic" and rule "APIprogramCustomLogic"
+Then verify accept api-server for "9745081104" with touchpoint "apiTPCustomlogic" and rule "APIprogramCustomLogic"
+Then navigate to precision marketer
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9745081104"
+Then click on events tab
+Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTPCustomlogic" and rule from sheet "APIprogramCustomLogic"
+
+
 
 @NDX-9990 @initBrowser @closeBrowser 
 Scenario: Verify the request processing through API touchpoint
@@ -223,6 +274,7 @@ Then verify condition Conversion is persisted with offer from sheet "STVSMS" and
 @NDX-9857 @closeBrowser
 Scenario: Fulfillment of CC program
 Then verify condition Fulfillment Success is persisted with offer from sheet "STVSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
+
 
 
 @NDX-9878 @initBrowser @closeBrowser 

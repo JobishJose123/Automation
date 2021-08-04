@@ -150,6 +150,11 @@ public class TouchpointPage extends Init{
 	private WebElement apiFormPrioritizationLogicFIFO;
 	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'LIFO')]")
 	private WebElement apiFormPrioritizationLogicLIFO;
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'BEST FIT ALGORITHM')]")
+	private WebElement apiFormPrioritizationLogicBestFit;
+	
+	@FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'Custom AC logic')]")
+	private WebElement apiFormPrioritizationCustomLogic;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Hours')]")
 	private WebElement apiFormTimeIntervalHours;
 	@FindBy(xpath="//form[@id='apiForm']//vaadin-combo-box-item[contains(.,'Days')]")
@@ -1024,6 +1029,18 @@ public void deleteUSSDTouchpoint() throws Throwable {
 			jswait.loadClick(apiFormPrioritizationLogicSelector);
 			jswait.loadClick(apiFormPrioritizationLogicLIFO);
 		}
+		
+		
+		public void apiSelectPrioritizationLogicBestFit() throws InterruptedException {
+			jswait.loadClick(apiFormPrioritizationLogicSelector);
+			jswait.loadClick(apiFormPrioritizationLogicBestFit);
+		}
+		
+		public void apiSelectPrioritizationLogicCustom() throws InterruptedException {
+			jswait.loadClick(apiFormPrioritizationLogicSelector);
+			jswait.loadClick(apiFormPrioritizationCustomLogic);
+		}
+		
 		public void apiSelectPrioritizationRule() throws InterruptedException {
 			jswait.loadClick(apiFormPrioritizationRuleSelector);
 			jswait.loadClick(apiFormPrioritizationRuleFIFO);
@@ -1099,6 +1116,12 @@ public void deleteUSSDTouchpoint() throws Throwable {
 				apiSelectPrioritizationLogicLifo();
 			}
 			
+			else if(prioritizationLogic.contentEquals("BEST FIT ALGORITHM")) {
+				apiSelectPrioritizationLogicBestFit();
+			}
+			else if(prioritizationLogic.contentEquals("Custom AC logic")) {
+				apiSelectPrioritizationLogicCustom();
+			}
 //			apiSelectPrioritizationRule();
 			apiEnterRefreshEvery(refreshEvery);
 			if(timeInterval.contentEquals("Hours")) {

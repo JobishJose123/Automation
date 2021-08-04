@@ -36,6 +36,11 @@ public class CampaignObjects extends Init{
 	
 	@FindBy(xpath="//label[contains(text(),'Life-Cycle Marketing')]")
 	private WebElement lifeCycleMarketing;
+	
+//	@FindBy(xpath="//label[contains(text(),'Offer Management')]")
+//	private WebElement offerManagement;
+	@FindBy(xpath="(//*[contains(text(),'Offer Management')]//parent::*//following::iron-icon[4])[1]")
+	private WebElement offerManagement;
 	@FindBy(xpath="//paper-item[contains(.,'Export to Location')]")
 	private WebElement optionsExportToLocation;
 	@FindBy(xpath="//paper-item[contains(.,'View Broadcasts')]")
@@ -417,6 +422,10 @@ public class CampaignObjects extends Init{
 		}
 		
 	}
+	public void offerManagement() throws InterruptedException {
+		jswait.loadClick(offerManagement);
+	}
+	
 	public void clickCreateCampaignTemplateButton() throws InterruptedException {
 		jswait.loadClick(createCampaignTemplateButton);
 	}

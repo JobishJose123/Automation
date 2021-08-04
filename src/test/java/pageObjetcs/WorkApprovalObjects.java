@@ -45,6 +45,9 @@ public class WorkApprovalObjects extends Init{
 	private WebElement programListNameColumn;
 	@FindBy(xpath="//label[text()='Configuration']/..")
 	private WebElement configuration;
+	@FindBy(xpath="//div[contains(text(),'Offer Prioritization Logic')]//following::div[3]//iron-icon[1]")
+	private WebElement offerlogicclick;
+	
 	@FindBy(xpath=".//paper-card[contains(.,'Approval Rules')]")
 	private WebElement approvalRules;
 	@FindBy(xpath = "//paper-button[contains(.,'Create New Approval Rule')]")
@@ -168,6 +171,44 @@ public class WorkApprovalObjects extends Init{
 	public void navigateToConfiguration() throws InterruptedException {
 		jswait.loadClick(configuration);
 	}
+	public void navigateToOfferLogic() throws InterruptedException {
+		jswait.loadClick(offerlogicclick);
+	}
+	
+	public void creatNewlogic(String logic) throws InterruptedException {
+		jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']");
+		commonObjects.enterFilterFormname(logic);
+		Thread.sleep(2000);
+		commonObjects.clickFilterResetButton();
+
+		//commonObjects.clickFilterIcon();
+		jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']");
+		Thread.sleep(2000);
+		commonObjects.enterFilterFormname(logic);
+		commonObjects.clickFilterApplyButton();
+		Thread.sleep(2000);
+	try{
+		String expected=	driver.findElement(By.xpath("(//span[@class='ellipsis style-scope data-table-cell'])[1]")).getText();
+		jswait.loadClick("(//paper-icon-button[@icon='icons:more-vert']//iron-icon)[1]");
+		
+	}catch(Exception e) {
+		jswait.loadClick("//paper-button[text()='Create New Prioritization Logic']");
+		jswait.loadSendKeys("//label[text()='Name']//following::input[1]", logic);
+		jswait.loadSendKeys("//textarea[@id='textarea']", "create new prioritization Logic");
+		jswait.loadClick("//paper-button[text()='Proceed']");
+		jswait.loadClick("//label[text()='Prioritization Logic']//following::input[1]");
+		jswait.loadClick("//paper-item[text()='Analytics Model']");
+		jswait.loadClick("//label[text()='Model']//following::input[1]");
+		jswait.loadClick("//paper-item[text()='Adaptive Cognizance']");
+		jswait.loadClick("(//paper-button[text()='Save'])[3]");
+		jswait.loadClick("//paper-button[text()='Save Logic']");
+		jswait.loadClick("//paper-button[text()='Yes']");
+	}
+		
+		}
+	
+	
+	
 	public void clickApprovalRulesOption() throws InterruptedException {
 		jswait.loadClick(approvalRules);
 	}
