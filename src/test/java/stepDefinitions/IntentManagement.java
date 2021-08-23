@@ -3066,13 +3066,15 @@ public void filter_rule_from_sheet(String ruleSheet) throws Throwable {
 	eh.setExcelFile("ruleInputData", ruleSheet);
 	String ruleName=(eh.getCell(1, 0).toString());
 	Thread.sleep(10000);
-//	jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']");
+	jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']//parent::paper-icon-button");
 commonObjects.enterFilterFormname(ruleName);
-//Thread.sleep(2000);
-//commonObjects.clickFilterResetButton();
+Thread.sleep(2000);
+commonObjects.clickFilterResetButton();
+
 //commonObjects.clickFilterIcon();
-//Thread.sleep(2000);
-//commonObjects.enterFilterFormname(ruleName);
+jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']//parent::paper-icon-button");
+Thread.sleep(2000);
+commonObjects.enterFilterFormname(ruleName);
 commonObjects.clickFilterApplyButton();
 }
 

@@ -588,6 +588,25 @@ public class CampaignManagement extends Init{
 	    	campaignObjects.navigateToCampaignCategories();
 	    }
 	    
+	    @Then("^navigate to campaign Attributes$")
+	    public void navigate_to_campaign_Attributes() throws Throwable {
+	    	campaignObjects.navigateToCampaignAttributes();
+	    	
+	    }
+	    
+	    @Then("^navigate to broadcast Attributes$")
+	    public void navigate_to_broadcast_Attributes() throws Throwable {
+	    	campaignObjects.navigateToBroadcastAttributes();
+	    }
+	    @Then("^create new campaign Attributes \"([^\"]*)\"$")
+	    public void create_new_campaign_Attributes(String attributename) throws Throwable {
+	    	campaignObjects.createNewCampaignAttributes(attributename);
+	    }
+	    
+	    @Then("^create new broadcast Attributes \"([^\"]*)\"$")
+	    public void create_new_broadcast_Attributes(String attributename) throws Throwable {
+	    	campaignObjects.createNewBroadcastAttributes(attributename);
+	    }
 	    
 	    @Then("^verify toast message after successful export of a campaign$")
 	    public void verifyToastMessageAfterSuccessfulExportOfCampaign() throws Throwable

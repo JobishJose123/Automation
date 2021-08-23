@@ -97,6 +97,10 @@ public class CampaignObjects extends Init{
 	private WebElement saveCampaignTemplateButton;
 	@FindBy(xpath="//div[contains(text(),'Campaign Categories')]/../..")
 	private WebElement campaignCategoriesButton;
+	@FindBy(xpath="//div[contains(text(),'Campaign Attributes')]/../..")
+	private WebElement campaignAttributesButton;
+	@FindBy(xpath="//div[contains(text(),'Broadcast Attributes')]/../..")
+	private WebElement broadcastAttributesButton;
 	@FindBy(xpath="//paper-button[contains(text(),'Create New Campaign Category')]")
 	private WebElement createNewCampaignCategoryButton;
 	@FindBy(xpath="//label[contains(.,'Please select a location')]/../input")
@@ -766,6 +770,67 @@ public class CampaignObjects extends Init{
 	}
 	public void navigateToCampaignCategories() throws InterruptedException {
 		jswait.loadClick(campaignCategoriesButton);
+	}
+	public void navigateToCampaignAttributes() throws InterruptedException {
+		jswait.loadClick(campaignAttributesButton);
+	}
+	public void navigateToBroadcastAttributes() throws InterruptedException {
+		jswait.loadClick(broadcastAttributesButton);
+	}
+	public void createNewBroadcastAttributes(String attributename) throws InterruptedException {
+		
+		jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']");
+		commonObjects.enterFilterFormname(attributename);
+		Thread.sleep(2000);
+		commonObjects.clickFilterResetButton();
+
+		//commonObjects.clickFilterIcon();
+		jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']");
+		Thread.sleep(2000);
+		commonObjects.enterFilterFormname(attributename);
+		commonObjects.clickFilterApplyButton();
+		Thread.sleep(2000);
+	try{
+		jswait.loadClick("(//paper-icon-button[@icon='icons:more-vert']//iron-icon)[1]");
+		System.out.println(attributename+" is available");
+	}
+	catch(Exception e) {
+		jswait.loadClick("//paper-button[text()='Create New Broadcast Attribute']");
+		jswait.loadSendKeys("(//label[text()='Name'])[2]//following::input[1]", attributename);
+		jswait.loadSendKeys("(//label[text()='Label'])[2]//following::input[1]", "Create a new broadcast attribute");
+		jswait.loadClick("//input[@placeholder='Choose Type']//following::iron-icon[1]");
+		jswait.loadClick("(//paper-item[text()='Number'])[2]");
+		jswait.loadClick("//paper-button[text()='Save']");
+	}
+		
+		
+		
+	}
+	public void createNewCampaignAttributes(String attributename) throws InterruptedException {
+		jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']");
+		commonObjects.enterFilterFormname(attributename);
+		Thread.sleep(2000);
+		commonObjects.clickFilterResetButton();
+
+		//commonObjects.clickFilterIcon();
+		jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']");
+		Thread.sleep(2000);
+		commonObjects.enterFilterFormname(attributename);
+		commonObjects.clickFilterApplyButton();
+		Thread.sleep(2000);
+	try{
+		jswait.loadClick("(//paper-icon-button[@icon='icons:more-vert']//iron-icon)[1]");
+		System.out.println(attributename+" is available");
+	}
+	catch(Exception e) {
+		jswait.loadClick("//paper-button[text()='Create New Prioritization Logic']");
+		jswait.loadSendKeys("(//label[text()='Name'])[2]//following::input[1]", attributename);
+		jswait.loadSendKeys("(//label[text()='Label'])[2]//following::input[1]", "Create a new campaign attribute");
+		jswait.loadClick("//input[@placeholder='Choose Type']//following::iron-icon[1]");
+		jswait.loadClick("(//paper-item[text()='Number'])[2]");
+		jswait.loadClick("//paper-button[text()='Save']");
+		
+	}
 	}
 	public void clickSaveCampaignButton() throws InterruptedException {
 		jswait.loadClick(saveCampaignButton);

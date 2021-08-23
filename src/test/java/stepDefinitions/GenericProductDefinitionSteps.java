@@ -162,6 +162,10 @@ public class GenericProductDefinitionSteps extends Init{
 		commonObjects.clickConfirmYesButton();
 		
 	}
+	@Then("^create new class$")
+	public void create_new_class() throws Throwable {
+		
+	}
 	
 	@Then("^create product class and number attribute from \"([^\"]*)\"$")
 	public void create_product_class_and_number_attribute_from(String sheet) throws Throwable {

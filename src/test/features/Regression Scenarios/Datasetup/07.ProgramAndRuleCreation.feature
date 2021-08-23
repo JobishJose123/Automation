@@ -304,13 +304,13 @@ Then add program data from sheet "<programRuleSheet>" and offer "STVSMS" to row 
 		
 Examples:
 |programRuleSheet|tp|
-#|SMSprogram|smsTouchpoint_default|
-#|APIprogram|apiTouchpoint_default|
+|SMSprogram|smsTouchpoint_default|
+|APIprogram|apiTouchpoint_default|
 |APIprogramBestfit|apiTouchpointBestfit|
 |APIprogramCustomLogic|apiTPCustomlogic|
-#|USSDprogram|ussdTouchpoint_default|
-#|CCprogram|CCTouchpoint_default|
-#|triggerrprogram|triggerTouchpoint_default|
+|USSDprogram|ussdTouchpoint_default|
+|CCprogram|CCTouchpoint_default|
+|triggerrprogram|triggerTouchpoint_default|
 
 
 
