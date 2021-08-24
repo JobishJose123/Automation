@@ -314,7 +314,7 @@ Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "no
 Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "both"
 Then enter choose offer tab from sheet "<offerSheet>" for bc from sheet "<bcSheet>" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "one-offBC"
-Then save bc 
+Then activate bc 
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "facebookBC"
 Then wait for 4000 milliseconds 
 Examples:

@@ -15,7 +15,8 @@ Then click on Inputs
 Then create a Dataframe "selenium dataframe" with discription "dataframe created by Selenium"
 Then add a customer base list
 Then wait until dataframeStatus is changed to "Dataframe Status: complete"
-Then click on close and run the paragraph
+Then click on close 
+Then run the paragraph
 Then wait until status is changed to "FINISHED"
 Then verify model output from file <OUTPUT>
 Then add the model name from sheet "modelData" and <MODEL_TYPE>  to sheet "<iwbDetails>"

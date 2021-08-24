@@ -114,6 +114,24 @@ public class BIsheetSteps extends Init {
 		else if(sheetname.equals("BIworksheetEvents")){
 			BIobjects.createBIworksheetEvents(name,description,timerange);
 		}
+		else if(sheetname.equals("BIEandASheet")) {
+			BIobjects.createBIEandASheet(name,description,timerange);
+		}
+		else if(sheetname.equals("BISeeding")) {
+			BIobjects.createBISeedingSheet(name,description,timerange);
+		}
+		else if(sheetname.equals("BIEventscope")) {
+			BIobjects.createBICommonEvents(name,description,timerange);
+		}	
+		else if(sheetname.equals("BIPMwithgroup")) {
+			BIobjects.createBIPMwithgroups(name,description,timerange);
+		}
+		else if(sheetname.equals("BIwithAttributes")) {
+			BIobjects.createBIPMwithAttributes(name,description,timerange);
+		}
+		else if(sheetname.equals("BIwithCustSegment")) {
+			BIobjects.createBIPMwithCustSegment(name,description,timerange,sheetname);
+		}
 		
 	}
 	
