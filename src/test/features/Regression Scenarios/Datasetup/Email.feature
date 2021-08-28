@@ -3,7 +3,7 @@
 Feature: Email
 
 ######################## email feature ###########
-@ndx-basicemail   @initBrowser
+@ndx-basicemail @NDX-17442 @NDX-17443 @NDX-17444 @initBrowser
 Scenario: Basic email partner settings selection.
 Given login
 Then navigate to configuration management
@@ -15,7 +15,7 @@ Then fill from name as "Kiran Joseph".
 Then select the sender route as "Email outbound"
 Then save the settings
 
-@NDX-rechargeEmailoption1
+@NDX-rechargeEmailoption1 @NDX-17535
   @initBrowser @closeBrowser
 Scenario: rechargeEmail offer
   Given login
@@ -31,7 +31,7 @@ Scenario: rechargeEmail offer
   Then Add "Option1Email" offer to Offer Catalogue
   
   
-  @NDX-CreateEmailbcoption1 @initBrowser  
+  @NDX-CreateEmailbcoption1 @NDX-17607 @NDX-17608 @NDX-17609 @initBrowser  
 Scenario Outline:Create Email broadcast to verify bc functionality option1
 Given login
 Then navigate to precision marketer
@@ -74,7 +74,7 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataShee
 
 
 
-@ndx-withtracking   @initBrowser
+@ndx-withtracking @NDX-17459  @initBrowser
 Scenario:  With tracking email partner settings selection.
 Given login
 Then navigate to configuration management
@@ -86,7 +86,7 @@ Then fill from name as "Kiran Joseph".
 Then select the sender route as "Email outbound"
 Then save the settings
 
-  @NDX-rechargeEmailoption2
+  @NDX-rechargeEmailoption2 @NDX-17538 @NDX-17539 @NDX-17540
   @initBrowser @closeBrowser
 Scenario: rechargeEmail offer
   Given login
@@ -102,7 +102,7 @@ Scenario: rechargeEmail offer
   Then Add "Option2Email" offer to Offer Catalogue
   
   
-  @NDX-CreateEmailbcoption2 @initBrowser  
+  @NDX-CreateEmailbcoption2 @NDX-17610 @initBrowser  
 Scenario Outline:Create Email broadcast to verify bc functionality option2
 Given login
 Then navigate to precision marketer
@@ -124,7 +124,7 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataShee
 
 
 @ndx-mandril   @initBrowser
-Scenario:  With tracking email partner settings selection.
+Scenario:  option 3 email partner settings selection.
 Given login
 Then navigate to configuration management
 Then navigate to partners
