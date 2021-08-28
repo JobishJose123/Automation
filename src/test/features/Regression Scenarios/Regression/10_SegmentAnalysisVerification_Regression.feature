@@ -13,6 +13,16 @@ Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
 Then find the Target count
 
 
+@NDX-viewdetails @initBrowser @closeBrowser
+Scenario: Create Micro-Segment for a job which is in completed status
+Given login
+Then navigate to intent management
+Then navigate to analytics
+Then navigate to explore segments
+Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
+Then navigate to created micro-segments
+Then verify the view details option
+
 @NDX-10209 @NDX-10208 @initBrowser
 Scenario: Verify running a broadcast using the discovered cluster list from SAJ created 
 Given login

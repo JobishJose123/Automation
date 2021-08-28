@@ -458,6 +458,33 @@ public class TargetConditionObjects extends Init {
 				jswait.loadSendKeys(isGreaterThanValue,"15");
 				jswait.loadClick(targetConditionSave);
 			}
+			else if(event.contentEquals("Segment")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerList);
+				jswait.loadSendKeys(CustomerListFieldSelector,SEL_LIST);
+				jswait.loadClick(CustomerListSelection);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsSubscribed);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("EditSavedsegment")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerList);
+				jswait.loadSendKeys(CustomerListFieldSelector,SEL_LIST);
+				jswait.loadClick(CustomerListSelection);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsSubscribed);
+				jswait.loadClick(targetConditionSave);
+			}
+			else if(event.contentEquals("segmentAgeGT40")){
+				jswait.loadClick(targetConditionTypeSelector);
+				jswait.loadClick(targetConditionTypeCustomerList);
+				jswait.loadSendKeys(CustomerListFieldSelector,SEL_LIST);
+				jswait.loadClick(CustomerListSelection);
+				jswait.loadClick(conditionSelector);
+				jswait.loadClick(conditionIsSubscribed);
+				jswait.loadClick(targetConditionSave);
+			}
 			else if(event.contentEquals("customerList")){
 				jswait.loadClick(targetConditionTypeSelector);
 				jswait.loadClick(targetConditionTypeCustomerList);

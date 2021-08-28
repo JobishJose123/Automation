@@ -126,9 +126,18 @@ Scenario: create saved segment as precondition
 Given login
 Then navigate to landing page
 Then navigate to precision marketer
-    Then navigate to configuration
-    Then navigate to saved segments
-    Then create saved segment with condition "segmentAgeGT40"
+Then navigate to configuration
+Then navigate to saved segments
+Then create saved segment with condition "segmentAgeGT40"
+    
+    @SavedsegmentsEdit @initBrowser
+   Scenario: create saved segment as precondition
+   Given login
+   Then navigate to landing page
+   Then navigate to precision marketer
+   Then navigate to configuration
+   Then navigate to saved segments
+   Then create saved segment with condition "EditSavedsegment"
     
 
     

@@ -695,6 +695,9 @@ public void clickActivateOption() throws Throwable {
 	public void clickOptionsIcon() throws InterruptedException {
 		jswait.loadClick(optionsIcon);
 	}
+	public void clickEditIcon() throws InterruptedException {
+		jswait.loadClick("(//paper-item[@class='predefined-targets style-scope x-scope paper-item-1'][contains(text(),Edit)])[1]");
+	}
 	public void clickOptionsIcon2() throws InterruptedException {
 		jswait.loadClick(optionsIcon2);
 	}

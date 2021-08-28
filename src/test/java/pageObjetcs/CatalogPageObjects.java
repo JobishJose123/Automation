@@ -110,7 +110,7 @@ public class CatalogPageObjects extends Init{
 	private WebElement OfferName ;
 	@FindBy(xpath="//data-table-row-detail[@class='style-scope catalogue-offer-listing']")
 	private WebElement OfferDetails;
-	@FindBy(xpath="(//data-table-checkbox[@class='x-scope data-table-checkbox-0 style-scope add-offer-detail'])[2]")
+	@FindBy(xpath="(//data-table-checkbox[@class='style-scope add-offer-detail x-scope data-table-checkbox-0'])[2]")
 	private WebElement CheckBoxToAddOffer;
 	@FindBy(xpath="(//paper-icon-button[@icon='delete'])[2]")
 	private WebElement deleteOfferFromCatalog;

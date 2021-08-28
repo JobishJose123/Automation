@@ -23,6 +23,7 @@ Then navigate to analytics
 Then navigate to explore segments
 Then filter the Segment Analysis job from sheet "SegmentAnalysisName"
 Then Create Micro Segment
+Then wait for 4 minutes
 Then save the Micro Segment
 
 

@@ -413,6 +413,14 @@ public class SegmentAnalysisSteps extends Init {
 	public void Create_Micro_Segment() throws Exception{
 		segmentObjects.CreateMicroSegment();
 	}
+	@Then("^navigate to created micro-segments$")
+	public void navigate_to_created_micro_segments() throws Throwable {
+		segmentObjects.navigateToMicroSegment();
+	}
+	@Then("^verify the view details option$")
+	public void verify_the_view_details_option() throws Throwable {
+		segmentObjects.verifyviewdetails();
+	}
 
 	@Then("^Create Cross-Tab$")
 	public void Create_Cross_Tab() throws Exception{

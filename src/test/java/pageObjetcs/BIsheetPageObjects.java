@@ -3,6 +3,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +11,7 @@ import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -23,11 +25,16 @@ import com.itextpdf.text.log.SysoCounter;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
+import baseClasses.RandomNameGenerator;
 import baseClasses.TimeoutImpl;
 import cucumber.api.java.gl.E;
 
 public class BIsheetPageObjects extends Init{
 	JSWaiter jswait = new JSWaiter();
+	PmConfigurationPage page = new PmConfigurationPage();
+	TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+	public ExcelHelper eh = new ExcelHelper();
+	PmConfigurationPage pmConfigurationPage = new PmConfigurationPage();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	Init Init =new Init();
 	
@@ -39,6 +46,14 @@ public class BIsheetPageObjects extends Init{
 	private WebElement AutoRefreshbtn;
 	@FindBy(xpath="//*[@id='sym' and @icon='app-primary:reportDesigner']")
 	private WebElement clickBI;
+	@FindBy(xpath="//paper-dialog[@id='predefinedwin']//label[contains(.,'Description')]/../..//textarea")
+	private WebElement segmentDescriptionField;
+	@FindBy(xpath = "//paper-dialog[@id='predefinedwin']//label[contains(.,'List')]/../..//input")
+	private WebElement listSelectorField;
+	@FindBy(xpath="//paper-dialog[@id='predefinedwin']//paper-item[contains(.,'"+SELENIUM_LIST+"')]")
+	private WebElement listSelect;
+	@FindBy(xpath="//paper-dialog[@id='predefinedwin']//paper-button[contains(.,'Save')]")
+	private WebElement segmentSaveButton;
 	
 	@FindBy(xpath="//*[@id='journey-icon' and @icon='app-primary:reportDesigner']")
 	private WebElement clickBI2;
@@ -97,6 +112,14 @@ public class BIsheetPageObjects extends Init{
 	private WebElement clicksixteencolumn;
 	@FindBy(xpath="//iron-ajax[@id=\"getHeaders\"]//following::div[23]")
 	private WebElement clickseventeencolumn;
+	@FindBy(xpath="//iron-ajax[@id=\"getHeaders\"]//following::div[24]")
+	private WebElement clickeighteencolumn;
+	@FindBy(xpath="//iron-ajax[@id=\"getHeaders\"]//following::div[25]")
+	private WebElement clickninthteencolumn;
+	@FindBy(xpath="//iron-ajax[@id=\"getHeaders\"]//following::div[26]")
+	private WebElement clicktweentycolumn;
+	@FindBy(xpath="//iron-ajax[@id=\"getHeaders\"]//following::div[27]")
+	private WebElement clicktweentyonecolumn;
 	
 	@FindBy(xpath="//paper-radio-button[@name='SYSTEM']/div[1]")
 	private WebElement Systemeventstypeclick;
@@ -111,22 +134,36 @@ public class BIsheetPageObjects extends Init{
 	private WebElement headertypecalculations;
 	@FindBy(xpath="//paper-radio-button[@name=\"PM\"]/div[1]")
 	private WebElement elementheaderoutbound;
+	@FindBy(xpath="//paper-radio-button[@name='Segment']/div[1]")
+	private WebElement elementheadersegment;
+	@FindBy(xpath="//paper-radio-button[@name=\"Engagement\"]/div[1]")
+	private WebElement elementheaderEngagement;
 	@FindBy(xpath="//paper-radio-button[@name='OfferProducts']/div[1]")
 	private WebElement elementheaderoffersandproducts;
 	@FindBy(xpath="//paper-radio-button[@name='IM']/div[1]")
 	private WebElement elementheaderinbound;
 	@FindBy(xpath="//paper-radio-button[@name=\"EVENT\"]/div[1]")
 	private WebElement calculationheaderEvent;
+	@FindBy(xpath="//paper-radio-button[@name='METRIC']/div[1]")
+	private WebElement calculationheadermetric;
 	@FindBy(xpath="//paper-radio-button[@name='DERIVED']/div[1]")
 	private WebElement calculationheaderCreatecalculation;
 	@FindBy(xpath="//input[@placeholder='Give an easily identifiable name to your calculation']")
 	private WebElement calculationName;
+	@FindBy(xpath="//label[contains(.,'Header Name')]//following::input[1]")
+	private WebElement calculationNameforpercent;
 	@FindBy(xpath="//input[@placeholder='Write a sentence describing your calculation']")
 	private WebElement calculationDescription;
 	@FindBy(xpath="//vaadin-combo-box[@label=\"Element\"]//input[1]")
 	private WebElement elementselection;
+	@FindBy(xpath="//label[text()='Attribute Name']//following::iron-icon[2]")
+	private WebElement attributeNameselection;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Campaign Category Name')]")
 	private WebElement campaigncatnameelementselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Engagement Name')]")
+	private WebElement engagementnameelementselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Action Name')]")
+	private WebElement actionnameelementselection;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer')][1]")
 	private WebElement offerelementselection;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer Attributes')]")
@@ -145,12 +182,38 @@ public class BIsheetPageObjects extends Init{
 	private WebElement ProgramRuleNameselection;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Broadcast Name')]")
 	private WebElement broadcastNameelementselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Broadcast Label')]")
+	private WebElement broadcastLabelselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Inventory')]")
+	private WebElement inventoryselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Campaign Attributes')]")
+	private WebElement CampaignAttributesselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Broadcast Attributes')]")
+	private WebElement broadcastAttributesselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer Attributes')]")
+	private WebElement offerAttributesselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'c_attribute')]")
+	private WebElement CampaignAttributenameselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'b_attributes')]")
+	private WebElement broadcastAttributenameselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer_Price')]")
+	private WebElement offerAttributenameselection;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer_Profit')]")
+	private WebElement offerprofitAttributenameselection;
 	@FindBy(xpath="//paper-button[contains(.,'Next')]")
 	private WebElement clickNextbutton;
-	@FindBy(xpath="//input[@placeholder=\"Give an easily identifiable name to your calculation\"]")
+	@FindBy(xpath="//label[text()='Event Type']//following::input[1]")
+	private WebElement eventdropdowncalculation;
+//	@FindBy(xpath="//input[@placeholder=\"Give an easily identifiable name to your calculation\"]")
+//	private WebElement NameofCalculation;
+	@FindBy(xpath="//label[contains(.,'Header Name')]//following::input[1]")
 	private WebElement NameofCalculation;
-	@FindBy(xpath="//iron-icon[@icon=\"paper-dropdown-menu:arrow-drop-down\"]")
+	@FindBy(xpath="//paper-dialog-scrollable//following::div[2][contains(.,'Give a name to the Header')]//following::paper-button[1]//iron-icon")
+	private WebElement ClickNameofCalculation;
+	@FindBy(xpath="//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']")
 	private WebElement clickdropdownEventtypeincalculations;
+	@FindBy(xpath="//input[@placeholder='Select the Customer Set from the options given']//following::iron-icon[2]")
+	private WebElement clickdropdownMetrictypeincalculations;
 	@FindBy(xpath="//paper-item[contains(.,'Customer was sent the message')]")
 	private WebElement ACkeventTypeSelectioninCalculation;
 	@FindBy(xpath="//paper-item[contains(.,'Customer was eligible for Offer')]")
@@ -173,6 +236,8 @@ public class BIsheetPageObjects extends Init{
 	private WebElement TotalcountCalculations;
 	@FindBy(xpath="//paper-radio-button[@name='3']/div[1]")
 	private WebElement UniquecountCalculations;
+	@FindBy(xpath="//paper-radio-button[@name='1']/div[1]")
+	private WebElement EventDomainCalculations;
 	@FindBy(xpath="//paper-item[contains(.,'Edit')][@class='style-scope reports-canvas x-scope paper-item-1']")
 	private WebElement Editbutton;
 	@FindBy(xpath="//paper-radio-button[@name=\"BC\"]/div[1]")
@@ -193,10 +258,43 @@ public class BIsheetPageObjects extends Init{
 	private WebElement setupK1click;
 	@FindBy(xpath="//div/div[4]/div[2]/vaadin-combo-box/paper-input-container/div[2]/div/input")
 	private WebElement setupK2click;
+	@FindBy(xpath="//div/div[5]/div[2]/vaadin-combo-box/paper-input-container/div[2]/div/input")
+	private WebElement setupK3click;
 	@FindBy(xpath="//create-calculation/div/paper-icon-button/iron-icon")
 	private WebElement plusbuttonclickforformula;
 	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Unique Conversion')]")
 	private WebElement uniqueconversionselectfork1;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'c_attribute')]")
+	private WebElement cattributeselectfork1;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'F-Conversion')]")
+	private WebElement FConversion;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'G-Fulfilment')]")
+	private WebElement GFulfilment;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'H:F*D')]")
+	private WebElement HFD;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'I:G*D')]")
+	private WebElement IGD;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer_Price')]")
+	private WebElement Offer_Price;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'Offer_Profit')]")
+	private WebElement Offer_Profit;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'b_attributes')]")
+	private WebElement battributeselectfork1;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'E-unique_conv')]")
+	private WebElement Eunique_convk1;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'C-Unique_ACK')]")
+	private WebElement CUnique_ACK;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'F-Value')]")
+	private WebElement FValue;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'H-CGP_Unique')]")
+	private WebElement HCGP_Unique;
+	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'G-E/C')]")
+	private WebElement GEC;
+	
+	
+	
+	
+	
 	@FindBy(xpath="//div/form/create-calculation/div/div[3]/div[2]/vaadin-combo-box/vaadin-combo-box-overlay/div/iron-list/div/vaadin-combo-box-item[2][contains(.,'Unique offer presented')]")
 	private WebElement uniqueofferpresentedfork2;
 	@FindBy(xpath="//label[contains(.,'Combination Formula')]//following::input[1]")
@@ -212,6 +310,24 @@ public class BIsheetPageObjects extends Init{
 	
 	@FindBy(xpath="//vaadin-combo-box[2]/paper-input-container/div[2]/div/paper-icon-button[2]/iron-icon")
 	private WebElement clickdomaindropdown;
+	@FindBy(xpath="//div[text()='Create Groups']")
+	private WebElement createGroups;
+	@FindBy(xpath="//paper-icon-button[@icon='icons:add' and @title='Add Group']//iron-icon[1]")
+	private WebElement createGroupsplusbutton;
+	@FindBy(xpath="//input[@placeholder='Give an easily identifiable name to your element group']")
+	private WebElement createGroupsName;
+	@FindBy(xpath="//div[contains(text(),'Configure Condition')]//preceding::div[4]")
+	private WebElement createGroupsconfigurecondition;
+	@FindBy(xpath="//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']")
+	private WebElement createGroupsconditionclick;
+	@FindBy(xpath="//paper-item[text()='begins with']")
+	private WebElement createGroupsbeginswith;
+	@FindBy(xpath="(//input[@id='input' and @class='style-scope paper-input' and @type='text'])[2]")
+	private WebElement createGroupsconditiontext;
+	@FindBy(xpath="(//paper-button[text()='Save'])[2]")
+	private WebElement createGroupssave;
+	
+	
 	
 	
 	
@@ -222,7 +338,7 @@ public class BIsheetPageObjects extends Init{
 	
 	
 	public void clickBusinessIntelligence() throws InterruptedException{
-		jswait.loadClick(clickBI);
+		jswait.loadClick(clickBI2);
 		Thread.sleep(3000);
 	}
 	public void createBIworksheetinbound(String name,String description,String timerange ) throws InterruptedException{
@@ -230,15 +346,27 @@ public class BIsheetPageObjects extends Init{
 		Thread.sleep(3000);
 		jswait.loadSendKeys(BIname, name);
 		jswait.loadSendKeys(BIdescription, description);
-		if(timerange.equals("between_yesterday_and_tomorrow"))
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
 		{
-			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
 			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
 			jswait.loadClick("//paper-item[contains(.,'is between')]");
 			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
 			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
 			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
 			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
 			
 			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
 			
@@ -247,7 +375,7 @@ public class BIsheetPageObjects extends Init{
 		if(timerange.equals("Yesterday"))
 				{
 			timerange="1";
-				}else if(timerange.equals("Last_week")) {//paper-item[contains(.,'is between')]
+				}else if(timerange.equals("Last_week")) {
 					timerange="2";
 				}else if(timerange.equals("Last_month")) {
 					timerange="3";
@@ -256,7 +384,11 @@ public class BIsheetPageObjects extends Init{
 				}else if(timerange.equals("Last_Month_to_Date")) {
 					timerange="5";
 				}
-		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
 		}
 		DateColumnSelection();
 		programSelection();
@@ -274,16 +406,17 @@ public class BIsheetPageObjects extends Init{
 		columnSelectionninth();
 		uniqueOfferAcceptedSelection();
 		columnSelectiontenth();
-		totalIMConversionsSelection();
+		totalConversionsSelection();
 		columnSelectioneleveen();
 		uniqueIMConversionsSelection();
 		columnSelectiontwelve();
-		IMConversionspercentageSelection();
+//		IMConversionspercentageSelection();
+//		columnSelectionthirteen();
+		totalfulfillmentSelection();
+//		columnSelectionforteen();
 		columnSelectionthirteen();
-		totalIMfulfillmentSelection();
-		columnSelectionforteen();
 		uniqueIMfulfillmentSelection();
-		editDateinboundFinal();
+//		editDateinboundFinal();
 		
 		
 		
@@ -295,15 +428,27 @@ public class BIsheetPageObjects extends Init{
 		Thread.sleep(3000);
 		jswait.loadSendKeys(BIname, name);
 		jswait.loadSendKeys(BIdescription, description);
-		if(timerange.equals("between_yesterday_and_tomorrow"))
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
 		{
-			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
 			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
 			jswait.loadClick("//paper-item[contains(.,'is between')]");
 			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
 			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
 			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
 			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
 			
 			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
 			
@@ -321,7 +466,11 @@ public class BIsheetPageObjects extends Init{
 				}else if(timerange.equals("Last_Month_to_Date")) {
 					timerange="5";
 				}
-		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
 		}
 		DateColumnSelection();
 //		columnSelectionSecond();
@@ -334,30 +483,45 @@ public class BIsheetPageObjects extends Init{
 //		eventsCustomerConverted();
 //		columnSelectionSixth();
 //		eventsFulfilmentSuccess();
-		
+		columnSelectionSecond();
 		campaignCategoryNameSelection();
+		columnSelectionThird();
 		campaignNameSelection();
+		columnSelectionFourth();
 		broadcastNameSelection();
+		columnSelectionFifth();
 		acknowledgementSelection();
 		columnSelectionSixth();
 		eventsAckMessage();
-		editDateEvents();
+//		editDateEvents();
 		
 	}
-	public void createBIworksheetoffersproducts(String name,String description,String timerange ) throws InterruptedException{
+	public void createBICommonEvents(String name,String description,String timerange ) throws InterruptedException{
 		jswait.loadClick(clickcreatenewworksheet);
 		Thread.sleep(3000);
 		jswait.loadSendKeys(BIname, name);
 		jswait.loadSendKeys(BIdescription, description);
-		if(timerange.equals("between_yesterday_and_tomorrow"))
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
 		{
-			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
 			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
 			jswait.loadClick("//paper-item[contains(.,'is between')]");
 			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
 			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
 			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
 			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
 			
 			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
 			
@@ -375,11 +539,669 @@ public class BIsheetPageObjects extends Init{
 				}else if(timerange.equals("Last_Month_to_Date")) {
 					timerange="5";
 				}
-		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
+		columnSelectionFirst();
+		offerSelection();
+		columnSelectionSecond();
+		totalConversionsSelection();
+		columnSelectionThird();
+		totalfulfillmentSelection();
+		
+		
+	}
+	public void createBIPMwithgroups(String name,String description,String timerange ) throws InterruptedException{
+		jswait.loadClick(clickcreatenewworksheet);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(BIname, name);
+		jswait.loadSendKeys(BIdescription, description);
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
+		{
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
+		if(timerange.equals("Yesterday"))
+				{
+			timerange="1";
+				}else if(timerange.equals("Last_week")) {
+					timerange="2";
+				}else if(timerange.equals("Last_month")) {
+					timerange="3";
+				}else if(timerange.equals("This_Month_to_Date")) {
+					timerange="4";
+				}else if(timerange.equals("Last_Month_to_Date")) {
+					timerange="5";
+				}
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
+		columnSelectionFirst();
+		broadcastWithGroups();
+		columnSelectionSecond();
+		targetGroupSelection();
+		columnSelectionThird();
+		controlGroupParticipationSelectionwithoutcoloum();
+		columnSelectionFourth();
+		totalConversionsSelection();
+		columnSelectionFifth();
+		controlGroupConversionSelectionwithoutcoloumn();
+	
+	
+	
+	}
+	public void createBIPMwithAttributes(String name,String description,String timerange ) throws InterruptedException{
+		jswait.loadClick(clickcreatenewworksheet);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(BIname, name);
+		jswait.loadSendKeys(BIdescription, description);
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
+		{
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
+		if(timerange.equals("Yesterday"))
+				{
+			timerange="1";
+				}else if(timerange.equals("Last_week")) {
+					timerange="2";
+				}else if(timerange.equals("Last_month")) {
+					timerange="3";
+				}else if(timerange.equals("This_Month_to_Date")) {
+					timerange="4";
+				}else if(timerange.equals("Last_Month_to_Date")) {
+					timerange="5";
+				}
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
+		columnSelectionFirst();
+		campaignCategoryNameSelection();
+		columnSelectionSecond();
+		campaignNameSelection();
+		columnSelectionThird();
+		broadcastNameSelection();
+		columnSelectionFourth();
+		broadcastLabelSelection();
+		columnSelectionFifth();
+		inventorySelection();
+		columnSelectionSixth();
+		campaignAttributesSelection();
+		columnSelectionSeventh();
+		broadcastAttributesSelection();
+		columnSelectioneighth();
+		ProductSelection();
+		columnSelectionninth();
+		ProductClassSelection();
+		columnSelectiontenth();
+        offerSelection();
+        columnSelectioneleveen();
+        offerAttributesSelection();
+        columnSelectiontwelve();
+        acknowledgementSelection();
+        columnSelectionthirteen();
+        CustomcalCulationSelection();
+        
+	
+	
+	
+	}
+	
+	public void createBINumAttrCustCalculation(String name,String description,String timerange ) throws InterruptedException{
+		jswait.loadClick(clickcreatenewworksheet);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(BIname, name);
+		jswait.loadSendKeys(BIdescription, description);
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
+		{
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
+		if(timerange.equals("Yesterday"))
+				{
+			timerange="1";
+				}else if(timerange.equals("Last_week")) {
+					timerange="2";
+				}else if(timerange.equals("Last_month")) {
+					timerange="3";
+				}else if(timerange.equals("This_Month_to_Date")) {
+					timerange="4";
+				}else if(timerange.equals("Last_Month_to_Date")) {
+					timerange="5";
+				}
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
+		columnSelectionFirst();
+		campaignCategoryNameSelection();
+		columnSelectionSecond();
+		campaignNameSelection();
+		columnSelectionThird();
+		campaignAttributesSelection();
+		columnSelectionFourth();
+		campaignAttrpercentageSelection();
+		columnSelectionFifth();
+		broadcastNameSelection();
+		columnSelectionSixth();
+		inventorySelection();
+		columnSelectionSeventh();
+		broadcastLabelSelection();
+		columnSelectioneighth();
+		 offerSelection();
+		 columnSelectionninth();
+		 acknowledgementSelection();
+		 columnSelectiontenth();
+		 uniqueacknowledgementSelection();
+		 columnSelectioneleveen();
+		 totalConversionsSelection();
+		 columnSelectiontwelve();
+		 unique_E_ConversionsSelection();
+		columnSelectionthirteen();
+		Eventdomain_ConversionsSelection();
+		columnSelectionforteen();
+		CustomcalAckConversionSelection();
+		columnSelectionfifteen();
+		controlGroupParticipationSelectionwithoutcoloum();
+		columnSelectionsixteen();
+		controlGroupParticipationUnique();
+		columnSelectionseventeen();
+		controlGroupConversionSelectionwithoutcoloumn();
+		columnSelectioneighteen();
+		controlGroupConversionUnique();
+//		columnSelectionnintheen();
+//		
+//		columnSelectiontwenty();
+//		
+//		columnSelectiontwentyone();
+		
+	}
+	public void createBIEventDomainReport(String name,String description,String timerange ) throws InterruptedException{
+		jswait.loadClick(clickcreatenewworksheet);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(BIname, name);
+		jswait.loadSendKeys(BIdescription, description);
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
+		{
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
+		if(timerange.equals("Yesterday"))
+				{
+			timerange="1";
+				}else if(timerange.equals("Last_week")) {
+					timerange="2";
+				}else if(timerange.equals("Last_month")) {
+					timerange="3";
+				}else if(timerange.equals("This_Month_to_Date")) {
+					timerange="4";
+				}else if(timerange.equals("Last_Month_to_Date")) {
+					timerange="5";
+				}
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
 		}
 		DateColumnSelection();
+		columnSelectionSecond();
+		offerSelection();
+		columnSelectionThird();
 		ProductSelection();
+		columnSelectionFourth();
+		offerAttributesSelection();
+		columnSelectionFifth();
+		offerprofitAttributesSelection();
+		columnSelectionSixth();
+		F_conversionSelection();
+		columnSelectionSeventh();
+		G_fulfillmentSelection();
+		columnSelectioneighth();
+		H_F_DSelection();
+		columnSelectionninth();
+		I_G_DSelection();
+		columnSelectiontenth();
+		J_H_ISelection();
+		columnSelectioneleveen();
+		K_F_ESelection();
+		columnSelectiontwelve();
+		
+//		columnSelectionthirteen();
+	//	
+//		columnSelectionforteen();
+	//	
+//		columnSelectionfifteen();
+	//	
+//		columnSelectionsixteen();
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+//	columnSelectionFirst();
+//	
+//	columnSelectionSecond();
+//	
+//	columnSelectionThird();
+//	
+//	columnSelectionFourth();
+//	
+//	columnSelectionFifth();
+//	
+//	columnSelectionSixth();
+//	
+//	columnSelectionSeventh();
+//	
+//	columnSelectioneighth();
+//	
+//	columnSelectionninth();
+	
+//	columnSelectiontenth();
+//	
+//	columnSelectioneleveen();
+//	
+//	columnSelectiontwelve();
+//	
+//	columnSelectionthirteen();
+//	
+//	columnSelectionforteen();
+//	
+//	columnSelectionfifteen();
+//	
+//	columnSelectionsixteen();
+	
+	public void createBIPMwithCustSegment(String name,String description,String timerange,String sheet ) throws InterruptedException, IOException{
+		jswait.loadClick(clickcreatenewworksheet);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(BIname, name);
+		jswait.loadSendKeys(BIdescription, description);
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
+		{
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
+		if(timerange.equals("Yesterday"))
+				{
+			timerange="1";
+				}else if(timerange.equals("Last_week")) {
+					timerange="2";
+				}else if(timerange.equals("Last_month")) {
+					timerange="3";
+				}else if(timerange.equals("This_Month_to_Date")) {
+					timerange="4";
+				}else if(timerange.equals("Last_Month_to_Date")) {
+					timerange="5";
+				}
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
+		columnSelectionFirst();
+		campaignNameSelection();
+		columnSelectionSecond();
+		broadcastNameSelection();
+		columnSelectionThird();
+		segmantNameSelection(sheet);
+		columnSelectionFourth();
+		B_acknowledgementSelection();
+		columnSelectionFifth();
+		uniqueacknowledgementSelection();
+		columnSelectionSixth();
+		D_totalConversionsSelection();
+		columnSelectionSeventh();
+		unique_E_ConversionsSelection();
+		columnSelectioneighth();
+		Eventdomain_ConversionsSelection();
+		columnSelectionninth();
+		CustSegCulationSelection();
+		columnSelectiontenth();
+		controlGroupParticipationUnique();
+		columnSelectioneleveen();
+		controlGroupConversionUnique();
+		columnSelectiontwelve();
+		JUniqueNetconversionCal();
+//		columnSelectionthirteen();
+//		
+//		columnSelectionforteen();
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+	
+	public void createBISeedingSheet(String name,String description,String timerange ) throws InterruptedException{
+		jswait.loadClick(clickcreatenewworksheet);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(BIname, name);
+		jswait.loadSendKeys(BIdescription, description);
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
+		{
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
+		if(timerange.equals("Yesterday"))
+				{
+			timerange="1";
+				}else if(timerange.equals("Last_week")) {
+					timerange="2";
+				}else if(timerange.equals("Last_month")) {
+					timerange="3";
+				}else if(timerange.equals("This_Month_to_Date")) {
+					timerange="4";
+				}else if(timerange.equals("Last_Month_to_Date")) {
+					timerange="5";
+				}
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
+		DateColumnSelection();
+		columnSelectionSecond();
+		campaignCategoryNameSelection();
+		columnSelectionThird();
+		campaignNameSelection();
+		columnSelectionFourth();
+		broadcastNameSelection();
+		columnSelectionFifth();
+		targetGroupSelection();
+		columnSelectionSixth();
+		controlGroupParticipationSelectionwithoutcoloum();
+		columnSelectionSeventh();
+		totalConversionsSelection();
+		columnSelectioneighth();
+		controlGroupConversionSelectionwithoutcoloumn();
+		columnSelectionninth();
+		totalfulfillmentSelection();
+		
+		
+	}
+	
+	
+	public void createBIEandASheet(String name,String description,String timerange ) throws InterruptedException{
+		jswait.loadClick(clickcreatenewworksheet);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(BIname, name);
+		jswait.loadSendKeys(BIdescription, description);
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
+		{
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
+		if(timerange.equals("Yesterday"))
+				{
+			timerange="1";
+				}else if(timerange.equals("Last_week")) {
+					timerange="2";
+				}else if(timerange.equals("Last_month")) {
+					timerange="3";
+				}else if(timerange.equals("This_Month_to_Date")) {
+					timerange="4";
+				}else if(timerange.equals("Last_Month_to_Date")) {
+					timerange="5";
+				}
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
+		columnSelectionFirst();
+		engagementColumnSelection();
+		columnSelectionSecond();
+		actionColumnSelection();
+		columnSelectionThird();
+		totalOfferRecommendedSelection();
+		columnSelectionFourth();
+		targetGroupSelection();
+		columnSelectionFifth();
+		totalOfferAcceptedSelection();
+		columnSelectionSixth();
+		totalConversionsSelection();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	public void createBIworksheetoffersproducts(String name,String description,String timerange ) throws InterruptedException{
+		jswait.loadClick(clickcreatenewworksheet);
+		Thread.sleep(3000);
+		jswait.loadSendKeys(BIname, name);
+		jswait.loadSendKeys(BIdescription, description);
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
+		{
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
+			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+			jswait.loadClick("//paper-item[contains(.,'is between')]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
+			
+		}
+		else {
+		if(timerange.equals("Yesterday"))
+				{
+			timerange="1";
+				}else if(timerange.equals("Last_week")) {
+					timerange="2";
+				}else if(timerange.equals("Last_month")) {
+					timerange="3";
+				}else if(timerange.equals("This_Month_to_Date")) {
+					timerange="4";
+				}else if(timerange.equals("Last_Month_to_Date")) {
+					timerange="5";
+				}
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		}
+		DateColumnSelection();
+		columnSelectionSecond();
+		ProductSelection();
+		columnSelectionThird();
 		ProductClassSelection();
+		columnSelectionFourth();
 		offerSelection();
 		columnSelectionFifth();
 		totalOfferElligibleSelection();
@@ -396,16 +1218,16 @@ public class BIsheetPageObjects extends Init{
 		columnSelectioneleveen();
 		imacknowledgementSelection();
 		columnSelectiontwelve();
-		totalIMConversionsSelection();
+		totalConversionsSelection();
 		columnSelectionthirteen();
 		uniqueIMConversionsSelection();
 		columnSelectionforteen();
 		IMConversionspercentageSelection();
 		columnSelectionfifteen();
-		totalIMfulfillmentSelection();
+		totalfulfillmentSelection();
 		columnSelectionsixteen();
 		uniqueIMfulfillmentSelection();
-		editDateinboundFinal();
+//		editDateinboundFinal();
 		
 		
 		
@@ -416,15 +1238,27 @@ public class BIsheetPageObjects extends Init{
 		Thread.sleep(3000);
 		jswait.loadSendKeys(BIname, name);
 		jswait.loadSendKeys(BIdescription, description);
-		if(timerange.equals("between_yesterday_and_tomorrow"))
+		jswait.loadClick("//div[text()='No time ranges defined.']//following::iron-icon[1]");
+		jswait.loadSendKeys("//label[text()='Time Range Name']//following::input[1]", timerange);
+		if(timerange.equals("between yesterday and tomorrow"))
 		{
-			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+			jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[2]");
 			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
 			jswait.loadClick("//paper-item[contains(.,'is between')]");
 			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
 			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
 			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
 			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
+			
+			
+			
+//			jswait.loadClick("//div[@id=\"no-custom-message\"]//following::iron-icon[1]");
+//			jswait.loadClick("//label[contains(.,'Select')]//following::input[1]");
+//			jswait.loadClick("//paper-item[contains(.,'is between')]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[2]");
+//			jswait.loadClick("(//paper-item[contains(.,'yesterday (start of)')])[1]");
+//			jswait.loadClick("(//label[contains(.,'Select')]//following::input[1])[3]");
+//			jswait.loadClick("(//paper-item[contains(.,'tomorrow (start of)')])[2]");
 			
 			jswait.loadClick("(//paper-button[contains(.,'Save')])[2]");
 			
@@ -442,18 +1276,26 @@ public class BIsheetPageObjects extends Init{
 				}else if(timerange.equals("Last_Month_to_Date")) {
 					timerange="5";
 				}
-		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("//h4[text()='Select your Time Range Type']//following::paper-radio-button[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//h4[text()='Select Popular Range Type(s)']//following::paper-radio-group//following::paper-radio-button["+timerange+"]");
+		jswait.loadClick("(//paper-button[text()='Save'])[2]");
+//		jswait.loadClick("//h5[contains(.,'Select Popular Range Type(s)')]//following::paper-radio-button["+timerange+"]");
 		}
 		DateColumnSelection();
+		columnSelectionSecond();
 		campaignCategoryNameSelection();
+		columnSelectionThird();
 		campaignNameSelection();
+		columnSelectionFourth();
 		broadcastNameSelection();
+		columnSelectionFifth();
 		acknowledgementSelection();
-		conversionSelection();
-		fulfillmentSelection();
-		controlGroupConversionSelection();
-		controlGroupParticipationSelection();
-		editDateoutboundFinal();
+//		conversionSelection();
+//		fulfillmentSelection();
+//		controlGroupConversionSelection();
+//		controlGroupParticipationSelection();
+//		editDateoutboundFinal();
 		
 		
 		
@@ -530,8 +1372,28 @@ public class BIsheetPageObjects extends Init{
 		jswait.loadClick(clicksixteencolumn);
 		jswait.loadClick(clickconfigure);
 	}
+	public void columnSelectionseventeen() throws InterruptedException{
+		jswait.loadClick(clickseventeencolumn);
+		jswait.loadClick(clickconfigure);
+	}
+	public void columnSelectioneighteen() throws InterruptedException{
+		jswait.loadClick(clickeighteencolumn);
+		jswait.loadClick(clickconfigure);
+	}
+	public void columnSelectionnintheen() throws InterruptedException{
+		jswait.loadClick(clickninthteencolumn);
+		jswait.loadClick(clickconfigure);
+	}
+	public void columnSelectiontwenty() throws InterruptedException{
+		jswait.loadClick(clicktweentycolumn);
+		jswait.loadClick(clickconfigure);
+	}
+	public void columnSelectiontwentyone() throws InterruptedException{
+		jswait.loadClick(clicktweentyonecolumn);
+		jswait.loadClick(clickconfigure);
+	}
 	public void ProductSelection() throws InterruptedException{
-		columnSelectionSecond();
+		
 		jswait.loadClick(headertypeelements);
 		jswait.loadClick(elementheaderoffersandproducts);
 		jswait.loadSendKeys(elementselection, "Product");
@@ -540,7 +1402,7 @@ public class BIsheetPageObjects extends Init{
 		jswait.loadClick(clicksavebutton);
 	}
 	public void ProductClassSelection() throws InterruptedException{
-		columnSelectionThird();
+		
 		jswait.loadClick(headertypeelements);
 		jswait.loadClick(elementheaderoffersandproducts);
 		jswait.loadSendKeys(elementselection, "Product Class");
@@ -549,7 +1411,7 @@ public class BIsheetPageObjects extends Init{
 		jswait.loadClick(clicksavebutton);
 	}
 	public void offerSelection() throws InterruptedException{
-		columnSelectionFourth();
+		
 		jswait.loadClick(headertypeelements);
 		jswait.loadClick(elementheaderoffersandproducts);
 		jswait.loadSendKeys(elementselection, "Offer");
@@ -567,6 +1429,26 @@ public class BIsheetPageObjects extends Init{
 //		jswait.loadClick(aggregationtypecount);
 //		jswait.loadClick(clicksavebutton);
 //	}
+	public void engagementColumnSelection() throws InterruptedException{
+		jswait.loadClick(headertypeelements);
+		jswait.loadClick(elementheaderEngagement);
+		jswait.loadSendKeys(elementselection, "Engagement Name");
+		jswait.loadClick(engagementnameelementselection);
+		jswait.loadClick(aggregationtypecount);
+		jswait.loadClick(clicksavebutton);
+		
+	}
+	
+	public void actionColumnSelection() throws InterruptedException{
+		jswait.loadClick(headertypeelements);
+		jswait.loadClick(elementheaderEngagement);
+		jswait.loadSendKeys(elementselection, "Action Name");
+		jswait.loadClick(actionnameelementselection);
+		jswait.loadClick(aggregationtypecount);
+		jswait.loadClick(clicksavebutton);
+		
+	}
+	
 	
 	public void DateColumnSelection() throws InterruptedException{
 		columnSelectionFirst();
@@ -576,7 +1458,7 @@ public class BIsheetPageObjects extends Init{
 		jswait.loadClick(clicksavebutton);
 	}
 	public void campaignCategoryNameSelection() throws InterruptedException{
-		columnSelectionSecond();
+		
 		jswait.loadClick(headertypeelements);
 		jswait.loadClick(elementheaderoutbound);
 		jswait.loadSendKeys(elementselection, "Campaign Category Name");
@@ -607,10 +1489,18 @@ public class BIsheetPageObjects extends Init{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Total offers elligible");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Total offers elligible");
+//		jswait.pasteText(eventdropdowncalculation, "Customer was eligible for Offer");
+//		jswait.loadSendKeys(" //label[text()='Event Type']//following::input[1]", "Customer was eligible for Offer");
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(Customerelligible);
 		jswait.loadClick(randomClickontopcalculation);
@@ -621,10 +1511,17 @@ public class BIsheetPageObjects extends Init{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Unique offers elligible");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Unique offers elligible");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(Customerelligible);
 		jswait.loadClick(randomClickontopcalculation);
@@ -635,10 +1532,17 @@ public class BIsheetPageObjects extends Init{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Total Offers presented");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Total Offers presented");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(Offerrecommended);
 		jswait.loadClick(randomClickontopcalculation);
@@ -649,10 +1553,17 @@ public class BIsheetPageObjects extends Init{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Unique offer presented");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Unique offer presented");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(Offerrecommended);
 		jswait.loadClick(randomClickontopcalculation);
@@ -663,10 +1574,17 @@ public class BIsheetPageObjects extends Init{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Total Acceptance");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Total Acceptance");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(Offeraccepted);
 		jswait.loadClick(randomClickontopcalculation);
@@ -678,24 +1596,59 @@ public class BIsheetPageObjects extends Init{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Unique Acceptance");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Unique Acceptance");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(Offeraccepted);
 		jswait.loadClick(randomClickontopcalculation);
 		jswait.loadClick(UniquecountCalculations);
 		jswait.loadClick(clicksavebutton);
 	}
-	public void totalIMConversionsSelection() throws InterruptedException{
+	public void totalConversionsSelection() throws InterruptedException{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Total Conversion");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Total Conversion");
+		
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ConversioneventTypeSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(TotalcountCalculations);
+		jswait.loadClick(clicksavebutton);
+	}
+	public void D_totalConversionsSelection() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "D-CONV");
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(ConversioneventTypeSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
@@ -706,24 +1659,82 @@ public class BIsheetPageObjects extends Init{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Unique Conversion");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Unique Conversion");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(ConversioneventTypeSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
 		jswait.loadClick(UniquecountCalculations);
 		jswait.loadClick(clicksavebutton);
 	}
+public void unique_E_ConversionsSelection() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "E-unique_conv");
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ConversioneventTypeSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(UniquecountCalculations);
+		jswait.loadClick(clicksavebutton);
+	}
+public void Eventdomain_ConversionsSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderEvent);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "F-Value");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadClick(clickdropdownEventtypeincalculations);
+	jswait.loadClick(ConversioneventTypeSelectioninCalculation);
+	jswait.loadClick(randomClickontopcalculation);
+	jswait.loadClick(EventDomainCalculations);
+	jswait.loadSendKeys("//label[text()='Sub-Domain']//following::input[1]", "Value");
+	jswait.loadClick("//paper-radio-button[@name='SUM']");
+	jswait.loadClick(clicksavebutton);
+}
 	public void IMConversionspercentageSelection() throws InterruptedException{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderCreatecalculation);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(calculationNameforpercent, "Conv %");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(calculationName, "Conv %");
+		
 		jswait.loadSendKeys(calculationDescription, "To find conversion %");
 		jswait.loadSendKeys(setupK1click, "Unique Conversion");
 		//jswait.loadClick(setupK1click);
@@ -740,14 +1751,21 @@ public class BIsheetPageObjects extends Init{
 		jswait.loadClick(clicksavebutton);
 		
 	}
-	public void totalIMfulfillmentSelection() throws InterruptedException{
+	public void totalfulfillmentSelection() throws InterruptedException{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Total Fulfillment");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Total Fulfillment");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(FulfillmenteventTypeSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
@@ -755,14 +1773,350 @@ public class BIsheetPageObjects extends Init{
 		jswait.loadClick(clicksavebutton);
 		
 	}
+	public void G_fulfillmentSelection() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "G-Fulfilment");
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(FulfillmenteventTypeSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(TotalcountCalculations);
+		jswait.loadClick(clicksavebutton);
+		
+	}
+	
+public void CustomcalCulationSelection() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderCreatecalculation);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Custom calculation");
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
+		jswait.loadSendKeys(calculationDescription, "sum");
+		jswait.loadSendKeys(setupK1click, "c_attribute");
+		//jswait.loadClick(setupK1click);
+		jswait.loadClick(cattributeselectfork1);
+		jswait.loadClick(plusbuttonclickforformula);
+		
+		jswait.loadSendKeys(setupK2click, "b_attributes");
+		//jswait.loadClick(setupK2click);
+		//jswait.loadClick(clickrandoncal);
+		Thread.sleep(2000);
+		//jswait.loadClick(uniqueofferpresentedfork2);
+		jswait.loadClick(battributeselectfork1);
+		jswait.loadSendKeys(combinationformula, "K1+K2");
+		jswait.loadClick(clicksavebutton);
+		
+	}
+public void H_F_DSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderCreatecalculation);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "H:F*D");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadSendKeys(calculationDescription, "f*d");
+	jswait.loadSendKeys(setupK1click, "F-Conversion");
+	//jswait.loadClick(setupK1click);
+	jswait.loadClick(FConversion);
+	jswait.loadClick(plusbuttonclickforformula);
+	
+	jswait.loadSendKeys(setupK2click, "Offer_Price");
+	//jswait.loadClick(setupK2click);
+	//jswait.loadClick(clickrandoncal);
+	Thread.sleep(2000);
+	//jswait.loadClick(uniqueofferpresentedfork2);
+	jswait.loadClick(Offer_Price);
+	jswait.loadSendKeys(combinationformula, "K1*K2");
+	jswait.loadClick(clicksavebutton);
+	
+}
+public void I_G_DSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderCreatecalculation);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "I:G*D");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadSendKeys(calculationDescription, "G*D");
+	jswait.loadSendKeys(setupK1click, "G-Fulfilment");
+	//jswait.loadClick(setupK1click);
+	jswait.loadClick(GFulfilment);
+	jswait.loadClick(plusbuttonclickforformula);
+	
+	jswait.loadSendKeys(setupK2click, "Offer_Price");
+	//jswait.loadClick(setupK2click);
+	//jswait.loadClick(clickrandoncal);
+	Thread.sleep(2000);
+	//jswait.loadClick(uniqueofferpresentedfork2);
+	jswait.loadClick(Offer_Price);
+	jswait.loadSendKeys(combinationformula, "K1*K2");
+	jswait.loadClick(clicksavebutton);
+	
+}
+public void J_H_ISelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderCreatecalculation);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "J:H+I");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadSendKeys(calculationDescription, "J");
+	jswait.loadSendKeys(setupK1click, "H:F*D");
+	//jswait.loadClick(setupK1click);
+	jswait.loadClick(HFD);
+	jswait.loadClick(plusbuttonclickforformula);
+	
+	jswait.loadSendKeys(setupK2click, "I:G*D");
+	//jswait.loadClick(setupK2click);
+	//jswait.loadClick(clickrandoncal);
+	Thread.sleep(2000);
+	//jswait.loadClick(uniqueofferpresentedfork2);
+	jswait.loadClick(IGD);
+	jswait.loadSendKeys(combinationformula, "K1+K2");
+	jswait.loadClick(clicksavebutton);
+	
+}
+public void K_F_ESelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderCreatecalculation);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "K:F*E");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadSendKeys(calculationDescription, "F*e");
+	jswait.loadSendKeys(setupK1click, "F-Conversion");
+	//jswait.loadClick(setupK1click);
+	jswait.loadClick(FConversion);
+	jswait.loadClick(plusbuttonclickforformula);
+	
+	jswait.loadSendKeys(setupK2click, "Offer_Profit");
+	//jswait.loadClick(setupK2click);
+	//jswait.loadClick(clickrandoncal);
+	Thread.sleep(2000);
+	//jswait.loadClick(uniqueofferpresentedfork2);
+	jswait.loadClick(Offer_Profit);
+	jswait.loadSendKeys(combinationformula, "K1+K2");
+	jswait.loadClick(clicksavebutton);
+	
+}
+public void L_G_ESelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderCreatecalculation);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "L:G*E");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadSendKeys(calculationDescription, "G*E");
+	jswait.loadSendKeys(setupK1click, "G-Fulfilment");
+	//jswait.loadClick(setupK1click);
+	jswait.loadClick(GFulfilment);
+	jswait.loadClick(plusbuttonclickforformula);
+	
+	jswait.loadSendKeys(setupK2click, "Offer_Profit");
+	//jswait.loadClick(setupK2click);
+	//jswait.loadClick(clickrandoncal);
+	Thread.sleep(2000);
+	//jswait.loadClick(uniqueofferpresentedfork2);
+	jswait.loadClick(Offer_Profit);
+	jswait.loadSendKeys(combinationformula, "K1*K2");
+	jswait.loadClick(clicksavebutton);
+	
+}
+
+public void CustomcalAckConversionSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderCreatecalculation);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "E/C");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadSendKeys(calculationDescription, "E/C");
+	jswait.loadSendKeys(setupK1click, "C-Unique_ACK");
+	//jswait.loadClick(setupK1click);
+	jswait.loadClick(CUnique_ACK);
+	jswait.loadClick(plusbuttonclickforformula);
+	
+	jswait.loadSendKeys(setupK2click, "E-unique_conv");
+	//jswait.loadClick(setupK2click);
+	//jswait.loadClick(clickrandoncal);
+	Thread.sleep(2000);
+	//jswait.loadClick(uniqueofferpresentedfork2);
+	jswait.loadClick(Eunique_convk1);
+	jswait.loadSendKeys(combinationformula, "K1/K2");
+	jswait.loadClick(clicksavebutton);
+	
+}
+public void campaignAttrpercentageSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderCreatecalculation);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "Custom calculation");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadSendKeys(calculationDescription, "sum");
+	jswait.loadSendKeys(setupK1click, "c_attribute");
+	//jswait.loadClick(setupK1click);
+	jswait.loadClick(cattributeselectfork1);
+	jswait.loadSendKeys(combinationformula, "K1*100");
+	jswait.loadClick(clicksavebutton);
+	
+}
+public void CustSegCulationSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderCreatecalculation);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "G-E/C");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadSendKeys(calculationDescription, "G");
+	jswait.loadSendKeys(setupK1click, "E-unique_conv");
+	//jswait.loadClick(setupK1click);
+	jswait.loadClick(Eunique_convk1);
+	jswait.loadClick(plusbuttonclickforformula);
+	
+	jswait.loadSendKeys(setupK2click, "C-Unique_ACK");
+	//jswait.loadClick(setupK2click);
+	//jswait.loadClick(clickrandoncal);
+	Thread.sleep(2000);
+	//jswait.loadClick(uniqueofferpresentedfork2);
+	jswait.loadClick(CUnique_ACK);
+	jswait.loadSendKeys(combinationformula, "K1/K2");
+	jswait.loadClick(clicksavebutton);
+	
+}
+public void JUniqueNetconversionCal() throws InterruptedException{
+	
+	jswait.loadClick(headertypecalculations);
+	jswait.loadClick(calculationheaderCreatecalculation);
+	Thread.sleep(2000);
+	jswait.loadClick(ClickNameofCalculation);
+	Thread.sleep(2000);
+//	jswait.loadClick(ClickNameofCalculation);
+	NameofCalculation.clear();
+	jswait.loadClick(ClickNameofCalculation);
+	jswait.loadSendKeys(NameofCalculation, "J-Unique Net conversion");
+	jswait.loadClick(aggregationtypeSum);
+	jswait.loadClick(clickNextbutton);
+	Thread.sleep(2000);
+	
+	jswait.loadSendKeys(calculationDescription, "Unique Net conversion %");
+	jswait.loadSendKeys(setupK1click, "F-Value");
+	//jswait.loadClick(setupK1click);
+	jswait.loadClick(FValue);
+	jswait.loadClick(plusbuttonclickforformula);
+	
+	jswait.loadSendKeys(setupK2click, "H-CGP_Unique");
+	//jswait.loadClick(setupK2click);
+	//jswait.loadClick(clickrandoncal);
+	Thread.sleep(2000);
+	//jswait.loadClick(uniqueofferpresentedfork2);
+	jswait.loadClick(HCGP_Unique);
+	jswait.loadClick(plusbuttonclickforformula);
+	jswait.loadSendKeys(setupK3click, "G-E/C");
+	jswait.loadClick(GEC);
+	jswait.loadSendKeys(combinationformula, "K1-(K2/K3)");
+	jswait.loadClick(clicksavebutton);
+	
+}
 	public void uniqueIMfulfillmentSelection() throws InterruptedException{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Unique Fulfillment");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Unique Fulfillment");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(FulfillmenteventTypeSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
@@ -774,7 +2128,7 @@ public class BIsheetPageObjects extends Init{
 	
 	
 	public void campaignNameSelection() throws InterruptedException{
-		columnSelectionThird();
+		
 		jswait.loadClick(headertypeelements);
 		jswait.loadClick(elementheaderoutbound);
 		jswait.loadSendKeys(elementselection, "Campaign Name");
@@ -783,7 +2137,7 @@ public class BIsheetPageObjects extends Init{
 		jswait.loadClick(clicksavebutton);
 	}
 	public void broadcastNameSelection() throws InterruptedException{
-		columnSelectionFourth();
+		
 		jswait.loadClick(headertypeelements);
 		jswait.loadClick(elementheaderoutbound);
 		jswait.loadSendKeys(elementselection, "Broadcast Name");
@@ -791,15 +2145,132 @@ public class BIsheetPageObjects extends Init{
 		jswait.loadClick(aggregationtypecount);
 		jswait.loadClick(clicksavebutton);	
 	}
+	public void segmantNameSelection(String sheet) throws InterruptedException, IOException{
+		jswait.loadClick(headertypeelements);
+		jswait.loadClick(elementheadersegment);
+		jswait.loadClick("//paper-button[contains(text(),'Create Saved Segment')]");
+		Thread.sleep(2000);
+		eh.setExcelFile("BIworksheet", sheet);
+		String Name = (String) eh.getCell(1, 2);
+		String segmentName=RandomNameGenerator.getRandomName(Name);
+		eh.setCell(1, 2,segmentName);
+		page.enterSavedSegmentName(segmentName);
+		jswait.loadSendKeys(segmentDescriptionField, segmentName+"_Description");
+		jswait.loadSendKeys(listSelectorField,SELENIUM_LIST);
+		jswait.loadClick(listSelect);
+//		if(segmentName.contains("TEMP"))
+//			segmentName = segmentName.replaceAll("TEMP", "");
+//		System.out.println(segmentName);
+		targetConditionObjects.clickBasicTargetCondition("Segment");
+		pmConfigurationPage.clickSegmentSaveButton();
+		jswait.loadSendKeys("//label[text()='Saved Segments']//following::input[1]", segmentName);
+		jswait.loadClick("//paper-item[text()='"+segmentName+"']");
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(aggregationtypecount);
+		jswait.loadClick(clicksavebutton);	
+	}
+	
+public void broadcastLabelSelection() throws InterruptedException{
+		
+		jswait.loadClick(headertypeelements);
+		jswait.loadClick(elementheaderoutbound);
+		jswait.loadSendKeys(elementselection, "Broadcast Label");
+		jswait.loadClick(broadcastLabelselection);
+		jswait.loadClick(aggregationtypecount);
+		jswait.loadClick(clicksavebutton);	
+	}
+public void inventorySelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypeelements);
+	jswait.loadClick(elementheaderoutbound);
+	jswait.loadSendKeys(elementselection, "Inventory");
+	jswait.loadClick(inventoryselection);
+	jswait.loadClick(aggregationtypecount);
+	jswait.loadClick(clicksavebutton);	
+}
+public void campaignAttributesSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypeelements);
+	jswait.loadClick(elementheaderoutbound);
+	jswait.loadSendKeys(elementselection, "Campaign Attributes");
+	jswait.loadClick(CampaignAttributesselection);
+    jswait.loadSendKeys("//label[text()='Attribute Name']//following::input[1]", "c_attribute");
+    jswait.loadClick(CampaignAttributenameselection);
+    jswait.loadClick(aggregationtypecount);
+	jswait.loadClick(clicksavebutton);	
+}
+
+public void broadcastAttributesSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypeelements);
+	jswait.loadClick(elementheaderoutbound);
+	jswait.loadSendKeys(elementselection, "Broadcast Attributes");
+	jswait.loadClick(broadcastAttributesselection);
+    jswait.loadSendKeys("//label[text()='Attribute Name']//following::input[1]", "b_attributes");
+    jswait.loadClick(broadcastAttributenameselection);
+    jswait.loadClick(aggregationtypecount);
+	jswait.loadClick(clicksavebutton);	
+}
+
+public void offerAttributesSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypeelements);
+	jswait.loadClick(elementheaderoffersandproducts);
+	jswait.loadSendKeys(elementselection, "Offer Attributes");
+	jswait.loadClick(offerAttributesselection);
+    jswait.loadSendKeys("//label[text()='Attribute Name']//following::input[1]", "Offer_Price");
+    jswait.loadClick(offerAttributenameselection);
+    jswait.loadClick(aggregationtypecount);
+	jswait.loadClick(clicksavebutton);	
+}
+public void offerprofitAttributesSelection() throws InterruptedException{
+	
+	jswait.loadClick(headertypeelements);
+	jswait.loadClick(elementheaderoffersandproducts);
+	jswait.loadSendKeys(elementselection, "Offer Attributes");
+	jswait.loadClick(offerAttributesselection);
+    jswait.loadSendKeys("//label[text()='Attribute Name']//following::input[1]", "Offer_Profit");
+    jswait.loadClick(offerprofitAttributenameselection);
+    jswait.loadClick(aggregationtypecount);
+	jswait.loadClick(clicksavebutton);	
+}
+	
+public void broadcastWithGroups() throws InterruptedException{
+		
+		jswait.loadClick(headertypeelements);
+		jswait.loadClick(elementheaderoutbound);
+		jswait.loadSendKeys(elementselection, "Broadcast Name");
+		jswait.loadClick(broadcastNameelementselection);
+		Thread.sleep(2000);
+		jswait.loadClick(createGroups);
+		jswait.loadClick(aggregationtypecount);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		jswait.loadClick(createGroupsplusbutton);
+		jswait.loadSendKeys(createGroupsName, "Broadcast campaign");
+		//jswait.loadClick(createGroupsconfigurecondition);
+		jswait.loadClick(createGroupsconditionclick);
+		jswait.loadClick(createGroupsbeginswith);
+		jswait.loadSendKeys(createGroupsconditiontext, "smpp");
+//		jswait.loadClick(createGroupssave);
+		jswait.loadClick(clicksavebutton);	
+	}
 	
 	public void imacknowledgementSelection() throws InterruptedException{
 		
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Acknowledgement");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Acknowledgement");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(ACkeventTypeSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
@@ -808,14 +2279,92 @@ public class BIsheetPageObjects extends Init{
 		
 	}
 	
-	public void acknowledgementSelection() throws InterruptedException{
-		columnSelectionFifth();
+	public void targetGroupSelection() throws InterruptedException{
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "TG");
+		Thread.sleep(2000);
 		jswait.loadClick(aggregationtypeSum);
+		Thread.sleep(2000);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ACkeventTypeSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(TotalcountCalculations);
+		jswait.loadClick(clicksavebutton);
+		
+	}
+	public void B_acknowledgementSelection() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "B-ACK");
+		Thread.sleep(2000);
+		jswait.loadClick(aggregationtypeSum);
+		Thread.sleep(2000);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ACkeventTypeSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(TotalcountCalculations);
+		jswait.loadClick(clicksavebutton);
+		
+	}
+	
+public void uniqueacknowledgementSelection() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "C-Unique_ACK");
+		Thread.sleep(2000);
+		jswait.loadClick(aggregationtypeSum);
+		Thread.sleep(2000);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ACkeventTypeSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(UniquecountCalculations);
+		jswait.loadClick(clicksavebutton);
+		
+	}
+	
+	public void acknowledgementSelection() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+//		jswait.loadClick(ClickNameofCalculation);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
 		jswait.loadSendKeys(NameofCalculation, "Acknowledgement");
+		Thread.sleep(2000);
+		jswait.loadClick(aggregationtypeSum);
+		Thread.sleep(2000);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(ACkeventTypeSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
@@ -827,10 +2376,38 @@ public class BIsheetPageObjects extends Init{
 		columnSelectionSixth();
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Conversion");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Conversion");
+		
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ConversioneventTypeSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(TotalcountCalculations);
+		jswait.loadClick(clicksavebutton);
+		
+		
+	}
+	public void F_conversionSelection() throws InterruptedException{
+		columnSelectionSixth();
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "F-Conversion");
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(ConversioneventTypeSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
@@ -843,12 +2420,39 @@ public class BIsheetPageObjects extends Init{
 		columnSelectionSeventh();
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Fulfillment");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Fulfillment");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(FulfillmenteventTypeSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(TotalcountCalculations);
+		jswait.loadClick(clicksavebutton);
+		
+	}
+	public void controlGroupConversionSelectionwithoutcoloumn() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Control Group Conversion");
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ControlGroupConversionSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
 		jswait.loadClick(TotalcountCalculations);
 		jswait.loadClick(clicksavebutton);
@@ -858,10 +2462,16 @@ public class BIsheetPageObjects extends Init{
 		columnSelectioneighth();
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Control Group Conversion");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Control Group Conversion");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(ControlGroupConversionSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
@@ -869,15 +2479,101 @@ public class BIsheetPageObjects extends Init{
 		jswait.loadClick(clicksavebutton);
 		
 	}
+	public void controlGroupParticipationSelectionwithoutcoloum() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Control Group Participation");
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ControlGroupParticipationSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(TotalcountCalculations);
+		jswait.loadClick(clicksavebutton);
+		
+	}
+	
+	public void clickSegmentSaveButton() throws InterruptedException{
+		jswait.loadClick(segmentSaveButton);
+	}
+	public void controlGroupParticipationUnique() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "H-CGP_Unique");
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ControlGroupParticipationSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(UniquecountCalculations);
+		jswait.loadClick(clicksavebutton);
+		
+	}
+	public void controlGroupConversionUnique() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "I-CGC_Unique");
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
+		jswait.loadClick(clickdropdownEventtypeincalculations);
+		jswait.loadClick(ControlGroupConversionSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(UniquecountCalculations);
+		jswait.loadClick(clicksavebutton);
+	}
+public void metricSelection() throws InterruptedException{
+		
+		jswait.loadClick(headertypecalculations);
+		jswait.loadClick(calculationheadermetric);
+		jswait.loadClick(aggregationtypeSum);
+		jswait.loadClick(clickNextbutton);
+		Thread.sleep(2000);
+		
+		jswait.loadClick(clickdropdownMetrictypeincalculations);
+		jswait.loadClick(ControlGroupConversionSelectioninCalculation);
+		jswait.loadClick(randomClickontopcalculation);
+		jswait.loadClick(UniquecountCalculations);
+		jswait.loadClick(clicksavebutton);
+	}
 	
 	public void controlGroupParticipationSelection() throws InterruptedException{
 		columnSelectionninth();
 		jswait.loadClick(headertypecalculations);
 		jswait.loadClick(calculationheaderEvent);
+		Thread.sleep(2000);
+		jswait.loadClick(ClickNameofCalculation);
+		Thread.sleep(2000);
+		NameofCalculation.clear();
+		jswait.loadClick(ClickNameofCalculation);
+		jswait.loadSendKeys(NameofCalculation, "Control Group Participation");
 		jswait.loadClick(aggregationtypeSum);
 		jswait.loadClick(clickNextbutton);
 		Thread.sleep(2000);
-		jswait.loadSendKeys(NameofCalculation, "Control Group Participation");
+		
 		jswait.loadClick(clickdropdownEventtypeincalculations);
 		jswait.loadClick(ControlGroupParticipationSelectioninCalculation);
 		jswait.loadClick(randomClickontopcalculation);
@@ -1102,12 +2798,25 @@ public class BIsheetPageObjects extends Init{
       	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
 		jswait.loadClick("(//paper-button[contains(.,'OK')])[4]");
 		jswait.loadClick("//paper-button[contains(.,'Proceed')]");
-		jswait.loadClick("(//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down'])[1]");
-		Thread.sleep(1000);
-		jswait.loadClick("//paper-item[contains(.,'System Administrator')]");
-		jswait.loadClick("(//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down'])[2]");
-		Thread.sleep(1000);
+		jswait.loadSendKeys("(//input[@id='input'])[3]", "Regression");
+		driver.findElement(By.xpath("(//input[@id='input'])[3]")).sendKeys(Keys.ENTER);
+		jswait.loadSendKeys("(//input[@id='input'])[3]", "z");
+		//Thread.sleep(1000);
+//		driver.findElement(By.xpath("//h2[contains(.,'STEP 2: Save, Export, Tags & Share')]")).click();
+//		Thread.sleep(1000);
+//		jswait.loadClick("(//*[@id=\"scrollable\"])[1]");
+//		jswait.loadClick("//h2[contains(.,'STEP 2: Save, Export, Tags & Share')]");
+////		jswait.loadClick("(//input[@id='input'])[4]");
+////		jswait.loadClick("(//input[@id='input'])[4]");
+//		jswait.loadClick("(//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down'])[1]");
+//		Thread.sleep(1000);
+//		jswait.loadClick("//paper-item[contains(.,'System Administrator')]");
+//		jswait.loadClick("//h2[contains(.,'STEP 2: Save, Export, Tags & Share')]");
+//		jswait.loadClick("(//input[@id='input'])[3]");
+		jswait.loadClick("(//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down'])[3]");
+//		Thread.sleep(1000);
 		jswait.loadClick("//paper-item[contains(.,'flyops@flytxt.com')]");
+		jswait.loadClick("//label[contains(.,'Write Email Message')]//following::input[1]");
 		jswait.loadSendKeys("//label[contains(.,'Write Email Message')]//following::input[1]", "BI Report");
 		jswait.loadClick("//paper-button[contains(.,'Done')]");
 	}

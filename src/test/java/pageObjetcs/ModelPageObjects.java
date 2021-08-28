@@ -209,7 +209,7 @@ public class ModelPageObjects extends Init {
 		Thread.sleep(3000);
 	}
 	
-	public void inputdata( String inputCodeFile,String modelType ,String modelName ) throws Exception {
+	public void inputdata( String inputCodeFile,String modelType ,String modelName) throws Exception {
 		
 		driver.switchTo().frame(0);//switch frame
 			Thread.sleep(3000);
@@ -222,13 +222,17 @@ public class ModelPageObjects extends Init {
 		   	StringSelection selection = new StringSelection(input);
 		   	clipboard.setContents(selection, selection);
 		   	inputdata.sendKeys(Keys.CONTROL,"v");
+//		   	jswait.loadClick("(//span[@class=\"icon-control-play\"])[1]");
+//			Thread.sleep(5000);
 		   	driver.switchTo().defaultContent();
 	   	jswait.loadClick("//div[@class='content style-scope data-analytics']");
 	   	Thread.sleep(5000);
 		   	driver.navigate().refresh();
-		   	jswait.loadClick("(//data-table-cell[contains(.,'"+modelName+"')]//following::paper-icon-button)[1]");
+//		   	jswait.loadClick("(//data-table-cell[contains(.,'"+modelName+"')]//following::paper-icon-button)[1]");
+			jswait.loadClick("//div[contains(text(),'"+modelName+"')]//following::paper-icon-button[1]");
 		   	Thread.sleep(2000);
-		   jswait.loadClick("(//data-table-cell[contains(.,'"+modelName+"')]//following::paper-item[contains(.,'Edit')])[1]");
+//		   jswait.loadClick("(//data-table-cell[contains(.,'"+modelName+"')]//following::paper-item[contains(.,'Edit')])[1]");
+		   jswait.loadClick("//div[contains(text(),'"+modelName+"')]//following::paper-item[contains(.,'Edit')][1]");
 		   	Thread.sleep(2000);
 		   	
 	}

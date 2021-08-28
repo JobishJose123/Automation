@@ -290,6 +290,7 @@ Then navigate to precision marketer
 Then navigate to offer management
 Then navigate to offers
 Then create new offer from sheet "<offerSheet>" with product "fullDetails"
+Then navigate to life cycle marketing
 Then navigate to offer management 
 Then Navigate to Offer Catalogue 
 Then adding existing offers from sheet "<offerSheet>" Offer Catalogue from sheet "defaultCatalog"
@@ -297,8 +298,8 @@ Examples:
 |offerSheet|
 |rechargeimageFacebook|
 |rechargevideoFacebook|
-|carouselimageFacebook|
-|carouselvideoFacebook|
+#|carouselimageFacebook|
+#|carouselvideoFacebook|
 
 
 @CreateBCWithFacebookOffers @initBrowser @closeBrowser
@@ -314,15 +315,15 @@ Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "no
 Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "both"
 Then enter choose offer tab from sheet "<offerSheet>" for bc from sheet "<bcSheet>" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
 Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "one-offBC"
-Then activate bc 
+Then save bc 
 Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "facebookBC"
 Then wait for 4000 milliseconds 
 Examples:
 |bcSheet|offerSheet|i|
 |recurringBC|rechargeimageFacebook|1|
 |recurringBC|rechargevideoFacebook|2|
-|recurringBC|carouselimageFacebook|3|
-|recurringBC|carouselvideoFacebook|4|
+#|recurringBC|carouselimageFacebook|3|
+#|recurringBC|carouselvideoFacebook|4|
 
 
 #=====================================================================================================================================#

@@ -1044,8 +1044,8 @@ Examples:
 |bcSheet||i|
 |recurringBC|1|
 |recurringBC|2|
-|recurringBC|3|
-|recurringBC|4|
+#|recurringBC|3|
+#|recurringBC|4|
 
 
 @NX-2052 @initBrowser 
@@ -1145,7 +1145,7 @@ Then filter the bc from file "bcInputData" of sheet "latchbc" for bctype "onetim
 Then edit the Delevery tab details from workbook "bcInputData" sheet "latchbc"
 Then wait until status of "latchbc" from file "bcInputData" is "Delivering" for bctype "onetime"
 
-################Start the latch simulator then run the following cases################
+################Start the latch simulator then run the following cases################ https://docs.google.com/document/d/179FmAPomOv3d4VHPAKvDb76vXzGmlE2WQpmzGY0cYLA/edit?usp=sharing
 @NDX-latcheventverification  @initBrowser
 Scenario: Verify the event verification of latch 
 Given login
@@ -1166,6 +1166,19 @@ Then search msisdn "919995335682"
 Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "latchbc" for the campaign from sheet "campaignBC"
 Then verify the condition Confirmed Delivery event for the bc from sheet "latchbc" for the campaign from sheet "campaignBC"
+
+@VerifySavedsegmentsEdit @initBrowser
+   Scenario: create saved segment as precondition
+   Given login
+   Then navigate to landing page
+   Then navigate to precision marketer
+   Then navigate to configuration
+   Then navigate to saved segments
+   Then edit the saved segment "EditSavedsegment"
+   Then add Condition and save
+   Then verify the changes
+
+
 
 
 

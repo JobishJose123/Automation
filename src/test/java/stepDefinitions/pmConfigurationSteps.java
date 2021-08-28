@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 
 import baseClasses.Init;
+import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
@@ -35,6 +36,24 @@ public class pmConfigurationSteps extends Init{
 			pmConfigurationPage.clickSegmentSaveButton();
 		}
     }
+	@Then("^edit the saved segment \"([^\"]*)\"$")
+	public void edit_the_saved_segment(String name) throws Throwable {
+		CommonObjects commonObjects = new CommonObjects();
+		commonObjects.filterName(name);
+		commonObjects.clickOptionsIcon();
+		commonObjects.clickEditIcon();
+		Thread.sleep(2000);
+		
+	}
+	@Then("^add Condition and save$")
+	public void add_Condition_and_save() throws Throwable {
+		
+	}
+	@Then("^verify the changes$")
+	public void verify_the_changes() throws Throwable {
+		
+		
+	}
 	@Then("^edit saved segment with condition \"([^\"]*)\"$")
     public void  editSavedSegment(String name) throws Throwable{
 		TargetConditionObjects targetConditionObjects = new TargetConditionObjects();

@@ -2,7 +2,9 @@ package stepDefinitions;
 import java.util.Calendar;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import baseClasses.ExcelHelper;
@@ -23,6 +25,12 @@ public class BIsheetSteps extends Init {
 	BIsheetPageObjects BIobjects = new BIsheetPageObjects();
 	CommonObjects CommonObjects=new CommonObjects();
 	 ReportPageObjects  ReportPageObject = new  ReportPageObjects();
+	 @FindBy(xpath="//paper-button[contains(.,'Add')]")
+	  private WebElement BIAdd;
+	
+	@FindBy(xpath="//iron-icon[@icon='icons:filter-list']")
+ private WebElement setFilter;
+	
 	
 	public BIsheetSteps()
 	{
@@ -89,6 +97,11 @@ public class BIsheetSteps extends Init {
 		String bcName=eh.getCellByColumnName("BC Name");
 		ReportPageObject.FilterBifunction(bcName);
 	}
+	@Then("^verify \"([^\"]*)\" worksheet$")
+	public void verify_worksheet(String arg1) throws Throwable {
+		jswait.loadClick(setFilter);
+		jswait.loadClick(BIAdd);
+	}
 	
 	
 	@Then("^create BI worksheet from sheet \"([^\"]*)\" with time range \"([^\"]*)\"$")
@@ -132,7 +145,12 @@ public class BIsheetSteps extends Init {
 		else if(sheetname.equals("BIwithCustSegment")) {
 			BIobjects.createBIPMwithCustSegment(name,description,timerange,sheetname);
 		}
-		
+		else if(sheetname.equals("NumAttrCustCalculation")) {
+			BIobjects.createBINumAttrCustCalculation(name,description,timerange);
+		}
+		else if(sheetname.equals("EventDomainReport")) {
+			BIobjects.createBIEventDomainReport(name,description,timerange);
+		}
 	}
 	
 	@Then("^save the BI sheet$")

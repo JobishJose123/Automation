@@ -437,7 +437,8 @@ private WebElement savedSegmentSelectorField;
 	@FindBy(xpath="//paper-item[contains(.,'Saved Segment')]")
 	private WebElement SavedSegmentbtn;
 	
-	
+	@FindBy(xpath="//paper-item[contains(.,'View Details')]")
+	private WebElement Viewdetailsbtn;
 	
 	@FindBy(xpath="//paper-button[@class='saveBtn style-scope saved-segment-option x-scope paper-button-0'][contains(.,'Save')]")
 	private WebElement SaveMicroSegmentNameToSavedSegment;
@@ -1236,7 +1237,21 @@ public void clustertabledetailsandsave() throws Exception {
        Thread.sleep(3000);
      jswait.loadClick(MicroSegmentSavebtn);
      jswait.loadClick(SaveAnalysisBtn);
+     jswait.loadClick("//div[@class='toggle-container style-scope paper-toggle-button']");
 		
+   }
+   public void navigateToMicroSegment() throws Exception{
+	   commonObjects.clickOptionsIcon();
+	   jswait.loadClick(CreatedMicroSegment);
+	   commonObjects.clickOptionsIcon();
+	   jswait.loadClick(Viewdetailsbtn);
+   
+   
+   }
+   public void verifyviewdetails() throws Exception{
+	   commonObjects.clickOptionsIcon();
+	   jswait.loadClick(Viewdetailsbtn);
+	   
    }
    
    public void CreateCrossTab() throws Exception{
@@ -1290,7 +1305,7 @@ public void clustertabledetailsandsave() throws Exception {
 	  
 public void TargetCount() throws Exception {
 
-	Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope analysis-list'][contains(.,'1,019')]"));
+	Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope analysis-list'][contains(.,'1,001')]"));
 }
 
   public void editCrossTab() throws Exception{

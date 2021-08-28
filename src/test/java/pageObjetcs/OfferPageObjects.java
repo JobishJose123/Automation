@@ -429,13 +429,13 @@ public class OfferPageObjects extends Init {
 	 @FindBy(xpath="//span[contains(.,'Change')]/../input")
 	 private WebElement emailcreativechangebtn ;
 	 
-	 @FindBy(xpath=".//label[contains(.,'Text')]//following::textarea")
+	 @FindBy(xpath=".//label[contains(.,'Text')]//following::input[1]")
 	 private WebElement facebookcreativetextInput;
 	 @FindBy(xpath="//label[contains(.,'Select Facebook Page')]//following::iron-icon[1]")
 	 private WebElement facebookpageselect;
 	 @FindBy(xpath="//paper-item[contains(.,'NEONxTel')]")
 	 private WebElement facebookpage;
-	 @FindBy(xpath=".//*[@id='browse']//following::input[1]")
+	 @FindBy(xpath=".//*[@id='file']")
 	 private WebElement fbvideoinput;
 	@FindBy(xpath = ".//*[@id='file']")
 	private WebElement facebookimageButton;
@@ -2464,15 +2464,16 @@ else {
 		System.out.println(profile);
 		System.out.println(type);
 		
-		jswait.loadClick(facebookpageselect);
-		Thread.sleep(3000);
-		
-		jswait.loadClick(facebookpage);
+//		jswait.loadClick(facebookpageselect);
+//		Thread.sleep(3000);
+//		
+//		jswait.loadClick(facebookpage);
 		
 	   if(type.equalsIgnoreCase("image")) {
 	   		   
-	   jswait.loadClick(".//*[@id='rectMain']//div[contains(.,'Single Image')]");
-	   
+//	   jswait.loadClick(".//*[@id='rectMain']//div[contains(.,'Single Image')]");
+	   jswait.loadClick("//div[contains(text(),'Single Image or Video')]//preceding::div[5]");
+	   jswait.loadClick("//paper-radio-button[@name='image']");
 	   File image = new File("facebookinput\\Hydrangeas.jpg");
 	   Thread.sleep(2000);
 	   facebookimageButton.sendKeys(image.getAbsolutePath());
@@ -2484,7 +2485,9 @@ else {
 	   
 	}else if(type.equalsIgnoreCase("video")) {
 		
-		  jswait.loadClick(".//*[@id='rectMain']//div[contains(.,'Single Video')]");
+//		  jswait.loadClick(".//*[@id='rectMain']//div[contains(.,'Single Video')]");
+		  jswait.loadClick("//div[contains(text(),'Single Image or Video')]//preceding::div[5]");
+		  jswait.loadClick("//paper-radio-button[@name='video']");
 		   
 		   File video = new File("facebookinput\\welcome.mp4");
 		   Thread.sleep(2000);
@@ -2497,31 +2500,39 @@ else {
 	}
 	else if(type.equalsIgnoreCase("carouselImage")||type.equalsIgnoreCase("carouselVideo")) {
 		jswait.loadClick(carouselRadioBtn);
-		for(int i=1;i<=3;i++) {
+//		for(int i=1;i<=3;i++) {
+		Thread.sleep(10000);
 		jswait.loadClick(firstCarousel);
-		 switch(type) {
-		 case "carouselImage":
+		Thread.sleep(10000);
+//		 switch(type) {
+//		 case "carouselImage":
+		if(type.equals("carouselImage")) {
 		jswait.loadClick(imageRadioBtn);
-		jswait.loadClick(selectImage);
+//		jswait.loadClick(selectImage);
 		File image=new File("facebookinput\\Hydrangeas.jpg");
 		selectImage.sendKeys(image.getAbsolutePath());	
-		case "carouselVideo":
+		Thread.sleep(50000);
+		}else if(type.equals("carouselVideo")) {
+//		case "carouselVideo":
 		jswait.loadClick(carouselVideo);
 		jswait.loadClick(selectImage);
-		image=new File("facebookinput\\welcome.mp4");
+		File image=new File("facebookinput\\welcome.mp4");
 		selectImage.sendKeys(image.getAbsolutePath());
+		Thread.sleep(50000);
 		}
+		
 		jswait.loadSendKeys(headlineInput,"carousel by selenium");
-		jswait.loadSendKeys(carouselDespInput,"");
-		jswait.loadSendKeys(carouselURL,"");
+		jswait.loadSendKeys(carouselDespInput,"carousel by selenium");
+		jswait.loadSendKeys(carouselURL,"test.com");
 		jswait.loadSendKeys(carouselPrimaryText,"");
 		jswait.loadSendKeys(carouselSeeMoreURL,"");
 		jswait.loadSendKeys( carouselMoreLink,"");
 		jswait.loadClick(carouselCallAction);
 		jswait.loadClick(sendMessage);
-		}
+//		}
 		} 
-   }
+	}
+   
 	public void EditCreative(String sheet) throws Throwable {
 		Thread.sleep(1000);
 		clickOfferEditProceedButton();
