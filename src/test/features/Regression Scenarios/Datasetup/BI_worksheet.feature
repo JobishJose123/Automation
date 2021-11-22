@@ -166,4 +166,61 @@ Then save the BI sheet
 Then filter the BI worksheet for status check from sheet "EventDomainReport"
 Then wait until BI worksheet status is changed to "R"
 
+#
+#=========================================================================================================================================================================================================================
+#
+
+
+    @Bi_offerforAck     @initBrowser
+Scenario: Data Setup for Offer creation for Bi 
+Given login 
+Then navigate to precision marketer
+Then navigate to offer management
+Then navigate to offers
+Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to offer management 
+Then Navigate to Offer Catalogue
+Then Create New Offer Catalogue from sheet "defaultCatalog"
+Then Add "rechargeSMS" offer to Offer Catalogue
+
+
+    @Bi_campaignforAck     @initBrowser
+Scenario: Data Setup for Campaign and Campaign Category for Bi outBound
+Given login
+Then navigate to configuration management
+Then navigate to campaign categories
+Then create new campaign category from sheet "campaignCategory"
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+
+
+  @bcDataSetUpBIforAck     @initBrowser
+Scenario: create Bc for Bi
+Given login
+Then navigate to precision marketer
+Then wait for 1 minutes
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then click create new broadcast button
+Then create bc from sheet "one-offBC" with inventory "Unlimited" and trigger "none"
+Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "both"
+Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "one-offBC" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "none" from sheet "one-offBC"
+Then activate bc
+Then wait until status of "one-offBC" is "Completed"
+Then wait for 1 minutes
+Then save "Ack" data to sheet "BiData" to the column "BC_ACK"
+
+
+#(//vaadin-grid-cell-content[text()='Broadcast Name']//following::vaadin-grid-cell-content[5]//span)[1]
+#//span[@title='smpptest8998']/../../../vaadin-grid-table-cell//span[@title='801']
+
+ 
+
 

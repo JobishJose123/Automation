@@ -145,3 +145,23 @@ Then filter BI worksheet from sheet "EventDomainReport"
 Then click on the BI sheet "EventDomainReport".
 Then verify "EventDomainReport" worksheet
 
+#####################################################################################################################################################
+ 
+  @AckVerifyBI    @initBrowser
+Scenario: Verify Ack Bc in BI worksheet
+Given login
+When navigate to precision marketer
+Then navigate to analytics
+Then navigate to Business Intelligence
+Then create BI worksheet from sheet "BIworksheetoutbound" with time range "between yesterday and tomorrow" 
+Then save the BI sheet
+Then filter the BI worksheet for status check from sheet "BIworksheetoutbound"
+Then wait until BI worksheet status is changed to "E"
+Then refresh
+Then filter the BI worksheet for status check from sheet "BIworksheetoutbound"
+Then wait until BI worksheet status is changed to "R"
+Then click on the BI sheet "BIworksheetoutbound".
+Then filter based on HeaderName "Broadcast Name" from WorkBook "bcInputData" and sheet "one-offBC"
+Then verify "Ack" Data from WorkBook "bcInputData" and Sheet "one-offBC"
+
+

@@ -2,6 +2,7 @@ package stepDefinitions;
 import java.util.Calendar;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -170,15 +171,88 @@ public class BIsheetSteps extends Init {
 	@Then("^wait until BI worksheet status is changed to \"([^\"]*)\"$")
 	public void wait_until_BI_worksheet_status_is_changed_to(String BIsheetstatus) throws Throwable {
 		Thread.sleep(5000);
+		jswait.loadClick("//div[@id='toggleButton']");
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
 		String currWorksheetstatus = BIobjects.getBIsheetstatus();
-		while(!BIsheetstatus.contentEquals(currWorksheetstatus)&& t.checkTimerMin(30)) {
+		while(!BIsheetstatus.contentEquals(currWorksheetstatus)&& t.checkTimerMin(180)) {
 			Thread.sleep(2000);
 			currWorksheetstatus = BIobjects.getBIsheetstatus();
 		}
 		Assert.assertTrue("Required status not found", BIsheetstatus.contentEquals(currWorksheetstatus));
 	}
+	
+	
+///////==============================================================================================================================================================
+	
+
+	@Then("^save \"([^\"]*)\" data to sheet \"([^\"]*)\" to the column \"([^\"]*)\"$")
+	public void save_data_to_sheet_to_the_column(String header, String sheet, String columnName) throws Throwable {
+		
+		Thread.sleep(2000);
+		String BcName;
+		eM.setExcelFile("bcInputData", "one-offBC");
+		eh.setExcelFile("BIworksheet", sheet);
+		
+		if(header.equalsIgnoreCase("Ack"))
+		{   
+			BcName=(String)eM.getCellByColumnName("BC Name");
+			WebElement ack=driver.findElement(By.xpath("//vaadin-grid-cell-content[contains(.,'"+BcName+"')]//following::vaadin-grid-cell-content[7]"));
+			System.out.println("Ack Count In Broadcast Under Campaign ===> "+ack.getText()+" <=================");
+			eh.setCell(columnName, ack.getText());
+			System.out.println("Ack countt ++++++++++++=========="+eh.getCellByColumnName("BC_ACK"));
+			
+		}		
+	}
+	
+	
+	@Then("^filter based on HeaderName \"([^\"]*)\" from WorkBook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void filter_based_on_HeaderName_from_WorkBook_and_sheet(String headerName, String workBook, String sheetName) throws Throwable {
+	
+		String headerRef="";
+		eM.setExcelFile(workBook, sheetName);
+		jswait.loadClick(setFilter);
+		jswait.loadClick(BIAdd);
+		 
+		headerRef=(String) eM.getCell(1,0);
+		System.out.println("==> "+headerRef);
+		BIobjects.applyFilter(headerRef, headerName);
+		
+		//jswait.checkVisibility("(//vaadin-grid-cell-content[text()='"+headerName+"']//following::vaadin-grid-cell-content[6]//span)[1]");
+	
+		
+	}
+
+	
+	@Then("^verify \"([^\"]*)\" Data from WorkBook \"([^\"]*)\" and Sheet \"([^\"]*)\"$")
+	public void verify_Data_from_WorkBook_and_Sheet(String check, String workBook, String sheetName) throws Throwable {
+	    
+		if(check.equalsIgnoreCase("Ack"))
+		{
+			System.out.println("=================Verifying ACK count In BI Sheet OutBound ========");
+			eM.setExcelFile(workBook, sheetName);
+			eh.setExcelFile("BIworksheet","BiData");
+			String ackInBC=(String)eh.getCellByColumnName("BC_ACK");
+			System.out.println("Acknowledgement Count In Broad cast In campaign category "+ackInBC);
+			
+			String BcName=(String) eM.getCell(1,0);
+			Assert.assertTrue(BIobjects.getStatusOfAck(BcName,ackInBC));
+			
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

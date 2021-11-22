@@ -328,11 +328,14 @@ public class BIsheetPageObjects extends Init{
 	private WebElement createGroupssave;
 	
 	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	
+	@FindBy(xpath = "//div[@class='input-content style-scope paper-input-container']//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']")
+	private WebElement conditionArrow;
 	
-	
-	
+	@FindBy(xpath = "(//input[@id='input'])[4]")
+	private WebElement headerTextField;
 	
 	
 	
@@ -2822,12 +2825,76 @@ public void metricSelection() throws InterruptedException{
 	}
 	
 	public String getBIsheetstatus() throws Exception{
-		jswait.loadClick(AutoRefreshbtn);
+		//jswait.loadClick(AutoRefreshbtn);
 		Thread.sleep(2000);
 		String status = driver.findElement(By.xpath("//span[@class='style-scope reports-grid']")).getText();
 		System.out.println(status);
 		return status;
 	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	
+	public void columnSelect(String headerName)throws Exception
+	{
+		jswait.loadClick("//iron-icon[@icon='paper-dropdown-menu:arrow-drop-down']");
+		Thread.sleep(1000);
+		//click on Element Header 
+		
+		jswait.loadClick("//paper-item[contains(.,'"+headerName+"')]");
+		
+	}
+	
+	public void conditionSelect(String condition)throws Exception
+	{
+		jswait.loadClick(conditionArrow);
+		Thread.sleep(1000);
+		jswait.loadClick("//paper-item[contains(.,'"+condition+"')]");	
+	}
+	
+	public void inputHeaderText(String headerRef)throws Exception
+	{
+		Thread.sleep(2000);
+		jswait.loadSendKeys(headerTextField,headerRef);
+		Thread.sleep(1000);
+	}
+	
+	public void applyFilter(String headerRef,String headerName)throws Exception
+	{
+		columnSelect(headerName);
+		conditionSelect("matches with");
+		inputHeaderText(headerRef);
+		jswait.loadClick("//paper-button[text()='Save']");
+		
+		
+	}
+	
+	
+	public boolean getStatusOfAck(String bcName,String ackCount)
+	{
+		WebElement st=null;
+		
+		try
+		{
+			
+   st=driver.findElement(By.xpath("//span[@title='"+bcName+"']/../../../vaadin-grid-table-cell//span[@title='"+ackCount+"']"));
+		
+	System.out.println("Ack Count In BI Sheet ===>"+st.getText());	
+	return true;
+		}
+		catch (Exception e) {
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Test Case has Failed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			return false;
+			}
+		   
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
