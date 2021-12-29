@@ -171,56 +171,235 @@ Then wait until BI worksheet status is changed to "R"
 #
 
 
-    @Bi_offerforAck     @initBrowser
-Scenario: Data Setup for Offer creation for Bi 
+    #@Bi_offerforAck     @initBrowser
+#Scenario: Data Setup for Offer creation for Bi 
+#Given login 
+#Then navigate to precision marketer
+#Then navigate to offer management
+#Then navigate to offers
+#Then create new offer from sheet "rechargeSMS" with product "fullDetails"
+#Then navigate to landing page
+#Then navigate to precision marketer
+#Then navigate to offer management 
+#Then Navigate to Offer Catalogue
+#Then Create New Offer Catalogue from sheet "defaultCatalog"
+#Then Add "rechargeSMS" offer to Offer Catalogue
+
+
+    #@Bi_campaignforAck     @initBrowser
+#Scenario: Data Setup for Campaign and Campaign Category for Bi outBound
+#Given login
+#Then navigate to configuration management
+#Then navigate to campaign categories
+#Then create new campaign category from sheet "campaignCategory"
+#Then navigate to landing page
+#Then navigate to precision marketer
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+
+
+  #@bcDataSetUpBIforAck     @initBrowser @closeBrowser
+#Scenario: create Bc for Bi
+#Given login
+#Then navigate to precision marketer
+#Then wait for 1 minutes
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then click create new broadcast button
+#Then create bc from sheet "one-offBC" with inventory "Unlimited" and trigger "none"
+#Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "none"
+#Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "one-offBC" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
+#Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "none" from sheet "one-offBC"
+#Then activate bc
+#Then wait until status of "one-offBC" is "Completed"
+#Then wait for 1 minutes
+#Then save "Ack" data to sheet "BiData" to the column "BC_ACK"
+
+
+
+#######################################################################################################################################
+###       BI Regression Data Set-Up >> Must Run Only Once Each successfully
+###
+#################################################################################################################
+
+ @createBiList  @initBrowser @closeBrowser
+Scenario: create customer List for BI
+Given login
+Then navigate to data foundation
+Then navigate to registration list
+Then click create new registration list button
+Then create New CustomerList Name "selenium_BiList" type as "Standard" for BI
+Then navigate to landing page
+
+##   After Running List Creation Scenario '@createBiList' Upload selenium_BIListMsisdn.csv excel file from List folder
+##
+## Metric creating scenario should run only once
+@metric_BI  @initBrowser @closeBrowser
+Scenario Outline: metric creation for Bi
 Given login 
+Then navigate to data foundation
+Then navigate to usage metric
+Then click create new registration list button
+Then create usageMetric Bi with name "<metricNames>" for BI
+Then save usage metric "<metricNames>" for BI
+Then navigate to landing page
+Examples: 
+|metricNames|
+|SelBiMetric1|
+|SelBiMetric2|
+|SelBiMetric3|
+|SelBiMetric4|
+
+
+# Note :--> Mount the Location "/usr/local/flytxt/selenium/metricBI" in Marathon Before Running.
+# If scenario Fails Must upload 4 metrics through DK job manually
+#
+@metricBiUpload_BI  @initBrowser @closeBrowser
+Scenario: metric creation for Bi
+Given login
+Then provide file in location "/usr/local/flytxt/selenium/metricBI" for trigger with csv file "BiMetricUpload.csv"
+
+
+
+@segment_BI  @initBrowser @closeBrowser
+Scenario: Saved segment creating for Bi for New BI Customer List
+Given login
+Then navigate to landing page
+Then navigate to precision marketer
+Then navigate to configuration
+Then navigate to saved segments
+Then create segment with name "SelBiSegment" with condition "listSubscribed"
+
+@Attributes_BI  @initBrowser @closeBrowser
+Scenario: create Offer attribute  Campaign attribute  and BC  Attributes  for Bi 
+Given login
+Then navigate to configuration management
+Then navigate to Campaign Attributes 
+Then create campaign attribute with name "SelCampAttribute" and label "selCamAtbt"
+Then navigate back
+Then navigate to offer attributes
+Then create offer attribute with name "SelOfferAttribute" and label "selOffAtbt"
+Then navigate back
+Then navigate to broadcast attribute
+Then create broadcast atribute with name "SelBCAttribute" and label "selBcAtbt"
+Then navigate to landing page
+
+
+
+
+
+
+
+
+######################################################################################################################                                                                  
+##
+## Data set-up for BI Report verification Broadcast and offer  set-up :: Can Run Multiple Times 
+######################################################################################################################
+
+@Bi_offers_BI   @initBrowser @closeBrowser
+Scenario Outline: create offers with Attribute for Bi verification
+Given login
 Then navigate to precision marketer
 Then navigate to offer management
 Then navigate to offers
-Then create new offer from sheet "rechargeSMS" with product "fullDetails"
-Then navigate to landing page
+Then create offer from Sheet "<OfferSheetName>" with product "fullDetails" with Reward "sel_reward" and Attribute value "<attributeValue>"
+Examples:
+		|OfferSheetName|attributeValue|
+		|biSmsOffer    |    10|
+		|biSeedOffer   |    5.5|
+		
+
+
+@catalog_BI    @initBrowser  @closeBrowser
+Scenario: Create offer catalog for BI report verification
+Given login
 Then navigate to precision marketer
-Then navigate to offer management 
+Then navigate to offer management
 Then Navigate to Offer Catalogue
-Then Create New Offer Catalogue from sheet "defaultCatalog"
-Then Add "rechargeSMS" offer to Offer Catalogue
+Then create Offer catalog from Sheet "catalog"
+Then add offer from Sheet "biSmsOffer" to catalog
+Then add offer from Sheet "biSeedOffer" to catalog
+Then navigate to landing page
 
 
-    @Bi_campaignforAck     @initBrowser
-Scenario: Data Setup for Campaign and Campaign Category for Bi outBound
+
+
+@category_BI  @initBrowser  @closeBrowser
+Scenario: create campaign category for BI Broadcasts only
 Given login
 Then navigate to configuration management
 Then navigate to campaign categories
-Then create new campaign category from sheet "campaignCategory"
-Then navigate to landing page
-Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then create new campaign from sheet "campaignBC" with catalog "defaultCatalog"
+Then create New Campaign Category from sheet "BiCategory" for BI
 
 
-  @bcDataSetUpBIforAck     @initBrowser
-Scenario: create Bc for Bi
-Given login
-Then navigate to precision marketer
-Then wait for 1 minutes
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
+
+
+
+@campaigns_BI    @initBrowser @closeBrowser
+Scenario Outline: Create Campaigns for OneOff Recurring Seeding Broadcasts
+ Given login
+ Then navigate to precision marketer
+ Then navigate to life cycle marketing
+ Then Navigate to Bi campaign Category from sheet "BiCategory"
+ Then Create New Campaign from Sheet "<campaignNames>" with catalog as "catalog" with "<AttributeValue>" Attribute
+Examples:
+|campaignNames|AttributeValue|
+|campaignOneoff|   20        |
+|campaignSeeding|  20        |
+|campaignRecur  |20.5        |
+
+
+
+
+@OneOffBc_BI @initBrowser  @closeBrowser
+Scenario Outline: create OneOff Broadcasts for Bi Report Verification 
+Given login 
+Then navigate to precision marketer 
+Then wait for 1 minutes 
+Then navigate to life cycle marketing 
+Then Navigate to Bi campaign Category from sheet "BiCategory" 
+Then Navigate to "campaignOneoff" View Broadcast
 Then click create new broadcast button
-Then create bc from sheet "one-offBC" with inventory "Unlimited" and trigger "none"
-Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "both"
-Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "one-offBC" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"
-Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "none" from sheet "one-offBC"
+Then input details Tab "<BcSheet>" with inventory "Unlimited" Attribute value "<attributeValue>" and triger "none"
+Then input Target Tab with customerList "selenium_BiList" and TG "none" CG "none" DNC "none"
+Then input offer from Sheet "biSmsOffer" with filter Criteria "ruleBased" and Give Rewards to "Unique Conversion"
+Then input Deliver Tab from sheet "<BcSheet>" with end Type as "none" 
 Then activate bc
-Then wait until status of "one-offBC" is "Completed"
+Then wait for Status of Bc "<BcSheet>" is "Completed"
 Then wait for 1 minutes
-Then save "Ack" data to sheet "BiData" to the column "BC_ACK"
+Then provide file in location "/usr/local/flytxt/selenium/conversionBI" for trigger with csv file "conversionBI.csv"
+Examples:
+		|BcSheet|attributeValue|
+		|OneOffBcA|     30   |
+		|OneOffBcB|     30   |
+		|OneOffBcC|     30   |
+		|OneOffBcD|     30   |
+		|OneOffBcE|     30   |
 
 
-#(//vaadin-grid-cell-content[text()='Broadcast Name']//following::vaadin-grid-cell-content[5]//span)[1]
-#//span[@title='smpptest8998']/../../../vaadin-grid-table-cell//span[@title='801']
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
