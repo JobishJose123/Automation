@@ -1,5 +1,8 @@
 package stepDefinitions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.itextpdf.text.log.SysoCounter;
 
+import baseClasses.BiEmail;
+import baseClasses.EmailHandlergmail;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -249,6 +254,10 @@ public class BiDataDef extends Init {
 		if (bc_Type.equalsIgnoreCase("oneoff")) {
 			biDataObject.oneOffBcDeliverTab(bcSheet);
 		}
+		else if(bc_Type.equalsIgnoreCase("Recuring"))
+		{
+			biDataObject.recuringBcDeliverTab(bcSheet,endType);
+		}
 
 	}
 	
@@ -260,6 +269,24 @@ public class BiDataDef extends Init {
 		String statusOfBc;
 		excel.setExcelFile("biDataSetup", bcSheet);
 		bcName = (String) excel.getCell(1, 0);
+		if (bcSheet.contains("RecuringBc")) {
+			System.out.println(":::::::::::Inside Recurring BC Filtering::::::::");
+			String date = (String) excel.getCell(1, 3);
+			bcName = bcName + "-" + date;
+			System.out.println("Bc Name::: " + bcName);
+
+		}
+		else if (bcSheet.contains("SeedingBc")) {
+			System.out.println(":::::::::::::Inside Seeding Bc Filtering::::::::");
+			String bcType = (String) excel.getCell(1, 1);
+			String date = (String) excel.getCell(1, 3);
+			if (bcType.equalsIgnoreCase("recuring")) {
+				bcName = bcName + "_MessagingBC" + "-" + date;
+
+			} else
+				bcName = bcName + "_OneOff_MessagingBC";
+		}
+		System.out.println("Bc Name::: " + bcName);
 		commonObjects.filterName(bcName);
 		commonObjects.toggleAutoRefresh();
 		statusOfBc = broadcastPageObjects.getTopBcStatus();
@@ -273,6 +300,31 @@ public class BiDataDef extends Init {
 		Assert.assertTrue("Invalid status of BC", statusOfBc.contains(statusExpected));
 
 	}
+	
+	
+	
+	@Then("^Save Ack to workBook \"([^\"]*)\" to Sheet \"([^\"]*)\" to the column \"([^\"]*)\"$")
+	public void save_Ack_to_workBook_to_Sheet_to_the_column(String workBook, String sheetName, String columnName) throws Throwable {
+	   
+		Thread.sleep(2000);
+		String BcName;
+		excel.setExcelFile(workBook, sheetName);
+		BcName=(String) excel.getCell(1,0);
+		WebElement ack=driver.findElement(By.xpath("//vaadin-grid-cell-content[contains(.,'"+BcName+"')]//following::vaadin-grid-cell-content[6]"));
+		System.out.println("Ack Count In Broadcast Under Campaign ===> "+ack.getText()+" <=================");
+		excel.setCell(columnName, ack.getText());
+		System.out.println("**********Successfully Stored Acknowledgement count in Sheet****************");
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

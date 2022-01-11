@@ -224,7 +224,7 @@ Then wait until BI worksheet status is changed to "R"
 ###
 #################################################################################################################
 
- @createBiList  @initBrowser @closeBrowser
+ @NDX-createBiList  @initBrowser @closeBrowser
 Scenario: create customer List for BI
 Given login
 Then navigate to data foundation
@@ -236,7 +236,7 @@ Then navigate to landing page
 ##   After Running List Creation Scenario '@createBiList' Upload selenium_BIListMsisdn.csv excel file from List folder
 ##
 ## Metric creating scenario should run only once
-@metric_BI  @initBrowser @closeBrowser
+@NDX-metric_BI  @initBrowser @closeBrowser
 Scenario Outline: metric creation for Bi
 Given login 
 Then navigate to data foundation
@@ -263,7 +263,7 @@ Then provide file in location "/usr/local/flytxt/selenium/metricBI" for trigger 
 
 
 
-@segment_BI  @initBrowser @closeBrowser
+@NDX-segment_BI  @initBrowser @closeBrowser
 Scenario: Saved segment creating for Bi for New BI Customer List
 Given login
 Then navigate to landing page
@@ -272,7 +272,7 @@ Then navigate to configuration
 Then navigate to saved segments
 Then create segment with name "SelBiSegment" with condition "listSubscribed"
 
-@Attributes_BI  @initBrowser @closeBrowser
+@NDX-Attributes_BI  @initBrowser @closeBrowser
 Scenario: create Offer attribute  Campaign attribute  and BC  Attributes  for Bi 
 Given login
 Then navigate to configuration management
@@ -289,7 +289,9 @@ Then navigate to landing page
 
 
 
-
+#
+##:::: Excel WorkBook used is biDataSetup.xls  
+#
 
 
 
@@ -298,7 +300,15 @@ Then navigate to landing page
 ## Data set-up for BI Report verification Broadcast and offer  set-up :: Can Run Multiple Times 
 ######################################################################################################################
 
-@Bi_offers_BI   @initBrowser @closeBrowser
+#
+##::::::::::: Must Mount This location "/usr/local/flytxt/selenium/conversionBI" in Marathon In order to automatically   
+## raise conversion for all Broadcasts.
+##
+# Or can use Any location in "/usr/local/flytxt/selenium.....  But need to be mounted. and created Conversion DK job  
+# with the same Location
+
+
+@NDX-Bi_offers_BI   @initBrowser @closeBrowser
 Scenario Outline: create offers with Attribute for Bi verification
 Given login
 Then navigate to precision marketer
@@ -312,7 +322,7 @@ Examples:
 		
 
 
-@catalog_BI    @initBrowser  @closeBrowser
+@NDX-catalog_BI    @initBrowser  @closeBrowser
 Scenario: Create offer catalog for BI report verification
 Given login
 Then navigate to precision marketer
@@ -326,7 +336,7 @@ Then navigate to landing page
 
 
 
-@category_BI  @initBrowser  @closeBrowser
+@NDX-category_BI  @initBrowser  @closeBrowser
 Scenario: create campaign category for BI Broadcasts only
 Given login
 Then navigate to configuration management
@@ -337,7 +347,7 @@ Then create New Campaign Category from sheet "BiCategory" for BI
 
 
 
-@campaigns_BI    @initBrowser @closeBrowser
+@NDX-campaigns_BI    @initBrowser @closeBrowser
 Scenario Outline: Create Campaigns for OneOff Recurring Seeding Broadcasts
  Given login
  Then navigate to precision marketer
@@ -348,12 +358,12 @@ Examples:
 |campaignNames|AttributeValue|
 |campaignOneoff|   20        |
 |campaignSeeding|  20        |
-|campaignRecur  |20.5        |
+|campaignRecur |20.5        |
 
 
 
 
-@OneOffBc_BI @initBrowser  @closeBrowser
+@NDX-OneOffBc_BI @initBrowser  @closeBrowser
 Scenario Outline: create OneOff Broadcasts for Bi Report Verification 
 Given login 
 Then navigate to precision marketer 
@@ -370,6 +380,7 @@ Then activate bc
 Then wait for Status of Bc "<BcSheet>" is "Completed"
 Then wait for 1 minutes
 Then provide file in location "/usr/local/flytxt/selenium/conversionBI" for trigger with csv file "conversionBI.csv"
+Then Save Ack to workBook "biDataSetup" to Sheet "<BcSheet>" to the column "Ack"
 Examples:
 		|BcSheet|attributeValue|
 		|OneOffBcA|     30   |
@@ -380,26 +391,99 @@ Examples:
 
 
 
+#
+#:: Note:-> In Deliver Tab :  Instead of "At" if we Give "None" Recurring BC will Run Infinite Days continuously. If provide "At" 
+# Recurring BC run for only Two Days.
+#
+
+ @NDX-RecurBc_BI    @initBrowser  @closeBrowser
+Scenario Outline: create Recurring Broadcasts for Bi Report Verification 
+Given login 
+Then navigate to precision marketer 
+Then wait for 1 minutes 
+Then navigate to life cycle marketing 
+Then Navigate to Bi campaign Category from sheet "BiCategory" 
+Then Navigate to "campaignRecur" View Broadcast
+Then click create new broadcast button 
+Then input details Tab "<BcSheet>" with inventory "Unlimited" Attribute value "<attributeValue>" and triger "none"
+Then input Target Tab with customerList "selenium_BiList" and TG "none" CG "none" DNC "none"
+Then input offer from Sheet "biSmsOffer" with filter Criteria "ruleBased" and Give Rewards to "Unique Conversion"
+Then input Deliver Tab from sheet "<BcSheet>" with end Type as "<endType>" 
+Then activate bc
+Then refresh
+Then wait for Status of Bc "<BcSheet>" is "Completed"
+Then wait for 1 minutes
+Then provide file in location "/usr/local/flytxt/selenium/conversionBI" for trigger with csv file "conversionBI.csv"
+Then Save Ack to workBook "biDataSetup" to Sheet "<BcSheet>" to the column "Ack"
+Examples:
+|BcSheet|attributeValue|endType|
+|RecuringBcA| 30       |At     |
+|RecuringBcB|30        |At     |
+|RecuringBcC|30        |At     |
+|RecuringBcD|30        |At     |
+|RecuringBcE|30        |At     |
+
+ 
+ 
+ 
+ ##:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ ##
+ ##Case::1  >>In seeding Bc's excel Sheet if user provide  column Type=recuring and in Deliver Tab  end Type as "none" .seeding Bc 
+ ## will run Infinite Times as Recuring Bc
+ ##
+ ##Case::2 >> In seeding Bc's excel Sheet if user provide  column Type=recuring and in Deliver Tab  end Type as "At"
+ ## Seeding bc will run as Recurring bc only for 2 Days then It will be completed
+ ##
+ ##Case::3 >>In seeding Bc's excel Sheet if user provide  column Type=oneoff , Seeding oneOff Bc will be sent
+ ##
+ ##:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ 
+ 
+  @NDX-SeedingBc_BI  @initBrowser @closeBrowser
+ Scenario Outline: create seeding Broadcasts for Bi Report Verification 
+ Given login 
+Then navigate to precision marketer 
+Then wait for 1 minutes 
+Then navigate to life cycle marketing 
+Then Navigate to Bi campaign Category from sheet "BiCategory"
+Then Navigate to "campaignSeeding" View Broadcast
+Then click create new broadcast button 
+Then input details Tab "<BcSheet>" with inventory "Unlimited" Attribute value "<attributeValue>" and triger "none"
+Then input Target Tab with customerList "selenium_BiList" and TG "none" CG "none" DNC "none"
+Then input offer from Sheet "biSeedOffer" with filter Criteria "ruleBased" and Give Rewards to "Unique Conversion"
+Then input Deliver Tab from sheet "<BcSheet>" with end Type as "none" 
+Then activate bc
+Then wait for Status of Bc "<BcSheet>" is "Completed"
+Then wait for 1 minutes
+Then provide file in location "/usr/local/flytxt/selenium/conversionBI" for trigger with csv file "conversionBI.csv"
+Then Save Ack to workBook "biDataSetup" to Sheet "<BcSheet>" to the column "Ack"
+Examples:
+|BcSheet|attributeValue|
+|SeedingBcA| 30        |
+|SeedingBcB| 30        |
+|SeedingBcC| 30        |
+|SeedingBcD| 30        |
+|SeedingBcE| 30        |
 
 
 
 
+################################################################################################################################################################
+################################################################################################################################################################
+#::::::
+#::::::Creating Data For Intent Management
+#::::::
+#::::::#########################################################################################################################################################
 
 
+#
+#:: WorkBook used >> "biDataSetup.xls"   ::::::::::::::::
+#
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@NDX-touchpoint_BI   @initBrowser
+Scenario: create new Api Touch point For Bi report regression
+Given login
+Then navigate to intent management
+Then navigate to touchpoints
+Then navigate to api
 

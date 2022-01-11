@@ -170,12 +170,34 @@ public class BiDataObject extends Init {
 	 @FindBy(xpath = "//*[contains(text(),'One-time')]/..")
 	 private WebElement oneOffRadiobutton;
 	 
+	 @FindBy(xpath = "//div[@id='radioLabel'][contains(.,'Never')]")
+	 private WebElement neverRadiobutton;
+	 @FindBy(xpath = ".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input")
+	 private WebElement RecurrencePatternInput;
+	 @FindBy(xpath = "//*[contains(@class,'recurrence')]//input")
+	 private WebElement RecurrenceInput;
+	 @FindBy(xpath = "(//label[contains(.,'Start broadcasts at')]//following::input)[1]")
+	 private WebElement StartBroadcastAtInput;
+	 @FindBy(xpath="(//label[contains(.,'Start broadcasts at')]//following::paper-button[contains(.,'OK')])[2]")
+	 private WebElement  startBroadcastOkbutton;
+	 @FindBy(xpath = "//div[@id='radioLabel'][contains(.,'At')]")
+	 private WebElement atRadiobutton;
+	 @FindBy(xpath = "//label[contains(.,'End Date/Time')]//following::input[1]")
+	 private WebElement EndDateInput;
+	 @FindBy(xpath = "(//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2])[2]")
+	 private WebElement dateOkbutton;
+	 @FindBy(xpath = "//label[contains(.,'End Date/Time')]//following::input[2]")
+	 private WebElement EndTimeInput;
+	 @FindBy(xpath = "(.//*[@id='timeDialog']/div/paper-button[2])[2]")
+	 private WebElement timeOkbutton;
+	 @FindBy(xpath = "//div[@id='radioContainer']//following::div[contains(.,'Fixed percentage')][@id='radioLabel']")
+	 private WebElement FixedPercentageOfTargetBase;
+	 @FindBy(xpath = "(//input[@id='input'][@type='number'])[1]")
+	 private WebElement fixedPercentnumber;
 	 
 	 
 	 
 	 
-	 
-	
 	
 	public BiDataObject() {
 		PageFactory.initElements(driver, this);
@@ -489,6 +511,11 @@ public class BiDataObject extends Init {
 		jswait.loadClick(SelectControlGroup);
 		if (CG.equalsIgnoreCase("none")) {
 			jswait.loadClick(NocontrolGroup);
+		} else {
+			System.out.println("Selected Control Group:: " + CG);
+			jswait.loadClick(FixedPercentageOfTargetBase);
+			jswait.loadSendKeys(fixedPercentnumber, CG);
+
 		}
 		jswait.loadClick(CGSaveButton);
 	}
@@ -691,10 +718,217 @@ public class BiDataObject extends Init {
 	}
 	
 	
+	public void recuringBcDeliverTab(String bcSheet,String endType)throws Exception
+	{
+		System.out.println(":::::::::::::::::INSIDE RECURRING BROADCAST DELIVER TAB :::::::::::::::::::::::::::::");
+		Thread.sleep(5000);
+		jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
+		Thread.sleep(1000);
+		jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
+		
+		Actions builder =new Actions(driver);
+		
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		String date2= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+2);
+		String date1= Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH)+1);
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		 if(min==0)
+			{
+				min+=5;
+			}
+		
+		//For storing to Excel sheet Start date
+		String start_Date;
+		String monthString = calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+		start_Date = String.format("%02d", day) + " " + monthString.substring(0, 3) + " " + year;
+		System.out.println(" Recurring Broadcast Start Date::::: "+start_Date);
+		
+		 ex.setExcelFile("biDataSetup", bcSheet);
+		 ex.setCell(1, 3, start_Date);
+		 
+		
+		
+		////:::::::::::::Selecting Start Date and Time  ::::::::::::::::::::
+		
+		jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");	
+		jswait.loadClick("//paper-date-time-input[1]//*[@id='dateDialog']/div/paper-button[2]");
+		
+		Thread.sleep(2000);
+		jswait.loadClick(".//paper-date-time-input//paper-input[2]//input");
+		Thread.sleep(2000);
+		jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[1]/div[1]");
+		Thread.sleep(3000);
+		WebElement num = driver.findElement(By.xpath(
+				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+						+ (hours + 1) + "]"));
+		Thread.sleep(2000);
+		builder.moveToElement(num).click().build().perform();
+		Thread.sleep(2000);
+		WebElement num1 = driver.findElement(By.xpath(
+				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+						+ (min + 1) + "]"));
+		Thread.sleep(1000);
+		builder.moveToElement(num1).click().build().perform();
+		Thread.sleep(1000);
+		if (am_pm == 0)
+			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
+		
+		else
+			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
+		Thread.sleep(1000);
+		
+		
+		num1 = driver.findElement(By.xpath(
+				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
+		builder.moveToElement(num1).click().build().perform();
+		
+		
+		
+		///Selected Start  Time and Date++++++++++++///////////////////////////////////
+		
+		if(endType.equalsIgnoreCase("none"))
+		{
+			System.out.println(":::::::::End type Selected Is Never  ++++");
+			jswait.loadClick(neverRadiobutton);
+			
+			Thread.sleep(2000);
+			jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
+			Thread.sleep(1000);
+			jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
+			Thread.sleep(1000);
+			
+			select_Recurrence_Pattern();
+			Thread.sleep(2000);
+			
+			//::::::::::::::::::::::::::::Selecting Time for Start Broadcast At ::::::::::::::::
+			jswait.loadClick(StartBroadcastAtInput);
+			Thread.sleep(3000);
+			
+			WebElement num2 = driver.findElement(By.xpath(
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
+			builder.moveToElement(num2).click().build().perform();
+			Thread.sleep(2000);
+			
+			WebElement num3 = driver.findElement(By.xpath(
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
+			Thread.sleep(3000);
+			builder.moveToElement(num3).click().build().perform();
+			Thread.sleep(3000);
+			if (am_pm == 0)
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+			else
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+			
+			
+			jswait.loadClick(startBroadcastOkbutton);
+			
+		
+		}
+		else if(endType.equalsIgnoreCase("At"))
+		{
+			System.out.println("++++++++++++==End Type Selected as At==========+++++++++");
+			Thread.sleep(2000);
+			jswait.loadClick(atRadiobutton);
+			//Selecting End Date ::::::::::::///////////////
+			Thread.sleep(2000);
+			jswait.loadClick(EndDateInput);
+
+			Thread.sleep(2000);
+			jswait.loadClick("(.//*[@id='months']//div[@date=('"+date1+"')])[2]");
+			jswait.loadClick(dateOkbutton);
+			/////////////////Finished Selected Date to End /////////////////
+			Thread.sleep(2000);
+			//Selecting End Time ::::::::::::////////////////////
+			jswait.loadClick(EndTimeInput);
+			Thread.sleep(2000);
+			
+			WebElement num6 = driver.findElement(By.xpath(
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[2]"));
+			builder.moveToElement(num6).click().build().perform();
+			Thread.sleep(2000);
+			WebElement num7 = driver.findElement(By.xpath(
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[2]"));
+			Thread.sleep(1000);
+			builder.moveToElement(num7).click().build().perform();
+			if (am_pm == 0)
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+			else
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+
+			
+			jswait.loadClick(timeOkbutton);
+			
+			
+			//Selecting Time Range:::::::::::::;
+			Thread.sleep(2000);
+			jswait.loadSendKeys(".//label[contains(.,'Time Zone')]/../input", "GMT+05:30");
+			Thread.sleep(1000);
+			jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
+			Thread.sleep(1000);
+			
+			////:::::::::::: Setting , Recurrence Pattern and Delivery:::::::::::::///////////////
+			select_Recurrence_Pattern();
+			Thread.sleep(2000);
+			
+			//::::::::::::::::::::::::::::Selecting Time for Start Broadcast At ::::::::::::::::
+			jswait.loadClick(StartBroadcastAtInput);
+			Thread.sleep(3000);
+			
+			WebElement num2 = driver.findElement(By.xpath(
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["+ (hours + 1) +"])[3]"));
+			builder.moveToElement(num2).click().build().perform();
+			Thread.sleep(2000);
+			
+			WebElement num3 = driver.findElement(By.xpath(
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[3]"));
+			Thread.sleep(3000);
+			builder.moveToElement(num3).click().build().perform();
+			Thread.sleep(3000);
+			if (am_pm == 0)
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[3]");
+			else
+				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[3]");
+			
+			
+			jswait.loadClick(startBroadcastOkbutton);
+			
+			
+		}	
+		
+		
+	}
 	
 	
-	
-	
+	public void select_Recurrence_Pattern() throws Exception {
+		jswait.loadClick(RecurrencePatternInput);
+		Thread.sleep(1000);
+		jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Days')]");
+		Thread.sleep(1000);
+		jswait.loadSendKeys(RecurrenceInput, "1");
+
+	}
 	
 	
 	
