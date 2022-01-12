@@ -13,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.itextpdf.text.log.SysoCounter;
 
-import baseClasses.BiEmail;
+
 import baseClasses.EmailHandlergmail;
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
@@ -318,7 +318,18 @@ public class BiDataDef extends Init {
 	}
 	
 	
-	
+	@Then("^create Touch point from Sheet \"([^\"]*)\" and Logic \"([^\"]*)\"$")
+	public void create_Touch_point_from_Sheet_and_Logic(String sheetName, String prioLogic) throws Throwable {
+		String tpName;
+		ex.setExcelFile("biDataSetup", sheetName);
+		tpName=(String) ex.getCell(1, 0);
+		tpName=RandomNameGenerator.getRandomName(tpName);
+		ex.setCell(1, 0, tpName);
+		System.out.println("::Touch point Name::"+tpName+":::Prioritization Logic::"+prioLogic);
+		biDataObject.createApiTouchpoint(tpName, prioLogic);
+	   
+	}
+
 	
 	
 	
