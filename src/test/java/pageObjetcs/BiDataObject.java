@@ -980,8 +980,11 @@ public class BiDataObject extends Init {
 			touchpointPage.apiSelectPrioritizationLogicFifo();
 		}
 		
-		
 	}
+	
+
+	
+	
 	
 	
 	
