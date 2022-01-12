@@ -30,7 +30,7 @@ public class BiDataObject extends Init {
 	
 	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
 	CalenderUtility calender=new CalenderUtility();
-	
+	TouchpointPage touchpointPage = new TouchpointPage();
 	
 	
 	
@@ -194,6 +194,19 @@ public class BiDataObject extends Init {
 	 private WebElement FixedPercentageOfTargetBase;
 	 @FindBy(xpath = "(//input[@id='input'][@type='number'])[1]")
 	 private WebElement fixedPercentnumber;
+	 
+	 
+	 ///////////////X path for IM Data SetUp  ///////////////////////////////////////
+	 
+	 @FindBy(xpath="//form[@id='apiForm']//label[contains(.,'Time Interval')]/../..//input")
+	 private WebElement TpTimeIntervalSelector;
+	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'Hours')]")
+	 private WebElement TpTimeIntervalHours;
+	 @FindBy(xpath = "//serving-rule//div[contains(.,'Max. minutes allowed to accept an offer after recommendation')]/../div[2]//div//div[2]//input")
+	 private WebElement fieldMinuteToaceptOffer;
+	 
+	 
+	 
 	 
 	 
 	 
@@ -930,7 +943,45 @@ public class BiDataObject extends Init {
 
 	}
 	
+//////////////////////////////////////////Intent Management Data SetUp //////////////////////////////////////////////
 	
+	public void selectTimeIntervalHours() throws Exception {
+		jswait.loadClick(TpTimeIntervalSelector);
+		Thread.sleep(2000);
+		jswait.loadClick(TpTimeIntervalHours);
+
+	}
+	
+	public void selectAcceptMinRecomndation()throws Exception
+	{
+		jswait.clearTextField(fieldMinuteToaceptOffer);
+		jswait.loadSendKeys(fieldMinuteToaceptOffer, "45");
+		
+	}
+	
+	public void createApiTouchpoint(String tpName,String prioLogic)throws Exception
+	{
+		touchpointPage.clickCreateNewTouchpoint();
+		Thread.sleep(3000);
+		touchpointPage.apiEnterTouchpointName(tpName);
+		Thread.sleep(2000);
+		touchpointPage.apiSelectApplicationTypeGeneral();
+		Thread.sleep(2000);
+
+		touchpointPage.apiSelectEventForTrackingAccepted();
+		selectAcceptMinRecomndation();
+
+		touchpointPage.apiEnterRefreshEvery("3");
+		selectTimeIntervalHours();
+	
+		if (prioLogic.equalsIgnoreCase("LIFO")) {
+			touchpointPage.apiSelectPrioritizationLogicLifo();
+		} else if (prioLogic.equalsIgnoreCase("FIFO")) {
+			touchpointPage.apiSelectPrioritizationLogicFifo();
+		}
+		
+		
+	}
 	
 	
 	

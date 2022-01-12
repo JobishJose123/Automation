@@ -480,10 +480,11 @@ Examples:
 #:: WorkBook used >> "biDataSetup.xls"   ::::::::::::::::
 #
 
-@NDX-touchpoint_BI   @initBrowser
+@NDX-Touchpoint_BI   @initBrowser
 Scenario: create new Api Touch point For Bi report regression
 Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to api
+Then create Touch point from Sheet "TouchPointBI" and Logic "FIFO"
 
