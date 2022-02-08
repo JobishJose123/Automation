@@ -406,7 +406,7 @@ Then Navigate to Bi campaign Category from sheet "BiCategory"
 Then Navigate to "campaignRecur" View Broadcast
 Then click create new broadcast button 
 Then input details Tab "<BcSheet>" with inventory "Unlimited" Attribute value "<attributeValue>" and triger "none"
-Then input Target Tab with customerList "selenium_BiList" and TG "none" CG "none" DNC "none"
+Then input Target Tab with customerList "selenium_BiList" and TG "500" CG "20" DNC "none"
 Then input offer from Sheet "biSmsOffer" with filter Criteria "ruleBased" and Give Rewards to "Unique Conversion"
 Then input Deliver Tab from sheet "<BcSheet>" with end Type as "<endType>" 
 Then activate bc
@@ -486,5 +486,91 @@ Given login
 Then navigate to intent management
 Then navigate to touchpoints
 Then navigate to api
-Then create Touch point from Sheet "TouchPointBI" and Logic "FIFO"
+Then create Touch point from Sheet "TouchPointBI" and Logic "LiFO"
 
+
+##
+##:: Run only once Can do Manually also.  
+##::: Scenario for Creating Group in IP Access control for API touchPoint
+
+
+@NDX-IPAccess_BI  @initBrowser  @closeBrowser
+Scenario: IP Access Control Create New Group for API Touhpoint
+Given login
+Then navigate to configuration management
+Then Navigate to System Administration for BI
+Then Navigate to IP Access Control for BI
+Then create IP Access Group touchPoint Sheet "TouchPointBI" and AuthKey as "BICucumber" for BI
+
+
+#############################################################################################################################################################################
+###
+###:::Creating program and Rule for IM BI report Regression
+###   >>>> Can Run many times
+
+
+#######
+#:::In Schedule Step if End Date "No End" refresh...The program Never End.
+#:::In Schedule Step if End Date "At" refresh.....The program will end After 1 Days 
+######
+
+@NDX-program_BI    @initBrowser  @closeBrowser
+Scenario: create program for Bi report Regression
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then click create program button
+Then input detais tab from sheet "program" and offer Catalog sheet "catalog" for IM program
+Then input touchpoint Tab from Sheet "TouchPointBI" and channel "API"
+Then input Schedule Tab start date "Now" and End Date "No End" refresh Cycle "Days" for IM program
+
+
+
+#######
+#:::In Schedule Step if End Date "No End" refresh...The Rule will Never End.
+#:::In Schedule Step if End Date "At" refresh.....The Rule will end After 1 Days 
+#:::
+######
+@NDX-rule_BI   @initBrowser  @closeBrowser
+Scenario: create rule for Bi report Regression
+Given login
+Then navigate to intent management
+Then navigate to programs
+Then filter the program using sheet "program" for Rule create
+Then click on Create New Rule
+Then input Rule Name and  Target Tab from Sheet "rule"
+Then input offers Tab product "fullDetails" offer Sheet "biSmsOffer" Recommendationlimit "Unlimited" Acceptancelimit "Unlimited" rule sheet "rule"
+Then input delivery Tab of Rule Tracking expires "After" Day "1" Hours Daysor minute "Days"
+Then input Schedule Tab for Rule sheet "rule" start date "Now" and End Date "At" refresh Cycle "Days"
+Then Activate the Rule
+Then wait until rule from sheet "rule" is refreshed
+
+
+
+#:: calling Get and Post API calls for Events ==> 
+#Note-> can provide more numbers from list 
+
+ @Get_Post_BI   @initBrowser @closeBrowser
+Scenario Outline: Get and post offers for API BI (offer Accepted Event and Offer Recommended Events)
+Given login
+Then Get Api call msisdn "<Msisdn>" with Auth Key "BICucumber" and Rule sheet "rule" for BI 
+Then wait for 5000 milliseconds
+Then POST Api call msisdn "<Msisdn>" with auth key "BICucumber" and Rule sheet "rule" for BI
+Examples: 
+|Msisdn|
+|919447095529|
+|919447095530|
+|919447095531|
+|919447095532|
+|919447095533|
+|919447095534|
+|919447095535|
+|919447095536|
+|919447095537|
+|919447095538|
+
+
+@Converted_BI  @initBrowser @closeBrowser
+Scenario: To make Event Customer Converted for above Msisdns providing file in location
+Given login
+Then provide file in location "/usr/local/flytxt/selenium/conversionBI" for trigger with csv file "conversionBI.csv"

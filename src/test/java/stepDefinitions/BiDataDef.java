@@ -1,7 +1,11 @@
 package stepDefinitions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -19,6 +23,7 @@ import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
+import baseClasses.Request;
 import baseClasses.TimeoutImpl;
 import cucumber.api.java.en.Then;
 import pageObjetcs.BiDataObject;
@@ -45,7 +50,7 @@ public class BiDataDef extends Init {
 	 
 	
 	
-	
+	 String offerRecommended = "{\"status\":{\"code\":200,\"message\":\"Success\"},\"offers\":{\"offer\":[{\"id\":\"111\",\"message\":\"Enjoy the offer with 25 extar TT\",\"shortMessage\":\"Bonus offer\",\"message-encoding\":\"UTF-8\",\"message-lang\":\"English (UK)\",\"offerType\":\"usage\",\"category\":\"Balance Top ups\",\"order\":1},{\"id\":\"110\",\"message\":\"Enjoy the offer with 25 extar TT\",\"shortMessage\":\"Bonus offer\",\"message-encoding\":\"UTF-8\",\"message-lang\":\"English (UK)\",\"offerType\":\"usage\",\"category\":\"Balance Top ups\",\"order\":2}]}}";
 	
 	
 	
@@ -322,17 +327,231 @@ public class BiDataDef extends Init {
 	public void create_Touch_point_from_Sheet_and_Logic(String sheetName, String prioLogic) throws Throwable {
 		String tpName;
 		ex.setExcelFile("biDataSetup", sheetName);
-		tpName=(String) ex.getCell(1, 0);
-		tpName=RandomNameGenerator.getRandomName(tpName);
+		tpName = (String) ex.getCell(1, 0);
+		tpName = RandomNameGenerator.getRandomName(tpName);
 		ex.setCell(1, 0, tpName);
-		System.out.println("::Touch point Name::"+tpName+":::Prioritization Logic::"+prioLogic);
+		System.out.println("::Touch point Name::" + tpName + ":::Prioritization Logic::" + prioLogic);
 		biDataObject.createApiTouchpoint(tpName, prioLogic);
-	   
+
 	}
 
 	
+	@Then("^Navigate to System Administration for BI$")
+	public void navigate_to_System_Administration_for_BI() throws Throwable {
+	    jswait.loadClick("//hexagon-icon[2]//div[@class='icon-container style-scope hexagon-icon']");
+	}
+	
+	@Then("^Navigate to IP Access Control for BI$")
+	public void navigate_to_IP_Access_Control_for_BI() throws Throwable {
+	    jswait.loadClick("//div[contains(text(),'IP Access Control')]");
+	}
+	
+	@Then("^create IP Access Group touchPoint Sheet \"([^\"]*)\" and AuthKey as \"([^\"]*)\" for BI$")
+	public void create_IP_Access_Group_touchPoint_Sheet_and_AuthKey_as_for_BI(String sheetName, String authKey) throws Throwable {
+		String tpName;
+		ex.setExcelFile("biDataSetup", sheetName);
+		tpName=(String) ex.getCell(1,0);
+        biDataObject.createGroupforAPIinIpAccessControl(tpName, authKey);
+        
+	}
+	
+	@Then("^input detais tab from sheet \"([^\"]*)\" and offer Catalog sheet \"([^\"]*)\" for IM program$")
+	public void input_detais_tab_from_sheet_and_offer_Catalog_sheet_for_IM_program(String programSheet,
+			String catalogSheet) throws Throwable {
+
+		String programName;
+		String catalogName;
+		ex.setExcelFile("biDataSetup", programSheet);
+		excel.setExcelFile("biDataSetup", catalogSheet);
+		programName = (String) ex.getCell(1, 0);
+		programName = RandomNameGenerator.getRandomName(programName);
+		System.out.println(programName);
+		ex.setCell(1, 0, programName);
+		catalogName = (String) excel.getCell(1, 0);
+		biDataObject.inputDetailsTabOfProgram(programName, catalogName);
+
+	}
 	
 	
+	@Then("^input touchpoint Tab from Sheet \"([^\"]*)\" and channel \"([^\"]*)\"$")
+	public void input_touchpoint_Tab_from_Sheet_and_channel(String touchpointSheet, String channel) throws Throwable {
+		String touchpointName;
+		ex.setExcelFile("biDataSetup",touchpointSheet);
+		touchpointName=(String) ex.getCell(1,0);
+		System.out.println("Touch point Name::"+touchpointName+" :::Channel"+channel);
+		biDataObject.inputTouchpointTabOfProgram(touchpointName);
+	}
+	
+	
+	@Then("^input Schedule Tab start date \"([^\"]*)\" and End Date \"([^\"]*)\" refresh Cycle \"([^\"]*)\" for IM program$")
+	public void input_Schedule_Tab_start_date_and_End_Date_refresh_Cycle_for_IM_program(String startDate, String endDate, String cycle) throws Throwable {
+	    biDataObject.inputScheduleTabOfProgram(startDate, endDate, cycle);
+	}
+	
+	
+	
+	@Then("^filter the program using sheet \"([^\"]*)\" for Rule create$")
+	public void filter_the_program_using_sheet_for_Rule_create(String programSheet) throws Throwable {
+		String programName;
+		ex.setExcelFile("biDataSetup", programSheet);
+		programName=(String) ex.getCell(1,0);
+		System.out.println("Program Name:::"+programName);
+		commonObjects.filterName(programName);
+		 commonObjects.clickOptionsIcon();
+		 biDataObject.click_ProgramViewRules();
+	}
+	
+	@Then("^click on Create New Rule$")
+	public void click_on_Create_New_Rule() throws Throwable {
+	    jswait.loadClick("//paper-button[text()='Create New Rule']");
+	}
+	
+
+		@Then("^input Rule Name and  Target Tab from Sheet \"([^\"]*)\"$")
+		public void input_Rule_Name_and_Target_Tab_from_Sheet(String ruleSheet) throws Throwable {
+
+			String ruleName;
+			excel.setExcelFile("biDataSetup", ruleSheet);
+			ruleName = (String) excel.getCell(1, 0);
+			ruleName = RandomNameGenerator.getRandomName(ruleName);
+			excel.setCell(1, 0, ruleName);
+			System.out.println("Rule Name ::::" + ruleName);
+			biDataObject.input_Target_Tab_For_Rule(ruleName);
+
+		}
+	
+	
+	
+	@Then("^input offers Tab product \"([^\"]*)\" offer Sheet \"([^\"]*)\" Recommendationlimit \"([^\"]*)\" Acceptancelimit \"([^\"]*)\" rule sheet \"([^\"]*)\"$")
+	public void input_offers_Tab_product_offer_Sheet_Recommendationlimit_Acceptancelimit_rule_sheet(String productSheet, String offerSheet, String recomendlimit, String acceptLimit,String ruleSheet) throws Throwable {
+		excel.setExcelFile("biDataSetup", ruleSheet);
+		ex.setExcelFile("biDataSetup", offerSheet);
+		biDataObject.selectProduct_forProgram(productSheet);
+	    biDataObject.select_RecomndAndAcceptLimit(recomendlimit,acceptLimit);
+	    String recomendTimeOut=(String) excel.getCell(1, 1);
+	    String acceptTimeOut=(String) excel.getCell(1, 2);
+	    String conversionTimeOut=(String) excel.getCell(1, 3);
+	    String declineTimeOut=(String) excel.getCell(1, 4);
+	    String laterTimeOut=(String) excel.getCell(1, 5);
+	    System.out.println("Offer Recommendation Timeout "+recomendTimeOut+":Hours");
+	    System.out.println("Offer acceptance Timeout "+acceptTimeOut+":Hours");
+	    System.out.println("Offer conversion Timeout "+conversionTimeOut+":Hours");
+	    System.out.println("Offer decline Timeout "+declineTimeOut+":Hours");
+	    System.out.println("Offer May-be-later Timeout "+laterTimeOut+":Hours");
+	    biDataObject.select_AllTimeOuts(recomendTimeOut, acceptTimeOut, conversionTimeOut, declineTimeOut, laterTimeOut);
+	    String offerName=(String) ex.getCell(1,0);
+	    biDataObject.select_Offer_for_IMrule(offerName);
+	    //:::::::Skipping Additional Information Tab and Moving forward::::::
+	}
+	
+	@Then("^input delivery Tab of Rule Tracking expires \"([^\"]*)\" Day \"([^\"]*)\" Hours Daysor minute \"([^\"]*)\"$")
+	public void input_delivery_Tab_of_Rule_Tracking_expires_Day_Hours_Daysor_minute(String expire, String count, String dayHour) throws Throwable {
+	    biDataObject.inputDeliveryTabOfIMRule(expire, count, dayHour);
+	}
+	
+	
+	@Then("^input Schedule Tab for Rule sheet \"([^\"]*)\" start date \"([^\"]*)\" and End Date \"([^\"]*)\" refresh Cycle \"([^\"]*)\"$")
+	public void input_Schedule_Tab_for_Rule_sheet_start_date_and_End_Date_refresh_Cycle(String ruleSheet, String startDate, String endDate, String cycle) throws Throwable {
+	   biDataObject.inputScheduleTab_of_Rule(ruleSheet, startDate, endDate, cycle);
+	}
+	
+	@Then("^Activate the Rule$")
+	public void activate_the_Rule() throws Throwable {
+	   biDataObject.activate_TheRule();
+	}
+	
+	@Then("^wait until rule from sheet \"([^\"]*)\" is refreshed$")
+	public void wait_until_rule_from_sheet_is_refreshed(String ruleSheetName) throws Throwable {
+		String ruleName;
+		excel.setExcelFile("biDataSetup", ruleSheetName);
+		ruleName = (String) excel.getCell(1, 0);
+		System.out.println("Rule name:-: " + ruleName);
+		commonObjects.filterName(ruleName);
+		TimeoutImpl t = new TimeoutImpl();
+		t.startTimer();
+		while (biDataObject.getRule_Last_Refresh_Date().isEmpty() && t.checkTimerMin(50)) {
+			commonObjects.filterName(ruleName);
+			Thread.sleep(5000);
+			System.out.println(":-::-: Waiting for Rule to be Refreshed :-:::-:");
+		}
+
+	}
+			
+	
+		@Then("^Get Api call msisdn \"([^\"]*)\" with Auth Key \"([^\"]*)\" and Rule sheet \"([^\"]*)\" for BI$")
+		public void get_Api_call_msisdn_with_Auth_Key_and_Rule_sheet_for_BI(String msisdn, String authKey,
+				String ruleSheet) throws Throwable {
+
+			StringBuilder str = new StringBuilder();
+			str.append("http://");
+			str.append(p.getValue("env"));
+			str.append(":");
+			str.append("8092");
+			str.append("/rest/authkey/" + authKey + "/msisdn/" + msisdn + "/offers");
+			System.out.println(str.toString());
+
+			Request req = new Request();
+			req.getRequest(str.toString(), "");
+			offerRecommended = req.responseString;
+			System.out.println("This is the response:-:>> " + req.responseString);
+			ex.setExcelFile("biDataSetup", ruleSheet);
+			String message=req.responseString;
+			String messagesArray[]=message.split(":",0);
+		    String successMesssage=messagesArray[3];
+			
+		    if (successMesssage.contains("Success")) {
+				String idTemp[] = messagesArray[6].split("\"", 0);
+				String ruleId = idTemp[1];
+				ex.setCell(1, 7, ruleId);
+				System.out.println("Successfully Stored Rule ID :-:-: " + ruleId);
+			}
+		 
+			
+			
+
+		}
+	
+	
+	@Then("^POST Api call msisdn \"([^\"]*)\" with auth key \"([^\"]*)\" and Rule sheet \"([^\"]*)\" for BI$")
+	public void post_Api_call_msisdn_with_auth_key_and_Rule_sheet_for_BI(String msisdn, String authKey, String ruleSheet) throws Throwable {
+	   
+		String ruleId=null;
+		excel.setExcelFile("biDataSetup", ruleSheet);
+		
+		StringBuilder postBody = new StringBuilder();
+		postBody.append("{\"event\":[\r\n" + 
+				"{ \"id\":\"104\", \"type\":\"POST\", \"value\":\"");
+		
+		//rule ID Append Below for use in value field in Post api Body
+		ruleId=(String) excel.getCell(1, 7);
+		System.out.println("Rule Id :-:>> "+ruleId);
+		postBody.append(ruleId);
+		postBody.append("\", \"date\":\"");
+		
+		Date now = new Date();
+		//Calendar calendar = Calendar.getInstance();
+		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+		postBody.append(timeStamp);
+		postBody.append(" +0530\" }");
+		postBody.append("]}");
+		System.out.println(postBody.toString());
+		
+		StringBuilder str = new StringBuilder();
+		str.append("http://");
+		str.append(p.getValue("env"));
+		str.append(":");
+		str.append("8092");
+		str.append("/rest/authkey/"+authKey+"/msisdn/"+msisdn+"/kpi/events");
+		System.out.println(str.toString());
+		Request req = new Request();
+		String resp=req.postRequeststring(str.toString(), postBody.toString());
+		String code=resp.substring(0, 3);
+		if(code.equals("200"))
+			System.out.println(":-::-:-:-:-:-:-:Post API call is Successfull:-:-:-:-:-:");
+		else 
+			System.out.println("!!!!!!!!!!!!! Unsuccessfull!!!!!");
+		
+	}
 	
 	
 	

@@ -17,6 +17,7 @@ import baseClasses.Init;
 import baseClasses.JSWaiter;
 import baseClasses.RandomNameGenerator;
 
+
 public class BiDataObject extends Init {
 	
 	JSWaiter jswait = new JSWaiter();
@@ -31,7 +32,7 @@ public class BiDataObject extends Init {
 	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
 	CalenderUtility calender=new CalenderUtility();
 	TouchpointPage touchpointPage = new TouchpointPage();
-	
+	ProgramPage programPage = new ProgramPage();
 	
 	
 	
@@ -195,6 +196,10 @@ public class BiDataObject extends Init {
 	 @FindBy(xpath = "(//input[@id='input'][@type='number'])[1]")
 	 private WebElement fixedPercentnumber;
 	 
+	 @FindBy(xpath = "//div[text()='Define Limit (Fixed)']")
+	 private WebElement TGFixedLimitRadio;
+	 @FindBy(xpath = ".//paper-radio-group//paper-input-wrapper[@class='define-limit-style style-scope cvm-settings']//input[@id='input']")
+	 private WebElement TGLimitField;
 	 
 	 ///////////////X path for IM Data SetUp  ///////////////////////////////////////
 	 
@@ -204,7 +209,102 @@ public class BiDataObject extends Init {
 	 private WebElement TpTimeIntervalHours;
 	 @FindBy(xpath = "//serving-rule//div[contains(.,'Max. minutes allowed to accept an offer after recommendation')]/../div[2]//div//div[2]//input")
 	 private WebElement fieldMinuteToaceptOffer;
+	 @FindBy(xpath="//paper-button[contains(.,'Save')]")
+	 private WebElement apiSaveButton;
+	 @FindBy(xpath = "//paper-button[text()='Create New Group']")
+	 private WebElement IpAccessControlNewBTn;
+	 @FindBy(xpath = "//label[text()='Name']/../input")
+	 private WebElement IPNameField;
+	 @FindBy(xpath = "//label[text()='Hosts']/../input")
+	 private WebElement IPHostfield;
+	 @FindBy(xpath = "//label[text()='Touchpoint Name']/../input")
+	 private WebElement IPtouchPointNamefield;
+	 @FindBy(xpath = "//label[text()='Authentication Key']/../input")
+	 private WebElement BiAuthKeyField;
+	 @FindBy(xpath = "//paper-button[text()='Save']")
+	 private WebElement IPAccessGroupSaveBtn;
+	 @FindBy(xpath = "//label[text()[contains(.,'Offer Catalog')]]/../input")
+	 private WebElement programCatalogField;
+	 @FindBy(xpath = ".//*[@id='topBar']/paper-button[contains(.,'Proceed')]")
+	 private WebElement programProceedBtn;
 	 
+	 @FindBy(xpath = "//paper-button[contains(.,'Add Touchpoint')]")
+	 private WebElement addTouchPointButton;
+	 @FindBy(xpath = "//form[@id='addTouchpointForm']//label[text()='Touchpoint']/..//*[@id='input']")
+	 private WebElement touchPointField;
+	 @FindBy(xpath="//*[@id='addTouchpointForm']//paper-button[text()='Save']")
+	 private WebElement addtouchpointSaveBtn;
+	 @FindBy(xpath = "//form[@id='scheduleForm']//label[text()='Start Date']/..//*[@id='input']")
+	 private WebElement programStartDate;
+	 @FindBy(xpath = "//label[contains(.,'End Date')]/../input")
+	 private WebElement programEndField;
+	 
+	 @FindBy(xpath = "//label[contains(.,'End Date/Time')]//..//input")
+	 private WebElement endDateCalenderIn;
+	 
+	 @FindBy(xpath = "//form[@id='scheduleForm']//label[text()='Refresh Cycle']/..//*[@id='input']")
+	 private WebElement refreshCycleIn;
+	 @FindBy(xpath = "//form[@id='scheduleForm']//label[text()='Every']/..//*[@id='input']")
+	 private WebElement refreshEveryPgm;
+	 @FindBy(xpath = "//form[@id='scheduleForm']//label[text()='Refresh At']/..//*[@id='input']")
+	 private WebElement refreshAtPgm;
+	 
+	 @FindBy(xpath = "//label[text()='Time Zone']/../input")
+	 private WebElement timeZonePgmField;
+	 @FindBy(xpath="//paper-button[contains(.,'Activate')]")
+	 private WebElement programActivatebutton;
+	 @FindBy(xpath="//paper-dialog[@id='confirmActivate']//paper-button[text()='Yes']")
+	 private WebElement programConfirmActivateYesBtn;
+	 
+	 @FindBy(xpath = "//data-table-row[@id='item1']//data-table-cell[8]//paper-item[contains(.,'View Rules')]")
+	 private WebElement programViewRules;
+	
+	 ///////////////////:::::::X path for Rule ////////////////////////////////////
+	 @FindBy(xpath = "//paper-dialog[@id='view']//label[contains(.,'Rule Name')]//..//input")
+	 private WebElement ruleNameField;
+	 @FindBy(xpath = "//label[contains(.,'Customer List')]/../input")
+	 private WebElement ruleCustomerListField;
+	 
+	 @FindBy(xpath = ".//*[@id='topBar']/paper-button[contains(.,'Proceed')]")
+	 private WebElement programProceedButton;
+	 
+	 @FindBy(xpath = "//label[contains(.,'Product')]//following::input[1]")
+	 private WebElement programProductfield;
+	 @FindBy(xpath = "//form//div[2]//paper-radio-button[@name='unlimited']//div[@id='radioContainer']")
+	 private WebElement ruleUnlimitedRecmndLimitRadio;
+	 
+	 @FindBy(xpath = "//form//div[4]//paper-radio-button[@name='unlimited']//div[@id='radioContainer']")
+	 private WebElement ruleUnlimitedAceptRadio;
+	 @FindBy(xpath = "//div[contains(.,'Recommendation Limit')]/paper-icon-button[@role='button']/iron-icon[@id='icon']")
+	 private WebElement ruleTimingsPencil;
+	 @FindBy(xpath = "//label[text()='Recommendation timeout (in hours)']/../input")
+	 private WebElement recomendTimeOutField;
+	 @FindBy(xpath = "//label[text()='Acceptance timeout (in hours)']/../input")
+	 private WebElement acceptTimeOutFieled;
+	 @FindBy(xpath = "//label[text()='Conversion timeout (in hours)']/../input")
+	 private WebElement conversionTimeOutField;
+	 @FindBy(xpath = "//label[text()='Decline timeout (in hours)']/../input")
+	 private WebElement declineTimeOutField;
+	 @FindBy(xpath = "//label[text()='Maybe later timeout (in hours)']/../input")
+	 private WebElement maybeLaterTimeOutField;
+	 @FindBy(xpath = "//div[@class='buttons style-scope set-product-limits']//paper-button[text()='Save']")
+	 private WebElement ruleTimeOutsSaveButton;
+	 
+	 @FindBy(xpath = "//h5[text()='Tracking expires']/../div[1]//div[1]//vaadin-combo-box//div[2]//div[1]/input")
+	 private WebElement TrackingexpiresField;
+	 @FindBy(xpath = "//div[@id='items']/vaadin-combo-box-item[contains(.,'After')]//following::label[1]//..//input")
+	 private WebElement ruleExpiresValueField;
+	 @FindBy(xpath = "//div[@id='items']/vaadin-combo-box-item[contains(.,'After')]//following::label[2]//..//input")
+	 private WebElement ruleExpireHourOrDaysField;
+	 @FindBy(xpath = "//rule-tracking//label[text()='Time Zone']/../input")
+	 private WebElement timeZoneFieldRuleDelTab;
+	 
+	 @FindBy(xpath = "//label[text()='Sender ID: Fulfillment success or failure message would appear from this ID']/../input")
+	 private WebElement senderIDruleIM;
+	 @FindBy(xpath = "//label[text()='Route over which Fulfillment success or failure confirmation message can be sent']/../input")
+	 private WebElement routeOverRuleIM;
+	 @FindBy(xpath = "(//label[text()='Time Zone']/../input)[2]")
+	 private WebElement ruleTimezoneField;
 	 
 	 
 	 
@@ -516,6 +616,10 @@ public class BiDataObject extends Init {
 		jswait.loadClick(SelectTargetGroup);
 		if (TG.equalsIgnoreCase("none")) {
 			jswait.loadClick(NoLimitTGRadiobtn);
+		} else {
+			jswait.loadClick(TGFixedLimitRadio);
+			jswait.loadSendKeys(TGLimitField, TG);
+
 		}
 		jswait.loadClick(TGSaveButton);
 	}
@@ -980,10 +1084,377 @@ public class BiDataObject extends Init {
 			touchpointPage.apiSelectPrioritizationLogicFifo();
 		}
 		
+		touchpointPage.apiEnterMaximumOffers("3");
+		Thread.sleep(2000);
+		jswait.loadClick(apiSaveButton);
+		
 	}
 	
+ 
+	public void createGroupforAPIinIpAccessControl(String touchPointName,String authKey) throws Exception
+	{
+		jswait.loadClick("//div[text()='API']");
+		Thread.sleep(1000);
+		jswait.loadClick(IpAccessControlNewBTn);
+		jswait.loadSendKeys(IPNameField,"BiSelenium");
+		jswait.loadSendKeys(IPHostfield, "*");
+		jswait.loadSendKeys(IPtouchPointNamefield, touchPointName);
+		Thread.sleep(2000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+touchPointName+"')]");
+		jswait.loadSendKeys(BiAuthKeyField, authKey);
+		jswait.loadClick(IPAccessGroupSaveBtn);
+		Thread.sleep(2000);
+	}
+	
+	public void clickProgramProceedButton() throws Exception {
+		jswait.loadClick(programProceedBtn);
+	}
+	
+	public void inputDetailsTabOfProgram(String programName, String catalogName) throws Exception {
+		Thread.sleep(4000);
+		programPage.enterProgramName(programName);
+		programPage.enterProgramDescription();
+		jswait.loadSendKeys(programCatalogField, catalogName);
+		Thread.sleep(4000);
+		jswait.loadClick(".//*[@id='items']/vaadin-combo-box-item[contains(.,'" + catalogName + "')]");
+		Thread.sleep(2000);
+		clickProgramProceedButton();
+	}
+	
+	public void clickADDTouchPoint() throws Exception {
+		jswait.loadClick(addTouchPointButton);
+	}
+	
+	public void inputTouchpointTabOfProgram(String touchPointName) throws Exception {
+		Thread.sleep(3000);
+		clickADDTouchPoint();
+		programPage.addTouchPointSelectApiChannel();
+		// jswait.loadClick(touchPointField);
+		Thread.sleep(1000);
+		jswait.loadSendKeys(touchPointField, touchPointName);
+		jswait.loadClick("//*[@id='items']/vaadin-combo-box-item[contains(.,'" + touchPointName + "')]");
+		Thread.sleep(2000);
+		programPage.addTouchPointSelectApiResponseChannel();
+		Thread.sleep(2000);
+		jswait.loadClick(addtouchpointSaveBtn);
+		clickProgramProceedButton();
+	}
 
 	
+	
+	public void selectProgramStartDate(String startDate) throws Exception {
+		jswait.loadClick(programStartDate);
+		Thread.sleep(1000);
+		if (startDate.equalsIgnoreCase("Now")) {
+			jswait.loadClick("//paper-item[contains(.,'Now')]");
+		} else if (startDate.equalsIgnoreCase("At")) {
+			jswait.loadClick("//paper-item[contains(.,'At')]");
+		}
+	}
+	
+	public void selectProgramEndDate(String endDate)throws Exception
+	{
+		jswait.loadClick(programEndField);
+		if (endDate.equalsIgnoreCase("NoEnd")||endDate.equalsIgnoreCase("No End")) {
+			jswait.loadClick("//paper-item[@val='NOEND']");
+		}
+		else if(endDate.equalsIgnoreCase("At"))
+		{
+			jswait.loadClick("//paper-card//div[2]//form//div[2]//paper-item[@val='AT']");
+			selectEndDate_Program();
+		}
+	}
+	
+	
+	public void selectEndDate_Program() throws Exception {
+		Calendar rightNow =Calendar.getInstance();
+    	String mn = "";
+    	if(rightNow.get(Calendar.MONTH)+1<=9) {
+    		mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH)+1);
+    	}
+    	else 
+    		mn = Integer.toString(rightNow.get(Calendar.MONTH)+1);
+		jswait.loadClick(endDateCalenderIn);
+		
+		String date = Integer.toString(rightNow.get(Calendar.YEAR))+"-"+mn+"-"+String.format("%02d",rightNow.get(Calendar.DAY_OF_MONTH)+1);
+		Thread.sleep(2000);
+		jswait.loadClick("//label[contains(.,'End Date/Time')]//following::div[@id='months'][1]//div[@date='" + date + "']");
+		Thread.sleep(2000);
+		jswait.loadClick("//label[contains(.,'End Date/Time')]//following::paper-button[contains(.,'OK')][1]");		
+	}
+	
+	
+	public void selectRefreshCycle(String cycle) throws Exception {
+		jswait.loadClick(refreshCycleIn);
+		Thread.sleep(2000);
+		if (cycle.equalsIgnoreCase("Days")) {
+			jswait.loadClick("//paper-item[contains(.,'Days')]");
+		} else if (cycle.equalsIgnoreCase("Weeks")) {
+			jswait.loadClick("//paper-item[contains(.,'Weeks')]");
+		}
+	}
+	
+	public void selectRefresh_Time_Program(String endDate)throws Exception
+	{
+		jswait.loadClick(refreshAtPgm);
+		Thread.sleep(2000);
+		
+		Calendar rightNow = Calendar.getInstance();
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+		int hours = rightNow.get(Calendar.HOUR);
+		int min = rightNow.get(Calendar.MINUTE);
+		int am_pm = rightNow.get(Calendar.AM_PM);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		min += 2;
+		int rem = min % 5;
+		rem = 5 - rem;
+		min += rem;
+		if (min > 59) {
+			min -= 60;
+			hours++;
+		}
+		Actions builder = new Actions(driver);
+		Thread.sleep(4000);
+		
+		
+		if (endDate.equalsIgnoreCase("NoEnd")||endDate.equalsIgnoreCase("No End")) {
+			
+			System.out.println(":::::::No End Selected :::::");
+			Thread.sleep(2000);
+			WebElement num = driver.findElement(By.xpath(
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours+1) + "])[1]"));
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(4000);
+
+			WebElement num1 = driver.findElement(By.xpath(
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[1]"));
+			Thread.sleep(1000);
+	    	 builder.moveToElement(num1).click().build().perform();
+				if (am_pm == 0)
+					jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[1]");
+				else
+					jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[1]");
+	      	
+			jswait.loadClick("(//paper-button[contains(.,'OK')])[2]");
+			
+		}
+		else if(endDate.equalsIgnoreCase("At"))
+		{
+			System.out.println(":::End After 2 days :::");
+			Thread.sleep(2000);
+			WebElement num = driver.findElement(By.xpath(
+					"(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector'][" + (hours+1) + "])[2]"));
+			builder.moveToElement(num).click().build().perform();
+			Thread.sleep(4000);
+
+			WebElement num1 = driver.findElement(By.xpath(
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[2]"));
+			Thread.sleep(1000);
+	    	 builder.moveToElement(num1).click().build().perform();
+	      	if(am_pm==0)
+	      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+	       else
+	      	  jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+			
+	      	Thread.sleep(2000);
+	      	jswait.loadClick("(//paper-button[contains(.,'OK')])[4]");
+			
+		}
+          
+		
+		
+	}
+	
+	public void selectTimeZone_Program() throws Exception {
+		jswait.loadSendKeys(timeZonePgmField, "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi");
+		Thread.sleep(2000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi')]");
+	}
+	
+	
+	public void inputScheduleTabOfProgram(String startDate, String endDate, String cycle) throws Exception {
+		Thread.sleep(3000);
+		selectProgramStartDate(startDate);
+		Thread.sleep(2000);
+		selectProgramEndDate(endDate);
+		Thread.sleep(1000);
+		selectRefreshCycle(cycle);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(refreshEveryPgm,"1");
+		Thread.sleep(1000);
+		selectRefresh_Time_Program(endDate);
+		jswait.loadClick("//div[text()='On All Days']");
+		Thread.sleep(1000);
+		selectTimeZone_Program();
+		jswait.loadClick(programActivatebutton);
+		Thread.sleep(2000);
+		jswait.loadClick(programConfirmActivateYesBtn);
+	}
+	
+	public void clickProgramProceed_Button() throws Exception {
+		jswait.loadClick(programProceedButton);
+		 Thread.sleep(2000);
+	}
+	
+	public void click_ProgramViewRules()throws Exception
+	{
+		jswait.loadClick(programViewRules);
+	}
+	
+	public void selectCustomerListInRule(String customerList)throws Exception
+	{
+	  jswait.loadSendKeys(ruleCustomerListField, customerList);	
+	  Thread.sleep(8000);
+	  jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+customerList+"')][1]");
+	  Thread.sleep(2000);
+	  jswait.loadClick("//div[text()='None']");
+	  Thread.sleep(1000);
+	}
+	public void input_Target_Tab_For_Rule(String ruleName) throws Exception {
+		Thread.sleep(2000);
+		jswait.clearTextField(ruleNameField);
+		Thread.sleep(1000);
+		jswait.loadSendKeys(ruleNameField, ruleName);
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-button[text()='Save']");
+		Thread.sleep(4000);
+		selectCustomerListInRule("selenium_BiList");
+		clickProgramProceed_Button();
+		Thread.sleep(4000);
+	}
+	
+	public void selectProduct_forProgram(String productSheet) throws Exception {
+		excel.setExcelFile("productInputData", productSheet);
+		String productName = (String) excel.getCell(1, 0);
+		jswait.loadSendKeys(programProductfield, productName);
+		Thread.sleep(2000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'" + productName + "')]");
+		Thread.sleep(1000);
+	}
+	
+	public void select_RecomndAndAcceptLimit(String recomendlimit, String acceptLimit) throws Exception {
+		jswait.loadClick(ruleTimingsPencil);
+		Thread.sleep(1000);
+		if (recomendlimit.equalsIgnoreCase("Unlimited")) {
+			jswait.loadClick(ruleUnlimitedRecmndLimitRadio);
+		}
+
+		if (acceptLimit.equalsIgnoreCase("Unlimited")) {
+			jswait.loadClick(ruleUnlimitedAceptRadio);
+		}
+
+	}
+	
+	public void select_AllTimeOuts(String recomendTimeOut,String acceptTimeOut, String conversionTimeOut,String declineTimeOut,String laterTimeOut)throws Exception
+	{
+		jswait.loadSendKeys(recomendTimeOutField, recomendTimeOut);
+		jswait.loadSendKeys(acceptTimeOutFieled, acceptTimeOut);
+		jswait.loadSendKeys(conversionTimeOutField,conversionTimeOut);
+		jswait.loadSendKeys(declineTimeOutField,declineTimeOut);
+		jswait.loadSendKeys(maybeLaterTimeOutField,laterTimeOut);
+		jswait.loadClick(ruleTimeOutsSaveButton);
+	}
+	
+	public void select_Offer_for_IMrule(String offerName) throws Exception {
+		jswait.loadClick("//paper-button[contains(.,'Select Offer')]");
+		Thread.sleep(2000);
+		jswait.loadClick("//h4[contains(.,'" + offerName + "')]");
+		Thread.sleep(1000);
+		jswait.loadClick("//paper-button[contains(.,'Done')]");
+		//Skipping Additional Information Tab and Moving forward
+		clickProgramProceed_Button();
+		clickProgramProceed_Button();
+		Thread.sleep(2000);
+	}
+
+	public void selectTimeZoneForRuleIM() throws Exception {
+		jswait.clearTextField(timeZoneFieldRuleDelTab);
+		Thread.sleep(1000);
+        jswait.loadSendKeys(timeZoneFieldRuleDelTab,"(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi");
+        Thread.sleep(1000);
+        jswait.loadClick("//vaadin-combo-box-item[contains(.,'(GMT+05:30) Chennai')]");
+	}
+	
+	public void selectSenderID_and_Route_forIMRule()throws Exception
+	{
+		jswait.loadSendKeys(senderIDruleIM,SENDER_SMPP);
+		Thread.sleep(1000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]");
+		jswait.loadSendKeys(routeOverRuleIM,ROUTE_SMPP);
+		Thread.sleep(1000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]");
+		Thread.sleep(1000);
+	}
+	
+	public void inputDeliveryTabOfIMRule(String expire, String count, String dayHour) throws Exception {
+		jswait.loadClick(TrackingexpiresField);
+		Thread.sleep(1000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'" + expire + "')]");
+		jswait.loadSendKeys(ruleExpiresValueField, count);
+		jswait.loadClick(ruleExpireHourOrDaysField);
+		if(dayHour.equalsIgnoreCase("Days"))
+			jswait.loadClick("//div[@id='items']/vaadin-combo-box-item[contains(.,'Days')]");
+		else if(dayHour.equalsIgnoreCase("Hours"))
+			jswait.loadClick("//div[@id='items']/vaadin-combo-box-item[contains(.,'Hours')]");
+		selectTimeZoneForRuleIM();
+		selectSenderID_and_Route_forIMRule();
+		clickProgramProceed_Button();
+	}
+	
+	public void saveDateOfRuleToSheet(String ruleSheet) throws Exception {
+		Calendar rightNow = Calendar.getInstance();
+		excel.setExcelFile("biDataSetup", ruleSheet);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+
+		String Start_Date;
+		String monthString = calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+		Start_Date = String.format("%02d", day) + " " + monthString.substring(0, 3) + " " + year;
+		System.out.println("Rule Date :: " + Start_Date);
+		excel.setCell(1, 6, Start_Date);
+		System.out.println("::Successfully Stored Rule Date to Excel Sheet ::");
+
+	}
+	
+	public void activate_TheRule() throws Exception {
+		jswait.loadClick(programActivatebutton);
+		Thread.sleep(2000);
+		jswait.loadClick(programConfirmActivateYesBtn);
+		Thread.sleep(2000);
+	}
+	
+	public void inputScheduleTab_of_Rule(String ruleSheet, String startDate, String endDate, String cycle)
+			throws Exception {
+		Thread.sleep(3000);
+		selectProgramStartDate(startDate);
+		Thread.sleep(2000);
+		selectProgramEndDate(endDate);
+		Thread.sleep(1000);
+		selectRefreshCycle(cycle);
+		Thread.sleep(2000);
+		jswait.loadSendKeys(refreshEveryPgm, "1");
+		Thread.sleep(1000);
+		selectRefresh_Time_Program(endDate);
+		jswait.loadClick("//div[text()='On All Days']");
+		Thread.sleep(1000);
+		saveDateOfRuleToSheet(ruleSheet);
+	}
+	
+	public String getRule_Last_Refresh_Date() throws Exception {
+		String col = jswait.getGridColumnNumber(
+				"//iron-data-table[@id='ruleList']//data-table-row[@header]//data-table-cell", "Last Refresh Date");
+		jswait.waitUntil("//iron-data-table[@id='ruleList']//iron-list//data-table-cell[" + col + "]");
+		return jswait.getTextFormElement("//iron-data-table[@id='ruleList']//iron-list//data-table-cell[" + col + "]");
+
+	}
 	
 	
 	
