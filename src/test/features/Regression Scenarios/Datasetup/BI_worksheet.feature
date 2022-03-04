@@ -66,7 +66,7 @@ Then save the BI sheet
 Then filter the BI worksheet for status check from sheet "BIEandASheet"
 Then wait until BI worksheet status is changed to "R"
 
-@ndx-SeedingCandF @NDX-20901 @NDX-20839 @NDX-20835  @initBrowser @closeBrowser
+@ndx-SeedingCandF  @NDX-20839 @NDX-20835  @initBrowser @closeBrowser
 Scenario: create new worksheet for seeding conversion and fulfilment.
 Given login
 When navigate to precision marketer
@@ -235,7 +235,7 @@ Then navigate to landing page
 
 ##   After Running List Creation Scenario '@createBiList' Upload selenium_BIListMsisdn.csv excel file from List folder
 ##
-## Metric creating scenario should run only once
+## Metric creating scenario and custom Event should run only once
 @NDX-metric_BI  @initBrowser @closeBrowser
 Scenario Outline: metric creation for Bi
 Given login 
@@ -252,18 +252,35 @@ Examples:
 |SelBiMetric3|
 |SelBiMetric4|
 
+ @customEvent_BI   @initBrowser  @closeBrowser
+Scenario: Creating custom Event for Bi Report Verification
+Given login
+Then navigate to data foundation
+Then navigate to customer driven events
+Then click create new registration list button
+Then input name "selCustomEvent_BI" of Bi custom Event
+Then save Bi custom Event "selCustomEvent_BI" and Verify
+Then click on custom event Name "selCustomEvent_BI"
+Then click on Create new Domain Field
+Then create value with label "value"
+Then navigate to landing page
+Then navigate to configuration management
+Then navigate to partners
+Then Select Custom event from Relevant Events
+
+
 
 # Note :--> Mount the Location "/usr/local/flytxt/selenium/metricBI" in Marathon Before Running.
 # If scenario Fails Must upload 4 metrics through DK job manually
 #
 @metricBiUpload_BI  @initBrowser @closeBrowser
-Scenario: metric creation for Bi
+Scenario: metric and custom Event upload for Bi
 Given login
 Then provide file in location "/usr/local/flytxt/selenium/metricBI" for trigger with csv file "BiMetricUpload.csv"
 
 
 
-@NDX-segment_BI  @initBrowser @closeBrowser
+@NDX-segment_BI  @NDX-20830   @initBrowser @closeBrowser
 Scenario: Saved segment creating for Bi for New BI Customer List
 Given login
 Then navigate to landing page
@@ -492,7 +509,8 @@ Then create Touch point from Sheet "TouchPointBI" and Logic "LiFO"
 ##
 ##:: Run only once Can do Manually also.  
 ##::: Scenario for Creating Group in IP Access control for API touchPoint
-
+##:: Restart API server after this scenario of creating Authkey
+##
 
 @NDX-IPAccess_BI  @initBrowser  @closeBrowser
 Scenario: IP Access Control Create New Group for API Touhpoint
@@ -538,7 +556,7 @@ Then navigate to intent management
 Then navigate to programs
 Then filter the program using sheet "program" for Rule create
 Then click on Create New Rule
-Then input Rule Name and  Target Tab from Sheet "rule"
+Then input rule Name and target tab from "rule" Sheet
 Then input offers Tab product "fullDetails" offer Sheet "biSmsOffer" Recommendationlimit "Unlimited" Acceptancelimit "Unlimited" rule sheet "rule"
 Then input delivery Tab of Rule Tracking expires "After" Day "1" Hours Daysor minute "Days"
 Then input Schedule Tab for Rule sheet "rule" start date "Now" and End Date "At" refresh Cycle "Days"

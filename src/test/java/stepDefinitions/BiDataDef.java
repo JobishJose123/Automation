@@ -1,24 +1,20 @@
 package stepDefinitions;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
+import java.util.Date;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
+
 import org.openqa.selenium.support.PageFactory;
 
-import com.itextpdf.text.log.SysoCounter;
 
 
-import baseClasses.EmailHandlergmail;
+
+
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -89,6 +85,40 @@ public class BiDataDef extends Init {
 		commonObjects.filterName(metricName);
 		commonObjects.clickOptionsIcon();  
 	}
+	
+	@Then("^input name \"([^\"]*)\" of Bi custom Event$")
+	public void input_name_of_Bi_custom_Event(String customEventName) throws Throwable {
+		Thread.sleep(3000);
+		listpg.enterCustomerDrivenEventDetails(customEventName, "forBI_by_Selenium");
+	}
+	
+	@Then("^save Bi custom Event \"([^\"]*)\" and Verify$")
+	public void save_Bi_custom_Event_and_Verify(String customEventName) throws Throwable {
+		Thread.sleep(2000);
+		listpg.clickSaveButton();
+		Thread.sleep(2000);
+	}
+	
+	@Then("^Select Custom event from Relevant Events$")
+	public void select_Custom_event_from_Relevant_Events() throws Throwable {
+		Thread.sleep(2000);
+		jswait.loadClick("//div[@class='item style-scope iron-data-table'][1]//data-table-cell[6]//iron-icon[@id='icon']");
+		Thread.sleep(2000);
+		//clicking on Edit Button of System Global 
+		jswait.loadClick("//iron-list[@id='list']/div[1]/div[1]//data-table-cell[6]//paper-item[2]");
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-item[text()='Relevant Event Options']");
+		Thread.sleep(1000);
+		jswait.loadClick("//paper-item[contains(.,'Event Options')]/paper-checkbox/div[1]");
+		Thread.sleep(1000);
+		jswait.loadClick("//div[@class='buttons style-scope event-options']//paper-button[text()='Save']");
+		Thread.sleep(2000);
+		System.out.println("included custom event for Bi  in relevant Event options");
+	}
+	
+	
+	
+	
 	
 	@Then("^create segment with name \"([^\"]*)\" with condition \"([^\"]*)\"$")
 	public void create_segment_with_name_with_condition(String segmentName, String condition) throws Throwable {
@@ -407,20 +437,18 @@ public class BiDataDef extends Init {
 	}
 	
 
-		@Then("^input Rule Name and  Target Tab from Sheet \"([^\"]*)\"$")
-		public void input_Rule_Name_and_Target_Tab_from_Sheet(String ruleSheet) throws Throwable {
+	@Then("^input rule Name and target tab from \"([^\"]*)\" Sheet$")
+	public void input_rule_Name_and_target_tab_from_Sheet(String ruleSheet) throws Throwable {
 
-			String ruleName;
-			excel.setExcelFile("biDataSetup", ruleSheet);
-			ruleName = (String) excel.getCell(1, 0);
-			ruleName = RandomNameGenerator.getRandomName(ruleName);
-			excel.setCell(1, 0, ruleName);
-			System.out.println("Rule Name ::::" + ruleName);
-			biDataObject.input_Target_Tab_For_Rule(ruleName);
-
-		}
-	
-	
+		String ruleName;
+		excel.setExcelFile("biDataSetup", ruleSheet);
+		ruleName = (String) excel.getCell(1, 0);
+		ruleName = RandomNameGenerator.getRandomName(ruleName);
+		excel.setCell(1, 0, ruleName);
+		System.out.println("Rule Name ::::" + ruleName);
+		biDataObject.input_Target_Tab_For_Rule(ruleName);
+	}
+					
 	
 	@Then("^input offers Tab product \"([^\"]*)\" offer Sheet \"([^\"]*)\" Recommendationlimit \"([^\"]*)\" Acceptancelimit \"([^\"]*)\" rule sheet \"([^\"]*)\"$")
 	public void input_offers_Tab_product_offer_Sheet_Recommendationlimit_Acceptancelimit_rule_sheet(String productSheet, String offerSheet, String recomendlimit, String acceptLimit,String ruleSheet) throws Throwable {

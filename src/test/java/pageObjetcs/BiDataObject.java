@@ -748,6 +748,9 @@ public class BiDataObject extends Init {
 
 			System.out.println("Bc_Send Date ::" + Start_Date);
 			ex.setCell(1, 3, Start_Date);
+			System.out.println("Bc_Send Year Date -:: "+date);
+			ex.setCell(1, 4, date);
+			System.out.println(":::- Successfully Stored in Sheet  ");
 		 
 	//send Time ///////////////////	 
 			
@@ -884,7 +887,9 @@ public class BiDataObject extends Init {
 		
 		 ex.setExcelFile("biDataSetup", bcSheet);
 		 ex.setCell(1, 3, start_Date);
-		 
+		 System.out.println("Recurring Broadcast Start year Date: "+date);
+		 ex.setCell(1, 4,date);
+		 System.out.println("::- Successfully stored in sheet");
 		
 		
 		////:::::::::::::Selecting Start Date and Time  ::::::::::::::::::::
@@ -1412,14 +1417,18 @@ public class BiDataObject extends Init {
 	public void saveDateOfRuleToSheet(String ruleSheet) throws Exception {
 		Calendar rightNow = Calendar.getInstance();
 		excel.setExcelFile("biDataSetup", ruleSheet);
-		int day = rightNow.get(Calendar.DAY_OF_MONTH);
-		int year = rightNow.get(Calendar.YEAR);
-
-		String Start_Date;
-		String monthString = calender.getMonthForInt(rightNow.get(Calendar.MONTH));
-		Start_Date = String.format("%02d", day) + " " + monthString.substring(0, 3) + " " + year;
-		System.out.println("Rule Date :: " + Start_Date);
-		excel.setCell(1, 6, Start_Date);
+		
+		String mn = "";
+		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
+			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+		} else
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+		
+		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
+				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
+																			
+		System.out.println("Rule Date :: " +date);
+		excel.setCell(1, 6, date);
 		System.out.println("::Successfully Stored Rule Date to Excel Sheet ::");
 
 	}
