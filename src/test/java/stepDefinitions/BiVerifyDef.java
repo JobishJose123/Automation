@@ -72,6 +72,21 @@ public class BiVerifyDef extends Init {
 
 	
 	
+	@Then("^create offer and Product Report from sheet \"([^\"]*)\" and \"([^\"]*)\" as Time Range$")
+	public void create_offer_and_Product_Report_from_sheet_and_as_Time_Range(String sheetName, String timeRange) throws Throwable {
+	  
+		String reportName;
+		excel.setExcelFile("BiVerify", sheetName);
+		reportName = (String) excel.getCell(1, 0);
+		reportName = RandomNameGenerator.getRandomName(reportName);
+		excel.setCell(1, 0, reportName);
+		System.out.println("Offers and Prod_Report_Name:: " + reportName);
+		biverifyobject.createOffersAndProductReport(reportName, timeRange, sheetName);		
+	}
+	
+	
+	
+	
 	@Then("^create metric report from sheet \"([^\"]*)\" Report TimeRange \"([^\"]*)\" Metric TimeRange \"([^\"]*)\" and \"([^\"]*)\"$")
 	public void create_metric_report_from_sheet_Report_TimeRange_Metric_TimeRange_and(String sheetName, String reportTime, String metricTimeDayWeek, String metricTimeDays) throws Throwable {
 		
@@ -122,12 +137,21 @@ public class BiVerifyDef extends Init {
 	
 	@Then("^verify Aggregated data of header \"([^\"]*)\" with \"([^\"]*)\" as value$")
 	public void verify_Aggregated_data_of_header_with_as_value(String headerName, String dataValue) throws Throwable {
-		
-		biverifyobject.externalFilter("Customer Segment","matches with","SelBiSegment");
+
+		biverifyobject.externalFilter("Customer Segment", "matches with", "SelBiSegment");
 		Thread.sleep(3000);
-		WebElement agregateElement=driver.findElement(By.xpath("//div[@class='paper-carousel_wrapper style-scope paper-carousel']/div[contains(.,'"+headerName+"')]/div[2]"));
-		System.out.println(">>> "+agregateElement.getText());
-	    
+		WebElement agregateElement = driver.findElement(
+				By.xpath("//div[@class='paper-carousel_wrapper style-scope paper-carousel']/div[contains(.,'"
+						+ headerName + "')]/div[2]"));
+		boolean status = biverifyobject.getAgregate_DataStatus(agregateElement, dataValue);
+		if (status == false) {
+			System.out.println("::- Verification failed -:::");
+			System.out.println("Expected Agregated Data " + headerName + " = " + dataValue);
+			System.out.println("Found Agregated Data " + headerName + " = " + agregateElement.getAttribute("title"));
+			
+		}
+		Assert.assertTrue(status);
+		
 	}
 	
 	

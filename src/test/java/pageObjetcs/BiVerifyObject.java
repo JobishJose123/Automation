@@ -236,7 +236,7 @@ public class BiVerifyObject extends Init {
 	
 	
 	//:: xapth for get text() status of Worksheet 
-	@FindBy(xpath ="//vaadin-grid-table-body[@id='items']//vaadin-grid-table-row[1]//vaadin-grid-table-cell[4]//div[@class='hexData style-scope hexagon-content']//span")
+	@FindBy(xpath ="//span[@class='style-scope reports-grid']")
 	private WebElement currentStatusTextSheet;
 	
 	@FindBy(xpath ="//iron-icon[@id='filter']")
@@ -250,6 +250,26 @@ public class BiVerifyObject extends Init {
 	private WebElement conditionExternalFilterField;
 	@FindBy(xpath ="//div[@class='input-content style-scope paper-input-container']//input")
 	private WebElement valueExternalFilterField;
+	
+	//::verification x paths 
+	
+	@FindBy(xpath ="//paper-radio-button[@value='PM']/div[1]")
+	private WebElement pmOnlyRadioBtn;
+	@FindBy(xpath ="//paper-radio-button[@value='IM']/div[1]")
+	private WebElement imOnlyRadioBtn;
+	@FindBy(xpath ="//paper-radio-button[@value='EVENT']/div[1]")
+	private WebElement BothRadioBtn;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -1501,9 +1521,57 @@ public class BiVerifyObject extends Init {
 		jswait.loadClick("//paper-button[text()='Save']");		
 	}
 	
+	public boolean getAgregate_DataStatus(WebElement agregateElement, String dataValue) throws Exception {
+		String agregateData = agregateElement.getAttribute("title");
+		agregateData = agregateData.replace(",", "");
+		return agregateData.equals(dataValue);
+	}
+	
+	public void selectPM_onlyRadioButton() throws Exception {
+		jswait.loadClick(pmOnlyRadioBtn);
+	}
+
+	public void selectIM_onlyRadioButton() throws Exception {
+		jswait.loadClick(imOnlyRadioBtn);
+	}
+
+	public void selectBoth_RadioButton() throws Exception {
+		jswait.loadClick(BothRadioBtn);
+	}
 	
 	
 	
+/////////////////////////////////////////////////////////////////////////////////////////	
+	
+	
+	
+	public void createOffersAndProductReport(String reportName,String timeRange,String sheetName)throws Exception
+	{
+		input_Name_Description(reportName,"created By selenium");
+		selectTimeRange(timeRange);
+		
+		firstColumnSelect();
+		selectProductColumn();
+		secondColumnSelect();
+		selectOfferColumn();
+		thirdColumnSelect();
+		selectConversionColumn("conversion","sum","Unique Count");
+		fourthColumnSelect();
+		selectFulfilmentColumn("fulfillment","sum","Unique Count");
+		fifthColumnSelect();
+		selectCustomerSegment();
+		if (sheetName.equals("offerReportPM")) {
+			System.out.println("::- Outbound Marketing Only -::");
+			selectPM_onlyRadioButton();
+		} else if (sheetName.equals("offerReportIM")) {
+			System.out.println("::- Inbound Marketing Only -::");
+			selectIM_onlyRadioButton();
+		} else if (sheetName.equals("offerReportBoth")) {
+			System.out.println("::- Both -::");
+			selectBoth_RadioButton();
+		}
+		shortCut_for_Schedule_Share();			
+	}
 	
 	
 	public void createMetricAckReport(String reportName,String reportTimeRange,String metricTimeDayWeek,String days)throws Exception
@@ -1527,7 +1595,7 @@ public class BiVerifyObject extends Init {
 		selectMetricColumn("Metric4","conversion","SelBiMetric4",metricTimeDayWeek, days);
 		eighthColumnSelect();
 		selectCustomerSegment();
-		shortCut_for_Schedule_Share();		
+		shortCut_for_Schedule_Share();	
 	}
 	
  	
