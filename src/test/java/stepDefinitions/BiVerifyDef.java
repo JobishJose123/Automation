@@ -160,8 +160,6 @@ public class BiVerifyDef extends Init {
 	
 	
 	
-	
-	
-	
+		
 	
 }

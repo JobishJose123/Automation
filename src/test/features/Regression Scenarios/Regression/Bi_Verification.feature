@@ -59,7 +59,7 @@ Then verify create calculation is disabled before header save
 # 22nd
 #  3rd
 # Auto (if user provides keyword 'Auto' then automatically fetch data setup run date and provide as input
-
+#
 @NDX-commonReport_BI    @initBrowser @closeBrowser
 Scenario Outline: Generating common report by selecting Outbound marketing inbound Marketing and Both Button
 Given login
