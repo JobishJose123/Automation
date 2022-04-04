@@ -307,7 +307,9 @@ public class BiDataObject extends Init {
 	 private WebElement ruleTimezoneField;
 	 
 	 
-	 
+	 //x path for Record Conversions for Seeding Reward check box
+	 @FindBy(xpath ="//div[text()='Record Conversions for Seeding Reward']/../div[1]")
+	 private WebElement ConvForSeedBcCheckBox;
 	 
 	 
 	 
@@ -694,11 +696,16 @@ public class BiDataObject extends Init {
 		Thread.sleep(2000);
 	}
 	
-	public void inputOfferTab(String offerName, String filterCriteria, String giveRewardsTo) throws Exception {
+	public void inputOfferTab(String offerName, String filterCriteria, String giveRewardsTo,String offerSheet) throws Exception {
 		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
 		Thread.sleep(2000);
 		SelectTrackSession();
 		selectTrackSource();
+		if (offerSheet.equals("biSeedOffer")) {
+			jswait.loadClick(ConvForSeedBcCheckBox);
+			System.out.println("::Included Conversion for Rewarding Bc :: for Seeding BC");
+		}
+		
 		select_SenderAndRoute();
 		clickProceedButton();
 	}

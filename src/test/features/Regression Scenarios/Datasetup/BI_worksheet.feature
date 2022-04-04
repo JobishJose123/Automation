@@ -399,12 +399,12 @@ Then wait for 1 minutes
 Then provide file in location "/usr/local/flytxt/selenium/conversionBI" for trigger with csv file "conversionBI.csv"
 Then Save Ack to workBook "biDataSetup" to Sheet "<BcSheet>" to the column "Ack"
 Examples:
-		|BcSheet|attributeValue|
-		|OneOffBcA|     30   |
-		|OneOffBcB|     30   |
-		|OneOffBcC|     30   |
-		|OneOffBcD|     30   |
-		|OneOffBcE|     30   |
+|BcSheet|attributeValue|
+|OneOffBcA|     30   |
+|OneOffBcB|     30   |
+|OneOffBcC|     30   |
+|OneOffBcD|     30   |
+|OneOffBcE|     30   |
 
 
 
@@ -497,7 +497,7 @@ Examples:
 #:: WorkBook used >> "biDataSetup.xls"   ::::::::::::::::
 #
 
-@NDX-Touchpoint_BI   @initBrowser
+@NDX-Touchpoint_BI   @initBrowser   @closeBrowser
 Scenario: create new Api Touch point For Bi report regression
 Given login
 Then navigate to intent management
@@ -522,7 +522,7 @@ Then create IP Access Group touchPoint Sheet "TouchPointBI" and AuthKey as "BICu
 
 
 #############################################################################################################################################################################
-###
+### Restart API server
 ###:::Creating program and Rule for IM BI report Regression
 ###   >>>> Can Run many times
 
@@ -572,7 +572,7 @@ Then wait until rule from sheet "rule" is refreshed
 Scenario Outline: Get and post offers for API BI (offer Accepted Event and Offer Recommended Events)
 Given login
 Then Get Api call msisdn "<Msisdn>" with Auth Key "BICucumber" and Rule sheet "rule" for BI 
-Then wait for 5000 milliseconds
+Then wait for 10000 milliseconds
 Then POST Api call msisdn "<Msisdn>" with auth key "BICucumber" and Rule sheet "rule" for BI
 Examples: 
 |Msisdn|

@@ -122,22 +122,12 @@ public class BiDataDef extends Init {
 	
 	@Then("^create segment with name \"([^\"]*)\" with condition \"([^\"]*)\"$")
 	public void create_segment_with_name_with_condition(String segmentName, String condition) throws Throwable {
-		CommonObjects commonObjects = new CommonObjects();
-		commonObjects.filterName(segmentName);
-		
-		try {
-			commonObjects.clickOptionsIcon();
-			System.out.println("Saved Segment Already present !! with name as "+segmentName);
-			
-		} catch (Exception e) {
-			System.out.println("Creating new segment for List selenium_BiList");
-			biDataObject.clickCreateNewSegment();
-			if(condition.equalsIgnoreCase("listSubscribed"))
-			{
-				biDataObject.createSegment(segmentName);
-			}
+
+		System.out.println("Creating new segment for List selenium_BiList");
+		biDataObject.clickCreateNewSegment();
+		if (condition.equalsIgnoreCase("listSubscribed")) {
+			biDataObject.createSegment(segmentName);
 		}
-	   
 	}
 	
 	
@@ -277,7 +267,7 @@ public class BiDataDef extends Init {
 	    Thread.sleep(2000);
 		excel.setExcelFile("biDataSetup", offerSheet);
 		offerName=(String) excel.getCell(1,0);
-		 biDataObject.inputOfferTab(offerName, filterCriteria, giveRewardsTo);
+		 biDataObject.inputOfferTab(offerName, filterCriteria, giveRewardsTo,offerSheet);
 	}
 	
 	@Then("^input Deliver Tab from sheet \"([^\"]*)\" with end Type as \"([^\"]*)\"$")
