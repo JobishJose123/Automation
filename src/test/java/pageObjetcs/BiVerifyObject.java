@@ -2,8 +2,10 @@ package pageObjetcs;
 
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
@@ -260,7 +262,8 @@ public class BiVerifyObject extends Init {
 	@FindBy(xpath ="//paper-radio-button[@value='EVENT']/div[1]")
 	private WebElement BothRadioBtn;
 	
-	
+	@FindBy(xpath ="//div[@id='checkboxContainer']")
+	private WebElement incldSedRwd;
 	
 	
 	
@@ -798,7 +801,7 @@ public class BiVerifyObject extends Init {
 		jswait.clearTextField(HeaderNameTextField);
 		Thread.sleep(1000);
 		jswait.loadClick(nameToheaderPencilBtn);
-		jswait.loadSendKeys(HeaderNameTextField,"Campaign Attribute");
+		jswait.loadSendKeys(HeaderNameTextField,"CampaignAttribute");
 		
 		if (agregateType.equalsIgnoreCase("count")) {
 			jswait.loadClick(countAggregateRadioBtn);
@@ -831,7 +834,7 @@ public class BiVerifyObject extends Init {
 		jswait.clearTextField(HeaderNameTextField);
 		Thread.sleep(1000);
 		jswait.loadClick(nameToheaderPencilBtn);
-		jswait.loadSendKeys(HeaderNameTextField,"Broadcast Attribute");
+		jswait.loadSendKeys(HeaderNameTextField,"BroadcastAttribute");
 		
 		if (agregateType.equalsIgnoreCase("count")) {
 			jswait.loadClick(countAggregateRadioBtn);
@@ -891,7 +894,7 @@ public class BiVerifyObject extends Init {
 		jswait.clearTextField(HeaderNameTextField);
 		Thread.sleep(1000);
 		jswait.loadClick(nameToheaderPencilBtn);
-		jswait.loadSendKeys(HeaderNameTextField, "Offer Attribute");
+		jswait.loadSendKeys(HeaderNameTextField, "OfferAttribute");
 
 		if (agregateType.equalsIgnoreCase("count")) {
 			jswait.loadClick(countAggregateRadioBtn);
@@ -1540,6 +1543,183 @@ public class BiVerifyObject extends Init {
 		jswait.loadClick(BothRadioBtn);
 	}
 	
+	public List<String> getAllColumnDatas(String columnNumber)throws Exception
+	{
+		WebElement columDatas;
+		String column;
+		String name;
+		List<String>values=new ArrayList<String>();
+		
+		for (int i = 1; i <= 15; i++) {
+			column = String.valueOf(i);
+			columDatas = driver.findElement(By.xpath("//vaadin-grid-table-body[@id='items']//vaadin-grid-table-row["
+					+ column + "]//vaadin-grid-table-cell[" + columnNumber + "]"));
+			name = columDatas.getText();
+			values.add(name);
+		}		
+		return values;		
+	}
+	
+	public boolean verifyColumnDatas(List<String> listExpected, List<String> listActual) throws Exception {
+		boolean status = true;
+		for (String x : listExpected) {
+
+			for (int i = 0; i < listActual.size(); i++) {
+				if (x.equals(listActual.get(i))) {
+					break;
+				} else if (i == listActual.size() - 1) {
+					System.out.println(">>--> Data Not Present:-> " + x);
+					status = false;
+				}
+			}
+		}		
+		return status;
+	}
+	
+	public boolean checkXpath(String xpath) {
+		WebElement element = null;
+
+		try {
+			element = driver.findElement(By.xpath(xpath));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	
+	
+	public boolean checkDateColumns() throws Exception {
+		ExcelHelper excelDate = new ExcelHelper();
+		String date;
+		List<String> dateExpected =new ArrayList<String>();
+		List<String> dateActual=new ArrayList<String>();
+		excelDate.setExcelFile("biDataSetup", "OneOffBcA");
+		date = (String) excelDate.getCell(1, 4);
+		dateExpected.add(date);
+		dateActual=getAllColumnDatas("1");
+		return verifyColumnDatas(dateExpected, dateActual);				
+	}
+	
+	public boolean checkCampaignCategory() throws Exception {
+		ExcelHelper excelCategory = new ExcelHelper();
+		String categoryName;
+		List<String> categoryExpected = new ArrayList<String>();
+		List<String> categoryActual = new ArrayList<String>();
+		excelCategory.setExcelFile("biDataSetup", "BiCategory");
+		categoryName = excelCategory.getCellByColumnName("Category Name");
+		categoryExpected.add(categoryName);
+		categoryActual = getAllColumnDatas("2");
+		return verifyColumnDatas(categoryExpected, categoryActual);
+	}
+	
+	public boolean checkCampaignColumns() throws Exception {
+		ExcelHelper excelCampaign = new ExcelHelper();
+		List<String> campaignExpected = new ArrayList<String>();
+		List<String> campaignActual = new ArrayList<String>();
+		excelCampaign.setExcelFile("biDataSetup", "campaignOneoff");
+		campaignExpected.add(excelCampaign.getCellByColumnName("Campaign Name"));
+		excelCampaign.setExcelFile("biDataSetup", "campaignRecur");
+		campaignExpected.add(excelCampaign.getCellByColumnName("Campaign Name"));
+		excelCampaign.setExcelFile("biDataSetup", "campaignSeeding");
+		campaignExpected.add(excelCampaign.getCellByColumnName("Campaign Name"));
+		campaignActual = getAllColumnDatas("3");
+		return verifyColumnDatas(campaignExpected, campaignActual); 
+	}
+	
+	public boolean checkBroadcastNameColumns() throws Exception {
+		ExcelHelper excelBC = new ExcelHelper();
+		List<String> bcNameSheets = new ArrayList<String>();
+		List<String> BcExpected = new ArrayList<String>();
+		List<String> BcActual = new ArrayList<String>();
+
+		bcNameSheets.add("OneOffBcA");
+		bcNameSheets.add("OneOffBcB");
+		bcNameSheets.add("OneOffBcC");
+		bcNameSheets.add("OneOffBcD");
+		bcNameSheets.add("OneOffBcE");
+
+		bcNameSheets.add("RecuringBcA");
+		bcNameSheets.add("RecuringBcB");
+		bcNameSheets.add("RecuringBcC");
+		bcNameSheets.add("RecuringBcD");
+		bcNameSheets.add("RecuringBcE");
+
+		bcNameSheets.add("SeedingBcA");
+		bcNameSheets.add("SeedingBcB");
+		bcNameSheets.add("SeedingBcC");
+		bcNameSheets.add("SeedingBcD");
+		bcNameSheets.add("SeedingBcE");
+
+		for (String sheetName : bcNameSheets) {
+			excelBC.setExcelFile("biDataSetup", sheetName);
+			BcExpected.add(excelBC.getCellByColumnName("BC Name"));
+		}
+		BcActual = getAllColumnDatas("4");
+		return verifyColumnDatas(BcExpected, BcActual);
+	}
+	
+	
+	public boolean checkCustomerSegmentColumn() throws Exception {
+		List<String> segmentExpected = new ArrayList<String>();
+		List<String> segmentActual = new ArrayList<String>();
+		segmentExpected.add("SelBiSegment");
+		segmentExpected.add("SelBiSegment");
+		segmentActual = getAllColumnDatas("5");
+		return verifyColumnDatas(segmentExpected, segmentActual);
+	}
+	
+	public boolean checkCountsOfBcs(String eventNumber)throws Exception
+	{   ExcelHelper excelEvent = new ExcelHelper();
+		List<String> bcNameSheets= new ArrayList<String>();
+		bcNameSheets.add("OneOffBcA");
+		bcNameSheets.add("OneOffBcB");
+		bcNameSheets.add("OneOffBcC");
+		bcNameSheets.add("OneOffBcD");
+		bcNameSheets.add("OneOffBcE");
+		
+		bcNameSheets.add("RecuringBcA");
+		bcNameSheets.add("RecuringBcB");
+		bcNameSheets.add("RecuringBcC");
+		bcNameSheets.add("RecuringBcD");
+		bcNameSheets.add("RecuringBcE");
+
+		bcNameSheets.add("SeedingBcA");
+		bcNameSheets.add("SeedingBcB");
+		bcNameSheets.add("SeedingBcC");
+		bcNameSheets.add("SeedingBcD");
+		bcNameSheets.add("SeedingBcE");
+		
+		boolean status;
+		boolean statusCase=true;
+		String bcName;
+		String AckValue;
+		String xpath;
+		
+		for (String sheetName : bcNameSheets) {
+			excelEvent.setExcelFile("biDataSetup", sheetName);
+			bcName = excelEvent.getCellByColumnName("BC Name");
+			AckValue = excelEvent.getCellByColumnName("Ack");
+			xpath = "//vaadin-grid-table-cell//vaadin-grid-cell-content//span[@title='" + bcName+ "']/../../../vaadin-grid-table-cell[" + eventNumber + "]//span[@title='" + AckValue + "']";
+			status = checkXpath(xpath);
+			if (status == false) {
+				System.out.println(
+						"-->Event value not present! value Expected= " + AckValue + " for Broadcast :-> " + bcName);
+				statusCase = false;
+			}
+		}
+		return statusCase;	
+	}
+	
+	public void selectIncludeSeedRWDCheckBox() throws Exception {
+		jswait.loadClick(incldSedRwd);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 /////////////////////////////////////////////////////////////////////////////////////////	
@@ -1600,12 +1780,112 @@ public class BiVerifyObject extends Init {
 	}
 	
  	
+	public void createPM_DetailedReport(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		dateColumnSelect();
+		secondColumnSelect();
+		selectCampaignCategoryColumn();
+		thirdColumnSelect();
+		selectCampaignNameColumn();
+		fourthColumnSelect();
+		selectBroadcastNameColumn();
+		fifthColumnSelect();
+		selectAckColumn("Ack", "sum", "Total Count");
+		sixthColumnSelect();
+		selectConversionColumn("conversion", "sum", "Unique Count");
+		seventhColumnSelect();
+		selectFulfilmentColumn("fulfillment", "sum", "Unique Count");
+		eighthColumnSelect();
+		selectCustomerSegment();
+		shortCut_for_Schedule_Share();
+	}
+	
+	public void createIM_DetailReport(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		dateColumnSelect();
+		secondColumnSelect();
+		selectTouchpointTypeColumn();
+		thirdColumnSelect();
+		selectTouchpointColumn();
+		fourthColumnSelect();
+		selectProgramColumn();
+		fifthColumnSelect();
+		selectRuleColumn();
+		sixthColumnSelect();
+		selectOfferEligibleEvent("offerEligible","sum","Unique Count");
+		seventhColumnSelect();
+		selectOfferEnquiryEvent("offerEnquiry","sum","Unique Count","offerEligible");
+		eighthColumnSelect();
+		selectOfferRecomendedEvent("offerRecommend","sum","Unique Count");
+		ninethColumnSelect();
+		selectOfferAcceptedEvent("offerAccepted","sum","Unique Count");
+		tenthColumnSelect();
+		selectConversionColumn("conversion","sum","Unique Count");
+		eleventhColumnSelect();
+		selectFulfilmentColumn("fulfillment","sum","Unique Count");
+		twelvethColumnSelect();
+		selectCustomerSegment();
+		shortCut_for_Schedule_Share();
+	}
+	
+	
+   public void createAttributeReport(String reportName, String timeRange)throws Exception
+	{
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		firstColumnSelect();
+		selectCampaignCategoryColumn();
+		secondColumnSelect();
+		selectCampaignNameColumn();
+		thirdColumnSelect();
+		selectBroadcastNameColumn();
+		fourthColumnSelect();
+		selectAckColumn("Ack", "sum", "Total Count");
+		fifthColumnSelect();
+		selectOfferAttributeColumn("SelOfferAttribute","sum");
+		sixthColumnSelect();
+		selectCampaignAttribute("SelCampAttribute","sum");
+		seventhColumnSelect();
+		selectBroadcastAttribute("SelBCAttribute","sum");
+		eighthColumnSelect();
+		selectCustomerSegment();
+		shortCut_for_Schedule_Share();		
+   }
+	
+	public void create_Include_Seed_Reward_Report(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		firstColumnSelect();
+		selectCampaignCategoryColumn();
+		secondColumnSelect();
+		selectCampaignNameColumn();
+		thirdColumnSelect();
+		selectBroadcastNameColumn();
+		fourthColumnSelect();
+		selectAckColumn("Ack", "sum", "Total Count");
+		fifthColumnSelect();
+		selectConversionColumn("conversion","sum","Total Count");
+		sixthColumnSelect();
+		selectFulfilmentColumn("fulfillment","sum","Total Count");
+		seventhColumnSelect();
+		selectCustomerSegment();
+		selectIncludeSeedRWDCheckBox();
+		shortCut_for_Schedule_Share();
+	}
+	
+	public void create_custom_CalculationReport(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		firstColumnSelect();
+		selectCampaignCategoryColumn();
+	}
 	
 	
 	
 	
 	
-    
     
     
 }

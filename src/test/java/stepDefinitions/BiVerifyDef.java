@@ -8,6 +8,8 @@ package stepDefinitions;
 
 
 
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -155,10 +157,89 @@ public class BiVerifyDef extends Init {
 	}
 	
 	
+	@Then("^create BI report from sheet \"([^\"]*)\" and \"([^\"]*)\" as Time Range$")
+	public void create_BI_report_from_sheet_and_as_Time_Range(String sheetName, String timeRange) throws Throwable {
+	  
+		String reportName;
+		excel.setExcelFile("BiVerify", sheetName);
+		reportName = (String) excel.getCell(1, 0);
+		reportName = RandomNameGenerator.getRandomName(reportName);
+		excel.setCell(1, 0, reportName);
+		System.out.println("Report_Name:: " + reportName);
+		
+		if (sheetName.equals("pmReport")) {
+			biverifyobject.createPM_DetailedReport(reportName, timeRange);
+		} else if (sheetName.equals("imReport")) {
+			biverifyobject.createIM_DetailReport(reportName, timeRange);
+		}
+		else if (sheetName.equals("PMattribute")) {
+			biverifyobject.createAttributeReport(reportName, timeRange);
+		}
+		else if (sheetName.equals("includeSeedRewards")) {
+			biverifyobject.create_Include_Seed_Reward_Report(reportName, timeRange);
+		}
+		else if (sheetName.equals("calcReport")) {
+			biverifyobject.create_custom_CalculationReport(reportName, timeRange);
+		}
+		
+		
+	}
+	
+	@Then("^verify data of \"([^\"]*)\" for \"([^\"]*)\" type report$")
+	public void verify_data_of_for_type_report(String dataHeader, String reportType) throws Throwable {
+
+		biverifyobject.externalFilter("Customer Segment", "matches with", "SelBiSegment");
+		Thread.sleep(3000);
+		boolean caseStatus=false;
+		if (reportType.equalsIgnoreCase("OutBound Marketing")) {
+			
+			if (dataHeader.equalsIgnoreCase("date")) {
+				caseStatus = biverifyobject.checkDateColumns();
+			}
+			else if (dataHeader.equalsIgnoreCase("Campaign Category")) {
+				caseStatus = biverifyobject.checkCampaignCategory();
+			}
+			else if (dataHeader.equalsIgnoreCase("Campaign")) {
+				caseStatus = biverifyobject.checkCampaignColumns();
+			}
+			else if (dataHeader.equalsIgnoreCase("Broadcast Name")) {
+				caseStatus = biverifyobject.checkBroadcastNameColumns();
+			}
+			else if (dataHeader.equalsIgnoreCase("Customer Segment")) {
+				caseStatus = biverifyobject.checkCustomerSegmentColumn();
+			}
+			else if (dataHeader.equalsIgnoreCase("Acknowledgement")) {
+				caseStatus = biverifyobject.checkCountsOfBcs("6");
+			}
+			else if (dataHeader.equalsIgnoreCase("conversion")) {
+				caseStatus = biverifyobject.checkCountsOfBcs("7");
+			}
+			else if (dataHeader.equalsIgnoreCase("fulfillment")) {
+				caseStatus = biverifyobject.checkCountsOfBcs("8");
+			}
+			
+		
+
+		} else if (reportType.equalsIgnoreCase("inbound marketing")) {
+
+		}
+		
+		Assert.assertTrue(caseStatus);
+		
+	    
+	}
 	
 	
-	
-	
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		
 	
 		
 	
