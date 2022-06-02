@@ -125,6 +125,14 @@ public class BiVerifyObject extends Init {
 	@FindBy(xpath ="//paper-radio-button[@name='Segment']/div[1]")
 	private WebElement customerSegmentsRadioBtn;
 	
+	@FindBy(xpath ="//paper-radio-button[@name='CUSTOM']/div[1]")
+	private WebElement customEventsRadioBtn;
+    @FindBy(xpath ="//label[text()='Event']/../input")
+    private WebElement customEventField;
+    @FindBy(xpath ="//label[text()='Domain']/../input")
+    private WebElement customEventDomainField;
+    
+    
 	///:::End of Element headers radio Buttons
 	
 	
@@ -265,13 +273,33 @@ public class BiVerifyObject extends Init {
 	@FindBy(xpath ="//div[@id='checkboxContainer']")
 	private WebElement incldSedRwd;
 	
+	@FindBy(xpath ="//div[@class='layout horizontal flex style-scope create-report']//following::label[text()='Description']/../input")
+	private WebElement calcDescriptionField;
 	
+	@FindBy(xpath ="//div[@class='content layout vertical flex style-scope create-calculation']//paper-icon-button[@icon='icons:add']")
+	private WebElement plusButtonCreateCalc;
 	
+	@FindBy(xpath ="//label[text()='Combination Formula']/../input")
+	private WebElement formulaFieldCreateCalc;
 	
+	///::Group x paths Below
+	///
+	@FindBy(xpath ="//paper-checkbox[@id='checkbox']//div[@id='checkboxContainer']")
+	private WebElement createGroupsCheckBox;
 	
+	@FindBy(xpath ="//div[@class='addGroupBtn style-scope report-header-dialog']//paper-icon-button[@icon='icons:add']//iron-icon[@id='icon']")
+	private WebElement groupPlusBtn;
 	
+	@FindBy(xpath ="//div[@class='input-content style-scope paper-input-container']//input[@id='input']")
+	private WebElement groupValueField;
 	
+	/////::::::: Group X path is Over
 	
+	/////:::X paths for Internal filter 
+	@FindBy(xpath ="//paper-icon-button[@icon='filter-list']/iron-icon")
+	private WebElement internalFilterBtn;
+	@FindBy(xpath ="//paper-button[text()='Apply']")
+	private WebElement applyButton;
 	
 	
 	
@@ -1467,7 +1495,13 @@ public class BiVerifyObject extends Init {
 					".//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "]"));
 			Thread.sleep(1000);
 			builder.moveToElement(num1).click().build().perform();
+			//
+			//Selecting Seconds Time to 00
+			WebElement seconds=driver.findElement(By.xpath(".//*[@id='secondClock']//*[@class='number style-scope paper-clock-selector'][1]"));
+			Thread.sleep(1000);
+			builder.moveToElement(seconds).click().build().perform();
 			
+			Thread.sleep(1000);
 			if (am_pm == 0)
 				jswait.loadClick(".//*[@id='heading']/iron-selector[2]/div[1]");
 			else
@@ -1716,13 +1750,330 @@ public class BiVerifyObject extends Init {
 	}
 	
 	
+	///Methods for create calculation option
+	//:::Utlities for create custom calculation starts Below :::::::::::
+	///
+	
+	public void selectCalcFrontWindow(String headerName, String agregateType) throws Exception {
+		jswait.loadClick(calculationsRadioBtn);
+		Thread.sleep(1000);
+		jswait.loadClick(createCalculationRadioBtn);
+		Thread.sleep(1000);
+		jswait.loadClick(nameToheaderPencilBtn);
+		Thread.sleep(2000);
+		jswait.clearTextField(HeaderNameTextField);
+		Thread.sleep(1000);
+		jswait.loadClick(nameToheaderPencilBtn);
+		jswait.loadSendKeys(HeaderNameTextField,headerName);
+		Thread.sleep(1000);
+		
+		if (agregateType.equalsIgnoreCase("sum")) {
+			jswait.loadClick(sumAggregateRadioBtn);
+			jswait.loadClick(sumAggregateRadioBtn);
+		} else if (agregateType.equalsIgnoreCase("average")) {
+			Thread.sleep(1000);
+			jswait.loadClick(averageAggregateRadioBtn);
+			jswait.loadClick(averageAggregateRadioBtn);
+		}
+		
+		Thread.sleep(1000);
+		jswait.loadClick(NextButton);
+		Thread.sleep(2000);
+	}
+	
+	public void inputCalcDescription(String desc) throws Exception {
+		jswait.loadSendKeys(calcDescriptionField, desc);
+		Thread.sleep(1000);
+	}
+	
+	public void selectCalcColumnEvent(String eventName,String columNumber)throws Exception
+	{	String xpath="//div[@class='layout vertical style-scope create-calculation']["+columNumber+"]//label[text()='Select from the options given']/../input";
+		jswait.loadSendKeys(xpath, eventName);
+		Thread.sleep(2000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+eventName+"')]");
+		
+	}
+	
+	public void inputCombination_FormulaCreate_Calc(String formula) throws Exception {
+		jswait.loadSendKeys(formulaFieldCreateCalc, formula);
+	}
+	
+	public void select_fulfillment_Percent_Formula(String headerName, String agregateType) throws Exception {
+		selectCalcFrontWindow(headerName, agregateType);
+		inputCalcDescription("Selenium Calculations");
+		selectCalcColumnEvent("fulfillment","1");
+		jswait.loadClick(plusButtonCreateCalc);
+		
+		String xpath="//div[@class='layout vertical style-scope create-calculation'][2]//label[text()='Select from the options given']/../input";	
+		jswait.loadSendKeys(xpath,"conversion");
+		Thread.sleep(2000);
+		jswait.loadClick("//div//following::vaadin-combo-box-item[contains(.,'conversion')][2]");	
+		inputCombination_FormulaCreate_Calc("(k1/k2)*100");
+		jswait.loadClick(eventSaveButton);
+		
+	}
+	
+	public void select_UniqueConversion_percent_Formula(String headerName, String agregateType) throws Exception {
+		selectCalcFrontWindow(headerName, agregateType);
+		inputCalcDescription("Selenium Calculations");
+		selectCalcColumnEvent("conversion","1");
+		jswait.loadClick(plusButtonCreateCalc);
+        String xpath="//div[@class='layout vertical style-scope create-calculation'][2]//label[text()='Select from the options given']/../input";	
+		jswait.loadSendKeys(xpath,"Ack");
+		Thread.sleep(2000);
+		jswait.loadClick("//div//following::vaadin-combo-box-item[contains(.,'Ack')][2]");
+		inputCombination_FormulaCreate_Calc("(k1/k2)*100");
+		jswait.loadClick(eventSaveButton);
+	}
+	
+	
+	public void select_Totalconversion_percent_Formula(String headerName, String agregateType) throws Exception {
+		selectCalcFrontWindow(headerName, agregateType);
+		inputCalcDescription("Selenium Calculations");
+		String xpath="//div[@class='layout vertical style-scope create-calculation'][1]//label[text()='Select from the options given']/../input";
+		
+		jswait.loadSendKeys(xpath,"TotalConversion");
+		Thread.sleep(2000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(text(),'TotalConversion')]");
+		jswait.loadClick(plusButtonCreateCalc);
+		xpath="//div[@class='layout vertical style-scope create-calculation'][2]//label[text()='Select from the options given']/../input";
+		jswait.loadSendKeys(xpath,"Ack");
+		Thread.sleep(2000);
+		jswait.loadClick("//div//following::vaadin-combo-box-item[contains(.,'Ack')][2]");
+		inputCombination_FormulaCreate_Calc("(k1/k2)*100");
+		jswait.loadClick(eventSaveButton);
+	}
+	///
+	///::Utlities for Create custom calculation is Over >>>>>>>>>>>>>>>
+	///
+
+	//::Utilities for creating Groups 
+	
+	public void selectGroupFrontWindow(String headerName) throws Exception {
+		jswait.loadClick(elementsRadioBtn);
+		Thread.sleep(1000);
+		jswait.loadClick(outboundMarketingRadioBtn);
+		Thread.sleep(1000);
+		jswait.loadSendKeys(ElementField, headerName);
+		Thread.sleep(2000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'" + headerName + "')]");
+		jswait.loadClick(createGroupsCheckBox);
+		jswait.loadClick(NextButton);
+		Thread.sleep(2000);
+	}
+	
+	public void selectGroupCondition(String groupName,String number,String condition,String groupHeaderVal)throws Exception
+	{
+		jswait.loadClick(groupPlusBtn);
+		String nameXpath="//form//create-report-element-groups["+number+"]//label[text()='Name']/../input";
+		jswait.loadSendKeys(nameXpath, groupName);
+		jswait.loadClick("//create-report-element-groups["+number+"]//label[text()='Condition']/../input");
+		Thread.sleep(1000);
+		jswait.loadClick("//create-report-element-groups["+number+"]//paper-item[contains(.,'"+condition+"')]");
+		jswait.loadSendKeys(groupValueField,groupHeaderVal);	
+	}
+	
+	public void selectRemainingValues(String groupName,String number) throws Exception {
+		jswait.loadClick(groupPlusBtn);
+		String nameXpath="//form//create-report-element-groups["+number+"]//label[text()='Name']/../input";
+		jswait.loadSendKeys(nameXpath, groupName);
+		jswait.loadClick("//create-report-element-groups["+number+"]//paper-radio-button[@name='selectRemaining']//div[@id='radioContainer']");	
+	}
+	
+	public void internalFilter(String headerName, String condition, String value) throws Exception {
+		jswait.loadClick(internalFilterBtn);
+		Thread.sleep(1000);
+		jswait.loadClick(headerExternalFilterField);
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-item[contains(.,'"+headerName+"')]");
+		jswait.loadClick(conditionExternalFilterField);
+		Thread.sleep(2000);
+		jswait.loadClick("//paper-item[contains(.,'"+condition+"')]");
+		jswait.loadSendKeys(valueExternalFilterField,value);
+		jswait.loadClick(applyButton);
+	}
+	
+	public void select_BC_NameGroup() throws Exception {
+		selectGroupFrontWindow("Broadcast Name");
+		selectGroupCondition("Grp1OneOff", "1", "begins with", "OneOffBc");
+		selectGroupCondition("Grp2Recur", "2", "begins with", "RecurBc");
+		selectGroupCondition("Grp3Seed", "3", "begins with", "SeedBc");
+		jswait.loadClick(eventSaveButton);
+	}
+	
+	public void select_BC_NameGRP_Other() throws Exception {
+		selectGroupFrontWindow("Broadcast Name");
+		selectGroupCondition("Grp1OneOff", "1", "begins with", "OneOffBc");
+		selectRemainingValues("Grp2SelOther", "2");
+		jswait.loadClick(eventSaveButton);
+	}
+	
+	public void select_camp_NameGroup() throws Exception {
+		selectGroupFrontWindow("Campaign Name");
+		selectGroupCondition("Grp1CampOneoff", "1", "begins with", "oneoffBCs");
+		selectGroupCondition("Grp2CampRecur", "2", "begins with", "RecuringBCs");
+		selectGroupCondition("Grp3CampSeed", "3", "begins with", "SeedingBCs");
+		jswait.loadClick(eventSaveButton);
+	}
+	
+	public void select_camp_NameGrp_other() throws Exception {
+		selectGroupFrontWindow("Campaign Name");
+		selectGroupCondition("Grp1CampOneoff", "1", "begins with", "oneoffBCs");
+		selectRemainingValues("Grp2CampOther", "2");
+		jswait.loadClick(eventSaveButton);
+	}
 	
 	
 	
+	/////////::::::::::Group Verification :::::::::::::::::::::::::::::Utility Methods  
 	
 	
+	public boolean get_statusOf_Ack_Conv_Fulfil(String ack,String conv,String fulfill)throws Exception
+	{
+		Thread.sleep(1000);
+		boolean ackStatus;
+		boolean convStatus;
+		boolean fulfillStatus;
+		
+		WebElement AckElement = driver.findElement(By.xpath(
+				"//div[@class='paper-carousel_wrapper style-scope paper-carousel']/div[contains(.,'Ack')]/div[2]"));
+		
+		WebElement ConvElement = driver.findElement(By.xpath(
+				"//div[@class='paper-carousel_wrapper style-scope paper-carousel']/div[contains(.,'conversion')]/div[2]"));
+		
+		
+		WebElement FulfillElement = driver.findElement(By.xpath(
+				"//div[@class='paper-carousel_wrapper style-scope paper-carousel']/div[contains(.,'fulfillment')]/div[2]"));
+		
+		ackStatus=getAgregate_DataStatus(AckElement, ack);
+		convStatus=getAgregate_DataStatus(ConvElement, conv);
+		fulfillStatus=getAgregate_DataStatus(FulfillElement,fulfill);
+		
+		if (ackStatus == false) {
+			System.out.println(":::::::::::::::::::::::Test case Failed ::::::::::::::::::::::::::::::::::");
+			System.out.println(":::::::::::: Expected Acknowledgement value= " + ack);
+			System.out.println(":::::::::::: Actual found Acknowledgement value= " + AckElement.getAttribute("title"));
+		}
+		 if (convStatus == false) {
+			System.out.println(":::::::::::::::::::::::Test case Failed ::::::::::::::::::::::::::::::::::");
+			System.out.println(":::::::::::: Expected Conversion value= " + conv);
+			System.out.println(":::::::::::: Actual found Conversion value= " + ConvElement.getAttribute("title"));
+		}
+		
+		 if (fulfillStatus == false) {
+			System.out.println(":::::::::::::::::::::::Test case Failed ::::::::::::::::::::::::::::::::::");
+			System.out.println(":::::::::::: Expected Fulfillment value= " + fulfill);
+			System.out.println(":::::::::::: Actual found Fulfillment value= " + FulfillElement.getAttribute("title"));
+		}
+		
+		if (ackStatus == true && convStatus == true && fulfillStatus == true)
+			return true;
+		else
+			return false;
+		
+	}
 	
+	public boolean get_Status_Of_BcNameOneOff(String bcName, String Ack, String conversion, String fulfillment)
+			throws Exception {
+	
+		externalFilter("Broadcast Name", "matches with", bcName);
+		return get_statusOf_Ack_Conv_Fulfil(Ack, conversion, fulfillment);
+
+	}
+	
+	public boolean get_Status_of_BcNameRecur(String bcName, String Ack, String conversion, String fulfillment)throws Exception
+	{ externalFilter("Broadcast Name", "matches with", bcName);
+	  return get_statusOf_Ack_Conv_Fulfil(Ack, conversion, fulfillment);
+	}
+	
+	public boolean get_Status_of_BcNameSeed(String bcName, String Ack, String conversion, String fulfillment)throws Exception
+	{   externalFilter("Broadcast Name", "matches with", bcName);
+       return get_statusOf_Ack_Conv_Fulfil(Ack, conversion, fulfillment);
+	}
+	
+	public boolean get_Status_of_BcNameOther(String bcName, String Ack, String conversion, String fulfillment)
+			throws Exception {
+		externalFilter("Broadcast Name", "matches with", bcName);
+		return get_statusOf_Ack_Conv_Fulfil(Ack, conversion, fulfillment);
+	}
+	
+	
+	public boolean get_Status_of_CampName_Oneoff(String campName,String Ack, String conversion, String fulfillment)throws Exception
+	{	externalFilter("Campaign Name", "matches with", campName);
+	    return get_statusOf_Ack_Conv_Fulfil(Ack, conversion, fulfillment);
+	}
+	
+	public boolean get_Status_of_CampName_Recur(String campName,String Ack, String conversion, String fulfillment)throws Exception
+	{   externalFilter("Campaign Name", "matches with", campName);
+	    return get_statusOf_Ack_Conv_Fulfil(Ack, conversion, fulfillment);
+	}
+	
+	public boolean get_Status_of_CampName_Seed(String campName,String Ack, String conversion, String fulfillment)throws Exception
+	{   externalFilter("Campaign Name", "matches with", campName);
+	     return get_statusOf_Ack_Conv_Fulfil(Ack, conversion, fulfillment);
+	}
+	
+	public boolean get_Status_of_CampNameOther(String campName,String Ack, String conversion, String fulfillment)throws Exception
+	{  externalFilter("Campaign Name", "matches with", campName);
+	    return get_statusOf_Ack_Conv_Fulfil(Ack, conversion, fulfillment);
+	}
+	
+	public void selectCustomEvent_Header(String eventName, String domain, String headerName) throws Exception {
+		jswait.loadClick(elementsRadioBtn);
+		Thread.sleep(1000);
+		jswait.loadClick(EventsRadioBtn);
+		jswait.loadClick(customEventsRadioBtn);
+		Thread.sleep(1000);
+		jswait.loadSendKeys(customEventField,eventName);
+		Thread.sleep(1000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(text(),'"+eventName+"')]");
+		jswait.loadSendKeys(customEventDomainField,domain);
+		Thread.sleep(1000);
+		jswait.loadClick("//vaadin-combo-box-item[contains(text(),'"+domain+"')]");
+		jswait.loadClick(nameToheaderPencilBtn);
+		Thread.sleep(1000);
+		jswait.clearTextField(HeaderNameTextField);
+		Thread.sleep(1000);
+		jswait.loadClick(nameToheaderPencilBtn);
+		jswait.loadSendKeys(HeaderNameTextField,headerName);
+		Thread.sleep(1000);
+		jswait.loadClick(sumAggregateRadioBtn);
+		jswait.loadClick(sumAggregateRadioBtn);
+		jswait.loadClick(elementHeaderSaveBtn);	
+	}
+	
+	public void selectConversionCustEvent() throws Exception {
+		jswait.loadClick(calculationsRadioBtn);
+		Thread.sleep(1000);
+		jswait.loadClick(EventRadioBtn);
+		Thread.sleep(1000);
+		jswait.loadClick(nameToheaderPencilBtn);
+		Thread.sleep(2000);
+		jswait.clearTextField(HeaderNameTextField);
+		Thread.sleep(1000);
+		jswait.loadClick(nameToheaderPencilBtn);
+		jswait.loadSendKeys(HeaderNameTextField, "conversion");
+		Thread.sleep(1000);
+		jswait.loadClick(sumAggregateRadioBtn);
+		jswait.loadClick(sumAggregateRadioBtn);
+		
+		Thread.sleep(1000);
+		jswait.loadClick(NextButton);
+		Thread.sleep(2000);
+		jswait.loadClick(eventTypeArrowBtn);
+		Thread.sleep(1000);
+		jswait.loadClick("//paper-item[contains(.,'Customer converted')]");
+		Thread.sleep(1000);
+		jswait.loadClick(clickOnTopEvent);
+		jswait.loadClick(uniqueCountRadioBtn);
+		
+		selectCustomerSet("CustomEvent");
+		jswait.loadClick(eventSaveButton);
+		Thread.sleep(2000);		
+	}
+
 /////////////////////////////////////////////////////////////////////////////////////////	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	
@@ -1879,13 +2230,144 @@ public class BiVerifyObject extends Init {
 		input_Name_Description(reportName, "created By selenium");
 		selectTimeRange(timeRange);
 		firstColumnSelect();
+		selectCampaignNameColumn();
+		secondColumnSelect();
+		selectBroadcastNameColumn();
+		thirdColumnSelect();
+		selectAckColumn("Ack", "sum", "Total Count");
+		fourthColumnSelect();
+		selectConversionColumn("conversion","sum","Unique Count");
+		fifthColumnSelect();
+		selectConversionColumn("TotalConversion","sum","Total Count");
+		sixthColumnSelect();
+		selectFulfilmentColumn("fulfillment","sum","Unique Count");
+		seventhColumnSelect();
+		select_Totalconversion_percent_Formula("TotalConversion%","sum");
+		eighthColumnSelect();
+		select_UniqueConversion_percent_Formula("UniqueConversion%","sum");
+		ninethColumnSelect();
+		select_fulfillment_Percent_Formula("fulfillment%","sum");
+		tenthColumnSelect();
+		selectCustomerSegment();
+		shortCut_for_Schedule_Share();		
+	}
+	
+	public void create_Group_BCName_Report(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		ex.setExcelFile("biDataSetup","BiCategory");
+		String campaignCategory=(String) ex.getCell(1,0);
+
+		firstColumnSelect();
 		selectCampaignCategoryColumn();
+		secondColumnSelect();
+		selectCampaignNameColumn();
+		thirdColumnSelect();
+		select_BC_NameGroup();
+		fourthColumnSelect();
+		selectAckColumn("Ack", "sum", "Total Count");
+		fifthColumnSelect();
+		selectConversionColumn("conversion","sum","Unique Count");
+		sixthColumnSelect();
+		selectFulfilmentColumn("fulfillment","sum","Unique Count");
+		internalFilter("Campaign Category Name","matches with",campaignCategory);
+		shortCut_for_Schedule_Share();		
+	}
+	
+	public void create_Group_BCName_Other(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		ex.setExcelFile("biDataSetup","BiCategory");
+		String campaignCategory=(String) ex.getCell(1,0);
+
+		firstColumnSelect();
+		selectCampaignCategoryColumn();
+		secondColumnSelect();
+		selectCampaignNameColumn();
+		thirdColumnSelect();
+		select_BC_NameGRP_Other();
+		fourthColumnSelect();
+		selectAckColumn("Ack", "sum", "Total Count");
+		fifthColumnSelect();
+		selectConversionColumn("conversion","sum","Unique Count");
+		sixthColumnSelect();
+		selectFulfilmentColumn("fulfillment","sum","Unique Count");
+		internalFilter("Campaign Category Name","matches with",campaignCategory);
+		shortCut_for_Schedule_Share();		
+	}
+	
+	public void create_Group_CampaignName(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		ex.setExcelFile("biDataSetup","BiCategory");
+		String campaignCategory=(String) ex.getCell(1,0);
+
+		firstColumnSelect();
+		selectCampaignCategoryColumn();
+		secondColumnSelect();
+		select_camp_NameGroup();
+		thirdColumnSelect();
+		selectBroadcastNameColumn();
+		fourthColumnSelect();
+		selectAckColumn("Ack", "sum", "Total Count");
+		fifthColumnSelect();
+		selectConversionColumn("conversion","sum","Unique Count");
+		sixthColumnSelect();
+		selectFulfilmentColumn("fulfillment","sum","Unique Count");
+		internalFilter("Campaign Category Name","matches with",campaignCategory);
+		shortCut_for_Schedule_Share();	
 	}
 	
 	
+	public void create_Group_campOther(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		ex.setExcelFile("biDataSetup", "BiCategory");
+		String campaignCategory = (String) ex.getCell(1, 0);
+
+		firstColumnSelect();
+		selectCampaignCategoryColumn();
+		secondColumnSelect();
+		select_camp_NameGrp_other();
+		thirdColumnSelect();
+		selectBroadcastNameColumn();
+		fourthColumnSelect();
+		selectAckColumn("Ack", "sum", "Total Count");
+		fifthColumnSelect();
+		selectConversionColumn("conversion","sum","Unique Count");
+		sixthColumnSelect();
+		selectFulfilmentColumn("fulfillment","sum","Unique Count");
+		internalFilter("Campaign Category Name","matches with",campaignCategory);
+		shortCut_for_Schedule_Share();			
+	}
+	
+	public void create_CustomEvent_Report(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		
+		firstColumnSelect();
+		selectCustomEvent_Header("selCustomEvent_BI","value","CustomEvent");
+		secondColumnSelect();
+		selectConversionCustEvent();
+		shortCut_for_Schedule_Share();		
+	}
+	
+	////////////::::::::::::UseCases from Here ::::::::::::::::::::::::///////////////////
+	
+	public void create_UseCase1_Report(String reportName, String timeRange) throws Exception {
+		input_Name_Description(reportName, "created By selenium");
+		selectTimeRange(timeRange);
+		
+		firstColumnSelect();
+		selectCampaignCategoryColumn();
+		secondColumnSelect();
+		selectBroadcastNameColumn();
+		thirdColumnSelect();
+		selectAckColumn("B-Ack","sum","Total Count");
+		
+		
+	}
 	
 	
-	
-    
     
 }

@@ -134,7 +134,7 @@ Then wait for "R" status for worksheet
 
 
 #::Report-5
-# verification pending
+#
 @NDX-includeSeedRewards   @initBrowser  @closeBrowser
 Scenario: Generate Report for Include seeding Bc Rewards and conversion 
 Given login
@@ -149,8 +149,8 @@ Then wait for "R" status for worksheet
 
 
 #::Report-6
-#verification pending
- @NDX-20866    @initBrowser
+#
+ @NDX-20866  @NDX-20869    @initBrowser  @closeBrowser
 Scenario: Generate report for Calculation verification
 Given login
 Then navigate to precision marketer
@@ -158,14 +158,70 @@ Then navigate to analytics
 Then navigate to Business Intelligence
 Then click create New Worksheet
 Then create BI report from sheet "calcReport" and "Auto" as Time Range
+Then filter the Bi sheet from "calcReport" using excel sheet 
+Then wait for "E" status for worksheet
+Then wait for "R" status for worksheet
 
 
-
-
-
-############::::::::::::::::::::::::::::Verification Scenarios ::::::::::::::::::::::::::::
+#::Report-7
 #
+@NDX-20819  @NDX-20822   @initBrowser  @closeBrowser
+Scenario Outline: Generate report for Grouping and Data verification
+Given login
+Then navigate to precision marketer
+Then navigate to analytics
+Then navigate to Business Intelligence
+Then click create New Worksheet
+Then create BI Group report from sheet "<reportSheet>" and "Auto" as Time Range
+Then filter the Bi sheet from "<reportSheet>" using excel sheet 
+Then wait for "E" status for worksheet
+Then wait for "R" status for worksheet
+Examples:
+|reportSheet|
+|GrpBcRpt|
+|GrpBcOther|
+|GrpCamp|
+|GrpCampOther|
+
+
+#::Report-8
 #
+@NDX-Bi_CustomEvent_Report   @initBrowser  @closeBrowser
+Scenario: Generate CustomEvent report for Custom Event Verification
+Given login
+Then navigate to precision marketer
+Then navigate to analytics
+Then navigate to Business Intelligence
+Then click create New Worksheet
+Then create BI report from sheet "CustomEventSheet" and "Auto" as Time Range
+Then filter the Bi sheet from "CustomEventSheet" using excel sheet 
+Then wait for "E" status for worksheet
+Then wait for "R" status for worksheet
+
+
+#::Report-9
+#UseCase1
+#UseCase2
+#UseCase3
+#UseCase4
+#UseCase5
+@NDX-Bi_UseCases   @initBrowser
+Scenario: Create BI UseCases report for use cases Verification
+Given login
+Then navigate to precision marketer
+Then navigate to analytics
+Then navigate to Business Intelligence
+Then click create New Worksheet
+Then create BI Use CaseReport from sheet "UseCase1" and "Auto" as Time Range
+
+
+###::::::::::::::::::::::::::::::::::::::::::::Verification Scenarios::::::::::::::::::::::::::::::::::::::::::::::::
+############
+############
+############
+############
+###::::::::::::::::::::::::::::::::::::::::::::Verification Scenarios::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 
 @NDX-20897   @initBrowser  @closeBrowser
@@ -339,6 +395,75 @@ Examples:
 		|Ack        |      7000|
 		|conversion |      9990|
 		|fulfillment|      9500|
+
+
+
+
+@NDX-20867 @NDX-20870   @initBrowser  @closeBrowser
+Scenario Outline: verify Data for Report of create custom calculation 
+Given login
+Then navigate to precision marketer
+Then navigate to analytics
+Then navigate to Business Intelligence
+Then filter the Bi sheet from "calcReport" using excel sheet
+Then wait for "R" status for worksheet
+Then click on BiSheet from "calcReport" sheet
+Then verify Aggregated data of header "<formulaHeader>" with "<value>" as value
+Examples:
+        |formulaHeader|   value |
+	    |TotalConversion%|1598  |
+	    |UniqueConversion%|1500 |
+	    |fulfillment%     | 1500|
+
+
+
+
+@NDX-20890  @NDX-20818    @initBrowser @closeBrowser
+Scenario Outline: verify Data for Grouping of Broadcast Names Campaigns with Internal filter
+Given login
+Then navigate to precision marketer
+Then navigate to analytics
+Then navigate to Business Intelligence
+Then filter the Bi sheet from "<BiSheet>" using excel sheet
+Then wait for "R" status for worksheet
+Then click on BiSheet from "<BiSheet>" sheet
+Then verify GroupData "<BiSheet>" and Case "<CaseName>" Events "<Ack>" conversion "<conversion>" and "<fulfillment>" fulfillment 
+Examples:
+|BiSheet|CaseName|Ack|conversion|fulfillment|
+#
+|GrpBcRpt|BcNameOneOff|2500|2500|2500|
+|GrpBcRpt|BcNameRecur |2000|2000|2000|   
+|GrpBcRpt|BcNameSeed  |2500|2500|2500|
+#
+|GrpBcOther|BcNameOneoff|2500|2500|2500|
+|GrpBcOther|BcNameOther |4500|4500|4500|
+#
+|GrpCamp|CampNameOneOff|2500|2500|2500|
+|GrpCamp|CampNameRecur |2000|2000|2000|
+|GrpCamp|CampNameSeed  |2500|2500|2500|
+#
+|GrpCampOther|CampNameOneoff|2500|2500|2500|
+|GrpCampOther|CampNameOther |4500|4500|4500|
+
+
+
+@NDX-12392   @initBrowser  @closeBrowser
+Scenario: Verify creation of Report by selecting Custom Event as Header
+Given login
+Then navigate to precision marketer
+Then navigate to analytics
+Then navigate to Business Intelligence
+Then filter the Bi sheet from "CustomEventSheet" using excel sheet
+Then wait for "R" status for worksheet
+Then click on BiSheet from "CustomEventSheet" sheet
+Then Verify Custom Event "CustomEvent" with value "100" for Custom Event Report
+
+
+
+
+
+
+
 
 
 

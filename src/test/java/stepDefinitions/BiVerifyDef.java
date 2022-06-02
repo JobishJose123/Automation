@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+
 import baseClasses.ExcelHelper;
 import baseClasses.Init;
 import baseClasses.JSWaiter;
@@ -181,9 +182,44 @@ public class BiVerifyDef extends Init {
 		else if (sheetName.equals("calcReport")) {
 			biverifyobject.create_custom_CalculationReport(reportName, timeRange);
 		}
+		else if (sheetName.equals("CustomEventSheet")) {
+			biverifyobject.create_CustomEvent_Report(reportName, timeRange);
+		}
 		
 		
 	}
+	
+	@Then("^create BI Group report from sheet \"([^\"]*)\" and \"([^\"]*)\" as Time Range$")
+	public void create_BI_Group_report_from_sheet_and_as_Time_Range(String sheetName, String timeRange) throws Throwable { 
+		String reportName;
+		ex.setExcelFile("BiVerify", sheetName);
+		reportName=(String) ex.getCell(1,0);
+		reportName = RandomNameGenerator.getRandomName(reportName);
+		ex.setCell(1, 0, reportName);
+		System.out.println("Report_Name:: " + reportName);
+		
+		if (sheetName.equals("GrpBcRpt")) {
+			biverifyobject.create_Group_BCName_Report(reportName, timeRange);
+		}
+		else if (sheetName.equals("GrpBcOther")) {
+			biverifyobject.create_Group_BCName_Other(reportName, timeRange);
+		}
+		else if (sheetName.equals("GrpCamp")) {
+			biverifyobject.create_Group_CampaignName(reportName, timeRange);
+		}
+		else if (sheetName.equals("GrpCampOther")) {
+			biverifyobject.create_Group_campOther(reportName, timeRange);
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@Then("^verify data of \"([^\"]*)\" for \"([^\"]*)\" type report$")
 	public void verify_data_of_for_type_report(String dataHeader, String reportType) throws Throwable {
@@ -230,14 +266,87 @@ public class BiVerifyDef extends Init {
 	}
 	
 	
+	
+	@Then("^verify GroupData \"([^\"]*)\" and Case \"([^\"]*)\" Events \"([^\"]*)\" conversion \"([^\"]*)\" and \"([^\"]*)\" fulfillment$")
+	public void verify_GroupData_and_Case_Events_conversion_and_fulfillment(String sheetName, String CaseType, String Ack, String conversion, String fulfillment) throws Throwable {
+	   
+		boolean caseStatus=false;
+		
+		if (sheetName.equals("GrpBcRpt") && CaseType.equals("BcNameOneOff")) {
+			caseStatus = biverifyobject.get_Status_Of_BcNameOneOff("Grp1OneOff", Ack, conversion, fulfillment);
+		}
+		else if (sheetName.equals("GrpBcRpt") && CaseType.equals("BcNameRecur")) {
+			caseStatus = biverifyobject.get_Status_of_BcNameRecur("Grp2Recur", Ack, conversion, fulfillment);
+		}
+		else if (sheetName.equals("GrpBcRpt") && CaseType.equals("BcNameSeed")) {
+			caseStatus = biverifyobject.get_Status_of_BcNameSeed("Grp3Seed", Ack, conversion, fulfillment);
+		}
+		
+		else if (sheetName.equals("GrpBcOther") && CaseType.equals("BcNameOneoff")) {
+			caseStatus = biverifyobject.get_Status_Of_BcNameOneOff("Grp1OneOff", Ack, conversion, fulfillment);
+		}
+		else if (sheetName.equals("GrpBcOther") && CaseType.equals("BcNameOther")) {
+			caseStatus = biverifyobject.get_Status_of_BcNameOther("Grp2SelOther", Ack, conversion, fulfillment);
+		}
+		
+		else if (sheetName.equals("GrpCamp") && CaseType.equals("CampNameOneOff")) {
+			caseStatus = biverifyobject.get_Status_of_CampName_Oneoff("Grp1CampOneoff", Ack, conversion, fulfillment);
+		}
+		else if (sheetName.equals("GrpCamp") && CaseType.equals("CampNameRecur")) {
+			caseStatus = biverifyobject.get_Status_of_CampName_Recur("Grp2CampRecur", Ack, conversion, fulfillment);
+		}
+		else if (sheetName.equals("GrpCamp") && CaseType.equals("CampNameSeed")) {
+			caseStatus = biverifyobject.get_Status_of_CampName_Seed("Grp3CampSeed", Ack, conversion, fulfillment);
+		}
+		
+		else if (sheetName.equals("GrpCampOther") && CaseType.equals("CampNameOneoff")) {
+			caseStatus = biverifyobject.get_Status_of_CampName_Oneoff("Grp1CampOneoff", Ack, conversion, fulfillment);
+		}
+		
+		else if (sheetName.equals("GrpCampOther") && CaseType.equals("CampNameOther")) {
+			caseStatus = biverifyobject.get_Status_of_CampNameOther("Grp2CampOther", Ack, conversion, fulfillment);
+		}
+
+		Assert.assertTrue(caseStatus);
+		
+	}
+	
 		
 		
+	@Then("^Verify Custom Event \"([^\"]*)\" with value \"([^\"]*)\" for Custom Event Report$")
+	public void verify_Custom_Event_with_value_for_Custom_Event_Report(String customEvent, String value) throws Throwable {
+	   
+		Thread.sleep(2000);
+		WebElement agregateElement = driver.findElement(
+				By.xpath("//div[@class='paper-carousel_wrapper style-scope paper-carousel']/div[contains(.,'"
+						+ customEvent + "')]/div[2]"));
 		
+		boolean status = biverifyobject.getAgregate_DataStatus(agregateElement,value);
+		if (status == false) {
+			System.out.println("::::::!!!!!!!!Custom Event Test Case has failed!!!!!!!!:::::::");
+			System.out.println("Expected Custom Event Value:: " + value);
+			System.out.println("Actual found Custom Event Value:: " + agregateElement.getAttribute("title"));
+		}
+		Assert.assertTrue(status);
+	}
+	
 		
+	@Then("^create BI Use CaseReport from sheet \"([^\"]*)\" and \"([^\"]*)\" as Time Range$")
+	public void create_BI_Use_CaseReport_from_sheet_and_as_Time_Range(String sheetName, String timeRange)
+			throws Throwable {
+
+		String reportName;
+		ex.setExcelFile("BiVerify", sheetName);
+		reportName = (String) ex.getCell(1, 0);
+		reportName = RandomNameGenerator.getRandomName(reportName);
+		ex.setCell(1, 0, reportName);
+		System.out.println("Report_Name:: " + reportName);
 		
-		
-			
-		
+		if (sheetName.equals("UseCase1")) {
+			biverifyobject.create_UseCase1_Report(reportName, timeRange);
+		}
+
+	}
 		
 		
 	
