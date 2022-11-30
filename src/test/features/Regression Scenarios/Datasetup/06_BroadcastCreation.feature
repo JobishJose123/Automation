@@ -15,7 +15,7 @@ Then navigate to control group settings page
 Then change partner control group settings
 Then wait for 2 minutes
 
-@NDX-CreateOfferForBCFunctionality  @initBrowser  @closeBrowser
+@NDX-CreateOfferForBCFunctionality  @initBrowser  
 Scenario Outline: create offer
 Given login
 Then navigate to precision marketer
@@ -24,18 +24,20 @@ Then navigate to offers
 Then create new offer from sheet "<offerName>" with product "fullDetails" rewards "oneruleonereward" with creative type "<creativeType>" 
 Examples:
 |offerName|creativeType|
-|rechargeSMS|multiplecreative|
-|rechargeWAP|singlecreative|
-|rechargeEmail|singlecreative|
-|rechargeSMS_Dynamic|singlecreative|
-|SeedingSMS|multiplecreative|
-|seedingWAPoffer|singlecreative|
-|seedingEmail|singlecreative|
-|SeedingSMS_Dynamic|singlecreative|
-|ReminderOffer|singlecreative|
+#|rechargeSMS|multiplecreative|
+#|rechargeWAP|singlecreative|
+#|rechargeEmail|singlecreative|
+#|rechargeSMS_Dynamic|singlecreative|
+#|SeedingSMS|multiplecreative|
+#|seedingWAPoffer|singlecreative|
+#|seedingEmail|singlecreative|
+#|SeedingSMS_Dynamic|singlecreative|
+#|ReminderOffer|singlecreative|
+|InformationalSMS|singlecreative|
 
 
-@CreateOfferCatalog11 @initBrowser @closeBrowser
+
+@CreateOfferCatalog11 @initBrowser 
 Scenario: Verify Creating Offer Catalogue 
 Given login
 When navigate to precision marketer
@@ -43,15 +45,16 @@ Then wait for 1 minutes
 Then navigate to offer management
 Then Navigate to Offer Catalogue
 Then Create New Offer Catalogue from sheet "defaultCatalog"
-Then Add "rechargeSMS" offer to Offer Catalogue
-Then Add "SeedingSMS" offer to Offer Catalogue
-Then Add "rechargeWAP" offer to Offer Catalogue
-Then Add "seedingWAPoffer" offer to Offer Catalogue
-Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue
-Then Add "seedingEmail" offer to Offer Catalogue
-Then Add "rechargeEmail" offer to Offer Catalogue
-Then Add "rechargeSMS_Dynamic" offer to Offer Catalogue
-Then Add "ReminderOffer" offer to Offer Catalogue
+#Then Add "rechargeSMS" offer to Offer Catalogue
+#Then Add "SeedingSMS" offer to Offer Catalogue
+#Then Add "rechargeWAP" offer to Offer Catalogue
+#Then Add "seedingWAPoffer" offer to Offer Catalogue
+#Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue
+#Then Add "seedingEmail" offer to Offer Catalogue
+#Then Add "rechargeEmail" offer to Offer Catalogue
+#Then Add "rechargeSMS_Dynamic" offer to Offer Catalogue
+#Then Add "ReminderOffer" offer to Offer Catalogue
+Then Add "InformationalSMS" offer to Offer Catalogue
 Then navigate to landing page
 Then navigate to configuration management
 Then navigate to campaign categories
@@ -270,17 +273,6 @@ Then wait for 4000 milliseconds
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 #/////////////////////////////////   FACEBOOK BC ////////////////////////////////////////
 
 @NDX-CreatefacebookOffer  @initBrowser 
@@ -326,8 +318,37 @@ Examples:
 #|recurringBC|carouselvideoFacebook|4|
 
 
-#=====================================================================================================================================#
+#==================================================================#
+#Informational BC
+#1 - run @NDX-CreateOfferForBCFunctionality (Create Offer)
+#2 - Run @CreateOfferCatalog11 (Create Catalog)
 
+@CreateOneOff-Informational @initBrowser 
+Scenario Outline:: CreateOneOff-Informational
+Given login 
+Then navigate to precision marketer 
+Then wait for 1 minutes
+Then navigate to life cycle marketing 
+Then navigate to campaign category from sheet "CampaignCategory" 
+Then naigate to "campaignBC" campaign view broadcasts 
+Then click create new broadcast button
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "none"
+Then enter target tab details target condition targetall type "None" TG "no limit" CG "no limit" DNC "both"
+Then enter choose offer tab from sheet "<offerName>" for bc from sheet "<bcSheet>"
+Then enter deliver tab with end "<endType>" target render time "realTime" and broadcast expiry as "<expiryType>" from sheet "<bcSheet>"
+Then "<status>" bc
+Then wait for 4000 milliseconds 
+Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataSheet>"
+ Examples:
+|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|status|BCDataSheet|                  
+|Informational-OneOffBC|InformationalSMS|customerList|Create|no limit|no limit|none|single creative|none|at|1|activate|BCDataStorage|
+
+#==================================================================================================================================
+
+
+
+
+#==================================================================================================================================
 
 
 #  @NDX-oneOffBcForDataSetup @NDX-4887
@@ -698,4 +719,3 @@ Examples:
 #Then save bc
 #Then save "bcInputData" data to spreadsheet from "recurringMonthBC" with string Joel Test-recurring bc with monthly recurring
 #=====================================================================================================================================#
-

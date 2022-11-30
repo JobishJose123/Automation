@@ -588,8 +588,8 @@ public class BroadcastSteps extends Init {
 					}
 
 				}
-
-				jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+//modified recurcion default timr xpath
+				jswait.loadClick("//div//label[contains(.,'Default Start Time')]");
 				Thread.sleep(2000);
 				jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
 				num = driver.findElement(By.xpath(
@@ -670,7 +670,7 @@ public class BroadcastSteps extends Init {
 
 				}
 
-				jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+				jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Default Start Time')]/..//input");
 				Thread.sleep(2000);
 				jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
 				num = driver.findElement(By.xpath(
@@ -776,7 +776,7 @@ public class BroadcastSteps extends Init {
 				}
 
 			}
-			jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+			jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Default Start Time')]/..//input");
 			Thread.sleep(2000);
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
 			num = driver.findElement(By.xpath(
@@ -1291,7 +1291,7 @@ public class BroadcastSteps extends Init {
 			Thread.sleep(1000);
 			jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input", "1");
 			Thread.sleep(1000);
-			jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+			jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Default Start Time')]/..//input");
 			Thread.sleep(2000);
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
 			num = driver.findElement(By.xpath(
@@ -2323,7 +2323,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 			Thread.sleep(1000);
 			jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input", "1");
 			Thread.sleep(1000);
-			jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+			jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Default Start Time')]/..//input");
 			Thread.sleep(2000);
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
 			num = driver.findElement(By.xpath(
@@ -3690,6 +3690,15 @@ public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_track_session_ex
 	broadcastPageObjects.selectOffer(offerSheet,bc_type,creative,trackExpires,filterCriteria,giveRewardsTo);
 
 }
+@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\"$")
+public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet(String offerSheet, String bcSheet) throws Throwable {
+	
+	eM.setExcelFile("bcInputData", bcSheet);
+	String bc_type = (String) eM.getCell(1, 7);
+	broadcastPageObjects.selectOffer(offerSheet,bc_type);
+}
+    
+
 
 @Then("^enter deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
 public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {

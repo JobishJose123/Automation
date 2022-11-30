@@ -1,12 +1,13 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer creation for regression data setup
+#Total Scenario : 18
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
 @NDX-AllOffer_datasetup
 Feature: Test suite on Offer creation
   Create all types of offers
 
        
- @NDX-5165 @initBrowser  @testusage 
+ @NDX-5165 @initBrowser  @testusage @closeBrowser  
   Scenario: Verify the Create offer using WAP Push Channel and Recharge offer Type 
     Given login
     Then navigate to precision marketer
@@ -147,7 +148,7 @@ Feature: Test suite on Offer creation
  		Then save "offerInputData" data to spreadsheet from "usageBasedSMS" with string usageBasedSMS offer with fullDetails product
  		
  		@NDX-rechargeEmail
-   @initBrowser @closeBrowser
+   @initBrowser 
    Scenario: rechargeEmail offer
      Given login
  		When navigate to precision marketer
@@ -192,7 +193,7 @@ Feature: Test suite on Offer creation
  
  
  @NDX-reminderOffer
-   @initBrowser @closeBrowser
+   @initBrowser
    Scenario: create reminder offer
      Given login
  		When navigate to precision marketer

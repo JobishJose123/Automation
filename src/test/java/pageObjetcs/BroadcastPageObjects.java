@@ -24,6 +24,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import java.io.BufferedReader;
@@ -124,7 +125,7 @@ public class BroadcastPageObjects extends Init {
 	private WebElement targetConditionNoneOption;
 	@FindBy(xpath = "//offer-form//paper-button[contains(.,'Proceed')]")
 	private WebElement offerPopUpProceedButton;
-	@FindBy(xpath = ".//label[contains(.,'Base Lists')]/../input")
+	@FindBy(xpath = ".//label[contains(.,'Base List')]/../input")
 	private WebElement baseListSelector;
 	@FindBy(xpath = ".//paper-button[contains(.,'Target Group')]")
 	private WebElement TGConfigure;
@@ -179,10 +180,20 @@ public class BroadcastPageObjects extends Init {
 	private WebElement defineCGSize;
 	@FindBy(xpath = ".//*[@id='offerDetailForm']//paper-input-wrapper//input")
 	private WebElement trackSession2Days;
-	@FindBy(xpath = ".//label[contains(.,'Sender ID: Broadcast')]/../input")
+	@FindBy(xpath = "//label[contains(.,'Sender ID: Fulfillment success or failure message would appear from this ID')]/../input")
 	private WebElement senderIdBroadcastSelector;
 	@FindBy(xpath = ".//label[contains(.,'Sender ID: Fulfillment')]/../input")
 	private WebElement senderIdFulfillmentSelector;
+	
+	///////InformationalBC - Choose offer address//////
+	@FindBy(xpath = "//label[contains(.,'Sender ID: Broadcast message would appear from this ID')]")
+	private WebElement senderIdBroadcastSelector1;
+	@FindBy(xpath = ".//label[contains(.,'Route over which this broadcast can be sent')]/../input")
+	private WebElement routeBroadcast1;
+	
+	///////////////////////////////////////////////
+	
+	
 	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'" + SENDER_SMPP + "')]")
 	private WebElement senderIdBroadcastAdressSmpp;
 	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'" + SENDER_EMAIL + "')]")
@@ -607,6 +618,9 @@ public class BroadcastPageObjects extends Init {
 		
 		@FindBy(xpath="//paper-item[contains(.,'Email_q11')]")
 		private WebElement emailprofileselectclick;
+		
+		@FindBy(xpath="//label[contains(.,'Triggers')]/../input")
+		private WebElement triggerclick;
 		
 		
 		
@@ -1594,7 +1608,7 @@ public boolean checkCalculateBtnDisplayed() {
 		Thread.sleep(1000);
 		jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input", "1");
 		Thread.sleep(1000);
-		jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Start broadcasts at')]/..//input");
+		jswait.loadClick("//*[@id='deliver-card']//label[contains(.,'Default Start Time')]/..//input");
 		Thread.sleep(2000);
 		jswait.loadClick(
 				"//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/paper-input[1]//div");
@@ -1690,7 +1704,8 @@ public boolean checkCalculateBtnDisplayed() {
 			System.out.println("inside triggerable");
 //			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(1000);
-			jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
+			jswait.loadSendKeys(triggerclick, TRIGGER );
+			//jswait.loadClick("//label[contains(.,'Triggers')]/../../iron-icon");
 			Thread.sleep(2000);
 			jswait.loadClick("//paper-item[contains(.,'" + TRIGGER + "')]");
 			Thread.sleep(1500);
@@ -3477,8 +3492,13 @@ public boolean checkCalculateBtnDisplayed() {
 			
 		}
 		if (!bc_type.contains("Informational")) {
-			selectTrackSession(trackExpires);
+			System.out.println("IM inside if condition");
+				selectTrackSession(trackExpires);
 			selectTrackingSource();
+			
+			
+			
+	
 //		    selectFiletrCriteria(filterCriteria);
 //			selectGiveRewardsTo(giverRewardsTo);
 			
@@ -3502,6 +3522,36 @@ public boolean checkCalculateBtnDisplayed() {
 		}
 		clickProceedButton();
 	}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	public void selectOffer(String offerSheet, String bc_type) throws Exception{
+		ExcelHelper offerExcel=new ExcelHelper();
+		offerExcel.setExcelFile("offerInputData", offerSheet);
+		String offerName = offerExcel.getCellByColumnName("Offer Name");
+		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
+	
+			
+		
+	
+			System.out.println("IM inside if condition");
+			Select select = new Select(senderIdBroadcastSelector1);
+			select.selectByVisibleText(SENDER_SMPP);
+				jswait.loadClick(senderIdBroadcastSelector1);
+				System.out.println("click click click");
+			jswait.loadSendKeys(senderIdBroadcastSelector1, SENDER_SMPP);
+			Thread.sleep(2000);
+			jswait.loadClick(senderIdBroadcastAdressSmpp);
+			Thread.sleep(1000);
+			jswait.loadSendKeys(routeBroadcast1, ROUTE_SMPP);
+			Thread.sleep(2000);
+
+			
+
+			clickProceedButton();
+	}
+	/////////////////////////////////////////////////////////////////////////
+	
+	
 	public void selectOffer(String offerSheet,String bc_type,String connectorSheet) throws Exception{
 		ExcelHelper offerExcel=new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offerSheet);
@@ -3522,6 +3572,8 @@ public boolean checkCalculateBtnDisplayed() {
 		jswait.loadClick(".//label[contains(.,'Route over which Fulfillment')]/following::vaadin-combo-box-item[contains(.,'"+connector+"')]");
 		clickProceedButton();
 	}
+	
+	
 	
 	public void selectCopiedOffer(String offerSheet, String bc_type,String creative,String trackExpires,String filterCriteria,String giverRewardsTo) throws Exception{
 		ExcelHelper offerExcel=new ExcelHelper();

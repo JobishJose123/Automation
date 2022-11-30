@@ -245,6 +245,12 @@ public class CommonSteps extends Init {
 //		jswait.loadClick(offerManagement);
 		campaignObjects.offerManagement();
 	}
+	@Then("^navigate to offer management through Top tag$")
+	public void navigate_to_offer_management_through_Top_tag() throws Throwable {
+	 
+		campaignObjects.offermanagementTopTag();
+	}
+
 	@Then("^wait for some time")
 	public void waitForSomeTime() throws InterruptedException {
 		Thread.sleep(5000);
