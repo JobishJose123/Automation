@@ -1,5 +1,6 @@
 #Author:shobina.k@flytxt.com
 #Feature:Before executing this feature make sure to execute @IntentManagement.feature, @BroadcastManagement.feature
+#Total scenario: 8
 @NDX-Report
 Feature: Program Report Verfication (Regression)                  
 #

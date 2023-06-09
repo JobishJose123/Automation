@@ -16,7 +16,8 @@
 ##""
 ### (Comments)
 ##Sample Feature Definition Template
-#@Broadcast_EditDataVerification_Regression
+#Total scenario : 130
+@Broadcast_EditDataVerification_Regression
 Feature: Test suite for Broadcast Editing
 #  Editing all types of Braodcast
 ## 

@@ -1,8 +1,11 @@
 #Author : kiran.joseph@flytxt.com
+#Total Scenario : 60
 @BIworksheetfeature01
 Feature: Business Intelligence
 
+
 ########################BI worksheetfeature feature ###########
+
 @ndx-BIoutbound @NDX-12375 @NDX-12376 @NDX-12377 @NDX-12378 @NDX-12379 @NDX-12380 @NDX-12435 @initBrowser 
 Scenario: create new worksheet for outbound.
 Given login
@@ -41,7 +44,7 @@ Then save the BI sheet
 Then filter the BI worksheet for status check from sheet "BIworksheetoffersproducts"
 Then wait until BI worksheet status is changed to "R"
 
-@ndx-BIevents @NDX-12402 @NDX-12403 @NDX-12404 @NDX-12405 @NDX-12406 @NDX-12410 @NDX-12411 @NDX-12412 @NDX-12413 @NDX-12414  @initBrowser @closeBrowser
+@ndx-BIevents @NDX-12402 @NDX-12403 @NDX-12404 @NDX-12405 @NDX-12406 @NDX-12410 @NDX-12411 @NDX-12412 @NDX-12413 @NDX-12414  @initBrowser 
 Scenario: create new worksheet for Events.
 Given login
 When navigate to precision marketer
@@ -114,7 +117,7 @@ Scenario: BC attribute creation.
 Given login
 Then navigate to configuration management
 Then navigate to broadcast Attributes
-Then create new broadcast Attributes "b_attribute"
+Then create new broadcast Attributes "b_attributes"
 
 
 
@@ -252,7 +255,7 @@ Examples:
 |SelBiMetric3|
 |SelBiMetric4|
 
- @customEvent_BI   @initBrowser  @closeBrowser
+ @customEvent_BI   @initBrowser  
 Scenario: Creating custom Event for Bi Report Verification
 Given login
 Then navigate to data foundation
@@ -325,7 +328,7 @@ Then navigate to landing page
 # with the same Location
 
 
-@NDX-Bi_offers_BI   @initBrowser @closeBrowser
+@NDX-Bi_offers_BI   @initBrowser 
 Scenario Outline: create offers with Attribute for Bi verification
 Given login
 Then navigate to precision marketer
@@ -352,6 +355,7 @@ Then navigate to landing page
 
 
 
+#Will select already existing catalog or If error occur run Catalog code
 
 @NDX-category_BI  @initBrowser  @closeBrowser
 Scenario: create campaign category for BI Broadcasts only
@@ -363,8 +367,8 @@ Then create New Campaign Category from sheet "BiCategory" for BI
 
 
 
-
-@NDX-campaigns_BI    @initBrowser @closeBrowser
+#If category not created campaign will added to last created category
+@NDX-campaigns_BI    @initBrowser
 Scenario Outline: Create Campaigns for OneOff Recurring Seeding Broadcasts
  Given login
  Then navigate to precision marketer
@@ -380,7 +384,7 @@ Examples:
 
 
 
-@NDX-OneOffBc_BI @initBrowser  @closeBrowser
+@NDX-OneOffBc_BI @initBrowser  
 Scenario Outline: create OneOff Broadcasts for Bi Report Verification 
 Given login 
 Then navigate to precision marketer 
@@ -413,11 +417,11 @@ Examples:
 # Recurring BC run for only Two Days.
 #
 
- @NDX-RecurBc_BI    @initBrowser  @closeBrowser
+ @NDX-RecurBc_BI    @initBrowser  
 Scenario Outline: create Recurring Broadcasts for Bi Report Verification 
 Given login 
 Then navigate to precision marketer 
-Then wait for 1 minutes 
+#Then wait for 1 minutes 
 Then navigate to life cycle marketing 
 Then Navigate to Bi campaign Category from sheet "BiCategory" 
 Then Navigate to "campaignRecur" View Broadcast
@@ -460,7 +464,7 @@ Examples:
  Scenario Outline: create seeding Broadcasts for Bi Report Verification 
  Given login 
 Then navigate to precision marketer 
-Then wait for 1 minutes 
+#Then wait for 1 minutes 
 Then navigate to life cycle marketing 
 Then Navigate to Bi campaign Category from sheet "BiCategory"
 Then Navigate to "campaignSeeding" View Broadcast
@@ -468,7 +472,7 @@ Then click create new broadcast button
 Then input details Tab "<BcSheet>" with inventory "Unlimited" Attribute value "<attributeValue>" and triger "none"
 Then input Target Tab with customerList "selenium_BiList" and TG "none" CG "none" DNC "none"
 Then input offer from Sheet "biSeedOffer" with filter Criteria "ruleBased" and Give Rewards to "Unique Conversion"
-Then input Deliver Tab from sheet "<BcSheet>" with end Type as "none" 
+Then input Deliver Tab from sheet "<BcSheet>" with end Type as "oneoff" 
 Then activate bc
 Then wait for Status of Bc "<BcSheet>" is "Completed"
 Then wait for 1 minutes
@@ -478,7 +482,6 @@ Examples:
 |BcSheet|attributeValue|
 |SeedingBcA| 30        |
 |SeedingBcB| 30        |
-|SeedingBcC| 30        |
 |SeedingBcD| 30        |
 |SeedingBcE| 30        |
 
@@ -549,7 +552,7 @@ Then input Schedule Tab start date "Now" and End Date "No End" refresh Cycle "Da
 #:::In Schedule Step if End Date "At" refresh.....The Rule will end After 1 Days 
 #:::
 ######
-@NDX-rule_BI   @initBrowser  @closeBrowser
+@NDX-rule_BI   @initBrowser  
 Scenario: create rule for Bi report Regression
 Given login
 Then navigate to intent management

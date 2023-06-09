@@ -1,6 +1,6 @@
 #Author:shobina.k@flytxt.com
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature and @OfferCatalogueDataSetup.feature
-
+#Total scenario: 4
 @NDX-OfferCatalogVerification_Migration
 Feature: Verification of Offer Catalogue(Migration)
 

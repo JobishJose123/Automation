@@ -1,13 +1,15 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer and offer catelogue for regression data setup
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
-
+#Total scenarios : 20
 @Dashboard_datasetup
 Feature: Test suite Dashboard_data setup
   Create all types of BC for dashboard
+  
+  
 #=============================================================================================================#
-  @CapaignCatagory1_Campaign1_AllBC 
-  @initBrowser @closeBrowser
+
+  @CapaignCatagory1_Campaign1_AllBC @initBrowser @closeBrowser
   Scenario: Verify Creating CapaignCatagory1 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to configuration management
@@ -71,8 +73,9 @@ Feature: Test suite Dashboard_data setup
     Then activate bc 
     Then save details of datasetup
    #------------------------------------------------------------------------------------------------------------------------------------# 
-      @CapaignCatagory1_Campaign2_AllBC
-  @initBrowser 
+   
+   
+    @CapaignCatagory1_Campaign2_AllBC @initBrowser 
   Scenario: Verify Creating CapaignCatagory1 with Campaign2 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -132,8 +135,7 @@ Feature: Test suite Dashboard_data setup
     Then activate bc 
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
-      @CapaignCatagory1_Campaign3_AllBC
-  @initBrowser @closeBrowser  
+     @CapaignCatagory1_Campaign3_AllBC @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign3 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -193,8 +195,8 @@ Feature: Test suite Dashboard_data setup
     Then activate bc 
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
-      @CapaignCatagory1_Campaign4_AllBC
-  @initBrowser @closeBrowser  
+     
+      @CapaignCatagory1_Campaign4_AllBC @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign4 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -254,8 +256,8 @@ Feature: Test suite Dashboard_data setup
     Then activate bc 
     Then save details of datasetup
        #------------------------------------------------------------------------------------------------------------------------------------# 
-      @CapaignCatagory1_Campaign5_AllBC
-  @initBrowser @closeBrowser  
+    
+      @CapaignCatagory1_Campaign5_AllBC @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -316,8 +318,7 @@ Feature: Test suite Dashboard_data setup
     Then save details of datasetup
     
     #=============================================================================================================#
-  @CapaignCatagory2_Campaign1_AllBC
-  @initBrowser @closeBrowser  
+  @CapaignCatagory2_Campaign1_AllBC @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory2 with Campaign1 and 8typeofBC's 
     Given login
     Then navigate to configuration management
@@ -381,8 +382,8 @@ Feature: Test suite Dashboard_data setup
     Then activate bc 
     Then save details of datasetup
    #------------------------------------------------------------------------------------------------------------------------------------# 
-      @CapaignCatagory2_Campaign2_AllBC
-  @initBrowser @closeBrowser  
+   
+      @CapaignCatagory2_Campaign2_AllBC @initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory2 with Campaign2 and 8typeofBC's 
     Given login
     Then navigate to precision marketer
@@ -811,9 +812,9 @@ Feature: Test suite Dashboard_data setup
     Then enter details for new broadcast with condition groupIdCondition_125  from sheet "TriggerReccurringBC" with "rechargeSMS"
     Then activate bc 
     Then save details of datasetup
-       #------------------------------------------------------------------------------------------------------------------------------------# 
-      @CapaignCatagory3_Campaign4_AllBC
-  @initBrowser @closeBrowser  
+       #------------------------------------------------------------------------------------------------------------------------------------#
+        
+  @CapaignCatagory3_Campaign4_AllBC@initBrowser @closeBrowser  
   Scenario: Verify Creating CapaignCatagory1 with Campaign4 and 8typeofBC's 
     Given login
     Then navigate to precision marketer

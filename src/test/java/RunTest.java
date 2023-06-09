@@ -44,7 +44,8 @@ import cucumber.api.java.en.Then;
         features = { "src/test/features"},
 		glue = {"classpath:"},
 		dryRun = false,
-		tags = {"@NDX-CreateEmailbcoption3"},
+		tags = {"@NDX-7144"},
+		
 		plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:output/report.html",
         "html:target/81", "json:target/81/cucumber.json",

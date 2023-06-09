@@ -118,7 +118,7 @@ public class SegmentAnalysisObjects extends Init {
 	
 	@FindBy(xpath=".//*[@id='kpiForm']//label[contains(.,'KPI Name')]//../input")
 	private WebElement KpiName ;
-	@FindBy(xpath=".//*[@id='kpiForm']//label[contains(.,'KPI Description')]//../input")
+	@FindBy(xpath=".//*[@id='kpiForm']//label[contains(.,'Description')]//../input")
 	private WebElement KpiDesc;
 	@FindBy(xpath=".//*[@id='kpiForm']//label[contains(.,'Attribute Type')]//../input")
 	private WebElement KpiAttributetype;
@@ -392,7 +392,7 @@ private WebElement savedSegmentSelectorField;
 
 	
 	
-	@FindBy(xpath="//paper-button[contains(.,'Save')][@class='style-scope microsegments-list x-scope paper-button-0']")
+	@FindBy(xpath="//paper-button[contains(.,'Save')][@class='style-scope cross-tab x-scope paper-button-0']")
 	private WebElement MicroSegmentSavebtn;
 	
 	
@@ -1269,10 +1269,10 @@ public void clustertabledetailsandsave() throws Exception {
 	   jswait.loadClick(RefreshCrossTabbtn);
 	   Assert.assertTrue(driver.findElement(By.xpath("//p[@class='cross-tab style-scope'][contains(.,'SelCrossTab')]")).isDisplayed());
 	   jswait.loadClick(CreatedCrossTabName);
-	   CrossTabTable.isDisplayed();
-//	   jswait.loadClick(MicroSegmentSavebtn);
-//	   jswait.loadClick(SaveAnalysisBtn);
-//		
+	   //CrossTabTable.isDisplayed();
+	   jswait.loadClick(MicroSegmentSavebtn);
+	   jswait.loadClick(SaveAnalysisBtn);
+		
 	   	    }
    
    

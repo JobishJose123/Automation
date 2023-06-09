@@ -37,10 +37,11 @@ public class CampaignObjects extends Init{
 	@FindBy(xpath="//label[contains(text(),'Life-Cycle Marketing')]")
 	private WebElement lifeCycleMarketing;
 	
-//	@FindBy(xpath="//label[contains(text(),'Offer Management')]")
-//	private WebElement offerManagement;
+	@FindBy(xpath="(//*[contains(text(),'Offer Management')]//parent::*//following::hexagon-icon[5])[1]")
+	private WebElement offerManagement1;
 	@FindBy(xpath="(//*[contains(text(),'Offer Management')]//parent::*//following::iron-icon[4])[1]")
 	private WebElement offerManagement;
+	
 	@FindBy(xpath="//paper-item[contains(.,'Export to Location')]")
 	private WebElement optionsExportToLocation;
 	@FindBy(xpath="//paper-item[contains(.,'View Broadcasts')]")
@@ -355,10 +356,14 @@ public class CampaignObjects extends Init{
 	private WebElement proceedbtn;
 	@FindBy(xpath="//paper-button[contains(.,'Save')][3]")
 	private WebElement Savebtn ;
-//	@FindBy(xpath="")
-//	private WebElement ;
-//	@FindBy(xpath="")
-//	private WebElement ;
+	
+	
+	//Jobish
+	
+@FindBy(xpath="//flytxt-breadcrumb//paper-button[contains(.,\"Offer Management\")]")
+private WebElement OffermanagemnetTopTag;
+@FindBy(xpath="//flytxt-breadcrumb//paper-button[@class ='current style-scope flytxt-breadcrumb x-scope paper-button-0']")
+private WebElement campaignCategoryTopTag;
 //	@FindBy(xpath="")
 //	private WebElement ;
 //	@FindBy(xpath="")
@@ -389,6 +394,9 @@ public class CampaignObjects extends Init{
 		jswait.loadClick(optionsshowhistory);
 	}
 	
+	public void campaigncategoryTopTag() throws InterruptedException {
+		jswait.loadClick(campaignCategoryTopTag);
+	}
 	
 	
 	
@@ -427,7 +435,20 @@ public class CampaignObjects extends Init{
 		
 	}
 	public void offerManagement() throws InterruptedException {
+		
 		jswait.loadClick(offerManagement);
+	
+	}
+	
+public void offerManagementback() throws InterruptedException {
+		
+		jswait.loadClick(offerManagement1);
+	
+	}
+	
+	public void offermanagementTopTag()  throws InterruptedException 
+	{
+	jswait.loadClick(OffermanagemnetTopTag);
 	}
 	
 	public void clickCreateCampaignTemplateButton() throws InterruptedException {
@@ -823,7 +844,7 @@ public class CampaignObjects extends Init{
 		System.out.println(attributename+" is available");
 	}
 	catch(Exception e) {
-		jswait.loadClick("//paper-button[text()='Create New Prioritization Logic']");
+		jswait.loadClick("//paper-button[text()='Create New Campaign Attribute']");
 		jswait.loadSendKeys("(//label[text()='Name'])[2]//following::input[1]", attributename);
 		jswait.loadSendKeys("(//label[text()='Label'])[2]//following::input[1]", "Create a new campaign attribute");
 		jswait.loadClick("//input[@placeholder='Choose Type']//following::iron-icon[1]");
@@ -2198,7 +2219,7 @@ public void selectBothUserForBCApproval() throws Exception{
 	Thread.sleep(1000);
 	jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
 	Thread.sleep(1000);
-	jswait.loadClick("/html//div[@id='mainContainer']//app-router[@id='router']/app-route[11]/campaign-form//iron-pages[@class='style-scope wizard-tab']//div[@date='" + date + "']");
+	jswait.loadClick("//*[@id='months']//div[@date='"+ date +"']");
 	Thread.sleep(1000);
 	jswait.loadClick("//paper-dialog[@id='dateDialog']/div/paper-button[2]");
 	wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//campaign-schedule//paper-input-container)[2]//input"))).click();

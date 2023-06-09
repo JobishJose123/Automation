@@ -1,11 +1,12 @@
 @BroadcastCopyEdit_Migration
 Feature: Test cases related to Broadcast Management Copy Edit
 Copy and Editing all types of Braodcast Migration
+#Total scenarios: 130
 
 #  we should pass the target condition which is used to create the bc for verification
 # *******************one off bc***************
   
-    @NDX-7356 @NDX-10035 @initBrowser @closeBrowser
+@NDX-7356 @NDX-10035 @initBrowser @closeBrowser
   Scenario: Verify after copy the BC all details oneOff new
       Given login
     When navigate to precision marketer

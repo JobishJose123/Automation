@@ -1,5 +1,6 @@
 #Author: kiran.joseph
 #Keywords Summary : covers functionality of tag manager
+#Total scenario:3
 @IMFunctRegression
 Feature: TagManager functionality regression
 

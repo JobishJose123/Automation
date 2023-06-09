@@ -1,12 +1,12 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer creation for regression data setup
+#Total Scenario : 1
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
 @CampaignCategory_datasetup
 Feature: Campaign Category creation
   Create Campaign Category
   
-@NX_CreateCampaignCategory
-@initBrowser @closeBrowser
+@NX_CreateCampaignCategory @initBrowser @closeBrowser
 Scenario: create new campaign category 
 Given login
 Then navigate to configuration management

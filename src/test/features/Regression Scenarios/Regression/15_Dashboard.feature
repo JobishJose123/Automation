@@ -1,4 +1,5 @@
 #Author:shobina.k@flytxt.com
+#Total scenario:5
 @NDX-Dashboard
 Feature: PM AND IM Dashboard
 

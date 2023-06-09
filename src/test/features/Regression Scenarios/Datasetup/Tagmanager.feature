@@ -1,4 +1,5 @@
 #Author : kiran.joseph@flytxt.com
+#Total scenarios: 4
 @Tagmanagerrun
 Feature: Tag Manager
 

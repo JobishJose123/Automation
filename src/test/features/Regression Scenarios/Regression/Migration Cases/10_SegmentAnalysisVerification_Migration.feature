@@ -1,5 +1,6 @@
 #Author: shobina.k@flytxt.com
 #Summary :Segment Analysis Verification
+#Total scenario:  21
 @SegmentAnalysis_Migration
 Feature: Verification of Segment Analysis job(Migration)
 
@@ -84,8 +85,7 @@ Then wait until Segment Analysis job status is changed to "C"
 
 
 @NDX-5557 @initBrowser  @closeBrowser
-Scenario: Edit target condition of a Segment Analysis job(Migration) which
-is in Completed status. 
+Scenario: Edit target condition of a Segment Analysis job(Migration) whichis in Completed status. 
 Given login
 Then navigate to intent management
 Then navigate to analytics
@@ -142,8 +142,7 @@ Then enter details for new broadcast with condition SegmentAnalysis from sheet "
 Then save bc
 
 #
-@NDX-5588 @NDX-10183
- @initBrowser  @closeBrowser
+@NDX-5588 @NDX-10183 @initBrowser  @closeBrowser
 Scenario: Rerun a Segment Analysis job(Migration)
 Given login
 Then navigate to intent management
@@ -179,10 +178,8 @@ Then save iaj job
 Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnalysisCopy"
 Then wait until Segment Analysis job status is changed to "C"
 
-@NDX-5584 @NDX-10180
- @initBrowser  
-Scenario: Edit target condition of a Segment Analysis job_Copy(Migration) which
-is in Completed status
+@NDX-5584 @NDX-10180 @initBrowser  
+Scenario: Edit target condition of a Segment Analysis job_Copy(Migration) whichis in Completed status
 Given login
 Then navigate to intent management
 Then navigate to analytics
@@ -193,8 +190,7 @@ Then filter the Segment Analysis Copy for status check from sheet "SegmentAnalys
 Then wait until Segment Analysis job status is changed to "C"
 #
 #
-@NDX-5582 @NDX-10181
- @initBrowser  @closeBrowser
+@NDX-5582 @NDX-10181 @initBrowser  @closeBrowser
 Scenario: Edit target condition of a Segment Analysis job_Copy(Migration) which
 is in Completed status. 
 Given login
@@ -207,8 +203,7 @@ Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnaly
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5574 @NDX-10178
-@initBrowser @closeBrowser
+@NDX-5574 @NDX-10178 @initBrowser @closeBrowser
 Scenario: Edit a Segment Analysis job_Copy(Migration) by adding a KPI.
 Given login
 Then navigate to intent management
@@ -220,8 +215,7 @@ Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnaly
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5580 @NDX-10179
- @initBrowser  @closeBrowser
+@NDX-5580 @NDX-10179 @initBrowser  @closeBrowser
 Scenario: Edit a Segment Analysis job_Copy(Migration) by deleting a KPI.
 Given login
 Then navigate to intent management
@@ -233,8 +227,7 @@ Then filter the Segment Analysis Copy  for status check from sheet "SegmentAnaly
 Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5576 @NDX-10177
- @initBrowser  @closeBrowser
+@NDX-5576 @NDX-10177 @initBrowser  @closeBrowser
 Scenario: Edit a Segment Analysis job_Copy(Migration) by editing a KPI.
 Given login
 Then navigate to intent management
@@ -270,8 +263,7 @@ Then wait until Segment Analysis job status is changed to "C"
 #Then wait until Segment Analysis job status is changed to "C"
 
 
-@NDX-5573 @NDX-10188
- @initBrowser  @closeBrowser
+@NDX-5573 @NDX-10188 @initBrowser  @closeBrowser
 Scenario: Delete a Segment Analysis Job(Migration)
 Given login
 Then navigate to intent management

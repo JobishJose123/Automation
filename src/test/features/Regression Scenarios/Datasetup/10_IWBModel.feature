@@ -1,5 +1,6 @@
 #Author: shobina.k@flytxt.com
 #Summary : New Model Creation
+#toatal scenario : 1
 @NX-Models
 Feature: Model Creation
 @NDX-5444 @NDX-5456 @NDX-5466 @NDX-5464 @NDX-5463 @NDX-5454 @NDX-5455 @NDX-5457 @NDX-5458 @NDX-5459 @NDX-5460 @NDX-5461 @NDX-5452 @NDX-5450 @NDX-5465 @NDX-5442 @NDX-5440 @NDX-5443 @NDX-5462 @NDX-5451 @NDX-5449 @NDX-5448 @NDX-5447 @NDX-5446 @NDX-5445 @NDX-5441

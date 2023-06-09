@@ -16,13 +16,13 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
+#Total scenarios: 75
 @BroadcastEdit_Migration
 Feature: Test suite for Broadcast Editing for Migration
   Editing all types of Braodcast
   
  
-  #    ************************ OneOFF BC**************
- 
+  #    ************************ OneOFF BC **************
 
   
   @NDX-5875 @NDX-10027 @initBrowser

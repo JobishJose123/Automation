@@ -32,6 +32,8 @@ public class RewardTypePage extends Init{
 	private WebElement rewardParameterDisplayName;
 	@FindBy(xpath=".//*[@id='newParamDialog']//label[text()='Parameter Name']/..//input")
 	private WebElement rewardParameterName;
+	@FindBy(xpath=".//*[@id='newParamDialog']//label[text()='Default Value']/..//input")
+	private WebElement rewardParameterDefaultvalue;
 	@FindBy(xpath=".//*[@id='newParamDialog']//label[text()='Type']/..//input")
 	private WebElement rewardParameterTypeDropDown;
 	@FindBy(xpath="//paper-item[contains(.,'Text')]")
@@ -131,11 +133,12 @@ public class RewardTypePage extends Init{
 		jswait.loadClick(createNewRewardParameterButton);
 		jswait.loadSendKeys(rewardParameterDisplayName, displayName);
 		jswait.loadSendKeys(rewardParameterName, parameterName);
-		jswait.loadClick(rewardParameterTypeDropDown);
+				jswait.loadClick(rewardParameterTypeDropDown);
 		if(type.contains("SINGLE_SELECT")) {
 			jswait.loadClick(rewardParameterTypeSingleSelect);
 		}else if(type.contains("NUMBER")) {
 			jswait.loadClick(rewardParameterTypeNumber);
+			jswait.loadSendKeys(rewardParameterDefaultValue, "100");
 			jswait.loadClick(rewardParameterMandatoryCheckbox);
 		}
 		else if(type.contains("TEXT")) {
@@ -145,7 +148,7 @@ public class RewardTypePage extends Init{
 		}
 		jswait.loadSendKeys(rewardParameterUIOrder, order);
 		if(!type.contains("SINGLE_SELECT")) {
-		jswait.loadSendKeys(rewardParameterDefaultValue, "defaultValue");
+		jswait.loadSendKeys(rewardParameterDefaultValue, displayName+" value");
 		}
 		jswait.loadClick(rewartdParameterSaveButton);
 	}

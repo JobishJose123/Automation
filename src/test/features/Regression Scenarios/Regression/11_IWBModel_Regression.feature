@@ -1,4 +1,5 @@
 #Author:shobina.k@flytxt.com
+#Total scenario: 3
 @NDX-iwbModelRegression
 Feature: iwb model regression
                

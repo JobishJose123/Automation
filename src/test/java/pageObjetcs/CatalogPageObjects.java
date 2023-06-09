@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -53,7 +55,7 @@ public class CatalogPageObjects extends Init{
 	private WebElement catalogAddOffer;
 	@FindBy(xpath="//paper-button[text()='Add to Catalog']")
 	private WebElement addToCatalogButton;
-	@FindBy(xpath="//*[@id='sym1' and @icon='app-primary:offer-catalogue']")
+	@FindBy(xpath="//div//iron-icon[@icon='app-primary:offer-catalogue']")
 	private WebElement offerCatalogButton;
 	@FindBy(xpath="//paper-button[text()='Add to Catalog']/../paper-button[text()='Cancel']")
 	private WebElement catalogAddOfferCancelButton;
@@ -283,11 +285,16 @@ public void detailsOfOffer() throws Exception{
 	Thread.sleep(2000);
 	assertTrue("offer details not displayed",OfferDetails.isDisplayed());
 }
+
 public void addOfferToCatalog(String addOffer2) throws Exception{
 	System.out.println(addOffer2);
 	jswait.loadClick(CheckBoxToAddOffer);
 	clickAddToCatalogButton();
 	Thread.sleep(2000);
+	
+	 JavascriptExecutor js = (JavascriptExecutor) driver;
+     js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+     Thread.sleep(3000);
 	assertTrue(jswait.checkVisibility("//data-table-cell[@class='catalogue-offer-listing style-scope'][contains(.,'"+addOffer2+"')]"));
 
 }

@@ -1,4 +1,5 @@
 #Author: shobina.k@flytxt.com
+#Total scenario:4
 Feature: digital plus regression
 @NDX-digitalPlusRegression
 @NDX-16913 @initBrowser @closeBrowser

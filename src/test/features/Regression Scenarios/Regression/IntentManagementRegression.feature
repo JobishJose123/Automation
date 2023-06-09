@@ -1,5 +1,6 @@
 #Author: your.email@your.domain.com
 #Keywords Summary :
+#Total scenario: 47
 @NX-intentmanagemen
 Feature: For IntentManagement Regression.
 

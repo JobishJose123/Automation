@@ -6,11 +6,12 @@
 ####################################################################################################################
 #
 #
-     @Data-setupFB   @NDX-18462
+#	Toatl scenarios: 5
+ @Data-setupFB   @NDX-18462
 Feature: FaceBookConversionAPI Testing
 
 
-@initBrowser  @offerCatalogFB @closeBrowser
+@initBrowser  @offerCatalogFB 
 Scenario: Creating OfferCatalog for FaceBook BroadcastBC API
 Given login
 Then navigate to precision marketer
@@ -21,7 +22,7 @@ Then navigate to landing page
 
 
 
-@initBrowser @fbOffer @closeBrowser
+@initBrowser @fbOffer 
 Scenario Outline:: creating FaceBookOffer 
 Given login 
 Then navigate to precision marketer

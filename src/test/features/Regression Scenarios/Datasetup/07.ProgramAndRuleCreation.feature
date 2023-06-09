@@ -1,5 +1,6 @@
 #Author: your.email@your.domain.com
 #Keywords Summary :
+#Total scenario : 39
 @IMdatasetup
 Feature: For IntentManagement datasetup.
 
@@ -25,26 +26,25 @@ Then create new offer from sheet "STVSMS" with product "fullDetails" rewards "on
 Then click on create new ofer button
 Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 Then click on create new ofer button
-Then create new offer from sheet "rechargegobal" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
-Then click on create new ofer button
+#Then create new offer from sheet "rechargegobal" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
+#Then click on create new ofer button
 Then create new offer from sheet "usageBasedSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
-Then navigate to offer management
+Then navigate back to offer management
 Then Navigate to Offer Catalogue
 Then Create New Offer Catalogue from sheet "IMcatalog"
 Then Add "STVSMS" offer to Offer Catalogue
 Then Add "rechargeSMS" offer to Offer Catalogue
-Then Add "rechargegobal" offer to Offer Catalogue
+#Then Add "rechargegobal" offer to Offer Catalogue
 Then Add "usageBasedSMS" offer to Offer Catalogue
-Then navigate to offer management
+Then navigate back to offer management
 Then Navigate to Offer Catalogue
 Then Create New Offer Catalogue from sheet "defaultCatalog"
-#Then Add "STVSMS" offer to Offer Catalogue
+Then Add "STVSMS" offer to Offer Catalogue
 Then Add "rechargeSMS" offer to Offer Catalogue
 
 ################################## TOUCHPOINT CREATION FOR UI AND FUNCTIONALITY VERIFICATION ###########################
 	
-@NX-433 @NX-4063
-@initBrowser @closeBrowser
+@NX-433 @NX-4063  @initBrowser @closeBrowser
 Scenario: create customer care touchpoint to be used in customerCare executive
 Given login
 Then navigate to intent management
@@ -53,8 +53,7 @@ Then navigate to customer care
 Then create customer care touchpoint from sheet "CCTouchpoint" with logic "FIFO" 
 Then check customer care touchpoint in grid "CCTouchpoint"
 
-@NX-433 @NX-4063
-@initBrowser @closeBrowser
+@NX-433 @NX-4063 @initBrowser @closeBrowser
 Scenario: create customer care touchpoint to be used in customerCare executive
 Given login
 Then navigate to intent management
@@ -73,6 +72,7 @@ Then create api touchpoint from sheet "apiTouchpoint_default" and logic "LIFO"
 Then check api touchpoint in grid "apiTouchpoint_default"
 ##Then add touchpoint "apiTouchpoint_default" to api_auth_policy
 #    
+
 @NX-createDefaultApiTouchpointUR @initBrowser @closeBrowser
 Scenario: create api touchpoint UR
 Given login
@@ -95,7 +95,7 @@ Then check api touchpoint in grid "apiTouchpointBestfit"
 ##Then add touchpoint "apiTouchpoint_default" to api_auth_policy
 
 #Custom AC logic
-@createcustomlogic @initBrowser  
+@createcustomlogic @initBrowser  @closeBrowser
 Scenario: create a custom logic
 Given login
 Then navigate to intent management
@@ -103,7 +103,7 @@ Then navigate to configuration
 Then navigate to Offer Prioritization Logic
 Then create new custom logic "Custom AC logic"
 
-@NX-createApiTouchpointcustomlogic @initBrowser @closeBrowser
+@NX-createApiTouchpointcustomlogic @initBrowser 
 Scenario: create api touchpoint GA
 Given login
 Then navigate to intent management
@@ -114,8 +114,8 @@ Then check api touchpoint in grid "apiTPCustomlogic"
 ##Then add touchpoint "apiTouchpoint_default" to api_auth_policy
 
 
-##need to create ussd application in legacy first
-@NX-435 @initBrowser @closeBrowser
+#need to create ussd application in legacy first8
+@NX-435 @initBrowser 
 Scenario: Verify new USSD touchpoint creation
 Given login
 Then navigate to intent management
@@ -152,7 +152,7 @@ Then create sms touchpoint from sheet "smsTouchpoint" with logic "FIFO" and keyw
 Then check sms touchpoint in grid "smsTouchpoint"
  
 
-@NX-431 @initBrowser @closeBrowser
+@NX-431 @initBrowser 
 Scenario: Verify new Trigger touchpoint creation  NX-431
 Given login
 Then navigate to intent management
@@ -171,7 +171,7 @@ Then navigate to trigger
 Then create trigger touchpoint from sheet "triggerTouchpoint_default" with logic "FIFO" and trigger "selTrigger1"  
 Then check trigger touchpoint in grid "triggerTouchpoint_default"
 
-@NX-realTimeRTE @initBrowser @closeBrowser
+@NX-realTimeRTE @initBrowser 
 Scenario: Verify new Trigger touchpoint creation  
 Given login
 Then navigate to intent management
@@ -183,9 +183,7 @@ Then check trigger touchpoint in grid "rteTrigger_tp"
 
 ############################ PROGRAM AND RULE CREATION FOR UI VERIFICATION ######################################
 	 
-@NDX-7144 @NDX-7141 @NDX-7140 @NDX-7137 @NDX-7136 @NDX-7133 @NDX-7132 @NDX-7125 @NDX-5711 @NDX-9983 
-@NDX-9979  @NDX-9980 @NDX-9981 @NDX-9982
-@initBrowser  @closeBrowser
+@NDX-7144 @NDX-7141 @NDX-7140 @NDX-7137 @NDX-7136 @NDX-7133 @NDX-7132 @NDX-7125 @NDX-5711 @NDX-9983 @NDX-9979  @NDX-9980 @NDX-9981 @NDX-9982 @initBrowser  @closeBrowser
 Scenario Outline: Verify create  <programRuleSheet> with tp <tp>
 Given login
 Then navigate to intent management
@@ -199,7 +197,6 @@ Then add program data from sheet "<programRuleSheet>" and offer "rechargeSMS" to
 Then create new rule with enddate from sheet "<programRuleSheet>" and offer "rechargeSMS" and touchpoint from sheet "<tp>"
 Then "save" rule
 Then add program data from sheet "<programRuleSheet>" and offer "rechargeSMS" to row "1"
-
 Examples:
 |programRuleSheet|tp|
 |SMSprogram|smsTouchpoint|
@@ -243,8 +240,7 @@ Examples:
 	
 
  
-@createprogramdeletedatasetup
-@initBrowser 
+@createprogramdeletedatasetup @initBrowser 
 Scenario: Verify create a program delete
 Given login
 Then navigate to intent management
@@ -255,8 +251,7 @@ Then choose program from sheet "programdelete"
 Then create new rule with enddate from sheet "programdelete" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
 Then "save" rule
 
-@createprogramdeactivatedatasetup
-@initBrowser @NDX-9987
+@createprogramdeactivatedatasetup @initBrowser @NDX-9987
 Scenario: Verify deactivating the created rule
 Given login
 Then navigate to intent management
@@ -269,8 +264,7 @@ Then "save" rule
  
 ############################# falcon #################################
 
-@NDX-realTime&rechargeTrackingService
-@initBrowser  @closeBrowser
+@NDX-realTime&rechargeTrackingService @initBrowser  @closeBrowser
 Scenario: Verify create a program and rule 
 Given login
 Then navigate to intent management
@@ -286,8 +280,7 @@ Then add program and rule from sheet "triggerrprogram" to column "1" of sheet "p
     
 ################################   RULE CREATION FOR PRIORITIZATION LOGIC   ####################################################
 
-@NDX-Program&RuleForPrioLogic 
-@initBrowser  @closeBrowser
+@NDX-Program&RuleForPrioLogic @initBrowser 
 Scenario Outline: Verify create a program and rule <programRuleSheet> with tp <tp>
 Given login
 Then navigate to intent management
@@ -311,11 +304,6 @@ Examples:
 |USSDprogram|ussdTouchpoint_default|
 |CCprogram|CCTouchpoint_default|
 |triggerrprogram|triggerTouchpoint_default|
-
-
-
-
-
 
 
 

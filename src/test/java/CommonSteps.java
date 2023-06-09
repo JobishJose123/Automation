@@ -137,7 +137,7 @@ public class CommonSteps extends Init {
 	@Given("^login$")
     public void loginuser() throws Exception {
      driver.get("https://"+p.getValue("env"));
-	 Thread.sleep(10000);
+	 Thread.sleep(15000);
      loginPage.login(p.getValue("username"), p.getValue("password"));
 	 Thread.sleep(5000);
 	 try {
@@ -240,11 +240,29 @@ public class CommonSteps extends Init {
 	public void navigateToConfiurationManagement() throws InterruptedException {
 		landingPage.navigateToConfigurationManagement();
 	}
+	
+	@Then("^navigate to control group$")
+	public void navigate_to_control_group() throws Throwable {
+	    
+		landingPage.navigateToControlgroup();
+	}
+	
+	
+	
 	@Then("^navigate to offer management$")
     public void offerManagement() throws InterruptedException {
 //		jswait.loadClick(offerManagement);
 		campaignObjects.offerManagement();
 	}
+	
+	@Then("^navigate back to offer management$")
+	public void navigate_back_to_offer_management() throws Throwable {
+	  
+		campaignObjects.offerManagementback();
+	}
+	
+	
+	
 	@Then("^navigate to offer management through Top tag$")
 	public void navigate_to_offer_management_through_Top_tag() throws Throwable {
 	 

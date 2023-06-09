@@ -1,10 +1,11 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer creation for regression data setup
+#Total Scenario : 4
 #Feature: Offer :
 @NDX-Product_datasetup
 Feature: Product class and Product creation
 
-@NX-1222 @initBrowser  
+@NX-1222 @initBrowser   @closeBrowser
 Scenario: Products Grid: Create Prodcut from Productclass other than prepaid telecom 
 Given login
 Then navigate to configuration management
@@ -18,10 +19,9 @@ Then navigate to products
 Then navigate to product class "TestProductClass"
 Then click create new product button
 Then create product with attributes from sheet "fullDetails"
-# Then save "productInputData" data to spreadsheet from "fullDetails" with string product with attributes from fullDetails
+#Then save "productInputData" data to spreadsheet from "fullDetails" with string product with attributes from fullDetails
 
-@NX-1112
-@initBrowser  @closeBrowser
+@NX-1112 @initBrowser  @closeBrowser
 Scenario: Create product from prepaid telecom
 Given login
 Then navigate to precision marketer
@@ -34,8 +34,7 @@ Then create single product from sheet "singleProductPage"
 #Then save "productInputData" data to spreadsheet from "singleProductPage" with string prepaid telecom product with singleProductPage
 
 
-@NDX-6885 
-@initBrowser @closeBrowser
+@NDX-6885 @initBrowser @closeBrowser
 Scenario: Create New Product
 Given login
 Then navigate to configuration management
@@ -51,8 +50,7 @@ Then click create new product button
 Then enter the name and description from sheet "fullDetails"
 #Then save "productInputData" data to spreadsheet from "fullDetails" with string prepaid telecom product with singleProductPage
 
-@CreateProductToVerifyDelete 
-@initBrowser @closeBrowser
+@CreateProductToVerifyDelete @initBrowser @closeBrowser
 Scenario: Create New Product for the verification of delete option
 Given login
 Then navigate to configuration management

@@ -1,5 +1,6 @@
 #Author: Shobina.k
 #Keywords Summary :IM functionality migration
+#Total scenarios: 80
 @IMFunctMigration
 Feature: IM functionality migration
 

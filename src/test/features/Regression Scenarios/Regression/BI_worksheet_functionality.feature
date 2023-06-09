@@ -1,4 +1,5 @@
 #Author : kiran.joseph@flytxt.com
+#Total scenario: 13
 @BIworksheetfunctfeature01
 Feature: Business Intelligence functionality
 

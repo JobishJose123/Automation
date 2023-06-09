@@ -177,9 +177,9 @@ public class BiDataObject extends Init {
 	 private WebElement RecurrencePatternInput;
 	 @FindBy(xpath = "//*[contains(@class,'recurrence')]//input")
 	 private WebElement RecurrenceInput;
-	 @FindBy(xpath = "(//label[contains(.,'Start broadcasts at')]//following::input)[1]")
+	 @FindBy(xpath = "(//label[contains(.,'Default Start Time')]//following::input)[1]")
 	 private WebElement StartBroadcastAtInput;
-	 @FindBy(xpath="(//label[contains(.,'Start broadcasts at')]//following::paper-button[contains(.,'OK')])[2]")
+	 @FindBy(xpath="(//label[contains(.,'Default Start Time')]//following::paper-button[contains(.,'OK')])[2]")
 	 private WebElement  startBroadcastOkbutton;
 	 @FindBy(xpath = "//div[@id='radioLabel'][contains(.,'At')]")
 	 private WebElement atRadiobutton;
@@ -705,7 +705,7 @@ public class BiDataObject extends Init {
 			jswait.loadClick(ConvForSeedBcCheckBox);
 			System.out.println("::Included Conversion for Rewarding Bc :: for Seeding BC");
 		}
-		
+		jswait.loadClick("//div[text()='Rule-based']/../div[1]");
 		select_SenderAndRoute();
 		clickProceedButton();
 	}
@@ -921,6 +921,11 @@ public class BiDataObject extends Init {
 		Thread.sleep(1000);
 		builder.moveToElement(num1).click().build().perform();
 		Thread.sleep(1000);
+		
+		WebElement seconds=driver.findElement(By.xpath(".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='secondClock']//*[@class='number style-scope paper-clock-selector'][1]"));
+		builder.moveToElement(seconds).click().build().perform();
+		Thread.sleep(1000);
+		
 		if (am_pm == 0)
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
 		
@@ -998,7 +1003,7 @@ public class BiDataObject extends Init {
 			builder.moveToElement(num6).click().build().perform();
 			Thread.sleep(2000);
 			WebElement num7 = driver.findElement(By.xpath(
-					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min+1) + "])[2]"));
+					"(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector'][" + (min + 1) + "])[2]"));
 			Thread.sleep(1000);
 			builder.moveToElement(num7).click().build().perform();
 			if (am_pm == 0)

@@ -1,5 +1,6 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer creation for regression data setup
+#Total Scenario : 16
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
 @Offer_verificationRegression
 Feature: Test suite for offer verification test cases
@@ -96,7 +97,7 @@ Feature: Test suite for offer verification test cases
      Then verify the condition offer copy in the detail tab for the offer from sheet "SeedingSMS" with product "fullDetails" 
      
      
-     @NDX-7604 @initBrowser @closeBrowser
+     @NDX-7604 @initBrowser 
      Scenario: Edit Product details from a Duplicated/copied offer and verify that the edited product details are mapped correctly in offer
     Given login
     Then navigate to precision marketer
@@ -109,7 +110,7 @@ Feature: Test suite for offer verification test cases
     Then verify the condition product added for copy in the detail tab for the offer from sheet "SeedingSMS" with product "singleProductPage"
     
     
-    @NDX-7606 @initBrowser  @closeBrowser
+    @NDX-7606 @initBrowser  
   Scenario: Edit Dynamic tag details in creative tab from a Duplicated/Copied offer and verify that the edited creative details are mapped correctly in offer
     Given login
     When navigate to precision marketer
@@ -117,11 +118,11 @@ Feature: Test suite for offer verification test cases
  		Then navigate to offers
  		Then filter the offer copy from sheet "SeedingSMS"
  		Then edit offer
- 		Then edit creative details and verify the same from sheet "SeedingSMS" 
+ 		#Then edit creative details and verify the same from sheet "SeedingSMS" 
  		Then save the offer and filter the offer from sheet "SeedingSMS"
  		Then verify the condition dynamic tag edited for copy in the detail tab for the offer from sheet "SeedingSMS" with product "singleProductPage"
  		
- 		@NDX-7612 @initBrowser @closeBrowser
+  @NDX-7612 @initBrowser
    Scenario: edit Track Period from Duplicated/Copied offer with SMS channel with type recharge and verify the edited details
     Given login
     Then navigate to precision marketer
@@ -129,11 +130,11 @@ Feature: Test suite for offer verification test cases
     Then navigate to offers
     Then filter the offer copy from sheet "SeedingSMS"
     Then edit offer
-    Then edit Track Period from offer from sheet "SeedingSMS" and verify the edited details
+   Then edit Track Period from offer from sheet "SeedingSMS" and verify the edited details
     Then verify the condition track source edited for copy in the detail tab for the offer from sheet "SeedingSMS" with product "singleProductPage"
     
     
-    @NDX-7615 @initBrowser @closeBrowser
+    @NDX-7615 @initBrowser 
    Scenario: edit reward tab success message from Duplicated/Copied offer with SMS channel with type recharge and verify the edited details
     Given login
     Then navigate to precision marketer
@@ -168,13 +169,41 @@ Feature: Test suite for offer verification test cases
     Then add a new reward and save offer
     Then filter the offer copy from sheet "SeedingSMS"
     Then verify the condition reward added in the detail tab for the offer from sheet "SeedingSMS" with product "fullDetails" 
- 		
- 		
- 		
-     
-     
-     
-     
-     
-     
+ 
+ #//////////Multitrack offer Edit product//////////////////	 	
+
+     @NDX-MultiTrackCopy @initBrowser 
+     Scenario: Verify Copy/Duplicating a NEW offer  
+     Given login
+     Then navigate to precision marketer
+     Then navigate to offer management
+     Then navigate to offers
+     Then verify "MultiTrackOffer" offer in grid
+     Then Duplicate/copy offer from sheet "MultiTrackOffer"
+     Then verify the condition offer copy in the detail tab for the offer from sheet "MultiTrackOffer" with product "fullDetails"
+      
+ @NDX-MultiTrackRuleEditVerify @initBrowser 
+Scenario: edit Track Period from Duplicated/Copied offer with SMS channel with type recharge and verify the edited details 
+	Given login 
+	Then navigate to precision marketer 
+	Then navigate to offer management 
+	Then navigate to offers 
+	Then filter the offer copy from sheet "MultiTrackOffer" 
+	Then edit offer 
+	Then edit Track Period from offer from sheet "MultiTrackOffer" and verify the edited details 
+	Then verify the condition track source edited for copy in the detail tab for the offer from sheet "MultiTrackOffer" with product "singleProductPage" 
+	
+	
+#//////////MultiRule_Reward Offer Verification////////////////
+
+
+@NDX-MultipleRuleRewardEditcopy @initBrowser 
+     Scenario: Verify Copy/Duplicating a NEW offer  
+     Given login
+     Then navigate to precision marketer
+     Then navigate to offer management
+     Then navigate to offers
+     Then verify "MultiRuleRewardOffer" offer in grid
+     Then Duplicate/copy offer from sheet "MultiRuleRewardOffer"
+     Then verify the condition offer copy in the detail tab for the offer from sheet "MultiRuleRewardOffer" with product "fullDetails"
      

@@ -464,6 +464,7 @@ public class CampaignManagement extends Init{
 	    	
 	    	jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'"+name+"')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
 			campaignObjects.clickOptionsViewBroadcasts();
+			
 	    }
 	    
 	    
@@ -648,6 +649,7 @@ public class CampaignManagement extends Init{
 	    	eM.setExcelFile("campaignCategoryInputData",sheet);
 	    	String name = (String) eM.getCell(1, 0);
 	    	campaignObjects.scrollToCampaignCategory(name);
+	    	//campaignObjects.campaigncategoryTopTag();
 	    }
 	    
 	    

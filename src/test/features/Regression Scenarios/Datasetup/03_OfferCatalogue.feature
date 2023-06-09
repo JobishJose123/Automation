@@ -5,9 +5,8 @@
 @Offercatalogue_datasetup
 Feature: Test suite Offer and offer catelogue
   Create all types of offers and offer catelogue
-@NDX-5751
-@Create_OfferCatalogue
-@initBrowser 
+  
+@NDX-5751 @Create_OfferCatalogue @initBrowser 
 Scenario: Verify Creating Offer Catalogue 
   Given login
   When navigate to precision marketer
@@ -17,11 +16,11 @@ Scenario: Verify Creating Offer Catalogue
   Then Add "rechargeSMS" offer to Offer Catalogue
   Then Add "SeedingSMS" offer to Offer Catalogue
   Then Add "rechargeWAP" offer to Offer Catalogue
-   Then Add "seedingWAPoffer" offer to Offer Catalogue
+  Then Add "seedingWAPoffer" offer to Offer Catalogue
   #Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue
   Then Add "rechargeVoicePush" offer to Offer Catalogue
   Then Add "rechargeEmail" offer to Offer Catalogue
-  #Then Add "STVSMS" offer to Offer Catalogue
+  Then Add "STVSMS" offer to Offer Catalogue
   Then save "offerCatalogInputData" data to spreadsheet from "defaultCatalog" with string offer catalog 
   
  

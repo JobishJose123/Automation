@@ -1,9 +1,10 @@
 #Author: shobina.k@flytxt.com
 #Summary : Segment Analysis Creation
+#Total scenario : 10
 @NX-SegmentAnalysisDataesetup
 Feature: Segment Analysis Creation
 
-@NDX-5542 @NDX-5565 @initBrowser @closeBrowser
+@NDX-5542 @NDX-5565 @initBrowser 
 Scenario: Verify Segment Analysis Creation
 Given login
 Then navigate to intent management
@@ -103,7 +104,7 @@ Then select radio button for view2
 Then click save cluster button
 Then wait until status of cluster is complete
 
-@NDX-CreateSegmentAnalysisJobForDelete @initBrowser @closeBrowser
+@NDX-CreateSegmentAnalysisJobForDelete @initBrowser
 Scenario: Verify Segment Analysis Creation
 Given login
 Then navigate to intent management

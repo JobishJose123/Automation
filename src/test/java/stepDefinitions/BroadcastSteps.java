@@ -22,6 +22,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.SoftAssert;
 
 //import com.google.common.collect.Collections2;
 import com.itextpdf.text.log.SysoCounter;
@@ -53,27 +54,29 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 
-
-
 public class BroadcastSteps extends Init {
-
 
 	JSWaiter jswait = new JSWaiter();
 
 	public ExcelHelper eM = new ExcelHelper();
 	public ExcelHelper eh = new ExcelHelper();
+	public ExcelHelper offerExcel = new ExcelHelper();
+
 	CampaignObjects campaignObjects = new CampaignObjects();
 	AdminPageObjects adminPageObjects = new AdminPageObjects();
 	CatalogPageObjects catalogPageObjects = new CatalogPageObjects();
 	OfferPageObjects offerPageObjects = new OfferPageObjects();
 	LoginPageObjects loginPage = new LoginPageObjects();
 	CommonObjects commonObjects = new CommonObjects();
-	CustomerProfilePage customerObjects= new CustomerProfilePage();
+	CustomerProfilePage customerObjects = new CustomerProfilePage();
 	dkpageobjects dkpageobjects = new dkpageobjects();
 	TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
 	BroadcastPageObjects broadcastPageObjects = new BroadcastPageObjects();
 	public WebDriverWait wait = new WebDriverWait(driver, 8);
-	CalenderUtility calender=new CalenderUtility();
+	CalenderUtility calender = new CalenderUtility();
+
+	private String targetRenderTime;
+
 	@Then("^check if create new bc lands in details tab$")
 	public void checkLandingOfCreateNewBc() throws Throwable {
 		broadcastPageObjects.enterBroadcastName("check");
@@ -239,6 +242,9 @@ public class BroadcastSteps extends Init {
 		}
 	}
 
+
+
+
 	public void enterDeliveryTabDetails(String bc_type, String sheet) throws InterruptedException, Exception {
 		eM.setExcelFile("bcInputData", sheet);
 		Calendar rightNow = Calendar.getInstance();
@@ -263,13 +269,10 @@ public class BroadcastSteps extends Init {
 			min -= 60;
 			hours++;
 		}
-		 if(min==0)
-			{
-				min+=5;
-			}
-			
-			
-		
+		if (min == 0) {
+			min += 5;
+		}
+
 		try {
 			eM.setExcelFile("bcInputData", sheet);
 			if ((String) eM.getCell(1, 6) == "later") {
@@ -289,32 +292,36 @@ public class BroadcastSteps extends Init {
 			}
 		}
 		// we are getting the broadcast start date and stored in sheet , row 1 column 11
-		String Start_Date="";
-		if(sheet.contains("Edit")||sheet.contains("seedingTriggerableRecurringBCEd")){
-			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
-			if(am_pm==0) {
-			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
-			}else {
-				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+		String Start_Date = "";
+		if (sheet.contains("Edit") || sheet.contains("seedingTriggerableRecurringBCEd")) {
+			String monthString = calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+			if (am_pm == 0) {
+				Start_Date = String.format("%02d", day) + " " + monthString.substring(0, 3) + " " + year + " "
+						+ String.format("%02d", hours) + ":" + String.format("%02d", min) + " AM GMT+05:30";
+			} else {
+				Start_Date = String.format("%02d", day) + " " + monthString.substring(0, 3) + " " + year + " "
+						+ String.format("%02d", hours) + ":" + String.format("%02d", min) + " PM GMT+05:30";
 			}
 			eh.setExcelFile("bcInputDataForEdit", sheet);
 			eh.setCell(1, 11, Start_Date);
-		}else {
-			String monthString=calender.getMonthForInt(rightNow.get(Calendar.MONTH));
-			if(am_pm==0) {
-			Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" AM GMT+05:30";
-			}else {
-				 Start_Date= String.format("%02d", day)+" "+monthString.substring(0, 3)+" "+year+" "+String.format("%02d", hours)+":"+String.format("%02d", min)+" PM GMT+05:30";
+		} else {
+			String monthString = calender.getMonthForInt(rightNow.get(Calendar.MONTH));
+			if (am_pm == 0) {
+				Start_Date = String.format("%02d", day) + " " + monthString.substring(0, 3) + " " + year + " "
+						+ String.format("%02d", hours) + ":" + String.format("%02d", min) + " AM GMT+05:30";
+			} else {
+				Start_Date = String.format("%02d", day) + " " + monthString.substring(0, 3) + " " + year + " "
+						+ String.format("%02d", hours) + ":" + String.format("%02d", min) + " PM GMT+05:30";
 			}
 			eM.setExcelFile("bcInputData", sheet);
 			eM.setCell(1, 11, Start_Date);
-			
+
 		}
-		
-		
+
 		Actions builder = new Actions(driver);
 		if (bc_type.contentEquals("one-off") || bc_type.contentEquals("seedingTriggerable")
-				|| bc_type.contentEquals("one-offInformational") || bc_type.contentEquals("TriggerOneoff")|| bc_type.contentEquals("seedingoneoff")) {
+				|| bc_type.contentEquals("one-offInformational") || bc_type.contentEquals("TriggerOneoff")
+				|| bc_type.contentEquals("seedingoneoff")) {
 			System.out.println("bc type is one-time selected");
 			Thread.sleep(5000);
 			broadcastPageObjects.clickOneOffRadioButton();
@@ -322,7 +329,7 @@ public class BroadcastSteps extends Init {
 			jswait.loadClick(".//label[contains(.,'Send Time')]/../input");
 			Thread.sleep(1000);
 //			jswait.loadClick("(//iron-icon[@icon='date-picker:chevron-left'])[1]");
-				Thread.sleep(1000);
+			Thread.sleep(1000);
 			jswait.loadClick(".//*[@id='one-off-form']/div/paper-date-time-input[1]//div[@date='" + date + "']");
 			Thread.sleep(1000);
 			jswait.loadClick(
@@ -347,7 +354,7 @@ public class BroadcastSteps extends Init {
 
 			jswait.loadClick(".//*[@id='timeDialog']/div/paper-button[2]");
 			Thread.sleep(2000);
-			if (bc_type.contentEquals("one-off")||bc_type.contentEquals("seedingoneoff")) {
+			if (bc_type.contentEquals("one-off") || bc_type.contentEquals("seedingoneoff")) {
 				jswait.loadClick(".//label[contains(.,'Target Render Time')]/../input");
 				Thread.sleep(1000);
 //				jswait.loadClick("(//iron-icon[@icon='date-picker:chevron-left'])[2]");
@@ -507,7 +514,8 @@ public class BroadcastSteps extends Init {
 		}
 
 		else if (bc_type.contentEquals("recurring") || bc_type.contentEquals("seedingRecurring")
-				|| bc_type.contentEquals("seedingTriggerableRecurringBC")||bc_type.contentEquals("TriggerReccurringBC")) {
+				|| bc_type.contentEquals("seedingTriggerableRecurringBC")
+				|| bc_type.contentEquals("TriggerReccurringBC") || bc_type.contentEquals("TriggerReccurringBC")) {
 			Thread.sleep(2000);
 			System.out.println("Inside recurring");
 			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
@@ -531,7 +539,7 @@ public class BroadcastSteps extends Init {
 			Thread.sleep(1000);
 			if (am_pm == 0)
 				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
-			
+
 			else
 				jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
 			Thread.sleep(1000);
@@ -545,16 +553,16 @@ public class BroadcastSteps extends Init {
 			Thread.sleep(1000);
 			try {
 				if (eM.getCellByColumnName("Recurrance Pattern").contains("days")) {
-					
-					String recurringDays=(eM.getCellByColumnName("Recurrance Pattern").toString()).substring(0);
-					
-					System.out.println("Selecting the"+ recurringDays +" recurrence pattren");
-					
+
+					String recurringDays = (eM.getCellByColumnName("Recurrance Pattern").toString()).substring(0);
+
+					System.out.println("Selecting the" + recurringDays + " recurrence pattren");
+
 					jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
 					Thread.sleep(1000);
 					jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Days')]");
 					Thread.sleep(1000);
-					jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input",recurringDays);
+					jswait.loadSendKeys("//*[contains(@class,'recurrence')]//input", recurringDays);
 					Thread.sleep(1000);
 
 				} else if (eM.getCellByColumnName("Recurrance Pattern").contentEquals("months")
@@ -589,7 +597,7 @@ public class BroadcastSteps extends Init {
 
 				}
 //modified recurcion default timr xpath
-				jswait.loadClick("//div//label[contains(.,'Default Start Time')]");
+				jswait.loadClick("(//label[contains(.,'Default Start Time')]//following::input)[1]");
 				Thread.sleep(2000);
 				jswait.loadClick("//*[@id='deliver-card']/../paper-card[2]//*[@id='heading']/iron-selector[1]/div[1]");
 				num = driver.findElement(By.xpath(
@@ -617,20 +625,20 @@ public class BroadcastSteps extends Init {
 				jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
 			} catch (Exception e) {
 				eh.setExcelFile("bcInputDataForEdit", sheet);
-				
+
 				System.out.println("Inside catch");
 
-				String recurringDays="";
+				String recurringDays = "";
 				if (eh.getCellByColumnName("Recurrance Pattern").contains("days")) {
-					
+
 					try {
-                   recurringDays=(eh.getCellByColumnName("Recurrance Pattern").toString()).substring(0);
-					
-					System.out.println("Selecting the"+ recurringDays +" recurrence pattren");
-					}catch (Exception ep) {
-					 recurringDays="1";
+						recurringDays = (eh.getCellByColumnName("Recurrance Pattern").toString()).substring(0);
+
+						System.out.println("Selecting the" + recurringDays + " recurrence pattren");
+					} catch (Exception ep) {
+						recurringDays = "1";
 					}
-					
+
 					jswait.loadClick(".//*[@id='deliver-card']//label[contains(.,'Recurrence Pattern')]/..//input");
 					Thread.sleep(1000);
 					jswait.loadClick("//*[@id='deliver-card']//paper-item[contains(.,'Days')]");
@@ -1034,8 +1042,8 @@ public class BroadcastSteps extends Init {
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
 			mn = "0" + Integer.toString(rightNow.get(Calendar.MONTH) + 1);
 		} else
-			//mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH) + 1);
-		mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
+			// mn = "0"+Integer.toString(rightNow.get(Calendar.MONTH) + 1);
+			mn = String.format("%02d", rightNow.get(Calendar.MONTH) + 1);
 		String date = Integer.toString(rightNow.get(Calendar.YEAR)) + "-" + mn + "-"
 				+ String.format("%02d", rightNow.get(Calendar.DAY_OF_MONTH));
 		int hours = rightNow.get(Calendar.HOUR);
@@ -1316,8 +1324,7 @@ public class BroadcastSteps extends Init {
 			Thread.sleep(2000);
 			jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Real Time')]/../div[1]");
 		}
-		
-		
+
 	}
 
 	@Then("^enter details for new broadcast and calculate TG and CG from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
@@ -1335,11 +1342,10 @@ public class BroadcastSteps extends Init {
 		name = name.replaceAll("[0-9]", "") + n;
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-		
-		broadcastPageObjects.createBCAndCalculateCG_TG(name, bc_type, BASE_LIST, offerExcel.getCell(1, 0).toString());
-		
-		enterDeliveryTabDetails(bc_type, sheet);
 
+		broadcastPageObjects.createBCAndCalculateCG_TG(name, bc_type, BASE_LIST, offerExcel.getCell(1, 0).toString());
+
+		enterDeliveryTabDetails(bc_type, sheet);
 
 	}
 
@@ -1370,7 +1376,7 @@ public class BroadcastSteps extends Init {
 		name = RandomNameGenerator.getRandomName(name);
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-		
+
 		broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer);
 		enterDeliveryTabDetails(bc_type, sheet);
 
@@ -1389,7 +1395,7 @@ public class BroadcastSteps extends Init {
 		name = RandomNameGenerator.getRandomName(name);
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-		
+
 		broadcastPageObjects.createBCForUseTemplate(name, bc_type, BASE_LIST_FOR_USE_TEMPLATE, offer);
 
 	}
@@ -1405,11 +1411,11 @@ public class BroadcastSteps extends Init {
 //    	String baseList = list.getCell(1, 2).toString();
 		ExcelHelper offerExcel = new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offer);
-		String name = (String) eM.getCell(1,0);
+		String name = (String) eM.getCell(1, 0);
 		name = RandomNameGenerator.getRandomName(name);
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-		
+
 		eh.setExcelFile("bcInputData", sheet);
 		String DNCExclusion = "";
 		try {
@@ -1657,7 +1663,7 @@ public class BroadcastSteps extends Init {
 		name = name.replaceAll("[0-9]", "") + n;
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-		
+
 		broadcastPageObjects.createBCAndVerifyStartBroadcastAtOption(name, bc_type, BASE_LIST,
 				offerExcel.getCell(1, 0).toString());
 
@@ -1724,9 +1730,9 @@ public class BroadcastSteps extends Init {
 		name = RandomNameGenerator.getRandomName(name);
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-		
+
 		broadcastPageObjects.createBCAndSelectDNCList(name, bc_type, BASE_LIST, offerExcel.getCell(1, 0).toString());
-enterDeliveryTabDetails(bc_type, sheet);
+		enterDeliveryTabDetails(bc_type, sheet);
 
 	}
 
@@ -1744,7 +1750,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 		name = RandomNameGenerator.getRandomName(name);
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-				broadcastPageObjects.createBCAndSelectDNCListForPartnerLevelCG(name, bc_type, SELENIUM_DND_LIST,
+		broadcastPageObjects.createBCAndSelectDNCListForPartnerLevelCG(name, bc_type, SELENIUM_DND_LIST,
 				offerExcel.getCell(1, 0).toString());
 
 		enterDeliveryTabDetails(bc_type, sheet);
@@ -1768,7 +1774,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 		broadcastPageObjects.createBCAndSelectDNCListForSeedingBC(name, bc_type, BASE_LIST,
 				offerExcel.getCell(1, 0).toString());
 
-	enterDeliveryTabDetails(bc_type, sheet);
+		enterDeliveryTabDetails(bc_type, sheet);
 
 	}
 
@@ -1786,10 +1792,9 @@ enterDeliveryTabDetails(bc_type, sheet);
 		name = RandomNameGenerator.getRandomName(name);
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-		
+
 		broadcastPageObjects.createBCAndSelectDNCList_AndConfigureCG_TG(name, bc_type, BASE_LIST,
 				offerExcel.getCell(1, 0).toString());
-
 
 		enterDeliveryTabDetails(bc_type, sheet);
 
@@ -1941,10 +1946,10 @@ enterDeliveryTabDetails(bc_type, sheet);
 		name = RandomNameGenerator.getRandomName(name);
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-		
+
 		broadcastPageObjects.createBCWithoutTargetCondition(name, bc_type, BASE_LIST,
 				offerExcel.getCell(1, 0).toString());
-enterDeliveryTabDetails(bc_type, sheet);
+		enterDeliveryTabDetails(bc_type, sheet);
 
 	}
 
@@ -1984,13 +1989,10 @@ enterDeliveryTabDetails(bc_type, sheet);
 		name = name.replaceAll("[0-9]", "") + n;
 		eM.setCell(1, 0, name);
 		String bc_type = (String) eM.getCell(1, 7);
-				broadcastPageObjects.createBCWith1MSubscribersAndConfigurCG_TG(name, bc_type, BASE_LIST,
+		broadcastPageObjects.createBCWith1MSubscribersAndConfigurCG_TG(name, bc_type, BASE_LIST,
 				offerExcel.getCell(1, 0).toString());
-				enterDeliveryTabDetails(bc_type, sheet);
+		enterDeliveryTabDetails(bc_type, sheet);
 
-
-
-		
 	}
 
 	@Then("^navigate to BC page$")
@@ -2394,14 +2396,14 @@ enterDeliveryTabDetails(bc_type, sheet);
 			Assert.assertTrue("condition not displayed",
 					jswait.checkVisibility("//profile-field[contains(.,'is greater than')]"));
 			Assert.assertTrue("condition not displayed", jswait.checkVisibility("//profile-field[contains(.,'30')]"));
-		} else if(event.contains("analyticalScoresGT45")) {
-			Assert.assertTrue(jswait.checkVisibility("//b[@class='style-scope profile-field'][contains(.,'"+ANALYTICAL_SCORES_FIELD+"')]"));
-	}else if(event.contains("offerEnquiry")) {
-		Assert.assertTrue(jswait.checkVisibility("//b[contains(.,'Offer Enquiry')]"));
-}else if(event.contains("customerLocationInsightsGT5")) {
-	Assert.assertTrue(jswait.checkVisibility("//b[contains(.,'Location_q11')]"));
-}
-		else {
+		} else if (event.contains("analyticalScoresGT45")) {
+			Assert.assertTrue(jswait.checkVisibility(
+					"//b[@class='style-scope profile-field'][contains(.,'" + ANALYTICAL_SCORES_FIELD + "')]"));
+		} else if (event.contains("offerEnquiry")) {
+			Assert.assertTrue(jswait.checkVisibility("//b[contains(.,'Offer Enquiry')]"));
+		} else if (event.contains("customerLocationInsightsGT5")) {
+			Assert.assertTrue(jswait.checkVisibility("//b[contains(.,'Location_q11')]"));
+		} else {
 			Assert.assertTrue("condition not handled in if else", false);
 		}
 	}
@@ -2506,8 +2508,72 @@ enterDeliveryTabDetails(bc_type, sheet);
 
 	}
 
+	@Then("^wait for (.*) event for the bc from sheet \"([^\"]*)\"for the campaign from sheet \"([^\"]*)\"$")
+	public void wait_for_comversion_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,
+			String bcSheet, String campaignSheet) throws Throwable {
+
+		System.out.println(event);
+		CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+		customerProfilePage.clickEventTypesCheckBox();
+		customerProfilePage.clickEventTypesCheckBox();
+		customerProfilePage.clickConversionEventCheckBox();
+		customerProfilePage.clickSelectEventApplyButton();
+		Thread.sleep(2000);
+		TimeoutImpl t = new TimeoutImpl();
+		t.startTimer();
+		String date = getLastConversionTime();
+		if (date.equals("noConversionFound")) {
+			date = "05 Sep 2000 04:18 PM";
+			Date timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+			System.out.println(timeStamp);
+			System.out.println(checkConversionTime(dateForCompare, timeStamp));
+			while (t.checkTimerMin(15) && !checkConversionTime(dateForCompare, timeStamp)) {
+				System.out.println("insie while");
+				Thread.sleep(5000);
+//		customerProfilePage.clickEventsTab();
+				customerProfilePage.clickEventTypesCheckBox();
+				customerProfilePage.clickSelectEventApplyButton();
+				Thread.sleep(2000);
+				customerProfilePage.clickEventTypesCheckBox();
+				customerProfilePage.clickConversionEventCheckBox();
+				customerProfilePage.clickSelectEventApplyButton();
+				Thread.sleep(2000);
+
+				date = getLastConversionTime();
+				if (date.equals("noConversionFound"))
+					date = "05 Sep 2000 04:18 PM";
+				timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+				SoftAssert soft = new SoftAssert();
+				soft.assertTrue(checkConversionTime(dateForCompare, timeStamp), "convertion event not found");
+				System.out.println(timeStamp);
+				System.out.println(getLastConversionTime());
+
+				if (driver.findElement(By.xpath(
+						"//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[3]"))
+						.getText().equalsIgnoreCase("Conversion"))
+
+					eh.setExcelFile("bcInputData", bcSheet);
+				String bcName = eh.getCellByColumnName("BC Name");
+				eM.setExcelFile("campaignInputData", campaignSheet);
+				String camapignName = (String) eM.getCell(1, 0);
+				broadcastPageObjects.verifyEventOfTheBC(event, bcName, camapignName);
+
+				System.out.println(getLastConversionTime());
+				System.out.println("Conversion found");
+
+			}
+
+		}
+//		date = getLastConversionTime();
+//		if (date.equals("noConversionFound"))
+//			date = "05 Sep 2000 04:18 PM";
+//		timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
+//		Assert.assertTrue("convertion event not found", checkConversionTime(dateForCompare, timeStamp));
+
+	}
+
 	@Then("^wait for comversion event$")
-//consumer-events//iron-list//data-table-row  
+	// consumer-events//iron-list//data-table-row
 	public void wait_for_comversion_event() throws Throwable {
 		CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 		customerProfilePage.clickEventTypesCheckBox();
@@ -2526,7 +2592,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 		while (t.checkTimerMin(15) && !checkConversionTime(dateForCompare, timeStamp)) {
 			System.out.println("insie while");
 			Thread.sleep(5000);
-//		customerProfilePage.clickEventsTab();
+//			customerProfilePage.clickEventsTab();
 			customerProfilePage.clickEventTypesCheckBox();
 			customerProfilePage.clickSelectEventApplyButton();
 			Thread.sleep(2000);
@@ -2542,12 +2608,19 @@ enterDeliveryTabDetails(bc_type, sheet);
 			System.out.println(timeStamp);
 			System.out.println(getLastConversionTime());
 
+//				else if(driver.findElement(By.xpath(
+//						"//iron-data-table[@id='table']/div[@id='container']/iron-list[@id='list']/div/div[1]/data-table-row/div[1]/data-table-cell[3]"))
+//						.getText().equalsIgnoreCase("Conversion"))
+//				{
+//					
+//					
+//					System.out.println(getLastConversionTime());
+//					System.out.println("Conversion found");
+//					
+//				}
+
 		}
-		date = getLastConversionTime();
-		if (date.equals("noConversionFound"))
-			date = "05 Sep 2000 04:18 PM";
-		timeStamp = new SimpleDateFormat("dd MMM yyyy hh:mm a").parse(date);
-		Assert.assertTrue("convertion event not found", checkConversionTime(dateForCompare, timeStamp));
+
 	}
 
 	public String getLastFullfillmentTime() {
@@ -2878,7 +2951,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 	public void bc_Settings_page_validation() throws Throwable {
 
 	}
-	
+
 	@Then("^click on Archive from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
 	public void click_on_Archive_from_workbook_and_sheet(String workbook, String sheet) throws Throwable {
 		eh.setExcelFile(workbook, sheet);
@@ -2887,7 +2960,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 		commonObjects.clickBCOptionsIcon(sheet);
 		commonObjects.clickArchiveOption();
 	}
-	
+
 	@Then("^click on delete from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
 	public void click_on_delete_from_workbook_and_sheet(String workbook, String sheet) throws Throwable {
 		eh.setExcelFile(workbook, sheet);
@@ -2896,8 +2969,6 @@ enterDeliveryTabDetails(bc_type, sheet);
 		commonObjects.clickBCOptionsIcon(sheet);
 		commonObjects.clickDeleteOption();
 	}
-
-
 
 	@Then("^click on BC edit button from workbook \"([^\"]*)\" sheet \"([^\"]*)\"$")
 	public void click_on_BC_edit_button_from_workbook_sheet(String workbook, String sheet) throws Throwable {
@@ -2927,18 +2998,18 @@ enterDeliveryTabDetails(bc_type, sheet);
 	@Then("^editing the BC from sheet \"([^\"]*)\" basic details With edit data from sheet \"([^\"]*)\"$")
 	public void editing_the_BC_from_sheet_basic_details_With_edit_data_from_sheet(String oneoffsheet,
 			String oneoffeditsheet) throws Throwable {
-		String bcName="";
-		if(oneoffsheet.contains("Edit")||oneoffsheet.contains("seedingTriggerableRecurringBCEd")) {
+		String bcName = "";
+		if (oneoffsheet.contains("Edit") || oneoffsheet.contains("seedingTriggerableRecurringBCEd")) {
 			eh.setExcelFile("bcInputDataForEdit", oneoffeditsheet);
-			 bcName = (eh.getCell(1, 0).toString()) + "Edited";
+			bcName = (eh.getCell(1, 0).toString()) + "Edited";
 			eh.setCell(1, 0, bcName);
-		}else {
+		} else {
 			eh.setExcelFile("bcInputData", oneoffsheet);
-			 bcName = (eh.getCell(1, 0).toString()) + "Edited";
-			 eh.setExcelFile("bcInputDataForEdit", oneoffeditsheet);
+			bcName = (eh.getCell(1, 0).toString()) + "Edited";
+			eh.setExcelFile("bcInputDataForEdit", oneoffeditsheet);
 			eh.setCell(1, 0, bcName);
 		}
-				
+
 		broadcastPageObjects.editingTheBcBasicDeatils(bcName, oneoffeditsheet);
 		broadcastPageObjects.clickProceedButton();
 		broadcastPageObjects.clickProceedButton();
@@ -2966,7 +3037,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 		Thread.sleep(2000);
 		broadcastPageObjects.clickProceedButton();
 
-		broadcastPageObjects.editTheDeleveryTabDetails(workbook,sheet);
+		broadcastPageObjects.editTheDeleveryTabDetails(workbook, sheet);
 
 	}
 
@@ -2998,13 +3069,13 @@ enterDeliveryTabDetails(bc_type, sheet);
 
 		try {
 			broadcastPageObjects.selectALanguage();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("language already selected");
 		}
-		
+
 		broadcastPageObjects.selectTrackSession();
 		broadcastPageObjects.selectTrackingSource();
-		
+
 //		String bc_type=eh.getCell(1, 7).toString();
 //		
 //		System.out.println("bc_type="+bc_type);
@@ -3027,9 +3098,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 //
 //		}
 //		
-		
-		
-		
+
 		Thread.sleep(3000);
 		broadcastPageObjects.clickProceedButton();
 	}
@@ -3041,7 +3110,7 @@ enterDeliveryTabDetails(bc_type, sheet);
 		Thread.sleep(2000);
 		if (targetSelection.contains("None")) {
 			broadcastPageObjects.clickTargetConditionNoneOption();
-			
+
 		} else if (targetSelection.contains("Create")) {
 
 			broadcastPageObjects.clickcreateTargetCondition();
@@ -3153,28 +3222,29 @@ enterDeliveryTabDetails(bc_type, sheet);
 						+ "')]"));
 	}
 
-	
 	@Then("^verify the Child BC count and recurring dates from workbook \"([^\"]*)\" in sheet \"([^\"]*)\"$")
-	public void verify_the_Child_BC_count_and_recurring_dates_from_workbook_in_sheet(String workbook, String sheet) throws Throwable {
+	public void verify_the_Child_BC_count_and_recurring_dates_from_workbook_in_sheet(String workbook, String sheet)
+			throws Throwable {
 		eh.setExcelFile(workbook, sheet);
 		String bcName = eh.getCell(1, 0).toString();
-		//Navigation navigation=new Navigation();
-		//navigation.refreshPage();
+		// Navigation navigation=new Navigation();
+		// navigation.refreshPage();
 		Thread.sleep(8000);
-		
+
 		String output = "";
-		List<WebElement> recurChilds=null;
-		
+		List<WebElement> recurChilds = null;
 
 		if (sheet.contains("seeding")) {
 			Thread.sleep(8000);
-			commonObjects.filterName(bcName+"_re");
+			commonObjects.filterName(bcName + "_re");
 			Thread.sleep(2000);
 			commonObjects.toggleAutoRefresh();
 			Thread.sleep(1000);
 			commonObjects.toggleAutoRefresh();
 			Thread.sleep(1000);
-			recurChilds = driver.findElements(By.xpath("//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row//vaadin-grid-table-cell[1]//vaadin-grid-cell-content[contains(.,'"+bcName+"')]/../..//vaadin-grid-table-cell[3]//vaadin-grid-cell-content"));
+			recurChilds = driver.findElements(By.xpath(
+					"//vaadin-grid-table//vaadin-grid-table-body//vaadin-grid-table-row//vaadin-grid-table-cell[1]//vaadin-grid-cell-content[contains(.,'"
+							+ bcName + "')]/../..//vaadin-grid-table-cell[3]//vaadin-grid-cell-content"));
 
 			System.out.println("Size of seedingReward recur bcs" + recurChilds.size());
 		} else {
@@ -3187,29 +3257,28 @@ enterDeliveryTabDetails(bc_type, sheet);
 			System.out.println("size of recurring bcs" + recurChilds.size());
 		}
 
-
 		ArrayList<String> getData = new ArrayList<String>();
 		String getTextFromElement;
 		for (WebElement webElement : recurChilds) {
-			//System.out.println(webElement.getText());
-			getTextFromElement=webElement.getText();
-			getData.add(getTextFromElement);	
+			// System.out.println(webElement.getText());
+			getTextFromElement = webElement.getText();
+			getData.add(getTextFromElement);
 		}
 //		 Collections.sort(getData);
 		System.out.println("getdatasort" + getData);
 
 		String dates = eh.getCell(1, 11).toString();
 		String s1 = (eh.getCellByColumnName("Recurrance Pattern").toString());
-		//System.out.println(s1.substring(0, 1));
+		// System.out.println(s1.substring(0, 1));
 		int recurringDays = Integer.parseInt(s1.substring(0, 1));
-		//System.out.println(recurringDays);
+		// System.out.println(recurringDays);
 		SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy hh:mm a");
 		Calendar c = Calendar.getInstance();
 		Date db = new Date();
 		Date gh = df.parse(dates);
-		//System.out.println(gh);
-		c.setTime(gh); 		
-		
+		// System.out.println(gh);
+		c.setTime(gh);
+
 //		for (int i=0;i<getData.size();i++) {
 //			output = df.format(c.getTime());
 //			System.out.println("before list"+getData.get(i));
@@ -3221,28 +3290,25 @@ enterDeliveryTabDetails(bc_type, sheet);
 //			}
 //			c.add(Calendar.DATE, recurringDays);
 //		}
-		int recurringDays1=recurringDays*2;
+		int recurringDays1 = recurringDays * 2;
 		c.add(Calendar.DATE, recurringDays1);
-		//System.out.println(Calendar.DATE);
-		for (int i=0;i<getData.size();i++) {
+		// System.out.println(Calendar.DATE);
+		for (int i = 0; i < getData.size(); i++) {
 			output = df.format(c.getTime());
-			System.out.println("before list"+getData.get(i));
-			System.out.println("before"+output);
-			if((getData.get(i)).equalsIgnoreCase(output)){
-			Assert.assertTrue(true);
-			}else {
-				Assert.assertTrue("NO child BC spawn",false);
+			System.out.println("before list" + getData.get(i));
+			System.out.println("before" + output);
+			if ((getData.get(i)).equalsIgnoreCase(output)) {
+				Assert.assertTrue(true);
+			} else {
+				Assert.assertTrue("NO child BC spawn", false);
 			}
 			c.add(Calendar.DATE, -recurringDays);
 		}
-		
-		
+
 	}
 
-	
 //*******Copy BC*******//
-	
-	
+
 	@Then("^click on BC Copy button from workbook \"([^\"]*)\" sheet \"([^\"]*)\"$")
 	public void click_on_BC_Copy_button_from_workbook_sheet(String workbook, String sheet) throws Throwable {
 		eh.setExcelFile(workbook, sheet);
@@ -3256,39 +3322,40 @@ enterDeliveryTabDetails(bc_type, sheet);
 	public void save_the_copied_BC_from_workbook_and_sheet(String workbook, String sheet) throws Throwable {
 		Thread.sleep(3000);
 		eM.setExcelFile(workbook, sheet);
-		String bcName=eM.getCell(1,0).toString();
-		//eM.setCell(1, 0, bcName+"_Copy");
-			if(sheet.contains("seedingTriggerableRecurringBC")) {
+		String bcName = eM.getCell(1, 0).toString();
+		// eM.setCell(1, 0, bcName+"_Copy");
+		if (sheet.contains("seedingTriggerableRecurringBC")) {
 			eh.setExcelFile("bcInputDataForEdit", "seedingTriggerableRecurringBCEd");
-			eh.setCell(1,0,bcName+"_Copy");
-		}else {
-			eh.setExcelFile("bcInputDataForEdit",sheet+"Edit");
-			eh.setCell(1,0,bcName+"_Copy");
+			eh.setCell(1, 0, bcName + "_Copy");
+		} else {
+			eh.setExcelFile("bcInputDataForEdit", sheet + "Edit");
+			eh.setCell(1, 0, bcName + "_Copy");
 		}
-		
+
 		broadcastPageObjects.clickProceedButton();
 		Thread.sleep(3000);
 		broadcastPageObjects.clickProceedButton();
 		Thread.sleep(3000);
 		broadcastPageObjects.clickProceedButton();
-		
+
 		Thread.sleep(2000);
 		System.out.println("Delivery tab details entering ...");
-		broadcastPageObjects.editTheDeleveryTabDetails(workbook,sheet);
+		broadcastPageObjects.editTheDeleveryTabDetails(workbook, sheet);
 //		broadcastPageObjects.clickCreateButton();
 //		Thread.sleep(2000);
 //		broadcastPageObjects.clickSaveButton();
 	}
 
 	@Then("^Verify the Copied Bc in view page workbook \"([^\"]*)\" sheet \"([^\"]*)\" with \"([^\"]*)\" condition (.*)$")
-	public void verify_the_Copied_Bc_in_view_page_sheet_with_condition_digitalPersonaGT(String workbook, String bcSheet, String offerSheet,String condition) throws Throwable {
-	    
+	public void verify_the_Copied_Bc_in_view_page_sheet_with_condition_digitalPersonaGT(String workbook, String bcSheet,
+			String offerSheet, String condition) throws Throwable {
+
 		broadcastPageObjects.verifyTheBcBasicDetailsBeforeEdit(bcSheet);
 		Thread.sleep(2000);
 		broadcastPageObjects.verifyTheBCTargetConditionDetails(condition);
 		Thread.sleep(2000);
-		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'"+BASE_LIST+"')]"));
-		
+		Assert.assertTrue(jswait.checkVisibility(".//p[contains(.,'" + BASE_LIST + "')]"));
+
 		Thread.sleep(2000);
 		broadcastPageObjects.offerDetailsBC();
 		eM.setExcelFile("offerInputData", offerSheet);
@@ -3306,107 +3373,110 @@ enterDeliveryTabDetails(bc_type, sheet);
 			broadcastPageObjects.verifyDeleveryTabDetails(workbook, bcSheet);
 		}
 	}
-	
+
 	@Then("^click on toggleAutoRefresh$")
 	public void click_on_toggleAutoRefresh() throws Throwable {
 		commonObjects.toggleAutoRefresh();
 	}
 
-	
-	
+	@Then("^Save bcInputData data to registrationListInputData \"([^\"]*)\" from \"([^\"]*)\" with condition (.*)$")
+	public void save_bcInputData_data_to_registrationListInputData_from_with_condition_customerWasSentTheTrialMessage(
+			String registraionSheet, String bcSheet, String condition) throws Throwable {
+		eh.setExcelFile("bcInputData", bcSheet);
 
-@Then("^Save bcInputData data to registrationListInputData \"([^\"]*)\" from \"([^\"]*)\" with condition (.*)$")
-public void save_bcInputData_data_to_registrationListInputData_from_with_condition_customerWasSentTheTrialMessage(String registraionSheet, String bcSheet,String condition) throws Throwable {
-	 eh.setExcelFile("bcInputData", bcSheet);
-	   
-	    String BCname=eh.getCell(1,0).toString();
-	    BCname=BCname+"-"+condition;
-	     eM.setExcelFile("registrationListInputData","WithOutDNC");
-	     int rows=eM.numRows();
-	    int cols=eM.numCols();
-	    eM.addCells(rows,0,BCname);	    
-	   System.out.println(eM.getCell(rows, 0).toString());
-}
-
-@Then("^verify the BC notification in mail \"([^\"]*)\" from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
-public void verify_the_BC_notification_in_mail_from_workbook_and_sheet(String status,String workbook, String sheet) throws Throwable {
-	Thread.sleep(2000);
-	eh.setExcelFile(workbook, sheet);
-	String bcName=eh.getCell(1, 0).toString();
-	EmailHelper emailHelper= new EmailHelper();
-	Thread.sleep(5000);
-	String fromAddrForBCNotification="";
-	String subjectOfEmail="";
-	
-	if(status.contentEquals("Rendering")) {
-	fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";// you pass your from address
-	subjectOfEmail= "Broadcast Rendering Notification - "+bcName;//BCNotification is BC name
-	}else if(status.contentEquals("Delivering")) {
-		 fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";
-		 subjectOfEmail="Broadcast Delivery Notification - "+bcName;
-	}else if(status.contentEquals("Completed")){
-		fromAddrForBCNotification="\"flyops@flytxt.com\" <flyops@flytxt.com>";
-		subjectOfEmail="Broadcast Finished - "+bcName;
+		String BCname = eh.getCell(1, 0).toString();
+		BCname = BCname + "-" + condition;
+		eM.setExcelFile("registrationListInputData", "WithOutDNC");
+		int rows = eM.numRows();
+		int cols = eM.numCols();
+		eM.addCells(rows, 0, BCname);
+		System.out.println(eM.getCell(rows, 0).toString());
 	}
-	
-	Date emailRecivedDate = EmailHelper.getMailRecivedDate(fromAddrForBCNotification, subjectOfEmail);
-	System.out.println("email recived Date"+emailRecivedDate);
-	String bcStartDate=(eh.getCell(1, 11).toString()).substring(0, 20);
-	bcStartDate=bcStartDate.trim();
-	System.out.println(bcStartDate);
-	
-		if(status.contentEquals("Completed")) {
-			SimpleDateFormat sdf= new SimpleDateFormat("dd MMM yyyy hh:mm a");
-			  Date bcdate = sdf.parse(bcStartDate);
-			  System.out.println(bcdate);
-			  Assert.assertTrue(bcdate.before(emailRecivedDate));
-		}else {	
-	SimpleDateFormat sdf= new SimpleDateFormat("dd MMM yyyy hh:mm a");
-	  Date bcdate = sdf.parse(bcStartDate);
-	  System.out.println(bcdate);
-	  Assert.assertTrue(emailRecivedDate.before(bcdate));
+
+	@Then("^verify the BC notification in mail \"([^\"]*)\" from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void verify_the_BC_notification_in_mail_from_workbook_and_sheet(String status, String workbook, String sheet)
+			throws Throwable {
+		Thread.sleep(2000);
+		eh.setExcelFile(workbook, sheet);
+		String bcName = eh.getCell(1, 0).toString();
+		EmailHelper emailHelper = new EmailHelper();
+		Thread.sleep(5000);
+		String fromAddrForBCNotification = "";
+		String subjectOfEmail = "";
+
+		if (status.contentEquals("Rendering")) {
+			fromAddrForBCNotification = "\"flyops@flytxt.com\" <flyops@flytxt.com>";// you pass your from address
+			subjectOfEmail = "Broadcast Rendering Notification - " + bcName;// BCNotification is BC name
+		} else if (status.contentEquals("Delivering")) {
+			fromAddrForBCNotification = "\"flyops@flytxt.com\" <flyops@flytxt.com>";
+			subjectOfEmail = "Broadcast Delivery Notification - " + bcName;
+		} else if (status.contentEquals("Completed")) {
+			fromAddrForBCNotification = "\"flyops@flytxt.com\" <flyops@flytxt.com>";
+			subjectOfEmail = "Broadcast Finished - " + bcName;
 		}
-   
-}
-@Then("^enter details for new broadcast with condition (.*) from sheet \"([^\"]*)\" with \"([^\"]*)\" and inventory \"([^\"]*)\"$")
-public void enter_details_for_new_broadcast_with_condition_digitalPersonaGT_from_sheet_with_and_inventory(String condition, String sheet, String offer, String inventory) throws Throwable {
-   
-	System.out.println(condition);
-	Thread.sleep(3000);
-	ExcelHelper list = new ExcelHelper();
-	list.setExcelFile("registrationListInputData", "Sheet1");
-	eM.setExcelFile("bcInputData", sheet);
+
+		Date emailRecivedDate = EmailHelper.getMailRecivedDate(fromAddrForBCNotification, subjectOfEmail);
+		System.out.println("email recived Date" + emailRecivedDate);
+		String bcStartDate = (eh.getCell(1, 11).toString()).substring(0, 20);
+		bcStartDate = bcStartDate.trim();
+		System.out.println(bcStartDate);
+
+		if (status.contentEquals("Completed")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm a");
+			Date bcdate = sdf.parse(bcStartDate);
+			System.out.println(bcdate);
+			Assert.assertTrue(bcdate.before(emailRecivedDate));
+		} else {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm a");
+			Date bcdate = sdf.parse(bcStartDate);
+			System.out.println(bcdate);
+			Assert.assertTrue(emailRecivedDate.before(bcdate));
+		}
+
+	}
+
+	@Then("^enter details for new broadcast with condition (.*) from sheet \"([^\"]*)\" with \"([^\"]*)\" and inventory \"([^\"]*)\"$")
+	public void enter_details_for_new_broadcast_with_condition_digitalPersonaGT_from_sheet_with_and_inventory(
+			String condition, String sheet, String offer, String inventory) throws Throwable {
+
+		System.out.println(condition);
+		Thread.sleep(3000);
+		ExcelHelper list = new ExcelHelper();
+		list.setExcelFile("registrationListInputData", "Sheet1");
+		eM.setExcelFile("bcInputData", sheet);
 //	String baseList = list.getCell(1, 2).toString();
-	ExcelHelper offerExcel = new ExcelHelper();
-	offerExcel.setExcelFile("offerInputData", offer);
-	String name = (String) eM.getCell(1, 0);
-	name = RandomNameGenerator.getRandomName(name);
-	eM.setCell(1, 0, name);
-	String bc_type = (String) eM.getCell(1, 7);
-	
-	eh.setExcelFile("bcInputData", sheet);
-	String DNCExclusion = "";
-	try {
-		DNCExclusion = eh.getCellByColumnName("DNCExclusion");
-	} catch (Exception e) {
-		DNCExclusion = "none";
-	}
-	
-	if(inventory.equalsIgnoreCase("Unlimited")){
-		broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_UNLIMITED, DNCExclusion);
-	}else if(inventory.equalsIgnoreCase("OneperDay")){ 
-		broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_ONEPERDAY, DNCExclusion);
-	}else if(inventory.equalsIgnoreCase("BlackoutAlways")) {
-		broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_BLACKOUTALWAYS, DNCExclusion);
-	}else {
-		System.out.println("no invetory selected, default inventory unlimited ");
-		broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_UNLIMITED, DNCExclusion);
-	}
-	
-	enterDeliveryTabDetails(bc_type, sheet);
-}
+		ExcelHelper offerExcel = new ExcelHelper();
+		offerExcel.setExcelFile("offerInputData", offer);
+		String name = (String) eM.getCell(1, 0);
+		name = RandomNameGenerator.getRandomName(name);
+		eM.setCell(1, 0, name);
+		String bc_type = (String) eM.getCell(1, 7);
 
+		eh.setExcelFile("bcInputData", sheet);
+		String DNCExclusion = "";
+		try {
+			DNCExclusion = eh.getCellByColumnName("DNCExclusion");
+		} catch (Exception e) {
+			DNCExclusion = "none";
+		}
 
+		if (inventory.equalsIgnoreCase("Unlimited")) {
+			broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_UNLIMITED,
+					DNCExclusion);
+		} else if (inventory.equalsIgnoreCase("OneperDay")) {
+			broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_ONEPERDAY,
+					DNCExclusion);
+		} else if (inventory.equalsIgnoreCase("BlackoutAlways")) {
+			broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_BLACKOUTALWAYS,
+					DNCExclusion);
+		} else {
+			System.out.println("no invetory selected, default inventory unlimited ");
+			broadcastPageObjects.createBC(name, bc_type, BASE_LIST, offer, condition, INVENTORY_UNLIMITED,
+					DNCExclusion);
+		}
+
+		enterDeliveryTabDetails(bc_type, sheet);
+	}
 
 //@Then("^save \"([^\"]*)\" migration data to spreadsheet from \"([^\"]*)\" with string (.*)$")
 //public void save_migration_data_to_spreadsheet_from_with_string_one_off_bc_blackout_with_condition_Condition(String workbook, String bcsheet, String key) throws Throwable {
@@ -3417,198 +3487,208 @@ public void enter_details_for_new_broadcast_with_condition_digitalPersonaGT_from
 //
 //}
 
-@Then("^add the BC Data to \"([^\"]*)\" from BCsheet \"([^\"]*)\" campaignname \"([^\"]*)\" campaign category \"([^\"]*)\" offer \"([^\"]*)\" condition \"([^\"]*)\" inventory \"([^\"]*)\" with string (.*)$")
-public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition_inventory_with_string(String parllelRunSheet, String bcSheet, String campaignSheet, String campaignCategory, String offerSheet, String condition, String inventory, String description) throws Throwable {
+	@Then("^add the BC Data to \"([^\"]*)\" from BCsheet \"([^\"]*)\" campaignname \"([^\"]*)\" campaign category \"([^\"]*)\" offer \"([^\"]*)\" condition \"([^\"]*)\" inventory \"([^\"]*)\" with string (.*)$")
+	public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition_inventory_with_string(
+			String parllelRunSheet, String bcSheet, String campaignSheet, String campaignCategory, String offerSheet,
+			String condition, String inventory, String description) throws Throwable {
 
-eh.setExcelFile("bcInputData", bcSheet);
-String bcName=eh.getCell(1,0).toString();
-String bcType=eh.getCell(1,7).toString();
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName = eh.getCell(1, 0).toString();
+		String bcType = eh.getCell(1, 7).toString();
 
-eh.setExcelFile("offerInputData", offerSheet);
-String offername=eh.getCell(1,0).toString();
+		eh.setExcelFile("offerInputData", offerSheet);
+		String offername = eh.getCell(1, 0).toString();
 
-eh.setExcelFile("campaignCategoryInputData", campaignCategory);
-String campaignCategoryName=eh.getCell(1,0).toString();
+		eh.setExcelFile("campaignCategoryInputData", campaignCategory);
+		String campaignCategoryName = eh.getCell(1, 0).toString();
 
-eh.setExcelFile("campaignInputData", campaignSheet);
-String campaignName=eh.getCell(1,0).toString();
+		eh.setExcelFile("campaignInputData", campaignSheet);
+		String campaignName = eh.getCell(1, 0).toString();
 
-eh.addDataToParllelSheet(parllelRunSheet, bcName, campaignName, campaignCategoryName, offername, condition, inventory, description, bcType,bcSheet);
-	
-}
+		eh.addDataToParllelSheet(parllelRunSheet, bcName, campaignName, campaignCategoryName, offername, condition,
+				inventory, description, bcType, bcSheet);
 
-/***
-* 
-* @param parallelRunBCSheet , hm.getKey()=bcname, hm.getValue()=bcSheet
-* @throws Throwable
-*/
-@Then("^Activate the BCs from sheet \"([^\"]*)\"$")
-public void activate_the_BCs_from_sheet(String parallelRunBCSheet) throws Throwable {
-eh.setExcelFile("parallelRunBC", parallelRunBCSheet);
-Thread.sleep(2000);
-String statusOfBC="";
+	}
+
+	/***
+	 * 
+	 * @param parallelRunBCSheet , hm.getKey()=bcname, hm.getValue()=bcSheet
+	 * @throws Throwable
+	 */
+	@Then("^Activate the BCs from sheet \"([^\"]*)\"$")
+	public void activate_the_BCs_from_sheet(String parallelRunBCSheet) throws Throwable {
+		eh.setExcelFile("parallelRunBC", parallelRunBCSheet);
+		Thread.sleep(2000);
+		String statusOfBC = "";
 // here we passing the parameters sheetname and for bcname: Name(coulmn name), for bcsheet : BCSheet(column name) keys are bcname and values are bcsheet like(oneoffBC, rucurringBC)
-LinkedHashMap<String, String> dataList = eh.extractDataFromExcelFile(parallelRunBCSheet,"Name","BCSheet");
-for (Entry<String, String> hm: dataList.entrySet()) {
+		LinkedHashMap<String, String> dataList = eh.extractDataFromExcelFile(parallelRunBCSheet, "Name", "BCSheet");
+		for (Entry<String, String> hm : dataList.entrySet()) {
 
-	try { 
+			try {
 
-		broadcastPageObjects.navigate_to_broadcasts(hm.getValue());
-	    commonObjects.filterBCName(hm.getValue(), hm.getKey());
-	    Thread.sleep(1000);
-	    statusOfBC=broadcastPageObjects.getTopBcStatus(hm.getValue(),hm.getKey());
-	    
-			if (statusOfBC.equals("Planned")) {
-				commonObjects.clickBCOptionsIcon(hm.getValue());
-				commonObjects.clickEditOption();
-
-				edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", hm.getValue());
-				activateBc();
-
-				Thread.sleep(3000);
 				broadcastPageObjects.navigate_to_broadcasts(hm.getValue());
 				commonObjects.filterBCName(hm.getValue(), hm.getKey());
-				// broadcastPageObjects.getTopBcStatus(bcSheetName,bcname);
+				Thread.sleep(1000);
 				statusOfBC = broadcastPageObjects.getTopBcStatus(hm.getValue(), hm.getKey());
 
-				eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, statusOfBC, hm.getKey(), "Name",
-						"StatusofBC");
+				if (statusOfBC.equals("Planned")) {
+					commonObjects.clickBCOptionsIcon(hm.getValue());
+					commonObjects.clickEditOption();
 
-				Thread.sleep(3000);
+					edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", hm.getValue());
+					activateBc();
 
-				System.out.println(hm.getKey() + " is acivated");
-			} else {
+					Thread.sleep(3000);
+					broadcastPageObjects.navigate_to_broadcasts(hm.getValue());
+					commonObjects.filterBCName(hm.getValue(), hm.getKey());
+					// broadcastPageObjects.getTopBcStatus(bcSheetName,bcname);
+					statusOfBC = broadcastPageObjects.getTopBcStatus(hm.getValue(), hm.getKey());
 
+					eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, statusOfBC, hm.getKey(), "Name",
+							"StatusofBC");
+
+					Thread.sleep(3000);
+
+					System.out.println(hm.getKey() + " is acivated");
+				} else {
+
+					statusOfBC = broadcastPageObjects.getTopBcStatus(hm.getValue(), hm.getKey());
+
+					eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, statusOfBC, hm.getKey(), "Name",
+							"StatusofBC");
+				}
+
+			} catch (Exception e) {
+				commonObjects.filterBCName(hm.getValue(), hm.getKey());
 				statusOfBC = broadcastPageObjects.getTopBcStatus(hm.getValue(), hm.getKey());
-
+				System.out.println(statusOfBC);
 				eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, statusOfBC, hm.getKey(), "Name",
 						"StatusofBC");
+				// System.out.println(hm.getKey()+" is not acivated");
 			}
-		
-	}catch (Exception e) {
-		commonObjects.filterBCName(hm.getValue(), hm.getKey());
-		statusOfBC=broadcastPageObjects.getTopBcStatus(hm.getValue(),hm.getKey());
-		System.out.println(statusOfBC);
-		eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,statusOfBC, hm.getKey(), "Name","StatusofBC" );
-		//System.out.println(hm.getKey()+" is not acivated");
+
 		}
-		
-		
-	   
-}
 
-Thread.sleep(2000);
-}
-	
+		Thread.sleep(2000);
+	}
 
-@Then("^verify the activated Bcs from Sheet \"([^\"]*)\" and inventory \"([^\"]*)\" with condition \"([^\"]*)\"$")
-public void verify_the_activated_Bcs_from_Sheet_and_inventory_with_condition(String parallelRunBCSheet, String inventory, String targetCondition) throws Throwable {
-    int count=0;
-    boolean boolean1;
-	eh.setExcelFile("parallelRunBC", parallelRunBCSheet);
-	LinkedHashMap<String, String> dataList = eh.extractDataFromExcelFile(parallelRunBCSheet,"Name","Inventory");
-	
-	for (Entry<String, String> hm: dataList.entrySet()) {
-	
-		
-	 if(hm.getValue().equals("BlackoutAlways")&&inventory.equals("BlackoutAlways")) {
-		 commonObjects.filterName(hm.getKey());
-		 
-		 boolean1 = jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Blackout Snooze')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
-	
-		if(boolean1==true)
-			eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,"Pass", hm.getKey(), "Name","StatusOfTestcase");
-		else
-			eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,"Fail", hm.getKey(), "Name","StatusOfTestcase");
-	
-	 }else if(hm.getValue().equals("OneperDay")&&inventory.equals("OneperDay")) {
-		 commonObjects.filterName(hm.getKey());
-		
-			 if(count==0) {
-		 jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
-		 ++count;
-		 System.out.println(hm.getKey()+" one per day 1st bc");
-			 }else if(count>=1) {
-			 jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
-		System.out.println(hm.getKey()+" one per day 2nd bc");
-		 }
-			 
-	 }else if(hm.getValue().equals("Unlimited")&&inventory.equals("Unlimited")) {
-		 commonObjects.filterName(hm.getKey());
-		
-		if(hm.getKey().contains("seeding"))
-		  boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
-		 else
-		 boolean1= jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+hm.getKey()+"')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
-		 
-		 if(boolean1==true)
-				eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,"Pass", hm.getKey(), "Name","StatusOfTestcase");
-			else
-				eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet,"Fail", hm.getKey(), "Name","StatusOfTestcase");
-	 }
-		
-		
-	}//for
-	
-	
-}//method
-@Then("^filter the bc from file \"([^\"]*)\" of sheet \"([^\"]*)\" for bctype \"([^\"]*)\"$")
-public void filter_the_bc_from_sheet_with(String bcfile, String bcsheet, String bctype ) throws Throwable {
-	eh.setExcelFile(bcfile, bcsheet);
-	String bcName=eh.getCellByColumnName("BC Name");
-	commonObjects.filterBC(bcName,bctype);
-	commonObjects.BCOptionIcon(bctype);
-}
+	@Then("^verify the activated Bcs from Sheet \"([^\"]*)\" and inventory \"([^\"]*)\" with condition \"([^\"]*)\"$")
+	public void verify_the_activated_Bcs_from_Sheet_and_inventory_with_condition(String parallelRunBCSheet,
+			String inventory, String targetCondition) throws Throwable {
+		int count = 0;
+		boolean boolean1;
+		eh.setExcelFile("parallelRunBC", parallelRunBCSheet);
+		LinkedHashMap<String, String> dataList = eh.extractDataFromExcelFile(parallelRunBCSheet, "Name", "Inventory");
 
+		for (Entry<String, String> hm : dataList.entrySet()) {
 
-@Then("^pause bc for bctype \"([^\"]*)\"$")
-public void pause_bc_for_other_than_oneoff_from_sheet(String bctype) throws Throwable {
-	broadcastPageObjects.pauseBC(bctype);
+			if (hm.getValue().equals("BlackoutAlways") && inventory.equals("BlackoutAlways")) {
+				commonObjects.filterName(hm.getKey());
 
-}
+				boolean1 = jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + hm.getKey()
+						+ "')]/../..//vaadin-grid-table-cell[contains(.,'Blackout Snooze')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
 
-@Then("^wait until status of \"([^\"]*)\" from file \"([^\"]*)\" is \"([^\"]*)\" for bctype \"([^\"]*)\"$")
-public void wait_until_status_of_from_file_is_for_bctype(String bcsheet, String bcfile, String status, String bctype) throws Throwable {
-	eh.setExcelFile(bcfile, bcsheet);
-    String bcName=eh.getCellByColumnName("BC Name");
+				if (boolean1 == true)
+					eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, "Pass", hm.getKey(), "Name",
+							"StatusOfTestcase");
+				else
+					eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, "Fail", hm.getKey(), "Name",
+							"StatusOfTestcase");
+
+			} else if (hm.getValue().equals("OneperDay") && inventory.equals("OneperDay")) {
+				commonObjects.filterName(hm.getKey());
+
+				if (count == 0) {
+					jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + hm.getKey()
+							+ "')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
+					++count;
+					System.out.println(hm.getKey() + " one per day 1st bc");
+				} else if (count >= 1) {
+					jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + hm.getKey()
+							+ "')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[contains(.,'0')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
+					System.out.println(hm.getKey() + " one per day 2nd bc");
+				}
+
+			} else if (hm.getValue().equals("Unlimited") && inventory.equals("Unlimited")) {
+				commonObjects.filterName(hm.getKey());
+
+				if (hm.getKey().contains("seeding"))
+					boolean1 = jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + hm.getKey()
+							+ "')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'0')])[1]");
+				else
+					boolean1 = jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + hm.getKey()
+							+ "')]/../..//vaadin-grid-table-cell[contains(.,'Completed')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[contains(.,'728')]/..//vaadin-grid-table-cell[8][contains(.,'728')])[1]");
+
+				if (boolean1 == true)
+					eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, "Pass", hm.getKey(), "Name",
+							"StatusOfTestcase");
+				else
+					eh.insertLastColumnValues("parallelRunBC", parallelRunBCSheet, "Fail", hm.getKey(), "Name",
+							"StatusOfTestcase");
+			}
+
+		} // for
+
+	}// method
+
+	@Then("^filter the bc from file \"([^\"]*)\" of sheet \"([^\"]*)\" for bctype \"([^\"]*)\"$")
+	public void filter_the_bc_from_sheet_with(String bcfile, String bcsheet, String bctype) throws Throwable {
+		eh.setExcelFile(bcfile, bcsheet);
+		String bcName = eh.getCellByColumnName("BC Name");
+		commonObjects.filterBC(bcName, bctype);
+		commonObjects.BCOptionIcon(bctype);
+	}
+
+	@Then("^pause bc for bctype \"([^\"]*)\"$")
+	public void pause_bc_for_other_than_oneoff_from_sheet(String bctype) throws Throwable {
+		broadcastPageObjects.pauseBC(bctype);
+
+	}
+
+	@Then("^wait until status of \"([^\"]*)\" from file \"([^\"]*)\" is \"([^\"]*)\" for bctype \"([^\"]*)\"$")
+	public void wait_until_status_of_from_file_is_for_bctype(String bcsheet, String bcfile, String status,
+			String bctype) throws Throwable {
+		eh.setExcelFile(bcfile, bcsheet);
+		String bcName = eh.getCellByColumnName("BC Name");
 //    commonObjects.filterBC(bcName,bctype);
-	String statusOfBc = broadcastPageObjects.getTopBcStatus(bcsheet,bcName,bctype);
-	TimeoutImpl t = new TimeoutImpl();
-	t.startTimer();
-	while (!statusOfBc.contains(status) && t.checkTimerMin(6)) {
-		statusOfBc = broadcastPageObjects.getTopBcStatus(bcsheet,bcName,bctype);
-		System.out.println(statusOfBc);
-		Thread.sleep(3000);
+		String statusOfBc = broadcastPageObjects.getTopBcStatus(bcsheet, bcName, bctype);
+		TimeoutImpl t = new TimeoutImpl();
+		t.startTimer();
+		while (!statusOfBc.contains(status) && t.checkTimerMin(10)) {
+			statusOfBc = broadcastPageObjects.getTopBcStatus(bcsheet, bcName, bctype);
+			System.out.println(statusOfBc);
+			Thread.sleep(3000);
+		}
+		Assert.assertTrue("Invalid status of BC", statusOfBc.contains(status));
 	}
-	Assert.assertTrue("Invalid status of BC", statusOfBc.contains(status));
-}
 
-@Then("^wait until status of recurring child bc from sheet \"([^\"]*)\" is \"([^\"]*)\"$")
-public void wait_until_status_of_recurring_child_bc_from_sheet_is(String bcsheet, String statusExpected) throws Throwable {
-	eh.setExcelFile("bcInputData", bcsheet);
-    String bcName=eh.getCellByColumnName("BC Name");
-    commonObjects.filterName(bcName);
-	String statusOfBc = broadcastPageObjects.getStatusForChildBC(bcsheet,bcName);
-	TimeoutImpl t = new TimeoutImpl();
-	t.startTimer();
-	while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(20)) {
-		statusOfBc = broadcastPageObjects.getStatusForChildBC(bcsheet,bcName);
-		System.out.println(statusOfBc);
-		Thread.sleep(3000);
+	@Then("^wait until status of recurring child bc from sheet \"([^\"]*)\" is \"([^\"]*)\"$")
+	public void wait_until_status_of_recurring_child_bc_from_sheet_is(String bcsheet, String statusExpected)
+			throws Throwable {
+		eh.setExcelFile("bcInputData", bcsheet);
+		String bcName = eh.getCellByColumnName("BC Name");
+		commonObjects.filterName(bcName);
+		String statusOfBc = broadcastPageObjects.getStatusForChildBC(bcsheet, bcName);
+		TimeoutImpl t = new TimeoutImpl();
+		t.startTimer();
+		while (!statusOfBc.contains(statusExpected) && t.checkTimerMin(20)) {
+			statusOfBc = broadcastPageObjects.getStatusForChildBC(bcsheet, bcName);
+			System.out.println(statusOfBc);
+			Thread.sleep(3000);
+		}
+		Assert.assertTrue("Invalid status of BC", statusOfBc.contains(statusExpected));
+
 	}
-	Assert.assertTrue("Invalid status of BC", statusOfBc.contains(statusExpected));
 
-}
-@Then("^abort bc for bctype \"([^\"]*)\"$")
-public void abort_bc_for_bctype(String bctype) throws Exception {
-	broadcastPageObjects.abortBC(bctype);
-	
-}
-	
-	
-	
-	public void recurringBCDelieverTab(String bcSheet,String endType,String targetRenderTime,String bcExpiry) throws Exception {
-		Actions builder =new Actions(driver);
+	@Then("^abort bc for bctype \"([^\"]*)\"$")
+	public void abort_bc_for_bctype(String bctype) throws Exception {
+		broadcastPageObjects.abortBC(bctype);
+
+	}
+
+	public void recurringBCDelieverTab(String bcSheet, String endType, String targetRenderTime, String bcExpiry)
+			throws Exception {
+		Actions builder = new Actions(driver);
 		Calendar rightNow = Calendar.getInstance();
 		String mn = "";
 		if (rightNow.get(Calendar.MONTH) + 1 < 9) {
@@ -3631,10 +3711,9 @@ public void abort_bc_for_bctype(String bctype) throws Exception {
 			min -= 60;
 			hours++;
 		}
-		 if(min==0)
-			{
-				min+=5;
-			}
+		if (min == 0) {
+			min += 5;
+		}
 		jswait.loadClick(".//div[@id='radioLabel' and contains(.,'Recurring')]/../div[1]");
 		jswait.loadClick(".//paper-date-time-input//paper-input[1]//input");
 		jswait.loadClick(".//*[@id='months']//div[@date='" + date + "']");
@@ -3657,122 +3736,133 @@ public void abort_bc_for_bctype(String bctype) throws Exception {
 		Thread.sleep(1000);
 		if (am_pm == 0)
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[1]");
-		
+
 		else
 			jswait.loadClick("//*[@id='deliver-card']/../paper-card[1]//*[@id='heading']/iron-selector[2]/div[2]");
 		Thread.sleep(1000);
 		num1 = driver.findElement(By.xpath(
 				".//*[@id='deliverDetailForm']//*[@class='start-time-wrap style-scope broadcast-deliver-details']//*[@id='timeDialog']/div/paper-button[2]"));
 		builder.moveToElement(num1).click().build().perform();
-		broadcastPageObjects.recurringBCDeliverTabDetails(bcSheet,endType,targetRenderTime,bcExpiry);
-		
+		broadcastPageObjects.recurringBCDeliverTabDetails(bcSheet, endType, targetRenderTime, bcExpiry);
+
 	}
+
 //==========================================================================================================================================//
 	@Then("^create bc from sheet \"([^\"]*)\" with inventory \"([^\"]*)\" and trigger \"([^\"]*)\"$")
-	public void create_bc_from_sheet_with_inventory_and_trigger(String bcSheet, String inventory, String trigger) throws Exception {
-	eM.setExcelFile("bcInputData", bcSheet);
-	String bcName = (String) eM.getCell(1, 0);
-	bcName = RandomNameGenerator.getRandomName(bcName);
-	eM.setCell(1, 0, bcName);
+	public void create_bc_from_sheet_with_inventory_and_trigger(String bcSheet, String inventory, String trigger)
+			throws Exception {
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bcName = (String) eM.getCell(1, 0);
+		bcName = RandomNameGenerator.getRandomName(bcName);
+		eM.setCell(1, 0, bcName);
 //	String bc_type = (String) eM.getCell(1, 7);
-	broadcastPageObjects.enterBasicDetailsOfBC(bcName,inventory,trigger);
-}
-
-@Then("^enter target tab details target condition (.*) type \"([^\"]*)\" TG \"([^\"]*)\" CG \"([^\"]*)\" DNC \"([^\"]*)\"$")
-public void enter_target_tab_details_target_condition_type_TG_CG_DNC(String condition,String targetType, String TG, String CG, String DNC) throws Exception {
-	broadcastPageObjects.enterTargetTabDetails(condition,targetType,TG,CG,DNC);
-}
-
-@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with \"([^\"]*)\" track session expires \"([^\"]*)\" filter criteria \"([^\"]*)\" give reward to \"([^\"]*)\"$")
-public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_track_session_expires_filter_criteria_give_reward_to(String offerSheet, String bcSheet, String creative, String trackExpires, String filterCriteria, String giveRewardsTo) throws Exception {
-	eM.setExcelFile("bcInputData", bcSheet);
-	String bc_type = (String) eM.getCell(1, 7);
-	broadcastPageObjects.selectOffer(offerSheet,bc_type,creative,trackExpires,filterCriteria,giveRewardsTo);
-
-}
-@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\"$")
-public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet(String offerSheet, String bcSheet) throws Throwable {
-	
-	eM.setExcelFile("bcInputData", bcSheet);
-	String bc_type = (String) eM.getCell(1, 7);
-	broadcastPageObjects.selectOffer(offerSheet,bc_type);
-}
-    
-
-
-@Then("^enter deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
-public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
-	eM.setExcelFile("bcInputData", bcSheet);
-	String bc_type = (String) eM.getCell(1, 7);
-	System.out.println("bc_type is :"+bc_type);
-	if(bc_type.equalsIgnoreCase("recurring")) {
-		broadcastPageObjects.recurringBCDeliverTabDetails(endType,targetRenderTime,bcExpiry,bcSheet);
+		broadcastPageObjects.enterBasicDetailsOfBC(bcName, inventory, trigger);
 	}
-	else {
-		System.out.println("inside non recurring bc s");
-	enterDeliveryTabDetails(bc_type,bcSheet);
-}
-}
-@Then("^enter deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
-public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet_with(String endType, String targetRenderTime, String bcExpiry, String bcSheet, String notification) throws Throwable {
-	eM.setExcelFile("bcInputData", bcSheet);
-	String bc_type = (String) eM.getCell(1, 7);
-	System.out.println("bc_type is :"+bc_type);
-	if(notification.equals("notification")) {
-		broadcastPageObjects.bcNotifications();
-		broadcastPageObjects.bcNotificationsadd();
-		broadcastPageObjects.addNotificationuser();
-		broadcastPageObjects.bcNotificationsok();
-	}else {
-		System.out.println("no notification configured");
+
+	@Then("^enter target tab details target condition (.*) type \"([^\"]*)\" TG \"([^\"]*)\" CG \"([^\"]*)\" DNC \"([^\"]*)\"$")
+	public void enter_target_tab_details_target_condition_type_TG_CG_DNC(String condition, String targetType, String TG,
+			String CG, String DNC) throws Exception {
+		broadcastPageObjects.enterTargetTabDetails(condition, targetType, TG, CG, DNC);
 	}
-	if(bc_type.equalsIgnoreCase("recurring")) {
-		broadcastPageObjects.recurringBCDeliverTabDetails(endType,targetRenderTime,bcExpiry,bcSheet);
+
+	@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with \"([^\"]*)\" track session expires \"([^\"]*)\" filter criteria \"([^\"]*)\" give reward to \"([^\"]*)\"$")
+	public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_track_session_expires_filter_criteria_give_reward_to(
+			String offerSheet, String bcSheet, String creative, String trackExpires, String filterCriteria,
+			String giveRewardsTo) throws Exception {
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bc_type = (String) eM.getCell(1, 7);
+		broadcastPageObjects.selectOffer(offerSheet, bc_type, creative, trackExpires, filterCriteria, giveRewardsTo);
+
 	}
-	else {
-		System.out.println("inside non recurring bc s");
-	enterDeliveryTabDetails(bc_type,bcSheet);
-}
-}
 
-@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with connector from sheet \"([^\"]*)\"$")
-public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_with_connector_from_sheet(String offerSheet, String bcSheet, String connectorSheet) throws Throwable {
-	eM.setExcelFile("bcInputData", bcSheet);
-	String bc_type = (String) eM.getCell(1, 7);
-	broadcastPageObjects.selectOffer(offerSheet,bc_type,connectorSheet);
-}
-@Then("^add the BC Data to \"([^\"]*)\" from BCsheet \"([^\"]*)\" campaignname \"([^\"]*)\" campaign category \"([^\"]*)\" offer \"([^\"]*)\" condition \"([^\"]*)\"$")
-public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition(String bcDataSheet, String bcSheet, String campaignSheet, String campaignCategorySheet, String offerSheet, String condition) throws Exception {
-	eh.setExcelFile("bcInputData", bcSheet);
-	String bcName=eh.getCell(1,0).toString();
-	String bcType=eh.getCell(1,14).toString();
+	@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\"$")
+	public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet(String offerSheet, String bcSheet)
+			throws Throwable {
 
-	eh.setExcelFile("offerInputData", offerSheet);
-	String offername=eh.getCell(1,0).toString();
-	String channel=eh.getCell(1,3).toString();
-	String offerType=eh.getCell(1,2).toString();
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bc_type = (String) eM.getCell(1, 7);
+		broadcastPageObjects.selectOffer(offerSheet, bc_type);
+	}
 
-	eh.setExcelFile("campaignCategoryInputData", campaignCategorySheet);
-	String campaignCategoryName=eh.getCell(1,0).toString();
+	@Then("^enter deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+	public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType,
+			String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bc_type = (String) eM.getCell(1, 7);
+		System.out.println("bc_type is :" + bc_type);
+		if (bc_type.equalsIgnoreCase("recurring")) {
+			broadcastPageObjects.recurringBCDeliverTabDetails(endType, targetRenderTime, bcExpiry, bcSheet);
+		} else {
+			System.out.println("inside non recurring bc s");
+			enterDeliveryTabDetails(bc_type, bcSheet);
+		}
+	}
 
-	eh.setExcelFile("campaignInputData", campaignSheet);
-	String campaignName=eh.getCell(1,0).toString();
+	@Then("^enter deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\" with \"([^\"]*)\"$")
+	public void enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet_with(String endType,
+			String targetRenderTime, String bcExpiry, String bcSheet, String notification) throws Throwable {
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bc_type = (String) eM.getCell(1, 7);
+		System.out.println("bc_type is :" + bc_type);
+		if (notification.equals("notification")) {
+			broadcastPageObjects.bcNotifications();
+			broadcastPageObjects.bcNotificationsadd();
+			broadcastPageObjects.addNotificationuser();
+			broadcastPageObjects.bcNotificationsok();
+		} else {
+			System.out.println("no notification configured");
+		}
+		if (bc_type.equalsIgnoreCase("recurring")) {
+			broadcastPageObjects.recurringBCDeliverTabDetails(endType, targetRenderTime, bcExpiry, bcSheet);
+		} else {
+			System.out.println("inside non recurring bc s");
+			enterDeliveryTabDetails(bc_type, bcSheet);
+		}
+	}
 
-	eh.addDataToParllelSheet(bcDataSheet, bcName, campaignName, campaignCategoryName, offername, condition, channel, offerType, bcType,bcSheet);
-}
+	@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with connector from sheet \"([^\"]*)\"$")
+	public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_with_connector_from_sheet(String offerSheet,
+			String bcSheet, String connectorSheet) throws Throwable {
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bc_type = (String) eM.getCell(1, 7);
+		broadcastPageObjects.selectOffer(offerSheet, bc_type, connectorSheet);
+	}
 
+	@Then("^add the BC Data to \"([^\"]*)\" from BCsheet \"([^\"]*)\" campaignname \"([^\"]*)\" campaign category \"([^\"]*)\" offer \"([^\"]*)\" condition \"([^\"]*)\"$")
+	public void add_the_BC_Data_to_from_BCsheet_campaignname_campaign_category_offer_condition(String bcDataSheet,
+			String bcSheet, String campaignSheet, String campaignCategorySheet, String offerSheet, String condition)
+			throws Exception {
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName = eh.getCell(1, 0).toString();
+		String bcType = eh.getCell(1, 14).toString();
 
-@Then("^\"([^\"]*)\" the conversion job name \"([^\"]*)\"$")
-public void the_conversion_job_name(String statusTypeOfJob, String jobName) throws Throwable {
-    
-    }
+		eh.setExcelFile("offerInputData", offerSheet);
+		String offername = eh.getCell(1, 0).toString();
+		String channel = eh.getCell(1, 3).toString();
+		String offerType = eh.getCell(1, 2).toString();
 
-@Then("^activate and verify the broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
-public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String workBook, String sheet) throws Throwable {
+		eh.setExcelFile("campaignCategoryInputData", campaignCategorySheet);
+		String campaignCategoryName = eh.getCell(1, 0).toString();
+
+		eh.setExcelFile("campaignInputData", campaignSheet);
+		String campaignName = eh.getCell(1, 0).toString();
+
+		eh.addDataToParllelSheet(bcDataSheet, bcName, campaignName, campaignCategoryName, offername, condition, channel,
+				offerType, bcType, bcSheet);
+	}
+
+	@Then("^\"([^\"]*)\" the conversion job name \"([^\"]*)\"$")
+	public void the_conversion_job_name(String statusTypeOfJob, String jobName) throws Throwable {
+
+	}
+
+	@Then("^activate and verify the broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String workBook, String sheet)
+			throws Throwable {
 		String statusOfBC = "";
-		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,sheet);
-		String bcName, campaignCategory, campaignName, offerName, inventory,bcSheet = "",bcType;
-		
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook, sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventory, bcSheet = "", bcType;
+
 		for (int i = 0; i < data.size(); i++) {
 			campaignObjects.navigateToLIfeCycleMarketing();
 			bcName = data.get(i).get(1);
@@ -3781,8 +3871,8 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 			offerName = data.get(i).get(6);
 			inventory = data.get(i).get(7);
 			bcSheet = data.get(i).get(9);
-			bcType= data.get(i).get(8);
-			
+			bcType = data.get(i).get(8);
+
 			try {
 
 				campaignObjects.scrollToCampaignCategory(campaignCategory);
@@ -3800,16 +3890,13 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 					commonObjects.clickEditOption();
 
 					edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
-									
+
 					activateBc();
-					
-					
+
 					broadcastPageObjects.navigate_to_broadcasts(bcSheet);
-					commonObjects.filterBCName(bcSheet, bcName);			
-					
+					commonObjects.filterBCName(bcSheet, bcName);
+
 					statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
-					
-					
 
 					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
 				} else {
@@ -3827,363 +3914,350 @@ public void activate_and_verify_the_broadcast_from_workbook_and_sheet(String wor
 
 		}
 
-}
-
-
-
-
-
-
-@Then("^edit deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
-public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType, String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
-	 Thread.sleep(3000);
-	 broadcastPageObjects.clickProceedButton();
-	 Thread.sleep(2000);
-	 broadcastPageObjects.clickProceedButton();
-	 Thread.sleep(2000);
-	 broadcastPageObjects.clickProceedButton();
-	 Thread.sleep(2000);
-	 enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet( endType,  targetRenderTime,  bcExpiry,  bcSheet);
-         
-		 }
-
-
-	
-@Then("^verify the inventory \"([^\"]*)\" after completion of BCs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
-public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet(String inventory, String workbook, String sheet) throws Throwable {
-	int count=0;
-	boolean boolean1;
-	ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
-	String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "",bcLimit;
-	for (int i = 0; i < data.size(); i++) {
-		
-		
-		bcName = data.get(i).get(1);
-		campaignCategory = data.get(i).get(4);
-		campaignName = data.get(i).get(5);
-		offerName = data.get(i).get(6);
-		inventoryFromSheet = data.get(i).get(7);
-		bcSheet = data.get(i).get(9);
-		bcLimit=data.get(i).get(2);
-		try {
-				
-			if(inventory.equals(inventoryFromSheet)&& inventory.equals("BlackoutAlways")) {
-				broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
-				boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Blackout Snooze",770,0,0);
-				if(boolean1==true)
-					eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-				else
-					eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
-			
-			 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("OneperDay")) {
-				 broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
-					
-					 if(count==0) {
-						 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,770);
-				 ++count;
-				 System.out.println(bcName+" one per day 1st bc");
-				 if(boolean1==true)
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-					else
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");	
-				 }
-					 else if(count>=1) {
-					 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",0,0,0);	
-					 System.out.println(bcName+" one per day 2nd bc");
-				if(boolean1==true)
-					eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-				else
-					eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
-				 }
-				 
-					 
-			 }else if(inventory.equals(inventoryFromSheet)&& inventory.equals("Unlimited")) {
-				 
-				 broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory,campaignName,bcName);
-				 
-				 
-				if(bcName.contains("seeding")&&!bcLimit.contains("defineLimitFixed")){
-					System.out.println("verify seeding bc count...");
-					 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,0);
-				}else if(bcLimit.contains("defineLimitFixed")){
-					
-					try {
-					int bcLimitSize=bcLimit.trim().length();
-					String limitCount=bcLimit.substring(16,bcLimitSize);
-					int limit=Integer.parseInt(limitCount);
-					if(!bcName.contains("seeding")) {
-						System.out.println("verify non seeding bc limit...");
-					boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",limit,limit,limit);
-					}else {
-						System.out.println("verify seeding bc limit...");
-						boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",limit,limit,0);
-						//boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",0,limit,limit);
-					}
-					}catch (Exception e) {
-						boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",10,10,10);
-					}
-				}else {
-					System.out.println("verify non seeding bc count...");
-					 boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",770,770,770);
-				}
-				 if(boolean1==true) {
-					 
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Pass", bcName, "Name","StatusOfTestcase");
-						Assert.assertTrue(true);
-				 }else {
-						eh.insertLastColumnValues("parallelRunBC", sheet,"Fail", bcName, "Name","StatusOfTestcase");
-						Assert.assertTrue(false);
-				 }
-			 }
-			 }catch (Exception e) {
-			System.out.println("count mismatch...");
-		}
-		}
-	
 	}
 
+	@Then("^edit deliver tab with end \"([^\"]*)\" target render time \"([^\"]*)\" and broadcast expiry as \"([^\"]*)\" from sheet \"([^\"]*)\"$")
+	public void edit_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(String endType,
+			String targetRenderTime, String bcExpiry, String bcSheet) throws Exception {
+		Thread.sleep(3000);
+		broadcastPageObjects.clickProceedButton();
+		Thread.sleep(2000);
+		broadcastPageObjects.clickProceedButton();
+		Thread.sleep(2000);
+		broadcastPageObjects.clickProceedButton();
+		Thread.sleep(2000);
+		enter_deliver_tab_with_end_target_render_time_and_broadcast_expiry_as_from_sheet(endType, targetRenderTime,
+				bcExpiry, bcSheet);
 
+	}
+
+	@Then("^verify the inventory \"([^\"]*)\" after completion of BCs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
+	public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet(String inventory, String workbook,
+			String sheet) throws Throwable {
+		int count = 0;
+		boolean boolean1;
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook, sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "", bcLimit;
+		for (int i = 0; i < data.size(); i++) {
+
+			bcName = data.get(i).get(1);
+			campaignCategory = data.get(i).get(4);
+			campaignName = data.get(i).get(5);
+			offerName = data.get(i).get(6);
+			inventoryFromSheet = data.get(i).get(7);
+			bcSheet = data.get(i).get(9);
+			bcLimit = data.get(i).get(2);
+			try {
+
+				if (inventory.equals(inventoryFromSheet) && inventory.equals("BlackoutAlways")) {
+					broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory, campaignName, bcName);
+					boolean1 = broadcastPageObjects.verifyCountsinGrid(bcName, "Blackout Snooze", 770, 0, 0);
+					if (boolean1 == true)
+						eh.insertLastColumnValues("parallelRunBC", sheet, "Pass", bcName, "Name", "StatusOfTestcase");
+					else
+						eh.insertLastColumnValues("parallelRunBC", sheet, "Fail", bcName, "Name", "StatusOfTestcase");
+
+				} else if (inventory.equals(inventoryFromSheet) && inventory.equals("OneperDay")) {
+					broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory, campaignName, bcName);
+
+					if (count == 0) {
+						boolean1 = broadcastPageObjects.verifyCountsinGrid(bcName, "Completed", 770, 770, 770);
+						++count;
+						System.out.println(bcName + " one per day 1st bc");
+						if (boolean1 == true)
+							eh.insertLastColumnValues("parallelRunBC", sheet, "Pass", bcName, "Name",
+									"StatusOfTestcase");
+						else
+							eh.insertLastColumnValues("parallelRunBC", sheet, "Fail", bcName, "Name",
+									"StatusOfTestcase");
+					} else if (count >= 1) {
+						boolean1 = broadcastPageObjects.verifyCountsinGrid(bcName, "Completed", 0, 0, 0);
+						System.out.println(bcName + " one per day 2nd bc");
+						if (boolean1 == true)
+							eh.insertLastColumnValues("parallelRunBC", sheet, "Pass", bcName, "Name",
+									"StatusOfTestcase");
+						else
+							eh.insertLastColumnValues("parallelRunBC", sheet, "Fail", bcName, "Name",
+									"StatusOfTestcase");
+					}
+
+				} else if (inventory.equals(inventoryFromSheet) && inventory.equals("Unlimited")) {
+
+					broadcastPageObjects.navigateToLandingPageToBcFilterPage(campaignCategory, campaignName, bcName);
+
+					if (bcName.contains("seeding") && !bcLimit.contains("defineLimitFixed")) {
+						System.out.println("verify seeding bc count...");
+						boolean1 = broadcastPageObjects.verifyCountsinGrid(bcName, "Completed", 770, 770, 0);
+					} else if (bcLimit.contains("defineLimitFixed")) {
+
+						try {
+							int bcLimitSize = bcLimit.trim().length();
+							String limitCount = bcLimit.substring(16, bcLimitSize);
+							int limit = Integer.parseInt(limitCount);
+							if (!bcName.contains("seeding")) {
+								System.out.println("verify non seeding bc limit...");
+								boolean1 = broadcastPageObjects.verifyCountsinGrid(bcName, "Completed", limit, limit,
+										limit);
+							} else {
+								System.out.println("verify seeding bc limit...");
+								boolean1 = broadcastPageObjects.verifyCountsinGrid(bcName, "Completed", limit, limit,
+										0);
+								// boolean1=broadcastPageObjects.verifyCountsinGrid(bcName,"Completed",0,limit,limit);
+							}
+						} catch (Exception e) {
+							boolean1 = broadcastPageObjects.verifyCountsinGrid(bcName, "Completed", 10, 10, 10);
+						}
+					} else {
+						System.out.println("verify non seeding bc count...");
+						boolean1 = broadcastPageObjects.verifyCountsinGrid(bcName, "Completed", 770, 770, 770);
+					}
+					if (boolean1 == true) {
+
+						eh.insertLastColumnValues("parallelRunBC", sheet, "Pass", bcName, "Name", "StatusOfTestcase");
+						Assert.assertTrue(true);
+					} else {
+						eh.insertLastColumnValues("parallelRunBC", sheet, "Fail", bcName, "Name", "StatusOfTestcase");
+						Assert.assertTrue(false);
+					}
+				}
+			} catch (Exception e) {
+				System.out.println("count mismatch...");
+			}
+		}
+
+	}
 
 	@Then("^adding existing offers from sheet \"([^\"]*)\" Offer Catalogue from sheet \"([^\"]*)\"$")
-	public void adding_existing_offers_from_sheet_Offer_Catalogue_from_sheet(String offerSheet, String catelogSheet) throws Throwable {
-		eM.setExcelFile("offerCatalogInputData",catelogSheet);
+	public void adding_existing_offers_from_sheet_Offer_Catalogue_from_sheet(String offerSheet, String catelogSheet)
+			throws Throwable {
+		eM.setExcelFile("offerCatalogInputData", catelogSheet);
 		commonObjects.filterName(eM.getCell(1, 0).toString());
 		commonObjects.clickOptionsIcon();
 		catalogPageObjects.clickViewOffersOption();
 		catalogPageObjects.clickCatalogAddOffers();
-		eh.setExcelFile("offerInputData",offerSheet);
+		eh.setExcelFile("offerInputData", offerSheet);
 		String addOffer = eh.getCellByColumnName("Offer Name").toString();
 		Thread.sleep(3000);
-	    commonObjects.filterName(addOffer);
-	    Thread.sleep(2000);
-	    catalogPageObjects.addOfferToCatalog(addOffer);
-	    Thread.sleep(4000);
+		commonObjects.filterName(addOffer);
+		Thread.sleep(2000);
+		catalogPageObjects.addOfferToCatalog(addOffer);
+		Thread.sleep(4000);
 	}
-		
-	
+
 	@Then("^verify the acknowledgement of Bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\" with bc \"([^\"]*)\"$")
-	public void verify_the_acknowledgement_of_Bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn,String bcSheetName) throws Throwable {
-	    
-		
-		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
+	public void verify_the_acknowledgement_of_Bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet,
+			String msisdn, String bcSheetName) throws Throwable {
+
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook, sheet);
 		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "";
 		for (int i = 0; i < data.size(); i++) {
-		bcName = data.get(i).get(1);
-		campaignCategory = data.get(i).get(4);
-		campaignName = data.get(i).get(5);
-		offerName = data.get(i).get(6);
-		inventoryFromSheet = data.get(i).get(7);
-		bcSheet = data.get(i).get(9);
-		
-		if(bcSheet.equals(bcSheetName)) {
-		commonObjects.clickOnReports();
-		customerObjects.navigateToCustomerProfile();
-		
-		customerObjects.enterCustomerNumber(msisdn);
-		
-		customerObjects.clickSearchNumberIcon();
-		customerObjects.clickEventsTab();
-		customerObjects.chooseAllEvents();
-		customerObjects.clickApplyButton();
-		customerObjects.chooseAllEvents();
-		customerObjects.clickOnAckEventCheckBox();
-		customerObjects.clickApplyButton();
-		
-		
-		
-		customerObjects.verifyAcknowledgedEvent(bcName,campaignName,offerName);
-		
+			bcName = data.get(i).get(1);
+			campaignCategory = data.get(i).get(4);
+			campaignName = data.get(i).get(5);
+			offerName = data.get(i).get(6);
+			inventoryFromSheet = data.get(i).get(7);
+			bcSheet = data.get(i).get(9);
+
+			if (bcSheet.equals(bcSheetName)) {
+				commonObjects.clickOnReports();
+				customerObjects.navigateToCustomerProfile();
+
+				customerObjects.enterCustomerNumber(msisdn);
+
+				customerObjects.clickSearchNumberIcon();
+				customerObjects.clickEventsTab();
+				customerObjects.chooseAllEvents();
+				customerObjects.clickApplyButton();
+				customerObjects.chooseAllEvents();
+				customerObjects.clickOnAckEventCheckBox();
+				customerObjects.clickApplyButton();
+
+				customerObjects.verifyAcknowledgedEvent(bcName, campaignName, offerName);
+
+			}
+
 		}
 
-		
-		
-		
-		}
-		
 	}
-	
-	
+
 	@Then("^verify the Conversion event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with MSISDN\"([^\"]*)\" with bc \"([^\"]*)\"$")
-	public void verify_the_Conversion_event_of_bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet, String msisdn,String bcSheetName) throws Throwable {
-	   
-		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
+	public void verify_the_Conversion_event_of_bcs_from_workbook_and_sheet_with_MSISDN(String workbook, String sheet,
+			String msisdn, String bcSheetName) throws Throwable {
+
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook, sheet);
 		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, bcSheet = "";
 		for (int i = 0; i < data.size(); i++) {
-		bcName = data.get(i).get(1);
-		campaignCategory = data.get(i).get(4);
-		campaignName = data.get(i).get(5);
-		offerName = data.get(i).get(6);
-		inventoryFromSheet = data.get(i).get(7);
-		bcSheet = data.get(i).get(9);
-		
-		if(bcSheet.equals(bcSheetName)) {
-			commonObjects.clickOnReports();
-			customerObjects.navigateToCustomerProfile();
-			
-			customerObjects.enterCustomerNumber(msisdn);
-			customerObjects.clickSearchNumberIcon();
-			System.out.println("verifying Conversion event ... .. .. .... ");
-			customerObjects.clickEventsTab();
-			customerObjects.chooseAllEvents();
-			customerObjects.clickApplyButton();
-			customerObjects.chooseAllEvents();
-			customerObjects.clickOnConversionEventCheckBox();
-			customerObjects.clickApplyButton();
-			Thread.sleep(3000);
-			customerObjects.verifyConversionEvent(bcName,campaignName,offerName);
+			bcName = data.get(i).get(1);
+			campaignCategory = data.get(i).get(4);
+			campaignName = data.get(i).get(5);
+			offerName = data.get(i).get(6);
+			inventoryFromSheet = data.get(i).get(7);
+			bcSheet = data.get(i).get(9);
+
+			if (bcSheet.equals(bcSheetName)) {
+				commonObjects.clickOnReports();
+				customerObjects.navigateToCustomerProfile();
+
+				customerObjects.enterCustomerNumber(msisdn);
+				customerObjects.clickSearchNumberIcon();
+				System.out.println("verifying Conversion event ... .. .. .... ");
+				customerObjects.clickEventsTab();
+				customerObjects.chooseAllEvents();
+				customerObjects.clickApplyButton();
+				customerObjects.chooseAllEvents();
+				customerObjects.clickOnConversionEventCheckBox();
+				customerObjects.clickApplyButton();
+				Thread.sleep(3000);
+				customerObjects.verifyConversionEvent(bcName, campaignName, offerName);
 			}
 		}
-			
+
 	}
 
 	@Then("^verify the Fulfillment event of bcs from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" with rewardType \"([^\"]*)\" and MSISDN\"([^\"]*)\" with bctype \"([^\"]*)\"$")
-	public void verify_the_Fulfillment_event_of_bcs_from_workbook_and_sheet_with_rewardType_and_MSISDN(String workbook, String sheet, String rewardstype, String msisdn,String bctype) throws Throwable {
-		
-		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook,sheet);
-		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet,rewardRule,bcType, bcSheet = "";
+	public void verify_the_Fulfillment_event_of_bcs_from_workbook_and_sheet_with_rewardType_and_MSISDN(String workbook,
+			String sheet, String rewardstype, String msisdn, String bctype) throws Throwable {
+
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workbook, sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventoryFromSheet, rewardRule, bcType, bcSheet = "";
 		for (int i = 0; i < data.size(); i++) {
-		bcName = data.get(i).get(1);
-		campaignCategory = data.get(i).get(4);
-		campaignName = data.get(i).get(5);
-		offerName = data.get(i).get(6);
-		inventoryFromSheet = data.get(i).get(7);
-		bcSheet = data.get(i).get(9);
-		rewardRule=data.get(i).get(2);
-		bcType=data.get(i).get(8);
-		if(rewardRule.equals(rewardstype)&&bcType.equals(bctype)) {
-		commonObjects.clickOnReports();
-		customerObjects.navigateToCustomerProfile();
-		
-		customerObjects.enterCustomerNumber(msisdn);
-		customerObjects.clickSearchNumberIcon();
-		System.out.println("verifying Fulfillment Event ... .. .. .... ");
-		customerObjects.clickEventsTab();
-		customerObjects.chooseAllEvents();
-		customerObjects.clickApplyButton();
-		customerObjects.chooseAllEvents();
-		customerObjects.clickOnFulfillmentSuccess();
-		customerObjects.clickApplyButton();
-		
-		
-			
-			customerObjects.verifyFullfillementEvent(bcName,campaignName,offerName,rewardstype);
-		}else {
-			
-			System.out.println("Reward ttype not match....");
+			bcName = data.get(i).get(1);
+			campaignCategory = data.get(i).get(4);
+			campaignName = data.get(i).get(5);
+			offerName = data.get(i).get(6);
+			inventoryFromSheet = data.get(i).get(7);
+			bcSheet = data.get(i).get(9);
+			rewardRule = data.get(i).get(2);
+			bcType = data.get(i).get(8);
+			if (rewardRule.equals(rewardstype) && bcType.equals(bctype)) {
+				commonObjects.clickOnReports();
+				customerObjects.navigateToCustomerProfile();
+
+				customerObjects.enterCustomerNumber(msisdn);
+				customerObjects.clickSearchNumberIcon();
+				System.out.println("verifying Fulfillment Event ... .. .. .... ");
+				customerObjects.clickEventsTab();
+				customerObjects.chooseAllEvents();
+				customerObjects.clickApplyButton();
+				customerObjects.chooseAllEvents();
+				customerObjects.clickOnFulfillmentSuccess();
+				customerObjects.clickApplyButton();
+
+				customerObjects.verifyFullfillementEvent(bcName, campaignName, offerName, rewardstype);
+			} else {
+
+				System.out.println("Reward ttype not match....");
+			}
+
 		}
-		
-		
-		
-		
-		}
-		
-		
-		
+
 	}
 
 	@Then("^verify the FulfillmentSuccessMessage to verify Creative \"([^\"]*)\" message type \"([^\"]*)\" and rewardType \"([^\"]*)\" with MSISDN\"([^\"]*)\"$")
-	public void verify_the_FulfillmentSuccessMessage_to_verify_Creative_message_type_and_rewardType_with_MSISDN(String creative, String messageType, String rewardType, String msisdn) throws Throwable {
+	public void verify_the_FulfillmentSuccessMessage_to_verify_Creative_message_type_and_rewardType_with_MSISDN(
+			String creative, String messageType, String rewardType, String msisdn) throws Throwable {
 		commonObjects.clickOnReports();
 		customerObjects.navigateToCustomerProfile();
-		
+
 		customerObjects.enterCustomerNumber(msisdn);
 		customerObjects.clickSearchNumberIcon();
 		System.out.println("verifying Fulfillment Success message ... .. .. .... ");
-		
+
 		customerObjects.clickEventsTab();
 		customerObjects.chooseAllEvents();
 		customerObjects.clickApplyButton();
 		customerObjects.chooseAllEvents();
 		customerObjects.clickOnAckEventCheckBox();
 		customerObjects.clickApplyButton();
-		customerObjects.verifyFulFillmentSuccessMessage(creative,messageType,rewardType);
-		
+		customerObjects.verifyFulFillmentSuccessMessage(creative, messageType, rewardType);
+
 	}
-	
 
 	@Then("^activate and raise the conversion job the broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\" and bcSheetName \"([^\"]*)\"$")
-	public void activate_and_raise_the_conversion_job_the_broadcast_from_workbook_and_sheet(String workBook, String sheet,String bcSheetName) throws Throwable {
-		LegacyClass lg=new LegacyClass();
-		
+	public void activate_and_raise_the_conversion_job_the_broadcast_from_workbook_and_sheet(String workBook,
+			String sheet, String bcSheetName) throws Throwable {
+		LegacyClass lg = new LegacyClass();
+
 		String statusOfBC = "";
-		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,sheet);
-		String bcName, campaignCategory, campaignName, offerName, inventory, bcType,bcSheet = "";
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook, sheet);
+		String bcName, campaignCategory, campaignName, offerName, inventory, bcType, bcSheet = "";
 		SQLHandler sql = new SQLHandler();
 		for (int i = 0; i < data.size(); i++) {
-			
+
 			bcName = data.get(i).get(1);
 			campaignCategory = data.get(i).get(4);
 			campaignName = data.get(i).get(5);
 			offerName = data.get(i).get(6);
 			inventory = data.get(i).get(7);
 			bcSheet = data.get(i).get(9);
-			bcType=data.get(i).get(8);
-			
-			if(bcSheet.equals(bcSheetName)) {
-			try {
-                 System.out.println("try block");
-                 campaignObjects.navigateToLIfeCycleMarketing();
-				campaignObjects.scrollToCampaignCategory(campaignCategory);
-				commonObjects.filterName(campaignName);
-				jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
-						+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
-				campaignObjects.clickOptionsViewBroadcasts();
+			bcType = data.get(i).get(8);
 
-				broadcastPageObjects.navigate_to_broadcasts(bcSheet);
-				commonObjects.filterBCName(bcSheet, bcName);
-				statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
+			if (bcSheet.equals(bcSheetName)) {
+				try {
+					System.out.println("try block");
+					campaignObjects.navigateToLIfeCycleMarketing();
+					campaignObjects.scrollToCampaignCategory(campaignCategory);
+					commonObjects.filterName(campaignName);
+					jswait.loadClick(".//vaadin-grid-cell-content[contains(.,'" + campaignName
+							+ "')]//following::*[@d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z']/../../..");
+					campaignObjects.clickOptionsViewBroadcasts();
 
-				if (statusOfBC.equals("Planned")) {
-					commonObjects.clickBCOptionsIcon(bcSheet);
-					commonObjects.clickEditOption();
-					edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
-					activateBc();
-					Thread.sleep(5000);
-					jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");		
-					commonObjects.filterName(bcName);
-					Thread.sleep(5000);
-					commonObjects.toggleAutoRefresh();
-					Thread.sleep(3000);
-					commonObjects.toggleAutoRefresh();
-					statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
-					System.out.println("Status of BC "+statusOfBC);
-					commonObjects.toggleAutoRefresh();
-					
-					if(bcSheet.contains("Trigger")) {
-						TimeoutImpl t = new TimeoutImpl();
-						t.startTimer();
-						while (!statusOfBC.contains("Delivering") && t.checkTimerMin(120)) {
-							statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
-							System.out.println(statusOfBC);
-							Thread.sleep(5000);
-						}
-						System.out.println("Status of BC "+statusOfBC);
-						if(statusOfBC.equals("Delivering")) {
-						broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium/seleniumTrigger","TriggerData.csv");
-						System.out.println("Trigger input data provided ");
-						Thread.sleep(480000);
-						System.out.println("Inside Trigger waiting for count updation.......");
+					broadcastPageObjects.navigate_to_broadcasts(bcSheet);
+					commonObjects.filterBCName(bcSheet, bcName);
+					statusOfBC = broadcastPageObjects.getTopBcStatus(bcSheet, bcName);
+
+					if (statusOfBC.equals("Planned")) {
+						commonObjects.clickBCOptionsIcon(bcSheet);
+						commonObjects.clickEditOption();
+						edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
+						activateBc();
+						Thread.sleep(5000);
+						jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");
+						commonObjects.filterName(bcName);
+						Thread.sleep(5000);
+						commonObjects.toggleAutoRefresh();
+						Thread.sleep(3000);
+						commonObjects.toggleAutoRefresh();
+						statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+						System.out.println("Status of BC " + statusOfBC);
+						commonObjects.toggleAutoRefresh();
+
+						if (bcSheet.contains("Trigger")) {
+							TimeoutImpl t = new TimeoutImpl();
+							t.startTimer();
+							while (!statusOfBC.contains("Delivering") && t.checkTimerMin(120)) {
+								statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+								System.out.println(statusOfBC);
+								Thread.sleep(5000);
+							}
+							System.out.println("Status of BC " + statusOfBC);
+							if (statusOfBC.equals("Delivering")) {
+								broadcastPageObjects.provideFileForConversion(
+										"/usr/local/flytxt/selenium/seleniumTrigger", "TriggerData.csv");
+								System.out.println("Trigger input data provided ");
+								Thread.sleep(480000);
+								System.out.println("Inside Trigger waiting for count updation.......");
 //						Thread.sleep(480000);
-							if (sheet.equals("rewardBcs")) {
-								System.out.println("RechargeBasedConversion");
-								System.out.println("Providing file for conversion ");
-								// provideFileForConversion();
-								broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium/seleniumConversion",
-										"conversion.csv");
+								if (sheet.equals("rewardBcs")) {
+									System.out.println("RechargeBasedConversion");
+									System.out.println("Providing file for conversion ");
+									// provideFileForConversion();
+									broadcastPageObjects.provideFileForConversion(
+											"/usr/local/flytxt/selenium/seleniumConversion", "conversion.csv");
 //								lg.legacyTest();
-								System.out.println("Removing file from conversion. .. .. ... .");
-								// deleteFileForConversion();
+									System.out.println("Removing file from conversion. .. .. ... .");
+									// deleteFileForConversion();
 //								broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
 //										"conversion.csv");
 //								int deactivateConversionJob = sql
 //										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
 //								System.out.println("Deactivate the JOb ... .. ." + deactivateConversionJob);
-							} else if (sheet.equals("UsageBasedConversion")) {
-								System.out.println("UsageBasedConversion");
-								System.out.println("Providing file for conversion ");
-								// provideFileForConversion();
-								broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium/seleniumMetric",
-										"conversion.csv");
+								} else if (sheet.equals("UsageBasedConversion")) {
+									System.out.println("UsageBasedConversion");
+									System.out.println("Providing file for conversion ");
+									// provideFileForConversion();
+									broadcastPageObjects.provideFileForConversion(
+											"/usr/local/flytxt/selenium/seleniumMetric", "conversion.csv");
 //								lg.UsageConversionJob();
 //								System.out.println("Removing file from conversion. .. .. ... .");
 //								// deleteFileForConversion();
@@ -4192,26 +4266,82 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 //								int deactivateUsageConversionJob = sql
 //										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
 //								System.out.println("Deactivate the JOb ... .. ." + deactivateUsageConversionJob);
-						
-							}//conversion Else if
-						
-					}//Delevering else if
+
+								} // conversion Else if
+
+							} // Delevering else if
+							eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
+						} // trigger if
+
+						else {
+							TimeoutImpl t1 = new TimeoutImpl();
+							t1.startTimer();
+							while (!statusOfBC.contains("Completed") && t1.checkTimerMin(25)) {
+								statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+								System.out.println(statusOfBC);
+								Thread.sleep(5000);
+							}
+							System.out.println("Status of BC  " + statusOfBC);
+							Thread.sleep(5000);
+							Assert.assertTrue("BC not completed ", statusOfBC.equals("Completed"));
+
+							if (statusOfBC.equals("Completed")) {
+								if (sheet.equals("rewardBcs")) {
+									System.out.println("RechargeBasedConversion");
+									System.out.println("Providing file for conversion ");
+									// provideFileForConversion();
+									broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium",
+											"conversion.csv");
+									lg.legacyTest();
+									System.out.println("Removing file from conversion. .. .. ... .");
+									// deleteFileForConversion();
+									broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
+											"conversion.csv");
+//								int deactivateConversionJob = sql
+//										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
+//								System.out.println("Deactivate the JOb ... .. ." + deactivateConversionJob);
+								} else if (sheet.equals("UsageBasedConversion")) {
+									System.out.println("UsageBasedConversion");
+									System.out.println("Providing file for conversion ");
+									// provideFileForConversion();
+									broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium",
+											"conversion.csv");
+									lg.UsageConversionJob();
+									System.out.println("Removing file from conversion. .. .. ... .");
+									// deleteFileForConversion();
+									broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
+											"conversion.csv");
+//								int deactivateUsageConversionJob = sql
+//										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
+//								System.out.println("Deactivate the JOb ... .. ." + deactivateUsageConversionJob);
+								}
+							}
+						}
 						eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
-						}// trigger if 
-					
-					else {
-					TimeoutImpl t1 = new TimeoutImpl();
-					t1.startTimer();
-					while (!statusOfBC.contains("Completed") && t1.checkTimerMin(25)) {
-						statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
-						System.out.println(statusOfBC);
+					} else {
+						System.out.println("else block");
+						jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");
+						commonObjects.filterName(bcName);
 						Thread.sleep(5000);
-					}
-					System.out.println("Status of BC  "+statusOfBC);
-					Thread.sleep(5000);
-					Assert.assertTrue("BC not completed ",statusOfBC.equals("Completed"));
-					
-					
+						statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+						System.out.println("Status of BC " + statusOfBC);
+						eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
+
+						if (!statusOfBC.equals("completed")) {
+							commonObjects.toggleAutoRefresh();
+							TimeoutImpl t1 = new TimeoutImpl();
+							t1.startTimer();
+							while (!statusOfBC.contains("Completed") && t1.checkTimerMin(150)) {
+								statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
+								System.out.println(statusOfBC);
+								Thread.sleep(5000);
+							}
+
+							System.out.println("Status of BC  " + statusOfBC);
+						} // if
+
+						Thread.sleep(5000);
+
 						if (statusOfBC.equals("Completed")) {
 							if (sheet.equals("rewardBcs")) {
 								System.out.println("RechargeBasedConversion");
@@ -4222,64 +4352,6 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 								lg.legacyTest();
 								System.out.println("Removing file from conversion. .. .. ... .");
 								// deleteFileForConversion();
-								broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
-										"conversion.csv");
-//								int deactivateConversionJob = sql
-//										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
-//								System.out.println("Deactivate the JOb ... .. ." + deactivateConversionJob);
-							} else if (sheet.equals("UsageBasedConversion")) {
-								System.out.println("UsageBasedConversion");
-								System.out.println("Providing file for conversion ");
-								// provideFileForConversion();
-								broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium",
-										"conversion.csv");
-								lg.UsageConversionJob();
-								System.out.println("Removing file from conversion. .. .. ... .");
-								// deleteFileForConversion();
-								broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium",
-										"conversion.csv");
-//								int deactivateUsageConversionJob = sql
-//										.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
-//								System.out.println("Deactivate the JOb ... .. ." + deactivateUsageConversionJob);
-							}
-						}
-					}
-					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
-				} 
-				else {
-                    System.out.println("else block");
-                    jswait.loadClick("//paper-tab//div[contains(.,'One-time')]");
-					commonObjects.filterName(bcName);
-					Thread.sleep(5000);
-					statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
-					System.out.println("Status of BC "+statusOfBC);
-					eh.insertLastColumnValues("parallelRunBC", sheet, statusOfBC, bcName, "Name", "StatusofBC");
-					
-					
-					if (!statusOfBC.equals("completed")) {
-						commonObjects.toggleAutoRefresh();
-						TimeoutImpl t1 = new TimeoutImpl();
-						t1.startTimer();
-						while (!statusOfBC.contains("Completed") && t1.checkTimerMin(150)) {
-							statusOfBC = broadcastPageObjects.getTopBcStatus(bcType);
-							System.out.println(statusOfBC);
-							Thread.sleep(5000);
-						}
-						
-						System.out.println("Status of BC  "+statusOfBC);
-					}//if
-					
-                    Thread.sleep(5000);
-                    
-					if(statusOfBC.equals("Completed")) {
-						if(sheet.equals("rewardBcs")) {
-							System.out.println("RechargeBasedConversion");
-					System.out.println("Providing file for conversion ");
-					//provideFileForConversion();
-					broadcastPageObjects.provideFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
-					lg.legacyTest();			
-					System.out.println("Removing file from conversion. .. .. ... .");
-					//deleteFileForConversion();
 //					broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
 ////					int deactivateConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=8500");
 ////					System.out.println("Deactivate the JOb ... .. ." +deactivateConversionJob);
@@ -4294,13 +4366,12 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 //						broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
 //						int deactivateUsageConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
 //						System.out.println("Deactivate the JOb ... .. ." +deactivateUsageConversionJob);
+							}
+						} // if
 					}
-					}//if
-				}
 
-			}
-			catch (Exception e) {
-                System.out.println("Catch block");
+				} catch (Exception e) {
+					System.out.println("Catch block");
 //				System.out.println("Removing file from conversion. .. .. ... .");
 //				//deleteFileForConversion();
 //				broadcastPageObjects.deleteFileForConversion("/usr/local/flytxt/selenium","conversion.csv");
@@ -4308,146 +4379,167 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 //				System.out.println("Deactivate the JOb ... .. ." +deactivateConversionJob);
 //				int deactivateUsageConversionJob = sql.executeUpdate("UPDATE sch_data_job SET STATUS_ID=26 WHERE DATA_JOB_ID=17121");
 //				System.out.println("Deactivate the JOb ... .. ." +deactivateUsageConversionJob);
-			}//catch
-			}// after for loop if 
+				} // catch
+			} // after for loop if
 
-		}//for
-		
+		} // for
 
-}
-	@Then("^verify the target count with condition (.*) from sheet \"([^\"]*)\" also the channel \"([^\"]*)\"$")
-	public void verify_the_target_count_with_condition_SharedcustomerList_from_sheet_also_the_channel(String condition,String targetCountSheet, String offerChannel) throws Exception {
-	   eh.setExcelFile("parallelRunBC", targetCountSheet);
-	   String targetCount=eh.getCellByColumnName(condition);
-	   broadcastPageObjects.verifyViewDetailsOfBc(targetCount,offerChannel);
 	}
 
-	
+	@Then("^verify the target count with condition (.*) from sheet \"([^\"]*)\" also the channel \"([^\"]*)\"$")
+	public void verify_the_target_count_with_condition_SharedcustomerList_from_sheet_also_the_channel(String condition,
+			String targetCountSheet, String offerChannel) throws Exception {
+		eh.setExcelFile("parallelRunBC", targetCountSheet);
+		String targetCount = eh.getCellByColumnName(condition);
+		broadcastPageObjects.verifyViewDetailsOfBc(targetCount, offerChannel);
+	}
+
 	@Then("^view broadcast for \"([^\"]*)\" for bctype \"([^\"]*)\"$")
 	public void view_broadcast_for_for_bctype(String bcToView, String bctype) throws Exception {
-			broadcastPageObjects.viewBCbtn(bcToView,bctype);
-		
+		broadcastPageObjects.viewBCbtn(bcToView, bctype);
+
 	}
+
 	@Then("^filter the bc from sheet \"([^\"]*)\" from row \"([^\"]*)\" and column \"([^\"]*)\" and write in sheet \"([^\"]*)\"$")
-	public void filter_the_bc_from_sheet_from_row_and_column_and_write_in_sheet(String bcStorageSheet, int row, int column, String bcSheet) throws Exception {
+	public void filter_the_bc_from_sheet_from_row_and_column_and_write_in_sheet(String bcStorageSheet, int row,
+			int column, String bcSheet) throws Exception {
 		eh.setExcelFile("parallelRunBC", bcStorageSheet);
-		String bcName =(String) eh.getCell(row, column);
+		String bcName = (String) eh.getCell(row, column);
 		eM.setExcelFile("bcInputData", bcSheet);
 		eM.setCell("BC Name", bcName);
-		
+
 	}
+
 	@Then("^activate broadcast from workbook \"([^\"]*)\" and sheet \"([^\"]*)\"$")
 	public void activate_broadcast_from_workbook_and_sheet(String workBook, String bcStorageSheet) throws Throwable {
-	ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook,bcStorageSheet);
-	String bcName,bcSheet,bctype="";
-	for (int i = 0; i < data.size(); i++) {
-		bcName = data.get(i).get(0);
-		bctype=data.get(i).get(1); 
-		bcSheet =data.get(i).get(2);
-		commonObjects.filterBC(bcName, bctype);
-		commonObjects.BCOptionIcon(bctype);
-		Thread.sleep(2000);
-		commonObjects.clickEditOption();
-	edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
+		ArrayList<ArrayList<String>> data = eh.readTheDataFromExcel(workBook, bcStorageSheet);
+		String bcName, bcSheet, bctype = "";
+		for (int i = 0; i < data.size(); i++) {
+			bcName = data.get(i).get(0);
+			bctype = data.get(i).get(1);
+			bcSheet = data.get(i).get(2);
+			commonObjects.filterBC(bcName, bctype);
+			commonObjects.BCOptionIcon(bctype);
+			Thread.sleep(2000);
+			commonObjects.clickEditOption();
+			edit_the_Delevery_tab_details_from_workbook_sheet("bcInputData", bcSheet);
 			activateBc();
-}
+		}
 	}
 
 	@Then("^verify the date for child bc from sheet \"([^\"]*)\" with recurrence pattern \"([^\"]*)\"$")
-	public void verify_the_date_for_child_bc_from_sheet_with_recurrence_pattern(String bcSheet, String recurrencePattern) throws Exception {
+	public void verify_the_date_for_child_bc_from_sheet_with_recurrence_pattern(String bcSheet,
+			String recurrencePattern) throws Exception {
 		eh.setExcelFile("bcInputData", bcSheet);
-		String bcName =eh.getCellByColumnName("BC Name");
-		Calendar c= Calendar.getInstance();
-		DateFormat df=new SimpleDateFormat("dd MMM yyyy");
-		if(recurrencePattern.equalsIgnoreCase("daily")) {	
-		Thread.sleep(2000);
-		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
-		c.add(Calendar.DATE,1);
-		System.out.println(df.format(c.getTime())); 
-		Thread.sleep(2000);
-		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+		String bcName = eh.getCellByColumnName("BC Name");
+		Calendar c = Calendar.getInstance();
+		DateFormat df = new SimpleDateFormat("dd MMM yyyy");
+		if (recurrencePattern.equalsIgnoreCase("daily")) {
+			Thread.sleep(2000);
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + bcName
+					+ "')]//following::vaadin-grid-cell-content[contains(.,'" + df.format(c.getTime()) + "')])[1]"));
+			c.add(Calendar.DATE, 0);
+			System.out.println(df.format(c.getTime()));
+			Thread.sleep(2000);
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + bcName
+					+ "')]//following::vaadin-grid-cell-content[contains(.,'" + df.format(c.getTime()) + "')])[1]"));
 //		c.add(Calendar.DATE,1);
 //		System.out.println(df.format(c.getTime()));
 //		Thread.sleep(2000);
 //		Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
-	}
-		else if (recurrencePattern.equalsIgnoreCase("every 2 days")) {
+		} else if (recurrencePattern.equalsIgnoreCase("every 2 days")) {
 			Thread.sleep(2000);
 			System.out.println(df.format(c.getTime()));
-			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
-			c.add(Calendar.DATE,2);
-			System.out.println(df.format(c.getTime())); 
-			Thread.sleep(2000);
-			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
-			c.add(Calendar.DATE,2);
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + bcName
+					+ "')]//following::vaadin-grid-cell-content[contains(.,'" + df.format(c.getTime()) + "')])[1]"));
+			c.add(Calendar.DATE, 2);
 			System.out.println(df.format(c.getTime()));
 			Thread.sleep(2000);
-			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
-		}
-		else if (recurrencePattern.equalsIgnoreCase("every week")) {
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + bcName
+					+ "')]//following::vaadin-grid-cell-content[contains(.,'" + df.format(c.getTime()) + "')])[1]"));
+			c.add(Calendar.DATE, 2);
+			System.out.println(df.format(c.getTime()));
 			Thread.sleep(2000);
-			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));   
-			c.add(Calendar.DATE,7);
-			System.out.println(df.format(c.getTime())); 
-			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
-			c.add(Calendar.DATE,7);
-			System.out.println(df.format(c.getTime())); 
-			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')]//following::vaadin-grid-cell-content[contains(.,'"+df.format(c.getTime())+"')])[1]"));
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + bcName
+					+ "')]//following::vaadin-grid-cell-content[contains(.,'" + df.format(c.getTime()) + "')])[1]"));
+		} else if (recurrencePattern.equalsIgnoreCase("every week")) {
+			Thread.sleep(2000);
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + bcName
+					+ "')]//following::vaadin-grid-cell-content[contains(.,'" + df.format(c.getTime()) + "')])[1]"));
+			c.add(Calendar.DATE, 7);
+			System.out.println(df.format(c.getTime()));
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + bcName
+					+ "')]//following::vaadin-grid-cell-content[contains(.,'" + df.format(c.getTime()) + "')])[1]"));
+			c.add(Calendar.DATE, 7);
+			System.out.println(df.format(c.getTime()));
+			Assert.assertTrue(jswait.checkVisibility("(//vaadin-grid-cell-content[contains(.,'" + bcName
+					+ "')]//following::vaadin-grid-cell-content[contains(.,'" + df.format(c.getTime()) + "')])[1]"));
+		} else if (recurrencePattern.equals("special day of the week")) {
+
+			int dayOfTheMonth = c.get(c.WEEK_OF_MONTH);
+			if (dayOfTheMonth == 5) {
+
+			}
 		}
-		else if (recurrencePattern.equals("special day of the week")) {
-			
-		int dayOfTheMonth=c.get(c.WEEK_OF_MONTH);
-	if(dayOfTheMonth ==5) {
-		
 	}
-		}
-	}
-	
+
 	@Then("^verify the \"([^\"]*)\" event$")
 	public void verify_the_event(String event) throws Throwable {
 		broadcastPageObjects.verifyEventNetworklatch(event);
 	}
-	
-	
-	
+
 	@Then("^verify the condition (.*) event for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
-	public void verify_the_condition_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
-      eh.setExcelFile("bcInputData", bcSheet);
-      String bcName =eh.getCellByColumnName("BC Name");
-      eM.setExcelFile("campaignInputData", campaignSheet);
-      String camapignName=(String) eM.getCell(1, 0);
-      broadcastPageObjects.verifyEventOfTheBC(event,bcName,camapignName);
-     
+	public void verify_the_condition_event_for_the_bc_from_sheet_for_the_campaign_from_sheet(String event,
+			String bcSheet, String campaignSheet) throws Exception {
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName = eh.getCellByColumnName("BC Name");
+		eM.setExcelFile("campaignInputData", campaignSheet);
+		String camapignName = (String) eM.getCell(1, 0);
+		broadcastPageObjects.verifyEventOfTheBC(event, bcName, camapignName);
 	}
-	
+
+	@Then("^verify the (.*) in consumer profile with offer \"([^\"]*)\" and track source \"([^\"]*)\" from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
+	public void verify_the_Conversion_in_consumer_profile_with_offer_and_track_source_from_sheet_for_the_campaign_from_sheet(
+			String event, String offerType, String Track_Source, String bcSheet, String campaignSheet)
+			throws Exception {
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName = eh.getCellByColumnName("BC Name");
+		eM.setExcelFile("campaignInputData", campaignSheet);
+		String camapignName = (String) eM.getCell(1, 0);
+		broadcastPageObjects.verifyBCforConvFulfillment(event, offerType, Track_Source, bcName, camapignName);
+
+	}
 
 	@Then("^verify the condition \"([^\"]*)\" event for the bc notification \"([^\"]*)\" from file \"([^\"]*)\" of sheet \"([^\"]*)\"$")
-	public void verify_the_condition_event_for_the_bc_notification_from_file_of_sheet(String event, String status, String file, String sheet) throws Throwable {
-	eh.setExcelFile(file, sheet);
-    String bcName =eh.getCellByColumnName("BC Name");
-    broadcastPageObjects.verifyEventNotification(event,bcName,status);
-}
-	
+	public void verify_the_condition_event_for_the_bc_notification_from_file_of_sheet(String event, String status,
+			String file, String sheet) throws Throwable {
+		eh.setExcelFile(file, sheet);
+		String bcName = eh.getCellByColumnName("BC Name");
+		broadcastPageObjects.verifyEventNotification(event, bcName, status);
+	}
+
 	@Then("^verify the condition (.*) event for the recurring seeding bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
-	public void verify_the_condition_event_for_the_seeding_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
-      eh.setExcelFile("bcInputData", bcSheet);
-      String bcName =eh.getCellByColumnName("BC Name");
-      eM.setExcelFile("campaignInputData", campaignSheet);
-      String camapignName=(String) eM.getCell(1, 0);
-      broadcastPageObjects.verifyEventOfTheRecurringSeedingBC(event,bcName,camapignName);
-     
+	public void verify_the_condition_event_for_the_seeding_bc_from_sheet_for_the_campaign_from_sheet(String event,
+			String bcSheet, String campaignSheet) throws Exception {
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName = eh.getCellByColumnName("BC Name");
+		eM.setExcelFile("campaignInputData", campaignSheet);
+		String camapignName = (String) eM.getCell(1, 0);
+		broadcastPageObjects.verifyEventOfTheRecurringSeedingBC(event, bcName, camapignName);
+
 	}
-	
+
 	@Then("^verify the condition (.*) event for the onetime seeding bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
-	public void verify_the_condition_event_for_the_onetime_seeding_bc_from_sheet_for_the_campaign_from_sheet(String event,String bcSheet, String campaignSheet) throws Exception {
-      eh.setExcelFile("bcInputData", bcSheet);
-      String bcName =eh.getCellByColumnName("BC Name");
-      eM.setExcelFile("campaignInputData", campaignSheet);
-      String camapignName=(String) eM.getCell(1, 0);
-      broadcastPageObjects.verifyEventOfTheOneTimeSeedingBC(event,bcName,camapignName);
-     
+	public void verify_the_condition_event_for_the_onetime_seeding_bc_from_sheet_for_the_campaign_from_sheet(
+			String event, String bcSheet, String campaignSheet) throws Exception {
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName = eh.getCellByColumnName("BC Name");
+		eM.setExcelFile("campaignInputData", campaignSheet);
+		String camapignName = (String) eM.getCell(1, 0);
+		broadcastPageObjects.verifyEventOfTheOneTimeSeedingBC(event, bcName, camapignName);
+
 	}
-	
+
 	@Then("^Verify calculate option for BCs from workbook \"([^\"]*)\" in sheet \"([^\"]*)\" with BC \"([^\"]*)\"$")
 	public void verify_calculate_option_for_BCs_from_workbook_in_sheet_with_BC(String workbook, String sheet,
 			String bcsheet) throws Throwable {
@@ -4562,197 +4654,279 @@ public void verify_the_inventory_after_completion_of_BCs_from_workbook_and_sheet
 							System.out.println("calculate Btn verified.....");
 						} else {
 							System.out.println("calculate Btn verified.....");
-						}//else block if - else
+						} // else block if - else
 					} // Internal if
 				} // if-else
 			} // main if
 		} // for
 
 	}// method
+
 	@Then("^verify the ack count with target condition (.*) from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" of bctype \"([^\"]*)\"$")
-	public void verify_the_ack_count_with_target_condition_Acknowlegment_from_sheet_for_bc_from_sheet_of_bctype(String targetCondition, String targetCountSheet, String bcSheet, String bctype) throws Exception {
+	public void verify_the_ack_count_with_target_condition_Acknowlegment_from_sheet_for_bc_from_sheet_of_bctype(
+			String targetCondition, String targetCountSheet, String bcSheet, String bctype) throws Exception {
 		eh.setExcelFile("bcInputData", bcSheet);
-		String bcName=eh.getCellByColumnName("BC Name");
+		String bcName = eh.getCellByColumnName("BC Name");
 		eM.setExcelFile("parallelRunBC", targetCountSheet);
-		String targetCount=eM.getCellByColumnName(targetCondition);
-		broadcastPageObjects.verifyBCAckCountFromGrid(bcName,targetCount,bctype);
-}
+		String targetCount = eM.getCellByColumnName(targetCondition);
+		broadcastPageObjects.verifyBCAckCountFromGrid(bcName, targetCount, bctype);
+	}
+
 	@Then("^from bc report verify condition (.*) and cg \"([^\"]*)\" count from sheet \"([^\"]*)\" of the bc from sheet \"([^\"]*)\"$")
-	public void from_bc_report_verify_count_from_sheet_of_the_bc_from_sheet(String targetCondition,String cgRequired, String targetCountSheet, String bcSheet) throws Exception {
-    eh.setExcelFile("parallelRunBc", targetCountSheet);
-    String targetCount=eh.getCellByColumnName(targetCondition);
-    String OverallcgCount=eh.getCellByColumnName("OverallCg");
-    String bcLevelcgCount=eh.getCellByColumnName("bcLevelCg");
-    eM.setExcelFile("bcInputData", bcSheet);
-    String  bcName=eM.getCellByColumnName("BC Name");
-    broadcastPageObjects.verifyCountFromBCReport(bcName,targetCount,targetCountSheet,OverallcgCount,cgRequired,bcLevelcgCount);
-}
-	
+	public void from_bc_report_verify_count_from_sheet_of_the_bc_from_sheet(String targetCondition, String cgRequired,
+			String targetCountSheet, String bcSheet) throws Exception {
+		eh.setExcelFile("parallelRunBc", targetCountSheet);
+		String targetCount = eh.getCellByColumnName(targetCondition);
+		String OverallcgCount = eh.getCellByColumnName("OverallCg");
+		String bcLevelcgCount = eh.getCellByColumnName("bcLevelCg");
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bcName = eM.getCellByColumnName("BC Name");
+		broadcastPageObjects.verifyCountFromBCReport(bcName, targetCount, targetCountSheet, OverallcgCount, cgRequired,
+				bcLevelcgCount);
+	}
+
 	@Then("^add bc from sheet \"([^\"]*)\" to column \"([^\"]*)\" of bc data sheet \"([^\"]*)\"$")
-	public void add_bc_from_sheet_to_column_of_bc_data_sheet(String bcSheet, int row, String bcStorageSheet) throws Throwable {
-         eM.setExcelFile("bcInputData", bcSheet);
-         String bcName=eM.getCellByColumnName("BC Name");
-         System.out.println("=========="+bcName+"=============");
-         String bcType=(String)eM.getCell(1, 7);
-         System.out.println("=========="+bcType+"=============");
-         broadcastPageObjects.addBcToSheet(bcSheet,bcName,bcType,bcStorageSheet,row);
-         
- }
+	public void add_bc_from_sheet_to_column_of_bc_data_sheet(String bcSheet, int row, String bcStorageSheet)
+			throws Throwable {
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bcName = eM.getCellByColumnName("BC Name");
+		System.out.println("==========" + bcName + "=============");
+		String bcType = (String) eM.getCell(1, 7);
+		System.out.println("==========" + bcType + "=============");
+		broadcastPageObjects.addBcToSheet(bcSheet, bcName, bcType, bcStorageSheet, row);
+
+	}
+
 	@Then("^provide file in location \"([^\"]*)\" for trigger with csv file \"([^\"]*)\"$")
 	public void provide_file_in_location_for_trigger_with_csv_file(String location, String csvFile) throws Throwable {
-	String csvFileData = "";
-	File conversionCSV = new File("ExcelFiles//"+csvFile);
-	BufferedReader br = null;
-	String temp = "";
-	int initial = 1;
-	br = new BufferedReader(new FileReader(conversionCSV.getCanonicalPath()));
-	while ((temp = br.readLine()) != null) {
-		if (initial == 0) {
-			csvFileData += "\n";
+		String csvFileData = "";
+		File conversionCSV = new File("ExcelFiles//" + csvFile);
+		BufferedReader br = null;
+		String temp = "";
+		int initial = 1;
+		br = new BufferedReader(new FileReader(conversionCSV.getCanonicalPath()));
+		while ((temp = br.readLine()) != null) {
+			if (initial == 0) {
+				csvFileData += "\n";
+			}
+			initial = 0;
+			csvFileData += temp;
 		}
-		initial = 0;
-		csvFileData += temp;
+		System.out.println(csvFileData);
+		System.out.println("test");
+		br.close();
+		ShellExecuter se = new ShellExecuter();
+		se.executeScript("cd " + location + "; echo '" + csvFileData + "' >" + csvFile + "");
 	}
-	System.out.println(csvFileData);
-	System.out.println("test");
-	br.close();
-	ShellExecuter se = new ShellExecuter();
-	se.executeScript("cd "+location+"; echo '" + csvFileData + "' >"+csvFile+"");
-	}
-	
-	
+
 	@Then("^verify the cg exclusion from sheet \"([^\"]*)\"$")
 	public void verify_the_cg_exclusion_from_sheet(String targetCountSheet) throws Exception {
 		eh.setExcelFile("parallelRunBC", targetCountSheet);
-		   String targetCount=eh.getCellByColumnName("OverallCg");
-		   broadcastPageObjects.verifyCGCount(targetCount);
-	
+		String targetCount = eh.getCellByColumnName("OverallCg");
+		broadcastPageObjects.verifyCGCount(targetCount);
+
 	}
-	
-	
+
 	@Then("^verify multiple creative \"([^\"]*)\" for the bc from sheet \"([^\"]*)\" for the campaign from sheet \"([^\"]*)\"$")
-	public void verify_the_multiple_creative_(String dynamicTag,String bcSheet, String campaignSheet)throws Throwable {
-		 eh.setExcelFile("bcInputData", bcSheet);
-	      String bcName =eh.getCellByColumnName("BC Name");
-	      eM.setExcelFile("campaignInputData", campaignSheet);
-	      String campaignName=(String) eM.getCell(1, 0);
-	      broadcastPageObjects.verifyDynamicTagOfTheBC(dynamicTag,bcName,campaignName);
+	public void verify_the_multiple_creative_(String dynamicTag, String bcSheet, String campaignSheet)
+			throws Throwable {
+		eh.setExcelFile("bcInputData", bcSheet);
+		String bcName = eh.getCellByColumnName("BC Name");
+		eM.setExcelFile("campaignInputData", campaignSheet);
+		String campaignName = (String) eM.getCell(1, 0);
+		broadcastPageObjects.verifyDynamicTagOfTheBC(dynamicTag, bcName, campaignName);
 	}
-	
+
 	@Then("^verify the message is not delivered after expiry$")
-	public void verify_message_not_send_after_expiry() throws Exception{
-		
+	public void verify_message_not_send_after_expiry() throws Exception {
+
 	}
-	
+
 	@Then("^verify the ack is not send for the bc from sheet \"([^\"]*)\" after the bc expiry$")
 	public void verify_the_ack_is_not_send_for_the_bc_from_sheet_after_the_bc_expiry(String bcSheet) throws Exception {
 		eh.setExcelFile("bcInputData", bcSheet);
-		String bcName=eh.getCellByColumnName("BC Name");
-		String count=driver.findElement(By.xpath("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[2]//following::vaadin-grid-cell-content[7]")).getText();
-		System.out.println("current count is :  "+count);
-		int millisec=1*60*1000;
+		String bcName = eh.getCellByColumnName("BC Name");
+		String count = driver.findElement(By.xpath("(//vaadin-grid-cell-content[contains(.,'" + bcName
+				+ "')])[2]//following::vaadin-grid-cell-content[7]")).getText();
+		System.out.println("current count is :  " + count);
+		int millisec = 1 * 60 * 1000;
 		Thread.sleep(millisec);
-		String countAfter1min=driver.findElement(By.xpath("(//vaadin-grid-cell-content[contains(.,'"+bcName+"')])[2]//following::vaadin-grid-cell-content[7]")).getText();
+		String countAfter1min = driver.findElement(By.xpath("(//vaadin-grid-cell-content[contains(.,'" + bcName
+				+ "')])[2]//following::vaadin-grid-cell-content[7]")).getText();
 		Assert.assertTrue(count.equals(countAfter1min));
-		
+
 	}
-	
-	@Then("^raise the conversion job$")	
-public void _raise_conversion_job() throws Exception{
-	LegacyClass legacy=new LegacyClass();
-	legacy.legacyTest();
-	
-}
-@Then("^verify the seeding and trigger option for the bc from sheet \"([^\"]*)\" for \"([^\"]*)\" bc$")
-public void verify_the_seeding_and_trigger_option_for_the_bc_from_sheet_for_bc(String bcSheet, String bctype) throws Throwable {	
-	 eM.setExcelFile("bcInputData", bcSheet);
-	    String  bcName=eM.getCellByColumnName("BC Name");
-	    broadcastPageObjects.verifyIsSeedingInReport(bcName,bctype);
-}
-	
-@Then("^\"([^\"]*)\" bc$")
-public void bc(String bcSaveOrActivate) throws Throwable {
-    if(bcSaveOrActivate.equalsIgnoreCase("activate"))
-		activateBc();
-    else if
-		(bcSaveOrActivate.equalsIgnoreCase("save"))
-		save_bc();
-    else
-    	System.out.println("no activate save button is selected");
-	
-}
-	
-	
-@Then("^click on BC edit button from workbook \"([^\"]*)\" sheet \"([^\"]*)\" and bctype \"([^\"]*)\"$")
-public void click_on_BC_edit_button_from_workbook_sheet_and_bctype(String workbook, String sheet, String bctype) throws Throwable {
-eh.setExcelFile(workbook, sheet);
-String name = eh.getCell(1, 0).toString();
-commonObjects.filterBC(name,bctype);
-commonObjects.BCOptionIcon(bctype);
-commonObjects.clickEditOption();  
 
-}	
-	
-@Then("^create the blackout period for the blackout rule and save$")
-public void create_the_blackout_period_for_the_blackout_rule_and_save() throws Throwable {
-	broadcastPageObjects.AddBlackoutPeriods();
-}
-	
-@Then("^verify offer from sheet \"([^\"]*)\" is displayed$")
-public void verify_offer_from_sheet_is_displayed(String offerSheet) throws Throwable {	
-	eh.setExcelFile("OfferInputData", offerSheet);
-	String offerName=eh.getCellByColumnName("Offer Name");
-	broadcastPageObjects.verifyofferDetailsInViewPage(offerName);
-}
+	@Then("^raise the conversion job$")
+	public void _raise_conversion_job() throws Exception {
+		LegacyClass legacy = new LegacyClass();
+		legacy.legacyTest();
 
-@Then("^verify copied offer from sheet \"([^\"]*)\" is displayed$")
-public void verify_copied_offer_from_sheet_is_displayed(String offerSheet) throws Throwable {	
-	eh.setExcelFile("OfferInputData", offerSheet);
-	String offerName=eh.getCellByColumnName("Offer Name");
-	broadcastPageObjects.verifycopiedofferDetailsInViewPage(offerName);
-}
-@Then("^enter choose offer tab with copied offer from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with \"([^\"]*)\" track session expires \"([^\"]*)\" filter criteria \"([^\"]*)\" give reward to \"([^\"]*)\"$")
-public void enter_choose_offer_tab_for_copied_offer_from_sheet_for_bc_from_sheet_track_session_expires_filter_criteria_give_reward_to(String offerSheet, String bcSheet, String creative, String trackExpires, String filterCriteria, String giveRewardsTo) throws Exception {
-	eM.setExcelFile("bcInputData", bcSheet);
-	String bc_type = (String) eM.getCell(1, 7);
-	broadcastPageObjects.selectCopiedOffer(offerSheet,bc_type,creative,trackExpires,filterCriteria,giveRewardsTo);	
-	
-}
-	
-@Then ("add bc from sheet \"([^\"]*)\" to row \"([^\"]*)\" of bamboo data storage sheet \"([^\"]*)\"$")	
-public void add_bc(String bcsheet,int row,String bcStorageSheet) throws Exception{
-	  eM.setExcelFile("bcInputData", bcsheet);
-      String bcName=eM.getCellByColumnName("BC Name");
-      System.out.println("=========="+bcName+"=============");
-      String bcType=(String)eM.getCell(1, 7);
-      System.out.println("=========="+bcType+"=============");
-      broadcastPageObjects.addBambooRunBcToSheet(bcsheet,bcName,bcType,bcStorageSheet,row);
-}
-	
-@Then("^filter the bc from sheet \"([^\"]*)\" from row \"([^\"]*)\" and column \"([^\"]*)\" and add data in sheet \"([^\"]*)\"$")
-public void filter_the_bc_from_sheet_and_add_data_in_sheet(String bcStorageSheet, int row, int column, String bcSheet) throws Exception {
-	eh.setExcelFile("BambooBuildDetails", bcStorageSheet);
-	String bcName =(String) eh.getCell(row, column);
-	eM.setExcelFile("bcInputData", bcSheet);
-	eM.setCell("BC Name", bcName);
-	
-}                          
-@Then("^configure feedback for bc from sheet \"([^\"]*)\" and bctype \"([^\"]*)\"$")
-public void configure_feedback_for_bc_from_sheet_and_bctype(String bcSheet, String bcType) throws Throwable {	
-	broadcastPageObjects.configureFeedbackBC(bcSheet,bcType);
-	
-	
-}
+	}
 
-@Then("^click \"([^\"]*)\" for \"([^\"]*)\" for bctype \"([^\"]*)\"$")
-public void click_for_for_bctype(String optionToClick, String bcToView, String bcType) throws Throwable {
-	broadcastPageObjects.BCOptionToClick(optionToClick,  bcToView,  bcType);
+	@Then("^verify the seeding and trigger option for the bc from sheet \"([^\"]*)\" for \"([^\"]*)\" bc$")
+	public void verify_the_seeding_and_trigger_option_for_the_bc_from_sheet_for_bc(String bcSheet, String bctype)
+			throws Throwable {
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bcName = eM.getCellByColumnName("BC Name");
+		broadcastPageObjects.verifyIsSeedingInReport(bcName, bctype);
+	}
+
+	@Then("^\"([^\"]*)\" bc$")
+	public void bc(String bcSaveOrActivate) throws Throwable {
+		if (bcSaveOrActivate.equalsIgnoreCase("activate"))
+			activateBc();
+		else if (bcSaveOrActivate.equalsIgnoreCase("save"))
+			save_bc();
+		else
+			System.out.println("no activate save button is selected");
+
+	}
+
+	@Then("^click on BC edit button from workbook \"([^\"]*)\" sheet \"([^\"]*)\" and bctype \"([^\"]*)\"$")
+	public void click_on_BC_edit_button_from_workbook_sheet_and_bctype(String workbook, String sheet, String bctype)
+			throws Throwable {
+		eh.setExcelFile(workbook, sheet);
+		String name = eh.getCell(1, 0).toString();
+		commonObjects.filterBC(name, bctype);
+		commonObjects.BCOptionIcon(bctype);
+		commonObjects.clickEditOption();
+
+	}
+
+	@Then("^create the blackout period for the blackout rule and save$")
+	public void create_the_blackout_period_for_the_blackout_rule_and_save() throws Throwable {
+		broadcastPageObjects.AddBlackoutPeriods();
+	}
+
+	@Then("^verify offer from sheet \"([^\"]*)\" is displayed$")
+	public void verify_offer_from_sheet_is_displayed(String offerSheet) throws Throwable {
+		eh.setExcelFile("OfferInputData", offerSheet);
+		String offerName = eh.getCellByColumnName("Offer Name");
+		broadcastPageObjects.verifyofferDetailsInViewPage(offerName);
+	}
+
+	@Then("^verify copied offer from sheet \"([^\"]*)\" is displayed$")
+	public void verify_copied_offer_from_sheet_is_displayed(String offerSheet) throws Throwable {
+		eh.setExcelFile("OfferInputData", offerSheet);
+		String offerName = eh.getCellByColumnName("Offer Name");
+		broadcastPageObjects.verifycopiedofferDetailsInViewPage(offerName);
+	}
+
+	@Then("^enter choose offer tab with copied offer from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with \"([^\"]*)\" track session expires \"([^\"]*)\" filter criteria \"([^\"]*)\" give reward to \"([^\"]*)\"$")
+	public void enter_choose_offer_tab_for_copied_offer_from_sheet_for_bc_from_sheet_track_session_expires_filter_criteria_give_reward_to(
+			String offerSheet, String bcSheet, String creative, String trackExpires, String filterCriteria,
+			String giveRewardsTo) throws Exception {
+		eM.setExcelFile("bcInputData", bcSheet);
+		String bc_type = (String) eM.getCell(1, 7);
+		broadcastPageObjects.selectCopiedOffer(offerSheet, bc_type, creative, trackExpires, filterCriteria,
+				giveRewardsTo);
+
+	}
+
+	@Then("add bc from sheet \"([^\"]*)\" to row \"([^\"]*)\" of bamboo data storage sheet \"([^\"]*)\"$")
+	public void add_bc(String bcsheet, int row, String bcStorageSheet) throws Exception {
+		eM.setExcelFile("bcInputData", bcsheet);
+		String bcName = eM.getCellByColumnName("BC Name");
+		System.out.println("==========" + bcName + "=============");
+		String bcType = (String) eM.getCell(1, 7);
+		System.out.println("==========" + bcType + "=============");
+		broadcastPageObjects.addBambooRunBcToSheet(bcsheet, bcName, bcType, bcStorageSheet, row);
+	}
+
+	@Then("^filter the bc from sheet \"([^\"]*)\" from row \"([^\"]*)\" and column \"([^\"]*)\" and add data in sheet \"([^\"]*)\"$")
+	public void filter_the_bc_from_sheet_and_add_data_in_sheet(String bcStorageSheet, int row, int column,
+			String bcSheet) throws Exception {
+		eh.setExcelFile("BambooBuildDetails", bcStorageSheet);
+		String bcName = (String) eh.getCell(row, column);
+		eM.setExcelFile("bcInputData", bcSheet);
+		eM.setCell("BC Name", bcName);
+
+	}
+
+	@Then("^configure feedback for bc from sheet \"([^\"]*)\" and bctype \"([^\"]*)\"$")
+	public void configure_feedback_for_bc_from_sheet_and_bctype(String bcSheet, String bcType) throws Throwable {
+		broadcastPageObjects.configureFeedbackBC(bcSheet, bcType);
+
+	}
+
+	@Then("^click \"([^\"]*)\" for \"([^\"]*)\" for bctype \"([^\"]*)\"$")
+	public void click_for_for_bctype(String optionToClick, String bcToView, String bcType) throws Throwable {
+		broadcastPageObjects.BCOptionToClick(optionToClick, bcToView, bcType);
+	}
+
+	@Then("^Create a new UCG button$")
+	public void create_a_new_UCG_button() throws Throwable {
+
+		broadcastPageObjects.createUCGButton();
+
+	}
+
+	@Then("^enter the details to the metrics tab and add variance calculation KPI \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void enter_the_details_to_the_metrics_tab_and_add_variance_calculation_KPI_and(String Attribute_Type,
+			String Customer_Insight) throws Throwable {
+
+		broadcastPageObjects.enterUCGMetricsDetails(Attribute_Type, Customer_Insight);
+	}
+
+	@Then("^enter details with base list \"([^\"]*)\" and outlier kpi \"([^\"]*)\" with \"([^\"]*)\" and extend list \"([^\"]*)\"$")
+	public void enter_details_with_base_list_and_outlier_kpi_with_and_extend_list(String baseList, String attributeType,
+			String customerInsight, String extendList) throws Throwable {
+
+		broadcastPageObjects.enterCustomerBaseDetails(baseList, attributeType, customerInsight, extendList);
+
+	}
+
+
+
+
+@Then("^enter Schedule tab with end \"([^\"]*)\" CG Reccurance pattern \"([^\"]*)\" and CG extension pattern \"([^\"]*)\"$")
+public void enter_Schedule_tab_with_end_CG_Reccurance_pattern_and_CG_extension_pattern(String endType,
+		String cg_Reccurance, String cgExtension_Reccurance) throws Throwable {
+    
+
+	if(endType.equalsIgnoreCase("none")) {
+	
+	broadcastPageObjects.enterUCGdeliveryDetails(endType, cg_Reccurance, cgExtension_Reccurance);
+	broadcastPageObjects.sampleASelectprocess();
+	broadcastPageObjects.saveUCG();
+	}
+	else if(endType.equalsIgnoreCase("At")){
+		
+		broadcastPageObjects.enterUCGdeliveryDetailsAt(endType, cg_Reccurance, cgExtension_Reccurance);
+		broadcastPageObjects.ucgReccuranceNo();
+		broadcastPageObjects.sampleASelectprocess();
+		broadcastPageObjects.saveUCG();
+	
+}
 }
 	
-	
-}//class
-
-
-
 
 	
+	@Then("^wait until the UCG change to \"([^\"]*)\"$")
+	public void wait_until_the_UCG_change_to(String status) throws Throwable {
+		
+		//System.out.println(status);
+		String statusOfUCG =  broadcastPageObjects.getTopUCGstatus();
+		System.out.println(statusOfUCG);
+		TimeoutImpl t = new TimeoutImpl();
+		t.startTimer();
+		commonObjects.toggleAutoRefresh();
+		while (!statusOfUCG.equalsIgnoreCase(status)  && !statusOfUCG.equalsIgnoreCase("Failed") && t.checkTimerMin(15)) {
+		    statusOfUCG = broadcastPageObjects.getTopUCGstatus();
+			System.out.println(statusOfUCG);
+			Thread.sleep(3000);
+			
+			if(statusOfUCG.equalsIgnoreCase("Failed"))
+			{
+				System.out.println("UCG Failed");
+				break;
+			}
+		}
+
+		Assert.assertTrue("Invalid status of UCG", statusOfUCG.equalsIgnoreCase(status));
+	   
+	}
+
+
+}// class

@@ -1281,10 +1281,12 @@ public class RegistrationList extends Init{
 		registrationListPage.createBlackout(blackout);
 	}
 
-	@Then("^create new inventory \"([^\"]*)\"$")
-	public void create_new_inventory_with_frequency_and_blackout(String inventory, String frequency, String blackout) throws Throwable {
+	@Then("^create new inventory with \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\"$")
+	public void create_new_inventory_with(String inventory, String frequency, String blackout) throws Throwable {
 		registrationListPage.createInventory(inventory,frequency,blackout);
+	    
 	}
+
 	@Then("^filter the job \"([^\"]*)\" and activate it$")
 	public void filter_job(String jobName) throws Exception{
 		commonObjects.filterName(jobName);
@@ -1297,7 +1299,12 @@ public class RegistrationList extends Init{
 		
 	}
 	
-	
+	@Then("^create new reward \"([^\"]*)\" with parameters$")
+	public void create_new_reward_with_parameters(String rewardName) throws Exception {
+		
+		registrationListPage.createRewardwithparameters(rewardName);
+	}
+
 	
 	
 	

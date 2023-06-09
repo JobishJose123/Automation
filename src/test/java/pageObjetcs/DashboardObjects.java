@@ -20,7 +20,7 @@ public class DashboardObjects extends Init{
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(xpath="//label[contains(text(),'Dashboard')]")
+	@FindBy(xpath="//label[contains(text(),'Dashboards')]")
 	private WebElement Dashboard;
 	
 	@FindBy(xpath="//div[contains(.,'Campaign Performance Monitor')][@id='pointerDiv']")

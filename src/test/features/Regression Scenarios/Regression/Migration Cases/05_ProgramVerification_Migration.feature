@@ -1,5 +1,6 @@
 #Author: your.email@your.domain.com
 #Keywords Summary :
+#Total scenarios:  17
 @NX-IMUICases_Migration
 Feature: For IntentManagement Regression.
 
@@ -32,8 +33,8 @@ Then navigate to programs
 Then filter im program from sheet "programdelete"
 Then verify delete a program "programdelete"
 
-@initBrowser
-@NDX-5755, @NDX-5752 @NDX-10117	
+
+@NDX-5755, @NDX-5752 @NDX-10117	@initBrowser
 Scenario: Verify program rule deactivate
 Then filter program and rule created from sheet "CCprogram" and offer "rechargeSMS" of excelfile "IMdata"
 Given login
@@ -167,8 +168,8 @@ Examples:
 #	  | conditionForOROperation |
 #
 
-@initBrowser 
-@NDX-6336 @NDX-6334 @NDX-6332 @NDX-6330 @NDX-6327
+
+@NDX-6336 @NDX-6334 @NDX-6332 @NDX-6330 @NDX-6327 @initBrowser 
 Scenario Outline: Verify program rule edit <Condition>
 Given login
 Then filter program and rule created from sheet "APIprogram" and offer "STVSMS" of excelfile "IMdata"

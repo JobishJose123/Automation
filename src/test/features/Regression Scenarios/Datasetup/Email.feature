@@ -1,9 +1,10 @@
 #Author : kiran.joseph@flytxt.com
+#Total scenario : 10
 @Emailcreation01
 Feature: Email
 
 ######################## email feature ###########
-@ndx-basicemail @NDX-17442 @NDX-17443 @NDX-17444 @initBrowser
+@ndx-basicemail @NDX-17442 @NDX-17443 @NDX-17444 @initBrowser 
 Scenario: Basic email partner settings selection.
 Given login
 Then navigate to configuration management
@@ -16,7 +17,7 @@ Then select the sender route as "Email outbound"
 Then save the settings
 
 @NDX-rechargeEmailoption1 @NDX-17535
-  @initBrowser @closeBrowser
+  @initBrowser 
 Scenario: rechargeEmail offer
   Given login
   When navigate to precision marketer
@@ -25,13 +26,15 @@ Scenario: rechargeEmail offer
   Then create new offer from sheet "Option1Email" with product "fullDetails"
   Then verify "Option1Email" offer in grid
   Then wait for 1 minutes
+  Then navigate to landing page
+  Then navigate to precision marketer
   Then navigate to offer management
   Then Navigate to Offer Catalogue
   Then filter the offer catalogue from sheet "defaultCatalog" and navigate to view offers
   Then Add "Option1Email" offer to Offer Catalogue
   
   
-  @NDX-CreateEmailbcoption1 @NDX-17607 @NDX-17608 @NDX-17609 @initBrowser  
+  @NDX-CreateEmailbcoption1 @NDX-17607 @NDX-17608 @NDX-17609 @initBrowser 
 Scenario Outline:Create Email broadcast to verify bc functionality option1
 Given login
 Then navigate to precision marketer
@@ -74,7 +77,7 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataShee
 
 
 
-@ndx-withtracking @NDX-17459  @initBrowser
+@ndx-withtracking @NDX-17459  @initBrowser @closeBrowser
 Scenario:  With tracking email partner settings selection.
 Given login
 Then navigate to configuration management
@@ -87,7 +90,7 @@ Then select the sender route as "Email outbound"
 Then save the settings
 
   @NDX-rechargeEmailoption2 @NDX-17538 @NDX-17539 @NDX-17540
-  @initBrowser @closeBrowser
+  @initBrowser 
 Scenario: rechargeEmail offer
   Given login
   When navigate to precision marketer
@@ -96,13 +99,15 @@ Scenario: rechargeEmail offer
   Then create new offer from sheet "Option2Email" with product "fullDetails"
   Then verify "Option2Email" offer in grid
   Then wait for 1 minutes
+   Then navigate to landing page
+  Then navigate to precision marketer
   Then navigate to offer management
   Then Navigate to Offer Catalogue
   Then filter the offer catalogue from sheet "defaultCatalog" and navigate to view offers
   Then Add "Option2Email" offer to Offer Catalogue
   
   
-  @NDX-CreateEmailbcoption2 @NDX-17610 @initBrowser  
+  @NDX-CreateEmailbcoption2 @NDX-17610 @initBrowser  @closeBrowser
 Scenario Outline:Create Email broadcast to verify bc functionality option2
 Given login
 Then navigate to precision marketer
@@ -123,7 +128,7 @@ Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "<BCDataShee
 |Emailoption2|Option2Email|usageMetric|Create|no limit|no limit|none|single creative|none|none|2|activate|BCDataStorage|
 
 
-@ndx-mandril   @initBrowser
+@ndx-mandril   @initBrowser @closeBrowser
 Scenario:  option 3 email partner settings selection.
 Given login
 Then navigate to configuration management
@@ -139,7 +144,7 @@ Then save the settings
  
   
     @NDX-rechargeEmailoption3
-  @initBrowser @closeBrowser
+  @initBrowser @closeBrowser 
 Scenario: rechargeEmail offer
   Given login
   When navigate to precision marketer
@@ -148,6 +153,8 @@ Scenario: rechargeEmail offer
   Then create new offer from sheet "Option3Email" with product "fullDetails"
   Then verify "Option3Email" offer in grid
   Then wait for 1 minutes
+   Then navigate to landing page
+  Then navigate to precision marketer
   Then navigate to offer management
   Then Navigate to Offer Catalogue
   Then filter the offer catalogue from sheet "defaultCatalog" and navigate to view offers
@@ -188,7 +195,7 @@ Scenario: rechargeEmail offer
 #  Then Create New Offer Catalogue from sheet "defaultCatalog"
 
 
-@NDX-CreateEmailbcoption3 @initBrowser  
+@NDX-CreateEmailbcoption3 @initBrowser  @closeBrowser 
 Scenario Outline:Create Email broadcast to verify bc functionality option3
 Given login
 Then navigate to precision marketer

@@ -233,7 +233,7 @@ public class ProgramPage extends Init{
 	@FindBy(xpath="//form[@id='scheduleForm']//label[text()='Serve on']/..//*[@id='input']")
 	private WebElement programschserveon;
 
-	@FindBy(xpath="//paper-item[contains(.,'All Days')]")
+	@FindBy(xpath="//paper-radio-button//div[contains(.,'On All Days')]")
 	private WebElement prmshcserveonalldays ;
 	
 	@FindBy(xpath="//paper-item[contains(.,'Specific Days')]")

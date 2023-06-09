@@ -60,7 +60,8 @@ public class LandingPageObjects extends Init{
 	private WebElement changePasswordCancelButton;
 	@FindBy(xpath="//span[contains(text(),'Manage License')]/..")
 	private WebElement profileNameDropdownManageLicense;
-	
+	@FindBy(xpath="//div[contains(text(),'Control Group')]/..")
+	private WebElement Controlgrouppage;
 	
 	
 	public void navigateToPrecisionMarketer() throws InterruptedException {
@@ -78,6 +79,12 @@ public class LandingPageObjects extends Init{
 	public void navigateToConfigurationManagement() throws InterruptedException {
 		jswait.loadClick(configurationManagement);
 	}
+	
+	public void navigateToControlgroup() throws InterruptedException {
+	
+		jswait.loadClick(Controlgrouppage);
+	}
+	
 	public void navigateToDataFoundation() throws InterruptedException {
 		jswait.loadClick(dataFoundation);
 	}

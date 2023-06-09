@@ -1,5 +1,6 @@
 #Author: your.email@your.domain.com
 #Keywords Summary :
+#Total scenario:17
 @NDX-IMUICases_Regression
 Feature: For IntentManagement Regression(UI Cases).
 

@@ -1,5 +1,6 @@
 #Author: shobina.k@flytxt.com
 #Summary :Segment Analysis Verification
+#total scenario: 20
 @SegmentAnalysis_Regression
 Feature: Verification of Segment Analysis job(Regression)
 

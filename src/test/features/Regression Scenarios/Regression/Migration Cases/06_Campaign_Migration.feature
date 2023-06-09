@@ -1,6 +1,7 @@
 #Author: rahul.chandran@flytxt.com
 #Keywords Summary : to create campaign for data setup
 #Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
+#Total scenarios: 16
 @NDX-CampaignMigrationCases
 Feature: Campaign Migration Cases
 

@@ -2,14 +2,6 @@ package stepDefinitions;
 
 
 
-
-
-
-
-
-
-
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -346,6 +338,11 @@ public class BiVerifyDef extends Init {
 			biverifyobject.create_UseCase1_Report(reportName, timeRange);
 		}
 
+	}
+	
+	@Then("^hello \"([^\"]*)\"$")
+	public void hello(String arg1) throws Throwable {
+	System.out.println(arg1);
 	}
 		
 		

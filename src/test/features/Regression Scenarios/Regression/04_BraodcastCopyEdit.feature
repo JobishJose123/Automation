@@ -16,6 +16,7 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
+#Total scenario : 175
 @BroadcastCopyEdit_Regression
 Feature: Test cases related to Broadcast Management Copy Edit
 Copy and Editing all types of Braodcast
@@ -24,7 +25,7 @@ Copy and Editing all types of Braodcast
 #########################################################################################################################
  
  
-  @NDX-7344 @NDX-9929 @initBrowser @closeBrowser
+  @NDX-7344 @NDX-9929 @initBrowser 
   Scenario: Verify after copy the BC all details oneOff new
      Given login
     When navigate to precision marketer
@@ -38,7 +39,7 @@ Copy and Editing all types of Braodcast
     Then view the bc from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     Then Verify the Copied Bc in view page workbook "bcInputData" sheet "one-offBC" with "rechargeSMS" condition digitalPersonaGT15   
    
-   @NDX-5928  @NDX-9937 @initBrowser @closeBrowser
+   @NDX-5928  @NDX-9937 @initBrowser 
    Scenario: Verify the Delivery Details BC after copy & edit Start and End Time of One-Off Bc new
    Given login
     When navigate to precision marketer
@@ -53,7 +54,7 @@ Copy and Editing all types of Braodcast
     Then Verify the BC Delivery tab details from Broadcast View from workbook "bcInputDataForEdit" in sheet "one-offBCEdit"
     
     
-     @NDX-5878 @initBrowser @closeBrowser
+     @NDX-5878 @initBrowser 
    Scenario: Verify the BC after copy & edit the basic detais of BC -NEW
     Given login
     When navigate to precision marketer
@@ -68,7 +69,7 @@ Copy and Editing all types of Braodcast
     Then verify the basic details from Broadcast View and data sheet "one-offBCEdit"
     
    
-    @NDX-5926 @initBrowser @closeBrowser
+    @NDX-5926 @initBrowser
   Scenario: Verify BC after copy & edit with offer in offer selection page
     Given login
     When navigate to precision marketer
@@ -344,6 +345,8 @@ Verify BC after edit with new Saved segment TriggerOneoff BC
 #    Then navigate to "One-time" broadcasts
 #    Then click on delete from workbook "bcInputDataForEdit" and sheet "one-offBCEdit"
 #    Then click on toggleAutoRefresh
+
+
      #    ************************ Seeding OneOFF BC**************   
     
     
@@ -412,7 +415,7 @@ Verify BC after edit with new Saved segment TriggerOneoff BC
     Then verify the BC offer in BC View from workbook "bcInputDataForEdit" sheet "seedingoneoffEdit" with offer "seedingWAPoffer"
 
 
-  @NDX-6544 @NDX-6576 @initBrowser @closeBrowser
+  @NDX-6544 @NDX-6576 @initBrowser 
   Scenario Outline: Verify Seeding one-off BC and edit the targetSelection <Condition>
 #                    Verify BC after copy & edit  with new Saved segment Seeding one-off bc(NEW)
     Given login
@@ -446,7 +449,7 @@ Verify BC after edit with new Saved segment TriggerOneoff BC
     Then navigate to life cycle marketing
     Then navigate to campaign category from sheet "campaignCategory"
     Then naigate to "campaignBC" campaign view broadcasts
-Then navigate to "Seedings Broadcasts" broadcasts
+    Then navigate to "Seedings Broadcasts" broadcasts
     Then click on BC edit button from workbook "bcInputDataForEdit" sheet "seedingoneoffEdit"
     Then edit the broadcast with taget condition <Condition>
     Then save bc
@@ -455,7 +458,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then verify the target conditions from Broadcast View and condition <Condition>
 
     Examples: 
-      | Condition |
+    | Condition |
 	| customerWasSentTheTrialMessage |
 	| customerList                   |
 	| SharedcustomerList             |
@@ -511,6 +514,7 @@ Then navigate to "Seedings Broadcasts" broadcasts
     Then navigate to "Seedings Broadcasts" broadcasts
     Then view the bc from workbook "bcInputDataForEdit" in sheet "seedingoneoffEdit"
     Then verify the BC expiry in BC View After hours "2"
+    
     
     #    ************************ Seeding Triggerable BC**************
        
@@ -622,17 +626,17 @@ Then navigate to "Seedings Broadcasts" broadcasts
 
     Examples: 
       | Condition |
-	| customerWasSentTheTrialMessage |
-	| customerList                   |
-	| SharedcustomerList             |
-	| customerDrivenEvent            |
-	| usageMetric                    |
-	| sharedMetricOtherPartner  |
+	#| customerWasSentTheTrialMessage |
+	#| customerList                   |
+	#| SharedcustomerList             |
+	#| customerDrivenEvent            |
+	#| usageMetric                    |
+	#| sharedMetricOtherPartner  |
 	| customerDrivenEventNotOccurred  |
-	| customerWasSentTheTrialMessageNOtOccurred |
-	| conditionForANDOperation |
-	| conditionForOROperation |
-	| segmentAgeGT40                 |
+	#| customerWasSentTheTrialMessageNOtOccurred |
+	#| conditionForANDOperation |
+	#| conditionForOROperation |
+	# segmentAgeGT40                 |
  
 # | revenueMetric                  |
  #  | digitalPersonaGT15             |

@@ -46,6 +46,7 @@ import net.rcarz.jiraclient.JiraClient;
 	
 		@Before("@initBrowser")
 		public static void beforeSuite() throws InterruptedException, MalformedURLException, FileNotFoundException {
+			System.out.println("Program ready to start");
 			Init.init();
 		}
 		

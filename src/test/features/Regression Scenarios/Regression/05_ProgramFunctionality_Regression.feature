@@ -1,17 +1,20 @@
 #Author: Shobina.k
 #Keywords Summary : covers functionality of IM Features
+#Toatal scenario : 80
 @IMFunctRegression
 Feature: IM functionality regression
 
-@NDX-9991 @initBrowser  
+@NDX-9991  @12324 @initBrowser  
 Scenario: Verify the request processing through CC touchpoint
 Given login
 Then filter program and rule created from sheet "CCprogram" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
 Then navigate to intent management
 Then navigate to programs
 Then choose program from sheet "CCprogram"
+#Then filter rule from sheet "CCprogram"
+#Then edit new rule without enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
+Then "activate" rule
 Then filter rule from sheet "CCprogram"
-Then edit new rule without enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
 Then wait until rule is picked
 Then navigate to landing page
 Then navigate to precision marketer
@@ -88,7 +91,7 @@ Then verify condition Offer Accepted is persisted with offer from sheet "recharg
 
 
 
-@NDX-9990 @initBrowser @closeBrowser 
+@NDX-9990 @2134 @initBrowser @closeBrowser 
 Scenario: Verify the request processing through API touchpoint
 Given login
 Then filter program and rule created from sheet "APIprogram" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
@@ -160,7 +163,6 @@ Then verify condition Offer Accepted is persisted with offer from sheet "recharg
 Scenario: conversion for ussd
 Given login
 Then provide file in location "/usr/local/flytxt/selenium/seleniumConversion/" for trigger with csv file "conversionIM.csv"
-Then navigate to the neon again
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
@@ -277,7 +279,7 @@ Then verify condition Fulfillment Success is persisted with offer from sheet "ST
 
 
 
-@NDX-9878 @initBrowser @closeBrowser 
+@NDX-9878 @4567 @initBrowser @closeBrowser 
 Scenario: Verify the conversion of STV offer with API touch point.
 Given login
 Then filter program and rule created from sheet "APIprogram" and offer "STVSMS" of excelfile "IMdatafunctionality"
@@ -286,6 +288,8 @@ Then navigate to programs
 Then choose program from sheet "APIprogram"
 Then filter rule from sheet "APIprogram"
 Then edit new rule without enddate from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
+Then "activate" rule
+Then filter rule from sheet "APIprogram"
 Then wait until rule is picked
     
 @apihit @initBrowser @closeBrowser 
@@ -918,70 +922,6 @@ Then verify condition Acknowledged is persisted with offer from sheet "rechargeS
 #Then edit new rule without enddate from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR_default"
 #Then wait until rule is picked
 #Then get-offer api-server for "9745081104" with touchpoint "apiTouchpoint_default" and rule "APIprogram"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

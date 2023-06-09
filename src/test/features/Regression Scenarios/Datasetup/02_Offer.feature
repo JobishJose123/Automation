@@ -1,20 +1,20 @@
 #Author: rahul.chandran@your.flytxt.com
 #Keywords Summary :Offer creation for regression data setup
-#Total Scenario : 18
+#Total Scenario : 20
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
 @NDX-AllOffer_datasetup
 Feature: Test suite on Offer creation
   Create all types of offers
 
        
- @NDX-5165 @initBrowser  @testusage @closeBrowser  
+ @NDX-5165 @initBrowser  
   Scenario: Verify the Create offer using WAP Push Channel and Recharge offer Type 
     Given login
     Then navigate to precision marketer
     Then navigate to offer management
     Then navigate to offers
     Then create new offer from sheet "usagerecharge" with product "fullDetails"
-    Then verify recharge offer from sheet "rechargeWAP"
+    Then verify recharge offer from sheet "usagerecharge"
 #    Then save "offerInputData" data to spreadsheet from "rechargeWAP" with string recharge wap offer with fullDetails product
    
   @NDX-5164 @initBrowser @closeBrowser
@@ -27,7 +27,7 @@ Feature: Test suite on Offer creation
     Then verify "STVWAP" offer in grid
 #    Then save "offerInputData" data to spreadsheet from "STVWAP" with string stv wap offer with fullDetails product
   
-   @rechargeSMS @initBrowser @closeBrowser
+   @rechargeSMS @initBrowser 
    Scenario: Email Channel -->Verify the Create offer using STVSMS 
      Given login
      Then navigate to precision marketer
@@ -37,8 +37,7 @@ Feature: Test suite on Offer creation
      Then verify "rechargeSMS" offer in grid
 #     Then save "offerInputData" data to spreadsheet from "rechargeSMS" with string recharge sms offer with fullDetails product
       
-   @NDX-5397
-   @initBrowser 
+   @NDX-5397  @initBrowser 
    Scenario: Verify cerating SMS channel,Recharge Type offer with Dynamic tag
      Given login
  		When navigate to precision marketer
@@ -48,8 +47,8 @@ Feature: Test suite on Offer creation
  		Then verify "rechargeSMS_Dynamic" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "rechargeSMS_Dynamic" with string rechargeSMS_Dynamic offer with fullDetails product
  		
- 		@NDX-newSeedingWap
-   @initBrowser @closeBrowser
+ 		
+@NDX-newSeedingWap  @initBrowser @closeBrowser
    Scenario: seeding wap offer
      Given login
  		When navigate to precision marketer
@@ -59,8 +58,7 @@ Feature: Test suite on Offer creation
  		Then verify "seedingWAPoffer" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "seedingWAPoffer" with string seeding wap offer with fullDetails product
  		
- 		@NDX-SeedingSMS
-   @initBrowser @closeBrowser
+ @NDX-SeedingSMS @initBrowser @closeBrowser
    Scenario: SeedingSMS offer
      Given login
  		When navigate to precision marketer
@@ -70,8 +68,7 @@ Feature: Test suite on Offer creation
  		Then verify "SeedingSMS" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "SeedingSMS" with string seeding sms offer with fullDetails product
  		
- 		@NDX-rechargeVoicePush
-   @initBrowser @closeBrowser
+ 		@NDX-rechargeVoicePush @initBrowser @closeBrowser
    Scenario: rechargeVoicePush offer
      Given login
  		When navigate to precision marketer
@@ -81,8 +78,7 @@ Feature: Test suite on Offer creation
  		Then verify "rechargeVoicePush" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "rechargeVoicePush" with string recharge voice push offer with fullDetails product
  		
- 		@NDX-balanceDeductionWAP
-   @initBrowser @closeBrowser
+@NDX-balanceDeductionWAP @initBrowser @closeBrowser
    Scenario: balanceDeductionWAP offer
      Given login
  		When navigate to precision marketer
@@ -92,8 +88,7 @@ Feature: Test suite on Offer creation
  		Then verify "balanceDeductionWAP" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "balanceDeductionWAP" with string balanceDeductionWAP offer with fullDetails product
  		
- 		@NDX-comboOfferWAP
-   @initBrowser @closeBrowser
+ @NDX-comboOfferWAP @initBrowser @closeBrowser
    Scenario: comboOfferWAP offer
      Given login
  		When navigate to precision marketer
@@ -103,8 +98,7 @@ Feature: Test suite on Offer creation
  		Then verify "comboOfferWAP" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "comboOfferWAP" with string comboOfferWAP offer with fullDetails product
  		
- 		@NDX-informationalWAP
-   @initBrowser @closeBrowser
+@NDX-informationalWAP   @initBrowser @closeBrowser
    Scenario: informationalWAP offer
      Given login
  		When navigate to precision marketer
@@ -147,8 +141,7 @@ Feature: Test suite on Offer creation
  		Then verify "usageBasedSMS" offer in grid
  		Then save "offerInputData" data to spreadsheet from "usageBasedSMS" with string usageBasedSMS offer with fullDetails product
  		
- 		@NDX-rechargeEmail
-   @initBrowser 
+ 		@NDX-rechargeEmail @initBrowser 
    Scenario: rechargeEmail offer
      Given login
  		When navigate to precision marketer
@@ -157,9 +150,9 @@ Feature: Test suite on Offer creation
  		Then create new offer from sheet "rechargeEmail" with product "fullDetails"
  		Then verify "rechargeEmail" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "rechargeEmail" with string rechargeEmail offer with fullDetails product
- 		
- 		@NDX-rechargeimageFacebook
-   @initBrowser @closeBrowser
+ 
+ 
+ @NDX-rechargeimageFacebook @initBrowser 
    Scenario: rechargeimageFacebook offer
      Given login
  		When navigate to precision marketer
@@ -169,8 +162,8 @@ Feature: Test suite on Offer creation
  		Then verify "rechargeimageFacebook" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "rechargeimageFacebook" with string rechargeimageFacebook offer with fullDetails product
  		
- 		@NDX-rechargevideoFacebook
-   @initBrowser @closeBrowser
+ 		
+ 		@NDX-rechargevideoFacebook @initBrowser @closeBrowser
    Scenario: rechargevideoFacebook offer
      Given login
  		When navigate to precision marketer
@@ -191,26 +184,57 @@ Feature: Test suite on Offer creation
 #     Then save "offerInputData" data to spreadsheet from "STVSMS" with string recharge sms offer with fullDetails product
      
  
- 
- @NDX-reminderOffer
-   @initBrowser
-   Scenario: create reminder offer
+    @MultiTrackRechOffer @initBrowser 
+   Scenario: SMS Channel -->Verify the Create offer using Multi trackSource
      Given login
- 		When navigate to precision marketer
- 		Then navigate to offer management
- 		Then navigate to offers
- 		Then create new offer from sheet "reminderOffer" with product "fullDetails"
- 		Then verify "" offer in grid
+     Then navigate to precision marketer
+     Then navigate to offer management
+     Then navigate to offers
+     Then create new offer with multiple track from sheet "MultiTrackOffer" with product "fullDetails"
+     Then verify "MultiTrackOffer" offer in grid
+#     Then save "offerInputData" data to spreadsheet from "STVSMS" with string recharge sms offer with fullDetails product
+    
+    
+     @MultiTrackSeedingoffer @initBrowser 
+   Scenario: SMS Channel -->Verify the Create Seeding offer using Multi trackSource
+     Given login
+     Then navigate to precision marketer
+     Then navigate to offer management
+     Then navigate to offers
+     Then create new offer with multiple track from sheet "MultiTrackOffer-Seeding" with product "fullDetails"
+     Then verify "MultiTrackOffer-Seeding" offer in grid
+ #Then save "offerInputData" data to spreadsheet from "STVSMS" with string recharge sms offer with fullDetails product
+    
+    
+     
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ #@NDX-reminderOffer @initBrowser
+   Scenario: create reminder offer
+    Given login 
+	When navigate to precision marketer 
+	Then navigate to offer management 
+	Then navigate to offers 
+	Then create new offer from sheet "reminderOffer" with product "fullDetails" 
+	Then verify "reminderOffer" offer in grid 
+ 		
+ @Informational-Offer @initBrowser 
+Scenario: Verify the Create offer using InformationalOffer 
+	Given login 
+	Then navigate to precision marketer 
+	Then navigate to offer management 
+	Then navigate to offers 
+	Then create new offer from sheet "InfoOffer" with product "fullDetails" 
+	Then verify "InfoOffer" offer in grid 
+	
+    
+ @SingleTrackMultiRuleRewardOffer    @initBrowser
+Scenario: Verify the Create offer with a single track and Multi Rule and Reward
+Given login 
+Then navigate to precision marketer 
+Then navigate to offer management 
+Then navigate to offers 
+Then create new offer with multiple track from sheet "MultiRuleRewardOffer" with product "fullDetails"	
+Then verify "MultiRuleRewardOffer" offer in grid 
  
  
  

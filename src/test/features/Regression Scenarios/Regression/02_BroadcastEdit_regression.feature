@@ -16,6 +16,7 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
+#Total scenario : 75
 @BroadcastEdit_regression
 Feature: Test suite for Broadcast Editing for NEW
   Editing all types of Braodcast

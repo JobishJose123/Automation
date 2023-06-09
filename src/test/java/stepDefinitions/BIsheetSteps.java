@@ -26,6 +26,7 @@ public class BIsheetSteps extends Init {
 	BIsheetPageObjects BIobjects = new BIsheetPageObjects();
 	CommonObjects CommonObjects=new CommonObjects();
 	 ReportPageObjects  ReportPageObject = new  ReportPageObjects();
+	 
 	 @FindBy(xpath="//paper-button[contains(.,'Add')]")
 	  private WebElement BIAdd;
 	
@@ -37,6 +38,7 @@ public class BIsheetSteps extends Init {
 	{
 		PageFactory.initElements(driver, this);
 	}
+	
 	@Then("^navigate to Business Intelligence$")
 	public void navigate_to_Business_Intelligence() throws Throwable {
 		BIobjects.clickBusinessIntelligence();

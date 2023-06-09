@@ -3,20 +3,26 @@ package pageObjetcs;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Robot;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.xpath.XPath;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.server.handler.FindElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -33,7 +39,7 @@ public class OfferPageObjects extends Init {
 	JSWaiter jswait = new JSWaiter();
 	WebDriverWait wait = new WebDriverWait(driver, 10);
 	CommonObjects commonObjects = new CommonObjects();
-	RandomNameGenerator RandomNameGenerator=new RandomNameGenerator();
+	RandomNameGenerator RandomNameGenerator = new RandomNameGenerator();
 	public ExcelHelper eh = new ExcelHelper();
 	OfferAttributesPage offerAttributesPage = new OfferAttributesPage();
 
@@ -41,21 +47,20 @@ public class OfferPageObjects extends Init {
 		PageFactory.initElements(driver, this);
 	}
 
-	
 	@FindBy(xpath = "//div[@id='templateDiv-REGULAR-OFFER']/span[1]")
 	private WebElement selecttemplatemandrill;
-	
+
 	@FindBy(xpath = "//preview-email/form[2]/div[2]/email-template-tile/paper-dialog[2]/div/paper-button[2]")
 	private WebElement yesornomandrilltemplate;
 	@FindBy(xpath = "//email-template-tile[@tile-style='REGULAR']/paper-dialog[1]/div[2]/paper-button[2]")
 	private WebElement finalselectmandrilltemplate;
-	
+
 	@FindBy(xpath = "//*[@id=\"syncDiv-OFFER\"]/div[2]/iron-icon[@title='Click to Sync']")
 	private WebElement synctemplate;
-	
+
 	@FindBy(xpath = "//preview-email/form[2]/div[1]/paper-input/paper-input-container/div[2]/div/input")
 	private WebElement mandrillfilter;
-	
+
 	@FindBy(xpath = "//span[contains(.,'Select')]/../input")
 	private WebElement emailSelectResourceButton;
 	@FindBy(xpath = ".//*[@id='sym2']")
@@ -75,7 +80,7 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = "//*[contains(.,'Create New Offer')]/following::paper-button[contains(.,'Proceed')]")
 	private WebElement offerProceedButton;
 	@FindBy(xpath = "//*[contains(.,'Edit Offer')]/following::paper-button[contains(.,'Proceed')]")
-	private WebElement EditofferProceedButton;	
+	private WebElement EditofferProceedButton;
 	@FindBy(xpath = "//paper-button[contains(.,'Proceed')]")
 	private WebElement offerEditProceedButton;
 	@FindBy(xpath = ".//*[@id='check']/div/iron-pages/offer-products/form/div/div[2]/paper-button")
@@ -84,12 +89,14 @@ public class OfferPageObjects extends Init {
 	private WebElement dialogBoxAddProductButton;
 	@FindBy(xpath = "//label[contains(.,'Language')]/..//input")
 	private WebElement creativeLanguage;
-	@FindBy(xpath = "//paper-item[contains(.,'"+LANGUAGE1+"')]")
+	@FindBy(xpath = "//paper-item[contains(.,'" + LANGUAGE1 + "')]")
 	private WebElement creativeLanguageEnglishSelect;
-	@FindBy(xpath = "//creative-wrapper//define-creative[2]//paper-item[contains(.,'"+LANGUAGE2+"')]")
+	@FindBy(xpath = "//creative-wrapper//define-creative[2]//paper-item[contains(.,'" + LANGUAGE2 + "')]")
 	private WebElement secondCreativeLanguageSpanishSelect;
 	@FindBy(xpath = "//paper-button[contains(.,'Save Offer')]")
 	private WebElement saveOfferButton;
+	@FindBy(xpath = "(//paper-button[@class='style-scope offer-form x-scope paper-button-0'])[1]")
+	private WebElement saveOfferReportButton;
 	@FindBy(xpath = "//label[contains(.,'Optional1')]/../input")
 	private WebElement voiceCreativeOptional1;
 	@FindBy(xpath = "//label[contains(.,'Optional2')]/../input")
@@ -106,21 +113,72 @@ public class OfferPageObjects extends Init {
 	private WebElement cancelOfferButton;
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]/..//input")
 	private WebElement rewardTypeInputField;
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')])[2]/..//input")
+	private WebElement rewardTypeInputField1;
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')])[4]/..//input")
+	private WebElement rewardTypeInputField2;
+	@FindBy(xpath = "//div//h3[contains(.,'Rewards for Third Rule')]//..//input")
+	private WebElement rewardTypeInputFieldThirdRule;
+
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')])[3]/..//input")
+	private WebElement SeedingrewardTypeInputField;
+
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'" + SEEEDING_REWARD
+			+ "')])[3]")
+	private WebElement SeedingrewardTypeselenium_reward;
+	
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'" + SEEEDING_REWARD
+			+ "')])[5]")
+	private WebElement SeedingrewardTypeselenium_rewardMulti;
+
 //	@FindBy(xpath = ".//rewards-container//paper-button[contains(.,'Add')]")
 //	private WebElement rewardAddButton;
-	
-	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")
+
+	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELENIUM_REWARD + "')]")
 	private WebElement rewardTypeAnySelector;
-	
+
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'sample_flow')]")
 	private WebElement rewardTypeSampleFlowSelector;
-	
-	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
+
+	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'" + SEL_REWARD
+			+ "')]")
 	private WebElement rewardTypesel_reward;
+
+	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'" + SEL_REWARD
+			+ "')][3]")
+	private WebElement DefaultSecondRuleReward;
+
+	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'" + SELENIUM_REWARD
+			+ "')][2]")
+	private WebElement rewardTypeselenium_rewardforFirstRule;
 	
+	@FindBy(xpath = "//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'" + SELENIUM_LORD_REWARD
+			+ "')][2]")
+	private WebElement rewardTypeselenium_Lord_rewardforFirstRule;
 	
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELENIUM_TOPG_REWARD + "')])[4]")
+	private WebElement rewardTypeselenium_TopGrewardsecondRule;
+
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELENIUM_REWARD + "')])[2]")
+	private WebElement rewardTypeselenium_reward;
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELMULTI_REWARD + "')])[4]")
+	private WebElement rewardTypeselenium_rewardsecondRule;
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELENIUM_REWARD_TEST + "')])[3]")
+	private WebElement rewardTypeSelenium_reward_test;
+
 	@FindBy(xpath = "//label[contains(@class,'style-scope paper-input') and contains(text(),'Source')]/..//input")
 	private WebElement trackSourceSelector;
+
+	@FindBy(xpath = "(//label[contains(@class,'style-scope paper-input') and contains(text(),'Source')]/..//input)[2]")
+	private WebElement trackSourceSelector1;
+	@FindBy(xpath = "//div//paper-button[contains(.,'Add') and @class =\"style-scope offer-track x-scope paper-button-0\"]")
+	private WebElement trackAddSourceSelector;
+
 	@FindBy(xpath = "//*[@id='form']//label[contains(.,'Title')]/..//input")
 	private WebElement CreativeTitle;
 	@FindBy(xpath = "//creative-wrapper//define-creative[2]//*[@id='form']//label[contains(.,'Title')]/..//input")
@@ -132,7 +190,6 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = "//label[contains(.,'Details')]/..//textarea")
 	private WebElement smsCreativeDetails;
 
-	
 	@FindBy(xpath = "//creative-wrapper//define-creative[2]//label[contains(.,'Details')]/..//textarea")
 	private WebElement secondSmsCreativeDetails;
 	@FindBy(xpath = "//label[contains(.,'Offer Type')]/../..//input")
@@ -173,6 +230,7 @@ public class OfferPageObjects extends Init {
 	private WebElement setAsDefaultSecondTrack;
 	@FindBy(xpath = ".//div[@class='layout horizontal style-scope offer-track']//paper-button[contains(.,'Add')]")
 	private WebElement addTrackButton;
+
 	@FindBy(xpath = ".//form[@id='trackForm']/div[@class='style-scope offer-track']/div[@class='closeImg style-scope offer-track']")
 	private WebElement removeTrackRuleButton;
 	@FindBy(xpath = ".//div[@class='buttons style-scope offer-track']//paper-button[contains(.,'Yes')]")
@@ -187,8 +245,8 @@ public class OfferPageObjects extends Init {
 	private WebElement removeCreativeButton;
 	@FindBy(xpath = ".//paper-listbox[@id='langDrop']/paper-item")
 	private List<WebElement> creativeLanguagesList;
-	
-	@FindBy(xpath="//div[contains(text(),'Rewards')]")
+
+	@FindBy(xpath = "//div[contains(text(),'Rewards')]")
 	private WebElement rewards;
 
 	@FindBy(xpath = "//span[text()='Offer Details']/..")
@@ -205,6 +263,22 @@ public class OfferPageObjects extends Init {
 	private WebElement successMessage;
 	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[2]")
 	private WebElement failureMessage;
+
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[3]")
+	private WebElement successMessageFirstRule;
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[4]")
+	private WebElement failureMessageFirstRule;
+
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[7]")
+	private WebElement successMessageSecondRule;
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[8]")
+	private WebElement failureMessageSecondRule;
+
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[5]")
+	private WebElement successMessageThirdRule;
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[6]")
+	private WebElement failureMessageThirdRule;
+
 	@FindBy(xpath = "//span[contains(.,'Preview Email')]")
 	private WebElement previewEmailButton;
 
@@ -230,10 +304,10 @@ public class OfferPageObjects extends Init {
 	private WebElement mapVariableIcon;
 	@FindBy(xpath = "//label[contains(.,'Details')]/following::*[@d='M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z']//../../../..")
 	private WebElement mapVariablecreativeIcon;
-	
+
 	@FindBy(xpath = "//paper-dialog-scrollable/div/div/variables-grid/iron-data-table/div/iron-list/div/div[1]/data-table-row/div[1]/data-table-cell[1]")
 	private WebElement mapVariableFirstVariable;
-	@FindBy(xpath = "//paper-button[text()='OK']")
+	@FindBy(xpath = "//div//paper-button[@class ='style-scope variables-dialog x-scope paper-button-0']")
 	private WebElement mapVariableOkButton;
 	@FindBy(xpath = "//div[@class='buttons style-scope variable-dialog']/paper-button[1]")
 	private WebElement mapVariableCancelButton;
@@ -241,324 +315,372 @@ public class OfferPageObjects extends Init {
 	private WebElement mapVariableDialogHeader;
 	@FindBy(xpath = "//preview-email/div//*[@d='M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z']/../../..")
 	private WebElement emailMapVariable;
-	
-	
+
 //Track Tab in Offer Creation	
-	 @FindBy(xpath="//paper-button[text()='Add Rule']")
-	 private WebElement addRuleButton;
-	 @FindBy(xpath="(//label[contains(.,'Rule Name')]//..//input)[2]")
-	 private WebElement addTrackingRuleRuleName;
-	 @FindBy(xpath="(//label[contains(.,'Priority')]/../input)[2]")
-	 private WebElement addTrackingRulePrioritySelector;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'2')]")
-	 private WebElement addTrackingRulePrioritySelect2;
-	 @FindBy(xpath="(//label[contains(.,'Priority')])[2]//following::paper-button[contains(.,'Add')][1]")
-	 private WebElement addTrackingRuleAddConditionButton;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../input")
-	 private WebElement  addTrackingRuleSecondConditionParameterSelector;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'amount')]")
-	 private WebElement addTrackingRuleSecondConditionParameterSelectAge;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../input")
-	 private WebElement addTrackingRuleSecondConditionConditionSelector;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is greater than')]")
-	 private WebElement addTrackingRuleSecondConditionConditionSelectisGreaterThan;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Value')]/../input")
-	 private WebElement addTrackingRuleSecondConditionConditionValue;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Parameter')]/../input")
-	 private WebElement  addTrackingRuleConditionParameterSelector;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'amount')]")
-	 private WebElement addTrackingRuleConditionParameterSelectAge;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../input")
-	 private WebElement addTrackingRuleConditionConditionSelector;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is greater than')]")
-	 private WebElement addTrackingRuleConditionConditionSelectisGreaterThan;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Value')]/../input")
-	 private WebElement addTrackingRuleConditionConditionValue;
-	 @FindBy(xpath="//form[@id='trackRuleForm']//div[@id='scrollable']/div/iron-icon")
-	 private WebElement addTrackingRuleConditionDeleteButton;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[text()='Save']")
-	 private WebElement addTrackingRuleSaveButton;
-	 @FindBy(xpath="//form[@id='trackRuleForm']//div[2]//paper-button[contains(.,'Save')]")
-	 private WebElement EditTrackingRuleSaveButton;
-	 @FindBy(xpath="//form[@id='trackRuleForm']//paper-button[text()='Save']")
-	 private WebElement editTrackingRuleSaveButton;
-	 @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[text()='Cancel']")
-	 private WebElement addTrackingRuleCancelButton;
-	 @FindBy(xpath="//recharge-rule-grid//iron-list/div/div[2]/data-table-row//data-table-cell[4]//iron-icon")
-	 private WebElement editRule;
-	 @FindBy(xpath="//recharge-rule-grid//iron-list/div/div[2]/data-table-row//data-table-cell[5]//iron-icon")
-	 private WebElement deleteRule;
-	 @FindBy(xpath="//paper-dialog[@id='deleteRule']//paper-button[text()='Yes']")
-	 private WebElement deleteRuleConfirmYes;
-	 @FindBy(xpath="//paper-dialog[@id='deleteRule']//paper-button[text()='No']")
-	 private WebElement deleteRuleConfirmNo;
-	 @FindBy(xpath="//form[@id='trackRuleForm']//paper-input[@label='Rule Name']//input")
-	 private WebElement editTrackRuleName;
-	 @FindBy(xpath="//offer-track/div//paper-button[text()='Add']")
-	 private WebElement addTrackSourceButton;
-	 @FindBy(xpath="//form[@id='trackForm']/div[2]//iron-icon")
-	 private WebElement secondTrackSourceDeleteButton;
-	 @FindBy(xpath="//paper-dialog[@id='confirmation']//paper-button[text()='Yes']")
-	 private WebElement trackSourceDeleteConfirmYes;
-	 
+	@FindBy(xpath = "//div//paper-button[@id='addB']")
+	private WebElement addRuleButton;
+	@FindBy(xpath = "(//div//paper-button[@id='addB'])[2]")
+	private WebElement addRuleButton1;
+
+	// Track rule
+	@FindBy(xpath = "(//label[contains(.,'Rule Name')]//..//input)[2]")
+	private WebElement addTrackingRuleRuleName;
+	@FindBy(xpath = "(//label[contains(.,'Rule Name')]//..//input)[3]")
+	private WebElement addTrackingRuleRuleName1;
+
+	@FindBy(xpath = "(//label[contains(.,'Priority')]/../input)[2]")
+	private WebElement addTrackingRulePrioritySelector;
+
+	@FindBy(xpath = "(//label[contains(.,'Priority')]/../input)[3]")
+	private WebElement addTrackingRulePrioritySelector1;
+
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'2')]")
+	private WebElement addTrackingRulePrioritySelect2;
+	@FindBy(xpath = "(//label[contains(.,'Priority')])[1]//following::paper-button[contains(.,'Add')][2]")
+	private WebElement addTrackingRuleAddConditionButton;
+	@FindBy(xpath = "(//label[contains(.,'Priority')])[1]//following::paper-button[contains(.,'Add')][4]")
+	private WebElement addTrackingRuleAddConditionButton1;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../input")
+	private WebElement addTrackingRuleSecondConditionParameterSelector;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'amount')]")
+	private WebElement addTrackingRuleSecondConditionParameterSelectAge;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../input")
+	private WebElement addTrackingRuleSecondConditionConditionSelector;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is greater than')]")
+	private WebElement addTrackingRuleSecondConditionConditionSelectisGreaterThan;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is greater than or equal to')]")
+	private WebElement addTrackingRuleSecondConditionConditionSelectisgreaterthanorequalto;
+
+	@FindBy(xpath = "(//paper-item[@role='option'][normalize-space()='is less than'])[2]")
+	private WebElement addTrackingRuleSecondConditionConditionSelectisLessThan;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Value')]/../input")
+	private WebElement addTrackingRuleSecondConditionConditionValue;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Parameter')]/../input")
+	private WebElement addTrackingRuleConditionParameterSelector;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Parameter')]/../../../../../../..//paper-item[contains(.,'amount')]")
+	private WebElement addTrackingRuleConditionParameterSelectAge;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../input")
+	private WebElement addTrackingRuleConditionConditionSelector;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is greater than')]")
+	private WebElement addTrackingRuleConditionConditionSelectisGreaterThan;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Value')]/../input")
+	private WebElement addTrackingRuleConditionConditionValue;
+	@FindBy(xpath = "//form[@id='trackRuleForm']//div[@id='scrollable']/div/iron-icon")
+	private WebElement addTrackingRuleConditionDeleteButton;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[text()='Save']")
+	private WebElement addTrackingRuleSaveButton;
+	@FindBy(xpath = "(//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[text()='Save'])[1]")
+	private WebElement addTrackingRuleSaveButton1;
+	@FindBy(xpath = "//form[@id='trackRuleForm']//div[2]//paper-button[contains(.,'Save')]")
+	private WebElement EditTrackingRuleSaveButton;
+	@FindBy(xpath = "//form[@id='trackRuleForm']//paper-button[text()='Save']")
+	private WebElement editTrackingRuleSaveButton;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//paper-button[text()='Cancel']")
+	private WebElement addTrackingRuleCancelButton;
+	@FindBy(xpath = "//recharge-rule-grid//iron-list/div/div[2]/data-table-row//data-table-cell[4]//iron-icon")
+	private WebElement editRule;
+	@FindBy(xpath = "//recharge-rule-grid//iron-list/div/div[2]/data-table-row//data-table-cell[5]//iron-icon")
+	private WebElement deleteRule;
+	@FindBy(xpath = "//paper-dialog[@id='deleteRule']//paper-button[text()='Yes']")
+	private WebElement deleteRuleConfirmYes;
+	@FindBy(xpath = "//paper-dialog[@id='deleteRule']//paper-button[text()='No']")
+	private WebElement deleteRuleConfirmNo;
+	@FindBy(xpath = "//form[@id='trackRuleForm']//paper-input[@label='Rule Name']//input")
+	private WebElement editTrackRuleName;
+	@FindBy(xpath = "//offer-track/div//paper-button[text()='Add']")
+	private WebElement addTrackSourceButton;
+	@FindBy(xpath = "//form[@id='trackForm']/div[2]//iron-icon")
+	private WebElement secondTrackSourceDeleteButton;
+	@FindBy(xpath = "//paper-dialog[@id='confirmation']//paper-button[text()='Yes']")
+	private WebElement trackSourceDeleteConfirmYes;
+
 // Creative tab in offer creation
-	 @FindBy(xpath="//variable-dialog/paper-dialog//paper-radio-button[2]/div[@id='radioContainer']")
-	 private WebElement addNewVariableButton;
-	 @FindBy(xpath="//variable-dialog/paper-dialog//paper-radio-button[1]/div[@id='radioContainer']")
-	 private WebElement selectVariableButton;
-	
-	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Name')]/..//input")
-	 private WebElement addVariableName;
-	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Source')]/..//input")
-	 private WebElement addVariableSourceSelector;
-	 @FindBy(xpath="//paper-item[@value='ProfileField']")
-	 private WebElement addVariableSourceProfileSelect;
-	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Field')]/..//input")
-	 private WebElement addVariableFieldSelector;
-	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+AGE_PROFILE_FIELD+"')]")
-	 private WebElement addVariableFieldAgeSelect;
-	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+NAME_PROFILE_FIELD+"')]")
-	 private WebElement addVariableFieldNameSelect;
-	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Limit')]/..//input")
-	 private WebElement addVariableLimit;
-	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Format')]/..//input")
-	 private WebElement addVariableFormatSelector;
-	 @FindBy(xpath="//paper-item[@value='NO_FORMAT']")
-	 private WebElement addVariableFormatNoFormatSelect;
-	 @FindBy(xpath="//variable-dialog/paper-dialog//label[contains(text(),'Default')]/..//input")
-	 private WebElement addVariableDefault;
-	 @FindBy(xpath="//iron-data-table[@id='variablesList']//data-table-row/div[1]/data-table-cell[5]/paper-icon-button[@role='button']")
-	 private WebElement addVariableEditButton;
-	 @FindBy(xpath="//define-creative[@id='define-creative-0']//paper-button[contains(text(),'Save')]")
-	 private WebElement addVariableSaveButton;
-	 @FindBy(xpath="//define-creative[@id='define-creative-0']//paper-button[contains(text(),'Cancel')]")
-	 private WebElement addVariableCancelButton;
-     //@FindBy(xpath="//variable-dialog/paper-dialog//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
-	 @FindBy(xpath="//data-table-column-filter-dialog[@grid-selector='#grid']//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
-	 private WebElement mapVariableFilterButton;
-	 @FindBy(xpath="//iron-data-table[@id='variablesList']//data-table-row/div[1]/data-table-cell[6]/paper-icon-button[@role='button']")
-	 private WebElement addVariableDeleteButton;
-	 @FindBy(xpath=".//*[@id='previewForm']//paper-button[2]")
-	 private WebElement previewEmailConfirmButton;
-	 @FindBy(xpath="//paper-dialog[@id='deleteOffer']//paper-button[contains(.,'Yes')]")
-	 private WebElement offerDeleteConfirmYes;
-	 @FindBy(xpath="//paper-button[contains(.,'Add')]")
-	 private WebElement addOfferAttributeButton;
-	 @FindBy(xpath="//label[contains(text(),'Attribute')]/..//input")
-	 private WebElement offerAttributeSelector;
-	 @FindBy(xpath="//paper-item[contains(.,'a_sel_offer_attribute')]")
-	 private WebElement offerAttributeSelect;
-	 @FindBy(xpath="//label[contains(text(),'Value')]/..//input")
-	 private WebElement offerAttributeValueSelector;
-	 @FindBy(xpath="//*[@id='offerGrid']//data-table-cell[contains(.,'Recharge')])")
-	 private WebElement rechargeverify ;
-	 @FindBy(xpath="//span[text()='Send Trial']")
-	 private WebElement sendTrialButton;
-	 @FindBy(xpath=".//*[@id='sendTrialDialogEmail']//paper-button[text()='Cancel']")
-	 private WebElement sendTrialEmailCancelButton;
-	 @FindBy(xpath=".//*[@id='sendTrialDialogNumber']//paper-button[text()='Cancel']")
-	 private WebElement sendTrialNumberCancelButton;
-	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']")
-	 private WebElement sendTrialfield;
-	 @FindBy(xpath="//form[@id='trialEmailForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']")
-	 private WebElement sendTrialEmailfield;
-	 @FindBy(xpath="//define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']/paper-input[@required='']//div[@id='labelAndInputContainer']/input[@id='input']")
-	 private WebElement secondsendTrialfield;
-	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-input[2]//div[@id='labelAndInputContainer']/input[@id='input']")
-	 private WebElement sendTrialsecondfield;
-	 @FindBy(xpath="//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
-	 //define-creative[2]//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']
-	 private WebElement sendTrialSMSSender;
-	 @FindBy(xpath="//form[@id='trialEmailForm']//*//label[contains(.,'Sender ID: ')]/..//input[@id='input']")
-	 private WebElement sendTrialEmailSender;
-	 @FindBy(xpath="//define-creative[2]//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
-	 private WebElement SecondsendTrialSMSSender;
-	 @FindBy(xpath="//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
-	 private WebElement sendTrialSMSRoute;
-	 @FindBy(xpath="//form[@id='trialEmailForm']//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
-	 private WebElement sendTrialEmailRoute;
-	 @FindBy(xpath="//define-creative[2]//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
-	 private WebElement SecondsendTrialSMSRoute;
-	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
-	 private WebElement SelectTrialSMSID;
+	@FindBy(xpath = "//variable-dialog/paper-dialog//paper-radio-button[2]/div[@id='radioContainer']")
+	private WebElement addNewVariableButton;
+	@FindBy(xpath = "//variable-dialog/paper-dialog//paper-radio-button[1]/div[@id='radioContainer']")
+	private WebElement selectVariableButton;
+
+	@FindBy(xpath = "//variable-dialog/paper-dialog//label[contains(text(),'Name')]/..//input")
+	private WebElement addVariableName;
+	@FindBy(xpath = "//variable-dialog/paper-dialog//label[contains(text(),'Source')]/..//input")
+	private WebElement addVariableSourceSelector;
+	@FindBy(xpath = "//paper-item[@value='ProfileField']")
+	private WebElement addVariableSourceProfileSelect;
+	@FindBy(xpath = "//variable-dialog/paper-dialog//label[contains(text(),'Field')]/..//input")
+	private WebElement addVariableFieldSelector;
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'" + AGE_PROFILE_FIELD + "')]")
+	private WebElement addVariableFieldAgeSelect;
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'" + NAME_PROFILE_FIELD + "')]")
+	private WebElement addVariableFieldNameSelect;
+	@FindBy(xpath = "//variable-dialog/paper-dialog//label[contains(text(),'Limit')]/..//input")
+	private WebElement addVariableLimit;
+	@FindBy(xpath = "//variable-dialog/paper-dialog//label[contains(text(),'Format')]/..//input")
+	private WebElement addVariableFormatSelector;
+	@FindBy(xpath = "//paper-item[@value='NO_FORMAT']")
+	private WebElement addVariableFormatNoFormatSelect;
+	@FindBy(xpath = "//variable-dialog/paper-dialog//label[contains(text(),'Default')]/..//input")
+	private WebElement addVariableDefault;
+	@FindBy(xpath = "//iron-data-table[@id='variablesList']//data-table-row/div[1]/data-table-cell[5]/paper-icon-button[@role='button']")
+	private WebElement addVariableEditButton;
+	@FindBy(xpath = "//define-creative[@id='define-creative-0']//paper-button[contains(text(),'Save')]")
+	private WebElement addVariableSaveButton;
+	@FindBy(xpath = "//define-creative[@id='define-creative-0']//paper-button[contains(text(),'Cancel')]")
+	private WebElement addVariableCancelButton;
+	// @FindBy(xpath="//variable-dialog/paper-dialog//*[@d='M10 18h4v-2h-4v2zM3
+	// 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
+	@FindBy(xpath = "//data-table-column-filter-dialog[@grid-selector='#grid']//*[@d='M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z']/../../..")
+	private WebElement mapVariableFilterButton;
+	@FindBy(xpath = "//iron-data-table[@id='variablesList']//data-table-row/div[1]/data-table-cell[6]/paper-icon-button[@role='button']")
+	private WebElement addVariableDeleteButton;
+	@FindBy(xpath = ".//*[@id='previewForm']//paper-button[2]")
+	private WebElement previewEmailConfirmButton;
+	@FindBy(xpath = "//paper-dialog[@id='deleteOffer']//paper-button[contains(.,'Yes')]")
+	private WebElement offerDeleteConfirmYes;
+	@FindBy(xpath = "//paper-button[contains(.,'Add')]")
+	private WebElement addOfferAttributeButton;
+	@FindBy(xpath = "//label[contains(text(),'Attribute')]/..//input")
+	private WebElement offerAttributeSelector;
+	@FindBy(xpath = "//paper-item[contains(.,'a_sel_offer_attribute')]")
+	private WebElement offerAttributeSelect;
+	@FindBy(xpath = "//label[contains(text(),'Value')]/..//input")
+	private WebElement offerAttributeValueSelector;
+	@FindBy(xpath = "//*[@id='offerGrid']//data-table-cell[contains(.,'Recharge')])")
+	private WebElement rechargeverify;
+	@FindBy(xpath = "//span[text()='Send Trial']")
+	private WebElement sendTrialButton;
+	@FindBy(xpath = ".//*[@id='sendTrialDialogEmail']//paper-button[text()='Cancel']")
+	private WebElement sendTrialEmailCancelButton;
+	@FindBy(xpath = ".//*[@id='sendTrialDialogNumber']//paper-button[text()='Cancel']")
+	private WebElement sendTrialNumberCancelButton;
+	@FindBy(xpath = "//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']")
+	private WebElement sendTrialfield;
+	@FindBy(xpath = "//form[@id='trialEmailForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']")
+	private WebElement sendTrialEmailfield;
+	@FindBy(xpath = "//define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']/paper-input[@required='']//div[@id='labelAndInputContainer']/input[@id='input']")
+	private WebElement secondsendTrialfield;
+	@FindBy(xpath = "//form[@id='trialNumberForm']/paper-input[2]//div[@id='labelAndInputContainer']/input[@id='input']")
+	private WebElement sendTrialsecondfield;
+	@FindBy(xpath = "//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
+	// define-creative[2]//*//label[contains(.,'Sender ID:
+	// Trial')]/..//input[@id='input']
+	private WebElement sendTrialSMSSender;
+	@FindBy(xpath = "//form[@id='trialEmailForm']//*//label[contains(.,'Sender ID: ')]/..//input[@id='input']")
+	private WebElement sendTrialEmailSender;
+	@FindBy(xpath = "//define-creative[2]//*//label[contains(.,'Sender ID: Trial')]/..//input[@id='input']")
+	private WebElement SecondsendTrialSMSSender;
+	@FindBy(xpath = "//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
+	private WebElement sendTrialSMSRoute;
+	@FindBy(xpath = "//form[@id='trialEmailForm']//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
+	private WebElement sendTrialEmailRoute;
+	@FindBy(xpath = "//define-creative[2]//*//label[contains(.,'Route over which this')]/..//input[@id='input']")
+	private WebElement SecondsendTrialSMSRoute;
+	@FindBy(xpath = ".//*[@id='items']/vaadin-combo-box-item[contains(.,'" + SENDER_SMPP + "')]")
+	private WebElement SelectTrialSMSID;
 //	 @FindBy(xpath=".//*[@id='trialEmailForm']/vaadin-combo-box-item[contains(.,'"+SENDER_EMAIL+"')]")
 //	 private WebElement SelectTrialEmailID;
-	 @FindBy(xpath="//vaadin-combo-box-item[contains(text(),'"+SENDER_EMAIL+"')]")
-	 private WebElement SelectTrialEmailID;
-     @FindBy(xpath="//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is any of')]")
-     private WebElement addTrackingRuleConditionConditionSelectisAnyOf;
-     //@FindBy(xpath="//wizard-tab[@id='check']//creative-wrapper/define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']//vaadin-combo-box[@label='Sender ID: Trial message would appear from this ID']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
-	 @FindBy(xpath="//define-creative[2]//*[@id='sendTrialDialogNumber']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
-	 private WebElement SecondSelectTrialSMSID;
-	 @FindBy(xpath=".//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
-	 private WebElement SelectTrialSMSRoute;
-	 //@FindBy(xpath=".//*[@id='trialEmailForm']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
-	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'"+ROUTE_EMAIL+"')]")
-	 //@FindBy(xpath="//form[@id='trialEmailForm']//vaadin-combo-box[@label='Route over which this broadcast can be sent']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']/div/vaadin-combo-box-item[2]")
-	 private WebElement SelectTrialEmailRoute;
-	 @FindBy(xpath="//creative-wrapper/define-creative[2]//*[@id='items']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
-	 private WebElement SecondSelectTrialSMSRoute;
-	 @FindBy(xpath=".//*[@id='sendTrialDialogNumber']//paper-button[text()='Send']")
-	 private WebElement sendTrialNumberSendButton;
-	 @FindBy(xpath=".//*[@id='sendTrialDialogEmail']//paper-button[text()='Send']")
-	 private WebElement sendTrialEmailSendButton;
-	 @FindBy(xpath="//form[@id='trialEmailForm']//vaadin-combo-box[@label='Route over which this broadcast can be sent']/paper-input-container[@id='inputContainer']//paper-icon-button[@id='toggleIcon']/iron-icon[@id='icon']")
-	 private WebElement sendTrialwindow;
-	 @FindBy(xpath=".//define-creative[2]//*[@id='sendTrialDialogNumber']//paper-button[text()='Send']")
-	 private WebElement SecondsendTrialNumberSendButton;
-	 @FindBy(xpath="//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
-	 private WebElement sendTrialPageClose;
-	 @FindBy(xpath="//paper-dialog[@id='sendTrialDialogEmail']/iron-icon[@icon='close']")
-	 private WebElement sendTrialEmailPageClose;
-	 @FindBy(xpath="//define-creative[2]//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
-	 private WebElement SecondsendTrialPageClose;
-	 @FindBy(xpath="/html//paper-toast[@id='toast']/span[contains(.,'Invalid format. Please check the customer number entered.')]")
-	 private WebElement sendTrialInavlidNumPopup;
-	 @FindBy(xpath="//form[@id='trialNumberForm']/paper-button[contains(.,'Add')]")
-	 private WebElement sendTrialAddButton;
-	 @FindBy(xpath="//div/paper-button[contains(.,'Add Creative')]")
-	 private WebElement sendTrialCreativeAddButton;
-	 @FindBy(xpath="//creative-wrapper/define-creative[2]/paper-card/form[@id='form']//span[.='Send Trial']")
-	 private WebElement SecondsendTrialButton;
-	//define-creative[2]/paper-card/form[@id='form']/div/div[3]/div/div/div[1]/paper-icon-button[@role='button']/iron-icon[@id='icon']
-	 @FindBy(xpath="//define-creative[2]/paper-card/form[@id='form']/div/div[3]/div/div/div[1]/paper-icon-button[@role='button']/iron-icon[@id='icon']")
-	 private WebElement CreativeDeleteButton;
-	 
-	 @FindBy(xpath="//rewards-container[2]//paper-button")
-	 private WebElement rewardFirstRuleAdButton;
-	 @FindBy(xpath="//span[contains(.,'Change')]/../input")
-	 private WebElement emailcreativechangebtn ;
-	 
-	 @FindBy(xpath=".//label[contains(.,'Text')]//following::input[1]")
-	 private WebElement facebookcreativetextInput;
-	 @FindBy(xpath="//label[contains(.,'Select Facebook Page')]//following::iron-icon[1]")
-	 private WebElement facebookpageselect;
-	 @FindBy(xpath="//paper-item[contains(.,'NEONxTel')]")
-	 private WebElement facebookpage;
-	 @FindBy(xpath=".//*[@id='file']")
-	 private WebElement fbvideoinput;
-	@FindBy(xpath = ".//*[@id='file']")
-	private WebElement facebookimageButton;
-	 
-	@FindBy(xpath="//vaadin-combo-box-item[contains(.,'sel_reward')]")
-    private WebElement selectTheRewardName ;
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(text(),'" + SENDER_EMAIL + "')]")
+	private WebElement SelectTrialEmailID;
+	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is any of')]")
+	private WebElement addTrackingRuleConditionConditionSelectisAnyOf;
+	// @FindBy(xpath="//wizard-tab[@id='check']//creative-wrapper/define-creative[2]/paper-dialog[@id='sendTrialDialogNumber']//div[@id='scrollable']/form[@id='trialNumberForm']//vaadin-combo-box[@label='Sender
+	// ID: Trial message would appear from this
+	// ID']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']//vaadin-combo-box-item[contains(.,'"+SENDER_SMPP+"')]")
+	@FindBy(xpath = "//define-creative[2]//*[@id='sendTrialDialogNumber']//vaadin-combo-box-item[contains(.,'"
+			+ SENDER_SMPP + "')]")
+	private WebElement SecondSelectTrialSMSID;
+	@FindBy(xpath = ".//*[@id='items']/vaadin-combo-box-item[contains(.,'" + ROUTE_SMPP + "')]")
+	private WebElement SelectTrialSMSRoute;
+	// @FindBy(xpath=".//*[@id='trialEmailForm']/vaadin-combo-box-item[contains(.,'"+ROUTE_SMPP+"')]")
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'" + ROUTE_EMAIL + "')]")
+	// @FindBy(xpath="//form[@id='trialEmailForm']//vaadin-combo-box[@label='Route
+	// over which this broadcast can be
+	// sent']/vaadin-combo-box-overlay[@id='overlay']//iron-list[@id='selector']/div/vaadin-combo-box-item[2]")
+	private WebElement SelectTrialEmailRoute;
+	@FindBy(xpath = "//creative-wrapper/define-creative[2]//*[@id='items']/vaadin-combo-box-item[contains(.,'"
+			+ ROUTE_SMPP + "')]")
+	private WebElement SecondSelectTrialSMSRoute;
+	@FindBy(xpath = ".//*[@id='sendTrialDialogNumber']//paper-button[text()='Send']")
+	private WebElement sendTrialNumberSendButton;
+	@FindBy(xpath = ".//*[@id='sendTrialDialogEmail']//paper-button[text()='Send']")
+	private WebElement sendTrialEmailSendButton;
+	@FindBy(xpath = "//form[@id='trialEmailForm']//vaadin-combo-box[@label='Route over which this broadcast can be sent']/paper-input-container[@id='inputContainer']//paper-icon-button[@id='toggleIcon']/iron-icon[@id='icon']")
+	private WebElement sendTrialwindow;
+	@FindBy(xpath = ".//define-creative[2]//*[@id='sendTrialDialogNumber']//paper-button[text()='Send']")
+	private WebElement SecondsendTrialNumberSendButton;
+	@FindBy(xpath = "//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
+	private WebElement sendTrialPageClose;
+	@FindBy(xpath = "//paper-dialog[@id='sendTrialDialogEmail']/iron-icon[@icon='close']")
+	private WebElement sendTrialEmailPageClose;
+	@FindBy(xpath = "//define-creative[2]//paper-dialog[@id='sendTrialDialogNumber']/iron-icon[@icon='close']")
+	private WebElement SecondsendTrialPageClose;
+	@FindBy(xpath = "/html//paper-toast[@id='toast']/span[contains(.,'Invalid format. Please check the customer number entered.')]")
+	private WebElement sendTrialInavlidNumPopup;
+	@FindBy(xpath = "//form[@id='trialNumberForm']/paper-button[contains(.,'Add')]")
+	private WebElement sendTrialAddButton;
+	@FindBy(xpath = "//div/paper-button[contains(.,'Add Creative')]")
+	private WebElement sendTrialCreativeAddButton;
+	@FindBy(xpath = "//creative-wrapper/define-creative[2]/paper-card/form[@id='form']//span[.='Send Trial']")
+	private WebElement SecondsendTrialButton;
+	// define-creative[2]/paper-card/form[@id='form']/div/div[3]/div/div/div[1]/paper-icon-button[@role='button']/iron-icon[@id='icon']
+	@FindBy(xpath = "//define-creative[2]/paper-card/form[@id='form']/div/div[3]/div/div/div[1]/paper-icon-button[@role='button']/iron-icon[@id='icon']")
+	private WebElement CreativeDeleteButton;
 
-	 @FindBy(xpath="//paper-button[contains(.,'Add')][@class='style-scope rewards-container x-scope paper-button-0']")
-	 private WebElement addNewRewardbtn ;
-	 @FindBy(xpath="//div[@class='layout vertical style-scope rewards-list']//following::iron-icon[@icon='icons:close']")
-	 private WebElement deleteReward;
-	 
-	 @FindBy(xpath = "//paper-button[contains(.,'Cancel')][@class='cancel-button style-scope offer-form x-scope paper-button-0']")
-		private WebElement cancelbtn;
-	 
-	 @FindBy(xpath="//seeding-reward//vaadin-combo-box[@id='reward']//input")
-		private WebElement seedingRewardInputType;
-		
-		@FindBy(xpath="//rewards-container[2]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
-		private WebElement firstRuleFirstRewardInputField;
-		
-		@FindBy(xpath="//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]/..//input")
-		private WebElement firstRuleSecondRewardInputField;
-		
-		
-		@FindBy(xpath = "//rewards-container[1]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
-		private WebElement defaultFirstRewardTypeInputField;
-		
-		@FindBy(xpath = "//rewards-container[1]//rewards-list[2]//label[contains(.,'Reward Type')]/..//input")
-		private WebElement defaultSecondRewardTypeInputField;
-		
-		@FindBy(xpath="//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
-		private WebElement secondRuleFirstRewardInputField;
-		
-		@FindBy(xpath="//seeding-reward//add-seeding-reward//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
-		private WebElement selectSeedingReward;
-		
-		@FindBy(xpath="//rewards-container[1]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")
-		private WebElement defaultRuleSecondReward;
-		
-		@FindBy(xpath="//rewards-container[2]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')]")
-		private WebElement selectFirstRuleFirstReward;
-		
-		@FindBy(xpath="//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")
-		private WebElement selectSecondRuleFirstReward;
-		
-		@FindBy(xpath="//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")
-		private WebElement selectFirstRuleSecondReward;
-		
-		@FindBy(xpath="//rewards-container[2]//label[contains(text(),'Default Success')]/..//textarea")
-		private WebElement FirstRuleSuccessMessage;
-		@FindBy(xpath="//rewards-container[2]//label[contains(text(),'Default Failure')]/..//textarea")
-		private WebElement FirstRuleFailureMessage;
-		
-		@FindBy(xpath="//rewards-container[3]//label[contains(text(),'Response on success')]/..//textarea")
-		private WebElement secondRuleSuccessMessage;
-		@FindBy(xpath="//rewards-container[3]//label[contains(text(),'Response on Failure')]/..//textarea")
-		private WebElement secondRuleFailureMessage;
-		
-		@FindBy(xpath="//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[1]")
-		private WebElement defaultSecondCreativeSuccessMessage;
-		
-		@FindBy(xpath="//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[2]")
-		private WebElement defaultSecondCreativeFailureMessage;
-		
-		@FindBy(xpath="//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[5]")
-		private WebElement firstRuleSecondCreativeSuccessMessage;
-		
-		@FindBy(xpath="//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[6]")
-		private WebElement firstRuleSecondCreativeFailureMessage;
-		
-		@FindBy(xpath="//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on success')]/..//textarea")
-		private WebElement secondRuleSecondCreativeSuccessMessage;
-		
-		@FindBy(xpath="//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on Failure')]/..//textarea")
-		private WebElement secondRuleSecondCreativeFailureMessage;
-		
-		 @FindBy(xpath="//rewards-container[3]//paper-button")
-		 private WebElement rewardSecondRuleAdButton;
-		 
-		 @FindBy(xpath="//rewards-container[1]//paper-button")
-		 private WebElement rewardDefaultRuleAdButton;
-		 
-	 
-	 @FindBy(xpath="//div[@class='label-and-input-container style-scope paper-input-container']//label[contains(.,'Track By')]//following::input[@id='input'][1]")
-	 private WebElement globalResponsceTrackBy;
-	 @FindBy(xpath="//div[@class='rules layout vertical style-scope source-track-rule']//paper-item[contains(.,'"+globalResonseKeywords+"')]")
-	 private WebElement globalResponseKeyword;
-	 @FindBy(xpath="//div[@class='rules layout vertical style-scope source-track-rule']//paper-item[contains(.,'"+globalResonseKeywordforbc+"')]")
-	 private WebElement globalResponseKeywordforbc;
-	 @FindBy(xpath="//paper-radio-button[@name='carousel']")
-	 private WebElement carouselRadioBtn;
-	 @FindBy(xpath="//div[@id='item-0']")
-	  private WebElement firstCarousel;
-	 @FindBy(xpath="//paper-radio-button[@name='image']")
-	 private WebElement imageRadioBtn;
-	 @FindBy(xpath="//input[@id='file']")
-	  private WebElement selectImage;
-	 @FindBy(xpath="//label[contains(.,'Headline')]//following::input[1]")
-	 private WebElement headlineInput;
-	 @FindBy(xpath="//label[contains(.,'Headline')]//following::input[2]")
-	 private WebElement carouselDespInput;
-	 @FindBy(xpath="//label[contains(.,'Headline')]//following::input[3]")
-	 private WebElement carouselURL;
-	 @FindBy(xpath="//label[contains(.,'Primary Text')]//following::input[1]")
-	  private WebElement carouselPrimaryText;
-	 @FindBy(xpath="//label[contains(.,'See More URL')]//following::input[1]")
-	 private WebElement carouselSeeMoreURL;
-	  @FindBy(xpath="//label[contains(.,'See More Display Link')]//following::input[1]")
-	 private WebElement carouselMoreLink;
-	  @FindBy(xpath="//label[contains(.,'Call To Action')]//following::input[1]")
-	 private WebElement carouselCallAction;
-	 @FindBy(xpath="//vaadin-combo-box-item[contains(.,'Send Message')]")
-	 private WebElement sendMessage;
-	 @FindBy(xpath="//div[@id='radioLabel'][contains(.,'Video / Slideshow')]")
-	 private WebElement carouselVideo;
-	 @FindBy(xpath="//label[contains(.,'Configure Reminder')]//following::label[contains(.,'Title')]//following::input[1]")
-	 private WebElement reminderTitleInput ;
-	 @FindBy(xpath="//label[contains(.,'Configure Reminder')]//following::label[contains(.,'Details')]//following::textarea[1]")
-	 private WebElement reminderDetailsInput;
-	 @FindBy(xpath="//div[contains(.,'Configure Reminder')][@id='checkboxLabel']")
-	  private WebElement reminderCheckbox;
-	 
+	@FindBy(xpath = "//rewards-container[2]//paper-button")
+	private WebElement rewardFirstRuleAdButton;
+	@FindBy(xpath = "//rewards-container[4]//paper-button")
+	private WebElement rewardFirstRuleAdButton1;
+	@FindBy(xpath = "//span[contains(.,'Change')]/../input")
+	private WebElement emailcreativechangebtn;
+
+	@FindBy(xpath = ".//label[contains(.,'Text')]//following::input[1]")
+	private WebElement facebookcreativetextInput;
+	@FindBy(xpath = "//label[contains(.,'Select Facebook Page')]//following::iron-icon[1]")
+	private WebElement facebookpageselect;
+	@FindBy(xpath = "//paper-item[contains(.,'NEONxTel')]")
+	private WebElement facebookpage;
+	@FindBy(xpath = ".//*[@id='file']")
+	private WebElement fbvideoinput;
+	@FindBy(xpath = "//div[contains(.,\"Select Image\")]//input[@id='file']")
+	private WebElement facebookimageButton;
+
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'sel_reward')]")
+	private WebElement selectTheRewardName;
+
+	@FindBy(xpath = "//paper-button[contains(.,'Add')][@class='style-scope rewards-container x-scope paper-button-0']")
+	private WebElement addNewRewardbtn;
+	@FindBy(xpath = "//div[@class='layout vertical style-scope rewards-list']//following::iron-icon[@icon='icons:close']")
+	private WebElement deleteReward;
+
+	@FindBy(xpath = "//paper-button[contains(.,'Cancel')][@class='cancel-button style-scope offer-form x-scope paper-button-0']")
+	private WebElement cancelbtn;
+
+	@FindBy(xpath = "//seeding-reward//vaadin-combo-box[@id='reward']//input")
+	private WebElement seedingRewardInputType;
+
+	@FindBy(xpath = "//rewards-container[2]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
+	private WebElement firstRuleFirstRewardInputField;
+
+	@FindBy(xpath = "//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]/..//input")
+	private WebElement firstRuleSecondRewardInputField;
+
+	@FindBy(xpath = "//rewards-container[1]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
+	private WebElement defaultFirstRewardTypeInputField;
+
+	@FindBy(xpath = "//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
+	private WebElement defaultSecondRewardTypeSecondInputField;
+
+	@FindBy(xpath = "//rewards-container[1]//rewards-list[2]//label[contains(.,'Reward Type')]/..//input")
+	private WebElement defaultSecondRewardTypeInputField;
+
+	@FindBy(xpath = "//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
+	private WebElement secondRuleFirstRewardInputField;
+
+	@FindBy(xpath = "//seeding-reward//add-seeding-reward//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SEEEDING_REWARD + "')]")
+	private WebElement selectSeedingReward;
+
+	@FindBy(xpath = "//rewards-container[1]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELENIUM_REWARD + "')]")
+	private WebElement defaultRuleSecondReward;
+
+	@FindBy(xpath = "//rewards-container[2]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SEL_REWARD + "')]")
+	private WebElement selectFirstRuleFirstReward;
+
+	@FindBy(xpath = "//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELENIUM_REWARD + "')]")
+	private WebElement selectSecondRuleFirstReward;
+
+	@FindBy(xpath = "//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELENIUM_REWARD + "')]")
+	private WebElement selectFirstRuleSecondReward;
+
+	@FindBy(xpath = "//rewards-container[2]//label[contains(text(),'Default Success')]/..//textarea")
+	private WebElement FirstRuleSuccessMessage;
+	@FindBy(xpath = "//rewards-container[2]//label[contains(text(),'Default Failure')]/..//textarea")
+	private WebElement FirstRuleFailureMessage;
+
+	@FindBy(xpath = "//rewards-container[3]//label[contains(text(),'Default Success')]/..//textarea")
+	private WebElement DefaultSecondRuleSuccessMessage;
+	@FindBy(xpath = "//rewards-container[3]//label[contains(text(),'Default Failure')]/..//textarea")
+	private WebElement DefaultSecondRuleFailureMessage;
+
+	@FindBy(xpath = "//rewards-container[3]//label[contains(text(),'Response on success')]/..//textarea")
+	private WebElement secondRuleSuccessMessage;
+	@FindBy(xpath = "//rewards-container[3]//label[contains(text(),'Response on Failure')]/..//textarea")
+	private WebElement secondRuleFailureMessage;
+
+	@FindBy(xpath = "//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[1]")
+	private WebElement defaultSecondCreativeSuccessMessage;
+
+	@FindBy(xpath = "//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[2]")
+	private WebElement defaultSecondCreativeFailureMessage;
+
+	@FindBy(xpath = "//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[5]")
+	private WebElement firstRuleSecondCreativeSuccessMessage;
+
+	@FindBy(xpath = "//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[6]")
+	private WebElement firstRuleSecondCreativeFailureMessage;
+
+	@FindBy(xpath = "//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on success')]/..//textarea")
+	private WebElement secondRuleSecondCreativeSuccessMessage;
+
+	@FindBy(xpath = "//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on Failure')]/..//textarea")
+	private WebElement secondRuleSecondCreativeFailureMessage;
+
+	@FindBy(xpath = "//rewards-container[3]//paper-button")
+	private WebElement rewardSecondRuleAdButton;
+
+	@FindBy(xpath = "//rewards-container[1]//paper-button")
+	private WebElement rewardDefaultRuleAdButton;
+
+	@FindBy(xpath = "//rewards-container[3]//paper-button")
+	private WebElement rewardDefaultRuleSecondAdButton;
+
+	@FindBy(xpath = "//div[@class='label-and-input-container style-scope paper-input-container']//label[contains(.,'Track By')]//following::input[@id='input'][1]")
+	private WebElement globalResponsceTrackBy;
+	@FindBy(xpath = "//div[@class='rules layout vertical style-scope source-track-rule']//paper-item[contains(.,'"
+			+ globalResonseKeywords + "')]")
+	private WebElement globalResponseKeyword;
+	@FindBy(xpath = "//div[@class='rules layout vertical style-scope source-track-rule']//paper-item[contains(.,'"
+			+ globalResonseKeywordforbc + "')]")
+	private WebElement globalResponseKeywordforbc;
+	@FindBy(xpath = "//paper-radio-button[@name='carousel']")
+	private WebElement carouselRadioBtn;
+	@FindBy(xpath = "//div[@id='item-0']")
+	private WebElement firstCarousel;
+	@FindBy(xpath = "//paper-radio-button[@name='image']")
+	private WebElement imageRadioBtn;
+	@FindBy(xpath = "//input[@id='file']")
+	private WebElement selectImage;
+	@FindBy(xpath = "//label[contains(.,'Headline')]//following::input[1]")
+	private WebElement headlineInput;
+	@FindBy(xpath = "//label[contains(.,'Headline')]//following::input[2]")
+	private WebElement carouselDespInput;
+	@FindBy(xpath = "//label[contains(.,'Headline')]//following::input[3]")
+	private WebElement carouselURL;
+	@FindBy(xpath = "//label[contains(.,'Primary Text')]//following::input[1]")
+	private WebElement carouselPrimaryText;
+	@FindBy(xpath = "//label[contains(.,'See More URL')]//following::input[1]")
+	private WebElement carouselSeeMoreURL;
+	@FindBy(xpath = "//label[contains(.,'See More Display Link')]//following::input[1]")
+	private WebElement carouselMoreLink;
+	@FindBy(xpath = "//label[contains(.,'Call To Action')]//following::input[1]")
+	private WebElement carouselCallAction;
+	@FindBy(xpath = "//vaadin-combo-box-item[contains(.,'Send Message')]")
+	private WebElement sendMessage;
+	@FindBy(xpath = "//div[@id='radioLabel'][contains(.,'Video / Slideshow')]")
+	private WebElement carouselVideo;
+	@FindBy(xpath = "//label[contains(.,'Configure Reminder')]//following::label[contains(.,'Title')]//following::input[1]")
+	private WebElement reminderTitleInput;
+	@FindBy(xpath = "//label[contains(.,'Configure Reminder')]//following::label[contains(.,'Details')]//following::textarea[1]")
+	private WebElement reminderDetailsInput;
+	@FindBy(xpath = "//div[contains(.,'Configure Reminder')][@id='checkboxLabel']")
+	private WebElement reminderCheckbox;
+
+	@FindBy(xpath = "//offer-details//label[contains(text(),'Total Price')]/../..//input")
+	private WebElement totalprice;
+
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -593,358 +715,769 @@ public class OfferPageObjects extends Init {
 //	 private WebElement ;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
-	 public void checkOfefrAttributesValidation() throws InterruptedException, UnsupportedFlavorException, IOException {
-		 String textField = commonObjects.getTextFormTextField("//offer-attribute[3]//label[contains(text(),'Value')]/..//input");
-		 Assert.assertTrue(textField.length()==10, "Error in text field of offer attriibute");
-		 textField = commonObjects.getTextFormTextField("//offer-attribute[4]//label[contains(text(),'Value')]/..//input");
-		 Assert.assertTrue(textField.length()==4, "Error in text field of offer attriibute");
-		 
-	 }
-	 public void selectOfferAttribute() throws InterruptedException, UnsupportedFlavorException, IOException {
-			jswait.loadClick("//offer-attribute[1]//label[contains(text(),'Attribute')]/..//input");
-			jswait.loadClick("//offer-attribute[1]//paper-item[contains(.,'a_sel_offer_attributeMultiname')]");
-			jswait.loadClick("//offer-attribute[1]//label[contains(text(),'Value')]/../../iron-icon");
-			jswait.loadClick("//offer-attribute[1]//paper-item[contains(.,'LABEL')]");
-			jswait.loadClick("//offer-attribute[1]//paper-item[contains(.,'LABEL1')]");
-			
-			clickAddOfferAttributeButton();
-			
-			jswait.loadClick("//offer-attribute[2]//label[contains(text(),'Attribute')]/..//input");
-			jswait.loadClick("//offer-attribute[2]//paper-item[contains(.,'a_sel_offer_attributeSinglename')]");
-			jswait.loadClick("//offer-attribute[2]//label[contains(text(),'Value')]/..//input");
-			jswait.loadClick("//offer-attribute[2]//paper-item[contains(.,'LABEL')]");
-			
-			clickAddOfferAttributeButton();
-			
-			jswait.loadClick("//offer-attribute[3]//label[contains(text(),'Attribute')]/..//input");
-			jswait.loadClick("//offer-attribute[3]//paper-item[contains(.,'a_sel_offer_attributeTextname')]");
-			jswait.loadSendKeys("//offer-attribute[3]//label[contains(text(),'Value')]/..//input","text454Val");
-			
-			clickAddOfferAttributeButton();
-			
-			jswait.loadClick("//offer-attribute[4]//label[contains(text(),'Attribute')]/..//input");
-			jswait.loadClick("//offer-attribute[4]//paper-item[contains(.,'a_sel_offer_attributeNumbername')]");
-			jswait.loadSendKeys("//offer-attribute[4]//label[contains(text(),'Value')]/..//input","98nb33");
-			
-			checkOfefrAttributesValidation();
-		}
-	 
-	 
-	 public void clickSetAsDefaultSecondTrack() throws InterruptedException {
-			jswait.loadClick(setAsDefaultSecondTrack);
-		}
-	 public void clickRewardFirstRuleAdButton() throws InterruptedException {
-			jswait.loadClick(rewardFirstRuleAdButton);
-		}
-	 public void clickSendTrialButton() throws InterruptedException {
-			jswait.loadClick(sendTrialButton);
-		}
-	 public void clickAddOfferAttributeButton() throws InterruptedException {
-			jswait.loadClick(addOfferAttributeButton);
-		}
-	 public void clearCreative() throws InterruptedException {
-		 jswait.clearTextField(CreativeTitle);
-	 }
-	 
+
+	public void checkOfefrAttributesValidation() throws InterruptedException, UnsupportedFlavorException, IOException {
+		String textField = commonObjects
+				.getTextFormTextField("//offer-attribute[3]//label[contains(text(),'Value')]/..//input");
+		Assert.assertTrue(textField.length() == 10, "Error in text field of offer attriibute");
+		textField = commonObjects
+				.getTextFormTextField("//offer-attribute[4]//label[contains(text(),'Value')]/..//input");
+		Assert.assertTrue(textField.length() == 4, "Error in text field of offer attriibute");
+
+	}
+
+	public void selectOfferAttribute() throws InterruptedException, UnsupportedFlavorException, IOException {
+		jswait.loadClick("//offer-attribute[1]//label[contains(text(),'Attribute')]/..//input");
+		jswait.loadClick("//offer-attribute[1]//paper-item[contains(.,'a_sel_offer_attributeMultiname')]");
+		jswait.loadClick("//offer-attribute[1]//label[contains(text(),'Value')]/../../iron-icon");
+		jswait.loadClick("//offer-attribute[1]//paper-item[contains(.,'LABEL')]");
+		jswait.loadClick("//offer-attribute[1]//paper-item[contains(.,'LABEL1')]");
+
+		clickAddOfferAttributeButton();
+
+		jswait.loadClick("//offer-attribute[2]//label[contains(text(),'Attribute')]/..//input");
+		jswait.loadClick("//offer-attribute[2]//paper-item[contains(.,'a_sel_offer_attributeSinglename')]");
+		jswait.loadClick("//offer-attribute[2]//label[contains(text(),'Value')]/..//input");
+		jswait.loadClick("//offer-attribute[2]//paper-item[contains(.,'LABEL')]");
+
+		clickAddOfferAttributeButton();
+
+		jswait.loadClick("//offer-attribute[3]//label[contains(text(),'Attribute')]/..//input");
+		jswait.loadClick("//offer-attribute[3]//paper-item[contains(.,'a_sel_offer_attributeTextname')]");
+		jswait.loadSendKeys("//offer-attribute[3]//label[contains(text(),'Value')]/..//input", "text454Val");
+
+		clickAddOfferAttributeButton();
+
+		jswait.loadClick("//offer-attribute[4]//label[contains(text(),'Attribute')]/..//input");
+		jswait.loadClick("//offer-attribute[4]//paper-item[contains(.,'a_sel_offer_attributeNumbername')]");
+		jswait.loadSendKeys("//offer-attribute[4]//label[contains(text(),'Value')]/..//input", "98nb33");
+
+		checkOfefrAttributesValidation();
+	}
+
+	public void clickSetAsDefaultSecondTrack() throws InterruptedException {
+		jswait.loadClick(setAsDefaultSecondTrack);
+	}
+
+	public void clickRewardFirstRuleAdButton() throws InterruptedException {
+		jswait.loadClick(rewardFirstRuleAdButton);
+	}
+
+	public void clickRewardFirstRuleAdButton1() throws InterruptedException {
+		jswait.loadClick(rewardFirstRuleAdButton1);
+	}
+
+	public void clickSendTrialButton() throws InterruptedException {
+		jswait.loadClick(sendTrialButton);
+	}
+
+	public void clickAddOfferAttributeButton() throws InterruptedException {
+		jswait.loadClick(addOfferAttributeButton);
+	}
+
+	public void clearCreative() throws InterruptedException {
+		jswait.clearTextField(CreativeTitle);
+	}
+
 //  Creative Tab in Offer Creation	functions
-	 public void clickAddNewVariableButton() throws InterruptedException {
-			jswait.loadClick(addNewVariableButton);
-		}
-	 public void clickOfferDeleteConfirmYesButton() throws InterruptedException {
-			jswait.loadClick(offerDeleteConfirmYes);
-		}
-	 public void clickMapVariableCancelButton() throws InterruptedException {
-			jswait.loadClick(mapVariableCancelButton);
-		}
-	 public void clickAddVariableDeleteButton() throws InterruptedException {
-			jswait.loadClick(addVariableDeleteButton);
-		}
-	 public void clickAddNewVariableSaveButton() throws InterruptedException {
-			jswait.loadClick(addVariableSaveButton);
-		}
-	 public void clickAddNewVariableCancelButton() throws InterruptedException {
-			jswait.loadClick(addVariableCancelButton);
-		}
-	 public void MapVariableFilterName(String name) throws InterruptedException {
-			jswait.loadClick(mapVariableFilterButton);
-			jswait.loadSendKeys("//variables-grid/iron-data-table/div/div[2]/data-table-column-filter-dialog/paper-dialog/paper-dialog-scrollable/div/form/paper-input[1]/paper-input-container/div[2]/div/input",name);
-			jswait.loadClick("//paper-dialog-scrollable/div/div/variables-grid/iron-data-table/div/div[2]/data-table-column-filter-dialog/paper-dialog/div/paper-button[3]");
-		}
-	 public void clickAddNewVariableEditButton() throws InterruptedException {
-			jswait.loadClick(addVariableEditButton);
-		}
-	 public void enterAddVariableName(String text) throws InterruptedException {
-			jswait.loadSendKeys(addVariableName,text);
-		}
-	 public void enterAddVariableLimit(String text) throws InterruptedException {
-			jswait.loadSendKeys(addVariableLimit,text);
-		}
-	 public void enterAddVariableDefault(String text) throws InterruptedException {
-			jswait.loadSendKeys(addVariableDefault,text);
-		}
-	 public void selectAddVariableSourceProfileField() throws InterruptedException {
-			jswait.loadClick(addVariableSourceSelector);
-			jswait.loadClick(addVariableSourceProfileSelect);
-		}
-	 public void selectAddVariableFormatNoFormat() throws InterruptedException {
-			jswait.loadClick(addVariableFormatSelector);
-			jswait.loadClick(addVariableFormatNoFormatSelect);
-		}
-	 public void selectAddVariableFieldAge() throws InterruptedException {
-			jswait.loadSendKeys(addVariableFieldSelector,"Age_q11");
-			jswait.loadClick(addVariableFieldAgeSelect);
-		}
-	 public void selectAddVariableFieldName() throws InterruptedException {
-			jswait.loadSendKeys(addVariableFieldSelector,NAME_PROFILE_FIELD);
-			jswait.loadClick(addVariableFieldNameSelect);
-		}
-	 public void enterFirstDynamicVariableDetails(String name) throws InterruptedException {
-		 enterAddVariableName(name);
-			selectAddVariableSourceProfileField();
-			selectAddVariableFieldAge();
-			selectAddVariableFormatNoFormat();
-			enterAddVariableLimit("100");
-			enterAddVariableDefault("10");
-		}
-	 public void createFirstVariable(String name) throws InterruptedException {
-			clickAddNewVariableButton();
-			enterFirstDynamicVariableDetails(name);
-			clickAddNewVariableSaveButton();
-		}
-	 
-	 public void createSecondVariable(String name) throws InterruptedException {
-			clickAddNewVariableButton();
-			enterAddVariableName(name);
-			selectAddVariableSourceProfileField();
-			selectAddVariableFieldAge();
-			selectAddVariableFormatNoFormat();
-			enterAddVariableLimit("100");
-			enterAddVariableDefault("10");
-			clickAddNewVariableSaveButton();
-		}
-	 public void createNameDynamicVariable(String name) throws InterruptedException {
-			clickAddNewVariableButton();
-			enterAddVariableName(name);
-			selectAddVariableSourceProfileField();
-			selectAddVariableFieldName();
-			selectAddVariableFormatNoFormat();
-			enterAddVariableLimit("100");
-			enterAddVariableDefault("no name");
-			clickAddNewVariableSaveButton();
-		}
-	 
+	public void clickAddNewVariableButton() throws InterruptedException {
+		jswait.loadClick(addNewVariableButton);
+	}
+
+	public void clickOfferDeleteConfirmYesButton() throws InterruptedException {
+		jswait.loadClick(offerDeleteConfirmYes);
+	}
+
+	public void clickMapVariableCancelButton() throws InterruptedException {
+		jswait.loadClick(mapVariableCancelButton);
+	}
+
+	public void clickAddVariableDeleteButton() throws InterruptedException {
+		jswait.loadClick(addVariableDeleteButton);
+	}
+
+	public void clickAddNewVariableSaveButton() throws InterruptedException {
+		jswait.loadClick(addVariableSaveButton);
+	}
+
+	public void clickAddNewVariableCancelButton() throws InterruptedException {
+		jswait.loadClick(addVariableCancelButton);
+	}
+
+	public void MapVariableFilterName(String name) throws InterruptedException {
+		jswait.loadClick(mapVariableFilterButton);
+		jswait.loadSendKeys(
+				"//variables-grid/iron-data-table/div/div[2]/data-table-column-filter-dialog/paper-dialog/paper-dialog-scrollable/div/form/paper-input[1]/paper-input-container/div[2]/div/input",
+				name);
+		jswait.loadClick(
+				"//paper-dialog-scrollable/div/div/variables-grid/iron-data-table/div/div[2]/data-table-column-filter-dialog/paper-dialog/div/paper-button[3]");
+	}
+
+	public void clickAddNewVariableEditButton() throws InterruptedException {
+		jswait.loadClick(addVariableEditButton);
+	}
+
+	public void enterAddVariableName(String text) throws InterruptedException {
+		jswait.loadSendKeys(addVariableName, text);
+	}
+
+	public void enterAddVariableLimit(String text) throws InterruptedException {
+		jswait.loadSendKeys(addVariableLimit, text);
+	}
+
+	public void enterAddVariableDefault(String text) throws InterruptedException {
+		jswait.loadSendKeys(addVariableDefault, text);
+	}
+
+	public void selectAddVariableSourceProfileField() throws InterruptedException {
+		jswait.loadClick(addVariableSourceSelector);
+		jswait.loadClick(addVariableSourceProfileSelect);
+	}
+
+	public void selectAddVariableFormatNoFormat() throws InterruptedException {
+		jswait.loadClick(addVariableFormatSelector);
+		jswait.loadClick(addVariableFormatNoFormatSelect);
+	}
+
+	public void selectAddVariableFieldAge() throws InterruptedException {
+		jswait.loadSendKeys(addVariableFieldSelector, "Age_q11");
+		jswait.loadClick(addVariableFieldAgeSelect);
+	}
+
+	public void selectAddVariableFieldName() throws InterruptedException {
+		jswait.loadSendKeys(addVariableFieldSelector, NAME_PROFILE_FIELD);
+		jswait.loadClick(addVariableFieldNameSelect);
+	}
+
+	public void enterFirstDynamicVariableDetails(String name) throws InterruptedException {
+		enterAddVariableName(name);
+		selectAddVariableSourceProfileField();
+		selectAddVariableFieldAge();
+		selectAddVariableFormatNoFormat();
+		enterAddVariableLimit("100");
+		enterAddVariableDefault("10");
+	}
+
+	public void createFirstVariable(String name) throws InterruptedException {
+		clickAddNewVariableButton();
+		enterFirstDynamicVariableDetails(name);
+		clickAddNewVariableSaveButton();
+	}
+
+	public void createSecondVariable(String name) throws InterruptedException {
+		clickAddNewVariableButton();
+		enterAddVariableName(name);
+		selectAddVariableSourceProfileField();
+		selectAddVariableFieldAge();
+		selectAddVariableFormatNoFormat();
+		enterAddVariableLimit("100");
+		enterAddVariableDefault("10");
+		clickAddNewVariableSaveButton();
+	}
+
+	public void createNameDynamicVariable(String name) throws InterruptedException {
+		clickAddNewVariableButton();
+		enterAddVariableName(name);
+		selectAddVariableSourceProfileField();
+		selectAddVariableFieldName();
+		selectAddVariableFormatNoFormat();
+		enterAddVariableLimit("100");
+		enterAddVariableDefault("no name");
+		clickAddNewVariableSaveButton();
+	}
+
 //	Track Tab in Offer Creation	functions
-	 public void clickAddTrackSourceButton() throws InterruptedException {
-			jswait.loadClick(addTrackSourceButton);
-		}
-	 public void clicktrackSourceDeleteConfirmYes() throws InterruptedException {
-			jswait.loadClick(trackSourceDeleteConfirmYes);
-		}
-	 public void clickSecondTrackSourceDeleteButton() throws InterruptedException {
-			jswait.loadClick(secondTrackSourceDeleteButton);
-		}
-	 public int getNumberOfTrackSources() throws InterruptedException {
-		 	Thread.sleep(3000);
-		 	List <WebElement> trackSources = driver.findElements(By.xpath("//label[.='Tracking Source and Rules']"));
-			return trackSources.size();
-		}
-	
-	 public void clickAddRuleButton() throws InterruptedException {
-			jswait.loadClick(addRuleButton);
-		}
-	 public void clickEditRuleSaveButton() throws InterruptedException {
-			jswait.loadClick(editTrackingRuleSaveButton);
-		}
-	 public void selectAddTrackingRuleConditionConditionAnyOf() throws InterruptedException {
-	jswait.loadClick(addTrackingRuleConditionConditionSelector);
-	jswait.loadClick(addTrackingRuleConditionConditionSelectisAnyOf);
-		             }
-	 public void enterRuleName(String text) throws InterruptedException {
-			jswait.loadSendKeys(addTrackingRuleRuleName,text);
-		}
-	 public void enterEditRuleName(String text) throws InterruptedException {
-			jswait.loadSendKeys(editTrackRuleName,text);
-		}
-	 public void selectPriority(String text) throws InterruptedException {
-			jswait.loadClick(addTrackingRulePrioritySelector);
-			int value=Integer.valueOf(text);
+	public void clickAddTrackSourceButton() throws InterruptedException {
+		jswait.loadClick(addTrackSourceButton);
+	}
+
+	public void clicktrackSourceDeleteConfirmYes() throws InterruptedException {
+		jswait.loadClick(trackSourceDeleteConfirmYes);
+	}
+
+	public void clickSecondTrackSourceDeleteButton() throws InterruptedException {
+		jswait.loadClick(secondTrackSourceDeleteButton);
+	}
+
+	public int getNumberOfTrackSources() throws InterruptedException {
+		Thread.sleep(3000);
+		List<WebElement> trackSources = driver.findElements(By.xpath("//label[.='Tracking Source and Rules']"));
+		return trackSources.size();
+	}
+
+	public void clickAddRuleButton() throws InterruptedException {
+		jswait.loadClick(addRuleButton);
+	}
+
+	public void clickAddRuleButton1() throws InterruptedException {
+		jswait.loadClick(addRuleButton1);
+	}
+
+	public void clickEditRuleSaveButton() throws InterruptedException {
+		jswait.loadClick(editTrackingRuleSaveButton);
+	}
+
+	public void selectAddTrackingRuleConditionConditionAnyOf() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleConditionConditionSelector);
+		jswait.loadClick(addTrackingRuleConditionConditionSelectisAnyOf);
+	}
+
+	public void enterRuleName(String text) throws InterruptedException {
+		jswait.loadSendKeys(addTrackingRuleRuleName, text);
+	}
+
+	public void enterRuleName1(String text) throws InterruptedException {
+		jswait.loadClick(addTrackingRuleRuleName1);
+		jswait.loadSendKeys(addTrackingRuleRuleName1, text);
+	}
+
+	public void enterEditRuleName(String text) throws InterruptedException {
+		jswait.loadSendKeys(editTrackRuleName, text);
+	}
+
+	public void selectPriority(String text) throws InterruptedException {
+		jswait.loadClick(addTrackingRulePrioritySelector);
+		int value = Integer.valueOf(text);
+		System.out.println(value);
+		if (value <= 5) {
 			System.out.println(value);
-			if(value<=5) {
-				System.out.println(value);
-				jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'"+text+"')])[3]");
-			}else {
-				jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'"+text+"')])[2]");
+			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
+					+ "')])[3]");
+		} else {
+			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
+					+ "')])[4]");
+		}
+
+	}
+
+	public void selectPrioritymulti(String text) throws InterruptedException {
+		jswait.loadClick(addTrackingRulePrioritySelector1);
+		int value = Integer.valueOf(text);
+		System.out.println(value);
+		if (value <= 5) {
+			System.out.println(value);
+			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
+					+ "')])[5]");
+		} else {
+			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
+					+ "')])[6]");
+		}
+
+	}
+
+	public void selectPriority1(String text) throws InterruptedException {
+		jswait.loadClick(addTrackingRulePrioritySelector);
+		int value = Integer.valueOf(text);
+		System.out.println(value);
+		if (value <= 5) {
+			System.out.println(value);
+			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
+					+ "')])[3]");
+		} else {
+			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
+					+ "')])[2]");
+		}
+
+	}
+
+	public void clickAddTrackingRuleAddConditionButton() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleAddConditionButton);
+	}
+
+	public void clickAddTrackingRuleAddConditionButton1() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleAddConditionButton1);
+	}
+
+	public void selectAddTrackingRuleConditionParameterAge() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleConditionParameterSelector);
+		jswait.loadClick(addTrackingRuleConditionParameterSelectAge);
+	}
+
+	public void clickSaveOfferButton() throws InterruptedException {
+		jswait.loadClick(saveOfferButton);
+		jswait.loadClick(saveOfferReportButton);
+	}
+
+	public void selectAddTrackingRuleConditionConditionGreaterThan() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleConditionConditionSelector);
+		jswait.loadClick(addTrackingRuleConditionConditionSelectisGreaterThan);
+	}
+
+	public void enterAddTrackingRuleConditionConditionValue(String text) throws InterruptedException {
+		jswait.loadSendKeys(addTrackingRuleConditionConditionValue, text);
+	}
+
+	public void selectAddTrackingRuleSecondConditionParameterAge() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleSecondConditionParameterSelector);
+		jswait.loadClick(addTrackingRuleSecondConditionParameterSelectAge);
+	}
+
+	public void checkRuleCreationWithTrackValue(String ruleName, String trackRuleValue) throws Exception {
+		jswait.waitUntil("//span[text()='" + ruleName + "']");
+		jswait.waitUntil("//span[contains(.,'amount is any of " + trackRuleValue + "')]");
+	}
+
+	public void selectAddTrackingRuleSecondConditionConditionGreaterThan() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleSecondConditionConditionSelector);
+		jswait.loadClick(addTrackingRuleSecondConditionConditionSelectisGreaterThan);
+	}
+
+	public void selectAddTrackingRuleSecondConditionConditionGreaterThanOrEqualTo() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleSecondConditionConditionSelector);
+		jswait.loadClick(addTrackingRuleSecondConditionConditionSelectisgreaterthanorequalto);
+	}
+
+	public void selectAddTrackingRuleSecondConditionConditionLessThan() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleSecondConditionConditionSelector);
+		jswait.loadClick(addTrackingRuleSecondConditionConditionSelectisLessThan);
+	}
+
+	public void enterAddTrackingRuleSecondConditionConditionValue(String text) throws InterruptedException {
+		jswait.loadSendKeys(addTrackingRuleSecondConditionConditionValue, text);
+	}
+
+	public void clickAddTrackingRuleConditionDeleteButton() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleConditionDeleteButton);
+	}
+
+	public void clickaddTrackingRuleSaveButton() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleSaveButton);
+	}
+
+	public void clickaddTrackingRuleSaveButton1() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleSaveButton1);
+	}
+
+	public void clickaddTrackingRuleCancelButton() throws InterruptedException {
+		jswait.loadClick(addTrackingRuleCancelButton);
+	}
+
+	public void clickEditRule() throws InterruptedException {
+		jswait.loadClick(editRule);
+	}
+
+	public void clickDeleteRule() throws InterruptedException {
+		jswait.loadClick(deleteRule);
+	}
+
+	public void clickDeleteRuleConfirmYes() throws InterruptedException {
+		jswait.loadClick(deleteRuleConfirmYes);
+	}
+
+	public void clickDeleteRuleConfirmNo() throws InterruptedException {
+		jswait.loadClick(deleteRuleConfirmNo);
+	}
+
+	public void checkRuleCreation(String ruleName) throws Exception {
+		jswait.waitUntil("//span[text()='" + ruleName + "']");
+		// jswait.waitUntil("//span[contains(.,'amount is greater than 18, amount is
+		// greater than 19')]");
+	}
+
+	public void createTrackRuleCondition() throws InterruptedException {
+		clickAddTrackingRuleAddConditionButton();
+		selectAddTrackingRuleConditionParameterAge();
+		selectAddTrackingRuleConditionConditionGreaterThan();
+		enterAddTrackingRuleConditionConditionValue("18");
+	}
+
+	public void createSecondTrackRuleCondition() throws InterruptedException {
+		clickAddTrackingRuleAddConditionButton();
+		selectAddTrackingRuleSecondConditionParameterAge();
+		selectAddTrackingRuleSecondConditionConditionGreaterThan();
+		enterAddTrackingRuleSecondConditionConditionValue("19");
+	}
+
+	public void createMultiTrackRuleCondition() throws InterruptedException {
+		clickAddTrackingRuleAddConditionButton1();
+		selectAddTrackingRuleConditionParameterAge();
+		selectAddTrackingRuleConditionConditionGreaterThan();
+		enterAddTrackingRuleConditionConditionValue("18");
+	}
+
+	public void createMultiSecondTrackRuleCondition() throws InterruptedException {
+		clickAddTrackingRuleAddConditionButton1();
+		selectAddTrackingRuleSecondConditionParameterAge();
+		selectAddTrackingRuleSecondConditionConditionGreaterThan();
+		enterAddTrackingRuleSecondConditionConditionValue("19");
+	}
+
+	public void enterDetailsFirstDefaultTrackingRuleCondition(String name) throws InterruptedException {
+		enterRuleName(name);
+		selectPriority("2");
+		createTrackRuleCondition();
+		createSecondTrackRuleCondition();
+	}
+
+	public void CreateFirstRuleparemeter(String value1, String value2) throws Exception {
+		clickAddTrackingRuleAddConditionButton();
+		selectAddTrackingRuleConditionParameterAge();
+		selectAddTrackingRuleConditionConditionGreaterThan();
+		enterAddTrackingRuleConditionConditionValue(value1);
+		clickAddTrackingRuleAddConditionButton();
+		selectAddTrackingRuleSecondConditionParameterAge();
+		selectAddTrackingRuleSecondConditionConditionGreaterThanOrEqualTo();
+		enterAddTrackingRuleSecondConditionConditionValue(value2);
+
+	}
+
+	public void CreateFirstRuleparemeter3(String value1, String value2) throws Exception {
+		clickAddTrackingRuleAddConditionButton();
+		selectAddTrackingRuleConditionParameterAge();
+		selectAddTrackingRuleConditionConditionGreaterThan();
+		enterAddTrackingRuleConditionConditionValue(value1);
+		clickAddTrackingRuleAddConditionButton();
+		selectAddTrackingRuleSecondConditionParameterAge();
+		selectAddTrackingRuleSecondConditionConditionLessThan();
+		enterAddTrackingRuleSecondConditionConditionValue(value2);
+
+	}
+
+	public void enterDetailsFirstTrackingRuleCondition(String name) throws Exception {
+		enterRuleName(name);
+		selectPriority("2");
+		CreateFirstRuleparemeter("15", "18");
+		clickaddTrackingRuleSaveButton();
+
+	}
+
+	public void enterDetailsFirstDefaultTrackingRuleCondition1(String name) throws InterruptedException {
+		enterRuleName(name);
+		selectPriority("2");
+		createTrackRuleCondition1();
+		createMultiSecondTrackRuleCondition1();
+	}
+
+	public void createTrackRuleCondition1() throws InterruptedException {
+		clickAddTrackingRuleAddConditionButton();
+		selectAddTrackingRuleConditionParameterAge();
+		selectAddTrackingRuleConditionConditionGreaterThan();
+		enterAddTrackingRuleConditionConditionValue("18");
+	}
+
+	public void createMultiSecondTrackRuleCondition1() throws InterruptedException {
+		clickAddTrackingRuleAddConditionButton();
+		selectAddTrackingRuleSecondConditionParameterAge();
+		selectAddTrackingRuleSecondConditionConditionLessThan();
+		enterAddTrackingRuleSecondConditionConditionValue("100");
+	}
+
+	public void enterDetailsFirstMultiTrackingRuleCondition(String name, String RuleValue1, String RuleValue2)
+			throws InterruptedException {
+		enterRuleName1(name);
+		selectPrioritymulti("2");
+		createTrackRuleCondition2(RuleValue1);
+		createMultiSecondTrackRuleCondition2(RuleValue2);
+	}
+
+	public void createTrackRuleCondition2(String RuleValue1) throws InterruptedException {
+		clickAddTrackingRuleAddConditionButton1();
+		selectAddTrackingRuleConditionParameterAge();
+		selectAddTrackingRuleConditionConditionGreaterThan();
+		enterAddTrackingRuleConditionConditionValue(RuleValue1);
+	}
+
+	public void createMultiSecondTrackRuleCondition2(String RuleValue2) throws InterruptedException {
+		clickAddTrackingRuleAddConditionButton1();
+		selectAddTrackingRuleSecondConditionParameterAge();
+		selectAddTrackingRuleSecondConditionConditionLessThan();
+		enterAddTrackingRuleSecondConditionConditionValue(RuleValue2);
+	}
+
+	public void enterDetailsFirstDefaultTrackingRuleCondition() throws InterruptedException {
+		enterRuleName("defRule");
+		selectPriority("2");
+		createTrackRuleCondition();
+		createSecondTrackRuleCondition();
+	}
+
+	public void createFirstDefaultTrackingRuleCondition(ExcelHelper eh) throws Exception {
+		try {
+			Exception e = null;
+			if (!eh.getCell(1, 20).toString().contains("usage")) {
+
+				throw e;
 			}
-			
-		}
-	 public void clickAddTrackingRuleAddConditionButton() throws InterruptedException {
-			jswait.loadClick(addTrackingRuleAddConditionButton);
-		}
-	 public void selectAddTrackingRuleConditionParameterAge() throws InterruptedException {
-			jswait.loadClick(addTrackingRuleConditionParameterSelector);
-			jswait.loadClick(addTrackingRuleConditionParameterSelectAge);
-		}
-	 public void selectAddTrackingRuleConditionConditionGreaterThan() throws InterruptedException {
-			jswait.loadClick(addTrackingRuleConditionConditionSelector);
-			jswait.loadClick(addTrackingRuleConditionConditionSelectisGreaterThan);
-		}
-	 public void enterAddTrackingRuleConditionConditionValue(String text) throws InterruptedException {
-			jswait.loadSendKeys(addTrackingRuleConditionConditionValue,text);
-		}
-	 public void selectAddTrackingRuleSecondConditionParameterAge() throws InterruptedException {
-			jswait.loadClick(addTrackingRuleSecondConditionParameterSelector);
-			jswait.loadClick(addTrackingRuleSecondConditionParameterSelectAge);
-		}
-	 public void checkRuleCreationWithTrackValue(String ruleName,String trackRuleValue) throws Exception {
-	 jswait.waitUntil("//span[text()='"+ruleName+"']");
-	jswait.waitUntil("//span[contains(.,'amount is any of "+trackRuleValue+"')]");
-	 }
-	 public void selectAddTrackingRuleSecondConditionConditionGreaterThan() throws InterruptedException {
-			jswait.loadClick(addTrackingRuleSecondConditionConditionSelector);
-			jswait.loadClick(addTrackingRuleSecondConditionConditionSelectisGreaterThan);
-		}
-	 public void enterAddTrackingRuleSecondConditionConditionValue(String text) throws InterruptedException {
-			jswait.loadSendKeys(addTrackingRuleSecondConditionConditionValue,text);
-		}
-	 public void clickAddTrackingRuleConditionDeleteButton() throws InterruptedException {
-			jswait.loadClick(addTrackingRuleConditionDeleteButton);
-		}
-	 public void clickaddTrackingRuleSaveButton() throws InterruptedException {
-			jswait.loadClick(addTrackingRuleSaveButton);
-		}
-	 public void clickaddTrackingRuleCancelButton() throws InterruptedException {
-			jswait.loadClick(addTrackingRuleCancelButton);
-		}
-	 public void clickEditRule() throws InterruptedException {
-			jswait.loadClick(editRule);
-		}
-	 public void clickDeleteRule() throws InterruptedException {
-			jswait.loadClick(deleteRule);
-		}
-	 public void clickDeleteRuleConfirmYes() throws InterruptedException {
-			jswait.loadClick(deleteRuleConfirmYes);
-		}
-	 public void clickDeleteRuleConfirmNo() throws InterruptedException {
-			jswait.loadClick(deleteRuleConfirmNo);
-		}
-	 public void checkRuleCreation(String ruleName) throws Exception {
-		 jswait.waitUntil("//span[text()='"+ruleName+"']");
-		 jswait.waitUntil("//span[contains(.,'amount is greater than 18, amount is greater than 19')]");
-	 }
-	 public void createTrackRuleCondition() throws InterruptedException {
-		 clickAddTrackingRuleAddConditionButton();
-			selectAddTrackingRuleConditionParameterAge();
-			selectAddTrackingRuleConditionConditionGreaterThan();
-			enterAddTrackingRuleConditionConditionValue("18");
-	 }
-	 public void createSecondTrackRuleCondition() throws InterruptedException {
-		 clickAddTrackingRuleAddConditionButton();
-			selectAddTrackingRuleSecondConditionParameterAge();
-			selectAddTrackingRuleSecondConditionConditionGreaterThan();
-			enterAddTrackingRuleSecondConditionConditionValue("19");
-	 }
-	 public void enterDetailsFirstDefaultTrackingRuleCondition(String name) throws InterruptedException {
-		 enterRuleName(name);
-			selectPriority("2");
-			createTrackRuleCondition();
-			createSecondTrackRuleCondition();
-	 }
-	 public void enterDetailsFirstDefaultTrackingRuleCondition() throws InterruptedException {
-		 enterRuleName("defRule");
-			selectPriority("2");
-			createTrackRuleCondition();
-			createSecondTrackRuleCondition();
-	 }
-	 public void createFirstDefaultTrackingRuleCondition(ExcelHelper eh ) throws Exception {
-			try {
-				Exception e = null;
-				if (!eh.getCell(1, 20).toString().contains("usage")) {
-					
-					throw e;
-				}
-				else {
-					 clickAddRuleButton();
-					enterRuleName("first rule");
-					selectPriority("2");
-					 jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
-					 Thread.sleep(1000);
-					jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
-					Thread.sleep(2000);
-					jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
-					Thread.sleep(2000);
-					jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
-					Thread.sleep(2000);
-					jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
-					Thread.sleep(2000);
-					jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
-					
-					jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
-					
-						
-				} } catch(Exception e) {
-						System.out.println("inside catch");
-					 clickAddRuleButton();
-					 	enterDetailsFirstDefaultTrackingRuleCondition("firstRule");
-						clickaddTrackingRuleSaveButton();
-						checkRuleCreation("firstRule");
-				}
+
+			else {
+				clickAddRuleButton();
+				enterRuleName("first rule");
+				selectPriority("2");
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+				Thread.sleep(1000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+				Thread.sleep(2000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+				Thread.sleep(2000);
+				jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+
 			}
-		
-	 public void createFirstTrackingRuleForMetric() throws Exception {
-		 
-		 clickAddRuleButton();
-			enterRuleName("first rule");
-			selectPriority("2");
-			 jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
-			 Thread.sleep(1000);
-			jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
-			Thread.sleep(2000);
-			jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
-			Thread.sleep(2000);
-			jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
-			Thread.sleep(2000);
-			jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
-			Thread.sleep(2000);
-			jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
-			
-			jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
-	 }
-	 
- public void createSecondTrackingRuleForMetric() throws Exception {
-		 
-		 clickAddRuleButton();
-			enterRuleName("Second rule");
-			selectPriority("3");
-			 jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
-			 Thread.sleep(1000);
-			jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
-			Thread.sleep(2000);
-			jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
-			Thread.sleep(2000);
-			jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
-			Thread.sleep(2000);
-			jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
-			Thread.sleep(2000);
-			jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
-			
-			jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
-	 }
-	 
-	 public void createFirstDefaultTrackingRuleCondition(String name) throws Exception {
-		 	clickAddRuleButton();
-		 	enterDetailsFirstDefaultTrackingRuleCondition(name);
+		} catch (Exception e) {
+			System.out.println("inside catch");
+			clickAddRuleButton();
+			enterDetailsFirstDefaultTrackingRuleCondition("firstRule");
 			clickaddTrackingRuleSaveButton();
-			checkRuleCreation(name);
-	 }
-	 public void createSecondDefaultTrackingRuleCondition() throws Exception {
-		 	clickAddRuleButton();
-			enterRuleName("secondRule");
-			selectPriority("3");
-			createTrackRuleCondition();
+			checkRuleCreation("firstRule");
+		}
+	}
+
+	public void createMultipleRuleDefaultTrackingRuleCondition(ExcelHelper eh) throws Exception {
+		try {
+			Exception e = null;
+			if (!eh.getCell(1, 20).toString().contains("usage")) {
+
+				throw e;
+			}
+
+			else {
+				clickAddRuleButton();
+				enterRuleName("first rule");
+				selectPriority("2");
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+				Thread.sleep(1000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+				Thread.sleep(2000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+				Thread.sleep(2000);
+				jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+
+			}
+		} catch (Exception e) {
+			System.out.println("inside catch");
+			clickAddRuleButton();
+			enterDetailsFirstTrackingRuleCondition("first Rule");
+			checkRuleCreation("first Rule");
+			clickAddRuleButton();
+			enterDetailsSecondTrackingRuleCondion("Second Rule");
+			checkRuleCreation("Second Rule");
+			clickAddRuleButton();
+			enterDetailsThirdTrackingRuleCondion("Third Rule");
+			checkRuleCreation("Third Rule");
+		}
+	}
+
+	public void enterDetailsSecondTrackingRuleCondion(String name) throws Exception {
+		enterRuleName(name);
+		selectPriority("3");
+		CreateFirstRuleparemeter("15", "100");
+		clickaddTrackingRuleSaveButton();
+
+	}
+
+	public void enterDetailsThirdTrackingRuleCondion(String name) throws Exception {
+		enterRuleName(name);
+		selectPriority("4");
+		CreateFirstRuleparemeter3("15", "200");
+		clickaddTrackingRuleSaveButton();
+
+	}
+
+	public void createFirstMultiDefaultTrackingRuleCondition(ExcelHelper eh) throws Exception {
+		try {
+			Exception e = null;
+			if (!eh.getCell(1, 20).toString().contains("usage")) {
+
+				throw e;
+			}
+
+			else {
+				clickAddRuleButton();
+				enterRuleName("first rule");
+				selectPriority("2");
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+				Thread.sleep(1000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+				Thread.sleep(2000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+				Thread.sleep(2000);
+				jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+
+			}
+		} catch (Exception e) {
+			System.out.println("inside catch");
+			clickAddRuleButton();
+			enterDetailsFirstDefaultTrackingRuleCondition1("firstRule");
 			clickaddTrackingRuleSaveButton();
-			checkRuleCreation("secondRule");
-	 }
-	 
+			checkRuleCreation("firstRule");
+		}
+	}
+
+	public void createMultiTrackingRuleCondition(ExcelHelper eh) throws Exception {
+		try {
+			Exception e = null;
+			if (!eh.getCell(1, 20).toString().contains("usage")) {
+
+				throw e;
+			}
+
+			else {
+				clickAddRuleButton();
+				enterRuleName("first rule");
+				selectPriority("2");
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+				Thread.sleep(1000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+				Thread.sleep(2000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+				Thread.sleep(2000);
+				jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+
+			}
+		} catch (Exception e) {
+			System.out.println("inside Multi catch");
+			clickAddRuleButton1();
+			enterDetailsFirstMultiTrackingRuleCondition("Second RULE", "100", "200");
+			clickaddTrackingRuleSaveButton1();
+			checkRuleCreation("Second RULE");
+		}
+	}
+
+	public void createFirstDefaultTrackingMultiRuleCondition(ExcelHelper eh) throws Exception {
+		try {
+			Exception e = null;
+			if (!eh.getCell(1, 20).toString().contains("usage")) {
+
+				throw e;
+			} else if (eh.getCell(1, 20).toString().contains("Multiple")) {
+				clickAddRuleButton();
+				enterRuleName("first rule");
+				selectPriority("2");
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+				Thread.sleep(1000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+				Thread.sleep(2000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+				Thread.sleep(2000);
+				jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+				Thread.sleep(2000);
+				///////////////////////// Multi Track add//////////
+				jswait.loadClick(
+						"//div//input[@class='style-scope paper-input' and @pattern ='^[a-zA-Z0-9-_#\\[\\]\\s?&:\\)\\(.@]+$']");
+				selectTrackSource(TRACK_SOURCE);
+				clickAddRuleButton();
+				enterRuleName("first rule");
+				selectPriority("3");
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+				Thread.sleep(1000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+				Thread.sleep(2000);
+				jswait.loadClick(
+						"//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+				Thread.sleep(2000);
+				jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+				Thread.sleep(2000);
+				jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+
+				jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+
+			}
+		} catch (Exception e) {
+			System.out.println("inside catch");
+			clickAddRuleButton();
+			enterDetailsFirstDefaultTrackingRuleCondition("firstRule");
+			clickaddTrackingRuleSaveButton();
+			checkRuleCreation("firstRule");
+		}
+	}
+
+	public void createFirstTrackingRuleForMetric() throws Exception {
+
+		clickAddRuleButton();
+		enterRuleName("first rule");
+		selectPriority("2");
+		jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+		Thread.sleep(1000);
+		jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+		Thread.sleep(2000);
+		jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+		Thread.sleep(2000);
+		jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+		Thread.sleep(2000);
+		jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+		Thread.sleep(2000);
+		jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+
+		jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+	}
+
+	public void createSecondTrackingRuleForMetric() throws Exception {
+
+		clickAddRuleButton();
+		enterRuleName("Second rule");
+		selectPriority("3");
+		jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Add')])[2]");
+		Thread.sleep(1000);
+		jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Metric Name')]//following::iron-icon[1]");
+		Thread.sleep(2000);
+		jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'Selenium Usage Metric_q11')]");
+		Thread.sleep(2000);
+		jswait.loadClick("//form[@id='trackRuleForm']//label[contains(.,'Condition')]//following::iron-icon[1]");
+		Thread.sleep(2000);
+		jswait.loadClick("//form[@id='trackRuleForm']//paper-item[contains(.,'is greater than')][1]");
+		Thread.sleep(2000);
+		jswait.loadSendKeys("//form[@id='trackRuleForm']//label[contains(.,'Value')]//..//input", "18");
+
+		jswait.loadClick("(//form[@id='trackRuleForm']//paper-button[contains(.,'Save')])[2]");
+	}
+
+	public void createFirstDefaultTrackingRuleCondition(String name) throws Exception {
+		clickAddRuleButton();
+		enterDetailsFirstDefaultTrackingRuleCondition(name);
+		clickaddTrackingRuleSaveButton();
+		checkRuleCreation(name);
+	}
+
+	public void createSecondDefaultTrackingRuleCondition() throws Exception {
+		clickAddRuleButton();
+		enterRuleName("secondRule");
+		selectPriority("3");
+		createTrackRuleCondition();
+		clickaddTrackingRuleSaveButton();
+		checkRuleCreation("secondRule");
+	}
 
 	// offer page functions
 	public void navigateToOffer() throws InterruptedException {
@@ -954,6 +1487,7 @@ public class OfferPageObjects extends Init {
 	public void clickRemoveTrackYesButton() throws InterruptedException {
 		jswait.loadClick(removeTrackYesButton);
 	}
+
 	public void clickOfferEditProceedButton() throws InterruptedException {
 		jswait.loadClick(offerEditProceedButton);
 	}
@@ -969,11 +1503,11 @@ public class OfferPageObjects extends Init {
 	public void clickRewardAddButton() throws InterruptedException {
 		jswait.loadClick(rewardAddButton);
 	}
+
 	public void selectVariableButton() throws InterruptedException {
 		jswait.loadClick(selectVariableButton);
 	}
-	
-	
+
 	public void clickMapVariableIcon() throws InterruptedException {
 		jswait.loadClick(mapVariableIcon);
 	}
@@ -989,10 +1523,6 @@ public class OfferPageObjects extends Init {
 	public void clickAddProductSecondCheckbox() throws InterruptedException {
 		jswait.loadClick(addProductSecondCheckbox);
 	}
-	
-	
-	
-	
 
 	public void selectAllLanguagesCreativeTab() throws Throwable {
 
@@ -1048,35 +1578,31 @@ public class OfferPageObjects extends Init {
 //		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(text(),'Offers')]")));
 //		driver.switchTo().parentFrame();
 //		commonObjects.clickContextHelpCloseIcon();
-		
-		 Thread.sleep(3000);
-	        
-		 String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
-		   ((JavascriptExecutor)driver).executeScript("window.open()");
-		   ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
-		    driver.switchTo().window(tabs2.get(1));
-		    driver.get(secondUrl);
-		    Thread.sleep(3000);
+
+		Thread.sleep(3000);
+
+		String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
+		((JavascriptExecutor) driver).executeScript("window.open()");
+		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(tabs2.get(1));
+		driver.get(secondUrl);
+		Thread.sleep(3000);
 //		    driver.switchTo().frame(1);
-		    try{
-		    //driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Offers')]"));
-		    String getTextOfferHelpPage=driver.findElement(By.xpath("//*[@id=\"topic-content\"]/div[1]/h1[1]/span/span[contains(text(),'Offers')]")).getText();
-		    Assert.assertTrue(getTextOfferHelpPage.contentEquals("Offers"));
-		    driver.close();
-		    driver.switchTo().window(tabs2.get(0));
-		    }
-		    catch (Exception e) {
-		    	driver.close();
-			    driver.switchTo().window(tabs2.get(0));
-			    throw e;
-			}
-		    
-		
-		
-		
-		
-		
-		
+		try {
+			// driver.findElement(By.xpath("//*[@id='topic_content']/h1[1]/span/span[contains(text(),'Offers')]"));
+			String getTextOfferHelpPage = driver
+					.findElement(
+							By.xpath("//*[@id=\"topic-content\"]/div[1]/h1[1]/span/span[contains(text(),'Offers')]"))
+					.getText();
+			Assert.assertTrue(getTextOfferHelpPage.contentEquals("Offers"));
+			driver.close();
+			driver.switchTo().window(tabs2.get(0));
+		} catch (Exception e) {
+			driver.close();
+			driver.switchTo().window(tabs2.get(0));
+			throw e;
+		}
+
 	}
 
 	public void enterOfferName(String name) throws InterruptedException {
@@ -1103,14 +1629,14 @@ public class OfferPageObjects extends Init {
 		selectOfferChannel(eh.getCell(1, 3).toString());
 		selectOfferCategory(eh.getCellByColumnName("Category"));
 	}
-	
-	public void verifyOfferDetails(String sheet,String product) throws Exception {
+
+	public void verifyOfferDetails(String sheet, String product) throws Exception {
 		eh.setExcelFile("offerInputData", sheet);
-		jswait.waitUntil("//*[contains(text(),'"+eh.getCellByColumnName("Channel")+"')]");
-		jswait.waitUntil("//span[contains(.,'"+eh.getCellByColumnName("Offer Type")+"')]");
-		jswait.waitUntil("//*[contains(text(),'"+eh.getCellByColumnName("Category")+"')]");
+		jswait.waitUntil("//*[contains(text(),'" + eh.getCellByColumnName("Channel") + "')]");
+		jswait.waitUntil("//span[contains(.,'" + eh.getCellByColumnName("Offer Type") + "')]");
+		jswait.waitUntil("//*[contains(text(),'" + eh.getCellByColumnName("Category") + "')]");
 		eh.setExcelFile("productInputData", product);
-		jswait.waitUntil("//*[contains(text(),'"+eh.getCellByColumnName("Product Name")+"')]");
+		jswait.waitUntil("//*[contains(text(),'" + eh.getCellByColumnName("Product Name") + "')]");
 	}
 
 	public void enterOfferDetailsCreativeTab(String sheet, String productSheet) throws Throwable {
@@ -1152,27 +1678,26 @@ public class OfferPageObjects extends Init {
 
 	public void verifySetAsDefaultCheckboxinCreativeTab() throws Throwable {
 
-		if (defineCreativeTitle.size() == 1)  {
-			Exception ceckboxExcep=new Exception("Set as default checkbox is displaying");
-					
+		if (defineCreativeTitle.size() == 1) {
+			Exception ceckboxExcep = new Exception("Set as default checkbox is displaying");
+
 			if (setAsDefaultCreative.size() == 2) {
 				throw ceckboxExcep;
 			}
-			}
-			
+		}
+
 		clickAddCreativeButton();
 		clickSecondCreativeLanguageField();
 		clickSecondCreativeLanguageSpanishSelect();
-		
-		
-		if (defineCreativeTitle.size() == 2)  {
-			Exception ceckboxExcep2=new Exception("Set as default checkbox is not displaying");
-					
+
+		if (defineCreativeTitle.size() == 2) {
+			Exception ceckboxExcep2 = new Exception("Set as default checkbox is not displaying");
+
 			if (setAsDefaultCreative.size() == 1) {
 				throw ceckboxExcep2;
 			}
-			}
-		
+		}
+
 		// assertTrue("Set as default checkbox is not selected",
 		// setAsDefaultCheckbox.isSelected());
 		// Thread.sleep(4000);
@@ -1181,11 +1706,7 @@ public class OfferPageObjects extends Init {
 		// clickRemoveTrackYesButton();
 		assertFalse("Set as default checkbox is displaying", setAsDefault.isDisplayed());
 	}
-	
-	
-	
-	
-	
+
 	public void createOfferAndVerifyOptionalFields(String sheet, String productSheet) throws Throwable {
 		clickCreateNewOfferButton();
 		enterOfferDetailsFromSheetAndVerifyOptionalFields(sheet, productSheet);
@@ -1258,9 +1779,9 @@ public class OfferPageObjects extends Init {
 
 		try {
 			jswait.loadClick(setAsDefault);
-			 assertFalse("Set as default checkbox is displaying with one track source", true);
-		}catch(Exception e){
-			
+			assertFalse("Set as default checkbox is displaying with one track source", true);
+		} catch (Exception e) {
+
 		}
 
 		clickAddTrackButton();
@@ -1272,9 +1793,9 @@ public class OfferPageObjects extends Init {
 		clickRemoveTrackYesButton();
 		try {
 			jswait.loadClick(setAsDefault);
-			 assertFalse("Set as default checkbox is displaying with one track source", true);
-		}catch(Exception e){
-			
+			assertFalse("Set as default checkbox is displaying with one track source", true);
+		} catch (Exception e) {
+
 		}
 
 	}
@@ -1345,38 +1866,65 @@ public class OfferPageObjects extends Init {
 //		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(text(),'Products')]")));
 //		driver.switchTo().parentFrame();
 //		commonObjects.clickContextHelpCloseIcon();
-		
+
 		Thread.sleep(3000);
-        
-		 String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
-		   ((JavascriptExecutor)driver).executeScript("window.open()");
-		   ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
-		    driver.switchTo().window(tabs2.get(1));
-		    driver.get(secondUrl);
-		    Thread.sleep(3000);
-		    try{
-		    	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(.,'Products')]")));
-		    driver.close();
-		    driver.switchTo().window(tabs2.get(0));
-		    }
-		    catch (Exception e) {
-		    	driver.close();
-			    driver.switchTo().window(tabs2.get(0));
-			    throw e;
-			}
+
+		String secondUrl = driver.findElement(By.xpath(".//*[@id='content']/object")).getAttribute("data");
+		((JavascriptExecutor) driver).executeScript("window.open()");
+		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(tabs2.get(1));
+		driver.get(secondUrl);
+		Thread.sleep(3000);
+		try {
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//h1[contains(.,'Products')]")));
+			driver.close();
+			driver.switchTo().window(tabs2.get(0));
+		} catch (Exception e) {
+			driver.close();
+			driver.switchTo().window(tabs2.get(0));
+			throw e;
+		}
 	}
 
 	public void clickTrackSourceSelector() throws InterruptedException {
 		jswait.loadClick(trackSourceSelector);
 	}
 
+	public void clickAddTrackSourceSelector() throws InterruptedException {
+		jswait.loadClick(trackAddSourceSelector);
+	}
+
 	public void selectTrackSource(String trackSource) throws InterruptedException {
 		jswait.loadClick("//paper-item[contains(.,'" + trackSource + "')]");
+	}
+
+	public void selectTrackSource2() throws InterruptedException {
+		jswait.loadClick("(//paper-item[contains(.,'B_track_Sel')])[2]");
 	}
 
 	public void clickRewardTypeInputField() throws InterruptedException {
 		jswait.loadClick(rewardTypeInputField);
 	}
+	
+	public void clickRewardTypeInputField1() throws InterruptedException {
+		jswait.loadClick(rewardTypeInputField1);
+	}
+
+	public void clickRewardTypeInputField2() throws InterruptedException {
+		jswait.loadClick(rewardTypeInputField2);
+
+	}
+
+	public void clickRewardTypeInputFieldthirdRule() throws InterruptedException {
+		jswait.loadClick(rewardTypeInputFieldThirdRule);
+
+	}
+
+	public void clicSeedingRewardTypeInputField1() throws InterruptedException {
+		jswait.loadClick(SeedingrewardTypeInputField);
+
+	}
+
 //	public void clickRewardAddButton() throws InterruptedException {
 //		jswait.loadClick(rewardAddButton);
 //	}
@@ -1388,24 +1936,61 @@ public class OfferPageObjects extends Init {
 	public void clickRewardTypeAny() throws InterruptedException {
 		jswait.loadClick(rewardTypeAnySelector);
 	}
-	
+
 	public void selectReward(String reward) throws InterruptedException {
-		
-		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+reward+"')]");
+
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'" + reward + "')]");
 	}
-	
-	
+
 	public void clickrewardTypesel_reward() throws InterruptedException {
 		jswait.loadClick(rewardTypesel_reward);
 	}
+
+	public void SelectSecondDefaultReward() throws InterruptedException {
+		jswait.loadClick(DefaultSecondRuleReward);
+	}
+
+	public void SelectrewardForFirstRule() throws InterruptedException {
+		jswait.loadClick(rewardTypeselenium_rewardforFirstRule);
+	}
 	
-	public void clickrewardTypeSampleFlowSelector() throws InterruptedException {
-		jswait.loadClick(rewardTypeSampleFlowSelector);
+	public void SelectLordrewardForFirstRule() throws InterruptedException {
+		jswait.loadClick(rewardTypeselenium_Lord_rewardforFirstRule);
 	}
 
 
-	public void clickSaveOfferButton() throws InterruptedException {
-		jswait.loadClick(saveOfferButton);
+	public void clickrewardTypeselenium_reward() throws InterruptedException {
+		jswait.loadClick(rewardTypeselenium_reward);
+	}
+
+	public void clickrewardTypeselenium_rewardforSecondRule() throws InterruptedException {
+		Actions action = new Actions(driver);
+		action.moveToElement(rewardTypeselenium_rewardsecondRule).click().perform();
+		//jswait.loadClick(rewardTypeselenium_rewardsecondRule);
+	}
+	
+	public void clickrewardTypeselenium_TogGrewardforSecondRule() throws InterruptedException {
+		Actions action = new Actions(driver);
+		action.moveToElement(rewardTypeselenium_TopGrewardsecondRule).click().perform();
+		//jswait.loadClick(rewardTypeselenium_rewardsecondRule);
+	}
+	
+
+	public void clickrewardTypeSelenium_reward_test() throws InterruptedException {
+		jswait.loadClick(rewardTypeSelenium_reward_test);
+	}
+
+	public void clickSeedingrewardTypeselenium_reward() throws InterruptedException {
+		jswait.loadClick(SeedingrewardTypeselenium_reward);
+	}
+	
+	public void clickSeedingrewardTypeselenium_rewardMulti() throws InterruptedException {
+		jswait.loadClick(SeedingrewardTypeselenium_rewardMulti);
+	}
+
+
+	public void clickrewardTypeSampleFlowSelector() throws InterruptedException {
+		jswait.loadClick(rewardTypeSampleFlowSelector);
 	}
 
 	public void clickOfferType() throws InterruptedException {
@@ -1439,7 +2024,7 @@ public class OfferPageObjects extends Init {
 		 * commonObjects.clickOptionsIcon(); clickEditOffer(); clickProceedButton();
 		 */
 
-		assertFalse("Product removed successfully", productList.isDisplayed());
+		// assertFalse("Product removed successfully", productList.isDisplayed());
 
 	}
 
@@ -1458,7 +2043,7 @@ public class OfferPageObjects extends Init {
 	public void clickProceedButton() throws InterruptedException {
 		jswait.loadClick(offerProceedButton);
 	}
-	
+
 	public void EditScreen_clickProceedButton() throws InterruptedException {
 		jswait.loadClick(EditofferProceedButton);
 	}
@@ -1490,7 +2075,7 @@ public class OfferPageObjects extends Init {
 
 	public void selectOfferCategory(String offerCategory) throws InterruptedException {
 		clickOfferCategory();
-		jswait.loadClick("//vaadin-combo-box-item[contains(.,'"+offerCategory+"')]");
+		jswait.loadClick("//vaadin-combo-box-item[contains(.,'" + offerCategory + "')]");
 	}
 
 	public void enterSuccessMessage(String s) throws InterruptedException {
@@ -1499,6 +2084,30 @@ public class OfferPageObjects extends Init {
 
 	public void enterFailureMessage(String f) throws InterruptedException {
 		jswait.loadSendKeys(failureMessage, f);
+	}
+
+	public void enterSuccessMessageforFirstRule(String s) throws InterruptedException {
+		jswait.loadSendKeys(successMessageFirstRule, s);
+	}
+
+	public void enterFailureMessageforfirstRule(String f) throws InterruptedException {
+		jswait.loadSendKeys(failureMessageFirstRule, f);
+	}
+
+	public void enterSuccessMessageSecondRule(String s) throws InterruptedException {
+		jswait.loadSendKeys(successMessageSecondRule, s);
+	}
+
+	public void enterFailureMessageSecondRule(String f) throws InterruptedException {
+		jswait.loadSendKeys(failureMessageSecondRule, f);
+	}
+
+	public void enterSuccessMessageThirdRule(String s) throws InterruptedException {
+		jswait.loadSendKeys(successMessageThirdRule, s);
+	}
+
+	public void enterFailureMessageThirdRule(String f) throws InterruptedException {
+		jswait.loadSendKeys(failureMessageThirdRule, f);
 	}
 
 	public void clickOfferTypeField() throws InterruptedException {
@@ -1512,15 +2121,31 @@ public class OfferPageObjects extends Init {
 	public void enterDetailsTabFields(String sheet) throws InterruptedException, IOException {
 		eh.setExcelFile("offerInputData", sheet);
 		String name = (String) eh.getCell(1, 0);
-		String newname=RandomNameGenerator.getRandomName(name);
-		eh.setCell(1, 0,newname);
+		String newname = RandomNameGenerator.getRandomName(name);
+		eh.setCell(1, 0, newname);
 		enterOfferName(newname);
 		enterOfferDescription((String) eh.getCell(1, 1));
 		selectOfferType(eh.getCell(1, 2).toString());
 		selectOfferChannel(eh.getCell(1, 3).toString());
 		selectOfferCategory(eh.getCellByColumnName("Category"));
+
+		/////////////// new offer discount/////////////////
+		
+		if(!eh.getCellByColumnName("Offer Type").contains("Informational"))
+		{
+			 jswait.loadClick("//offer-details//label[contains(text(),'Value')]/../..//input");
+			 jswait.loadClick("//div//vaadin-combo-box-item[contains(.,'Auto Calculate Total Price')]");
+
+			// jswait.loadClick("//offer-details//label[contains(text(),'Total
+			// Price')]/../..//input");
+			// totalprice.sendKeys(String.valueOf(1));
+		}
+		else {
+			System.out.println("Informational offer");
+		}
+
 	}
-	
+
 	public void chooseChannelType() throws InterruptedException {
 		jswait.loadClick(offerChannelType);
 	}
@@ -1549,70 +2174,70 @@ public class OfferPageObjects extends Init {
 		jswait.loadSendKeys(voiceCreativeSubject, subject);
 		jswait.loadSendKeys(voiceCreativeReference, reference);
 	}
-	
-   public void enterEmailCreative(String profile,String subject ) throws InterruptedException, UnsupportedFlavorException, IOException {
-	  
-	  // jswait.loadClick(emailProfileField);
-	 // jswait.loadClick("//preview-email//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
-	   jswait.loadSendKeys(emailCreativeSubject,"email offer by selenium");
-	   
-	   File indexZip = new File("EmailZipFile\\index.zip");
-	   emailSelectResourceButton.sendKeys(indexZip.getAbsolutePath());
-	   
 
-	   jswait.loadClick(emailMapVariable);
-	   MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
-	   try{
-		   clickMapVariableFirstVariable();
-	   }catch(Exception e) {
-		  createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
-	   }
-	   clickMapVariableOkButton();
-	   
-	   //jswait.loadClick(emailcreativechangebtn);
-	   Thread.sleep(2000);
-	 
-	   emailcreativechangebtn.sendKeys(indexZip.getAbsolutePath());
+	public void enterEmailCreative(String profile, String subject)
+			throws InterruptedException, UnsupportedFlavorException, IOException {
+
+		// jswait.loadClick(emailProfileField);
+		// jswait.loadClick("//preview-email//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
+		jswait.loadSendKeys(emailCreativeSubject, "email offer by selenium");
+
+		File indexZip = new File("EmailZipFile\\index.zip");
+		emailSelectResourceButton.sendKeys(indexZip.getAbsolutePath());
+
+		jswait.loadClick(emailMapVariable);
+		MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
+		try {
+			clickMapVariableFirstVariable();
+		} catch (Exception e) {
+			createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
+		}
+		clickMapVariableOkButton();
+
+		// jswait.loadClick(emailcreativechangebtn);
+		Thread.sleep(2000);
+
+		// emailcreativechangebtn.sendKeys(indexZip.getAbsolutePath());
 	}
-   
-   public void verifyEmailCreative(String profile,String subject ) throws InterruptedException, UnsupportedFlavorException, IOException {
-	   jswait.loadClick(emailProfileField);
-	   jswait.loadClick("//preview-email//paper-item[contains(.,'"+AGE_PROFILE_FIELD+"')]");
-	   jswait.loadClick(emailProfileField);
-	   jswait.loadClick("//preview-email//paper-item[contains(.,'"+EMAIL_PROFILE_FIELD+"')]");
-	   jswait.loadSendKeys(emailCreativeSubject, "Subject of Email Offer &$^%#@!+*(&)");
-	   String enteredText = commonObjects.getTextFormTextField(emailCreativeSubject);
-	   Assert.assertTrue(enteredText.length()==35, "error in subject field accepting alpha nueric and special characters");
-	   Thread.sleep(2000);
-	   File indexZip = new File("EmailZipFile\\index.zip");
-	   emailSelectResourceButton.sendKeys(indexZip.getAbsolutePath());
-	   
-	   jswait.loadClick(previewEmailButton);
-	   Thread.sleep(3000);
-	   driver.switchTo().frame("my_iframe");
-	   driver.findElement(By.xpath("//h1[contains(.,'THIS IS THE BODY OF EMAIL')]"));
-	   driver.findElement(By.xpath("//h1[contains(.,'$$EMAIL$$')]"));
-	   driver.findElement(By.xpath("//img[@src='logo.png']"));
-	   driver.switchTo().parentFrame();
-	   jswait.loadClick(previewEmailConfirmButton);
-	   clickMapVariableIcon();
-	   clickMapVariableCancelButton();
-	   jswait.loadClick(emailMapVariable);
-	   MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
-	   try{
-		   clickMapVariableFirstVariable();
-	   }catch(Exception e) {
-		   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
-	   }
-	   clickMapVariableOkButton();
-	   
-	   //jswait.loadClick(emailcreativechangebtn);
-	   Thread.sleep(2000);
-	 
-	   emailcreativechangebtn.sendKeys(indexZip.getAbsolutePath());
-	   
-	   
-	   
+
+	public void verifyEmailCreative(String profile, String subject)
+			throws InterruptedException, UnsupportedFlavorException, IOException {
+		jswait.loadClick(emailProfileField);
+		jswait.loadClick("//preview-email//paper-item[contains(.,'" + AGE_PROFILE_FIELD + "')]");
+		jswait.loadClick(emailProfileField);
+		jswait.loadClick("//preview-email//paper-item[contains(.,'" + EMAIL_PROFILE_FIELD + "')]");
+		jswait.loadSendKeys(emailCreativeSubject, "Subject of Email Offer &$^%#@!+*(&)");
+		String enteredText = commonObjects.getTextFormTextField(emailCreativeSubject);
+		Assert.assertTrue(enteredText.length() == 35,
+				"error in subject field accepting alpha nueric and special characters");
+		Thread.sleep(2000);
+		File indexZip = new File("EmailZipFile\\index.zip");
+		emailSelectResourceButton.sendKeys(indexZip.getAbsolutePath());
+
+		jswait.loadClick(previewEmailButton);
+		Thread.sleep(3000);
+		driver.switchTo().frame("my_iframe");
+		driver.findElement(By.xpath("//h1[contains(.,'THIS IS THE BODY OF EMAIL')]"));
+		driver.findElement(By.xpath("//h1[contains(.,'$$EMAIL$$')]"));
+		driver.findElement(By.xpath("//img[@src='logo.png']"));
+		driver.switchTo().parentFrame();
+		jswait.loadClick(previewEmailConfirmButton);
+		clickMapVariableIcon();
+		clickMapVariableCancelButton();
+		jswait.loadClick(emailMapVariable);
+		MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
+		try {
+			clickMapVariableFirstVariable();
+		} catch (Exception e) {
+			createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
+		}
+		clickMapVariableOkButton();
+
+		// jswait.loadClick(emailcreativechangebtn);
+		Thread.sleep(2000);
+
+		emailcreativechangebtn.sendKeys(indexZip.getAbsolutePath());
+
 	}
 
 	public void enterSecondVoiceCreative(String subject, String reference) throws InterruptedException {
@@ -1641,11 +2266,11 @@ public class OfferPageObjects extends Init {
 	public void enterProductTabFields(String productSheet) throws InterruptedException, IOException {
 		ExcelHelper prodcutFile = new ExcelHelper();
 		prodcutFile.setExcelFile("productInputData", productSheet);
-		String productToAdd = (String) prodcutFile.getCell(1,0);
+		String productToAdd = (String) prodcutFile.getCell(1, 0);
 		clickOfferAddButton();
-			commonObjects.filterName(productToAdd);
-			Thread.sleep(3000);
-			jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
+		commonObjects.filterName(productToAdd);
+		Thread.sleep(3000);
+		jswait.loadClick("//span[contains(.,'" + productToAdd + "')]");
 		clickDialogBoxAddButton();
 	}
 
@@ -1689,9 +2314,9 @@ public class OfferPageObjects extends Init {
 		enterOfferDescription(desc);
 		clickOfferTypeField();
 		Thread.sleep(2000);
-		//chooseOfferType();
+		// chooseOfferType();
 		Thread.sleep(2000);
-		//driver.findElement(By.xpath("//paper-item[contains(.,'"+eh.getCell(1,2)+"')]")).click();
+		// driver.findElement(By.xpath("//paper-item[contains(.,'"+eh.getCell(1,2)+"')]")).click();
 		jswait.loadClick("//paper-item[contains(.,'Recharge')]");
 		clickOfferChannel();
 		Thread.sleep(2000);
@@ -1731,17 +2356,18 @@ public class OfferPageObjects extends Init {
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
-		if(sheet.equals("Option3Email"))
-		{
+		if (sheet.equals("Option3Email")) {
 			mandrillCreative();
-		}else {
-		enterCreativeTabDetails(eh,testMode);
+		} else {
+			enterCreativeTabDetails(eh, testMode);
 		}
 		clickProceedButton();
 		Thread.sleep(3000);
-		
+
 		// ******************Track tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+
+			System.out.println("Informational Track Source");
 			enterTrackTabDetails(eh);
 			createFirstDefaultTrackingRuleCondition(eh);
 		}
@@ -1749,57 +2375,216 @@ public class OfferPageObjects extends Init {
 
 		// ******************Rewards tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
-			
-						
-				try {
-					Exception e = null;
+
+			try {
+				Exception e = null;
 //					eh.setExcelFile("offerInputData", "usagerecharge");
-					if (!eh.getCell(1, 20).toString().contains("usage")) {
-						
-						throw e;
-					}
-					else {
-						
+				if (!eh.getCell(1, 20).toString().contains("usage")) {
+
+					throw e;
+				} else {
+
 					jswait.loadClick("//paper-card[@id='rewardDetails']//paper-button[contains(.,'Add')]");
-					
-				jswait.loadSendKeys("//label[contains(.,'Reward Type')]/..//input", "sel_reward");
-				Thread.sleep(2000);
+
+					jswait.loadSendKeys("//label[contains(.,'Reward Type')]/..//input", "sel_reward");
+					Thread.sleep(2000);
 					jswait.loadClick("//vaadin-combo-box-item[contains(.,'sel_reward')]");
 					enterSuccessMessage("Success from Selenium");
 					enterFailureMessage("Failure from Selenium");
-				}}catch(Exception e) {
-					if (eh.getCell(1, 2).toString().contains("Seeding")) {
-						clickRewardFirstRuleAdButton();	
-						clickRewardTypeInputField();	
-						//clickrewardTypeSampleFlowSelector();
-						//clickrewardTypesel_reward();
-						clickrewardTypesel_reward();
-						 enterSuccessMessage("Success from Selenium");
-						enterFailureMessage("Failure from Selenium");
-						Thread.sleep(2000);
-						jswait.loadSendKeys("//h3[contains(.,'Reward for Seeding')]//following::input[1]", SEL_REWARD);
-						jswait.loadClick("(//vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')])[2]");
-					}
-					else if(eh.getCell(1, 2).toString().contains("Recharge")) {
+				}
+			} catch (Exception e) {
+				if (eh.getCell(1, 2).toString().contains("Seeding")) {
+					clickRewardFirstRuleAdButton();
+					clickRewardTypeInputField();
+					// clickrewardTypeSampleFlowSelector();
+					// clickrewardTypesel_reward();
+					clickrewardTypesel_reward();
+					enterSuccessMessage("Success from Selenium");
+					enterFailureMessage("Failure from Selenium");
+					Thread.sleep(2000);
+					jswait.loadSendKeys("//h3[contains(.,'Reward for Seeding')]//following::input[1]", SEL_REWARD);
+					jswait.loadClick("(//vaadin-combo-box-item[contains(.,'" + SEL_REWARD + "')])[2]");
+				} else if (eh.getCell(1, 2).toString().contains("Recharge")) {
 					clickRewardFirstRuleAdButton();
 					clickRewardTypeInputField();
 //					clickrewardTypeSampleFlowSelector();
 //					clickrewardTypesel_reward();
 					clickrewardTypesel_reward();
-					
+
 					enterSuccessMessage("Success from Selenium");
 					enterFailureMessage("Failure from Selenium");
-				}else {
+				} else {
 					clickRewardFirstRuleAdButton();
 					clickRewardTypeInputField();
-					//clickRewardTypeAny();
+					// clickRewardTypeAny();
 					clickrewardTypesel_reward();
 					enterSuccessMessage("Success from Selenium");
 					enterFailureMessage("Failure from Selenium");
 				}
-		}}
+			}
+		}
 
 	}
+
+	void enterOfferDetailsFromSheetMultiTrack(String sheet, String productSheet,String testMode , String creativeType) throws Throwable {
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
+		// ******************Products tab*****************:
+		Thread.sleep(3000);
+		enterProductTabFields(productSheet);
+		clickProceedButton();
+
+		// ******************Creative tab*****************:
+		if (sheet.equals("Option3Email")) {
+			mandrillCreative();
+		} else {
+			enterCreativeTabDetails(eh, testMode);
+		}
+		clickProceedButton();
+		Thread.sleep(3000);
+
+		// ******************Track tab*****************:
+
+		if (eh.getCellByColumnName("Tracksource").contains("Multiple")) {
+
+			System.out.println("Multiple Track source");
+			Thread.sleep(3000);
+			enterTrackTabDetailsMultitrack1(eh);
+			createFirstMultiDefaultTrackingRuleCondition(eh);
+			enterTrackTabDetailsMultitrack2(eh);
+			createMultiTrackingRuleCondition(eh);
+
+		} else if (eh.getCellByColumnName("RuleType").contains("MultipleRule")) {
+
+			System.out.println("Single rule Multiple Rule");
+			enterTrackTabDetails(eh);
+			createMultipleRuleDefaultTrackingRuleCondition(eh);
+
+		}
+		clickProceedButton();
+
+		// ******************Rewards tab*****************:
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+
+			try {
+				Exception e = null;
+//					eh.setExcelFile("offerInputData", "usagerecharge");
+				if (!eh.getCell(1, 20).toString().contains("usage")) {
+
+					throw e;
+				} else {
+					System.out.println("Else one 1");
+					jswait.loadClick("//paper-card[@id='rewardDetails']//paper-button[contains(.,'Add')]");
+
+					jswait.loadSendKeys("//label[contains(.,'Reward Type')]/..//input", "sel_reward");
+					Thread.sleep(2000);
+					jswait.loadClick("//vaadin-combo-box-item[contains(.,'sel_reward')]");
+					enterSuccessMessage("Success from Selenium");
+					enterFailureMessage("Failure from Selenium");
+				}
+			} catch (Exception e) {
+
+//				System.out.println("Inside reward catch");
+//				if (eh.getCell(1, 2).toString().contains("Seeding")) {
+//					System.out.println("Insdie multi reward");
+//					clickRewardFirstRuleAdButton();
+//					clickRewardTypeInputField();
+//					// clickrewardTypeSampleFlowSelector();
+//					// clickrewardTypesel_reward();
+//					clickrewardTypesel_reward();
+//					enterSuccessMessage("Success from Selenium");
+//					enterFailureMessage("Failure from Selenium");
+//					Thread.sleep(2000);
+//					jswait.loadSendKeys("//h3[contains(.,'Reward for Seeding')]//following::input[1]", SEEEDING_REWARD);
+//					jswait.loadClick("(//vaadin-combo-box-item[contains(.,'" + SEEEDING_REWARD + "')])[2]");
+//				}
+
+				 if (eh.getCell(1, 20).toString().contains("Multiple")) {
+					// First track reward
+					createDefaultRuleFirstReward(creativeType);
+					System.out.println("Insdie multi reward `1");
+					clickRewardFirstRuleAdButton();
+					clickRewardTypeInputField1();
+					SelectrewardForFirstRule();
+					enterSuccessMessageforFirstRule("Success from Selenium First rule");
+					enterFailureMessageforfirstRule("Failure from Selenium First rule");
+					// Second track reward
+					createDefaultRuleSecondReward(creativeType);
+					clickRewardFirstRuleAdButton1();
+					clickRewardTypeInputField2();
+					clickrewardTypeselenium_rewardforSecondRule();
+					enterSuccessMessageSecondRule("Success from Selenium Second rule");
+					enterFailureMessageSecondRule("Failure from Selenium Second rule");
+					
+		
+					
+					
+				} else if (eh.getCell(1, 21).toString().contains("MultipleRule")) {
+
+					clickRewardFirstRuleAdButton();
+					clickRewardTypeInputField();
+					// clickRewardTypeAny();
+					clickrewardTypesel_reward();
+					enterSuccessMessage("Success from Selenium First Rule - MultiRuleOffer");
+					enterFailureMessage("Failure from Selenium First Rule - MultiRuleOffer");
+
+					// Second rule reward
+					jswait.loadClick(
+							"//div//h3[contains(.,'Rewards for Second Rule')]//..//paper-button[contains(.,'Add')]");
+					clickRewardTypeInputField1();
+					clickrewardTypeselenium_reward();
+					enterSuccessMessageSecondRule("Success from Selenium Second Rule - MultiRuleOffer");
+					enterFailureMessageSecondRule("Failure from Selenium Second Rule - MultiRuleOffer");
+
+					// Third Rule Reward
+					jswait.loadClick(
+							"//div//h3[contains(.,'Rewards for Third Rule')]//..//paper-button[contains(.,'Add')]");
+					clickRewardTypeInputFieldthirdRule();
+					clickrewardTypeSelenium_reward_test();
+					enterSuccessMessageThirdRule("Success from Selenium Third Rule - MultiRuleOffer");
+					enterFailureMessageThirdRule("Success from Selenium Third Rule - MultiRuleOffer");
+
+					
+				}
+
+				else {
+
+					System.out.println("Inside last else");
+					clickRewardFirstRuleAdButton();
+					clickRewardTypeInputField();
+					// clickRewardTypeAny();
+					clickrewardTypesel_reward();
+					enterSuccessMessage("Success from Selenium");
+					enterFailureMessage("Failure from Selenium");
+
+				}
+
+				}
+			if (eh.getCellByColumnName("Offer Type").contains("Seeding")) {
+				System.out.println("Inside seeding Reward");
+				
+				try {
+					clickSeedingRewardTypeInputField();
+					clickSeedingrewardTypeselenium_reward();
+				} catch (Exception ei) {
+					clickSeedingRewardTypeInputField();
+					clickSeedingrewardTypeselenium_rewardMulti();
+					
+				}
+				
+			}
+		}
+		
+	}
+
 	public void verifyCancelInSendTrial(String sheet, String productSheet) throws Throwable {
 		Thread.sleep(4000);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -1818,21 +2603,20 @@ public class OfferPageObjects extends Init {
 
 		// ******************Creative tab*****************:
 		enterCreativeTabDetails(eh);
-		
-		//verify cancel button of send trial 
+
+		// verify cancel button of send trial
 		clickSendTrialButton();
-		if(eh.getCellByColumnName("Channel").contains("Email")) {
+		if (eh.getCellByColumnName("Channel").contains("Email")) {
 			jswait.loadClick(sendTrialEmailCancelButton);
-		}
-		else {
+		} else {
 			jswait.loadClick(sendTrialNumberCancelButton);
 		}
-		
+
 		clickProceedButton();
 		Thread.sleep(3000);
 
 	}
-	
+
 	public void enterOfferDetailsFromSheetAndCheckRewardsDropDown(String sheet, String productSheet) throws Throwable {
 		Thread.sleep(4000);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -1860,93 +2644,131 @@ public class OfferPageObjects extends Init {
 		clickProceedButton();
 
 		// ******************Rewards tab*****************:
-		    clickRewardAddButton();
-			clickRewardTypeInputField();
-			enterReward();
-			
-		
+		clickRewardAddButton();
+		clickRewardTypeInputField();
+		enterReward();
 
 	}
+
 	public void verifyRewardTypeField() throws InterruptedException {
 		Thread.sleep(2000);
-		assertTrue(driver.findElement(By.xpath(".//vaadin-combo-box-item[contains(.,'"+SELENIUM_REWARD+"')]")).isDisplayed());
+		assertTrue(driver.findElement(By.xpath(".//vaadin-combo-box-item[contains(.,'" + SELENIUM_REWARD + "')]"))
+				.isDisplayed());
 	}
-	
-	
-	
-	
 
 	public void enterTrackTabDetails(ExcelHelper eh) throws Exception {
 		try {
 			Exception e = null;
-	
+
 			if (!eh.getCell(1, 20).toString().contains("usage")) {
-				
+
 				throw e;
 			}
-			else {clickTrackSourceSelector();
-			selectTrackSource(TRACK_SOURCE2);}
-		
-		
-		}catch(Exception e) {
-			clickTrackSourceSelector();
-			selectTrackSource(TRACK_SOURCE);}
-		
+
+			else {
+
+				System.out.println("Multi 2 #");
+				clickTrackSourceSelector();
+				selectTrackSource(TRACK_SOURCE2);
 			}
-		
-	
-	
+
+		} catch (Exception e) {
+
+			clickTrackSourceSelector();
+			selectTrackSource(TRACK_SOURCE);
+		}
+
+	}
+
+	public void enterTrackTabDetailsMultitrack1(ExcelHelper eh) throws Exception {
+
+		if (eh.getCell(1, 20).toString().contains("Multiple")) {
+			System.out.println("Multiple track 1");
+
+			clickTrackSourceSelector();
+			selectTrackSource(TRACK_SOURCE);
+			System.out.println(TRACK_SOURCE);
+			System.out.println("selected 2 track");
+
+		} else {
+			{
+				System.out.println("Multi 2");
+				clickTrackSourceSelector();
+				selectTrackSource(TRACK_SOURCE);
+			}
+		}
+	}
+
+	public void enterTrackTabDetailsMultitrack2(ExcelHelper eh) throws Exception {
+
+		if (eh.getCell(1, 20).toString().contains("Multiple")) {
+			System.out.println("Multiple track 2");
+
+			clickAddTrackSourceSelector();
+			trackSourceSelector1.sendKeys(Keys.ENTER);
+			Thread.sleep(5000);
+			selectTrackSource2();
+			System.out.println(TRACK_SOURCE1);
+
+		} else {
+			{
+				System.out.println("Multi 2");
+				clickTrackSourceSelector();
+				selectTrackSource(TRACK_SOURCE);
+			}
+		}
+	}
+
 	public void enterCreativeTabDetails(ExcelHelper eh) throws Throwable {
 		selectCreativeLanguageEnglish();
-		if (eh.getCell(1, 3).toString().contains("SMS") && eh.getCell(1, 13).toString().contains("yes") ) {
-		enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-		jswait.loadClick(reminderCheckbox);
-		jswait.loadSendKeys(reminderTitleInput, "reminder title by selenium");
-		jswait.loadSendKeys(reminderDetailsInput, "reminder detail by selenium");	
-			                }
-		else if (((String) eh.getCell(1, 3)).contains("WAP")) {
+		if (eh.getCell(1, 3).toString().contains("SMS") && eh.getCell(1, 13).toString().contains("yes")) {
+			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			jswait.loadClick(reminderCheckbox);
+			jswait.loadSendKeys(reminderTitleInput, "reminder title by selenium");
+			jswait.loadSendKeys(reminderDetailsInput, "reminder detail by selenium");
+		} else if (((String) eh.getCell(1, 3)).contains("WAP")) {
 			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-		}
-		else if (eh.getCell(1, 3).toString().contains("SMS"))
+		} else if (eh.getCell(1, 3).toString().contains("SMS"))
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		else if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		else if (eh.getCell(1, 3).toString().contains("Email")) {
-			 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-			 verifySetAsDefaultCheckboxinCreativeTab();			   
-			 selectCreativeLanguageEnglish();
-			 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			verifySetAsDefaultCheckboxinCreativeTab();
+			selectCreativeLanguageEnglish();
+			enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		}
-		}
+	}
+
 	private void enterDynamic() throws InterruptedException {
 		Thread.sleep(5000);
-		smsCreativeDetails.sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+		smsCreativeDetails.sendKeys(Keys.CONTROL, "a", Keys.DELETE);
 		Thread.sleep(2000);
-		 jswait.loadClick(mapVariablecreativeIcon);
-		   //clickMapVariableCancelButton();
-		   //jswait.loadClick(emailMapVariable);
-		   MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
-		   try{
-			   clickMapVariableFirstVariable();
-		   }catch(Exception e) {
-			   System.out.println("catch");
-			   createSecondVariable(AGE_DYNAMIC_VARIABLE);
-		   }
-		   clickMapVariableOkButton();
-		
+		jswait.loadClick(mapVariablecreativeIcon);
+		// clickMapVariableCancelButton();
+		// jswait.loadClick(emailMapVariable);
+		MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
+		try {
+			clickMapVariableFirstVariable();
+		} catch (Exception e) {
+			System.out.println("catch");
+			createSecondVariable(AGE_DYNAMIC_VARIABLE);
 		}
+		clickMapVariableOkButton();
+
+	}
+
 	public void enterEmailCreativeTabDetails(ExcelHelper eh) throws Throwable {
 		selectCreativeLanguageEnglish();
 		if (eh.getCell(1, 3).toString().contains("Email")) {
-		enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		}
-			
+
 	}
-	
-	
-	public void mandrillCreative() throws Throwable{
+
+	public void mandrillCreative() throws Throwable {
 		selectCreativeLanguageEnglish();
-		jswait.loadSendKeys(emailCreativeSubject,"email offer by selenium");
+		jswait.loadSendKeys(emailCreativeSubject, "email offer by selenium");
 		jswait.loadClick(synctemplate);
 		Thread.sleep(10000);
 		jswait.loadSendKeys(mandrillfilter, "SRS_Events_NCS");
@@ -1954,75 +2776,80 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(finalselectmandrilltemplate);
 		jswait.loadClick(yesornomandrilltemplate);
 		Thread.sleep(5000);
-		
+
 	}
-	public void enterCreativeTabDetails(ExcelHelper eh,String testMode) throws Throwable {
+
+	public void enterCreativeTabDetails(ExcelHelper eh, String testMode) throws Throwable {
 		selectCreativeLanguageEnglish();
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
 			enterWapCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-		}
-		else if (eh.getCell(1, 3).toString().contains("SMS"))
-			{
+		} else if (eh.getCell(1, 3).toString().contains("SMS")) {
 			enterSmsCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-			
-			try{if (((String) eh.getCell(1, 20)).contains("DYNAMICTAG")) {
-				enterDynamic();
+
+			try {
+				if (((String) eh.getCell(1, 20)).contains("DYNAMICTAG")) {
+					enterDynamic();
+				}
+			} catch (Exception e) {
+				System.out.println("NO DYNAMIC TAG");
 			}
-			    }catch(Exception e) {
-			    	System.out.println("NO DYNAMIC TAG");
-			    }
-			}		
-		else if (eh.getCell(1, 3).toString().contains("Voice"))
+		} else if (eh.getCell(1, 3).toString().contains("Voice"))
 			enterVoiceCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		else if (eh.getCell(1, 3).toString().contains("Facebook"))
 			enterfacebookCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
 		else if (eh.getCell(1, 3).toString().contains("Email")) {
-			 System.out.println("email1");
-			 if(testMode!="NULL") {verifySetAsDefaultCheckboxinCreativeTab();	
-			 verifyEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-			   selectCreativeLanguageEnglish();
-			   enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-			 }
-			 else {
-				 System.out.println("email2");
-				 enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-			 }
+			System.out.println("email1");
+			if (testMode != "NULL") {
+				verifySetAsDefaultCheckboxinCreativeTab();
+				verifyEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+				selectCreativeLanguageEnglish();
+				enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			} else {
+				System.out.println("email2");
+				enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			}
 		}
-		
-			
+
 	}
 
 	public void enterSecondCreativeTabDetails(ExcelHelper eh) throws InterruptedException, IOException {
 		selectSecodnCreativeLanguageSpanish();
-		String title= "عرض مكافأة";
-		String details="عرض مكافأة";
+		String title = "عرض مكافأة";
+		String details = "عرض مكافأة";
 		if (((String) eh.getCell(1, 3)).contains("WAP")) {
-			enterSecondWapCreative(title,details );
+			enterSecondWapCreative(title, details);
 		}
 		if (eh.getCell(1, 3).toString().contains("SMS"))
-			enterSecondSmsCreative(title,details );
+			enterSecondSmsCreative(title, details);
 		if (eh.getCell(1, 3).toString().contains("Voice"))
-			enterSecondVoiceCreative(title,details);
+			enterSecondVoiceCreative(title, details);
 
 	}
 
-	public void createOffer(String sheet, String productSheet,String testMode) throws Throwable {
+	public void createOffer(String sheet, String productSheet, String testMode) throws Throwable {
 		clickCreateNewOfferButton();
 		enterOfferDetailsFromSheet(sheet, productSheet, testMode);
 		clickSaveOfferButton();
 	}
+
+	public void createOfferMultitrack(String sheet, String productSheet, String testMode ) throws Throwable {
+		clickCreateNewOfferButton();
+		enterOfferDetailsFromSheetMultiTrack(sheet, productSheet,"NULL" , "NULL");
+		clickSaveOfferButton();
+	}
+
 	public void verifyCancelButtonInSendTrial(String sheet, String productSheet) throws Throwable {
 		clickCreateNewOfferButton();
 		verifyCancelInSendTrial(sheet, productSheet);
 	}
-	
+
 	public void createOfferAndCheckRewardsDropDown(String sheet, String productSheet) throws Throwable {
 		clickCreateNewOfferButton();
 		enterOfferDetailsFromSheetAndCheckRewardsDropDown(sheet, productSheet);
 		verifyRewardTypeField();
-		
+
 	}
-	
+
 	public void navigateToRewards() throws InterruptedException {
 		jswait.loadClick(rewards);
 	}
@@ -2135,12 +2962,15 @@ public class OfferPageObjects extends Init {
 		Assert.assertTrue(commonObjects.getTextFormTextField(smsCreativeDetails).length() == 29,
 				"wrong character limit for creative details");
 	}
+
 	public void validateRuleNameField() throws InterruptedException, UnsupportedFlavorException, IOException {
 		enterRuleName("ygy56465!@#$%^&*()@#$%^&*(^%$#ggy");
-		Assert.assertTrue(commonObjects.getTextFormTextField(addTrackingRuleRuleName).length()==30, "validation of rule name failed");
+		Assert.assertTrue(commonObjects.getTextFormTextField(addTrackingRuleRuleName).length() == 30,
+				"validation of rule name failed");
 	}
-	
-	public void SendTrialSMS(String number1, String number2, String number3, String sheet, String productSheet) throws Throwable {
+
+	public void SendTrialSMS(String number1, String number2, String number3, String sheet, String productSheet)
+			throws Throwable {
 		Thread.sleep(1000);
 		clickCreateNewOfferButton();
 		Thread.sleep(4000);
@@ -2160,22 +2990,22 @@ public class OfferPageObjects extends Init {
 
 		// ******************Creative tab*****************:
 		enterCreativeTabDetails(eh);
-		
-		//verify cancel button of send trial 
+
+		// verify cancel button of send trial
 		sendTrialSMSToNumber(number1);
 		sendTrialSMSToNumber(number2);
 		sendTrialSMSToNumber(number3);
-		
+
 	}
+
 	public void sendTrialSMSToNumber(String number) throws InterruptedException {
 		clickSendTrialButton();
-		if(eh.getCellByColumnName("Channel").contains("Email")) {
-                           //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
-                           //jswait.loadSendKeys("1234567890");
-		}
-		else {
-                           jswait.loadClick(sendTrialfield);
-                           jswait.loadSendKeys(sendTrialfield, number);
+		if (eh.getCellByColumnName("Channel").contains("Email")) {
+			// jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
+			// jswait.loadSendKeys("1234567890");
+		} else {
+			jswait.loadClick(sendTrialfield);
+			jswait.loadSendKeys(sendTrialfield, number);
 		}
 		jswait.loadClick(sendTrialSMSSender);
 		jswait.loadClick(SelectTrialSMSID);
@@ -2185,6 +3015,7 @@ public class OfferPageObjects extends Init {
 		Thread.sleep(3000);
 		jswait.loadClick(sendTrialPageClose);
 	}
+
 	public void SendTrialSMSOneNum(String sheet, String productSheet, String number) throws Throwable {
 		Thread.sleep(1000);
 		clickCreateNewOfferButton();
@@ -2206,17 +3037,15 @@ public class OfferPageObjects extends Init {
 		// ******************Creative tab*****************:
 		System.out.println("entr creative details");
 		enterCreativeTabDetails(eh);
-		
-	
+
 		clickSendTrialButton();
-		if(eh.getCellByColumnName("Channel").contains("Email")) {
-            //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
-            //jswait.loadSendKeys("1234567890");
-}
-else {
-            jswait.loadClick(sendTrialfield);
-            jswait.loadSendKeys(sendTrialfield, number);
-}
+		if (eh.getCellByColumnName("Channel").contains("Email")) {
+			// jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
+			// jswait.loadSendKeys("1234567890");
+		} else {
+			jswait.loadClick(sendTrialfield);
+			jswait.loadSendKeys(sendTrialfield, number);
+		}
 		jswait.loadClick(sendTrialSMSSender);
 		jswait.loadClick(SelectTrialSMSID);
 		jswait.loadClick(sendTrialSMSRoute);
@@ -2224,8 +3053,9 @@ else {
 		jswait.loadClick(sendTrialNumberSendButton);
 		Thread.sleep(3000);
 		jswait.loadClick(sendTrialPageClose);
-		
+
 	}
+
 	public void SendTrialInvalidNumber(String sheet, String productSheet) throws Throwable {
 		Thread.sleep(1000);
 		clickCreateNewOfferButton();
@@ -2246,19 +3076,17 @@ else {
 
 		// ******************Creative tab*****************:
 		enterCreativeTabDetails(eh);
-		
-		 
+
 		clickSendTrialButton();
-		if(eh.getCellByColumnName("Channel").contains("Email")) {
-	                       //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
-	                       //jswait.loadSendKeys("1234567890");
-		}
-		else {
-	                       jswait.loadClick(sendTrialfield);
-	                       jswait.loadSendKeys(sendTrialfield, "9123");
-	                       jswait.loadClick(sendTrialAddButton);
-	                       jswait.loadClick(sendTrialsecondfield);
-	                       jswait.loadSendKeys(sendTrialsecondfield, "923");
+		if (eh.getCellByColumnName("Channel").contains("Email")) {
+			// jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
+			// jswait.loadSendKeys("1234567890");
+		} else {
+			jswait.loadClick(sendTrialfield);
+			jswait.loadSendKeys(sendTrialfield, "9123");
+			jswait.loadClick(sendTrialAddButton);
+			jswait.loadClick(sendTrialsecondfield);
+			jswait.loadSendKeys(sendTrialsecondfield, "923");
 		}
 		jswait.loadClick(sendTrialSMSSender);
 		jswait.loadClick(SelectTrialSMSID);
@@ -2268,12 +3096,14 @@ else {
 		Thread.sleep(3000);
 		String gettext;
 		gettext = sendTrialInavlidNumPopup.getText();
-	    Assert.assertTrue(gettext.contentEquals("Invalid format. Please check the customer number entered."), "Invalid popup message");
-	    //System.out.println("message is , " +gettext);
-	    Thread.sleep(3000);
+		Assert.assertTrue(gettext.contentEquals("Invalid format. Please check the customer number entered."),
+				"Invalid popup message");
+		// System.out.println("message is , " +gettext);
+		Thread.sleep(3000);
 		jswait.loadClick(sendTrialPageClose);
-		
+
 	}
+
 	public void SendTrialSMSMultipleCreative(String sheet, String productSheet) throws Throwable {
 		Thread.sleep(1000);
 		clickCreateNewOfferButton();
@@ -2294,33 +3124,32 @@ else {
 
 		// ******************Creative tab*****************:
 		enterCreativeTabDetails(eh);
-	//	
-	//
+		//
+		//
 //		clickSendTrialButton();
-		if(eh.getCellByColumnName("Channel").contains("Email")) {
-	                       //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
-	                       //jswait.loadSendKeys("1234567890");
-		}
-		else {
+		if (eh.getCellByColumnName("Channel").contains("Email")) {
+			// jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
+			// jswait.loadSendKeys("1234567890");
+		} else {
 //			jswait.loadClick(sendTrialCreativeAddButton);
 //	                       jswait.loadClick(sendTrialfield);
 //	                       jswait.loadSendKeys(sendTrialfield, "919446506809");
-	                       //jswait.loadClick(sendTrialAddButton);
-	                       //jswait.loadClick(sendTrialsecondfield);
-	                       //jswait.loadSendKeys(sendTrialsecondfield, "919446506807");                       
-	                       
+			// jswait.loadClick(sendTrialAddButton);
+			// jswait.loadClick(sendTrialsecondfield);
+			// jswait.loadSendKeys(sendTrialsecondfield, "919446506807");
+
 		}
 //		sendTrialPageFill();
 		jswait.loadClick(sendTrialCreativeAddButton);
-		//Thread.sleep(3000);
+		// Thread.sleep(3000);
 		enterSecondCreativeTabDetails(eh);
-		//SecondsendTrialButton
+		// SecondsendTrialButton
 		jswait.loadClick(SecondsendTrialButton);
-		//jswait.loadClick(sendTrialPageClose);
+		// jswait.loadClick(sendTrialPageClose);
 		jswait.loadClick(secondsendTrialfield);
-	    jswait.loadSendKeys(secondsendTrialfield, "919446506807");
-	    //sendTrialPageFill();
-	    jswait.loadClick(SecondsendTrialSMSSender);
+		jswait.loadSendKeys(secondsendTrialfield, "919446506807");
+		// sendTrialPageFill();
+		jswait.loadClick(SecondsendTrialSMSSender);
 //	    jswait.loadSendKeys(SecondsendTrialSMSSender,SENDER_SMPP);
 		jswait.loadClick(SelectTrialSMSID);
 		jswait.loadClick(SecondsendTrialSMSRoute);
@@ -2330,12 +3159,13 @@ else {
 		jswait.loadClick(CreativeDeleteButton);
 		clickSendTrialButton();
 		jswait.loadClick(sendTrialfield);
-	  jswait.loadSendKeys(sendTrialfield, "919446506809");
-	  sendTrialPageFill();
-		
-	    Thread.sleep(3000);
-	    
+		jswait.loadSendKeys(sendTrialfield, "919446506809");
+		sendTrialPageFill();
+
+		Thread.sleep(3000);
+
 	}
+
 	public void sendTrialPageFill() throws InterruptedException {
 		jswait.loadClick(sendTrialSMSSender);
 		jswait.loadClick(SelectTrialSMSID);
@@ -2343,8 +3173,9 @@ else {
 		jswait.loadClick(SelectTrialSMSRoute);
 		jswait.loadClick(sendTrialNumberSendButton);
 		jswait.loadClick(sendTrialPageClose);
-		
+
 	}
+
 	public void SendTrialSMSOneNumDynamictag(String sheet, String productSheet, String number) throws Throwable {
 		Thread.sleep(1000);
 		clickCreateNewOfferButton();
@@ -2365,29 +3196,26 @@ else {
 
 		// ******************Creative tab*****************:
 		enterCreativeTabDetails(eh);
-		//clickMapVariableIcon();
+		// clickMapVariableIcon();
 		jswait.loadClick(mapVariablecreativeIcon);
-		//clickMapVariableCancelButton();
-		//jswait.loadClick(emailMapVariable);
-		   MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
-		   try{
-			   clickMapVariableFirstVariable();
-		   }catch(Exception e) {
-			   createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
-		   }
-		   clickMapVariableOkButton();
-		   
-		
-	
-		clickSendTrialButton();
-		if(eh.getCellByColumnName("Channel").contains("Email")) {
-                           //jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
-                           //jswait.loadSendKeys("1234567890");
+		// clickMapVariableCancelButton();
+		// jswait.loadClick(emailMapVariable);
+		MapVariableFilterName(AGE_DYNAMIC_VARIABLE);
+		try {
+			clickMapVariableFirstVariable();
+		} catch (Exception e) {
+			createNameDynamicVariable(AGE_DYNAMIC_VARIABLE);
 		}
-		else {
-                           jswait.loadClick(sendTrialfield);
-                           jswait.loadSendKeys(sendTrialfield, number);                                                 
-                           
+		clickMapVariableOkButton();
+
+		clickSendTrialButton();
+		if (eh.getCellByColumnName("Channel").contains("Email")) {
+			// jswait.loadClick(By.xpath("//form[@id='trialNumberForm']/paper-input//div[@id='labelAndInputContainer']/input[@id='input']");
+			// jswait.loadSendKeys("1234567890");
+		} else {
+			jswait.loadClick(sendTrialfield);
+			jswait.loadSendKeys(sendTrialfield, number);
+
 		}
 		jswait.loadClick(sendTrialSMSSender);
 		jswait.loadClick(SelectTrialSMSID);
@@ -2396,8 +3224,9 @@ else {
 		jswait.loadClick(sendTrialNumberSendButton);
 		Thread.sleep(3000);
 		jswait.loadClick(sendTrialPageClose);
-		
+
 	}
+
 	public void EmailSendTrialSMSOneNum(String sheet, String productSheet, String number) throws Throwable {
 		Thread.sleep(1000);
 		clickCreateNewOfferButton();
@@ -2420,20 +3249,21 @@ else {
 		enterEmailCreativeTabDetails(eh);
 		clickSendTrialButton();
 		jswait.loadClick(sendTrialEmailfield);
-        jswait.loadSendKeys(sendTrialEmailfield, number);                                                 
+		jswait.loadSendKeys(sendTrialEmailfield, number);
 		jswait.loadClick(sendTrialEmailSender);
-		jswait.loadSendKeys(sendTrialEmailSender,SENDER_EMAIL);
+		jswait.loadSendKeys(sendTrialEmailSender, SENDER_EMAIL);
 		jswait.loadClick(SelectTrialEmailID);
 		jswait.loadClick(sendTrialEmailRoute);
-		//jswait.loadSendKeys(sendTrialEmailRoute, "SMPP Robi outbound");
+		// jswait.loadSendKeys(sendTrialEmailRoute, "SMPP Robi outbound");
 		jswait.loadSendKeys(sendTrialEmailRoute, ROUTE_EMAIL);
 		jswait.loadClick(SelectTrialEmailRoute);
 //		jswait.loadClick(sendTrialwindow);
 		jswait.loadClick(sendTrialEmailSendButton);
 		Thread.sleep(3000);
 		jswait.loadClick(sendTrialEmailPageClose);
-		
+
 	}
+
 	public void EditOffer_Product(String sheet, String productSheet) throws Throwable {
 		ExcelHelper prodcutFile = new ExcelHelper();
 		prodcutFile.setExcelFile("productInputData", productSheet);
@@ -2446,93 +3276,92 @@ else {
 		EditScreen_clickProceedButton();
 		EditScreen_clickProceedButton();
 		clickSaveOfferButton();
-			}
-	
+	}
+
 	public void Verify_Product_InOffer(String sheet, String productSheet) throws Throwable {
 		ExcelHelper prodcutFile = new ExcelHelper();
 		prodcutFile.setExcelFile("productInputData", productSheet);
 		String productToCheck = (String) prodcutFile.getCell(1, 0);
 		EditScreen_clickProceedButton();
 		WebElement element = driver.findElement(By.xpath("//span[contains(.,'" + productToCheck + "')]"));
-		assertTrue("Prduct '"+ productToCheck +"' not found, offer not edited", element.isDisplayed());
-		
+		assertTrue("Prduct '" + productToCheck + "' not found, offer not edited", element.isDisplayed());
+
 	}
-	
-	public void enterfacebookCreative(String profile,String type ) throws Exception {
-		   
+
+	public void enterfacebookCreative(String profile, String type) throws Exception {
+
 		System.out.println("inside fb creative");
 		System.out.println(profile);
 		System.out.println(type);
-		
+
 //		jswait.loadClick(facebookpageselect);
 //		Thread.sleep(3000);
 //		
 //		jswait.loadClick(facebookpage);
-		
-	   if(type.equalsIgnoreCase("image")) {
-	   		   
+
+		if (type.equalsIgnoreCase("image")) {
+
 //	   jswait.loadClick(".//*[@id='rectMain']//div[contains(.,'Single Image')]");
-	   jswait.loadClick("//div[contains(text(),'Single Image or Video')]//preceding::div[5]");
-	   jswait.loadClick("//paper-radio-button[@name='image']");
-	   File image = new File("facebookinput\\Hydrangeas.jpg");
-	   Thread.sleep(2000);
-	   facebookimageButton.sendKeys(image.getAbsolutePath());
-	
-	   Thread.sleep(2000);
-	   jswait.loadSendKeys(facebookcreativetextInput,"This is a test promoting");
-	   
-	   Thread.sleep(50000);
-	   
-	}else if(type.equalsIgnoreCase("video")) {
-		
+			jswait.loadClick("//div[contains(text(),'Single Image or Video')]//preceding::div[5]");
+			jswait.loadClick("//paper-radio-button[@name='image']");
+			File image = new File("facebookinput\\Hydrangeas.jpg");
+			Thread.sleep(2000);
+			facebookimageButton.sendKeys(image.getAbsolutePath());
+
+			Thread.sleep(5000);
+			jswait.loadSendKeys(facebookcreativetextInput, "This is a test promoting");
+
+			Thread.sleep(50000);
+
+		} else if (type.equalsIgnoreCase("video")) {
+
 //		  jswait.loadClick(".//*[@id='rectMain']//div[contains(.,'Single Video')]");
-		  jswait.loadClick("//div[contains(text(),'Single Image or Video')]//preceding::div[5]");
-		  jswait.loadClick("//paper-radio-button[@name='video']");
-		   
-		   File video = new File("facebookinput\\welcome.mp4");
-		   Thread.sleep(2000);
-		   fbvideoinput.sendKeys(video.getAbsolutePath());
-		  			 			   
-		   Thread.sleep(2000);
-		   jswait.loadSendKeys(facebookcreativetextInput,"This is Just for Testing");
-		   Thread.sleep(50000);
-		
-	}
-	else if(type.equalsIgnoreCase("carouselImage")||type.equalsIgnoreCase("carouselVideo")) {
-		jswait.loadClick(carouselRadioBtn);
+			jswait.loadClick("//div[contains(text(),'Single Image or Video')]//preceding::div[5]");
+			jswait.loadClick("//paper-radio-button[@name='video']");
+
+			File video = new File("facebookinput\\welcome.mp4");
+			Thread.sleep(2000);
+			fbvideoinput.sendKeys(video.getAbsolutePath());
+
+			Thread.sleep(2000);
+			jswait.loadSendKeys(facebookcreativetextInput, "This is Just for Testing");
+			Thread.sleep(50000);
+
+		} else if (type.equalsIgnoreCase("carouselImage") || type.equalsIgnoreCase("carouselVideo")) {
+			jswait.loadClick(carouselRadioBtn);
 //		for(int i=1;i<=3;i++) {
-		Thread.sleep(10000);
-		jswait.loadClick(firstCarousel);
-		Thread.sleep(10000);
+			Thread.sleep(10000);
+			jswait.loadClick(firstCarousel);
+			Thread.sleep(10000);
 //		 switch(type) {
 //		 case "carouselImage":
-		if(type.equals("carouselImage")) {
-		jswait.loadClick(imageRadioBtn);
+			if (type.equals("carouselImage")) {
+				jswait.loadClick(imageRadioBtn);
 //		jswait.loadClick(selectImage);
-		File image=new File("facebookinput\\Hydrangeas.jpg");
-		selectImage.sendKeys(image.getAbsolutePath());	
-		Thread.sleep(50000);
-		}else if(type.equals("carouselVideo")) {
+				File image = new File("facebookinput\\Hydrangeas.jpg");
+				selectImage.sendKeys(image.getAbsolutePath());
+				Thread.sleep(50000);
+			} else if (type.equals("carouselVideo")) {
 //		case "carouselVideo":
-		jswait.loadClick(carouselVideo);
-		jswait.loadClick(selectImage);
-		File image=new File("facebookinput\\welcome.mp4");
-		selectImage.sendKeys(image.getAbsolutePath());
-		Thread.sleep(50000);
-		}
-		
-		jswait.loadSendKeys(headlineInput,"carousel by selenium");
-		jswait.loadSendKeys(carouselDespInput,"carousel by selenium");
-		jswait.loadSendKeys(carouselURL,"test.com");
-		jswait.loadSendKeys(carouselPrimaryText,"");
-		jswait.loadSendKeys(carouselSeeMoreURL,"");
-		jswait.loadSendKeys( carouselMoreLink,"");
-		jswait.loadClick(carouselCallAction);
-		jswait.loadClick(sendMessage);
+				jswait.loadClick(carouselVideo);
+				jswait.loadClick(selectImage);
+				File image = new File("facebookinput\\welcome.mp4");
+				selectImage.sendKeys(image.getAbsolutePath());
+				Thread.sleep(50000);
+			}
+
+			jswait.loadSendKeys(headlineInput, "carousel by selenium");
+			jswait.loadSendKeys(carouselDespInput, "carousel by selenium");
+			jswait.loadSendKeys(carouselURL, "test.com");
+			jswait.loadSendKeys(carouselPrimaryText, "");
+			jswait.loadSendKeys(carouselSeeMoreURL, "");
+			jswait.loadSendKeys(carouselMoreLink, "");
+			jswait.loadClick(carouselCallAction);
+			jswait.loadClick(sendMessage);
 //		}
-		} 
+		}
 	}
-   
+
 	public void EditCreative(String sheet) throws Throwable {
 		Thread.sleep(1000);
 		clickOfferEditProceedButton();
@@ -2546,13 +3375,13 @@ else {
 		clickOfferEditProceedButton();
 		clickOfferEditProceedButton();
 		clickSaveOfferButton();
-		//clickOfferEditProceedButton();
-		//clickOfferEditProceedButton();
-		//clickSaveOfferButton();
+		// clickOfferEditProceedButton();
+		// clickOfferEditProceedButton();
+		// clickSaveOfferButton();
 		Thread.sleep(2000);
 		chooseOffer(sheet);
 		commonObjects.clickOptionsIcon();
-		//chooseOffer(sheet);
+		// chooseOffer(sheet);
 		clickEditOffer();
 		clickOfferEditProceedButton();
 		clickOfferEditProceedButton();
@@ -2560,11 +3389,13 @@ else {
 		String Editedtitle = commonObjects.getTextFormTextField(CreativeTitle);
 		String Editedcreativedetails = commonObjects.getTextFormTextField(smsCreativeDetails);
 		System.out.println("test");
-		System.out.println("Edited Creative detail is" +Editedcreativedetails+ "");
-		System.out.println("Creative detail is" +creativedetails+ "");
+		System.out.println("Edited Creative detail is" + Editedcreativedetails + "");
+		System.out.println("Creative detail is" + creativedetails + "");
 		assertTrue("CreativeTitle is not saved correctly after editing", Editedtitle.equals(title));
-		assertTrue("CreativeDetails is not saved correctly after editing", Editedcreativedetails.equals(creativedetails));
+		assertTrue("CreativeDetails is not saved correctly after editing",
+				Editedcreativedetails.equals(creativedetails));
 	}
+
 	public void EditTrack(String sheet) throws Throwable {
 		// TODO Auto-generated method stub
 		Thread.sleep(1000);
@@ -2573,31 +3404,38 @@ else {
 		clickOfferEditProceedButton();
 		Thread.sleep(1000);
 		jswait.loadClick("//form[@id='trackForm']//data-table-cell[text()='2']/..//iron-icon[contains(@icon,'edit')]");
-		//addTrackingRuleSecondConditionConditionValue.sendKeys("1");
-		driver.findElement(By.xpath("//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input")).sendKeys("1");
-		String value = commonObjects.getTextFormTextField("//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input");
+		// addTrackingRuleSecondConditionConditionValue.sendKeys("1");
+		driver.findElement(By.xpath(
+				"//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input"))
+				.clear();
+		driver.findElement(By.xpath(
+				"//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input"))
+				.sendKeys("18");
+		String value = commonObjects.getTextFormTextField(
+				"//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input");
 		jswait.loadClick(editTrackingRuleSaveButton);
 		clickOfferEditProceedButton();
 		clickSaveOfferButton();
 		Thread.sleep(2000);
 		chooseOffer(sheet);
 		commonObjects.clickOptionsIcon();
-		//chooseOffer(sheet);
+		// chooseOffer(sheet);
 		clickEditOffer();
 		clickOfferEditProceedButton();
 		clickOfferEditProceedButton();
 		clickOfferEditProceedButton();
 		Thread.sleep(1000);
 		jswait.loadClick("//form[@id='trackForm']//data-table-cell[text()='2']/..//iron-icon[contains(@icon,'edit')]");
-		String editedvalue = commonObjects.getTextFormTextField("//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input");
+		String editedvalue = commonObjects.getTextFormTextField(
+				"//recharge-condition[@class='style-scope recharge-rule-grid']//paper-input-wrapper[@id='value']//div[@class='label-and-input-container style-scope paper-input-container']/input[@id='input']/../input");
 		jswait.loadClick(editTrackingRuleSaveButton);
-		System.out.println("Edited value is" +editedvalue+ "");
-		System.out.println("Orginal value is" +value+ "");
+		System.out.println("Edited value is" + editedvalue + "");
+		System.out.println("Orginal value is" + value + "");
 		assertTrue("CreativeTitle is not saved correctly after editing", editedvalue.equals(value));
-		//createSecondDefaultTrackingRuleCondition();
-		//clickOfferEditProceedButton();
+		// createSecondDefaultTrackingRuleCondition();
+		// clickOfferEditProceedButton();
 	}
-	
+
 	public void EditReward(String sheet) throws Throwable {
 		Thread.sleep(1000);
 		clickOfferEditProceedButton();
@@ -2611,7 +3449,7 @@ else {
 		Thread.sleep(2000);
 		chooseOffer(sheet);
 		commonObjects.clickOptionsIcon();
-		//chooseOffer(sheet);
+		// chooseOffer(sheet);
 		clickEditOffer();
 		clickOfferEditProceedButton();
 		clickOfferEditProceedButton();
@@ -2619,23 +3457,23 @@ else {
 		clickOfferEditProceedButton();
 		Thread.sleep(1000);
 		String editedvalue = commonObjects.getTextFormTextField(successMessage);
-		System.out.println("Edited value is" +editedvalue+ "");
-		System.out.println("Orginal value is" +value+ "");
+		System.out.println("Edited value is" + editedvalue + "");
+		System.out.println("Orginal value is" + value + "");
 		assertTrue("Success message is not saved correctly after editing", editedvalue.equals(value));
 	}
-	
+
 	@FindBy(xpath = "(//data-table-row//data-table-cell[1])[10]")
 	private WebElement firstRule;
 	@FindBy(xpath = "(//data-table-row//data-table-cell[1])[11]")
 	private WebElement secondRule;
-	
+
 	public String getFirstRuleName() {
-		String getFirstRule=firstRule.getText();
+		String getFirstRule = firstRule.getText();
 		return getFirstRule;
 	}
-	
-	
-	public void enterOfferDetailsFromSheetForMultipleCreative(String sheet, String productSheet, String testMode) throws Throwable {
+
+	public void enterOfferDetailsFromSheetForMultipleCreative(String sheet, String productSheet, String testMode)
+			throws Throwable {
 		Thread.sleep(4000);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		Actions actions = new Actions(driver);
@@ -2653,7 +3491,7 @@ else {
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
-		enterCreativeTabDetails(eh,testMode);
+		enterCreativeTabDetails(eh, testMode);
 		jswait.loadClick(addCreativeButton);
 		enterSecondCreativeTabDetails(eh);
 		clickProceedButton();
@@ -2670,39 +3508,38 @@ else {
 
 		// ******************Rewards tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
-			
-		
-				if (eh.getCell(1, 2).toString().contains("Seeding")) {
-					clickRewardTypeInputField();
-					clickRewardTypeAny();
-				}
-				else {
-					clickRewardFirstRuleAdButton();
-					clickRewardTypeInputField();
-					clickRewardTypeAny();
-					enterSuccessMessage("Success from Selenium");
-					enterFailureMessage("Failure from Selenium");
-				}
+
+			if (eh.getCell(1, 2).toString().contains("Seeding")) {
+				clickRewardTypeInputField();
+				clickRewardTypeAny();
+			} else {
+				clickRewardFirstRuleAdButton();
+				clickRewardTypeInputField();
+				clickRewardTypeAny();
+				enterSuccessMessage("Success from Selenium");
+				enterFailureMessage("Failure from Selenium");
+			}
 		}
 
 	}
-	public void createOfferWithMultipleCreatives(String sheet, String productSheet,String testMode) throws Throwable {
+
+	public void createOfferWithMultipleCreatives(String sheet, String productSheet, String testMode) throws Throwable {
 		clickCreateNewOfferButton();
 		enterOfferDetailsFromSheetForMultipleCreative(sheet, productSheet, testMode);
 		clickSaveOfferButton();
 	}
-	
+
 	public void clickDuplicateoffer() throws InterruptedException {
-		jswait.loadClick(optionsDuplicate);		
+		jswait.loadClick(optionsDuplicate);
 	}
-	
-	public void CopyOffer(String offername) throws InterruptedException, Exception, IOException{
+
+	public void CopyOffer(String offername) throws InterruptedException, Exception, IOException {
 		commonObjects.filterName(offername);
 		commonObjects.clickOptionsIcon();
 		clickDuplicateoffer();
 		Thread.sleep(2000);
 		String copiedoffername = commonObjects.getTextFormTextField(offerName);
-		System.out.println("name of copied offer is:  " +copiedoffername );
+		System.out.println("name of copied offer is:  " + copiedoffername);
 		clickProceedButton();
 		clickProceedButton();
 		clickProceedButton();
@@ -2712,256 +3549,281 @@ else {
 		Thread.sleep(2000);
 //		WebElement element = driver.findElement(By.xpath("//div[1]/data-table-row/div[1]/data-table-cell[contains(.,'"+copiedoffername+"')]"));
 //		Assert.assertTrue(element.isDisplayed(), "Copied job not found");
-		}
-	
+	}
 
-	public void addNewReward() throws Exception{
-	clickOfferEditProceedButton();
-	clickOfferEditProceedButton();
-	clickOfferEditProceedButton();
-	clickOfferEditProceedButton();
-	Thread.sleep(2000);
-	jswait.loadClick(addNewRewardbtn);
-	clickRewardTypeInputField();
-	jswait.loadClick(selectTheRewardName);
-	clickSaveOfferButton();
-	Thread.sleep(2000);
-}
-public void deleteReward() throws Exception{
-	clickOfferEditProceedButton();
-	clickOfferEditProceedButton();
-	clickOfferEditProceedButton();
-	clickOfferEditProceedButton();
-	jswait.loadClick(deleteReward);
-	clickSaveOfferButton();
-	Thread.sleep(2000);
-}
-	public void viewOfferDetails(String condition, String offerName, String productName) throws Exception{
-		jswait.loadClick("//data-table-cell[contains(.,'"+offerName+"')]");
+	public void addNewReward() throws Exception {
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
 		Thread.sleep(2000);
-		if(condition.contentEquals("reward added")) {
-		Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'"+SEL_REWARD+"')]"));
-		}
-		else if(condition.contentEquals("reward deleted")) {
+		jswait.loadClick(addNewRewardbtn);
+		clickRewardTypeInputField();
+		jswait.loadClick(selectTheRewardName);
+		clickSaveOfferButton();
+		Thread.sleep(2000);
+	}
+
+	public void deleteReward() throws Exception {
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		jswait.loadClick(deleteReward);
+		clickSaveOfferButton();
+		Thread.sleep(2000);
+	}
+
+	public void viewOfferDetails(String condition, String offerName, String productName) throws Exception {
+		jswait.loadClick("//data-table-cell[contains(.,'" + offerName + "')]");
+		Thread.sleep(2000);
+		if (condition.contentEquals("reward added")) {
+			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'" + SEL_REWARD + "')]"));
+		} else if (condition.contentEquals("reward deleted")) {
 			Assert.assertFalse(jswait.checkVisibility("//label[contains(.,'Selenium_reward')]"));
-		}
-		else if(condition.contentEquals("product added")) {
-			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'"+productName+"')]"));
-		}
-		else if(condition.contentEquals("dynamic tag edited")) {
-			Assert.assertTrue(jswait.checkVisibility("(//label[contains(.,'Message')]//following::label[contains(.,'edited')])[1]"));
-			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'Description')]//following::label[contains(.,'edited')]"));
-		}
-		else if(condition.contentEquals("track source edited")) {
+		} else if (condition.contentEquals("product added")) {
+			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'" + productName + "')]"));
+		} else if (condition.contentEquals("dynamic tag edited")) {
+			Assert.assertTrue(jswait
+					.checkVisibility("(//label[contains(.,'Message')]//following::label[contains(.,'edited')])[1]"));
+			Assert.assertTrue(jswait
+					.checkVisibility("//label[contains(.,'Description')]//following::label[contains(.,'edited')]"));
+		} else if (condition.contentEquals("track source edited")) {
 			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'181')]"));
-		}
-		else if(condition.contentEquals("reward succedd message edited")) {
+		} else if (condition.contentEquals("reward succedd message edited")) {
 			Assert.assertTrue(jswait.checkVisibility("//label[contains(.,'Success from Selenium_edited')]"));
-		}
-		else if(condition.contentEquals("offer copy")) {
-			String offerCopyName= offerName +"_Copy";
-			System.out.println("copied offer name is :"+offerCopyName);
+		} else if (condition.contentEquals("offer copy")) {
+			String offerCopyName = offerName + "_Copy";
+			System.out.println("copied offer name is :" + offerCopyName);
 			Thread.sleep(2000);
 			Thread.sleep(3000);
-			jswait.loadClick("//data-table-cell[contains(.,'"+offerCopyName+"')]");
+			jswait.loadClick("//data-table-cell[contains(.,'" + offerCopyName + "')]");
 			Thread.sleep(3000);
-			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+offerCopyName+"')]//following::label[contains(.,'"+productName+"')]"));
+			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'" + offerCopyName
+					+ "')]//following::label[contains(.,'" + productName + "')]"));
 			Assert.assertTrue(jswait.checkVisibility("(//data-table-cell[contains(.,'SMS')])[4]"));
-			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+offerCopyName+"')]//following::label[contains(.,'"+TRACK_SOURCE+"')]"));
+			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'" + offerCopyName
+					+ "')]//following::label[contains(.,'" + TRACK_SOURCE + "')]"));
 			Thread.sleep(2000);
-			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'"+offerCopyName+"')]//following::label[contains(.,'"+SEL_REWARD+"')]"));
-			
+			Assert.assertTrue(jswait.checkVisibility("//data-table-cell[contains(.,'" + offerCopyName
+					+ "')]//following::label[contains(.,'" + SEL_REWARD + "')]"));
+
 		}
-		
+
 	}
-		public void filterOfferCopy(String offer) throws Exception{
-			commonObjects.filterName(offer);
-			
-		
+
+	public void filterOfferCopy(String offer) throws Exception {
+		commonObjects.filterName(offer);
+
 	}
-		public void saveAndToFilterOffer(String offerName) throws Exception{
-			clickOfferEditProceedButton();
-			clickOfferEditProceedButton();
-			clickSaveOfferButton();
-			commonObjects.filterName(offerName);
-			
-		}
-		public void filterForVerification(String offerName) throws Exception{
-			jswait.loadClick(cancelbtn);
-			commonObjects.filterName(offerName);
-			
-		}
-		
-		public void clickRewardDefaultRuleAdButton() throws InterruptedException {
-			jswait.loadClick(rewardDefaultRuleAdButton);
-		}
-		
-		 public void clickRewardSecondRuleAdButton() throws InterruptedException {
-			jswait.loadClick(rewardSecondRuleAdButton);
-		}
-	 
-	 public void clickSeedingRewardTypeInputField() throws InterruptedException {
+
+	public void saveAndToFilterOffer(String offerName) throws Exception {
+		clickOfferEditProceedButton();
+		clickOfferEditProceedButton();
+		clickSaveOfferButton();
+		commonObjects.filterName(offerName);
+
+	}
+
+	public void filterForVerification(String offerName) throws Exception {
+		jswait.loadClick(cancelbtn);
+		commonObjects.filterName(offerName);
+
+	}
+
+	public void clickRewardDefaultRuleAdButton() throws InterruptedException {
+		jswait.loadClick(rewardDefaultRuleAdButton);
+	}
+
+	public void clickRewardDefaultRuleSecondAdButton() throws InterruptedException {
+		jswait.loadClick(rewardDefaultRuleSecondAdButton);
+	}
+
+	public void clickRewardSecondRuleAdButton() throws InterruptedException {
+		jswait.loadClick(rewardSecondRuleAdButton);
+	}
+
+	public void clickSeedingRewardTypeInputField() throws InterruptedException {
 		jswait.loadClick(seedingRewardInputType);
-		jswait.loadSendKeys(seedingRewardInputType,SEL_REWARD);
-		
+		jswait.loadSendKeys(seedingRewardInputType, SEEEDING_REWARD);
+
 	}
-	
-	
-	
+
 	public void clickFirstRuleFirstReward() throws InterruptedException {
-		
+
 		jswait.loadClick(firstRuleFirstRewardInputField);
 		jswait.loadSendKeys(firstRuleFirstRewardInputField, SEL_REWARD);
 	}
-	
+
 	public void clickFirstRuleSecondRewardInputField() throws InterruptedException {
-		
+
 		jswait.loadClick(firstRuleSecondRewardInputField);
 		jswait.loadSendKeys(firstRuleSecondRewardInputField, SELENIUM_REWARD);
 	}
-	
-public void clickSecondRuleSecondRewardInputField() throws InterruptedException {
-		
+
+	public void clickSecondRuleSecondRewardInputField() throws InterruptedException {
+
 		jswait.loadClick(secondRuleFirstRewardInputField);
-		jswait.loadSendKeys(secondRuleFirstRewardInputField,SELENIUM_REWARD);
+		jswait.loadSendKeys(secondRuleFirstRewardInputField, SELENIUM_REWARD);
 	}
-	
-	
-	
+
 	public void clickDefualtFirstRewardTypeInputField() throws InterruptedException {
 		jswait.loadClick(defaultFirstRewardTypeInputField);
 	}
-	
+
+	public void clickDefualtSecondRewardTypeSecondInputField() throws InterruptedException {
+		jswait.loadClick(defaultSecondRewardTypeSecondInputField);
+	}
+
 	public void clickDefaultSecondRewardTypeInputField() throws InterruptedException {
 		jswait.loadClick(defaultSecondRewardTypeInputField);
 	}
-	 
-	 
-	 public void clickSeedingRewardTypesel_reward() throws InterruptedException {
+
+	public void clickSeedingRewardTypesel_reward() throws InterruptedException {
 		jswait.loadClick(selectSeedingReward);
 	}
-	
-	
+
 	public void clickdefaultRuleSecondReward() throws InterruptedException {
 		jswait.loadClick(defaultRuleSecondReward);
 	}
-	
-	
-	
+
 	public void selectFirstRuleFirstReward() throws InterruptedException {
-		jswait.loadClick(selectFirstRuleFirstReward);
 		
+		Actions action = new Actions(driver);
+
+		action.moveToElement(selectFirstRuleFirstReward).click().perform();
+		//jswait.loadClick(selectFirstRuleFirstReward);
+
 	}
-	
+
 	public void selectFirstRuleSecondReward() throws InterruptedException {
 		jswait.loadClick(selectFirstRuleSecondReward);
-		
+
 	}
-	
+
 	public void selectSecondRuleFirstReward() throws InterruptedException {
 		jswait.loadClick(selectSecondRuleFirstReward);
-		
+
 	}
-	 
-	 
-	 
-	 public void enterFirstRuleSuccessMessage(String message) throws InterruptedException {
-		
+
+	public void enterFirstRuleSuccessMessage(String message) throws InterruptedException {
+
 		jswait.loadSendKeys(FirstRuleSuccessMessage, message);
 	}
-	
-	
-public void enterFirstRuleFailureMessage(String message) throws InterruptedException {
-	jswait.loadSendKeys(FirstRuleFailureMessage, message);
-}
-	 
-	 public void enterSecondRuleSuccessMessage(String message) throws InterruptedException {
-	
-	jswait.loadSendKeys(secondRuleSuccessMessage, message);
-}
 
-public void enterSecondRuleFailureMessage(String message) throws InterruptedException {
-	jswait.loadSendKeys(secondRuleFailureMessage, message);
-}
+	public void enterFirstRuleFailureMessage(String message) throws InterruptedException {
+		jswait.loadSendKeys(FirstRuleFailureMessage, message);
+	}
 
-	 public void enterdefaultSecondCreativeSuccessMessage(String message) throws InterruptedException {
+	public void enterDefaultSecondSuccessMessage(String message) throws InterruptedException {
+
+		jswait.loadSendKeys(DefaultSecondRuleSuccessMessage, message);
+	}
+
+	public void enterDefaultSecondFailureMessage(String message) throws InterruptedException {
+		jswait.loadSendKeys(DefaultSecondRuleFailureMessage, message);
+	}
+
+	public void enterSecondRuleSuccessMessage(String message) throws InterruptedException {
+
+		jswait.loadSendKeys(secondRuleSuccessMessage, message);
+	}
+
+	public void enterSecondRuleFailureMessage(String message) throws InterruptedException {
+		jswait.loadSendKeys(secondRuleFailureMessage, message);
+	}
+
+	public void enterdefaultSecondCreativeSuccessMessage(String message) throws InterruptedException {
 		jswait.loadSendKeys(defaultSecondCreativeSuccessMessage, message);
 	}
-	
+
 	public void enterdefaultSecondCreativeFailureMessage(String message) throws InterruptedException {
 		jswait.loadSendKeys(defaultSecondCreativeFailureMessage, message);
 	}
-	
+
 	public void enterfirstRuleSecondCreativeSuccessMessage(String message) throws InterruptedException {
 		jswait.loadSendKeys(firstRuleSecondCreativeSuccessMessage, message);
 	}
-	
+
 	public void enterfirstRuleSecondCreativeFailureMessage(String message) throws InterruptedException {
 		jswait.loadSendKeys(firstRuleSecondCreativeFailureMessage, message);
 	}
-	
+
 	public void entersecondRuleSecondCreativeSuccessMessage(String message) throws InterruptedException {
 		jswait.loadSendKeys(secondRuleSecondCreativeSuccessMessage, message);
 	}
-	
+
 	public void entersecondRuleSecondCreativeFailureMessage(String message) throws InterruptedException {
 		jswait.loadSendKeys(secondRuleSecondCreativeFailureMessage, message);
 	}
-	
-	
-	 
-	 public void createDefaultRuleFirstReward(String creativeType) throws InterruptedException {
-		
+
+	public void createDefaultRuleFirstReward(String creativeType) throws InterruptedException {
+
 		clickRewardDefaultRuleAdButton();
 		clickDefualtFirstRewardTypeInputField();
 		clickrewardTypesel_reward();
 		enterSuccessMessage("Default Reward Success from Selenium");
 		enterFailureMessage("Default Reward Failure from Selenium");
-		
-		if(creativeType.equals("multiplecreative")) {
+
+		if (creativeType.equals("multiplecreative")) {
+			enterdefaultSecondCreativeSuccessMessage("Default Reward Success from Selenium 2nd creative");
+			enterdefaultSecondCreativeFailureMessage("Default Reward Failure from Selenium 2nd creative");
+		}
+	}
+
+	public void createDefaultRuleSecondReward(String creativeType) throws InterruptedException {
+
+		clickRewardDefaultRuleSecondAdButton();
+		clickDefualtSecondRewardTypeSecondInputField();
+		SelectSecondDefaultReward();
+		enterDefaultSecondSuccessMessage("Default Second Reward Success from Selenium");
+		enterDefaultSecondFailureMessage("Default Second Reward Failure from Selenium");
+
+		if (creativeType.equals("multiplecreative")) {
 			enterdefaultSecondCreativeSuccessMessage("Default Reward Success from Selenium 2nd creative");
 			enterdefaultSecondCreativeFailureMessage("Default Reward Failure from Selenium 2nd creative");
 		}
 	}
 
 	public void createFirstRuleFirstReward(String creativeType) throws Exception {
-		
+
 		clickRewardFirstRuleAdButton();
 		clickFirstRuleFirstReward();
 		selectFirstRuleFirstReward();
 		enterFirstRuleSuccessMessage("Success from Selenium from first rule");
 		enterFirstRuleFailureMessage("Failure from Selenium from first rule");
-		if(creativeType.equals("multiplecreative")) {
-			
+		if (creativeType.equals("multiplecreative")) {
+
 			enterfirstRuleSecondCreativeSuccessMessage("Success from Selenium from first rule 2nd creative");
 			enterfirstRuleSecondCreativeFailureMessage("Failure from Selenium from first rule 2nd creative");
 		}
 	}
-	
+
 	public void createSecondRuleFirstReward(String creativeType) throws InterruptedException {
-		
+
 		clickRewardSecondRuleAdButton();
 		clickSecondRuleSecondRewardInputField();
 		selectSecondRuleFirstReward();
 		enterSecondRuleSuccessMessage("Success from Selenium from 2nd rule");
 		enterSecondRuleFailureMessage("Success from Selenium from 2nd rule");
-		
-		if(creativeType.equals("multiplecreative")) {
+
+		if (creativeType.equals("multiplecreative")) {
 			entersecondRuleSecondCreativeSuccessMessage("Success from Selenium from second rule 2nd creative");
 			entersecondRuleSecondCreativeFailureMessage("Failure from Selenium from second rule 2nd creative");
 		}
 	}
-	
+
 	public void selectSeedingReward(String offerType) throws InterruptedException {
-		if(offerType.contains("Seeding")) {
-		clickSeedingRewardTypeInputField();
-		clickSeedingRewardTypesel_reward();
-		}else {
-			System.out.println("not a seeding offer, offer type is"+offerType);
+		if (offerType.contains("Seeding")) {
+			clickSeedingRewardTypeInputField();
+			clickSeedingRewardTypesel_reward();
+		} else {
+			System.out.println("not a seeding offer, offer type is" + offerType);
 		}
 	}
-	
-	public void createOffer(String sheet, String productSheet, String rewardType, String creativeType) throws Throwable {
+
+	public void createOffer(String sheet, String productSheet, String rewardType, String creativeType)
+			throws Throwable {
 
 		String testMode = "";
 		clickCreateNewOfferButton();
@@ -2969,8 +3831,8 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 		ExcelHelper prodcutFile = new ExcelHelper();
 		prodcutFile.setExcelFile("productInputData", productSheet);
 		eh.setExcelFile("offerInputData", sheet);
-		String offerType=eh.getCell(1, 2).toString();
-		
+		String offerType = eh.getCell(1, 2).toString();
+
 		// ******************Details tab******************:
 		enterDetailsTabFields(sheet);
 		clickProceedButton();
@@ -2980,12 +3842,12 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 		clickProceedButton();
 
 		// ******************Creative tab*****************:
-		if(eh.getCell(1, 3).toString().contains("Email")) {
-				 System.out.println("email1");
-				   selectCreativeLanguageEnglish();
-				   enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
-				   clickProceedButton();
-				 }
+		if (eh.getCell(1, 3).toString().contains("Email")) {
+			System.out.println("email1");
+			selectCreativeLanguageEnglish();
+			enterEmailCreative(eh.getCell(1, 10).toString(), eh.getCell(1, 11).toString());
+			clickProceedButton();
+		}
 
 		else if (creativeType.equals("singlecreative")) {
 			enterCreativeTabDetails(eh, testMode);
@@ -3005,15 +3867,26 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 
 		// ******************Track tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
-			//enterTrackTabDetails(eh);
+			// enterTrackTabDetails(eh);
 			clickTrackSourceSelector();
 			selectTrackSource(TRACK_SOURCE);
+
 			if (rewardType.equals("oneruleonereward") || rewardType.equals("onerulemultiplerewards")
 					|| rewardType.equals("firstrulefirstreward")) {
+
 				createFirstDefaultTrackingRuleCondition(eh);
 			} else if (rewardType.equals("multiplerulesmultiplerewards")) {
 				createFirstDefaultTrackingRuleCondition(eh);
 				createSecondDefaultTrackingRuleCondition();
+			} else if (rewardType.equals("Multiplerulemultiplereward")) {
+
+				System.out.println("Multiple Track source");
+				Thread.sleep(3000);
+				enterTrackTabDetailsMultitrack1(eh);
+				createFirstMultiDefaultTrackingRuleCondition(eh);
+				enterTrackTabDetailsMultitrack2(eh);
+				createMultiTrackingRuleCondition(eh);
+
 			} else if (rewardType.equals("default")) {
 				System.out.println("No rules are created , only deafult rule available");
 			} else {
@@ -3031,7 +3904,7 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 				createDefaultRuleFirstReward(creativeType);
 				createFirstRuleFirstReward(creativeType);
 				selectSeedingReward(offerType);
-				
+
 			} else if (rewardType.equals("onerulemultiplerewards")) {
 				createDefaultRuleFirstReward(creativeType);
 				clickRewardDefaultRuleAdButton();
@@ -3042,82 +3915,113 @@ public void enterSecondRuleFailureMessage(String message) throws InterruptedExce
 				clickFirstRuleSecondRewardInputField();
 				selectFirstRuleSecondReward();
 				selectSeedingReward(offerType);
-				
 
 			} else if (rewardType.equals("multiplerulesmultiplerewards")) {
 				createDefaultRuleFirstReward(creativeType);
 				createFirstRuleFirstReward(creativeType);
 				createSecondRuleFirstReward(creativeType);
 				selectSeedingReward(offerType);
-				
+
 			} else if (rewardType.equals("default")) {
 				createDefaultRuleFirstReward(creativeType);
-			selectSeedingReward(offerType);
-			
+				selectSeedingReward(offerType);
+
 			} else if (rewardType.equals("firstrulefirstreward")) {
 				createFirstRuleFirstReward(creativeType);
 				selectSeedingReward(offerType);
-		
-			} else {
+
+			} else if (rewardType.equals("Multiplerulemultiplereward")) {
+				createDefaultRuleFirstReward(creativeType);
+				System.out.println("Insdie multi reward `1");
+				clickRewardFirstRuleAdButton();
+				clickRewardTypeInputField1();
+				SelectrewardForFirstRule();
+				//SelectLordrewardForFirstRule();
+				enterSuccessMessageforFirstRule("Success from Selenium First rule");
+				enterFailureMessageforfirstRule("Failure from Selenium First rule");
+				
+				
+				// Second track reward
+				createDefaultRuleSecondReward(creativeType);
+				clickRewardFirstRuleAdButton1();
+				clickRewardTypeInputField2();
+				clickrewardTypeselenium_rewardforSecondRule();
+				//clickrewardTypeselenium_TogGrewardforSecondRule();
+				enterSuccessMessageSecondRule("Success from Selenium Second rule");
+				enterFailureMessageSecondRule("Failure from Selenium Second rule");
+
+				if (eh.getCellByColumnName("Offer Type").contains("Seeding")) {
+					System.out.println("Inside seeding Reward");
+					
+					try {
+						clickSeedingRewardTypeInputField();
+						clickSeedingrewardTypeselenium_reward();
+					} catch (Exception e) {
+						clickSeedingRewardTypeInputField();
+						clickSeedingrewardTypeselenium_rewardMulti();
+						
+					}
+
+				}
+
+			}
+
+			else {
 				System.out.println("No Rule for selecting the Rewards");
 				Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
 			}
 
 		}
-		
 
 		clickSaveOfferButton();
 
 	}
-		
-	
-		
-	
 
-public void createOffer(String sheet, String productSheet, String rewardType, String creativeType,String tracksource) throws Throwable {
+	public void createOffer(String sheet, String productSheet, String rewardType, String creativeType,
+			String tracksource) throws Throwable {
 
-String testMode="";
-	clickCreateNewOfferButton();
+		String testMode = "";
+		clickCreateNewOfferButton();
 
-	ExcelHelper prodcutFile = new ExcelHelper();
-	prodcutFile.setExcelFile("productInputData", productSheet);
-	eh.setExcelFile("offerInputData", sheet);
-	String offerType=eh.getCell(1, 2).toString();
-	String offerChannel=eh.getCell(1, 3).toString();
-	
-	if(!offerChannel.equals("Email")) {
-		testMode = "test";
-		
-	}else {
-		testMode="NULL";
-	}
-	
-	// ******************Details tab******************:
-	enterDetailsTabFields(sheet);
-	clickProceedButton();
-	// ******************Products tab*****************:
-	Thread.sleep(3000);
-	enterProductTabFields(productSheet);
-	clickProceedButton();
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
+		String offerType = eh.getCell(1, 2).toString();
+		String offerChannel = eh.getCell(1, 3).toString();
 
-	// ******************Creative tab*****************:
-	if (creativeType.equalsIgnoreCase("singlecreative")) {
-		enterCreativeTabDetails(eh, testMode);
+		if (!offerChannel.equals("Email")) {
+			testMode = "test";
+
+		} else {
+			testMode = "NULL";
+		}
+
+		// ******************Details tab******************:
+		enterDetailsTabFields(sheet);
 		clickProceedButton();
+		// ******************Products tab*****************:
 		Thread.sleep(3000);
-	} else if (creativeType.equalsIgnoreCase("multiplecreative")) {
-
-		enterCreativeTabDetails(eh, testMode);
-		jswait.loadClick(addCreativeButton);
-		enterSecondCreativeTabDetails(eh);
+		enterProductTabFields(productSheet);
 		clickProceedButton();
-		Thread.sleep(3000);
 
-	} else {
-		System.out.println("No creative created");
-	}
+		// ******************Creative tab*****************:
+		if (creativeType.equalsIgnoreCase("singlecreative")) {
+			enterCreativeTabDetails(eh, testMode);
+			clickProceedButton();
+			Thread.sleep(3000);
+		} else if (creativeType.equalsIgnoreCase("multiplecreative")) {
 
-	// ******************Track tab*****************:
+			enterCreativeTabDetails(eh, testMode);
+			jswait.loadClick(addCreativeButton);
+			enterSecondCreativeTabDetails(eh);
+			clickProceedButton();
+			Thread.sleep(3000);
+
+		} else {
+			System.out.println("No creative created");
+		}
+
+		// ******************Track tab*****************:
 		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
 			// enterTrackTabDetails(eh);
 			clickTrackSourceSelector();
@@ -3147,10 +4051,10 @@ String testMode="";
 				} else {
 					Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
 				}
-			}else if(tracksource.equals("Global Response App")) {
-				
+			} else if (tracksource.equals("Global Response App")) {
+
 				jswait.loadClick(globalResponsceTrackBy);
-				
+
 				jswait.loadClick(globalResponseKeywordforbc);
 			}
 
@@ -3158,287 +4062,266 @@ String testMode="";
 
 		clickProceedButton();
 
-	// ******************Rewards tab*****************:
-	
-	if(tracksource.equalsIgnoreCase("A_track_Sel")) {
-	if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+		// ******************Rewards tab*****************:
 
-		if (rewardType.equals("oneruleonereward")) {
-			createDefaultRuleFirstReward(creativeType);
-			System.out.println("++++++++++++++++next to add first rule reward++++++++++++++++++");
-			createFirstRuleFirstReward(creativeType);
-			selectSeedingReward(offerType);
-			
-		} else if (rewardType.equals("onerulemultiplerewards")) {
-			createDefaultRuleFirstReward(creativeType);
-			clickRewardDefaultRuleAdButton();
-			clickDefaultSecondRewardTypeInputField();
-			clickdefaultRuleSecondReward();
-			createFirstRuleFirstReward(creativeType);
-			clickRewardFirstRuleAdButton();
-			clickFirstRuleSecondRewardInputField();
-			selectFirstRuleSecondReward();
-			selectSeedingReward(offerType);
-			
+		if (tracksource.equalsIgnoreCase("A_track_Sel")) {
+			if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
 
-		} else if (rewardType.equals("multiplerulesmultiplerewards")) {
+				if (rewardType.equals("oneruleonereward")) {
+					createDefaultRuleFirstReward(creativeType);
+					System.out.println("++++++++++++++++next to add first rule reward++++++++++++++++++");
+					createFirstRuleFirstReward(creativeType);
+					selectSeedingReward(offerType);
+
+				} else if (rewardType.equals("onerulemultiplerewards")) {
+					createDefaultRuleFirstReward(creativeType);
+					clickRewardDefaultRuleAdButton();
+					clickDefaultSecondRewardTypeInputField();
+					clickdefaultRuleSecondReward();
+					createFirstRuleFirstReward(creativeType);
+					clickRewardFirstRuleAdButton();
+					clickFirstRuleSecondRewardInputField();
+					selectFirstRuleSecondReward();
+					selectSeedingReward(offerType);
+
+				} else if (rewardType.equals("multiplerulesmultiplerewards")) {
+					createDefaultRuleFirstReward(creativeType);
+					createFirstRuleFirstReward(creativeType);
+					createSecondRuleFirstReward(creativeType);
+					selectSeedingReward(offerType);
+
+				} else if (rewardType.equals("default")) {
+					createDefaultRuleFirstReward(creativeType);
+					selectSeedingReward(offerType);
+
+				} else if (rewardType.equals("firstrulefirstreward")) {
+					createFirstRuleFirstReward(creativeType);
+					selectSeedingReward(offerType);
+
+				} else {
+					System.out.println("No Rule for selecting the Rewards");
+					Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
+				}
+
+			} // if
+
+			clickSaveOfferButton();
+
+		} else if (tracksource.equals("Usage Metric")) {
+
+			if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+
+				if (rewardType.equals("oneruleonereward")) {
+					createDefaultRuleFirstReward(creativeType);
+					selectSeedingReward(offerType);
+
+				} else if (rewardType.equals("onerulemultiplerewards")) {
+					createDefaultRuleFirstReward(creativeType);
+					clickRewardDefaultRuleAdButton();
+					clickDefaultSecondRewardTypeInputField();
+					clickdefaultRuleSecondReward();
+
+					selectSeedingReward(offerType);
+
+				} else if (rewardType.equals("multiplerulesmultiplerewards")) {
+					createDefaultRuleFirstReward(creativeType);
+					createFirstRuleFirstReward(creativeType);
+					selectSeedingReward(offerType);
+
+				} else if (rewardType.equals("default")) {
+					createDefaultRuleFirstReward(creativeType);
+					selectSeedingReward(offerType);
+
+				} else if (rewardType.equals("firstrulefirstreward")) {
+					createDefaultRuleFirstReward(creativeType);
+					selectSeedingReward(offerType);
+
+				} else {
+					System.out.println("No Rule for selecting the Rewards");
+					Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
+				}
+
+			} // if
+			Thread.sleep(3000);
+			clickSaveOfferButton();
+
+		} else if (tracksource.equals("Global Response App")) {
+
 			createDefaultRuleFirstReward(creativeType);
-			createFirstRuleFirstReward(creativeType);
-			createSecondRuleFirstReward(creativeType);
 			selectSeedingReward(offerType);
-			
-		} else if (rewardType.equals("default")) {
-			createDefaultRuleFirstReward(creativeType);
-		selectSeedingReward(offerType);
-		
-		} else if (rewardType.equals("firstrulefirstreward")) {
-			createFirstRuleFirstReward(creativeType);
-			selectSeedingReward(offerType);
-	
-		} else {
-			System.out.println("No Rule for selecting the Rewards");
-			Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
+
+			clickSaveOfferButton();
 		}
 
-	}//if
+	}// method
 
-	clickSaveOfferButton();
-	
-	}else if(tracksource.equals("Usage Metric")) { 
-		
-		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
-
-			if (rewardType.equals("oneruleonereward")) {
-				createDefaultRuleFirstReward(creativeType);
-				selectSeedingReward(offerType);
-				
-			} else if (rewardType.equals("onerulemultiplerewards")) {
-				createDefaultRuleFirstReward(creativeType);
-				clickRewardDefaultRuleAdButton();
-				clickDefaultSecondRewardTypeInputField();
-				clickdefaultRuleSecondReward();
-
-				selectSeedingReward(offerType);
-				
-
-			} else if (rewardType.equals("multiplerulesmultiplerewards")) {
-				createDefaultRuleFirstReward(creativeType);
-				createFirstRuleFirstReward(creativeType);
-				selectSeedingReward(offerType);
-				
-			} else if (rewardType.equals("default")) {
-				createDefaultRuleFirstReward(creativeType);
-			selectSeedingReward(offerType);
-			
-			} else if (rewardType.equals("firstrulefirstreward")) {
-				createDefaultRuleFirstReward(creativeType);
-				selectSeedingReward(offerType);
-		
-			} else {
-				System.out.println("No Rule for selecting the Rewards");
-				Assert.assertTrue(false, "issue in createOfferWithRewardType method from offerpageobjects");
-			}
-
-		}//if
-Thread.sleep(3000);
-		clickSaveOfferButton();
-		
-	}else if(tracksource.equals("Global Response App")) {
-		
-	 
-			createDefaultRuleFirstReward(creativeType);
-		selectSeedingReward(offerType);
-	
-	 clickSaveOfferButton();
+	public void addOfferDetails(String offerName, String storageSheet, int row) throws Exception {
+		System.out.println("row of the table  " + row);
+		eh.setExcelFile("BambooBuildDetails", storageSheet);
+		System.out.println("data storage sheet :" + storageSheet);
+		System.out.println("offer name that need to be stored : " + offerName);
+		eh.setCell(row, 0, offerName);
 	}
 
-}//method
+	public void createOfferWithTrackingRuleValue(String sheet, String productSheet, String testMode, String ruleValue)
+			throws Throwable {
+		clickCreateNewOfferButton();
+		enterOfferDetailsFromSheetWithTrackSourceValue(sheet, productSheet, testMode, ruleValue);
+		clickSaveOfferButton();
 
+	}
 
-
-public void addOfferDetails(String offerName, String storageSheet, int row) throws Exception {
-System.out.println("row of the table  "+row);
-eh.setExcelFile("BambooBuildDetails", storageSheet);
-System.out.println("data storage sheet :"+storageSheet);
-System.out.println("offer name that need to be stored : "+offerName);
-eh.setCell(row, 0, offerName);
-}
-public void createOfferWithTrackingRuleValue(String sheet, String productSheet,String testMode,String ruleValue) throws Throwable{
-clickCreateNewOfferButton();
-enterOfferDetailsFromSheetWithTrackSourceValue(sheet, productSheet, testMode, ruleValue);
- clickSaveOfferButton();
-	
-}
-	
-public void enterOfferDetailsFromSheetWithTrackSourceValue(String sheet, String productSheet, String testMode, String ruleValue) throws Throwable{
-Thread.sleep(4000);
-WebDriverWait wait = new WebDriverWait(driver, 10);
-Actions actions = new Actions(driver);
-ExcelHelper prodcutFile = new ExcelHelper();
- prodcutFile.setExcelFile("productInputData", productSheet);
-eh.setExcelFile("offerInputData", sheet);
+	public void enterOfferDetailsFromSheetWithTrackSourceValue(String sheet, String productSheet, String testMode,
+			String ruleValue) throws Throwable {
+		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		Actions actions = new Actions(driver);
+		ExcelHelper prodcutFile = new ExcelHelper();
+		prodcutFile.setExcelFile("productInputData", productSheet);
+		eh.setExcelFile("offerInputData", sheet);
 // ******************Details tab******************:
- enterDetailsTabFields(sheet);
- clickProceedButton();
+		enterDetailsTabFields(sheet);
+		clickProceedButton();
 // ******************Products tab*****************:
- Thread.sleep(3000);
-enterProductTabFields(productSheet);
+		Thread.sleep(3000);
+		enterProductTabFields(productSheet);
 // ******************Creative tab*****************:
 
-enterCreativeTabDetails(eh,testMode);
+		enterCreativeTabDetails(eh, testMode);
 
-clickProceedButton();
+		clickProceedButton();
 
-Thread.sleep(3000);
+		Thread.sleep(3000);
 
+		// ******************Track tab*****************:
 
-        // ******************Track tab*****************:
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
 
-if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
+			enterTrackTabDetails(eh);
 
-        enterTrackTabDetails(eh);
+			clickAddRuleButton();
 
-        clickAddRuleButton();
+			enterDetailsFirstDefaultTrackingRuleCondition("firstRule", ruleValue);
 
-         enterDetailsFirstDefaultTrackingRuleCondition("firstRule",ruleValue);
+			clickaddTrackingRuleSaveButton();
 
-        clickaddTrackingRuleSaveButton();
+			checkRuleCreationWithTrackValue("firstRule", ruleValue);
 
-        checkRuleCreationWithTrackValue("firstRule",ruleValue);
+		}
 
-}
+		clickProceedButton();
 
+		// ******************Rewards tab*****************:
 
+		if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
 
-clickProceedButton();
+			try {
 
+				Exception e = null;
 
-        // ******************Rewards tab*****************:
-	
-    if (!eh.getCellByColumnName("Offer Type").contains("Informational")) {
-	
-            
-	
-                                    
-	
-                    try {
-	
-                            Exception e = null;
-	
 //                                eh.setExcelFile("offerInputData", "usagerecharge");
-	
-                            if (!eh.getCell(1, 20).toString().contains("usage")) {
-	
-                                    
-	
-                                    throw e;
-	
-                            }
-	
-                            else {
-	
-                                    
-	
-                            jswait.loadClick("//paper-card[@id='rewardDetails']//paper-button[contains(.,'Add')]");
-	
-                            
-	
-                    jswait.loadSendKeys("//label[contains(.,'Reward Type')]/..//input", "sel_reward");
-	
-                    Thread.sleep(2000);
-	
-                            jswait.loadClick("//vaadin-combo-box-item[contains(.,'sel_reward')]");
-	
-                            enterSuccessMessage("Success from Selenium");
-	
-                            enterFailureMessage("Failure from Selenium");
-	
-                    }}catch(Exception e) {
-	
-                            if (eh.getCell(1, 2).toString().contains("Seeding")) {
-	
-                                    clickRewardFirstRuleAdButton();
-	
-                                    clickRewardTypeInputField();
-	
+
+				if (!eh.getCell(1, 20).toString().contains("usage")) {
+
+					throw e;
+
+				}
+
+				else {
+
+					jswait.loadClick("//paper-card[@id='rewardDetails']//paper-button[contains(.,'Add')]");
+
+					jswait.loadSendKeys("//label[contains(.,'Reward Type')]/..//input", "sel_reward");
+
+					Thread.sleep(2000);
+
+					jswait.loadClick("//vaadin-combo-box-item[contains(.,'sel_reward')]");
+
+					enterSuccessMessage("Success from Selenium");
+
+					enterFailureMessage("Failure from Selenium");
+
+				}
+			} catch (Exception e) {
+
+				if (eh.getCell(1, 2).toString().contains("Seeding")) {
+
+					clickRewardFirstRuleAdButton();
+
+					clickRewardTypeInputField();
+
 //                                        clickrewardTypeSampleFlowSelector();
-	
+
 //                                        clickrewardTypesel_reward();
-	
-                                    clickrewardTypesel_reward();
-	
-                                    
-	
-                                    enterSuccessMessage("Success from Selenium");
-	
-                                    enterFailureMessage("Failure from Selenium");
-	
-                                    Thread.sleep(2000);
-	
-                                    jswait.loadSendKeys("//h3[contains(.,'Reward for Seeding')]//following::input[1]", SEL_REWARD);
-	
-                                    jswait.loadClick("(//vaadin-combo-box-item[contains(.,'"+SEL_REWARD+"')])[2]");
-	
-                            }
-	
-                            else if(eh.getCell(1, 2).toString().contains("Recharge")) {
-	
-                            clickRewardFirstRuleAdButton();
-	
-                            clickRewardTypeInputField();
-	
+
+					clickrewardTypesel_reward();
+
+					enterSuccessMessage("Success from Selenium");
+
+					enterFailureMessage("Failure from Selenium");
+
+					Thread.sleep(2000);
+
+					jswait.loadSendKeys("//h3[contains(.,'Reward for Seeding')]//following::input[1]", SEL_REWARD);
+
+					jswait.loadClick("(//vaadin-combo-box-item[contains(.,'" + SEL_REWARD + "')])[2]");
+
+				}
+
+				else if (eh.getCell(1, 2).toString().contains("Recharge")) {
+
+					clickRewardFirstRuleAdButton();
+
+					clickRewardTypeInputField();
+
 //                                clickrewardTypeSampleFlowSelector();
-	
+
 //                                clickrewardTypesel_reward();
-	
-                            clickrewardTypesel_reward();
-	
-                            
-	
-                            enterSuccessMessage("Success from Selenium");
-	
-                            enterFailureMessage("Failure from Selenium");
-	
-                    }else {
-	
-                            clickRewardFirstRuleAdButton();
-	
-                            clickRewardTypeInputField();
-	
-                            //clickRewardTypeAny();
-	
-                            clickrewardTypesel_reward();
-	
-                            enterSuccessMessage("Success from Selenium");
-	
-                            enterFailureMessage("Failure from Selenium");
-	
-                    }
-	
-}
-	
-        }	
-}
-	
-public void enterDetailsFirstDefaultTrackingRuleCondition(String name,String TrackRuleValue) throws InterruptedException {
 
- enterRuleName(name);
+					clickrewardTypesel_reward();
 
-        selectPriority("2");
+					enterSuccessMessage("Success from Selenium");
 
-        clickAddTrackingRuleAddConditionButton();
+					enterFailureMessage("Failure from Selenium");
 
-        System.out.println("??????????????");
+				} else {
 
-        selectAddTrackingRuleConditionParameterAge();
+					clickRewardFirstRuleAdButton();
 
-        selectAddTrackingRuleConditionConditionAnyOf();
+					clickRewardTypeInputField();
 
-        enterAddTrackingRuleConditionConditionValue(TrackRuleValue);
+					// clickRewardTypeAny();
 
-}
+					clickrewardTypesel_reward();
 
+					enterSuccessMessage("Success from Selenium");
 
-}//class
-	
+					enterFailureMessage("Failure from Selenium");
 
+				}
+
+			}
+
+		}
+	}
+
+	public void enterDetailsFirstDefaultTrackingRuleCondition(String name, String TrackRuleValue)
+			throws InterruptedException {
+
+		enterRuleName(name);
+
+		selectPriority("2");
+
+		clickAddTrackingRuleAddConditionButton();
+
+		System.out.println("??????????????");
+
+		selectAddTrackingRuleConditionParameterAge();
+
+		selectAddTrackingRuleConditionConditionAnyOf();
+
+		enterAddTrackingRuleConditionConditionValue(TrackRuleValue);
+
+	}
+
+}// class

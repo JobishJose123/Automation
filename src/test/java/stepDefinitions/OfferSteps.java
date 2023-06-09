@@ -64,16 +64,24 @@ public class OfferSteps extends Init {
 	public void create_new_offer_with_Multiple_creatives_from_sheet_with_product(String sheet, String productSheet) throws Throwable {
 	   offerPageObjects.createOfferWithMultipleCreatives(sheet, productSheet, "NUll");
 	}
+
 	
 	@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
 	public void create_new_Offer(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.createOffer(sheet, productSheet,"NULL");
 		}
 	
+	@Then("^create new offer with multiple track from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
+	public void create_new_offer_with_multiple_track_from_sheet_with_product(String sheet, String productSheet) throws Throwable {
+		
+		offerPageObjects.createOfferMultitrack(sheet, productSheet,"NULL");   
+	}
+	
+
 	@Then("^create new offer from sheet \"([^\"]*)\" with product \"([^\"]*)\" for test$")
 	public void create_new_Offer_test(String sheet, String productSheet) throws Throwable {
 		offerPageObjects.createOffer(sheet, productSheet,"test");
-	}
+	} 
 	
 	@Then("^verify cancel button in send trial pop up from sheet \"([^\"]*)\" with product \"([^\"]*)\"$")
 	public void verifyCancelButtonInSendTrial(String sheet, String productSheet) throws Throwable {
@@ -882,7 +890,7 @@ public class OfferSteps extends Init {
 	public void createReward(String rewardName) throws InterruptedException {
 		rewardTypePage.clickCreateNewRewardTypeButton();
 		rewardTypePage.enterCreateRewardName(rewardName);
-		rewardTypePage.enterCreateRewardDescription("desc_for reward created using sekenium");
+		rewardTypePage.enterCreateRewardDescription("desc_for reward created using selenium");
 		rewardTypePage.selectFirstCreateRewardFlowClass();
 		rewardTypePage.clickCreateRewardSaveButton();
 		commonObjects.filterName(rewardName);
@@ -892,6 +900,7 @@ public class OfferSteps extends Init {
 		rewardTypePage.createRewardParameters("Single Select", "singleSelect", "SINGLE_SELECT","3");
 		Thread.sleep(2000);
 	}
+	
 	@Then("^create new reward type$")
 	public void createNewRewardType() throws Throwable {
 		createReward("Selenium_reward");

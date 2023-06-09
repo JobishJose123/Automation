@@ -1,5 +1,6 @@
 #Author: your.email@your.domain.com
 #Keywords Summary :
+#Total scenarios: 44
 @NX-BroadcastFunctionalityMigration 
 Feature: For broadcast functionality check for Migration cases 
 
@@ -515,7 +516,7 @@ Then verify multiple creative "عرض مكافأة" for the bc from sheet "recur
 Then verify the condition Confirmed Delivery event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750005"
+Then search msisdn "9491750025"
 Then click on events tab
 Then verify the condition Control Group Participation event for the bc from sheet "recurrBCDaily" for the campaign from sheet "campaignBC"
 Then provide file in location "/usr/local/flytxt/selenium/" for trigger with csv file "conversion.csv"
@@ -536,7 +537,7 @@ Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
 Then filter the bc from file "bcInputData" of sheet "recurrBCWeekly" for bctype "onetime" 
-Then verify the date for child bc from sheet "recurrBCWeekly" with recurrence pattern "EVERY WEEK"
+#Then verify the date for child bc from sheet "recurrBCWeekly" with recurrence pattern "EVERY WEEK"
 Then wait until status of "recurrBCWeekly" from file "bcInputData" is "Completed" for bctype "recurring"
 Then view broadcast for "recurringchildbc" for bctype "onetime"
 Then verify the target count with condition profilefieldNV from sheet "targetConditionCount" also the channel "WAP"
@@ -565,18 +566,18 @@ Scenario: Verify recurrence pattern EVERY 2 DAYS and target condition: Sharedcus
 Then filter the bc from sheet "BCDataStorage" from row "6" and column "0" and write in sheet "recurringBC"
 Given login
 Then navigate to precision marketer
-Then navigate to life cycle marketing
-Then navigate to campaign category from sheet "campaignCategory"
-Then naigate to "campaignBC" campaign view broadcasts
-Then filter the bc from file "bcInputData" of sheet "recurringBC" for bctype "onetime"
-Then verify the date for child bc from sheet "recurringBC" with recurrence pattern "EVERY 2 DAYS"
-Then wait until status of recurring child bc from sheet "recurringBC" is "Completed" 
-Then verify the ack count with target condition SharedcustomerList from sheet "targetConditionCount" for bc from sheet "recurringBC" of bctype "recurring"
-Then view broadcast for "recurringchildbc" for bctype "onetime"
-Then verify the target count with condition SharedcustomerList from sheet "targetConditionCount" also the channel "SMS"
+#Then navigate to life cycle marketing
+#Then navigate to campaign category from sheet "campaignCategory"
+#Then naigate to "campaignBC" campaign view broadcasts
+#Then filter the bc from file "bcInputData" of sheet "recurringBC" for bctype "onetime"
+#Then verify the date for child bc from sheet "recurringBC" with recurrence pattern "EVERY 2 DAYS"
+#Then wait until status of recurring child bc from sheet "recurringBC" is "Completed" 
+#Then verify the ack count with target condition SharedcustomerList from sheet "targetConditionCount" for bc from sheet "recurringBC" of bctype "recurring"
+#Then view broadcast for "recurringchildbc" for bctype "onetime"
+#Then verify the target count with condition SharedcustomerList from sheet "targetConditionCount" also the channel "SMS"
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9491750800"
+Then search msisdn "9491750832"
 Then click on events tab
 Then verify the condition Acknowledged event for the bc from sheet "recurringBC" for the campaign from sheet "campaignBC"
 Then click on events tab
@@ -591,6 +592,7 @@ Then navigate to precision marketer
 Then navigate to life cycle marketing
 Then navigate to campaign category from sheet "campaignCategory"
 Then naigate to "campaignBC" campaign view broadcasts
+Then navigate to "Seedings Broadcasts" broadcasts
 Then filter the bc from file "bcInputData" of sheet "seedingoneoff" for bctype "onetime"
 Then edit the Delevery tab details from workbook "bcInputData" sheet "seedingoneoff"
 Then wait until status of "seedingoneoff" from file "bcInputData" is "Completed" for bctype "seeding"

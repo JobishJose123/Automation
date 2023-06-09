@@ -1,4 +1,5 @@
 #Author:shobina.k@flytxt.com
+#Total Scenario : 3
 @ProductVerification_Regression
 Feature: Product Verification_Regression
 

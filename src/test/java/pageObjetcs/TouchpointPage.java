@@ -943,7 +943,6 @@ public void deleteUSSDTouchpoint() throws Throwable {
 	public void createTriggerTouchpoint(String name,String prioLogic, String trigger) throws InterruptedException {
 		clickCreateNewTouchpoint();
 		enterTriggerTouchpointDetails(name,prioLogic,trigger);
-		
 		triggerClickSave();
 	}
 	public void editTriggerTouchpoint(String keyword) throws InterruptedException {

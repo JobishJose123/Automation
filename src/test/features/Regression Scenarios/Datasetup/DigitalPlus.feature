@@ -1,4 +1,5 @@
 #Author : shobina.k@flytxt.com
+#total scenario : 10
 Feature: DigitalPlus
 
 ######################## webhook login to get the url ###########

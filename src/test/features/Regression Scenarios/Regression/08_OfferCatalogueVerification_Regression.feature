@@ -1,5 +1,6 @@
 #Author:shobina.k@flytxt.com
 #Feature: Offer :Before executing this feature make sure to execute @Product_datasetup feature
+#Total Scenario : 5
 @NDX-OfferCatalogVerification_Regression
 Feature: Create new Offer Catalog
 

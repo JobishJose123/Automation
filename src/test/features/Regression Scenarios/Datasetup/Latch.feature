@@ -1,4 +1,5 @@
 #Author : kiran.joseph@flytxt.com
+#Total scenarios: 5
 @Latchrunfeature
 Feature: Latch
 

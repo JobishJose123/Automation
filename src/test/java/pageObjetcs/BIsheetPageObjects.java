@@ -322,7 +322,7 @@ public class BIsheetPageObjects extends Init{
 	private WebElement createGroupsconditionclick;
 	@FindBy(xpath="//paper-item[text()='begins with']")
 	private WebElement createGroupsbeginswith;
-	@FindBy(xpath="(//input[@id='input' and @class='style-scope paper-input' and @type='text'])[2]")
+	@FindBy(xpath="//div//input[@class='style-scope paper-input' and @pattern='^[\\d|a-zA-Z_\\@\\-.#_:&]+((,|\\.|@|-|\\s)+[\\d|a-zA-Z]{1,})*$']")
 	private WebElement createGroupsconditiontext;
 	@FindBy(xpath="(//paper-button[text()='Save'])[2]")
 	private WebElement createGroupssave;
@@ -757,9 +757,11 @@ public class BIsheetPageObjects extends Init{
 		columnSelectionThird();
 		campaignAttributesSelection();
 		columnSelectionFourth();
-		campaignAttrpercentageSelection();
+		totalConversionsSelection();
+		
 		columnSelectionFifth();
-		broadcastNameSelection();
+		campaignAttrpercentageSelection();
+		
 		columnSelectionSixth();
 		inventorySelection();
 		columnSelectionSeventh();
@@ -771,7 +773,7 @@ public class BIsheetPageObjects extends Init{
 		 columnSelectiontenth();
 		 uniqueacknowledgementSelection();
 		 columnSelectioneleveen();
-		 totalConversionsSelection();
+		 broadcastNameSelection();
 		 columnSelectiontwelve();
 		 unique_E_ConversionsSelection();
 		columnSelectionthirteen();
@@ -1720,6 +1722,7 @@ public void Eventdomain_ConversionsSelection() throws InterruptedException{
 	jswait.loadClick(randomClickontopcalculation);
 	jswait.loadClick(EventDomainCalculations);
 	jswait.loadSendKeys("//label[text()='Sub-Domain']//following::input[1]", "Value");
+	jswait.loadClick("//vaadin-combo-box-item[contains(.,'Value')]");
 	jswait.loadClick("//paper-radio-button[@name='SUM']");
 	jswait.loadClick(clicksavebutton);
 }
@@ -1856,7 +1859,7 @@ public void H_F_DSelection() throws InterruptedException{
 	//jswait.loadClick(clickrandoncal);
 	Thread.sleep(2000);
 	//jswait.loadClick(uniqueofferpresentedfork2);
-	jswait.loadClick(Offer_Price);
+	jswait.loadClick("(//vaadin-combo-box-item[contains(.,'Offer_Price')])[2]");
 	jswait.loadSendKeys(combinationformula, "K1*K2");
 	jswait.loadClick(clicksavebutton);
 	
@@ -1887,7 +1890,7 @@ public void I_G_DSelection() throws InterruptedException{
 	//jswait.loadClick(clickrandoncal);
 	Thread.sleep(2000);
 	//jswait.loadClick(uniqueofferpresentedfork2);
-	jswait.loadClick(Offer_Price);
+	jswait.loadClick("(//vaadin-combo-box-item[contains(.,'Offer_Price')])[2]");
 	jswait.loadSendKeys(combinationformula, "K1*K2");
 	jswait.loadClick(clicksavebutton);
 	
@@ -1918,7 +1921,7 @@ public void J_H_ISelection() throws InterruptedException{
 	//jswait.loadClick(clickrandoncal);
 	Thread.sleep(2000);
 	//jswait.loadClick(uniqueofferpresentedfork2);
-	jswait.loadClick(IGD);
+	jswait.loadClick("(//vaadin-combo-box-item[contains(.,'I:G*D')])[2]");
 	jswait.loadSendKeys(combinationformula, "K1+K2");
 	jswait.loadClick(clicksavebutton);
 	
@@ -1949,7 +1952,7 @@ public void K_F_ESelection() throws InterruptedException{
 	//jswait.loadClick(clickrandoncal);
 	Thread.sleep(2000);
 	//jswait.loadClick(uniqueofferpresentedfork2);
-	jswait.loadClick(Offer_Profit);
+	//jswait.loadClick(Offer_Profit);
 	jswait.loadSendKeys(combinationformula, "K1+K2");
 	jswait.loadClick(clicksavebutton);
 	
@@ -1980,7 +1983,7 @@ public void L_G_ESelection() throws InterruptedException{
 	//jswait.loadClick(clickrandoncal);
 	Thread.sleep(2000);
 	//jswait.loadClick(uniqueofferpresentedfork2);
-	jswait.loadClick(Offer_Profit);
+	jswait.loadClick("(//vaadin-combo-box-item[contains(.,'Offer_Profit')]])[2]");
 	jswait.loadSendKeys(combinationformula, "K1*K2");
 	jswait.loadClick(clicksavebutton);
 	
@@ -2012,7 +2015,7 @@ public void CustomcalAckConversionSelection() throws InterruptedException{
 	//jswait.loadClick(clickrandoncal);
 	Thread.sleep(2000);
 	//jswait.loadClick(uniqueofferpresentedfork2);
-	jswait.loadClick(Eunique_convk1);
+	jswait.loadClick("(//vaadin-combo-box-item[contains(.,'E-unique_conv')])[2]");
 	jswait.loadSendKeys(combinationformula, "K1/K2");
 	jswait.loadClick(clicksavebutton);
 	
@@ -2066,7 +2069,7 @@ public void CustSegCulationSelection() throws InterruptedException{
 	//jswait.loadClick(clickrandoncal);
 	Thread.sleep(2000);
 	//jswait.loadClick(uniqueofferpresentedfork2);
-	jswait.loadClick(CUnique_ACK);
+	jswait.loadClick("(//vaadin-combo-box-item[contains(.,'C-Unique_ACK')])[2]");
 	jswait.loadSendKeys(combinationformula, "K1/K2");
 	jswait.loadClick(clicksavebutton);
 	
@@ -2097,10 +2100,10 @@ public void JUniqueNetconversionCal() throws InterruptedException{
 	//jswait.loadClick(clickrandoncal);
 	Thread.sleep(2000);
 	//jswait.loadClick(uniqueofferpresentedfork2);
-	jswait.loadClick(HCGP_Unique);
+	jswait.loadClick("(//vaadin-combo-box-item[contains(.,'H-CGP_Unique')])[2]");
 	jswait.loadClick(plusbuttonclickforformula);
 	jswait.loadSendKeys(setupK3click, "G-E/C");
-	jswait.loadClick(GEC);
+	jswait.loadClick("(//vaadin-combo-box-item[contains(.,'G-E/C')])[3]");
 	jswait.loadSendKeys(combinationformula, "K1-(K2/K3)");
 	jswait.loadClick(clicksavebutton);
 	

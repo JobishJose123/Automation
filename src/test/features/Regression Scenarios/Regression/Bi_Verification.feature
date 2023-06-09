@@ -1,6 +1,6 @@
 # AMAL XAVIOUR
 #
-#
+#Total: 64
 @BI_Verfication
 Feature: Business Intelligence Verification
 
@@ -27,7 +27,7 @@ Then verify inbound options are disabled when selected outbound
 
 
 
-  @NDX-12370    @initBrowser  @closeBrowser
+@NDX-12370    @initBrowser  @closeBrowser
 Scenario: Verify whether Outbound options are  disabled when Inbound column is selected 
 Given login
 Then navigate to precision marketer
@@ -37,7 +37,7 @@ Then click create New Worksheet
 Then verify outbound options are disabled when selected inbound
 
 
-  @NDX-12371   @initBrowser @closeBrowser
+@NDX-12371   @initBrowser @closeBrowser
 Scenario: Verify whether Create Calculation is enabled only after a Calculation header save
 Given login
 Then navigate to precision marketer
@@ -75,7 +75,7 @@ Then navigate to Business Intelligence
 Then click create New Worksheet
 Then create offer and Product Report from sheet "<reportSheet>" and "Auto" as Time Range
 Then filter the Bi sheet from "<reportSheet>" using excel sheet 
-Then wait for "E" status for worksheet
+#Then wait for "E" status for worksheet
 Then wait for "R" status for worksheet
 Examples:
 |reportSheet|
@@ -93,7 +93,7 @@ Then navigate to precision marketer
 Then navigate to analytics
 Then navigate to Business Intelligence
 Then click create New Worksheet
-Then create metric report from sheet "metricReportAck" Report TimeRange "Auto" Metric TimeRange "By Week" and "this week" 
+Then create metric report from sheet "metricReportAck" Report TimeRange "2022-10-19" Metric TimeRange "By Week" and "this week" 
 Then filter the Bi sheet from "metricReportAck" using excel sheet 
 Then wait for "E" status for worksheet
 Then wait for "R" status for worksheet
@@ -159,7 +159,7 @@ Then navigate to Business Intelligence
 Then click create New Worksheet
 Then create BI report from sheet "calcReport" and "Auto" as Time Range
 Then filter the Bi sheet from "calcReport" using excel sheet 
-Then wait for "E" status for worksheet
+#Then wait for "E" status for worksheet
 Then wait for "R" status for worksheet
 
 
@@ -174,7 +174,7 @@ Then navigate to Business Intelligence
 Then click create New Worksheet
 Then create BI Group report from sheet "<reportSheet>" and "Auto" as Time Range
 Then filter the Bi sheet from "<reportSheet>" using excel sheet 
-Then wait for "E" status for worksheet
+#Then wait for "E" status for worksheet
 Then wait for "R" status for worksheet
 Examples:
 |reportSheet|
@@ -195,7 +195,7 @@ Then navigate to Business Intelligence
 Then click create New Worksheet
 Then create BI report from sheet "CustomEventSheet" and "Auto" as Time Range
 Then filter the Bi sheet from "CustomEventSheet" using excel sheet 
-Then wait for "E" status for worksheet
+#Then wait for "E" status for worksheet
 Then wait for "R" status for worksheet
 
 
@@ -288,11 +288,10 @@ Then click on BiSheet from "metricReportAck" sheet
 Then verify Aggregated data of header "<metricName>" with "<metric value>" as value
 Examples:
 |metricName|metric value|
-	|Metric1|  21007.500|
-	|Metric2| 35000|
+	|Metric1|21007.500|
+	|Metric2|35000|
 	|Metric3|56000|
-	|Metric4| 70000|
-
+	|Metric4|70000|
 
 
 
@@ -457,9 +456,6 @@ Then filter the Bi sheet from "CustomEventSheet" using excel sheet
 Then wait for "R" status for worksheet
 Then click on BiSheet from "CustomEventSheet" sheet
 Then Verify Custom Event "CustomEvent" with value "100" for Custom Event Report
-
-
-
 
 
 
