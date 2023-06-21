@@ -2,6 +2,9 @@ package pageObjetcs;
 
 import static org.junit.Assert.assertTrue;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -784,19 +787,27 @@ private WebElement saveRuleName;
    
    
    
-   public void selectCustomerList(String listname) throws InterruptedException {
+   public void selectCustomerList(String listname) throws InterruptedException, AWTException {
 			
+	   
 		Thread.sleep(1000);
 //		eh.setExcelFile("listname",listname);
 		String list = listname;
 		jswait.loadSendKeys(customerListField, list);
-		
-		Thread.sleep(2000);
-		jswait.loadSendKeys(customerListField, list);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
+		//jswait.loadSendKeys(customerListField, list);
 		wait.until(ExpectedConditions.visibilityOf(customerListField)).sendKeys(Keys.ARROW_DOWN);
 		wait.until(ExpectedConditions.visibilityOf(customerListField)).sendKeys(Keys.ENTER);
-//		jswait.loadClick(rulelist);	
+		jswait.loadClick("//label[contains(.,'Customer List')]//..//paper-icon-button[@id='clearIcon']");
+		//////////////////
+		Thread.sleep(5000);
+		jswait.loadSendKeys(customerListField, list);
+		Thread.sleep(5000);
+		wait.until(ExpectedConditions.visibilityOf(customerListField)).sendKeys(Keys.ARROW_DOWN);
+		wait.until(ExpectedConditions.visibilityOf(customerListField)).sendKeys(Keys.ENTER);
+		
+		
+		//jswait.loadClick(rulelist);	
 		
 		
 //		

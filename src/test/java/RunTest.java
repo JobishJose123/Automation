@@ -44,7 +44,7 @@ import cucumber.api.java.en.Then;
         features = { "src/test/features"},
 		glue = {"classpath:"},
 		dryRun = false,
-		tags = {"@NDX-7144"},
+		tags = {"@UCGExclusionBC"},
 		
 		plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:output/report.html",

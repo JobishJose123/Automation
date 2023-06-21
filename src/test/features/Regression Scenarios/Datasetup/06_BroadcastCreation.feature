@@ -26,13 +26,13 @@ Scenario Outline: create offer
 		#|rechargeSMS_Dynamic|singlecreative|oneruleonereward|
 		#|rechargeSMS|multiplecreative|oneruleonereward|
 		#|rechargeWAP|singlecreative|oneruleonereward|
-		|rechargeEmail|singlecreative|oneruleonereward|
+		#|rechargeEmail|singlecreative|oneruleonereward|
 		#|SeedingSMS|multiplecreative|oneruleonereward|
 		#|seedingWAPoffer|singlecreative|oneruleonereward|
 		#|SeedingSMS_Dynamic|singlecreative|oneruleonereward|
 		#|seedingEmail|singlecreative|oneruleonereward|
-		|InfoOffer|singlecreative|oneruleonereward|
-		|MultiTrackOffer|singlecreative|Multiplerulemultiplereward|
+		#|InfoOffer|singlecreative|oneruleonereward|
+		#|MultiTrackOffer|singlecreative|Multiplerulemultiplereward|
 		|MultiTrackOfferSeeding|singlecreative|Multiplerulemultiplereward|
 		#|ReminderOffer|singlecreative|oneruleonereward|
 		
@@ -97,7 +97,7 @@ Scenario Outline: Create broadcast to verify bc functionality(except trigger)
 		#|one-offBC|rechargeEmail|usageMetric|Create|no limit|no limit|none|single creative|none|none|2|activate|BCDataStorage|
 		#|one-offBC|rechargeSMS_Dynamic|sharedMetricOtherPartner|Create|no limit|no limit|none|single creative|none|none|3|activate|BCDataStorage|
 		#|OneOff-Info|InfoOffer|targetall|None|no limit|no limit|none|single creative|none|none|23|activate|BCDataStorage| 
-		|oneoff-multiTrack|MultiTrackOffer|targetall|None|no limit|fixedPercentage|none|single creative|none|At|14|save|ConversionBC|         
+		#|oneoff-multiTrack|MultiTrackOffer|targetall|None|no limit|fixedPercentage|none|single creative|none|At|14|save|ConversionBC|         
 		#
 		#|recurrBCDaily|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|At|none|2|save|ConversionBC|
 		#|recurrBCWeekly|rechargeWAP|profilefieldNV|Create|no limit|no limit|none|single creative|none|none|4|activate|BCDataStorage|
@@ -110,13 +110,13 @@ Scenario Outline: Create broadcast to verify bc functionality(except trigger)
 		#|seedingoneoff|seedingWAPoffer|customerDrivenEvent|Create|no limit|no limit|none|single creative|none|none|7|activate|BCDataStorage|
 		#|seedingoneoff|seedingEmail|customerDrivenEventNotOccurred|Create|no limit|no limit|none|single creative|none|none|8|activate|BCDataStorage|
 		#|seedingoneoff|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|9|activate|BCDataStorage|
-		#|seedingoneoff-MultiTrack|MultiTrackOffer-Seeding|targetall|None|no limit|fixedPercentage|none|single creative|At|none|25|activate|BCDataStorage|
+		#|seedingoneoff-MultiTrack|MultiTrackOfferSeeding|targetall|None|no limit|fixedPercentage|none|single creative|At|none|25|activate|BCDataStorage|
 		#
 		#|seedingRecurringBC|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|4|save|ConversionBC|
 		#|seedingRecurringBC|seedingWAPoffer|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|none|none|10|activate|BCDataStorage|
 		#|seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|11|activate|BCDataStorage|
 		#|seedingRecurringBC|SeedingSMS_Dynamic|customerListNotSubscribed|None|no limit|no limit|none|single creative|none|none|12|activate|BCDataStorage|
-		#|seedingRecurring-MultiBC|MultiTrackOffer-Seeding|targetall|None|no limit|fixedPercentage|none|single creative|none|none|16|save|ConversionBC|
+		|seedingRecurring-MultiBC|MultiTrackOfferSeeding|targetall|None|no limit|fixedPercentage|none|single creative|none|none|16|save|ConversionBC|
 		
 	@NDX-createTriggerWithDKJob @initBrowser @closeBrowser 
 Scenario: create streaming attribute and trigger and dk job for trigger 
@@ -224,7 +224,7 @@ Examples:
 	
 	
 	
-	####after running @NDX-TriggerBC and @DNCExclusionBC
+####after running @NDX-TriggerBC and @DNCExclusionBC
 	
 @NDX-fileForTriggerBC @initBrowser @closeBrowser 
 Scenario: upload file for trigger bc
@@ -348,6 +348,27 @@ Then enter the details to the metrics tab and add variance calculation KPI "Cust
 Then enter Schedule tab with end "At" CG Reccurance pattern "none" and CG extension pattern "Every week"
 Then wait until the UCG change to "Active"												
 															
+@UCGExclusionBC @initBrowser 
+Scenario Outline: create BC to verify UCG Exclusion
+Given login 
+Then navigate to precision marketer 
+Then wait for 1 minutes 
+Then navigate to life cycle marketing 
+Then navigate to campaign category from sheet "CampaignCategory" 
+Then naigate to "campaignBC" campaign view broadcasts 
+Then click create new broadcast button 
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "none"  
+Then enter target tab details with UCG list "Selenium_UCG_List" target condition targetall type "None" TG "no limit" CG "no limit" DNC "none" 
+Then enter choose offer tab from sheet "<offerSheet>" for bc from sheet "<bcSheet>" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions" 
+Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "<bcSheet>" 
+Then save bc 
+Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "ConversionBC"
+Examples:
+	|bcSheet|offerSheet|i|
+	|OneoffUCG_BC|rechargeSMS|26|
+	
+	
+	
 															
 															
 #==================================================================================================================================

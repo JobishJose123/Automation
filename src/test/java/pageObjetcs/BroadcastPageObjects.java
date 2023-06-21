@@ -3535,6 +3535,8 @@ public class BroadcastPageObjects extends Init {
 
 	public void enterTargetTabDetails(String condition, String targetType, String TG, String CG, String DNC)
 			throws Exception {
+			
+		
 		selectBaseList(SELENIUM_LIST);
 		Thread.sleep(10000);
 		jswait.loadClick("(//div[@id='radioContainer']//following::div[contains(.,'" + targetType + "')])[1]");
@@ -3608,11 +3610,92 @@ public class BroadcastPageObjects extends Init {
 		clickProceedButton();
 	}
 
+	public void enterUCGTargetTabDetails(String UCGlist ,String condition, String targetType, String TG, String CG, String DNC)
+			throws Exception {
+			
+		
+		selectBaseList(UCGlist);
+		Thread.sleep(10000);
+		jswait.loadClick("(//div[@id='radioContainer']//following::div[contains(.,'" + targetType + "')])[1]");
+		Thread.sleep(10000);
+		jswait.loadClick(selectTargetGroup);
+
+		if (TG.equalsIgnoreCase("no limit")) {
+			jswait.loadClick(noLimitTGRadiobtn);
+		} else if (TG.contains("defineLimitFixed")) {
+
+			try {
+				int size = TG.length();
+				String targetGroup = TG.substring(16, size);
+//				int result = Integer.parseInt(targetGroup);
+				System.out.println(targetGroup);
+
+				jswait.loadClick(defineLimit);
+				jswait.loadSendKeys(enterLimitField, targetGroup);
+			} catch (Exception e) {
+				jswait.loadClick(defineLimit);
+				jswait.loadSendKeys(enterLimitField, "10");
+			}
+
+		} else if (TG.equalsIgnoreCase("defineLimitsDynamic")) {
+
+		}
+		jswait.loadClick(TGSavebtn);
+
+		jswait.loadClick(selectControlGroup);
+		if (CG.equalsIgnoreCase("no limit")) {
+			jswait.loadClick(noControlGroup);
+
+		} else if (CG.equalsIgnoreCase("fixedPercentage")) {
+			jswait.loadClick(fixedPercentageOfTargetBase);
+			jswait.loadSendKeys(fixedPercentNumber, "10");
+		} else if (CG.equalsIgnoreCase("advancedParameters")) {
+
+		}
+		jswait.loadClick(CGSavebtn);
+		selectDNCList(DNC);
+		TargetConditionObjects targetConditionObjects = new TargetConditionObjects();
+		if (targetType.equalsIgnoreCase("create")) {
+			commonObjects.clickOptionsIcon();
+			targetConditionObjects.clickTargetConditionDeletet();
+			Thread.sleep(2000);
+			System.out.println("selected condition is " + condition);
+			targetConditionObjects.clickBasicTargetCondition(condition);
+		} else if (targetType.equalsIgnoreCase("saved segments")) {
+			jswait.loadClick(savedSegmentRadioButtion);
+			Thread.sleep(1000);
+			jswait.loadClick(savedSegmentSelectorField);
+			Thread.sleep(1000);
+			{
+				if (condition.contains("segmentAgeGT40")) {
+					jswait.loadClick("//paper-item[contains(.,'segmentAgeGT40')]");
+				} else if (condition.equals("SegmentForMoreThanTenConditions")) {
+					jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditions')]");
+				} else if (condition.equals("SegmentForMoreThanTenConditionsOR")) {
+					jswait.loadClick("//paper-item[contains(.,'SegmentForMoreThanTenConditionsOR')]");
+
+				} else if (condition.equals("SegmentAnalysis")) {
+					jswait.loadClick("(//paper-item[contains(.,'" + condition + "')])[1]");
+				}
+			}
+		}
+
+		else {
+			System.out.println("none selected as target condition");
+		}
+
+		clickProceedButton();
+	}
+	
+	
+	
+	
 	public void selectOffer(String offerSheet, String bc_type, String creative, String trackExpires,
 			String filterCriteria, String giverRewardsTo) throws Exception {
 		ExcelHelper offerExcel = new ExcelHelper();
 		offerExcel.setExcelFile("offerInputData", offerSheet);
 		String offerName = offerExcel.getCellByColumnName("Offer Name");
+		System.out.println(offerName);
 		jswait.loadClick(".//data-table-cell[contains(.,'" + offerName + "')]/..//*[@id='checkboxContainer']");
 		if (creative.equalsIgnoreCase("multiple creative")) {
 			jswait.loadClick(selectLanguage);

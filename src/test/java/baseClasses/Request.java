@@ -83,8 +83,8 @@ public class Request extends Init{
 		}
 		in.close();
 		responseString = response.toString();
-//		System.out.println(responseString);
 		return responseString;
+		
 	}
 	
 	public int getRequest(String urlStr,String authkey) throws IOException{	
@@ -95,6 +95,7 @@ public class Request extends Init{
 		System.out.println("\nSending 'GET' request to URL : " + url);
 		System.out.println("Response Code : " + responseCode);
 		getResponseString();
+		System.out.println();
 		return responseCode;	
 	}
 	public int getRequestWithCookie(String urlStr,String cookie) throws IOException{	

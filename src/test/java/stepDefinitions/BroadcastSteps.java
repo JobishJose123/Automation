@@ -3764,6 +3764,16 @@ public class BroadcastSteps extends Init {
 			String CG, String DNC) throws Exception {
 		broadcastPageObjects.enterTargetTabDetails(condition, targetType, TG, CG, DNC);
 	}
+	
+	@Then("^enter target tab details with UCG list \"([^\"]*)\" target condition (.*) type \"([^\"]*)\" TG \"([^\"]*)\" CG \"([^\"]*)\" DNC \"([^\"]*)\"$")
+	public void enter_target_tab_details_with_UCG_list_target_condition_targetall_type_TG_CG_DNC(String UCGlist ,String condition, String targetType, String TG,
+			String CG, String DNC) throws Throwable {
+	    
+		broadcastPageObjects.enterUCGTargetTabDetails(UCGlist,condition, targetType, TG, CG, DNC);
+		
+	}
+	
+	
 
 	@Then("^enter choose offer tab from sheet \"([^\"]*)\" for bc from sheet \"([^\"]*)\" with \"([^\"]*)\" track session expires \"([^\"]*)\" filter criteria \"([^\"]*)\" give reward to \"([^\"]*)\"$")
 	public void enter_choose_offer_tab_from_sheet_for_bc_from_sheet_track_session_expires_filter_criteria_give_reward_to(
@@ -3771,6 +3781,7 @@ public class BroadcastSteps extends Init {
 			String giveRewardsTo) throws Exception {
 		eM.setExcelFile("bcInputData", bcSheet);
 		String bc_type = (String) eM.getCell(1, 7);
+		System.out.println(bc_type);
 		broadcastPageObjects.selectOffer(offerSheet, bc_type, creative, trackExpires, filterCriteria, giveRewardsTo);
 
 	}
@@ -4912,7 +4923,7 @@ public void enter_Schedule_tab_with_end_CG_Reccurance_pattern_and_CG_extension_p
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
 		commonObjects.toggleAutoRefresh();
-		while (!statusOfUCG.equalsIgnoreCase(status)  && !statusOfUCG.equalsIgnoreCase("Failed") && t.checkTimerMin(15)) {
+		while (!statusOfUCG.equalsIgnoreCase(status)  && !statusOfUCG.equalsIgnoreCase("Failed") && t.checkTimerMin(25)) {
 		    statusOfUCG = broadcastPageObjects.getTopUCGstatus();
 			System.out.println(statusOfUCG);
 			Thread.sleep(3000);

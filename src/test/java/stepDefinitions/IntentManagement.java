@@ -2079,6 +2079,7 @@ public class IntentManagement extends Init {
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
 		while (programPage.getRuleLastRefreshTime().isEmpty() && t.checkTimerMin(15)) {
+			Thread.sleep(20000);
 			driver.navigate().refresh();
 			Thread.sleep(4000);
 			System.out.println("Waiting for rule to be picked by Conveyor Belt");
@@ -2094,7 +2095,7 @@ public class IntentManagement extends Init {
 		sql.addTouchpointToApiAuthPolicy(eh.getCellByColumnName("api touchpoint name"));
 	}
 
-	String offerRecommended = "{\"status\":{\"code\":200,\"message\":\"Success\"},\"offers\":{\"offer\":[{\"id\":\"111\",\"message\":\"Enjoy the offer with 25 extar TT\",\"shortMessage\":\"Bonus offer\",\"message-encoding\":\"UTF-8\",\"message-lang\":\"English (UK)\",\"offerType\":\"usage\",\"category\":\"Balance Top ups\",\"order\":1},{\"id\":\"110\",\"message\":\"Enjoy the offer with 25 extar TT\",\"shortMessage\":\"Bonus offer\",\"message-encoding\":\"UTF-8\",\"message-lang\":\"English (UK)\",\"offerType\":\"usage\",\"category\":\"Balance Top ups\",\"order\":2}]}}";
+	String offerRecommended = "{\"status\":{\"code\":200,\"message\":\"Success\"},\"offers\":{\"recharge-offer\":[{\"id\":\"1174\",\"message\":\"Enjoy the offer with 25 extar TT\",\"shortMessage\":\"Bonus offer\",\"message-encoding\":\"UTF-8\",\"message-lang\":\"English (UK)\",\"offerType\":\"recharge\",\"category\":\"Recharge offer\",\"additional-params\":{\"priceCalculationMode\":[\"auto\"],\"totalPrice\":[\"0.0\"]},\"order\":1,\"price\":0.0},{\"id\":\"1173\",\"message\":\"Enjoy the offer with 25 extar TT\",\"shortMessage\":\"Bonus offer\",\"message-encoding\":\"UTF-8\",\"message-lang\":\"English (UK)\",\"offerType\":\"stv\",\"category\":\"Recharge offer\",\"additional-params\":{\"priceCalculationMode\":[\"auto\"],\"totalPrice\":[\"0.0\"]},\"order\":2,\"price\":0.0},{\"id\":\"1191\",\"message\":\"Enjoy the offer with 25 extar TT\",\"shortMessage\":\"Bonus offer\",\"message-encoding\":\"UTF-8\",\"message-lang\":\"English (UK)\",\"offerType\":\"recharge\",\"category\":\"Recharge offer\",\"additional-params\":{\"priceCalculationMode\":[\"auto\"],\"totalPrice\":[\"0.0\"]},\"order\":3,\"price\":0.0}]}}";
 
 	public int getRuleId(String ruleName) throws IOException, Exception {
 		SQLHandler sql = new SQLHandler();
@@ -2526,11 +2527,12 @@ public class IntentManagement extends Init {
 		req.getRequest(str.toString(), "");
 
 		offerRecommended = req.responseString;
-		System.out.println("this is the response" + req.responseString);
+		System.out.println("this is the response " + req.responseString);
+		System.out.println("Got get response");
 		eh.setExcelFile("ruleInputData", ruleSheet);
-		SQLHandler sql = new SQLHandler();
+	   SQLHandler sql = new SQLHandler();
 		int ruleId = getRuleId(eh.getCellByColumnName("Rule Name"));
-//						Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
+//Assert.assertTrue("Specified rule not found in response of get offer", offerRecommended.contains("\"id\":\""+ruleId+"\","));
 	}
 
 	@Then("^wait for Message Recevied in consumer profile$")

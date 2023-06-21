@@ -47,7 +47,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Jun 9, 2023 03:48:02 PM</span>
+                    <span class='label suite-start-time blue darken-3'>Jun 21, 2023 12:52:19 PM</span>
 				</a>
 			</li>
 			<li>
@@ -86,7 +86,7 @@
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
 					<li><a href='#'>@AllBCCreation_datasetup</a></li>
-					<li><a href='#'>@UCGcreation</a></li>
+					<li><a href='#'>@UCGExclusionBC</a></li>
 					<li><a href='#'>@initBrowser</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
@@ -165,7 +165,7 @@
 					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>8</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>13</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
 					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
@@ -185,84 +185,82 @@
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
 						<span class='test-name'>Test suite for Broadcast creation</span>
-						<span class='test-time'>Jun 9, 2023 03:48:02 PM</span>
+						<span class='test-time'>Jun 21, 2023 12:52:20 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
-<div class='scenario node' test-id='2' status='pass'>
-	<div class='category-list'>
-		<span class='category label white-text'>@UCGcreation</span>
-		<span class='category label white-text'>@initBrowser</span>
-	</div>
-	<span class='duration right label'>0h 17m 20s+802ms</span>
+<div class='scenariooutline node' test-id='2' status='pass'>
+	<span class='duration right label'>0h 5m 11s+493ms</span>
 	<div class='desc'>
-		<b>Scenario</b>
-		<span class="desc-text">create a UCG and activate for the selenium UCG List</span>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">create BC to verify UCG Exclusion</span>
 	</div>
 	<ul class='steps'>
-		<li test-id='3' class='node given pass' status='pass'>
+		<li test-id='3' class='node scenario pass' status='pass'>
+			<div class='category-list'>
+				<span class='category label white-text'>@AllBCCreation_datasetup</span>
+				<span class='category label white-text'>@UCGExclusionBC</span>
+				<span class='category label white-text'>@initBrowser</span>
+			</div>
 			
-			<b>Given</b>
+			<b>Scenario</b>
 			
-			<span class="bdd-step-name">Given login</span>
-				<div class='pre'>passed</div>
+			<span class="bdd-step-name">create BC to verify UCG Exclusion</span>
 			
-		</li>
-		<li test-id='4' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then navigate to configuration management</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='5' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then navigate to control group</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='6' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then Create a new UCG button</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='7' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then enter details with base list "Selenium_UCG_List" and outlier kpi "Customer Profile Info" with "Age_q11" and extend list "sel list_q11"</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='8' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then enter the details to the metrics tab and add variance calculation KPI "Customer Profile Info" and "Age_q11"</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='9' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then enter Schedule tab with end "At" CG Reccurance pattern "none" and CG extension pattern "Every week"</span>
-				<div class='pre'>passed</div>
-			
-		</li>
-		<li test-id='10' class='node then pass' status='pass'>
-			
-			<b>Then</b>
-			
-			<span class="bdd-step-name">Then wait until the UCG change to "Active"</span>
-				<div class='pre'>passed</div>
-			
+				<ul class='steps'>
+					<li test-id='4' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given login</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='5' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then navigate to precision marketer</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='6' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then wait for 1 minutes</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='7' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then navigate to life cycle marketing</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='8' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then navigate to campaign category from sheet "CampaignCategory"</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='9' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then naigate to "campaignBC" campaign view broadcasts</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='10' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then click create new broadcast button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='11' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then create bc from sheet "OneoffUCG_BC" with inventory "Unlimited" and trigger "none"</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='12' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then enter target tab details with UCG list "Selenium_UCG_List" target condition targetall type "None" TG "no limit" CG "no limit" DNC "none"</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='13' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "OneoffUCG_BC" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='14' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "OneoffUCG_BC"</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='15' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then save bc</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='16' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then add bc from sheet "OneoffUCG_BC" to column "26" of bc data sheet "ConversionBC"</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
 		</li>
 	</ul>
 </div>
@@ -322,12 +320,12 @@
 					<div class='category-heading'>
 						<span class='category-name'>@AllBCCreation_datasetup</span>
 						<span class='category-status right'>
-							<span class='label pass'>1</span>
+							<span class='label pass'>2</span>
 						</span>
 					</div>
 					<div class='category-content hide'>
 						<div class='category-status-counts'>
-							<span class='label green accent-4 white-text'>Passed: 1</span>
+							<span class='label green accent-4 white-text'>Passed: 2</span>
 							
 							
 						</div>
@@ -343,8 +341,13 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Jun 9, 2023 03:48:02 PM</td>
+										<td>Jun 21, 2023 12:52:20 PM</td>
 										<td class='linked' test-id='1'>Test suite for Broadcast creation</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>Jun 21, 2023 12:52:20 PM</td>
+										<td class='linked' test-id='3'>Test suite for Broadcast creation.create BC to verify UCG Exclusion.create BC to verify UCG Exclusion</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -354,7 +357,7 @@
 				</li>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@UCGcreation</span>
+						<span class='category-name'>@UCGExclusionBC</span>
 						<span class='category-status right'>
 							<span class='label pass'>1</span>
 						</span>
@@ -377,8 +380,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Jun 9, 2023 03:48:02 PM</td>
-										<td class='linked' test-id='2'>Test suite for Broadcast creation.create a UCG and activate for the selenium UCG List</td>
+										<td>Jun 21, 2023 12:52:20 PM</td>
+										<td class='linked' test-id='3'>Test suite for Broadcast creation.create BC to verify UCG Exclusion.create BC to verify UCG Exclusion</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -411,8 +414,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Jun 9, 2023 03:48:02 PM</td>
-										<td class='linked' test-id='2'>Test suite for Broadcast creation.create a UCG and activate for the selenium UCG List</td>
+										<td>Jun 21, 2023 12:52:20 PM</td>
+										<td class='linked' test-id='3'>Test suite for Broadcast creation.create BC to verify UCG Exclusion.create BC to verify UCG Exclusion</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -453,25 +456,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>8</div>
+					<div class='panel-lead'>13</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Jun 9, 2023 03:48:02 PM</div>
+					<div class='panel-lead'>Jun 21, 2023 12:52:19 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Jun 9, 2023 04:05:23 PM</div>
+			 		<div class='panel-lead'>Jun 21, 2023 12:57:31 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>1,041,350ms</div>
+					<div class='panel-lead'>312,050ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -487,12 +490,12 @@
 						</tr>
 						<tr>
 							<td>@AllBCCreation_datasetup</td>
-							<td>1</td>
+							<td>2</td>
 							<td>0</td>
 							<td>0</td>
 						</tr>
 						<tr>
-							<td>@UCGcreation</td>
+							<td>@UCGExclusionBC</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -533,7 +536,7 @@
 				infoChild: 0,
 				exceptionsChild: 0,
 				
-				passGrandChild: 8,
+				passGrandChild: 13,
 				failGrandChild: 0,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,

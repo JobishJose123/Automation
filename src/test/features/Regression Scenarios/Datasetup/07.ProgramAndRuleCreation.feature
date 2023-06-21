@@ -26,15 +26,15 @@ Then create new offer from sheet "STVSMS" with product "fullDetails" rewards "on
 Then click on create new ofer button
 Then create new offer from sheet "rechargeSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "A_track_Sel"
 Then click on create new ofer button
-#Then create new offer from sheet "rechargegobal" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
-#Then click on create new ofer button
+Then create new offer from sheet "rechargegobal" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Global Response App"
+Then click on create new ofer button
 Then create new offer from sheet "usageBasedSMS" with product "fullDetails" rewards "oneruleonereward" with creative type "singlecreative" and track Source "Usage Metric"
 Then navigate back to offer management
 Then Navigate to Offer Catalogue
 Then Create New Offer Catalogue from sheet "IMcatalog"
 Then Add "STVSMS" offer to Offer Catalogue
 Then Add "rechargeSMS" offer to Offer Catalogue
-#Then Add "rechargegobal" offer to Offer Catalogue
+Then Add "rechargegobal" offer to Offer Catalogue
 Then Add "usageBasedSMS" offer to Offer Catalogue
 Then navigate back to offer management
 Then Navigate to Offer Catalogue
@@ -183,7 +183,7 @@ Then check trigger touchpoint in grid "rteTrigger_tp"
 
 ############################ PROGRAM AND RULE CREATION FOR UI VERIFICATION ######################################
 	 
-@NDX-7144 @NDX-7141 @NDX-7140 @NDX-7137 @NDX-7136 @NDX-7133 @NDX-7132 @NDX-7125 @NDX-5711 @NDX-9983 @NDX-9979  @NDX-9980 @NDX-9981 @NDX-9982 @initBrowser  @closeBrowser
+@NDX-7144 @NDX-7141 @NDX-7140 @NDX-7137 @NDX-7136 @NDX-7133 @NDX-7132 @NDX-7125 @NDX-5711 @NDX-9983 @NDX-9979  @NDX-9980 @NDX-9981 @NDX-9982 @initBrowser  
 Scenario Outline: Verify create  <programRuleSheet> with tp <tp>
 Given login
 Then navigate to intent management
@@ -207,9 +207,9 @@ Examples:
 	
 
  	 
- ########################### PROGRAM AND RULE CREATION FOR FUNCTIONALITY VERIFICATION #################################
+########################### PROGRAM AND RULE CREATION FOR FUNCTIONALITY VERIFICATION #################################
  
-@NDX-9978 @initBrowser  @closeBrowser
+@NDX-9978 @initBrowser  
 Scenario Outline: Verfiy creation of <programRuleSheet> with <tp>
 Given login
 Then navigate to intent management
@@ -232,11 +232,11 @@ Then add program data functionality from sheet "<programRuleSheet>" and offer "u
 
 Examples: 
 |programRuleSheet|tp|
-|SMSprogram|smsTouchpoint|
+#|SMSprogram|smsTouchpoint|
 |APIprogram|apiTouchpointGR|
-|USSDprogram|ussdTouchpoint|
-|CCprogram|CCTouchpoint|
-|triggerrprogram|triggerTouchpoint|	
+#|USSDprogram|ussdTouchpoint|
+#|CCprogram|CCTouchpoint|
+#|triggerrprogram|triggerTouchpoint|	
 	
 
  

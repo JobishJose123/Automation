@@ -11,8 +11,8 @@ Then filter program and rule created from sheet "CCprogram" and offer "rechargeS
 Then navigate to intent management
 Then navigate to programs
 Then choose program from sheet "CCprogram"
-#Then filter rule from sheet "CCprogram"
-#Then edit new rule without enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
+Then filter rule from sheet "CCprogram"
+Then edit new rule without enddate from sheet "CCprogram" and offer "rechargeSMS" and touchpoint from sheet "CCTouchpoint"
 Then "activate" rule
 Then filter rule from sheet "CCprogram"
 Then wait until rule is picked
@@ -39,10 +39,13 @@ Then verify condition Conversion is persisted with offer from sheet "rechargeSMS
 Scenario: Verify fulfillment processing for recharge offer with customer care touch point.
 Then verify condition Fulfillment Success is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "CCTouchpoint" and rule from sheet "CCprogram"
 
+
+###===== API program =====###
+
 @NDX-Bestfit @initBrowser  
 Scenario: Verify the request processing through API touchpoint
 Given login
-#Then filter program and rule created from sheet "APIprogramBestfit" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
+Then filter program and rule created from sheet "APIprogramBestfit" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
 Then navigate to intent management
 Then navigate to programs
 Then choose program from sheet "APIprogramBestfit"
@@ -67,7 +70,7 @@ Then verify condition Offer Accepted is persisted with offer from sheet "recharg
 @NDX-CustomLogicP&R @initBrowser  
 Scenario: Verify the request processing through API touchpoint
 Given login
-#Then filter program and rule created from sheet "APIprogramBestfit" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
+Then filter program and rule created from sheet "APIprogramBestfit" and offer "rechargeSMS" of excelfile "IMdatafunctionality"
 Then navigate to intent management
 Then navigate to programs
 Then choose program from sheet "APIprogramCustomLogic"
@@ -107,12 +110,12 @@ Then wait until rule is picked
 @apihit @initBrowser @closeBrowser 
 Scenario: api touchpoint hit
 Given login
-Then get-offer api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
-Then verify accept api-server for "9745081104" with touchpoint "apiTouchpointGR" and rule "APIprogram"
+Then get-offer api-server for "9745081123" with touchpoint "apiTouchpointGR" and rule "APIprogram"
+Then verify accept api-server for "9745081123" with touchpoint "apiTouchpointGR" and rule "APIprogram"
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9745081104"
+Then search msisdn "9745081123"
 Then click on events tab
 Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
     
@@ -141,8 +144,9 @@ Then navigate to programs
 Then choose program from sheet "USSDprogram"
 Then filter rule from sheet "USSDprogram"
 Then edit new rule without enddate from sheet "USSDprogram" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
-Then wait until rule is picked
 Then "activate" rule
+Then wait until rule is picked
+
 
     
 @USSDHIT @initBrowser @closeBrowser
@@ -504,7 +508,6 @@ Then wait until rule is picked
   Given login
     Then get-offer USSD for "9745081121" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "12345"
     Then get-offer USSD for "9745081121" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "12345"
-    Then get-offer USSD for "9745081121" with touchpoint "ussdTouchpoint" and rule "rule" type "2" msg "1" where cid= "12345"
     
     
  @NDX-9868 @initBrowser  
@@ -670,9 +673,10 @@ Then navigate to programs
 Then choose program from sheet "USSDprogram"
 Then filter rule from sheet "USSDprogram"
 Then edit new rule without enddate from sheet "USSDprogram" and offer "usageBasedSMS" and touchpoint from sheet "ussdTouchpoint"
+Then "activate" rule
 Then wait until rule is picked
 
-     @USSDHIT @initBrowser @closeBrowser
+  @USSDHIT @initBrowser @closeBrowser
   Scenario: USSD touchpoint hit
 Given login
 Then get-offer USSD for "9745081121" with touchpoint "ussdTouchpoint" and rule "rule" type "1" msg "1" where cid= "12345"
