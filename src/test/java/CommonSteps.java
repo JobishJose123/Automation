@@ -137,7 +137,7 @@ public class CommonSteps extends Init {
 	@Given("^login$")
     public void loginuser() throws Exception {
      driver.get("https://"+p.getValue("env"));
-	 Thread.sleep(15000);
+	 Thread.sleep(35000);
      loginPage.login(p.getValue("username"), p.getValue("password"));
 	 Thread.sleep(5000);
 	 try {

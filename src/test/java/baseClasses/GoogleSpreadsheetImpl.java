@@ -29,7 +29,7 @@ import java.util.List;
 public class GoogleSpreadsheetImpl {
     private static final String APPLICATION_NAME = "Google Sheets API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private static final String TOKENS_DIRECTORY_PATH = "GogoleCredentialTokens";
+    private static final String TOKENS_DIRECTORY_PATH = "GoogleCredentialTokens";
     private static String SPREADSHEET_ID;
     //= "1WpzKjJUrs4tRBIreEIsZAPkb3QFDmWIlnFRwbTVcMAY";
     /**

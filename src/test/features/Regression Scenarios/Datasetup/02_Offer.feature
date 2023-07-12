@@ -108,8 +108,7 @@ Feature: Test suite on Offer creation
  		Then verify "informationalWAP" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "informationalWAP" with string informationalWAP offer with fullDetails product
  		
- 		@NDX-STVWAP
-   @initBrowser @closeBrowser
+ 		@NDX-STVWAP @initBrowser @closeBrowser
    Scenario: STVWAP offer
      Given login
  		When navigate to precision marketer
@@ -119,8 +118,7 @@ Feature: Test suite on Offer creation
  		Then verify "STVWAP" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "STVWAP" with string STVWAP offer with fullDetails product
  		
- 		@NDX-usageBasedWAP
-   @initBrowser @closeBrowser
+ 		@NDX-usageBasedWAP @initBrowser @closeBrowser
    Scenario: usageBasedWAP offer
      Given login
  		When navigate to precision marketer
@@ -130,8 +128,7 @@ Feature: Test suite on Offer creation
  		Then verify "usageBasedWAP" offer in grid
 # 		Then save "offerInputData" data to spreadsheet from "usageBasedWAP" with string usageBasedWAP offer with fullDetails product
  		
- 		@NDX-usageBasedSMS
-   @initBrowser 
+ 		@NDX-usageBasedSMS @initBrowser  @closeBrowser
    Scenario: usageBasedSMS offer
      Given login
  		When navigate to precision marketer
@@ -141,7 +138,7 @@ Feature: Test suite on Offer creation
  		Then verify "usageBasedSMS" offer in grid
  		Then save "offerInputData" data to spreadsheet from "usageBasedSMS" with string usageBasedSMS offer with fullDetails product
  		
- 		@NDX-rechargeEmail @initBrowser 
+ 		@NDX-rechargeEmail @initBrowser  @closeBrowser 
    Scenario: rechargeEmail offer
      Given login
  		When navigate to precision marketer
@@ -201,8 +198,8 @@ Feature: Test suite on Offer creation
      Then navigate to precision marketer
      Then navigate to offer management
      Then navigate to offers
-     Then create new offer with multiple track from sheet "MultiTrackOffer-Seeding" with product "fullDetails"
-     Then verify "MultiTrackOffer-Seeding" offer in grid
+     Then create new offer with multiple track from sheet "MultiTrackOfferSeeding" with product "fullDetails"
+     Then verify "MultiTrackOfferSeeding" offer in grid
  #Then save "offerInputData" data to spreadsheet from "STVSMS" with string recharge sms offer with fullDetails product
     
     
@@ -239,10 +236,7 @@ Then verify "MultiRuleRewardOffer" offer in grid
  
  
  
- 
- 
- 
- 
+
      
 #     /**
 #      * this method is user for creating the offers with different types of rewards

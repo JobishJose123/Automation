@@ -2078,7 +2078,7 @@ public class IntentManagement extends Init {
 	public void waituntilRuleIsPicked() throws Throwable {
 		TimeoutImpl t = new TimeoutImpl();
 		t.startTimer();
-		while (programPage.getRuleLastRefreshTime().isEmpty() && t.checkTimerMin(15)) {
+		while (programPage.getRuleLastRefreshTime().isEmpty() && t.checkTimerMin(25)) {
 			Thread.sleep(20000);
 			driver.navigate().refresh();
 			Thread.sleep(4000);
@@ -3097,6 +3097,37 @@ public class IntentManagement extends Init {
 		commonObjects.enterFilterFormname(ruleName);
 		commonObjects.clickFilterApplyButton();
 	}
+	
+	
+	@Then("^wait until rule is picked from sheet \"([^\"]*)\"$")
+	public void wait_until_rule_is_picked_from_sheet(String ruleSheet) throws Throwable {
+		TimeoutImpl t = new TimeoutImpl();
+		t.startTimer();
+		while (programPage.getRuleLastRefreshTime().isEmpty() && t.checkTimerMin(25)) {
+			Thread.sleep(20000);
+			driver.navigate().refresh();
+			Thread.sleep(4000);
+			
+			////Filtering rule sheet //////////
+			eh.setExcelFile("ruleInputData", ruleSheet);
+			String ruleName = (eh.getCell(1, 0).toString());
+			Thread.sleep(10000);
+			jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']//parent::paper-icon-button");
+			commonObjects.enterFilterFormname(ruleName);
+			Thread.sleep(2000);
+			commonObjects.clickFilterResetButton();
+
+	//commonObjects.clickFilterIcon();
+			jswait.loadClick("//paper-icon-button[@icon='filter-list']//iron-icon[@id='icon']//parent::paper-icon-button");
+			Thread.sleep(2000);
+			commonObjects.enterFilterFormname(ruleName);
+			commonObjects.clickFilterApplyButton();
+			
+			System.out.println("Waiting for rule to be picked by Conveyor Belt");
+		}
+		
+	}
+	
 
 	@Then("^edit the rule from sheet \"([^\"]*)\" and product from sheet \"([^\"]*)\" and offer from sheet \"([^\"]*)\"  and touchpoint from sheet \"([^\"]*)\"$")
 	public void edit_the_rule_from_sheet_and_product_from_sheet_and_offer_from_sheet(String ruleSheet,

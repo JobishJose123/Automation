@@ -53,7 +53,7 @@ Then filter rule from sheet "APIprogramBestfit"
 Then edit new rule without enddate from sheet "APIprogramBestfit" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointBestfit"
 Then "activate" rule
 Then filter rule from sheet "APIprogramBestfit"
-Then wait until rule is picked
+Then wait until rule is picked from sheet "APIprogramBestfit"
 
 @apibestfithit @initBrowser @closeBrowser 
 Scenario: api touchpoint hit
@@ -78,18 +78,19 @@ Then filter rule from sheet "APIprogramCustomLogic"
 Then edit new rule without enddate from sheet "APIprogramCustomLogic" and offer "rechargeSMS" and touchpoint from sheet "apiTPCustomlogic"
 Then "activate" rule
 Then filter rule from sheet "APIprogramCustomLogic"
-Then wait until rule is picked
+Then wait until rule is picked from sheet "APIprogramCustomLogic"
 
 @apicustomlogichit @initBrowser @closeBrowser 
 Scenario: api touchpoint hit
 Given login
-Then get-offer api-server for "9745081104" with touchpoint "apiTPCustomlogic" and rule "APIprogramCustomLogic"
-Then verify accept api-server for "9745081104" with touchpoint "apiTPCustomlogic" and rule "APIprogramCustomLogic"
+Then get-offer api-server for "9745081181" with touchpoint "apiTPCustomlogic" and rule "APIprogramCustomLogic"
+Then verify accept api-server for "9745081181" with touchpoint "apiTPCustomlogic" and rule "APIprogramCustomLogic"
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9745081104"
+Then search msisdn "9745081181"
 Then click on events tab
+Then wait for 2 minutes
 Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTPCustomlogic" and rule from sheet "APIprogramCustomLogic"
 
 
@@ -105,18 +106,19 @@ Then filter rule from sheet "APIprogram"
 Then edit new rule without enddate from sheet "APIprogram" and offer "rechargeSMS" and touchpoint from sheet "apiTouchpointGR"
 Then "activate" rule
 Then filter rule from sheet "APIprogram"
-Then wait until rule is picked
+Then wait until rule is picked from sheet "APIprogram"
 
-@apihit @initBrowser @closeBrowser 
+@apihit  @apihitGR @initBrowser @closeBrowser 
 Scenario: api touchpoint hit
 Given login
-Then get-offer api-server for "9745081123" with touchpoint "apiTouchpointGR" and rule "APIprogram"
-Then verify accept api-server for "9745081123" with touchpoint "apiTouchpointGR" and rule "APIprogram"
+Then get-offer api-server for "9745081151" with touchpoint "apiTouchpointGR" and rule "APIprogram"
+Then verify accept api-server for "9745081151" with touchpoint "apiTouchpointGR" and rule "APIprogram"
 Then navigate to precision marketer
 Then navigate to reports
 Then navigate to customer profile
-Then search msisdn "9745081123"
+Then search msisdn "9745081151"
 Then click on events tab
+Then wait for 1 minutes
 Then verify condition Offer Accepted is persisted with offer from sheet "rechargeSMS" and touchpoint from sheet "apiTouchpointGR" and rule from sheet "APIprogram"
     
 @NDX-9878 @initBrowser 
@@ -145,7 +147,7 @@ Then choose program from sheet "USSDprogram"
 Then filter rule from sheet "USSDprogram"
 Then edit new rule without enddate from sheet "USSDprogram" and offer "rechargeSMS" and touchpoint from sheet "ussdTouchpoint"
 Then "activate" rule
-Then wait until rule is picked
+Then wait until rule is picked from sheet "USSDprogram"
 
 
     
@@ -188,7 +190,8 @@ Then navigate to programs
 Then choose program from sheet "SMSprogram"
 Then filter rule from sheet "SMSprogram"
 Then edit new rule without enddate from sheet "SMSprogram" and offer "rechargeSMS" and touchpoint from sheet "smsTouchpoint"
-Then wait until rule is picked
+Then "activate" rule
+Then wait until rule is picked from sheet "SMSprogram"
 	
 @vcustlogin  @initBrowser @closeBrowser
 Scenario: login to Vcust for SMS hit
@@ -293,8 +296,7 @@ Then choose program from sheet "APIprogram"
 Then filter rule from sheet "APIprogram"
 Then edit new rule without enddate from sheet "APIprogram" and offer "STVSMS" and touchpoint from sheet "apiTouchpointGR"
 Then "activate" rule
-Then filter rule from sheet "APIprogram"
-Then wait until rule is picked
+Then wait until rule is picked from sheet "APIprogram"
     
 @apihit @initBrowser @closeBrowser 
 Scenario: api touchpoint hit
@@ -329,7 +331,8 @@ Then navigate to programs
 Then choose program from sheet "USSDprogram"
 Then filter rule from sheet "USSDprogram"
 Then edit new rule without enddate from sheet "USSDprogram" and offer "STVSMS" and touchpoint from sheet "ussdTouchpoint"
-Then wait until rule is picked
+Then "activate" rule
+Then wait until rule is picked from sheet "USSDprogram"
     
 @USSDHIT @initBrowser @closeBrowser
 Scenario: USSD touchpoint hit
@@ -363,7 +366,8 @@ Then navigate to programs
 Then choose program from sheet "SMSprogram"
 Then filter rule from sheet "SMSprogram"
 Then edit new rule without enddate from sheet "SMSprogram" and offer "STVSMS" and touchpoint from sheet "smsTouchpoint"
-Then wait until rule is picked
+Then "activate" rule
+Then wait until rule is picked from sheet "SMSprogram"
 
 @NDX-9869  @initBrowser @closeBrowser
 Scenario: login to Vcust for SMS hit
@@ -392,7 +396,8 @@ Then navigate to programs
 Then choose program from sheet "triggerrprogram"
 Then filter rule from sheet "triggerrprogram"
 Then edit new rule without enddate from sheet "triggerrprogram" and offer "STVSMS" and touchpoint from sheet "triggerTouchpoint"
-Then wait until rule is picked
+Then "activate" rule
+Then wait until rule is picked from sheet "triggerrprogram"
     
 @NDX-9868 @initBrowser  
 Scenario: conversion for trigger

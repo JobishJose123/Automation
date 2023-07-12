@@ -23,17 +23,18 @@ Scenario Outline: create offer
 	Then create new offer from sheet "<offerName>" with product "fullDetails" rewards "<ruleReward>" with creative type "<creativeType>" 
 	Examples: 
 		|offerName|creativeType|ruleReward|
-		#|rechargeSMS_Dynamic|singlecreative|oneruleonereward|
-		#|rechargeSMS|multiplecreative|oneruleonereward|
-		#|rechargeWAP|singlecreative|oneruleonereward|
-		#|rechargeEmail|singlecreative|oneruleonereward|
-		#|SeedingSMS|multiplecreative|oneruleonereward|
-		#|seedingWAPoffer|singlecreative|oneruleonereward|
-		#|SeedingSMS_Dynamic|singlecreative|oneruleonereward|
-		#|seedingEmail|singlecreative|oneruleonereward|
-		#|InfoOffer|singlecreative|oneruleonereward|
-		#|MultiTrackOffer|singlecreative|Multiplerulemultiplereward|
+		|rechargeSMS_Dynamic|singlecreative|oneruleonereward|
+		|rechargeSMS|multiplecreative|oneruleonereward|
+		|rechargeWAP|singlecreative|oneruleonereward|
+		|rechargeEmail|singlecreative|oneruleonereward|
+		|SeedingSMS|multiplecreative|oneruleonereward|
+		|seedingWAPoffer|singlecreative|oneruleonereward|
+		|SeedingSMS_Dynamic|singlecreative|oneruleonereward|
+		|seedingEmail|singlecreative|oneruleonereward|
+		|InfoOffer|singlecreative|oneruleonereward|
+		|MultiTrackOffer|singlecreative|Multiplerulemultiplereward|
 		|MultiTrackOfferSeeding|singlecreative|Multiplerulemultiplereward|
+		|MultiRuleRewardOffer|singlecreative|Singletrackmultiplereward|
 		#|ReminderOffer|singlecreative|oneruleonereward|
 		
 @CreateOfferCatalog11 @initBrowser @closeBrowser 
@@ -44,17 +45,18 @@ Scenario: Verify Creating Offer Catalogue
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue 
 	Then Create New Offer Catalogue from sheet "defaultCatalog" 
-	#Then Add "rechargeSMS" offer to Offer Catalogue 
-	#Then Add "SeedingSMS" offer to Offer Catalogue 
-	#Then Add "rechargeWAP" offer to Offer Catalogue 
-	#Then Add "seedingWAPoffer" offer to Offer Catalogue 
-	#Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue 
-	#Then Add "seedingEmail" offer to Offer Catalogue 
+	Then Add "rechargeSMS" offer to Offer Catalogue 
+	Then Add "SeedingSMS" offer to Offer Catalogue 
+	Then Add "rechargeWAP" offer to Offer Catalogue 
+	Then Add "seedingWAPoffer" offer to Offer Catalogue 
+	Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue 
+	Then Add "seedingEmail" offer to Offer Catalogue 
 	Then Add "rechargeEmail" offer to Offer Catalogue 
-	#Then Add "rechargeSMS_Dynamic" offer to Offer Catalogue 
+	Then Add "rechargeSMS_Dynamic" offer to Offer Catalogue 
 	Then Add "InfoOffer" offer to Offer Catalogue 
 	Then Add "MultiTrackOffer" offer to Offer Catalogue 
 	Then Add "MultiTrackOfferSeeding" offer to Offer Catalogue 
+	Then Add "MultiRuleRewardOffer" offer to Offer Catalogue
 	#Then Add "ReminderOffer" offer to Offer Catalogue
 	
 @createCampaignCategory @initBrowser @closeBrowser 
@@ -97,7 +99,8 @@ Scenario Outline: Create broadcast to verify bc functionality(except trigger)
 		#|one-offBC|rechargeEmail|usageMetric|Create|no limit|no limit|none|single creative|none|none|2|activate|BCDataStorage|
 		#|one-offBC|rechargeSMS_Dynamic|sharedMetricOtherPartner|Create|no limit|no limit|none|single creative|none|none|3|activate|BCDataStorage|
 		#|OneOff-Info|InfoOffer|targetall|None|no limit|no limit|none|single creative|none|none|23|activate|BCDataStorage| 
-		#|oneoff-multiTrack|MultiTrackOffer|targetall|None|no limit|fixedPercentage|none|single creative|none|At|14|save|ConversionBC|         
+		#|oneoff-multiTrack|MultiTrackOffer|targetall|None|no limit|fixedPercentage|none|single creative|none|At|14|save|ConversionBC| 
+		|OneoffB_SingletrackMultiplerule|MultiRuleRewardOffer|targetall|None|no limit|fixedPercentage|none|single creative|none|At|28|save|ConversionBC|        
 		#
 		#|recurrBCDaily|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|At|none|2|save|ConversionBC|
 		#|recurrBCWeekly|rechargeWAP|profilefieldNV|Create|no limit|no limit|none|single creative|none|none|4|activate|BCDataStorage|
@@ -116,7 +119,7 @@ Scenario Outline: Create broadcast to verify bc functionality(except trigger)
 		#|seedingRecurringBC|seedingWAPoffer|segmentAgeGT40|Saved Segments|no limit|no limit|none|single creative|none|none|10|activate|BCDataStorage|
 		#|seedingRecurringBC|seedingEmail|targetall|None|no limit|no limit|none|single creative|none|none|11|activate|BCDataStorage|
 		#|seedingRecurringBC|SeedingSMS_Dynamic|customerListNotSubscribed|None|no limit|no limit|none|single creative|none|none|12|activate|BCDataStorage|
-		|seedingRecurring-MultiBC|MultiTrackOfferSeeding|targetall|None|no limit|fixedPercentage|none|single creative|none|none|16|save|ConversionBC|
+		#|seedingRecurring-MultiBC|MultiTrackOfferSeeding|targetall|None|no limit|fixedPercentage|none|single creative|none|none|16|save|ConversionBC|
 		
 	@NDX-createTriggerWithDKJob @initBrowser @closeBrowser 
 Scenario: create streaming attribute and trigger and dk job for trigger 
@@ -160,19 +163,19 @@ Scenario Outline: Create all type of trigger bc to verify trigger bc functionali
 	
 	Examples: 
 		|bcSheet|offerName|targetCondition|targetType|targetCount|cgCount|DNCType|creative|endType|expiryType|i|status|BCDataSheet|
-		#|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|5|save|ConversionBC|
-		#|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|13|activate|BCDataStorage|
-		#|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|14|activate|BCDataStorage|
+		|TriggerOneoff|rechargeSMS|targetall|None|no limit|fixedPercentage|none|single creative|never|none|5|save|ConversionBC|
+		|TriggerOneoff|SeedingSMS|targetall|None|no limit|no limit|none|multiple creative|never|none|13|activate|BCDataStorage|
+		|TriggerOneoff|rechargeEmail|targetall|None|no limit|fixedPercentage|none|single creative|never|none|14|activate|BCDataStorage|
 		|TriggerOneoff|InfoOffer|targetall|None|no limit|fixedPercentage|none|single creative|never|none|28|activate|BCDataStorage|
-		#|TriggerOneoff|MultiTrackOffer|targetall|None|no limit|no limit|none|single creative|never|none|24|save|ConversionBC|
-		#|TriggerOneoff|MultiTrackOffer-Seeding|targetall|None|no limit|fixedPercentage|none|single creative|never|none|26|activate|BCDataStorage|
+		|TriggerOneoff|MultiTrackOffer|targetall|None|no limit|no limit|none|single creative|never|none|24|save|ConversionBC|
+		|TriggerOneoff|MultiTrackOfferSeeding|targetall|None|no limit|fixedPercentage|none|single creative|never|none|26|activate|BCDataStorage|
 		#
-		#|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|never|none|6|save|ConversionBC|
-		#|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|15|activate|BCDataStorage|
-		#|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|7|save|ConversionBC|
-		#|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|single creative|At|At|16|activate|BCDataStorage|
-		#|TriggerReccurringBC|MultiTrackOffer|targetall|None|no limit|no limit|none|single creative|none|none|27|activate|BCDataStorage|
-		#|TriggerReccurringBC|MultiTrackOffer-Seeding|targetall|None|no limit|no limit|none|single creative|none|none|25|save|ConversionBC|
+		|TriggerReccurringBC|rechargeSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|never|none|6|save|ConversionBC|
+		|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|never|none|15|activate|BCDataStorage|
+		|TriggerReccurringBC|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|7|save|ConversionBC|
+		|TriggerReccurringBC|rechargeSMS|targetall|None|no limit|no limit|none|single creative|At|At|16|activate|BCDataStorage|
+		|TriggerReccurringBC|MultiTrackOffer|targetall|None|no limit|no limit|none|single creative|none|none|27|activate|BCDataStorage|
+		|TriggerReccurringBC|MultiTrackOffer-Seeding|targetall|None|no limit|no limit|none|single creative|none|none|25|save|ConversionBC|
 		
 		
 		#//////////////////////////////BC CREATION FOR BLACKOUT MANUAL AND RENDER SCHEDULE BEFORE AND AT//////////////////////// 
@@ -333,7 +336,7 @@ Scenario Outline: create BC with facebook offers
 														
 ################################UCG Creation or Universal Control group############################
 
-#Add "Selenium_UCG_List", "sel list_q11" and Run @NX-createProfileField and upload "selenium_list_profile" Through dk job
+#Add "Selenium_UCG_List", "Selenium_UCG_Extension_List" and Run @NX-createProfileField and upload "selenium_list_profile" Through dk job
 
 
 
@@ -343,22 +346,24 @@ Given login
 Then navigate to configuration management 
 Then navigate to control group 
 Then Create a new UCG button 
-Then enter details with base list "Selenium_UCG_List" and outlier kpi "Customer Profile Info" with "Age_q11" and extend list "sel list_q11"
+Then enter details with base list "Selenium_UCG_List" and outlier kpi "Customer Profile Info" with "Age_q11" and extend list "Selenium_UCG_Extension_List"
 Then enter the details to the metrics tab and add variance calculation KPI "Customer Profile Info" and "Age_q11" 															
 Then enter Schedule tab with end "At" CG Reccurance pattern "none" and CG extension pattern "Every week"
-Then wait until the UCG change to "Active"												
-															
-@UCGExclusionBC @initBrowser 
-Scenario Outline: create BC to verify UCG Exclusion
+Then wait until the UCG change to "Active"
+Then activate the UCG Extension											
+Then wait until the UCG Extension status change to "Active"	
+														
+@UCGOneoffExclusionBC @initBrowser 
+Scenario Outline: create One off bc BC to verify UCG Exclusion
 Given login 
 Then navigate to precision marketer 
-Then wait for 1 minutes 
+#Then wait for 1 minutes 
 Then navigate to life cycle marketing 
 Then navigate to campaign category from sheet "CampaignCategory" 
 Then naigate to "campaignBC" campaign view broadcasts 
 Then click create new broadcast button 
 Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "none"  
-Then enter target tab details with UCG list "Selenium_UCG_List" target condition targetall type "None" TG "no limit" CG "no limit" DNC "none" 
+Then enter target tab details with UCG list "Selenium_UCG_Combined_List" target condition targetall type "None" TG "no limit" CG "no limit" DNC "none" 
 Then enter choose offer tab from sheet "<offerSheet>" for bc from sheet "<bcSheet>" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions" 
 Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "<bcSheet>" 
 Then save bc 
@@ -368,8 +373,26 @@ Examples:
 	|OneoffUCG_BC|rechargeSMS|26|
 	
 	
-	
-															
+														
+@UCGReccurExclusionBC @initBrowser 
+Scenario Outline: create a reccuring  BC to verify UCG Exclusion 
+Given login 
+Then navigate to precision marketer 
+#Then wait for 1 minutes 
+Then navigate to life cycle marketing 
+Then navigate to campaign category from sheet "CampaignCategory" 
+Then naigate to "campaignBC" campaign view broadcasts 
+Then click create new broadcast button 
+Then create bc from sheet "<bcSheet>" with inventory "Unlimited" and trigger "none"  	
+Then enter target tab details with UCG list "Selenium_UCG_Combined_List" target condition targetall type "None" TG "no limit" CG "no limit" DNC "none" 
+Then enter choose offer tab from sheet "<offerSheet>" for bc from sheet "<bcSheet>" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions" 
+Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "none" from sheet "<bcSheet>" 
+Then save bc 
+Then add bc from sheet "<bcSheet>" to column "<i>" of bc data sheet "ConversionBC"
+Examples:
+	|bcSheet|offerSheet|i|
+	|ReccurUCG_BC|rechargeSMS|27|			
+												
 															
 #==================================================================================================================================
 	

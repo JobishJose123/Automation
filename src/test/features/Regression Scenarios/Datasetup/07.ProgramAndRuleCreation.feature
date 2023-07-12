@@ -232,11 +232,11 @@ Then add program data functionality from sheet "<programRuleSheet>" and offer "u
 
 Examples: 
 |programRuleSheet|tp|
-#|SMSprogram|smsTouchpoint|
+|SMSprogram|smsTouchpoint|
 |APIprogram|apiTouchpointGR|
-#|USSDprogram|ussdTouchpoint|
-#|CCprogram|CCTouchpoint|
-#|triggerrprogram|triggerTouchpoint|	
+|USSDprogram|ussdTouchpoint|
+|CCprogram|CCTouchpoint|
+|triggerrprogram|triggerTouchpoint|	
 	
 
  

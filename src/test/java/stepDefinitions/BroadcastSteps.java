@@ -77,6 +77,12 @@ public class BroadcastSteps extends Init {
 
 	private String targetRenderTime;
 
+	private String outlierRemoved;
+
+	private String totalcount;
+
+	private String memberCount;
+
 	@Then("^check if create new bc lands in details tab$")
 	public void checkLandingOfCreateNewBc() throws Throwable {
 		broadcastPageObjects.enterBroadcastName("check");
@@ -4912,6 +4918,31 @@ public void enter_Schedule_tab_with_end_CG_Reccurance_pattern_and_CG_extension_p
 }
 }
 	
+@Then("^wait until the UCG Extension status change to \"([^\"]*)\"$")
+public void wait_until_the_UCG_Extension_status_change_to(String status) throws Throwable {
+   
+	//System.out.println(status);
+	String statusOfUCG =  broadcastPageObjects.getTopUCGstatus();
+	System.out.println(statusOfUCG);
+	TimeoutImpl t = new TimeoutImpl();
+	t.startTimer();
+	//commonObjects.toggleAutoRefresh();
+	while (!statusOfUCG.equalsIgnoreCase(status)  && !statusOfUCG.equalsIgnoreCase("Failed") && t.checkTimerMin(25)) {
+	    statusOfUCG = broadcastPageObjects.getTopUCGstatus();
+		System.out.println(statusOfUCG);
+		Thread.sleep(3000);
+		
+		if(statusOfUCG.equalsIgnoreCase("Failed"))
+		{
+			System.out.println("UCG Failed");
+			break;
+		}
+	}
+
+	Assert.assertTrue("Invalid status of UCG", statusOfUCG.equalsIgnoreCase(status));
+	
+	
+}
 
 	
 	@Then("^wait until the UCG change to \"([^\"]*)\"$")
@@ -4938,6 +4969,41 @@ public void enter_Schedule_tab_with_end_CG_Reccurance_pattern_and_CG_extension_p
 		Assert.assertTrue("Invalid status of UCG", statusOfUCG.equalsIgnoreCase(status));
 	   
 	}
+	
 
+	@Then("^activate the UCG Extension$")
+	public void activate_the_UCG_Extension() throws Throwable {
+	 
+		broadcastPageObjects.activateUCGExtension();
+		
+	}
+	
+	@Then("^view UCG Target details$")
+	public void view_UCG_Target_details() throws Throwable {
+		
+		broadcastPageObjects.viewUCGDetails();
+	    
+	}
+	
+	@Then("^Verify the UCG target condition details from sheet \"([^\"]*)\"$")
+	public void verify_the_UCG_target_condition_details_from_sheet(String targetCountSheet) throws Throwable {
+	
+		   broadcastPageObjects.verifyUCGDetails(targetCountSheet);
+
+		
+	}
+	
+	@Then("^verify the cg exclusion and target count from sheet \"([^\"]*)\"$")
+	public void verify_the_cg_exclusion_and_target_count_from_sheet(String targetCountSheet) throws Throwable {
+		
+		
+		eh.setExcelFile("parallelRunBC", targetCountSheet);
+		String targetCount = eh.getCellByColumnName("TargetCount");
+		String MemberCount = eh.getCellByColumnName("MemberCount");
+		broadcastPageObjects.verifyCGTargetCount(targetCount ,MemberCount);
+	   
+	}
+	
+	
 
 }// class

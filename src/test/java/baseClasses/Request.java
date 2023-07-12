@@ -263,6 +263,7 @@ public class Request extends Init{
                 ContentType.APPLICATION_JSON);
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(urlStr);
+        request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(entity);
         HttpResponse response = httpClient.execute(request);

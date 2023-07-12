@@ -108,7 +108,7 @@ public class OfferSteps extends Init {
 		jswait.loadClick("//data-table-cell[contains(.,'" + eh.getCell(1, 0).toString() + "')]");
 		
 		try{
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(.,'Channel Type')]//following::label[contains(.,'" + eh.getCellByColumnName("Grid Channel") + "')]")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(.,'Channel Type')]//following::label[contains(.,'" + eh.getCellByColumnName("Channel") + "')]")));
 		}catch(Exception e) {
 			System.err.println("Grid label Column not found in Excel. Checking channel name in Grid");
 			if(!eh.getCell(1, 3).toString().equalsIgnoreCase("WAP Push")) {

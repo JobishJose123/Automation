@@ -72,8 +72,7 @@ Then wait until status of cluster is complete
 
  
  @NDX-5549   @initBrowser  @closeBrowser
-Scenario: Edit target condition of a Segment Analysis job(Migration) which
-is in Completed status
+Scenario: Edit target condition of a Segment Analysis job(Migration) which is in Completed status
 Given login
 Then navigate to intent management
 Then navigate to analytics

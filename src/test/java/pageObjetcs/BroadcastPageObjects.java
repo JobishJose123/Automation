@@ -147,7 +147,7 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = "//paper-item[text()='" + SELENIUM_OPTIONAL_DND_LIST + "']")
 	private WebElement seleniumDNDOptionalList;
 
-	@FindBy(xpath = ".//paper-button[contains(.,'DNC Exclusions')]")
+	@FindBy(xpath = ".//paper-button[contains(.,'DNC Exclusion')]")
 	private WebElement DNCExclusionOption;
 	@FindBy(xpath = ".//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']")
 	private WebElement DNCExclusionList;
@@ -271,6 +271,9 @@ public class BroadcastPageObjects extends Init {
 	private WebElement topBcStatusGridForSeedingChild;
 	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[6]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGridForSeedingrecurringChild;
+	@FindBy(xpath = "//div[@val='broadcastViews']//vaadin-grid-table-row[3]/vaadin-grid-table-cell[2]/vaadin-grid-cell-content")
+	private WebElement topBcStatusGridForrecurringNeverEndChild;
+	
 
 	@FindBy(xpath = "//div[@id ='mainContainer']//vaadin-grid-table-row[1]/vaadin-grid-table-cell[3]/vaadin-grid-cell-content")
 	private WebElement topBcStatusGridForUCG;
@@ -719,6 +722,21 @@ public class BroadcastPageObjects extends Init {
 	private WebElement cgExtensionTime;
 	@FindBy(xpath = "(//label[contains(.,'Time at which evaluation starts everyday')]//following::paper-button[contains(.,'OK')])[4]")
 	private WebElement cgExtensionTimeOK;
+	
+	@FindBy(xpath = "//vaadin-grid-table-body//vaadin-grid-table-row[1]//paper-icon-button[@icon='icons:more-vert']")
+	private WebElement ucgOptions;
+	@FindBy(xpath = "//paper-item[contains(.,'View Details')]")
+	private WebElement ucgViewDetails;
+	@FindBy(xpath = "//paper-item[contains(.,'Run Extension')]")
+	private WebElement ucgExtensionRun;
+	@FindBy(xpath = "//paper-dialog[contains(.,'Are you sure you want to Run Extension?')]//..//paper-button[contains(.,'Confirm')]")
+	private WebElement ucgExtensionConfirm;
+	@FindBy(xpath = "//h3[contains(.,'Universal Control Groups Snapshot ')]//..//paper-icon-button[@id='clear']")
+	private WebElement closeUCGDetails;
+	
+	
+	
+	
 
 	public void calculatedCountsCloseBtn() throws InterruptedException {
 		jswait.loadClick(calculatedCountsCloseBtn);
@@ -3259,6 +3277,14 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = "//data-table-cell[5]//iron-icon[@icon='icons:remove-circle']")
 	private List<WebElement> dncRemoveIcon;
 
+	private String totalcount;
+
+	private String memberCount;
+
+	private String outlierRemoved;
+
+	private String eligibleBase;
+
 	public void selectDNCList(String dndListType) throws InterruptedException {
 
 		Thread.sleep(2000);
@@ -3406,6 +3432,9 @@ public class BroadcastPageObjects extends Init {
 
 		} else if (bctype.equalsIgnoreCase("seedingRecurr")) {
 			status = topBcStatusGridForSeedingrecurringChild.getText();
+		}
+		else if (bctype.equalsIgnoreCase("ReccuringNever")) {
+			status = topBcStatusGridForrecurringNeverEndChild.getText();
 		}
 
 		return status;
@@ -4088,6 +4117,44 @@ public class BroadcastPageObjects extends Init {
 			jswait.loadClick(atRadiobtn);
 			jswait.loadClick(endDateInput);
 			Thread.sleep(2000);
+			
+
+			int currentDay = rightNow.get(Calendar.DAY_OF_MONTH);
+			if (currentDay == 30 || currentDay == 31) {
+				System.out.println(currentDay);
+				jswait.loadClick("(//div[@class='flex col self-stretch style-scope paper-calendar'])[4]");
+				
+				 String nextMonthDate2 = rightNow.get(Calendar.YEAR) + "-" + String.format("%02d", month + 1) + "-02";
+				   WebElement date2Element = driver.findElement(By.xpath(".//*[@id='months']//div[@date='" + nextMonthDate2 + "']"));
+				System.out.println(nextMonthDate2);
+				jswait.loadClick("(.//*[@id='months']//div[@date=('"+ nextMonthDate2 +"')])[2]");
+				jswait.loadClick(dateOkbtn);
+				Thread.sleep(2000);
+				
+			
+			jswait.loadClick("//label[contains(.,'End Date')]//following::input[2]");
+				Thread.sleep(2000);
+				WebElement num6 = driver.findElement(
+						By.xpath("(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+								+ (hours + 1) + "])[2]"));
+				builder.moveToElement(num6).click().build().perform();
+				Thread.sleep(2000);
+				WebElement num7 = driver.findElement(
+					By.xpath("(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+								+ (min - 2) + "])[2]"));
+				Thread.sleep(1000);
+				builder.moveToElement(num7).click().build().perform();
+				if (am_pm == 0)
+					jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+				else
+					jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+
+				jswait.loadClick(timeOkbtn);
+
+			
+			}
+				else
+				{
 			jswait.loadClick("(.//*[@id='months']//div[@date=('" + date2 + "')])[2]");
 			jswait.loadClick(dateOkbtn);
 			Thread.sleep(2000);
@@ -4109,6 +4176,8 @@ public class BroadcastPageObjects extends Init {
 				jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
 
 			jswait.loadClick(timeOkbtn);
+			
+				}
 			{
 				if (recurrencePattern.equalsIgnoreCase("daily")) {
 					jswait.loadClick(recurrencePatternInput);
@@ -4166,6 +4235,7 @@ public class BroadcastPageObjects extends Init {
 				WebElement num9 = driver.findElement(
 						By.xpath("(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
 								+ (min + 1) + "])[3]"));
+				System.out.println(num9);
 				Thread.sleep(1000);
 				builder.moveToElement(num9).click().build().perform();
 				if (am_pm == 0)
@@ -4383,7 +4453,7 @@ public class BroadcastPageObjects extends Init {
 	public void viewBCbtn(String bcToView, String bctype) throws Exception {
 		Thread.sleep(3000);
 		if (bcToView.equalsIgnoreCase("recurringchildbc")) {
-			System.out.println("++++++++++++++++++++ to view is the recurring child bc thatis third column");
+			System.out.println("++++++++++++++++++++ to view is the recurring child bc that is third column");
 			jswait.loadClick(recurringChildOptionIcon);
 		}
 		if (bcToView.equalsIgnoreCase("RecurringChildAt") || bcToView.equalsIgnoreCase("seedingonetime-messaging")) {
@@ -4758,6 +4828,28 @@ public class BroadcastPageObjects extends Init {
 						+ targetCount + "')][1]"))));
 
 	}
+	
+	public void verifyCGTargetCount(String targetCount , String CgCount) throws Exception {
+		
+		
+		System.out.println("==== Total Target count is ==== "+ targetCount);
+		System.out.println("==== Control Group Exclusion Count count is ==== "+ CgCount);
+		Thread.sleep(3000);
+		jswait.loadClick(ViewTargetDetails);
+		Thread.sleep(3000);
+		Assert.assertTrue(jswait.checkVisibility(driver
+				.findElement(By.xpath("//p[contains(.,'Target Count')]//following::p[contains(.,'"
+						+ targetCount + "')][1]"))));
+		Thread.sleep(3000);		
+		Assert.assertTrue(jswait.checkVisibility(driver
+				.findElement(By.xpath("//p[contains(.,'Control Group Exclusion Count')]//following::p[contains(.,'"
+						+ CgCount + "')][1]"))));
+		
+
+	}
+	
+	
+	
 
 	public void verifyDynamicTagOfTheBC(String dynamicTag, String bcName, String campaignName) throws Exception {
 		CustomerProfilePage CustomerProfilePage = new CustomerProfilePage();
@@ -5701,7 +5793,8 @@ public class BroadcastPageObjects extends Init {
 		if (min == 0) {
 			min += 5;
 		}
-
+		
+		
 		System.out.println("Inside UCG Scheduling");
 		Thread.sleep(5000);
 		if (targetRenderTime.equalsIgnoreCase("UCG schedule before")) {
@@ -5749,6 +5842,7 @@ public class BroadcastPageObjects extends Init {
 			jswait.loadClick("//vaadin-combo-box-item[contains(.,'GMT+05:30')]");
 			Thread.sleep(1000);
 
+			{
 			if (endType.equalsIgnoreCase("none")) {
 				System.out.println("end type :" + endType);
 				jswait.loadClick(neverRadiobtn);
@@ -5759,11 +5853,50 @@ public class BroadcastPageObjects extends Init {
 				jswait.loadClick(atRadiobtn);
 				jswait.loadClick("//label[contains(.,'End Date')]//following::input[1]");
 				Thread.sleep(2000);
-				jswait.loadClick("(.//*[@id='months']//div[@date=('" + date2 + "')])[2]");
+				
+				int currentDay = rightNow.get(Calendar.DAY_OF_MONTH);
+				if (currentDay == 30 || currentDay == 31) {
+					System.out.println(currentDay);
+					jswait.loadClick("(//div[@class='flex col self-stretch style-scope paper-calendar'])[4]");
+					
+					 String nextMonthDate2 = rightNow.get(Calendar.YEAR) + "-" + String.format("%02d", month + 1) + "-02";
+					   WebElement date2Element = driver.findElement(By.xpath(".//*[@id='months']//div[@date='" + nextMonthDate2 + "']"));
+					System.out.println(nextMonthDate2);
+					jswait.loadClick("(.//*[@id='months']//div[@date=('"+ nextMonthDate2 +"')])[2]");
+					jswait.loadClick("(//paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2])");
+					Thread.sleep(2000);
+					
+				
+				jswait.loadClick("//label[contains(.,'End Date')]//following::input[2]");
+					Thread.sleep(2000);
+					WebElement num6 = driver.findElement(
+							By.xpath("(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
+									+ (hours + 1) + "])[2]"));
+					builder.moveToElement(num6).click().build().perform();
+					Thread.sleep(2000);
+					WebElement num7 = driver.findElement(
+						By.xpath("(.//*[@id='minuteClock']//*[@class='number style-scope paper-clock-selector']["
+									+ (min - 2) + "])[2]"));
+					Thread.sleep(1000);
+					builder.moveToElement(num7).click().build().perform();
+					if (am_pm == 0)
+						jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[1])[2]");
+					else
+						jswait.loadClick("(.//*[@id='heading']/iron-selector[2]/div[2])[2]");
+ 
+					jswait.loadClick(timeOkbtn);
+
+					
+				
+				}
+				
+				else {
+				
+			jswait.loadClick("(.//*[@id='months']//div[@date=('" + date2 + "')])[2]");
 				jswait.loadClick("(//paper-date-time-input[2]//*[@id='dateDialog']/div/paper-button[2])");
 				Thread.sleep(2000);
 				jswait.loadClick("//label[contains(.,'End Date')]//following::input[2]");
-				Thread.sleep(2000);
+			Thread.sleep(2000);
 				WebElement num6 = driver.findElement(
 						By.xpath("(.//*[@id='hourClock']//*[@class='number style-scope paper-clock-selector']["
 								+ (hours + 1) + "])[2]"));
@@ -5781,9 +5914,77 @@ public class BroadcastPageObjects extends Init {
 
 				jswait.loadClick(timeOkbtn);
 
+				}
+	
 			}
-		}
-
+			}
+			}
 	}
-
+	
+	public void activateUCGExtension() throws Throwable
+	{
+		Thread.sleep(1000);
+		jswait.loadClick(ucgOptions);
+		Thread.sleep(1000);
+		jswait.loadClick(ucgExtensionRun);;
+		Thread.sleep(1000);
+		jswait.loadClick(ucgExtensionConfirm);
+		
+	}
+	
+	
+	public void viewUCGDetails() throws Throwable {
+		
+		jswait.loadClick(ucgOptions);
+		Thread.sleep(1000);
+		jswait.loadClick(ucgViewDetails);
+		
+	}
+	
+	
+	public void verifyUCGDetails(String targetCountSheet) throws Throwable
+	{
+		
+		eM.setExcelFile("parallelRunBC", targetCountSheet);
+		String MemberCountColumnName = "MemberCount";
+	    String TotalCountColumnName = "Totalcount";
+	    String OutlierRemovedColumnName = "OutlierRemoved";
+	    String EligibleBaseColumnName = "EligibleBase";
+	    
+		  System.out.println(targetCountSheet);
+	    memberCount = eM.getCellByColumnName(MemberCountColumnName);
+		totalcount = eM.getCellByColumnName(TotalCountColumnName);
+		outlierRemoved = eM.getCellByColumnName(OutlierRemovedColumnName);
+		eligibleBase = eM.getCellByColumnName(EligibleBaseColumnName);
+		
+		System.out.println("==== Member count is ==== " + memberCount);
+		System.out.println("==== Total Count is ==== " + totalcount);
+		System.out.println("==== outlier Removed is ==== " + outlierRemoved);
+		System.out.println("==== Eligible Base is ==== " + eligibleBase);
+		
+		System.out.println("======= Inside UCG Details verification =======");
+		
+		
+		WebElement e = driver.findElement(By.xpath("//label[contains(.,'Total Count')]//..//input"));
+		 String totalcountActual = e.getAttribute("value");
+		 WebElement f = driver.findElement(By.xpath("//label[contains(.,'Outlier Removed Count')]//..//input"));
+		 String outlierRemovedActual = f.getAttribute("value");
+		 WebElement g = driver.findElement(By.xpath("//label[contains(.,'Eligible Base Count')]//..//input"));
+		 String eligibleBaseActual = g.getAttribute("value");
+		 Thread.sleep(1000);
+		  Assert.assertEquals(totalcount,totalcountActual.replaceAll(",",""),"The total count is not same");
+		  Thread.sleep(1000);
+		  Assert.assertEquals(outlierRemoved,outlierRemovedActual.replaceAll(",",""),"The outlier Removed count is not same");
+		  Thread.sleep(1000);
+		  Assert.assertEquals(eligibleBase,eligibleBaseActual.replaceAll(",",""),"The eligible Base count is not same");
+		  Thread.sleep(1000);
+		jswait.loadClick(closeUCGDetails);
+		 Thread.sleep(1000);
+		Assert.assertTrue(jswait.checkVisibility("//vaadin-grid-table-row[1]//vaadin-grid-table-cell[6][contains(.,'"+ memberCount +"')]"));
+		
+		System.out.println("========= Verification for UCG Details completed ========");
+		
+		
+	}
+///class
 }

@@ -47,7 +47,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Jun 21, 2023 12:52:19 PM</span>
+                    <span class='label suite-start-time blue darken-3'>Jul 12, 2023 01:25:05 PM</span>
 				</a>
 			</li>
 			<li>
@@ -86,7 +86,7 @@
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
 					<li><a href='#'>@AllBCCreation_datasetup</a></li>
-					<li><a href='#'>@UCGExclusionBC</a></li>
+					<li><a href='#'>@NDX-CreateBCForFunctionality</a></li>
 					<li><a href='#'>@initBrowser</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
@@ -185,27 +185,27 @@
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
 						<span class='test-name'>Test suite for Broadcast creation</span>
-						<span class='test-time'>Jun 21, 2023 12:52:20 PM</span>
+						<span class='test-time'>Jul 12, 2023 01:25:05 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='scenariooutline node' test-id='2' status='pass'>
-	<span class='duration right label'>0h 5m 11s+493ms</span>
+	<span class='duration right label'>0h 4m 32s+332ms</span>
 	<div class='desc'>
 		<b>ScenarioOutline</b>
-		<span class="desc-text">create BC to verify UCG Exclusion</span>
+		<span class="desc-text">Create broadcast to verify bc functionality(except trigger)</span>
 	</div>
 	<ul class='steps'>
 		<li test-id='3' class='node scenario pass' status='pass'>
 			<div class='category-list'>
 				<span class='category label white-text'>@AllBCCreation_datasetup</span>
-				<span class='category label white-text'>@UCGExclusionBC</span>
+				<span class='category label white-text'>@NDX-CreateBCForFunctionality</span>
 				<span class='category label white-text'>@initBrowser</span>
 			</div>
 			
 			<b>Scenario</b>
 			
-			<span class="bdd-step-name">create BC to verify UCG Exclusion</span>
+			<span class="bdd-step-name">Create broadcast to verify bc functionality(except trigger)</span>
 			
 				<ul class='steps'>
 					<li test-id='4' class='node given pass' status='pass'><b>Given</b>
@@ -217,47 +217,47 @@
 							<div class='pre'>passed</div>
 					</li>
 					<li test-id='6' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then wait for 1 minutes</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='7' class='node then pass' status='pass'><b>Then</b>
 						<span class="bdd-step-name">Then navigate to life cycle marketing</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='8' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then navigate to campaign category from sheet "CampaignCategory"</span>
+					<li test-id='7' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then navigate to campaign category from sheet "campaignCategory"</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='9' class='node then pass' status='pass'><b>Then</b>
+					<li test-id='8' class='node then pass' status='pass'><b>Then</b>
 						<span class="bdd-step-name">Then naigate to "campaignBC" campaign view broadcasts</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='10' class='node then pass' status='pass'><b>Then</b>
+					<li test-id='9' class='node then pass' status='pass'><b>Then</b>
 						<span class="bdd-step-name">Then click create new broadcast button</span>
 							<div class='pre'>passed</div>
 					</li>
+					<li test-id='10' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then create bc from sheet "OneoffB_SingletrackMultiplerule" with inventory "Unlimited" and trigger "none"</span>
+							<div class='pre'>passed</div>
+					</li>
 					<li test-id='11' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then create bc from sheet "OneoffUCG_BC" with inventory "Unlimited" and trigger "none"</span>
+						<span class="bdd-step-name">Then enter target tab details target condition targetall type "None" TG "no limit" CG "fixedPercentage" DNC "none"</span>
 							<div class='pre'>passed</div>
 					</li>
 					<li test-id='12' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then enter target tab details with UCG list "Selenium_UCG_List" target condition targetall type "None" TG "no limit" CG "no limit" DNC "none"</span>
+						<span class="bdd-step-name">Then enter choose offer tab from sheet "MultiRuleRewardOffer" for bc from sheet "OneoffB_SingletrackMultiplerule" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"</span>
 							<div class='pre'>passed</div>
 					</li>
 					<li test-id='13' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then enter choose offer tab from sheet "rechargeSMS" for bc from sheet "OneoffUCG_BC" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"</span>
+						<span class="bdd-step-name">Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "At" from sheet "OneoffB_SingletrackMultiplerule"</span>
 							<div class='pre'>passed</div>
 					</li>
 					<li test-id='14' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then enter deliver tab with end "none" target render time "real time" and broadcast expiry as "none" from sheet "OneoffUCG_BC"</span>
+						<span class="bdd-step-name">Then "save" bc</span>
 							<div class='pre'>passed</div>
 					</li>
 					<li test-id='15' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then save bc</span>
+						<span class="bdd-step-name">Then wait for 4000 milliseconds</span>
 							<div class='pre'>passed</div>
 					</li>
 					<li test-id='16' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then add bc from sheet "OneoffUCG_BC" to column "26" of bc data sheet "ConversionBC"</span>
+						<span class="bdd-step-name">Then add bc from sheet "OneoffB_SingletrackMultiplerule" to column "28" of bc data sheet "ConversionBC"</span>
 							<div class='pre'>passed</div>
 					</li>
 				</ul>
@@ -341,13 +341,13 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Jun 21, 2023 12:52:20 PM</td>
+										<td>Jul 12, 2023 01:25:05 PM</td>
 										<td class='linked' test-id='1'>Test suite for Broadcast creation</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 									<tr>
-										<td>Jun 21, 2023 12:52:20 PM</td>
-										<td class='linked' test-id='3'>Test suite for Broadcast creation.create BC to verify UCG Exclusion.create BC to verify UCG Exclusion</td>
+										<td>Jul 12, 2023 01:25:05 PM</td>
+										<td class='linked' test-id='3'>Test suite for Broadcast creation.Create broadcast to verify bc functionality(except trigger).Create broadcast to verify bc functionality(except trigger)</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -357,7 +357,7 @@
 				</li>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@UCGExclusionBC</span>
+						<span class='category-name'>@NDX-CreateBCForFunctionality</span>
 						<span class='category-status right'>
 							<span class='label pass'>1</span>
 						</span>
@@ -380,8 +380,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Jun 21, 2023 12:52:20 PM</td>
-										<td class='linked' test-id='3'>Test suite for Broadcast creation.create BC to verify UCG Exclusion.create BC to verify UCG Exclusion</td>
+										<td>Jul 12, 2023 01:25:05 PM</td>
+										<td class='linked' test-id='3'>Test suite for Broadcast creation.Create broadcast to verify bc functionality(except trigger).Create broadcast to verify bc functionality(except trigger)</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -414,8 +414,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Jun 21, 2023 12:52:20 PM</td>
-										<td class='linked' test-id='3'>Test suite for Broadcast creation.create BC to verify UCG Exclusion.create BC to verify UCG Exclusion</td>
+										<td>Jul 12, 2023 01:25:05 PM</td>
+										<td class='linked' test-id='3'>Test suite for Broadcast creation.Create broadcast to verify bc functionality(except trigger).Create broadcast to verify bc functionality(except trigger)</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -462,19 +462,19 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Jun 21, 2023 12:52:19 PM</div>
+					<div class='panel-lead'>Jul 12, 2023 01:25:05 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Jun 21, 2023 12:57:31 PM</div>
+			 		<div class='panel-lead'>Jul 12, 2023 01:29:38 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>312,050ms</div>
+					<div class='panel-lead'>272,925ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -495,7 +495,7 @@
 							<td>0</td>
 						</tr>
 						<tr>
-							<td>@UCGExclusionBC</td>
+							<td>@NDX-CreateBCForFunctionality</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>

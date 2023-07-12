@@ -1487,6 +1487,7 @@ Then edit the Delevery tab details from workbook "bcInputData" sheet "latchbc"
 Then wait until status of "latchbc" from file "bcInputData" is "Delivering" for bctype "onetime"
 
 ################Start the latch simulator then run the following cases################ https://docs.google.com/document/d/179FmAPomOv3d4VHPAKvDb76vXzGmlE2WQpmzGY0cYLA/edit?usp=sharing
+
 @NDX-latcheventverification  @initBrowser
 Scenario: Verify the event verification of latch 
 Given login
@@ -1518,5 +1519,60 @@ Then verify the condition Confirmed Delivery event for the bc from sheet "latchb
    Then edit the saved segment "EditSavedsegment"
    Then add Condition and save
    Then verify the changes
+   
+   
+################# UCG Verification ################
 
+@verifyUCGdetails  @initBrowser
+Scenario: Verify the Multitrack oneoff BC Ack Count,conversion and fullfillment reward based on track source
+Given login 
+Then navigate to configuration management 
+Then navigate to control group 
+Then view UCG Target details
+Then Verify the UCG target condition details from sheet "targetCountUCG"
+
+
+@VerifyOneoffUCG_BC   @initBrowser
+Scenario Outline: Verify the UCG broadcast target count and Control group exclusion count
+Then filter the bc from sheet "ConversionBC" from row "26" and column "0" and write in sheet "<bcSheet>"
+Given login 
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "<bcSheet>" for bctype "onetime"
+Then click on BC edit button from workbook "bcInputData" sheet "<bcSheet>"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "<bcSheet>"
+Then activate bc
+Then wait until status of "<bcSheet>" is "Completed"
+Then filter the bc from file "bcInputData" of sheet "<bcSheet>" for bctype "onetime"
+Then view broadcast for "onetime" for bctype "onetime"
+Then verify the cg exclusion and target count from sheet "targetCountUCG"
+ Examples:
+|bcSheet|bctype|
+|OneoffUCG_BC|onetime| 
+
+
+@VerifyReccurUCG_BC   @initBrowser
+Scenario Outline: Verify the reccuring UCG broadcast target count and Control group exclusion count
+Then filter the bc from sheet "ConversionBC" from row "27" and column "0" and write in sheet "<bcSheet>"
+Given login 
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then navigate to "Recurring Broadcasts" broadcasts
+Then filter the bc from file "bcInputData" of sheet "<bcSheet>" for bctype "recurring"
+Then click on BC edit button from workbook "bcInputData" sheet "<bcSheet>"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "<bcSheet>"
+Then activate bc
+Then wait for 1 minutes
+Then filter the bc from file "bcInputData" of sheet "<bcSheet>" for bctype "onetime"
+Then wait until status of "<bcSheet>" from file "bcInputData" is "Completed" for bctype "ReccuringNever"
+Then filter the bc from file "bcInputData" of sheet "<bcSheet>" for bctype "onetime"
+Then view broadcast for "recurringchildbc" for bctype "onetime"
+Then verify the cg exclusion and target count from sheet "targetCountUCG"
+ Examples:
+|bcSheet|bctype|
+|ReccurUCG_BC|recurring|  
 
