@@ -1576,3 +1576,35 @@ Then verify the cg exclusion and target count from sheet "targetCountUCG"
 |bcSheet|bctype|
 |ReccurUCG_BC|recurring|  
 
+
+########################## Single Track Multiple Rule Verification ########################
+
+@VerifyOneoffSingleTrackMultirule_BC  @initBrowser
+Scenario Outline: Verify the Single track multiple rule broadcast reward success based on the rule
+Then filter the bc from sheet "ConversionBC" from row "28" and column "0" and write in sheet "<bcSheet>"
+Given login 
+Then navigate to precision marketer
+Then navigate to life cycle marketing
+Then navigate to campaign category from sheet "campaignCategory"
+Then naigate to "campaignBC" campaign view broadcasts
+Then filter the bc from file "bcInputData" of sheet "<bcSheet>" for bctype "onetime"
+Then click on BC edit button from workbook "bcInputData" sheet "<bcSheet>"
+Then edit the Delevery tab details from workbook "bcInputData" sheet "<bcSheet>"
+Then activate bc
+Then wait until status of "<bcSheet>" is "Completed"
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "9491750042"
+Then click on events tab
+Then verify the condition Acknowledged event for the bc from sheet "<bcSheet>" for the campaign from sheet "campaignBC"
+#
+Then provide file in location "/usr/local/flytxt/selenium/seleniumConversion/" for trigger with csv file "conversion.csv"
+Then navigate to reports
+Then navigate to customer profile
+Then search msisdn "919491750082"
+Then click on events tab
+Then wait for 4 minutes
+ Examples:
+|bcSheet|bctype|
+|Oneoff_SingletrackMultiplerule|onetime|  
+

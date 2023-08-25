@@ -113,7 +113,7 @@ public class OfferPageObjects extends Init {
 	private WebElement cancelOfferButton;
 	@FindBy(xpath = "//label[contains(.,'Reward Type')]/..//input")
 	private WebElement rewardTypeInputField;
-	@FindBy(xpath = "(//label[contains(.,'Reward Type')])[2]/..//input")
+	@FindBy(xpath = "(//label[contains(.,'Reward Type')])[3]/..//input")
 	private WebElement rewardTypeInputField1;
 	@FindBy(xpath = "(//label[contains(.,'Reward Type')])[4]/..//input")
 	private WebElement rewardTypeInputField2;
@@ -264,20 +264,28 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[2]")
 	private WebElement failureMessage;
 
-	@FindBy(xpath = "//paper-card[contains(.,'Rewards for first Rule')]//..//label[contains(.,'Default Success')]//..//textarea[@id='textarea']")
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[3]")
 	private WebElement successMessageFirstRule;
-	@FindBy(xpath = "//paper-card[contains(.,'Rewards for first Rule')]//..//label[contains(.,'Default Failure')]//..//textarea[@id='textarea'](//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[4]")
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[4]")
 	private WebElement failureMessageFirstRule;
 
-	@FindBy(xpath = "//paper-card[contains(.,'Rewards for Second Rule')]//..//label[contains(.,'Default Success')]//..//textarea[@id='textarea']")
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[7]")
 	private WebElement successMessageSecondRule;
-	@FindBy(xpath = "//paper-card[contains(.,'Rewards for Second Rule')]//..//label[contains(.,'Default Failure')]//..//textarea[@id='textarea']")
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[8]")
 	private WebElement failureMessageSecondRule;
+	
+	
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[5]")
+	private WebElement successMessageSingleTrackSecondRule;
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[6]")
+	private WebElement failureMessageSingleTrackSecondRule;
+	
+	
 
-	@FindBy(xpath = "//paper-card[contains(.,'Rewards for Third Rule')]//..//label[contains(.,'Default Success')]//..//textarea[@id='textarea']")
-	private WebElement successMessageThirdRule;
-	@FindBy(xpath = "//paper-card[contains(.,'Rewards for Third Rule')]//..//label[contains(.,'Default Failure')]//..//textarea[@id='textarea']")
-	private WebElement failureMessageThirdRule;
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[7]")
+	private WebElement successMessageSingleTrackThirdRule;
+	@FindBy(xpath = "(//form[@id='responseForm']//h4[.='Add fulfillment response in English (UK)']//..//textarea)[8]")
+	private WebElement failureMessageSingleTrackThirdRule;
 
 	@FindBy(xpath = "//span[contains(.,'Preview Email')]")
 	private WebElement previewEmailButton;
@@ -317,28 +325,28 @@ public class OfferPageObjects extends Init {
 	private WebElement emailMapVariable;
 
 //Track Tab in Offer Creation	
-	@FindBy(xpath = "//div//paper-button[@id='addB']")
+	@FindBy(xpath = "//div//paper-button[@id='addB'][1]")
 	private WebElement addRuleButton;
 	@FindBy(xpath = "(//div//paper-button[@id='addB'])[2]")
 	private WebElement addRuleButton1;
 
 	// Track rule
-	@FindBy(xpath = "(//label[contains(.,'Rule Name')]//..//input)[2]")
+	@FindBy(xpath = "(//label[contains(.,'Rule Name')]//..//input)[1]")
 	private WebElement addTrackingRuleRuleName;
-	@FindBy(xpath = "(//label[contains(.,'Rule Name')]//..//input)[3]")
+	@FindBy(xpath = "(//label[contains(.,'Rule Name')]//..//input)[1]")
 	private WebElement addTrackingRuleRuleName1;
 
-	@FindBy(xpath = "(//label[contains(.,'Priority')]/../input)[2]")
+	@FindBy(xpath = "(//label[contains(.,'Priority')]/../input)[1]")
 	private WebElement addTrackingRulePrioritySelector;
 
-	@FindBy(xpath = "(//label[contains(.,'Priority')]/../input)[3]")
+	@FindBy(xpath = "(//label[contains(.,'Priority')]/../input)[1]")
 	private WebElement addTrackingRulePrioritySelector1;
 
 	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'2')]")
 	private WebElement addTrackingRulePrioritySelect2;
-	@FindBy(xpath = "(//label[contains(.,'Priority')])[1]//following::paper-button[contains(.,'Add')][2]")
+	@FindBy(xpath = "(//label[contains(.,'Priority')])[1]//following::paper-button[contains(.,'Add')][1]")
 	private WebElement addTrackingRuleAddConditionButton;
-	@FindBy(xpath = "(//label[contains(.,'Priority')])[1]//following::paper-button[contains(.,'Add')][4]")
+	@FindBy(xpath = "(//label[contains(.,'Priority')])[1]//following::paper-button[contains(.,'Add')][1]")
 	private WebElement addTrackingRuleAddConditionButton1;
 	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Parameter')]/../input")
 	private WebElement addTrackingRuleSecondConditionParameterSelector;
@@ -349,8 +357,7 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is greater than')]")
 	private WebElement addTrackingRuleSecondConditionConditionSelectisGreaterThan;
 	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Condition')]/../../../../../../..//paper-item[contains(.,'is greater than or equal to')]")
-	private WebElement addTrackingRuleSecondConditionConditionSelectisgreaterthanorequalto;
-
+	private WebElement addTrackingRuleSecondConditionConditionSelectisgreaterthanorequalto;	
 	@FindBy(xpath = "(//paper-item[@role='option'][normalize-space()='is less than'])[2]")
 	private WebElement addTrackingRuleSecondConditionConditionSelectisLessThan;
 	@FindBy(xpath = "//recharge-rule-model/paper-dialog[@id='trackOpenDialog']//recharge-condition[2]//label[contains(.,'Value')]/../input")
@@ -574,6 +581,9 @@ public class OfferPageObjects extends Init {
 
 	@FindBy(xpath = "//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
 	private WebElement secondRuleFirstRewardInputField;
+	
+	@FindBy(xpath = "//rewards-container[4]//rewards-list[1]//label[contains(.,'Reward Type')]/..//input")
+	private WebElement ThirdRuleThirdRewardInputField;
 
 	@FindBy(xpath = "//seeding-reward//add-seeding-reward//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
 			+ SEEEDING_REWARD + "')]")
@@ -586,10 +596,24 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = "//rewards-container[2]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
 			+ SEL_REWARD + "')]")
 	private WebElement selectFirstRuleFirstReward;
+	
+	@FindBy(xpath = "//rewards-container[2]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELENIUM_REWARD + "')]")
+	private WebElement selectFirstRuleFirstRewardMultiTrack;
 
 	@FindBy(xpath = "//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
 			+ SELENIUM_REWARD + "')]")
 	private WebElement selectSecondRuleFirstReward;
+	
+	@FindBy(xpath = "//rewards-container[3]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SEL_REWARD + "')]")
+	private WebElement selectSecondRuleDefaultReward;
+	
+	
+	
+	@FindBy(xpath = "//rewards-container[4]//rewards-list[1]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
+			+ SELENIUM_REWARD_TEST + "')]")
+	private WebElement selectThirdRuleThirdReward;
 
 	@FindBy(xpath = "//rewards-container[2]//rewards-list[2]//label[contains(.,'Reward Type')]//following::vaadin-combo-box-item[contains(.,'"
 			+ SELENIUM_REWARD + "')]")
@@ -605,10 +629,20 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = "//rewards-container[3]//label[contains(text(),'Default Failure')]/..//textarea")
 	private WebElement DefaultSecondRuleFailureMessage;
 
-	@FindBy(xpath = "//rewards-container[3]//label[contains(text(),'Response on success')]/..//textarea")
+	@FindBy(xpath = "//rewards-container[3]//label[contains(text(),'Default Success')]/..//textarea")
 	private WebElement secondRuleSuccessMessage;
-	@FindBy(xpath = "//rewards-container[3]//label[contains(text(),'Response on Failure')]/..//textarea")
+	@FindBy(xpath = "//rewards-container[3]//label[contains(text(),'Default Failure')]/..//textarea")
 	private WebElement secondRuleFailureMessage;
+	
+	@FindBy(xpath = "//rewards-container[4]//label[contains(text(),'Default Success')]/..//textarea")
+	private WebElement ThirdRuleSuccessMessage;
+	@FindBy(xpath = "//rewards-container[4]//label[contains(text(),'Default Failure')]/..//textarea")
+	private WebElement ThirdRuleFailureMessage;
+	
+	
+	
+	
+	
 
 	@FindBy(xpath = "//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[1]")
 	private WebElement defaultSecondCreativeSuccessMessage;
@@ -622,14 +656,24 @@ public class OfferPageObjects extends Init {
 	@FindBy(xpath = "//h4[contains(.,'Add fulfillment response in Arabic')]//following::textarea[6]")
 	private WebElement firstRuleSecondCreativeFailureMessage;
 
-	@FindBy(xpath = "//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on success')]/..//textarea")
+	@FindBy(xpath = "//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Default Success')]/..//textarea")
 	private WebElement secondRuleSecondCreativeSuccessMessage;
 
-	@FindBy(xpath = "//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Response on Failure')]/..//textarea")
+	@FindBy(xpath = "//rewards-container[3]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Default Failure')]/..//textarea")
 	private WebElement secondRuleSecondCreativeFailureMessage;
+	
+	@FindBy(xpath = "//rewards-container[4]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Default Success')]/..//textarea")
+	private WebElement ThirdRuleSecondCreativeSuccessMessage;
+	@FindBy(xpath = "//rewards-container[4]//div[@id='rewardMessage']//response-message[2]//label[contains(text(),'Default Failure')]/..//textarea")
+	private WebElement ThirdRuleSecondCreativeFailureMessage;
+	
+	
 
 	@FindBy(xpath = "//rewards-container[3]//paper-button")
 	private WebElement rewardSecondRuleAdButton;
+	
+	@FindBy(xpath = "//rewards-container[4]//paper-button")
+	private WebElement rewardThirdRuleAdButton;
 
 	@FindBy(xpath = "//rewards-container[1]//paper-button")
 	private WebElement rewardDefaultRuleAdButton;
@@ -680,7 +724,8 @@ public class OfferPageObjects extends Init {
 
 	@FindBy(xpath = "//offer-details//label[contains(text(),'Total Price')]/../..//input")
 	private WebElement totalprice;
-
+	@FindBy(xpath = "(//label[contains(.,'Priority')]/../input)[2]")
+	private WebElement addTrackingRulePrioritySelectorUsage;
 //	 @FindBy(xpath="")
 //	 private WebElement ;
 //	 @FindBy(xpath="")
@@ -938,14 +983,14 @@ public class OfferPageObjects extends Init {
 	public void selectPriority(String text) throws InterruptedException {
 		jswait.loadClick(addTrackingRulePrioritySelector);
 		int value = Integer.valueOf(text);
-		System.out.println(value);
+		//System.out.println(value);
 		if (value <= 5) {
-			System.out.println(value);
+			System.out.println("Priority is "+value);
 			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
-					+ "')])[3]");
+					+ "')])[1]");
 		} else {
 			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
-					+ "')])[4]");
+					+ "')])[2]");
 		}
 
 	}
@@ -957,10 +1002,10 @@ public class OfferPageObjects extends Init {
 		if (value <= 5) {
 			System.out.println(value);
 			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
-					+ "')])[5]");
+					+ "')])[1]");
 		} else {
 			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
-					+ "')])[6]");
+					+ "')])[2]");
 		}
 
 	}
@@ -976,6 +1021,21 @@ public class OfferPageObjects extends Init {
 		} else {
 			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
 					+ "')])[2]");
+		}
+
+	}
+	
+	public void selectUsagepriority(String text) throws InterruptedException {
+		jswait.loadClick(addTrackingRulePrioritySelectorUsage);
+		int value = Integer.valueOf(text);
+		System.out.println(value);
+		if (value <= 5) {
+			System.out.println(value);
+			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
+					+ "')])[3]");
+		} else {
+			jswait.loadClick("(//label[contains(.,'Priority')]/../../../../../../..//paper-item[contains(.,'" + text
+					+ "')])[4]");
 		}
 
 	}
@@ -1026,6 +1086,12 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(addTrackingRuleSecondConditionConditionSelector);
 		jswait.loadClick(addTrackingRuleSecondConditionConditionSelectisgreaterthanorequalto);
 	}
+	public void selectAddTrackSecondConditionConditionIslessThan()throws InterruptedException 
+	{
+		jswait.loadClick(addTrackingRuleSecondConditionConditionSelector);
+		jswait.loadClick(addTrackingRuleSecondConditionConditionSelectisgreaterthanorequalto);
+	}
+	
 
 	public void selectAddTrackingRuleSecondConditionConditionLessThan() throws InterruptedException {
 		jswait.loadClick(addTrackingRuleSecondConditionConditionSelector);
@@ -1116,10 +1182,11 @@ public class OfferPageObjects extends Init {
 		enterAddTrackingRuleConditionConditionValue(value1);
 		clickAddTrackingRuleAddConditionButton();
 		selectAddTrackingRuleSecondConditionParameterAge();
-		selectAddTrackingRuleSecondConditionConditionGreaterThanOrEqualTo();
+		 selectAddTrackingRuleSecondConditionConditionLessThan();
 		enterAddTrackingRuleSecondConditionConditionValue(value2);
 
 	}
+	
 
 	public void CreateFirstRuleparemeter3(String value1, String value2) throws Exception {
 		clickAddTrackingRuleAddConditionButton();
@@ -1136,7 +1203,7 @@ public class OfferPageObjects extends Init {
 	public void enterDetailsFirstTrackingRuleCondition(String name) throws Exception {
 		enterRuleName(name);
 		selectPriority("2");
-		CreateFirstRuleparemeter("15", "18");
+		CreateFirstRuleparemeter("15", "100");
 		clickaddTrackingRuleSaveButton();
 
 	}
@@ -1275,7 +1342,7 @@ public class OfferPageObjects extends Init {
 	public void enterDetailsSecondTrackingRuleCondion(String name) throws Exception {
 		enterRuleName(name);
 		selectPriority("3");
-		CreateFirstRuleparemeter("15", "100");
+		CreateFirstRuleparemeter("90", "100");
 		clickaddTrackingRuleSaveButton();
 
 	}
@@ -1283,7 +1350,7 @@ public class OfferPageObjects extends Init {
 	public void enterDetailsThirdTrackingRuleCondion(String name) throws Exception {
 		enterRuleName(name);
 		selectPriority("4");
-		CreateFirstRuleparemeter3("15", "200");
+		CreateFirstRuleparemeter3("140", "200");
 		clickaddTrackingRuleSaveButton();
 
 	}
@@ -1356,7 +1423,7 @@ public class OfferPageObjects extends Init {
 
 			}
 		} catch (Exception e) {
-			System.out.println("inside Multi catch");
+			//System.out.println("inside Multi catch");
 			clickAddRuleButton1();
 			enterDetailsFirstMultiTrackingRuleCondition("Second RULE", "100", "200");
 			clickaddTrackingRuleSaveButton1();
@@ -2102,12 +2169,23 @@ public class OfferPageObjects extends Init {
 		jswait.loadSendKeys(failureMessageSecondRule, f);
 	}
 
+	public void enterSuccessMessgaeSingleTrackSecondRule(String s) throws InterruptedException
+	{
+		jswait.loadSendKeys(successMessageSingleTrackSecondRule,s);
+	}
+	
+	public void enterFailureMessageSingleTrackSecondRule(String t) throws InterruptedException
+	
+	{
+		jswait.loadSendKeys(failureMessageSingleTrackSecondRule,t);
+	}
+	
 	public void enterSuccessMessageThirdRule(String s) throws InterruptedException {
-		jswait.loadSendKeys(successMessageThirdRule, s);
+		jswait.loadSendKeys(successMessageSingleTrackThirdRule, s);
 	}
 
 	public void enterFailureMessageThirdRule(String f) throws InterruptedException {
-		jswait.loadSendKeys(failureMessageThirdRule, f);
+		jswait.loadSendKeys(failureMessageSingleTrackThirdRule, f);
 	}
 
 	public void clickOfferTypeField() throws InterruptedException {
@@ -2133,8 +2211,8 @@ public class OfferPageObjects extends Init {
 		
 		if(!eh.getCellByColumnName("Offer Type").contains("Informational"))
 		{
-			jswait.loadClick("//offer-details//label[contains(text(),'Value')]/../..//input");
-			jswait.loadClick("//div//vaadin-combo-box-item[contains(.,'Auto Calculate Total Price')]");
+			//jswait.loadClick("//offer-details//label[contains(text(),'Value')]/../..//input");
+			//jswait.loadClick("//div//vaadin-combo-box-item[contains(.,'Auto Calculate Total Price')]");
 
 			// jswait.loadClick("//offer-details//label[contains(text(),'Total
 			// Price')]/../..//input");
@@ -2492,65 +2570,34 @@ public class OfferPageObjects extends Init {
 				}
 			} catch (Exception e) {
 
-//				System.out.println("Inside reward catch");
-//				if (eh.getCell(1, 2).toString().contains("Seeding")) {
-//					System.out.println("Insdie multi reward");
-//					clickRewardFirstRuleAdButton();
-//					clickRewardTypeInputField();
-//					// clickrewardTypeSampleFlowSelector();
-//					// clickrewardTypesel_reward();
-//					clickrewardTypesel_reward();
-//					enterSuccessMessage("Success from Selenium");
-//					enterFailureMessage("Failure from Selenium");
-//					Thread.sleep(2000);
-//					jswait.loadSendKeys("//h3[contains(.,'Reward for Seeding')]//following::input[1]", SEEEDING_REWARD);
-//					jswait.loadClick("(//vaadin-combo-box-item[contains(.,'" + SEEEDING_REWARD + "')])[2]");
-//				}
+
 
 				 if (eh.getCell(1, 20).toString().contains("Multiple")) {
-					// First track reward
-					createDefaultRuleFirstReward(creativeType);
-					System.out.println("Insdie multi reward `1");
-					clickRewardFirstRuleAdButton();
-					clickRewardTypeInputField1();
-					SelectrewardForFirstRule();
-					enterSuccessMessageforFirstRule("Success from Selenium First rule");
-					enterFailureMessageforfirstRule("Failure from Selenium First rule");
-					// Second track reward
-					createDefaultRuleSecondReward(creativeType);
-					clickRewardFirstRuleAdButton1();
-					clickRewardTypeInputField2();
-					clickrewardTypeselenium_rewardforSecondRule();
-					enterSuccessMessageSecondRule("Success from Selenium Second rule");
-					enterFailureMessageSecondRule("Failure from Selenium Second rule");
+					 
+					 createDefaultRuleFirstReward(creativeType);
+						//createFirstRuleFirstReward(creativeType);
+						createFirstRewardMultiTrack(creativeType);
+						System.out.println("First rule set");
+						createSecondDefaultRewardMultiTrack(creativeType);
+						System.out.println("Second default reward set");
+						createSecondruleSecodnRewardMulti(creativeType);
+			         	System.out.println("Second multi reward set");
+
 					
 		
 					
 					
 				} else if (eh.getCell(1, 21).toString().contains("MultipleRule")) {
 
-					clickRewardFirstRuleAdButton();
-					clickRewardTypeInputField();
-					// clickRewardTypeAny();
-					clickrewardTypesel_reward();
-					enterSuccessMessage("Success from Selenium First Rule - MultiRuleOffer");
-					enterFailureMessage("Failure from Selenium First Rule - MultiRuleOffer");
 
-					// Second rule reward
-					jswait.loadClick(
-							"//div//h3[contains(.,'Rewards for Second Rule')]//..//paper-button[contains(.,'Add')]");
-					clickRewardTypeInputField1();
-					clickrewardTypeselenium_reward();
-					enterSuccessMessageSecondRule("Success from Selenium Second Rule - MultiRuleOffer");
-					enterFailureMessageSecondRule("Failure from Selenium Second Rule - MultiRuleOffer");
-
-					// Third Rule Reward
-					jswait.loadClick(
-							"//div//h3[contains(.,'Rewards for Third Rule')]//..//paper-button[contains(.,'Add')]");
-					clickRewardTypeInputFieldthirdRule();
-					clickrewardTypeSelenium_reward_test();
-					enterSuccessMessageThirdRule("Success from Selenium Third Rule - MultiRuleOffer");
-					enterFailureMessageThirdRule("Success from Selenium Third Rule - MultiRuleOffer");
+					//default reward
+					createDefaultRuleFirstReward(creativeType);
+					createFirstRuleFirstReward(creativeType);
+					System.out.println("First rule set");
+					createSecondRuleFirstReward(creativeType);
+					System.out.println("Second rule set");
+					createThirdruleThirdReward(creativeType);
+					System.out.println("Third rule set");
 
 					
 				}
@@ -2683,12 +2730,10 @@ public class OfferPageObjects extends Init {
 	public void enterTrackTabDetailsMultitrack1(ExcelHelper eh) throws Exception {
 
 		if (eh.getCell(1, 20).toString().contains("Multiple")) {
-			System.out.println("Multiple track 1");
-
 			clickTrackSourceSelector();
 			selectTrackSource(TRACK_SOURCE);
-			System.out.println(TRACK_SOURCE);
-			System.out.println("selected 2 track");
+			//System.out.println(TRACK_SOURCE);
+			System.out.println("selected Track 1");
 
 		} else {
 			{
@@ -3654,6 +3699,14 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(firstRuleFirstRewardInputField);
 		jswait.loadSendKeys(firstRuleFirstRewardInputField, SEL_REWARD);
 	}
+	
+	public void clickFirstRuleFirstRewardMultiTrack() throws InterruptedException {
+
+		jswait.loadClick(firstRuleFirstRewardInputField);
+		jswait.loadSendKeys(firstRuleFirstRewardInputField, SELENIUM_REWARD);
+	}
+	
+	
 
 	public void clickFirstRuleSecondRewardInputField() throws InterruptedException {
 
@@ -3666,7 +3719,27 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(secondRuleFirstRewardInputField);
 		jswait.loadSendKeys(secondRuleFirstRewardInputField, SELENIUM_REWARD);
 	}
+	
+	public void clickSecondDefaultRewardInputField() throws InterruptedException {
 
+		jswait.loadClick(secondRuleFirstRewardInputField);
+		jswait.loadSendKeys(secondRuleFirstRewardInputField, SEL_REWARD);
+	}
+	
+	public void clickSecondrulesecondRewardMultiInputFeild() throws InterruptedException
+	{
+		jswait.loadClick(ThirdRuleThirdRewardInputField);
+		jswait.loadSendKeys(ThirdRuleThirdRewardInputField, SELMULTI_REWARD);
+		
+	}
+
+	public void clickThirdRuleThirdRewardInputField() throws InterruptedException {
+
+		jswait.loadClick(ThirdRuleThirdRewardInputField);
+		jswait.loadSendKeys(ThirdRuleThirdRewardInputField, SELENIUM_REWARD_TEST);
+	}
+	
+	
 	public void clickDefualtFirstRewardTypeInputField() throws InterruptedException {
 		jswait.loadClick(defaultFirstRewardTypeInputField);
 	}
@@ -3696,6 +3769,32 @@ public class OfferPageObjects extends Init {
 
 	}
 
+public void selectFirstRuleFirstRewardMultiTrack() throws InterruptedException {
+		
+		Actions action = new Actions(driver);
+
+		action.moveToElement(selectFirstRuleFirstRewardMultiTrack).click().perform();
+		//jswait.loadClick(selectFirstRuleFirstReward);
+
+	}
+
+public void selectseconddefaultrewardMultiTrack() throws InterruptedException 
+{
+	Actions action = new Actions(driver);
+
+	action.moveToElement(selectSecondRuleDefaultReward).click().perform();
+
+}
+public void selectsecondrulesecondrewardMultiTrack() throws InterruptedException  {
+	
+	Actions action = new Actions(driver);
+
+	action.moveToElement(rewardTypeselenium_rewardsecondRule).click().perform();
+
+	
+}
+
+
 	public void selectFirstRuleSecondReward() throws InterruptedException {
 		jswait.loadClick(selectFirstRuleSecondReward);
 
@@ -3705,6 +3804,12 @@ public class OfferPageObjects extends Init {
 		jswait.loadClick(selectSecondRuleFirstReward);
 
 	}
+	
+	public void selectThirdruleThirdReward() throws InterruptedException
+	{
+		jswait.loadClick(selectThirdRuleThirdReward);
+	}
+	
 
 	public void enterFirstRuleSuccessMessage(String message) throws InterruptedException {
 
@@ -3732,6 +3837,21 @@ public class OfferPageObjects extends Init {
 	public void enterSecondRuleFailureMessage(String message) throws InterruptedException {
 		jswait.loadSendKeys(secondRuleFailureMessage, message);
 	}
+	
+	
+	
+	public void enterThirdruleSuccessMessage(String message) throws InterruptedException
+	{
+		jswait.loadSendKeys(ThirdRuleSuccessMessage,message);
+	}
+	
+	public void enterThirdruleFailureMessage(String message)throws InterruptedException
+	{
+		
+		jswait.loadSendKeys(ThirdRuleFailureMessage, message);
+	}
+	
+	
 
 	public void enterdefaultSecondCreativeSuccessMessage(String message) throws InterruptedException {
 		jswait.loadSendKeys(defaultSecondCreativeSuccessMessage, message);
@@ -3755,6 +3875,18 @@ public class OfferPageObjects extends Init {
 
 	public void entersecondRuleSecondCreativeFailureMessage(String message) throws InterruptedException {
 		jswait.loadSendKeys(secondRuleSecondCreativeFailureMessage, message);
+	}
+	
+	
+	public void enterThirdruleSecondCreativeSuccessMessage(String message)throws InterruptedException
+	{
+		jswait.loadSendKeys(ThirdRuleSecondCreativeSuccessMessage, message);
+	}
+	
+	public void ThirdruleSecondCreativeFailureMessage(String message) throws InterruptedException {
+		
+		jswait.loadSendKeys(ThirdRuleSecondCreativeFailureMessage, message);
+		
 	}
 
 	public void createDefaultRuleFirstReward(String creativeType) throws InterruptedException {
@@ -3798,6 +3930,61 @@ public class OfferPageObjects extends Init {
 			enterfirstRuleSecondCreativeFailureMessage("Failure from Selenium from first rule 2nd creative");
 		}
 	}
+	
+	public void createFirstRewardMultiTrack(String creativeType) throws Exception
+	{
+		clickRewardFirstRuleAdButton();
+		clickFirstRuleFirstRewardMultiTrack();
+		selectFirstRuleFirstRewardMultiTrack();
+		enterFirstRuleSuccessMessage("Success from Selenium from first rule");
+		enterFirstRuleFailureMessage("Failure from Selenium from first rule");
+		if (creativeType.equals("multiplecreative")) {
+
+			enterfirstRuleSecondCreativeSuccessMessage("Success from Selenium from first rule 2nd creative");
+			enterfirstRuleSecondCreativeFailureMessage("Failure from Selenium from first rule 2nd creative");
+		}
+		
+		
+	}
+	
+	public void createSecondDefaultRewardMultiTrack(String creativeType) throws Exception {
+		
+		
+		clickRewardSecondRuleAdButton();
+		clickSecondDefaultRewardInputField();
+		selectseconddefaultrewardMultiTrack();
+		
+		enterSecondRuleSuccessMessage("Success from Selenium from 2nd  Default rule");
+		enterSecondRuleFailureMessage("Success from Selenium from 2nd Default rule");
+
+		if (creativeType.equals("multiplecreative")) {
+			entersecondRuleSecondCreativeSuccessMessage("Success from Selenium from second Default rule 2nd creative");
+			entersecondRuleSecondCreativeFailureMessage("Failure from Selenium from second Default rule 2nd creative");
+		}
+	}
+	
+	
+	public void createSecondruleSecodnRewardMulti(String creativeType) throws Exception
+	
+	{
+		clickRewardThirdRuleaddbutton();
+		clickSecondrulesecondRewardMultiInputFeild();
+		selectsecondrulesecondrewardMultiTrack();
+		
+		enterThirdruleSuccessMessage("Success from Selenium from 2nd rule");
+		enterThirdruleFailureMessage("Failure from Selenium from 2nd rule");
+		
+		if (creativeType.equals("multiplecreative")) {
+	
+			enterThirdruleSecondCreativeSuccessMessage("Success from Selenium from third rule 2nd creative");
+			ThirdruleSecondCreativeFailureMessage("Failure from Selenium from third rule 2nd creative");
+			
+			
+		}
+	
+	}
+	
+	
 
 	public void createSecondRuleFirstReward(String creativeType) throws InterruptedException {
 
@@ -3812,6 +3999,53 @@ public class OfferPageObjects extends Init {
 			entersecondRuleSecondCreativeFailureMessage("Failure from Selenium from second rule 2nd creative");
 		}
 	}
+	
+	public void createSecondrulesecondreward(String creativeType)   throws InterruptedException {
+
+		clickRewardSecondRuleAdButton();
+		clickSecondRuleSecondRewardInputField();
+		selectSecondRuleFirstReward();
+		
+		
+		enterSecondRuleSuccessMessage("Success from Selenium from 2nd rule");
+		enterSecondRuleFailureMessage("Failure from Selenium from 2nd rule");
+
+		if (creativeType.equals("multiplecreative")) {
+			entersecondRuleSecondCreativeSuccessMessage("Success from Selenium from second rule 2nd creative");
+			entersecondRuleSecondCreativeFailureMessage("Failure from Selenium from second rule 2nd creative");
+		}
+	}
+	
+	public void  clickRewardThirdRuleaddbutton() throws InterruptedException
+	{
+		
+		jswait.loadClick(rewardThirdRuleAdButton);
+	}
+	
+	
+	
+	
+	
+	public void createThirdruleThirdReward(String creativeType) throws InterruptedException {
+		
+		clickRewardThirdRuleaddbutton();
+		clickThirdRuleThirdRewardInputField();
+		selectThirdruleThirdReward();
+		
+		enterThirdruleSuccessMessage("Success from Selenium from 3nd rule");
+		enterThirdruleFailureMessage("Failure from Selenium from 3nd rule");
+		
+		if (creativeType.equals("multiplecreative")) {
+	
+			enterThirdruleSecondCreativeSuccessMessage("Success from Selenium from third rule 2nd creative");
+			ThirdruleSecondCreativeFailureMessage("Failure from Selenium from third rule 2nd creative");
+			
+			
+		}
+	
+	}
+	
+	
 
 	public void selectSeedingReward(String offerType) throws InterruptedException {
 		if (offerType.contains("Seeding")) {
@@ -3942,52 +4176,28 @@ public class OfferPageObjects extends Init {
 
 			}
 			else if (rewardType.equals("Singletrackmultiplereward")) {
-
-				clickRewardFirstRuleAdButton();
-				clickRewardTypeInputField();
-				// clickRewardTypeAny();
-				clickrewardTypesel_reward();
-				enterSuccessMessage("Success from Selenium First Rule - MultiRuleOffer");
-				enterFailureMessage("Failure from Selenium First Rule - MultiRuleOffer");
-
-				// Second rule reward
-				jswait.loadClick(
-						"//div//h3[contains(.,'Rewards for Second Rule')]//..//paper-button[contains(.,'Add')]");
-				clickRewardTypeInputField1();
-				clickrewardTypeselenium_reward();
-				enterSuccessMessageSecondRule("Success from Selenium Second Rule - MultiRuleOffer");
-				enterFailureMessageSecondRule("Failure from Selenium Second Rule - MultiRuleOffer");
-
-				// Third Rule Reward
-				jswait.loadClick(
-						"//div//h3[contains(.,'Rewards for Third Rule')]//..//paper-button[contains(.,'Add')]");
-				clickRewardTypeInputFieldthirdRule();
-				clickrewardTypeSelenium_reward_test();
-				enterSuccessMessageThirdRule("Success from Selenium Third Rule - MultiRuleOffer");
-				enterFailureMessageThirdRule("Success from Selenium Third Rule - MultiRuleOffer");
-
 				
+				//default reward
+				createDefaultRuleFirstReward(creativeType);
+				createFirstRuleFirstReward(creativeType);
+				System.out.println("First rule set");
+				createSecondRuleFirstReward(creativeType);
+				System.out.println("Second rule set");
+				createThirdruleThirdReward(creativeType);
+				System.out.println("Third rule set");
+
 			}
 			
 			else if (rewardType.equals("Multiplerulemultiplereward")) {
+				
 				createDefaultRuleFirstReward(creativeType);
-				System.out.println("Insdie multi reward `1");
-				clickRewardFirstRuleAdButton();
-				clickRewardTypeInputField1();
-				SelectrewardForFirstRule();
-				//SelectLordrewardForFirstRule();
-				enterSuccessMessageforFirstRule("Success from Selenium First rule");
-				enterFailureMessageforfirstRule("Failure from Selenium First rule");
-				
-				
-				// Second track reward
-				createDefaultRuleSecondReward(creativeType);
-				clickRewardFirstRuleAdButton1();
-				clickRewardTypeInputField2();
-				clickrewardTypeselenium_rewardforSecondRule();
-				//clickrewardTypeselenium_TogGrewardforSecondRule();
-				enterSuccessMessageSecondRule("Success from Selenium Second rule");
-				enterFailureMessageSecondRule("Failure from Selenium Second rule");
+				//createFirstRuleFirstReward(creativeType);
+				createFirstRewardMultiTrack(creativeType);
+				System.out.println("First rule set");
+				createSecondDefaultRewardMultiTrack(creativeType);
+				System.out.println("Second default reward set");
+				createSecondruleSecodnRewardMulti(creativeType);
+	         	System.out.println("Second multi reward set");
 
 				if (eh.getCellByColumnName("Offer Type").contains("Seeding")) {
 					System.out.println("Inside seeding Reward");

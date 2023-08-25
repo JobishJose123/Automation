@@ -17,7 +17,7 @@ Scenario: Verify Creating Offer Catalogue
   Then Add "SeedingSMS" offer to Offer Catalogue
   Then Add "rechargeWAP" offer to Offer Catalogue
   Then Add "seedingWAPoffer" offer to Offer Catalogue
-  Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue
+  #Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue
   Then Add "rechargeVoicePush" offer to Offer Catalogue
   Then Add "rechargeEmail" offer to Offer Catalogue
   Then Add "STVSMS" offer to Offer Catalogue

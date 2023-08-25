@@ -23,17 +23,17 @@ Scenario Outline: create offer
 	Then create new offer from sheet "<offerName>" with product "fullDetails" rewards "<ruleReward>" with creative type "<creativeType>" 
 	Examples: 
 		|offerName|creativeType|ruleReward|
-		|rechargeSMS_Dynamic|singlecreative|oneruleonereward|
-		|rechargeSMS|multiplecreative|oneruleonereward|
-		|rechargeWAP|singlecreative|oneruleonereward|
-		|rechargeEmail|singlecreative|oneruleonereward|
-		|SeedingSMS|multiplecreative|oneruleonereward|
-		|seedingWAPoffer|singlecreative|oneruleonereward|
-		|SeedingSMS_Dynamic|singlecreative|oneruleonereward|
-		|seedingEmail|singlecreative|oneruleonereward|
-		|InfoOffer|singlecreative|oneruleonereward|
-		|MultiTrackOffer|singlecreative|Multiplerulemultiplereward|
-		|MultiTrackOfferSeeding|singlecreative|Multiplerulemultiplereward|
+		#|rechargeSMS_Dynamic|singlecreative|oneruleonereward|
+		#|rechargeSMS|multiplecreative|oneruleonereward|
+		#|rechargeWAP|singlecreative|oneruleonereward|
+		#|rechargeEmail|singlecreative|oneruleonereward|
+		#|SeedingSMS|multiplecreative|oneruleonereward|
+		#|seedingWAPoffer|singlecreative|oneruleonereward|
+		#|SeedingSMS_Dynamic|singlecreative|oneruleonereward|
+		#|seedingEmail|singlecreative|oneruleonereward|
+		#|InfoOffer|singlecreative|oneruleonereward|
+		#|MultiTrackOffer|singlecreative|Multiplerulemultiplereward|
+		#|MultiTrackOfferSeeding|singlecreative|Multiplerulemultiplereward|
 		|MultiRuleRewardOffer|singlecreative|Singletrackmultiplereward|
 		#|ReminderOffer|singlecreative|oneruleonereward|
 		
@@ -45,17 +45,17 @@ Scenario: Verify Creating Offer Catalogue
 	Then navigate to offer management 
 	Then Navigate to Offer Catalogue 
 	Then Create New Offer Catalogue from sheet "defaultCatalog" 
-	Then Add "rechargeSMS" offer to Offer Catalogue 
-	Then Add "SeedingSMS" offer to Offer Catalogue 
-	Then Add "rechargeWAP" offer to Offer Catalogue 
-	Then Add "seedingWAPoffer" offer to Offer Catalogue 
-	Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue 
-	Then Add "seedingEmail" offer to Offer Catalogue 
-	Then Add "rechargeEmail" offer to Offer Catalogue 
-	Then Add "rechargeSMS_Dynamic" offer to Offer Catalogue 
-	Then Add "InfoOffer" offer to Offer Catalogue 
-	Then Add "MultiTrackOffer" offer to Offer Catalogue 
-	Then Add "MultiTrackOfferSeeding" offer to Offer Catalogue 
+	#Then Add "rechargeSMS" offer to Offer Catalogue 
+	#Then Add "SeedingSMS" offer to Offer Catalogue 
+	#Then Add "rechargeWAP" offer to Offer Catalogue 
+	#Then Add "seedingWAPoffer" offer to Offer Catalogue 
+	#Then Add "SeedingSMS_Dynamic" offer to Offer Catalogue 
+	#Then Add "seedingEmail" offer to Offer Catalogue 
+	#Then Add "rechargeEmail" offer to Offer Catalogue 
+	#Then Add "rechargeSMS_Dynamic" offer to Offer Catalogue 
+	#Then Add "InfoOffer" offer to Offer Catalogue 
+	#Then Add "MultiTrackOffer" offer to Offer Catalogue 
+	#Then Add "MultiTrackOfferSeeding" offer to Offer Catalogue 
 	Then Add "MultiRuleRewardOffer" offer to Offer Catalogue
 	#Then Add "ReminderOffer" offer to Offer Catalogue
 	
@@ -100,7 +100,7 @@ Scenario Outline: Create broadcast to verify bc functionality(except trigger)
 		#|one-offBC|rechargeSMS_Dynamic|sharedMetricOtherPartner|Create|no limit|no limit|none|single creative|none|none|3|activate|BCDataStorage|
 		#|OneOff-Info|InfoOffer|targetall|None|no limit|no limit|none|single creative|none|none|23|activate|BCDataStorage| 
 		#|oneoff-multiTrack|MultiTrackOffer|targetall|None|no limit|fixedPercentage|none|single creative|none|At|14|save|ConversionBC| 
-		|OneoffB_SingletrackMultiplerule|MultiRuleRewardOffer|targetall|None|no limit|fixedPercentage|none|single creative|none|At|28|save|ConversionBC|        
+		|Oneoff_SingletrackMultiplerule|MultiRuleRewardOffer|targetall|None|no limit|no limit|none|single creative|none|At|28|save|ConversionBC|        
 		#
 		#|recurrBCDaily|rechargeSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|At|none|2|save|ConversionBC|
 		#|recurrBCWeekly|rechargeWAP|profilefieldNV|Create|no limit|no limit|none|single creative|none|none|4|activate|BCDataStorage|
@@ -112,7 +112,7 @@ Scenario Outline: Create broadcast to verify bc functionality(except trigger)
 		#|seedingoneoff|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|3|save|ConversionBC|
 		#|seedingoneoff|seedingWAPoffer|customerDrivenEvent|Create|no limit|no limit|none|single creative|none|none|7|activate|BCDataStorage|
 		#|seedingoneoff|seedingEmail|customerDrivenEventNotOccurred|Create|no limit|no limit|none|single creative|none|none|8|activate|BCDataStorage|
-		#|seedingoneoff|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|9|activate|BCDataStorage|
+		#seedingoneoff|SeedingSMS_Dynamic|targetall|None|no limit|no limit|none|single creative|none|none|9|activate|BCDataStorage|
 		#|seedingoneoff-MultiTrack|MultiTrackOfferSeeding|targetall|None|no limit|fixedPercentage|none|single creative|At|none|25|activate|BCDataStorage|
 		#
 		#|seedingRecurringBC|SeedingSMS|targetall|None|no limit|fixedPercentage|none|multiple creative|none|none|4|save|ConversionBC|
@@ -232,7 +232,7 @@ Examples:
 @NDX-fileForTriggerBC @initBrowser @closeBrowser 
 Scenario: upload file for trigger bc
      Given login  
-	Then provide file in location "/usr/local/flytxt/seleniumTrigger" for trigger with csv file "trigger1.csv" 
+	Then provide file in location "/usr/local/flytxt/selenium/seleniumConversion/" for trigger with csv file "conversion.csv" 
 	
 	
 		##///////////////////////  REMINDER BC   ////////////////

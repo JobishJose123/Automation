@@ -147,7 +147,7 @@ public class BroadcastPageObjects extends Init {
 	@FindBy(xpath = "//paper-item[text()='" + SELENIUM_OPTIONAL_DND_LIST + "']")
 	private WebElement seleniumDNDOptionalList;
 
-	@FindBy(xpath = ".//paper-button[contains(.,'DNC Exclusion')]")
+	@FindBy(xpath = ".//paper-button[contains(.,'DNC Lists Enabled')]")
 	private WebElement DNCExclusionOption;
 	@FindBy(xpath = ".//paper-dialog[@class='style-scope dnc-exclusion x-scope paper-dialog-0']")
 	private WebElement DNCExclusionList;

@@ -47,7 +47,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Jul 12, 2023 01:25:05 PM</span>
+                    <span class='label suite-start-time blue darken-3'>Aug 25, 2023 03:00:17 PM</span>
 				</a>
 			</li>
 			<li>
@@ -86,8 +86,9 @@
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
 					<li><a href='#'>@AllBCCreation_datasetup</a></li>
-					<li><a href='#'>@NDX-CreateBCForFunctionality</a></li>
+					<li><a href='#'>@NDX-fileForTriggerBC</a></li>
 					<li><a href='#'>@initBrowser</a></li>
+					<li><a href='#'>@closeBrowser</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -165,7 +166,7 @@
 					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>13</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>2</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
 					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
@@ -185,82 +186,37 @@
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
 						<span class='test-name'>Test suite for Broadcast creation</span>
-						<span class='test-time'>Jul 12, 2023 01:25:05 PM</span>
+						<span class='test-time'>Aug 25, 2023 03:00:17 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
-<div class='scenariooutline node' test-id='2' status='pass'>
-	<span class='duration right label'>0h 4m 32s+332ms</span>
+<div class='scenario node' test-id='2' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@NDX-fileForTriggerBC</span>
+		<span class='category label white-text'>@initBrowser</span>
+		<span class='category label white-text'>@closeBrowser</span>
+	</div>
+	<span class='duration right label'>0h 0m 58s+68ms</span>
 	<div class='desc'>
-		<b>ScenarioOutline</b>
-		<span class="desc-text">Create broadcast to verify bc functionality(except trigger)</span>
+		<b>Scenario</b>
+		<span class="desc-text">upload file for trigger bc</span>
 	</div>
 	<ul class='steps'>
-		<li test-id='3' class='node scenario pass' status='pass'>
-			<div class='category-list'>
-				<span class='category label white-text'>@AllBCCreation_datasetup</span>
-				<span class='category label white-text'>@NDX-CreateBCForFunctionality</span>
-				<span class='category label white-text'>@initBrowser</span>
-			</div>
+		<li test-id='3' class='node given pass' status='pass'>
 			
-			<b>Scenario</b>
+			<b>Given</b>
 			
-			<span class="bdd-step-name">Create broadcast to verify bc functionality(except trigger)</span>
+			<span class="bdd-step-name">Given login</span>
+				<div class='pre'>passed</div>
 			
-				<ul class='steps'>
-					<li test-id='4' class='node given pass' status='pass'><b>Given</b>
-						<span class="bdd-step-name">Given login</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='5' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then navigate to precision marketer</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='6' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then navigate to life cycle marketing</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='7' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then navigate to campaign category from sheet "campaignCategory"</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='8' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then naigate to "campaignBC" campaign view broadcasts</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='9' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then click create new broadcast button</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='10' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then create bc from sheet "OneoffB_SingletrackMultiplerule" with inventory "Unlimited" and trigger "none"</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='11' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then enter target tab details target condition targetall type "None" TG "no limit" CG "fixedPercentage" DNC "none"</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='12' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then enter choose offer tab from sheet "MultiRuleRewardOffer" for bc from sheet "OneoffB_SingletrackMultiplerule" with "single creative" track session expires "after" filter criteria "convertAll" give reward to "allConversions"</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='13' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then enter deliver tab with end "none" target render time "realTime" and broadcast expiry as "At" from sheet "OneoffB_SingletrackMultiplerule"</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='14' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then "save" bc</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='15' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then wait for 4000 milliseconds</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='16' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then add bc from sheet "OneoffB_SingletrackMultiplerule" to column "28" of bc data sheet "ConversionBC"</span>
-							<div class='pre'>passed</div>
-					</li>
-				</ul>
+		</li>
+		<li test-id='4' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then provide file in location "/usr/local/flytxt/selenium/seleniumConversion/" for trigger with csv file "conversion.csv"</span>
+				<div class='pre'>passed</div>
+			
 		</li>
 	</ul>
 </div>
@@ -320,12 +276,12 @@
 					<div class='category-heading'>
 						<span class='category-name'>@AllBCCreation_datasetup</span>
 						<span class='category-status right'>
-							<span class='label pass'>2</span>
+							<span class='label pass'>1</span>
 						</span>
 					</div>
 					<div class='category-content hide'>
 						<div class='category-status-counts'>
-							<span class='label green accent-4 white-text'>Passed: 2</span>
+							<span class='label green accent-4 white-text'>Passed: 1</span>
 							
 							
 						</div>
@@ -341,13 +297,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Jul 12, 2023 01:25:05 PM</td>
+										<td>Aug 25, 2023 03:00:17 PM</td>
 										<td class='linked' test-id='1'>Test suite for Broadcast creation</td>
-										<td><span class='test-status pass'>pass</span></td>
-									</tr>
-									<tr>
-										<td>Jul 12, 2023 01:25:05 PM</td>
-										<td class='linked' test-id='3'>Test suite for Broadcast creation.Create broadcast to verify bc functionality(except trigger).Create broadcast to verify bc functionality(except trigger)</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -357,7 +308,7 @@
 				</li>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@NDX-CreateBCForFunctionality</span>
+						<span class='category-name'>@NDX-fileForTriggerBC</span>
 						<span class='category-status right'>
 							<span class='label pass'>1</span>
 						</span>
@@ -380,8 +331,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Jul 12, 2023 01:25:05 PM</td>
-										<td class='linked' test-id='3'>Test suite for Broadcast creation.Create broadcast to verify bc functionality(except trigger).Create broadcast to verify bc functionality(except trigger)</td>
+										<td>Aug 25, 2023 03:00:17 PM</td>
+										<td class='linked' test-id='2'>Test suite for Broadcast creation.upload file for trigger bc</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -414,8 +365,42 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Jul 12, 2023 01:25:05 PM</td>
-										<td class='linked' test-id='3'>Test suite for Broadcast creation.Create broadcast to verify bc functionality(except trigger).Create broadcast to verify bc functionality(except trigger)</td>
+										<td>Aug 25, 2023 03:00:17 PM</td>
+										<td class='linked' test-id='2'>Test suite for Broadcast creation.upload file for trigger bc</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@closeBrowser</span>
+						<span class='category-status right'>
+							<span class='label pass'>1</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 1</span>
+							
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Aug 25, 2023 03:00:17 PM</td>
+										<td class='linked' test-id='2'>Test suite for Broadcast creation.upload file for trigger bc</td>
 										<td><span class='test-status pass'>pass</span></td>
 									</tr>
 								</tbody>
@@ -456,25 +441,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>13</div>
+					<div class='panel-lead'>2</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Jul 12, 2023 01:25:05 PM</div>
+					<div class='panel-lead'>Aug 25, 2023 03:00:17 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Jul 12, 2023 01:29:38 PM</div>
+			 		<div class='panel-lead'>Aug 25, 2023 03:01:15 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>272,925ms</div>
+					<div class='panel-lead'>58,900ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -490,18 +475,24 @@
 						</tr>
 						<tr>
 							<td>@AllBCCreation_datasetup</td>
-							<td>2</td>
+							<td>1</td>
 							<td>0</td>
 							<td>0</td>
 						</tr>
 						<tr>
-							<td>@NDX-CreateBCForFunctionality</td>
+							<td>@NDX-fileForTriggerBC</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
 						</tr>
 						<tr>
 							<td>@initBrowser</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>@closeBrowser</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -536,7 +527,7 @@
 				infoChild: 0,
 				exceptionsChild: 0,
 				
-				passGrandChild: 13,
+				passGrandChild: 2,
 				failGrandChild: 0,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,

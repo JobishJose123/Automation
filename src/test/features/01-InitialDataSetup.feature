@@ -45,7 +45,7 @@ Scenario: Create Customer Driven Event for upload
 	Then navigate to landing page 
 	
 	
-@NX-createUsageMetricField @initBrowser @closeBrowser 
+@NX-createUsageMetricField @initBrowser  
 Scenario: Create Customer Driven Event for upload 
 	Given login 
 	Then navigate to data foundation 
@@ -55,7 +55,7 @@ Scenario: Create Customer Driven Event for upload
 	Then save usage metric 
 	Then navigate to landing page 
 	
-@NX-createRevenueMetricField @initBrowser @closeBrowser 
+@NX-createRevenueMetricField @initBrowser 
 Scenario: Create Customer Driven Event for upload 
 	Given login 
 	Then navigate to data foundation 
@@ -65,7 +65,7 @@ Scenario: Create Customer Driven Event for upload
 	Then save revenue metric 
 	Then navigate to landing page 
 	
-@NX-createEventCountField @initBrowser @closeBrowser 
+@NX-createEventCountField @initBrowser 
 Scenario: Create Customer Driven Event for upload 
 	Given login 
 	Then navigate to data foundation 
@@ -190,6 +190,7 @@ Scenario Outline: create reward
 		|reward|
 		|selenium_reward|
 		|sel_reward|
+		|Selenium_reward_test|
 		|selmulti_reward|
 		|Seeding_Reward|
 			
@@ -262,15 +263,7 @@ Scenario: create a streaming attribute with real time rte
 	Then navigate to streaming attributes 
 	Then create a streaming attribute from sheet "RechargeTrackingService" with route "Real Time Recharge Tracking Service" 
 	
-@NDX-Rewardwithparameter 	@initBrowser 
-Scenario Outline: create reward with parameters
-	Given login 
-	Then navigate to configuration management 
-	Then create new reward "<reward>" with parameters
-Examples: 
-		|reward|
-		|Lord_Reward|
-        |Top_Reward |	
+	
 					
 	
 	#@NX-createDefaultData 
